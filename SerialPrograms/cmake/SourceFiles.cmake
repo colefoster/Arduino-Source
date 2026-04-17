@@ -1302,6 +1302,24 @@ file(GLOB LIBRARY_SOURCES
     Source/Pokemon/Resources/Pokemon_PokemonNames.h
     Source/Pokemon/Resources/Pokemon_PokemonSlugs.cpp
     Source/Pokemon/Resources/Pokemon_PokemonSlugs.h
+    Source/PokemonChampions/Inference/PokemonChampions_ActionMenuDetector.cpp
+    Source/PokemonChampions/Inference/PokemonChampions_ActionMenuDetector.h
+    Source/PokemonChampions/Inference/PokemonChampions_BattleEndDetector.cpp
+    Source/PokemonChampions/Inference/PokemonChampions_BattleEndDetector.h
+    Source/PokemonChampions/Inference/PokemonChampions_MoveSelectDetector.cpp
+    Source/PokemonChampions/Inference/PokemonChampions_MoveSelectDetector.h
+    Source/PokemonChampions/Inference/PokemonChampions_PostMatchDetector.cpp
+    Source/PokemonChampions/Inference/PokemonChampions_PostMatchDetector.h
+    Source/PokemonChampions/Inference/PokemonChampions_PreparingForBattleDetector.cpp
+    Source/PokemonChampions/Inference/PokemonChampions_PreparingForBattleDetector.h
+    Source/PokemonChampions/PokemonChampions_Panels.cpp
+    Source/PokemonChampions/PokemonChampions_Panels.h
+    Source/PokemonChampions/PokemonChampions_Settings.cpp
+    Source/PokemonChampions/PokemonChampions_Settings.h
+    Source/PokemonChampions/Programs/PokemonChampions_AutoLadder.cpp
+    Source/PokemonChampions/Programs/PokemonChampions_AutoLadder.h
+    Source/PokemonChampions/Programs/PokemonChampions_DetectorTest.cpp
+    Source/PokemonChampions/Programs/PokemonChampions_DetectorTest.h
     Source/PokemonBDSP/Inference/Battles/PokemonBDSP_BattleBallReader.cpp
     Source/PokemonBDSP/Inference/Battles/PokemonBDSP_BattleBallReader.h
     Source/PokemonBDSP/Inference/Battles/PokemonBDSP_BattleMenuDetector.cpp

@@ -75,3 +75,6 @@ build_*/
 .cache/*
 Packages/*
 
+# Pokemon Champions: reference video captures & extracted frames (local only)
+SerialPrograms/Source/PokemonChampions/ref_frames/
+
