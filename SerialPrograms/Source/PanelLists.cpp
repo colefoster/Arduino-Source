@@ -25,6 +25,7 @@
 #include "PokemonSV/PokemonSV_Panels.h"
 #include "PokemonLZA/PokemonLZA_Panels.h"
 #include "PokemonPokopia/PokemonPokopia_Panels.h"
+#include "PokemonChampions/PokemonChampions_Panels.h"
 #include "ZeldaTotK/ZeldaTotK_Panels.h"
 #include "PanelLists.h"
 
@@ -61,6 +62,7 @@ ProgramSelect::ProgramSelect(QWidget& parent, PanelHolder& holder)
     if (IS_BETA_VERSION || PreloadSettings::instance().DEVELOPER_MODE){
         add(std::make_unique<NintendoSwitch::PokemonPokopia::PanelListFactory>());
     }
+    add(std::make_unique<NintendoSwitch::PokemonChampions::PanelListFactory>());
     if (PreloadSettings::instance().DEVELOPER_MODE){
         add(std::make_unique<NintendoSwitch::PokemonRSE::PanelListFactory>());
     }

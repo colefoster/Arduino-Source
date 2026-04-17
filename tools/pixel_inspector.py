@@ -1,0 +1,934 @@
+#!/usr/bin/env python3
+"""
+Pixel Inspector — interactive tool for tuning PokemonAutomation detectors.
+
+Opens a screenshot, lets you drag-select regions, and outputs:
+  - ImageFloatBox coordinates (normalized 0.0-1.0)
+  - image_stats() equivalent (average RGB, stddev per channel)
+  - Color ratio (r/(r+g+b), ...)
+  - is_solid() result with configurable thresholds
+  - Copy-pasteable C++ declarations
+
+Usage:
+  python3 tools/pixel_inspector.py <screenshot.png>
+  python3 tools/pixel_inspector.py <screenshot.png> --box 0.9062 0.5694 0.0260 0.0185
+  python3 tools/pixel_inspector.py <screenshot.png> --load action_menu/fight_button
+  python3 tools/pixel_inspector.py --list
+  python3 tools/pixel_inspector.py <screenshot.png> --check-all
+
+Controls (interactive mode):
+  - Click and drag to select a region
+  - Right-click to clear selection
+  - Scroll to zoom (centered on cursor)
+  - Middle-click drag to pan
+  - Press 's' to save current selection
+  - Press 'l' to load a saved/detector box
+  - Press 'n' / 'p' to cycle through loaded boxes (next/prev)
+  - Press 'a' to show all saved boxes as overlays
+  - Press 'q' or close window to quit
+"""
+
+import json
+import math
+import os
+import re
+import sys
+import tkinter as tk
+from tkinter import simpledialog
+from PIL import Image, ImageTk
+
+
+# ─── Paths ──────────────────────────────────────────────────────────────────
+
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+REPO_ROOT = os.path.dirname(SCRIPT_DIR)
+SAVED_BOXES_PATH = os.path.join(SCRIPT_DIR, "pixel_inspector_boxes.json")
+INFERENCE_DIR = os.path.join(
+    REPO_ROOT, "SerialPrograms", "Source", "PokemonChampions", "Inference"
+)
+
+
+# ─── Color math (matches C++ exactly) ───────────────────────────────────────
+
+def image_stats(pixels):
+    """Compute average RGB and per-channel stddev. Matches C++ image_stats()."""
+    n = len(pixels)
+    if n == 0:
+        return (0, 0, 0), (0, 0, 0), 0
+
+    sum_r = sum_g = sum_b = 0
+    sqr_r = sqr_g = sqr_b = 0
+
+    for r, g, b in pixels:
+        sum_r += r; sum_g += g; sum_b += b
+        sqr_r += r * r; sqr_g += g * g; sqr_b += b * b
+
+    avg = (sum_r / n, sum_g / n, sum_b / n)
+
+    if n > 1:
+        var_r = (sqr_r - sum_r * sum_r / n) / (n - 1)
+        var_g = (sqr_g - sum_g * sum_g / n) / (n - 1)
+        var_b = (sqr_b - sum_b * sum_b / n) / (n - 1)
+        sd = (math.sqrt(max(0, var_r)), math.sqrt(max(0, var_g)), math.sqrt(max(0, var_b)))
+    else:
+        sd = (0, 0, 0)
+
+    return avg, sd, n
+
+
+def color_ratio(avg):
+    """Compute normalized color ratio {r/(r+g+b), ...}."""
+    s = avg[0] + avg[1] + avg[2]
+    if s == 0:
+        return (0.333, 0.333, 0.333)
+    return (avg[0] / s, avg[1] / s, avg[2] / s)
+
+
+def euclidean_distance(a, b):
+    return math.sqrt(sum((x - y) ** 2 for x, y in zip(a, b)))
+
+
+def is_solid(avg, sd, expected_ratio, max_dist=0.15, max_stddev_sum=120):
+    stddev_sum = sd[0] + sd[1] + sd[2]
+    if stddev_sum > max_stddev_sum:
+        return False, stddev_sum, None
+    ratio = color_ratio(avg)
+    dist = euclidean_distance(ratio, expected_ratio)
+    return dist <= max_dist, stddev_sum, dist
+
+
+def extract_pixels(img, x, y, w, h):
+    """Extract RGB tuples from a pixel region."""
+    pixels = []
+    for py in range(y, min(y + h, img.height)):
+        for px in range(x, min(x + w, img.width)):
+            p = img.getpixel((px, py))
+            pixels.append((p[0], p[1], p[2]))
+    return pixels
+
+
+def format_report(img_w, img_h, px_x, px_y, px_w, px_h):
+    """Return the normalized box."""
+    fx = px_x / img_w
+    fy = px_y / img_h
+    fw = px_w / img_w
+    fh = px_h / img_h
+    return fx, fy, fw, fh
+
+
+def print_report(img, px_x, px_y, px_w, px_h, label="selection", expected=None):
+    """Compute and print full analysis for a pixel region."""
+    if px_w <= 0 or px_h <= 0:
+        return
+
+    fx, fy, fw, fh = format_report(img.width, img.height, px_x, px_y, px_w, px_h)
+    pixels = extract_pixels(img, px_x, px_y, px_w, px_h)
+    avg, sd, count = image_stats(pixels)
+    ratio = color_ratio(avg)
+
+    print()
+    print(f"=== {label} ===")
+    print(f"  Pixel region:  x={px_x}, y={px_y}, w={px_w}, h={px_h}  ({count} pixels)")
+    print(f"  Image size:    {img.width} x {img.height}")
+    print()
+    print(f"  Average RGB:   ({avg[0]:.1f}, {avg[1]:.1f}, {avg[2]:.1f})")
+    print(f"  Stddev RGB:    ({sd[0]:.1f}, {sd[1]:.1f}, {sd[2]:.1f})")
+    print(f"  Stddev sum:    {sd[0] + sd[1] + sd[2]:.1f}")
+    print(f"  Color ratio:   ({ratio[0]:.4f}, {ratio[1]:.4f}, {ratio[2]:.4f})")
+    print()
+    print(f"  // C++ -- paste into your detector")
+    print(f"  ImageFloatBox  box({fx:.4f}, {fy:.4f}, {fw:.4f}, {fh:.4f});")
+    print(f"  FloatPixel     expected{{{ratio[0]:.2f}, {ratio[1]:.2f}, {ratio[2]:.2f}}};")
+
+    # If an expected ratio was provided, test against it
+    if expected:
+        print()
+        print(f"  // Testing against expected ratio ({expected[0]:.2f}, {expected[1]:.2f}, {expected[2]:.2f})")
+        dist = euclidean_distance(ratio, expected)
+        sdsum = sd[0] + sd[1] + sd[2]
+        print(f"  Distance from expected: {dist:.4f}")
+        print(f"  Stddev sum:             {sdsum:.1f}")
+        for max_dist, max_sdsum in [(0.10, 100), (0.15, 120), (0.18, 150), (0.25, 200)]:
+            ok = dist <= max_dist and sdsum <= max_sdsum
+            tag = "PASS" if ok else "FAIL"
+            reasons = []
+            if dist > max_dist:
+                reasons.append(f"dist {dist:.4f} > {max_dist}")
+            if sdsum > max_sdsum:
+                reasons.append(f"sdsum {sdsum:.1f} > {max_sdsum}")
+            reason_s = "  (" + ", ".join(reasons) + ")" if reasons else ""
+            print(f"  is_solid(dist={max_dist}, sdsum={max_sdsum:3d}): {tag}{reason_s}")
+    else:
+        print()
+        # Self-test (distance is always 0 against own ratio)
+        sdsum = sd[0] + sd[1] + sd[2]
+        for max_dist, max_sdsum in [(0.10, 100), (0.15, 120), (0.18, 150), (0.25, 200)]:
+            ok = sdsum <= max_sdsum
+            tag = "PASS" if ok else "FAIL"
+            reason = f"  (stddev_sum {sdsum:.1f} > {max_sdsum})" if not ok else ""
+            print(f"  is_solid(dist={max_dist}, sdsum={max_sdsum:3d}): {tag}{reason}")
+
+    print()
+
+
+# ─── Box store: save/load + C++ source parsing ─────────────────────────────
+
+def load_saved_boxes():
+    """Load user-saved boxes from JSON file."""
+    if os.path.exists(SAVED_BOXES_PATH):
+        with open(SAVED_BOXES_PATH, "r") as f:
+            return json.load(f)
+    return {}
+
+
+def save_boxes(boxes):
+    """Save boxes to JSON file."""
+    with open(SAVED_BOXES_PATH, "w") as f:
+        json.dump(boxes, f, indent=2)
+
+
+def parse_cpp_detectors():
+    """Parse ImageFloatBox definitions from PokemonChampions C++ detector sources.
+
+    Returns dict of "detector/variable" -> {"box": [x,y,w,h], "source": "path:line",
+                                            "expected": [r,g,b] or None}
+
+    For detectors that test a box against multiple colors (like BattleEndDetector
+    which checks left_won_glow against both WINNER_BLUE and LOSER_RED), we create
+    separate entries: "detector/m_box:COLOR_NAME" for each pairing.
+    """
+    boxes = {}
+    if not os.path.isdir(INFERENCE_DIR):
+        return boxes
+
+    for fname in os.listdir(INFERENCE_DIR):
+        if not fname.endswith(".cpp"):
+            continue
+        fpath = os.path.join(INFERENCE_DIR, fname)
+        with open(fpath, "r") as f:
+            lines = f.readlines()
+        full_text = "".join(lines)
+
+        # Extract detector name from filename
+        base = fname.replace("PokemonChampions_", "").rsplit(".", 1)[0]
+        rel_path = os.path.relpath(fpath, REPO_ROOT)
+
+        # ── Pass 1: Find FloatPixel color constants ──
+        color_constants = {}
+        for i, line in enumerate(lines):
+            m = re.search(
+                r'FloatPixel\s+(\w+)\s*[\{(]\s*([0-9.]+)\s*,\s*([0-9.]+)\s*,\s*([0-9.]+)\s*[\})]',
+                line
+            )
+            if m:
+                color_constants[m.group(1)] = (float(m.group(2)), float(m.group(3)), float(m.group(4)))
+
+        # ── Pass 2: Find ImageFloatBox member definitions ──
+        # Maps member name -> {box, source_line}
+        member_boxes = {}
+        for i, line in enumerate(lines):
+            # m_var(x, y, w, h) in constructor initializer list
+            m = re.search(
+                r'(m_\w+)\s*[\({]\s*([0-9.]+)\s*,\s*([0-9.]+)\s*,\s*([0-9.]+)\s*,\s*([0-9.]+)\s*[\})]',
+                line
+            )
+            if not m:
+                # ImageFloatBox(x, y, w, h) with a variable context
+                m2 = re.search(
+                    r'ImageFloatBox\s*[\({]\s*([0-9.]+)\s*,\s*([0-9.]+)\s*,\s*([0-9.]+)\s*,\s*([0-9.]+)\s*[\})]',
+                    line
+                )
+                if m2:
+                    var_m = re.search(r'(m_\w+)', line)
+                    var_name = var_m.group(1) if var_m else f"box_line{i+1}"
+                    box_vals = [float(m2.group(j)) for j in range(1, 5)]
+                else:
+                    continue
+            else:
+                var_name = m.group(1)
+                box_vals = [float(m.group(j)) for j in range(2, 6)]
+
+            if all(v == 0.0 for v in box_vals):
+                continue
+
+            member_boxes[var_name] = {"box": box_vals, "line": i + 1}
+
+        # ── Pass 3: Trace is_solid() calls to pair boxes with colors ──
+        # Track: image_stats(extract_box_reference(screen, m_box)) -> stats_var
+        # Then:  is_solid(stats_var, COLOR_CONST, ...)
+        #
+        # stats_var -> [member_names] (file-wide, across all functions)
+        # A var name like "stats" can appear in multiple functions mapping to
+        # different members, so we collect all (stats_var, member) pairs.
+        stats_pairs = []  # [(stats_var, member_name, line_idx), ...]
+        for i, line in enumerate(lines):
+            m = re.search(r'(\w+)\s*=\s*image_stats\(.*?(m_\w+)', line)
+            if m:
+                stats_pairs.append((m.group(1), m.group(2), i))
+
+        # Collect (member_name, color_const_name) pairs from is_solid calls
+        box_color_pairs = []
+        for i, line in enumerate(lines):
+            # Case 1: is_solid(stats_var, COLOR_CONST, ...)
+            m = re.search(r'is_solid\(\s*(\w+)\s*,\s*(\w+)', line)
+            if m:
+                stats_var = m.group(1)
+                color_name = m.group(2)
+                if color_name not in color_constants:
+                    continue
+                # Find the closest preceding image_stats assignment for this var
+                member = None
+                for sv, mem, li in reversed(stats_pairs):
+                    if sv == stats_var and li <= i:
+                        member = mem
+                        break
+                if member and member in member_boxes:
+                    box_color_pairs.append((member, color_name))
+                    continue
+
+            # Case 2: is_solid(image_stats(extract_box_reference(screen, m_box)), COLOR, ...)
+            m2 = re.search(r'is_solid\(\s*image_stats\(.*?(m_\w+).*?,\s*(\w+)', line)
+            if m2:
+                member = m2.group(1)
+                color_name = m2.group(2)
+                if member in member_boxes and color_name in color_constants:
+                    box_color_pairs.append((member, color_name))
+
+        # ── Build output entries ──
+        if box_color_pairs:
+            # We have precise is_solid mappings
+            seen_members = set()
+            for member, color_name in box_color_pairs:
+                seen_members.add(member)
+                info = member_boxes[member]
+                # Use "member:COLOR" key if a member maps to multiple colors
+                member_color_count = sum(1 for m, _ in box_color_pairs if m == member)
+                if member_color_count > 1:
+                    key = f"{base}/{member}:{color_name}"
+                else:
+                    key = f"{base}/{member}"
+                boxes[key] = {
+                    "box": info["box"],
+                    "source": f"{rel_path}:{info['line']}",
+                    "expected": list(color_constants[color_name]),
+                }
+
+            # Add any member boxes not referenced in is_solid (overlay-only, etc.)
+            for member, info in member_boxes.items():
+                if member not in seen_members:
+                    key = f"{base}/{member}"
+                    boxes[key] = {
+                        "box": info["box"],
+                        "source": f"{rel_path}:{info['line']}",
+                    }
+                    if color_constants:
+                        boxes[key]["color_constants"] = {
+                            k: list(v) for k, v in color_constants.items()
+                        }
+        else:
+            # No is_solid calls found — store boxes with available color constants
+            for member, info in member_boxes.items():
+                key = f"{base}/{member}"
+                entry = {
+                    "box": info["box"],
+                    "source": f"{rel_path}:{info['line']}",
+                }
+                if color_constants:
+                    entry["color_constants"] = {
+                        k: list(v) for k, v in color_constants.items()
+                    }
+                boxes[key] = entry
+
+    return boxes
+
+
+def get_all_boxes():
+    """Return merged dict: C++ detector boxes + user-saved boxes.
+    User-saved boxes are prefixed with 'saved/' to avoid collisions.
+    """
+    cpp_boxes = parse_cpp_detectors()
+    saved = load_saved_boxes()
+
+    merged = {}
+    for k, v in cpp_boxes.items():
+        merged[k] = v
+    for k, v in saved.items():
+        merged[f"saved/{k}"] = v
+
+    return merged
+
+
+def list_all_boxes():
+    """Print all known boxes."""
+    all_boxes = get_all_boxes()
+    if not all_boxes:
+        print("No boxes found.")
+        return
+
+    # Group by prefix
+    groups = {}
+    for key, val in sorted(all_boxes.items()):
+        prefix = key.split("/")[0]
+        groups.setdefault(prefix, []).append((key, val))
+
+    for prefix, items in sorted(groups.items()):
+        print(f"\n  [{prefix}]")
+        for key, val in items:
+            b = val["box"]
+            src = val.get("source", "")
+            exp = val.get("expected")
+            exp_s = f"  expected=({exp[0]:.2f},{exp[1]:.2f},{exp[2]:.2f})" if exp else ""
+            src_s = f"  ({src})" if src else ""
+            print(f"    {key:<45s} box=({b[0]:.4f}, {b[1]:.4f}, {b[2]:.4f}, {b[3]:.4f}){exp_s}{src_s}")
+    print()
+
+
+# ─── CLI modes ──────────────────────────────────────────────────────────────
+
+def cli_box(img_path, box_args):
+    img = Image.open(img_path).convert("RGB")
+    fx, fy, fw, fh = [float(v) for v in box_args]
+    px_x = int(fx * img.width)
+    px_y = int(fy * img.height)
+    px_w = int(fw * img.width)
+    px_h = int(fh * img.height)
+    print_report(img, px_x, px_y, px_w, px_h, label=f"box ({fx}, {fy}, {fw}, {fh})")
+
+
+def cli_load(img_path, name):
+    all_boxes = get_all_boxes()
+    # Fuzzy match: find keys containing the name
+    matches = [k for k in all_boxes if name.lower() in k.lower()]
+    if not matches:
+        print(f"No box matching '{name}'. Use --list to see available boxes.")
+        sys.exit(1)
+
+    img = Image.open(img_path).convert("RGB")
+    for key in sorted(matches):
+        val = all_boxes[key]
+        b = val["box"]
+        px_x = int(b[0] * img.width)
+        px_y = int(b[1] * img.height)
+        px_w = int(b[2] * img.width)
+        px_h = int(b[3] * img.height)
+        expected = tuple(val["expected"]) if val.get("expected") else None
+        src = val.get("source", "")
+        label = f"{key}" + (f"  ({src})" if src else "")
+        print_report(img, px_x, px_y, px_w, px_h, label=label, expected=expected)
+
+
+def cli_check_all(img_path):
+    """Run all known detector boxes against the given image."""
+    all_boxes = get_all_boxes()
+    img = Image.open(img_path).convert("RGB")
+
+    for key in sorted(all_boxes):
+        val = all_boxes[key]
+        b = val["box"]
+        px_x = int(b[0] * img.width)
+        px_y = int(b[1] * img.height)
+        px_w = int(b[2] * img.width)
+        px_h = int(b[3] * img.height)
+        if px_w <= 0 or px_h <= 0:
+            continue
+        expected = tuple(val["expected"]) if val.get("expected") else None
+        src = val.get("source", "")
+        label = f"{key}" + (f"  ({src})" if src else "")
+        print_report(img, px_x, px_y, px_w, px_h, label=label, expected=expected)
+
+
+# ─── Interactive GUI ─────────────────────────────────────────────────────────
+
+# Overlay colors for loaded boxes
+BOX_COLORS = [
+    "#ff6666", "#66ff66", "#6666ff", "#ffff66", "#ff66ff", "#66ffff",
+    "#ff9933", "#33ff99", "#9933ff", "#ff3399", "#99ff33", "#3399ff",
+]
+
+
+class PixelInspector:
+    CROSSHAIR_SIZE = 12
+
+    def __init__(self, img_path):
+        self.img = Image.open(img_path).convert("RGB")
+        self.img_w, self.img_h = self.img.size
+        self.img_path = img_path
+
+        # Load all known boxes
+        self.all_boxes = get_all_boxes()
+        self.box_keys = sorted(self.all_boxes.keys())
+        self.current_box_idx = -1
+        self.show_all_overlays = False
+
+        self.root = tk.Tk()
+        self.root.title(f"Pixel Inspector -- {img_path}")
+
+        # Top bar: info
+        self.info_var = tk.StringVar(value="Click+drag=select  s=save  l=load  n/p=cycle boxes  a=show all  q=quit")
+        info_label = tk.Label(self.root, textvariable=self.info_var, anchor="w",
+                              font=("Menlo", 11), bg="#1e1e1e", fg="#00ff88",
+                              padx=8, pady=4)
+        info_label.pack(fill="x")
+
+        # Box info bar
+        self.box_var = tk.StringVar(value=f"{len(self.box_keys)} boxes available (press 'l' to load)")
+        box_label = tk.Label(self.root, textvariable=self.box_var, anchor="w",
+                             font=("Menlo", 10), bg="#2a2a2a", fg="#aaaaff",
+                             padx=8, pady=2)
+        box_label.pack(fill="x")
+
+        # Canvas
+        self.canvas = tk.Canvas(self.root, bg="#111", highlightthickness=0)
+        self.canvas.pack(fill="both", expand=True)
+
+        # Zoom / pan state
+        self.zoom = 1.0
+        self.offset_x = 0.0
+        self.offset_y = 0.0
+
+        # Selection state
+        self.sel_start = None
+        self.sel_rect = None
+        self.sel_coords = None  # (px_x, px_y, px_w, px_h) in image space
+
+        # Pan state
+        self.pan_start = None
+
+        # Crosshair items
+        self.crosshair_items = []
+
+        # Bind events
+        self.canvas.bind("<ButtonPress-1>", self.on_press)
+        self.canvas.bind("<B1-Motion>", self.on_drag)
+        self.canvas.bind("<ButtonRelease-1>", self.on_release)
+        self.canvas.bind("<ButtonPress-2>", self.on_pan_start)
+        self.canvas.bind("<B2-Motion>", self.on_pan_move)
+        self.canvas.bind("<ButtonPress-3>", self.on_right_click)
+        self.canvas.bind("<MouseWheel>", self.on_scroll)       # macOS
+        self.canvas.bind("<Button-4>", self.on_scroll_up)      # Linux
+        self.canvas.bind("<Button-5>", self.on_scroll_down)    # Linux
+        self.canvas.bind("<Motion>", self.on_motion)
+        self.canvas.bind("<Configure>", lambda e: self.redraw())
+        self.root.bind("<q>", lambda e: self.root.destroy())
+        self.root.bind("<s>", lambda e: self.save_selection())
+        self.root.bind("<l>", lambda e: self.load_box_dialog())
+        self.root.bind("<n>", lambda e: self.cycle_box(1))
+        self.root.bind("<p>", lambda e: self.cycle_box(-1))
+        self.root.bind("<a>", lambda e: self.toggle_all_overlays())
+
+        # Fit image to window on startup
+        self.root.update_idletasks()
+        screen_w = self.root.winfo_screenwidth()
+        screen_h = self.root.winfo_screenheight()
+        win_w = min(self.img_w, int(screen_w * 0.85))
+        win_h = min(self.img_h, int(screen_h * 0.85))
+        self.root.geometry(f"{win_w}x{win_h}")
+
+        self.root.after(100, self.fit_to_window)
+        self.root.mainloop()
+
+    def fit_to_window(self):
+        cw = self.canvas.winfo_width()
+        ch = self.canvas.winfo_height()
+        if cw < 10 or ch < 10:
+            return
+        zx = cw / self.img_w
+        zy = ch / self.img_h
+        self.zoom = min(zx, zy)
+        self.offset_x = (cw - self.img_w * self.zoom) / 2
+        self.offset_y = (ch - self.img_h * self.zoom) / 2
+        self.redraw()
+
+    # ── Coordinate transforms ──
+
+    def img_to_canvas(self, ix, iy):
+        return ix * self.zoom + self.offset_x, iy * self.zoom + self.offset_y
+
+    def canvas_to_img(self, cx, cy):
+        return (cx - self.offset_x) / self.zoom, (cy - self.offset_y) / self.zoom
+
+    # ── Drawing ──
+
+    def redraw(self):
+        self.canvas.delete("all")
+
+        cw = self.canvas.winfo_width()
+        ch = self.canvas.winfo_height()
+
+        # Determine visible portion of image
+        ix0, iy0 = self.canvas_to_img(0, 0)
+        ix1, iy1 = self.canvas_to_img(cw, ch)
+
+        # Clamp to image bounds
+        ix0 = max(0, int(ix0))
+        iy0 = max(0, int(iy0))
+        ix1 = min(self.img_w, int(ix1) + 1)
+        iy1 = min(self.img_h, int(iy1) + 1)
+
+        if ix1 <= ix0 or iy1 <= iy0:
+            return
+
+        # Crop and resize visible portion
+        crop = self.img.crop((ix0, iy0, ix1, iy1))
+        disp_w = max(1, int((ix1 - ix0) * self.zoom))
+        disp_h = max(1, int((iy1 - iy0) * self.zoom))
+        resized = crop.resize((disp_w, disp_h), Image.NEAREST if self.zoom > 2 else Image.BILINEAR)
+
+        self._photo = ImageTk.PhotoImage(resized)
+        cx0, cy0 = self.img_to_canvas(ix0, iy0)
+        self.canvas.create_image(cx0, cy0, image=self._photo, anchor="nw")
+
+        # Draw all overlays if toggled
+        if self.show_all_overlays:
+            for i, key in enumerate(self.box_keys):
+                b = self.all_boxes[key]["box"]
+                color = BOX_COLORS[i % len(BOX_COLORS)]
+                self._draw_box_overlay(b, color, key)
+
+        # Draw currently loaded box
+        if 0 <= self.current_box_idx < len(self.box_keys):
+            key = self.box_keys[self.current_box_idx]
+            b = self.all_boxes[key]["box"]
+            self._draw_box_overlay(b, "#00ff00", key, width=3)
+
+        # Redraw user selection
+        if self.sel_coords:
+            px_x, px_y, px_w, px_h = self.sel_coords
+            sx0, sy0 = self.img_to_canvas(px_x, px_y)
+            sx1, sy1 = self.img_to_canvas(px_x + px_w, px_y + px_h)
+            self.canvas.create_rectangle(sx0, sy0, sx1, sy1,
+                                         outline="#00ffff", width=2, dash=(4, 4))
+
+    def _draw_box_overlay(self, box, color, label="", width=2):
+        """Draw a named box overlay on the canvas."""
+        bx = box[0] * self.img_w
+        by = box[1] * self.img_h
+        bw = box[2] * self.img_w
+        bh = box[3] * self.img_h
+        cx0, cy0 = self.img_to_canvas(bx, by)
+        cx1, cy1 = self.img_to_canvas(bx + bw, by + bh)
+        self.canvas.create_rectangle(cx0, cy0, cx1, cy1,
+                                     outline=color, width=width)
+        if label:
+            # Truncate label for display
+            short = label.split("/")[-1] if "/" in label else label
+            self.canvas.create_text(cx0 + 2, cy0 - 2, text=short,
+                                    fill=color, anchor="sw",
+                                    font=("Menlo", 9, "bold"))
+
+    def draw_crosshair(self, cx, cy):
+        for item in self.crosshair_items:
+            self.canvas.delete(item)
+        self.crosshair_items.clear()
+
+        s = self.CROSSHAIR_SIZE
+        self.crosshair_items.append(
+            self.canvas.create_line(cx - s, cy, cx + s, cy, fill="#ff0", width=1))
+        self.crosshair_items.append(
+            self.canvas.create_line(cx, cy - s, cx, cy + s, fill="#ff0", width=1))
+
+    # ── Box management ──
+
+    def save_selection(self):
+        if not self.sel_coords:
+            self.info_var.set("Nothing to save -- select a region first")
+            return
+
+        px_x, px_y, px_w, px_h = self.sel_coords
+        fx, fy, fw, fh = format_report(self.img_w, self.img_h, px_x, px_y, px_w, px_h)
+
+        name = simpledialog.askstring("Save Box", "Name for this box (e.g. 'battle_dialog/text_area'):",
+                                      parent=self.root)
+        if not name:
+            return
+
+        boxes = load_saved_boxes()
+        boxes[name] = {
+            "box": [fx, fy, fw, fh],
+            "source": f"saved from {os.path.basename(self.img_path)}",
+        }
+
+        # Compute and store the expected color ratio
+        pixels = extract_pixels(self.img, px_x, px_y, px_w, px_h)
+        avg, sd, count = image_stats(pixels)
+        ratio = color_ratio(avg)
+        boxes[name]["expected"] = [round(ratio[0], 4), round(ratio[1], 4), round(ratio[2], 4)]
+        boxes[name]["avg_rgb"] = [round(avg[0], 1), round(avg[1], 1), round(avg[2], 1)]
+        boxes[name]["stddev_sum"] = round(sd[0] + sd[1] + sd[2], 1)
+
+        save_boxes(boxes)
+
+        # Reload
+        self.all_boxes = get_all_boxes()
+        self.box_keys = sorted(self.all_boxes.keys())
+
+        self.info_var.set(f"Saved '{name}' -> {SAVED_BOXES_PATH}")
+        print(f"\nSaved box '{name}': ({fx:.4f}, {fy:.4f}, {fw:.4f}, {fh:.4f})")
+
+    def load_box_dialog(self):
+        if not self.box_keys:
+            self.info_var.set("No boxes available")
+            return
+
+        # Build a picker window
+        picker = tk.Toplevel(self.root)
+        picker.title("Load Box")
+        picker.geometry("600x500")
+        picker.configure(bg="#1e1e1e")
+
+        # Search field
+        search_var = tk.StringVar()
+        search_entry = tk.Entry(picker, textvariable=search_var, font=("Menlo", 12),
+                                bg="#2a2a2a", fg="#ffffff", insertbackground="#ffffff")
+        search_entry.pack(fill="x", padx=8, pady=8)
+        search_entry.focus_set()
+
+        # Listbox
+        frame = tk.Frame(picker, bg="#1e1e1e")
+        frame.pack(fill="both", expand=True, padx=8, pady=(0, 8))
+
+        scrollbar = tk.Scrollbar(frame)
+        scrollbar.pack(side="right", fill="y")
+
+        listbox = tk.Listbox(frame, font=("Menlo", 11), bg="#2a2a2a", fg="#cccccc",
+                             selectbackground="#444488", yscrollcommand=scrollbar.set)
+        listbox.pack(fill="both", expand=True)
+        scrollbar.config(command=listbox.yview)
+
+        # Populate
+        filtered_keys = list(self.box_keys)
+
+        def refresh_list(*_):
+            nonlocal filtered_keys
+            query = search_var.get().lower()
+            listbox.delete(0, "end")
+            filtered_keys = [k for k in self.box_keys if query in k.lower()]
+            for key in filtered_keys:
+                b = self.all_boxes[key]["box"]
+                listbox.insert("end", f"{key}  ({b[0]:.4f}, {b[1]:.4f}, {b[2]:.4f}, {b[3]:.4f})")
+
+        search_var.trace_add("write", refresh_list)
+        refresh_list()
+
+        def on_select(event=None):
+            sel = listbox.curselection()
+            if not sel:
+                return
+            key = filtered_keys[sel[0]]
+            self.current_box_idx = self.box_keys.index(key)
+            self._activate_box(key)
+            picker.destroy()
+
+        listbox.bind("<Double-Button-1>", on_select)
+        listbox.bind("<Return>", on_select)
+        search_entry.bind("<Return>", lambda e: on_select())
+
+    def _activate_box(self, key):
+        """Load a box, print its report, update overlays."""
+        val = self.all_boxes[key]
+        b = val["box"]
+        px_x = int(b[0] * self.img_w)
+        px_y = int(b[1] * self.img_h)
+        px_w = int(b[2] * self.img_w)
+        px_h = int(b[3] * self.img_h)
+
+        expected = tuple(val["expected"]) if val.get("expected") else None
+        src = val.get("source", "")
+        label = f"{key}" + (f"  ({src})" if src else "")
+        print_report(self.img, px_x, px_y, px_w, px_h, label=label, expected=expected)
+
+        self.sel_coords = (px_x, px_y, px_w, px_h)
+        self.redraw()
+
+        self.box_var.set(f"[{self.current_box_idx + 1}/{len(self.box_keys)}] {key}")
+        self.info_var.set(
+            f"Loaded: {key}  box=({b[0]:.4f}, {b[1]:.4f}, {b[2]:.4f}, {b[3]:.4f})"
+        )
+
+    def cycle_box(self, direction):
+        if not self.box_keys:
+            return
+        self.current_box_idx = (self.current_box_idx + direction) % len(self.box_keys)
+        key = self.box_keys[self.current_box_idx]
+        self._activate_box(key)
+
+    def toggle_all_overlays(self):
+        self.show_all_overlays = not self.show_all_overlays
+        self.redraw()
+        state = "ON" if self.show_all_overlays else "OFF"
+        self.info_var.set(f"All box overlays: {state}  ({len(self.box_keys)} boxes)")
+
+    # ── Selection ──
+
+    def on_press(self, event):
+        self.sel_start = (event.x, event.y)
+        self.sel_coords = None
+        if self.sel_rect:
+            self.canvas.delete(self.sel_rect)
+            self.sel_rect = None
+
+    def on_drag(self, event):
+        if not self.sel_start:
+            return
+
+        x0, y0 = self.sel_start
+        x1, y1 = event.x, event.y
+
+        if self.sel_rect:
+            self.canvas.delete(self.sel_rect)
+        self.sel_rect = self.canvas.create_rectangle(
+            x0, y0, x1, y1, outline="#00ffff", width=2, dash=(4, 4))
+
+        # Update info with live coordinates
+        ix0, iy0 = self.canvas_to_img(min(x0, x1), min(y0, y1))
+        ix1, iy1 = self.canvas_to_img(max(x0, x1), max(y0, y1))
+        ix0, iy0 = max(0, int(ix0)), max(0, int(iy0))
+        ix1, iy1 = min(self.img_w, int(ix1)), min(self.img_h, int(iy1))
+        pw, ph = ix1 - ix0, iy1 - iy0
+        if pw > 0 and ph > 0:
+            fx, fy = ix0 / self.img_w, iy0 / self.img_h
+            fw, fh = pw / self.img_w, ph / self.img_h
+            self.info_var.set(
+                f"Selecting: ({ix0},{iy0}) {pw}x{ph}px  |  "
+                f"ImageFloatBox({fx:.4f}, {fy:.4f}, {fw:.4f}, {fh:.4f})")
+
+    def on_release(self, event):
+        if not self.sel_start:
+            return
+
+        x0, y0 = self.sel_start
+        x1, y1 = event.x, event.y
+
+        # Convert to image coords
+        ix0, iy0 = self.canvas_to_img(min(x0, x1), min(y0, y1))
+        ix1, iy1 = self.canvas_to_img(max(x0, x1), max(y0, y1))
+
+        px_x = max(0, int(ix0))
+        px_y = max(0, int(iy0))
+        px_w = min(self.img_w, int(ix1)) - px_x
+        px_h = min(self.img_h, int(iy1)) - px_y
+
+        self.sel_start = None
+
+        if px_w < 2 or px_h < 2:
+            # Too small — treat as a single-pixel click, show info
+            ix, iy = self.canvas_to_img(event.x, event.y)
+            ix, iy = int(ix), int(iy)
+            if 0 <= ix < self.img_w and 0 <= iy < self.img_h:
+                p = self.img.getpixel((ix, iy))
+                s = p[0] + p[1] + p[2]
+                ratio = (p[0]/s, p[1]/s, p[2]/s) if s > 0 else (0.333, 0.333, 0.333)
+                self.info_var.set(
+                    f"Pixel ({ix},{iy}): RGB=({p[0]},{p[1]},{p[2]})  "
+                    f"ratio=({ratio[0]:.3f},{ratio[1]:.3f},{ratio[2]:.3f})  "
+                    f"norm=({ix/self.img_w:.4f},{iy/self.img_h:.4f})")
+            return
+
+        self.sel_coords = (px_x, px_y, px_w, px_h)
+        self.redraw()
+        print_report(self.img, px_x, px_y, px_w, px_h)
+
+        # Update status bar
+        fx, fy, fw, fh = format_report(self.img_w, self.img_h, px_x, px_y, px_w, px_h)
+        pixels = extract_pixels(self.img, px_x, px_y, px_w, px_h)
+        avg, sd, count = image_stats(pixels)
+        ratio = color_ratio(avg)
+        self.info_var.set(
+            f"Box({fx:.4f}, {fy:.4f}, {fw:.4f}, {fh:.4f})  "
+            f"ratio=({ratio[0]:.2f},{ratio[1]:.2f},{ratio[2]:.2f})  "
+            f"stddev_sum={sd[0]+sd[1]+sd[2]:.1f}  [{count}px]")
+
+    def on_right_click(self, event):
+        self.sel_coords = None
+        self.current_box_idx = -1
+        if self.sel_rect:
+            self.canvas.delete(self.sel_rect)
+            self.sel_rect = None
+        self.redraw()
+        self.info_var.set("Selection cleared")
+
+    # ── Pan ──
+
+    def on_pan_start(self, event):
+        self.pan_start = (event.x, event.y, self.offset_x, self.offset_y)
+
+    def on_pan_move(self, event):
+        if not self.pan_start:
+            return
+        sx, sy, ox, oy = self.pan_start
+        self.offset_x = ox + (event.x - sx)
+        self.offset_y = oy + (event.y - sy)
+        self.redraw()
+
+    # ── Zoom ──
+
+    def do_zoom(self, event, factor):
+        ix, iy = self.canvas_to_img(event.x, event.y)
+        self.zoom *= factor
+        self.zoom = max(0.1, min(50, self.zoom))
+        self.offset_x = event.x - ix * self.zoom
+        self.offset_y = event.y - iy * self.zoom
+        self.redraw()
+
+    def on_scroll(self, event):
+        factor = 1.15 if event.delta > 0 else 1 / 1.15
+        self.do_zoom(event, factor)
+
+    def on_scroll_up(self, event):
+        self.do_zoom(event, 1.15)
+
+    def on_scroll_down(self, event):
+        self.do_zoom(event, 1 / 1.15)
+
+    # ── Motion (live pixel readout) ──
+
+    def on_motion(self, event):
+        if self.sel_start:
+            return  # dragging — handled by on_drag
+        ix, iy = self.canvas_to_img(event.x, event.y)
+        ix, iy = int(ix), int(iy)
+        self.draw_crosshair(event.x, event.y)
+        if 0 <= ix < self.img_w and 0 <= iy < self.img_h:
+            p = self.img.getpixel((ix, iy))
+            s = p[0] + p[1] + p[2]
+            ratio = (p[0]/s, p[1]/s, p[2]/s) if s > 0 else (0.333, 0.333, 0.333)
+            self.info_var.set(
+                f"({ix},{iy})  RGB=({p[0]:3d},{p[1]:3d},{p[2]:3d})  "
+                f"ratio=({ratio[0]:.3f},{ratio[1]:.3f},{ratio[2]:.3f})  "
+                f"norm=({ix/self.img_w:.4f},{iy/self.img_h:.4f})")
+
+
+# ─── Main ───────────────────────────────────────────────────────────────────
+
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print(__doc__)
+        sys.exit(1)
+
+    if sys.argv[1] in ("-h", "--help"):
+        print(__doc__)
+        sys.exit(0)
+
+    if sys.argv[1] == "--list":
+        list_all_boxes()
+        sys.exit(0)
+
+    img_path = sys.argv[1]
+
+    if "--box" in sys.argv:
+        idx = sys.argv.index("--box")
+        box_args = sys.argv[idx + 1:idx + 5]
+        if len(box_args) != 4:
+            print("Error: --box requires 4 values: x y width height")
+            sys.exit(1)
+        cli_box(img_path, box_args)
+    elif "--load" in sys.argv:
+        idx = sys.argv.index("--load")
+        if idx + 1 >= len(sys.argv):
+            print("Error: --load requires a box name")
+            sys.exit(1)
+        cli_load(img_path, sys.argv[idx + 1])
+    elif "--check-all" in sys.argv:
+        cli_check_all(img_path)
+    else:
+        PixelInspector(img_path)
