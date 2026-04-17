@@ -1306,6 +1306,8 @@ file(GLOB LIBRARY_SOURCES
     Source/PokemonChampions/Inference/PokemonChampions_ActionMenuDetector.h
     Source/PokemonChampions/Inference/PokemonChampions_BattleEndDetector.cpp
     Source/PokemonChampions/Inference/PokemonChampions_BattleEndDetector.h
+    Source/PokemonChampions/Inference/PokemonChampions_MainMenuDetector.cpp
+    Source/PokemonChampions/Inference/PokemonChampions_MainMenuDetector.h
     Source/PokemonChampions/Inference/PokemonChampions_MoveSelectDetector.cpp
     Source/PokemonChampions/Inference/PokemonChampions_MoveSelectDetector.h
     Source/PokemonChampions/Inference/PokemonChampions_PostMatchDetector.cpp
