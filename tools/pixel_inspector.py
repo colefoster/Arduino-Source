@@ -10,22 +10,25 @@ Opens a screenshot, lets you drag-select regions, and outputs:
   - Copy-pasteable C++ declarations
 
 Usage:
-  python3 tools/pixel_inspector.py <screenshot.png>
-  python3 tools/pixel_inspector.py <screenshot.png> --box 0.9062 0.5694 0.0260 0.0185
-  python3 tools/pixel_inspector.py <screenshot.png> --load action_menu/fight_button
+  python3 tools/pixel_inspector.py                     (opens file picker)
+  python3 tools/pixel_inspector.py <img> [img2] ...    (open one or more images)
+  python3 tools/pixel_inspector.py <img> --box 0.9062 0.5694 0.0260 0.0185
+  python3 tools/pixel_inspector.py <img> --load action_menu/fight_button
+  python3 tools/pixel_inspector.py <img> --check-all
   python3 tools/pixel_inspector.py --list
-  python3 tools/pixel_inspector.py <screenshot.png> --check-all
 
 Controls (interactive mode):
-  - Click and drag to select a region
-  - Right-click to clear selection
-  - Scroll to zoom (centered on cursor)
-  - Middle-click drag to pan
-  - Press 's' to save current selection
-  - Press 'l' to load a saved/detector box
-  - Press 'n' / 'p' to cycle through loaded boxes (next/prev)
-  - Press 'a' to show all saved boxes as overlays
-  - Press 'q' or close window to quit
+  Click + drag    Select a region
+  Right-click     Clear selection
+  Scroll          Zoom (centered on cursor)
+  Middle-drag     Pan
+  Left / Right    Switch between loaded images
+  o               Open more images (file picker)
+  s               Save current selection
+  l               Load a saved/detector box
+  n / p           Cycle through loaded boxes (next/prev)
+  a               Toggle all box overlays
+  q               Quit
 """
 
 import json
@@ -34,7 +37,7 @@ import os
 import re
 import sys
 import tkinter as tk
-from tkinter import simpledialog
+from tkinter import filedialog, simpledialog
 from PIL import Image, ImageTk
 
 
@@ -446,13 +449,29 @@ BOX_COLORS = [
 ]
 
 
+def pick_files(initial_dir=None):
+    """Open a native file picker and return selected paths (or empty list)."""
+    root = tk.Tk()
+    root.withdraw()
+    paths = filedialog.askopenfilenames(
+        title="Select screenshot(s)",
+        initialdir=initial_dir or os.getcwd(),
+        filetypes=[
+            ("Images", "*.png *.jpg *.jpeg *.bmp *.gif *.tiff"),
+            ("All files", "*.*"),
+        ],
+    )
+    root.destroy()
+    return list(paths)
+
+
 class PixelInspector:
     CROSSHAIR_SIZE = 12
 
-    def __init__(self, img_path):
-        self.img = Image.open(img_path).convert("RGB")
-        self.img_w, self.img_h = self.img.size
-        self.img_path = img_path
+    def __init__(self, img_paths):
+        # Image list and index
+        self.img_paths = list(img_paths)
+        self.img_idx = 0
 
         # Load all known boxes
         self.all_boxes = get_all_boxes()
@@ -461,17 +480,16 @@ class PixelInspector:
         self.show_all_overlays = False
 
         self.root = tk.Tk()
-        self.root.title(f"Pixel Inspector -- {img_path}")
 
         # Top bar: info
-        self.info_var = tk.StringVar(value="Click+drag=select  s=save  l=load  n/p=cycle boxes  a=show all  q=quit")
+        self.info_var = tk.StringVar(value="drag=select  s=save  l=load  n/p=cycle boxes  o=open  Left/Right=switch image  q=quit")
         info_label = tk.Label(self.root, textvariable=self.info_var, anchor="w",
                               font=("Menlo", 11), bg="#1e1e1e", fg="#00ff88",
                               padx=8, pady=4)
         info_label.pack(fill="x")
 
         # Box info bar
-        self.box_var = tk.StringVar(value=f"{len(self.box_keys)} boxes available (press 'l' to load)")
+        self.box_var = tk.StringVar()
         box_label = tk.Label(self.root, textvariable=self.box_var, anchor="w",
                              font=("Menlo", 10), bg="#2a2a2a", fg="#aaaaff",
                              padx=8, pady=2)
@@ -515,8 +533,13 @@ class PixelInspector:
         self.root.bind("<n>", lambda e: self.cycle_box(1))
         self.root.bind("<p>", lambda e: self.cycle_box(-1))
         self.root.bind("<a>", lambda e: self.toggle_all_overlays())
+        self.root.bind("<o>", lambda e: self.open_files())
+        self.root.bind("<Left>", lambda e: self.switch_image(-1))
+        self.root.bind("<Right>", lambda e: self.switch_image(1))
 
-        # Fit image to window on startup
+        # Load first image and show
+        self._load_current_image()
+
         self.root.update_idletasks()
         screen_w = self.root.winfo_screenwidth()
         screen_h = self.root.winfo_screenheight()
@@ -526,6 +549,46 @@ class PixelInspector:
 
         self.root.after(100, self.fit_to_window)
         self.root.mainloop()
+
+    def _load_current_image(self):
+        """Load the image at self.img_idx and reset view state."""
+        self.img_path = self.img_paths[self.img_idx]
+        self.img = Image.open(self.img_path).convert("RGB")
+        self.img_w, self.img_h = self.img.size
+
+        self.sel_start = None
+        self.sel_rect = None
+        self.sel_coords = None
+        self.crosshair_items = []
+
+        fname = os.path.basename(self.img_path)
+        count = len(self.img_paths)
+        img_label = f"[{self.img_idx + 1}/{count}] {fname}" if count > 1 else fname
+        self.root.title(f"Pixel Inspector -- {img_label}")
+        self.box_var.set(f"{img_label}  |  {len(self.box_keys)} boxes available  |  {self.img_w}x{self.img_h}")
+
+    def open_files(self):
+        """Open file picker to add more images."""
+        initial = os.path.dirname(self.img_path) if self.img_path else None
+        paths = pick_files(initial_dir=initial)
+        if not paths:
+            return
+        # Replace the image list and jump to the first new image
+        start = len(self.img_paths)
+        self.img_paths.extend(paths)
+        self.img_idx = start
+        self._load_current_image()
+        self.fit_to_window()
+        self.info_var.set(f"Opened {len(paths)} image(s) -- {len(self.img_paths)} total")
+
+    def switch_image(self, direction):
+        """Switch to next/prev image in the list."""
+        if len(self.img_paths) < 2:
+            self.info_var.set("Only 1 image loaded -- press 'o' to open more")
+            return
+        self.img_idx = (self.img_idx + direction) % len(self.img_paths)
+        self._load_current_image()
+        self.fit_to_window()
 
     def fit_to_window(self):
         cw = self.canvas.winfo_width()
@@ -901,34 +964,41 @@ class PixelInspector:
 # ─── Main ───────────────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        print(__doc__)
-        sys.exit(1)
-
-    if sys.argv[1] in ("-h", "--help"):
+    if len(sys.argv) >= 2 and sys.argv[1] in ("-h", "--help"):
         print(__doc__)
         sys.exit(0)
 
-    if sys.argv[1] == "--list":
+    if len(sys.argv) >= 2 and sys.argv[1] == "--list":
         list_all_boxes()
         sys.exit(0)
 
-    img_path = sys.argv[1]
+    # CLI modes that require an image path as first arg
+    if len(sys.argv) >= 2 and not sys.argv[1].startswith("-"):
+        img_path = sys.argv[1]
 
-    if "--box" in sys.argv:
-        idx = sys.argv.index("--box")
-        box_args = sys.argv[idx + 1:idx + 5]
-        if len(box_args) != 4:
-            print("Error: --box requires 4 values: x y width height")
-            sys.exit(1)
-        cli_box(img_path, box_args)
-    elif "--load" in sys.argv:
-        idx = sys.argv.index("--load")
-        if idx + 1 >= len(sys.argv):
-            print("Error: --load requires a box name")
-            sys.exit(1)
-        cli_load(img_path, sys.argv[idx + 1])
-    elif "--check-all" in sys.argv:
-        cli_check_all(img_path)
+        if "--box" in sys.argv:
+            idx = sys.argv.index("--box")
+            box_args = sys.argv[idx + 1:idx + 5]
+            if len(box_args) != 4:
+                print("Error: --box requires 4 values: x y width height")
+                sys.exit(1)
+            cli_box(img_path, box_args)
+        elif "--load" in sys.argv:
+            idx = sys.argv.index("--load")
+            if idx + 1 >= len(sys.argv):
+                print("Error: --load requires a box name")
+                sys.exit(1)
+            cli_load(img_path, sys.argv[idx + 1])
+        elif "--check-all" in sys.argv:
+            cli_check_all(img_path)
+        else:
+            # Collect all non-flag args as image paths
+            img_paths = [a for a in sys.argv[1:] if not a.startswith("-")]
+            PixelInspector(img_paths)
     else:
-        PixelInspector(img_path)
+        # No image path given -- open file picker
+        paths = pick_files(initial_dir=os.path.join(REPO_ROOT, "SerialPrograms", "Source", "PokemonChampions", "ref_frames"))
+        if not paths:
+            print("No files selected.")
+            sys.exit(0)
+        PixelInspector(paths)
