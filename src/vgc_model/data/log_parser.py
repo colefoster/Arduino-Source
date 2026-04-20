@@ -50,6 +50,7 @@ class Action:
     target: str = ""  # "p1a", "p1b", "p2a", "p2b", or "" for self/spread
     mega: bool = False
     switch_to: str = ""  # species name when switching
+    slot: str = ""  # "a" or "b" — which active slot performed this action
 
 
 @dataclass
@@ -155,7 +156,8 @@ class BattleParser:
 
         # Turn tracking
         self.current_turn = 0
-        self.turn_actions: dict[str, list[Action]] = {"p1": [], "p2": []}
+        # Keyed by player -> slot suffix -> Action (ensures correct slot attribution)
+        self.turn_actions: dict[str, dict[str, Action]] = {"p1": {}, "p2": {}}
         self.samples: list[TrainingSample] = []
 
         # Mega tracking per turn
@@ -262,11 +264,13 @@ class BattleParser:
             leads_list.append(base_species)
 
         # Record as switch action if during a turn
+        slot_suffix = slot[2]  # "a" or "b"
         if self.current_turn > 0:
-            self.turn_actions[player].append(Action(
+            self.turn_actions[player][slot_suffix] = Action(
                 type="switch",
                 switch_to=species,
-            ))
+                slot=slot_suffix,
+            )
 
     def _cmd_drag(self, parts: list[str]):
         """Forced switch (e.g. Whirlwind) - same format as switch."""
@@ -280,13 +284,20 @@ class BattleParser:
         move_name = parts[3]
         target = parts[4] if len(parts) > 4 else ""
 
-        slot = slot_info[:3]
-        player = slot[:2]
+        slot = slot_info[:3]  # "p1a"
+        player = slot[:2]    # "p1"
+        slot_suffix = slot[2]  # "a" or "b"
 
         # Check if this move was from a forced action (copycat, metronome, etc.)
         rest = "|".join(parts[4:])
         if "[from]" in rest:
             return  # not a player decision
+
+        # Don't overwrite if we already recorded an action for this slot
+        # (the first move logged is the actual player decision; subsequent
+        # ones from the same slot are follow-ups like Parental Bond)
+        if slot_suffix in self.turn_actions[player]:
+            return
 
         # Parse target slot
         target_slot = ""
@@ -295,12 +306,13 @@ class BattleParser:
 
         mega = slot in self.mega_this_turn
 
-        self.turn_actions[player].append(Action(
+        self.turn_actions[player][slot_suffix] = Action(
             type="move",
             move=move_name,
             target=target_slot,
             mega=mega,
-        ))
+            slot=slot_suffix,
+        )
 
     def _cmd_turn(self, parts: list[str]):
         """|turn|N - emit training sample for previous turn, start new turn."""
@@ -310,7 +322,7 @@ class BattleParser:
             self._emit_turn_sample()
 
         self.current_turn = new_turn
-        self.turn_actions = {"p1": [], "p2": []}
+        self.turn_actions = {"p1": {}, "p2": {}}
         self.mega_this_turn = set()
 
     def _cmd_win(self, parts: list[str]):
@@ -610,15 +622,14 @@ class BattleParser:
         state = self._build_game_state()
 
         for player in ("p1", "p2"):
-            actions = self.turn_actions[player]
-            if not actions:
+            slot_actions = self.turn_actions[player]
+            if not slot_actions:
                 continue
 
-            turn_actions = TurnActions()
-            if len(actions) >= 1:
-                turn_actions.slot_a = actions[0]
-            if len(actions) >= 2:
-                turn_actions.slot_b = actions[1]
+            turn_actions = TurnActions(
+                slot_a=slot_actions.get("a"),
+                slot_b=slot_actions.get("b"),
+            )
 
             self.samples.append(TrainingSample(
                 state=state,
@@ -628,19 +639,16 @@ class BattleParser:
                 rating=self.rating,
             ))
 
-        # Track moves for known moves
+        # Track moves for known moves — now correctly attributed by slot
         for player in ("p1", "p2"):
-            for action in self.turn_actions[player]:
+            for slot_suffix, action in self.turn_actions[player].items():
                 if action.type == "move":
-                    # Find which pokemon used this move
-                    for slot_suffix in ("a", "b"):
-                        slot = f"{player}{slot_suffix}"
-                        key = self.active_slots.get(slot)
-                        if key and key in self.all_pokemon:
-                            poke = self.all_pokemon[key]
-                            if action.move not in poke.moves_known:
-                                poke.moves_known.append(action.move)
-                            break
+                    slot = f"{player}{slot_suffix}"
+                    key = self.active_slots.get(slot)
+                    if key and key in self.all_pokemon:
+                        poke = self.all_pokemon[key]
+                        if action.move not in poke.moves_known:
+                            poke.moves_known.append(action.move)
 
 
 def parse_battle(log: str, rating: int = 0) -> Optional[ParsedBattle]:
