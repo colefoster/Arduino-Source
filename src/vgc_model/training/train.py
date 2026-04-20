@@ -25,9 +25,10 @@ def train(
     epochs: int = 80,
     batch_size: int = 128,
     lr: float = 3e-4,
-    weight_decay: float = 1e-3,
+    weight_decay: float = 5e-3,
     min_rating: int = 0,
     device_str: str = "auto",
+    patience: int = 10,
 ):
     # Device selection
     if device_str == "auto":
@@ -88,6 +89,7 @@ def train(
 
     CHECKPOINT_DIR.mkdir(parents=True, exist_ok=True)
     best_val_loss = float("inf")
+    patience_counter = 0
 
     for epoch in range(1, epochs + 1):
         # Train
@@ -157,9 +159,10 @@ def train(
             f"LR: {scheduler.get_last_lr()[0]:.2e}"
         )
 
-        # Save best
+        # Save best + early stopping
         if avg_val_loss < best_val_loss:
             best_val_loss = avg_val_loss
+            patience_counter = 0
             torch.save({
                 "epoch": epoch,
                 "model_state_dict": model.state_dict(),
@@ -170,6 +173,11 @@ def train(
                 "config": config,
             }, CHECKPOINT_DIR / "best.pt")
             print(f"  -> Saved best model (val_loss={avg_val_loss:.4f})")
+        else:
+            patience_counter += 1
+            if patience_counter >= patience:
+                print(f"  -> Early stopping: no improvement for {patience} epochs")
+                break
 
         # Periodic checkpoint
         if epoch % 10 == 0:
@@ -189,9 +197,10 @@ def main():
     parser.add_argument("--epochs", type=int, default=80)
     parser.add_argument("--batch-size", type=int, default=128)
     parser.add_argument("--lr", type=float, default=3e-4)
-    parser.add_argument("--weight-decay", type=float, default=1e-3)
+    parser.add_argument("--weight-decay", type=float, default=5e-3)
     parser.add_argument("--min-rating", type=int, default=0)
     parser.add_argument("--device", type=str, default="auto")
+    parser.add_argument("--patience", type=int, default=10)
     args = parser.parse_args()
 
     train(
@@ -201,6 +210,7 @@ def main():
         weight_decay=args.weight_decay,
         min_rating=args.min_rating,
         device_str=args.device,
+        patience=args.patience,
     )
 
 

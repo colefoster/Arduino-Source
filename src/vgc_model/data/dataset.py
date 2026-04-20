@@ -86,10 +86,12 @@ class VGCDataset(Dataset):
         min_rating: int = 0,
         winner_only: bool = True,
         min_turns: int = 3,
+        augment: bool = True,
     ):
         self.vocabs = vocabs
         self.winner_only = winner_only
         self.min_turns = min_turns
+        self.augment = augment
 
         # Index all replay files with their ratings
         self.replay_files: list[tuple[Path, int]] = []
@@ -141,7 +143,13 @@ class VGCDataset(Dataset):
     def __getitem__(self, idx: int) -> dict[str, torch.Tensor]:
         sample, battle = self.samples[idx]
         encoded = self._encode_sample(sample)
-        return self._to_tensors(encoded)
+        tensors = self._to_tensors(encoded)
+
+        # Slot swap augmentation: 50% chance swap slot a/b in inputs and labels
+        if self.augment and random.random() < 0.5:
+            tensors = self._swap_slots(tensors)
+
+        return tensors
 
     def _encode_sample(self, sample: TrainingSample) -> EncodedSample:
         """Encode a training sample into model-ready indices."""
@@ -236,9 +244,9 @@ class VGCDataset(Dataset):
                 move_idx += [0] * (4 - len(move_idx))
                 move_ids.append(move_idx)
 
-        # Encode actions as indices
-        action_a = self._encode_action(sample.actions.slot_a, own_active, own_bench)
-        action_b = self._encode_action(sample.actions.slot_b, own_active, own_bench)
+        # Encode actions as indices (pass slot index + player for correct attribution)
+        action_a = self._encode_action(sample.actions.slot_a, 0, own_active, own_bench, sample.player)
+        action_b = self._encode_action(sample.actions.slot_b, 1, own_active, own_bench, sample.player)
 
         # Action masks (simplified: all moves + switches available)
         # In reality should be computed from game state, but we start simple
@@ -274,43 +282,46 @@ class VGCDataset(Dataset):
     def _encode_action(
         self,
         action: Optional["Action"],
+        slot_idx: int,
         own_active: list[Pokemon],
         own_bench: list[Pokemon],
+        player: str,
     ) -> int:
         """Encode an action into a flat index.
 
         Action space (14 total):
-          0-11: move_i * 3 + target_j (4 moves × 3 targets)
+          0-11: move_i * 3 + target_j (4 moves × 3 targets: opp_a, opp_b, ally)
           12-13: switch to bench slot 0 or 1
         """
         if action is None:
             return 0
 
         if action.type == "switch":
-            # Find which bench slot we're switching to
             for i, poke in enumerate(own_bench):
                 if poke.species == action.switch_to or self._base_species(poke.species) == self._base_species(action.switch_to):
                     return 12 + min(i, 1)
-            return 12  # default to first switch slot
+            return 12
 
         if action.type == "move":
-            # Find move index among active pokemon's known moves
+            # Find move index in THIS slot's pokemon's known moves
             move_idx = 0
-            if own_active:
-                # Check slot a first, then slot b
-                for poke in own_active:
-                    if action.move in poke.moves_known:
-                        move_idx = poke.moves_known.index(action.move)
-                        break
+            if slot_idx < len(own_active):
+                poke = own_active[slot_idx]
+                if action.move in poke.moves_known:
+                    move_idx = poke.moves_known.index(action.move)
 
-            # Target encoding: 0=opp_a, 1=opp_b, 2=ally
-            target_idx = 0
+            # Target encoding: determine if target is opp_a(0), opp_b(1), or ally(2)
+            target_idx = 0  # default: opp_a / spread / self-target
             if action.target:
-                if "b" in action.target:
-                    target_idx = 1
-                if action.target[:2] == action.target[:2]:  # same side = ally
-                    # Check if targeting ally
-                    pass  # default to 0 for now
+                target_player = action.target[:2]  # "p1" or "p2"
+                target_slot = action.target[2]      # "a" or "b"
+
+                if target_player == player:
+                    # Targeting own side = ally
+                    target_idx = 2
+                else:
+                    # Targeting opponent: a=0, b=1
+                    target_idx = 0 if target_slot == "a" else 1
 
             return min(move_idx, 3) * 3 + min(target_idx, 2)
 
@@ -348,3 +359,33 @@ class VGCDataset(Dataset):
             "action_mask_b": torch.tensor(enc.action_mask_b, dtype=torch.bool),
             "rating_weight": torch.tensor(enc.rating_weight, dtype=torch.float),
         }
+
+    @staticmethod
+    def _swap_slots(t: dict[str, torch.Tensor]) -> dict[str, torch.Tensor]:
+        """Swap slot A and slot B in both inputs and labels.
+
+        Slot layout: [own_a(0), own_b(1), own_bench0(2), own_bench1(3),
+                       opp_a(4), opp_b(5), opp_bench0(6), opp_bench1(7)]
+        Swapping own active: 0<->1, opp active: 4<->5
+        """
+        t = dict(t)  # shallow copy
+
+        # Swap own active slots (0,1) and opp active slots (4,5) in pokemon features
+        for key in ("species_ids", "hp_values", "status_ids", "item_ids",
+                     "ability_ids", "mega_flags", "alive_flags"):
+            v = t[key].clone()
+            v[0], v[1] = t[key][1], t[key][0]
+            v[4], v[5] = t[key][5], t[key][4]
+            t[key] = v
+
+        for key in ("boost_values", "move_ids"):
+            v = t[key].clone()
+            v[0], v[1] = t[key][1], t[key][0]
+            v[4], v[5] = t[key][5], t[key][4]
+            t[key] = v
+
+        # Swap action labels
+        t["action_slot_a"], t["action_slot_b"] = t["action_slot_b"].clone(), t["action_slot_a"].clone()
+        t["action_mask_a"], t["action_mask_b"] = t["action_mask_b"].clone(), t["action_mask_a"].clone()
+
+        return t

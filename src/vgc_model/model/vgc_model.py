@@ -33,7 +33,7 @@ class ModelConfig:
     n_heads: int = 4
     n_layers: int = 4
     d_ff: int = 256
-    dropout: float = 0.15
+    dropout: float = 0.25
 
     # Output
     num_actions: int = 14  # 4 moves * 3 targets + 2 switches
