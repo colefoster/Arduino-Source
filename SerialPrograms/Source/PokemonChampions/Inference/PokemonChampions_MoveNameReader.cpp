@@ -61,17 +61,16 @@ MoveNameReader::MoveNameReader(Language language)
     : m_language(language)
 {
     //  Move name text boxes — right side of screen, 4 stacked slots.
-    //  x: 1340-1540/1920 = 0.698 - 0.802  (width 0.104)
-    //  Each slot is ~34px tall / 1080 = 0.031
-    //  Slots spaced 130px / 1080 = 0.120 apart
-    const double X      = 0.698;
-    const double WIDTH  = 0.104;
-    const double HEIGHT = 0.031;
+    //  Shifted right to exclude the type icon circle on the left.
+    //  x: 1490-1780/1920, ~50px tall, ~130px vertical spacing.
+    const double X      = 0.776;
+    const double WIDTH  = 0.151;
+    const double HEIGHT = 0.046;
     const double Y_SLOTS[4] = {
-        0.483,   //  slot 0: y = 522/1080
-        0.604,   //  slot 1: y = 652/1080
-        0.724,   //  slot 2: y = 782/1080
-        0.844,   //  slot 3: y = 912/1080
+        0.509,   //  slot 0: y = 550/1080
+        0.630,   //  slot 1: y = 680/1080
+        0.750,   //  slot 2: y = 810/1080
+        0.870,   //  slot 3: y = 940/1080
     };
 
     for (size_t i = 0; i < 4; i++){

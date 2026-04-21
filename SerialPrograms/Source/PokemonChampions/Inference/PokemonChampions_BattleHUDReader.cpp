@@ -89,32 +89,28 @@ static int parse_percentage(const std::string& text){
 BattleHUDReader::BattleHUDReader(Language language)
     : m_language(language)
 {
-    //  Opponent species name: "Greninja" in top-right colored badge.
-    //  x: 1716-1862 / 1920 = 0.894 - 0.970
-    //  y: 30-56 / 1080 = 0.028 - 0.052
-    m_opponent_name_box = ImageFloatBox(0.870, 0.020, 0.110, 0.035);
+    //  Opponent species name: "Greninja" in top-right pink/red badge.
+    //  x: 1600-1850 / 1920, y: 45-80 / 1080
+    m_opponent_name_box = ImageFloatBox(0.833, 0.042, 0.130, 0.032);
 
-    //  Opponent HP %: "1%" or "45%" below the badge.
-    //  x: 1836-1900 / 1920 = 0.956 - 0.990
-    //  y: 60-86 / 1080 = 0.056 - 0.080
-    m_opponent_hp_box = ImageFloatBox(0.945, 0.055, 0.045, 0.030);
+    //  Opponent HP %: "1%" or "45%" below/right of the badge.
+    //  x: 1850-1915 / 1920, y: 62-95 / 1080
+    m_opponent_hp_box = ImageFloatBox(0.964, 0.057, 0.034, 0.031);
 
-    //  Own HP "41/187" in bottom-left info bar.
-    //  x: 82-196 / 1920 = 0.043 - 0.102
-    //  y: 984-1014 / 1080 = 0.911 - 0.939
-    m_own_hp_box = ImageFloatBox(0.040, 0.908, 0.090, 0.035);
+    //  Own HP "41/187" in bottom-left, below HP bar.
+    //  x: 255-405 / 1920, y: 1020-1065 / 1080
+    m_own_hp_box = ImageFloatBox(0.133, 0.944, 0.078, 0.042);
 
     //  PP counts — right end of each move pill.
-    //  The large PP number + "/max" spans roughly x: 1810-1900 / 1920
-    //  Same vertical spacing as the move pills.
-    const double PP_X      = 0.943;
-    const double PP_WIDTH  = 0.045;
-    const double PP_HEIGHT = 0.035;
+    //  x: 1780-1890 / 1920, ~55px tall, same vertical spacing as moves.
+    const double PP_X      = 0.927;
+    const double PP_WIDTH  = 0.057;
+    const double PP_HEIGHT = 0.051;
     const double Y_SLOTS[4] = {
-        0.490,   //  slot 0
-        0.610,   //  slot 1
-        0.730,   //  slot 2
-        0.850,   //  slot 3
+        0.500,   //  slot 0: y = 540/1080
+        0.620,   //  slot 1: y = 670/1080
+        0.741,   //  slot 2: y = 800/1080
+        0.861,   //  slot 3: y = 930/1080
     };
     for (size_t i = 0; i < 4; i++){
         m_pp_boxes[i] = ImageFloatBox(PP_X, Y_SLOTS[i], PP_WIDTH, PP_HEIGHT);
