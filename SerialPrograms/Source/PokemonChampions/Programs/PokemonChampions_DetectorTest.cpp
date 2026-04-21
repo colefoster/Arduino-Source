@@ -19,6 +19,8 @@
  *
  */
 
+#include "Common/Cpp/PrettyPrint.h"
+#include "CommonFramework/Globals.h"
 #include "CommonFramework/VideoPipeline/VideoFeed.h"
 #include "CommonFramework/VideoPipeline/VideoOverlayScopes.h"
 #include "Pokemon/Pokemon_Strings.h"
@@ -55,7 +57,26 @@ DetectorTest_Descriptor::DetectorTest_Descriptor()
 {}
 
 
-DetectorTest::DetectorTest(){}
+DetectorTest::DetectorTest()
+    : AUTO_SCREENSHOT(
+        "<b>Auto-Screenshot:</b><br>"
+        "Automatically save a screenshot every N milliseconds, classified by screen type. "
+        "Saves to the Screenshots folder, organized by type (move_select/, battle_log/, etc.).",
+        LockMode::UNLOCK_WHILE_RUNNING,
+        false
+    )
+    , SCREENSHOT_INTERVAL_MS(
+        "<b>Screenshot Interval (ms):</b><br>"
+        "Milliseconds between auto-screenshots. Only saves on screen transitions or "
+        "at this interval within the same screen type.",
+        LockMode::UNLOCK_WHILE_RUNNING,
+        2000,
+        500
+    )
+{
+    PA_ADD_OPTION(AUTO_SCREENSHOT);
+    PA_ADD_OPTION(SCREENSHOT_INTERVAL_MS);
+}
 
 
 //  Helper: format a move slug for display, replacing hyphens with spaces.
@@ -106,8 +127,21 @@ void DetectorTest::program(SingleSwitchProgramEnvironment& env, ProControllerCon
     env.console.log("  UNKNOWN      = No detector matched this frame");
     env.console.log("");
 
+    if (AUTO_SCREENSHOT){
+        env.console.log(
+            "[Auto-Screenshot] ON — saving every " +
+            std::to_string((uint32_t)SCREENSHOT_INTERVAL_MS) + "ms to " +
+            SCREENSHOTS_PATH() + "detector_test/",
+            COLOR_PURPLE
+        );
+    }
+
     std::string last_screen;
     std::string last_log_text;   //  Deduplicate repeated battle log messages.
+
+    //  Auto-screenshot state.
+    uint32_t screenshot_count = 0;
+    auto last_screenshot_time = std::chrono::steady_clock::now();
 
     //  Poll loop.
     while (true){
@@ -157,10 +191,42 @@ void DetectorTest::program(SingleSwitchProgramEnvironment& env, ProControllerCon
 
         //  Log screen transitions.
         std::string full_label = screen + " (" + detail + ")";
-        if (full_label != last_screen){
+        bool screen_changed = (full_label != last_screen);
+        if (screen_changed){
             Color color = (screen == "UNKNOWN") ? COLOR_RED : COLOR_GREEN;
             env.console.log("[Screen] " + full_label, color);
             last_screen = full_label;
+        }
+
+        //  ── Auto-Screenshot ─────────────────────────────────────
+        //
+        //  Save on screen transitions (always) or at the configured
+        //  interval within the same screen type. Skip UNKNOWN frames.
+        if (AUTO_SCREENSHOT && screen != "UNKNOWN"){
+            auto now = std::chrono::steady_clock::now();
+            auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(
+                now - last_screenshot_time
+            ).count();
+
+            bool should_save = screen_changed
+                || elapsed >= (int64_t)(uint32_t)SCREENSHOT_INTERVAL_MS;
+
+            if (should_save){
+                //  Build path:  Screenshots/detector_test/<screen_type>/NNNN_<detail>.png
+                std::string type_dir = SCREENSHOTS_PATH() + "detector_test/" + screen + "/";
+                std::string filename = type_dir +
+                    std::to_string(screenshot_count) + "_" +
+                    now_to_filestring() + ".png";
+
+                if (frame.save(filename)){
+                    screenshot_count++;
+                    last_screenshot_time = now;
+                    env.console.log(
+                        "[Screenshot] " + screen + " -> " + filename,
+                        COLOR_PURPLE
+                    );
+                }
+            }
         }
 
         //  ── OCR: Move Select Screen ──────────────────────────────
