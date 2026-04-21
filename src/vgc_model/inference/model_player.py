@@ -42,7 +42,29 @@ class VGCModelPlayer(Player):
     def choose_move(self, battle: AbstractBattle) -> BattleOrder:
         if not isinstance(battle, DoubleBattle):
             return self.choose_random_move(battle)
-        return self._choose_doubles_move(battle)
+        try:
+            return self._choose_doubles_move(battle)
+        except Exception as e:
+            # Fallback to random on any error — never crash mid-game
+            print(f"  [model fallback] {e}", flush=True)
+            return self.choose_random_doubles_move(battle)
+
+    def choose_random_doubles_move(self, battle: DoubleBattle) -> DoubleBattleOrder:
+        """Emergency fallback — random legal move."""
+        orders = [None, None]
+        for i in range(2):
+            if battle.force_switch[i]:
+                if battle.available_switches[i]:
+                    orders[i] = self.create_order(random.choice(battle.available_switches[i]))
+            elif battle.active_pokemon[i] and not battle.active_pokemon[i].fainted:
+                actions = []
+                for move in battle.available_moves[i]:
+                    actions.append(self.create_order(move, move_target=random.choice([1, 2])))
+                for switch in battle.available_switches[i]:
+                    actions.append(self.create_order(switch))
+                if actions:
+                    orders[i] = random.choice(actions)
+        return DoubleBattleOrder(first_order=orders[0], second_order=orders[1])
 
     def teampreview(self, battle: AbstractBattle) -> str:
         """Use the team selection + lead selection heads to pick 4 and order them."""

@@ -399,7 +399,13 @@ class Pokemon:
 
     def _update_from_pokedex(self, species: str, store_species: bool = True):
         species = to_id_str(species)
-        dex_entry = self._data.pokedex[species]
+        dex_entry = self._data.pokedex.get(species)
+        if dex_entry is None:
+            # Champions has mega forms not in the gen9 pokedex — try base form
+            base = species.split("mega")[0].rstrip("-")
+            dex_entry = self._data.pokedex.get(base)
+            if dex_entry is None:
+                return  # give up gracefully
         if store_species:
             self._species = species
         self._base_stats = dex_entry["baseStats"]
