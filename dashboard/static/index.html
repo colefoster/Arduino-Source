@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon Champions - Training Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+            background: #0d1117;
+            color: #c9d1d9;
+            padding: 16px;
+        }
+        h1 { font-size: 18px; color: #58a6ff; margin-bottom: 12px; }
+        h2 { font-size: 14px; color: #8b949e; margin: 16px 0 8px; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* Status bar */
+        .status-bar {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+        .status-card {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 12px 16px;
+            flex: 1;
+            min-width: 180px;
+        }
+        .status-card .label { font-size: 11px; color: #8b949e; text-transform: uppercase; }
+        .status-card .value { font-size: 22px; font-weight: bold; margin-top: 4px; }
+        .status-card .sub { font-size: 11px; color: #8b949e; margin-top: 2px; }
+        .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+        .dot.green { background: #3fb950; }
+        .dot.red { background: #f85149; }
+        .dot.yellow { background: #d29922; }
+
+        /* Charts */
+        .chart-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        .chart-box {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 12px;
+        }
+        .chart-box canvas { max-height: 250px; }
+        .chart-title { font-size: 12px; color: #8b949e; margin-bottom: 8px; }
+
+        /* Model table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            overflow: hidden;
+            font-size: 13px;
+        }
+        th { background: #21262d; color: #8b949e; font-weight: 600; text-align: left; padding: 8px 12px; font-size: 11px; text-transform: uppercase; }
+        td { padding: 8px 12px; border-top: 1px solid #30363d; }
+        td.best { color: #3fb950; font-weight: bold; }
+
+        /* Run selector */
+        .run-selector { margin-bottom: 12px; }
+        .run-selector label { font-size: 12px; color: #8b949e; margin-right: 8px; }
+        .run-selector select {
+            background: #21262d; color: #c9d1d9; border: 1px solid #30363d;
+            padding: 4px 8px; border-radius: 4px; font-family: inherit;
+        }
+
+        .updated { font-size: 11px; color: #484f58; text-align: right; margin-top: 8px; }
+    </style>
+</head>
+<body>
+    <h1>Pokemon Champions VGC Dashboard</h1>
+
+    <!-- Status cards -->
+    <div class="status-bar">
+        <div class="status-card">
+            <div class="label">Training</div>
+            <div class="value" id="train-status">--</div>
+            <div class="sub" id="train-detail"></div>
+        </div>
+        <div class="status-card">
+            <div class="label">Spectator</div>
+            <div class="value" id="spec-status">--</div>
+            <div class="sub" id="spec-detail"></div>
+        </div>
+        <div class="status-card">
+            <div class="label">VGC Replays</div>
+            <div class="value" id="vgc-total">--</div>
+            <div class="sub" id="vgc-rate"></div>
+        </div>
+        <div class="status-card">
+            <div class="label">Best Model</div>
+            <div class="value" id="best-model">--</div>
+            <div class="sub" id="best-detail"></div>
+        </div>
+    </div>
+
+    <!-- Charts -->
+    <h2>Training Progress</h2>
+    <div class="run-selector">
+        <label>Run:</label>
+        <select id="run-select" onchange="loadTraining()">
+            <option value="">All runs</option>
+        </select>
+    </div>
+    <div class="chart-grid">
+        <div class="chart-box">
+            <div class="chart-title">Loss</div>
+            <canvas id="loss-chart"></canvas>
+        </div>
+        <div class="chart-box">
+            <div class="chart-title">Action Accuracy</div>
+            <canvas id="acc-chart"></canvas>
+        </div>
+        <div class="chart-box">
+            <div class="chart-title">Team & Lead Selection</div>
+            <canvas id="team-chart"></canvas>
+        </div>
+        <div class="chart-box">
+            <div class="chart-title">Collection Rate (replays/hr)</div>
+            <canvas id="collection-chart"></canvas>
+        </div>
+    </div>
+
+    <!-- Model comparison -->
+    <h2>Model Runs</h2>
+    <table id="runs-table">
+        <thead>
+            <tr>
+                <th>Run</th>
+                <th>Epochs</th>
+                <th>Val Loss</th>
+                <th>Top-1</th>
+                <th>Top-3</th>
+                <th>Team</th>
+                <th>Lead</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody id="runs-body"></tbody>
+    </table>
+
+    <div class="updated" id="last-updated"></div>
+
+    <script>
+    const API = window.location.origin;
+    const chartDefaults = {
+        responsive: true,
+        maintainAspectRatio: true,
+        animation: false,
+        plugins: { legend: { labels: { color: '#8b949e', font: { size: 11 } } } },
+        scales: {
+            x: { ticks: { color: '#484f58' }, grid: { color: '#21262d' } },
+            y: { ticks: { color: '#484f58' }, grid: { color: '#21262d' } },
+        },
+    };
+
+    let lossChart, accChart, teamChart, collectionChart;
+
+    function initCharts() {
+        lossChart = new Chart(document.getElementById('loss-chart'), {
+            type: 'line',
+            data: { labels: [], datasets: [] },
+            options: { ...chartDefaults },
+        });
+        accChart = new Chart(document.getElementById('acc-chart'), {
+            type: 'line',
+            data: { labels: [], datasets: [] },
+            options: { ...chartDefaults },
+        });
+        teamChart = new Chart(document.getElementById('team-chart'), {
+            type: 'line',
+            data: { labels: [], datasets: [] },
+            options: { ...chartDefaults },
+        });
+        collectionChart = new Chart(document.getElementById('collection-chart'), {
+            type: 'bar',
+            data: { labels: [], datasets: [] },
+            options: { ...chartDefaults },
+        });
+    }
+
+    async function loadLatest() {
+        try {
+            const resp = await fetch(`${API}/api/latest`);
+            const d = await resp.json();
+            if (d.error) return;
+
+            // Training status
+            const t = d.training || {};
+            if (t.active) {
+                document.getElementById('train-status').innerHTML =
+                    `<span class="dot green"></span>Epoch ${t.epoch}/${t.total_epochs}`;
+                document.getElementById('train-detail').textContent =
+                    `top1: ${t.val_top1?.toFixed(1)}% | top3: ${t.val_top3?.toFixed(1)}% | loss: ${t.val_loss?.toFixed(4)}`;
+            } else {
+                document.getElementById('train-status').innerHTML =
+                    `<span class="dot yellow"></span>Idle`;
+                document.getElementById('train-detail').textContent =
+                    t.run_id ? `Last: ${t.run_id} epoch ${t.epoch}` : '';
+            }
+
+            // Spectator status
+            const s = d.spectator || {};
+            if (s.alive && s.last_save_ago_sec >= 0 && s.last_save_ago_sec < 300) {
+                document.getElementById('spec-status').innerHTML =
+                    `<span class="dot green"></span>Active`;
+                document.getElementById('spec-detail').textContent =
+                    `Last save: ${s.last_save_ago_sec}s ago`;
+            } else {
+                document.getElementById('spec-status').innerHTML =
+                    `<span class="dot red"></span>Down`;
+                const ago = s.last_save_ago_sec > 0 ? `${Math.round(s.last_save_ago_sec / 60)}m ago` : 'unknown';
+                document.getElementById('spec-detail').textContent = `Last save: ${ago}`;
+            }
+
+            // Data totals
+            const vgc = d.data?.vgc || {};
+            document.getElementById('vgc-total').textContent = (vgc.total || 0).toLocaleString();
+            const rate = (vgc.last_1h || 0);
+            document.getElementById('vgc-rate').textContent =
+                `${vgc.spectated?.toLocaleString() || 0} spectated | ${rate}/hr`;
+
+            // Best model
+            if (t.best_val_loss) {
+                document.getElementById('best-model').textContent = t.best_val_loss.toFixed(4);
+                document.getElementById('best-detail').textContent =
+                    `top1: ${t.val_top1?.toFixed(1)}% | top3: ${t.val_top3?.toFixed(1)}%`;
+            }
+
+            document.getElementById('last-updated').textContent =
+                `Updated: ${new Date().toLocaleTimeString()}`;
+        } catch (e) {
+            console.error('Failed to load latest:', e);
+        }
+    }
+
+    const RUN_COLORS = [
+        { train: '#f8514966', val: '#f85149', top1: '#58a6ff', top3: '#3fb950', team: '#d2a8ff', lead: '#f0883e' },
+        { train: '#d2992266', val: '#d29922', top1: '#79c0ff', top3: '#56d364', team: '#bc8cff', lead: '#ffa657' },
+        { train: '#3fb95066', val: '#3fb950', top1: '#a5d6ff', top3: '#7ee787', team: '#e2c5ff', lead: '#ffc680' },
+    ];
+
+    async function loadTraining() {
+        try {
+            const runId = document.getElementById('run-select').value;
+            const url = runId ? `${API}/api/training?run_id=${runId}` : `${API}/api/training`;
+            const resp = await fetch(url);
+            const rows = await resp.json();
+            if (!rows.length) return;
+
+            // Group by run
+            const runs = {};
+            rows.forEach(r => {
+                if (!runs[r.run_id]) runs[r.run_id] = [];
+                runs[r.run_id].push(r);
+            });
+
+            // Loss chart
+            const lossDatasets = [];
+            const accDatasets = [];
+            const teamDatasets = [];
+            let colorIdx = 0;
+
+            for (const [rid, epochs] of Object.entries(runs)) {
+                const c = RUN_COLORS[colorIdx % RUN_COLORS.length];
+                const labels = epochs.map(e => e.epoch);
+
+                lossDatasets.push(
+                    { label: `${rid} train`, data: epochs.map(e => e.train_loss), borderColor: c.train, borderDash: [4, 2], pointRadius: 0, borderWidth: 1.5 },
+                    { label: `${rid} val`, data: epochs.map(e => e.val_loss), borderColor: c.val, pointRadius: 1, borderWidth: 2 },
+                );
+                accDatasets.push(
+                    { label: `${rid} top-1`, data: epochs.map(e => e.val_top1), borderColor: c.top1, pointRadius: 1, borderWidth: 2 },
+                    { label: `${rid} top-3`, data: epochs.map(e => e.val_top3), borderColor: c.top3, pointRadius: 1, borderWidth: 2 },
+                );
+                if (epochs[0].team_acc !== null) {
+                    teamDatasets.push(
+                        { label: `${rid} team`, data: epochs.map(e => e.team_acc), borderColor: c.team, pointRadius: 1, borderWidth: 2 },
+                        { label: `${rid} lead`, data: epochs.map(e => e.lead_acc), borderColor: c.lead, pointRadius: 1, borderWidth: 2 },
+                    );
+                }
+
+                lossChart.data.labels = labels;
+                accChart.data.labels = labels;
+                teamChart.data.labels = labels;
+                colorIdx++;
+            }
+
+            lossChart.data.datasets = lossDatasets;
+            accChart.data.datasets = accDatasets;
+            teamChart.data.datasets = teamDatasets;
+            lossChart.update();
+            accChart.update();
+            teamChart.update();
+        } catch (e) {
+            console.error('Failed to load training:', e);
+        }
+    }
+
+    async function loadRuns() {
+        try {
+            const resp = await fetch(`${API}/api/runs`);
+            const runs = await resp.json();
+            if (!runs.length) return;
+
+            // Update selector
+            const select = document.getElementById('run-select');
+            const currentVal = select.value;
+            select.innerHTML = '<option value="">All runs</option>';
+            runs.forEach(r => {
+                const opt = document.createElement('option');
+                opt.value = r.run_id;
+                opt.textContent = `${r.run_id} (${r.epochs} epochs)`;
+                select.appendChild(opt);
+            });
+            select.value = currentVal;
+
+            // Find best values for highlighting
+            const bests = {
+                best_val_loss: Math.min(...runs.map(r => r.best_val_loss || Infinity)),
+                best_top1: Math.max(...runs.map(r => r.best_top1 || 0)),
+                best_top3: Math.max(...runs.map(r => r.best_top3 || 0)),
+                best_team_acc: Math.max(...runs.map(r => r.best_team_acc || 0)),
+                best_lead_acc: Math.max(...runs.map(r => r.best_lead_acc || 0)),
+            };
+
+            // Update table
+            const tbody = document.getElementById('runs-body');
+            tbody.innerHTML = '';
+            runs.forEach(r => {
+                const date = new Date(r.started * 1000).toLocaleDateString();
+                const cls = (field, val, lower) => {
+                    if (val == null) return '';
+                    return (lower ? val <= bests[field] : val >= bests[field]) ? 'class="best"' : '';
+                };
+                tbody.innerHTML += `<tr>
+                    <td><strong>${r.run_id}</strong></td>
+                    <td>${r.epochs}</td>
+                    <td ${cls('best_val_loss', r.best_val_loss, true)}>${r.best_val_loss?.toFixed(4) || '-'}</td>
+                    <td ${cls('best_top1', r.best_top1, false)}>${r.best_top1?.toFixed(1) || '-'}%</td>
+                    <td ${cls('best_top3', r.best_top3, false)}>${r.best_top3?.toFixed(1) || '-'}%</td>
+                    <td ${cls('best_team_acc', r.best_team_acc, false)}>${r.best_team_acc?.toFixed(1) || '-'}%</td>
+                    <td ${cls('best_lead_acc', r.best_lead_acc, false)}>${r.best_lead_acc?.toFixed(1) || '-'}%</td>
+                    <td>${date}</td>
+                </tr>`;
+            });
+        } catch (e) {
+            console.error('Failed to load runs:', e);
+        }
+    }
+
+    // Init
+    initCharts();
+    loadLatest();
+    loadTraining();
+    loadRuns();
+
+    // Auto-refresh
+    setInterval(loadLatest, 30000);
+    setInterval(() => { loadTraining(); loadRuns(); }, 120000);
+    </script>
+</body>
+</html>

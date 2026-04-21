@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import time
 from pathlib import Path
 
@@ -35,6 +36,7 @@ def train(
     min_rating: int = 0,
     device_str: str = "auto",
     patience: int = 10,
+    run_id: str = "",
 ):
     # Device selection
     if device_str == "auto":
@@ -95,6 +97,11 @@ def train(
     action_criterion = nn.CrossEntropyLoss(reduction="none", label_smoothing=0.1)
     team_criterion = nn.BCEWithLogitsLoss(reduction="none")
 
+    # JSONL training log for dashboard
+    if not run_id:
+        run_id = f"run_{int(time.time())}"
+    training_log_path = CHECKPOINT_DIR / "training_log.jsonl"
+
     CHECKPOINT_DIR.mkdir(parents=True, exist_ok=True)
     best_val_loss = float("inf")
     patience_counter = 0
@@ -121,7 +128,27 @@ def train(
         if v["team_acc"] is not None:
             line += f" | team: {v['team_acc']:.1f}% lead: {v['lead_acc']:.1f}%"
         line += f" | LR: {scheduler.get_last_lr()[0]:.2e}"
-        print(line)
+        print(line, flush=True)
+
+        # Append to JSONL for dashboard
+        with open(training_log_path, "a") as f:
+            json.dump({
+                "run_id": run_id,
+                "epoch": epoch,
+                "total_epochs": epochs,
+                "timestamp": time.time(),
+                "train_loss": round(m["loss"], 4),
+                "val_loss": round(v["loss"], 4),
+                "train_top1": round(m["top1"], 2),
+                "val_top1": round(v["top1"], 2),
+                "train_top3": round(m["top3"], 2),
+                "val_top3": round(v["top3"], 2),
+                "team_acc": round(v["team_acc"], 2) if v["team_acc"] is not None else None,
+                "lead_acc": round(v["lead_acc"], 2) if v["lead_acc"] is not None else None,
+                "lr": scheduler.get_last_lr()[0],
+                "best_val_loss": round(min(best_val_loss, v["loss"]), 4),
+            }, f)
+            f.write("\n")
 
         # Save best + early stopping
         if v["loss"] < best_val_loss:
@@ -254,6 +281,7 @@ def main():
     parser.add_argument("--min-rating", type=int, default=0)
     parser.add_argument("--device", type=str, default="auto")
     parser.add_argument("--patience", type=int, default=10)
+    parser.add_argument("--run-id", type=str, default="")
     args = parser.parse_args()
 
     train(
@@ -264,6 +292,7 @@ def main():
         min_rating=args.min_rating,
         device_str=args.device,
         patience=args.patience,
+        run_id=args.run_id,
     )
 
 
