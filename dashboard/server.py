@@ -141,6 +141,16 @@ async def latest():
     return JSONResponse({"error": "no data"})
 
 
+@app.get("/api/battles")
+async def battles():
+    """Return battle results from the latest snapshot."""
+    latest_path = Path(__file__).parent / "latest.json"
+    if latest_path.exists():
+        data = json.loads(latest_path.read_text())
+        return JSONResponse(data.get("battles", []))
+    return JSONResponse([])
+
+
 @app.get("/api/training")
 async def training_history(run_id: str = "", hours: float = 0):
     """Return training epoch data. If run_id empty, return all runs."""
