@@ -126,10 +126,10 @@ class ShowdownSpectator:
         while True:
             try:
                 await self._session(remaining)
-            except (websockets.exceptions.ConnectionClosed,
-                    websockets.exceptions.WebSocketException,
-                    OSError) as e:
-                print(f"\n  Connection lost: {e}", flush=True)
+            except asyncio.CancelledError:
+                break
+            except Exception as e:
+                print(f"\n  Session error: {type(e).__name__}: {e}", flush=True)
 
             # Check if we should stop
             if duration:
@@ -174,25 +174,30 @@ class ShowdownSpectator:
     async def _message_handler(self):
         """Process incoming WebSocket messages."""
         async for raw in self.ws:
-            # Showdown sends room messages as: >roomid\nline1\nline2\n...
-            # Global messages have no > prefix
-            if raw.startswith(">"):
-                lines = raw.split("\n")
-                room_id = lines[0][1:]  # strip ">"
-                for line in lines[1:]:
-                    if line:
-                        await self._handle_room_message(room_id, line)
-            else:
-                for line in raw.split("\n"):
-                    if not line:
-                        continue
-                    if "|challstr|" in line:
-                        await self._login()
-                    elif "|updateuser|" in line and not self.logged_in:
-                        self.logged_in = True
-                        print("Logged in as guest", flush=True)
-                    elif "|queryresponse|roomlist|" in line:
-                        await self._handle_roomlist(line)
+            try:
+                # Showdown sends room messages as: >roomid\nline1\nline2\n...
+                # Global messages have no > prefix
+                if raw.startswith(">"):
+                    lines = raw.split("\n")
+                    room_id = lines[0][1:]  # strip ">"
+                    for line in lines[1:]:
+                        if line:
+                            await self._handle_room_message(room_id, line)
+                else:
+                    for line in raw.split("\n"):
+                        if not line:
+                            continue
+                        if "|challstr|" in line:
+                            await self._login()
+                        elif "|updateuser|" in line and not self.logged_in:
+                            self.logged_in = True
+                            print("Logged in as guest", flush=True)
+                        elif "|queryresponse|roomlist|" in line:
+                            await self._handle_roomlist(line)
+            except websockets.exceptions.ConnectionClosed:
+                raise  # let the reconnect logic handle this
+            except Exception as e:
+                print(f"  [warn] Message handler error: {e}", flush=True)
 
     async def _handle_room_message(self, room_id: str, line: str):
         """Handle a message from a battle room."""
@@ -220,12 +225,17 @@ class ShowdownSpectator:
             await asyncio.sleep(0.5)
 
         while True:
-            for fmt in self.formats:
-                cmd = f"|/crq roomlist {fmt}"
-                if self.min_elo:
-                    cmd = f"|/crq roomlist {fmt},{self.min_elo}"
-                await self.ws.send(cmd)
-                await asyncio.sleep(1)
+            try:
+                for fmt in self.formats:
+                    cmd = f"|/crq roomlist {fmt}"
+                    if self.min_elo:
+                        cmd = f"|/crq roomlist {fmt},{self.min_elo}"
+                    await self.ws.send(cmd)
+                    await asyncio.sleep(1)
+            except websockets.exceptions.ConnectionClosed:
+                raise
+            except Exception as e:
+                print(f"  [warn] Poll error: {e}", flush=True)
 
             await asyncio.sleep(POLL_INTERVAL)
 
