@@ -63,6 +63,14 @@ class EncodedSample:
     action_mask_a: list[int]     # [max_actions] legal action mask
     action_mask_b: list[int]     # [max_actions] legal action mask
 
+    # Team preview labels (only populated for team preview samples)
+    own_team_ids: list[int]      # [6] species IDs of own team
+    opp_team_ids: list[int]      # [6] species IDs of opp team
+    team_select_labels: list[int]  # [6] binary — was this pokemon selected?
+    selected_ids: list[int]      # [4] species IDs of selected pokemon
+    lead_labels: list[int]       # [4] binary — was this pokemon a lead?
+    has_team_preview: bool       # whether this sample has team preview data
+
     # Metadata
     rating_weight: float
     is_winner: bool
@@ -112,6 +120,7 @@ class VGCDataset(Dataset):
 
         # Pre-parse all replays and flatten into samples
         self.samples: list[tuple[TrainingSample, ParsedBattle]] = []
+        self.team_previews: list[tuple[ParsedBattle, int]] = []  # (battle, rating)
         self._load_all()
 
     def _load_all(self):
@@ -137,21 +146,33 @@ class VGCDataset(Dataset):
                     continue
                 self.samples.append((sample, result))
 
+            # Add one team preview sample per battle (from winner's perspective)
+            tp = result.team_preview
+            if len(tp.p1_team) == 6 and len(tp.p2_team) == 6:
+                if len(tp.p1_selected) >= 4 and len(tp.p2_selected) >= 4:
+                    self.team_previews.append((result, rating))
+
     def __len__(self) -> int:
-        return len(self.samples)
+        return len(self.samples) + len(self.team_previews)
 
     def __getitem__(self, idx: int) -> dict[str, torch.Tensor]:
-        sample, battle = self.samples[idx]
-        encoded = self._encode_sample(sample)
-        tensors = self._to_tensors(encoded)
+        if idx < len(self.samples):
+            sample, battle = self.samples[idx]
+            encoded = self._encode_sample(sample, battle)
+            tensors = self._to_tensors(encoded)
 
-        # Slot swap augmentation: 50% chance swap slot a/b in inputs and labels
-        if self.augment and random.random() < 0.5:
-            tensors = self._swap_slots(tensors)
+            if self.augment and random.random() < 0.5:
+                tensors = self._swap_slots(tensors)
 
-        return tensors
+            return tensors
+        else:
+            # Team preview sample
+            tp_idx = idx - len(self.samples)
+            battle, rating = self.team_previews[tp_idx]
+            encoded = self._encode_team_preview(battle, rating)
+            return self._to_tensors(encoded)
 
-    def _encode_sample(self, sample: TrainingSample) -> EncodedSample:
+    def _encode_sample(self, sample: TrainingSample, battle: ParsedBattle) -> EncodedSample:
         """Encode a training sample into model-ready indices."""
         player = sample.player
         if player == "p1":
@@ -275,8 +296,86 @@ class VGCDataset(Dataset):
             action_slot_b=action_b,
             action_mask_a=mask_a,
             action_mask_b=mask_b,
+            own_team_ids=self._encode_team_species(battle, sample.player, "team"),
+            opp_team_ids=self._encode_team_species(battle, sample.player, "opp_team"),
+            team_select_labels=self._encode_team_select_labels(battle, sample.player),
+            selected_ids=self._encode_team_species(battle, sample.player, "selected"),
+            lead_labels=self._encode_lead_labels(battle, sample.player),
+            has_team_preview=True,
             rating_weight=get_rating_weight(sample.rating),
             is_winner=sample.is_winner,
+        )
+
+    def _encode_team_species(self, battle: ParsedBattle, player: str, which: str) -> list[int]:
+        """Encode species IDs for team preview fields."""
+        tp = battle.team_preview
+        if which == "team":
+            species_list = tp.p1_team if player == "p1" else tp.p2_team
+        elif which == "opp_team":
+            species_list = tp.p2_team if player == "p1" else tp.p1_team
+        elif which == "selected":
+            species_list = tp.p1_selected if player == "p1" else tp.p2_selected
+        else:
+            species_list = []
+
+        target_len = 6 if which != "selected" else 4
+        ids = [self.vocabs.species[s] for s in species_list[:target_len]]
+        ids += [0] * (target_len - len(ids))
+        return ids
+
+    def _encode_team_select_labels(self, battle: ParsedBattle, player: str) -> list[int]:
+        """Binary labels: was each of the 6 team members selected?"""
+        tp = battle.team_preview
+        team = tp.p1_team if player == "p1" else tp.p2_team
+        selected = set(tp.p1_selected if player == "p1" else tp.p2_selected)
+        labels = [1 if s in selected else 0 for s in team[:6]]
+        labels += [0] * (6 - len(labels))
+        return labels
+
+    def _encode_lead_labels(self, battle: ParsedBattle, player: str) -> list[int]:
+        """Binary labels: was each of the 4 selected pokemon a lead?"""
+        tp = battle.team_preview
+        selected = (tp.p1_selected if player == "p1" else tp.p2_selected)[:4]
+        leads = set(tp.p1_leads if player == "p1" else tp.p2_leads)
+        labels = [1 if s in leads else 0 for s in selected]
+        labels += [0] * (4 - len(labels))
+        return labels
+
+    def _encode_team_preview(self, battle: ParsedBattle, rating: int) -> EncodedSample:
+        """Encode a team-preview-only sample (no battle state)."""
+        player = battle.winner  # use winner's perspective
+
+        return EncodedSample(
+            # Empty battle state (zeros)
+            species_ids=[0] * 8,
+            hp_values=[0.0] * 8,
+            status_ids=[0] * 8,
+            boost_values=[[0] * 6 for _ in range(8)],
+            item_ids=[0] * 8,
+            ability_ids=[0] * 8,
+            mega_flags=[0] * 8,
+            alive_flags=[0] * 8,
+            move_ids=[[0, 0, 0, 0] for _ in range(8)],
+            weather_id=0,
+            terrain_id=0,
+            trick_room=0,
+            tailwind_own=0,
+            tailwind_opp=0,
+            screens_own=[0, 0, 0],
+            screens_opp=[0, 0, 0],
+            turn=0,
+            action_slot_a=0,
+            action_slot_b=0,
+            action_mask_a=[1] * MAX_ACTIONS,
+            action_mask_b=[1] * MAX_ACTIONS,
+            own_team_ids=self._encode_team_species(battle, player, "team"),
+            opp_team_ids=self._encode_team_species(battle, player, "opp_team"),
+            team_select_labels=self._encode_team_select_labels(battle, player),
+            selected_ids=self._encode_team_species(battle, player, "selected"),
+            lead_labels=self._encode_lead_labels(battle, player),
+            has_team_preview=True,
+            rating_weight=get_rating_weight(rating),
+            is_winner=True,
         )
 
     def _encode_action(
@@ -358,6 +457,12 @@ class VGCDataset(Dataset):
             "action_mask_a": torch.tensor(enc.action_mask_a, dtype=torch.bool),
             "action_mask_b": torch.tensor(enc.action_mask_b, dtype=torch.bool),
             "rating_weight": torch.tensor(enc.rating_weight, dtype=torch.float),
+            "own_team_ids": torch.tensor(enc.own_team_ids, dtype=torch.long),
+            "opp_team_ids": torch.tensor(enc.opp_team_ids, dtype=torch.long),
+            "team_select_labels": torch.tensor(enc.team_select_labels, dtype=torch.float),
+            "selected_ids": torch.tensor(enc.selected_ids, dtype=torch.long),
+            "lead_labels": torch.tensor(enc.lead_labels, dtype=torch.float),
+            "has_team_preview": torch.tensor(enc.has_team_preview, dtype=torch.bool),
         }
 
     @staticmethod

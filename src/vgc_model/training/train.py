@@ -21,6 +21,12 @@ VOCAB_DIR = DATA_DIR / "vocab"
 CHECKPOINT_DIR = DATA_DIR / "checkpoints"
 
 
+def top_k_accuracy(logits: torch.Tensor, targets: torch.Tensor, k: int) -> int:
+    """Count how many targets are in the top-k predictions."""
+    _, top_k_preds = logits.topk(k, dim=-1)  # (B, k)
+    return (top_k_preds == targets.unsqueeze(-1)).any(dim=-1).sum().item()
+
+
 def train(
     epochs: int = 80,
     batch_size: int = 128,
@@ -55,7 +61,8 @@ def train(
         winner_only=True,
         min_turns=3,
     )
-    print(f"Dataset: {len(dataset)} samples")
+    print(f"Dataset: {len(dataset)} samples ({len(dataset.samples)} battle turns, "
+          f"{len(dataset.team_previews)} team previews)")
 
     # Train/val split (90/10)
     val_size = max(1, len(dataset) // 10)
@@ -84,95 +91,54 @@ def train(
     optimizer = torch.optim.AdamW(model.parameters(), lr=lr, weight_decay=weight_decay)
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=epochs)
 
-    # Loss with label smoothing
-    criterion = nn.CrossEntropyLoss(reduction="none", label_smoothing=0.1)
+    # Losses
+    action_criterion = nn.CrossEntropyLoss(reduction="none", label_smoothing=0.1)
+    team_criterion = nn.BCEWithLogitsLoss(reduction="none")
 
     CHECKPOINT_DIR.mkdir(parents=True, exist_ok=True)
     best_val_loss = float("inf")
     patience_counter = 0
 
     for epoch in range(1, epochs + 1):
-        # Train
+        # ---- Train ----
         model.train()
-        train_loss = 0.0
-        train_correct_a = 0
-        train_correct_b = 0
-        train_total = 0
-
-        for batch in train_loader:
-            batch = {k: v.to(device) for k, v in batch.items()}
-
-            logits_a, logits_b = model(batch)
-
-            loss_a = criterion(logits_a, batch["action_slot_a"])
-            loss_b = criterion(logits_b, batch["action_slot_b"])
-
-            # Weight by rating
-            weights = batch["rating_weight"]
-            loss = (weights * (loss_a + loss_b)).mean()
-
-            optimizer.zero_grad()
-            loss.backward()
-            torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
-            optimizer.step()
-
-            train_loss += loss.item() * len(batch["species_ids"])
-            train_correct_a += (logits_a.argmax(-1) == batch["action_slot_a"]).sum().item()
-            train_correct_b += (logits_b.argmax(-1) == batch["action_slot_b"]).sum().item()
-            train_total += len(batch["species_ids"])
-
+        metrics = _run_epoch(model, train_loader, device, action_criterion, team_criterion,
+                             optimizer=optimizer)
         scheduler.step()
 
-        # Validate
+        # ---- Validate ----
         model.eval()
-        val_loss = 0.0
-        val_correct_a = 0
-        val_correct_b = 0
-        val_total = 0
-
         with torch.no_grad():
-            for batch in val_loader:
-                batch = {k: v.to(device) for k, v in batch.items()}
-                logits_a, logits_b = model(batch)
+            val_metrics = _run_epoch(model, val_loader, device, action_criterion, team_criterion)
 
-                loss_a = criterion(logits_a, batch["action_slot_a"])
-                loss_b = criterion(logits_b, batch["action_slot_b"])
-                weights = batch["rating_weight"]
-                loss = (weights * (loss_a + loss_b)).mean()
-
-                val_loss += loss.item() * len(batch["species_ids"])
-                val_correct_a += (logits_a.argmax(-1) == batch["action_slot_a"]).sum().item()
-                val_correct_b += (logits_b.argmax(-1) == batch["action_slot_b"]).sum().item()
-                val_total += len(batch["species_ids"])
-
-        avg_train_loss = train_loss / train_total
-        avg_val_loss = val_loss / val_total
-        train_acc_a = train_correct_a / train_total * 100
-        train_acc_b = train_correct_b / train_total * 100
-        val_acc_a = val_correct_a / val_total * 100
-        val_acc_b = val_correct_b / val_total * 100
-
-        print(
+        # Print
+        m, v = metrics, val_metrics
+        line = (
             f"Epoch {epoch:3d}/{epochs} | "
-            f"Train loss: {avg_train_loss:.4f} acc_a: {train_acc_a:.1f}% acc_b: {train_acc_b:.1f}% | "
-            f"Val loss: {avg_val_loss:.4f} acc_a: {val_acc_a:.1f}% acc_b: {val_acc_b:.1f}% | "
-            f"LR: {scheduler.get_last_lr()[0]:.2e}"
+            f"Train loss: {m['loss']:.4f} top1: {m['top1']:.1f}% top3: {m['top3']:.1f}% | "
+            f"Val loss: {v['loss']:.4f} top1: {v['top1']:.1f}% top3: {v['top3']:.1f}%"
         )
+        if v["team_acc"] is not None:
+            line += f" | team: {v['team_acc']:.1f}% lead: {v['lead_acc']:.1f}%"
+        line += f" | LR: {scheduler.get_last_lr()[0]:.2e}"
+        print(line)
 
         # Save best + early stopping
-        if avg_val_loss < best_val_loss:
-            best_val_loss = avg_val_loss
+        if v["loss"] < best_val_loss:
+            best_val_loss = v["loss"]
             patience_counter = 0
             torch.save({
                 "epoch": epoch,
                 "model_state_dict": model.state_dict(),
                 "optimizer_state_dict": optimizer.state_dict(),
-                "val_loss": avg_val_loss,
-                "val_acc_a": val_acc_a,
-                "val_acc_b": val_acc_b,
+                "val_loss": v["loss"],
+                "val_top1": v["top1"],
+                "val_top3": v["top3"],
+                "val_team_acc": v["team_acc"],
+                "val_lead_acc": v["lead_acc"],
                 "config": config,
             }, CHECKPOINT_DIR / "best.pt")
-            print(f"  -> Saved best model (val_loss={avg_val_loss:.4f})")
+            print(f"  -> Saved best model (val_loss={v['loss']:.4f})")
         else:
             patience_counter += 1
             if patience_counter >= patience:
@@ -185,11 +151,98 @@ def train(
                 "epoch": epoch,
                 "model_state_dict": model.state_dict(),
                 "optimizer_state_dict": optimizer.state_dict(),
-                "val_loss": avg_val_loss,
+                "val_loss": v["loss"],
                 "config": config,
             }, CHECKPOINT_DIR / f"epoch_{epoch}.pt")
 
     print(f"\nTraining complete. Best val loss: {best_val_loss:.4f}")
+
+
+def _run_epoch(
+    model, loader, device, action_criterion, team_criterion, optimizer=None
+) -> dict:
+    """Run one epoch (train or eval). Returns metrics dict."""
+    total_loss = 0.0
+    total_correct_top1 = 0
+    total_correct_top3 = 0
+    total_actions = 0
+    total_team_correct = 0
+    total_team_samples = 0
+    total_lead_correct = 0
+    total_lead_samples = 0
+
+    for batch in loader:
+        batch = {k: v.to(device) for k, v in batch.items()}
+
+        out = model(batch)
+        logits_a = out["logits_a"]
+        logits_b = out["logits_b"]
+
+        # Action loss
+        loss_a = action_criterion(logits_a, batch["action_slot_a"])
+        loss_b = action_criterion(logits_b, batch["action_slot_b"])
+        weights = batch["rating_weight"]
+        loss = (weights * (loss_a + loss_b)).mean()
+
+        # Team selection loss (BCE on 6 binary labels)
+        if "team_logits" in out:
+            tp_mask = batch["has_team_preview"]
+            if tp_mask.any():
+                team_logits = out["team_logits"][tp_mask]
+                team_labels = batch["team_select_labels"][tp_mask]
+                team_loss = team_criterion(team_logits, team_labels).mean()
+                loss = loss + 0.3 * team_loss
+
+                # Team accuracy: top-4 overlap with ground truth
+                team_preds = team_logits.topk(4, dim=-1).indices  # (N, 4)
+                team_truth = team_labels.bool()  # (N, 6)
+                for i in range(team_preds.shape[0]):
+                    pred_set = set(team_preds[i].tolist())
+                    truth_set = set(j for j in range(6) if team_truth[i, j])
+                    total_team_correct += len(pred_set & truth_set)
+                    total_team_samples += 4  # out of 4
+
+        # Lead selection loss
+        if "lead_logits" in out:
+            tp_mask = batch["has_team_preview"]
+            if tp_mask.any():
+                lead_logits = out["lead_logits"][tp_mask]
+                lead_labels = batch["lead_labels"][tp_mask]
+                lead_loss = team_criterion(lead_logits, lead_labels).mean()
+                loss = loss + 0.3 * lead_loss
+
+                # Lead accuracy: top-2 overlap
+                lead_preds = lead_logits.topk(2, dim=-1).indices  # (N, 2)
+                lead_truth = lead_labels.bool()  # (N, 4)
+                for i in range(lead_preds.shape[0]):
+                    pred_set = set(lead_preds[i].tolist())
+                    truth_set = set(j for j in range(4) if lead_truth[i, j])
+                    total_lead_correct += len(pred_set & truth_set)
+                    total_lead_samples += 2  # out of 2
+
+        if optimizer:
+            optimizer.zero_grad()
+            loss.backward()
+            torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
+            optimizer.step()
+
+        n = len(batch["species_ids"])
+        total_loss += loss.item() * n
+
+        # Top-1 and top-3 accuracy for actions
+        total_correct_top1 += (logits_a.argmax(-1) == batch["action_slot_a"]).sum().item()
+        total_correct_top1 += (logits_b.argmax(-1) == batch["action_slot_b"]).sum().item()
+        total_correct_top3 += top_k_accuracy(logits_a, batch["action_slot_a"], 3)
+        total_correct_top3 += top_k_accuracy(logits_b, batch["action_slot_b"], 3)
+        total_actions += n * 2  # two slots per sample
+
+    return {
+        "loss": total_loss / (total_actions // 2) if total_actions else 0,
+        "top1": total_correct_top1 / total_actions * 100 if total_actions else 0,
+        "top3": total_correct_top3 / total_actions * 100 if total_actions else 0,
+        "team_acc": total_team_correct / total_team_samples * 100 if total_team_samples else None,
+        "lead_acc": total_lead_correct / total_lead_samples * 100 if total_lead_samples else None,
+    }
 
 
 def main():
