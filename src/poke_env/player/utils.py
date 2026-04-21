@@ -8,10 +8,16 @@ from typing import Dict, List, Optional, Tuple
 
 from poke_env.concurrency import POKE_LOOP
 from poke_env.data import to_id_str
-from poke_env.player.baselines import MaxBasePowerPlayer, AbyssalPlayer
 from poke_env.player.player import Player
 from poke_env.player.random_player import RandomPlayer
-from tqdm import tqdm
+try:
+    from poke_env.player.baselines import MaxBasePowerPlayer, AbyssalPlayer
+except ImportError:
+    MaxBasePowerPlayer = AbyssalPlayer = None
+try:
+    from tqdm import tqdm
+except ImportError:
+    tqdm = None
 import numpy as np
 import pandas as pd
 
