@@ -119,22 +119,49 @@ class ShowdownSpectator:
             self.index = json.loads(INDEX_FILE.read_text())
 
     async def run(self, duration: float | None = None):
-        """Main loop: connect, login, poll, spectate."""
+        """Main loop with auto-reconnect."""
         start = time.time()
+        remaining = duration
 
+        while True:
+            try:
+                await self._session(remaining)
+            except (websockets.exceptions.ConnectionClosed,
+                    websockets.exceptions.WebSocketException,
+                    OSError) as e:
+                print(f"\n  Connection lost: {e}", flush=True)
+
+            # Check if we should stop
+            if duration:
+                elapsed = time.time() - start
+                remaining = duration - elapsed
+                if remaining <= 0:
+                    break
+
+            print(f"  Reconnecting in 15s...", flush=True)
+            await asyncio.sleep(15)
+            self.logged_in = False
+            self.battles.clear()
+
+        elapsed = time.time() - start
+        print(f"\nSession ended after {elapsed/60:.1f} minutes", flush=True)
+        print(f"  Battles joined: {self.stats['joined']}", flush=True)
+        print(f"  Battles saved: {self.stats['saved']}", flush=True)
+
+    async def _session(self, timeout: float | None = None):
+        """Single websocket session."""
         async with websockets.connect(WS_URL, ping_interval=30, ping_timeout=60) as ws:
             self.ws = ws
             print(f"Connected to {WS_URL}", flush=True)
 
-            # Start message handler and poller concurrently
             handler = asyncio.create_task(self._message_handler())
             poller = asyncio.create_task(self._poll_loop())
 
             try:
-                if duration:
+                if timeout:
                     await asyncio.wait_for(
                         asyncio.gather(handler, poller),
-                        timeout=duration,
+                        timeout=timeout,
                     )
                 else:
                     await asyncio.gather(handler, poller)
@@ -143,11 +170,6 @@ class ShowdownSpectator:
             finally:
                 handler.cancel()
                 poller.cancel()
-
-        elapsed = time.time() - start
-        print(f"\nSession ended after {elapsed/60:.1f} minutes", flush=True)
-        print(f"  Battles joined: {self.stats['joined']}", flush=True)
-        print(f"  Battles saved: {self.stats['saved']}", flush=True)
 
     async def _message_handler(self):
         """Process incoming WebSocket messages."""
