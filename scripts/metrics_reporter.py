@@ -249,6 +249,23 @@ def get_training_history() -> list[dict]:
     return entries
 
 
+def get_battle_log() -> list[dict]:
+    """Read battle results from the JSONL log."""
+    battle_log = CHECKPOINT_DIR / "battle_log.jsonl"
+    if not battle_log.exists():
+        return []
+    entries = []
+    try:
+        with open(battle_log) as f:
+            for line in f:
+                line = line.strip()
+                if line:
+                    entries.append(json.loads(line))
+    except Exception:
+        pass
+    return entries[-50:]  # last 50 battles
+
+
 def build_payload() -> dict:
     """Build the full metrics payload."""
     data_stats = {}
@@ -261,6 +278,7 @@ def build_payload() -> dict:
         "training": get_training_status(),
         "training_history": get_training_history(),
         "spectator": get_spectator_status(),
+        "battles": get_battle_log(),
         "data": data_stats,
     }
 

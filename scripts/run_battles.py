@@ -15,9 +15,11 @@ from __future__ import annotations
 
 import argparse
 import asyncio
+import json
 import os
 import random
 import sys
+import time
 from pathlib import Path
 
 # Add src to path
@@ -145,10 +147,14 @@ async def run_battles(
     print(f"Format: {battle_format}")
     print(f"Teams: {len(all_teams)} available\n")
 
+    # Battle log file
+    battle_log_path = DATA_DIR / "checkpoints" / "battle_log.jsonl"
+
     # Run battles
     wins = 0
     losses = 0
     errors = 0
+    prev_battles = set(player._battles.keys()) if hasattr(player, '_battles') else set()
 
     for i in range(n_battles):
         try:
@@ -170,6 +176,13 @@ async def run_battles(
             wins = current_wins
             losses = current_total - current_wins
 
+            # Extract battle details from the most recent battle
+            battle_summary = _extract_battle_summary(player, i + 1)
+            if battle_summary:
+                with open(battle_log_path, "a") as f:
+                    json.dump(battle_summary, f)
+                    f.write("\n")
+
             win_pct = wins / current_total * 100 if current_total > 0 else 0
             print(f"  Battle {i+1}/{n_battles}: {wins}W-{losses}L ({win_pct:.0f}%)", flush=True)
 
@@ -187,6 +200,47 @@ async def run_battles(
     if errors > 0:
         print(f"Errors: {errors}")
     print(f"{'='*50}")
+
+
+def _extract_battle_summary(player, battle_num: int) -> dict | None:
+    """Extract a summary from the player's most recent battle."""
+    if not player._battles:
+        return None
+
+    # Get the last battle
+    battle_tag = list(player._battles.keys())[-1]
+    battle = player._battles[battle_tag]
+
+    won = battle.won
+    turns = battle.turn
+
+    # Our team
+    our_team = []
+    for poke in battle.team.values():
+        our_team.append({
+            "species": poke.species,
+            "fainted": poke.fainted,
+            "hp": round(poke.current_hp_fraction, 2) if not poke.fainted else 0,
+        })
+
+    # Opponent team (what was revealed)
+    opp_team = []
+    for poke in (battle.opponent_team or {}).values():
+        opp_team.append({
+            "species": poke.species,
+            "fainted": poke.fainted,
+            "hp": round(poke.current_hp_fraction, 2) if not poke.fainted else 0,
+        })
+
+    return {
+        "battle_num": battle_num,
+        "timestamp": time.time(),
+        "won": won,
+        "turns": turns,
+        "our_team": our_team,
+        "opp_team": opp_team,
+        "battle_tag": battle_tag,
+    }
 
 
 def main():

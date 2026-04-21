@@ -96,6 +96,20 @@
             padding: 4px 8px; border-radius: 4px; font-family: inherit;
         }
 
+        /* Battle log */
+        .battle-grid { display: grid; grid-template-columns: 1fr 3fr; gap: 16px; margin-bottom: 16px; }
+        @media (max-width: 700px) { .battle-grid { grid-template-columns: 1fr; } }
+        .battle-summary { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 12px; }
+        .battle-item { font-size: 12px; padding: 6px 8px; border-bottom: 1px solid #21262d; display: flex; align-items: center; gap: 8px; }
+        .battle-item:last-child { border-bottom: none; }
+        .battle-item .result { font-weight: bold; width: 28px; text-align: center; }
+        .battle-item .result.win { color: #3fb950; }
+        .battle-item .result.loss { color: #f85149; }
+        .battle-item .turns { color: #8b949e; font-size: 11px; }
+        .battle-item .teams { flex: 1; color: #c9d1d9; font-size: 11px; }
+        .battle-item .fainted { color: #f85149; text-decoration: line-through; opacity: 0.6; }
+        .battle-winrate { font-size: 28px; font-weight: bold; text-align: center; padding: 16px; }
+
         .updated { font-size: 11px; color: #484f58; text-align: right; margin-top: 8px; }
     </style>
 </head>
@@ -179,6 +193,22 @@
         <div class="chart-box">
             <div class="chart-title">Collection Rate (replays/hr)</div>
             <canvas id="collection-chart"></canvas>
+        </div>
+    </div>
+
+    <!-- Battle results -->
+    <h2>Battle Results (Model vs Random)</h2>
+    <div class="battle-grid">
+        <div>
+            <div class="battle-summary">
+                <div class="chart-title">Win Rate</div>
+                <div class="battle-winrate" id="battle-winrate">--</div>
+                <div style="text-align:center; font-size:12px; color:#8b949e;" id="battle-record">--</div>
+            </div>
+        </div>
+        <div class="battle-summary" style="max-height:350px; overflow-y:auto;">
+            <div class="chart-title">Recent Games</div>
+            <div id="battle-feed"><div style="color:#484f58; font-size:12px;">No battles yet</div></div>
         </div>
     </div>
 
@@ -312,6 +342,33 @@
                 document.getElementById('best-model').textContent = t.best_val_loss.toFixed(4);
                 document.getElementById('best-detail').textContent =
                     `top1: ${t.val_top1?.toFixed(1)}% | top3: ${t.val_top3?.toFixed(1)}%`;
+            }
+
+            // Battle results
+            const battles = d.battles || [];
+            if (battles.length > 0) {
+                const bWins = battles.filter(b => b.won).length;
+                const bTotal = battles.length;
+                const pct = (bWins / bTotal * 100).toFixed(0);
+                const color = pct >= 50 ? '#3fb950' : pct >= 30 ? '#d29922' : '#f85149';
+                document.getElementById('battle-winrate').innerHTML = `<span style="color:${color}">${pct}%</span>`;
+                document.getElementById('battle-record').textContent = `${bWins}W - ${bTotal - bWins}L (${bTotal} games)`;
+
+                const feed = document.getElementById('battle-feed');
+                feed.innerHTML = battles.slice().reverse().map(b => {
+                    const res = b.won ? '<span class="result win">W</span>' : '<span class="result loss">L</span>';
+                    const ourTeam = (b.our_team || []).map(p =>
+                        p.fainted ? `<span class="fainted">${p.species}</span>` : p.species
+                    ).join(', ');
+                    const oppTeam = (b.opp_team || []).map(p =>
+                        p.fainted ? `<span class="fainted">${p.species}</span>` : p.species
+                    ).join(', ');
+                    return `<div class="battle-item">
+                        ${res}
+                        <span class="turns">${b.turns}t</span>
+                        <span class="teams">${ourTeam} <span style="color:#484f58">vs</span> ${oppTeam}</span>
+                    </div>`;
+                }).join('');
             }
 
             document.getElementById('last-updated').textContent =
