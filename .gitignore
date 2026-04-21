@@ -56,6 +56,7 @@ SerialPrograms/*.lib
 
 .vs
 Resources/*
+!Resources/PokemonChampions/
 Packages/
 SerialPrograms/CMakeLists.txt.user
 opencv_world4120.dll
