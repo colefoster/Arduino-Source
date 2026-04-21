@@ -110,7 +110,8 @@ class ShowdownSpectator:
         self.ws = None
         self.logged_in = False
         self.battles: dict[str, BattleLog] = {}  # room_id -> BattleLog
-        self.known_rooms: set[str] = set()  # rooms we've already joined or seen
+        self.joined_rooms: set[str] = set()  # rooms currently joined (for concurrency limit)
+        self.known_rooms: set[str] = set()  # rooms we've already seen (don't re-join)
         self.index: dict = {}
         self.stats = {"joined": 0, "saved": 0, "failed": 0}
 
@@ -142,6 +143,7 @@ class ShowdownSpectator:
             await asyncio.sleep(15)
             self.logged_in = False
             self.battles.clear()
+            self.joined_rooms.clear()
             self.known_rooms.clear()
 
         elapsed = time.time() - start
@@ -210,9 +212,10 @@ class ShowdownSpectator:
 
         if battle.finished:
             await self._save_battle(battle)
-            # Leave the room
+            # Leave the room to free up a slot
             await self.ws.send(f"|/leave {room_id}")
             del self.battles[room_id]
+            self.joined_rooms.discard(room_id)
 
     async def _login(self):
         """Login as a guest with a random name."""
@@ -251,7 +254,7 @@ class ShowdownSpectator:
         rooms = data.get("rooms", {})
         for room_id, info in rooms.items():
             # Don't exceed concurrent limit
-            if len(self.battles) >= MAX_CONCURRENT:
+            if len(self.joined_rooms) >= MAX_CONCURRENT:
                 break
 
             if room_id in self.known_rooms:
@@ -270,13 +273,14 @@ class ShowdownSpectator:
 
             # Join as spectator
             await self.ws.send(f"|/join {room_id}")
+            self.joined_rooms.add(room_id)
             self.stats["joined"] += 1
 
             p1 = info.get("p1", "?")
             p2 = info.get("p2", "?")
             elo = info.get("minElo", "?")
             print(f"  Joined {room_id} ({p1} vs {p2}, elo>={elo}) "
-                  f"[{len(self.battles)} active]", flush=True)
+                  f"[{len(self.joined_rooms)} rooms]", flush=True)
 
             await asyncio.sleep(1.0)  # rate limit joins — too fast gets kicked
 
