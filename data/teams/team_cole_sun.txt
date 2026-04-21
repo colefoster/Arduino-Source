@@ -1,7 +1,7 @@
 Charizard-Mega-Y @ Charizardite Y
 Ability: Drought
 Level: 50
-EVs: 4 HP / 252 SpA / 252 Spe
+EVs: 2 HP / 32 SpA / 32 Spe
 Timid Nature
 - Flamethrower
 - Solar Beam
@@ -11,7 +11,7 @@ Timid Nature
 Typhlosion-Hisui @ Choice Scarf
 Ability: Frisk
 Level: 50
-EVs: 252 HP / 4 Def / 252 Spe
+EVs: 32 HP / 2 Def / 32 Spe
 Hardy Nature
 - Focus Blast
 - Heat Wave
@@ -21,7 +21,7 @@ Hardy Nature
 Incineroar @ Leftovers
 Ability: Intimidate
 Level: 50
-EVs: 252 HP / 4 Def / 252 SpD
+EVs: 32 HP / 2 Def / 32 SpD
 Careful Nature
 - Darkest Lariat
 - Parting Shot
@@ -31,7 +31,7 @@ Careful Nature
 Garchomp @ Soft Sand
 Ability: Rough Skin
 Level: 50
-EVs: 4 HP / 252 Atk / 252 Spe
+EVs: 2 HP / 32 Atk / 32 Spe
 Jolly Nature
 - Earthquake
 - Dragon Claw
@@ -41,7 +41,7 @@ Jolly Nature
 Whimsicott @ Focus Sash
 Ability: Prankster
 Level: 50
-EVs: 252 HP / 4 SpD / 252 Spe
+EVs: 32 HP / 2 SpD / 32 Spe
 Timid Nature
 - Moonblast
 - Tailwind
@@ -51,7 +51,7 @@ Timid Nature
 Venusaur @ Mental Herb
 Ability: Chlorophyll
 Level: 50
-EVs: 4 HP / 252 SpA / 252 Spe
+EVs: 2 HP / 32 SpA / 32 Spe
 Timid Nature
 - Sludge Bomb
 - Energy Ball
