@@ -57,6 +57,15 @@ SAMPLE_TEAMS = [
 
 def load_model(checkpoint_path: Path, vocabs: Vocabs, device: torch.device):
     """Load a trained model from checkpoint."""
+    # Fix pickle path for checkpoints saved via `python -m src.vgc_model...`
+    import importlib
+    import sys
+    if "src" not in sys.modules:
+        sys.modules["src"] = type(sys)("src")
+        sys.modules["src.vgc_model"] = importlib.import_module("vgc_model")
+        sys.modules["src.vgc_model.model"] = importlib.import_module("vgc_model.model")
+        sys.modules["src.vgc_model.model.vgc_model"] = importlib.import_module("vgc_model.model.vgc_model")
+
     checkpoint = torch.load(checkpoint_path, map_location=device, weights_only=False)
     config = checkpoint.get("config", ModelConfig())
     model = VGCTransformer(vocabs, config)
