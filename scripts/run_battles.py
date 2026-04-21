@@ -35,25 +35,7 @@ DATA_DIR = project_root / "data"
 VOCAB_DIR = DATA_DIR / "vocab"
 CHECKPOINT_DIR = DATA_DIR / "checkpoints"
 
-# Sample VGC teams (packed Showdown format)
-# These are common Champions VGC teams — replace with better ones as needed
-SAMPLE_TEAMS = [
-    # Team 1: Charizard-Y + Tyranitar core
-    "|Charizard||charizarditey|SolarPower|HeatWave,SolarBeam,Protect,AirSlash|Timid|,,,252,4,252|||||]"
-    "|Tyranitar||chopleberry|SandStream|RockSlide,Crunch,Protect,LowKick|Adamant|252,252,,,,4|||||]"
-    "|Incineroar||sitrusberry|Intimidate|FakeOut,FlareBlitz,KnockOff,Protect|Adamant|252,252,,,,4|||||]"
-    "|Sinistcha||focussash|Hospitality|MatchaGotcha,ShadowBall,Protect,TrickRoom|Quiet|252,,,252,4,|||||]"
-    "|Garchomp||lifeorb|RoughSkin|Earthquake,DragonClaw,RockSlide,Protect|Jolly|,252,,,4,252|||||]"
-    "|Rotom-Wash||sitrusberry|Levitate|HydroPump,Thunderbolt,WillOWisp,Protect|Modest|252,,,252,4,|||||]",
-
-    # Team 2: Rain
-    "|Pelipper||damprock|Drizzle|Scald,Hurricane,Tailwind,Protect|Bold|252,,252,,4,|||||]"
-    "|Kingdra||choicespecs|SwiftSwim|MuddyWater,DragonPulse,IceBeam,HydroPump|Modest|,,,252,4,252|||||]"
-    "|Rillaboom||miracleseed|GrassySurge|GrassyGlide,WoodHammer,FakeOut,Protect|Adamant|252,252,,,,4|||||]"
-    "|Corviknight||leftovers|MirrorArmor|BraveBird,IronHead,Tailwind,Protect|Careful|252,,,,252,4|||||]"
-    "|Sneasler||focussash|PoisonTouch|CloseCombat,DireClaw,FakeOut,Protect|Jolly|,252,,,4,252|||||]"
-    "|Farigiraf||mentalherb|ArmorTail|Psychic,DazzlingGleam,TrickRoom,Protect|Quiet|252,,,252,4,|||||]",
-]
+SAMPLE_TEAMS = None  # use random teams from poke_env's built-in team files
 
 
 def load_model(checkpoint_path: Path, vocabs: Vocabs, device: torch.device):
@@ -86,6 +68,7 @@ async def run_battles(
     temperature: float = 0.0,
     checkpoint: str = "best.pt",
     server_url: str = "localhost:8000",
+    battle_format: str = "gen9randombattle",
 ):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Device: {device}")
@@ -103,20 +86,17 @@ async def run_battles(
         vocabs=vocabs,
         device=device,
         temperature=temperature,
-        battle_format="gen9championsvgc2026regma",
+        battle_format=battle_format,
         server_configuration=server_config,
         max_concurrent_battles=1,
         start_timer_on_battle_start=True,
     )
-    player.update_team(SAMPLE_TEAMS[0])
-
     if opponent_type == "random":
         opponent = RandomPlayer(
-            battle_format="gen9championsvgc2026regma",
+            battle_format=battle_format,
             server_configuration=server_config,
             max_concurrent_battles=1,
         )
-        opponent.update_team(SAMPLE_TEAMS[1])
         print(f"\nModel (temp={temperature}) vs Random — {n_battles} battles")
     elif opponent_type == "model":
         model2 = load_model(CHECKPOINT_DIR / checkpoint, vocabs, device)
@@ -125,11 +105,10 @@ async def run_battles(
             vocabs=vocabs,
             device=device,
             temperature=max(temperature, 0.3),
-            battle_format="gen9championsvgc2026regma",
+            battle_format=battle_format,
             server_configuration=server_config,
             max_concurrent_battles=1,
         )
-        opponent.update_team(SAMPLE_TEAMS[1])
         print(f"\nModel (temp={temperature}) vs Model (temp={max(temperature, 0.3)}) — {n_battles} battles")
     else:
         raise ValueError(f"Unknown opponent type: {opponent_type}")
@@ -176,6 +155,7 @@ def main():
     parser.add_argument("--temperature", type=float, default=0.0)
     parser.add_argument("--checkpoint", default="best.pt")
     parser.add_argument("--server", default="localhost:8000")
+    parser.add_argument("--format", default="gen9randombattle")
     args = parser.parse_args()
 
     asyncio.run(run_battles(
@@ -184,6 +164,7 @@ def main():
         temperature=args.temperature,
         checkpoint=args.checkpoint,
         server_url=args.server,
+        battle_format=args.format,
     ))
 
 
