@@ -55,6 +55,7 @@ SerialPrograms/*.lib
 *.app
 
 .vs
+build_and_run.bat
 Resources/*
 !Resources/PokemonChampions/
 Packages/
@@ -79,3 +80,5 @@ Packages/*
 # Pokemon Champions: reference video captures & extracted frames (local only)
 SerialPrograms/Source/PokemonChampions/ref_frames/
 
+
+ref_frames/vod_extract/
