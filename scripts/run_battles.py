@@ -95,6 +95,8 @@ async def run_battles(
 
     team1 = load_team(Path(team1_path)) if team1_path else all_teams[0]
     team2 = load_team(Path(team2_path)) if team2_path else (all_teams[1] if len(all_teams) > 1 else all_teams[0])
+    print(f"Team 1: {team1_path or 'default'}")
+    print(f"Team 2: {team2_path or 'default'}")
 
     # Load vocabs and model
     vocabs = Vocabs.load(VOCAB_DIR)
