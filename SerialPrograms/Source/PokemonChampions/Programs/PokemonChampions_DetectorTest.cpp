@@ -6,6 +6,15 @@
  *  logging which detectors fire on each frame. Infers a "current screen"
  *  label from the combination of detectors that fire.
  *
+ *  When the MOVE_SELECT screen is detected, also runs OCR on:
+ *    - Move names (4 slots)
+ *    - Opponent species name + HP%
+ *    - Own HP (current/max)
+ *    - PP counts (4 slots)
+ *
+ *  When no specific screen is detected, checks for the battle log text bar
+ *  and runs OCR + parse on it.
+ *
  *  Does NOT send any controller input.
  *
  */
@@ -19,6 +28,9 @@
 #include "PokemonChampions/Inference/PokemonChampions_PreparingForBattleDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_BattleEndDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_PostMatchDetector.h"
+#include "PokemonChampions/Inference/PokemonChampions_MoveNameReader.h"
+#include "PokemonChampions/Inference/PokemonChampions_BattleHUDReader.h"
+#include "PokemonChampions/Inference/PokemonChampions_BattleLogReader.h"
 #include "PokemonChampions_DetectorTest.h"
 
 namespace PokemonAutomation{
@@ -34,6 +46,7 @@ DetectorTest_Descriptor::DetectorTest_Descriptor()
         STRING_POKEMON + " Champions", "Detector Test",
         "Programs/PokemonChampions/DetectorTest.html",
         "Dev tool: visualise all detector overlays and log which ones fire. "
+        "Also runs OCR on move names, species, HP, PP, and battle log text. "
         "Does NOT press any buttons.",
         ProgramControllerClass::StandardController_NoRestrictions,
         FeedbackType::REQUIRED,
@@ -45,6 +58,17 @@ DetectorTest_Descriptor::DetectorTest_Descriptor()
 DetectorTest::DetectorTest(){}
 
 
+//  Helper: format a move slug for display, replacing hyphens with spaces.
+static std::string slug_display(const std::string& slug){
+    if (slug.empty()) return "(unreadable)";
+    std::string out = slug;
+    for (char& c : out){
+        if (c == '-') c = ' ';
+    }
+    return out;
+}
+
+
 void DetectorTest::program(SingleSwitchProgramEnvironment& env, ProControllerContext& context){
     //  Create all detectors.
     ActionMenuDetector       action_menu;
@@ -53,6 +77,11 @@ void DetectorTest::program(SingleSwitchProgramEnvironment& env, ProControllerCon
     ResultScreenDetector     result_screen;
     PostMatchScreenDetector  post_match;
 
+    //  Create OCR readers.
+    MoveNameReader   move_reader(Language::English);
+    BattleHUDReader  hud_reader(Language::English);
+    BattleLogReader  log_reader;
+
     //  Register overlays so boxes appear on the video feed.
     VideoOverlaySet overlay_set(env.console.overlay());
     action_menu.make_overlays(overlay_set);
@@ -60,20 +89,25 @@ void DetectorTest::program(SingleSwitchProgramEnvironment& env, ProControllerCon
     preparing.make_overlays(overlay_set);
     result_screen.make_overlays(overlay_set);
     post_match.make_overlays(overlay_set);
+    move_reader.make_overlays(overlay_set);
+    hud_reader.make_overlays(overlay_set);
+    log_reader.make_overlays(overlay_set);
 
     env.console.log("Detector Test running. Navigate the game - watch overlays + log.");
     env.console.log("Press Stop to end.");
     env.console.log("");
     env.console.log("Screen labels:");
     env.console.log("  ACTION_MENU  = FIGHT/POKEMON buttons visible (start of turn)");
-    env.console.log("  MOVE_SELECT  = 4-move panel visible (after pressing FIGHT)");
+    env.console.log("  MOVE_SELECT  = 4-move panel visible (+ OCR runs on moves/HUD)");
     env.console.log("  PREPARING    = Both teams shown, Standing By pills visible");
     env.console.log("  RESULT       = WON!/LOST! split screen");
     env.console.log("  POST_MATCH   = Quit/Edit/Continue buttons");
+    env.console.log("  BATTLE_LOG   = Text bar detected during animations (OCR runs)");
     env.console.log("  UNKNOWN      = No detector matched this frame");
     env.console.log("");
 
     std::string last_screen;
+    std::string last_log_text;   //  Deduplicate repeated battle log messages.
 
     //  Poll loop.
     while (true){
@@ -93,7 +127,6 @@ void DetectorTest::program(SingleSwitchProgramEnvironment& env, ProControllerCon
         bool d_post       = post_match.detect(frame);
 
         //  Determine screen label from priority order.
-        //  Priority: specific screens first, generic last.
         std::string screen;
         std::string detail;
 
@@ -122,12 +155,126 @@ void DetectorTest::program(SingleSwitchProgramEnvironment& env, ProControllerCon
             detail = "no detector matched";
         }
 
-        //  Only log when the screen changes (avoid flooding).
+        //  Log screen transitions.
         std::string full_label = screen + " (" + detail + ")";
         if (full_label != last_screen){
             Color color = (screen == "UNKNOWN") ? COLOR_RED : COLOR_GREEN;
             env.console.log("[Screen] " + full_label, color);
             last_screen = full_label;
+        }
+
+        //  ── OCR: Move Select Screen ──────────────────────────────
+        //
+        //  When the move select panel is visible, run OCR on everything:
+        //  move names, opponent species/HP, own HP, PP counts.
+        //  We re-run OCR every time the screen is MOVE_SELECT so you can
+        //  see if results are stable across frames.
+        if (d_move){
+            //  Move names.
+            auto moves = move_reader.read_all_moves(env.console, frame);
+            env.console.log(
+                "[OCR Moves] " +
+                slug_display(moves[0]) + " | " +
+                slug_display(moves[1]) + " | " +
+                slug_display(moves[2]) + " | " +
+                slug_display(moves[3]),
+                COLOR_BLUE
+            );
+
+            //  Opponent species.
+            std::string opp = hud_reader.read_opponent_species(env.console, frame);
+            int opp_hp = hud_reader.read_opponent_hp_pct(env.console, frame);
+            env.console.log(
+                "[OCR Opponent] " + slug_display(opp) +
+                "  HP=" + (opp_hp >= 0 ? std::to_string(opp_hp) + "%" : "??"),
+                COLOR_BLUE
+            );
+
+            //  Own HP.
+            auto own_hp = hud_reader.read_own_hp(env.console, frame);
+            env.console.log(
+                "[OCR Own HP] " +
+                (own_hp.first >= 0
+                    ? std::to_string(own_hp.first) + "/" + std::to_string(own_hp.second)
+                    : "??"),
+                COLOR_BLUE
+            );
+
+            //  PP for each move.
+            std::string pp_str = "[OCR PP]";
+            for (uint8_t i = 0; i < 4; i++){
+                auto pp = hud_reader.read_move_pp(env.console, frame, i);
+                pp_str += " " + (pp.first >= 0
+                    ? std::to_string(pp.first) + "/" + std::to_string(pp.second)
+                    : "??");
+            }
+            env.console.log(pp_str, COLOR_BLUE);
+        }
+
+        //  ── OCR: Battle Log Text Bar ─────────────────────────────
+        //
+        //  When no UI menu is detected, check for the battle log text
+        //  bar (bottom of screen during animations). Deduplicate since
+        //  the same message stays on screen for ~2 seconds.
+        if (!d_move && !d_action && !d_post && !d_result && !d_preparing){
+            if (log_reader.detect_text_bar(frame)){
+                std::string raw = log_reader.read_raw(env.console, frame);
+                if (!raw.empty() && raw != last_log_text){
+                    last_log_text = raw;
+
+                    BattleLogEvent event = BattleLogReader::parse(raw);
+                    std::string event_str;
+                    switch (event.type){
+                    case BattleLogEventType::MOVE_USED:
+                        event_str = (event.is_opponent ? "OPP " : "OWN ") +
+                            event.pokemon + " used " + event.move;
+                        break;
+                    case BattleLogEventType::STAT_CHANGE:
+                        event_str = (event.is_opponent ? "OPP " : "OWN ") +
+                            event.pokemon + " " + event.stat + " " +
+                            (event.boost_stages > 0 ? "+" : "") +
+                            std::to_string(event.boost_stages);
+                        break;
+                    case BattleLogEventType::STATUS_INFLICTED:
+                        event_str = (event.is_opponent ? "OPP " : "OWN ") +
+                            event.pokemon + " " + event.stat;
+                        break;
+                    case BattleLogEventType::SWITCH_IN:
+                        event_str = "SWITCH_IN " + event.pokemon;
+                        break;
+                    case BattleLogEventType::FAINTED:
+                        event_str = (event.is_opponent ? "OPP " : "OWN ") +
+                            event.pokemon + " FAINTED";
+                        break;
+                    case BattleLogEventType::WEATHER:
+                        event_str = "WEATHER";
+                        break;
+                    case BattleLogEventType::TERRAIN:
+                        event_str = "TERRAIN";
+                        break;
+                    case BattleLogEventType::TRICK_ROOM:
+                        event_str = "TRICK_ROOM";
+                        break;
+                    case BattleLogEventType::SUPER_EFFECTIVE:
+                        event_str = "SUPER EFFECTIVE";
+                        break;
+                    case BattleLogEventType::NOT_EFFECTIVE:
+                        event_str = "NOT VERY EFFECTIVE";
+                        break;
+                    case BattleLogEventType::OTHER:
+                        event_str = "OTHER: " + raw;
+                        break;
+                    default:
+                        event_str = "UNKNOWN: " + raw;
+                        break;
+                    }
+
+                    env.console.log("[Battle Log] " + event_str, COLOR_MAGENTA);
+                }
+            }else{
+                //  Text bar gone — reset dedup so we catch the next message.
+                last_log_text.clear();
+            }
         }
     }
 }

@@ -1,0 +1,1423 @@
+{
+  "eng": {
+    "fake-out": [
+      "Fake Out"
+    ],
+    "trick-room": [
+      "Trick Room"
+    ],
+    "matcha-gotcha": [
+      "Matcha Gotcha"
+    ],
+    "psychic-terrain": [
+      "Psychic Terrain"
+    ],
+    "sacred-sword": [
+      "Sacred Sword"
+    ],
+    "heavy-slam": [
+      "Heavy Slam"
+    ],
+    "aurora-veil": [
+      "Aurora Veil"
+    ],
+    "expanding-force": [
+      "Expanding Force"
+    ],
+    "gravity": [
+      "Gravity"
+    ],
+    "focus-blast": [
+      "Focus Blast"
+    ],
+    "protect": [
+      "Protect"
+    ],
+    "helping-hand": [
+      "Helping Hand"
+    ],
+    "flamethrower": [
+      "Flamethrower"
+    ],
+    "nasty-plot": [
+      "Nasty Plot"
+    ],
+    "heat-wave": [
+      "Heat Wave"
+    ],
+    "clanging-scales": [
+      "Clanging Scales"
+    ],
+    "weather-ball": [
+      "Weather Ball"
+    ],
+    "dazzling-gleam": [
+      "Dazzling Gleam"
+    ],
+    "parting-shot": [
+      "Parting Shot"
+    ],
+    "rock-slide": [
+      "Rock Slide"
+    ],
+    "tailwind": [
+      "Tailwind"
+    ],
+    "solar-beam": [
+      "Solar Beam"
+    ],
+    "earthquake": [
+      "Earthquake"
+    ],
+    "wave-crash": [
+      "Wave Crash"
+    ],
+    "electroweb": [
+      "Electroweb"
+    ],
+    "skill-swap": [
+      "Skill Swap"
+    ],
+    "leech-seed": [
+      "Leech Seed"
+    ],
+    "iron-head": [
+      "Iron Head"
+    ],
+    "scald": [
+      "Scald"
+    ],
+    "psychic": [
+      "Psychic"
+    ],
+    "kowtow-cleave": [
+      "Kowtow Cleave"
+    ],
+    "kings-shield": [
+      "King's Shield"
+    ],
+    "shadow-sneak": [
+      "Shadow Sneak"
+    ],
+    "dragon-dance": [
+      "Dragon Dance"
+    ],
+    "moonblast": [
+      "Moonblast"
+    ],
+    "waterfall": [
+      "Waterfall"
+    ],
+    "flare-blitz": [
+      "Flare Blitz"
+    ],
+    "encore": [
+      "Encore"
+    ],
+    "sludge-bomb": [
+      "Sludge Bomb"
+    ],
+    "spiky-shield": [
+      "Spiky Shield"
+    ],
+    "stomping-tantrum": [
+      "Stomping Tantrum"
+    ],
+    "body-press": [
+      "Body Press"
+    ],
+    "sucker-punch": [
+      "Sucker Punch"
+    ],
+    "electro-shot": [
+      "Electro Shot"
+    ],
+    "close-combat": [
+      "Close Combat"
+    ],
+    "aqua-jet": [
+      "Aqua Jet"
+    ],
+    "last-respects": [
+      "Last Respects"
+    ],
+    "draco-meteor": [
+      "Draco Meteor"
+    ],
+    "earth-power": [
+      "Earth Power"
+    ],
+    "hurricane": [
+      "Hurricane"
+    ],
+    "muddy-water": [
+      "Muddy Water"
+    ],
+    "dire-claw": [
+      "Dire Claw"
+    ],
+    "dual-wingbeat": [
+      "Dual Wingbeat"
+    ],
+    "power-gem": [
+      "Power Gem"
+    ],
+    "stone-edge": [
+      "Stone Edge"
+    ],
+    "darkest-lariat": [
+      "Darkest Lariat"
+    ],
+    "leaf-storm": [
+      "Leaf Storm"
+    ],
+    "head-smash": [
+      "Head Smash"
+    ],
+    "follow-me": [
+      "Follow Me"
+    ],
+    "dragon-claw": [
+      "Dragon Claw"
+    ],
+    "hyper-voice": [
+      "Hyper Voice"
+    ],
+    "shadow-ball": [
+      "Shadow Ball"
+    ],
+    "psycho-cut": [
+      "Psycho Cut"
+    ],
+    "triple-axel": [
+      "Triple Axel"
+    ],
+    "calm-mind": [
+      "Calm Mind"
+    ],
+    "chilly-reception": [
+      "Chilly Reception"
+    ],
+    "ice-hammer": [
+      "Ice Hammer"
+    ],
+    "ally-switch": [
+      "Ally Switch"
+    ],
+    "sunny-day": [
+      "Sunny Day"
+    ],
+    "knock-off": [
+      "Knock Off"
+    ],
+    "ice-punch": [
+      "Ice Punch"
+    ],
+    "ceaseless-edge": [
+      "Ceaseless Edge"
+    ],
+    "razor-shell": [
+      "Razor Shell"
+    ],
+    "heal-pulse": [
+      "Heal Pulse"
+    ],
+    "night-slash": [
+      "Night Slash"
+    ],
+    "ice-beam": [
+      "Ice Beam"
+    ],
+    "swords-dance": [
+      "Swords Dance"
+    ],
+    "discharge": [
+      "Discharge"
+    ],
+    "will-o-wisp": [
+      "Will-O-Wisp"
+    ],
+    "substitute": [
+      "Substitute"
+    ],
+    "scale-shot": [
+      "Scale Shot"
+    ],
+    "super-fang": [
+      "Super Fang"
+    ],
+    "feint": [
+      "Feint"
+    ],
+    "rage-powder": [
+      "Rage Powder"
+    ],
+    "dragon-pulse": [
+      "Dragon Pulse"
+    ],
+    "perish-song": [
+      "Perish Song"
+    ],
+    "blizzard": [
+      "Blizzard"
+    ],
+    "shed-tail": [
+      "Shed Tail"
+    ],
+    "throat-chop": [
+      "Throat Chop"
+    ],
+    "thunderbolt": [
+      "Thunderbolt"
+    ],
+    "flip-turn": [
+      "Flip Turn"
+    ],
+    "reflect": [
+      "Reflect"
+    ],
+    "clangorous-soul": [
+      "Clangorous Soul"
+    ],
+    "iron-defense": [
+      "Iron Defense"
+    ],
+    "flash-cannon": [
+      "Flash Cannon"
+    ],
+    "brave-bird": [
+      "Brave Bird"
+    ],
+    "curse": [
+      "Curse"
+    ],
+    "life-dew": [
+      "Life Dew"
+    ],
+    "bullet-punch": [
+      "Bullet Punch"
+    ],
+    "u-turn": [
+      "U-turn"
+    ],
+    "high-horsepower": [
+      "High Horsepower"
+    ],
+    "low-kick": [
+      "Low Kick"
+    ],
+    "eruption": [
+      "Eruption"
+    ],
+    "poltergeist": [
+      "Poltergeist"
+    ],
+    "acrobatics": [
+      "Acrobatics"
+    ],
+    "liquidation": [
+      "Liquidation"
+    ],
+    "sleep-powder": [
+      "Sleep Powder"
+    ],
+    "scorching-sands": [
+      "Scorching Sands"
+    ],
+    "double-edge": [
+      "Double-Edge"
+    ],
+    "salt-cure": [
+      "Salt Cure"
+    ],
+    "focus-energy": [
+      "Focus Energy"
+    ],
+    "roar": [
+      "Roar"
+    ],
+    "stealth-rock": [
+      "Stealth Rock"
+    ],
+    "yawn": [
+      "Yawn"
+    ],
+    "crunch": [
+      "Crunch"
+    ],
+    "giga-drain": [
+      "Giga Drain"
+    ],
+    "speed-swap": [
+      "Speed Swap"
+    ],
+    "baton-pass": [
+      "Baton Pass"
+    ],
+    "draining-kiss": [
+      "Draining Kiss"
+    ],
+    "dragon-darts": [
+      "Dragon Darts"
+    ],
+    "phantom-force": [
+      "Phantom Force"
+    ],
+    "coil": [
+      "Coil"
+    ],
+    "recover": [
+      "Recover"
+    ],
+    "hydro-pump": [
+      "Hydro Pump"
+    ],
+    "hypnosis": [
+      "Hypnosis"
+    ],
+    "fake-tears": [
+      "Fake Tears"
+    ],
+    "snarl": [
+      "Snarl"
+    ],
+    "bitter-malice": [
+      "Bitter Malice"
+    ],
+    "toxic-spikes": [
+      "Toxic Spikes"
+    ],
+    "gyro-ball": [
+      "Gyro Ball"
+    ],
+    "thunder-wave": [
+      "Thunder Wave"
+    ],
+    "wish": [
+      "Wish"
+    ],
+    "foul-play": [
+      "Foul Play"
+    ],
+    "rapid-spin": [
+      "Rapid Spin"
+    ],
+    "surf": [
+      "Surf"
+    ],
+    "light-screen": [
+      "Light Screen"
+    ],
+    "drill-run": [
+      "Drill Run"
+    ],
+    "explosion": [
+      "Explosion"
+    ],
+    "volt-switch": [
+      "Volt Switch"
+    ],
+    "upper-hand": [
+      "Upper Hand"
+    ],
+    "bulk-up": [
+      "Bulk Up"
+    ],
+    "trick": [
+      "Trick"
+    ],
+    "amnesia": [
+      "Amnesia"
+    ],
+    "rest": [
+      "Rest"
+    ],
+    "dark-pulse": [
+      "Dark Pulse"
+    ],
+    "wide-guard": [
+      "Wide Guard"
+    ],
+    "overheat": [
+      "Overheat"
+    ],
+    "taunt": [
+      "Taunt"
+    ],
+    "extreme-speed": [
+      "Extreme Speed"
+    ],
+    "roost": [
+      "Roost"
+    ],
+    "beat-up": [
+      "Beat Up"
+    ],
+    "light-of-ruin": [
+      "Light of Ruin"
+    ],
+    "belly-drum": [
+      "Belly Drum"
+    ],
+    "screech": [
+      "Screech"
+    ],
+    "mortal-spin": [
+      "Mortal Spin"
+    ],
+    "coaching": [
+      "Coaching"
+    ],
+    "drain-punch": [
+      "Drain Punch"
+    ],
+    "venoshock": [
+      "Venoshock"
+    ],
+    "disable": [
+      "Disable"
+    ],
+    "morning-sun": [
+      "Morning Sun"
+    ],
+    "strength-sap": [
+      "Strength Sap"
+    ],
+    "sheer-cold": [
+      "Sheer Cold"
+    ],
+    "leaf-blade": [
+      "Leaf Blade"
+    ],
+    "tidy-up": [
+      "Tidy Up"
+    ],
+    "blaze-kick": [
+      "Blaze Kick"
+    ],
+    "population-bomb": [
+      "Population Bomb"
+    ],
+    "zen-headbutt": [
+      "Zen Headbutt"
+    ],
+    "shell-smash": [
+      "Shell Smash"
+    ],
+    "water-spout": [
+      "Water Spout"
+    ],
+    "rain-dance": [
+      "Rain Dance"
+    ],
+    "icy-wind": [
+      "Icy Wind"
+    ],
+    "entrainment": [
+      "Entrainment"
+    ],
+    "horn-drill": [
+      "Horn Drill"
+    ],
+    "cross-chop": [
+      "Cross Chop"
+    ],
+    "jet-punch": [
+      "Jet Punch"
+    ],
+    "lumina-crash": [
+      "Lumina Crash"
+    ],
+    "dragon-cheer": [
+      "Dragon Cheer"
+    ],
+    "imprison": [
+      "Imprison"
+    ],
+    "endeavor": [
+      "Endeavor"
+    ],
+    "spicy-extract": [
+      "Spicy Extract"
+    ],
+    "x-scissor": [
+      "X-Scissor"
+    ],
+    "quick-attack": [
+      "Quick Attack"
+    ],
+    "round": [
+      "Round"
+    ],
+    "ice-spinner": [
+      "Ice Spinner"
+    ],
+    "aura-sphere": [
+      "Aura Sphere"
+    ],
+    "play-rough": [
+      "Play Rough"
+    ],
+    "superpower": [
+      "Superpower"
+    ],
+    "energy-ball": [
+      "Energy Ball"
+    ],
+    "rock-blast": [
+      "Rock Blast"
+    ],
+    "after-you": [
+      "After You"
+    ],
+    "aqua-cutter": [
+      "Aqua Cutter"
+    ],
+    "high-jump-kick": [
+      "High Jump Kick"
+    ],
+    "torch-song": [
+      "Torch Song"
+    ],
+    "psychic-noise": [
+      "Psychic Noise"
+    ],
+    "quick-guard": [
+      "Quick Guard"
+    ],
+    "future-sight": [
+      "Future Sight"
+    ],
+    "infestation": [
+      "Infestation"
+    ],
+    "baneful-bunker": [
+      "Baneful Bunker"
+    ],
+    "lunge": [
+      "Lunge"
+    ],
+    "sludge-wave": [
+      "Sludge Wave"
+    ],
+    "shell-side-arm": [
+      "Shell Side Arm"
+    ],
+    "bug-bite": [
+      "Bug Bite"
+    ],
+    "shadow-claw": [
+      "Shadow Claw"
+    ],
+    "flower-trick": [
+      "Flower Trick"
+    ],
+    "gigaton-hammer": [
+      "Gigaton Hammer"
+    ],
+    "alluring-voice": [
+      "Alluring Voice"
+    ],
+    "snap-trap": [
+      "Snap Trap"
+    ],
+    "gunk-shot": [
+      "Gunk Shot"
+    ],
+    "icicle-spear": [
+      "Icicle Spear"
+    ],
+    "destiny-bond": [
+      "Destiny Bond"
+    ],
+    "ice-shard": [
+      "Ice Shard"
+    ],
+    "twin-beam": [
+      "Twin Beam"
+    ],
+    "bounce": [
+      "Bounce"
+    ],
+    "guillotine": [
+      "Guillotine"
+    ],
+    "instruct": [
+      "Instruct"
+    ],
+    "triple-arrows": [
+      "Triple Arrows"
+    ],
+    "psyshock": [
+      "Psyshock"
+    ],
+    "rock-tomb": [
+      "Rock Tomb"
+    ],
+    "quash": [
+      "Quash"
+    ],
+    "outrage": [
+      "Outrage"
+    ],
+    "shelter": [
+      "Shelter"
+    ],
+    "fire-blast": [
+      "Fire Blast"
+    ],
+    "last-resort": [
+      "Last Resort"
+    ],
+    "thunder-punch": [
+      "Thunder Punch"
+    ],
+    "steel-beam": [
+      "Steel Beam"
+    ],
+    "water-pulse": [
+      "Water Pulse"
+    ],
+    "hammer-arm": [
+      "Hammer Arm"
+    ],
+    "psychic-fangs": [
+      "Psychic Fangs"
+    ],
+    "dynamic-punch": [
+      "Dynamic Punch"
+    ],
+    "dragon-tail": [
+      "Dragon Tail"
+    ],
+    "air-slash": [
+      "Air Slash"
+    ],
+    "thunder": [
+      "Thunder"
+    ],
+    "haze": [
+      "Haze"
+    ],
+    "mach-punch": [
+      "Mach Punch"
+    ],
+    "meteor-mash": [
+      "Meteor Mash"
+    ],
+    "breaking-swipe": [
+      "Breaking Swipe"
+    ],
+    "cosmic-power": [
+      "Cosmic Power"
+    ],
+    "slack-off": [
+      "Slack Off"
+    ],
+    "recycle": [
+      "Recycle"
+    ],
+    "struggle": [
+      "Struggle"
+    ],
+    "grass-knot": [
+      "Grass Knot"
+    ],
+    "double-team": [
+      "Double Team"
+    ],
+    "struggle-bug": [
+      "Struggle Bug"
+    ],
+    "night-shade": [
+      "Night Shade"
+    ],
+    "body-slam": [
+      "Body Slam"
+    ],
+    "headlong-rush": [
+      "Headlong Rush"
+    ],
+    "flying-press": [
+      "Flying Press"
+    ],
+    "fickle-beam": [
+      "Fickle Beam"
+    ],
+    "decorate": [
+      "Decorate"
+    ],
+    "acid-spray": [
+      "Acid Spray"
+    ],
+    "power-whip": [
+      "Power Whip"
+    ],
+    "mystical-fire": [
+      "Mystical Fire"
+    ],
+    "misty-terrain": [
+      "Misty Terrain"
+    ],
+    "misty-explosion": [
+      "Misty Explosion"
+    ],
+    "moonlight": [
+      "Moonlight"
+    ],
+    "fissure": [
+      "Fissure"
+    ],
+    "endure": [
+      "Endure"
+    ],
+    "synthesis": [
+      "Synthesis"
+    ],
+    "pollen-puff": [
+      "Pollen Puff"
+    ],
+    "armor-cannon": [
+      "Armor Cannon"
+    ],
+    "assurance": [
+      "Assurance"
+    ],
+    "terrain-pulse": [
+      "Terrain Pulse"
+    ],
+    "worry-seed": [
+      "Worry Seed"
+    ],
+    "poison-jab": [
+      "Poison Jab"
+    ],
+    "ice-fang": [
+      "Ice Fang"
+    ],
+    "aerial-ace": [
+      "Aerial Ace"
+    ],
+    "bitter-blade": [
+      "Bitter Blade"
+    ],
+    "whirlpool": [
+      "Whirlpool"
+    ],
+    "facade": [
+      "Facade"
+    ],
+    "detect": [
+      "Detect"
+    ],
+    "fire-spin": [
+      "Fire Spin"
+    ],
+    "brick-break": [
+      "Brick Break"
+    ],
+    "acid-armor": [
+      "Acid Armor"
+    ],
+    "fiery-dance": [
+      "Fiery Dance"
+    ],
+    "trop-kick": [
+      "Trop Kick"
+    ],
+    "stored-power": [
+      "Stored Power"
+    ],
+    "mountain-gale": [
+      "Mountain Gale"
+    ],
+    "chilling-water": [
+      "Chilling Water"
+    ],
+    "bite": [
+      "Bite"
+    ],
+    "pain-split": [
+      "Pain Split"
+    ],
+    "icicle-crash": [
+      "Icicle Crash"
+    ],
+    "mirror-coat": [
+      "Mirror Coat"
+    ],
+    "toxic": [
+      "Toxic"
+    ],
+    "charge": [
+      "Charge"
+    ],
+    "cotton-guard": [
+      "Cotton Guard"
+    ],
+    "parabolic-charge": [
+      "Parabolic Charge"
+    ],
+    "stone-axe": [
+      "Stone Axe"
+    ],
+    "metal-burst": [
+      "Metal Burst"
+    ],
+    "pin-missile": [
+      "Pin Missile"
+    ],
+    "temper-flare": [
+      "Temper Flare"
+    ],
+    "brutal-swing": [
+      "Brutal Swing"
+    ],
+    "dragon-rush": [
+      "Dragon Rush"
+    ],
+    "self-destruct": [
+      "Self-Destruct"
+    ],
+    "charm": [
+      "Charm"
+    ],
+    "ancient-power": [
+      "Ancient Power"
+    ],
+    "freeze-dry": [
+      "Freeze-Dry"
+    ],
+    "leech-life": [
+      "Leech Life"
+    ],
+    "drill-peck": [
+      "Drill Peck"
+    ],
+    "avalanche": [
+      "Avalanche"
+    ],
+    "swagger": [
+      "Swagger"
+    ],
+    "sandstorm": [
+      "Sandstorm"
+    ],
+    "metal-sound": [
+      "Metal Sound"
+    ],
+    "quiver-dance": [
+      "Quiver Dance"
+    ],
+    "infernal-parade": [
+      "Infernal Parade"
+    ],
+    "seed-bomb": [
+      "Seed Bomb"
+    ],
+    "spirit-shackle": [
+      "Spirit Shackle"
+    ],
+    "wild-charge": [
+      "Wild Charge"
+    ],
+    "tri-attack": [
+      "Tri Attack"
+    ],
+    "string-shot": [
+      "String Shot"
+    ],
+    "trailblaze": [
+      "Trailblaze"
+    ],
+    "nuzzle": [
+      "Nuzzle"
+    ],
+    "safeguard": [
+      "Safeguard"
+    ],
+    "bone-rush": [
+      "Bone Rush"
+    ],
+    "hyper-beam": [
+      "Hyper Beam"
+    ],
+    "howl": [
+      "Howl"
+    ],
+    "raging-bull": [
+      "Raging Bull"
+    ],
+    "frost-breath": [
+      "Frost Breath"
+    ],
+    "grav-apple": [
+      "Grav Apple"
+    ],
+    "eerie-impulse": [
+      "Eerie Impulse"
+    ],
+    "minimize": [
+      "Minimize"
+    ],
+    "attract": [
+      "Attract"
+    ],
+    "fling": [
+      "Fling"
+    ],
+    "flame-charge": [
+      "Flame Charge"
+    ],
+    "extrasensory": [
+      "Extrasensory"
+    ],
+    "focus-punch": [
+      "Focus Punch"
+    ],
+    "fire-punch": [
+      "Fire Punch"
+    ],
+    "growth": [
+      "Growth"
+    ],
+    "psych-up": [
+      "Psych Up"
+    ],
+    "bug-buzz": [
+      "Bug Buzz"
+    ],
+    "transform": [
+      "Transform"
+    ],
+    "accelerock": [
+      "Accelerock"
+    ],
+    "vacuum-wave": [
+      "Vacuum Wave"
+    ],
+    "psyshield-bash": [
+      "Psyshield Bash"
+    ],
+    "stun-spore": [
+      "Stun Spore"
+    ],
+    "electric-terrain": [
+      "Electric Terrain"
+    ],
+    "burn-up": [
+      "Burn Up"
+    ],
+    "hex": [
+      "Hex"
+    ],
+    "water-shuriken": [
+      "Water Shuriken"
+    ],
+    "sticky-web": [
+      "Sticky Web"
+    ],
+    "memento": [
+      "Memento"
+    ],
+    "scary-face": [
+      "Scary Face"
+    ],
+    "shadow-punch": [
+      "Shadow Punch"
+    ],
+    "sleep-talk": [
+      "Sleep Talk"
+    ],
+    "wood-hammer": [
+      "Wood Hammer"
+    ],
+    "fire-fang": [
+      "Fire Fang"
+    ],
+    "boomburst": [
+      "Boomburst"
+    ],
+    "smack-down": [
+      "Smack Down"
+    ],
+    "soak": [
+      "Soak"
+    ],
+    "teeter-dance": [
+      "Teeter Dance"
+    ],
+    "grassy-terrain": [
+      "Grassy Terrain"
+    ],
+    "sand-tomb": [
+      "Sand Tomb"
+    ],
+    "tickle": [
+      "Tickle"
+    ],
+    "bullet-seed": [
+      "Bullet Seed"
+    ],
+    "glare": [
+      "Glare"
+    ],
+    "giga-impact": [
+      "Giga Impact"
+    ],
+    "air-cutter": [
+      "Air Cutter"
+    ],
+    "aura-wheel": [
+      "Aura Wheel"
+    ],
+    "heat-crash": [
+      "Heat Crash"
+    ],
+    "bulldoze": [
+      "Bulldoze"
+    ],
+    "rising-voltage": [
+      "Rising Voltage"
+    ],
+    "skitter-smack": [
+      "Skitter Smack"
+    ],
+    "flatter": [
+      "Flatter"
+    ],
+    "switcheroo": [
+      "Switcheroo"
+    ],
+    "final-gambit": [
+      "Final Gambit"
+    ],
+    "solar-blade": [
+      "Solar Blade"
+    ],
+    "charge-beam": [
+      "Charge Beam"
+    ],
+    "lava-plume": [
+      "Lava Plume"
+    ],
+    "steel-wing": [
+      "Steel Wing"
+    ],
+    "fell-stinger": [
+      "Fell Stinger"
+    ],
+    "horn-leech": [
+      "Horn Leech"
+    ],
+    "eerie-spell": [
+      "Eerie Spell"
+    ],
+    "wrap": [
+      "Wrap"
+    ],
+    "low-sweep": [
+      "Low Sweep"
+    ],
+    "grassy-glide": [
+      "Grassy Glide"
+    ],
+    "torment": [
+      "Torment"
+    ],
+    "toxic-thread": [
+      "Toxic Thread"
+    ],
+    "first-impression": [
+      "First Impression"
+    ],
+    "iron-tail": [
+      "Iron Tail"
+    ],
+    "lash-out": [
+      "Lash Out"
+    ],
+    "guard-swap": [
+      "Guard Swap"
+    ],
+    "power-swap": [
+      "Power Swap"
+    ],
+    "supercell-slam": [
+      "Supercell Slam"
+    ],
+    "hard-press": [
+      "Hard Press"
+    ],
+    "apple-acid": [
+      "Apple Acid"
+    ],
+    "aqua-step": [
+      "Aqua Step"
+    ],
+    "crabhammer": [
+      "Crabhammer"
+    ],
+    "aqua-ring": [
+      "Aqua Ring"
+    ],
+    "electro-ball": [
+      "Electro Ball"
+    ],
+    "forests-curse": [
+      "Forest's Curse"
+    ],
+    "spikes": [
+      "Spikes"
+    ],
+    "volt-tackle": [
+      "Volt Tackle"
+    ],
+    "stockpile": [
+      "Stockpile"
+    ],
+    "burning-jealousy": [
+      "Burning Jealousy"
+    ],
+    "agility": [
+      "Agility"
+    ],
+    "hydro-cannon": [
+      "Hydro Cannon"
+    ],
+    "payback": [
+      "Payback"
+    ],
+    "acupressure": [
+      "Acupressure"
+    ],
+    "thunder-fang": [
+      "Thunder Fang"
+    ],
+    "aromatic-mist": [
+      "Aromatic Mist"
+    ],
+    "mega-kick": [
+      "Mega Kick"
+    ],
+    "clear-smog": [
+      "Clear Smog"
+    ],
+    "spite": [
+      "Spite"
+    ],
+    "feather-dance": [
+      "Feather Dance"
+    ],
+    "poison-powder": [
+      "Poison Powder"
+    ],
+    "whirlwind": [
+      "Whirlwind"
+    ],
+    "copycat": [
+      "Copycat"
+    ],
+    "counter": [
+      "Counter"
+    ],
+    "baby-doll-eyes": [
+      "Baby-Doll Eyes"
+    ],
+    "zap-cannon": [
+      "Zap Cannon"
+    ],
+    "megahorn": [
+      "Megahorn"
+    ],
+    "cross-poison": [
+      "Cross Poison"
+    ],
+    "confuse-ray": [
+      "Confuse Ray"
+    ],
+    "inferno": [
+      "Inferno"
+    ],
+    "simple-beam": [
+      "Simple Beam"
+    ],
+    "beak-blast": [
+      "Beak Blast"
+    ],
+    "role-play": [
+      "Role Play"
+    ],
+    "night-daze": [
+      "Night Daze"
+    ],
+    "storm-throw": [
+      "Storm Throw"
+    ],
+    "snowscape": [
+      "Snowscape"
+    ],
+    "power-split": [
+      "Power Split"
+    ],
+    "power-trip": [
+      "Power Trip"
+    ],
+    "dig": [
+      "Dig"
+    ],
+    "sparkling-aria": [
+      "Sparkling Aria"
+    ],
+    "wonder-room": [
+      "Wonder Room"
+    ],
+    "reflect-type": [
+      "Reflect Type"
+    ],
+    "aqua-tail": [
+      "Aqua Tail"
+    ],
+    "ingrain": [
+      "Ingrain"
+    ],
+    "cotton-spore": [
+      "Cotton Spore"
+    ],
+    "block": [
+      "Block"
+    ],
+    "thrash": [
+      "Thrash"
+    ],
+    "circle-throw": [
+      "Circle Throw"
+    ],
+    "meteor-beam": [
+      "Meteor Beam"
+    ],
+    "petal-blizzard": [
+      "Petal Blizzard"
+    ],
+    "thief": [
+      "Thief"
+    ],
+    "blast-burn": [
+      "Blast Burn"
+    ],
+    "trick-or-treat": [
+      "Trick-or-Treat"
+    ],
+    "pounce": [
+      "Pounce"
+    ],
+    "fire-lash": [
+      "Fire Lash"
+    ],
+    "sing": [
+      "Sing"
+    ],
+    "rock-wrecker": [
+      "Rock Wrecker"
+    ],
+    "reversal": [
+      "Reversal"
+    ],
+    "healing-wish": [
+      "Healing Wish"
+    ],
+    "fly": [
+      "Fly"
+    ],
+    "double-hit": [
+      "Double Hit"
+    ],
+    "mud-shot": [
+      "Mud Shot"
+    ],
+    "tail-slap": [
+      "Tail Slap"
+    ],
+    "syrup-bomb": [
+      "Syrup Bomb"
+    ],
+    "mean-look": [
+      "Mean Look"
+    ],
+    "electrify": [
+      "Electrify"
+    ],
+    "mud-slap": [
+      "Mud-Slap"
+    ],
+    "tearful-look": [
+      "Tearful Look"
+    ],
+    "fairy-lock": [
+      "Fairy Lock"
+    ],
+    "raging-fury": [
+      "Raging Fury"
+    ],
+    "rock-polish": [
+      "Rock Polish"
+    ],
+    "magic-powder": [
+      "Magic Powder"
+    ],
+    "defog": [
+      "Defog"
+    ],
+    "belch": [
+      "Belch"
+    ],
+    "pluck": [
+      "Pluck"
+    ],
+    "axe-kick": [
+      "Axe Kick"
+    ],
+    "bind": [
+      "Bind"
+    ],
+    "magnet-rise": [
+      "Magnet Rise"
+    ],
+    "guard-split": [
+      "Guard Split"
+    ],
+    "comeuppance": [
+      "Comeuppance"
+    ],
+    "corrosive-gas": [
+      "Corrosive Gas"
+    ],
+    "sweet-scent": [
+      "Sweet Scent"
+    ],
+    "magic-room": [
+      "Magic Room"
+    ],
+    "dive": [
+      "Dive"
+    ],
+    "steel-roller": [
+      "Steel Roller"
+    ],
+    "petal-dance": [
+      "Petal Dance"
+    ],
+    "heal-bell": [
+      "Heal Bell"
+    ],
+    "flail": [
+      "Flail"
+    ],
+    "poison-fang": [
+      "Poison Fang"
+    ],
+    "noble-roar": [
+      "Noble Roar"
+    ]
+  }
+}
