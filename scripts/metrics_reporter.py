@@ -212,6 +212,7 @@ def post_payload(url: str, token: str, payload: dict) -> bool:
         req = Request(url, data=body, method="POST", headers={
             "Content-Type": "application/json",
             "Authorization": f"Bearer {token}",
+            "User-Agent": "PokemonChampionsReporter/1.0",
         })
         with urlopen(req, timeout=10) as resp:
             return resp.status == 200
