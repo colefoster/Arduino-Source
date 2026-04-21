@@ -11,6 +11,8 @@
 #ifndef PokemonAutomation_PokemonChampions_DetectorTest_H
 #define PokemonAutomation_PokemonChampions_DetectorTest_H
 
+#include "Common/Cpp/Options/BooleanCheckBoxOption.h"
+#include "Common/Cpp/Options/SimpleIntegerOption.h"
 #include "NintendoSwitch/NintendoSwitch_SingleSwitchProgram.h"
 
 namespace PokemonAutomation{
@@ -36,6 +38,10 @@ public:
     DetectorTest();
 
     virtual void program(SingleSwitchProgramEnvironment& env, ProControllerContext& context) override;
+
+private:
+    BooleanCheckBoxOption AUTO_SCREENSHOT;
+    SimpleIntegerOption<uint16_t> SCREENSHOT_INTERVAL_MS;
 };
 
 
