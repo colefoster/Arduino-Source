@@ -42,8 +42,8 @@ INDEX_FILE = OUTPUT_DIR / "index.json"
 # How often to poll for new battles (seconds)
 POLL_INTERVAL = 15
 
-# Max battles to spectate simultaneously (avoid overwhelming the connection)
-MAX_CONCURRENT = 20
+# Max battles to spectate simultaneously (Showdown kicks at ~50 rooms)
+MAX_CONCURRENT = 10
 
 
 class BattleLog:
@@ -142,6 +142,7 @@ class ShowdownSpectator:
             await asyncio.sleep(15)
             self.logged_in = False
             self.battles.clear()
+            self.known_rooms.clear()
 
         elapsed = time.time() - start
         print(f"\nSession ended after {elapsed/60:.1f} minutes", flush=True)
@@ -277,7 +278,7 @@ class ShowdownSpectator:
             print(f"  Joined {room_id} ({p1} vs {p2}, elo>={elo}) "
                   f"[{len(self.battles)} active]", flush=True)
 
-            await asyncio.sleep(0.6)  # rate limit joins
+            await asyncio.sleep(1.0)  # rate limit joins — too fast gets kicked
 
     async def _save_battle(self, battle: BattleLog):
         """Save a completed battle log to disk."""
