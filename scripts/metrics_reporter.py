@@ -108,23 +108,83 @@ def get_spectator_status() -> dict:
     except Exception:
         pass
 
-    # Get last save time from recent files
+    # Get last save time + recent saves feed + session stats
     last_save_ago = -1
+    recent_saves = []  # last 20 spectated battles
+    session_start = None
+    session_count = 0
+    now = time.time()
+
     for fmt_id in FORMATS:
         fmt_dir = REPLAY_DIR / fmt_id
         if not fmt_dir.exists():
             continue
-        for f in sorted(fmt_dir.iterdir(), key=lambda x: x.stat().st_mtime, reverse=True):
-            if f.suffix == ".json":
-                age = time.time() - f.stat().st_mtime
-                if last_save_ago < 0 or age < last_save_ago:
-                    last_save_ago = age
+
+        # Collect recent spectated files (last 24h)
+        spectated_files = []
+        for f in fmt_dir.iterdir():
+            if f.suffix != ".json":
+                continue
+            mtime = f.stat().st_mtime
+            if now - mtime > 86400:
+                continue
+            spectated_files.append((f, mtime))
+
+        for f, mtime in sorted(spectated_files, key=lambda x: -x[1]):
+            age = now - mtime
+            if last_save_ago < 0 or age < last_save_ago:
+                last_save_ago = age
+
+            # Read recent spectated files for the feed
+            if len(recent_saves) < 20:
+                try:
+                    data = json.loads(f.read_text())
+                    if data.get("source") == "spectated":
+                        players = data.get("players", ["?", "?"])
+                        recent_saves.append({
+                            "id": data.get("id", f.stem),
+                            "p1": players[0] if players else "?",
+                            "p2": players[1] if len(players) > 1 else "?",
+                            "rating": data.get("rating", 0),
+                            "time": round(mtime),
+                            "ago_sec": round(age),
+                        })
+                except Exception:
+                    pass
+
+        # Session tracking: find start of current session (gap > 10min = new session)
+        spectated_times = sorted([m for _, m in spectated_files
+                                   if now - m < 86400], reverse=True)
+        for i, t in enumerate(spectated_times):
+            if i + 1 < len(spectated_times) and t - spectated_times[i + 1] > 600:
+                session_start = spectated_times[i]
+                session_count = i + 1
                 break
+        else:
+            if spectated_times:
+                session_start = spectated_times[-1]
+                session_count = len(spectated_times)
+
+    # Compute collection rate from last 10 min
+    rate_per_hour = 0
+    for fmt_id in FORMATS:
+        fmt_dir = REPLAY_DIR / fmt_id
+        if not fmt_dir.exists():
+            continue
+        last_10m = sum(1 for f in fmt_dir.iterdir()
+                       if f.suffix == ".json" and now - f.stat().st_mtime < 600)
+        rate_per_hour += last_10m * 6
+
+    uptime_min = round((now - session_start) / 60) if session_start else 0
 
     return {
         "alive": alive,
         "pid": pid,
         "last_save_ago_sec": round(last_save_ago) if last_save_ago >= 0 else -1,
+        "session_battles": session_count,
+        "session_uptime_min": uptime_min,
+        "rate_per_hour": rate_per_hour,
+        "recent_saves": recent_saves,
     }
 
 

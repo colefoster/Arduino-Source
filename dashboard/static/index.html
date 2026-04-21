@@ -55,6 +55,25 @@
         .chart-box canvas { max-height: 250px; }
         .chart-title { font-size: 12px; color: #8b949e; margin-bottom: 8px; }
 
+        /* Spectator section */
+        .spec-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        @media (max-width: 700px) { .spec-grid { grid-template-columns: 1fr; } }
+        .spec-stats { display: flex; flex-direction: column; gap: 8px; }
+        .spec-stat { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 10px 14px; }
+        .spec-stat .label { font-size: 11px; color: #8b949e; }
+        .spec-stat .val { font-size: 18px; font-weight: bold; margin-top: 2px; }
+        .feed { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 12px; max-height: 300px; overflow-y: auto; }
+        .feed-item { font-size: 12px; padding: 4px 0; border-bottom: 1px solid #21262d; display: flex; justify-content: space-between; }
+        .feed-item:last-child { border-bottom: none; }
+        .feed-item .players { color: #c9d1d9; }
+        .feed-item .meta { color: #8b949e; white-space: nowrap; margin-left: 12px; }
+        .feed-item .rating { color: #58a6ff; }
+
         /* Model table */
         table {
             width: 100%;
@@ -104,6 +123,35 @@
             <div class="label">Best Model</div>
             <div class="value" id="best-model">--</div>
             <div class="sub" id="best-detail"></div>
+        </div>
+    </div>
+
+    <!-- Spectator detail -->
+    <h2>Live Spectator</h2>
+    <div class="spec-grid">
+        <div class="spec-stats">
+            <div class="spec-stat">
+                <div class="label">Uptime</div>
+                <div class="val" id="spec-uptime">--</div>
+            </div>
+            <div class="spec-stat">
+                <div class="label">Session Battles</div>
+                <div class="val" id="spec-session-count">--</div>
+            </div>
+            <div class="spec-stat">
+                <div class="label">Rate</div>
+                <div class="val" id="spec-rate">--</div>
+            </div>
+            <div class="spec-stat">
+                <div class="label">Rooms Joined</div>
+                <div class="val" id="spec-rooms">--</div>
+            </div>
+        </div>
+        <div>
+            <div class="chart-title">Recent Saves</div>
+            <div class="feed" id="spec-feed">
+                <div style="color: #484f58; font-size: 12px;">Waiting for data...</div>
+            </div>
         </div>
     </div>
 
@@ -214,7 +262,8 @@
 
             // Spectator status
             const s = d.spectator || {};
-            if (s.alive && s.last_save_ago_sec >= 0 && s.last_save_ago_sec < 300) {
+            const specAlive = s.alive && s.last_save_ago_sec >= 0 && s.last_save_ago_sec < 300;
+            if (specAlive) {
                 document.getElementById('spec-status').innerHTML =
                     `<span class="dot green"></span>Active`;
                 document.getElementById('spec-detail').textContent =
@@ -224,6 +273,31 @@
                     `<span class="dot red"></span>Down`;
                 const ago = s.last_save_ago_sec > 0 ? `${Math.round(s.last_save_ago_sec / 60)}m ago` : 'unknown';
                 document.getElementById('spec-detail').textContent = `Last save: ${ago}`;
+            }
+
+            // Spectator detail section
+            const upMin = s.session_uptime_min || 0;
+            const upStr = upMin >= 60 ? `${Math.floor(upMin/60)}h ${upMin%60}m` : `${upMin}m`;
+            document.getElementById('spec-uptime').textContent = upStr;
+            document.getElementById('spec-uptime').style.color = specAlive ? '#3fb950' : '#f85149';
+            document.getElementById('spec-session-count').textContent = (s.session_battles || 0).toLocaleString();
+            document.getElementById('spec-rate').textContent = `${s.rate_per_hour || 0}/hr`;
+            document.getElementById('spec-rooms').textContent = s.joined_rooms || '--';
+
+            // Recent saves feed
+            const saves = s.recent_saves || [];
+            const feed = document.getElementById('spec-feed');
+            if (saves.length > 0) {
+                feed.innerHTML = saves.map(sv => {
+                    const agoStr = sv.ago_sec < 60 ? `${sv.ago_sec}s` :
+                                   sv.ago_sec < 3600 ? `${Math.round(sv.ago_sec/60)}m` :
+                                   `${Math.round(sv.ago_sec/3600)}h`;
+                    const ratingStr = sv.rating ? `<span class="rating">${sv.rating}</span>` : '';
+                    return `<div class="feed-item">
+                        <span class="players">${sv.p1} vs ${sv.p2}</span>
+                        <span class="meta">${ratingStr} ${agoStr} ago</span>
+                    </div>`;
+                }).join('');
             }
 
             // Data totals
