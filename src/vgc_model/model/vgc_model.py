@@ -147,6 +147,68 @@ class GlobalEncoder(nn.Module):
         return self.proj(x).unsqueeze(1)  # (B, 1, d_model)
 
 
+class TeamSelectionHead(nn.Module):
+    """Predict which 4 of 6 pokemon to bring, given both teams' species."""
+
+    def __init__(self, species_embed: nn.Embedding, config: ModelConfig):
+        super().__init__()
+        # Cross-attention: own 6 attend to opponent 6
+        self.cross_attn = nn.MultiheadAttention(
+            embed_dim=config.species_dim, num_heads=4,
+            dropout=config.dropout, batch_first=True,
+        )
+        self.head = nn.Sequential(
+            nn.Linear(config.species_dim, config.species_dim),
+            nn.GELU(),
+            nn.Dropout(config.dropout),
+            nn.Linear(config.species_dim, 1),  # score per pokemon
+        )
+        self.species_embed = species_embed
+
+    def forward(
+        self,
+        own_team: torch.Tensor,  # (B, 6) species IDs
+        opp_team: torch.Tensor,  # (B, 6) species IDs
+    ) -> torch.Tensor:
+        """Returns (B, 6) logits — one per own pokemon."""
+        own_emb = self.species_embed(own_team)  # (B, 6, species_dim)
+        opp_emb = self.species_embed(opp_team)  # (B, 6, species_dim)
+
+        # Own pokemon attend to opponent pokemon
+        attended, _ = self.cross_attn(own_emb, opp_emb, opp_emb)
+        return self.head(attended).squeeze(-1)  # (B, 6)
+
+
+class LeadSelectionHead(nn.Module):
+    """Predict which 2 of 4 selected pokemon to lead with."""
+
+    def __init__(self, species_embed: nn.Embedding, config: ModelConfig):
+        super().__init__()
+        self.cross_attn = nn.MultiheadAttention(
+            embed_dim=config.species_dim, num_heads=4,
+            dropout=config.dropout, batch_first=True,
+        )
+        self.head = nn.Sequential(
+            nn.Linear(config.species_dim, config.species_dim),
+            nn.GELU(),
+            nn.Dropout(config.dropout),
+            nn.Linear(config.species_dim, 1),
+        )
+        self.species_embed = species_embed
+
+    def forward(
+        self,
+        selected_4: torch.Tensor,  # (B, 4) species IDs
+        opp_team: torch.Tensor,    # (B, 6) species IDs
+    ) -> torch.Tensor:
+        """Returns (B, 4) logits — one per selected pokemon."""
+        sel_emb = self.species_embed(selected_4)  # (B, 4, species_dim)
+        opp_emb = self.species_embed(opp_team)    # (B, 6, species_dim)
+
+        attended, _ = self.cross_attn(sel_emb, opp_emb, opp_emb)
+        return self.head(attended).squeeze(-1)  # (B, 4)
+
+
 class VGCTransformer(nn.Module):
     """Main model: encodes game state, outputs action distributions."""
 
@@ -158,8 +220,6 @@ class VGCTransformer(nn.Module):
         self.global_encoder = GlobalEncoder(vocabs, config)
 
         # Positional embeddings for 9 tokens (8 pokemon + 1 global)
-        # Positions encode role: own_active_a(0), own_active_b(1), own_bench(2,3),
-        #                         opp_active_a(4), opp_active_b(5), opp_bench(6,7), global(8)
         self.position_embed = nn.Embedding(9, config.d_model)
 
         # Alive mask projection (to zero out empty slots)
@@ -190,12 +250,19 @@ class VGCTransformer(nn.Module):
             nn.Linear(config.d_model, config.num_actions),
         )
 
-    def forward(self, batch: dict[str, torch.Tensor]) -> tuple[torch.Tensor, torch.Tensor]:
+        # Team & lead selection heads (share species embedding from pokemon encoder)
+        self.team_head = TeamSelectionHead(self.pokemon_encoder.species_embed, config)
+        self.lead_head = LeadSelectionHead(self.pokemon_encoder.species_embed, config)
+
+    def forward(self, batch: dict[str, torch.Tensor]) -> dict[str, torch.Tensor]:
         """Forward pass.
 
-        Returns:
-            (logits_a, logits_b): action logits for slot a and b, each (B, num_actions)
+        Returns dict with keys:
+            logits_a, logits_b: action logits (B, num_actions)
+            team_logits: team selection logits (B, 6) — if own_team_ids in batch
+            lead_logits: lead selection logits (B, 4) — if selected_ids in batch
         """
+        out = {}
         # Encode pokemon slots
         pokemon_repr = self.pokemon_encoder(
             species_ids=batch["species_ids"],
@@ -251,7 +318,18 @@ class VGCTransformer(nn.Module):
         logits_a = logits_a.masked_fill(~batch["action_mask_a"], float("-inf"))
         logits_b = logits_b.masked_fill(~batch["action_mask_b"], float("-inf"))
 
-        return logits_a, logits_b
+        out["logits_a"] = logits_a
+        out["logits_b"] = logits_b
+
+        # Team selection: predict which 4 of 6 to bring
+        if "own_team_ids" in batch:
+            out["team_logits"] = self.team_head(batch["own_team_ids"], batch["opp_team_ids"])
+
+        # Lead selection: predict which 2 of 4 to lead
+        if "selected_ids" in batch:
+            out["lead_logits"] = self.lead_head(batch["selected_ids"], batch["opp_team_ids"])
+
+        return out
 
     def count_parameters(self) -> int:
         return sum(p.numel() for p in self.parameters() if p.requires_grad)
