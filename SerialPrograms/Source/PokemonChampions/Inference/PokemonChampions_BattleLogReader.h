@@ -25,8 +25,8 @@
 #include <string>
 #include <vector>
 #include "CommonFramework/ImageTools/ImageBoxes.h"
+#include "CommonFramework/Logging/Logger.h"
 #include "CommonFramework/VideoPipeline/VideoOverlayScopes.h"
-#include "CommonTools/VisualDetector.h"
 
 namespace PokemonAutomation{
 namespace NintendoSwitch{
