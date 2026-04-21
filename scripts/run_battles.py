@@ -29,6 +29,7 @@ from vgc_model.data.vocab import Vocabs
 from vgc_model.model.vgc_model import VGCTransformer, ModelConfig
 from vgc_model.inference.model_player import VGCModelPlayer
 from poke_env.player.random_player import RandomPlayer
+from poke_env.ps_client.server_configuration import LocalhostServerConfiguration, ServerConfiguration
 
 DATA_DIR = project_root / "data"
 VOCAB_DIR = DATA_DIR / "vocab"
@@ -93,6 +94,9 @@ async def run_battles(
     vocabs = Vocabs.load(VOCAB_DIR)
     model = load_model(CHECKPOINT_DIR / checkpoint, vocabs, device)
 
+    # Server config
+    server_config = ServerConfiguration(server_url, "https://play.pokemonshowdown.com/action.php?")
+
     # Create players
     player = VGCModelPlayer(
         model=model,
@@ -100,7 +104,7 @@ async def run_battles(
         device=device,
         temperature=temperature,
         battle_format="gen9championsvgc2026regma",
-        server_configuration={"server_url": server_url, "authentication_url": None},
+        server_configuration=server_config,
         max_concurrent_battles=1,
         start_timer_on_battle_start=True,
     )
@@ -109,7 +113,7 @@ async def run_battles(
     if opponent_type == "random":
         opponent = RandomPlayer(
             battle_format="gen9championsvgc2026regma",
-            server_configuration={"server_url": server_url, "authentication_url": None},
+            server_configuration=server_config,
             max_concurrent_battles=1,
         )
         opponent.update_team(SAMPLE_TEAMS[1])
@@ -120,9 +124,9 @@ async def run_battles(
             model=model2,
             vocabs=vocabs,
             device=device,
-            temperature=max(temperature, 0.3),  # force some randomness for diversity
+            temperature=max(temperature, 0.3),
             battle_format="gen9championsvgc2026regma",
-            server_configuration={"server_url": server_url, "authentication_url": None},
+            server_configuration=server_config,
             max_concurrent_battles=1,
         )
         opponent.update_team(SAMPLE_TEAMS[1])
