@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple, Union
 
 import numpy as np
@@ -116,15 +117,17 @@ class Pokemon:
         self._status_counter: int = 0
 
         # Load appropriate sets file based on battle format
-        # Handle None battle_format gracefully
+        _poke_env_root = Path(__file__).resolve().parent.parent
         if battle_format and "vgc" in battle_format.lower():
-            sets_file = 'poke_env/data/static/gen9/vgc/sets_1760.json'
+            sets_file = _poke_env_root / 'data' / 'static' / 'gen9' / 'vgc' / 'sets_1760.json'
         else:
-            sets_file = 'poke_env/data/static/gen9/ou/sets_1500.json'
-        
-        with open(sets_file, 'r') as f:
-            sets = json.load(f)
-        self._sets = sets
+            sets_file = _poke_env_root / 'data' / 'static' / 'gen9' / 'ou' / 'sets_1500.json'
+
+        try:
+            with open(sets_file, 'r') as f:
+                self._sets = json.load(f)
+        except FileNotFoundError:
+            self._sets = {}
         
         
         if request_pokemon:
