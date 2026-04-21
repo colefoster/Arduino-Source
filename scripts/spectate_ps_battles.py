@@ -18,8 +18,14 @@ import asyncio
 import json
 import random
 import string
+import sys
 import time
 from pathlib import Path
+
+# Force UTF-8 output on Windows
+if sys.platform == "win32":
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 
 import websockets
 
@@ -236,7 +242,7 @@ class ShowdownSpectator:
             p1 = info.get("p1", "?")
             p2 = info.get("p2", "?")
             elo = info.get("minElo", "?")
-            print(f"  Joined {room_id} ({p1} vs {p2}, elo≥{elo}) "
+            print(f"  Joined {room_id} ({p1} vs {p2}, elo>={elo}) "
                   f"[{len(self.battles)} active]", flush=True)
 
             await asyncio.sleep(0.6)  # rate limit joins
@@ -313,7 +319,12 @@ def main():
         print(f"Duration: {args.duration}s", flush=True)
     print(flush=True)
 
-    asyncio.run(spectator.run(duration=args.duration))
+    try:
+        asyncio.run(spectator.run(duration=args.duration))
+    except KeyboardInterrupt:
+        print("\nInterrupted by user", flush=True)
+    except Exception as e:
+        print(f"\nError: {e}", flush=True)
 
 
 if __name__ == "__main__":
