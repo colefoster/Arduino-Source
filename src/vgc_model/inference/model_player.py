@@ -176,7 +176,7 @@ class VGCModelPlayer(Player):
                 ability_ids[slot] = self.vocabs.abilities[poke.ability]
             if poke.item:
                 item_ids[slot] = self.vocabs.items[poke.item]
-            mega_flags[slot] = 1 if poke.is_mega else 0
+            mega_flags[slot] = 1 if getattr(poke, 'is_mega', False) else 0
             alive_flags[slot] = 1
             boosts = [poke.boosts.get(s, 0) for s in BOOST_STATS]
             boost_values[slot] = boosts
@@ -205,7 +205,7 @@ class VGCModelPlayer(Player):
                 status_ids[slot] = self.vocabs.status[poke.status.name.lower()]
             if poke.ability:
                 ability_ids[slot] = self.vocabs.abilities[poke.ability]
-            mega_flags[slot] = 1 if poke.is_mega else 0
+            mega_flags[slot] = 1 if getattr(poke, 'is_mega', False) else 0
             alive_flags[slot] = 1
             boosts = [poke.boosts.get(s, 0) for s in BOOST_STATS]
             boost_values[slot] = boosts
