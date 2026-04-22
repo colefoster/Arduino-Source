@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2583855234",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Hypnobeam",
+    "yuriimon"
+  ],
+  "log": "|j|\u2606Hypnobeam\n|j|\u2606yuriimon\n|t:|1776202982\n|gametype|doubles\n|player|p1|Hypnobeam|silver|1054\n|player|p2|yuriimon|waitress-gen4|1059\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Delphox, L50, F|\n|poke|p1|Ninetales, L50, F|\n|poke|p1|Venusaur, L50, M|\n|poke|p1|Sneasler, L50, F|\n|poke|p1|Noivern, L50, M|\n|poke|p1|Charizard, L50, F|\n|poke|p2|Glimmora, L50, F|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Archaludon, L50, F|\n|poke|p2|Politoed, L50, M|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Chesnaught, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by yuriimon)\n|inactive|yuriimon has 60 seconds left.\n|\n|t:|1776203041\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Charizard|Charizard, L50, F|100/100\n|switch|p1b: Noivern|Noivern, L50, M|100/100\n|switch|p2a: Glimmora|Glimmora, L50, F|100/100\n|switch|p2b: Basculegion|Basculegion, L50, M|100/100\n|turn|1\n|inactive|yuriimon has 30 seconds left.\n|inactive|yuriimon has 20 seconds left.\n|\n|t:|1776203080\n|switch|p2b: Incineroar|Incineroar, L50, M|100/100\n|-ability|p2b: Incineroar|Intimidate|boost\n|-unboost|p1a: Charizard|atk|1\n|-unboost|p1b: Noivern|atk|1\n|detailschange|p2a: Glimmora|Glimmora-Mega, L50, F\n|-mega|p2a: Glimmora|Glimmora|Glimmoranite\n|move|p1a: Charizard|Protect|p1a: Charizard\n|-singleturn|p1a: Charizard|Protect\n|move|p1b: Noivern|Tailwind|p1b: Noivern\n|-sidestart|p1: Hypnobeam|move: Tailwind\n|move|p2a: Glimmora|Power Gem|p1b: Noivern\n|-supereffective|p1b: Noivern|1\n|-damage|p1b: Noivern|0 fnt\n|faint|p1b: Noivern\n|\n|upkeep\n|-message|Hypnobeam forfeited.\n|\n|win|yuriimon\n|raw|Hypnobeam's rating: 1054 &rarr; <strong>1036</strong><br />(-18 for losing)\n|raw|yuriimon's rating: 1059 &rarr; <strong>1090</strong><br />(+31 for winning)\n|l|\u2606Hypnobeam\n|player|p1|\n",
+  "uploadtime": 1776203106,
+  "views": 17,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1036,
+  "private": 0,
+  "password": null
+}

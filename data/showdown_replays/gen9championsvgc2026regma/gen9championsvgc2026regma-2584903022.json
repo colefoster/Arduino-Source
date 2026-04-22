@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584903022",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "alvarompywf",
+    "ZakoDboX"
+  ],
+  "log": "|j|\u2606alvarompywf\n|j|\u2606ZakoDboX\n|t:|1776293042\n|gametype|doubles\n|player|p1|alvarompywf|fisherman-gen4|1092\n|player|p2|ZakoDboX|1|1081\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Sneasler, L50, F|\n|poke|p1|Kingambit, L50, F|\n|poke|p1|Milotic, L50, F|\n|poke|p1|Gengar, L50, F|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Garchomp, L50, F|\n|poke|p2|Raichu-Alola, L50, M|\n|poke|p2|Heliolisk, L50, F|\n|poke|p2|Rotom-Wash, L50|\n|poke|p2|Ampharos, L50, M|\n|poke|p2|Stunfisk, L50, M|\n|poke|p2|Jolteon, L50, F|\n|teampreview|4\n|c|\u2606ZakoDboX|otro conchesumadre que no sabe jugar sino lleva a sneasler, shupalo reculiao\n|\n|t:|1776293075\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Kingambit|Kingambit, L50, F|100/100\n|switch|p1b: Garchomp|Garchomp, L50, F|100/100\n|switch|p2a: Jolteon|Jolteon, L50, F|100/100\n|switch|p2b: Raichu|Raichu-Alola, L50, M|100/100\n|turn|1\n|\n|t:|1776293104\n|move|p2b: Raichu|Fake Out|p1b: Garchomp\n|-damage|p1b: Garchomp|93/100\n|-damage|p2b: Raichu|88/100|[from] ability: Rough Skin|[of] p1b: Garchomp\n|move|p1a: Kingambit|Sucker Punch||[still]\n|-fail|p1a: Kingambit\n|move|p2a: Jolteon|Electric Terrain|p2a: Jolteon\n|-fieldstart|move: Electric Terrain\n|cant|p1b: Garchomp|flinch\n|\n|upkeep\n|turn|2\n|\n|t:|1776293123\n|move|p1a: Kingambit|Sucker Punch|p2b: Raichu\n|-supereffective|p2b: Raichu|1\n|-damage|p2b: Raichu|0 fnt\n|faint|p2b: Raichu\n|move|p2a: Jolteon|Shadow Ball|p1b: Garchomp\n|-damage|p1b: Garchomp|72/100\n|move|p1b: Garchomp|Stomping Tantrum|p2a: Jolteon\n|-supereffective|p2a: Jolteon|1\n|-damage|p2a: Jolteon|0 fnt\n|faint|p2a: Jolteon\n|\n|upkeep\n|\n|t:|1776293135\n|switch|p2a: Heliolisk|Heliolisk, L50, F|100/100\n|switch|p2b: Ampharos|Ampharos, L50, M|100/100\n|turn|3\n|-message|ZakoDboX forfeited.\n|\n|win|alvarompywf\n",
+  "uploadtime": 1776293067,
+  "views": 16,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": null,
+  "private": 0,
+  "password": null
+}

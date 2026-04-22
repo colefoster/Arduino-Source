@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584648332",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "toxmyself",
+    "Helloisapokemon"
+  ],
+  "log": "|j|\u2606toxmyself\n|j|\u2606Helloisapokemon\n|t:|1776274337\n|gametype|doubles\n|player|p1|toxmyself|norman|1087\n|player|p2|Helloisapokemon|riley|1038\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Charizard, L50, M|\n|poke|p1|Venusaur, L50, F|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Gardevoir, L50, M|\n|poke|p1|Milotic, L50, F|\n|poke|p2|Froslass, L50, F|\n|poke|p2|Milotic, L50, F|\n|poke|p2|Aerodactyl, L50, M|\n|poke|p2|Espathra, L50, F|\n|poke|p2|Sylveon, L50, F|\n|poke|p2|Incineroar, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by toxmyself)\n|inactive|toxmyself has 60 seconds left.\n|inactive|Helloisapokemon has 60 seconds left.\nHelloisapokemon rejected open team sheets.\n|\n|t:|1776274393\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Gardevoir|Gardevoir, L50, M|100/100\n|switch|p1b: Milotic|Milotic, L50, F|100/100\n|switch|p2a: Milotic|Milotic, L50, F|100/100\n|switch|p2b: Espathra|Espathra, L50, F|100/100\n|turn|1\n|inactive|toxmyself has 30 seconds left.\n|inactive|toxmyself has 20 seconds left.\n|\n|t:|1776274431\n|move|p1a: Gardevoir|Moonblast|p2b: Espathra\n|-damage|p2b: Espathra|19/100\n|move|p2b: Espathra|Calm Mind|p2b: Espathra\n|-boost|p2b: Espathra|spa|1\n|-boost|p2b: Espathra|spd|1\n|move|p1b: Milotic|Scald|p2b: Espathra\n|-damage|p2b: Espathra|0 fnt\n|faint|p2b: Espathra\n|move|p2a: Milotic|Scald|p1a: Gardevoir\n|-damage|p1a: Gardevoir|69/100\n|-status|p1a: Gardevoir|brn\n|\n|-damage|p1a: Gardevoir|63/100 brn|[from] brn\n|upkeep\n|-message|Helloisapokemon forfeited.\n|\n|win|toxmyself\n|raw|toxmyself's rating: 1087 &rarr; <strong>1110</strong><br />(+23 for winning)\n|raw|Helloisapokemon's rating: 1038 &rarr; <strong>1024</strong><br />(-14 for losing)\n",
+  "uploadtime": 1776274442,
+  "views": 25,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1024,
+  "private": 0,
+  "password": null
+}

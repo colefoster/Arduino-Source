@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2588758476",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Kokashuu",
+    "hollospollosbro38"
+  ],
+  "log": "|j|\u2606Kokashuu\n|j|\u2606hollospollosbro38\n|t:|1776666987\n|gametype|doubles\n|player|p1|Kokashuu|burglar|\n|player|p2|hollospollosbro38|hilbert|\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Froslass, L50, F|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Orthworm, L50, M|\n|poke|p1|Rotom-Frost, L50|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Meowscarada, L50, F|\n|poke|p2|Tyrantrum, L50, M|\n|poke|p2|Arcanine, L50, M|\n|poke|p2|Rotom-Wash, L50|\n|poke|p2|Whimsicott, L50, M|\n|poke|p2|Dragonite, L50, M|\n|poke|p2|Tyranitar, L50, M|\n|teampreview|4\n|\n|t:|1776667012\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Rotom|Rotom-Frost, L50|100/100\n|switch|p1b: Orthworm|Orthworm, L50, M|100/100\n|switch|p2a: Tyrantrum|Tyrantrum, L50, M|100/100\n|switch|p2b: Whimsicott|Whimsicott, L50, M|100/100\n|turn|1\n|\n|t:|1776667031\n|move|p2b: Whimsicott|Protect|p2b: Whimsicott\n|-singleturn|p2b: Whimsicott|Protect\n|move|p2a: Tyrantrum|Earthquake|p1b: Orthworm|[spread] \n|-activate|p2b: Whimsicott|move: Protect\n|-immune|p1b: Orthworm|[from] ability: Earth Eater\n|-immune|p1a: Rotom|[from] ability: Levitate\n|move|p1a: Rotom|Blizzard|p2a: Tyrantrum|[spread] \n|-activate|p2b: Whimsicott|move: Protect\n|-miss|p1a: Rotom|p2a: Tyrantrum\n|move|p1b: Orthworm|Shed Tail|p1b: Orthworm\n|-start|p1b: Orthworm|Substitute|[from] move: Shed Tail\n|-damage|p1b: Orthworm|50/100\n|-enditem|p1b: Orthworm|Sitrus Berry|[eat]\n|-heal|p1b: Orthworm|75/100|[from] item: Sitrus Berry\n|\n|t:|1776667044\n|switch|p1b: Froslass|Froslass, L50, F|100/100|[from] Shed Tail\n|\n|upkeep\n|turn|2\n|\n|t:|1776667064\n|switch|p2b: Dragonite|Dragonite, L50, M|100/100\n|detailschange|p1b: Froslass|Froslass-Mega, L50, F\n|-mega|p1b: Froslass|Froslass|Froslassite\n|-weather|Snowscape|[from] ability: Snow Warning|[of] p1b: Froslass\n|move|p2a: Tyrantrum|Earthquake|p1a: Rotom|[spread] p1b\n|-immune|p2b: Dragonite\n|-immune|p1a: Rotom|[from] ability: Levitate\n|-activate|p1b: Froslass|move: Substitute|[damage]\n|move|p1b: Froslass|Blizzard|p2b: Dragonite|[spread] p2a,p2b\n|-supereffective|p2a: Tyrantrum|1\n|-supereffective|p2b: Dragonite|2\n|-damage|p2a: Tyrantrum|0 fnt\n|-damage|p2b: Dragonite|0 fnt\n|faint|p2a: Tyrantrum\n|faint|p2b: Dragonite\n|move|p1a: Rotom|Blizzard|p2: Tyrantrum|[notarget]\n|-fail|p1a: Rotom\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|-message|hollospollosbro38 forfeited.\n|\n|win|Kokashuu\n|l|\u2606hollospollosbro38\n|player|p2|\n",
+  "uploadtime": 1776667089,
+  "views": 11,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": null,
+  "private": 0,
+  "password": null
+}

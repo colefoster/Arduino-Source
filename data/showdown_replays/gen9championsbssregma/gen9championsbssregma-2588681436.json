@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2588681436",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "demiru_09",
+    "meteor1101"
+  ],
+  "log": "|j|\u2606demiru_09\n|j|\u2606meteor1101\n|t:|1776657132\n|gametype|singles\n|player|p1|demiru_09|169|1460\n|player|p2|meteor1101|acetrainerf|1398\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Heracross, L50, F|\n|poke|p1|Gengar, L50, M|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Volcarona, L50, M|\n|poke|p1|Kingambit, L50, F|\n|poke|p1|Primarina, L50, F|\n|poke|p2|Kingambit, L50, M|\n|poke|p2|Meowscarada, L50, F|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Mimikyu, L50, F|\n|poke|p2|Victreebel, L50, M|\n|poke|p2|Dragonite, L50, M|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by demiru_09)\n|inactive|demiru_09 has 60 seconds left.\n|\n|t:|1776657178\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Primarina|Primarina, L50, F|100/100\n|switch|p2a: Victreebel|Victreebel, L50, M|100/100\n|turn|1\n|\n|t:|1776657186\n|switch|p1a: Heracross|Heracross, L50, F|100/100\n|detailschange|p2a: Victreebel|Victreebel-Mega, L50, M\n|-mega|p2a: Victreebel|Victreebel|Victreebelite\n|move|p2a: Victreebel|Sludge Wave|p1a: Heracross\n|-damage|p1a: Heracross|35/100\n|\n|upkeep\n|turn|2\n|\n|t:|1776657198\n|detailschange|p1a: Heracross|Heracross-Mega, L50, F\n|-mega|p1a: Heracross|Heracross|Heracronite\n|move|p1a: Heracross|Rock Blast|p2a: Victreebel\n|-damage|p2a: Victreebel|85/100\n|-damage|p2a: Victreebel|70/100\n|-damage|p2a: Victreebel|57/100\n|-damage|p2a: Victreebel|43/100\n|-damage|p2a: Victreebel|29/100\n|-hitcount|p2a: Victreebel|5\n|move|p2a: Victreebel|Sludge Wave|p1a: Heracross\n|-crit|p1a: Heracross\n|-damage|p1a: Heracross|0 fnt\n|faint|p1a: Heracross\n|\n|upkeep\n|\n|t:|1776657211\n|switch|p1a: Volcarona|Volcarona, L50, M|100/100\n|turn|3\n|\n|t:|1776657217\n|move|p1a: Volcarona|Quiver Dance|p1a: Volcarona\n|-boost|p1a: Volcarona|spa|1\n|-boost|p1a: Volcarona|spd|1\n|-boost|p1a: Volcarona|spe|1\n|move|p2a: Victreebel|Sludge Wave|p1a: Volcarona\n|-damage|p1a: Volcarona|66/100\n|\n|upkeep\n|turn|4\n|\n|t:|1776657226\n|move|p1a: Volcarona|Quiver Dance|p1a: Volcarona\n|-boost|p1a: Volcarona|spa|1\n|-boost|p1a: Volcarona|spd|1\n|-boost|p1a: Volcarona|spe|1\n|move|p2a: Victreebel|Sludge Wave|p1a: Volcarona\n|-crit|p1a: Volcarona\n|-damage|p1a: Volcarona|0 fnt\n|faint|p1a: Volcarona\n|\n|upkeep\n|-message|demiru_09 forfeited.\n|\n|win|meteor1101\n|raw|demiru_09's rating: 1460 &rarr; <strong>1436</strong><br />(-24 for losing)\n|raw|meteor1101's rating: 1398 &rarr; <strong>1422</strong><br />(+24 for winning)\n|l|\u2606demiru_09\n|player|p1|\n",
+  "uploadtime": 1776657239,
+  "views": 1,
+  "formatid": "gen9championsbssregma",
+  "rating": 1422,
+  "private": 0,
+  "password": null
+}

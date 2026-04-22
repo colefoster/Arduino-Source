@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2580847830",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Aliantz",
+    "AgsAllDay12"
+  ],
+  "log": "|j|\u2606Aliantz\n|j|\u2606AgsAllDay12\n|t:|1775937395\n|gametype|doubles\n|player|p1|Aliantz|steven|1021\n|player|p2|AgsAllDay12|265|1046\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Heracross, L50, M|\n|poke|p1|Sableye, L50, M|\n|poke|p1|Altaria, L50, F|\n|poke|p1|Hawlucha, L50, M|\n|poke|p1|Mr. Rime, L50, F|\n|poke|p1|Krookodile, L50, M|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Delphox, L50, M|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Aerodactyl, L50, F|\n|poke|p2|Maushold, L50|\n|poke|p2|Garchomp, L50, F|\n|teampreview|4\nAliantz rejected open team sheets.\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Aliantz)\n|\n|t:|1775937441\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: El primo|Hawlucha, L50, M, shiny|100/100\n|switch|p1b: Mr. Rime|Mr. Rime, L50, F|100/100\n|switch|p2a: Floette|Floette-Eternal, L50, F|100/100\n|switch|p2b: Maushold|Maushold, L50|100/100\n|turn|1\n|inactive|AgsAllDay12 has 30 seconds left.\n|\n|t:|1775937466\n|detailschange|p1a: El primo|Hawlucha-Mega, L50, M, shiny\n|-mega|p1a: El primo|Hawlucha|Hawluchanite\n|detailschange|p2a: Floette|Floette-Mega, L50, F\n|-mega|p2a: Floette|Floette|Floettite\n|-ability|p2a: Floette|Fairy Aura\n|move|p2b: Maushold|Follow Me|p2b: Maushold\n|-singleturn|p2b: Maushold|move: Follow Me\n|move|p1a: El primo|Entrainment|p2b: Maushold\n|-ability|p2b: Maushold|No Guard|Friend Guard|[from] move: Entrainment|[of] p1a: El primo\n|move|p2a: Floette|Calm Mind|p2a: Floette\n|-boost|p2a: Floette|spa|1\n|-boost|p2a: Floette|spd|1\n|move|p1b: Mr. Rime|Sheer Cold|p2b: Maushold\n|-damage|p2b: Maushold|0 fnt\n|faint|p2b: Maushold\n|-ohko\n|\n|upkeep\n|\n|t:|1775937483\n|switch|p2b: Aerodactyl|Aerodactyl, L50, F|100/100\n|-ability|p2b: Aerodactyl|Unnerve\n|turn|2\n|\n|t:|1775937489\n|move|p2b: Aerodactyl|Tailwind|p2b: Aerodactyl\n|-sidestart|p2: AgsAllDay12|move: Tailwind\n|move|p2a: Floette|Dazzling Gleam|p1a: El primo|[spread] p1a,p1b\n|-supereffective|p1a: El primo|1\n|-damage|p1a: El primo|0 fnt\n|-damage|p1b: Mr. Rime|32/100\n|faint|p1a: El primo\n|move|p1b: Mr. Rime|Sheer Cold|p2a: Floette|[miss]\n|-miss|p1b: Mr. Rime|p2a: Floette\n|\n|upkeep\n|-message|Aliantz forfeited.\n|\n|win|AgsAllDay12\n",
+  "uploadtime": 1775937397,
+  "views": 13,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": null,
+  "private": 0,
+  "password": null
+}

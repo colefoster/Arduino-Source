@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2587997566",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "B. Farro",
+    "terryishairy"
+  ],
+  "log": "|j|\u2606B. Farro\n|j|\u2606terryishairy\n|t:|1776590671\n|gametype|doubles\n|player|p1|B. Farro|ingo|1098\n|player|p2|terryishairy|burglar|1041\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Glimmora, L50, M|\n|poke|p1|Whimsicott, L50, M|\n|poke|p1|Altaria, L50, M|\n|poke|p1|Talonflame, L50, M|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Weavile, L50, F|\n|poke|p2|Ceruledge, L50, F, shiny|\n|poke|p2|Torkoal, L50, M|\n|poke|p2|Hatterene, L50, F, shiny|\n|poke|p2|Charizard, L50, F, shiny|\n|poke|p2|Sinistcha-Masterpiece, L50|\n|poke|p2|Kingambit, L50, F|\n|teampreview|4\n|\n|t:|1776590707\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Glimmora|Glimmora, L50, M|100/100\n|switch|p1b: Weavile|Weavile, L50, F|100/100\n|switch|p2a: Sinistcha|Sinistcha-Masterpiece, L50|100/100\n|switch|p2b: Hatterene|Hatterene, L50, F, shiny|100/100\n|-ability|p1b: Weavile|Pressure\n|turn|1\n|\n|t:|1776590750\n|detailschange|p1a: Glimmora|Glimmora-Mega, L50, M\n|-mega|p1a: Glimmora|Glimmora|Glimmoranite\n|move|p1b: Weavile|Triple Axel|p2a: Sinistcha\n|-supereffective|p2a: Sinistcha|1\n|-damage|p2a: Sinistcha|83/100\n|-supereffective|p2a: Sinistcha|1\n|-damage|p2a: Sinistcha|45/100\n|-supereffective|p2a: Sinistcha|1\n|-damage|p2a: Sinistcha|0 fnt\n|faint|p2a: Sinistcha\n|-hitcount|p2: Sinistcha|3\n|move|p1a: Glimmora|Sludge Bomb|p2b: Hatterene\n|-supereffective|p2b: Hatterene|1\n|-damage|p2b: Hatterene|0 fnt\n|faint|p2b: Hatterene\n|\n|upkeep\n|-message|terryishairy forfeited.\n|\n|win|B. Farro\n|raw|B. Farro's rating: 1098 &rarr; <strong>1119</strong><br />(+21 for winning)\n|raw|terryishairy's rating: 1041 &rarr; <strong>1027</strong><br />(-14 for losing)\n|l|\u2606terryishairy\n|player|p2|\n",
+  "uploadtime": 1776590764,
+  "views": 8,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1027,
+  "private": 0,
+  "password": null
+}

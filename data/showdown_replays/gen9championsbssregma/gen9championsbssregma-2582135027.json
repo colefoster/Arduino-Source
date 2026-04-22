@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2582135027",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "Lqndon612",
+    "berutene"
+  ],
+  "log": "|j|\u2606Lqndon612\n|j|\u2606berutene\n|t:|1776062502\n|gametype|singles\n|player|p1|Lqndon612|266|1159\n|player|p2|berutene|170|1220\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Corviknight, L50, F|\n|poke|p1|Glalie, L50, F|\n|poke|p1|Lucario, L50, F|\n|poke|p1|Gengar, L50, F|\n|poke|p1|Snorlax, L50, F|\n|poke|p1|Hydrapple, L50, F|\n|poke|p2|Charizard, L50, M|\n|poke|p2|Conkeldurr, L50, M|\n|poke|p2|Aegislash, L50, F|\n|poke|p2|Rotom-Wash, L50|\n|poke|p2|Mamoswine, L50, M|\n|poke|p2|Meganium, L50, M|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by berutene)\n|j| p74\n|\n|t:|1776062523\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Lucario|Lucario, L50, F|100/100\n|switch|p2a: Charizard|Charizard, L50, M|100/100\n|turn|1\n|\n|t:|1776062535\n|detailschange|p2a: Charizard|Charizard-Mega-X, L50, M\n|-mega|p2a: Charizard|Charizard|Charizardite X\n|move|p1a: Lucario|Final Gambit|p2a: Charizard\n|-damage|p2a: Charizard|0 fnt\n|faint|p1a: Lucario\n|faint|p2a: Charizard\n|\n|upkeep\n|\n|t:|1776062544\n|switch|p2a: Mamoswine|Mamoswine, L50, M|100/100\n|switch|p1a: Gengar|Gengar, L50, F|100/100\n|turn|2\n|\n|t:|1776062555\n|detailschange|p1a: Gengar|Gengar-Mega, L50, F\n|-mega|p1a: Gengar|Gengar|Gengarite\n|move|p1a: Gengar|Destiny Bond|p1a: Gengar\n|-singlemove|p1a: Gengar|Destiny Bond\n|move|p2a: Mamoswine|Earthquake|p1a: Gengar\n|-supereffective|p1a: Gengar|1\n|-damage|p1a: Gengar|0 fnt\n|faint|p1a: Gengar\n|-activate|p1a: Gengar|move: Destiny Bond\n|faint|p2a: Mamoswine\n|\n|upkeep\n|\n|t:|1776062576\n|switch|p1a: Corviknight|Corviknight, L50, F|100/100\n|switch|p2a: Rotom|Rotom-Wash, L50|100/100\n|-ability|p1a: Corviknight|Pressure\n|turn|3\n|\n|t:|1776062583\n|move|p2a: Rotom|Trick|p1a: Corviknight\n|-activate|p2a: Rotom|move: Trick|[of] p1a: Corviknight\n|-item|p1a: Corviknight|Choice Scarf|[from] move: Trick\n|-item|p2a: Rotom|Leftovers|[from] move: Trick\n|move|p1a: Corviknight|Roost||[still]\n|-fail|p1a: Corviknight|heal\n|\n|upkeep\n|turn|4\n|-message|Lqndon612 forfeited.\n|\n|win|berutene\n|raw|Lqndon612's rating: 1159 &rarr; <strong>1138</strong><br />(-21 for losing)\n|raw|berutene's rating: 1220 &rarr; <strong>1241</strong><br />(+21 for winning)\n|l|\u2606Lqndon612\n|player|p1|\n|l|\u2606berutene\n|player|p2|\n",
+  "uploadtime": 1776063208,
+  "views": 5,
+  "formatid": "gen9championsbssregma",
+  "rating": 1138,
+  "private": 0,
+  "password": null
+}

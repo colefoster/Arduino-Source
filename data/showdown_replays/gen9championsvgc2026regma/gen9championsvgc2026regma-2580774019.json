@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2580774019",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Quectar",
+    "grok how do i win?"
+  ],
+  "log": "|j|\u2606Quectar\n|j|\u2606grok how do i win?\n|t:|1775931375\n|gametype|doubles\n|player|p1|Quectar|101|1102\n|player|p2|grok how do i win?|2|1164\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Hawlucha, L50, F|\n|poke|p1|Excadrill, L50, M|\n|poke|p1|Kingambit, L50, M|\n|poke|p1|Whimsicott, L50, F|\n|poke|p1|Weavile, L50, F|\n|poke|p1|Tyranitar, L50, F|\n|poke|p2|Charizard, L50, M|\n|poke|p2|Venusaur, L50, F|\n|poke|p2|Garchomp, L50, F|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Whimsicott, L50, M|\n|poke|p2|Raichu, L50, F|\n|teampreview|4\n|\n|t:|1775931399\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Hawlucha|Hawlucha, L50, F|100/100\n|switch|p1b: Excadrill|Excadrill, L50, M|100/100\n|switch|p2a: Charizard|Charizard, L50, M, shiny|100/100\n|switch|p2b: Venusaur|Venusaur, L50, F, shiny|100/100\n|-ability|p1b: Excadrill|Mold Breaker\n|turn|1\n|\n|t:|1775931430\n|detailschange|p1a: Hawlucha|Hawlucha-Mega, L50, F\n|-mega|p1a: Hawlucha|Hawlucha|Hawluchanite\n|detailschange|p2a: Charizard|Charizard-Mega-Y, L50, M, shiny\n|-mega|p2a: Charizard|Charizard|Charizardite Y\n|-weather|SunnyDay|[from] ability: Drought|[of] p2a: Charizard\n|move|p2b: Venusaur|Giga Drain|p1b: Excadrill\n|-damage|p1b: Excadrill|55/100\n|move|p1a: Hawlucha|Entrainment|p1b: Excadrill\n|-ability|p1b: Excadrill|No Guard|Mold Breaker|[from] move: Entrainment|[of] p1a: Hawlucha\n|move|p2a: Charizard|Heat Wave|p1a: Hawlucha|[spread] p1a,p1b\n|-supereffective|p1b: Excadrill|1\n|-damage|p1a: Hawlucha|33/100\n|-damage|p1b: Excadrill|0 fnt\n|faint|p1b: Excadrill\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|-message|Quectar forfeited.\n|\n|win|grok how do i win?\n|raw|Quectar's rating: 1102 &rarr; <strong>1081</strong><br />(-21 for losing)\n|raw|grok how do i win?'s rating: 1164 &rarr; <strong>1185</strong><br />(+21 for winning)\n|l|\u2606Quectar\n|player|p1|\n",
+  "uploadtime": 1775931444,
+  "views": 12,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1081,
+  "private": 0,
+  "password": null
+}

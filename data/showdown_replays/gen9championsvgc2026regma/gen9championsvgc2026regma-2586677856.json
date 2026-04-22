@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586677856",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "mrguy888",
+    "mazto"
+  ],
+  "log": "|j|\u2606mrguy888\n|j|\u2606mazto\n|t:|1776451442\n|gametype|doubles\n|player|p1|mrguy888|noland-gen3|1265\n|player|p2|mazto|266|1309\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Aerodactyl, L50, F|\n|poke|p1|Tauros-Paldea-Aqua, L50, M|\n|poke|p1|Kangaskhan, L50, F|\n|poke|p1|Rotom-Heat, L50|\n|poke|p1|Aegislash, L50, F|\n|poke|p2|Pelipper, L50, F|\n|poke|p2|Archaludon, L50, M|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Maushold-Four, L50|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by mrguy888)\nmazto rejected open team sheets.\n|\n|t:|1776451466\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Aerodactyl|Aerodactyl, L50, F|100/100\n|switch|p1b: Floette|Floette-Eternal, L50, F|100/100\n|switch|p2a: Sneasler|Sneasler, L50, M|100/100\n|switch|p2b: Basculegion|Basculegion, L50, M|100/100\n|-ability|p1a: Aerodactyl|Unnerve\n|turn|1\n|\n|t:|1776451484\n|detailschange|p1b: Floette|Floette-Mega, L50, F\n|-mega|p1b: Floette|Floette|Floettite\n|-ability|p1b: Floette|Fairy Aura\n|move|p1a: Aerodactyl|Protect|p1a: Aerodactyl\n|-singleturn|p1a: Aerodactyl|Protect\n|move|p1b: Floette|Protect|p1b: Floette\n|-singleturn|p1b: Floette|Protect\n|move|p2b: Basculegion|Aqua Jet|p1a: Aerodactyl\n|-activate|p1a: Aerodactyl|move: Protect\n|move|p2a: Sneasler|Dire Claw|p1b: Floette\n|-activate|p1b: Floette|move: Protect\n|\n|upkeep\n|turn|2\n|inactive|mrguy888 has 30 seconds left.\n|\n|t:|1776451511\n|move|p2b: Basculegion|Aqua Jet|p1a: Aerodactyl\n|-supereffective|p1a: Aerodactyl|1\n|-damage|p1a: Aerodactyl|8/100\n|move|p1a: Aerodactyl|Dual Wingbeat|p2a: Sneasler|[miss]\n|-miss|p1a: Aerodactyl|p2a: Sneasler\n|move|p2a: Sneasler|Dire Claw|p1b: Floette\n|-supereffective|p1b: Floette|1\n|-damage|p1b: Floette|11/100\n|-status|p1b: Floette|slp\n|cant|p1b: Floette|slp\n|\n|upkeep\n|turn|3\n|-message|mrguy888 forfeited.\n|\n|win|mazto\n|raw|mrguy888's rating: 1265 &rarr; <strong>1243</strong><br />(-22 for losing)\n|raw|mazto's rating: 1309 &rarr; <strong>1326</strong><br />(+17 for winning)\n",
+  "uploadtime": 1776451527,
+  "views": 59,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1243,
+  "private": 0,
+  "password": null
+}

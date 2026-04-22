@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2581715319",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "ash ketchum299",
+    "bromerta"
+  ],
+  "log": "|j|\u2606ash ketchum299\n|j|\u2606bromerta\n|t:|1776022880\n|gametype|singles\n|player|p1|ash ketchum299|ash|1060\n|player|p2|bromerta|1|1127\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Greninja-*, L50, M|\n|poke|p1|Meowscarada, L50, F|\n|poke|p1|Infernape, L50, M|\n|poke|p1|Zoroark-Hisui, L50, M|\n|poke|p1|Jolteon, L50, F|\n|poke|p1|Corviknight, L50, F|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Starmie, L50|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Volcarona, L50, F|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Kingambit, L50, M|\n|teampreview|3\n|\n|t:|1776022919\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Greninja|Greninja, L50, M, shiny|100/100\n|switch|p2a: Garchomp|Garchomp, L50, M|100/100\n|turn|1\n|\n|t:|1776022930\n|move|p2a: Garchomp|Outrage|p1a: Greninja\n|-enditem|p1a: Greninja|Focus Sash\n|-damage|p1a: Greninja|1/100\n|replace|p1a: Zoroark|Zoroark-Hisui, L50, M\n|-end|p1a: Zoroark|Illusion\n|move|p1a: Zoroark|Shadow Ball|p2a: Garchomp\n|-damage|p2a: Garchomp|58/100\n|\n|upkeep\n|turn|2\n|\n|t:|1776022941\n|move|p2a: Garchomp|Outrage|p1a: Zoroark|[from] lockedmove\n|-damage|p1a: Zoroark|0 fnt\n|faint|p1a: Zoroark\n|-start|p2a: Garchomp|confusion|[fatigue]\n|\n|upkeep\n|\n|t:|1776022947\n|switch|p1a: Meowscarada|Meowscarada, L50, F|100/100\n|turn|3\n|\n|t:|1776022958\n|-activate|p2a: Garchomp|confusion\n|move|p2a: Garchomp|Outrage|p1a: Meowscarada\n|-damage|p1a: Meowscarada|0 fnt\n|faint|p1a: Meowscarada\n|\n|upkeep\n|-message|ash ketchum299 forfeited.\n|\n|win|bromerta\n|raw|ash ketchum299's rating: 1060 &rarr; <strong>1045</strong><br />(-15 for losing)\n|raw|bromerta's rating: 1127 &rarr; <strong>1147</strong><br />(+20 for winning)\n|l|\u2606ash ketchum299\n|player|p1|\n",
+  "uploadtime": 1776022972,
+  "views": 13,
+  "formatid": "gen9championsbssregma",
+  "rating": 1045,
+  "private": 0,
+  "password": null
+}

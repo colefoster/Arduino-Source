@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2585734504",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Stogna Bologna",
+    "RaiNBOWAFFaiR"
+  ],
+  "log": "|j|\u2606Stogna Bologna\n|j|\u2606RaiNBOWAFFaiR\n|t:|1776366920\n|gametype|doubles\n|player|p1|Stogna Bologna|steven|1116\n|player|p2|RaiNBOWAFFaiR|2|1018\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Gengar, L50, M|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Aegislash, L50, F|\n|poke|p1|Gyarados, L50, M|\n|poke|p1|Whimsicott, L50, M|\n|poke|p1|Kingambit, L50, M|\n|poke|p2|Gardevoir, L50, F|\n|poke|p2|Vivillon, L50, F|\n|poke|p2|Garchomp, L50, F|\n|poke|p2|Rotom-Wash, L50|\n|poke|p2|Aerodactyl, L50, M|\n|poke|p2|Aegislash, L50, F|\n|teampreview|4\nStogna Bologna rejected open team sheets.\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Stogna Bologna)\n|\n|t:|1776366947\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Gengar|Gengar, L50, M|100/100\n|switch|p1b: Whimsicott|Whimsicott, L50, M|100/100\n|switch|p2a: Gardevoir|Gardevoir, L50, F|100/100\n|switch|p2b: Vivillon|Vivillon, L50, F|100/100\n|-ability|p2a: Gardevoir|Cursed Body|Trace|[from] ability: Trace|[of] p1a: Gengar\n|turn|1\n|\n|t:|1776366966\n|detailschange|p1a: Gengar|Gengar-Mega, L50, M\n|-mega|p1a: Gengar|Gengar|Gengarite\n|detailschange|p2a: Gardevoir|Gardevoir-Mega, L50, F\n|-mega|p2a: Gardevoir|Gardevoir|Gardevoirite\n|move|p1b: Whimsicott|Protect|p1b: Whimsicott\n|-singleturn|p1b: Whimsicott|Protect\n|move|p1a: Gengar|Protect|p1a: Gengar\n|-singleturn|p1a: Gengar|Protect\n|move|p2b: Vivillon|Sleep Powder|p1a: Gengar\n|-activate|p1a: Gengar|move: Protect\n|move|p2a: Gardevoir|Calm Mind|p2a: Gardevoir\n|-boost|p2a: Gardevoir|spa|1\n|-boost|p2a: Gardevoir|spd|1\n|\n|upkeep\n|turn|2\n|\n|t:|1776366983\n|move|p1b: Whimsicott|Encore|p2a: Gardevoir\n|-start|p2a: Gardevoir|Encore\n|move|p1a: Gengar|Substitute|p1a: Gengar\n|-start|p1a: Gengar|Substitute\n|-damage|p1a: Gengar|76/100\n|move|p2b: Vivillon|Tailwind|p2b: Vivillon\n|-sidestart|p2: RaiNBOWAFFaiR|move: Tailwind\n|move|p2a: Gardevoir|Calm Mind|p2a: Gardevoir\n|-boost|p2a: Gardevoir|spa|1\n|-boost|p2a: Gardevoir|spd|1\n|\n|upkeep\n|turn|3\n|-message|RaiNBOWAFFaiR forfeited.\n|\n|win|Stogna Bologna\n|raw|Stogna Bologna's rating: 1116 &rarr; <strong>1134</strong><br />(+18 for winning)\n|raw|RaiNBOWAFFaiR's rating: 1018 &rarr; <strong>1009</strong><br />(-9 for losing)\n|l|\u2606RaiNBOWAFFaiR\n|player|p2|\n|j|\u2606RaiNBOWAFFaiR\n|player|p2|RaiNBOWAFFaiR|2|\n|l|\u2606RaiNBOWAFFaiR\n|player|p2|\n",
+  "uploadtime": 1776367002,
+  "views": 20,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1009,
+  "private": 0,
+  "password": null
+}

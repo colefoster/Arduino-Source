@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586138425",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Crash0utVGC",
+    "onethousandpotato"
+  ],
+  "log": "|j|\u2606Crash0utVGC\n|j|\u2606onethousandpotato\n|t:|1776403786\n|gametype|doubles\n|player|p1|Crash0utVGC|colress|1143\n|player|p2|onethousandpotato|265|1246\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Alakazam, L50, M|\n|poke|p1|Meowstic, L50, M|\n|poke|p1|Kingambit, L50, F|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Farigiraf, L50, F|\n|poke|p1|Rotom-Wash, L50|\n|poke|p2|Kangaskhan, L50, F|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Farigiraf, L50, F|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Milotic, L50, M|\n|poke|p2|Liepard, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Crash0utVGC)\n|\n|t:|1776403842\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Alakazam|Alakazam, L50, M|100/100\n|switch|p1b: Kingambit|Kingambit, L50, F, shiny|100/100\n|switch|p2a: Kangaskhan|Kangaskhan, L50, F|100/100\n|switch|p2b: Farigiraf|Farigiraf, L50, F|100/100\n|turn|1\n|inactive|onethousandpotato has 30 seconds left.\n|\n|t:|1776403876\n|switch|p1a: Farigiraf|Farigiraf, L50, F|100/100\n|move|p2a: Kangaskhan|Fake Out||[still]\n|cant|p1a: Farigiraf|ability: Armor Tail|Fake Out|[of] p2a: Kangaskhan\n|move|p1b: Kingambit|Kowtow Cleave|p2b: Farigiraf\n|-supereffective|p2b: Farigiraf|1\n|-enditem|p2b: Farigiraf|Colbur Berry|[eat]\n|-enditem|p2b: Farigiraf|Colbur Berry|[weaken]\n|-damage|p2b: Farigiraf|57/100\n|move|p2b: Farigiraf|Thunder Wave|p1b: Kingambit\n|-status|p1b: Kingambit|par\n|\n|upkeep\n|turn|2\n|\n|t:|1776403899\n|detailschange|p2a: Kangaskhan|Kangaskhan-Mega, L50, F\n|-mega|p2a: Kangaskhan|Kangaskhan|Kangaskhanite\n|move|p2a: Kangaskhan|Drain Punch|p1b: Kingambit\n|-supereffective|p1b: Kingambit|2\n|-damage|p1b: Kingambit|4/100 par\n|-supereffective|p1b: Kingambit|2\n|-damage|p1b: Kingambit|0 fnt\n|faint|p1b: Kingambit\n|-hitcount|p1: Kingambit|2\n|move|p2b: Farigiraf|Imprison|p2b: Farigiraf\n|-start|p2b: Farigiraf|move: Imprison\n|cant|p1a: Farigiraf|move: Imprison|Hyper Voice\n|\n|upkeep\n|-message|Crash0utVGC forfeited.\n|\n|win|onethousandpotato\n|raw|Crash0utVGC's rating: 1143 &rarr; <strong>1125</strong><br />(-18 for losing)\n|raw|onethousandpotato's rating: 1246 &rarr; <strong>1264</strong><br />(+18 for winning)\n",
+  "uploadtime": 1776403909,
+  "views": 17,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1125,
+  "private": 0,
+  "password": null
+}

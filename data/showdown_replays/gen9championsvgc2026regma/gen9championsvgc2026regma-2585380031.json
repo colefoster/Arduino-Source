@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2585380031",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "GoodName4852",
+    "zbfhaahahrqh"
+  ],
+  "log": "|j|\u2606GoodName4852\n|j|\u2606zbfhaahahrqh\n|t:|1776342908\n|gametype|doubles\n|player|p1|GoodName4852|swimmer|1078\n|player|p2|zbfhaahahrqh|169|1000\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Maushold-Four, L50|\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Talonflame, L50, F|\n|poke|p1|Rotom-Wash, L50|\n|poke|p1|Aegislash, L50, M|\n|poke|p2|Drampa, L50, M|\n|poke|p2|Golurk, L50|\n|poke|p2|Torkoal, L50, F|\n|poke|p2|Kingambit, L50, F|\n|poke|p2|Farigiraf, L50, F|\n|poke|p2|Slowbro, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by zbfhaahahrqh)\nzbfhaahahrqh rejected open team sheets.\n|\n|t:|1776342963\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Maushold|Maushold-Four, L50|100/100\n|switch|p1b: Floette|Floette-Eternal, L50, F|100/100\n|switch|p2a: Torkoal|Torkoal, L50, F|100/100\n|switch|p2b: Farigiraf|Farigiraf, L50, F|100/100\n|-weather|SunnyDay|[from] ability: Drought|[of] p2a: Torkoal\n|turn|1\n|\n|t:|1776342978\n|move|p2a: Torkoal|Protect|p2a: Torkoal\n|-singleturn|p2a: Torkoal|Protect\n|move|p1a: Maushold|Taunt|p2b: Farigiraf\n|-start|p2b: Farigiraf|move: Taunt\n|move|p1b: Floette|Calm Mind|p1b: Floette\n|-boost|p1b: Floette|spa|1\n|-boost|p1b: Floette|spd|1\n|cant|p2b: Farigiraf|move: Taunt|Trick Room\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|turn|2\n|-message|zbfhaahahrqh forfeited.\n|\n|win|GoodName4852\n|raw|GoodName4852's rating: 1078 &rarr; <strong>1100</strong><br />(+22 for winning)\n|raw|zbfhaahahrqh's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|l|\u2606zbfhaahahrqh\n|player|p2|\n",
+  "uploadtime": 1776343000,
+  "views": 31,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582177297",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "LyonFyre4",
+    "krmkk"
+  ],
+  "log": "|j|\u2606LyonFyre4\n|j|\u2606krmkk\n|t:|1776067777\n|gametype|doubles\n|player|p1|LyonFyre4|101|1394\n|player|p2|krmkk|1|1474\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Talonflame, L50, M|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Delphox, L50, F|\n|poke|p2|Froslass, L50, F|\n|poke|p2|Pelipper, L50, F|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Archaludon, L50, M|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Espeon, L50, F|\n|teampreview|4\n|j| toririn8000\n|j| RottenPond\n|j| CARtu348rjf90\n|l| RottenPond\n|\n|t:|1776067872\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Talonflame|Talonflame, L50, M|100/100\n|switch|p1b: Basculegion|Basculegion, L50, M|100/100\n|switch|p2a: Basculegion|Basculegion, L50, M|100/100\n|switch|p2b: Froslass|Froslass, L50, F|100/100\n|turn|1\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by LyonFyre4)\n|\n|t:|1776067900\n|switch|p2b: Archaludon|Archaludon, L50, M|100/100\n|move|p1a: Talonflame|Dual Wingbeat|p2a: Basculegion\n|-crit|p2a: Basculegion\n|-damage|p2a: Basculegion|65/100\n|-damage|p2a: Basculegion|41/100\n|-hitcount|p2a: Basculegion|2\n|move|p1b: Basculegion|Last Respects|p2a: Basculegion\n|-supereffective|p2a: Basculegion|1\n|-damage|p2a: Basculegion|0 fnt\n|faint|p2a: Basculegion\n|\n|upkeep\n|-message|krmkk forfeited.\n|\n|win|LyonFyre4\n|raw|LyonFyre4's rating: 1394 &rarr; <strong>1419</strong><br />(+25 for winning)\n|raw|krmkk's rating: 1474 &rarr; <strong>1449</strong><br />(-25 for losing)\n|l|\u2606krmkk\n|player|p2|\n|l| toririn8000\n|l|\u2606LyonFyre4\n|player|p1|\n",
+  "uploadtime": 1776067934,
+  "views": 52,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1419,
+  "private": 0,
+  "password": null
+}

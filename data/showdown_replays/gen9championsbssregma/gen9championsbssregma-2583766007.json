@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2583766007",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "NoSoyLuis33",
+    "Rookie101"
+  ],
+  "log": "|j|\u2606NoSoyLuis33\n|j|\u2606Rookie101\n|t:|1776196243\n|gametype|singles\n|player|p1|NoSoyLuis33|wallace|1134\n|player|p2|Rookie101|266|1097\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Tinkaton, L50, F|\n|poke|p1|Starmie, L50|\n|poke|p1|Pelipper, L50, M|\n|poke|p1|Kingambit, L50, F|\n|poke|p1|Gengar, L50, F|\n|poke|p1|Sneasler, L50, F|\n|poke|p2|Torkoal, L50, M|\n|poke|p2|Charizard, L50, M|\n|poke|p2|Venusaur, L50, F|\n|poke|p2|Gengar, L50, F|\n|poke|p2|Garchomp, L50, F|\n|poke|p2|Clefable, L50, M|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by NoSoyLuis33)\n|\n|t:|1776196268\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Patricio|Starmie, L50|100/100\n|switch|p2a: Torkoal|Torkoal, L50, M|100/100\n|-weather|SunnyDay|[from] ability: Drought|[of] p2a: Torkoal\n|turn|1\n|\n|t:|1776196282\n|detailschange|p1a: Patricio|Starmie-Mega, L50\n|-mega|p1a: Patricio|Starmie|Starminite\n|move|p1a: Patricio|Flip Turn|p2a: Torkoal\n|-supereffective|p2a: Torkoal|1\n|-damage|p2a: Torkoal|60/100\n|\n|t:|1776196288\n|switch|p1a: Papoi|Pelipper, L50, M|100/100|[from] Flip Turn\n|-weather|RainDance|[from] ability: Drizzle|[of] p1a: Papoi\n|move|p2a: Torkoal|Solar Beam||[still]\n|-prepare|p2a: Torkoal|Solar Beam\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|turn|2\n|\n|t:|1776196300\n|move|p1a: Papoi|Weather Ball|p2a: Torkoal\n|-supereffective|p2a: Torkoal|1\n|-damage|p2a: Torkoal|0 fnt\n|faint|p2a: Torkoal\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|-message|Rookie101 forfeited.\n|\n|win|NoSoyLuis33\n|raw|NoSoyLuis33's rating: 1134 &rarr; <strong>1156</strong><br />(+22 for winning)\n|raw|Rookie101's rating: 1097 &rarr; <strong>1075</strong><br />(-22 for losing)\n|l|\u2606Rookie101\n|player|p2|\n",
+  "uploadtime": 1776196317,
+  "views": 11,
+  "formatid": "gen9championsbssregma",
+  "rating": 1075,
+  "private": 0,
+  "password": null
+}

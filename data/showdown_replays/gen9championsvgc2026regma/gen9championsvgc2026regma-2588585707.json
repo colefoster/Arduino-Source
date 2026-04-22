@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2588585707",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "slippybingus",
+    "Namielito"
+  ],
+  "log": "|j|\u2606slippybingus\n|j|\u2606Namielito\n|t:|1776647503\n|gametype|doubles\n|player|p1|slippybingus|266|1195\n|player|p2|Namielito|2|1246\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Charizard, L50, M, shiny|\n|poke|p1|Sneasler, L50, F|\n|poke|p1|Tyranitar, L50, F, shiny|\n|poke|p1|Milotic, L50, F, shiny|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Incineroar, L50, M|\n|poke|p2|Heliolisk, L50, M|\n|poke|p2|Ninetales-Alola, L50, M|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Gallade, L50, M|\n|poke|p2|Whimsicott, L50, M|\n|poke|p2|Sylveon, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by slippybingus)\n|inactive|slippybingus has 60 seconds left.\nNamielito rejected open team sheets.\n|\n|t:|1776647559\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Sneasler|Sneasler, L50, F|100/100\n|switch|p1b: Charizard|Charizard, L50, M, shiny|100/100\n|switch|p2a: Whimsicott|Whimsicott, L50, M|100/100\n|switch|p2b: Gallade|Gallade, L50, M|100/100\n|turn|1\n|\n|t:|1776647572\n|detailschange|p2b: Gallade|Gallade-Mega, L50, M\n|-mega|p2b: Gallade|Gallade|Galladite\n|move|p2a: Whimsicott|Protect|p2a: Whimsicott\n|-singleturn|p2a: Whimsicott|Protect\n|move|p1a: Sneasler|Fake Out|p2a: Whimsicott\n|-activate|p2a: Whimsicott|move: Protect\n|move|p2b: Gallade|Rock Slide|p1b: Charizard|[spread] p1a,p1b\n|-resisted|p1a: Sneasler|1\n|-crit|p1a: Sneasler\n|-supereffective|p1b: Charizard|2\n|-damage|p1a: Sneasler|70/100\n|-damage|p1b: Charizard|0 fnt\n|faint|p1b: Charizard\n|\n|upkeep\n|\n|t:|1776647586\n|switch|p1b: Milotic|Milotic, L50, F, shiny|100/100\n|turn|2\n|\n|t:|1776647597\n|switch|p2b: Heliolisk|Heliolisk, L50, M|100/100\n|move|p2a: Whimsicott|Encore|p1a: Sneasler\n|-start|p1a: Sneasler|Encore\n|move|p1a: Sneasler|Fake Out||[still]\n|-hint|Fake Out only works on your first turn out.\n|-fail|p1a: Sneasler\n|move|p1b: Milotic|Icy Wind|p2b: Heliolisk|[spread] p2a,p2b\n|-supereffective|p2a: Whimsicott|1\n|-damage|p2a: Whimsicott|73/100\n|-damage|p2b: Heliolisk|87/100\n|-unboost|p2a: Whimsicott|spe|1\n|-unboost|p2b: Heliolisk|spe|1\n|\n|upkeep\n|turn|3\n|-message|slippybingus forfeited.\n|\n|win|Namielito\n|raw|slippybingus's rating: 1195 &rarr; <strong>1174</strong><br />(-21 for losing)\n|raw|Namielito's rating: 1246 &rarr; <strong>1267</strong><br />(+21 for winning)\n|l|\u2606Namielito\n|player|p2|\n",
+  "uploadtime": 1776647613,
+  "views": 10,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1174,
+  "private": 0,
+  "password": null
+}

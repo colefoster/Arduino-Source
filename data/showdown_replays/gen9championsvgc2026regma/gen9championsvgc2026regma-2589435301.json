@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2589435301",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "theechee",
+    "IuseExeggutor"
+  ],
+  "log": "|j|\u2606theechee\n|j|\u2606IuseExeggutor\n|t:|1776722715\n|gametype|doubles\n|player|p1|theechee|102|1029\n|player|p2|IuseExeggutor|psychic-gen3rs|1066\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Scovillain, L50, M|\n|poke|p1|Dragonite, L50, F|\n|poke|p1|Espathra, L50, M|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Milotic, L50, F|\n|poke|p1|Whimsicott, L50, F|\n|poke|p2|Whimsicott, L50, M|\n|poke|p2|Tyranitar, L50, M|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Milotic, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by theechee)\n|inactive|theechee has 60 seconds left.\n|inactive|theechee has 30 seconds left.\n|inactive|theechee has 20 seconds left.\n|inactive|theechee has 15 seconds left.\n|inactive|theechee has 10 seconds left.\n|inactive|theechee has 5 seconds left.\n|\n|t:|1776722805\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Scovillain|Scovillain, L50, M|100/100\n|switch|p1b: Dragonite|Dragonite, L50, F|100/100\n|switch|p2a: Whimsicott|Whimsicott, L50, M|100/100\n|switch|p2b: Tyranitar|Tyranitar, L50, M|100/100\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p2b: Tyranitar\n|turn|1\n|-message|theechee forfeited.\n|\n|win|IuseExeggutor\n|raw|theechee's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|raw|IuseExeggutor's rating: 1066 &rarr; <strong>1090</strong><br />(+24 for winning)\n|l|\u2606theechee\n|player|p1|\n",
+  "uploadtime": 1776722825,
+  "views": 3,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2581298953",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "phnhat2247",
+    "SLOWEREST"
+  ],
+  "log": "|j|\u2606phnhat2247\n|j|\u2606SLOWEREST\n|t:|1775983248\n|gametype|doubles\n|player|p1|phnhat2247|policeman-gen4|1045\n|player|p2|SLOWEREST|scientist|1046\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Serperior, L50, M|\n|poke|p1|Whimsicott, L50, M|\n|poke|p1|Arcanine-Hisui, L50, M|\n|poke|p1|Clefable, L50, F|\n|poke|p1|Aegislash, L50, F|\n|poke|p1|Chandelure, L50, F|\n|poke|p2|Aggron, L50, F|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Hatterene, L50, F|\n|poke|p2|Pelipper, L50, F|\n|poke|p2|Sharpedo, L50, M|\n|poke|p2|Slowbro, L50, F|\n|teampreview|4\n|c|\u2606SLOWEREST|gl hf\n|\n|t:|1775983269\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Whimsicott|Whimsicott, L50, M|100/100\n|switch|p1b: Arcanine|Arcanine-Hisui, L50, M|100/100\n|switch|p2a: Sharpedo|Sharpedo, L50, M|100/100\n|switch|p2b: Pelipper|Pelipper, L50, F|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p2b: Pelipper\n|turn|1\n|\n|t:|1775983284\n|switch|p1b: Serperior|Serperior, L50, M|100/100\n|move|p2a: Sharpedo|Protect|p2a: Sharpedo\n|-singleturn|p2a: Sharpedo|Protect\n|move|p1a: Whimsicott|Sunny Day|p1a: Whimsicott\n|-weather|SunnyDay\n|move|p2b: Pelipper|U-turn|p1a: Whimsicott\n|-damage|p1a: Whimsicott|85/100\n|\n|t:|1775983295\n|switch|p2b: Sneasler|Sneasler, L50, M|100/100|[from] U-turn\n|\n|-weather|SunnyDay|[upkeep]\n|-ability|p2a: Sharpedo|Speed Boost|boost\n|-boost|p2a: Sharpedo|spe|1\n|upkeep\n|turn|2\n|\n|t:|1775983312\n|switch|p2b: Pelipper|Pelipper, L50, F|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p2b: Pelipper\n|detailschange|p2a: Sharpedo|Sharpedo-Mega, L50, M\n|-mega|p2a: Sharpedo|Sharpedo|Sharpedonite\n|move|p1a: Whimsicott|Encore|p2a: Sharpedo\n|-hint|Since gen 7, Dark is immune to Prankster moves.\n|-immune|p2a: Sharpedo\n|move|p1b: Serperior|Leaf Storm|p2a: Sharpedo\n|-supereffective|p2a: Sharpedo|1\n|-damage|p2a: Sharpedo|0 fnt\n|-boost|p1b: Serperior|spa|2\n|faint|p2a: Sharpedo\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|-message|SLOWEREST forfeited.\n|\n|win|phnhat2247\n|raw|phnhat2247's rating: 1045 &rarr; <strong>1078</strong><br />(+33 for winning)\n|raw|SLOWEREST's rating: 1046 &rarr; <strong>1029</strong><br />(-17 for losing)\n|l|\u2606SLOWEREST\n|player|p2|\n",
+  "uploadtime": 1775983329,
+  "views": 37,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1029,
+  "private": 0,
+  "password": null
+}

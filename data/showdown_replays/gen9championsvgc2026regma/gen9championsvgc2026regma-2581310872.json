@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2581310872",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "nsbnsb",
+    "miquellapolis"
+  ],
+  "log": "|j|\u2606nsbnsb\n|j|\u2606miquellapolis\n|t:|1775984904\n|gametype|doubles\n|player|p1|nsbnsb|ghetsis|1296\n|player|p2|miquellapolis|clair|1354\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Crabominable, L50, F|\n|poke|p1|Farigiraf, L50, M|\n|poke|p1|Kingambit, L50, F|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Camerupt, L50, F|\n|poke|p1|Incineroar, L50, F|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Whimsicott, L50, F|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Zoroark-Hisui, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by miquellapolis)\n|inactive|nsbnsb also wants the timer to be on.\n|j| gE1xjZRtuhW2DdT0AK\n|\n|t:|1775984923\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Farigiraf|Farigiraf, L50, M|100/100\n|switch|p1b: Incineroar|Incineroar, L50, F|100/100\n|switch|p2a: Floette|Floette-Eternal, L50, F|100/100\n|switch|p2b: Whimsicott|Whimsicott, L50, F|100/100\n|-ability|p1b: Incineroar|Intimidate|boost\n|-unboost|p2a: Floette|atk|1\n|-block|p2b: Whimsicott|ability: Flower Veil|[of] p2a: Floette\n|turn|1\n|inactive|nsbnsb has 30 seconds left.\n|inactive|nsbnsb has 20 seconds left.\n|\n|t:|1775984959\n|switch|p2b: Sneasler|Sneasler, L50, M|100/100\n|detailschange|p2a: Floette|Floette-Mega, L50, F\n|-mega|p2a: Floette|Floette|Floettite\n|-ability|p2a: Floette|Fairy Aura\n|move|p1b: Incineroar|Fake Out|p2a: Floette\n|-damage|p2a: Floette|85/100\n|cant|p2a: Floette|flinch\n|move|p1a: Farigiraf|Trick Room|p1a: Farigiraf\n|-fieldstart|move: Trick Room|[of] p1a: Farigiraf\n|\n|upkeep\n|turn|2\n|\n|t:|1775984981\n|move|p2b: Sneasler|Protect|p2b: Sneasler\n|-singleturn|p2b: Sneasler|Protect\n|move|p1a: Farigiraf|Psychic|p2b: Sneasler\n|-activate|p2b: Sneasler|move: Protect\n|move|p1b: Incineroar|Flare Blitz|p2a: Floette\n|-damage|p2a: Floette|19/100\n|-status|p2a: Floette|brn\n|-damage|p1b: Incineroar|84/100|[from] Recoil\n|move|p2a: Floette|Calm Mind|p2a: Floette\n|-boost|p2a: Floette|spa|1\n|-boost|p2a: Floette|spd|1\n|\n|-damage|p2a: Floette|13/100 brn|[from] brn\n|upkeep\n|turn|3\n|-message|miquellapolis forfeited.\n|\n|win|nsbnsb\n|raw|nsbnsb's rating: 1264 &rarr; <strong>1295</strong><br />(+31 for winning)\n|raw|miquellapolis's rating: 1354 &rarr; <strong>1329</strong><br />(-25 for losing)\n|l|\u2606miquellapolis\n|player|p2|\n|l|\u2606nsbnsb\n|player|p1|\n",
+  "uploadtime": 1775985146,
+  "views": 36,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1295,
+  "private": 0,
+  "password": null
+}

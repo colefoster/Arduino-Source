@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2580410103",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "lolgz",
+    "RealKungullu"
+  ],
+  "log": "|j|\u2606lolgz\n|j|\u2606RealKungullu\n|t:|1775892252\n|gametype|doubles\n|player|p1|lolgz|266|1116\n|player|p2|RealKungullu|harlequin|1030\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Charizard, L50, F|\n|poke|p1|Whimsicott, L50, M|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Farigiraf, L50, F|\n|poke|p1|Kangaskhan, L50, F|\n|poke|p1|Sneasler, L50, F|\n|poke|p2|Chesnaught, L50, M|\n|poke|p2|Meowstic, L50, M|\n|poke|p2|Orthworm, L50, M|\n|poke|p2|Milotic, L50, F|\n|poke|p2|Clawitzer, L50, F|\n|poke|p2|Camerupt, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by RealKungullu)\nRealKungullu rejected open team sheets.\n|\n|t:|1775892281\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Whimsicott|Whimsicott, L50, M|100/100\n|switch|p1b: Charizard|Charizard, L50, F|100/100\n|switch|p2a: Meowstic|Meowstic, L50, M|100/100\n|switch|p2b: Camerupt|Camerupt, L50, F|100/100\n|turn|1\n|\n|t:|1775892300\n|detailschange|p1b: Charizard|Charizard-Mega-Y, L50, F\n|-mega|p1b: Charizard|Charizard|Charizardite Y\n|-weather|SunnyDay|[from] ability: Drought|[of] p1b: Charizard\n|move|p1a: Whimsicott|Moonblast|p2a: Meowstic\n|-crit|p2a: Meowstic\n|-damage|p2a: Meowstic|52/100\n|move|p1b: Charizard|Heat Wave|p2a: Meowstic|[spread] p2a,p2b\n|-resisted|p2b: Camerupt|1\n|-damage|p2a: Meowstic|0 fnt\n|-damage|p2b: Camerupt|56/100\n|faint|p2a: Meowstic\n|move|p2b: Camerupt|Eruption|p1b: Charizard|[spread] p1a,p1b\n|-supereffective|p1a: Whimsicott|1\n|-resisted|p1b: Charizard|1\n|-enditem|p1a: Whimsicott|Focus Sash\n|-damage|p1a: Whimsicott|1/100\n|-damage|p1b: Charizard|77/100\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|\n|t:|1775892312\n|switch|p2a: Chesnaught|Chesnaught, L50, M|100/100\n|turn|2\n|\n|t:|1775892322\n|move|p2a: Chesnaught|Spiky Shield|p2a: Chesnaught\n|-singleturn|p2a: Chesnaught|move: Protect\n|move|p1a: Whimsicott|Moonblast|p2b: Camerupt\n|-resisted|p2b: Camerupt|1\n|-damage|p2b: Camerupt|36/100\n|move|p1b: Charizard|Heat Wave|p2b: Camerupt|[spread] p2b\n|-activate|p2a: Chesnaught|move: Protect\n|-resisted|p2b: Camerupt|1\n|-damage|p2b: Camerupt|0 fnt\n|faint|p2b: Camerupt\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|-message|RealKungullu forfeited.\n|\n|win|lolgz\n|raw|lolgz's rating: 1116 &rarr; <strong>1135</strong><br />(+19 for winning)\n|raw|RealKungullu's rating: 1030 &rarr; <strong>1019</strong><br />(-11 for losing)\n",
+  "uploadtime": 1775892333,
+  "views": 14,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1019,
+  "private": 0,
+  "password": null
+}

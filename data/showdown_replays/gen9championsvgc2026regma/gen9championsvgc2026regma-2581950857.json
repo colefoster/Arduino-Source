@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2581950857",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Enarey",
+    "I'msotiredbro"
+  ],
+  "log": "|j|\u2606Enarey\n|j|\u2606I'msotiredbro\n|t:|1776042589\n|gametype|doubles\n|player|p1|Enarey|101|1112\n|player|p2|I'msotiredbro|roughneck|1082\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Aerodactyl, L50, M|\n|poke|p1|Sneasler, L50, F|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Orthworm, L50, M|\n|poke|p1|Froslass, L50, F|\n|poke|p1|Rotom-Wash, L50|\n|poke|p2|Lycanroc-Midnight, L50, M|\n|poke|p2|Pelipper, L50, M|\n|poke|p2|Ampharos, L50, M|\n|poke|p2|Farigiraf, L50, M|\n|poke|p2|Beedrill, L50, M|\n|poke|p2|Decidueye-Hisui, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by I'msotiredbro)\n|inactive|Enarey has 60 seconds left.\n|\n|t:|1776042632\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Froslass|Froslass, L50, F|100/100\n|switch|p1b: Orthworm|Orthworm, L50, M|100/100\n|switch|p2a: Lycanroc|Lycanroc-Midnight, L50, M, shiny|100/100\n|switch|p2b: Pelipper|Pelipper, L50, M, shiny|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p2b: Pelipper\n|turn|1\n|\n|t:|1776042650\n|switch|p2b: Farigiraf|Farigiraf, L50, M, shiny|100/100\n|detailschange|p1a: Froslass|Froslass-Mega, L50, F\n|-mega|p1a: Froslass|Froslass|Froslassite\n|-weather|Snowscape|[from] ability: Snow Warning|[of] p1a: Froslass\n|move|p2a: Lycanroc|Stone Edge|p1a: Froslass\n|-supereffective|p1a: Froslass|1\n|-damage|p1a: Froslass|0 fnt\n|faint|p1a: Froslass\n|move|p1b: Orthworm|Body Press|p2a: Lycanroc\n|-supereffective|p2a: Lycanroc|1\n|-damage|p2a: Lycanroc|30/100\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|-message|Enarey forfeited.\n|\n|win|I'msotiredbro\n|raw|Enarey's rating: 1112 &rarr; <strong>1085</strong><br />(-27 for losing)\n|raw|I&apos;msotiredbro's rating: 1082 &rarr; <strong>1112</strong><br />(+30 for winning)\n|l|\u2606Enarey\n|player|p1|\n",
+  "uploadtime": 1776042670,
+  "views": 25,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1085,
+  "private": 0,
+  "password": null
+}

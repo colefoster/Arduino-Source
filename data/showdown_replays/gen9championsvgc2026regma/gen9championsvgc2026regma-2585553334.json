@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2585553334",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "mr. bigodon",
+    "alexoatmeal"
+  ],
+  "log": "|j|\u2606mr. bigodon\n|j|\u2606alexoatmeal\n|t:|1776355107\n|gametype|doubles\n|player|p1|mr. bigodon|drayden|1208\n|player|p2|alexoatmeal|102|1131\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Meganium, L50, F|\n|poke|p1|Tyranitar, L50, M|\n|poke|p1|Milotic, L50, F|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Aerodactyl, L50, M|\n|poke|p1|Sinistcha, L50|\n|poke|p2|Blastoise, L50, M|\n|poke|p2|Farigiraf, L50, M|\n|poke|p2|Kingambit, L50, M|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Aggron, L50, F|\n|poke|p2|Sableye, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by alexoatmeal)\n|\n|t:|1776355138\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Meganium|Meganium, L50, F, shiny|100/100\n|switch|p1b: Sinistcha|Sinistcha, L50|100/100\n|switch|p2a: Ka\u00efssa|Kingambit, L50, M, shiny|100/100\n|switch|p2b: Moss|Sinistcha, L50|100/100\n|turn|1\n|inactive|alexoatmeal has 30 seconds left.\n|\n|t:|1776355171\n|detailschange|p1a: Meganium|Meganium-Mega, L50, F, shiny\n|-mega|p1a: Meganium|Meganium|Meganiumite\n|move|p1a: Meganium|Weather Ball|p2a: Ka\u00efssa\n|-supereffective|p2a: Ka\u00efssa|1\n|-damage|p2a: Ka\u00efssa|0 fnt\n|faint|p2a: Ka\u00efssa\n|move|p1b: Sinistcha|Imprison|p1b: Sinistcha\n|-start|p1b: Sinistcha|move: Imprison\n|cant|p2b: Moss|move: Imprison|Trick Room\n|\n|upkeep\n|-message|alexoatmeal forfeited.\n|\n|win|mr. bigodon\n|raw|mr. bigodon's rating: 1208 &rarr; <strong>1228</strong><br />(+20 for winning)\n|raw|alexoatmeal's rating: 1131 &rarr; <strong>1111</strong><br />(-20 for losing)\n|l|\u2606alexoatmeal\n|player|p2|\n",
+  "uploadtime": 1776355189,
+  "views": 25,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1111,
+  "private": 0,
+  "password": null
+}

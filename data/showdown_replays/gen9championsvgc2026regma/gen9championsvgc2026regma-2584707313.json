@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584707313",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "marretaovgc",
+    "gkrisstofer"
+  ],
+  "log": "|j|\u2606marretaovgc\n|j|\u2606gkrisstofer\n|t:|1776278118\n|gametype|doubles\n|player|p1|marretaovgc|fantina|1028\n|player|p2|gkrisstofer|turo|1000\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Gengar, L50, F|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Politoed, L50, M|\n|poke|p1|Ninetales-Alola, L50, M|\n|poke|p1|Sableye, L50, F|\n|poke|p1|Araquanid, L50, F|\n|poke|p2|Aggron, L50, F|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Pelipper, L50, M|\n|poke|p2|Farigiraf, L50, F|\n|poke|p2|Drampa, L50, F|\n|teampreview|4\ngkrisstofer rejected open team sheets.\n|\n|t:|1776278170\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Gengar|Gengar, L50, F|100/100\n|switch|p1b: Araquanid|Araquanid, L50, F|100/100\n|switch|p2a: Farigiraf|Farigiraf, L50, F|100/100\n|switch|p2b: Sinistcha|Sinistcha, L50|100/100\n|turn|1\n|\n|t:|1776278187\n|detailschange|p1a: Gengar|Gengar-Mega, L50, F\n|-mega|p1a: Gengar|Gengar|Gengarite\n|move|p2b: Sinistcha|Rage Powder|p2b: Sinistcha\n|-singleturn|p2b: Sinistcha|move: Rage Powder\n|move|p1a: Gengar|Substitute|p1a: Gengar\n|-start|p1a: Gengar|Substitute\n|-damage|p1a: Gengar|76/100\n|move|p1b: Araquanid|Soak|p2b: Sinistcha\n|-start|p2b: Sinistcha|typechange|Water\n|move|p2a: Farigiraf|Trick Room|p2a: Farigiraf\n|-fieldstart|move: Trick Room|[of] p2a: Farigiraf\n|\n|upkeep\n|turn|2\n|\n|t:|1776278239\n|move|p1b: Araquanid|Sticky Web|p2a: Farigiraf\n|-sidestart|p2: gkrisstofer|move: Sticky Web\n|move|p2a: Farigiraf|Psychic|p1a: Gengar\n|-supereffective|p1a: Gengar|1\n|-end|p1a: Gengar|Substitute\n|move|p2b: Sinistcha|Matcha Gotcha|p1a: Gengar|[spread] p1a,p1b\n|-resisted|p1a: Gengar|1\n|-damage|p1a: Gengar|69/100\n|-damage|p1b: Araquanid|90/100\n|move|p1a: Gengar|Perish Song|p1a: Gengar\n|-start|p1a: Gengar|perish3|[silent]\n|-start|p1b: Araquanid|perish3|[silent]\n|-start|p2a: Farigiraf|perish3|[silent]\n|-start|p2b: Sinistcha|perish3|[silent]\n|-fieldactivate|move: Perish Song\n|\n|-start|p1b: Araquanid|perish3\n|-start|p2a: Farigiraf|perish3\n|-start|p2b: Sinistcha|perish3\n|-start|p1a: Gengar|perish3\n|upkeep\n|turn|3\n|-message|gkrisstofer forfeited.\n|\n|win|marretaovgc\n|raw|marretaovgc's rating: 1028 &rarr; <strong>1061</strong><br />(+33 for winning)\n|raw|gkrisstofer's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|l|\u2606gkrisstofer\n|player|p2|\n",
+  "uploadtime": 1776278280,
+  "views": 28,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

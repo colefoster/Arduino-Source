@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582173924",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "RBG_LOL",
+    "xXCalidosoXx"
+  ],
+  "log": "|j|\u2606RBG_LOL\n|j|\u2606xXCalidosoXx\n|t:|1776067366\n|gametype|doubles\n|player|p1|RBG_LOL|ghetsis-gen5bw|1047\n|player|p2|xXCalidosoXx|2|1135\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Froslass, L50, F|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Kingambit, L50, M|\n|poke|p1|Talonflame, L50, M|\n|poke|p1|Milotic, L50, F|\n|poke|p2|Dragonite, L50, F|\n|poke|p2|Pelipper, L50, F|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Archaludon, L50, M|\n|poke|p2|Raichu, L50, M|\n|poke|p2|Garchomp, L50, M|\n|teampreview|4\n|\n|t:|1776067399\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Froslass|Froslass, L50, F|100/100\n|switch|p1b: Sneasler|Sneasler, L50, M|100/100\n|switch|p2a: Pelipper|Pelipper, L50, F|100/100\n|switch|p2b: Raichu|Raichu, L50, M|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p2a: Pelipper\n|turn|1\n|\n|t:|1776067426\n|detailschange|p1a: Froslass|Froslass-Mega, L50, F\n|-mega|p1a: Froslass|Froslass|Froslassite\n|-weather|Snowscape|[from] ability: Snow Warning|[of] p1a: Froslass\n|move|p2b: Raichu|Fake Out|p1b: Sneasler\n|-damage|p1b: Sneasler|86/100\n|cant|p1b: Sneasler|flinch\n|move|p1a: Froslass|Blizzard|p2a: Pelipper|[spread] p2a,p2b\n|-damage|p2a: Pelipper|23/100\n|-damage|p2b: Raichu|28/100\n|-status|p2b: Raichu|frz\n|move|p2a: Pelipper|Tailwind|p2a: Pelipper\n|-sidestart|p2: xXCalidosoXx|move: Tailwind\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|turn|2\n|\n|t:|1776067458\n|switch|p2a: Basculegion|Basculegion, L50, M|100/100\n|switch|p1b: Kingambit|Kingambit, L50, M|100/100\n|cant|p2b: Raichu|frz\n|move|p1a: Froslass|Blizzard|p2a: Basculegion|[spread] p2a,p2b\n|-resisted|p2a: Basculegion|1\n|-damage|p2a: Basculegion|73/100\n|-damage|p2b: Raichu|0 fnt\n|faint|p2b: Raichu\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|\n|t:|1776067473\n|switch|p2b: Pelipper|Pelipper, L50, F|23/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p2b: Pelipper\n|turn|3\n|l|\u2606xXCalidosoXx\n|player|p2|\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by RBG_LOL)\n|inactive|xXCalidosoXx has 30 seconds to reconnect!\n|inactive|xXCalidosoXx has 20 seconds to reconnect!\n|inactive|xXCalidosoXx has 15 seconds to reconnect!\n|inactive|xXCalidosoXx has 10 seconds to reconnect!\n|inactive|xXCalidosoXx has 5 seconds to reconnect!\n|-message|xXCalidosoXx lost due to inactivity.\n|\n|win|RBG_LOL\n|raw|RBG_LOL's rating: 1047 &rarr; <strong>1088</strong><br />(+41 for winning)\n|raw|xXCalidosoXx's rating: 1135 &rarr; <strong>1104</strong><br />(-31 for losing)\n",
+  "uploadtime": 1776067638,
+  "views": 22,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1088,
+  "private": 0,
+  "password": null
+}

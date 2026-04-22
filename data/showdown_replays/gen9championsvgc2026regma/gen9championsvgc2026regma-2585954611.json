@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2585954611",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "GR77777777",
+    "dem0n2011"
+  ],
+  "log": "|j|\u2606GR77777777\n|j|\u203ddem0n2011\n|t:|1776384751\n|gametype|doubles\n|player|p1|GR77777777|marlon|1007\n|player|p2|dem0n2011|benga|1081\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Charizard, L50, M|\n|poke|p1|Rotom-Wash, L50|\n|poke|p1|Venusaur, L50, M|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Whimsicott, L50, F|\n|poke|p1|Incineroar, L50, M|\n|poke|p2|Abomasnow, L50, F|\n|poke|p2|Farigiraf, L50, F|\n|poke|p2|Gyarados, L50, F|\n|poke|p2|Feraligatr, L50, F|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Kingambit, L50, M|\n|teampreview|4\n|\n|t:|1776384817\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Incineroar|Incineroar, L50, M|100/100\n|switch|p1b: Rotom|Rotom-Wash, L50|100/100\n|switch|p2a: Farigiraf|Farigiraf, L50, F|100/100\n|switch|p2b: Abomasnow|Abomasnow, L50, F, shiny|100/100\n|-ability|p1a: Incineroar|Intimidate|boost\n|-unboost|p2a: Farigiraf|atk|1\n|-unboost|p2b: Abomasnow|atk|1\n|-weather|Snowscape|[from] ability: Snow Warning|[of] p2b: Abomasnow\n|turn|1\n|\n|t:|1776384841\n|move|p2b: Abomasnow|Protect|p2b: Abomasnow\n|-singleturn|p2b: Abomasnow|Protect\n|move|p1a: Incineroar|Fake Out||[still]\n|cant|p2a: Farigiraf|ability: Armor Tail|Fake Out|[of] p1a: Incineroar\n|move|p1b: Rotom|Volt Switch|p2a: Farigiraf\n|-damage|p2a: Farigiraf|72/100\n|\n|t:|1776384854\n|switch|p1b: Whimsicott|Whimsicott, L50, F|100/100|[from] Volt Switch\n|move|p2a: Farigiraf|Trick Room|p2a: Farigiraf\n|-fieldstart|move: Trick Room|[of] p2a: Farigiraf\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|turn|2\n|\n|t:|1776384878\n|detailschange|p2b: Abomasnow|Abomasnow-Mega, L50, F, shiny\n|-mega|p2b: Abomasnow|Abomasnow|Abomasite\n|move|p2a: Farigiraf|Helping Hand|p2b: Abomasnow\n|-singleturn|p2b: Abomasnow|Helping Hand|[of] p2a: Farigiraf\n|move|p1b: Whimsicott|Encore||[still]\n|cant|p2a: Farigiraf|ability: Armor Tail|Encore|[of] p1b: Whimsicott\n|move|p2b: Abomasnow|Earth Power|p1a: Incineroar\n|-supereffective|p1a: Incineroar|1\n|-crit|p1a: Incineroar\n|-damage|p1a: Incineroar|0 fnt\n|faint|p1a: Incineroar\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|-message|GR77777777 forfeited.\n|\n|win|dem0n2011\n|raw|GR77777777's rating: 1007 &rarr; <strong>1000</strong><br />(-7 for losing)\n|raw|dem0n2011's rating: 1081 &rarr; <strong>1103</strong><br />(+22 for winning)\n|l|\u2606GR77777777\n|player|p1|\n",
+  "uploadtime": 1776384895,
+  "views": 21,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

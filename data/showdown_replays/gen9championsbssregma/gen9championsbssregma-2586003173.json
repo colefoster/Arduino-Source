@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2586003173",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "fletchyfletchy",
+    "gsgzv"
+  ],
+  "log": "|j|\u2606fletchyfletchy\n|j|\u2606gsgzv\n|t:|1776389299\n|gametype|singles\n|player|p1|fletchyfletchy|liko|1106\n|player|p2|gsgzv|265|1000\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Lopunny, L50, F|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Meowscarada, L50, F|\n|poke|p1|Aegislash, L50, F|\n|poke|p1|Charizard, L50, M|\n|poke|p1|Rotom-Wash, L50|\n|poke|p2|Froslass, L50, F|\n|poke|p2|Sableye, L50, M|\n|poke|p2|Gardevoir, L50, M|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Azumarill, L50, M|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by fletchyfletchy)\n|\n|t:|1776389341\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Lopunny|Lopunny, L50, F|100/100\n|switch|p2a: Sableye|Sableye, L50, M|100/100\n|turn|1\n|inactive|fletchyfletchy has 30 seconds left.\n|\n|t:|1776389370\n|detailschange|p1a: Lopunny|Lopunny-Mega, L50, F\n|-mega|p1a: Lopunny|Lopunny|Lopunnite\n|move|p1a: Lopunny|Fake Out|p2a: Sableye\n|-damage|p2a: Sableye|69/100\n|cant|p2a: Sableye|flinch\n|\n|upkeep\n|turn|2\n|\n|t:|1776389378\n|switch|p1a: Rotom|Rotom-Wash, L50|100/100\n|move|p2a: Sableye|Will-O-Wisp|p1a: Rotom\n|-status|p1a: Rotom|brn\n|\n|-damage|p1a: Rotom|95/100 brn|[from] brn\n|upkeep\n|turn|3\n|\n|t:|1776389387\n|move|p1a: Rotom|Hydro Pump|p2a: Sableye\n|-damage|p2a: Sableye|25/100\n|move|p2a: Sableye|Foul Play|p1a: Rotom\n|-damage|p1a: Rotom|77/100 brn\n|\n|-damage|p1a: Rotom|71/100 brn|[from] brn\n|upkeep\n|turn|4\n|\n|t:|1776389398\n|move|p2a: Sableye|Thunder Wave||[still]\n|-fail|p2a: Sableye\n|move|p1a: Rotom|Volt Switch|p2a: Sableye\n|-damage|p2a: Sableye|0 fnt\n|faint|p2a: Sableye\n|inactive|fletchyfletchy has 30 seconds left.\n|\n|t:|1776389423\n|switch|p1a: Lopunny|Lopunny-Mega, L50, F|100/100|[from] Volt Switch\n|\n|upkeep\n|-message|gsgzv forfeited.\n|\n|win|fletchyfletchy\n|raw|fletchyfletchy's rating: 1106 &rarr; <strong>1124</strong><br />(+18 for winning)\n|raw|gsgzv's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n",
+  "uploadtime": 1776389428,
+  "views": 3,
+  "formatid": "gen9championsbssregma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

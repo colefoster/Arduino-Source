@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2581690771",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "domenicovnzla",
+    "HealborforHire"
+  ],
+  "log": "|j|\u2606domenicovnzla\n|j|\u2606HealborforHire\n|t:|1776021004\n|gametype|doubles\n|player|p1|domenicovnzla|170|1283\n|player|p2|HealborforHire|101|1353\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Kingambit, L50, F|\n|poke|p1|Rotom-Heat, L50|\n|poke|p1|Froslass, L50, F|\n|poke|p1|Sneasler, L50, F|\n|poke|p1|Clefable, L50, M|\n|poke|p2|Tyranitar, L50, F|\n|poke|p2|Excadrill, L50, F|\n|poke|p2|Delphox, L50, M|\n|poke|p2|Milotic, L50, M|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Sylveon, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by HealborforHire)\n|inactive|domenicovnzla has 60 seconds left.\n|inactive|domenicovnzla has 30 seconds left.\n|inactive|domenicovnzla has 20 seconds left.\n|inactive|domenicovnzla has 15 seconds left.\n|inactive|domenicovnzla has 10 seconds left.\n|inactive|domenicovnzla has 5 seconds left.\n|\n|t:|1776021128\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Basculegion|Basculegion, L50, M|100/100\n|switch|p1b: Kingambit|Kingambit, L50, F|100/100\n|switch|p2a: Tyranitar|Tyranitar, L50, F|100/100\n|switch|p2b: Delphox|Delphox, L50, M|100/100\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p2a: Tyranitar\n|turn|1\n|l|\u2606domenicovnzla\n|inactive|domenicovnzla disconnected and has a minute to reconnect!\n|player|p1|\n|inactive|domenicovnzla has 30 seconds left.\n|inactive|HealborforHire has 30 seconds left.\n|inactive|domenicovnzla has 20 seconds left.\n|inactive|HealborforHire has 20 seconds left.\n|inactive|domenicovnzla has 15 seconds left.\n|inactive|domenicovnzla has 10 seconds left.\n|inactive|domenicovnzla has 5 seconds left.\n|-message|domenicovnzla lost due to inactivity.\n|\n|win|HealborforHire\n|raw|domenicovnzla's rating: 1283 &rarr; <strong>1263</strong><br />(-20 for losing)\n|raw|HealborforHire's rating: 1353 &rarr; <strong>1369</strong><br />(+16 for winning)\n",
+  "uploadtime": 1776021185,
+  "views": 35,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1263,
+  "private": 0,
+  "password": null
+}

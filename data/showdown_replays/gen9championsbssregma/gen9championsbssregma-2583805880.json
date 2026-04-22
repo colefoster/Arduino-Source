@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2583805880",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "moratox",
+    "BacktotheGen"
+  ],
+  "log": "|j|\u2606moratox\n|j|\u2606BacktotheGen\n|t:|1776199030\n|gametype|singles\n|player|p1|moratox|102|1000\n|player|p2|BacktotheGen|102|1000\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Gengar, L50, M|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Maushold-Four, L50|\n|poke|p1|Pelipper, L50, M|\n|poke|p1|Archaludon, L50, F|\n|poke|p2|Lucario, L50, F|\n|poke|p2|Kingambit, L50, M|\n|poke|p2|Primarina, L50, M|\n|poke|p2|Aegislash, L50, F|\n|poke|p2|Garchomp, L50, F|\n|poke|p2|Dragonite, L50, F|\n|teampreview|3\n|-message|moratox forfeited.\n|\n|win|BacktotheGen\n|raw|moratox's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|raw|BacktotheGen's rating: 1000 &rarr; <strong>1040</strong><br />(+40 for winning)\n|l|\u2606moratox\n|player|p1|\n",
+  "uploadtime": 1776199082,
+  "views": 3,
+  "formatid": "gen9championsbssregma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

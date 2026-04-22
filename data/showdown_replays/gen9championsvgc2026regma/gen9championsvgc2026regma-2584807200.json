@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584807200",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "jyotsha",
+    "vikos"
+  ],
+  "log": "|j|\u2606jyotsha\n|j|\u2606vikos\n|t:|1776285112\n|gametype|doubles\n|player|p1|jyotsha|101|1308\n|player|p2|vikos|1|1256\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Sableye, L50, F|\n|poke|p1|Aegislash, L50, M|\n|poke|p1|Charizard, L50, M|\n|poke|p1|Incineroar, L50, F|\n|poke|p2|Tyranitar, L50, M|\n|poke|p2|Excadrill, L50, F|\n|poke|p2|Farigiraf, L50, F|\n|poke|p2|Milotic, L50, F|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Corviknight, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by jyotsha)\n|inactive|jyotsha has 60 seconds left.\n|\n|t:|1776285147\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Sableye|Sableye, L50, F|100/100\n|switch|p1b: Incineroar|Incineroar, L50, F|100/100\n|switch|p2a: Corviknight|Corviknight, L50, M|100/100\n|switch|p2b: Milotic|Milotic, L50, F|100/100\n|-ability|p1b: Incineroar|Intimidate|boost\n|-ability|p2a: Corviknight|Mirror Armor\n|-unboost|p1b: Incineroar|atk|1\n|-unboost|p2b: Milotic|atk|1\n|-ability|p2b: Milotic|Competitive|boost\n|-boost|p2b: Milotic|spa|2\n|turn|1\n|\n|t:|1776285165\n|move|p1b: Incineroar|Fake Out|p2b: Milotic\n|-damage|p2b: Milotic|90/100\n|move|p1a: Sableye|Will-O-Wisp|p2a: Corviknight\n|-status|p2a: Corviknight|brn\n|-enditem|p2a: Corviknight|Lum Berry|[eat]\n|-curestatus|p2a: Corviknight|brn|[msg]\n|cant|p2b: Milotic|flinch\n|move|p2a: Corviknight|Taunt|p1a: Sableye\n|-start|p1a: Sableye|move: Taunt\n|\n|-heal|p2b: Milotic|96/100|[from] item: Leftovers\n|upkeep\n|turn|2\n|\n|t:|1776285189\n|switch|p1a: Charizard|Charizard, L50, M|100/100\n|move|p2b: Milotic|Scald|p1a: Charizard\n|-supereffective|p1a: Charizard|1\n|-damage|p1a: Charizard|0 fnt\n|faint|p1a: Charizard\n|move|p2a: Corviknight|Body Press|p1b: Incineroar\n|-supereffective|p1b: Incineroar|1\n|-enditem|p1b: Incineroar|Chople Berry|[eat]\n|-enditem|p1b: Incineroar|Chople Berry|[weaken]\n|-damage|p1b: Incineroar|76/100\n|move|p1b: Incineroar|Parting Shot|p2a: Corviknight\n|-ability|p2a: Corviknight|Mirror Armor\n|-unboost|p1b: Incineroar|atk|1\n|-ability|p2a: Corviknight|Mirror Armor\n|-unboost|p1b: Incineroar|spa|1\n|-message|jyotsha forfeited.\n|\n|win|vikos\n|raw|jyotsha's rating: 1308 &rarr; <strong>1285</strong><br />(-23 for losing)\n|raw|vikos's rating: 1256 &rarr; <strong>1285</strong><br />(+29 for winning)\n|l|\u2606jyotsha\n|player|p1|\n",
+  "uploadtime": 1776285213,
+  "views": 52,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1285,
+  "private": 0,
+  "password": null
+}

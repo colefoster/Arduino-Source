@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2581648301",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "wewillrockyou98",
+    "Abdrei01"
+  ],
+  "log": "|j|\u2606wewillrockyou98\n|j|\u2606Abdrei01\n|t:|1776017807\n|gametype|doubles\n|player|p1|wewillrockyou98|265|1105\n|player|p2|Abdrei01|sailor|1181\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Charizard, L50, M|\n|poke|p1|Meowscarada, L50, M|\n|poke|p1|Venusaur, L50, M|\n|poke|p1|Whimsicott, L50, F|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Rotom-Heat, L50|\n|poke|p2|Blastoise, L50, F|\n|poke|p2|Aerodactyl, L50, M|\n|poke|p2|Volcarona, L50, M|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Garchomp, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Abdrei01)\n|l|\u2606wewillrockyou98\n|inactive|wewillrockyou98 disconnected and has a minute to reconnect!\n|player|p1|\n|j|\u2606wewillrockyou98\n|inactive|wewillrockyou98 reconnected and has 65 seconds left.\n|player|p1|wewillrockyou98|265|\n|inactive|wewillrockyou98 has 60 seconds left.\n|\n|t:|1776017848\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Meowscarada|Meowscarada, L50, M|100/100\n|switch|p1b: Charizard|Charizard, L50, M|100/100\n|switch|p2a: Aerodactyl|Aerodactyl, L50, M|100/100\n|switch|p2b: Garchomp|Garchomp, L50, M|100/100\n|-ability|p2a: Aerodactyl|Pressure\n|turn|1\n|\n|t:|1776017861\n|switch|p1b: Venusaur|Venusaur, L50, M|100/100\n|move|p2b: Garchomp|Poison Jab|p1a: Meowscarada\n|-supereffective|p1a: Meowscarada|1\n|-damage|p1a: Meowscarada|0 fnt\n|faint|p1a: Meowscarada\n|move|p2a: Aerodactyl|Rock Slide|p1b: Venusaur\n|-damage|p1b: Venusaur|50/100\n|\n|upkeep\n|-message|wewillrockyou98 forfeited.\n|\n|win|Abdrei01\n|raw|wewillrockyou98's rating: 1105 &rarr; <strong>1085</strong><br />(-20 for losing)\n|raw|Abdrei01's rating: 1181 &rarr; <strong>1201</strong><br />(+20 for winning)\n|l|\u2606wewillrockyou98\n|player|p1|\n",
+  "uploadtime": 1776017873,
+  "views": 20,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1085,
+  "private": 0,
+  "password": null
+}

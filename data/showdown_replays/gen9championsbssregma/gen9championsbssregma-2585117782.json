@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2585117782",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "iamanewbie2",
+    "Jocelyn lose"
+  ],
+  "log": "|j|\u2606iamanewbie2\n|j|\u2606Jocelyn lose\n|t:|1776313814\n|gametype|singles\n|player|p1|iamanewbie2|102|1288\n|player|p2|Jocelyn lose|hiker-gen4|1214\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Meganium, L50, F|\n|poke|p1|Archaludon, L50, F|\n|poke|p1|Greninja-*, L50, F|\n|poke|p1|Lycanroc, L50, M|\n|poke|p1|Pelipper, L50, M|\n|poke|p1|Victreebel, L50, M|\n|poke|p2|Dragonite, L50, M|\n|poke|p2|Crabominable, L50, F|\n|poke|p2|Mimikyu, L50, M|\n|poke|p2|Ditto, L50|\n|poke|p2|Gengar, L50, F|\n|poke|p2|Scizor, L50, F|\n|teampreview|3\n|j| p74\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Jocelyn lose)\n|j| huhyuhyuhyuh\n|inactive|iamanewbie2 has 60 seconds left.\n|\n|t:|1776313937\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Victreebel|Victreebel, L50, M|100/100\n|switch|p2a: Gengar|Gengar, L50, F|100/100\n|turn|1\n|\n|t:|1776313957\n|switch|p2a: Scizor|Scizor, L50, F|100/100\n|detailschange|p1a: Victreebel|Victreebel-Mega, L50, M\n|-mega|p1a: Victreebel|Victreebel|Victreebelite\n|move|p1a: Victreebel|Poison Jab|p2a: Scizor\n|-immune|p2a: Scizor\n|\n|upkeep\n|turn|2\n|\n|t:|1776313971\n|detailschange|p2a: Scizor|Scizor-Mega, L50, F\n|-mega|p2a: Scizor|Scizor|Scizorite\n|move|p1a: Victreebel|Encore||[still]\n|-fail|p1a: Victreebel\n|move|p2a: Scizor|Swords Dance|p2a: Scizor\n|-boost|p2a: Scizor|atk|2\n|\n|upkeep\n|turn|3\n|\n|t:|1776313982\n|move|p2a: Scizor|Bullet Punch|p1a: Victreebel\n|-damage|p1a: Victreebel|20/100\n|move|p1a: Victreebel|Encore|p2a: Scizor\n|-start|p2a: Scizor|Encore\n|\n|upkeep\n|turn|4\n|\n|t:|1776313989\n|move|p1a: Victreebel|Sucker Punch|p2a: Scizor\n|-damage|p2a: Scizor|84/100\n|move|p2a: Scizor|Bullet Punch|p1a: Victreebel\n|-damage|p1a: Victreebel|0 fnt\n|-damage|p2a: Scizor|64/100|[from] ability: Innards Out|[of] p1a: Victreebel\n|faint|p1a: Victreebel\n|\n|upkeep\n|\n|t:|1776313993\n|switch|p1a: Archaludon|Archaludon, L50, F|100/100\n|turn|5\n|\n|t:|1776314002\n|move|p2a: Scizor|Bullet Punch|p1a: Archaludon\n|-resisted|p1a: Archaludon|1\n|-damage|p1a: Archaludon|72/100\n|-ability|p1a: Archaludon|Stamina|boost\n|-boost|p1a: Archaludon|def|1\n|move|p1a: Archaludon|Draco Meteor|p2a: Scizor\n|-resisted|p2a: Scizor|1\n|-crit|p2a: Scizor\n|-damage|p2a: Scizor|18/100\n|-unboost|p1a: Archaludon|spa|2\n|\n|-heal|p1a: Archaludon|78/100|[from] item: Leftovers\n|upkeep\n|turn|6\n|-message|iamanewbie2 forfeited.\n|\n|win|Jocelyn lose\n|raw|iamanewbie2's rating: 1288 &rarr; <strong>1258</strong><br />(-30 for losing)\n|raw|Jocelyn lose's rating: 1214 &rarr; <strong>1244</strong><br />(+30 for winning)\n|l|\u2606iamanewbie2\n|player|p1|\n|l|\u2606Jocelyn lose\n|player|p2|\n|l| huhyuhyuhyuh\n",
+  "uploadtime": 1776315164,
+  "views": 3,
+  "formatid": "gen9championsbssregma",
+  "rating": 1244,
+  "private": 0,
+  "password": null
+}

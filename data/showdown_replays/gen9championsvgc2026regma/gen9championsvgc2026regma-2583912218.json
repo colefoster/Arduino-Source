@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2583912218",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "josephcaa",
+    "DavidTIS"
+  ],
+  "log": "|j|\u2606josephcaa\n|j|\u2606DavidTIS\n|t:|1776207678\n|gametype|doubles\n|player|p1|josephcaa|101|1105\n|player|p2|DavidTIS|2|1162\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Sylveon, L50, F|\n|poke|p1|Blastoise, L50, F|\n|poke|p1|Aerodactyl, L50, M|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Garchomp, L50, F|\n|poke|p2|Starmie, L50|\n|poke|p2|Lucario, L50, M|\n|poke|p2|Lycanroc-Dusk, L50, M|\n|poke|p2|Hydreigon, L50, M|\n|poke|p2|Slowbro-Galar, L50, M|\n|poke|p2|Skarmory, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by josephcaa)\n|inactive|DavidTIS has 60 seconds left.\njosephcaa has agreed to open team sheets.\n|\n|t:|1776207732\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Sneasler|Sneasler, L50, M|100/100\n|switch|p1b: Blastoise|Blastoise, L50, F|100/100\n|switch|p2a: Skarmory|Skarmory, L50, M|100/100\n|switch|p2b: Hydreigon|Hydreigon, L50, M|100/100\n|turn|1\n|inactive|josephcaa has 30 seconds left.\n|inactive|DavidTIS has 30 seconds left.\n|\n|t:|1776207761\n|detailschange|p1b: Blastoise|Blastoise-Mega, L50, F\n|-mega|p1b: Blastoise|Blastoise|Blastoisinite\n|move|p1a: Sneasler|Fake Out|p2a: Skarmory\n|-resisted|p2a: Skarmory|1\n|-damage|p2a: Skarmory|93/100\n|move|p2b: Hydreigon|Tailwind|p2b: Hydreigon\n|-sidestart|p2: DavidTIS|move: Tailwind\n|cant|p2a: Skarmory|flinch\n|move|p1b: Blastoise|Shell Smash|p1b: Blastoise\n|-unboost|p1b: Blastoise|def|1\n|-unboost|p1b: Blastoise|spd|1\n|-boost|p1b: Blastoise|atk|2\n|-boost|p1b: Blastoise|spa|2\n|-boost|p1b: Blastoise|spe|2\n|\n|upkeep\n|turn|2\n|\n|t:|1776207783\n|switch|p1a: Sylveon|Sylveon, L50, F|100/100\n|detailschange|p2a: Skarmory|Skarmory-Mega, L50, M\n|-mega|p2a: Skarmory|Skarmory|Skarmorite\n|move|p2a: Skarmory|Rock Slide|p1b: Blastoise|[spread] p1a\n|-miss|p2a: Skarmory|p1b: Blastoise\n|-damage|p1a: Sylveon|73/100\n|move|p2b: Hydreigon|Draco Meteor|p1b: Blastoise\n|-damage|p1b: Blastoise|0 fnt\n|-unboost|p2b: Hydreigon|spa|2\n|faint|p1b: Blastoise\n|-enditem|p2b: Hydreigon|White Herb\n|-clearnegativeboost|p2b: Hydreigon|[silent]\n|\n|upkeep\n|-message|josephcaa forfeited.\n|\n|win|DavidTIS\n|raw|josephcaa's rating: 1105 &rarr; <strong>1084</strong><br />(-21 for losing)\n|raw|DavidTIS's rating: 1162 &rarr; <strong>1183</strong><br />(+21 for winning)\n|l|\u2606josephcaa\n|player|p1|\n",
+  "uploadtime": 1776207801,
+  "views": 41,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1084,
+  "private": 0,
+  "password": null
+}

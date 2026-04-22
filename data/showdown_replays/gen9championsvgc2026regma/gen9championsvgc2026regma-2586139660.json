@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586139660",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "goku s0los",
+    "StrawberryBalloons"
+  ],
+  "log": "|j|\u2606goku s0los\n|j|\u203dStrawberryBalloons\n|t:|1776403956\n|gametype|doubles\n|player|p1|goku s0los|1|1326\n|player|p2|StrawberryBalloons|fisherman-gen4|1358\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Gengar, L50, M|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Kingambit, L50, M|\n|poke|p1|Tyranitar, L50, F|\n|poke|p1|Kommo-o, L50, M|\n|poke|p1|Sableye, L50, M|\n|poke|p2|Meganium, L50, M|\n|poke|p2|Aerodactyl, L50, M|\n|poke|p2|Milotic, L50, M|\n|poke|p2|Typhlosion-Hisui, L50, F|\n|poke|p2|Tinkaton, L50, F|\n|poke|p2|Lucario, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by StrawberryBalloons)\n|inactive|goku s0los also wants the timer to be on.\n|inactive|goku s0los has 60 seconds left.\n|\n|t:|1776403993\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Gengar|Gengar, L50, M, shiny|100/100\n|switch|p1b: Incineroar|Incineroar, L50, F|100/100\n|switch|p2a: Typhlosion|Typhlosion-Hisui, L50, F|100/100\n|switch|p2b: Lucario|Lucario, L50, M|100/100\n|-item|p1a: Gengar|Gengarite|[from] ability: Frisk|[of] p2a: Typhlosion\n|-item|p1b: Incineroar|Shuca Berry|[from] ability: Frisk|[of] p2a: Typhlosion\n|-ability|p1b: Incineroar|Intimidate|boost\n|-unboost|p2a: Typhlosion|atk|1\n|-fail|p2b: Lucario|unboost|Attack|[from] ability: Inner Focus|[of] p2b: Lucario\n|turn|1\n|\n|t:|1776404017\n|detailschange|p1a: Gengar|Gengar-Mega, L50, M, shiny\n|-mega|p1a: Gengar|Gengar|Gengarite\n|move|p2a: Typhlosion|Shadow Ball|p1a: Gengar\n|-supereffective|p1a: Gengar|1\n|-damage|p1a: Gengar|0 fnt\n|faint|p1a: Gengar\n|move|p2b: Lucario|Close Combat|p1b: Incineroar\n|-supereffective|p1b: Incineroar|1\n|-damage|p1b: Incineroar|0 fnt\n|-unboost|p2b: Lucario|def|1\n|-unboost|p2b: Lucario|spd|1\n|faint|p1b: Incineroar\n|\n|upkeep\n|-message|goku s0los forfeited.\n|\n|win|StrawberryBalloons\n|raw|goku s0los's rating: 1326 &rarr; <strong>1308</strong><br />(-18 for losing)\n|raw|StrawberryBalloons's rating: 1358 &rarr; <strong>1376</strong><br />(+18 for winning)\n|l|\u2606goku s0los\n|player|p1|\n",
+  "uploadtime": 1776404034,
+  "views": 44,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1308,
+  "private": 0,
+  "password": null
+}

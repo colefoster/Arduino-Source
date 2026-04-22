@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2588265208",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Gonroadtotop500",
+    "The Dover Boys"
+  ],
+  "log": "|j|\u2606Gonroadtotop500\n|j|\u2606The Dover Boys\n|t:|1776619309\n|gametype|doubles\n|player|p1|Gonroadtotop500|veteran|1358\n|player|p2|The Dover Boys|acetrainer|1311\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Archaludon, L50, F|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Basculegion, L50, M, shiny|\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Pelipper, L50, F|\n|poke|p1|Sinistcha, L50|\n|poke|p2|Delphox, L50, M|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Aegislash, L50, M|\n|poke|p2|Gyarados, L50, M, shiny|\n|poke|p2|Milotic, L50, F|\n|poke|p2|Lucario, L50, M|\n|teampreview|4\nThe Dover Boys rejected open team sheets.\n|\n|t:|1776619352\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Basculegion|Basculegion, L50, M, shiny|100/100\n|switch|p1b: Archaludon|Archaludon, L50, F|100/100\n|switch|p2a: Ganbo|Gyarados, L50, M, shiny|100/100\n|switch|p2b: Snake Song|Milotic, L50, F|100/100\n|-ability|p2a: Ganbo|Intimidate|boost\n|-unboost|p1a: Basculegion|atk|1\n|-unboost|p1b: Archaludon|atk|1\n|turn|1\n|\n|t:|1776619392\n|switch|p1a: Pelipper|Pelipper, L50, F|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p1a: Pelipper\n|move|p1b: Archaludon|Electro Shot||[still]\n|-prepare|p1b: Archaludon|Electro Shot\n|-boost|p1b: Archaludon|spa|1\n|-anim|p1b: Archaludon|Electro Shot|p2b: Snake Song\n|-supereffective|p2b: Snake Song|1\n|-crit|p2b: Snake Song\n|-damage|p2b: Snake Song|0 fnt\n|faint|p2b: Snake Song\n|move|p2a: Ganbo|Power Whip|p1a: Pelipper\n|-damage|p1a: Pelipper|58/100\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|\n|t:|1776619405\n|switch|p2b: Ares|Lucario, L50, M|100/100\n|turn|2\n|\n|t:|1776619433\n|detailschange|p2b: Ares|Lucario-Mega, L50, M\n|-mega|p2b: Ares|Lucario|Lucarionite\n|move|p2b: Ares|Meteor Mash|p1a: Pelipper\n|-resisted|p1a: Pelipper|1\n|-damage|p1a: Pelipper|24/100\n|move|p1b: Archaludon|Aura Sphere|p2b: Ares\n|-supereffective|p2b: Ares|1\n|-damage|p2b: Ares|0 fnt\n|faint|p2b: Ares\n|move|p2a: Ganbo|Waterfall|p1a: Pelipper\n|-resisted|p1a: Pelipper|1\n|-damage|p1a: Pelipper|0 fnt\n|faint|p1a: Pelipper\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|-message|The Dover Boys forfeited.\n|\n|win|Gonroadtotop500\n|raw|Gonroadtotop500's rating: 1358 &rarr; <strong>1375</strong><br />(+17 for winning)\n|raw|The Dover Boys's rating: 1311 &rarr; <strong>1294</strong><br />(-17 for losing)\n",
+  "uploadtime": 1776619451,
+  "views": 14,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1294,
+  "private": 0,
+  "password": null
+}

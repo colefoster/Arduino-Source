@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2588914899",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "anotherhito",
+    "ImIkki"
+  ],
+  "log": "|j|\u2606anotherhito\n|j|\u2606ImIkki\n|t:|1776685436\n|gametype|doubles\n|player|p1|anotherhito|brock|1153\n|player|p2|ImIkki|miku-ghost|1109\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Politoed, L50, M|\n|poke|p1|Raichu, L50, M|\n|poke|p1|Meganium, L50, M|\n|poke|p1|Aerodactyl, L50, M|\n|poke|p1|Umbreon, L50, F|\n|poke|p1|Gengar, L50, M|\n|poke|p2|Chandelure, L50, M, shiny|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Milotic, L50, F, shiny|\n|poke|p2|Excadrill, L50, M|\n|poke|p2|Whimsicott, L50, F|\n|poke|p2|Ninetales-Alola, L50, F|\n|teampreview|4\n|\n|t:|1776685467\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Politoed|Politoed, L50, M|100/100\n|switch|p1b: Raichu|Raichu, L50, M|100/100\n|switch|p2a: WaterSerperior|Milotic, L50, F, shiny|100/100\n|switch|p2b: Mogging|Sneasler, L50, F|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p1a: Politoed\n|turn|1\n|\n|t:|1776685486\n|switch|p2a: Furby|Whimsicott, L50, F|100/100\n|move|p2b: Mogging|Fake Out|p1a: Politoed\n|-damage|p1a: Politoed|85/100\n|move|p1b: Raichu|Upper Hand||[still]\n|-fail|p1b: Raichu\n|cant|p1a: Politoed|flinch\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|turn|2\n|-message|anotherhito forfeited.\n|\n|win|ImIkki\n|raw|anotherhito's rating: 1153 &rarr; <strong>1125</strong><br />(-28 for losing)\n|raw|ImIkki's rating: 1109 &rarr; <strong>1137</strong><br />(+28 for winning)\n|l|\u2606anotherhito\n|player|p1|\n",
+  "uploadtime": 1776685505,
+  "views": 9,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1125,
+  "private": 0,
+  "password": null
+}

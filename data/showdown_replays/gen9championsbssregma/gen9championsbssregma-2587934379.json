@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2587934379",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "7ron11",
+    "Ncjxjdjdj"
+  ],
+  "log": "|j|\u26067ron11\n|j|\u2606Ncjxjdjdj\n|t:|1776581237\n|gametype|singles\n|player|p1|7ron11|red|1131\n|player|p2|Ncjxjdjdj|102|1000\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Kangaskhan, L50, F, shiny|\n|poke|p1|Golurk, L50, shiny|\n|poke|p1|Chimecho, L50, F, shiny|\n|poke|p1|Absol, L50, F, shiny|\n|poke|p1|Drampa, L50, M, shiny|\n|poke|p1|Audino, L50, F, shiny|\n|poke|p2|Meganium, L50, M|\n|poke|p2|Emboar, L50, M|\n|poke|p2|Feraligatr, L50, F|\n|poke|p2|Drampa, L50, F|\n|poke|p2|Excadrill, L50, F|\n|poke|p2|Froslass, L50, F|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Ncjxjdjdj)\n|inactive|7ron11 has 60 seconds left.\n|\n|t:|1776581305\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Kangaskhan|Kangaskhan, L50, F, shiny|100/100\n|switch|p2a: Drampa|Drampa, L50, F|100/100\n|turn|1\n|\n|t:|1776581318\n|detailschange|p1a: Kangaskhan|Kangaskhan-Mega, L50, F, shiny\n|-mega|p1a: Kangaskhan|Kangaskhan|Kangaskhanite\n|move|p1a: Kangaskhan|Fake Out|p2a: Drampa\n|-damage|p2a: Drampa|76/100\n|-damage|p2a: Drampa|71/100\n|-hitcount|p2a: Drampa|2\n|cant|p2a: Drampa|flinch\n|\n|upkeep\n|turn|2\n|\n|t:|1776581326\n|detailschange|p2a: Drampa|Drampa-Mega, L50, F\n|-mega|p2a: Drampa|Drampa|Drampanite\n|move|p1a: Kangaskhan|Ice Punch|p2a: Drampa\n|-supereffective|p2a: Drampa|1\n|-damage|p2a: Drampa|17/100\n|-status|p2a: Drampa|frz\n|-supereffective|p2a: Drampa|1\n|-damage|p2a: Drampa|4/100 frz\n|-hitcount|p2a: Drampa|2\n|-ability|p2a: Drampa|Berserk|boost\n|-boost|p2a: Drampa|spa|1\n|cant|p2a: Drampa|frz\n|\n|upkeep\n|turn|3\n|-message|Ncjxjdjdj forfeited.\n|\n|win|7ron11\n|raw|7ron11's rating: 1131 &rarr; <strong>1147</strong><br />(+16 for winning)\n|raw|Ncjxjdjdj's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|l|\u2606Ncjxjdjdj\n|player|p2|\n",
+  "uploadtime": 1776581341,
+  "views": 14,
+  "formatid": "gen9championsbssregma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

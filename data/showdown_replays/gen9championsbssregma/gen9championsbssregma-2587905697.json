@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2587905697",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "predo444",
+    "C2H6O ENJOYER"
+  ],
+  "log": "|j|\u2606predo444\n|j|\u2606C2H6O ENJOYER\n|t:|1776577182\n|gametype|singles\n|player|p1|predo444|265|1185\n|player|p2|C2H6O ENJOYER|ballguy|1148\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Dragonite, L50, F|\n|poke|p1|Garganacl, L50, F|\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Quaquaval, L50, F|\n|poke|p2|Meganium, L50, M|\n|poke|p2|Arcanine-Hisui, L50, F|\n|poke|p2|Gengar, L50, M|\n|poke|p2|Garchomp, L50, F|\n|poke|p2|Lucario, L50, M|\n|poke|p2|Kingambit, L50, M|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by predo444)\n|\n|t:|1776577202\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Incineroar|Incineroar, L50, F|100/100\n|switch|p2a: Garchomp|Garchomp, L50, F|100/100\n|-ability|p1a: Incineroar|Intimidate|boost\n|-unboost|p2a: Garchomp|atk|1\n|turn|1\n|\n|t:|1776577209\n|move|p2a: Garchomp|Swords Dance|p2a: Garchomp\n|-boost|p2a: Garchomp|atk|2\n|move|p1a: Incineroar|Will-O-Wisp|p2a: Garchomp|[miss]\n|-miss|p1a: Incineroar|p2a: Garchomp\n|\n|upkeep\n|turn|2\n|\n|t:|1776577214\n|move|p2a: Garchomp|Earthquake|p1a: Incineroar\n|-supereffective|p1a: Incineroar|1\n|-damage|p1a: Incineroar|0 fnt\n|faint|p1a: Incineroar\n|\n|upkeep\n|c|\u2606C2H6O ENJOYER|drunks are rewarded\n|\n|t:|1776577224\n|switch|p1a: Quaquaval|Quaquaval, L50, F|100/100\n|turn|3\n|\n|t:|1776577229\n|move|p2a: Garchomp|Earthquake|p1a: Quaquaval\n|-damage|p1a: Quaquaval|0 fnt\n|faint|p1a: Quaquaval\n|\n|upkeep\n|\n|t:|1776577232\n|switch|p1a: Floette|Floette-Eternal, L50, F|100/100\n|turn|4\n|\n|t:|1776577235\n|detailschange|p1a: Floette|Floette-Mega, L50, F\n|-mega|p1a: Floette|Floette|Floettite\n|-ability|p1a: Floette|Fairy Aura\n|move|p2a: Garchomp|Iron Head|p1a: Floette\n|-supereffective|p1a: Floette|1\n|-damage|p1a: Floette|0 fnt\n|faint|p1a: Floette\n|\n|win|C2H6O ENJOYER\n|raw|predo444's rating: 1185 &rarr; <strong>1157</strong><br />(-28 for losing)\n|raw|C2H6O ENJOYER's rating: 1148 &rarr; <strong>1176</strong><br />(+28 for winning)\n|l|\u2606predo444\n|player|p1|\n",
+  "uploadtime": 1776577242,
+  "views": 2,
+  "formatid": "gen9championsbssregma",
+  "rating": 1157,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2585433780",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "cloudyday1222",
+    "melon storme"
+  ],
+  "log": "|j|\u2606cloudyday1222\n|j|\u2606melon storme\n|t:|1776347000\n|gametype|doubles\n|player|p1|cloudyday1222|265|1060\n|player|p2|melon storme|kieran-festival|1129\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Golurk, L50|\n|poke|p1|Drampa, L50, M|\n|poke|p1|Torkoal, L50, M|\n|poke|p1|Kingambit, L50, M|\n|poke|p1|Farigiraf, L50, M|\n|poke|p1|Incineroar, L50, F|\n|poke|p2|Kingambit, L50, F|\n|poke|p2|Zoroark-Hisui, L50, M|\n|poke|p2|Froslass, L50, F|\n|poke|p2|Beartic, L50, F|\n|poke|p2|Primarina, L50, F|\n|poke|p2|Sneasler, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by cloudyday1222)\ncloudyday1222 rejected open team sheets.\n|\n|t:|1776347041\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Farigiraf|Farigiraf, L50, M|100/100\n|switch|p1b: Incineroar|Incineroar, L50, F|100/100\n|switch|p2a: Primarina|Primarina, L50, F|100/100\n|switch|p2b: Kingambit|Kingambit, L50, F|100/100\n|-ability|p1b: Incineroar|Intimidate|boost\n|-unboost|p2a: Primarina|atk|1\n|-unboost|p2b: Kingambit|atk|1\n|-ability|p2b: Kingambit|Defiant|boost\n|-boost|p2b: Kingambit|atk|2\n|turn|1\n|\n|t:|1776347060\n|move|p1b: Incineroar|Fake Out|p2b: Kingambit\n|-resisted|p2b: Kingambit|1\n|-damage|p2b: Kingambit|96/100\n|cant|p2b: Kingambit|flinch\n|move|p2a: Primarina|Taunt|p1a: Farigiraf\n|-start|p1a: Farigiraf|move: Taunt\n|cant|p1a: Farigiraf|move: Taunt|Trick Room\n|\n|upkeep\n|turn|2\n|-message|cloudyday1222 forfeited.\n|\n|win|melon storme\n|raw|cloudyday1222's rating: 1060 &rarr; <strong>1045</strong><br />(-15 for losing)\n|raw|melon storme's rating: 1129 &rarr; <strong>1149</strong><br />(+20 for winning)\n|l|\u2606cloudyday1222\n|player|p1|\n|c|\u2606melon storme|smartz\n",
+  "uploadtime": 1776347077,
+  "views": 33,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1045,
+  "private": 0,
+  "password": null
+}

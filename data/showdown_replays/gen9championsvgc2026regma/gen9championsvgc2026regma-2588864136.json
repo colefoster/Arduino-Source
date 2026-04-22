@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2588864136",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "TimeforCHILLI",
+    "Scartung"
+  ],
+  "log": "|j|\u2606TimeforCHILLI\n|j|\u2606Scartung\n|t:|1776680011\n|gametype|doubles\n|player|p1|TimeforCHILLI|caitlin|1148\n|player|p2|Scartung|101|1048\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Victreebel, L50, M|\n|poke|p1|Torkoal, L50, F|\n|poke|p1|Chimecho, L50, F|\n|poke|p1|Rotom-Heat, L50|\n|poke|p1|Mimikyu, L50, F|\n|poke|p1|Kommo-o, L50, F|\n|poke|p2|Kangaskhan, L50, F|\n|poke|p2|Meganium, L50, F|\n|poke|p2|Aerodactyl, L50, M|\n|poke|p2|Tauros-Paldea-Aqua, L50, M|\n|poke|p2|Archaludon, L50, F|\n|poke|p2|Typhlosion-Hisui, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Scartung)\nScartung rejected open team sheets.\n|\n|t:|1776680048\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Chimecho|Chimecho, L50, F|100/100\n|switch|p1b: Mimikyu|Mimikyu, L50, F|100/100\n|switch|p2a: Aerodactyl|Aerodactyl, L50, M|100/100\n|switch|p2b: Tauros|Tauros-Paldea-Aqua, L50, M|100/100\n|-ability|p2a: Aerodactyl|Unnerve\n|-ability|p2b: Tauros|Intimidate|boost\n|-unboost|p1a: Chimecho|atk|1\n|-unboost|p1b: Mimikyu|atk|1\n|turn|1\n|inactive|Scartung has 30 seconds left.\n|inactive|Scartung has 20 seconds left.\n|inactive|Scartung has 15 seconds left.\n|inactive|Scartung has 10 seconds left.\n|inactive|Scartung has 5 seconds left.\n|\n|t:|1776680103\n|detailschange|p1a: Chimecho|Chimecho-Mega, L50, F\n|-mega|p1a: Chimecho|Chimecho|Chimechite\n|move|p2a: Aerodactyl|Protect|p2a: Aerodactyl\n|-singleturn|p2a: Aerodactyl|Protect\n|move|p2b: Tauros|Protect|p2b: Tauros\n|-singleturn|p2b: Tauros|Protect\n|move|p1a: Chimecho|Calm Mind|p1a: Chimecho\n|-boost|p1a: Chimecho|spa|1\n|-boost|p1a: Chimecho|spd|1\n|move|p1b: Mimikyu|Trick Room|p1b: Mimikyu\n|-fieldstart|move: Trick Room|[of] p1b: Mimikyu\n|\n|upkeep\n|turn|2\n|-message|Scartung forfeited.\n|\n|win|TimeforCHILLI\n|raw|TimeforCHILLI's rating: 1148 &rarr; <strong>1166</strong><br />(+18 for winning)\n|raw|Scartung's rating: 1048 &rarr; <strong>1036</strong><br />(-12 for losing)\n|l|\u2606Scartung\n|player|p2|\n",
+  "uploadtime": 1776680133,
+  "views": 8,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1036,
+  "private": 0,
+  "password": null
+}

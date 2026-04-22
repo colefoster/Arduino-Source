@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2588491639",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "homosapienjoe",
+    "PashGG"
+  ],
+  "log": "|j|\u2606homosapienjoe\n|j|\u2606PashGG\n|t:|1776638360\n|gametype|doubles\n|player|p1|homosapienjoe|marlon|1136\n|player|p2|PashGG|1|1097\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Espathra, L50, F|\n|poke|p1|Glimmora, L50, F|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Milotic, L50, F|\n|poke|p1|Hawlucha, L50, M|\n|poke|p1|Araquanid, L50, M|\n|poke|p2|Incineroar, L50, M, shiny|\n|poke|p2|Corviknight, L50, M, shiny|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Sinistcha, L50|\n|teampreview|4\nPashGG rejected open team sheets.\n|\n|t:|1776638399\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Milotic|Milotic, L50, F|100/100\n|switch|p1b: Hawlucha|Hawlucha, L50, M|100/100\n|switch|p2a: Incineroar|Incineroar, L50, M, shiny|100/100\n|switch|p2b: Sinistcha|Sinistcha, L50|100/100\n|-ability|p2a: Incineroar|Intimidate|boost\n|-unboost|p1a: Milotic|atk|1\n|-ability|p1a: Milotic|Competitive|boost\n|-boost|p1a: Milotic|spa|2\n|-unboost|p1b: Hawlucha|atk|1\n|turn|1\n|\n|t:|1776638438\n|switch|p1b: Glimmora|Glimmora, L50, F|100/100\n|move|p2a: Incineroar|Fake Out|p1b: Glimmora\n|-resisted|p1b: Glimmora|1\n|-damage|p1b: Glimmora|94/100\n|-activate|p1b: Glimmora|ability: Toxic Debris\n|-sidestart|p2: PashGG|move: Toxic Spikes\n|move|p1a: Milotic|Scald|p2a: Incineroar\n|-supereffective|p2a: Incineroar|1\n|-damage|p2a: Incineroar|0 fnt\n|faint|p2a: Incineroar\n|move|p2b: Sinistcha|Trick Room|p2b: Sinistcha\n|-fieldstart|move: Trick Room|[of] p2b: Sinistcha\n|\n|upkeep\n|-message|PashGG forfeited.\n|\n|win|homosapienjoe\n|raw|homosapienjoe's rating: 1136 &rarr; <strong>1158</strong><br />(+22 for winning)\n|raw|PashGG's rating: 1097 &rarr; <strong>1075</strong><br />(-22 for losing)\n|l|\u2606PashGG\n|player|p2|\n",
+  "uploadtime": 1776638481,
+  "views": 19,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1075,
+  "private": 0,
+  "password": null
+}

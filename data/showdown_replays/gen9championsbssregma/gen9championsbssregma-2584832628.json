@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2584832628",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "drafeon",
+    "carpetmuncher45"
+  ],
+  "log": "|j|\u2606drafeon\n|j|\u2606carpetmuncher45\n|t:|1776287131\n|gametype|singles\n|player|p1|drafeon|elesa|1247\n|player|p2|carpetmuncher45|battlegirl-gen4|1247\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Beedrill, L50, F|\n|poke|p1|Kingambit, L50, M|\n|poke|p1|Conkeldurr, L50, M|\n|poke|p1|Chandelure, L50, F|\n|poke|p1|Meowstic-F, L50, F|\n|poke|p1|Vanilluxe, L50, M|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Kingambit, L50, F|\n|poke|p2|Meganium, L50, F|\n|poke|p2|Blastoise, L50, F|\n|poke|p2|Infernape, L50, M|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by drafeon)\n|\n|t:|1776287156\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Chandelure|Chandelure, L50, F|100/100\n|switch|p2a: Infernape|Infernape, L50, M|100/100\n|turn|1\n|\n|t:|1776287159\n|move|p2a: Infernape|Stealth Rock|p1a: Chandelure\n|-sidestart|p1: drafeon|move: Stealth Rock\n|move|p1a: Chandelure|Trick Room|p1a: Chandelure\n|-fieldstart|move: Trick Room|[of] p1a: Chandelure\n|\n|upkeep\n|turn|2\n|\n|t:|1776287162\n|move|p1a: Chandelure|Shadow Ball|p2a: Infernape\n|-damage|p2a: Infernape|28/100\n|move|p2a: Infernape|Taunt|p1a: Chandelure\n|-start|p1a: Chandelure|move: Taunt\n|\n|upkeep\n|turn|3\n|\n|t:|1776287166\n|switch|p2a: Kingambit|Kingambit, L50, F|100/100\n|move|p1a: Chandelure|Shadow Ball|p2a: Kingambit\n|-resisted|p2a: Kingambit|1\n|-damage|p2a: Kingambit|73/100\n|\n|upkeep\n|turn|4\n|\n|t:|1776287169\n|move|p2a: Kingambit|Sucker Punch|p1a: Chandelure\n|-supereffective|p1a: Chandelure|1\n|-enditem|p1a: Chandelure|Focus Sash\n|-damage|p1a: Chandelure|1/100\n|move|p1a: Chandelure|Flamethrower|p2a: Kingambit\n|-supereffective|p2a: Kingambit|1\n|-damage|p2a: Kingambit|0 fnt\n|faint|p2a: Kingambit\n|-end|p2a: Kingambit|fallenundefined|[silent]\n|\n|upkeep\n|l|\u2606carpetmuncher45\n|inactive|carpetmuncher45 disconnected and has a minute to reconnect!\n|player|p2|\n|inactive|carpetmuncher45 has 30 seconds left.\n|j| p74\n|inactive|carpetmuncher45 has 20 seconds left.\n|inactive|carpetmuncher45 has 15 seconds left.\n|inactive|carpetmuncher45 has 10 seconds left.\n|inactive|carpetmuncher45 has 5 seconds left.\n|-message|carpetmuncher45 lost due to inactivity.\n|\n|win|drafeon\n|raw|drafeon's rating: 1247 &rarr; <strong>1272</strong><br />(+25 for winning)\n|raw|carpetmuncher45's rating: 1247 &rarr; <strong>1222</strong><br />(-25 for losing)\n|l|\u2606drafeon\n|player|p1|\n",
+  "uploadtime": 1776287311,
+  "views": 3,
+  "formatid": "gen9championsbssregma",
+  "rating": 1222,
+  "private": 0,
+  "password": null
+}

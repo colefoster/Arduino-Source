@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2585807237",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "ThtWhiteGuy12",
+    "creeperconstable"
+  ],
+  "log": "|j|\u2606ThtWhiteGuy12\n|j|\u2606creeperconstable\n|t:|1776372061\n|gametype|doubles\n|player|p1|ThtWhiteGuy12|1|1238\n|player|p2|creeperconstable|drayden|1237\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Glimmora, L50, F|\n|poke|p1|Whimsicott, L50, F|\n|poke|p1|Tauros-Paldea-Blaze, L50, M|\n|poke|p1|Rotom-Wash, L50|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Skarmory, L50, M|\n|poke|p2|Blastoise, L50, M|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Pelipper, L50, F|\n|poke|p2|Aggron, L50, M|\n|poke|p2|Arcanine-Hisui, L50, F|\n|poke|p2|Ninetales-Alola, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by ThtWhiteGuy12)\n|\n|t:|1776372094\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Glimmora|Glimmora, L50, F|100/100\n|switch|p1b: Whimsicott|Whimsicott, L50, F|100/100\n|switch|p2a: Blastoise|Blastoise, L50, M|100/100\n|switch|p2b: Sinistcha|Sinistcha, L50|100/100\n|turn|1\n|\n|t:|1776372118\n|detailschange|p1a: Glimmora|Glimmora-Mega, L50, F\n|-mega|p1a: Glimmora|Glimmora|Glimmoranite\n|detailschange|p2a: Blastoise|Blastoise-Mega, L50, M\n|-mega|p2a: Blastoise|Blastoise|Blastoisinite\n|move|p1b: Whimsicott|Tailwind|p1b: Whimsicott\n|-sidestart|p1: ThtWhiteGuy12|move: Tailwind\n|move|p1a: Glimmora|Sludge Bomb|p2a: Blastoise\n|-damage|p2a: Blastoise|26/100\n|move|p2a: Blastoise|Shell Smash|p2a: Blastoise\n|-unboost|p2a: Blastoise|def|1\n|-unboost|p2a: Blastoise|spd|1\n|-boost|p2a: Blastoise|atk|2\n|-boost|p2a: Blastoise|spa|2\n|-boost|p2a: Blastoise|spe|2\n|move|p2b: Sinistcha|Matcha Gotcha|p1a: Glimmora|[spread] p1a,p1b\n|-resisted|p1b: Whimsicott|1\n|-damage|p1a: Glimmora|70/100\n|-damage|p1b: Whimsicott|81/100\n|\n|upkeep\n|turn|2\n|inactive|ThtWhiteGuy12 has 30 seconds left.\n|\n|t:|1776372144\n|switch|p2b: Pelipper|Pelipper, L50, F|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p2b: Pelipper\n|move|p1b: Whimsicott|Moonblast|p2a: Blastoise\n|-damage|p2a: Blastoise|0 fnt\n|faint|p2a: Blastoise\n|move|p1a: Glimmora|Sludge Bomb|p2b: Pelipper\n|-damage|p2b: Pelipper|0 fnt\n|faint|p2b: Pelipper\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|-message|creeperconstable forfeited.\n|\n|win|ThtWhiteGuy12\n|raw|ThtWhiteGuy12's rating: 1238 &rarr; <strong>1263</strong><br />(+25 for winning)\n|raw|creeperconstable's rating: 1237 &rarr; <strong>1212</strong><br />(-25 for losing)\n|l|\u2606creeperconstable\n|player|p2|\n",
+  "uploadtime": 1776372169,
+  "views": 20,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1212,
+  "private": 0,
+  "password": null
+}

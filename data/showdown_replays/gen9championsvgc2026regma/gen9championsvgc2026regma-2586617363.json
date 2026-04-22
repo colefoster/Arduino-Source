@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586617363",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "DaRealFaustino",
+    "isabellissima"
+  ],
+  "log": "|j|\u2606DaRealFaustino\n|j|\u2606isabellissima\n|t:|1776447177\n|gametype|doubles\n|player|p1|DaRealFaustino|102|1247\n|player|p2|isabellissima|170|1324\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Meganium, L50, M|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Maushold, L50|\n|poke|p1|Kingambit, L50, M|\n|poke|p1|Whimsicott, L50, M|\n|poke|p1|Sableye, L50, M|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Gengar, L50, M|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Maushold-Four, L50|\n|poke|p2|Kommo-o, L50, M|\n|poke|p2|Politoed, L50, M|\n|teampreview|4\nisabellissima has agreed to open team sheets.\n|\n|t:|1776447202\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Maushold|Maushold, L50|100/100\n|switch|p1b: Whimsicott|Whimsicott, L50, M|100/100\n|switch|p2a: Incineroar|Incineroar, L50, M, shiny|100/100\n|switch|p2b: Gengar|Gengar, L50, M, shiny|100/100\n|-ability|p2a: Incineroar|Intimidate|boost\n|-unboost|p1a: Maushold|atk|1\n|-unboost|p1b: Whimsicott|atk|1\n|turn|1\n|\n|t:|1776447223\n|detailschange|p2b: Gengar|Gengar-Mega, L50, M, shiny\n|-mega|p2b: Gengar|Gengar|Gengarite\n|move|p2a: Incineroar|Fake Out|p1b: Whimsicott\n|-damage|p1b: Whimsicott|92/100\n|move|p1a: Maushold|Follow Me|p1a: Maushold\n|-singleturn|p1a: Maushold|move: Follow Me\n|cant|p1b: Whimsicott|flinch\n|move|p2b: Gengar|Perish Song|p2b: Gengar\n|-start|p1a: Maushold|perish3|[silent]\n|-start|p1b: Whimsicott|perish3|[silent]\n|-start|p2a: Incineroar|perish3|[silent]\n|-start|p2b: Gengar|perish3|[silent]\n|-fieldactivate|move: Perish Song\n|\n|-start|p1a: Maushold|perish3\n|-start|p2b: Gengar|perish3\n|-start|p1b: Whimsicott|perish3\n|-start|p2a: Incineroar|perish3\n|upkeep\n|turn|2\n|-message|DaRealFaustino forfeited.\n|\n|win|isabellissima\n|raw|DaRealFaustino's rating: 1247 &rarr; <strong>1227</strong><br />(-20 for losing)\n|raw|isabellissima's rating: 1324 &rarr; <strong>1340</strong><br />(+16 for winning)\n|l|\u2606DaRealFaustino\n|player|p1|\n",
+  "uploadtime": 1776447237,
+  "views": 57,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1227,
+  "private": 0,
+  "password": null
+}

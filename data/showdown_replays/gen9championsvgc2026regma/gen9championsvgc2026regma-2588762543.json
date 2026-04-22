@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2588762543",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "gasStationBanana",
+    "markybehr"
+  ],
+  "log": "|j|\u2606gasStationBanana\n|j|\u2606markybehr\n|t:|1776667522\n|gametype|doubles\n|player|p1|gasStationBanana|flannery|1052\n|player|p2|markybehr|linebacker|1113\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Starmie, L50, shiny|\n|poke|p1|Meowstic, L50, M|\n|poke|p1|Basculegion, L50, M, shiny|\n|poke|p1|Rhyperior, L50, F, shiny|\n|poke|p1|Tyranitar, L50, M, shiny|\n|poke|p1|Talonflame, L50, M, shiny|\n|poke|p2|Gallade, L50, M, shiny|\n|poke|p2|Gardevoir, L50, M|\n|poke|p2|Whimsicott, L50, M|\n|poke|p2|Aerodactyl, L50, F, shiny|\n|poke|p2|Feraligatr, L50, F|\n|poke|p2|Garchomp, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by markybehr)\n|\n|t:|1776667544\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Meowstic|Meowstic, L50, M|100/100\n|switch|p1b: Talonflame|Talonflame, L50, M, shiny|100/100\n|switch|p2a: Gardevoir|Gardevoir, L50, M|100/100\n|switch|p2b: Aerodactyl|Aerodactyl, L50, F, shiny|100/100\n|-ability|p2b: Aerodactyl|Unnerve\n|turn|1\n|inactive|gasStationBanana has 30 seconds left.\n|\n|t:|1776667575\n|detailschange|p2a: Gardevoir|Gardevoir-Mega, L50, M\n|-mega|p2a: Gardevoir|Gardevoir|Gardevoirite\n|move|p1b: Talonflame|Tailwind|p1b: Talonflame\n|-sidestart|p1: gasStationBanana|move: Tailwind\n|move|p1a: Meowstic|Psychic Terrain|p1a: Meowstic\n|-fieldstart|move: Psychic Terrain\n|move|p2b: Aerodactyl|Rock Slide|p1a: Meowstic|[spread] p1a\n|-miss|p2b: Aerodactyl|p1b: Talonflame\n|-damage|p1a: Meowstic|62/100\n|move|p2a: Gardevoir|Calm Mind|p2a: Gardevoir\n|-boost|p2a: Gardevoir|spa|1\n|-boost|p2a: Gardevoir|spd|1\n|\n|upkeep\n|turn|2\n|inactive|gasStationBanana has 30 seconds left.\n|\n|t:|1776667603\n|switch|p1a: Starmie|Starmie, L50, shiny|100/100\n|move|p1b: Talonflame|Brave Bird|p2a: Gardevoir\n|-activate|p2a: Gardevoir|move: Psychic Terrain\n|move|p2b: Aerodactyl|Rock Slide|p1b: Talonflame|[spread] p1a,p1b\n|-supereffective|p1b: Talonflame|2\n|-damage|p1a: Starmie|58/100\n|-enditem|p1b: Talonflame|Focus Sash\n|-damage|p1b: Talonflame|1/100\n|move|p2a: Gardevoir|Hyper Voice|p1b: Talonflame|[spread] p1a,p1b\n|-resisted|p1b: Talonflame|1\n|-damage|p1a: Starmie|0 fnt\n|-damage|p1b: Talonflame|0 fnt\n|faint|p1a: Starmie\n|faint|p1b: Talonflame\n|\n|upkeep\n|-message|gasStationBanana forfeited.\n|\n|win|markybehr\n|raw|gasStationBanana's rating: 1052 &rarr; <strong>1037</strong><br />(-15 for losing)\n|raw|markybehr's rating: 1113 &rarr; <strong>1134</strong><br />(+21 for winning)\n|l|\u2606gasStationBanana\n|player|p1|\n",
+  "uploadtime": 1776667629,
+  "views": 12,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1037,
+  "private": 0,
+  "password": null
+}

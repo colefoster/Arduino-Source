@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2583027598",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "palkiaguy12",
+    "arceusineedthis"
+  ],
+  "log": "|j|\u2606palkiaguy12\n|j|\u2606arceusineedthis\n|t:|1776134638\n|gametype|doubles\n|player|p1|palkiaguy12|170|1340\n|player|p2|arceusineedthis|hilbert|1248\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Meganium, L50, M|\n|poke|p1|Farigiraf, L50, M|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Pelipper, L50, M|\n|poke|p1|Kingambit, L50, F|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Meganium, L50, F|\n|poke|p2|Pelipper, L50, F|\n|poke|p2|Dragonite, L50, F|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Basculegion, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by palkiaguy12)\n|inactive|arceusineedthis has 60 seconds left.\n|inactive|arceusineedthis has 30 seconds left.\n|inactive|arceusineedthis has 20 seconds left.\n|\n|t:|1776134709\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Meganium|Meganium, L50, M|100/100\n|switch|p1b: Farigiraf|Farigiraf, L50, M|100/100\n|switch|p2a: Basculegion|Basculegion, L50, M|100/100\n|switch|p2b: Pelipper|Pelipper, L50, F|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p2b: Pelipper\n|turn|1\n|inactive|arceusineedthis has 30 seconds left.\n|inactive|arceusineedthis has 20 seconds left.\n|inactive|arceusineedthis has 15 seconds left.\n|inactive|arceusineedthis has 10 seconds left.\n|inactive|arceusineedthis has 5 seconds left.\n|\n|t:|1776134761\n|detailschange|p1a: Meganium|Meganium-Mega, L50, M\n|-mega|p1a: Meganium|Meganium|Meganiumite\n|move|p2a: Basculegion|Wave Crash|p1b: Farigiraf\n|-crit|p1b: Farigiraf\n|-damage|p1b: Farigiraf|0 fnt\n|faint|p1b: Farigiraf\n|-damage|p2a: Basculegion|66/100|[from] Recoil\n|move|p2b: Pelipper|Tailwind|p2b: Pelipper\n|-sidestart|p2: arceusineedthis|move: Tailwind\n|move|p1a: Meganium|Solar Beam||[still]\n|-prepare|p1a: Meganium|Solar Beam\n|-activate|p1a: Meganium|ability: Mega Sol\n|-anim|p1a: Meganium|Solar Beam|p2a: Basculegion\n|-supereffective|p2a: Basculegion|1\n|-damage|p2a: Basculegion|0 fnt\n|faint|p2a: Basculegion\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|\n|t:|1776134776\n|switch|p2a: Sneasler|Sneasler, L50, M|100/100\n|switch|p1b: Incineroar|Incineroar, L50, M|100/100\n|-ability|p1b: Incineroar|Intimidate|boost\n|-unboost|p2a: Sneasler|atk|1\n|-unboost|p2b: Pelipper|atk|1\n|-enditem|p2a: Sneasler|White Herb\n|-clearnegativeboost|p2a: Sneasler|[silent]\n|turn|2\n|-message|palkiaguy12 forfeited.\n|\n|win|arceusineedthis\n|raw|palkiaguy12's rating: 1340 &rarr; <strong>1315</strong><br />(-25 for losing)\n|raw|arceusineedthis's rating: 1248 &rarr; <strong>1279</strong><br />(+31 for winning)\n|l|\u2606palkiaguy12\n|player|p1|\n",
+  "uploadtime": 1776134802,
+  "views": 40,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1279,
+  "private": 0,
+  "password": null
+}

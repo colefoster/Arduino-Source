@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2580981777",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "CrozzStorm",
+    "Ragefyre"
+  ],
+  "log": "|j|\u2606CrozzStorm\n|j|\u2606Ragefyre\n|t:|1775948796\n|gametype|doubles\n|player|p1|CrozzStorm|1|1068\n|player|p2|Ragefyre|hoopster|1000\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Scizor, L50, F|\n|poke|p1|Pelipper, L50, M|\n|poke|p1|Aerodactyl, L50, F|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Farigiraf, L50, M|\n|poke|p1|Basculegion, L50, M|\n|poke|p2|Charizard, L50, M|\n|poke|p2|Venusaur, L50, M|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Whimsicott, L50, M|\n|poke|p2|Rotom-Wash, L50|\n|poke|p2|Garchomp, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Ragefyre)\n|\n|t:|1775948855\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Incineroar|Incineroar, L50, F|100/100\n|switch|p1b: Aerodactyl|Aerodactyl, L50, F|100/100\n|switch|p2a: Spin Cycle|Rotom-Wash, L50|100/100\n|switch|p2b: Jaws|Garchomp, L50, F|100/100\n|-ability|p1b: Aerodactyl|Unnerve\n|turn|1\n|-message|CrozzStorm forfeited.\n|\n|win|Ragefyre\n|raw|CrozzStorm's rating: 1068 &rarr; <strong>1044</strong><br />(-24 for losing)\n|raw|Ragefyre's rating: 1000 &rarr; <strong>1048</strong><br />(+48 for winning)\n|l|\u2606CrozzStorm\n|player|p1|\n",
+  "uploadtime": 1775948871,
+  "views": 38,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1044,
+  "private": 0,
+  "password": null
+}

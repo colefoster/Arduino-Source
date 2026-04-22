@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2585810886",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Godofwar_fan",
+    "Pinoitaliano"
+  ],
+  "log": "|j|\u2606Godofwar_fan\n|j|\u2606Pinoitaliano\n|t:|1776372332\n|gametype|doubles\n|player|p1|Godofwar_fan|teamrocket|1111\n|player|p2|Pinoitaliano|allister|1122\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Whimsicott, L50, M|\n|poke|p1|Sneasler, L50, F|\n|poke|p1|Charizard, L50, M|\n|poke|p1|Maushold-Four, L50|\n|poke|p1|Hawlucha, L50, F|\n|poke|p1|Typhlosion-Hisui, L50, F|\n|poke|p2|Aggron, L50, F|\n|poke|p2|Whimsicott, L50, F|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Mimikyu, L50, F|\n|poke|p2|Gallade, L50, M|\n|poke|p2|Araquanid, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Godofwar_fan)\n|inactive|Pinoitaliano also wants the timer to be on.\n|inactive|Pinoitaliano has 60 seconds left.\n|\n|t:|1776372383\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Whimsicott|Whimsicott, L50, M|100/100\n|switch|p1b: Typhlosion|Typhlosion-Hisui, L50, F|100/100\n|switch|p2a: Araquanid|Araquanid, L50, F|100/100\n|switch|p2b: Mimikyu|Mimikyu, L50, F|100/100\n|-item|p2a: Araquanid|Mystic Water|[from] ability: Frisk|[of] p1b: Typhlosion\n|-item|p2b: Mimikyu|Mental Herb|[from] ability: Frisk|[of] p1b: Typhlosion\n|turn|1\n|\n|t:|1776372400\n|move|p1a: Whimsicott|Sunny Day|p1a: Whimsicott\n|-weather|SunnyDay\n|move|p1b: Typhlosion|Eruption|p2b: Mimikyu|[spread] p2a,p2b\n|-damage|p2a: Araquanid|68/100\n|-activate|p2b: Mimikyu|ability: Disguise\n|-damage|p2b: Mimikyu|100/100\n|detailschange|p2b: Mimikyu|Mimikyu-Busted, L50, F\n|-damage|p2b: Mimikyu|88/100|[from] pokemon: Mimikyu-Busted\n|move|p2a: Araquanid|Liquidation|p1b: Typhlosion\n|-supereffective|p1b: Typhlosion|1\n|-damage|p1b: Typhlosion|0 fnt\n|faint|p1b: Typhlosion\n|move|p2b: Mimikyu|Trick Room|p2b: Mimikyu\n|-fieldstart|move: Trick Room|[of] p2b: Mimikyu\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|\n|t:|1776372418\n|switch|p1b: Hawlucha|Hawlucha, L50, F, shiny|100/100\n|turn|2\n|\n|t:|1776372436\n|move|p1a: Whimsicott|Encore|p2b: Mimikyu\n|-start|p2b: Mimikyu|Encore\n|-enditem|p2b: Mimikyu|Mental Herb\n|-end|p2b: Mimikyu|Encore\n|move|p2a: Araquanid|Leech Life|p1a: Whimsicott\n|-damage|p1a: Whimsicott|65/100\n|-heal|p2a: Araquanid|85/100|[from] drain|[of] p1a: Whimsicott\n|move|p2b: Mimikyu|Play Rough|p1b: Hawlucha\n|-supereffective|p1b: Hawlucha|1\n|-damage|p1b: Hawlucha|0 fnt\n|faint|p1b: Hawlucha\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|-message|Godofwar_fan forfeited.\n|\n|win|Pinoitaliano\n|raw|Godofwar_fan's rating: 1111 &rarr; <strong>1087</strong><br />(-24 for losing)\n|raw|Pinoitaliano's rating: 1122 &rarr; <strong>1146</strong><br />(+24 for winning)\n|l|\u2606Godofwar_fan\n|player|p1|\n",
+  "uploadtime": 1776372453,
+  "views": 25,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1087,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582137987",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "lolgz",
+    "happidoodledoo"
+  ],
+  "log": "|j|\u2606lolgz\n|j|\u2606happidoodledoo\n|t:|1776062883\n|gametype|doubles\n|player|p1|lolgz|266|1343\n|player|p2|happidoodledoo|ghetsis|1375\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Charizard, L50, F|\n|poke|p1|Whimsicott, L50, F|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Farigiraf, L50, M|\n|poke|p1|Sneasler, L50, F|\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Talonflame, L50, F|\n|poke|p2|Primarina, L50, F|\n|poke|p2|Maushold, L50|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Incineroar, L50, M|\n|teampreview|4\n|j| HazelA7X\n|\n|t:|1776062945\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Whimsicott|Whimsicott, L50, F|100/100\n|switch|p1b: Sneasler|Sneasler, L50, F|100/100\n|switch|p2a: Incineroar|Incineroar, L50, M|100/100\n|switch|p2b: Primarina|Primarina, L50, F|100/100\n|-ability|p2a: Incineroar|Intimidate|boost\n|-unboost|p1a: Whimsicott|atk|1\n|-unboost|p1b: Sneasler|atk|1\n|-enditem|p1b: Sneasler|White Herb\n|-clearnegativeboost|p1b: Sneasler|[silent]\n|turn|1\n|\n|t:|1776062999\n|switch|p2b: Garchomp|Garchomp, L50, M|100/100\n|move|p1b: Sneasler|Fake Out|p2b: Garchomp\n|-damage|p2b: Garchomp|85/100\n|-damage|p1b: Sneasler|88/100|[from] ability: Rough Skin|[of] p2b: Garchomp\n|move|p2a: Incineroar|Fake Out|p1b: Sneasler\n|-damage|p1b: Sneasler|71/100\n|move|p1a: Whimsicott|Tailwind|p1a: Whimsicott\n|-sidestart|p1: lolgz|move: Tailwind\n|\n|upkeep\n|turn|2\n|\n|t:|1776063039\n|move|p2b: Garchomp|Protect|p2b: Garchomp\n|-singleturn|p2b: Garchomp|Protect\n|move|p1b: Sneasler|Close Combat|p2a: Incineroar\n|-supereffective|p2a: Incineroar|1\n|-damage|p2a: Incineroar|0 fnt\n|-unboost|p1b: Sneasler|def|1\n|-unboost|p1b: Sneasler|spd|1\n|faint|p2a: Incineroar\n|move|p1a: Whimsicott|Moonblast|p2b: Garchomp\n|-activate|p2b: Garchomp|move: Protect\n|\n|upkeep\n|-message|happidoodledoo forfeited.\n|\n|win|lolgz\n|raw|lolgz's rating: 1343 &rarr; <strong>1365</strong><br />(+22 for winning)\n|raw|happidoodledoo's rating: 1375 &rarr; <strong>1353</strong><br />(-22 for losing)\n",
+  "uploadtime": 1776063045,
+  "views": 35,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1353,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582088719",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "ConquestGanda",
+    "WalkEmDownM0rt"
+  ],
+  "log": "|j|\u2606ConquestGanda\n|j|\u2606WalkEmDownM0rt\n|t:|1776056420\n|gametype|doubles\n|player|p1|ConquestGanda|2|1245\n|player|p2|WalkEmDownM0rt|boarder|1314\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Froslass, L50, F|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Rotom-Frost, L50|\n|poke|p1|Empoleon, L50, M|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Kingambit, L50, M|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Delphox, L50, M|\n|poke|p2|Corviknight, L50, F|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Sneasler, L50, F|\n|teampreview|4\n|\n|t:|1776056465\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Froslass|Froslass, L50, F|100/100\n|switch|p1b: Rotom|Rotom-Frost, L50|100/100\n|switch|p2a: Delphox|Delphox, L50, M|100/100\n|switch|p2b: Sneasler|Sneasler, L50, F|100/100\n|turn|1\n|\n|t:|1776056478\n|detailschange|p2a: Delphox|Delphox-Mega, L50, M\n|-mega|p2a: Delphox|Delphox|Delphoxite\n|detailschange|p1a: Froslass|Froslass-Mega, L50, F\n|-mega|p1a: Froslass|Froslass|Froslassite\n|-weather|Snowscape|[from] ability: Snow Warning|[of] p1a: Froslass\n|move|p1b: Rotom|Electroweb|p2a: Delphox|[spread] p2a,p2b\n|-damage|p2a: Delphox|81/100\n|-damage|p2b: Sneasler|76/100\n|-unboost|p2a: Delphox|spe|1\n|-unboost|p2b: Sneasler|spe|1\n|-enditem|p2b: Sneasler|White Herb\n|-clearnegativeboost|p2b: Sneasler|[silent]\n|move|p2b: Sneasler|Gunk Shot|p1a: Froslass\n|-resisted|p1a: Froslass|1\n|-damage|p1a: Froslass|66/100\n|move|p1a: Froslass|Shadow Ball|p2a: Delphox\n|-supereffective|p2a: Delphox|1\n|-damage|p2a: Delphox|0 fnt\n|faint|p2a: Delphox\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|-message|WalkEmDownM0rt forfeited.\n|\n|win|ConquestGanda\n|raw|ConquestGanda's rating: 1245 &rarr; <strong>1275</strong><br />(+30 for winning)\n|raw|WalkEmDownM0rt's rating: 1314 &rarr; <strong>1290</strong><br />(-24 for losing)\n|l|\u2606WalkEmDownM0rt\n|player|p2|\n",
+  "uploadtime": 1776056503,
+  "views": 39,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1275,
+  "private": 0,
+  "password": null
+}

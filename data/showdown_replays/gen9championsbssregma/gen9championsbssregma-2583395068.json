@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2583395068",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "kyotoyoko",
+    "Jordio"
+  ],
+  "log": "|j|\u2606kyotoyoko\n|j|\u2606Jordio\n|t:|1776172703\n|gametype|singles\n|player|p1|kyotoyoko|caitlin|1374\n|player|p2|Jordio|alder|1368\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Hippowdon, L50, F|\n|poke|p1|Charizard, L50, F|\n|poke|p1|Corviknight, L50, F|\n|poke|p1|Primarina, L50, F|\n|poke|p1|Gengar, L50, F|\n|poke|p1|Mimikyu, L50, F|\n|poke|p2|Clefable, L50, M|\n|poke|p2|Rotom-Wash, L50|\n|poke|p2|Umbreon, L50, M|\n|poke|p2|Venusaur, L50, M|\n|poke|p2|Goodra-Hisui, L50, M|\n|poke|p2|Basculegion, L50, M|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Jordio)\n|inactive|Jordio has 60 seconds left.\n|\n|t:|1776172753\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Mimikyu|Mimikyu, L50, F, shiny|100/100\n|switch|p2a: Basculegion|Basculegion, L50, M, shiny|100/100\n|turn|1\n|\n|t:|1776172767\n|switch|p1a: Primarina|Primarina, L50, F|100/100\n|move|p2a: Basculegion|Flip Turn|p1a: Primarina\n|-resisted|p1a: Primarina|1\n|-damage|p1a: Primarina|78/100\n|\n|t:|1776172772\n|switch|p2a: Venusaur|Venusaur, L50, M, shiny|100/100|[from] Flip Turn\n|\n|upkeep\n|turn|2\n|\n|t:|1776172777\n|switch|p1a: Gengar|Gengar, L50, F, shiny|100/100\n|detailschange|p2a: Venusaur|Venusaur-Mega, L50, M, shiny\n|-mega|p2a: Venusaur|Venusaur|Venusaurite\n|move|p2a: Venusaur|Sleep Powder|p1a: Gengar\n|-status|p1a: Gengar|slp|[from] move: Sleep Powder\n|\n|upkeep\n|turn|3\n|\n|t:|1776172786\n|detailschange|p1a: Gengar|Gengar-Mega, L50, F, shiny\n|-mega|p1a: Gengar|Gengar|Gengarite\n|cant|p1a: Gengar|slp\n|move|p2a: Venusaur|Earth Power|p1a: Gengar\n|-supereffective|p1a: Gengar|1\n|-damage|p1a: Gengar|6/100 slp\n|\n|upkeep\n|turn|4\n|\n|t:|1776172799\n|cant|p1a: Gengar|slp\n|move|p2a: Venusaur|Giga Drain|p1a: Gengar\n|-resisted|p1a: Gengar|1\n|-damage|p1a: Gengar|0 fnt\n|faint|p1a: Gengar\n|\n|upkeep\n|-message|kyotoyoko forfeited.\n|\n|win|Jordio\n|raw|kyotoyoko's rating: 1374 &rarr; <strong>1354</strong><br />(-20 for losing)\n|raw|Jordio's rating: 1368 &rarr; <strong>1388</strong><br />(+20 for winning)\n|l|\u2606kyotoyoko\n|player|p1|\n",
+  "uploadtime": 1776172813,
+  "views": 17,
+  "formatid": "gen9championsbssregma",
+  "rating": 1354,
+  "private": 0,
+  "password": null
+}

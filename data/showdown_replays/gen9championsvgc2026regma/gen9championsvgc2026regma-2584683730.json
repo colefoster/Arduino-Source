@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584683730",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "tienngu",
+    "tonybravais"
+  ],
+  "log": "|j|\u2606tienngu\n|j|\u2606tonybravais\n|t:|1776276587\n|gametype|doubles\n|player|p1|tienngu|sage|1147\n|player|p2|tonybravais|170|1126\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Greninja-*, L50, M|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Whimsicott, L50, F|\n|poke|p1|Milotic, L50, F|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Aegislash, L50, M|\n|poke|p2|Farigiraf, L50, M|\n|poke|p2|Slowking-Galar, L50, F|\n|poke|p2|Glaceon, L50, F|\n|poke|p2|Empoleon, L50, M|\n|poke|p2|Golurk, L50|\n|poke|p2|Camerupt, L50, F|\n|teampreview|4\n|\n|t:|1776276632\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Greninja|Greninja, L50, M, shiny|100/100\n|switch|p1b: Garchomp|Garchomp, L50, M, shiny|100/100\n|switch|p2a: Farigiraf|Farigiraf, L50, M|100/100\n|switch|p2b: Slowking|Slowking-Galar, L50, F|100/100\n|turn|1\n|\n|t:|1776276647\n|detailschange|p1a: Greninja|Greninja-Mega, L50, M, shiny\n|-mega|p1a: Greninja|Greninja|Greninjite\n|move|p1b: Garchomp|Rock Slide|p2a: Farigiraf|[spread] p2a,p2b\n|-damage|p2a: Farigiraf|87/100\n|-damage|p2b: Slowking|82/100\n|move|p1a: Greninja|Dark Pulse|p2b: Slowking\n|-start|p1a: Greninja|typechange|Dark|[from] ability: Protean\n|-supereffective|p2b: Slowking|1\n|-damage|p2b: Slowking|30/100\n|-prepare|p2b: Slowking|Chilly Reception|[premajor]\n|move|p2b: Slowking|Chilly Reception|p2b: Slowking\n|-weather|Snowscape\n|\n|t:|1776276658\n|switch|p2b: Glaceon|Glaceon, L50, F|100/100|[from] Chilly Reception\n|cant|p2a: Farigiraf|flinch\n|\n|-weather|Snowscape|[upkeep]\n|-heal|p2a: Farigiraf|93/100|[from] item: Leftovers\n|upkeep\n|turn|2\n|\n|t:|1776276669\n|move|p1b: Garchomp|Rock Slide|p2a: Farigiraf|[spread] p2a,p2b\n|-supereffective|p2b: Glaceon|1\n|-damage|p2a: Farigiraf|81/100\n|-damage|p2b: Glaceon|75/100\n|move|p1a: Greninja|Dark Pulse|p2a: Farigiraf\n|-supereffective|p2a: Farigiraf|1\n|-damage|p2a: Farigiraf|0 fnt\n|faint|p2a: Farigiraf\n|cant|p2b: Glaceon|flinch\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|\n|t:|1776276679\n|switch|p2a: Slowking|Slowking-Galar, L50, F|63/100\n|turn|3\n|c|\u2606tienngu|Hahahaha\n|\n|t:|1776276690\n|move|p1b: Garchomp|Rock Slide|p2b: Glaceon|[spread] p2a,p2b\n|-supereffective|p2b: Glaceon|1\n|-damage|p2a: Slowking|44/100\n|-damage|p2b: Glaceon|52/100\n|move|p1a: Greninja|Dark Pulse|p2a: Slowking\n|-supereffective|p2a: Slowking|1\n|-damage|p2a: Slowking|0 fnt\n|faint|p2a: Slowking\n|cant|p2b: Glaceon|flinch\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|-message|tonybravais forfeited.\n|\n|win|tienngu\n|raw|tienngu's rating: 1147 &rarr; <strong>1170</strong><br />(+23 for winning)\n|raw|tonybravais's rating: 1126 &rarr; <strong>1103</strong><br />(-23 for losing)\n|l|\u2606tonybravais\n|player|p2|\n",
+  "uploadtime": 1776276709,
+  "views": 32,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1103,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586787618",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Ferret05",
+    "TAKUMIGAMER"
+  ],
+  "log": "|j|\u2606Ferret05\n|j|\u2606TAKUMIGAMER\n|t:|1776459905\n|gametype|doubles\n|player|p1|Ferret05|266|1026\n|player|p2|TAKUMIGAMER|1|1115\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Gengar, L50, M|\n|poke|p1|Maushold-Four, L50|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Arcanine-Hisui, L50, F|\n|poke|p1|Archaludon, L50, M|\n|poke|p1|Clefable, L50, F|\n|poke|p2|Arcanine, L50, F|\n|poke|p2|Rotom-Wash, L50|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Gardevoir, L50, F|\n|poke|p2|Corviknight, L50, M|\n|poke|p2|Tyranitar, L50, M|\n|teampreview|4\n|\n|t:|1776459918\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Gengar|Gengar, L50, M|100/100\n|switch|p1b: Maushold|Maushold-Four, L50|100/100\n|switch|p2a: Corviknight|Corviknight, L50, M|100/100\n|switch|p2b: Gardevoir|Gardevoir, L50, F|100/100\n|turn|1\n|\n|t:|1776459941\n|detailschange|p1a: Gengar|Gengar-Mega, L50, M\n|-mega|p1a: Gengar|Gengar|Gengarite\n|detailschange|p2b: Gardevoir|Gardevoir-Mega, L50, F\n|-mega|p2b: Gardevoir|Gardevoir|Gardevoirite\n|move|p1a: Gengar|Perish Song|p1a: Gengar\n|-start|p1a: Gengar|perish3|[silent]\n|-start|p1b: Maushold|perish3|[silent]\n|-start|p2a: Corviknight|perish3|[silent]\n|-start|p2b: Gardevoir|perish3|[silent]\n|-fieldactivate|move: Perish Song\n|move|p2b: Gardevoir|Psyshock|p1a: Gengar\n|-supereffective|p1a: Gengar|1\n|-damage|p1a: Gengar|0 fnt\n|faint|p1a: Gengar\n|move|p1b: Maushold|Encore||[still]\n|-fail|p1b: Maushold\n|move|p2a: Corviknight|Tailwind|p2a: Corviknight\n|-sidestart|p2: TAKUMIGAMER|move: Tailwind\n|\n|-start|p2b: Gardevoir|perish3\n|-start|p2a: Corviknight|perish3\n|-start|p1b: Maushold|perish3\n|upkeep\n|n|!Ferret05|ferret05\n|\n|t:|1776459974\n|switch|p1a: Incineroar|Incineroar, L50, M|100/100\n|-ability|p1a: Incineroar|Intimidate|boost\n|-ability|p2a: Corviknight|Mirror Armor\n|-unboost|p1a: Incineroar|atk|1\n|-unboost|p2b: Gardevoir|atk|1\n|turn|2\n|-message|Ferret05 forfeited.\n|\n|win|TAKUMIGAMER\n",
+  "uploadtime": 1776459955,
+  "views": 17,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": null,
+  "private": 0,
+  "password": null
+}

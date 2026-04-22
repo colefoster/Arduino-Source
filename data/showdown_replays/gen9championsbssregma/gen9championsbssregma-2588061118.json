@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2588061118",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "qweralt",
+    "SGA4OKC"
+  ],
+  "log": "|j|\u2606qweralt\n|j|\u2606SGA4OKC\n|t:|1776599562\n|gametype|singles\n|player|p1|qweralt|boarder|1120\n|player|p2|SGA4OKC|pokefan-gen4|1043\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Gengar, L50, M, shiny|\n|poke|p1|Hatterene, L50, F|\n|poke|p1|Weavile, L50, M|\n|poke|p1|Volcarona, L50, M|\n|poke|p1|Dragonite, L50, F|\n|poke|p1|Rotom-Wash, L50|\n|poke|p2|Aggron, L50, F|\n|poke|p2|Tyranitar, L50, F|\n|poke|p2|Chandelure, L50, M|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Primarina, L50, M|\n|poke|p2|Aerodactyl, L50, M|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by SGA4OKC)\n|inactive|qweralt has 60 seconds left.\n|\n|t:|1776599663\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Rotom|Rotom-Wash, L50|100/100\n|switch|p2a: Aggron|Aggron, L50, F|100/100\n|turn|1\n|inactive|SGA4OKC has 30 seconds left.\n|inactive|SGA4OKC has 20 seconds left.\n|inactive|SGA4OKC has 15 seconds left.\n|\n|t:|1776599703\n|detailschange|p2a: Aggron|Aggron-Mega, L50, F\n|-mega|p2a: Aggron|Aggron|Aggronite\n|move|p1a: Rotom|Will-O-Wisp|p2a: Aggron\n|-status|p2a: Aggron|brn\n|move|p2a: Aggron|Iron Defense|p2a: Aggron\n|-boost|p2a: Aggron|def|2\n|\n|-damage|p2a: Aggron|94/100 brn|[from] brn\n|upkeep\n|turn|2\n|\n|t:|1776599718\n|move|p1a: Rotom|Volt Switch|p2a: Aggron\n|-damage|p2a: Aggron|72/100 brn\n|\n|t:|1776599722\n|switch|p1a: Volcarona|Volcarona, L50, M|100/100|[from] Volt Switch\n|move|p2a: Aggron|Roar|p1a: Volcarona\n|drag|p1a: Rotom|Rotom-Wash, L50|100/100\n|\n|-damage|p2a: Aggron|65/100 brn|[from] brn\n|upkeep\n|turn|3\n|\n|t:|1776599731\n|move|p1a: Rotom|Hydro Pump|p2a: Aggron\n|-damage|p2a: Aggron|32/100 brn\n|move|p2a: Aggron|Body Press|p1a: Rotom\n|-damage|p1a: Rotom|67/100\n|\n|-damage|p2a: Aggron|25/100 brn|[from] brn\n|upkeep\n|turn|4\n|\n|t:|1776599739\n|move|p1a: Rotom|Hydro Pump|p2a: Aggron\n|-damage|p2a: Aggron|0 fnt\n|faint|p2a: Aggron\n|\n|upkeep\n|-message|SGA4OKC forfeited.\n|\n|win|qweralt\n|raw|qweralt's rating: 1120 &rarr; <strong>1140</strong><br />(+20 for winning)\n|raw|SGA4OKC's rating: 1043 &rarr; <strong>1030</strong><br />(-13 for losing)\n|l|\u2606SGA4OKC\n|player|p2|\n",
+  "uploadtime": 1776599744,
+  "views": 1,
+  "formatid": "gen9championsbssregma",
+  "rating": 1030,
+  "private": 0,
+  "password": null
+}

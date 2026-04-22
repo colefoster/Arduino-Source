@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582540720",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Sublamb",
+    "Bup_Ladder"
+  ],
+  "log": "|j|\u2606Sublamb\n|j|\u2606Bup_Ladder\n|t:|1776098196\n|gametype|doubles\n|player|p1|Sublamb|1|1110\n|player|p2|Bup_Ladder|2|1125\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Gallade, L50, M|\n|poke|p1|Whimsicott, L50, F|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Volcarona, L50, M|\n|poke|p1|Meowstic, L50, M|\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p2|Excadrill, L50, M|\n|poke|p2|Ninetales-Alola, L50, F|\n|poke|p2|Delphox, L50, M|\n|poke|p2|Whimsicott, L50, M|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Rotom-Wash, L50|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Sublamb)\n|\n|t:|1776098223\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Gallade|Gallade, L50, M|100/100\n|switch|p1b: Whimsicott|Whimsicott, L50, F|100/100\n|switch|p2a: Whimsicott|Whimsicott, L50, M|100/100\n|switch|p2b: Excadrill|Excadrill, L50, M|100/100\n|turn|1\n|\n|t:|1776098238\n|move|p2b: Excadrill|Protect|p2b: Excadrill\n|-singleturn|p2b: Excadrill|Protect\n|move|p2a: Whimsicott|Moonblast|p1a: Gallade\n|-supereffective|p1a: Gallade|1\n|-crit|p1a: Gallade\n|-damage|p1a: Gallade|1/100\n|move|p1b: Whimsicott|Beat Up|p1a: Gallade\n|-damage|p1a: Gallade|0 fnt\n|faint|p1a: Gallade\n|-hitcount|p1: Gallade|1\n|\n|upkeep\n|-message|Sublamb forfeited.\n|\n|win|Bup_Ladder\n|raw|Sublamb's rating: 1110 &rarr; <strong>1086</strong><br />(-24 for losing)\n|raw|Bup_Ladder's rating: 1125 &rarr; <strong>1149</strong><br />(+24 for winning)\n|l|\u2606Sublamb\n|player|p1|\n",
+  "uploadtime": 1776098251,
+  "views": 11,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1086,
+  "private": 0,
+  "password": null
+}

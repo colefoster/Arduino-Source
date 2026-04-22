@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2581537844",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "iceman5687",
+    "Filibbb"
+  ],
+  "log": "|j|\u2606iceman5687\n|j|\u2606Filibbb\n|t:|1776009197\n|gametype|doubles\n|player|p1|iceman5687|266|1126\n|player|p2|Filibbb|265|1192\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Charizard, L50, F|\n|poke|p1|Torkoal, L50, F|\n|poke|p1|Farigiraf, L50, M|\n|poke|p1|Venusaur, L50, F|\n|poke|p1|Aerodactyl, L50, M|\n|poke|p1|Kingambit, L50, F|\n|poke|p2|Charizard, L50, M|\n|poke|p2|Torkoal, L50, M|\n|poke|p2|Farigiraf, L50, M|\n|poke|p2|Garchomp, L50, F|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Venusaur, L50, F|\n|teampreview|4\n|\n|t:|1776009227\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Charizard|Charizard, L50, F|100/100\n|switch|p1b: Farigiraf|Farigiraf, L50, M|100/100\n|switch|p2a: Charizard|Charizard, L50, M|100/100\n|switch|p2b: Garchomp|Garchomp, L50, F|100/100\n|turn|1\n|\n|t:|1776009249\n|detailschange|p2a: Charizard|Charizard-Mega-Y, L50, M\n|-mega|p2a: Charizard|Charizard|Charizardite Y\n|-weather|SunnyDay|[from] ability: Drought|[of] p2a: Charizard\n|move|p1a: Charizard|Protect|p1a: Charizard\n|-singleturn|p1a: Charizard|Protect\n|move|p2b: Garchomp|Rock Slide|p1a: Charizard|[spread] p1b\n|-activate|p1a: Charizard|move: Protect\n|-damage|p1b: Farigiraf|82/100\n|move|p2a: Charizard|Overheat|p1b: Farigiraf\n|-damage|p1b: Farigiraf|0 fnt\n|-unboost|p2a: Charizard|spa|2\n|faint|p1b: Farigiraf\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|\n|t:|1776009265\n|switch|p1b: Aerodactyl|Aerodactyl, L50, M|100/100\n|turn|2\n|\n|t:|1776009288\n|detailschange|p1a: Charizard|Charizard-Mega-Y, L50, F\n|-mega|p1a: Charizard|Charizard|Charizardite Y\n|move|p2a: Charizard|Protect|p2a: Charizard\n|-singleturn|p2a: Charizard|Protect\n|move|p2b: Garchomp|Rock Slide|p1a: Charizard|[spread] p1a,p1b\n|-supereffective|p1a: Charizard|2\n|-supereffective|p1b: Aerodactyl|1\n|-damage|p1a: Charizard|0 fnt\n|-damage|p1b: Aerodactyl|41/100\n|faint|p1a: Charizard\n|cant|p1b: Aerodactyl|flinch\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|\n|t:|1776009294\n|switch|p1a: Torkoal|Torkoal, L50, F|100/100\n|turn|3\n|-message|iceman5687 forfeited.\n|\n|win|Filibbb\n|raw|iceman5687's rating: 1126 &rarr; <strong>1106</strong><br />(-20 for losing)\n|raw|Filibbb's rating: 1192 &rarr; <strong>1212</strong><br />(+20 for winning)\n",
+  "uploadtime": 1776009297,
+  "views": 22,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1106,
+  "private": 0,
+  "password": null
+}

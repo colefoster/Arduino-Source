@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2582032450",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "tklll",
+    "Aguwar"
+  ],
+  "log": "|j|\u2606tklll\n|j|\u2606Aguwar\n|t:|1776050204\n|gametype|singles\n|player|p1|tklll|dragontamer|1000\n|player|p2|Aguwar|chili|1000\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Scizor, L50, F|\n|poke|p1|Meganium, L50, F|\n|poke|p1|Pelipper, L50, F|\n|poke|p1|Tyranitar, L50, M|\n|poke|p1|Archaludon, L50, M|\n|poke|p1|Espathra, L50, M|\n|poke|p2|Charizard, L50, F|\n|poke|p2|Venusaur, L50, M|\n|poke|p2|Dragonite, L50, M|\n|poke|p2|Dragapult, L50, M|\n|poke|p2|Archaludon, L50, F|\n|poke|p2|Feraligatr, L50, M|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by tklll)\n|\n|t:|1776050276\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Pelipper|Pelipper, L50, F|100/100\n|switch|p2a: Feraligatr|Feraligatr, L50, M|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p1a: Pelipper\n|turn|1\n|\n|t:|1776050294\n|detailschange|p2a: Feraligatr|Feraligatr-Mega, L50, M\n|-mega|p2a: Feraligatr|Feraligatr|Feraligite\n|move|p2a: Feraligatr|Dragon Dance|p2a: Feraligatr\n|-boost|p2a: Feraligatr|atk|1\n|-boost|p2a: Feraligatr|spe|1\n|move|p1a: Pelipper|Tailwind|p1a: Pelipper\n|-sidestart|p1: tklll|move: Tailwind\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|turn|2\n|\n|t:|1776050302\n|move|p2a: Feraligatr|Dragon Dance|p2a: Feraligatr\n|-boost|p2a: Feraligatr|atk|1\n|-boost|p2a: Feraligatr|spe|1\n|move|p1a: Pelipper|U-turn|p2a: Feraligatr\n|-damage|p2a: Feraligatr|92/100\n|\n|t:|1776050306\n|switch|p1a: Archaludon|Archaludon, L50, M|100/100|[from] U-turn\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|turn|3\n|\n|t:|1776050317\n|move|p2a: Feraligatr|Body Slam|p1a: Archaludon\n|-damage|p1a: Archaludon|3/100\n|-ability|p1a: Archaludon|Stamina|boost\n|-boost|p1a: Archaludon|def|1\n|move|p1a: Archaludon|Draco Meteor|p2a: Feraligatr|[miss]\n|-miss|p1a: Archaludon|p2a: Feraligatr\n|\n|-weather|RainDance|[upkeep]\n|-heal|p1a: Archaludon|8/100|[from] item: Leftovers\n|upkeep\n|turn|4\n|-message|tklll forfeited.\n|\n|win|Aguwar\n|raw|tklll's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|raw|Aguwar's rating: 1000 &rarr; <strong>1040</strong><br />(+40 for winning)\n|l|\u2606tklll\n|player|p1|\n",
+  "uploadtime": 1776050330,
+  "views": 8,
+  "formatid": "gen9championsbssregma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

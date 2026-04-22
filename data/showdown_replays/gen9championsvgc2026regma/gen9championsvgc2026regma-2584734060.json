@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584734060",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Dbzone9001",
+    "Tempest Flute"
+  ],
+  "log": "|j|\u2606Dbzone9001\n|j|\u2606Tempest Flute\n|t:|1776279884\n|gametype|doubles\n|player|p1|Dbzone9001|1|1430\n|player|p2|Tempest Flute|youngster-gen1rb|1382\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Corviknight, L50, F|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Froslass, L50, F|\n|poke|p1|Whimsicott, L50, F|\n|poke|p1|Tauros-Paldea-Aqua, L50, M|\n|poke|p1|Sinistcha, L50|\n|poke|p2|Glimmora, L50, F|\n|poke|p2|Talonflame, L50, M|\n|poke|p2|Farigiraf, L50, M|\n|poke|p2|Rotom-Frost, L50|\n|poke|p2|Ninetales-Alola, L50, M|\n|poke|p2|Garchomp, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Tempest Flute)\n|inactive|Tempest Flute has 60 seconds left.\n|\n|t:|1776279929\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Froslass|Froslass, L50, F|100/100\n|switch|p1b: Garchomp|Garchomp, L50, F|100/100\n|switch|p2a: Gyro Zepelli|Talonflame, L50, M, shiny|100/100\n|switch|p2b: Johnny Joestar|Glimmora, L50, F|100/100\n|turn|1\n|\n|t:|1776279938\n|detailschange|p1a: Froslass|Froslass-Mega, L50, F\n|-mega|p1a: Froslass|Froslass|Froslassite\n|-weather|Snowscape|[from] ability: Snow Warning|[of] p1a: Froslass\n|detailschange|p2b: Johnny Joestar|Glimmora-Mega, L50, F\n|-mega|p2b: Johnny Joestar|Glimmora|Glimmoranite\n|move|p2a: Gyro Zepelli|Tailwind|p2a: Gyro Zepelli\n|-sidestart|p2: Tempest Flute|move: Tailwind\n|move|p2b: Johnny Joestar|Power Gem|p1a: Froslass\n|-supereffective|p1a: Froslass|1\n|-damage|p1a: Froslass|0 fnt\n|faint|p1a: Froslass\n|move|p1b: Garchomp|Rock Slide|p2b: Johnny Joestar|[spread] p2a,p2b\n|-supereffective|p2a: Gyro Zepelli|2\n|-damage|p2a: Gyro Zepelli|0 fnt\n|-damage|p2b: Johnny Joestar|78/100\n|faint|p2a: Gyro Zepelli\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|\n|t:|1776279952\n|switch|p2a: Diego Brando|Rotom-Frost, L50|100/100\n|switch|p1a: Corviknight|Corviknight, L50, F|100/100\n|turn|2\n|\n|t:|1776279959\n|move|p2a: Diego Brando|Blizzard|p1b: Garchomp|[spread] p1a,p1b\n|-crit|p1a: Corviknight\n|-supereffective|p1b: Garchomp|2\n|-damage|p1a: Corviknight|43/100\n|-damage|p1b: Garchomp|0 fnt\n|faint|p1b: Garchomp\n|move|p2b: Johnny Joestar|Power Gem|p1a: Corviknight\n|-damage|p1a: Corviknight|0 fnt\n|faint|p1a: Corviknight\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|-message|Dbzone9001 forfeited.\n|\n|win|Tempest Flute\n|raw|Dbzone9001's rating: 1430 &rarr; <strong>1407</strong><br />(-23 for losing)\n|raw|Tempest Flute's rating: 1382 &rarr; <strong>1405</strong><br />(+23 for winning)\n|l|\u2606Dbzone9001\n|player|p1|\n",
+  "uploadtime": 1776279970,
+  "views": 35,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1405,
+  "private": 0,
+  "password": null
+}

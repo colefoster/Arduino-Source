@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582771783",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "SHyperdestroyerVGC",
+    "Jah_08"
+  ],
+  "log": "|j|\u2606SHyperdestroyerVGC\n|j|\u2606Jah_08\n|t:|1776112991\n|gametype|doubles\n|player|p1|SHyperdestroyerVGC|lady|1224\n|player|p2|Jah_08|alder|1320\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Charizard, L50, F|\n|poke|p1|Venusaur, L50, M|\n|poke|p1|Whimsicott, L50, M|\n|poke|p1|Kingambit, L50, M|\n|poke|p1|Kommo-o, L50, M|\n|poke|p1|Typhlosion-Hisui, L50, F|\n|poke|p2|Excadrill, L50, F|\n|poke|p2|Whimsicott, L50, M|\n|poke|p2|Volcarona, L50, F|\n|poke|p2|Zoroark-Hisui, L50, F|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Conkeldurr, L50, F|\n|teampreview|4\nSHyperdestroyerVGC has agreed to open team sheets.\n|\n|t:|1776113041\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Charizard|Charizard, L50, F|100/100\n|switch|p1b: Kommo-o|Kommo-o, L50, M|100/100\n|switch|p2a: Whimsicott|Whimsicott, L50, M, shiny|100/100\n|switch|p2b: Excadrill|Excadrill, L50, F|100/100\n|-ability|p2b: Excadrill|Mold Breaker\n|turn|1\n|\n|t:|1776113065\n|detailschange|p1a: Charizard|Charizard-Mega-Y, L50, F\n|-mega|p1a: Charizard|Charizard|Charizardite Y\n|-weather|SunnyDay|[from] ability: Drought|[of] p1a: Charizard\n|detailschange|p2b: Excadrill|Excadrill-Mega, L50, F\n|-mega|p2b: Excadrill|Excadrill|Excadrite\n|move|p2b: Excadrill|Rock Slide|p1a: Charizard|[spread] p1a,p1b\n|-supereffective|p1a: Charizard|2\n|-resisted|p1b: Kommo-o|1\n|-damage|p1a: Charizard|0 fnt\n|-damage|p1b: Kommo-o|91/100\n|faint|p1a: Charizard\n|move|p2a: Whimsicott|Moonblast|p1b: Kommo-o\n|-supereffective|p1b: Kommo-o|2\n|-enditem|p1b: Kommo-o|Roseli Berry|[eat]\n|-enditem|p1b: Kommo-o|Roseli Berry|[weaken]\n|-damage|p1b: Kommo-o|26/100\n|move|p1b: Kommo-o|Iron Defense|p1b: Kommo-o\n|-boost|p1b: Kommo-o|def|2\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|\n|t:|1776113076\n|switch|p1a: Whimsicott|Whimsicott, L50, M|100/100\n|turn|2\n|\n|t:|1776113095\n|move|p2a: Whimsicott|Tailwind|p2a: Whimsicott\n|-sidestart|p2: Jah_08|move: Tailwind\n|move|p1a: Whimsicott|Tailwind|p1a: Whimsicott\n|-sidestart|p1: SHyperdestroyerVGC|move: Tailwind\n|move|p2b: Excadrill|High Horsepower|p1b: Kommo-o\n|-crit|p1b: Kommo-o\n|-damage|p1b: Kommo-o|0 fnt\n|faint|p1b: Kommo-o\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|-message|SHyperdestroyerVGC forfeited.\n|\n|win|Jah_08\n|raw|SHyperdestroyerVGC's rating: 1224 &rarr; <strong>1206</strong><br />(-18 for losing)\n|raw|Jah_08's rating: 1320 &rarr; <strong>1335</strong><br />(+15 for winning)\n",
+  "uploadtime": 1776113108,
+  "views": 24,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1206,
+  "private": 0,
+  "password": null
+}

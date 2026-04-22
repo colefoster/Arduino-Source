@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584063417",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Saachan46",
+    "Polaris711"
+  ],
+  "log": "|j|\u2606Saachan46\n|j|\u2606Polaris711\n|t:|1776221458\n|gametype|doubles\n|player|p1|Saachan46|170|1255\n|player|p2|Polaris711|backpacker|1212\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Kangaskhan, L50, F|\n|poke|p1|Milotic, L50, F|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Corviknight, L50, M|\n|poke|p1|Kommo-o, L50, M|\n|poke|p2|Dragonite, L50, M|\n|poke|p2|Pelipper, L50, M|\n|poke|p2|Clefable, L50, F|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Archaludon, L50, M|\n|poke|p2|Palafin, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Polaris711)\n|inactive|Saachan46 has 60 seconds left.\n|inactive|Polaris711 has 60 seconds left.\n|\n|t:|1776221506\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Kangaskhan|Kangaskhan, L50, F|100/100\n|switch|p1b: Kommo-o|Kommo-o, L50, M|100/100\n|switch|p2a: Pelipper|Pelipper, L50, M|100/100\n|switch|p2b: Dragonite|Dragonite, L50, M|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p2a: Pelipper\n|turn|1\n|\n|t:|1776221527\n|detailschange|p1a: Kangaskhan|Kangaskhan-Mega, L50, F\n|-mega|p1a: Kangaskhan|Kangaskhan|Kangaskhanite\n|move|p2b: Dragonite|Protect|p2b: Dragonite\n|-singleturn|p2b: Dragonite|Protect\n|move|p1a: Kangaskhan|Fake Out|p2b: Dragonite\n|-activate|p2b: Dragonite|move: Protect\n|move|p1b: Kommo-o|Clangorous Soul|p1b: Kommo-o\n|-boost|p1b: Kommo-o|atk|1\n|-boost|p1b: Kommo-o|def|1\n|-boost|p1b: Kommo-o|spa|1\n|-boost|p1b: Kommo-o|spd|1\n|-boost|p1b: Kommo-o|spe|1\n|-damage|p1b: Kommo-o|68/100\n|move|p2a: Pelipper|Hurricane|p1b: Kommo-o\n|-supereffective|p1b: Kommo-o|1\n|-damage|p1b: Kommo-o|0 fnt\n|faint|p1b: Kommo-o\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|-message|Saachan46 forfeited.\n|\n|win|Polaris711\n|raw|Saachan46's rating: 1255 &rarr; <strong>1227</strong><br />(-28 for losing)\n|raw|Polaris711's rating: 1212 &rarr; <strong>1240</strong><br />(+28 for winning)\n|l|\u2606Saachan46\n|player|p1|\n|c|\u2606Polaris711|lol\n",
+  "uploadtime": 1776221553,
+  "views": 40,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1227,
+  "private": 0,
+  "password": null
+}

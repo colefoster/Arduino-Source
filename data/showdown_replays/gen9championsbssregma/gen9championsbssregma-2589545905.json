@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2589545905",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "Sunlitrobby",
+    "mega.CHIVA"
+  ],
+  "log": "|j|\u2606Sunlitrobby\n|j|\u2606mega.CHIVA\n|t:|1776732847\n|gametype|singles\n|player|p1|Sunlitrobby|169|1015\n|player|p2|mega.CHIVA|unknown|1108\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Hydreigon, L50, F|\n|poke|p1|Dragapult, L50, F|\n|poke|p1|Whimsicott, L50, M|\n|poke|p1|Houndoom, L50, F|\n|poke|p1|Infernape, L50, F|\n|poke|p1|Meowscarada, L50, M|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Hawlucha, L50, M|\n|poke|p2|Sylveon, L50, F|\n|poke|p2|Greninja, L50, M|\n|poke|p2|Blastoise, L50, M|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Sunlitrobby)\n|\n|t:|1776732866\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Infernape|Infernape, L50, F|100/100\n|switch|p2a: Sylveon|Sylveon, L50, F|100/100\n|turn|1\n|\n|t:|1776732875\n|move|p1a: Infernape|Flamethrower|p2a: Sylveon\n|-damage|p2a: Sylveon|71/100\n|move|p2a: Sylveon|Psychic|p1a: Infernape\n|-supereffective|p1a: Infernape|1\n|-damage|p1a: Infernape|2/100\n|\n|upkeep\n|turn|2\n|\n|t:|1776732882\n|switch|p1a: Hydreigon|Hydreigon, L50, F|100/100\n|move|p2a: Sylveon|Hyper Voice|p1a: Hydreigon\n|-supereffective|p1a: Hydreigon|2\n|-damage|p1a: Hydreigon|0 fnt\n|faint|p1a: Hydreigon\n|\n|upkeep\n|-message|Sunlitrobby forfeited.\n|\n|win|mega.CHIVA\n|raw|Sunlitrobby's rating: 1015 &rarr; <strong>1006</strong><br />(-9 for losing)\n|raw|mega.CHIVA's rating: 1108 &rarr; <strong>1126</strong><br />(+18 for winning)\n|l|\u2606Sunlitrobby\n|player|p1|\n",
+  "uploadtime": 1776732893,
+  "views": 0,
+  "formatid": "gen9championsbssregma",
+  "rating": 1006,
+  "private": 0,
+  "password": null
+}

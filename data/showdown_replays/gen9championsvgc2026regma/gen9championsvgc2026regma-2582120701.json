@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582120701",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "thebossadry",
+    "qingyunyunyun"
+  ],
+  "log": "|j|\u2606thebossadry\n|j|\u2606qingyunyunyun\n|t:|1776060579\n|gametype|doubles\n|player|p1|thebossadry|170|1034\n|player|p2|qingyunyunyun|2|1134\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Gengar, L50, M|\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Politoed, L50, F|\n|poke|p1|Whimsicott, L50, M|\n|poke|p1|Kommo-o, L50, F|\n|poke|p2|Aerodactyl, L50, M|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Sinistcha-Masterpiece, L50|\n|poke|p2|Maushold-Four, L50|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Sneasler, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by thebossadry)\n|inactive|qingyunyunyun also wants the timer to be on.\n|inactive|thebossadry has 60 seconds left.\n|inactive|qingyunyunyun has 60 seconds left.\n|\n|t:|1776060635\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Whimsicott|Whimsicott, L50, M|100/100\n|switch|p1b: Gengar|Gengar, L50, M|100/100\n|switch|p2a: Sneasler|Sneasler, L50, M|100/100\n|switch|p2b: Aerodactyl|Aerodactyl, L50, M|100/100\n|-ability|p2b: Aerodactyl|Pressure\n|turn|1\n|\n|t:|1776060649\n|detailschange|p2b: Aerodactyl|Aerodactyl-Mega, L50, M\n|-mega|p2b: Aerodactyl|Aerodactyl|Aerodactylite\n|move|p1a: Whimsicott|Protect|p1a: Whimsicott\n|-singleturn|p1a: Whimsicott|Protect\n|move|p1b: Gengar|Protect|p1b: Gengar\n|-singleturn|p1b: Gengar|Protect\n|move|p2a: Sneasler|Fake Out|p1a: Whimsicott\n|-activate|p1a: Whimsicott|move: Protect\n|move|p2b: Aerodactyl|Dual Wingbeat|p1a: Whimsicott\n|-activate|p1a: Whimsicott|move: Protect\n|\n|upkeep\n|turn|2\n|inactive|thebossadry has 30 seconds left.\n|\n|t:|1776060676\n|detailschange|p1b: Gengar|Gengar-Mega, L50, M\n|-mega|p1b: Gengar|Gengar|Gengarite\n|move|p1a: Whimsicott|Encore|p2a: Sneasler\n|-start|p2a: Sneasler|Encore\n|move|p2a: Sneasler|Fake Out||[still]\n|-hint|Fake Out only works on your first turn out.\n|-fail|p2a: Sneasler\n|move|p2b: Aerodactyl|Tailwind|p2b: Aerodactyl\n|-sidestart|p2: qingyunyunyun|move: Tailwind\n|move|p1b: Gengar|Focus Blast|p2b: Aerodactyl\n|-crit|p2b: Aerodactyl\n|-damage|p2b: Aerodactyl|6/100\n|\n|upkeep\n|turn|3\n|-message|qingyunyunyun forfeited.\n|\n|win|thebossadry\n|raw|thebossadry's rating: 1034 &rarr; <strong>1079</strong><br />(+45 for winning)\n|raw|qingyunyunyun's rating: 1134 &rarr; <strong>1102</strong><br />(-32 for losing)\n|l|\u2606qingyunyunyun\n|player|p2|\n",
+  "uploadtime": 1776060702,
+  "views": 15,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1079,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2588332889",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Portalio",
+    "Arsyro"
+  ],
+  "log": "|j|\u2606Portalio\n|j|\u2606Arsyro\n|t:|1776624860\n|gametype|doubles\n|player|p1|Portalio|1|1223\n|player|p2|Arsyro|169|1150\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Aegislash, L50, F|\n|poke|p1|Blastoise, L50, M|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Pelipper, L50, M|\n|poke|p1|Maushold, L50|\n|poke|p2|Chandelure, L50, F|\n|poke|p2|Whimsicott, L50, F|\n|poke|p2|Torkoal, L50, F|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Raichu, L50, F|\n|poke|p2|Dragonite, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Arsyro)\n|\n|t:|1776624901\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Pelipper|Pelipper, L50, M|100/100\n|switch|p1b: Aegislash|Aegislash, L50, F|100/100\n|switch|p2a: Chandelure|Chandelure, L50, F|100/100\n|switch|p2b: Whimsicott|Whimsicott, L50, F|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p1a: Pelipper\n|turn|1\n|inactive|Portalio has 30 seconds left.\n|inactive|Portalio has 20 seconds left.\n|inactive|Portalio has 15 seconds left.\n|inactive|Portalio has 10 seconds left.\n|\n|t:|1776624949\n|detailschange|p2a: Chandelure|Chandelure-Mega, L50, F\n|-mega|p2a: Chandelure|Chandelure|Chandelurite\n|move|p2b: Whimsicott|Sunny Day|p2b: Whimsicott\n|-weather|SunnyDay\n|move|p1a: Pelipper|Tailwind|p1a: Pelipper\n|-sidestart|p1: Portalio|move: Tailwind\n|-formechange|p1b: Aegislash|Aegislash-Blade|\n|move|p1b: Aegislash|Poltergeist|p2a: Chandelure\n|-activate|p2a: Chandelure|move: Poltergeist|Chandelurite\n|-supereffective|p2a: Chandelure|1\n|-crit|p2a: Chandelure\n|-damage|p2a: Chandelure|0 fnt\n|faint|p2a: Chandelure\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|\n|t:|1776624960\n|switch|p2a: Raichu|Raichu, L50, F|100/100\n|turn|2\n|\n|t:|1776624976\n|switch|p1a: Incineroar|Incineroar, L50, F|100/100\n|-ability|p1a: Incineroar|Intimidate|boost\n|-unboost|p2a: Raichu|atk|1\n|-unboost|p2b: Whimsicott|atk|1\n|move|p2b: Whimsicott|Tailwind|p2b: Whimsicott\n|-sidestart|p2: Arsyro|move: Tailwind\n|move|p2a: Raichu|Thunderbolt|p1a: Incineroar\n|-damage|p1a: Incineroar|68/100\n|move|p1b: Aegislash|Poltergeist|p2a: Raichu\n|-activate|p2a: Raichu|move: Poltergeist|Focus Sash\n|-enditem|p2a: Raichu|Focus Sash\n|-damage|p2a: Raichu|1/100\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|turn|3\n|-message|Arsyro forfeited.\n|\n|win|Portalio\n|raw|Portalio's rating: 1223 &rarr; <strong>1243</strong><br />(+20 for winning)\n|raw|Arsyro's rating: 1150 &rarr; <strong>1130</strong><br />(-20 for losing)\n|l|\u2606Arsyro\n|player|p2|\n",
+  "uploadtime": 1776624991,
+  "views": 8,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1130,
+  "private": 0,
+  "password": null
+}

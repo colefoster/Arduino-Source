@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586777093",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "adityanair212",
+    "DemonGenesis"
+  ],
+  "log": "|j|\u2606adityanair212\n|j|\u2606DemonGenesis\n|t:|1776459073\n|gametype|doubles\n|player|p1|adityanair212|ghetsis-gen5bw|1140\n|player|p2|DemonGenesis|169|1067\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Froslass, L50, F|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Rotom-Frost, L50|\n|poke|p1|Empoleon, L50, M|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Kingambit, L50, F|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Sylveon, L50, F|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Farigiraf, L50, M|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Drampa, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by DemonGenesis)\n|\n|t:|1776459121\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Froslass|Froslass, L50, F|100/100\n|switch|p1b: Incineroar|Incineroar, L50, F|100/100\n|switch|p2a: Sinistcha|Sinistcha, L50|100/100\n|switch|p2b: Sylveon|Sylveon, L50, F|100/100\n|-ability|p1b: Incineroar|Intimidate|boost\n|-unboost|p2a: Sinistcha|atk|1\n|-unboost|p2b: Sylveon|atk|1\n|turn|1\n|inactive|DemonGenesis has 30 seconds left.\n|\n|t:|1776459154\n|detailschange|p1a: Froslass|Froslass-Mega, L50, F\n|-mega|p1a: Froslass|Froslass|Froslassite\n|-weather|Snowscape|[from] ability: Snow Warning|[of] p1a: Froslass\n|move|p1b: Incineroar|Fake Out|p2b: Sylveon\n|-damage|p2b: Sylveon|85/100\n|move|p1a: Froslass|Blizzard|p2a: Sinistcha|[spread] p2a,p2b\n|-supereffective|p2a: Sinistcha|1\n|-damage|p2a: Sinistcha|15/100\n|-damage|p2b: Sylveon|51/100\n|-status|p2a: Sinistcha|frz\n|-enditem|p2a: Sinistcha|Sitrus Berry|[eat]\n|-heal|p2a: Sinistcha|40/100 frz|[from] item: Sitrus Berry\n|cant|p2b: Sylveon|flinch\n|cant|p2a: Sinistcha|frz\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|turn|2\n|-message|DemonGenesis forfeited.\n|\n|win|adityanair212\n|raw|adityanair212's rating: 1140 &rarr; <strong>1160</strong><br />(+20 for winning)\n|raw|DemonGenesis's rating: 1067 &rarr; <strong>1051</strong><br />(-16 for losing)\n|l|\u2606DemonGenesis\n|player|p2|\n",
+  "uploadtime": 1776459170,
+  "views": 26,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1051,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2585396057",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Zhi2",
+    "ribas900"
+  ],
+  "log": "|j|\u2606Zhi2\n|j|\u2606ribas900\n|t:|1776344196\n|gametype|doubles\n|player|p1|Zhi2|169|1100\n|player|p2|ribas900|265|1099\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Pelipper, L50, F|\n|poke|p1|Blastoise, L50, M|\n|poke|p1|Starmie, L50|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Kingambit, L50, F|\n|poke|p1|Garchomp, L50, M|\n|poke|p2|Tyranitar, L50, F|\n|poke|p2|Excadrill, L50, F|\n|poke|p2|Aerodactyl, L50, M|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Whimsicott, L50, M|\n|poke|p2|Sinistcha, L50|\n|teampreview|4\n|\n|t:|1776344218\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Garchomp|Garchomp, L50, M|100/100\n|switch|p1b: Blastoise|Blastoise, L50, M|100/100\n|switch|p2a: Tyranitar|Tyranitar, L50, F|100/100\n|switch|p2b: Sneasler|Sneasler, L50, M|100/100\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p2a: Tyranitar\n|turn|1\n|\n|t:|1776344234\n|move|p2b: Sneasler|Fake Out|p1b: Blastoise\n|-damage|p1b: Blastoise|84/100\n|cant|p1b: Blastoise|flinch\n|move|p1a: Garchomp|Earthquake|p2a: Tyranitar|[spread] p1b,p2a,p2b\n|-supereffective|p2a: Tyranitar|1\n|-supereffective|p2b: Sneasler|1\n|-damage|p1b: Blastoise|36/100\n|-damage|p2a: Tyranitar|15/100\n|-damage|p2b: Sneasler|0 fnt\n|faint|p2b: Sneasler\n|move|p2a: Tyranitar|Dragon Dance|p2a: Tyranitar\n|-boost|p2a: Tyranitar|atk|1\n|-boost|p2a: Tyranitar|spe|1\n|\n|-weather|Sandstorm|[upkeep]\n|-damage|p1b: Blastoise|30/100|[from] Sandstorm\n|upkeep\n|\n|t:|1776344252\n|switch|p2b: Excadrill|Excadrill, L50, F|100/100\n|turn|2\n|\n|t:|1776344257\n|switch|p1b: Pelipper|Pelipper, L50, F|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p1b: Pelipper\n|move|p1a: Garchomp|Earthquake|p2a: Tyranitar|[spread] p2a,p2b\n|-immune|p1b: Pelipper\n|-supereffective|p2a: Tyranitar|1\n|-supereffective|p2b: Excadrill|1\n|-damage|p2a: Tyranitar|0 fnt\n|-damage|p2b: Excadrill|0 fnt\n|faint|p2a: Tyranitar\n|faint|p2b: Excadrill\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|\n|t:|1776344266\n|switch|p2b: Aerodactyl|Aerodactyl, L50, M|100/100\n|-ability|p2b: Aerodactyl|Unnerve\n|turn|3\n|-message|ribas900 forfeited.\n|\n|win|Zhi2\n|raw|Zhi2's rating: 1100 &rarr; <strong>1125</strong><br />(+25 for winning)\n|raw|ribas900's rating: 1099 &rarr; <strong>1074</strong><br />(-25 for losing)\n|l|\u2606ribas900\n|player|p2|\n",
+  "uploadtime": 1776344285,
+  "views": 19,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1074,
+  "private": 0,
+  "password": null
+}

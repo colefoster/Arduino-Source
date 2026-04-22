@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2585302280",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "storm93ita",
+    "manoleleco"
+  ],
+  "log": "|j|\u2606storm93ita\n|j|\u2606manoleleco\n|t:|1776335610\n|gametype|doubles\n|player|p1|storm93ita|volkner|1096\n|player|p2|manoleleco|fisherman-gen4|1134\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Dragonite, L50, M|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Archaludon, L50, M|\n|poke|p1|Meganium, L50, M|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Pelipper, L50, M|\n|poke|p2|Starmie, L50|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Archaludon, L50, F|\n|poke|p2|Aegislash, L50, M|\n|poke|p2|Pelipper, L50, M|\n|poke|p2|Maushold-Four, L50|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by storm93ita)\n|inactive|storm93ita has 60 seconds left.\n|inactive|manoleleco has 60 seconds left.\n|l|\u2606manoleleco\n|inactive|manoleleco disconnected and has a minute to reconnect!\n|player|p2|\n|inactive|storm93ita has 30 seconds left.\n|\n|t:|1776335675\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Dragonite|Dragonite, L50, M|100/100\n|switch|p1b: Pelipper|Pelipper, L50, M|100/100\n|switch|p2a: Sneasler|Sneasler, L50, M|100/100\n|switch|p2b: Pelipper|Pelipper, L50, M|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p2b: Pelipper\n|turn|1\n|inactive|storm93ita has 30 seconds left.\n|inactive|manoleleco has 30 seconds left.\n|inactive|manoleleco has 20 seconds left.\n|inactive|storm93ita has 20 seconds left.\n|inactive|manoleleco has 15 seconds left.\n|inactive|storm93ita has 15 seconds left.\n|inactive|manoleleco has 10 seconds left.\n|inactive|manoleleco has 5 seconds left.\n|-message|manoleleco lost due to inactivity.\n|\n|win|storm93ita\n|raw|storm93ita's rating: 1096 &rarr; <strong>1124</strong><br />(+28 for winning)\n|raw|manoleleco's rating: 1134 &rarr; <strong>1106</strong><br />(-28 for losing)\n",
+  "uploadtime": 1776335734,
+  "views": 23,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1106,
+  "private": 0,
+  "password": null
+}

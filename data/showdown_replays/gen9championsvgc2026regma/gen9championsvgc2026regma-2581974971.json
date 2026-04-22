@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2581974971",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "StrikerMohamud",
+    "Slyvyan"
+  ],
+  "log": "|j|\u2606StrikerMohamud\n|j|\u2606Slyvyan\n|t:|1776044763\n|gametype|doubles\n|player|p1|StrikerMohamud|unknown|1209\n|player|p2|Slyvyan|iono|1306\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Kangaskhan, L50, F|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Azumarill, L50, F|\n|poke|p1|Froslass, L50, F|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Talonflame, L50, M|\n|poke|p2|Chesnaught, L50, F|\n|poke|p2|Rotom-Wash, L50|\n|poke|p2|Reuniclus, L50, M|\n|poke|p2|Mimikyu, L50, M|\n|poke|p2|Crabominable, L50, F|\n|poke|p2|Incineroar, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Slyvyan)\n|inactive|StrikerMohamud has 60 seconds left.\n|c|\u2606StrikerMohamud|they dont know that azumarill learns trick room\n|\n|t:|1776044812\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Kangaskhan|Kangaskhan, L50, F|100/100\n|switch|p1b: Azumarill|Azumarill, L50, F, shiny|100/100\n|switch|p2a: Rotom|Rotom-Wash, L50|100/100\n|switch|p2b: Mimikyu|Mimikyu, L50, M|100/100\n|turn|1\n|c|\u2606Slyvyan|they don't know because it doesn't?\n|c|\u2606Slyvyan|I think?\n|\n|t:|1776044832\n|switch|p2b: Incineroar|Incineroar, L50, F|100/100\n|-ability|p2b: Incineroar|Intimidate|boost\n|-fail|p1a: Kangaskhan|unboost|Attack|[from] ability: Scrappy|[of] p1a: Kangaskhan\n|-unboost|p1b: Azumarill|atk|1\n|move|p1a: Kangaskhan|Fake Out|p2b: Incineroar\n|-damage|p2b: Incineroar|85/100\n|move|p2a: Rotom|Thunderbolt|p1b: Azumarill\n|-supereffective|p1b: Azumarill|1\n|-damage|p1b: Azumarill|15/100\n|-enditem|p1b: Azumarill|Sitrus Berry|[eat]\n|-heal|p1b: Azumarill|40/100|[from] item: Sitrus Berry\n|move|p1b: Azumarill|Belly Drum||[still]\n|-fail|p1b: Azumarill\n|\n|upkeep\n|turn|2\n|-message|StrikerMohamud forfeited.\n|\n|win|Slyvyan\n",
+  "uploadtime": 1776044765,
+  "views": 9,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": null,
+  "private": 0,
+  "password": null
+}

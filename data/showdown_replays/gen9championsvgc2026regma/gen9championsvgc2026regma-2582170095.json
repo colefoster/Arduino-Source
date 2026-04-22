@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582170095",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "lunakeys",
+    "moyeade"
+  ],
+  "log": "|j|\u2606lunakeys\n|j|\u2606moyeade\n|t:|1776066893\n|gametype|doubles\n|player|p1|lunakeys|gwynn|1188\n|player|p2|moyeade|lillie-masters|1163\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Froslass, L50, F|\n|poke|p1|Sneasler, L50, F|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Whimsicott, L50, M|\n|poke|p1|Primarina, L50, F|\n|poke|p1|Garchomp, L50, F|\n|poke|p2|Gengar, L50, F|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Pelipper, L50, M|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Kingambit, L50, M|\n|poke|p2|Farigiraf, L50, M|\n|teampreview|4\n|\n|t:|1776066918\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: artemis|Froslass, L50, F, shiny|100/100\n|switch|p1b: mother|Sneasler, L50, F|100/100\n|switch|p2a: Incineroar|Incineroar, L50, F, shiny|100/100\n|switch|p2b: Gengar|Gengar, L50, F, shiny|100/100\n|-ability|p2a: Incineroar|Intimidate|boost\n|-unboost|p1a: artemis|atk|1\n|-unboost|p1b: mother|atk|1\n|-enditem|p1b: mother|White Herb\n|-clearnegativeboost|p1b: mother|[silent]\n|turn|1\n|\n|t:|1776066949\n|detailschange|p1a: artemis|Froslass-Mega, L50, F, shiny\n|-mega|p1a: artemis|Froslass|Froslassite\n|-weather|Snowscape|[from] ability: Snow Warning|[of] p1a: artemis\n|detailschange|p2b: Gengar|Gengar-Mega, L50, F, shiny\n|-mega|p2b: Gengar|Gengar|Gengarite\n|move|p1b: mother|Fake Out|p2a: Incineroar\n|-damage|p2a: Incineroar|89/100\n|cant|p2a: Incineroar|flinch\n|move|p2b: Gengar|Perish Song|p2b: Gengar\n|-start|p1a: artemis|perish3|[silent]\n|-start|p1b: mother|perish3|[silent]\n|-start|p2a: Incineroar|perish3|[silent]\n|-start|p2b: Gengar|perish3|[silent]\n|-fieldactivate|move: Perish Song\n|move|p1a: artemis|Shadow Ball|p2b: Gengar\n|-supereffective|p2b: Gengar|1\n|-damage|p2b: Gengar|4/100\n|\n|-weather|Snowscape|[upkeep]\n|-start|p1b: mother|perish3\n|-start|p2b: Gengar|perish3\n|-start|p1a: artemis|perish3\n|-start|p2a: Incineroar|perish3\n|upkeep\n|turn|2\n|-message|moyeade forfeited.\n|\n|win|lunakeys\n|raw|lunakeys's rating: 1188 &rarr; <strong>1211</strong><br />(+23 for winning)\n|raw|moyeade's rating: 1163 &rarr; <strong>1140</strong><br />(-23 for losing)\n|l|\u2606moyeade\n|player|p2|\n|c|\u2606lunakeys|????\n",
+  "uploadtime": 1776066978,
+  "views": 25,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1140,
+  "private": 0,
+  "password": null
+}

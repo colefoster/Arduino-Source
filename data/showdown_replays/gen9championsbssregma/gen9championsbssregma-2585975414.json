@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2585975414",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "Bbbkty",
+    "Wanakai111"
+  ],
+  "log": "|j|\u2606Bbbkty\n|j|\u2606Wanakai111\n|t:|1776386700\n|gametype|singles\n|player|p1|Bbbkty|169|1188\n|player|p2|Wanakai111|169|1002\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Clefable, L50, M|\n|poke|p1|Charizard, L50, M|\n|poke|p1|Mimikyu, L50, M|\n|poke|p1|Kingambit, L50, M|\n|poke|p1|Espathra, L50, F|\n|poke|p1|Glimmora, L50, M|\n|poke|p2|Corviknight, L50, M|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Scizor, L50, F|\n|poke|p2|Blastoise, L50, M|\n|poke|p2|Glimmora, L50, F|\n|poke|p2|Hydreigon, L50, M|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Bbbkty)\n|\n|t:|1776386729\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Glimmora|Glimmora, L50, M, shiny|100/100\n|switch|p2a: Glimmora|Glimmora, L50, F|100/100\n|turn|1\n|-message|Wanakai111 forfeited.\n|\n|win|Bbbkty\n|raw|Bbbkty's rating: 1188 &rarr; <strong>1201</strong><br />(+13 for winning)\n|raw|Wanakai111's rating: 1002 &rarr; <strong>1000</strong><br />(-2 for losing)\n|l|\u2606Wanakai111\n|player|p2|\n",
+  "uploadtime": 1776386742,
+  "views": 6,
+  "formatid": "gen9championsbssregma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

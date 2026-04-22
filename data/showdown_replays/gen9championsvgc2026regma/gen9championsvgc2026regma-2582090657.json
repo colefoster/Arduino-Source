@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582090657",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Zappyzap01",
+    "froggityfrogfrog"
+  ],
+  "log": "|j|\u2606Zappyzap01\n|j|\u2606froggityfrogfrog\n|t:|1776056665\n|gametype|doubles\n|player|p1|Zappyzap01|benga|1387\n|player|p2|froggityfrogfrog|burgh|1286\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Sylveon, L50, F|\n|poke|p1|Camerupt, L50, M|\n|poke|p1|Sableye, L50, M|\n|poke|p1|Oranguru, L50, M|\n|poke|p1|Torkoal, L50, M|\n|poke|p1|Meganium, L50, F|\n|poke|p2|Camerupt, L50, F|\n|poke|p2|Farigiraf, L50, F|\n|poke|p2|Primarina, L50, M|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Drampa, L50, F|\n|poke|p2|Mimikyu, L50, F|\n|teampreview|4\n|\n|t:|1776056694\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Oranguru|Oranguru, L50, M, shiny|100/100\n|switch|p1b: Sylveon|Sylveon, L50, F, shiny|100/100\n|switch|p2a: Molpe|Primarina, L50, M|100/100\n|switch|p2b: SandyEggo|Farigiraf, L50, F, shiny|100/100\n|turn|1\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Zappyzap01)\n|\n|t:|1776056705\n|move|p2b: SandyEggo|Imprison|p2b: SandyEggo\n|-start|p2b: SandyEggo|move: Imprison\n|move|p2a: Molpe|Moonblast|p1b: Sylveon\n|-damage|p1b: Sylveon|56/100\n|cant|p1b: Sylveon|move: Imprison|Hyper Voice\n|cant|p1a: Oranguru|move: Imprison|Trick Room\n|\n|upkeep\n|turn|2\n|\n|t:|1776056719\n|move|p2b: SandyEggo|Hyper Voice|p1a: Oranguru|[spread] p1a,p1b\n|-damage|p1a: Oranguru|76/100\n|-damage|p1b: Sylveon|34/100\n|move|p1a: Oranguru|Psychic|p2b: SandyEggo\n|-resisted|p2b: SandyEggo|1\n|-damage|p2b: SandyEggo|88/100\n|move|p2a: Molpe|Moonblast|p1b: Sylveon\n|-damage|p1b: Sylveon|0 fnt\n|faint|p1b: Sylveon\n|\n|-heal|p2b: SandyEggo|94/100|[from] item: Leftovers\n|upkeep\n|-message|Zappyzap01 forfeited.\n|\n|win|froggityfrogfrog\n|raw|Zappyzap01's rating: 1387 &rarr; <strong>1361</strong><br />(-26 for losing)\n|raw|froggityfrogfrog's rating: 1286 &rarr; <strong>1318</strong><br />(+32 for winning)\n|l|\u2606Zappyzap01\n|player|p1|\n",
+  "uploadtime": 1776056734,
+  "views": 43,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1318,
+  "private": 0,
+  "password": null
+}

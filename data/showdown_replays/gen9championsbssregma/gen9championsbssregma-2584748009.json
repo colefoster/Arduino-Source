@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2584748009",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "NabbitXz26",
+    "Sjsbejs"
+  ],
+  "log": "|j|\u2606NabbitXz26\n|j|\u2606Sjsbejs\n|t:|1776280862\n|gametype|singles\n|player|p1|NabbitXz26|red|1110\n|player|p2|Sjsbejs|169|1050\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Greninja-*, L50, M|\n|poke|p1|Scizor, L50, M|\n|poke|p1|Meowscarada, L50, M|\n|poke|p1|Aegislash, L50, F|\n|poke|p1|Charizard, L50, M|\n|poke|p1|Tyranitar, L50, M|\n|poke|p2|Sableye, L50, F|\n|poke|p2|Ditto, L50|\n|poke|p2|Rotom-Wash, L50|\n|poke|p2|Hawlucha, L50, F|\n|poke|p2|Mimikyu, L50, M|\n|poke|p2|Glimmora, L50, M|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Sjsbejs)\n|inactive|NabbitXz26 has 60 seconds left.\n|\n|t:|1776280908\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Tyranitar|Tyranitar, L50, M|100/100\n|switch|p2a: Sableye|Sableye, L50, F, shiny|100/100\n|-ability|p1a: Tyranitar|Unnerve\n|turn|1\n|\n|t:|1776280916\n|detailschange|p2a: Sableye|Sableye-Mega, L50, F, shiny\n|-mega|p2a: Sableye|Sableye|Sablenite\n|move|p1a: Tyranitar|Crunch|p2a: Sableye\n|-damage|p2a: Sableye|64/100\n|move|p2a: Sableye|Will-O-Wisp|p1a: Tyranitar\n|-status|p1a: Tyranitar|brn\n|\n|-damage|p1a: Tyranitar|95/100 brn|[from] brn\n|upkeep\n|turn|2\n|\n|t:|1776280927\n|move|p1a: Tyranitar|Crunch|p2a: Sableye\n|-damage|p2a: Sableye|47/100\n|move|p2a: Sableye|Recover|p2a: Sableye\n|-heal|p2a: Sableye|97/100\n|\n|-damage|p1a: Tyranitar|89/100 brn|[from] brn\n|upkeep\n|turn|3\n|\n|t:|1776280937\n|switch|p1a: Scizor|Scizor, L50, M|100/100\n|move|p2a: Sableye|Calm Mind|p2a: Sableye\n|-boost|p2a: Sableye|spa|1\n|-boost|p2a: Sableye|spd|1\n|\n|upkeep\n|turn|4\n|\n|t:|1776280945\n|move|p1a: Scizor|Bullet Punch|p2a: Sableye\n|-damage|p2a: Sableye|68/100\n|move|p2a: Sableye|Will-O-Wisp|p1a: Scizor\n|-status|p1a: Scizor|brn\n|\n|-damage|p1a: Scizor|95/100 brn|[from] brn\n|upkeep\n|turn|5\n|c|\u2606NabbitXz26|Stall stall stall\n|n|!NabbitXz26|nabbitxz26\n|-message|NabbitXz26 forfeited.\n|\n|win|Sjsbejs\n",
+  "uploadtime": 1776280958,
+  "views": 3,
+  "formatid": "gen9championsbssregma",
+  "rating": null,
+  "private": 0,
+  "password": null
+}

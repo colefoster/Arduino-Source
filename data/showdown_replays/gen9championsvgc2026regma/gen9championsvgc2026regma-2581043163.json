@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2581043163",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "bluecatmeme",
+    "Breezy2"
+  ],
+  "log": "|j|\u2606bluecatmeme\n|j|\u2606Breezy2\n|t:|1775954508\n|gametype|doubles\n|player|p1|bluecatmeme|1|1090\n|player|p2|Breezy2|101|1070\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Rotom-Wash, L50|\n|poke|p1|Talonflame, L50, F|\n|poke|p1|Sinistcha, L50|\n|poke|p2|Froslass, L50, F|\n|poke|p2|Orthworm, L50, M|\n|poke|p2|Rotom-Frost, L50|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Incineroar, L50, M|\n|teampreview|4\nBreezy2 rejected open team sheets.\n|\n|t:|1775954534\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Talonflame|Talonflame, L50, F, shiny|100/100\n|switch|p1b: Incineroar|Incineroar, L50, F|100/100\n|switch|p2a: SOPHIE|Froslass, L50, F|100/100\n|switch|p2b: Tony The Tiger|Incineroar, L50, M|100/100\n|-ability|p1b: Incineroar|Intimidate|boost\n|-unboost|p2a: SOPHIE|atk|1\n|-unboost|p2b: Tony The Tiger|atk|1\n|-ability|p2b: Tony The Tiger|Intimidate|boost\n|-unboost|p1a: Talonflame|atk|1\n|-unboost|p1b: Incineroar|atk|1\n|turn|1\n|\n|t:|1775954572\n|detailschange|p2a: SOPHIE|Froslass-Mega, L50, F\n|-mega|p2a: SOPHIE|Froslass|Froslassite\n|-weather|Snowscape|[from] ability: Snow Warning|[of] p2a: SOPHIE\n|move|p1a: Talonflame|Quick Guard|p1a: Talonflame\n|-singleturn|p1a: Talonflame|Quick Guard\n|move|p1b: Incineroar|Fake Out|p2a: SOPHIE\n|-immune|p2a: SOPHIE\n|move|p2b: Tony The Tiger|Fake Out|p1a: Talonflame\n|-activate|p1a: Talonflame|move: Quick Guard\n|move|p2a: SOPHIE|Nasty Plot|p2a: SOPHIE\n|-boost|p2a: SOPHIE|spa|2\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|turn|2\n|-message|bluecatmeme forfeited.\n|\n|win|Breezy2\n|raw|bluecatmeme's rating: 1090 &rarr; <strong>1065</strong><br />(-25 for losing)\n|raw|Breezy2's rating: 1070 &rarr; <strong>1101</strong><br />(+31 for winning)\n|l|\u2606bluecatmeme\n|player|p1|\n",
+  "uploadtime": 1775954602,
+  "views": 28,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1065,
+  "private": 0,
+  "password": null
+}

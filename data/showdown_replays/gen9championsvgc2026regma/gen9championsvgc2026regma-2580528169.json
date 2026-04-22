@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2580528169",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "ajaihaja",
+    "namboyVGC"
+  ],
+  "log": "|j|\u2606ajaihaja\n|j|\u2606namboyVGC\n|t:|1775909127\n|gametype|doubles\n|player|p1|ajaihaja|169|1000\n|player|p2|namboyVGC|pokemonranger-gen4|1000\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Rotom-Wash, L50|\n|poke|p1|Talonflame, L50, M|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Volcarona, L50, F|\n|poke|p2|Starmie, L50|\n|poke|p2|Maushold, L50|\n|poke|p2|Aegislash, L50, F|\n|poke|p2|Incineroar, L50, M|\n|teampreview|4\nnamboyVGC has agreed to open team sheets.\n|\n|t:|1775909200\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Talonflame|Talonflame, L50, M|100/100\n|switch|p1b: Incineroar|Incineroar, L50, F|100/100\n|switch|p2a: Sneasler|Sneasler, L50, M|100/100\n|switch|p2b: Volcarona|Volcarona, L50, F|100/100\n|-ability|p1b: Incineroar|Intimidate|boost\n|-unboost|p2a: Sneasler|atk|1\n|-unboost|p2b: Volcarona|atk|1\n|turn|1\n|\n|t:|1775909243\n|switch|p2b: Starmie|Starmie, L50|100/100\n|switch|p1b: Garchomp|Garchomp, L50, F|100/100\n|move|p2a: Sneasler|Fake Out|p1a: Talonflame\n|-damage|p1a: Talonflame|86/100\n|cant|p1a: Talonflame|flinch\n|\n|upkeep\n|turn|2\n|\n|t:|1775909261\n|detailschange|p2b: Starmie|Starmie-Mega, L50\n|-mega|p2b: Starmie|Starmie|Starminite\n|move|p2a: Sneasler|Protect|p2a: Sneasler\n|-singleturn|p2a: Sneasler|Protect\n|move|p1a: Talonflame|Quick Guard|p1a: Talonflame\n|-singleturn|p1a: Talonflame|Quick Guard\n|move|p2b: Starmie|Ice Spinner|p1b: Garchomp\n|-supereffective|p1b: Garchomp|2\n|-damage|p1b: Garchomp|0 fnt\n|-damage|p2b: Starmie|88/100|[from] ability: Rough Skin|[of] p1b: Garchomp\n|faint|p1b: Garchomp\n|\n|upkeep\n|-message|ajaihaja forfeited.\n|\n|win|namboyVGC\n|raw|ajaihaja's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|raw|namboyVGC's rating: 1000 &rarr; <strong>1040</strong><br />(+40 for winning)\n",
+  "uploadtime": 1775909270,
+  "views": 14,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

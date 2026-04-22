@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2583571119",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "zmlt",
+    "MysticRy"
+  ],
+  "log": "|j|\u2606zmlt\n|j|\u2606MysticRy\n|t:|1776184007\n|gametype|doubles\n|player|p1|zmlt|265|1317\n|player|p2|MysticRy|ghetsis|1360\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Whimsicott, L50, M|\n|poke|p1|Gengar, L50, F|\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Kommo-o, L50, F|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Sneasler, L50, F|\n|poke|p2|Froslass, L50, F|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Primarina, L50, F|\n|poke|p2|Kingambit, L50, M|\n|poke|p2|Arcanine-Hisui, L50, F|\n|poke|p2|Pelipper, L50, F|\n|teampreview|4\n|\n|t:|1776184019\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Gengar|Gengar, L50, F|100/100\n|switch|p1b: Sneasler|Sneasler, L50, F|100/100\n|switch|p2a: Queen|Froslass, L50, F|100/100\n|switch|p2b: King|Kingambit, L50, M|100/100\n|turn|1\n|\n|t:|1776184047\n|detailschange|p1a: Gengar|Gengar-Mega, L50, F\n|-mega|p1a: Gengar|Gengar|Gengarite\n|move|p2a: Queen|Protect|p2a: Queen\n|-singleturn|p2a: Queen|Protect\n|move|p2b: King|Protect|p2b: King\n|-singleturn|p2b: King|Protect\n|move|p1b: Sneasler|Fake Out|p2b: King\n|-activate|p2b: King|move: Protect\n|move|p1a: Gengar|Shadow Ball|p2a: Queen\n|-activate|p2a: Queen|move: Protect\n|\n|upkeep\n|turn|2\n|j| soapeggs\n|\n|t:|1776184076\n|detailschange|p2a: Queen|Froslass-Mega, L50, F\n|-mega|p2a: Queen|Froslass|Froslassite\n|-weather|Snowscape|[from] ability: Snow Warning|[of] p2a: Queen\n|move|p2b: King|Sucker Punch||[still]\n|-fail|p2b: King\n|move|p1a: Gengar|Disable|p2a: Queen\n|-start|p2a: Queen|Disable|Protect\n|move|p2a: Queen|Blizzard|p1a: Gengar|[spread] p1a,p1b\n|-damage|p1a: Gengar|51/100\n|-damage|p1b: Sneasler|47/100\n|move|p1b: Sneasler|Close Combat|p2b: King\n|-supereffective|p2b: King|2\n|-enditem|p2b: King|Chople Berry|[eat]\n|-enditem|p2b: King|Chople Berry|[weaken]\n|-damage|p2b: King|0 fnt\n|-unboost|p1b: Sneasler|def|1\n|-unboost|p1b: Sneasler|spd|1\n|faint|p2b: King\n|-enditem|p1b: Sneasler|White Herb\n|-clearnegativeboost|p1b: Sneasler|[silent]\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|\n|t:|1776184095\n|switch|p2b: Bishop|Primarina, L50, F, shiny|100/100\n|turn|3\n|\n|t:|1776184105\n|move|p1b: Sneasler|Dire Claw|p2b: Bishop\n|-supereffective|p2b: Bishop|1\n|-damage|p2b: Bishop|2/100\n|-status|p2b: Bishop|slp\n|move|p1a: Gengar|Shadow Ball|p2a: Queen\n|-supereffective|p2a: Queen|1\n|-damage|p2a: Queen|0 fnt\n|faint|p2a: Queen\n|cant|p2b: Bishop|slp\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|-message|MysticRy forfeited.\n|\n|win|zmlt\n|raw|zmlt's rating: 1317 &rarr; <strong>1339</strong><br />(+22 for winning)\n|raw|MysticRy's rating: 1360 &rarr; <strong>1338</strong><br />(-22 for losing)\n|l|\u2606MysticRy\n|player|p2|\n",
+  "uploadtime": 1776184120,
+  "views": 33,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1338,
+  "private": 0,
+  "password": null
+}

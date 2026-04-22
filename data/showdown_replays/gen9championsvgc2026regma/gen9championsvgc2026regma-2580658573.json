@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2580658573",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "poktiyty3ty",
+    "tauro96"
+  ],
+  "log": "|j|\u2606poktiyty3ty\n|j|\u2606tauro96\n|t:|1775921993\n|gametype|doubles\n|player|p1|poktiyty3ty|miku-water|1101\n|player|p2|tauro96|unknown|1085\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Pelipper, L50, M|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Archaludon, L50, M|\n|poke|p1|Meganium, L50, F|\n|poke|p1|Greninja-*, L50, F|\n|poke|p1|Klefki, L50, F|\n|poke|p2|Manectric, L50, F|\n|poke|p2|Politoed, L50, F|\n|poke|p2|Aegislash, L50, M|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Meganium, L50, M|\n|poke|p2|Corviknight, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by tauro96)\npoktiyty3ty has agreed to open team sheets.\n|inactive|tauro96 has 60 seconds left.\n|\n|t:|1775922039\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Pelipper|Pelipper, L50, M|100/100\n|switch|p1b: Archaludon|Archaludon, L50, M|100/100\n|switch|p2a: Basculegion|Basculegion, L50, M|100/100\n|switch|p2b: Corviknight|Corviknight, L50, F|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p1a: Pelipper\n|turn|1\n|\n|t:|1775922060\n|move|p2a: Basculegion|Wave Crash|p1b: Archaludon\n|-resisted|p1b: Archaludon|1\n|-damage|p1b: Archaludon|58/100\n|-ability|p1b: Archaludon|Stamina|boost\n|-boost|p1b: Archaludon|def|1\n|-damage|p2a: Basculegion|87/100|[from] Recoil\n|move|p1b: Archaludon|Electro Shot||[still]\n|-prepare|p1b: Archaludon|Electro Shot\n|-boost|p1b: Archaludon|spa|1\n|-anim|p1b: Archaludon|Electro Shot|p2b: Corviknight\n|-supereffective|p2b: Corviknight|1\n|-damage|p2b: Corviknight|0 fnt\n|faint|p2b: Corviknight\n|move|p1a: Pelipper|Tailwind|p1a: Pelipper\n|-sidestart|p1: poktiyty3ty|move: Tailwind\n|\n|-weather|RainDance|[upkeep]\n|-heal|p1b: Archaludon|64/100|[from] item: Leftovers\n|upkeep\n|-message|tauro96 forfeited.\n|\n|win|poktiyty3ty\n|raw|poktiyty3ty's rating: 1101 &rarr; <strong>1125</strong><br />(+24 for winning)\n|raw|tauro96's rating: 1085 &rarr; <strong>1063</strong><br />(-22 for losing)\n|l|\u2606tauro96\n|player|p2|\n",
+  "uploadtime": 1775922080,
+  "views": 14,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1063,
+  "private": 0,
+  "password": null
+}

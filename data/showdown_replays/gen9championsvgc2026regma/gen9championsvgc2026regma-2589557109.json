@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2589557109",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "blazegeo",
+    "snoozerlozer"
+  ],
+  "log": "|j|\u2606blazegeo\n|j|\u2606snoozerlozer\n|t:|1776733896\n|gametype|doubles\n|player|p1|blazegeo|266|1069\n|player|p2|snoozerlozer|1|1000\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Greninja, L50, M|\n|poke|p1|Zoroark-Hisui, L50, M|\n|poke|p1|Talonflame, L50, F|\n|poke|p1|Farigiraf, L50, M|\n|poke|p1|Tyranitar, L50, M|\n|poke|p1|Aegislash, L50, F|\n|poke|p2|Farigiraf, L50, M|\n|poke|p2|Chandelure, L50, M|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Ampharos, L50, M|\n|poke|p2|Slowking-Galar, L50, M|\n|poke|p2|Rotom-Wash, L50|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by blazegeo)\n|inactive|blazegeo has 60 seconds left.\n|inactive|snoozerlozer has 60 seconds left.\n|\n|t:|1776733951\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Greninja|Greninja, L50, M|100/100\n|switch|p1b: Farigiraf|Farigiraf, L50, M|100/100\n|switch|p2a: Chandelure|Chandelure, L50, M|100/100\n|switch|p2b: Slowking|Slowking-Galar, L50, M|100/100\n|-clearboost|p2a: Chandelure|[from] ability: Curious Medicine|[of] p2b: Slowking\n|turn|1\n|inactive|blazegeo has 30 seconds left.\n|\n|t:|1776733977\n|detailschange|p1a: Greninja|Greninja-Mega, L50, M\n|-mega|p1a: Greninja|Greninja|Greninjite\n|detailschange|p2a: Chandelure|Chandelure-Mega, L50, M\n|-mega|p2a: Chandelure|Chandelure|Chandelurite\n|move|p2a: Chandelure|Protect|p2a: Chandelure\n|-singleturn|p2a: Chandelure|Protect\n|move|p1a: Greninja|Dark Pulse|p2b: Slowking\n|-start|p1a: Greninja|typechange|Dark|[from] ability: Protean\n|-supereffective|p2b: Slowking|1\n|-damage|p2b: Slowking|40/100\n|move|p1b: Farigiraf|Bitter Malice|p2b: Slowking\n|-supereffective|p2b: Slowking|1\n|-damage|p2b: Slowking|0 fnt\n|faint|p2b: Slowking\n|\n|upkeep\n|\n|t:|1776733996\n|switch|p2b: Rotom|Rotom-Wash, L50|100/100\n|turn|2\n|\n|t:|1776734014\n|switch|p1a: Farigiraf|Farigiraf, L50, M|100/100\n|move|p1b: Farigiraf|Bitter Malice|p2a: Chandelure\n|-supereffective|p2a: Chandelure|1\n|-damage|p2a: Chandelure|0 fnt\n|faint|p2a: Chandelure\n|move|p2b: Rotom|Discharge|p1b: Farigiraf|[spread] p1a,p1b\n|-damage|p1a: Farigiraf|71/100\n|-damage|p1b: Farigiraf|43/100\n|-status|p1a: Farigiraf|par\n|replace|p1b: Zoroark|Zoroark-Hisui, L50, M\n|-end|p1b: Zoroark|Illusion\n|\n|upkeep\n|-message|snoozerlozer forfeited.\n|\n|win|blazegeo\n|raw|blazegeo's rating: 1069 &rarr; <strong>1093</strong><br />(+24 for winning)\n|raw|snoozerlozer's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|l|\u2606snoozerlozer\n|player|p2|\n",
+  "uploadtime": 1776734039,
+  "views": 8,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

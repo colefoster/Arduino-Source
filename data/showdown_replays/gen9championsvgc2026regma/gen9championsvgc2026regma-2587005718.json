@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2587005718",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "panko",
+    "kuanyou"
+  ],
+  "log": "|j|\u2606panko\n|j|\u2606kuanyou\n|t:|1776480435\n|gametype|doubles\n|player|p1|panko|265|1381\n|player|p2|kuanyou|265|1331\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Sableye, L50, M|\n|poke|p1|Blastoise, L50, M|\n|poke|p1|Hydreigon, L50, F|\n|poke|p1|Maushold-Four, L50|\n|poke|p1|Orthworm, L50, M|\n|poke|p1|Sneasler, L50, F|\n|poke|p2|Blastoise, L50, F|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Sylveon, L50, M|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Aerodactyl, L50, F|\n|poke|p2|Sinistcha, L50|\n|teampreview|4\nkuanyou has agreed to open team sheets.\n|\n|t:|1776480470\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Sableye|Sableye, L50, M|100/100\n|switch|p1b: Orthworm|Orthworm, L50, M|100/100\n|switch|p2a: Blastoise|Blastoise, L50, F|100/100\n|switch|p2b: Sneasler|Sneasler, L50, F|100/100\n|-ability|p2b: Sneasler|Pressure\n|turn|1\n|\n|t:|1776480498\n|detailschange|p2a: Blastoise|Blastoise-Mega, L50, F\n|-mega|p2a: Blastoise|Blastoise|Blastoisinite\n|move|p2b: Sneasler|Fake Out|p1b: Orthworm\n|-resisted|p1b: Orthworm|1\n|-damage|p1b: Orthworm|96/100\n|move|p1a: Sableye|Fake Out|p2b: Sneasler\n|-damage|p2b: Sneasler|91/100\n|move|p2a: Blastoise|Shell Smash|p2a: Blastoise\n|-unboost|p2a: Blastoise|def|1\n|-unboost|p2a: Blastoise|spd|1\n|-boost|p2a: Blastoise|atk|2\n|-boost|p2a: Blastoise|spa|2\n|-boost|p2a: Blastoise|spe|2\n|cant|p1b: Orthworm|flinch\n|\n|upkeep\n|turn|2\n|\n|t:|1776480514\n|switch|p2b: Sinistcha|Sinistcha, L50|100/100\n|move|p2a: Blastoise|Protect|p2a: Blastoise\n|-singleturn|p2a: Blastoise|Protect\n|move|p1b: Orthworm|Protect|p1b: Orthworm\n|-singleturn|p1b: Orthworm|Protect\n|move|p1a: Sableye|Encore|p2a: Blastoise\n|-activate|p2a: Blastoise|move: Protect\n|\n|upkeep\n|turn|3\n|-message|panko forfeited.\n|\n|win|kuanyou\n|raw|panko's rating: 1381 &rarr; <strong>1358</strong><br />(-23 for losing)\n|raw|kuanyou's rating: 1331 &rarr; <strong>1354</strong><br />(+23 for winning)\n",
+  "uploadtime": 1776480523,
+  "views": 37,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1354,
+  "private": 0,
+  "password": null
+}

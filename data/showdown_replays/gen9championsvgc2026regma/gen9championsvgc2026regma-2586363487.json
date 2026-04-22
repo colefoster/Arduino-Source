@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586363487",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "wzzlr",
+    "Astraision"
+  ],
+  "log": "|j|\u2606wzzlr\n|j|\u2606Astraision\n|t:|1776428974\n|gametype|doubles\n|player|p1|wzzlr|rancher|1261\n|player|p2|Astraision|iris-gen5bw2|1286\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Pelipper, L50, F|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Farigiraf, L50, F|\n|poke|p1|Archaludon, L50, M|\n|poke|p1|Meganium, L50, F|\n|poke|p2|Aggron, L50, M|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Kangaskhan, L50, F|\n|poke|p2|Kommo-o, L50, M|\n|poke|p2|Milotic, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by wzzlr)\n|inactive|wzzlr has 60 seconds left.\n|\n|t:|1776429023\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Meganium|Meganium, L50, F, shiny|100/100\n|switch|p1b: Basculegion|Basculegion, L50, M|100/100\n|switch|p2a: MARINEFORD|Aggron, L50, M, shiny|100/100\n|switch|p2b: Charon|Kommo-o, L50, M, shiny|100/100\n|turn|1\n|inactive|wzzlr has 30 seconds left.\n|\n|t:|1776429050\n|switch|p2b: Kurama|Incineroar, L50, M|100/100\n|-ability|p2b: Kurama|Intimidate|boost\n|-unboost|p1a: Meganium|atk|1\n|-unboost|p1b: Basculegion|atk|1\n|detailschange|p1a: Meganium|Meganium-Mega, L50, F, shiny\n|-mega|p1a: Meganium|Meganium|Meganiumite\n|detailschange|p2a: MARINEFORD|Aggron-Mega, L50, M, shiny\n|-mega|p2a: MARINEFORD|Aggron|Aggronite\n|move|p2a: MARINEFORD|Protect|p2a: MARINEFORD\n|-singleturn|p2a: MARINEFORD|Protect\n|move|p1b: Basculegion|Flip Turn|p2b: Kurama\n|-supereffective|p2b: Kurama|1\n|-damage|p2b: Kurama|53/100\n|inactive|wzzlr has 30 seconds left.\n|\n|t:|1776429078\n|switch|p1b: Farigiraf|Farigiraf, L50, F, shiny|100/100|[from] Flip Turn\n|move|p1a: Meganium|Weather Ball|p2a: MARINEFORD\n|-activate|p2a: MARINEFORD|move: Protect\n|\n|upkeep\n|turn|2\n|inactive|Astraision has 30 seconds left.\n|inactive|Astraision has 20 seconds left.\n|inactive|Astraision has 15 seconds left.\n|\n|t:|1776429118\n|switch|p2a: Charon|Kommo-o, L50, M, shiny|100/100\n|move|p1b: Farigiraf|Helping Hand|p1a: Meganium\n|-singleturn|p1a: Meganium|Helping Hand|[of] p1b: Farigiraf\n|move|p1a: Meganium|Dazzling Gleam|p2a: Charon|[spread] p2a,p2b\n|-supereffective|p2a: Charon|2\n|-damage|p2a: Charon|0 fnt\n|-damage|p2b: Kurama|0 fnt\n|faint|p2a: Charon\n|faint|p2b: Kurama\n|\n|upkeep\n|-message|Astraision forfeited.\n|\n|win|wzzlr\n|raw|wzzlr's rating: 1261 &rarr; <strong>1288</strong><br />(+27 for winning)\n|raw|Astraision's rating: 1286 &rarr; <strong>1259</strong><br />(-27 for losing)\n|l|\u2606Astraision\n|player|p2|\n|c|\u2606wzzlr|smashed\n",
+  "uploadtime": 1776429134,
+  "views": 42,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1259,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2589481767",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "daeronmadafaka",
+    "mega.CHIVA"
+  ],
+  "log": "|j|\u2606daeronmadafaka\n|j|\u2606mega.CHIVA\n|t:|1776726900\n|gametype|singles\n|player|p1|daeronmadafaka|hugh|1010\n|player|p2|mega.CHIVA|unknown|1079\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Gyarados, L50, M|\n|poke|p1|Glimmora, L50, M|\n|poke|p1|Rotom-Mow, L50|\n|poke|p1|Ninetales-Alola, L50, F|\n|poke|p1|Azumarill, L50, M|\n|poke|p1|Mimikyu, L50, M|\n|poke|p2|Corviknight, L50, M|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Hawlucha, L50, M|\n|poke|p2|Sylveon, L50, F|\n|poke|p2|Greninja, L50, M|\n|poke|p2|Blastoise, L50, M|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by daeronmadafaka)\n|\n|t:|1776726910\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Azumarill|Azumarill, L50, M|100/100\n|switch|p2a: Sylveon|Sylveon, L50, F|100/100\n|turn|1\n|\n|t:|1776726917\n|move|p2a: Sylveon|Hyper Voice|p1a: Azumarill\n|-damage|p1a: Azumarill|28/100\n|move|p1a: Azumarill|Perish Song|p1a: Azumarill\n|-start|p1a: Azumarill|perish3|[silent]\n|-start|p2a: Sylveon|perish3|[silent]\n|-fieldactivate|move: Perish Song\n|\n|-start|p2a: Sylveon|perish3\n|-start|p1a: Azumarill|perish3\n|upkeep\n|turn|2\n|\n|t:|1776726925\n|move|p1a: Azumarill|Protect|p1a: Azumarill\n|-singleturn|p1a: Azumarill|Protect\n|move|p2a: Sylveon|Hyper Voice|p1a: Azumarill\n|-activate|p1a: Azumarill|move: Protect\n|\n|-start|p2a: Sylveon|perish2\n|-start|p1a: Azumarill|perish2\n|upkeep\n|turn|3\n|\n|t:|1776726938\n|move|p2a: Sylveon|Hyper Voice|p1a: Azumarill\n|-damage|p1a: Azumarill|0 fnt\n|faint|p1a: Azumarill\n|\n|-start|p2a: Sylveon|perish1\n|upkeep\n|\n|t:|1776726946\n|switch|p1a: Mimikyu|Mimikyu, L50, M|100/100\n|turn|4\n|\n|t:|1776726960\n|switch|p1a: Glimmora|Glimmora, L50, M|100/100\n|switch|p2a: Blastoise|Blastoise, L50, M|100/100\n|\n|upkeep\n|turn|5\n|\n|t:|1776726966\n|detailschange|p1a: Glimmora|Glimmora-Mega, L50, M\n|-mega|p1a: Glimmora|Glimmora|Glimmoranite\n|move|p1a: Glimmora|Energy Ball|p2a: Blastoise\n|-supereffective|p2a: Blastoise|1\n|-damage|p2a: Blastoise|26/100\n|move|p2a: Blastoise|Surf|p1a: Glimmora\n|-supereffective|p1a: Glimmora|1\n|-damage|p1a: Glimmora|0 fnt\n|faint|p1a: Glimmora\n|\n|upkeep\n|-message|daeronmadafaka forfeited.\n|\n|win|mega.CHIVA\n|raw|daeronmadafaka's rating: 1010 &rarr; <strong>1001</strong><br />(-9 for losing)\n|raw|mega.CHIVA's rating: 1079 &rarr; <strong>1102</strong><br />(+23 for winning)\n|l|\u2606daeronmadafaka\n|player|p1|\n",
+  "uploadtime": 1776726978,
+  "views": 1,
+  "formatid": "gen9championsbssregma",
+  "rating": 1001,
+  "private": 0,
+  "password": null
+}

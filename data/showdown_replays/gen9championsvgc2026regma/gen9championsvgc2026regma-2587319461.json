@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2587319461",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Zory Ylumi",
+    "Edudus"
+  ],
+  "log": "|j|\u2606Zory Ylumi\n|j|\u2606Edudus\n|t:|1776521626\n|gametype|doubles\n|player|p1|Zory Ylumi|lyra|1084\n|player|p2|Edudus|shauntal|1091\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Delphox, L50, F, shiny|\n|poke|p1|Incineroar, L50, M, shiny|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Rotom-Mow, L50|\n|poke|p1|Clefable, L50, M|\n|poke|p1|Sneasler, L50, M|\n|poke|p2|Volcarona, L50, F|\n|poke|p2|Rotom-Wash, L50|\n|poke|p2|Whimsicott, L50, F|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Aggron, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Edudus)\n|inactive|Edudus has 60 seconds left.\n|\n|t:|1776521672\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Zory|Delphox, L50, F, shiny|100/100\n|switch|p1b: Chris Pratt|Incineroar, L50, M, shiny|100/100\n|switch|p2a: Aggron|Aggron, L50, M|100/100\n|switch|p2b: Sneasler|Sneasler, L50, F|100/100\n|-ability|p1b: Chris Pratt|Intimidate|boost\n|-unboost|p2a: Aggron|atk|1\n|-unboost|p2b: Sneasler|atk|1\n|-enditem|p2b: Sneasler|White Herb\n|-clearnegativeboost|p2b: Sneasler|[silent]\n|turn|1\n|\n|t:|1776521696\n|switch|p1b: Tangerina Acamada|Sneasler, L50, M|100/100\n|detailschange|p1a: Zory|Delphox-Mega, L50, F, shiny\n|-mega|p1a: Zory|Delphox|Delphoxite\n|move|p2a: Aggron|Protect|p2a: Aggron\n|-singleturn|p2a: Aggron|Protect\n|move|p2b: Sneasler|Close Combat|p1b: Tangerina Acamada\n|-resisted|p1b: Tangerina Acamada|1\n|-damage|p1b: Tangerina Acamada|47/100\n|-unboost|p2b: Sneasler|def|1\n|-unboost|p2b: Sneasler|spd|1\n|move|p1a: Zory|Calm Mind|p1a: Zory\n|-boost|p1a: Zory|spa|1\n|-boost|p1a: Zory|spd|1\n|\n|upkeep\n|turn|2\n|\n|t:|1776521720\n|detailschange|p2a: Aggron|Aggron-Mega, L50, M\n|-mega|p2a: Aggron|Aggron|Aggronite\n|move|p2b: Sneasler|Protect|p2b: Sneasler\n|-singleturn|p2b: Sneasler|Protect\n|move|p1b: Tangerina Acamada|Fake Out|p2a: Aggron\n|-resisted|p2a: Aggron|1\n|-damage|p2a: Aggron|97/100\n|move|p1a: Zory|Calm Mind|p1a: Zory\n|-boost|p1a: Zory|spa|1\n|-boost|p1a: Zory|spd|1\n|cant|p2a: Aggron|flinch\n|\n|upkeep\n|turn|3\n|\n|t:|1776521737\n|move|p1a: Zory|Protect|p1a: Zory\n|-singleturn|p1a: Zory|Protect\n|move|p2b: Sneasler|Dire Claw|p1a: Zory\n|-activate|p1a: Zory|move: Protect\n|move|p1b: Tangerina Acamada|U-turn|p2b: Sneasler\n|-resisted|p2b: Sneasler|2\n|-damage|p2b: Sneasler|84/100\n|-message|Edudus forfeited.\n|\n|win|Zory Ylumi\n|raw|Zory Ylumi's rating: 1084 &rarr; <strong>1112</strong><br />(+28 for winning)\n|raw|Edudus's rating: 1091 &rarr; <strong>1067</strong><br />(-24 for losing)\n|l|\u2606Edudus\n|player|p2|\n",
+  "uploadtime": 1776521767,
+  "views": 13,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1067,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2584174503",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "fjkgher",
+    "Keyan_Sans"
+  ],
+  "log": "|j|\u2606fjkgher\n|j|\u2606Keyan_Sans\n|t:|1776234292\n|gametype|singles\n|player|p1|fjkgher|1|1151\n|player|p2|Keyan_Sans|hugh|1134\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Banette, L50, F|\n|poke|p1|Mamoswine, L50, M|\n|poke|p1|Victreebel, L50, M|\n|poke|p1|Primarina, L50, M|\n|poke|p1|Hydreigon, L50, F|\n|poke|p1|Arcanine-Hisui, L50, F|\n|poke|p2|Kingambit, L50, M|\n|poke|p2|Starmie, L50|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Volcarona, L50, M|\n|poke|p2|Excadrill, L50, F|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Keyan_Sans)\n|inactive|fjkgher has 60 seconds left.\n|inactive|Keyan_Sans has 60 seconds left.\n|inactive|Keyan_Sans has 30 seconds left.\n|\n|t:|1776234361\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Primarina|Primarina, L50, M|100/100\n|switch|p2a: Starmie|Starmie, L50|100/100\n|turn|1\n|\n|t:|1776234367\n|detailschange|p2a: Starmie|Starmie-Mega, L50\n|-mega|p2a: Starmie|Starmie|Starminite\n|move|p2a: Starmie|Zen Headbutt|p1a: Primarina\n|-damage|p1a: Primarina|37/100\n|cant|p1a: Primarina|flinch\n|\n|-heal|p1a: Primarina|43/100|[from] item: Leftovers\n|upkeep\n|turn|2\n|\n|t:|1776234372\n|switch|p1a: Banette|Banette, L50, F|100/100\n|-item|p2a: Starmie|Starminite|[from] ability: Frisk|[of] p1a: Banette\n|move|p2a: Starmie|Zen Headbutt|p1a: Banette\n|-damage|p1a: Banette|0 fnt\n|faint|p1a: Banette\n|\n|upkeep\n|-message|fjkgher forfeited.\n|\n|win|Keyan_Sans\n|raw|fjkgher's rating: 1151 &rarr; <strong>1125</strong><br />(-26 for losing)\n|raw|Keyan_Sans's rating: 1134 &rarr; <strong>1160</strong><br />(+26 for winning)\n|l|\u2606fjkgher\n|player|p1|\n|l|\u2606Keyan_Sans\n|player|p2|\n|j|\u2606Keyan_Sans\n|player|p2|Keyan_Sans|hugh|\n",
+  "uploadtime": 1776234418,
+  "views": 4,
+  "formatid": "gen9championsbssregma",
+  "rating": 1125,
+  "private": 0,
+  "password": null
+}

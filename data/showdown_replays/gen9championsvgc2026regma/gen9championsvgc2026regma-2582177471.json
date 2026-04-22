@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582177471",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "tinyyyy",
+    "arroyofran2"
+  ],
+  "log": "|j|\u203dtinyyyy\n|j|\u2606arroyofran2\n|t:|1776067799\n|gametype|doubles\n|player|p1|tinyyyy|iono|1325\n|player|p2|arroyofran2|fisherman|1425\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Oranguru, L50, F|\n|poke|p1|Torkoal, L50, F|\n|poke|p1|Farigiraf, L50, F|\n|poke|p1|Crabominable, L50, F|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Garchomp, L50, M|\n|poke|p2|Archaludon, L50, M|\n|poke|p2|Starmie, L50|\n|poke|p2|Pelipper, L50, M|\n|poke|p2|Farigiraf, L50, M|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Aegislash, L50, M|\n|teampreview|4\n|j| CARtu348rjf90\n|j| RottenPond\n|l| RottenPond\n|\n|t:|1776067830\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Oranguru|Oranguru, L50, F|100/100\n|switch|p1b: Garchomp|Garchomp, L50, M|100/100\n|switch|p2a: Farigiraf|Farigiraf, L50, M|100/100\n|switch|p2b: Starmie|Starmie, L50, shiny|100/100\n|turn|1\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by arroyofran2)\n|\n|t:|1776067889\n|switch|p1b: Torkoal|Torkoal, L50, F|100/100\n|-weather|SunnyDay|[from] ability: Drought|[of] p1b: Torkoal\n|detailschange|p2b: Starmie|Starmie-Mega, L50, shiny\n|-mega|p2b: Starmie|Starmie|Starminite\n|move|p1a: Oranguru|Protect|p1a: Oranguru\n|-singleturn|p1a: Oranguru|Protect\n|move|p2b: Starmie|Ice Spinner|p1b: Torkoal\n|-resisted|p1b: Torkoal|1\n|-damage|p1b: Torkoal|83/100\n|move|p2a: Farigiraf|Hyper Voice|p1b: Torkoal|[spread] p1b\n|-activate|p1a: Oranguru|move: Protect\n|-damage|p1b: Torkoal|49/100\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|turn|2\n|\n|t:|1776067904\n|switch|p2a: Pelipper|Pelipper, L50, M|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p2a: Pelipper\n|move|p1b: Torkoal|Protect|p1b: Torkoal\n|-singleturn|p1b: Torkoal|Protect\n|move|p2b: Starmie|Liquidation|p1a: Oranguru\n|-crit|p1a: Oranguru\n|-damage|p1a: Oranguru|0 fnt\n|faint|p1a: Oranguru\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|-message|tinyyyy forfeited.\n|\n|win|arroyofran2\n|raw|tinyyyy's rating: 1325 &rarr; <strong>1311</strong><br />(-14 for losing)\n|raw|arroyofran2's rating: 1425 &rarr; <strong>1439</strong><br />(+14 for winning)\n|l|\u203dtinyyyy\n|player|p1|\n",
+  "uploadtime": 1776067956,
+  "views": 32,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1311,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2588271506",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "sintist",
+    "IndoMichael"
+  ],
+  "log": "|j|\u2606sintist\n|j|\u2606IndoMichael\n|t:|1776619841\n|gametype|doubles\n|player|p1|sintist|265|1000\n|player|p2|IndoMichael|1|1079\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Farigiraf, L50, F|\n|poke|p1|Alcremie, L50, F|\n|poke|p1|Sinistcha-Masterpiece, L50|\n|poke|p1|Tyranitar, L50, M|\n|poke|p1|Excadrill, L50, M|\n|poke|p1|Talonflame, L50, M|\n|poke|p2|Gallade, L50, M, shiny|\n|poke|p2|Maushold-Four, L50, shiny|\n|poke|p2|Aerodactyl, L50, F, shiny|\n|poke|p2|Arcanine, L50, M, shiny|\n|poke|p2|Meowscarada, L50, M, shiny|\n|poke|p2|Gengar, L50, F, shiny|\n|teampreview|4\n|\n|t:|1776619866\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Farigiraf|Farigiraf, L50, F|100/100\n|switch|p1b: Alcremie|Alcremie, L50, F|100/100\n|switch|p2a: Aerodactyl|Aerodactyl, L50, F, shiny|100/100\n|switch|p2b: Maushold|Maushold-Four, L50, shiny|100/100\n|-ability|p2a: Aerodactyl|Unnerve\n|turn|1\n|\n|t:|1776619895\n|move|p2a: Aerodactyl|Tailwind|p2a: Aerodactyl\n|-sidestart|p2: IndoMichael|move: Tailwind\n|move|p2b: Maushold|Taunt|p1a: Farigiraf\n|-block|p1a: Farigiraf|ability: Aroma Veil|[of] p1b: Alcremie\n|move|p1b: Alcremie|Draining Kiss|p2b: Maushold\n|-damage|p2b: Maushold|73/100\n|move|p1a: Farigiraf|Trick Room|p1a: Farigiraf\n|-fieldstart|move: Trick Room|[of] p1a: Farigiraf\n|\n|upkeep\n|turn|2\n|\n|t:|1776619941\n|move|p1b: Alcremie|Decorate|p1a: Farigiraf\n|-boost|p1a: Farigiraf|atk|2\n|-boost|p1a: Farigiraf|spa|2\n|move|p1a: Farigiraf|Hyper Voice|p2a: Aerodactyl|[spread] p2a,p2b\n|-resisted|p2a: Aerodactyl|1\n|-damage|p2a: Aerodactyl|64/100\n|-damage|p2b: Maushold|0 fnt\n|faint|p2b: Maushold\n|move|p2a: Aerodactyl|Rock Slide|p1a: Farigiraf|[spread] p1a,p1b\n|-damage|p1a: Farigiraf|74/100\n|-damage|p1b: Alcremie|74/100\n|\n|-heal|p1b: Alcremie|80/100|[from] item: Leftovers\n|upkeep\n|-message|IndoMichael forfeited.\n|\n|win|sintist\n|raw|sintist's rating: 1000 &rarr; <strong>1049</strong><br />(+49 for winning)\n|raw|IndoMichael's rating: 1079 &rarr; <strong>1052</strong><br />(-27 for losing)\n|l|\u2606IndoMichael\n|player|p2|\n",
+  "uploadtime": 1776619955,
+  "views": 32,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1049,
+  "private": 0,
+  "password": null
+}

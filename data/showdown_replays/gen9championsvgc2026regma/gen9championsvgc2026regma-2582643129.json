@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582643129",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "dillrpg",
+    "Formiga Idiota"
+  ],
+  "log": "|j|\u2606dillrpg\n|j|\u2606Formiga Idiota\n|t:|1776104512\n|gametype|doubles\n|player|p1|dillrpg|170|1000\n|player|p2|Formiga Idiota|liza|1005\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Toucannon, L50, F|\n|poke|p1|Alakazam, L50, M|\n|poke|p1|Snorlax, L50, M|\n|poke|p1|Lopunny, L50, F|\n|poke|p1|Beedrill, L50, M|\n|poke|p1|Incineroar, L50, M|\n|poke|p2|Azumarill, L50, F|\n|poke|p2|Armarouge, L50, F|\n|poke|p2|Luxray, L50, F|\n|poke|p2|Audino, L50, F|\n|poke|p2|Whimsicott, L50, F|\n|poke|p2|Lycanroc, L50, F|\n|teampreview|4\n|\n|t:|1776104550\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Incineroar|Incineroar, L50, M|100/100\n|switch|p1b: Toucannon|Toucannon, L50, F|100/100\n|switch|p2a: Armarouge|Armarouge, L50, F|100/100\n|switch|p2b: Audino|Audino, L50, F|100/100\n|-ability|p1a: Incineroar|Intimidate|boost\n|-unboost|p2a: Armarouge|atk|1\n|-unboost|p2b: Audino|atk|1\n|turn|1\n|\n|t:|1776104601\n|move|p2a: Armarouge|Wide Guard|p2a: Armarouge\n|-singleturn|p2a: Armarouge|Wide Guard\n|move|p1a: Incineroar|Fake Out|p2a: Armarouge\n|-damage|p2a: Armarouge|86/100\n|move|p1b: Toucannon|Rock Blast|p2a: Armarouge\n|-supereffective|p2a: Armarouge|1\n|-damage|p2a: Armarouge|69/100\n|-supereffective|p2a: Armarouge|1\n|-damage|p2a: Armarouge|52/100\n|-supereffective|p2a: Armarouge|1\n|-crit|p2a: Armarouge\n|-damage|p2a: Armarouge|24/100\n|-supereffective|p2a: Armarouge|1\n|-damage|p2a: Armarouge|6/100\n|-supereffective|p2a: Armarouge|1\n|-damage|p2a: Armarouge|0 fnt\n|faint|p2a: Armarouge\n|-hitcount|p2: Armarouge|5\n|move|p2b: Audino|Icy Wind|p1a: Incineroar|[spread] p1a,p1b\n|-resisted|p1a: Incineroar|1\n|-supereffective|p1b: Toucannon|1\n|-damage|p1a: Incineroar|97/100\n|-damage|p1b: Toucannon|82/100\n|-unboost|p1a: Incineroar|spe|1\n|-unboost|p1b: Toucannon|spe|1\n|\n|upkeep\n|-message|Formiga Idiota forfeited.\n|\n|win|dillrpg\n|raw|dillrpg's rating: 1000 &rarr; <strong>1041</strong><br />(+41 for winning)\n|raw|Formiga Idiota's rating: 1005 &rarr; <strong>1000</strong><br />(-5 for losing)\n|l|\u2606Formiga Idiota\n|player|p2|\n",
+  "uploadtime": 1776104626,
+  "views": 14,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

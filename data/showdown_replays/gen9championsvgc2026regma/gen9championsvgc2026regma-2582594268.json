@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582594268",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "shin-tv07",
+    "john gcv"
+  ],
+  "log": "|j|\u2606shin-tv07\n|j|\u2606john gcv\n|t:|1776101502\n|gametype|doubles\n|player|p1|shin-tv07|twins-gen4dp|1063\n|player|p2|john gcv|hilbert-wonderlauncher|1069\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Golurk, L50|\n|poke|p1|Torkoal, L50, F|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Sneasler, L50, F|\n|poke|p1|Farigiraf, L50, F|\n|poke|p1|Venusaur, L50, F|\n|poke|p2|Charizard, L50, F|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Venusaur, L50, M|\n|poke|p2|Farigiraf, L50, F|\n|poke|p2|Conkeldurr, L50, M|\n|poke|p2|Aerodactyl, L50, F|\n|teampreview|4\n|\n|t:|1776101548\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Golurk|Golurk, L50, shiny|100/100\n|switch|p1b: Sneasler|Sneasler, L50, F|100/100\n|switch|p2a: Farigiraf|Farigiraf, L50, F|100/100\n|switch|p2b: Aerodactyl|Aerodactyl, L50, F|100/100\n|-ability|p2b: Aerodactyl|Unnerve\n|turn|1\n|\n|t:|1776101571\n|detailschange|p1a: Golurk|Golurk-Mega, L50, shiny\n|-mega|p1a: Golurk|Golurk|Golurkite\n|move|p2a: Farigiraf|Protect|p2a: Farigiraf\n|-singleturn|p2a: Farigiraf|Protect\n|move|p2b: Aerodactyl|Dual Wingbeat|p1b: Sneasler\n|-supereffective|p1b: Sneasler|1\n|-damage|p1b: Sneasler|35/100\n|-supereffective|p1b: Sneasler|1\n|-damage|p1b: Sneasler|0 fnt\n|faint|p1b: Sneasler\n|-hitcount|p1: Sneasler|2\n|move|p1a: Golurk|Ice Punch|p2b: Aerodactyl\n|-supereffective|p2b: Aerodactyl|1\n|-damage|p2b: Aerodactyl|6/100\n|\n|upkeep\n|\n|t:|1776101583\n|switch|p1b: Farigiraf|Farigiraf, L50, F|100/100\n|turn|2\n|\n|t:|1776101604\n|move|p1a: Golurk|Protect|p1a: Golurk\n|-singleturn|p1a: Golurk|Protect\n|move|p2b: Aerodactyl|Ice Fang|p1a: Golurk\n|-activate|p1a: Golurk|move: Protect\n|move|p2a: Farigiraf|Psychic|p1a: Golurk\n|-activate|p1a: Golurk|move: Protect\n|move|p1b: Farigiraf|Trick Room|p1b: Farigiraf\n|-fieldstart|move: Trick Room|[of] p1b: Farigiraf\n|\n|upkeep\n|turn|3\n|\n|t:|1776101622\n|move|p1a: Golurk|Headlong Rush|p2a: Farigiraf\n|-damage|p2a: Farigiraf|29/100\n|-unboost|p1a: Golurk|def|1\n|-unboost|p1a: Golurk|spd|1\n|move|p1b: Farigiraf|Hyper Voice|p2a: Farigiraf|[spread] p2a,p2b\n|-resisted|p2b: Aerodactyl|1\n|-damage|p2a: Farigiraf|0 fnt\n|-damage|p2b: Aerodactyl|0 fnt\n|faint|p2a: Farigiraf\n|faint|p2b: Aerodactyl\n|\n|upkeep\n|-message|john gcv forfeited.\n|\n|win|shin-tv07\n|raw|shin-tv07's rating: 1063 &rarr; <strong>1094</strong><br />(+31 for winning)\n|raw|john gcv's rating: 1069 &rarr; <strong>1048</strong><br />(-21 for losing)\n|l|\u2606john gcv\n|player|p2|\n",
+  "uploadtime": 1776101637,
+  "views": 11,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1048,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584298613",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Hldthen",
+    "smp on whimsicott"
+  ],
+  "log": "|j|\u2606Hldthen\n|j|\u2606smp on whimsicott\n|t:|1776248585\n|gametype|doubles\n|player|p1|Hldthen|2|1111\n|player|p2|smp on whimsicott|artist-gen4|1091\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Lycanroc, L50, M|\n|poke|p1|Tyranitar, L50, M|\n|poke|p1|Kingambit, L50, F|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Rotom-Heat, L50|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Aegislash, L50, M|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Pelipper, L50, F|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Incineroar, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Hldthen)\n|\n|t:|1776248623\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Lycanroc|Lycanroc, L50, M|100/100\n|switch|p1b: Tyranitar|Tyranitar, L50, M|100/100\n|switch|p2a: Basculegion|Basculegion, L50, M|100/100\n|switch|p2b: Aegislash|Aegislash, L50, M|100/100\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p1b: Tyranitar\n|turn|1\n|\n|t:|1776248636\n|move|p1b: Tyranitar|Protect|p1b: Tyranitar\n|-singleturn|p1b: Tyranitar|Protect\n|move|p1a: Lycanroc|Rock Slide|p2b: Aegislash|[spread] p2a,p2b\n|-resisted|p2b: Aegislash|1\n|-damage|p2a: Basculegion|68/100\n|-damage|p2b: Aegislash|88/100\n|move|p2a: Basculegion|Flip Turn|p1b: Tyranitar\n|-activate|p1b: Tyranitar|move: Protect\n|-formechange|p2b: Aegislash|Aegislash-Blade|\n|move|p2b: Aegislash|Sacred Sword|p1b: Tyranitar\n|-activate|p1b: Tyranitar|move: Protect\n|\n|-weather|Sandstorm|[upkeep]\n|-damage|p2a: Basculegion|62/100|[from] Sandstorm\n|upkeep\n|turn|2\n|\n|t:|1776248652\n|switch|p1b: Basculegion|Basculegion, L50, M|100/100\n|move|p1a: Lycanroc|Rock Slide|p2a: Basculegion|[spread] p2a,p2b\n|-resisted|p2b: Aegislash|1\n|-damage|p2a: Basculegion|30/100\n|-damage|p2b: Aegislash|63/100\n|move|p2a: Basculegion|Flip Turn|p1b: Basculegion\n|-resisted|p1b: Basculegion|1\n|-damage|p1b: Basculegion|76/100\n|-message|smp on whimsicott forfeited.\n|\n|win|Hldthen\n|raw|Hldthen's rating: 1111 &rarr; <strong>1135</strong><br />(+24 for winning)\n|raw|smp on whimsicott's rating: 1091 &rarr; <strong>1069</strong><br />(-22 for losing)\n",
+  "uploadtime": 1776248660,
+  "views": 25,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1069,
+  "private": 0,
+  "password": null
+}

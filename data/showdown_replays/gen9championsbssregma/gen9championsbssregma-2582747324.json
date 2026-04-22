@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2582747324",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "Willish6634",
+    "captainaizen99"
+  ],
+  "log": "|j|\u2606Willish6634\n|j|\u2606captainaizen99\n|t:|1776111305\n|gametype|singles\n|player|p1|Willish6634|cyrus|1000\n|player|p2|captainaizen99|102|1068\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Ceruledge, L50, M|\n|poke|p1|Samurott-Hisui, L50, M|\n|poke|p1|Weavile, L50, F|\n|poke|p1|Palafin, L50, M|\n|poke|p1|Lucario, L50, F|\n|poke|p1|Delphox, L50, M|\n|poke|p2|Charizard, L50, M|\n|poke|p2|Garchomp, L50, F|\n|poke|p2|Ninetales-Alola, L50, M|\n|poke|p2|Lucario, L50, M|\n|poke|p2|Meowscarada, L50, M|\n|poke|p2|Primarina, L50, M|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Willish6634)\n|\n|t:|1776111368\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Samurott|Samurott-Hisui, L50, M|100/100\n|switch|p2a: Lucario|Lucario, L50, M|100/100\n|turn|1\n|\n|t:|1776111376\n|detailschange|p2a: Lucario|Lucario-Mega, L50, M\n|-mega|p2a: Lucario|Lucario|Lucarionite\n|move|p2a: Lucario|Swords Dance|p2a: Lucario\n|-boost|p2a: Lucario|atk|2\n|move|p1a: Samurott|Sacred Sword|p2a: Lucario\n|-supereffective|p2a: Lucario|1\n|-damage|p2a: Lucario|0 fnt\n|faint|p2a: Lucario\n|\n|upkeep\n|\n|t:|1776111387\n|switch|p2a: Meowscarada|Meowscarada, L50, M|100/100\n|turn|2\n|\n|t:|1776111397\n|move|p2a: Meowscarada|Flower Trick|p1a: Samurott\n|-start|p2a: Meowscarada|typechange|Grass|[from] ability: Protean\n|-supereffective|p1a: Samurott|1\n|-crit|p1a: Samurott\n|-enditem|p1a: Samurott|Focus Sash\n|-damage|p1a: Samurott|1/100\n|move|p1a: Samurott|Ceaseless Edge|p2a: Meowscarada\n|-damage|p2a: Meowscarada|37/100\n|-sidestart|p2: captainaizen99|Spikes\n|\n|upkeep\n|turn|3\n|\n|t:|1776111405\n|move|p1a: Samurott|Sucker Punch|p2a: Meowscarada\n|-damage|p2a: Meowscarada|0 fnt\n|faint|p2a: Meowscarada\n|\n|upkeep\n|\n|t:|1776111408\n|switch|p2a: Charizard|Charizard, L50, M|100/100\n|turn|4\n|\n|t:|1776111412\n|move|p1a: Samurott|Sucker Punch|p2a: Charizard\n|-damage|p2a: Charizard|53/100\n|move|p2a: Charizard|Solar Beam||[still]\n|-prepare|p2a: Charizard|Solar Beam\n|\n|upkeep\n|turn|5\n|-message|captainaizen99 forfeited.\n|\n|win|Willish6634\n|raw|Willish6634's rating: 1000 &rarr; <strong>1048</strong><br />(+48 for winning)\n|raw|captainaizen99's rating: 1068 &rarr; <strong>1044</strong><br />(-24 for losing)\n|l|\u2606captainaizen99\n|player|p2|\n",
+  "uploadtime": 1776111420,
+  "views": 9,
+  "formatid": "gen9championsbssregma",
+  "rating": 1044,
+  "private": 0,
+  "password": null
+}

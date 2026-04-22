@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584167572",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "speedyturtle87",
+    "ScribbleScribble"
+  ],
+  "log": "|j|\u2606speedyturtle87\n|j|\u2606ScribbleScribble\n|t:|1776233380\n|gametype|doubles\n|player|p1|speedyturtle87|canari|1479\n|player|p2|ScribbleScribble|mina-lgpe|1653\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Aerodactyl, L50, F|\n|poke|p1|Meganium, L50, M|\n|poke|p1|Diggersby, L50, F|\n|poke|p1|Kingambit, L50, F|\n|poke|p1|Milotic, L50, F|\n|poke|p1|Sneasler, L50, F|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Aerodactyl, L50, F|\n|poke|p2|Kingambit, L50, M|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Farigiraf, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by ScribbleScribble)\n|inactive|speedyturtle87 also wants the timer to be on.\n|inactive|ScribbleScribble has 60 seconds left.\n|\n|t:|1776233411\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Aerodactyl|Aerodactyl, L50, F|100/100\n|switch|p1b: Sneasler|Sneasler, L50, F|100/100\n|switch|p2a: Aerodactyl|Aerodactyl, L50, F|100/100\n|switch|p2b: Sneasler|Sneasler, L50, M|100/100\n|-ability|p1a: Aerodactyl|Unnerve\n|-ability|p2a: Aerodactyl|Unnerve\n|turn|1\n|\n|t:|1776233424\n|move|p2b: Sneasler|Fake Out|p1a: Aerodactyl\n|-resisted|p1a: Aerodactyl|1\n|-damage|p1a: Aerodactyl|87/100\n|move|p1b: Sneasler|Fake Out|p2a: Aerodactyl\n|-resisted|p2a: Aerodactyl|1\n|-damage|p2a: Aerodactyl|87/100\n|cant|p2a: Aerodactyl|flinch\n|cant|p1a: Aerodactyl|flinch\n|\n|upkeep\n|turn|2\n|\n|t:|1776233439\n|switch|p1b: Kingambit|Kingambit, L50, F|100/100\n|move|p2a: Aerodactyl|Tailwind|p2a: Aerodactyl\n|-sidestart|p2: ScribbleScribble|move: Tailwind\n|move|p2b: Sneasler|Close Combat|p1a: Aerodactyl\n|-damage|p1a: Aerodactyl|0 fnt\n|-unboost|p2b: Sneasler|def|1\n|-unboost|p2b: Sneasler|spd|1\n|faint|p1a: Aerodactyl\n|-enditem|p2b: Sneasler|White Herb\n|-clearnegativeboost|p2b: Sneasler|[silent]\n|\n|upkeep\n|\n|t:|1776233446\n|switch|p1a: Sneasler|Sneasler, L50, F|100/100\n|turn|3\n|c|\u2606speedyturtle87|ggwp\n|-message|speedyturtle87 forfeited.\n|\n|win|ScribbleScribble\n|raw|speedyturtle87's rating: 1479 &rarr; <strong>1468</strong><br />(-11 for losing)\n|raw|ScribbleScribble's rating: 1653 &rarr; <strong>1664</strong><br />(+11 for winning)\n|l|\u2606ScribbleScribble\n|player|p2|\n|l|\u2606speedyturtle87\n|player|p1|\n",
+  "uploadtime": 1776233513,
+  "views": 81,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1468,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2580464984",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "SHIMA2023",
+    "ZOONGALABOOM"
+  ],
+  "log": "|j|\u2606SHIMA2023\n|j|\u2606ZOONGALABOOM\n|t:|1775900581\n|gametype|doubles\n|player|p1|SHIMA2023|1|1144\n|player|p2|ZOONGALABOOM|ingo|1050\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Tyranitar, L50, M|\n|poke|p1|Clefable, L50, F|\n|poke|p1|Milotic, L50, F|\n|poke|p1|Kommo-o, L50, F|\n|poke|p1|Excadrill, L50, M|\n|poke|p1|Alakazam, L50, F|\n|poke|p2|Meganium, L50, M|\n|poke|p2|Archaludon, L50, M|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Maushold-Four, L50|\n|poke|p2|Politoed, L50, M|\n|poke|p2|Talonflame, L50, F|\n|teampreview|4\n|\n|t:|1775900623\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Tyranitar|Tyranitar, L50, M|100/100\n|switch|p1b: Excadrill|Excadrill, L50, M|100/100\n|switch|p2a: Meganium|Meganium, L50, M|100/100\n|switch|p2b: Politoed|Politoed, L50, M|100/100\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p1a: Tyranitar\n|-weather|RainDance|[from] ability: Drizzle|[of] p2b: Politoed\n|turn|1\n|\n|t:|1775900650\n|detailschange|p1a: Tyranitar|Tyranitar-Mega, L50, M\n|-mega|p1a: Tyranitar|Tyranitar|Tyranitarite\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p1a: Tyranitar\n|detailschange|p2a: Meganium|Meganium-Mega, L50, M\n|-mega|p2a: Meganium|Meganium|Meganiumite\n|move|p1b: Excadrill|Iron Head|p2a: Meganium\n|-supereffective|p2a: Meganium|1\n|-damage|p2a: Meganium|19/100\n|move|p1a: Tyranitar|Rock Slide|p2b: Politoed|[spread] p2a,p2b\n|-damage|p2a: Meganium|0 fnt\n|-damage|p2b: Politoed|67/100\n|faint|p2a: Meganium\n|move|p2b: Politoed|Weather Ball|p1b: Excadrill\n|-resisted|p1b: Excadrill|2\n|-damage|p1b: Excadrill|93/100\n|\n|-weather|Sandstorm|[upkeep]\n|-damage|p2b: Politoed|61/100|[from] Sandstorm\n|upkeep\n|-message|ZOONGALABOOM forfeited.\n|\n|win|SHIMA2023\n|raw|SHIMA2023's rating: 1144 &rarr; <strong>1162</strong><br />(+18 for winning)\n|raw|ZOONGALABOOM's rating: 1050 &rarr; <strong>1037</strong><br />(-13 for losing)\n|l|\u2606ZOONGALABOOM\n|player|p2|\n",
+  "uploadtime": 1775900683,
+  "views": 19,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1037,
+  "private": 0,
+  "password": null
+}

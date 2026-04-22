@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2588676447",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "ninano200",
+    "dmddo412"
+  ],
+  "log": "|j|\u2606ninano200\n|j|\u2606dmddo412\n|t:|1776656579\n|gametype|singles\n|player|p1|ninano200|169|1424\n|player|p2|dmddo412|2|1466\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Charizard, L50, M|\n|poke|p1|Mimikyu, L50, M|\n|poke|p1|Greninja, L50, F|\n|poke|p1|Hippowdon, L50, F|\n|poke|p1|Corviknight, L50, M|\n|poke|p1|Lucario, L50, F|\n|poke|p2|Mimikyu, L50, F, shiny|\n|poke|p2|Garchomp, L50, F, shiny|\n|poke|p2|Archaludon, L50, F, shiny|\n|poke|p2|Kangaskhan, L50, F, shiny|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Volcarona, L50, F, shiny|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by dmddo412)\n|inactive|dmddo412 has 60 seconds left.\n|\n|t:|1776656610\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Hippowdon|Hippowdon, L50, F|100/100\n|switch|p2a: Floette|Floette-Eternal, L50, F|100/100\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p1a: Hippowdon\n|turn|1\n|\n|t:|1776656621\n|detailschange|p2a: Floette|Floette-Mega, L50, F\n|-mega|p2a: Floette|Floette|Floettite\n|-ability|p2a: Floette|Fairy Aura\n|move|p2a: Floette|Light of Ruin|p1a: Hippowdon|[miss]\n|-miss|p2a: Floette|p1a: Hippowdon\n|move|p1a: Hippowdon|Stealth Rock|p2a: Floette\n|-sidestart|p2: dmddo412|move: Stealth Rock\n|\n|-weather|Sandstorm|[upkeep]\n|-damage|p2a: Floette|94/100|[from] Sandstorm\n|upkeep\n|turn|2\n|\n|t:|1776656633\n|move|p2a: Floette|Light of Ruin|p1a: Hippowdon\n|-damage|p1a: Hippowdon|4/100\n|-enditem|p1a: Hippowdon|Sitrus Berry|[eat]\n|-heal|p1a: Hippowdon|28/100|[from] item: Sitrus Berry\n|-damage|p2a: Floette|37/100|[from] Recoil\n|move|p1a: Hippowdon|Yawn|p2a: Floette\n|-start|p2a: Floette|move: Yawn|[of] p1a: Hippowdon\n|\n|-weather|Sandstorm|[upkeep]\n|-damage|p2a: Floette|31/100|[from] Sandstorm\n|upkeep\n|turn|3\n|-message|dmddo412 forfeited.\n|\n|win|ninano200\n|raw|ninano200's rating: 1424 &rarr; <strong>1446</strong><br />(+22 for winning)\n|raw|dmddo412's rating: 1466 &rarr; <strong>1444</strong><br />(-22 for losing)\n|l|\u2606dmddo412\n|player|p2|\n|l|\u2606ninano200\n|player|p1|\n",
+  "uploadtime": 1776656650,
+  "views": 0,
+  "formatid": "gen9championsbssregma",
+  "rating": 1444,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2588091335",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "adfsdfsdfsdaf",
+    "ljh4874484"
+  ],
+  "log": "|j|\u2606adfsdfsdfsdaf\n|j|\u2606ljh4874484\n|t:|1776603262\n|gametype|singles\n|player|p1|adfsdfsdfsdaf|2|1230\n|player|p2|ljh4874484|misty|1142\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Aegislash, L50, M|\n|poke|p1|Rotom-Heat, L50|\n|poke|p1|Venusaur, L50, M|\n|poke|p1|Clefable, L50, F|\n|poke|p1|Hippowdon, L50, F|\n|poke|p1|Sableye, L50, M|\n|poke|p2|Venusaur, L50, F|\n|poke|p2|Kingambit, L50, M|\n|poke|p2|Primarina, L50, F, shiny|\n|poke|p2|Mimikyu, L50, F, shiny|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Hydreigon, L50, F, shiny|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by adfsdfsdfsdaf)\n|\n|t:|1776603294\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Clefable|Clefable, L50, F|100/100\n|switch|p2a: Venusaur|Venusaur, L50, F|100/100\n|turn|1\n|\n|t:|1776603314\n|detailschange|p2a: Venusaur|Venusaur-Mega, L50, F\n|-mega|p2a: Venusaur|Venusaur|Venusaurite\n|move|p2a: Venusaur|Earth Power|p1a: Clefable\n|-damage|p1a: Clefable|77/100\n|move|p1a: Clefable|Thunder Wave|p2a: Venusaur\n|-status|p2a: Venusaur|par\n|\n|upkeep\n|turn|2\n|\n|t:|1776603320\n|switch|p1a: Venusaur|Venusaur, L50, M|100/100\n|move|p2a: Venusaur|Sludge Wave|p1a: Venusaur\n|-damage|p1a: Venusaur|68/100\n|\n|upkeep\n|turn|3\n|\n|t:|1776603326\n|detailschange|p1a: Venusaur|Venusaur-Mega, L50, M\n|-mega|p1a: Venusaur|Venusaur|Venusaurite\n|move|p1a: Venusaur|Sludge Wave|p2a: Venusaur\n|-damage|p2a: Venusaur|72/100 par\n|move|p2a: Venusaur|Earth Power|p1a: Venusaur\n|-damage|p1a: Venusaur|53/100\n|\n|upkeep\n|turn|4\n|\n|t:|1776603332\n|move|p1a: Venusaur|Synthesis|p1a: Venusaur\n|-heal|p1a: Venusaur|100/100\n|move|p2a: Venusaur|Sludge Wave|p1a: Venusaur\n|-damage|p1a: Venusaur|76/100\n|\n|upkeep\n|turn|5\n|\n|t:|1776603335\n|move|p1a: Venusaur|Sludge Wave|p2a: Venusaur\n|-damage|p2a: Venusaur|42/100 par\n|cant|p2a: Venusaur|par\n|\n|upkeep\n|turn|6\n|\n|t:|1776603340\n|move|p1a: Venusaur|Sludge Wave|p2a: Venusaur\n|-damage|p2a: Venusaur|16/100 par\n|move|p2a: Venusaur|Synthesis|p2a: Venusaur\n|-heal|p2a: Venusaur|66/100 par\n|\n|upkeep\n|turn|7\n|\n|t:|1776603346\n|switch|p2a: Kingambit|Kingambit, L50, M|100/100\n|move|p1a: Venusaur|Earth Power|p2a: Kingambit\n|-supereffective|p2a: Kingambit|1\n|-damage|p2a: Kingambit|54/100\n|\n|upkeep\n|turn|8\n|-message|ljh4874484 forfeited.\n|\n|win|adfsdfsdfsdaf\n|raw|adfsdfsdfsdaf's rating: 1230 &rarr; <strong>1249</strong><br />(+19 for winning)\n|raw|ljh4874484's rating: 1142 &rarr; <strong>1123</strong><br />(-19 for losing)\n|l|\u2606ljh4874484\n|player|p2|\n",
+  "uploadtime": 1776603353,
+  "views": 1,
+  "formatid": "gen9championsbssregma",
+  "rating": 1123,
+  "private": 0,
+  "password": null
+}

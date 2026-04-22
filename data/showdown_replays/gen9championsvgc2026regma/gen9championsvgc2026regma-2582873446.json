@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582873446",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Marizo",
+    "WackyMelon"
+  ],
+  "log": "|j|\u2606Marizo\n|j|\u2606WackyMelon\n|t:|1776120970\n|gametype|doubles\n|player|p1|Marizo|n|1008\n|player|p2|WackyMelon|grimsley|1015\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Aegislash, L50, M|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Tyranitar, L50, F|\n|poke|p1|Greninja-*, L50, F|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Whimsicott, L50, F|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Whimsicott, L50, F|\n|poke|p2|Espeon, L50, F|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Pelipper, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by WackyMelon)\n|\n|t:|1776120997\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Whimsicott|Whimsicott, L50, F|100/100\n|switch|p1b: Aegislash|Aegislash, L50, M|100/100\n|switch|p2a: Floette|Floette-Eternal, L50, F|100/100\n|switch|p2b: Whimsicott|Whimsicott, L50, F, shiny|100/100\n|turn|1\n|inactive|Marizo has 30 seconds left.\n|inactive|Marizo has 20 seconds left.\n|inactive|Marizo has 15 seconds left.\n|\n|t:|1776121037\n|detailschange|p2a: Floette|Floette-Mega, L50, F\n|-mega|p2a: Floette|Floette|Floettite\n|-ability|p2a: Floette|Fairy Aura\n|move|p1b: Aegislash|King's Shield|p1b: Aegislash\n|-singleturn|p1b: Aegislash|Protect\n|move|p1a: Whimsicott|Cotton Spore|p2a: Floette|[spread] p2a\n|-immune|p2b: Whimsicott\n|-unboost|p2a: Floette|spe|2\n|move|p2b: Whimsicott|Tailwind|p2b: Whimsicott\n|-sidestart|p2: WackyMelon|move: Tailwind\n|move|p2a: Floette|Calm Mind|p2a: Floette\n|-boost|p2a: Floette|spa|1\n|-boost|p2a: Floette|spd|1\n|\n|upkeep\n|turn|2\n|\n|t:|1776121062\n|move|p2b: Whimsicott|Light Screen|p2b: Whimsicott\n|-sidestart|p2: WackyMelon|move: Light Screen\n|move|p1a: Whimsicott|Encore|p2a: Floette\n|-start|p2a: Floette|Encore\n|move|p2a: Floette|Calm Mind|p2a: Floette\n|-boost|p2a: Floette|spa|1\n|-boost|p2a: Floette|spd|1\n|-formechange|p1b: Aegislash|Aegislash-Blade|\n|move|p1b: Aegislash|Iron Head|p2a: Floette\n|-supereffective|p2a: Floette|1\n|-damage|p2a: Floette|0 fnt\n|faint|p2a: Floette\n|\n|upkeep\n|-message|WackyMelon forfeited.\n|\n|win|Marizo\n|raw|Marizo's rating: 1008 &rarr; <strong>1048</strong><br />(+40 for winning)\n|raw|WackyMelon's rating: 1015 &rarr; <strong>1003</strong><br />(-12 for losing)\n|l|\u2606WackyMelon\n|player|p2|\n",
+  "uploadtime": 1776121105,
+  "views": 14,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1003,
+  "private": 0,
+  "password": null
+}

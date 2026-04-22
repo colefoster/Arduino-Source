@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584317182",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "JimmiBunnie",
+    "mumof"
+  ],
+  "log": "|j|\u2606JimmiBunnie\n|j|\u2606mumof\n|t:|1776250564\n|gametype|doubles\n|player|p1|JimmiBunnie|pokekid|1083\n|player|p2|mumof|266|1122\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Lopunny, L50, F|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Rotom-Wash, L50|\n|poke|p1|Whimsicott, L50, F|\n|poke|p1|Milotic, L50, F|\n|poke|p2|Kangaskhan, L50, F|\n|poke|p2|Garchomp, L50, F|\n|poke|p2|Sylveon, L50, M|\n|poke|p2|Aerodactyl, L50, M|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Incineroar, L50, F|\n|teampreview|4\n|\n|t:|1776250640\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Rotom|Rotom-Wash, L50|100/100\n|switch|p1b: Lopunny|Lopunny, L50, F|100/100\n|switch|p2a: Sylveon|Sylveon, L50, M|100/100\n|switch|p2b: Aerodactyl|Aerodactyl, L50, M|100/100\n|-ability|p2b: Aerodactyl|Unnerve\n|turn|1\n|\n|t:|1776250681\n|switch|p2b: Garchomp|Garchomp, L50, F|100/100\n|detailschange|p1b: Lopunny|Lopunny-Mega, L50, F\n|-mega|p1b: Lopunny|Lopunny|Lopunnite\n|move|p2a: Sylveon|Detect|p2a: Sylveon\n|-singleturn|p2a: Sylveon|Protect\n|move|p1b: Lopunny|Fake Out|p2b: Garchomp\n|-crit|p2b: Garchomp\n|-damage|p2b: Garchomp|69/100\n|-damage|p1b: Lopunny|89/100|[from] ability: Rough Skin|[of] p2b: Garchomp\n|move|p1a: Rotom|Hydro Pump|p2b: Garchomp\n|-damage|p2b: Garchomp|19/100\n|\n|upkeep\n|turn|2\n|\n|t:|1776250718\n|move|p2b: Garchomp|Protect|p2b: Garchomp\n|-singleturn|p2b: Garchomp|Protect\n|move|p1b: Lopunny|Encore|p2a: Sylveon\n|-start|p2a: Sylveon|Encore\n|move|p2a: Sylveon|Detect||[still]\n|-fail|p2a: Sylveon\n|move|p1a: Rotom|Hydro Pump|p2b: Garchomp\n|-activate|p2b: Garchomp|move: Protect\n|\n|upkeep\n|turn|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by mumof)\n|\n|t:|1776250749\n|switch|p2a: Incineroar|Incineroar, L50, F|100/100\n|-ability|p2a: Incineroar|Intimidate|boost\n|-unboost|p1a: Rotom|atk|1\n|-fail|p1b: Lopunny|unboost|Attack|[from] ability: Scrappy|[of] p1b: Lopunny\n|move|p1b: Lopunny|Close Combat|p2b: Garchomp\n|-damage|p2b: Garchomp|0 fnt\n|-unboost|p1b: Lopunny|def|1\n|-unboost|p1b: Lopunny|spd|1\n|-damage|p1b: Lopunny|77/100|[from] ability: Rough Skin|[of] p2b: Garchomp\n|faint|p2b: Garchomp\n|move|p1a: Rotom|Hydro Pump|p2a: Incineroar\n|-supereffective|p2a: Incineroar|1\n|-damage|p2a: Incineroar|14/100\n|-enditem|p2a: Incineroar|Sitrus Berry|[eat]\n|-heal|p2a: Incineroar|39/100|[from] item: Sitrus Berry\n|\n|upkeep\n|-message|mumof forfeited.\n|\n|win|JimmiBunnie\n|raw|JimmiBunnie's rating: 1083 &rarr; <strong>1114</strong><br />(+31 for winning)\n|raw|mumof's rating: 1122 &rarr; <strong>1094</strong><br />(-28 for losing)\n|l|\u2606mumof\n|player|p2|\n",
+  "uploadtime": 1776250766,
+  "views": 23,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1094,
+  "private": 0,
+  "password": null
+}

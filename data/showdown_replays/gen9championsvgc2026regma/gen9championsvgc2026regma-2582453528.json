@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582453528",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "jonen",
+    "smk1111"
+  ],
+  "log": "|j|\u2606jonen\n|j|\u2606smk1111\n|t:|1776092692\n|gametype|doubles\n|player|p1|jonen|medium|1000\n|player|p2|smk1111|pokemaniac|1010\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Kleavor, L50, F|\n|poke|p1|Hippowdon, L50, M|\n|poke|p1|Chesnaught, L50, F|\n|poke|p1|Sneasler, L50, M|\n|poke|p2|Pelipper, L50, M|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Archaludon, L50, F|\n|poke|p2|Dragonite, L50, M|\n|poke|p2|Politoed, L50, M|\n|poke|p2|Incineroar, L50, F|\n|teampreview|4\n|-message|smk1111 forfeited.\n|\n|win|jonen\n|raw|jonen's rating: 1000 &rarr; <strong>1041</strong><br />(+41 for winning)\n|raw|smk1111's rating: 1010 &rarr; <strong>1000</strong><br />(-10 for losing)\n",
+  "uploadtime": 1776092699,
+  "views": 10,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

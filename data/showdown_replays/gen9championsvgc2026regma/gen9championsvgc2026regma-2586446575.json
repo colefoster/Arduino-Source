@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586446575",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Nexus2011x",
+    "campeondelfitness"
+  ],
+  "log": "|j|\u2606Nexus2011x\n|j|\u2606campeondelfitness\n|t:|1776435276\n|gametype|doubles\n|player|p1|Nexus2011x|1|1182\n|player|p2|campeondelfitness|swimmer|1242\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Blastoise, L50, F|\n|poke|p1|Talonflame, L50, F|\n|poke|p1|Mimikyu, L50, F|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Vanilluxe, L50, M|\n|poke|p1|Sneasler, L50, F|\n|poke|p2|Tyranitar, L50, M|\n|poke|p2|Garchomp, L50, F|\n|poke|p2|Heliolisk, L50, F|\n|poke|p2|Rotom-Heat, L50|\n|poke|p2|Orthworm, L50, M|\n|poke|p2|Aerodactyl, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by campeondelfitness)\n|inactive|Nexus2011x has 60 seconds left.\n|\n|t:|1776435318\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Talonflame|Talonflame, L50, F|100/100\n|switch|p1b: Blastoise|Blastoise, L50, F|100/100\n|switch|p2a: Heliolisk|Heliolisk, L50, F|100/100\n|switch|p2b: Rotom|Rotom-Heat, L50|100/100\n|turn|1\n|\n|t:|1776435337\n|detailschange|p1b: Blastoise|Blastoise-Mega, L50, F\n|-mega|p1b: Blastoise|Blastoise|Blastoisinite\n|move|p1a: Talonflame|Tailwind|p1a: Talonflame\n|-sidestart|p1: Nexus2011x|move: Tailwind\n|move|p1b: Blastoise|Water Spout|p2b: Rotom|[spread] p2a,p2b\n|-supereffective|p2b: Rotom|1\n|-damage|p2a: Heliolisk|11/100\n|-damage|p2b: Rotom|0 fnt\n|faint|p2b: Rotom\n|move|p2a: Heliolisk|Shed Tail|p2a: Heliolisk\n|-fail|p2a: Heliolisk|move: Shed Tail|[weak]\n|\n|upkeep\n|-message|campeondelfitness forfeited.\n|\n|win|Nexus2011x\n|raw|Nexus2011x's rating: 1182 &rarr; <strong>1211</strong><br />(+29 for winning)\n|raw|campeondelfitness's rating: 1242 &rarr; <strong>1213</strong><br />(-29 for losing)\n",
+  "uploadtime": 1776435355,
+  "views": 58,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1211,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2581463841",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Fjdhdhsjalsh",
+    "CroatianGolurk"
+  ],
+  "log": "|j|\u2606Fjdhdhsjalsh\n|j|\u2606CroatianGolurk\n|t:|1776002898\n|gametype|doubles\n|player|p1|Fjdhdhsjalsh|170|1000\n|player|p2|CroatianGolurk|102|1089\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Delphox, L50, F|\n|poke|p1|Kingambit, L50, F|\n|poke|p1|Clefable, L50, M|\n|poke|p1|Sneasler, L50, F|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Dragonite, L50, F|\n|poke|p2|Farigiraf, L50, F|\n|poke|p2|Golurk, L50|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Excadrill, L50, F|\n|poke|p2|Tyranitar, L50, M|\n|poke|p2|Meowscarada, L50, F|\n|teampreview|4\n|\n|t:|1776002943\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Delphox|Delphox, L50, F|100/100\n|switch|p1b: Sneasler|Sneasler, L50, F|100/100\n|switch|p2a: Excadrill|Excadrill, L50, F|100/100\n|switch|p2b: Tyranitar|Tyranitar, L50, M|100/100\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p2b: Tyranitar\n|turn|1\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by CroatianGolurk)\n|\n|t:|1776002978\n|detailschange|p1a: Delphox|Delphox-Mega, L50, F\n|-mega|p1a: Delphox|Delphox|Delphoxite\n|move|p2a: Excadrill|Protect|p2a: Excadrill\n|-singleturn|p2a: Excadrill|Protect\n|move|p1a: Delphox|Protect|p1a: Delphox\n|-singleturn|p1a: Delphox|Protect\n|move|p2b: Tyranitar|Protect|p2b: Tyranitar\n|-singleturn|p2b: Tyranitar|Protect\n|move|p1b: Sneasler|Close Combat|p2b: Tyranitar\n|-activate|p2b: Tyranitar|move: Protect\n|\n|-weather|Sandstorm|[upkeep]\n|-damage|p1a: Delphox|94/100|[from] Sandstorm\n|-damage|p1b: Sneasler|95/100|[from] Sandstorm\n|upkeep\n|turn|2\n|l|\u2606Fjdhdhsjalsh\n|inactive|Fjdhdhsjalsh disconnected and has a minute to reconnect!\n|player|p1|\n|inactive|Fjdhdhsjalsh has 30 seconds left.\n|inactive|CroatianGolurk has 30 seconds left.\n|inactive|Fjdhdhsjalsh has 20 seconds left.\n|inactive|Fjdhdhsjalsh has 15 seconds left.\n|inactive|Fjdhdhsjalsh has 10 seconds left.\n|inactive|Fjdhdhsjalsh has 5 seconds left.\n|-message|Fjdhdhsjalsh lost due to inactivity.\n|\n|win|CroatianGolurk\n|raw|Fjdhdhsjalsh's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|raw|CroatianGolurk's rating: 1089 &rarr; <strong>1109</strong><br />(+20 for winning)\n",
+  "uploadtime": 1776003077,
+  "views": 27,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

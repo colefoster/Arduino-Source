@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2585029627",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Silbatoman",
+    "BryJin"
+  ],
+  "log": "|j|\u2606Silbatoman\n|j|\u2606BryJin\n|t:|1776304849\n|gametype|doubles\n|player|p1|Silbatoman|265|1295\n|player|p2|BryJin|102|1379\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Aggron, L50, F|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Rotom-Wash, L50|\n|poke|p1|Aerodactyl, L50, M|\n|poke|p1|Tyranitar, L50, F|\n|poke|p2|Froslass, L50, F|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Primarina, L50, M|\n|poke|p2|Dragapult, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by BryJin)\n|inactive|Silbatoman has 60 seconds left.\n|\n|t:|1776304909\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Sneasler|Sneasler, L50, M|100/100\n|switch|p1b: Aerodactyl|Aerodactyl, L50, M, shiny|100/100\n|switch|p2a: Dragapult|Dragapult, L50, M|100/100\n|switch|p2b: Primarina|Primarina, L50, M, shiny|100/100\n|-ability|p1b: Aerodactyl|Unnerve\n|turn|1\n|inactive|Silbatoman has 30 seconds left.\n|inactive|Silbatoman has 20 seconds left.\n|inactive|Silbatoman has 15 seconds left.\n|\n|t:|1776304951\n|switch|p2b: Incineroar|Incineroar, L50, F|100/100\n|-ability|p2b: Incineroar|Intimidate|boost\n|-unboost|p1a: Sneasler|atk|1\n|-unboost|p1b: Aerodactyl|atk|1\n|-enditem|p1a: Sneasler|White Herb\n|-clearnegativeboost|p1a: Sneasler|[silent]\n|move|p1b: Aerodactyl|Protect|p1b: Aerodactyl\n|-singleturn|p1b: Aerodactyl|Protect\n|move|p1a: Sneasler|Close Combat|p2b: Incineroar\n|-supereffective|p2b: Incineroar|1\n|-damage|p2b: Incineroar|0 fnt\n|-unboost|p1a: Sneasler|def|1\n|-unboost|p1a: Sneasler|spd|1\n|faint|p2b: Incineroar\n|move|p2a: Dragapult|Will-O-Wisp|p1b: Aerodactyl\n|-activate|p1b: Aerodactyl|move: Protect\n|\n|upkeep\n|\n|t:|1776304969\n|switch|p2b: Sneasler|Sneasler, L50, F, shiny|100/100\n|turn|2\n|inactive|Silbatoman has 30 seconds left.\n|\n|t:|1776304994\n|detailschange|p1b: Aerodactyl|Aerodactyl-Mega, L50, M, shiny\n|-mega|p1b: Aerodactyl|Aerodactyl|Aerodactylite\n|move|p1a: Sneasler|Dire Claw|p2a: Dragapult\n|-resisted|p2a: Dragapult|1\n|-damage|p2a: Dragapult|71/100\n|-status|p2a: Dragapult|slp\n|move|p1b: Aerodactyl|Dual Wingbeat|p2b: Sneasler\n|-supereffective|p2b: Sneasler|1\n|-damage|p2b: Sneasler|43/100\n|-supereffective|p2b: Sneasler|1\n|-damage|p2b: Sneasler|0 fnt\n|faint|p2b: Sneasler\n|-hitcount|p2: Sneasler|2\n|cant|p2a: Dragapult|slp\n|\n|upkeep\n|c|\u2606BryJin|\uff1f\n|c|\u2606BryJin|good\n|-message|BryJin forfeited.\n|\n|win|Silbatoman\n|raw|Silbatoman's rating: 1295 &rarr; <strong>1326</strong><br />(+31 for winning)\n|raw|BryJin's rating: 1379 &rarr; <strong>1354</strong><br />(-25 for losing)\n|l|\u2606BryJin\n|player|p2|\n",
+  "uploadtime": 1776305018,
+  "views": 44,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1326,
+  "private": 0,
+  "password": null
+}

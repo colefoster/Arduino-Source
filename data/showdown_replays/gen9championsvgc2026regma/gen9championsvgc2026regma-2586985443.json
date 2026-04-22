@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586985443",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Barberryfaze",
+    "outofthebox215"
+  ],
+  "log": "|j|\u2606Barberryfaze\n|j|\u2606outofthebox215\n|t:|1776478374\n|gametype|doubles\n|player|p1|Barberryfaze|n|1178\n|player|p2|outofthebox215|266|1216\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Whimsicott, L50, F|\n|poke|p1|Heracross, L50, M|\n|poke|p1|Pelipper, L50, M|\n|poke|p1|Medicham, L50, F|\n|poke|p1|Aerodactyl, L50, F|\n|poke|p2|Garchomp, L50, F|\n|poke|p2|Talonflame, L50, F|\n|poke|p2|Gardevoir, L50, M|\n|poke|p2|Orthworm, L50, F|\n|poke|p2|Rotom-Mow, L50|\n|poke|p2|Blastoise, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Barberryfaze)\nBarberryfaze rejected open team sheets.\n|\n|t:|1776478407\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Basculegion|Basculegion, L50, M|100/100\n|switch|p1b: Whimsicott|Whimsicott, L50, F, shiny|100/100\n|switch|p2a: Talonflame|Talonflame, L50, F, shiny|100/100\n|switch|p2b: Rotom|Rotom-Mow, L50, shiny|100/100\n|turn|1\n|\n|t:|1776478425\n|move|p2a: Talonflame|Tailwind|p2a: Talonflame\n|-sidestart|p2: outofthebox215|move: Tailwind\n|move|p1b: Whimsicott|Tailwind|p1b: Whimsicott\n|-sidestart|p1: Barberryfaze|move: Tailwind\n|move|p2b: Rotom|Leaf Storm|p1a: Basculegion|[miss]\n|-miss|p2b: Rotom|p1a: Basculegion\n|move|p1a: Basculegion|Wave Crash|p2a: Talonflame\n|-supereffective|p2a: Talonflame|1\n|-damage|p2a: Talonflame|0 fnt\n|faint|p2a: Talonflame\n|-damage|p1a: Basculegion|74/100|[from] Recoil\n|\n|upkeep\n|-message|outofthebox215 forfeited.\n|\n|win|Barberryfaze\n|raw|Barberryfaze's rating: 1178 &rarr; <strong>1206</strong><br />(+28 for winning)\n|raw|outofthebox215's rating: 1216 &rarr; <strong>1188</strong><br />(-28 for losing)\n|l|\u2606outofthebox215\n|player|p2|\n|j|\u2606outofthebox215\n|player|p2|outofthebox215|266|\n",
+  "uploadtime": 1776478442,
+  "views": 17,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1188,
+  "private": 0,
+  "password": null
+}

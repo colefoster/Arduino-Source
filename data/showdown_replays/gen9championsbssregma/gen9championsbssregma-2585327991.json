@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2585327991",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "bekagoat",
+    "fletchyfletchy"
+  ],
+  "log": "|j|\u2606bekagoat\n|j|\u2606fletchyfletchy\n|t:|1776338233\n|gametype|singles\n|player|p1|bekagoat|169|1000\n|player|p2|fletchyfletchy|liko|1025\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Alakazam, L50, F|\n|poke|p1|Golurk, L50|\n|poke|p1|Hydreigon, L50, M|\n|poke|p1|Milotic, L50, M|\n|poke|p1|Rotom-Heat, L50|\n|poke|p1|Sinistcha, L50|\n|poke|p2|Ninetales-Alola, L50, F|\n|poke|p2|Froslass, L50, F|\n|poke|p2|Rotom-Wash, L50|\n|poke|p2|Aegislash, L50, F|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Gallade, L50, M|\n|teampreview|3\n|\n|t:|1776338262\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Golurk|Golurk, L50|100/100\n|switch|p2a: Froslass|Froslass, L50, F|100/100\n|turn|1\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by bekagoat)\n|\n|t:|1776338328\n|detailschange|p2a: Froslass|Froslass-Mega, L50, F\n|-mega|p2a: Froslass|Froslass|Froslassite\n|-weather|Snowscape|[from] ability: Snow Warning|[of] p2a: Froslass\n|move|p1a: Golurk|Protect|p1a: Golurk\n|-singleturn|p1a: Golurk|Protect\n|move|p2a: Froslass|Will-O-Wisp|p1a: Golurk\n|-activate|p1a: Golurk|move: Protect\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|turn|2\n|\n|t:|1776338350\n|move|p2a: Froslass|Blizzard|p1a: Golurk\n|-supereffective|p1a: Golurk|1\n|-damage|p1a: Golurk|0 fnt\n|faint|p1a: Golurk\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|\n|t:|1776338357\n|switch|p1a: Alakazam|Alakazam, L50, F|100/100\n|turn|3\n|\n|t:|1776338369\n|move|p2a: Froslass|Will-O-Wisp|p1a: Alakazam\n|-status|p1a: Alakazam|brn\n|move|p1a: Alakazam|Dazzling Gleam|p2a: Froslass\n|-damage|p2a: Froslass|66/100\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|turn|4\n|\n|t:|1776338377\n|move|p2a: Froslass|Hex|p1a: Alakazam\n|-supereffective|p1a: Alakazam|1\n|-enditem|p1a: Alakazam|Focus Sash\n|-damage|p1a: Alakazam|1/100 brn\n|move|p1a: Alakazam|Dazzling Gleam|p2a: Froslass\n|-damage|p2a: Froslass|34/100\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|turn|5\n|-message|bekagoat forfeited.\n|\n|win|fletchyfletchy\n|raw|bekagoat's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|raw|fletchyfletchy's rating: 1025 &rarr; <strong>1059</strong><br />(+34 for winning)\n",
+  "uploadtime": 1776338387,
+  "views": 7,
+  "formatid": "gen9championsbssregma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

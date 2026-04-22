@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586198729",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "DeStef2003",
+    "Pokeventurer"
+  ],
+  "log": "|j|\u2606DeStef2003\n|j|\u2606Pokeventurer\n|t:|1776411421\n|gametype|doubles\n|player|p1|DeStef2003|miku-ghost|1414\n|player|p2|Pokeventurer|170|1390\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Farigiraf, L50, F|\n|poke|p1|Torkoal, L50, F|\n|poke|p1|Crabominable, L50, F|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Ninetales-Alola, L50, M|\n|poke|p2|Talonflame, L50, M|\n|poke|p2|Kingambit, L50, F|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Pelipper, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Pokeventurer)\n|inactive|DeStef2003 has 60 seconds left.\n|inactive|Pokeventurer has 60 seconds left.\n|\n|t:|1776411470\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Farigiraf|Farigiraf, L50, F|100/100\n|switch|p1b: Crabominable|Crabominable, L50, F|100/100\n|switch|p2a: Floette|Floette-Eternal, L50, F|100/100\n|switch|p2b: Kingambit|Kingambit, L50, F|100/100\n|turn|1\n|j| 1#MiraidonHater\n|inactive|DeStef2003 has 30 seconds left.\n|c| 1#MiraidonHater|destef wth\n|inactive|DeStef2003 has 20 seconds left.\n|c| 1#MiraidonHater|mega crab?\n|c|\u2606DeStef2003|ye not my finest lead\n|inactive|DeStef2003 has 15 seconds left.\n|inactive|DeStef2003 has 10 seconds left.\n|\n|t:|1776411516\n|switch|p1a: Torkoal|Torkoal, L50, F|100/100\n|-weather|SunnyDay|[from] ability: Drought|[of] p1a: Torkoal\n|detailschange|p2a: Floette|Floette-Mega, L50, F\n|-mega|p2a: Floette|Floette|Floettite\n|-ability|p2a: Floette|Fairy Aura\n|move|p1b: Crabominable|Protect|p1b: Crabominable\n|-singleturn|p1b: Crabominable|Protect\n|move|p2a: Floette|Moonblast|p1a: Torkoal\n|-resisted|p1a: Torkoal|1\n|-damage|p1a: Torkoal|51/100\n|move|p2b: Kingambit|Kowtow Cleave|p1a: Torkoal\n|-damage|p1a: Torkoal|10/100\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|turn|2\n|-message|DeStef2003 forfeited.\n|\n|win|Pokeventurer\n|raw|DeStef2003's rating: 1414 &rarr; <strong>1393</strong><br />(-21 for losing)\n|raw|Pokeventurer's rating: 1390 &rarr; <strong>1411</strong><br />(+21 for winning)\n",
+  "uploadtime": 1776411534,
+  "views": 51,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1393,
+  "private": 0,
+  "password": null
+}

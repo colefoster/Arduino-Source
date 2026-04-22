@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2583294066",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "ThaaaVenom",
+    "faric"
+  ],
+  "log": "|j|\u2606ThaaaVenom\n|j|\u2606faric\n|t:|1776164051\n|gametype|doubles\n|player|p1|ThaaaVenom|266|1104\n|player|p2|faric|265|1194\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Meganium, L50, F|\n|poke|p1|Pelipper, L50, F|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Sneasler, L50, F|\n|poke|p1|Farigiraf, L50, F|\n|poke|p1|Krookodile, L50, F|\n|poke|p2|Charizard, L50, F|\n|poke|p2|Garchomp, L50, F|\n|poke|p2|Rotom-Wash, L50|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Whimsicott, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by ThaaaVenom)\n|inactive|faric has 60 seconds left.\n|inactive|ThaaaVenom has 60 seconds left.\n|\n|t:|1776164096\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Basculegion|Basculegion, L50, M|100/100\n|switch|p1b: Sneasler|Sneasler, L50, F|100/100\n|switch|p2a: Rotom|Rotom-Wash, L50|100/100\n|switch|p2b: Charizard|Charizard, L50, F|100/100\n|turn|1\n|\n|t:|1776164117\n|switch|p1b: Pelipper|Pelipper, L50, F|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p1b: Pelipper\n|move|p2b: Charizard|Protect|p2b: Charizard\n|-singleturn|p2b: Charizard|Protect\n|move|p1a: Basculegion|Wave Crash|p2b: Charizard\n|-activate|p2b: Charizard|move: Protect\n|move|p2a: Rotom|Thunderbolt|p1a: Basculegion\n|-supereffective|p1a: Basculegion|1\n|-damage|p1a: Basculegion|3/100\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|turn|2\n|\n|t:|1776164142\n|detailschange|p2b: Charizard|Charizard-Mega-Y, L50, F\n|-mega|p2b: Charizard|Charizard|Charizardite Y\n|-weather|SunnyDay|[from] ability: Drought|[of] p2b: Charizard\n|move|p1a: Basculegion|Aqua Jet|p2b: Charizard\n|-supereffective|p2b: Charizard|1\n|-damage|p2b: Charizard|76/100\n|move|p2b: Charizard|Heat Wave|p1a: Basculegion|[spread] p1a,p1b\n|-resisted|p1a: Basculegion|1\n|-resisted|p1b: Pelipper|1\n|-damage|p1a: Basculegion|0 fnt\n|-damage|p1b: Pelipper|66/100\n|faint|p1a: Basculegion\n|move|p2a: Rotom|Volt Switch|p1b: Pelipper\n|-supereffective|p1b: Pelipper|2\n|-damage|p1b: Pelipper|0 fnt\n|faint|p1b: Pelipper\n|-message|ThaaaVenom forfeited.\n|\n|win|faric\n|raw|ThaaaVenom's rating: 1104 &rarr; <strong>1085</strong><br />(-19 for losing)\n|raw|faric's rating: 1194 &rarr; <strong>1213</strong><br />(+19 for winning)\n|l|\u2606ThaaaVenom\n|player|p1|\n",
+  "uploadtime": 1776164160,
+  "views": 35,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1085,
+  "private": 0,
+  "password": null
+}

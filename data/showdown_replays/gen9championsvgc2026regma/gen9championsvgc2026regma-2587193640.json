@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2587193640",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "plslovefurfrou",
+    "MantraVGC"
+  ],
+  "log": "|j|\u2606plslovefurfrou\n|j|\u2606MantraVGC\n|t:|1776507066\n|gametype|doubles\n|player|p1|plslovefurfrou|roxanne|1000\n|player|p2|MantraVGC|li|1086\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Furfrou, L50, M|\n|poke|p1|Froslass, L50, F|\n|poke|p1|Medicham, L50, F|\n|poke|p1|Drampa, L50, F|\n|poke|p1|Klefki, L50, M|\n|poke|p1|Gardevoir, L50, F|\n|poke|p2|Kommo-o, L50, M|\n|poke|p2|Sableye, L50, F, shiny|\n|poke|p2|Beedrill, L50, M|\n|poke|p2|Milotic, L50, F, shiny|\n|poke|p2|Whimsicott, L50, F, shiny|\n|poke|p2|Kingambit, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by MantraVGC)\n|inactive|MantraVGC has 60 seconds left.\n|\n|t:|1776507153\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Furfrou|Furfrou, L50, M|100/100\n|switch|p1b: Gardevoir|Gardevoir, L50, F|100/100\n|switch|p2a: Kommo-o|Kommo-o, L50, M|100/100\n|switch|p2b: Sableye|Sableye, L50, F, shiny|100/100\n|-ability|p1b: Gardevoir|Prankster|Trace|[from] ability: Trace|[of] p2b: Sableye\n|turn|1\n|inactive|MantraVGC has 30 seconds left.\n|inactive|plslovefurfrou has 30 seconds left.\n|inactive|MantraVGC has 20 seconds left.\n|\n|t:|1776507190\n|switch|p2a: Beedrill|Beedrill, L50, M|100/100\n|move|p2b: Sableye|Fake Out|p1b: Gardevoir\n|-damage|p1b: Gardevoir|88/100\n|move|p1a: Furfrou|Thunder Wave|p2a: Beedrill\n|-status|p2a: Beedrill|par\n|cant|p1b: Gardevoir|flinch\n|\n|upkeep\n|turn|2\n|inactive|MantraVGC has 30 seconds left.\n|\n|t:|1776507216\n|detailschange|p2a: Beedrill|Beedrill-Mega, L50, M\n|-mega|p2a: Beedrill|Beedrill|Beedrillite\n|move|p1a: Furfrou|Helping Hand|p1b: Gardevoir\n|-singleturn|p1b: Gardevoir|Helping Hand|[of] p1a: Furfrou\n|move|p2a: Beedrill|Protect|p2a: Beedrill\n|-singleturn|p2a: Beedrill|Protect\n|move|p2b: Sableye|Encore|p1a: Furfrou\n|-start|p1a: Furfrou|Encore\n|move|p1b: Gardevoir|Moonblast|p2b: Sableye\n|-supereffective|p2b: Sableye|1\n|-damage|p2b: Sableye|0 fnt\n|faint|p2b: Sableye\n|\n|upkeep\n|\n|t:|1776507230\n|switch|p2b: Kommo-o|Kommo-o, L50, M|100/100\n|turn|3\n|\n|t:|1776507246\n|move|p1a: Furfrou|Helping Hand|p1b: Gardevoir\n|-singleturn|p1b: Gardevoir|Helping Hand|[of] p1a: Furfrou\n|move|p2b: Kommo-o|Protect|p2b: Kommo-o\n|-singleturn|p2b: Kommo-o|Protect\n|move|p1b: Gardevoir|Psyshock|p2a: Beedrill\n|-supereffective|p2a: Beedrill|1\n|-damage|p2a: Beedrill|0 fnt\n|faint|p2a: Beedrill\n|\n|upkeep\n|-message|MantraVGC forfeited.\n|\n|win|plslovefurfrou\n|raw|plslovefurfrou's rating: 1000 &rarr; <strong>1050</strong><br />(+50 for winning)\n|raw|MantraVGC's rating: 1086 &rarr; <strong>1058</strong><br />(-28 for losing)\n|l|\u2606MantraVGC\n|player|p2|\n",
+  "uploadtime": 1776507261,
+  "views": 13,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1050,
+  "private": 0,
+  "password": null
+}

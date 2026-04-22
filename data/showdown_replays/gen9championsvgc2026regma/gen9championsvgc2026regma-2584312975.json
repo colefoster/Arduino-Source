@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584312975",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "smp on whimsicott",
+    "Uujkkk12"
+  ],
+  "log": "|j|\u2606smp on whimsicott\n|j|\u2606Uujkkk12\n|t:|1776250133\n|gametype|doubles\n|player|p1|smp on whimsicott|artist-gen4|1093\n|player|p2|Uujkkk12|2|1000\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Aegislash, L50, F|\n|poke|p1|Talonflame, L50, M|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Milotic, L50, F|\n|poke|p1|Garchomp, L50, F|\n|poke|p2|Gengar, L50, M|\n|poke|p2|Sableye, L50, M|\n|poke|p2|Blastoise, L50, F|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Kommo-o, L50, M|\n|poke|p2|Altaria, L50, F|\n|teampreview|4\n|\n|t:|1776250175\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Basculegion|Basculegion, L50, M|100/100\n|switch|p1b: Garchomp|Garchomp, L50, F|100/100\n|switch|p2a: Gengar|Gengar, L50, M, shiny|100/100\n|switch|p2b: Incineroar|Incineroar, L50, M|100/100\n|-ability|p2b: Incineroar|Intimidate|boost\n|-unboost|p1a: Basculegion|atk|1\n|-unboost|p1b: Garchomp|atk|1\n|-enditem|p1b: Garchomp|White Herb\n|-clearnegativeboost|p1b: Garchomp|[silent]\n|turn|1\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by smp on whimsicott)\n|\n|t:|1776250240\n|switch|p2b: Sableye|Sableye, L50, M, shiny|100/100\n|detailschange|p2a: Gengar|Gengar-Mega, L50, M, shiny\n|-mega|p2a: Gengar|Gengar|Gengarite\n|move|p2a: Gengar|Protect|p2a: Gengar\n|-singleturn|p2a: Gengar|Protect\n|move|p1a: Basculegion|Flip Turn|p2b: Sableye\n|-damage|p2b: Sableye|65/100\n|\n|t:|1776250249\n|switch|p1a: Talonflame|Talonflame, L50, M|100/100|[from] Flip Turn\n|move|p1b: Garchomp|Earthquake|p2a: Gengar|[spread] p2b\n|-activate|p2a: Gengar|move: Protect\n|-immune|p1a: Talonflame\n|-damage|p2b: Sableye|13/100\n|\n|upkeep\n|turn|2\n|inactive|Uujkkk12 has 30 seconds left.\n|\n|t:|1776250277\n|move|p1a: Talonflame|Dual Wingbeat|p2b: Sableye\n|-damage|p2b: Sableye|0 fnt\n|faint|p2b: Sableye\n|-hitcount|p2: Sableye|1\n|move|p2a: Gengar|Perish Song|p2a: Gengar\n|-start|p1a: Talonflame|perish3|[silent]\n|-start|p1b: Garchomp|perish3|[silent]\n|-start|p2a: Gengar|perish3|[silent]\n|-fieldactivate|move: Perish Song\n|move|p1b: Garchomp|Earthquake|p2a: Gengar|[spread] p2a\n|-immune|p1a: Talonflame\n|-supereffective|p2a: Gengar|1\n|-damage|p2a: Gengar|0 fnt\n|faint|p2a: Gengar\n|\n|-start|p1a: Talonflame|perish3\n|-start|p1b: Garchomp|perish3\n|upkeep\n|-message|Uujkkk12 forfeited.\n|\n|win|smp on whimsicott\n|raw|smp on whimsicott's rating: 1093 &rarr; <strong>1112</strong><br />(+19 for winning)\n|raw|Uujkkk12's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|l|\u2606Uujkkk12\n|player|p2|\n",
+  "uploadtime": 1776250295,
+  "views": 29,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

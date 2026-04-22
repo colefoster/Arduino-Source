@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2585217280",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "isabellissima",
+    "Hyjack"
+  ],
+  "log": "|j|\u2606isabellissima\n|j|\u2606Hyjack\n|t:|1776326184\n|gametype|doubles\n|player|p1|isabellissima|265|1086\n|player|p2|Hyjack|cynthia-gen4|1083\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Gengar, L50, F|\n|poke|p1|Sneasler, L50, F|\n|poke|p1|Maushold-Four, L50|\n|poke|p1|Kommo-o, L50, F|\n|poke|p1|Politoed, L50, F|\n|poke|p2|Gourgeist-*, L50, M|\n|poke|p2|Tyranitar, L50, F|\n|poke|p2|Absol, L50, M|\n|poke|p2|Excadrill, L50, M|\n|poke|p2|Toxicroak, L50, M|\n|poke|p2|Meowscarada, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Hyjack)\n|\n|t:|1776326215\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Maushold|Maushold-Four, L50|100/100\n|switch|p1b: Kommo-o|Kommo-o, L50, F, shiny|100/100\n|switch|p2a: Gourgeist|Gourgeist-Small, L50, M|100/100\n|switch|p2b: Tyranitar|Tyranitar, L50, F|100/100\n|-ability|p2b: Tyranitar|Unnerve\n|-item|p1a: Maushold|Chople Berry|[from] ability: Frisk|[of] p2a: Gourgeist\n|-item|p1b: Kommo-o|Dragon Fang|[from] ability: Frisk|[of] p2a: Gourgeist\n|turn|1\n|\n|t:|1776326232\n|move|p1a: Maushold|Follow Me|p1a: Maushold\n|-singleturn|p1a: Maushold|move: Follow Me\n|move|p2a: Gourgeist|Trick-or-Treat|p1a: Maushold\n|-start|p1a: Maushold|typeadd|Ghost|[from] move: Trick-or-Treat\n|move|p1b: Kommo-o|Clangorous Soul|p1b: Kommo-o\n|-boost|p1b: Kommo-o|atk|1\n|-boost|p1b: Kommo-o|def|1\n|-boost|p1b: Kommo-o|spa|1\n|-boost|p1b: Kommo-o|spd|1\n|-boost|p1b: Kommo-o|spe|1\n|-damage|p1b: Kommo-o|68/100\n|move|p2b: Tyranitar|Shadow Claw|p1a: Maushold\n|-immune|p1a: Maushold\n|\n|upkeep\n|turn|2\n|-message|Hyjack forfeited.\n|\n|win|isabellissima\n|raw|isabellissima's rating: 1086 &rarr; <strong>1113</strong><br />(+27 for winning)\n|raw|Hyjack's rating: 1083 &rarr; <strong>1061</strong><br />(-22 for losing)\n|l|\u2606Hyjack\n|player|p2|\n",
+  "uploadtime": 1776326250,
+  "views": 50,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1061,
+  "private": 0,
+  "password": null
+}

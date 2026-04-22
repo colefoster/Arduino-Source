@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582572078",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "autiorez",
+    "v0iddragn"
+  ],
+  "log": "|j|\u2606autiorez\n|j|\u2606v0iddragn\n|t:|1776100137\n|gametype|doubles\n|player|p1|autiorez|youngn|1063\n|player|p2|v0iddragn|cynthia|1048\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Clefable, L50, F|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Whimsicott, L50, M|\n|poke|p1|Rotom-Wash, L50|\n|poke|p1|Arcanine-Hisui, L50, F|\n|poke|p1|Lucario, L50, M|\n|poke|p2|Charizard, L50, M|\n|poke|p2|Venusaur, L50, F|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Whimsicott, L50, M|\n|poke|p2|Milotic, L50, F|\n|poke|p2|Archaludon, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by autiorez)\n|inactive|autiorez has 60 seconds left.\n|inactive|v0iddragn has 60 seconds left.\n|inactive|v0iddragn has 30 seconds left.\n|inactive|v0iddragn has 20 seconds left.\n|\n|t:|1776100209\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Incineroar|Incineroar, L50, M|100/100\n|switch|p1b: Whimsicott|Whimsicott, L50, M|100/100\n|switch|p2a: Haku|Charizard, L50, M|100/100\n|switch|p2b: Chihiro|Whimsicott, L50, M, shiny|100/100\n|-ability|p1a: Incineroar|Intimidate|boost\n|-unboost|p2a: Haku|atk|1\n|-unboost|p2b: Chihiro|atk|1\n|turn|1\n|\n|t:|1776100227\n|move|p1a: Incineroar|Fake Out|p2b: Chihiro\n|-damage|p2b: Chihiro|82/100\n|cant|p2b: Chihiro|flinch\n|move|p1b: Whimsicott|Tailwind|p1b: Whimsicott\n|-sidestart|p1: autiorez|move: Tailwind\n|move|p2a: Haku|Dragon Dance|p2a: Haku\n|-boost|p2a: Haku|atk|1\n|-boost|p2a: Haku|spe|1\n|\n|upkeep\n|turn|2\n|\n|t:|1776100238\n|move|p1b: Whimsicott|Encore|p2a: Haku\n|-start|p2a: Haku|Encore\n|move|p2b: Chihiro|Encore|p1a: Incineroar\n|-hint|Since gen 7, Dark is immune to Prankster moves.\n|-immune|p1a: Incineroar\n|move|p2a: Haku|Dragon Dance|p2a: Haku\n|-boost|p2a: Haku|atk|1\n|-boost|p2a: Haku|spe|1\n|move|p1a: Incineroar|Parting Shot|p2a: Haku\n|-unboost|p2a: Haku|atk|1\n|-unboost|p2a: Haku|spa|1\n|\n|t:|1776100242\n|switch|p1a: Lucario|Lucario, L50, M|100/100|[from] Parting Shot\n|\n|upkeep\n|turn|3\n|-message|v0iddragn forfeited.\n|\n|win|autiorez\n|raw|autiorez's rating: 1063 &rarr; <strong>1092</strong><br />(+29 for winning)\n|raw|v0iddragn's rating: 1048 &rarr; <strong>1032</strong><br />(-16 for losing)\n|l|\u2606v0iddragn\n|player|p2|\n",
+  "uploadtime": 1776100260,
+  "views": 9,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1032,
+  "private": 0,
+  "password": null
+}

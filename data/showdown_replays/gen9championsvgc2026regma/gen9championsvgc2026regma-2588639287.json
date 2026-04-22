@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2588639287",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "ashgoodra101",
+    "Princenemo17"
+  ],
+  "log": "|j|\u2606ashgoodra101\n|j|\u2606Princenemo17\n|t:|1776652702\n|gametype|doubles\n|player|p1|ashgoodra101|102|1000\n|player|p2|Princenemo17|101|1049\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Hawlucha, L50, M, shiny|\n|poke|p1|Beartic, L50, F, shiny|\n|poke|p1|Pelipper, L50, M, shiny|\n|poke|p1|Basculegion, L50, M, shiny|\n|poke|p1|Archaludon, L50, F, shiny|\n|poke|p1|Maushold-Four, L50, shiny|\n|poke|p2|Froslass, L50, F|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Orthworm, L50, F|\n|poke|p2|Garchomp, L50, F|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Rotom-Frost, L50|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by ashgoodra101)\n|\n|t:|1776652735\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Hawlucha|Hawlucha, L50, M, shiny|100/100\n|switch|p1b: Beartic|Beartic, L50, F, shiny|100/100\n|switch|p2a: Orthworm|Orthworm, L50, F|100/100\n|switch|p2b: Garchomp|Garchomp, L50, F|100/100\n|-ability|p1a: Hawlucha|Mold Breaker\n|turn|1\n|\n|t:|1776652757\n|detailschange|p1a: Hawlucha|Hawlucha-Mega, L50, M, shiny\n|-mega|p1a: Hawlucha|Hawlucha|Hawluchanite\n|move|p1a: Hawlucha|Entrainment|p1b: Beartic\n|-ability|p1b: Beartic|No Guard|Swift Swim|[from] move: Entrainment|[of] p1a: Hawlucha\n|move|p2b: Garchomp|Rock Slide|p1a: Hawlucha|[spread] p1a,p1b\n|-supereffective|p1b: Beartic|1\n|-damage|p1a: Hawlucha|78/100\n|-damage|p1b: Beartic|55/100\n|move|p1b: Beartic|Sheer Cold|p2b: Garchomp\n|-enditem|p2b: Garchomp|Focus Sash\n|-damage|p2b: Garchomp|1/100\n|move|p2a: Orthworm|Body Press|p1b: Beartic\n|-supereffective|p1b: Beartic|1\n|-damage|p1b: Beartic|0 fnt\n|faint|p1b: Beartic\n|\n|upkeep\n|c|\u2606Princenemo17|aha aha\n|-message|ashgoodra101 forfeited.\n|\n|win|Princenemo17\n|raw|ashgoodra101's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|raw|Princenemo17's rating: 1049 &rarr; <strong>1077</strong><br />(+28 for winning)\n|l|\u2606ashgoodra101\n|player|p1|\n|c|\u2606Princenemo17|fn\n",
+  "uploadtime": 1776652788,
+  "views": 13,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

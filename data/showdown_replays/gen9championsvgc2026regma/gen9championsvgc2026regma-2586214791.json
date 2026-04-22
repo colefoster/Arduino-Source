@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586214791",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "yamzinyobooty",
+    "whistlejacket17"
+  ],
+  "log": "|j|\u2606yamzinyobooty\n|j|\u2606whistlejacket17\n|t:|1776413320\n|gametype|doubles\n|player|p1|yamzinyobooty|102|1077\n|player|p2|whistlejacket17|2|1073\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Charizard, L50, F|\n|poke|p1|Venusaur, L50, M|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Gardevoir, L50, F|\n|poke|p1|Milotic, L50, F|\n|poke|p2|Aggron, L50, M|\n|poke|p2|Ampharos, L50, F|\n|poke|p2|Primarina, L50, F|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Gallade, L50, M|\n|poke|p2|Hatterene, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by whistlejacket17)\n|\n|t:|1776413352\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Milotic|Milotic, L50, F|100/100\n|switch|p1b: Venusaur|Venusaur, L50, M|100/100\n|switch|p2a: Incineroar|Incineroar, L50, M, shiny|100/100\n|switch|p2b: Hatterene|Hatterene, L50, F|100/100\n|-ability|p2a: Incineroar|Intimidate|boost\n|-unboost|p1a: Milotic|atk|1\n|-ability|p1a: Milotic|Competitive|boost\n|-boost|p1a: Milotic|spa|2\n|-unboost|p1b: Venusaur|atk|1\n|turn|1\n|\n|t:|1776413365\n|switch|p2b: Gallade|Gallade, L50, M|100/100\n|move|p2a: Incineroar|Fake Out|p1a: Milotic\n|-damage|p1a: Milotic|93/100\n|move|p1b: Venusaur|Sleep Powder|p2b: Gallade\n|-status|p2b: Gallade|slp|[from] move: Sleep Powder\n|cant|p1a: Milotic|flinch\n|\n|-heal|p1a: Milotic|99/100|[from] item: Leftovers\n|upkeep\n|turn|2\n|\n|t:|1776413379\n|switch|p2b: Aggron|Aggron, L50, M|100/100\n|switch|p1b: Garchomp|Garchomp, L50, F|100/100\n|move|p1a: Milotic|Scald|p2b: Aggron\n|-supereffective|p2b: Aggron|1\n|-ability|p2b: Aggron|Sturdy\n|-damage|p2b: Aggron|1/100\n|-status|p2b: Aggron|brn\n|move|p2a: Incineroar|Parting Shot|p1a: Milotic\n|-unboost|p1a: Milotic|atk|1\n|-ability|p1a: Milotic|Competitive|boost\n|-boost|p1a: Milotic|spa|2\n|-unboost|p1a: Milotic|spa|1\n|-ability|p1a: Milotic|Competitive|boost\n|-boost|p1a: Milotic|spa|2\n|-message|whistlejacket17 forfeited.\n|\n|win|yamzinyobooty\n|raw|yamzinyobooty's rating: 1077 &rarr; <strong>1105</strong><br />(+28 for winning)\n|raw|whistlejacket17's rating: 1073 &rarr; <strong>1052</strong><br />(-21 for losing)\n",
+  "uploadtime": 1776413390,
+  "views": 16,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1052,
+  "private": 0,
+  "password": null
+}

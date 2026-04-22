@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2588517288",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Sigma Thor",
+    "87878yu78"
+  ],
+  "log": "|j|\u2606Sigma Thor\n|j|\u260687878yu78\n|t:|1776640833\n|gametype|doubles\n|player|p1|Sigma Thor|blue|1000\n|player|p2|87878yu78|266|1000\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Gengar, L50, M|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Pelipper, L50, F|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Dragonite, L50, F|\n|poke|p1|Whimsicott, L50, M|\n|poke|p2|Drampa, L50, M, shiny|\n|poke|p2|Spiritomb, L50, M|\n|poke|p2|Torkoal, L50, M|\n|poke|p2|Kingambit, L50, M|\n|poke|p2|Clawitzer, L50, M|\n|poke|p2|Dragapult, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by 87878yu78)\n|inactive|Sigma Thor has 60 seconds left.\n|\n|t:|1776640887\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Whimsicott|Whimsicott, L50, M|100/100\n|switch|p1b: Basculegion|Basculegion, L50, M|100/100\n|switch|p2a: Drampa|Drampa, L50, M, shiny|100/100\n|switch|p2b: Spiritomb|Spiritomb, L50, M|100/100\n|-ability|p2a: Drampa|Cloud Nine\n|turn|1\n|inactive|Sigma Thor has 30 seconds left.\n|inactive|Sigma Thor has 20 seconds left.\n|inactive|Sigma Thor has 15 seconds left.\n|inactive|Sigma Thor has 10 seconds left.\n|inactive|Sigma Thor has 5 seconds left.\n|\n|t:|1776640942\n|move|p2a: Drampa|Protect|p2a: Drampa\n|-singleturn|p2a: Drampa|Protect\n|move|p1a: Whimsicott|Taunt|p2b: Spiritomb\n|-hint|Since gen 7, Dark is immune to Prankster moves.\n|-immune|p2b: Spiritomb\n|move|p1b: Basculegion|Wave Crash|p2b: Spiritomb\n|-damage|p2b: Spiritomb|35/100\n|-damage|p1b: Basculegion|83/100|[from] Recoil\n|move|p2b: Spiritomb|Trick Room|p2b: Spiritomb\n|-fieldstart|move: Trick Room|[of] p2b: Spiritomb\n|\n|upkeep\n|turn|2\n|-message|Sigma Thor forfeited.\n|\n|win|87878yu78\n|raw|Sigma Thor's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|raw|87878yu78's rating: 1000 &rarr; <strong>1040</strong><br />(+40 for winning)\n|l|\u2606Sigma Thor\n|player|p1|\n",
+  "uploadtime": 1776640958,
+  "views": 15,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

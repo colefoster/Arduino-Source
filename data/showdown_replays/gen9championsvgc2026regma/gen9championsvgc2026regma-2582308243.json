@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582308243",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "ughhvgc",
+    "ItsukiN5"
+  ],
+  "log": "|j|\u2606ughhvgc\n|j|\u2606ItsukiN5\n|t:|1776081973\n|gametype|doubles\n|player|p1|ughhvgc|dawn-gen4pt|1000\n|player|p2|ItsukiN5|266|1041\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Meganium, L50, F|\n|poke|p1|Farigiraf, L50, M|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Goodra-Hisui, L50, M|\n|poke|p1|Pelipper, L50, F|\n|poke|p1|Primarina, L50, F|\n|poke|p2|Tyranitar, L50, F|\n|poke|p2|Excadrill, L50, F|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Whimsicott, L50, M|\n|poke|p2|Gyarados, L50, M|\n|poke|p2|Farigiraf, L50, M|\n|teampreview|4\n|\n|t:|1776082002\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: pippa|Pelipper, L50, F|100/100\n|switch|p1b: ritchie|Basculegion, L50, M, shiny|100/100\n|switch|p2a: Sekiam|Tyranitar, L50, F, shiny|100/100\n|switch|p2b: Carretero|Excadrill, L50, F|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p1a: pippa\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p2a: Sekiam\n|turn|1\n|-message|ughhvgc forfeited.\n|\n|win|ItsukiN5\n|raw|ughhvgc's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|raw|ItsukiN5's rating: 1041 &rarr; <strong>1071</strong><br />(+30 for winning)\n|l|\u2606ughhvgc\n|player|p1|\n",
+  "uploadtime": 1776082024,
+  "views": 16,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

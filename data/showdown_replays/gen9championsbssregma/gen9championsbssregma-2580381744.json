@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2580381744",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "bromerta",
+    "spongebobvious"
+  ],
+  "log": "|j|\u2606bromerta\n|j|\u2606spongebobvious\n|t:|1775888122\n|gametype|singles\n|player|p1|bromerta|170|1076\n|player|p2|spongebobvious|266|1000\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Starmie, L50|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Volcarona, L50, F|\n|poke|p1|Sneasler, L50, F|\n|poke|p1|Kingambit, L50, M|\n|poke|p2|Pelipper, L50, F|\n|poke|p2|Archaludon, L50, M|\n|poke|p2|Blastoise, L50, M|\n|poke|p2|Orthworm, L50, F|\n|poke|p2|Quaquaval, L50, F|\n|poke|p2|Toxapex, L50, F|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by spongebobvious)\n|inactive|bromerta has 60 seconds left.\n|\n|t:|1775888167\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Kingambit|Kingambit, L50, M, shiny|100/100\n|switch|p2a: Pelipper|Pelipper, L50, F|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p2a: Pelipper\n|turn|1\n|\n|t:|1775888176\n|move|p2a: Pelipper|U-turn|p1a: Kingambit\n|-damage|p1a: Kingambit|93/100\n|\n|t:|1775888179\n|switch|p2a: Archaludon|Archaludon, L50, M|100/100|[from] U-turn\n|move|p1a: Kingambit|Swords Dance|p1a: Kingambit\n|-boost|p1a: Kingambit|atk|2\n|\n|-weather|RainDance|[upkeep]\n|-heal|p1a: Kingambit|99/100|[from] item: Leftovers\n|upkeep\n|turn|2\n|\n|t:|1775888189\n|move|p2a: Archaludon|Electro Shot||[still]\n|-prepare|p2a: Archaludon|Electro Shot\n|-boost|p2a: Archaludon|spa|1\n|-anim|p2a: Archaludon|Electro Shot|p1a: Kingambit\n|-damage|p1a: Kingambit|37/100\n|move|p1a: Kingambit|Kowtow Cleave|p2a: Archaludon\n|-damage|p2a: Archaludon|19/100\n|-ability|p2a: Archaludon|Stamina|boost\n|-boost|p2a: Archaludon|def|1\n|\n|-weather|RainDance|[upkeep]\n|-heal|p1a: Kingambit|43/100|[from] item: Leftovers\n|upkeep\n|turn|3\n|\n|t:|1775888202\n|move|p1a: Kingambit|Sucker Punch|p2a: Archaludon\n|-damage|p2a: Archaludon|0 fnt\n|faint|p2a: Archaludon\n|\n|-weather|RainDance|[upkeep]\n|-heal|p1a: Kingambit|49/100|[from] item: Leftovers\n|upkeep\n|\n|t:|1775888204\n|switch|p2a: Toxapex|Toxapex, L50, F|100/100\n|turn|4\n|-message|spongebobvious forfeited.\n|\n|win|bromerta\n|raw|bromerta's rating: 1076 &rarr; <strong>1098</strong><br />(+22 for winning)\n|raw|spongebobvious's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|l|\u2606spongebobvious\n|player|p2|\n",
+  "uploadtime": 1775888215,
+  "views": 31,
+  "formatid": "gen9championsbssregma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

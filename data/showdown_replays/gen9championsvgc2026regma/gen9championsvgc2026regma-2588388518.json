@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2588388518",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "autiorez",
+    "gallade.13"
+  ],
+  "log": "|j|\u2606autiorez\n|j|\u2606gallade.13\n|t:|1776629362\n|gametype|doubles\n|player|p1|autiorez|youngn|1206\n|player|p2|gallade.13|101|1119\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Froslass, L50, F|\n|poke|p1|Jolteon, L50, M|\n|poke|p1|Zoroark-Hisui, L50, M|\n|poke|p1|Aerodactyl, L50, F|\n|poke|p1|Milotic, L50, M|\n|poke|p1|Slowking-Galar, L50, M|\n|poke|p2|Meganium, L50, F|\n|poke|p2|Aerodactyl, L50, M|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Aegislash, L50, F|\n|poke|p2|Rotom-Wash, L50|\n|poke|p2|Delphox, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by autiorez)\n|\n|t:|1776629389\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Aerodactyl|Aerodactyl, L50, F|100/100\n|switch|p1b: Jolteon|Jolteon, L50, M|100/100\n|switch|p2a: Aerodactyl|Aerodactyl, L50, M|100/100\n|switch|p2b: Meganium|Meganium, L50, F|100/100\n|-ability|p2a: Aerodactyl|Unnerve\n|-ability|p1a: Aerodactyl|Pressure\n|turn|1\n|\n|t:|1776629414\n|detailschange|p2b: Meganium|Meganium-Mega, L50, F\n|-mega|p2b: Meganium|Meganium|Meganiumite\n|move|p1a: Aerodactyl|Tailwind|p1a: Aerodactyl\n|-sidestart|p1: autiorez|move: Tailwind\n|move|p1b: Jolteon|Icy Wind|p2a: Aerodactyl|[spread] p2a,p2b\n|-supereffective|p2a: Aerodactyl|1\n|-supereffective|p2b: Meganium|1\n|-damage|p2a: Aerodactyl|65/100\n|-damage|p2b: Meganium|80/100\n|-unboost|p2a: Aerodactyl|spe|1\n|-unboost|p2b: Meganium|spe|1\n|move|p2a: Aerodactyl|Tailwind|p2a: Aerodactyl\n|-sidestart|p2: gallade.13|move: Tailwind\n|move|p2b: Meganium|Dazzling Gleam|p1a: Aerodactyl|[spread] p1a,p1b\n|-damage|p1a: Aerodactyl|52/100\n|-damage|p1b: Jolteon|50/100\n|replace|p1b: Zoroark|Zoroark-Hisui, L50, M\n|-end|p1b: Zoroark|Illusion\n|\n|upkeep\n|turn|2\n|-message|gallade.13 forfeited.\n|\n|win|autiorez\n|raw|autiorez's rating: 1206 &rarr; <strong>1225</strong><br />(+19 for winning)\n|raw|gallade.13's rating: 1119 &rarr; <strong>1100</strong><br />(-19 for losing)\n|l|\u2606gallade.13\n|player|p2|\n",
+  "uploadtime": 1776629432,
+  "views": 10,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1100,
+  "private": 0,
+  "password": null
+}

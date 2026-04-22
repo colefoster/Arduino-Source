@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586852417",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "RBG_LOL",
+    "DieuBalta"
+  ],
+  "log": "|j|\u2606RBG_LOL\n|j|\u2606DieuBalta\n|t:|1776465416\n|gametype|doubles\n|player|p1|RBG_LOL|ghetsis-gen5bw|1047\n|player|p2|DieuBalta|roughneck-gen4|1000\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Froslass, L50, F|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Kingambit, L50, M|\n|poke|p1|Talonflame, L50, M|\n|poke|p1|Milotic, L50, F|\n|poke|p2|Lucario, L50, M|\n|poke|p2|Farigiraf, L50, M|\n|poke|p2|Camerupt, L50, F|\n|poke|p2|Hatterene, L50, F|\n|poke|p2|Torkoal, L50, F|\n|poke|p2|Gallade, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by DieuBalta)\nDieuBalta rejected open team sheets.\n|\n|t:|1776465431\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Sneasler|Sneasler, L50, M|100/100\n|switch|p1b: Kingambit|Kingambit, L50, M|100/100\n|switch|p2a: Lucario|Lucario, L50, M, shiny|100/100\n|switch|p2b: Farigiraf|Farigiraf, L50, M, shiny|100/100\n|turn|1\n|inactive|DieuBalta has 30 seconds left.\n|inactive|DieuBalta has 20 seconds left.\n|inactive|DieuBalta has 15 seconds left.\n|inactive|DieuBalta has 10 seconds left.\n|\n|t:|1776465479\n|move|p1a: Sneasler|Fake Out||[still]\n|cant|p2b: Farigiraf|ability: Armor Tail|Fake Out|[of] p1a: Sneasler\n|move|p2a: Lucario|Final Gambit|p1b: Kingambit\n|-damage|p1b: Kingambit|15/100\n|faint|p2a: Lucario\n|move|p1b: Kingambit|Kowtow Cleave|p2b: Farigiraf\n|-supereffective|p2b: Farigiraf|1\n|-damage|p2b: Farigiraf|0 fnt\n|faint|p2b: Farigiraf\n|\n|upkeep\n|\n|t:|1776465497\n|switch|p2a: Camerupt|Camerupt, L50, F|100/100\n|switch|p2b: Torkoal|Torkoal, L50, F|100/100\n|turn|2\n|\n|t:|1776465512\n|switch|p1b: Garchomp|Garchomp, L50, M|100/100\n|detailschange|p2a: Camerupt|Camerupt-Mega, L50, F\n|-mega|p2a: Camerupt|Camerupt|Cameruptite\n|move|p1a: Sneasler|Protect|p1a: Sneasler\n|-singleturn|p1a: Sneasler|Protect\n|move|p2b: Torkoal|Eruption|p1a: Sneasler|[spread] p1b\n|-activate|p1a: Sneasler|move: Protect\n|-resisted|p1b: Garchomp|1\n|-damage|p1b: Garchomp|69/100\n|move|p2a: Camerupt|Eruption|p1a: Sneasler|[spread] p1b\n|-activate|p1a: Sneasler|move: Protect\n|-resisted|p1b: Garchomp|1\n|-damage|p1b: Garchomp|33/100\n|\n|upkeep\n|turn|3\n|-message|DieuBalta forfeited.\n|\n|win|RBG_LOL\n|raw|RBG_LOL's rating: 1047 &rarr; <strong>1076</strong><br />(+29 for winning)\n|raw|DieuBalta's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|l|\u2606DieuBalta\n|player|p2|\n",
+  "uploadtime": 1776465528,
+  "views": 21,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2583014315",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "hyunbelievable",
+    "AAAlelele"
+  ],
+  "log": "|j|\u2606hyunbelievable\n|j|\u2606AAAlelele\n|t:|1776133427\n|gametype|doubles\n|player|p1|hyunbelievable|guzma|1158\n|player|p2|AAAlelele|ninjaboy|1089\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Aerodactyl, L50, M|\n|poke|p1|Excadrill, L50, F|\n|poke|p1|Tyranitar, L50, M|\n|poke|p1|Orthworm, L50, M|\n|poke|p1|Rotom-Wash, L50|\n|poke|p2|Lucario, L50, M|\n|poke|p2|Aerodactyl, L50, F|\n|poke|p2|Dragapult, L50, M|\n|poke|p2|Kingambit, L50, M|\n|poke|p2|Delphox, L50, M|\n|poke|p2|Rotom-Wash, L50|\n|teampreview|4\n|\n|t:|1776133468\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Rotom|Rotom-Wash, L50|100/100\n|switch|p1b: Aerodactyl|Aerodactyl, L50, M|100/100\n|switch|p2a: Lucario|Lucario, L50, M|100/100\n|switch|p2b: Kingambit|Kingambit, L50, M|100/100\n|-ability|p1b: Aerodactyl|Unnerve\n|turn|1\n|\n|t:|1776133488\n|move|p1b: Aerodactyl|Tailwind|p1b: Aerodactyl\n|-sidestart|p1: hyunbelievable|move: Tailwind\n|move|p1a: Rotom|Volt Switch|p2a: Lucario\n|-damage|p2a: Lucario|42/100\n|\n|t:|1776133498\n|switch|p1a: Floette|Floette-Eternal, L50, F|100/100|[from] Volt Switch\n|move|p2a: Lucario|Howl|p2a: Lucario|[spread] p2a,p2b\n|-boost|p2a: Lucario|atk|1\n|-boost|p2b: Kingambit|atk|1\n|move|p2b: Kingambit|Kowtow Cleave|p1a: Floette\n|-resisted|p1a: Floette|1\n|-damage|p1a: Floette|50/100\n|\n|upkeep\n|turn|2\n|\n|t:|1776133521\n|switch|p1b: Rotom|Rotom-Wash, L50|100/100\n|detailschange|p1a: Floette|Floette-Mega, L50, F\n|-mega|p1a: Floette|Floette|Floettite\n|-ability|p1a: Floette|Fairy Aura\n|detailschange|p2a: Lucario|Lucario-Mega, L50, M\n|-mega|p2a: Lucario|Lucario|Lucarionite\n|move|p2a: Lucario|Bullet Punch|p1b: Rotom\n|-resisted|p1b: Rotom|2\n|-damage|p1b: Rotom|88/100\n|move|p2b: Kingambit|Sucker Punch||[still]\n|-fail|p2b: Kingambit\n|move|p1a: Floette|Draining Kiss|p2a: Lucario\n|-damage|p2a: Lucario|0 fnt\n|-heal|p1a: Floette|75/100|[from] drain|[of] p2a: Lucario\n|faint|p2a: Lucario\n|\n|upkeep\n|-message|AAAlelele forfeited.\n|\n|win|hyunbelievable\n|raw|hyunbelievable's rating: 1158 &rarr; <strong>1178</strong><br />(+20 for winning)\n|raw|AAAlelele's rating: 1089 &rarr; <strong>1070</strong><br />(-19 for losing)\n",
+  "uploadtime": 1776133535,
+  "views": 17,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1070,
+  "private": 0,
+  "password": null
+}

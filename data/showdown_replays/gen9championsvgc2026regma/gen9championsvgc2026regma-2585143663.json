@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2585143663",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "loklastaji",
+    "smak talk"
+  ],
+  "log": "|j|\u2606loklastaji\n|j|\u2606smak talk\n|t:|1776317078\n|gametype|doubles\n|player|p1|loklastaji|102|1320\n|player|p2|smak talk|1|1318\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Samurott-Hisui, L50, F|\n|poke|p1|Delphox, L50, F|\n|poke|p1|Tinkaton, L50, F|\n|poke|p1|Decidueye-Hisui, L50, F|\n|poke|p1|Dragonite, L50, F|\n|poke|p1|Maushold-Four, L50|\n|poke|p2|Dragapult, L50, M|\n|poke|p2|Manectric, L50, F|\n|poke|p2|Kingambit, L50, F|\n|poke|p2|Starmie, L50|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Rotom-Wash, L50|\n|teampreview|4\n|\n|t:|1776317123\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Dragonite|Dragonite, L50, F|100/100\n|switch|p1b: Tinkaton|Tinkaton, L50, F|100/100\n|switch|p2a: Rotom|Rotom-Wash, L50|100/100\n|switch|p2b: Manectric|Manectric, L50, F|100/100\n|-ability|p1b: Tinkaton|Mold Breaker\n|turn|1\n|\n|t:|1776317142\n|detailschange|p2b: Manectric|Manectric-Mega, L50, F\n|-mega|p2b: Manectric|Manectric|Manectite\n|-ability|p2b: Manectric|Intimidate|boost\n|-fail|p1a: Dragonite|unboost|Attack|[from] ability: Inner Focus|[of] p1a: Dragonite\n|-unboost|p1b: Tinkaton|atk|1\n|move|p1b: Tinkaton|Fake Out|p2b: Manectric\n|-damage|p2b: Manectric|91/100\n|cant|p2b: Manectric|flinch\n|move|p1a: Dragonite|Tailwind|p1a: Dragonite\n|-sidestart|p1: loklastaji|move: Tailwind\n|move|p2a: Rotom|Volt Switch|p1b: Tinkaton\n|-damage|p1b: Tinkaton|74/100\n|\n|t:|1776317150\n|switch|p2a: Sneasler|Sneasler, L50, M|100/100|[from] Volt Switch\n|\n|upkeep\n|turn|2\n|\n|t:|1776317165\n|move|p1b: Tinkaton|Protect|p1b: Tinkaton\n|-singleturn|p1b: Tinkaton|Protect\n|move|p1a: Dragonite|Protect|p1a: Dragonite\n|-singleturn|p1a: Dragonite|Protect\n|move|p2a: Sneasler|Fake Out|p1a: Dragonite\n|-activate|p1a: Dragonite|move: Protect\n|move|p2b: Manectric|Thunder|p1a: Dragonite\n|-activate|p1a: Dragonite|move: Protect\n|\n|upkeep\n|turn|3\n|\n|t:|1776317182\n|move|p1b: Tinkaton|Gigaton Hammer|p2b: Manectric\n|-resisted|p2b: Manectric|1\n|-damage|p2b: Manectric|61/100\n|move|p1a: Dragonite|Air Slash|p2a: Sneasler\n|-supereffective|p2a: Sneasler|1\n|-crit|p2a: Sneasler\n|-damage|p2a: Sneasler|0 fnt\n|faint|p2a: Sneasler\n|move|p2b: Manectric|Thunder|p1a: Dragonite|[miss]\n|-miss|p2b: Manectric|p1a: Dragonite\n|\n|upkeep\n|c|\u2606smak talk|okay\n|c|\u2606smak talk|you are rule dude\n|\n|t:|1776317196\n|switch|p2a: Rotom|Rotom-Wash, L50|100/100\n|turn|4\n|-message|smak talk forfeited.\n|\n|win|loklastaji\n|raw|loklastaji's rating: 1320 &rarr; <strong>1340</strong><br />(+20 for winning)\n|raw|smak talk's rating: 1318 &rarr; <strong>1298</strong><br />(-20 for losing)\n|l|\u2606smak talk\n|player|p2|\n",
+  "uploadtime": 1776317209,
+  "views": 43,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1298,
+  "private": 0,
+  "password": null
+}

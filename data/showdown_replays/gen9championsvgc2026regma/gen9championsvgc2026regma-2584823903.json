@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584823903",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "giovwater880",
+    "isanito"
+  ],
+  "log": "|j|\u2606giovwater880\n|j|\u2606isanito\n|t:|1776286415\n|gametype|doubles\n|player|p1|giovwater880|2|1033\n|player|p2|isanito|265|1050\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Skarmory, L50, F|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Tyranitar, L50, M|\n|poke|p1|Rotom-Wash, L50|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Whimsicott, L50, F|\n|poke|p2|Diggersby, L50, F|\n|poke|p2|Heliolisk, L50, F|\n|poke|p2|Archaludon, L50, M|\n|poke|p2|Pelipper, L50, F|\n|poke|p2|Goodra, L50, F|\n|poke|p2|Sinistcha, L50|\n|teampreview|4\n|\n|t:|1776286455\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Skarmory|Skarmory, L50, F|100/100\n|switch|p1b: Sneasler|Sneasler, L50, M|100/100\n|switch|p2a: Diggersby|Diggersby, L50, F|100/100\n|switch|p2b: Sinistcha|Sinistcha, L50|100/100\n|turn|1\n|\n|t:|1776286565\n|detailschange|p1a: Skarmory|Skarmory-Mega, L50, F\n|-mega|p1a: Skarmory|Skarmory|Skarmorite\n|move|p1b: Sneasler|Fake Out|p2a: Diggersby\n|-damage|p2a: Diggersby|83/100\n|move|p2b: Sinistcha|Rage Powder|p2b: Sinistcha\n|-singleturn|p2b: Sinistcha|move: Rage Powder\n|move|p1a: Skarmory|Drill Peck|p2b: Sinistcha\n|-supereffective|p2b: Sinistcha|1\n|-damage|p2b: Sinistcha|25/100\n|cant|p2a: Diggersby|flinch\n|\n|upkeep\n|turn|2\n|\n|t:|1776286589\n|move|p2b: Sinistcha|Rage Powder|p2b: Sinistcha\n|-singleturn|p2b: Sinistcha|move: Rage Powder\n|move|p1a: Skarmory|Drill Peck|p2b: Sinistcha\n|-supereffective|p2b: Sinistcha|1\n|-damage|p2b: Sinistcha|0 fnt\n|faint|p2b: Sinistcha\n|move|p1b: Sneasler|Close Combat|p2a: Diggersby\n|-supereffective|p2a: Diggersby|1\n|-damage|p2a: Diggersby|0 fnt\n|-unboost|p1b: Sneasler|def|1\n|-unboost|p1b: Sneasler|spd|1\n|faint|p2a: Diggersby\n|-enditem|p1b: Sneasler|White Herb\n|-clearnegativeboost|p1b: Sneasler|[silent]\n|\n|upkeep\n|-message|isanito forfeited.\n|\n|win|giovwater880\n|raw|giovwater880's rating: 1033 &rarr; <strong>1070</strong><br />(+37 for winning)\n|raw|isanito's rating: 1050 &rarr; <strong>1032</strong><br />(-18 for losing)\n|l|\u2606isanito\n|player|p2|\n",
+  "uploadtime": 1776286618,
+  "views": 33,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1032,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2587611253",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "Bara Enthusiast",
+    "Lord Queefus"
+  ],
+  "log": "|j|\u2606Bara Enthusiast\n|j|\u2606Lord Queefus\n|t:|1776546829\n|gametype|singles\n|player|p1|Bara Enthusiast|policeman|1274\n|player|p2|Lord Queefus|swimmer-gen4dp|1227\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Greninja, L50, M, shiny|\n|poke|p1|Aegislash, L50, M|\n|poke|p1|Beedrill, L50, M|\n|poke|p1|Serperior, L50, F|\n|poke|p1|Rotom-Heat, L50|\n|poke|p1|Tsareena, L50, F|\n|poke|p2|Gengar, L50, M|\n|poke|p2|Kingambit, L50, M|\n|poke|p2|Emboar, L50, M|\n|poke|p2|Archaludon, L50, M|\n|poke|p2|Pelipper, L50, M|\n|poke|p2|Greninja, L50, F|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Lord Queefus)\n|\n|t:|1776546880\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Shigiraki|Beedrill, L50, M|100/100\n|switch|p2a: Gengar|Gengar, L50, M|100/100\n|turn|1\n|\n|t:|1776546888\n|detailschange|p1a: Shigiraki|Beedrill-Mega, L50, M\n|-mega|p1a: Shigiraki|Beedrill|Beedrillite\n|move|p1a: Shigiraki|Drill Run|p2a: Gengar\n|-supereffective|p2a: Gengar|1\n|-enditem|p2a: Gengar|Focus Sash\n|-damage|p2a: Gengar|1/100\n|move|p2a: Gengar|Trick Room|p2a: Gengar\n|-fieldstart|move: Trick Room|[of] p2a: Gengar\n|\n|upkeep\n|turn|2\n|\n|t:|1776546900\n|move|p2a: Gengar|Destiny Bond|p2a: Gengar\n|-singlemove|p2a: Gengar|Destiny Bond\n|move|p1a: Shigiraki|U-turn|p2a: Gengar\n|-resisted|p2a: Gengar|2\n|-damage|p2a: Gengar|0 fnt\n|faint|p2a: Gengar\n|-activate|p2a: Gengar|move: Destiny Bond\n|faint|p1a: Shigiraki\n|\n|upkeep\n|\n|t:|1776546912\n|switch|p2a: Emboar|Emboar, L50, M|100/100\n|switch|p1a: Rotom|Rotom-Heat, L50|100/100\n|turn|3\n|\n|t:|1776546920\n|detailschange|p2a: Emboar|Emboar-Mega, L50, M\n|-mega|p2a: Emboar|Emboar|Emboarite\n|-ability|p2a: Emboar|Mold Breaker\n|move|p2a: Emboar|Bulk Up|p2a: Emboar\n|-boost|p2a: Emboar|atk|1\n|-boost|p2a: Emboar|def|1\n|move|p1a: Rotom|Volt Switch|p2a: Emboar\n|-damage|p2a: Emboar|79/100\n|\n|t:|1776546926\n|switch|p1a: Genji|Greninja, L50, M, shiny|100/100|[from] Volt Switch\n|\n|upkeep\n|turn|4\n|-message|Bara Enthusiast forfeited.\n|\n|win|Lord Queefus\n|raw|Bara Enthusiast's rating: 1274 &rarr; <strong>1246</strong><br />(-28 for losing)\n|raw|Lord Queefus's rating: 1227 &rarr; <strong>1255</strong><br />(+28 for winning)\n|l|\u2606Bara Enthusiast\n|player|p1|\n",
+  "uploadtime": 1776546941,
+  "views": 1,
+  "formatid": "gen9championsbssregma",
+  "rating": 1246,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582947231",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Fate universe",
+    "bernsu76"
+  ],
+  "log": "|j|\u2606Fate universe\n|j|\u2606bernsu76\n|t:|1776127484\n|gametype|doubles\n|player|p1|Fate universe|cynthia|1000\n|player|p2|bernsu76|fisherman|1000\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Pelipper, L50, F|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Archaludon, L50, F|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Gengar, L50, M|\n|poke|p1|Maushold, L50|\n|poke|p2|Pelipper, L50, M|\n|poke|p2|Dragonite, L50, M|\n|poke|p2|Kingambit, L50, M|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Archaludon, L50, M|\n|poke|p2|Sneasler, L50, M|\n|teampreview|4\n|\n|t:|1776127509\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Incineroar|Incineroar, L50, M|100/100\n|switch|p1b: Gengar|Gengar, L50, M|100/100\n|switch|p2a: Pelipper|Pelipper, L50, M, shiny|100/100\n|switch|p2b: Archaludon|Archaludon, L50, M, shiny|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p2a: Pelipper\n|-ability|p1a: Incineroar|Intimidate|boost\n|-unboost|p2a: Pelipper|atk|1\n|-unboost|p2b: Archaludon|atk|1\n|turn|1\n|\n|t:|1776127543\n|switch|p1b: Archaludon|Archaludon, L50, F|100/100\n|move|p2a: Pelipper|Wide Guard|p2a: Pelipper\n|-singleturn|p2a: Pelipper|Wide Guard\n|move|p1a: Incineroar|Fake Out|p2b: Archaludon\n|-resisted|p2b: Archaludon|1\n|-damage|p2b: Archaludon|96/100\n|-ability|p2b: Archaludon|Stamina|boost\n|-boost|p2b: Archaludon|def|1\n|cant|p2b: Archaludon|flinch\n|\n|-weather|RainDance|[upkeep]\n|-heal|p2b: Archaludon|100/100|[from] item: Leftovers\n|upkeep\n|turn|2\n|l|\u2606bernsu76\n|player|p2|\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Fate universe)\n|inactive|bernsu76 has 30 seconds to reconnect!\n|inactive|bernsu76 has 20 seconds to reconnect!\n|j|\u2606bernsu76\n|inactive|bernsu76 reconnected and has 50 seconds left.\n|player|p2|bernsu76|fisherman|\n|\n|t:|1776127623\n|move|p2b: Archaludon|Protect|p2b: Archaludon\n|-singleturn|p2b: Archaludon|Protect\n|move|p2a: Pelipper|Weather Ball|p1a: Incineroar\n|-supereffective|p1a: Incineroar|1\n|-damage|p1a: Incineroar|0 fnt\n|faint|p1a: Incineroar\n|move|p1b: Archaludon|Dragon Pulse|p2b: Archaludon\n|-activate|p2b: Archaludon|move: Protect\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|-message|Fate universe forfeited.\n|\n|win|bernsu76\n|raw|Fate universe's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|raw|bernsu76's rating: 1000 &rarr; <strong>1040</strong><br />(+40 for winning)\n|l|\u2606Fate universe\n|player|p1|\n",
+  "uploadtime": 1776127638,
+  "views": 13,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

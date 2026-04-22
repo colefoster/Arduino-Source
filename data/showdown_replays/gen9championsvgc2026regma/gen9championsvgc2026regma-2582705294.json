@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582705294",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "HeavyLobsterAlf",
+    "FreshSurfyOcean"
+  ],
+  "log": "|j|\u2606HeavyLobsterAlf\n|j|\u2606FreshSurfyOcean\n|t:|1776108498\n|gametype|doubles\n|player|p1|HeavyLobsterAlf|phoebe-masters|1055\n|player|p2|FreshSurfyOcean|1|1008\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Chandelure, L50, M|\n|poke|p1|Maushold, L50|\n|poke|p1|Sneasler, L50, F|\n|poke|p1|Kingambit, L50, M|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Alcremie, L50, F|\n|poke|p2|Slowking-Galar, L50, M|\n|poke|p2|Krookodile, L50, F|\n|poke|p2|Clefable, L50, F|\n|poke|p2|Delphox, L50, M|\n|poke|p2|Chesnaught, L50, F|\n|poke|p2|Bellibolt, L50, F|\n|teampreview|4\n|\n|t:|1776108530\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Chandelure|Chandelure, L50, M|100/100\n|switch|p1b: Sneasler|Sneasler, L50, F|100/100\n|switch|p2a: Krookodile|Krookodile, L50, F|100/100\n|switch|p2b: Delphox|Delphox, L50, M|100/100\n|turn|1\n|\n|t:|1776108552\n|move|p2b: Delphox|Protect|p2b: Delphox\n|-singleturn|p2b: Delphox|Protect\n|move|p1b: Sneasler|Fake Out|p2a: Krookodile\n|-damage|p2a: Krookodile|84/100\n|cant|p2a: Krookodile|flinch\n|move|p1a: Chandelure|Minimize|p1a: Chandelure\n|-boost|p1a: Chandelure|evasion|2\n|\n|upkeep\n|turn|2\n|\n|t:|1776108599\n|switch|p2b: Chesnaught|Chesnaught, L50, F|100/100\n|move|p1b: Sneasler|Close Combat|p2a: Krookodile\n|-supereffective|p2a: Krookodile|1\n|-damage|p2a: Krookodile|0 fnt\n|-unboost|p1b: Sneasler|def|1\n|-unboost|p1b: Sneasler|spd|1\n|faint|p2a: Krookodile\n|-enditem|p1b: Sneasler|White Herb\n|-clearnegativeboost|p1b: Sneasler|[silent]\n|move|p1a: Chandelure|Minimize|p1a: Chandelure\n|-boost|p1a: Chandelure|evasion|2\n|\n|upkeep\n|\n|t:|1776108616\n|switch|p2a: Slowking|Slowking-Galar, L50, M|100/100\n|turn|3\n|\n|t:|1776108624\n|switch|p2b: Delphox|Delphox, L50, M|100/100\n|detailschange|p1a: Chandelure|Chandelure-Mega, L50, M\n|-mega|p1a: Chandelure|Chandelure|Chandelurite\n|move|p1b: Sneasler|Dire Claw|p2a: Slowking\n|-resisted|p2a: Slowking|1\n|-damage|p2a: Slowking|79/100\n|move|p1a: Chandelure|Shadow Ball|p2a: Slowking\n|-supereffective|p2a: Slowking|1\n|-damage|p2a: Slowking|0 fnt\n|faint|p2a: Slowking\n|\n|upkeep\n|-message|FreshSurfyOcean forfeited.\n|\n|win|HeavyLobsterAlf\n|raw|HeavyLobsterAlf's rating: 1089 &rarr; <strong>1110</strong><br />(+21 for winning)\n|raw|FreshSurfyOcean's rating: 1008 &rarr; <strong>1000</strong><br />(-8 for losing)\n|l|\u2606FreshSurfyOcean\n|player|p2|\n",
+  "uploadtime": 1776108637,
+  "views": 9,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

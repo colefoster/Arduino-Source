@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2581839153",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "noreb",
+    "HustonSmogon"
+  ],
+  "log": "|j|\u2606noreb\n|j|\u2606HustonSmogon\n|t:|1776032645\n|gametype|doubles\n|player|p1|noreb|caitlin|\n|player|p2|HustonSmogon|266|\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|Tournament battle\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Gengar, L50, M|\n|poke|p1|Tyranitar, L50, M|\n|poke|p1|Excadrill, L50, M|\n|poke|p1|Talonflame, L50, M|\n|poke|p1|Sneasler, L50, F|\n|poke|p1|Milotic, L50, M|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Farigiraf, L50, F|\n|poke|p2|Torkoal, L50, M|\n|poke|p2|Venusaur, L50, F|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Garchomp, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by noreb)\nHustonSmogon has agreed to open team sheets.\n|j|+TheLoanRanger\n|\n|t:|1776032663\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Gengar|Gengar, L50, M|100/100\n|switch|p1b: Milotic|Milotic, L50, M|100/100\n|switch|p2a: Garchomp|Garchomp, L50, M|100/100\n|switch|p2b: Incineroar|Incineroar, L50, F|100/100\n|-ability|p2b: Incineroar|Intimidate|boost\n|-unboost|p1a: Gengar|atk|1\n|-unboost|p1b: Milotic|atk|1\n|-ability|p1b: Milotic|Competitive|boost\n|-boost|p1b: Milotic|spa|2\n|turn|1\n|inactive|noreb has 30 seconds left.\n|\n|t:|1776032694\n|switch|p1a: Talonflame|Talonflame, L50, M|100/100\n|move|p2a: Garchomp|Rock Slide|p1a: Talonflame|[spread] p1b\n|-miss|p2a: Garchomp|p1a: Talonflame\n|-damage|p1b: Milotic|78/100\n|cant|p1b: Milotic|flinch\n|move|p2b: Incineroar|Throat Chop|p1b: Milotic\n|-damage|p1b: Milotic|36/100\n|-start|p1b: Milotic|Throat Chop|[silent]\n|\n|-heal|p1b: Milotic|42/100|[from] item: Leftovers\n|upkeep\n|turn|2\n|inactive|HustonSmogon has 30 seconds left.\n|inactive|HustonSmogon has 20 seconds left.\n|\n|t:|1776032730\n|move|p1a: Talonflame|Tailwind|p1a: Talonflame\n|-sidestart|p1: noreb|move: Tailwind\n|move|p1b: Milotic|Ice Beam|p2a: Garchomp\n|-supereffective|p2a: Garchomp|2\n|-damage|p2a: Garchomp|0 fnt\n|faint|p2a: Garchomp\n|move|p2b: Incineroar|Throat Chop|p1b: Milotic\n|-damage|p1b: Milotic|3/100\n|\n|-heal|p1b: Milotic|9/100|[from] item: Leftovers\n|-end|p1b: Milotic|Throat Chop|[silent]\n|upkeep\n|inactive|HustonSmogon has 30 seconds left.\n|-message|HustonSmogon forfeited.\n|\n|win|noreb\n|n|\u2606noreb|noreb\n|n|\u2606HustonSmogon|hustonsmogon\n|n| TheLoanRanger|theloanranger\n|l|\u2606HustonSmogon\n|player|p2|\n|l|\u2606noreb\n|player|p1|\n|l| TheLoanRanger\n|j| aurora ltd\n",
+  "uploadtime": 1776033144,
+  "views": 10,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": null,
+  "private": 0,
+  "password": null
+}

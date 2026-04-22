@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586941054",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Gaw02",
+    "Ahelo"
+  ],
+  "log": "|j|\u2606Gaw02\n|j|\u2606Ahelo\n|t:|1776473921\n|gametype|doubles\n|player|p1|Gaw02|169|1124\n|player|p2|Ahelo|red|1089\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Charizard, L50, M|\n|poke|p1|Milotic, L50, M|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Ninetales-Alola, L50, M|\n|poke|p1|Scizor, L50, M|\n|poke|p1|Incineroar, L50, F|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Charizard, L50, M|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Torkoal, L50, M|\n|poke|p2|Umbreon, L50, M|\n|poke|p2|Venusaur, L50, M|\n|teampreview|4\n|\n|t:|1776473943\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Milotic|Milotic, L50, M|100/100\n|switch|p1b: Charizard|Charizard, L50, M|100/100\n|switch|p2a: Sneasler|Sneasler, L50, M|100/100\n|switch|p2b: Charizard|Charizard, L50, M, shiny|100/100\n|turn|1\n|\n|t:|1776473972\n|detailschange|p2b: Charizard|Charizard-Mega-Y, L50, M, shiny\n|-mega|p2b: Charizard|Charizard|Charizardite Y\n|-weather|SunnyDay|[from] ability: Drought|[of] p2b: Charizard\n|detailschange|p1b: Charizard|Charizard-Mega-X, L50, M\n|-mega|p1b: Charizard|Charizard|Charizardite X\n|move|p2a: Sneasler|Fake Out|p1b: Charizard\n|-damage|p1b: Charizard|88/100\n|move|p2b: Charizard|Solar Beam||[still]\n|-prepare|p2b: Charizard|Solar Beam\n|-anim|p2b: Charizard|Solar Beam|p1a: Milotic\n|-supereffective|p1a: Milotic|1\n|-crit|p1a: Milotic\n|-damage|p1a: Milotic|0 fnt\n|faint|p1a: Milotic\n|cant|p1b: Charizard|flinch\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|-message|Gaw02 forfeited.\n|\n|win|Ahelo\n|raw|Gaw02's rating: 1124 &rarr; <strong>1096</strong><br />(-28 for losing)\n|raw|Ahelo's rating: 1089 &rarr; <strong>1118</strong><br />(+29 for winning)\n|l|\u2606Gaw02\n|player|p1|\n",
+  "uploadtime": 1776474002,
+  "views": 18,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1096,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2580721099",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Enzozinid",
+    "Yani Aprieto"
+  ],
+  "log": "|j|\u2606Enzozinid\n|j|\u2606Yani Aprieto\n|t:|1775927053\n|gametype|doubles\n|player|p1|Enzozinid|169|1040\n|player|p2|Yani Aprieto|caitlin|1000\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Pelipper, L50, M|\n|poke|p1|Archaludon, L50, M|\n|poke|p1|Meganium, L50, M|\n|poke|p1|Palafin, L50, F|\n|poke|p1|Kangaskhan, L50, F|\n|poke|p1|Sinistcha, L50|\n|poke|p2|Beedrill, L50, F|\n|poke|p2|Gengar, L50, F|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Salazzle, L50, F|\n|poke|p2|Roserade, L50, F|\n|poke|p2|Glimmora, L50, F|\n|teampreview|4\n|\n|t:|1775927125\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Meganium|Meganium, L50, M|100/100\n|switch|p1b: Palafin|Palafin, L50, F|100/100\n|switch|p2a: Gengar|Gengar, L50, F, shiny|100/100\n|switch|p2b: Sneasler|Sneasler, L50, F, shiny|100/100\n|turn|1\n|\n|t:|1775927154\n|detailschange|p2a: Gengar|Gengar-Mega, L50, F, shiny\n|-mega|p2a: Gengar|Gengar|Gengarite\n|detailschange|p1a: Meganium|Meganium-Mega, L50, M\n|-mega|p1a: Meganium|Meganium|Meganiumite\n|move|p1a: Meganium|Protect|p1a: Meganium\n|-singleturn|p1a: Meganium|Protect\n|move|p2b: Sneasler|Fake Out|p1b: Palafin\n|-damage|p1b: Palafin|86/100\n|move|p2a: Gengar|Sludge Bomb|p1a: Meganium\n|-activate|p1a: Meganium|move: Protect\n|cant|p1b: Palafin|flinch\n|\n|upkeep\n|turn|2\n|\n|t:|1775927185\n|move|p2a: Gengar|Sludge Bomb|p1a: Meganium\n|-supereffective|p1a: Meganium|2\n|-damage|p1a: Meganium|0 fnt\n|faint|p1a: Meganium\n|move|p2b: Sneasler|Dire Claw|p1b: Palafin\n|-damage|p1b: Palafin|40/100\n|-status|p1b: Palafin|slp\n|cant|p1b: Palafin|slp\n|\n|upkeep\n|-message|Enzozinid forfeited.\n|\n|win|Yani Aprieto\n|raw|Enzozinid's rating: 1040 &rarr; <strong>1022</strong><br />(-18 for losing)\n|raw|Yani Aprieto's rating: 1000 &rarr; <strong>1045</strong><br />(+45 for winning)\n|l|\u2606Enzozinid\n|player|p1|\n",
+  "uploadtime": 1775927198,
+  "views": 28,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1022,
+  "private": 0,
+  "password": null
+}

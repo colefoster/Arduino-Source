@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584288702",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Disfrazdetigre",
+    "bdjsn"
+  ],
+  "log": "|j|\u2606Disfrazdetigre\n|j|\u2606bdjsn\n|t:|1776247498\n|gametype|doubles\n|player|p1|Disfrazdetigre|102|1309\n|player|p2|bdjsn|266|1273\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Gallade, L50, M|\n|poke|p1|Rotom-Wash, L50|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Aggron, L50, M|\n|poke|p1|Ninetales-Alola, L50, F|\n|poke|p2|Lucario, L50, M|\n|poke|p2|Tyranitar, L50, M|\n|poke|p2|Golurk, L50|\n|poke|p2|Torkoal, L50, M|\n|poke|p2|Oranguru, L50, F|\n|poke|p2|Camerupt, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Disfrazdetigre)\n|\n|t:|1776247546\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Gallade|Gallade, L50, M|100/100\n|switch|p1b: Incineroar|Incineroar, L50, F|100/100\n|switch|p2a: Lucario|Lucario, L50, M|100/100\n|switch|p2b: Oranguru|Oranguru, L50, F|100/100\n|-ability|p1b: Incineroar|Intimidate|boost\n|-fail|p2a: Lucario|unboost|Attack|[from] ability: Inner Focus|[of] p2a: Lucario\n|-unboost|p2b: Oranguru|atk|1\n|turn|1\n|\n|t:|1776247570\n|move|p1b: Incineroar|Fake Out|p2b: Oranguru\n|-damage|p2b: Oranguru|89/100\n|move|p2a: Lucario|Final Gambit|p1a: Gallade\n|-enditem|p1a: Gallade|Focus Sash\n|-damage|p1a: Gallade|1/100\n|faint|p2a: Lucario\n|move|p1a: Gallade|Sacred Sword|p2b: Oranguru\n|-damage|p2b: Oranguru|12/100\n|cant|p2b: Oranguru|flinch\n|\n|upkeep\n|\n|t:|1776247582\n|switch|p2a: Golurk|Golurk, L50|100/100\n|turn|2\n|\n|t:|1776247597\n|detailschange|p2a: Golurk|Golurk-Mega, L50\n|-mega|p2a: Golurk|Golurk|Golurkite\n|move|p2b: Oranguru|Protect|p2b: Oranguru\n|-singleturn|p2b: Oranguru|Protect\n|move|p1a: Gallade|Shadow Claw|p2a: Golurk\n|-supereffective|p2a: Golurk|1\n|-crit|p2a: Golurk\n|-damage|p2a: Golurk|12/100\n|move|p1b: Incineroar|Throat Chop|p2a: Golurk\n|-supereffective|p2a: Golurk|1\n|-damage|p2a: Golurk|0 fnt\n|faint|p2a: Golurk\n|\n|upkeep\n|-message|bdjsn forfeited.\n|\n|win|Disfrazdetigre\n|raw|Disfrazdetigre's rating: 1309 &rarr; <strong>1327</strong><br />(+18 for winning)\n|raw|bdjsn's rating: 1273 &rarr; <strong>1251</strong><br />(-22 for losing)\n|l|\u2606bdjsn\n|player|p2|\n",
+  "uploadtime": 1776247612,
+  "views": 41,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1251,
+  "private": 0,
+  "password": null
+}

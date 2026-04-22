@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2581013497",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "EninX",
+    "balzzzzz"
+  ],
+  "log": "|j|\u2606EninX\n|j|\u2606balzzzzz\n|t:|1775951728\n|gametype|doubles\n|player|p1|EninX|2|1089\n|player|p2|balzzzzz|ballguy|1084\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Kingambit, L50, F|\n|poke|p1|Dragapult, L50, M|\n|poke|p1|Charizard, L50, M|\n|poke|p1|Maushold-Four, L50|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Sneasler, L50, F|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Farigiraf, L50, F|\n|poke|p2|Golurk, L50|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Torkoal, L50, M|\n|poke|p2|Venusaur, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by balzzzzz)\n|inactive|EninX has 60 seconds left.\n|inactive|balzzzzz has 60 seconds left.\n|inactive|balzzzzz has 30 seconds left.\n|\n|t:|1775951792\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Dragapult|Dragapult, L50, M|100/100\n|switch|p1b: Kingambit|Kingambit, L50, F, shiny|100/100\n|switch|p2a: Farigiraf|Farigiraf, L50, F, shiny|100/100\n|switch|p2b: Torkoal|Torkoal, L50, M|100/100\n|-weather|SunnyDay|[from] ability: Drought|[of] p2b: Torkoal\n|turn|1\n|inactive|EninX has 30 seconds left.\n|inactive|EninX has 20 seconds left.\n|\n|t:|1775951829\n|move|p1b: Kingambit|Protect|p1b: Kingambit\n|-singleturn|p1b: Kingambit|Protect\n|move|p2b: Torkoal|Protect|p2b: Torkoal\n|-singleturn|p2b: Torkoal|Protect\n|move|p1a: Dragapult|Draco Meteor|p2b: Torkoal\n|-activate|p2b: Torkoal|move: Protect\n|move|p2a: Farigiraf|Trick Room|p2a: Farigiraf\n|-fieldstart|move: Trick Room|[of] p2a: Farigiraf\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|turn|2\n|\n|t:|1775951852\n|switch|p1b: Garchomp|Garchomp, L50, F|100/100\n|move|p2a: Farigiraf|Helping Hand|p2b: Torkoal\n|-singleturn|p2b: Torkoal|Helping Hand|[of] p2a: Farigiraf\n|move|p2b: Torkoal|Eruption|p1b: Garchomp|[spread] p1a,p1b\n|-resisted|p1a: Dragapult|1\n|-resisted|p1b: Garchomp|1\n|-damage|p1a: Dragapult|0 fnt\n|-damage|p1b: Garchomp|35/100\n|faint|p1a: Dragapult\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|-message|EninX forfeited.\n|\n|win|balzzzzz\n|raw|EninX's rating: 1089 &rarr; <strong>1065</strong><br />(-24 for losing)\n|raw|balzzzzz's rating: 1084 &rarr; <strong>1112</strong><br />(+28 for winning)\n|l|\u2606EninX\n|player|p1|\n",
+  "uploadtime": 1775951865,
+  "views": 19,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1065,
+  "private": 0,
+  "password": null
+}

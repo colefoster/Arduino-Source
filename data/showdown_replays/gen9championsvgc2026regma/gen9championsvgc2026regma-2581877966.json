@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2581877966",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "steelixgoated",
+    "TheTailwindEnjoyer"
+  ],
+  "log": "|j|\u2606steelixgoated\n|j|\u2606TheTailwindEnjoyer\n|t:|1776036024\n|gametype|doubles\n|player|p1|steelixgoated|elesa|1019\n|player|p2|TheTailwindEnjoyer|player-go|1099\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Steelix, L50, M|\n|poke|p1|Tyranitar, L50, F|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Farigiraf, L50, F|\n|poke|p1|Rhyperior, L50, M|\n|poke|p1|Slowbro, L50, M|\n|poke|p2|Gengar, L50, F|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Typhlosion-Hisui, L50, F|\n|poke|p2|Whimsicott, L50, M|\n|poke|p2|Dragonite, L50, M|\n|poke|p2|Sneasler, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by TheTailwindEnjoyer)\n|inactive|TheTailwindEnjoyer has 60 seconds left.\n|\n|t:|1776036071\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: WolfeyVgc|Incineroar, L50, M|100/100\n|switch|p1b: Farigiraf|Farigiraf, L50, F, shiny|100/100\n|switch|p2a: Typhlosion|Typhlosion-Hisui, L50, F|100/100\n|switch|p2b: Basculegion|Basculegion, L50, M|100/100\n|-item|p1a: WolfeyVgc|Sitrus Berry|[from] ability: Frisk|[of] p2a: Typhlosion\n|-item|p1b: Farigiraf|Leftovers|[from] ability: Frisk|[of] p2a: Typhlosion\n|-ability|p1a: WolfeyVgc|Intimidate|boost\n|-unboost|p2a: Typhlosion|atk|1\n|-unboost|p2b: Basculegion|atk|1\n|turn|1\n|\n|t:|1776036091\n|move|p2a: Typhlosion|Eruption|p1a: WolfeyVgc|[spread] p1a,p1b\n|-resisted|p1a: WolfeyVgc|1\n|-damage|p1a: WolfeyVgc|76/100\n|-damage|p1b: Farigiraf|37/100\n|move|p2b: Basculegion|Wave Crash|p1b: Farigiraf\n|-damage|p1b: Farigiraf|0 fnt\n|faint|p1b: Farigiraf\n|-damage|p2b: Basculegion|87/100|[from] Recoil\n|move|p1a: WolfeyVgc|Will-O-Wisp|p2b: Basculegion\n|-status|p2b: Basculegion|brn\n|\n|-damage|p2b: Basculegion|81/100 brn|[from] brn\n|upkeep\n|-message|steelixgoated forfeited.\n|\n|win|TheTailwindEnjoyer\n|raw|steelixgoated's rating: 1019 &rarr; <strong>1009</strong><br />(-10 for losing)\n|raw|TheTailwindEnjoyer's rating: 1099 &rarr; <strong>1118</strong><br />(+19 for winning)\n|l|\u2606steelixgoated\n|player|p1|\n",
+  "uploadtime": 1776036160,
+  "views": 11,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1009,
+  "private": 0,
+  "password": null
+}

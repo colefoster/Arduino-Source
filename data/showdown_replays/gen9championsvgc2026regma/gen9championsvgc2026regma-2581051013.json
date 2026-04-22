@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2581051013",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "I'mSoTiredBro",
+    "srgserg"
+  ],
+  "log": "|j|\u2606I'mSoTiredBro\n|j|\u2606srgserg\n|t:|1775955241\n|gametype|doubles\n|player|p1|I'mSoTiredBro|linebacker|1093\n|player|p2|srgserg|170|1163\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Crabominable, L50, F|\n|poke|p1|Farigiraf, L50, F|\n|poke|p1|Passimian, L50, M|\n|poke|p1|Dragonite, L50, M|\n|poke|p1|Pelipper, L50, F|\n|poke|p1|Sinistcha, L50|\n|poke|p2|Talonflame, L50, F|\n|poke|p2|Torkoal, L50, F|\n|poke|p2|Charizard, L50, M|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Delphox, L50, F|\n|poke|p2|Emboar, L50, F|\n|teampreview|4\n|\n|t:|1775955271\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Passimian|Passimian, L50, M, shiny|100/100\n|switch|p1b: Farigiraf|Farigiraf, L50, F, shiny|100/100\n|switch|p2a: Incineroar|Incineroar, L50, F|100/100\n|switch|p2b: Delphox|Delphox, L50, F|100/100\n|-ability|p2a: Incineroar|Intimidate|boost\n|-unboost|p1a: Passimian|atk|1\n|-ability|p1a: Passimian|Defiant|boost\n|-boost|p1a: Passimian|atk|2\n|-unboost|p1b: Farigiraf|atk|1\n|turn|1\n|\n|t:|1775955283\n|detailschange|p2b: Delphox|Delphox-Mega, L50, F\n|-mega|p2b: Delphox|Delphox|Delphoxite\n|move|p2b: Delphox|Heat Wave|p1b: Farigiraf|[spread] p1a,p1b\n|-damage|p1a: Passimian|34/100\n|-damage|p1b: Farigiraf|63/100\n|move|p1a: Passimian|Rock Slide|p2a: Incineroar|[spread] \n|-miss|p1a: Passimian|p2a: Incineroar\n|-miss|p1a: Passimian|p2b: Delphox\n|move|p2a: Incineroar|Darkest Lariat|p1b: Farigiraf\n|-supereffective|p1b: Farigiraf|1\n|-crit|p1b: Farigiraf\n|-damage|p1b: Farigiraf|0 fnt\n|faint|p1b: Farigiraf\n|\n|upkeep\n|-message|I'mSoTiredBro forfeited.\n|\n|win|srgserg\n|raw|I&apos;mSoTiredBro's rating: 1093 &rarr; <strong>1074</strong><br />(-19 for losing)\n|raw|srgserg's rating: 1163 &rarr; <strong>1183</strong><br />(+20 for winning)\n|l|\u2606I'mSoTiredBro\n|player|p1|\n",
+  "uploadtime": 1775955358,
+  "views": 20,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1074,
+  "private": 0,
+  "password": null
+}

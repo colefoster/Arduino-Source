@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2585085222",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "yadazei",
+    "Astil_ice"
+  ],
+  "log": "|j|\u2606yadazei\n|j|\u2606Astil_ice\n|t:|1776310177\n|gametype|doubles\n|player|p1|yadazei|twins|1186\n|player|p2|Astil_ice|169|1289\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Greninja-*, L50, F|\n|poke|p1|Pelipper, L50, M|\n|poke|p1|Aerodactyl, L50, M|\n|poke|p1|Archaludon, L50, F|\n|poke|p1|Kingambit, L50, F|\n|poke|p1|Sneasler, L50, M|\n|poke|p2|Charizard, L50, F|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Venusaur, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by yadazei)\n|inactive|yadazei has 60 seconds left.\n|\n|t:|1776310213\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Aerodactyl|Aerodactyl, L50, M|100/100\n|switch|p1b: Kingambit|Kingambit, L50, F|100/100\n|switch|p2a: Basculegion|Basculegion, L50, M|100/100\n|switch|p2b: Garchomp|Garchomp, L50, M|100/100\n|-ability|p1a: Aerodactyl|Unnerve\n|turn|1\n|\n|t:|1776310230\n|move|p1b: Kingambit|Sucker Punch|p2a: Basculegion\n|-supereffective|p2a: Basculegion|1\n|-damage|p2a: Basculegion|0 fnt\n|faint|p2a: Basculegion\n|move|p1a: Aerodactyl|Dragon Claw|p2b: Garchomp\n|-supereffective|p2b: Garchomp|1\n|-damage|p2b: Garchomp|56/100\n|-damage|p1a: Aerodactyl|88/100|[from] ability: Rough Skin|[of] p2b: Garchomp\n|move|p2b: Garchomp|Rock Slide|p1b: Kingambit|[spread] p1b\n|-miss|p2b: Garchomp|p1a: Aerodactyl\n|-resisted|p1b: Kingambit|1\n|-damage|p1b: Kingambit|93/100\n|\n|upkeep\n|\n|t:|1776310243\n|switch|p2a: Sneasler|Sneasler, L50, M|100/100\n|turn|2\n|\n|t:|1776310248\n|move|p1b: Kingambit|Protect|p1b: Kingambit\n|-singleturn|p1b: Kingambit|Protect\n|move|p1a: Aerodactyl|Dual Wingbeat|p2a: Sneasler\n|-supereffective|p2a: Sneasler|1\n|-damage|p2a: Sneasler|39/100\n|-supereffective|p2a: Sneasler|1\n|-damage|p2a: Sneasler|0 fnt\n|faint|p2a: Sneasler\n|-hitcount|p2: Sneasler|2\n|move|p2b: Garchomp|Rock Slide|p1b: Kingambit|[spread] p1a\n|-activate|p1b: Kingambit|move: Protect\n|-supereffective|p1a: Aerodactyl|1\n|-damage|p1a: Aerodactyl|29/100\n|\n|upkeep\n|-message|Astil_ice forfeited.\n|\n|win|yadazei\n|raw|yadazei's rating: 1186 &rarr; <strong>1218</strong><br />(+32 for winning)\n|raw|Astil_ice's rating: 1289 &rarr; <strong>1257</strong><br />(-32 for losing)\n|l|\u2606Astil_ice\n|player|p2|\n",
+  "uploadtime": 1776310293,
+  "views": 45,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1218,
+  "private": 0,
+  "password": null
+}

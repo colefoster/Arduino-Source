@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2585086577",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "dragon_noodle",
+    "grimI0I"
+  ],
+  "log": "|j|\u2606dragon_noodle\n|j|\u2606grimI0I\n|t:|1776310318\n|gametype|doubles\n|player|p1|dragon_noodle|riley|1069\n|player|p2|grimI0I|steven|1046\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Skarmory, L50, M|\n|poke|p1|Medicham, L50, F|\n|poke|p1|Maushold-Four, L50|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Whimsicott, L50, M|\n|poke|p2|Gengar, L50, F|\n|poke|p2|Clefable, L50, M|\n|poke|p2|Alcremie, L50, F|\n|poke|p2|Dragonite, L50, M|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Palafin, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by grimI0I)\n|inactive|dragon_noodle also wants the timer to be on.\ndragon_noodle rejected open team sheets.\n|\n|t:|1776310347\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Skarmory|Skarmory, L50, M|100/100\n|switch|p1b: Medicham|Medicham, L50, F|100/100\n|switch|p2a: Gengar|Gengar, L50, F|100/100\n|switch|p2b: Clefable|Clefable, L50, M|100/100\n|turn|1\n|inactive|dragon_noodle has 30 seconds left.\n|\n|t:|1776310375\n|detailschange|p2a: Gengar|Gengar-Mega, L50, F\n|-mega|p2a: Gengar|Gengar|Gengarite\n|move|p2b: Clefable|Follow Me|p2b: Clefable\n|-singleturn|p2b: Clefable|move: Follow Me\n|move|p2a: Gengar|Shadow Ball|p1b: Medicham\n|-supereffective|p1b: Medicham|1\n|-damage|p1b: Medicham|0 fnt\n|faint|p1b: Medicham\n|move|p1a: Skarmory|Swords Dance|p1a: Skarmory\n|-boost|p1a: Skarmory|atk|2\n|\n|upkeep\n|-message|dragon_noodle forfeited.\n|\n|win|grimI0I\n|raw|dragon_noodle's rating: 1069 &rarr; <strong>1047</strong><br />(-22 for losing)\n|raw|grimI0I's rating: 1046 &rarr; <strong>1081</strong><br />(+35 for winning)\n|l|\u2606dragon_noodle\n|player|p1|\n",
+  "uploadtime": 1776310392,
+  "views": 22,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1047,
+  "private": 0,
+  "password": null
+}

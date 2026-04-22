@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2587046272",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "shiver419",
+    "houses6\u80e1\u841d\u535c\u4fa0"
+  ],
+  "log": "|j|\u2606shiver419\n|j|\u2606houses6\u80e1\u841d\u535c\u4fa0\n|t:|1776486347\n|gametype|doubles\n|player|p1|shiver419|266|1473\n|player|p2|houses6\u80e1\u841d\u535c\u4fa0|1|1582\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Espathra, L50, F|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Dragonite, L50, F|\n|poke|p1|Milotic, L50, M|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Venusaur, L50, M|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Pelipper, L50, M|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Sinistcha-Masterpiece, L50|\n|poke|p2|Aegislash, L50, M|\n|teampreview|4\n|\n|t:|1776486396\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Espathra|Espathra, L50, F|100/100\n|switch|p1b: Sneasler|Sneasler, L50, M|100/100\n|switch|p2a: Basculegion|Basculegion, L50, M|100/100\n|switch|p2b: Sinistcha|Sinistcha-Masterpiece, L50|100/100\n|turn|1\n|\n|t:|1776486422\n|move|p1a: Espathra|Protect|p1a: Espathra\n|-singleturn|p1a: Espathra|Protect\n|move|p2a: Basculegion|Flip Turn|p1a: Espathra\n|-activate|p1a: Espathra|move: Protect\n|move|p1b: Sneasler|Coaching|p1a: Espathra\n|-boost|p1a: Espathra|atk|1\n|-boost|p1a: Espathra|def|1\n|move|p2b: Sinistcha|Trick Room|p2b: Sinistcha\n|-fieldstart|move: Trick Room|[of] p2b: Sinistcha\n|\n|-ability|p1a: Espathra|Speed Boost|boost\n|-boost|p1a: Espathra|spe|1\n|upkeep\n|turn|2\n|\n|t:|1776486446\n|move|p2b: Sinistcha|Matcha Gotcha|p1b: Sneasler|[spread] p1a,p1b\n|-resisted|p1b: Sneasler|1\n|-damage|p1a: Espathra|62/100\n|-damage|p1b: Sneasler|84/100\n|-status|p1a: Espathra|brn\n|move|p1b: Sneasler|Coaching|p1a: Espathra\n|-boost|p1a: Espathra|atk|1\n|-boost|p1a: Espathra|def|1\n|move|p2a: Basculegion|Flip Turn|p1a: Espathra\n|-damage|p1a: Espathra|30/100 brn\n|\n|t:|1776486459\n|switch|p2a: Pelipper|Pelipper, L50, M|100/100|[from] Flip Turn\n|-weather|RainDance|[from] ability: Drizzle|[of] p2a: Pelipper\n|move|p1a: Espathra|Calm Mind|p1a: Espathra\n|-boost|p1a: Espathra|spa|1\n|-boost|p1a: Espathra|spd|1\n|\n|-weather|RainDance|[upkeep]\n|-damage|p1a: Espathra|24/100 brn|[from] brn\n|-ability|p1a: Espathra|Speed Boost|boost\n|-boost|p1a: Espathra|spe|1\n|upkeep\n|turn|3\n|-message|shiver419 forfeited.\n|\n|win|houses6\u80e1\u841d\u535c\u4fa0\n|raw|shiver419's rating: 1473 &rarr; <strong>1459</strong><br />(-14 for losing)\n|raw|houses6\u80e1\u841d\u535c\u4fa0's rating: 1582 &rarr; <strong>1596</strong><br />(+14 for winning)\n|l|\u2606shiver419\n|player|p1|\n",
+  "uploadtime": 1776486482,
+  "views": 43,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1459,
+  "private": 0,
+  "password": null
+}

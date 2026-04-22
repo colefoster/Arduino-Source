@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2581959277",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "greetathunberg",
+    "zezsi"
+  ],
+  "log": "|j|\u2606greetathunberg\n|j|\u2606zezsi\n|t:|1776043351\n|gametype|doubles\n|player|p1|greetathunberg|170|1108\n|player|p2|zezsi|266|1121\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Froslass, L50, F|\n|poke|p1|Maushold, L50|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Mamoswine, L50, M|\n|poke|p1|Kingambit, L50, F|\n|poke|p2|Delphox, L50, M|\n|poke|p2|Clefable, L50, M|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Kingambit, L50, M|\n|poke|p2|Dragonite, L50, M|\n|poke|p2|Basculegion, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by zezsi)\n|inactive|greetathunberg has 60 seconds left.\n|\n|t:|1776043398\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Froslass|Froslass, L50, F|100/100\n|switch|p1b: Kingambit|Kingambit, L50, F|100/100\n|switch|p2a: Delphox|Delphox, L50, M|100/100\n|switch|p2b: Basculegion|Basculegion, L50, M|100/100\n|turn|1\n|inactive|greetathunberg has 30 seconds left.\n|\n|t:|1776043438\n|switch|p1a: Maushold|Maushold, L50|100/100\n|detailschange|p2a: Delphox|Delphox-Mega, L50, M\n|-mega|p2a: Delphox|Delphox|Delphoxite\n|move|p1b: Kingambit|Sucker Punch|p2a: Delphox\n|-supereffective|p2a: Delphox|1\n|-damage|p2a: Delphox|0 fnt\n|faint|p2a: Delphox\n|move|p2b: Basculegion|Last Respects|p1a: Maushold\n|-immune|p1a: Maushold\n|\n|upkeep\n|-message|zezsi forfeited.\n|\n|win|greetathunberg\n|raw|greetathunberg's rating: 1108 &rarr; <strong>1134</strong><br />(+26 for winning)\n|raw|zezsi's rating: 1121 &rarr; <strong>1095</strong><br />(-26 for losing)\n|l|\u2606zezsi\n|player|p2|\n",
+  "uploadtime": 1776043457,
+  "views": 9,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1095,
+  "private": 0,
+  "password": null
+}

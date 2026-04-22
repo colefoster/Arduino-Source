@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2580540397",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "a swift knock off",
+    "GirlriG"
+  ],
+  "log": "|j|\u2606a swift knock off\n|j|\u2606GirlriG\n|t:|1775910637\n|gametype|singles\n|player|p1|a swift knock off|guitarist|1082\n|player|p2|GirlriG|swimmerf-gen4dp|1000\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Gengar, L50, M|\n|poke|p1|Greninja-*, L50, M|\n|poke|p1|Corviknight, L50, F|\n|poke|p1|Meowscarada, L50, M|\n|poke|p1|Manectric, L50, F|\n|poke|p1|Garchomp, L50, M|\n|poke|p2|Charizard, L50, M|\n|poke|p2|Lucario, L50, M|\n|poke|p2|Infernape, L50, M|\n|poke|p2|Snorlax, L50, M|\n|poke|p2|Gyarados, L50, M|\n|poke|p2|Floette-Eternal, L50, F|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by GirlriG)\n|\n|t:|1775910662\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Manectric|Manectric, L50, F|100/100\n|switch|p2a: Charizard|Charizard, L50, M, shiny|100/100\n|turn|1\n|\n|t:|1775910673\n|detailschange|p1a: Manectric|Manectric-Mega, L50, F\n|-mega|p1a: Manectric|Manectric|Manectite\n|-ability|p1a: Manectric|Intimidate|boost\n|-unboost|p2a: Charizard|atk|1\n|detailschange|p2a: Charizard|Charizard-Mega-Y, L50, M, shiny\n|-mega|p2a: Charizard|Charizard|Charizardite Y\n|-weather|SunnyDay|[from] ability: Drought|[of] p2a: Charizard\n|move|p1a: Manectric|Thunderbolt|p2a: Charizard\n|-supereffective|p2a: Charizard|1\n|-damage|p2a: Charizard|0 fnt\n|faint|p2a: Charizard\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|\n|t:|1775910683\n|switch|p2a: Infernape|Infernape, L50, M, shiny|100/100\n|turn|2\n|\n|t:|1775910688\n|move|p1a: Manectric|Volt Switch|p2a: Infernape\n|-damage|p2a: Infernape|40/100\n|\n|t:|1775910691\n|switch|p1a: Garchomp|Garchomp, L50, M|100/100|[from] Volt Switch\n|move|p2a: Infernape|Close Combat|p1a: Garchomp\n|-damage|p1a: Garchomp|47/100\n|-unboost|p2a: Infernape|def|1\n|-unboost|p2a: Infernape|spd|1\n|-damage|p2a: Infernape|28/100|[from] ability: Rough Skin|[of] p1a: Garchomp\n|-enditem|p1a: Garchomp|Sitrus Berry|[eat]\n|-heal|p1a: Garchomp|72/100|[from] item: Sitrus Berry\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|turn|3\n|-message|GirlriG forfeited.\n|\n|win|a swift knock off\n|raw|a swift knock off's rating: 1082 &rarr; <strong>1103</strong><br />(+21 for winning)\n|raw|GirlriG's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|l|\u2606GirlriG\n|player|p2|\n",
+  "uploadtime": 1775910712,
+  "views": 18,
+  "formatid": "gen9championsbssregma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

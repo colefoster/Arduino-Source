@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586721285",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "AshKetchum680",
+    "godsend888"
+  ],
+  "log": "|j|\u2606AshKetchum680\n|j|\u2606godsend888\n|t:|1776454767\n|gametype|doubles\n|player|p1|AshKetchum680|lucas|1156\n|player|p2|godsend888|2|1174\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Sneasler, L50, F|\n|poke|p1|Dragapult, L50, F|\n|poke|p1|Starmie, L50|\n|poke|p1|Whimsicott, L50, M|\n|poke|p1|Zoroark-Hisui, L50, F|\n|poke|p1|Camerupt, L50, M|\n|poke|p2|Tyranitar, L50, F|\n|poke|p2|Excadrill, L50, M|\n|poke|p2|Talonflame, L50, M|\n|poke|p2|Meganium, L50, M|\n|poke|p2|Tinkaton, L50, F|\n|poke|p2|Milotic, L50, F|\n|teampreview|4\n|\n|t:|1776454796\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: lesbian|Sneasler, L50, F, shiny|100/100\n|switch|p1b: mother 3|Starmie, L50, shiny|100/100\n|switch|p2a: Burd Up|Talonflame, L50, M|100/100\n|switch|p2b: Mega^2|Meganium, L50, M|100/100\n|turn|1\n|\n|t:|1776454808\n|detailschange|p1b: mother 3|Starmie-Mega, L50, shiny\n|-mega|p1b: mother 3|Starmie|Starminite\n|move|p2a: Burd Up|Protect|p2a: Burd Up\n|-singleturn|p2a: Burd Up|Protect\n|move|p2b: Mega^2|Protect|p2b: Mega^2\n|-singleturn|p2b: Mega^2|Protect\n|move|p1a: lesbian|Fake Out|p2a: Burd Up\n|-activate|p2a: Burd Up|move: Protect\n|move|p1b: mother 3|Self-Destruct|p2a: Burd Up|[spread] p1a\n|-activate|p2a: Burd Up|move: Protect\n|-activate|p2b: Mega^2|move: Protect\n|-damage|p1a: lesbian|0 fnt\n|faint|p1b: mother 3\n|faint|p1a: lesbian\n|\n|upkeep\n|c|\u2606AshKetchum680|lol\n|l|\u2606AshKetchum680\n|player|p1|\n|c|\u2606godsend888|guh?\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by godsend888)\n|inactive|AshKetchum680 has 30 seconds to reconnect!\n|inactive|AshKetchum680 has 20 seconds to reconnect!\n|inactive|AshKetchum680 has 15 seconds to reconnect!\n|inactive|AshKetchum680 has 10 seconds to reconnect!\n|inactive|AshKetchum680 has 5 seconds to reconnect!\n|-message|AshKetchum680 lost due to inactivity.\n|\n|win|godsend888\n|raw|AshKetchum680's rating: 1156 &rarr; <strong>1132</strong><br />(-24 for losing)\n|raw|godsend888's rating: 1174 &rarr; <strong>1198</strong><br />(+24 for winning)\n",
+  "uploadtime": 1776454896,
+  "views": 33,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1132,
+  "private": 0,
+  "password": null
+}

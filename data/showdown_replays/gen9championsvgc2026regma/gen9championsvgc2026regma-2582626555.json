@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582626555",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "heyimporg",
+    "eevee1ynn"
+  ],
+  "log": "|j|\u2606heyimporg\n|j|\u2606eevee1ynn\n|t:|1776103490\n|gametype|doubles\n|player|p1|heyimporg|may-masters|\n|player|p2|eevee1ynn|unknownf|\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Sneasler, L50, F|\n|poke|p1|Cofagrigus, L50, F|\n|poke|p1|Palafin, L50, M|\n|poke|p1|Aggron, L50, F|\n|poke|p2|Scizor, L50, M|\n|poke|p2|Samurott-Hisui, L50, M|\n|poke|p2|Politoed, L50, F|\n|poke|p2|Archaludon, L50, M|\n|poke|p2|Aerodactyl, L50, F|\n|poke|p2|Gallade, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by heyimporg)\n|\n|t:|1776103507\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Sneasler|Sneasler, L50, F|100/100\n|switch|p1b: Cofagrigus|Cofagrigus, L50, F|100/100\n|switch|p2a: Scizor|Scizor, L50, M|100/100\n|switch|p2b: Politoed|Politoed, L50, F|100/100\n|-ability|p1a: Sneasler|Pressure\n|-weather|RainDance|[from] ability: Drizzle|[of] p2b: Politoed\n|turn|1\n|\n|t:|1776103526\n|switch|p2b: Gallade|Gallade, L50, M|100/100\n|move|p1a: Sneasler|Fake Out|p2b: Gallade\n|-damage|p2b: Gallade|77/100\n|move|p2a: Scizor|Swords Dance|p2a: Scizor\n|-boost|p2a: Scizor|atk|2\n|move|p1b: Cofagrigus|Disable|p2a: Scizor\n|-start|p2a: Scizor|Disable|Swords Dance\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|turn|2\n|-message|eevee1ynn forfeited.\n|\n|win|heyimporg\n",
+  "uploadtime": 1776103539,
+  "views": 10,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": null,
+  "private": 0,
+  "password": null
+}

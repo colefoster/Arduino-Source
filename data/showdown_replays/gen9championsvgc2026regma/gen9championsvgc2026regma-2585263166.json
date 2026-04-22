@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2585263166",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Andy6005",
+    "NoxxinVGC"
+  ],
+  "log": "|j|\u2606Andy6005\n|j|\u2606NoxxinVGC\n|t:|1776331407\n|gametype|doubles\n|player|p1|Andy6005|policeman-gen4|1113\n|player|p2|NoxxinVGC|giovanni|1121\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Meganium, L50, M|\n|poke|p1|Pelipper, L50, F|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Archaludon, L50, M|\n|poke|p1|Sneasler, L50, F|\n|poke|p1|Vivillon, L50, F|\n|poke|p2|Delphox, L50, M|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Clefable, L50, M|\n|poke|p2|Kingambit, L50, M|\n|poke|p2|Dragonite, L50, M|\n|poke|p2|Sneasler, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by NoxxinVGC)\n|inactive|Andy6005 has 60 seconds left.\n|inactive|NoxxinVGC has 60 seconds left.\n|\n|t:|1776331467\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Sneasler|Sneasler, L50, F|100/100\n|switch|p1b: Vivillon|Vivillon, L50, F|100/100\n|switch|p2a: Kingambit|Kingambit, L50, M|100/100\n|switch|p2b: Sneasler|Sneasler, L50, F|100/100\n|turn|1\n|\n|t:|1776331488\n|move|p2a: Kingambit|Protect|p2a: Kingambit\n|-singleturn|p2a: Kingambit|Protect\n|move|p1a: Sneasler|Fake Out|p2b: Sneasler\n|-damage|p2b: Sneasler|77/100\n|cant|p2b: Sneasler|flinch\n|move|p1b: Vivillon|Sleep Powder|p2a: Kingambit\n|-activate|p2a: Kingambit|move: Protect\n|\n|upkeep\n|turn|2\n|\n|t:|1776331509\n|move|p2a: Kingambit|Sucker Punch|p1a: Sneasler\n|-resisted|p1a: Sneasler|1\n|-damage|p1a: Sneasler|62/100\n|move|p1a: Sneasler|Close Combat|p2a: Kingambit\n|-supereffective|p2a: Kingambit|2\n|-damage|p2a: Kingambit|0 fnt\n|-unboost|p1a: Sneasler|def|1\n|-unboost|p1a: Sneasler|spd|1\n|faint|p2a: Kingambit\n|-enditem|p1a: Sneasler|White Herb\n|-clearnegativeboost|p1a: Sneasler|[silent]\n|move|p2b: Sneasler|Close Combat|p1a: Sneasler\n|-resisted|p1a: Sneasler|1\n|-damage|p1a: Sneasler|4/100\n|-unboost|p2b: Sneasler|def|1\n|-unboost|p2b: Sneasler|spd|1\n|move|p1b: Vivillon|Sleep Powder|p2b: Sneasler\n|-status|p2b: Sneasler|slp|[from] move: Sleep Powder\n|\n|upkeep\n|\n|t:|1776331526\n|switch|p2a: Basculegion|Basculegion, L50, M|100/100\n|turn|3\n|\n|t:|1776331536\n|switch|p1a: Meganium|Meganium, L50, M|100/100\n|switch|p2b: Clefable|Clefable, L50, M|100/100\n|move|p2a: Basculegion|Aqua Jet|p1a: Meganium\n|-resisted|p1a: Meganium|1\n|-damage|p1a: Meganium|87/100\n|move|p1b: Vivillon|Tailwind|p1b: Vivillon\n|-sidestart|p1: Andy6005|move: Tailwind\n|\n|upkeep\n|turn|4\n|-message|NoxxinVGC forfeited.\n|\n|win|Andy6005\n|raw|Andy6005's rating: 1113 &rarr; <strong>1139</strong><br />(+26 for winning)\n|raw|NoxxinVGC's rating: 1121 &rarr; <strong>1095</strong><br />(-26 for losing)\n",
+  "uploadtime": 1776331545,
+  "views": 17,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1095,
+  "private": 0,
+  "password": null
+}

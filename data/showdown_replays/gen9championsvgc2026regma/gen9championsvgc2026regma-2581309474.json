@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2581309474",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "tulivgc",
+    "MegVGC"
+  ],
+  "log": "|j|\u2606tulivgc\n|j|\u2606MegVGC\n|t:|1775984709\n|gametype|doubles\n|player|p1|tulivgc|169|1268\n|player|p2|MegVGC|266|1361\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Camerupt, L50, F|\n|poke|p1|Farigiraf, L50, M|\n|poke|p1|Sneasler, L50, F|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Rotom-Wash, L50|\n|poke|p1|Dragapult, L50, F|\n|poke|p2|Glimmora, L50, F|\n|poke|p2|Delphox, L50, M|\n|poke|p2|Quaquaval, L50, M|\n|poke|p2|Hydreigon, L50, F|\n|poke|p2|Whimsicott, L50, F|\n|poke|p2|Venusaur, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by tulivgc)\n|j| gE1xjZRtuhW2DdT0AK\n|\n|t:|1775984737\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Sneasler|Sneasler, L50, F|100/100\n|switch|p1b: Dragapult|Dragapult, L50, F|100/100\n|switch|p2a: Hydreigon|Hydreigon, L50, F|100/100\n|switch|p2b: Venusaur|Venusaur, L50, M|100/100\n|turn|1\n|\n|t:|1775984753\n|move|p2a: Hydreigon|Protect|p2a: Hydreigon\n|-singleturn|p2a: Hydreigon|Protect\n|move|p2b: Venusaur|Protect|p2b: Venusaur\n|-singleturn|p2b: Venusaur|Protect\n|move|p1b: Dragapult|Dragon Dance|p1b: Dragapult\n|-boost|p1b: Dragapult|atk|1\n|-boost|p1b: Dragapult|spe|1\n|move|p1a: Sneasler|Close Combat|p2a: Hydreigon\n|-activate|p2a: Hydreigon|move: Protect\n|\n|upkeep\n|turn|2\n|\n|t:|1775984769\n|move|p1b: Dragapult|Phantom Force||[still]\n|-prepare|p1b: Dragapult|Phantom Force\n|move|p1a: Sneasler|Close Combat|p2a: Hydreigon\n|-supereffective|p2a: Hydreigon|1\n|-damage|p2a: Hydreigon|0 fnt\n|-unboost|p1a: Sneasler|def|1\n|-unboost|p1a: Sneasler|spd|1\n|faint|p2a: Hydreigon\n|-enditem|p1a: Sneasler|White Herb\n|-clearnegativeboost|p1a: Sneasler|[silent]\n|move|p2b: Venusaur|Sleep Powder|p1b: Dragapult|[miss]\n|-miss|p2b: Venusaur|p1b: Dragapult\n|\n|upkeep\n|\n|t:|1775984776\n|switch|p2a: Glimmora|Glimmora, L50, F|100/100\n|turn|3\n|\n|t:|1775984784\n|detailschange|p2a: Glimmora|Glimmora-Mega, L50, F\n|-mega|p2a: Glimmora|Glimmora|Glimmoranite\n|move|p1a: Sneasler|Dire Claw|p2b: Venusaur\n|-damage|p2b: Venusaur|39/100\n|move|p1b: Dragapult|Phantom Force|p2b: Venusaur|[from] lockedmove\n|-damage|p2b: Venusaur|0 fnt\n|faint|p2b: Venusaur\n|move|p2a: Glimmora|Earth Power|p1a: Sneasler\n|-supereffective|p1a: Sneasler|1\n|-damage|p1a: Sneasler|9/100\n|\n|upkeep\n|-message|MegVGC forfeited.\n|\n|win|tulivgc\n|raw|tulivgc's rating: 1268 &rarr; <strong>1300</strong><br />(+32 for winning)\n|raw|MegVGC's rating: 1361 &rarr; <strong>1336</strong><br />(-25 for losing)\n|l|\u2606MegVGC\n|player|p2|\n|l|\u2606tulivgc\n|player|p1|\n",
+  "uploadtime": 1775984838,
+  "views": 41,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1300,
+  "private": 0,
+  "password": null
+}

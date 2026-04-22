@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582406684",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "dasabe\u76d6\u6b27\u5361\u4fa0",
+    "alvin776"
+  ],
+  "log": "|j|\u2606dasabe\u76d6\u6b27\u5361\u4fa0\n|j|\u2606alvin776\n|t:|1776089620\n|gametype|doubles\n|player|p1|dasabe\u76d6\u6b27\u5361\u4fa0|may-masters4|1285\n|player|p2|alvin776|170|1268\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Froslass, L50, F|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Aerodactyl, L50, F|\n|poke|p1|Kommo-o, L50, F|\n|poke|p1|Kingambit, L50, M|\n|poke|p2|Gengar, L50, F|\n|poke|p2|Arcanine, L50, F|\n|poke|p2|Whimsicott, L50, F|\n|poke|p2|Archaludon, L50, F|\n|poke|p2|Gallade, L50, M|\n|poke|p2|Politoed, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by alvin776)\n|j| yubanmeiqin\n|\n|t:|1776089675\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: \u629b\u5f00\u864e\u54e5\u54ee\u7a74|Incineroar, L50, M, shiny|100/100\n|switch|p1b: \u5316\u4e00\u6e7f\u7abf|Aerodactyl, L50, F, shiny|100/100\n|switch|p2a: Whimsicott|Whimsicott, L50, F|100/100\n|switch|p2b: Arcanine|Arcanine, L50, F|100/100\n|-ability|p1b: \u5316\u4e00\u6e7f\u7abf|Pressure\n|-ability|p2b: Arcanine|Intimidate|boost\n|-unboost|p1a: \u629b\u5f00\u864e\u54e5\u54ee\u7a74|atk|1\n|-unboost|p1b: \u5316\u4e00\u6e7f\u7abf|atk|1\n|-ability|p1a: \u629b\u5f00\u864e\u54e5\u54ee\u7a74|Intimidate|boost\n|-unboost|p2a: Whimsicott|atk|1\n|-unboost|p2b: Arcanine|atk|1\n|turn|1\n|\n|t:|1776089692\n|move|p1a: \u629b\u5f00\u864e\u54e5\u54ee\u7a74|Fake Out|p2a: Whimsicott\n|-damage|p2a: Whimsicott|94/100\n|cant|p2a: Whimsicott|flinch\n|move|p1b: \u5316\u4e00\u6e7f\u7abf|Dual Wingbeat|p2a: Whimsicott|[miss]\n|-miss|p1b: \u5316\u4e00\u6e7f\u7abf|p2a: Whimsicott\n|move|p2b: Arcanine|Will-O-Wisp|p1b: \u5316\u4e00\u6e7f\u7abf\n|-status|p1b: \u5316\u4e00\u6e7f\u7abf|brn\n|\n|-damage|p1b: \u5316\u4e00\u6e7f\u7abf|95/100 brn|[from] brn\n|upkeep\n|turn|2\n|-message|dasabe\u76d6\u6b27\u5361\u4fa0 forfeited.\n|\n|win|alvin776\n|raw|dasabe\u76d6\u6b27\u5361\u4fa0's rating: 1285 &rarr; <strong>1259</strong><br />(-26 for losing)\n|raw|alvin776's rating: 1268 &rarr; <strong>1294</strong><br />(+26 for winning)\n|l|\u2606dasabe\u76d6\u6b27\u5361\u4fa0\n|player|p1|\n|l|\u2606alvin776\n|player|p2|\n|l| yubanmeiqin\n|j| yubanmeiqin\n",
+  "uploadtime": 1776089759,
+  "views": 33,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1259,
+  "private": 0,
+  "password": null
+}

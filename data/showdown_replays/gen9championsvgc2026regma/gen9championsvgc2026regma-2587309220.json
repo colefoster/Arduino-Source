@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2587309220",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "guillehue",
+    "hide on whimscott"
+  ],
+  "log": "|j|\u2606guillehue\n|j|\u2606hide on whimscott\n|t:|1776520656\n|gametype|doubles\n|player|p1|guillehue|n|1501\n|player|p2|hide on whimscott|artist-gen4|1397\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Meganium, L50, F|\n|poke|p1|Dragonite, L50, M, shiny|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Sneasler, L50, F|\n|poke|p1|Kingambit, L50, M|\n|poke|p1|Politoed, L50, M|\n|poke|p2|Venusaur, L50, F|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Kingambit, L50, F|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Dragonite, L50, M|\n|teampreview|4\n|\n|t:|1776520700\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Dragonite|Dragonite, L50, M, shiny|100/100\n|switch|p1b: Sneasler|Sneasler, L50, F|100/100\n|switch|p2a: Venusaur|Venusaur, L50, F|100/100\n|switch|p2b: Kingambit|Kingambit, L50, F|100/100\n|turn|1\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by guillehue)\n|\n|t:|1776520723\n|switch|p1b: Politoed|Politoed, L50, M|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p1b: Politoed\n|switch|p2b: Basculegion|Basculegion, L50, M|100/100\n|detailschange|p2a: Venusaur|Venusaur-Mega, L50, F\n|-mega|p2a: Venusaur|Venusaur|Venusaurite\n|detailschange|p1a: Dragonite|Dragonite-Mega, L50, M, shiny\n|-mega|p1a: Dragonite|Dragonite|Dragoninite\n|move|p1a: Dragonite|Hurricane|p2a: Venusaur\n|-supereffective|p2a: Venusaur|1\n|-damage|p2a: Venusaur|0 fnt\n|faint|p2a: Venusaur\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|-message|hide on whimscott forfeited.\n|\n|win|guillehue\n|raw|guillehue's rating: 1501 &rarr; <strong>1515</strong><br />(+14 for winning)\n|raw|hide on whimscott's rating: 1397 &rarr; <strong>1383</strong><br />(-14 for losing)\n",
+  "uploadtime": 1776520736,
+  "views": 27,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1383,
+  "private": 0,
+  "password": null
+}

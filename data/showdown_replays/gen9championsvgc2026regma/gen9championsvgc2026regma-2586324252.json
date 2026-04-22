@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586324252",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Vkhanhh",
+    "rxxnx"
+  ],
+  "log": "|j|\u2606Vkhanhh\n|j|\u2606rxxnx\n|t:|1776425347\n|gametype|doubles\n|player|p1|Vkhanhh|youngster|1000\n|player|p2|rxxnx|266|1000\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Meganium, L50, M|\n|poke|p1|Archaludon, L50, F|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Maushold, L50|\n|poke|p1|Politoed, L50, F|\n|poke|p1|Talonflame, L50, F|\n|poke|p2|Crabominable, L50, F|\n|poke|p2|Aegislash, L50, F|\n|poke|p2|Slowking, L50, M|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Ninetales-Alola, L50, F|\n|poke|p2|Maushold, L50|\n|teampreview|4\nrxxnx has agreed to open team sheets.\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by rxxnx)\n|inactive|rxxnx has 60 seconds left.\n|\n|t:|1776425398\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Politoed|Politoed, L50, F|100/100\n|switch|p1b: Talonflame|Talonflame, L50, F, shiny|100/100\n|switch|p2a: Incineroar|Incineroar, L50, M, shiny|100/100\n|switch|p2b: Slowking|Slowking, L50, M|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p1a: Politoed\n|-ability|p2a: Incineroar|Intimidate|boost\n|-unboost|p1a: Politoed|atk|1\n|-unboost|p1b: Talonflame|atk|1\n|turn|1\n|\n|t:|1776425421\n|move|p1a: Politoed|Protect|p1a: Politoed\n|-singleturn|p1a: Politoed|Protect\n|move|p2a: Incineroar|Fake Out|p1b: Talonflame\n|-damage|p1b: Talonflame|83/100\n|cant|p1b: Talonflame|flinch\n|move|p2b: Slowking|Trick Room|p2b: Slowking\n|-fieldstart|move: Trick Room|[of] p2b: Slowking\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|turn|2\n|\n|t:|1776425445\n|-prepare|p2b: Slowking|Chilly Reception|[premajor]\n|move|p2b: Slowking|Chilly Reception|p2b: Slowking\n|-weather|Snowscape\n|\n|t:|1776425449\n|switch|p2b: Crabominable|Crabominable, L50, F|100/100|[from] Chilly Reception\n|move|p2a: Incineroar|Darkest Lariat|p1b: Talonflame\n|-damage|p1b: Talonflame|22/100\n|move|p1a: Politoed|Weather Ball|p2a: Incineroar\n|-resisted|p2a: Incineroar|1\n|-crit|p2a: Incineroar\n|-damage|p2a: Incineroar|87/100\n|move|p1b: Talonflame|Hurricane|p2b: Crabominable|[miss]\n|-miss|p1b: Talonflame|p2b: Crabominable\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|turn|3\n|inactive|Vkhanhh has 30 seconds left.\n|-message|Vkhanhh forfeited.\n|\n|win|rxxnx\n|raw|Vkhanhh's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|raw|rxxnx's rating: 1000 &rarr; <strong>1040</strong><br />(+40 for winning)\n|l|\u2606Vkhanhh\n|player|p1|\n",
+  "uploadtime": 1776425479,
+  "views": 24,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

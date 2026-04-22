@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582536127",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Alnoots",
+    "dragonballzassmove"
+  ],
+  "log": "|j|\u2606Alnoots\n|j|\u2606dragonballzassmove\n|t:|1776097918\n|gametype|doubles\n|player|p1|Alnoots|101|1043\n|player|p2|dragonballzassmove|266|1041\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Golurk, L50|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Farigiraf, L50, F|\n|poke|p1|Kingambit, L50, M|\n|poke|p1|Primarina, L50, F|\n|poke|p1|Meganium, L50, F|\n|poke|p2|Lucario, L50, F|\n|poke|p2|Aerodactyl, L50, F|\n|poke|p2|Talonflame, L50, F|\n|poke|p2|Rotom-Wash, L50|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Garchomp, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by dragonballzassmove)\n|\n|t:|1776097948\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: If you dance|Golurk, L50|100/100\n|switch|p1b: I'll dance|Farigiraf, L50, F|100/100\n|switch|p2a: Lucario|Lucario, L50, F|100/100\n|switch|p2b: Talonflame|Talonflame, L50, F|100/100\n|turn|1\n|inactive|dragonballzassmove has 30 seconds left.\n|\n|t:|1776097975\n|detailschange|p2a: Lucario|Lucario-Mega, L50, F\n|-mega|p2a: Lucario|Lucario|Lucarionite\n|move|p2a: Lucario|Protect|p2a: Lucario\n|-singleturn|p2a: Lucario|Protect\n|move|p2b: Talonflame|Tailwind|p2b: Talonflame\n|-sidestart|p2: dragonballzassmove|move: Tailwind\n|move|p1a: If you dance|Smack Down|p2b: Talonflame\n|-supereffective|p2b: Talonflame|2\n|-damage|p2b: Talonflame|0 fnt\n|faint|p2b: Talonflame\n|move|p1b: I'll dance|Trick Room|p1b: I'll dance\n|-fieldstart|move: Trick Room|[of] p1b: I'll dance\n|\n|upkeep\n|\n|t:|1776097986\n|switch|p2b: Rotom|Rotom-Wash, L50|100/100\n|turn|2\n|\n|t:|1776098002\n|detailschange|p1a: If you dance|Golurk-Mega, L50\n|-mega|p1a: If you dance|Golurk|Golurkite\n|move|p1b: I'll dance|Ally Switch|p1b: I'll dance\n|swap|p1b: I'll dance|0|[from] move: Ally Switch\n|move|p1b: If you dance|Headlong Rush|p2a: Lucario\n|-supereffective|p2a: Lucario|1\n|-damage|p2a: Lucario|0 fnt\n|-unboost|p1b: If you dance|def|1\n|-unboost|p1b: If you dance|spd|1\n|faint|p2a: Lucario\n|move|p2b: Rotom|Hydro Pump|p1a: I'll dance\n|-damage|p1a: I'll dance|60/100\n|\n|-heal|p1a: I'll dance|66/100|[from] item: Leftovers\n|upkeep\n|-message|dragonballzassmove forfeited.\n|\n|win|Alnoots\n|raw|Alnoots's rating: 1043 &rarr; <strong>1076</strong><br />(+33 for winning)\n|raw|dragonballzassmove's rating: 1041 &rarr; <strong>1025</strong><br />(-16 for losing)\n|l|\u2606dragonballzassmove\n|player|p2|\n",
+  "uploadtime": 1776098025,
+  "views": 12,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1025,
+  "private": 0,
+  "password": null
+}

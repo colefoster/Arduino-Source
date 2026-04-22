@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2585715389",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "tewbre",
+    "eldiablotyCham"
+  ],
+  "log": "|j|\u2606tewbre\n|j|\u2606eldiablotyCham\n|t:|1776365619\n|gametype|doubles\n|player|p1|tewbre|266|1000\n|player|p2|eldiablotyCham|170|1000\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Charizard, L50, F|\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Gengar, L50, F|\n|poke|p1|Venusaur, L50, M|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Garchomp, L50, F|\n|poke|p2|Aerodactyl, L50, F|\n|poke|p2|Tyranitar, L50, M|\n|poke|p2|Aegislash, L50, M|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Rotom-Wash, L50|\n|poke|p2|Sneasler, L50, F|\n|teampreview|4\ntewbre rejected open team sheets.\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by tewbre)\n|\n|t:|1776365697\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Floette|Floette-Eternal, L50, F|100/100\n|switch|p1b: Gengar|Gengar, L50, F|100/100\n|switch|p2a: Tyranitar|Tyranitar, L50, M, shiny|100/100\n|switch|p2b: Aegislash|Aegislash, L50, M, shiny|100/100\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p2a: Tyranitar\n|turn|1\n|inactive|tewbre has 30 seconds left.\n|inactive|eldiablotyCham has 30 seconds left.\n|inactive|tewbre has 20 seconds left.\n|inactive|eldiablotyCham has 20 seconds left.\n|inactive|eldiablotyCham has 15 seconds left.\n|inactive|tewbre has 15 seconds left.\n|inactive|eldiablotyCham has 10 seconds left.\n|inactive|tewbre has 10 seconds left.\n|inactive|eldiablotyCham has 5 seconds left.\n|\n|t:|1776365752\n|detailschange|p1a: Floette|Floette-Mega, L50, F\n|-mega|p1a: Floette|Floette|Floettite\n|-ability|p1a: Floette|Fairy Aura\n|move|p1b: Gengar|Protect|p1b: Gengar\n|-singleturn|p1b: Gengar|Protect\n|move|p1a: Floette|Moonblast|p2a: Tyranitar\n|-supereffective|p2a: Tyranitar|1\n|-damage|p2a: Tyranitar|2/100\n|move|p2a: Tyranitar|Knock Off|p1b: Gengar\n|-activate|p1b: Gengar|move: Protect\n|-formechange|p2b: Aegislash|Aegislash-Blade|\n|move|p2b: Aegislash|Iron Head|p1a: Floette\n|-supereffective|p1a: Floette|1\n|-damage|p1a: Floette|0 fnt\n|faint|p1a: Floette\n|\n|-weather|Sandstorm|[upkeep]\n|-damage|p1b: Gengar|95/100|[from] Sandstorm\n|upkeep\n|\n|t:|1776365768\n|switch|p1a: Charizard|Charizard, L50, F|100/100\n|turn|2\n|-message|tewbre forfeited.\n|\n|win|eldiablotyCham\n|raw|tewbre's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|raw|eldiablotyCham's rating: 1000 &rarr; <strong>1040</strong><br />(+40 for winning)\n",
+  "uploadtime": 1776365775,
+  "views": 13,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

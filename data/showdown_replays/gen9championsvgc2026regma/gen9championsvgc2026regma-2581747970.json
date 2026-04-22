@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2581747970",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Minezzzzz",
+    "Yassin-M"
+  ],
+  "log": "|j|\u2606Minezzzzz\n|j|\u2606Yassin-M\n|t:|1776025346\n|gametype|doubles\n|player|p1|Minezzzzz|hugh|1034\n|player|p2|Yassin-M|marlon|1000\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Tyranitar, L50, F|\n|poke|p1|Corviknight, L50, F|\n|poke|p1|Primarina, L50, F|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Excadrill, L50, F|\n|poke|p1|Sinistcha, L50|\n|poke|p2|Charizard, L50, M|\n|poke|p2|Maushold, L50|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Dragapult, L50, M|\n|poke|p2|Kingambit, L50, M|\n|poke|p2|Garchomp, L50, M|\n|teampreview|4\n|\n|t:|1776025373\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Tyranitar|Tyranitar, L50, F|100/100\n|switch|p1b: Excadrill|Excadrill, L50, F|100/100\n|switch|p2a: Dragapult|Dragapult, L50, M, shiny|100/100\n|switch|p2b: Maushold|Maushold, L50|100/100\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p1a: Tyranitar\n|turn|1\n|\n|t:|1776025413\n|detailschange|p1a: Tyranitar|Tyranitar-Mega, L50, F\n|-mega|p1a: Tyranitar|Tyranitar|Tyranitarite\n|move|p1b: Excadrill|Protect|p1b: Excadrill\n|-singleturn|p1b: Excadrill|Protect\n|move|p2b: Maushold|Follow Me|p2b: Maushold\n|-singleturn|p2b: Maushold|move: Follow Me\n|move|p2a: Dragapult|Will-O-Wisp|p1b: Excadrill\n|-activate|p1b: Excadrill|move: Protect\n|move|p1a: Tyranitar|Crunch|p2b: Maushold\n|-damage|p2b: Maushold|32/100\n|\n|-weather|Sandstorm|[upkeep]\n|-damage|p2a: Dragapult|94/100|[from] Sandstorm\n|-damage|p2b: Maushold|26/100|[from] Sandstorm\n|upkeep\n|turn|2\n|\n|t:|1776025430\n|move|p2b: Maushold|Protect|p2b: Maushold\n|-singleturn|p2b: Maushold|Protect\n|move|p1a: Tyranitar|Protect|p1a: Tyranitar\n|-singleturn|p1a: Tyranitar|Protect\n|move|p1b: Excadrill|Earthquake|p2a: Dragapult|[spread] p2a\n|-activate|p1a: Tyranitar|move: Protect\n|-activate|p2b: Maushold|move: Protect\n|-damage|p2a: Dragapult|50/100\n|move|p2a: Dragapult|Will-O-Wisp|p1b: Excadrill\n|-status|p1b: Excadrill|brn\n|\n|-weather|Sandstorm|[upkeep]\n|-damage|p2a: Dragapult|44/100|[from] Sandstorm\n|-damage|p2b: Maushold|19/100|[from] Sandstorm\n|-damage|p1b: Excadrill|95/100 brn|[from] brn\n|upkeep\n|turn|3\n|-message|Yassin-M forfeited.\n|\n|win|Minezzzzz\n",
+  "uploadtime": 1776025349,
+  "views": 12,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": null,
+  "private": 0,
+  "password": null
+}

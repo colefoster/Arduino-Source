@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2581551177",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "gonegeb",
+    "limpcriticism"
+  ],
+  "log": "|j|\u2606gonegeb\n|j|\u2606limpcriticism\n|t:|1776010279\n|gametype|doubles\n|player|p1|gonegeb|corbeau|1050\n|player|p2|limpcriticism|1|1012\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Lucario, L50, M|\n|poke|p1|Umbreon, L50, M|\n|poke|p1|Arcanine, L50, F|\n|poke|p1|Ceruledge, L50, M|\n|poke|p1|Corviknight, L50, M|\n|poke|p1|Whimsicott, L50, F|\n|poke|p2|Hydreigon, L50, M|\n|poke|p2|Whimsicott, L50, M|\n|poke|p2|Typhlosion-Hisui, L50, F|\n|poke|p2|Farigiraf, L50, F|\n|poke|p2|Gardevoir, L50, F|\n|teampreview|4\n|\n|t:|1776010301\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Lucario|Lucario, L50, M|100/100\n|switch|p1b: Whimsicott|Whimsicott, L50, F, shiny|100/100\n|switch|p2a: Whimsicott|Whimsicott, L50, M|100/100\n|switch|p2b: Typhlosion|Typhlosion-Hisui, L50, F|100/100\n|turn|1\n|\n|t:|1776010321\n|switch|p1a: Ceruledge|Ceruledge, L50, M|100/100\n|move|p1b: Whimsicott|Taunt|p2a: Whimsicott\n|-start|p2a: Whimsicott|move: Taunt\n|cant|p2a: Whimsicott|move: Taunt|Sunny Day\n|move|p2b: Typhlosion|Eruption|p1b: Whimsicott|[spread] p1b\n|-start|p1a: Ceruledge|ability: Flash Fire\n|-supereffective|p1b: Whimsicott|1\n|-damage|p1b: Whimsicott|0 fnt\n|faint|p1b: Whimsicott\n|\n|upkeep\n|\n|t:|1776010332\n|switch|p1b: Umbreon|Umbreon, L50, M, shiny|100/100\n|turn|2\n|\n|t:|1776010355\n|switch|p2a: Gardevoir|Gardevoir, L50, F|100/100\n|move|p2b: Typhlosion|Eruption|p1a: Ceruledge|[spread] p1b\n|-immune|p1a: Ceruledge|[from] ability: Flash Fire\n|-damage|p1b: Umbreon|66/100\n|move|p1a: Ceruledge|Bitter Blade|p2a: Gardevoir\n|-damage|p2a: Gardevoir|5/100\n|move|p1b: Umbreon|Snarl|p2b: Typhlosion|[spread] p2a,p2b\n|-supereffective|p2b: Typhlosion|1\n|-damage|p2a: Gardevoir|0 fnt\n|-damage|p2b: Typhlosion|76/100\n|-unboost|p2b: Typhlosion|spa|1\n|faint|p2a: Gardevoir\n|\n|-heal|p1b: Umbreon|72/100|[from] item: Leftovers\n|upkeep\n|-message|limpcriticism forfeited.\n|\n|win|gonegeb\n|raw|gonegeb's rating: 1050 &rarr; <strong>1079</strong><br />(+29 for winning)\n|raw|limpcriticism's rating: 1012 &rarr; <strong>1001</strong><br />(-11 for losing)\n|l|\u2606limpcriticism\n|player|p2|\n",
+  "uploadtime": 1776010375,
+  "views": 15,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1001,
+  "private": 0,
+  "password": null
+}

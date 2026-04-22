@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2585449906",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "OwlsGoHooot",
+    "Doctor Victreebel"
+  ],
+  "log": "|j|\u2606OwlsGoHooot\n|j|\u2606Doctor Victreebel\n|t:|1776348090\n|gametype|doubles\n|player|p1|OwlsGoHooot|1|1182\n|player|p2|Doctor Victreebel|265|1225\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Aerodactyl, L50, M|\n|poke|p1|Gengar, L50, M|\n|poke|p1|Tauros-Paldea-Blaze, L50, M|\n|poke|p1|Weavile, L50, M|\n|poke|p1|Rotom-Wash, L50|\n|poke|p1|Garchomp, L50, M|\n|poke|p2|Lopunny, L50, F|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Victreebel, L50, M|\n|poke|p2|Torkoal, L50, M|\n|poke|p2|Glalie, L50, M|\n|poke|p2|Farigiraf, L50, F|\n|teampreview|4\n|\n|t:|1776348144\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Weavile|Weavile, L50, M|100/100\n|switch|p1b: Tauros|Tauros-Paldea-Blaze, L50, M|100/100\n|switch|p2a: Glalie|Glalie, L50, M|100/100\n|switch|p2b: Farigiraf|Farigiraf, L50, F|100/100\n|-ability|p1b: Tauros|Intimidate|boost\n|-unboost|p2a: Glalie|atk|1\n|-unboost|p2b: Farigiraf|atk|1\n|-ability|p1a: Weavile|Pressure\n|turn|1\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Doctor Victreebel)\n|\n|t:|1776348169\n|detailschange|p2a: Glalie|Glalie-Mega, L50, M\n|-mega|p2a: Glalie|Glalie|Glalitite\n|move|p2b: Farigiraf|Protect|p2b: Farigiraf\n|-singleturn|p2b: Farigiraf|Protect\n|move|p1b: Tauros|Raging Bull|p2a: Glalie\n|-supereffective|p2a: Glalie|1\n|-damage|p2a: Glalie|0 fnt\n|faint|p2a: Glalie\n|move|p1a: Weavile|Taunt|p2b: Farigiraf\n|-activate|p2b: Farigiraf|move: Protect\n|\n|upkeep\n|-message|Doctor Victreebel forfeited.\n|\n|win|OwlsGoHooot\n|raw|OwlsGoHooot's rating: 1182 &rarr; <strong>1210</strong><br />(+28 for winning)\n|raw|Doctor Victreebel's rating: 1225 &rarr; <strong>1197</strong><br />(-28 for losing)\n|l|\u2606Doctor Victreebel\n|player|p2|\n",
+  "uploadtime": 1776348184,
+  "views": 28,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1197,
+  "private": 0,
+  "password": null
+}

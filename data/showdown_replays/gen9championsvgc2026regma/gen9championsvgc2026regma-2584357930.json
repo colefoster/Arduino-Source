@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584357930",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Galarian Tentacool",
+    "Pindara"
+  ],
+  "log": "|j|\u2606Galarian Tentacool\n|j|\u2606Pindara\n|t:|1776254573\n|gametype|doubles\n|player|p1|Galarian Tentacool|102|1051\n|player|p2|Pindara|170|1127\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Glalie, L50, F|\n|poke|p1|Whimsicott, L50, F|\n|poke|p1|Gardevoir, L50, M|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Rotom-Wash, L50|\n|poke|p1|Dragonite, L50, M|\n|poke|p2|Archaludon, L50, F|\n|poke|p2|Dragonite, L50, F|\n|poke|p2|Pelipper, L50, F|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Kingambit, L50, M|\n|teampreview|4\nGalarian Tentacool rejected open team sheets.\n|\n|t:|1776254601\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Whimsicott|Whimsicott, L50, F|100/100\n|switch|p1b: Gardevoir|Gardevoir, L50, M|100/100\n|switch|p2a: Pelipper|Pelipper, L50, F|100/100\n|switch|p2b: Sneasler|Sneasler, L50, M|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p2a: Pelipper\n|turn|1\n|\n|t:|1776254611\n|move|p2b: Sneasler|Fake Out|p1a: Whimsicott\n|-damage|p1a: Whimsicott|82/100\n|cant|p1a: Whimsicott|flinch\n|move|p2a: Pelipper|Hurricane|p1a: Whimsicott\n|-supereffective|p1a: Whimsicott|1\n|-damage|p1a: Whimsicott|0 fnt\n|faint|p1a: Whimsicott\n|move|p1b: Gardevoir|Imprison|p1b: Gardevoir\n|-start|p1b: Gardevoir|move: Imprison\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|\n|t:|1776254615\n|switch|p1a: Glalie|Glalie, L50, F|100/100\n|turn|2\n|\n|t:|1776254629\n|detailschange|p1a: Glalie|Glalie-Mega, L50, F\n|-mega|p1a: Glalie|Glalie|Glalitite\n|move|p1b: Gardevoir|Helping Hand|p1a: Glalie\n|-singleturn|p1a: Glalie|Helping Hand|[of] p1b: Gardevoir\n|move|p2a: Pelipper|Wide Guard|p2a: Pelipper\n|-singleturn|p2a: Pelipper|Wide Guard\n|move|p2b: Sneasler|Dire Claw|p1b: Gardevoir\n|-supereffective|p1b: Gardevoir|1\n|-damage|p1b: Gardevoir|17/100\n|-status|p1b: Gardevoir|slp\n|move|p1a: Glalie|Explosion|p2a: Pelipper|[spread] \n|-activate|p2a: Pelipper|move: Wide Guard\n|-activate|p2b: Sneasler|move: Wide Guard\n|-activate|p1b: Gardevoir|ability: Telepathy\n|faint|p1a: Glalie\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|-message|Galarian Tentacool forfeited.\n|\n|win|Pindara\n|raw|Galarian Tentacool's rating: 1051 &rarr; <strong>1037</strong><br />(-14 for losing)\n|raw|Pindara's rating: 1127 &rarr; <strong>1147</strong><br />(+20 for winning)\n|l|\u2606Galarian Tentacool\n|player|p1|\n",
+  "uploadtime": 1776254655,
+  "views": 40,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1037,
+  "private": 0,
+  "password": null
+}

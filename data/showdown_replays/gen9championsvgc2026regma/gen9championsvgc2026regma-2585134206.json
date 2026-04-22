@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2585134206",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Hao_poke",
+    "Terypagos"
+  ],
+  "log": "|j|\u2606Hao_poke\n|j|\u2606Terypagos\n|t:|1776315871\n|gametype|doubles\n|player|p1|Hao_poke|1|1396\n|player|p2|Terypagos|turo-ai|1411\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Sylveon, L50, F|\n|poke|p1|Primarina, L50, F|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Golurk, L50|\n|poke|p1|Oranguru, L50, M|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Aerodactyl, L50, F|\n|poke|p2|Garchomp, L50, F|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Delphox, L50, M|\n|poke|p2|Kingambit, L50, M|\n|teampreview|4\n|\n|t:|1776315906\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Golurk|Golurk, L50|100/100\n|switch|p1b: Oranguru|Oranguru, L50, M|100/100\n|switch|p2a: Floette|Floette-Eternal, L50, F|100/100\n|switch|p2b: Kingambit|Kingambit, L50, M|100/100\n|turn|1\n|\n|t:|1776315929\n|detailschange|p1a: Golurk|Golurk-Mega, L50\n|-mega|p1a: Golurk|Golurk|Golurkite\n|move|p2a: Floette|Light of Ruin|p1a: Golurk\n|-damage|p1a: Golurk|35/100\n|-damage|p2a: Floette|57/100|[from] Recoil\n|move|p2b: Kingambit|Kowtow Cleave|p1b: Oranguru\n|-supereffective|p1b: Oranguru|1\n|-damage|p1b: Oranguru|9/100\n|-enditem|p1b: Oranguru|Sitrus Berry|[eat]\n|-heal|p1b: Oranguru|34/100|[from] item: Sitrus Berry\n|move|p1a: Golurk|Headlong Rush|p2b: Kingambit\n|-supereffective|p2b: Kingambit|1\n|-enditem|p2b: Kingambit|Shuca Berry|[eat]\n|-enditem|p2b: Kingambit|Shuca Berry|[weaken]\n|-damage|p2b: Kingambit|41/100\n|-unboost|p1a: Golurk|def|1\n|-unboost|p1a: Golurk|spd|1\n|move|p1b: Oranguru|Trick Room|p1b: Oranguru\n|-fieldstart|move: Trick Room|[of] p1b: Oranguru\n|\n|upkeep\n|turn|2\n|\n|t:|1776315947\n|move|p1b: Oranguru|Protect|p1b: Oranguru\n|-singleturn|p1b: Oranguru|Protect\n|move|p2a: Floette|Protect|p2a: Floette\n|-singleturn|p2a: Floette|Protect\n|move|p2b: Kingambit|Sucker Punch|p1a: Golurk\n|-supereffective|p1a: Golurk|1\n|-damage|p1a: Golurk|0 fnt\n|faint|p1a: Golurk\n|\n|upkeep\n|\n|t:|1776315956\n|switch|p1a: Sylveon|Sylveon, L50, F|100/100\n|turn|3\n|j| huhyuhyuhyuh\n|\n|t:|1776315965\n|switch|p2a: Sneasler|Sneasler, L50, F, shiny|100/100\n|move|p2b: Kingambit|Iron Head|p1a: Sylveon\n|-supereffective|p1a: Sylveon|1\n|-damage|p1a: Sylveon|0 fnt\n|faint|p1a: Sylveon\n|move|p1b: Oranguru|Instruct|p1: Sylveon|[notarget]\n|-fail|p1b: Oranguru\n|\n|upkeep\n|-message|Hao_poke forfeited.\n|\n|win|Terypagos\n|raw|Hao_poke's rating: 1396 &rarr; <strong>1377</strong><br />(-19 for losing)\n|raw|Terypagos's rating: 1411 &rarr; <strong>1430</strong><br />(+19 for winning)\n|l|\u2606Hao_poke\n|player|p1|\n",
+  "uploadtime": 1776315980,
+  "views": 48,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1377,
+  "private": 0,
+  "password": null
+}

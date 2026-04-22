@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2587812237",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "vyuyuivyio",
+    "Chubs Mcdubs"
+  ],
+  "log": "|j|\u2606vyuyuivyio\n|j|\u2606Chubs Mcdubs\n|t:|1776566508\n|gametype|doubles\n|player|p1|vyuyuivyio|265|1067\n|player|p2|Chubs Mcdubs|1|1000\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Archaludon, L50, M, shiny|\n|poke|p1|Pelipper, L50, M, shiny|\n|poke|p1|Sinistcha, L50, shiny|\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Hawlucha, L50, M, shiny|\n|poke|p1|Kingambit, L50, M, shiny|\n|poke|p2|Absol, L50, M|\n|poke|p2|Sableye, L50, F|\n|poke|p2|Whimsicott, L50, F|\n|poke|p2|Aerodactyl, L50, F|\n|poke|p2|Runerigus, L50, M|\n|poke|p2|Medicham, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Chubs Mcdubs)\n|\n|t:|1776566523\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Archaludon|Archaludon, L50, M, shiny|100/100\n|switch|p1b: Pelipper|Pelipper, L50, M, shiny|100/100\n|switch|p2a: Sableye|Sableye, L50, F|100/100\n|switch|p2b: Absol|Absol, L50, M|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p1b: Pelipper\n|turn|1\n|\n|t:|1776566540\n|move|p1b: Pelipper|Protect|p1b: Pelipper\n|-singleturn|p1b: Pelipper|Protect\n|move|p2a: Sableye|Will-O-Wisp|p2b: Absol\n|-status|p2b: Absol|brn\n|move|p2b: Absol|Facade|p1b: Pelipper\n|-activate|p1b: Pelipper|move: Protect\n|move|p1a: Archaludon|Electro Shot||[still]\n|-prepare|p1a: Archaludon|Electro Shot\n|-boost|p1a: Archaludon|spa|1\n|-anim|p1a: Archaludon|Electro Shot|p2b: Absol\n|-damage|p2b: Absol|0 fnt\n|faint|p2b: Absol\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|-message|Chubs Mcdubs forfeited.\n|\n|win|vyuyuivyio\n|raw|vyuyuivyio's rating: 1067 &rarr; <strong>1091</strong><br />(+24 for winning)\n|raw|Chubs Mcdubs's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|l|\u2606Chubs Mcdubs\n|player|p2|\n",
+  "uploadtime": 1776566557,
+  "views": 13,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

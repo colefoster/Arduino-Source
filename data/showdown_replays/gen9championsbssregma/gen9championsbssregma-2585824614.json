@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2585824614",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "hanyouriron",
+    "TrainerXay"
+  ],
+  "log": "|j|\u2606hanyouriron\n|j|\u2606TrainerXay\n|t:|1776373388\n|gametype|singles\n|player|p1|hanyouriron|twins-gen4|1146\n|player|p2|TrainerXay|hilbert-wonderlauncher|1169\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Kangaskhan, L50, F|\n|poke|p1|Volcarona, L50, M|\n|poke|p1|Aggron, L50, F|\n|poke|p1|Gallade, L50, M|\n|poke|p1|Empoleon, L50, M|\n|poke|p1|Dragapult, L50, M|\n|poke|p2|Meowscarada, L50, M|\n|poke|p2|Lopunny, L50, F|\n|poke|p2|Sableye, L50, M|\n|poke|p2|Slowking-Galar, L50, F|\n|poke|p2|Raichu-Alola, L50, F|\n|poke|p2|Aegislash, L50, F|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by TrainerXay)\n|inactive|TrainerXay has 60 seconds left.\n|\n|t:|1776373441\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Gallade|Gallade, L50, M|100/100\n|switch|p2a: Lopunny|Lopunny, L50, F|100/100\n|turn|1\n|\n|t:|1776373445\n|detailschange|p2a: Lopunny|Lopunny-Mega, L50, F\n|-mega|p2a: Lopunny|Lopunny|Lopunnite\n|move|p2a: Lopunny|Fake Out|p1a: Gallade\n|-damage|p1a: Gallade|74/100\n|cant|p1a: Gallade|flinch\n|\n|upkeep\n|turn|2\n|inactive|TrainerXay has 30 seconds left.\n|inactive|TrainerXay has 20 seconds left.\n|-activate|p1a: Gallade|item: Quick Claw\n|\n|t:|1776373484\n|move|p1a: Gallade|Sacred Sword|p2a: Lopunny\n|-supereffective|p2a: Lopunny|1\n|-crit|p2a: Lopunny\n|-damage|p2a: Lopunny|0 fnt\n|faint|p2a: Lopunny\n|\n|upkeep\n|c|\u2606TrainerXay|Really gng?\n|c|\u2606TrainerXay|Quick claw crit\n|n|!TrainerXay|trainerxay\n|inactive|TrainerXay has 30 seconds left.\n|inactive|TrainerXay has 20 seconds left.\n|-message|TrainerXay forfeited.\n|\n|win|hanyouriron\n",
+  "uploadtime": 1776373508,
+  "views": 3,
+  "formatid": "gen9championsbssregma",
+  "rating": null,
+  "private": 0,
+  "password": null
+}

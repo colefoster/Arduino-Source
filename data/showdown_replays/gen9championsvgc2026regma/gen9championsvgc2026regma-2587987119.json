@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2587987119",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Zen4",
+    "bjhhrtr"
+  ],
+  "log": "|j|\u2606Zen4\n|j|\u2606bjhhrtr\n|t:|1776589120\n|gametype|doubles\n|player|p1|Zen4|li|1069\n|player|p2|bjhhrtr|1|1067\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Froslass, L50, F, shiny|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Rotom-Wash, L50, shiny|\n|poke|p1|Garchomp, L50, F|\n|poke|p2|Meganium, L50, F|\n|poke|p2|Archaludon, L50, M|\n|poke|p2|Aerodactyl, L50, M|\n|poke|p2|Typhlosion-Hisui, L50, F|\n|poke|p2|Tauros-Paldea-Aqua, L50, M|\n|poke|p2|Kangaskhan, L50, F|\n|teampreview|4\n|\n|t:|1776589188\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Sneasler|Sneasler, L50, M|100/100\n|switch|p1b: Garchomp|Garchomp, L50, F|100/100\n|switch|p2a: Aerodactyl|Aerodactyl, L50, M|100/100\n|switch|p2b: Archaludon|Archaludon, L50, M|100/100\n|-ability|p2a: Aerodactyl|Unnerve\n|turn|1\n|\n|t:|1776589216\n|move|p2a: Aerodactyl|Protect|p2a: Aerodactyl\n|-singleturn|p2a: Aerodactyl|Protect\n|move|p2b: Archaludon|Protect|p2b: Archaludon\n|-singleturn|p2b: Archaludon|Protect\n|move|p1a: Sneasler|Fake Out|p2a: Aerodactyl\n|-activate|p2a: Aerodactyl|move: Protect\n|move|p1b: Garchomp|Rock Slide|p2b: Archaludon|[spread] \n|-activate|p2a: Aerodactyl|move: Protect\n|-activate|p2b: Archaludon|move: Protect\n|\n|upkeep\n|turn|2\n|\n|t:|1776589243\n|move|p2a: Aerodactyl|Dual Wingbeat|p1a: Sneasler\n|-supereffective|p1a: Sneasler|1\n|-damage|p1a: Sneasler|45/100\n|-supereffective|p1a: Sneasler|1\n|-damage|p1a: Sneasler|0 fnt\n|faint|p1a: Sneasler\n|-hitcount|p1: Sneasler|2\n|move|p2b: Archaludon|Dragon Pulse|p1b: Garchomp\n|-supereffective|p1b: Garchomp|1\n|-damage|p1b: Garchomp|0 fnt\n|faint|p1b: Garchomp\n|\n|upkeep\n|\n|t:|1776589254\n|switch|p1a: Froslass|Froslass, L50, F, shiny|100/100\n|switch|p1b: Rotom|Rotom-Wash, L50, shiny|100/100\n|turn|3\n|-message|Zen4 forfeited.\n|\n|win|bjhhrtr\n|raw|Zen4's rating: 1069 &rarr; <strong>1049</strong><br />(-20 for losing)\n|raw|bjhhrtr's rating: 1067 &rarr; <strong>1097</strong><br />(+30 for winning)\n|l|\u2606Zen4\n|player|p1|\n",
+  "uploadtime": 1776589304,
+  "views": 10,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1049,
+  "private": 0,
+  "password": null
+}

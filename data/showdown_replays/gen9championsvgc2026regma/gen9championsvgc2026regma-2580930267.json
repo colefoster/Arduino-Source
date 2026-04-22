@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2580930267",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "STRONGEUW",
+    "marioman6444"
+  ],
+  "log": "|j|\u2606STRONGEUW\n|j|\u2606marioman6444\n|t:|1775944271\n|gametype|doubles\n|player|p1|STRONGEUW|266|1014\n|player|p2|marioman6444|hoopster|1040\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Pelipper, L50, M|\n|poke|p1|Skarmory, L50, M|\n|poke|p1|Lucario, L50, F|\n|poke|p1|Raichu, L50, M|\n|poke|p1|Farigiraf, L50, F|\n|poke|p2|Slowbro, L50, F|\n|poke|p2|Pikachu, L50, F|\n|poke|p2|Oranguru, L50, F|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Sableye, L50, F|\n|poke|p2|Crabominable, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by marioman6444)\n|inactive|STRONGEUW has 60 seconds left.\n|inactive|marioman6444 has 60 seconds left.\n|inactive|marioman6444 has 30 seconds left.\n|inactive|marioman6444 has 20 seconds left.\n|inactive|marioman6444 has 15 seconds left.\n|inactive|marioman6444 has 10 seconds left.\n|inactive|marioman6444 has 5 seconds left.\n|\n|t:|1775944359\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Pelipper|Pelipper, L50, M|100/100\n|switch|p1b: Raichu|Raichu, L50, M|100/100\n|switch|p2a: Sableye|Sableye, L50, F|100/100\n|switch|p2b: Oranguru|Oranguru, L50, F, shiny|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p1a: Pelipper\n|turn|1\n|inactive|marioman6444 has 30 seconds left.\n|\n|t:|1775944390\n|move|p2a: Sableye|Fake Out|p1b: Raichu\n|-damage|p1b: Raichu|87/100\n|cant|p1b: Raichu|flinch\n|move|p1a: Pelipper|Tailwind|p1a: Pelipper\n|-sidestart|p1: STRONGEUW|move: Tailwind\n|move|p2b: Oranguru|Trick Room|p2b: Oranguru\n|-fieldstart|move: Trick Room|[of] p2b: Oranguru\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|turn|2\n|-message|STRONGEUW forfeited.\n|\n|win|marioman6444\n|raw|STRONGEUW's rating: 1014 &rarr; <strong>1003</strong><br />(-11 for losing)\n|raw|marioman6444's rating: 1040 &rarr; <strong>1071</strong><br />(+31 for winning)\n|l|\u2606STRONGEUW\n|player|p1|\n",
+  "uploadtime": 1775944402,
+  "views": 9,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1003,
+  "private": 0,
+  "password": null
+}

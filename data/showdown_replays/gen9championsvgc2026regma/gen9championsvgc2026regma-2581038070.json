@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2581038070",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Cypresskeys",
+    "Avqcado"
+  ],
+  "log": "|j|\u2606Cypresskeys\n|j|\u2606Avqcado\n|t:|1775954035\n|gametype|doubles\n|player|p1|Cypresskeys|170|1032\n|player|p2|Avqcado|psychic-gen4|1040\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Meowstic, L50, M|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Slowbro, L50, M|\n|poke|p1|Alakazam, L50, F|\n|poke|p1|Lopunny, L50, M|\n|poke|p1|Incineroar, L50, F|\n|poke|p2|Whimsicott, L50, F|\n|poke|p2|Sandaconda, L50, M|\n|poke|p2|Arcanine-Hisui, L50, F|\n|poke|p2|Farigiraf, L50, M|\n|poke|p2|Corviknight, L50, F|\n|poke|p2|Tyranitar, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Cypresskeys)\n|\n|t:|1775954092\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Meowstic|Meowstic, L50, M|100/100\n|switch|p1b: Lopunny|Lopunny, L50, M|100/100\n|switch|p2a: Farigiraf|Farigiraf, L50, M|100/100\n|switch|p2b: Sandaconda|Sandaconda, L50, M|100/100\n|turn|1\n|inactive|Cypresskeys has 30 seconds left.\n|\n|t:|1775954119\n|switch|p1b: Alakazam|Alakazam, L50, F|100/100\n|move|p1a: Meowstic|Psychic Terrain|p1a: Meowstic\n|-fieldstart|move: Psychic Terrain\n|move|p2b: Sandaconda|Glare|p1b: Alakazam\n|-status|p1b: Alakazam|par\n|move|p2a: Farigiraf|Shadow Ball|p1a: Meowstic\n|-supereffective|p1a: Meowstic|1\n|-damage|p1a: Meowstic|53/100\n|\n|upkeep\n|turn|2\n|\n|t:|1775954139\n|detailschange|p1a: Meowstic|Meowstic-M-Mega, L50, M\n|-mega|p1a: Meowstic|Meowstic|Meowsticite\n|-ability|p1a: Meowstic|Sand Veil|Trace|[from] ability: Trace|[of] p2b: Sandaconda\n|move|p1a: Meowstic|Expanding Force|p2a: Farigiraf|[spread] p2a,p2b\n|-resisted|p2a: Farigiraf|1\n|-damage|p2a: Farigiraf|76/100\n|-damage|p2b: Sandaconda|1/100\n|cant|p1b: Alakazam|par\n|move|p2b: Sandaconda|Coil|p2b: Sandaconda\n|-boost|p2b: Sandaconda|atk|1\n|-boost|p2b: Sandaconda|def|1\n|-boost|p2b: Sandaconda|accuracy|1\n|move|p2a: Farigiraf|Trick Room|p2a: Farigiraf\n|-fieldstart|move: Trick Room|[of] p2a: Farigiraf\n|\n|upkeep\n|turn|3\n|-message|Cypresskeys forfeited.\n|\n|win|Avqcado\n|raw|Cypresskeys's rating: 1032 &rarr; <strong>1018</strong><br />(-14 for losing)\n|raw|Avqcado's rating: 1040 &rarr; <strong>1073</strong><br />(+33 for winning)\n|l|\u2606Cypresskeys\n|player|p1|\n|c|\u2606Avqcado|GG\n",
+  "uploadtime": 1775954165,
+  "views": 18,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1018,
+  "private": 0,
+  "password": null
+}

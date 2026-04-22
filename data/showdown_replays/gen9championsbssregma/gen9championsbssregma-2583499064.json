@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2583499064",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "Zenverak",
+    "Atatwe"
+  ],
+  "log": "|j|\u203dZenverak\n|j|\u2606Atatwe\n|t:|1776179509\n|gametype|singles\n|player|p1|Zenverak|265|1063\n|player|p2|Atatwe|2|1207\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Starmie, L50|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Aerodactyl, L50, M|\n|poke|p1|Orthworm, L50, M|\n|poke|p1|Araquanid, L50, M|\n|poke|p2|Polteageist, L50|\n|poke|p2|Glimmora, L50, M|\n|poke|p2|Dragapult, L50, M|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Skarmory, L50, F|\n|poke|p2|Greninja-*, L50, M|\n|teampreview|3\n|\n|t:|1776179524\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Aerodactyl|Aerodactyl, L50, M|100/100\n|switch|p2a: Polteageist|Polteageist, L50|100/100\n|turn|1\n|\n|t:|1776179533\n|switch|p2a: Skarmory|Skarmory, L50, F|100/100\n|move|p1a: Aerodactyl|Taunt|p2a: Skarmory\n|-start|p2a: Skarmory|move: Taunt\n|\n|upkeep\n|turn|2\n|\n|t:|1776179541\n|move|p1a: Aerodactyl|Rock Slide|p2a: Skarmory\n|-damage|p2a: Skarmory|66/100\n|-ability|p2a: Skarmory|Weak Armor|boost\n|-unboost|p2a: Skarmory|def|1\n|-boost|p2a: Skarmory|spe|2\n|move|p2a: Skarmory|Iron Head|p1a: Aerodactyl\n|-supereffective|p1a: Aerodactyl|1\n|-enditem|p1a: Aerodactyl|Focus Sash\n|-damage|p1a: Aerodactyl|1/100\n|\n|upkeep\n|turn|3\n|\n|t:|1776179556\n|switch|p1a: Araquanid|Araquanid, L50, M|100/100\n|move|p2a: Skarmory|Iron Head|p1a: Araquanid\n|-resisted|p1a: Araquanid|1\n|-damage|p1a: Araquanid|84/100\n|\n|-end|p2a: Skarmory|move: Taunt\n|upkeep\n|turn|4\n|\n|t:|1776179563\n|detailschange|p2a: Skarmory|Skarmory-Mega, L50, F\n|-mega|p2a: Skarmory|Skarmory|Skarmorite\n|move|p2a: Skarmory|Brave Bird|p1a: Araquanid\n|-supereffective|p1a: Araquanid|1\n|-damage|p1a: Araquanid|0 fnt\n|faint|p1a: Araquanid\n|-damage|p2a: Skarmory|38/100|[from] Recoil\n|\n|upkeep\n|\n|t:|1776179570\n|switch|p1a: Floette|Floette-Eternal, L50, F|100/100\n|turn|5\n|\n|t:|1776179575\n|detailschange|p1a: Floette|Floette-Mega, L50, F\n|-mega|p1a: Floette|Floette|Floettite\n|-ability|p1a: Floette|Fairy Aura\n|move|p2a: Skarmory|Iron Head|p1a: Floette\n|-supereffective|p1a: Floette|1\n|-damage|p1a: Floette|0 fnt\n|faint|p1a: Floette\n|\n|upkeep\n|-message|Zenverak forfeited.\n|\n|win|Atatwe\n|raw|Zenverak's rating: 1063 &rarr; <strong>1051</strong><br />(-12 for losing)\n|raw|Atatwe's rating: 1207 &rarr; <strong>1222</strong><br />(+15 for winning)\n",
+  "uploadtime": 1776179588,
+  "views": 4,
+  "formatid": "gen9championsbssregma",
+  "rating": 1051,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2583283969",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "fletchyfletchy",
+    "applepie25508"
+  ],
+  "log": "|j|\u2606fletchyfletchy\n|j|\u2606applepie25508\n|t:|1776163042\n|gametype|singles\n|player|p1|fletchyfletchy|liko|1034\n|player|p2|applepie25508|169|1103\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Lucario, L50, F|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Meowscarada, L50, M|\n|poke|p1|Aegislash, L50, F|\n|poke|p1|Charizard, L50, M|\n|poke|p1|Ninetales-Alola, L50, F|\n|poke|p2|Delphox, L50, F|\n|poke|p2|Corviknight, L50, M|\n|poke|p2|Meowscarada, L50, F|\n|poke|p2|Toxapex, L50, F|\n|poke|p2|Gyarados, L50, M|\n|poke|p2|Garchomp, L50, M|\n|teampreview|3\n|\n|t:|1776163073\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Basculegion|Basculegion, L50, M|100/100\n|switch|p2a: Meowscarada|Meowscarada, L50, F|100/100\n|turn|1\n|\n|t:|1776163085\n|move|p1a: Basculegion|Flip Turn|p2a: Meowscarada\n|-resisted|p2a: Meowscarada|1\n|-damage|p2a: Meowscarada|65/100\n|\n|t:|1776163089\n|switch|p1a: Charizard|Charizard, L50, M|100/100|[from] Flip Turn\n|move|p2a: Meowscarada|Flower Trick|p1a: Charizard\n|-start|p2a: Meowscarada|typechange|Grass|[from] ability: Protean\n|-resisted|p1a: Charizard|2\n|-crit|p1a: Charizard\n|-damage|p1a: Charizard|84/100\n|\n|upkeep\n|turn|2\n|\n|t:|1776163101\n|switch|p2a: Gyarados|Gyarados, L50, M|100/100\n|detailschange|p1a: Charizard|Charizard-Mega-X, L50, M\n|-mega|p1a: Charizard|Charizard|Charizardite X\n|move|p1a: Charizard|Dragon Dance|p1a: Charizard\n|-boost|p1a: Charizard|atk|1\n|-boost|p1a: Charizard|spe|1\n|\n|upkeep\n|turn|3\n|\n|t:|1776163124\n|detailschange|p2a: Gyarados|Gyarados-Mega, L50, M\n|-mega|p2a: Gyarados|Gyarados|Gyaradosite\n|-ability|p2a: Gyarados|Mold Breaker\n|move|p1a: Charizard|Dragon Claw|p2a: Gyarados\n|-crit|p2a: Gyarados\n|-damage|p2a: Gyarados|0 fnt\n|faint|p2a: Gyarados\n|\n|upkeep\n|\n|t:|1776163132\n|switch|p2a: Corviknight|Corviknight, L50, M|100/100\n|turn|4\n|-message|applepie25508 forfeited.\n|\n|win|fletchyfletchy\n|raw|fletchyfletchy's rating: 1034 &rarr; <strong>1076</strong><br />(+42 for winning)\n|raw|applepie25508's rating: 1103 &rarr; <strong>1073</strong><br />(-30 for losing)\n",
+  "uploadtime": 1776163140,
+  "views": 2,
+  "formatid": "gen9championsbssregma",
+  "rating": 1073,
+  "private": 0,
+  "password": null
+}

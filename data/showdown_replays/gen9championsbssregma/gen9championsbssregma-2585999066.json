@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2585999066",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "fletchyfletchy",
+    "haya7taka"
+  ],
+  "log": "|j|\u2606fletchyfletchy\n|j|\u2606haya7taka\n|t:|1776388917\n|gametype|singles\n|player|p1|fletchyfletchy|liko|1090\n|player|p2|haya7taka|169|1192\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Lopunny, L50, F|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Meowscarada, L50, M|\n|poke|p1|Aegislash, L50, M|\n|poke|p1|Charizard, L50, M|\n|poke|p1|Rotom-Wash, L50|\n|poke|p2|Aerodactyl, L50, F|\n|poke|p2|Gyarados, L50, M|\n|poke|p2|Lucario, L50, M|\n|poke|p2|Tinkaton, L50, F|\n|poke|p2|Mimikyu, L50, M|\n|poke|p2|Volcarona, L50, F|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by haya7taka)\n|\n|t:|1776388948\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Lopunny|Lopunny, L50, F|100/100\n|switch|p2a: Tinkaton|Tinkaton, L50, F|100/100\n|-ability|p2a: Tinkaton|Mold Breaker\n|turn|1\n|inactive|fletchyfletchy has 30 seconds left.\n|\n|t:|1776388979\n|detailschange|p1a: Lopunny|Lopunny-Mega, L50, F\n|-mega|p1a: Lopunny|Lopunny|Lopunnite\n|move|p1a: Lopunny|Fake Out|p2a: Tinkaton\n|-resisted|p2a: Tinkaton|1\n|-damage|p2a: Tinkaton|88/100\n|cant|p2a: Tinkaton|flinch\n|\n|upkeep\n|turn|2\n|\n|t:|1776388989\n|move|p1a: Lopunny|Close Combat|p2a: Tinkaton\n|-damage|p2a: Tinkaton|20/100\n|-unboost|p1a: Lopunny|def|1\n|-unboost|p1a: Lopunny|spd|1\n|move|p2a: Tinkaton|Rock Tomb|p1a: Lopunny\n|-resisted|p1a: Lopunny|1\n|-damage|p1a: Lopunny|87/100\n|-unboost|p1a: Lopunny|spe|1\n|\n|upkeep\n|turn|3\n|\n|t:|1776389008\n|switch|p1a: Rotom|Rotom-Wash, L50|100/100\n|move|p2a: Tinkaton|Stealth Rock|p1a: Rotom\n|-sidestart|p1: fletchyfletchy|move: Stealth Rock\n|\n|upkeep\n|turn|4\n|\n|t:|1776389016\n|move|p2a: Tinkaton|Rock Tomb|p1a: Rotom\n|-damage|p1a: Rotom|90/100\n|-unboost|p1a: Rotom|spe|1\n|move|p1a: Rotom|Volt Switch|p2a: Tinkaton\n|-damage|p2a: Tinkaton|0 fnt\n|faint|p2a: Tinkaton\n|\n|t:|1776389021\n|switch|p1a: Lopunny|Lopunny-Mega, L50, F|87/100|[from] Volt Switch\n|-damage|p1a: Lopunny|81/100|[from] Stealth Rock\n|\n|upkeep\n|\n|t:|1776389029\n|switch|p2a: Gyarados|Gyarados, L50, M|100/100\n|-ability|p2a: Gyarados|Intimidate|boost\n|-fail|p1a: Lopunny|unboost|Attack|[from] ability: Scrappy|[of] p1a: Lopunny\n|turn|5\n|\n|t:|1776389035\n|move|p1a: Lopunny|Fake Out|p2a: Gyarados\n|-damage|p2a: Gyarados|73/100\n|cant|p2a: Gyarados|flinch\n|\n|upkeep\n|turn|6\n|\n|t:|1776389044\n|move|p1a: Lopunny|Thunder Punch|p2a: Gyarados\n|-supereffective|p2a: Gyarados|2\n|-damage|p2a: Gyarados|0 fnt\n|faint|p2a: Gyarados\n|\n|upkeep\n|-message|haya7taka forfeited.\n|\n|win|fletchyfletchy\n|raw|fletchyfletchy's rating: 1090 &rarr; <strong>1124</strong><br />(+34 for winning)\n|raw|haya7taka's rating: 1192 &rarr; <strong>1160</strong><br />(-32 for losing)\n",
+  "uploadtime": 1776389050,
+  "views": 3,
+  "formatid": "gen9championsbssregma",
+  "rating": 1124,
+  "private": 0,
+  "password": null
+}

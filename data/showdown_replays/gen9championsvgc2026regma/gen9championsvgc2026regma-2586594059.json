@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586594059",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "ClutchTecco",
+    "Athlune"
+  ],
+  "log": "|j|\u2606ClutchTecco\n|j|\u2606Athlune\n|t:|1776445514\n|gametype|doubles\n|player|p1|ClutchTecco|gentleman-gen4|1161\n|player|p2|Athlune|pokemonrangerf-gen6|1137\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Delphox, L50, M|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Kingambit, L50, M|\n|poke|p2|Glimmora, L50, F|\n|poke|p2|Ninetales-Alola, L50, F|\n|poke|p2|Corviknight, L50, F|\n|poke|p2|Volcarona, L50, F|\n|poke|p2|Garchomp, L50, F|\n|poke|p2|Gyarados, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by ClutchTecco)\n|inactive|Athlune has 60 seconds left.\n|\n|t:|1776445554\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Delphox|Delphox, L50, M, shiny|100/100\n|switch|p1b: Incineroar|Incineroar, L50, M|100/100\n|switch|p2a: Glimmora|Glimmora, L50, F, shiny|100/100\n|switch|p2b: Gyarados|Gyarados, L50, F, shiny|100/100\n|-ability|p2b: Gyarados|Intimidate|boost\n|-unboost|p1a: Delphox|atk|1\n|-unboost|p1b: Incineroar|atk|1\n|turn|1\n|inactive|ClutchTecco has 30 seconds left.\n|\n|t:|1776445585\n|detailschange|p1a: Delphox|Delphox-Mega, L50, M, shiny\n|-mega|p1a: Delphox|Delphox|Delphoxite\n|move|p2a: Glimmora|Protect|p2a: Glimmora\n|-singleturn|p2a: Glimmora|Protect\n|move|p1b: Incineroar|Fake Out|p2b: Gyarados\n|-damage|p2b: Gyarados|92/100\n|move|p1a: Delphox|Psychic|p2b: Gyarados\n|-damage|p2b: Gyarados|38/100\n|cant|p2b: Gyarados|flinch\n|\n|upkeep\n|turn|2\n|inactive|ClutchTecco has 30 seconds left.\n|inactive|Athlune has 30 seconds left.\n|inactive|ClutchTecco has 20 seconds left.\n|inactive|Athlune has 20 seconds left.\n|\n|t:|1776445624\n|detailschange|p2a: Glimmora|Glimmora-Mega, L50, F, shiny\n|-mega|p2a: Glimmora|Glimmora|Glimmoranite\n|move|p1a: Delphox|Psychic|p2a: Glimmora\n|-supereffective|p2a: Glimmora|1\n|-damage|p2a: Glimmora|0 fnt\n|faint|p2a: Glimmora\n|move|p2b: Gyarados|Waterfall|p1a: Delphox\n|-supereffective|p1a: Delphox|1\n|-damage|p1a: Delphox|10/100\n|move|p1b: Incineroar|Parting Shot|p2b: Gyarados\n|-unboost|p2b: Gyarados|atk|1\n|-unboost|p2b: Gyarados|spa|1\n|-message|Athlune forfeited.\n|\n|win|ClutchTecco\n|raw|ClutchTecco's rating: 1161 &rarr; <strong>1184</strong><br />(+23 for winning)\n|raw|Athlune's rating: 1137 &rarr; <strong>1114</strong><br />(-23 for losing)\n|c|\u2606ClutchTecco|GG\n|l|\u2606Athlune\n|player|p2|\n",
+  "uploadtime": 1776445636,
+  "views": 22,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1114,
+  "private": 0,
+  "password": null
+}

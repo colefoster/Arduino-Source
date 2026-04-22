@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586608458",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "phuc2704",
+    "hvaloy"
+  ],
+  "log": "|j|\u2606phuc2704\n|j|\u2606hvaloy\n|t:|1776446482\n|gametype|doubles\n|player|p1|phuc2704|102|1167\n|player|p2|hvaloy|rocketgrunt|1150\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Tyranitar, L50, M|\n|poke|p1|Excadrill, L50, F|\n|poke|p1|Tauros-Paldea-Aqua, L50, M|\n|poke|p1|Dragapult, L50, M|\n|poke|p1|Ceruledge, L50, M|\n|poke|p1|Meowscarada, L50, F|\n|poke|p2|Hawlucha, L50, F|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Vanilluxe, L50, F|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Aerodactyl, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by hvaloy)\n|\n|t:|1776446516\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Tyranitar|Tyranitar, L50, M|100/100\n|switch|p1b: Ceruledge|Ceruledge, L50, M|100/100\n|switch|p2a: Vanilluxe|Vanilluxe, L50, F|100/100\n|switch|p2b: Hawlucha|Hawlucha, L50, F|100/100\n|-weather|Snowscape|[from] ability: Snow Warning|[of] p2a: Vanilluxe\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p1a: Tyranitar\n|turn|1\n|\n|t:|1776446532\n|detailschange|p2b: Hawlucha|Hawlucha-Mega, L50, F\n|-mega|p2b: Hawlucha|Hawlucha|Hawluchanite\n|move|p1a: Tyranitar|Protect|p1a: Tyranitar\n|-singleturn|p1a: Tyranitar|Protect\n|move|p2b: Hawlucha|Entrainment|p2a: Vanilluxe\n|-ability|p2a: Vanilluxe|No Guard|Snow Warning|[from] move: Entrainment|[of] p2b: Hawlucha\n|move|p2a: Vanilluxe|Sheer Cold|p1b: Ceruledge\n|-damage|p1b: Ceruledge|0 fnt\n|faint|p1b: Ceruledge\n|-ohko\n|\n|-weather|Sandstorm|[upkeep]\n|-damage|p2b: Hawlucha|95/100|[from] Sandstorm\n|-damage|p2a: Vanilluxe|94/100|[from] Sandstorm\n|upkeep\n|-message|phuc2704 forfeited.\n|\n|win|hvaloy\n|raw|phuc2704's rating: 1167 &rarr; <strong>1141</strong><br />(-26 for losing)\n|raw|hvaloy's rating: 1150 &rarr; <strong>1176</strong><br />(+26 for winning)\n|l|\u2606phuc2704\n|player|p1|\n|l|\u2606hvaloy\n|player|p2|\n|j|\u2606hvaloy\n|player|p2|hvaloy|rocketgrunt|\n",
+  "uploadtime": 1776446581,
+  "views": 20,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1141,
+  "private": 0,
+  "password": null
+}

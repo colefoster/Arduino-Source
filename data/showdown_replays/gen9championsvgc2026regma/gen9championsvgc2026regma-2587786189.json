@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2587786189",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "yanxi0312",
+    "treeshhhh"
+  ],
+  "log": "|j|\u2606yanxi0312\n|j|\u2606treeshhhh\n|t:|1776563867\n|gametype|doubles\n|player|p1|yanxi0312|hilbert-wonderlauncher|1234\n|player|p2|treeshhhh|169|1303\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Venusaur, L50, F|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Sneasler, L50, F|\n|poke|p1|Charizard, L50, M|\n|poke|p1|Aerodactyl, L50, F|\n|poke|p1|Garchomp, L50, M|\n|poke|p2|Lucario, L50, F|\n|poke|p2|Dragonite, L50, F|\n|poke|p2|Archaludon, L50, M|\n|poke|p2|Kingambit, L50, M|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Pelipper, L50, F|\n|teampreview|4\n|j| Sir Nester\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by yanxi0312)\nyanxi0312 rejected open team sheets.\n|inactive|yanxi0312 has 60 seconds left.\n|inactive|treeshhhh has 60 seconds left.\n|\n|t:|1776563910\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Garchomp|Garchomp, L50, M|100/100\n|switch|p1b: Charizard|Charizard, L50, M|100/100\n|switch|p2a: Basculegion|Basculegion, L50, M|100/100\n|switch|p2b: Archaludon|Archaludon, L50, M|100/100\n|turn|1\n|\n|t:|1776563932\n|detailschange|p1b: Charizard|Charizard-Mega-Y, L50, M\n|-mega|p1b: Charizard|Charizard|Charizardite Y\n|-weather|SunnyDay|[from] ability: Drought|[of] p1b: Charizard\n|move|p1a: Garchomp|Earthquake|p2b: Archaludon|[spread] p2a,p2b\n|-immune|p1b: Charizard\n|-supereffective|p2b: Archaludon|1\n|-damage|p2a: Basculegion|55/100\n|-damage|p2b: Archaludon|43/100\n|-ability|p2b: Archaludon|Stamina|boost\n|-boost|p2b: Archaludon|def|1\n|move|p2a: Basculegion|Flip Turn|p1a: Garchomp\n|-damage|p1a: Garchomp|83/100\n|-damage|p2a: Basculegion|43/100|[from] ability: Rough Skin|[of] p1a: Garchomp\n|\n|t:|1776563943\n|switch|p2a: Pelipper|Pelipper, L50, F|100/100|[from] Flip Turn\n|-weather|RainDance|[from] ability: Drizzle|[of] p2a: Pelipper\n|move|p1b: Charizard|Solar Beam||[still]\n|-prepare|p1b: Charizard|Solar Beam\n|move|p2b: Archaludon|Electro Shot||[still]\n|-prepare|p2b: Archaludon|Electro Shot\n|-boost|p2b: Archaludon|spa|1\n|-anim|p2b: Archaludon|Electro Shot|p1b: Charizard\n|-supereffective|p1b: Charizard|1\n|-damage|p1b: Charizard|0 fnt\n|faint|p1b: Charizard\n|\n|-weather|RainDance|[upkeep]\n|-heal|p2b: Archaludon|49/100|[from] item: Leftovers\n|upkeep\n|-message|yanxi0312 forfeited.\n|\n|win|treeshhhh\n|raw|yanxi0312's rating: 1234 &rarr; <strong>1214</strong><br />(-20 for losing)\n|raw|treeshhhh's rating: 1303 &rarr; <strong>1319</strong><br />(+16 for winning)\n|l|\u2606yanxi0312\n|player|p1|\n",
+  "uploadtime": 1776563959,
+  "views": 13,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1214,
+  "private": 0,
+  "password": null
+}

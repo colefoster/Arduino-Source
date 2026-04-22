@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586066184",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "tvini222555",
+    "Sunshine_Guy07"
+  ],
+  "log": "|j|\u2606tvini222555\n|j|\u2606Sunshine_Guy07\n|t:|1776395392\n|gametype|doubles\n|player|p1|tvini222555|1|1198\n|player|p2|Sunshine_Guy07|ethan|1218\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Charizard, L50, M|\n|poke|p1|Milotic, L50, F|\n|poke|p1|Sableye, L50, F|\n|poke|p1|Ninetales-Alola, L50, F|\n|poke|p1|Sneasler, L50, F|\n|poke|p1|Farigiraf, L50, F|\n|poke|p2|Victreebel, L50, F|\n|poke|p2|Morpeko, L50, M|\n|poke|p2|Torkoal, L50, F|\n|poke|p2|Farigiraf, L50, F|\n|poke|p2|Hatterene, L50, F|\n|poke|p2|Kleavor, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Sunshine_Guy07)\n|inactive|tvini222555 has 60 seconds left.\n|inactive|Sunshine_Guy07 has 60 seconds left.\n|\n|t:|1776395447\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Sableye|Sableye, L50, F|100/100\n|switch|p1b: Milotic|Milotic, L50, F|100/100\n|switch|p2a: Hatterene|Hatterene, L50, F|100/100\n|switch|p2b: Kleavor|Kleavor, L50, F|100/100\n|turn|1\n|\n|t:|1776395468\n|move|p1a: Sableye|Gravity|p1a: Sableye\n|-fieldstart|move: Gravity\n|move|p2b: Kleavor|Stone Axe|p1a: Sableye\n|-damage|p1a: Sableye|20/100\n|-sidestart|p1: tvini222555|move: Stealth Rock\n|move|p1b: Milotic|Hypnosis|p2a: Hatterene\n|move|p2a: Hatterene|Hypnosis|p1b: Milotic|[from] ability: Magic Bounce\n|-status|p1b: Milotic|slp|[from] move: Hypnosis\n|move|p2a: Hatterene|Dazzling Gleam|p1b: Milotic|[spread] p1a,p1b\n|-supereffective|p1a: Sableye|1\n|-damage|p1a: Sableye|0 fnt\n|-damage|p1b: Milotic|75/100 slp\n|faint|p1a: Sableye\n|\n|-heal|p1b: Milotic|81/100 slp|[from] item: Leftovers\n|upkeep\n|-message|tvini222555 forfeited.\n|\n|win|Sunshine_Guy07\n|raw|tvini222555's rating: 1198 &rarr; <strong>1174</strong><br />(-24 for losing)\n|raw|Sunshine_Guy07's rating: 1218 &rarr; <strong>1242</strong><br />(+24 for winning)\n|l|\u2606tvini222555\n|player|p1|\n",
+  "uploadtime": 1776395487,
+  "views": 16,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1174,
+  "private": 0,
+  "password": null
+}

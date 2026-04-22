@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584826098",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "toxmyself",
+    "fin6767"
+  ],
+  "log": "|j|\u2606toxmyself\n|j|\u2606fin6767\n|t:|1776286596\n|gametype|doubles\n|player|p1|toxmyself|norman|1198\n|player|p2|fin6767|ghetsis|1295\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Charizard, L50, M|\n|poke|p1|Venusaur, L50, F|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Gardevoir, L50, F|\n|poke|p1|Milotic, L50, F|\n|poke|p2|Kingambit, L50, F|\n|poke|p2|Volcarona, L50, M|\n|poke|p2|Chimecho, L50, M|\n|poke|p2|Kommo-o, L50, M|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Farigiraf, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by fin6767)\n|inactive|toxmyself also wants the timer to be on.\n|inactive|toxmyself has 60 seconds left.\nfin6767 has agreed to open team sheets.\n|\n|t:|1776286630\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Gardevoir|Gardevoir, L50, F|100/100\n|switch|p1b: Charizard|Charizard, L50, M|100/100\n|switch|p2a: Farigiraf|Farigiraf, L50, M, shiny|100/100\n|switch|p2b: Kingambit|Kingambit, L50, F, shiny|100/100\n|turn|1\n|\n|t:|1776286659\n|detailschange|p1b: Charizard|Charizard-Mega-Y, L50, M\n|-mega|p1b: Charizard|Charizard|Charizardite Y\n|-weather|SunnyDay|[from] ability: Drought|[of] p1b: Charizard\n|move|p2b: Kingambit|Protect|p2b: Kingambit\n|-singleturn|p2b: Kingambit|Protect\n|move|p1a: Gardevoir|Dazzling Gleam|p2a: Farigiraf|[spread] p2a\n|-activate|p2b: Kingambit|move: Protect\n|-damage|p2a: Farigiraf|70/100\n|move|p1b: Charizard|Weather Ball|p2a: Farigiraf\n|-damage|p2a: Farigiraf|0 fnt\n|faint|p2a: Farigiraf\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|\n|t:|1776286672\n|switch|p2a: Kommo-o|Kommo-o, L50, M, shiny|100/100\n|turn|2\n|\n|t:|1776286681\n|move|p2b: Kingambit|Sucker Punch|p1b: Charizard\n|-damage|p1b: Charizard|36/100\n|move|p1a: Gardevoir|Dazzling Gleam|p2b: Kingambit|[spread] p2a,p2b\n|-supereffective|p2a: Kommo-o|2\n|-damage|p2a: Kommo-o|0 fnt\n|-damage|p2b: Kingambit|72/100\n|faint|p2a: Kommo-o\n|move|p1b: Charizard|Heat Wave|p2b: Kingambit\n|-supereffective|p2b: Kingambit|1\n|-damage|p2b: Kingambit|0 fnt\n|faint|p2b: Kingambit\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|\n|t:|1776286686\n|switch|p2b: Chimecho|Chimecho, L50, M, shiny|100/100\n|turn|3\n|-message|fin6767 forfeited.\n|\n|win|toxmyself\n|raw|toxmyself's rating: 1198 &rarr; <strong>1230</strong><br />(+32 for winning)\n|raw|fin6767's rating: 1295 &rarr; <strong>1263</strong><br />(-32 for losing)\n",
+  "uploadtime": 1776286688,
+  "views": 44,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1230,
+  "private": 0,
+  "password": null
+}

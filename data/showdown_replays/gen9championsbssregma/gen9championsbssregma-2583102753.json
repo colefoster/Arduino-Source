@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2583102753",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "mathismathin",
+    "csgogo"
+  ],
+  "log": "|j|\u2606mathismathin\n|j|\u2606csgogo\n|t:|1776142285\n|gametype|singles\n|player|p1|mathismathin|bugsy-masters|1069\n|player|p2|csgogo|hiker-gen4|1181\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Aegislash, L50, F|\n|poke|p1|Meganium, L50, M|\n|poke|p1|Sneasler, L50, F|\n|poke|p1|Dragapult, L50, M|\n|poke|p1|Lycanroc-Dusk, L50, M|\n|poke|p1|Tyranitar, L50, F|\n|poke|p2|Feraligatr, L50, F|\n|poke|p2|Hydreigon, L50, F|\n|poke|p2|Rotom-Wash, L50|\n|poke|p2|Lopunny, L50, M|\n|poke|p2|Archaludon, L50, F|\n|poke|p2|Clefable, L50, M|\n|teampreview|3\n|\n|t:|1776142356\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Sneasler|Sneasler, L50, F|100/100\n|switch|p2a: Hydreigon|Hydreigon, L50, F|100/100\n|turn|1\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by csgogo)\n|\n|t:|1776142378\n|move|p1a: Sneasler|U-turn|p2a: Hydreigon\n|-supereffective|p2a: Hydreigon|1\n|-damage|p2a: Hydreigon|45/100\n|\n|t:|1776142380\n|switch|p1a: Meganium|Meganium, L50, M|100/100|[from] U-turn\n|move|p2a: Hydreigon|Draco Meteor|p1a: Meganium\n|-damage|p1a: Meganium|35/100\n|-unboost|p2a: Hydreigon|spa|2\n|\n|upkeep\n|turn|2\n|\n|t:|1776142391\n|switch|p2a: Lopunny|Lopunny, L50, M|100/100\n|detailschange|p1a: Meganium|Meganium-Mega, L50, M\n|-mega|p1a: Meganium|Meganium|Meganiumite\n|move|p1a: Meganium|Synthesis|p1a: Meganium\n|-heal|p1a: Meganium|100/100\n|\n|upkeep\n|turn|3\n|\n|t:|1776142401\n|switch|p1a: Sneasler|Sneasler, L50, F|100/100\n|detailschange|p2a: Lopunny|Lopunny-Mega, L50, M\n|-mega|p2a: Lopunny|Lopunny|Lopunnite\n|move|p2a: Lopunny|Fake Out|p1a: Sneasler\n|-damage|p1a: Sneasler|66/100\n|\n|upkeep\n|turn|4\n|\n|t:|1776142420\n|switch|p2a: Rotom|Rotom-Wash, L50|100/100\n|move|p1a: Sneasler|Close Combat|p2a: Rotom\n|-crit|p2a: Rotom\n|-damage|p2a: Rotom|12/100\n|-unboost|p1a: Sneasler|def|1\n|-unboost|p1a: Sneasler|spd|1\n|\n|-heal|p2a: Rotom|18/100|[from] item: Leftovers\n|upkeep\n|turn|5\n|-message|csgogo forfeited.\n|\n|win|mathismathin\n|raw|mathismathin's rating: 1069 &rarr; <strong>1108</strong><br />(+39 for winning)\n|raw|csgogo's rating: 1181 &rarr; <strong>1148</strong><br />(-33 for losing)\n|l|\u2606csgogo\n|player|p2|\n",
+  "uploadtime": 1776142449,
+  "views": 5,
+  "formatid": "gen9championsbssregma",
+  "rating": 1108,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582123146",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "anez0410",
+    "Aspecxt_"
+  ],
+  "log": "|j|\u2606anez0410\n|j|\u2606Aspecxt_\n|t:|1776060919\n|gametype|doubles\n|player|p1|anez0410|169|1002\n|player|p2|Aspecxt_|170|1050\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Feraligatr, L50, F|\n|poke|p1|Farigiraf, L50, F|\n|poke|p1|Clefable, L50, M|\n|poke|p1|Altaria, L50, F|\n|poke|p1|Raichu, L50, M|\n|poke|p1|Scizor, L50, M|\n|poke|p2|Manectric, L50, M|\n|poke|p2|Pelipper, L50, M|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Glimmora, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Aspecxt_)\n|\n|t:|1776060940\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Feraligatr|Feraligatr, L50, F|100/100\n|switch|p1b: Farigiraf|Farigiraf, L50, F|100/100\n|switch|p2a: Incineroar|Incineroar, L50, F|100/100\n|switch|p2b: Pelipper|Pelipper, L50, M|100/100\n|-ability|p2a: Incineroar|Intimidate|boost\n|-unboost|p1a: Feraligatr|atk|1\n|-unboost|p1b: Farigiraf|atk|1\n|-weather|RainDance|[from] ability: Drizzle|[of] p2b: Pelipper\n|turn|1\n|\n|t:|1776060967\n|move|p1a: Feraligatr|Liquidation|p2a: Incineroar\n|-supereffective|p2a: Incineroar|1\n|-damage|p2a: Incineroar|0 fnt\n|faint|p2a: Incineroar\n|move|p2b: Pelipper|Tailwind|p2b: Pelipper\n|-sidestart|p2: Aspecxt_|move: Tailwind\n|move|p1b: Farigiraf|Trick Room|p1b: Farigiraf\n|-fieldstart|move: Trick Room|[of] p1b: Farigiraf\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|-message|Aspecxt_ forfeited.\n|\n|win|anez0410\n|raw|anez0410's rating: 1002 &rarr; <strong>1047</strong><br />(+45 for winning)\n|raw|Aspecxt_'s rating: 1050 &rarr; <strong>1030</strong><br />(-20 for losing)\n|l|\u2606Aspecxt_\n|player|p2|\n|c|\u2606anez0410|bruh\n",
+  "uploadtime": 1776061006,
+  "views": 32,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1030,
+  "private": 0,
+  "password": null
+}

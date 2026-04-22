@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2587880963",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "SkelyStealth",
+    "bassv991"
+  ],
+  "log": "|j|\u2606SkelyStealth\n|j|\u2606bassv991\n|t:|1776574038\n|gametype|doubles\n|player|p1|SkelyStealth|yellow|1641\n|player|p2|bassv991|266|1616\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Farigiraf, L50, M|\n|poke|p1|Mimikyu, L50, M|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Torkoal, L50, F|\n|poke|p1|Crabominable, L50, M|\n|poke|p1|Chandelure, L50, M, shiny|\n|poke|p2|Gengar, L50, M|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Pelipper, L50, M|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Scovillain, L50, F|\n|poke|p2|Kingambit, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by SkelyStealth)\n|\n|t:|1776574065\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Headlock|Farigiraf, L50, M|100/100\n|switch|p1b: Lazy Cat|Incineroar, L50, F|100/100\n|switch|p2a: Scovillain|Scovillain, L50, F|100/100\n|switch|p2b: Kingambit|Kingambit, L50, M|100/100\n|-ability|p1b: Lazy Cat|Intimidate|boost\n|-unboost|p2a: Scovillain|atk|1\n|-unboost|p2b: Kingambit|atk|1\n|-ability|p2b: Kingambit|Defiant|boost\n|-boost|p2b: Kingambit|atk|2\n|turn|1\n|inactive|bassv991 has 30 seconds left.\n|inactive|SkelyStealth has 30 seconds left.\n|\n|t:|1776574107\n|move|p2a: Scovillain|Overheat|p1a: Headlock\n|-damage|p1a: Headlock|46/100\n|-unboost|p2a: Scovillain|spa|2\n|-enditem|p1a: Headlock|Sitrus Berry|[eat]\n|-heal|p1a: Headlock|71/100|[from] item: Sitrus Berry\n|move|p1b: Lazy Cat|Close Combat|p2b: Kingambit\n|-supereffective|p2b: Kingambit|2\n|-damage|p2b: Kingambit|0 fnt\n|-unboost|p1b: Lazy Cat|def|1\n|-unboost|p1b: Lazy Cat|spd|1\n|faint|p2b: Kingambit\n|-enditem|p1b: Lazy Cat|White Herb\n|-clearnegativeboost|p1b: Lazy Cat|[silent]\n|move|p1a: Headlock|Trick Room|p1a: Headlock\n|-fieldstart|move: Trick Room|[of] p1a: Headlock\n|\n|-ability|p2a: Scovillain|Moody|boost\n|-boost|p2a: Scovillain|atk|2\n|-unboost|p2a: Scovillain|spa|1\n|upkeep\n|-message|bassv991 forfeited.\n|\n|win|SkelyStealth\n|raw|SkelyStealth's rating: 1641 &rarr; <strong>1660</strong><br />(+19 for winning)\n|raw|bassv991's rating: 1616 &rarr; <strong>1597</strong><br />(-19 for losing)\n|l|\u2606bassv991\n|player|p2|\n|l|\u2606SkelyStealth\n|player|p1|\n",
+  "uploadtime": 1776574130,
+  "views": 29,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1597,
+  "private": 0,
+  "password": null
+}

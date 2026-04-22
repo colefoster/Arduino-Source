@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584673111",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Rimebliss",
+    "pokegambit5"
+  ],
+  "log": "|j|\u2606Rimebliss\n|j|\u2606pokegambit5\n|t:|1776275895\n|gametype|doubles\n|player|p1|Rimebliss|lady-gen4|1075\n|player|p2|pokegambit5|266|1061\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Farigiraf, L50, F|\n|poke|p1|Whimsicott, L50, M|\n|poke|p1|Charizard, L50, M|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Empoleon, L50, M|\n|poke|p2|Charizard, L50, F|\n|poke|p2|Whimsicott, L50, F|\n|poke|p2|Venusaur, L50, F|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Torkoal, L50, F|\n|poke|p2|Farigiraf, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by pokegambit5)\n|\n|t:|1776275929\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Whimsicott|Whimsicott, L50, M|100/100\n|switch|p1b: Garchomp|Garchomp, L50, M|100/100\n|switch|p2a: Whimsicott|Whimsicott, L50, F|100/100\n|switch|p2b: Charizard|Charizard, L50, F|100/100\n|turn|1\n|\n|t:|1776275950\n|detailschange|p2b: Charizard|Charizard-Mega-Y, L50, F\n|-mega|p2b: Charizard|Charizard|Charizardite Y\n|-weather|SunnyDay|[from] ability: Drought|[of] p2b: Charizard\n|move|p1a: Whimsicott|Tailwind|p1a: Whimsicott\n|-sidestart|p1: Rimebliss|move: Tailwind\n|move|p1b: Garchomp|Rock Slide|p2b: Charizard|[spread] p2a,p2b\n|-supereffective|p2b: Charizard|2\n|-damage|p2a: Whimsicott|75/100\n|-damage|p2b: Charizard|0 fnt\n|faint|p2b: Charizard\n|move|p2a: Whimsicott|Moonblast|p1b: Garchomp\n|-supereffective|p1b: Garchomp|1\n|-damage|p1b: Garchomp|30/100\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|-message|pokegambit5 forfeited.\n|\n|win|Rimebliss\n|raw|Rimebliss's rating: 1075 &rarr; <strong>1103</strong><br />(+28 for winning)\n|raw|pokegambit5's rating: 1061 &rarr; <strong>1043</strong><br />(-18 for losing)\n|l|\u2606pokegambit5\n|player|p2|\n",
+  "uploadtime": 1776275970,
+  "views": 15,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1043,
+  "private": 0,
+  "password": null
+}

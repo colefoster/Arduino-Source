@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2585568098",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "hellophant",
+    "Future Alice haver"
+  ],
+  "log": "|j|\u203dhellophant\n|j|\u2606Future Alice haver\n|t:|1776356057\n|gametype|doubles\n|player|p1|hellophant|1|1188\n|player|p2|Future Alice haver|kimonogirl|1141\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Aerodactyl, L50, F|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Rotom-Wash, L50|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Gardevoir, L50, M|\n|poke|p2|Charizard, L50, M|\n|poke|p2|Venusaur, L50, F|\n|poke|p2|Orthworm, L50, F|\n|poke|p2|Garchomp, L50, F|\n|poke|p2|Maushold, L50|\n|poke|p2|Milotic, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by hellophant)\n|inactive|hellophant has 60 seconds left.\n|inactive|Future Alice haver has 60 seconds left.\n|\n|t:|1776356097\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Aerodactyl|Aerodactyl, L50, F|100/100\n|switch|p1b: Garchomp|Garchomp, L50, F|100/100\n|switch|p2a: Milotic|Milotic, L50, M|100/100\n|switch|p2b: Orthworm|Orthworm, L50, F|100/100\n|-ability|p1a: Aerodactyl|Unnerve\n|turn|1\n|\n|t:|1776356110\n|move|p1a: Aerodactyl|Rock Slide|p2b: Orthworm|[spread] p2a,p2b\n|-resisted|p2b: Orthworm|1\n|-damage|p2a: Milotic|79/100\n|-damage|p2b: Orthworm|93/100\n|move|p1b: Garchomp|Rock Slide|p2a: Milotic|[spread] p2a,p2b\n|-resisted|p2b: Orthworm|1\n|-crit|p2b: Orthworm\n|-damage|p2a: Milotic|60/100\n|-damage|p2b: Orthworm|84/100\n|move|p2a: Milotic|Icy Wind|p1b: Garchomp|[spread] p1a,p1b\n|-supereffective|p1a: Aerodactyl|1\n|-supereffective|p1b: Garchomp|2\n|-damage|p1a: Aerodactyl|67/100\n|-damage|p1b: Garchomp|49/100\n|-unboost|p1a: Aerodactyl|spe|1\n|-unboost|p1b: Garchomp|spe|1\n|cant|p2b: Orthworm|flinch\n|\n|upkeep\n|turn|2\n|\n|t:|1776356133\n|switch|p1b: Incineroar|Incineroar, L50, F|100/100\n|-ability|p1b: Incineroar|Intimidate|boost\n|-unboost|p2a: Milotic|atk|1\n|-ability|p2a: Milotic|Competitive|boost\n|-boost|p2a: Milotic|spa|2\n|-unboost|p2b: Orthworm|atk|1\n|move|p1a: Aerodactyl|Tailwind|p1a: Aerodactyl\n|-sidestart|p1: hellophant|move: Tailwind\n|move|p2a: Milotic|Icy Wind|p1a: Aerodactyl|[spread] p1a,p1b\n|-supereffective|p1a: Aerodactyl|1\n|-resisted|p1b: Incineroar|1\n|-damage|p1a: Aerodactyl|0 fnt\n|-damage|p1b: Incineroar|90/100\n|-unboost|p1b: Incineroar|spe|1\n|faint|p1a: Aerodactyl\n|move|p2b: Orthworm|Heavy Slam|p1b: Incineroar\n|-resisted|p1b: Incineroar|1\n|-damage|p1b: Incineroar|84/100\n|\n|upkeep\n|-message|hellophant forfeited.\n|\n|win|Future Alice haver\n|raw|hellophant's rating: 1188 &rarr; <strong>1160</strong><br />(-28 for losing)\n|raw|Future Alice haver's rating: 1141 &rarr; <strong>1169</strong><br />(+28 for winning)\n|l|\u203dhellophant\n|player|p1|\n",
+  "uploadtime": 1776356143,
+  "views": 32,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1160,
+  "private": 0,
+  "password": null
+}

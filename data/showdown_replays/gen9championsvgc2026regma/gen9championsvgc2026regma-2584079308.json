@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584079308",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "HCaldwell333",
+    "gyggyggggv"
+  ],
+  "log": "|j|\u2606HCaldwell333\n|j|\u2606gyggyggggv\n|t:|1776223006\n|gametype|doubles\n|player|p1|HCaldwell333|1|1078\n|player|p2|gyggyggggv|169|1041\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Crabominable, L50, F|\n|poke|p1|Slowking, L50, F|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Kingambit, L50, F|\n|poke|p1|Drampa, L50, M|\n|poke|p2|Dragonite, L50, M|\n|poke|p2|Whimsicott, L50, F|\n|poke|p2|Aegislash, L50, F|\n|poke|p2|Rotom-Wash, L50|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Incineroar, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by HCaldwell333)\n|\n|t:|1776223051\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Slowking|Slowking, L50, F|100/100\n|switch|p1b: Incineroar|Incineroar, L50, M|100/100\n|switch|p2a: Aegislash|Aegislash, L50, F|100/100\n|switch|p2b: Incineroar|Incineroar, L50, M|100/100\n|-ability|p1b: Incineroar|Intimidate|boost\n|-unboost|p2a: Aegislash|atk|1\n|-unboost|p2b: Incineroar|atk|1\n|-ability|p2b: Incineroar|Intimidate|boost\n|-unboost|p1a: Slowking|atk|1\n|-unboost|p1b: Incineroar|atk|1\n|turn|1\n|inactive|HCaldwell333 has 30 seconds left.\n|\n|t:|1776223080\n|move|p1a: Slowking|Protect|p1a: Slowking\n|-singleturn|p1a: Slowking|Protect\n|move|p1b: Incineroar|Throat Chop|p2a: Aegislash\n|-supereffective|p2a: Aegislash|1\n|-damage|p2a: Aegislash|68/100\n|-start|p2a: Aegislash|Throat Chop|[silent]\n|move|p2b: Incineroar|Darkest Lariat|p1a: Slowking\n|-activate|p1a: Slowking|move: Protect\n|-formechange|p2a: Aegislash|Aegislash-Blade|\n|move|p2a: Aegislash|Poltergeist|p1a: Slowking\n|-activate|p1a: Slowking|move: Protect\n|\n|upkeep\n|turn|2\n|inactive|HCaldwell333 has 30 seconds left.\n|inactive|gyggyggggv has 30 seconds left.\n|inactive|HCaldwell333 has 20 seconds left.\n|\n|t:|1776223115\n|move|p1b: Incineroar|Throat Chop|p2a: Aegislash\n|-supereffective|p2a: Aegislash|1\n|-damage|p2a: Aegislash|0 fnt\n|faint|p2a: Aegislash\n|move|p2b: Incineroar|Darkest Lariat|p1a: Slowking\n|-supereffective|p1a: Slowking|1\n|-enditem|p1a: Slowking|Colbur Berry|[eat]\n|-enditem|p1a: Slowking|Colbur Berry|[weaken]\n|-damage|p1a: Slowking|83/100\n|move|p1a: Slowking|Trick Room|p1a: Slowking\n|-fieldstart|move: Trick Room|[of] p1a: Slowking\n|\n|upkeep\n|-message|gyggyggggv forfeited.\n|\n|win|HCaldwell333\n|raw|HCaldwell333's rating: 1078 &rarr; <strong>1103</strong><br />(+25 for winning)\n|raw|gyggyggggv's rating: 1041 &rarr; <strong>1027</strong><br />(-14 for losing)\n|l|\u2606gyggyggggv\n|player|p2|\n",
+  "uploadtime": 1776223125,
+  "views": 15,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1027,
+  "private": 0,
+  "password": null
+}

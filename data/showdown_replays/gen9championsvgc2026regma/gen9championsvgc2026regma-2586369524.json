@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586369524",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "YonkoLouis",
+    "Jakesparow54"
+  ],
+  "log": "|j|\u2606YonkoLouis\n|j|\u2606Jakesparow54\n|t:|1776429500\n|gametype|doubles\n|player|p1|YonkoLouis|zinnia|1080\n|player|p2|Jakesparow54|biker-gen4|1126\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Alakazam, L50, M|\n|poke|p1|Meowstic, L50, M|\n|poke|p1|Rotom-Wash, L50|\n|poke|p1|Kingambit, L50, M|\n|poke|p1|Chesnaught, L50, M|\n|poke|p1|Maushold, L50|\n|poke|p2|Scovillain, L50, M|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Farigiraf, L50, M|\n|poke|p2|Gallade, L50, M|\n|poke|p2|Kingambit, L50, F|\n|poke|p2|Pelipper, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Jakesparow54)\n|\n|t:|1776429543\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: The Simpsons|Maushold, L50|100/100\n|switch|p1b: Queen's Gambit|Kingambit, L50, M, shiny|100/100\n|switch|p2a: Incineroar|Incineroar, L50, F|100/100\n|switch|p2b: Farigiraf|Farigiraf, L50, M|100/100\n|-ability|p2a: Incineroar|Intimidate|boost\n|-unboost|p1a: The Simpsons|atk|1\n|-unboost|p1b: Queen's Gambit|atk|1\n|-ability|p1b: Queen's Gambit|Defiant|boost\n|-boost|p1b: Queen's Gambit|atk|2\n|turn|1\n|inactive|YonkoLouis has 30 seconds left.\n|inactive|YonkoLouis has 20 seconds left.\n|\n|t:|1776429582\n|move|p1b: Queen's Gambit|Protect|p1b: Queen's Gambit\n|-singleturn|p1b: Queen's Gambit|Protect\n|move|p2a: Incineroar|Fake Out|p1b: Queen's Gambit\n|-activate|p1b: Queen's Gambit|move: Protect\n|move|p1a: The Simpsons|Follow Me|p1a: The Simpsons\n|-singleturn|p1a: The Simpsons|move: Follow Me\n|move|p2b: Farigiraf|Trick Room|p2b: Farigiraf\n|-fieldstart|move: Trick Room|[of] p2b: Farigiraf\n|\n|upkeep\n|turn|2\n|l|\u2606Jakesparow54\n|inactive|Jakesparow54 disconnected and has a minute to reconnect!\n|player|p2|\n|inactive|YonkoLouis has 30 seconds left.\n|inactive|Jakesparow54 has 30 seconds left.\n|inactive|Jakesparow54 has 20 seconds left.\n|inactive|Jakesparow54 has 15 seconds left.\n|c|\u2606YonkoLouis|?????????\n|inactive|Jakesparow54 has 10 seconds left.\n|inactive|Jakesparow54 has 5 seconds left.\n|-message|Jakesparow54 lost due to inactivity.\n|\n|win|YonkoLouis\n|raw|YonkoLouis's rating: 1080 &rarr; <strong>1112</strong><br />(+32 for winning)\n|raw|Jakesparow54's rating: 1126 &rarr; <strong>1098</strong><br />(-28 for losing)\n",
+  "uploadtime": 1776429647,
+  "views": 29,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1098,
+  "private": 0,
+  "password": null
+}

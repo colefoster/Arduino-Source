@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582170578",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "PyroTheManiacMan",
+    "bioarmor01"
+  ],
+  "log": "|j|\u2606PyroTheManiacMan\n|j|\u2606bioarmor01\n|t:|1776066953\n|gametype|doubles\n|player|p1|PyroTheManiacMan|steven|1101\n|player|p2|bioarmor01|1|1191\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Tyranitar, L50, F|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Scizor, L50, F|\n|poke|p1|Rotom-Wash, L50|\n|poke|p1|Orthworm, L50, F|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Maushold-Four, L50|\n|poke|p2|Talonflame, L50, F|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Rotom-Wash, L50|\n|poke|p2|Kingambit, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by bioarmor01)\n|\n|t:|1776066971\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Sneasler|Sneasler, L50, M|100/100\n|switch|p1b: Orthworm|Orthworm, L50, F|100/100\n|switch|p2a: Talonflame|Talonflame, L50, F|100/100\n|switch|p2b: Garchomp|Garchomp, L50, M|100/100\n|turn|1\n|-message|PyroTheManiacMan forfeited.\n|\n|win|bioarmor01\n|raw|PyroTheManiacMan's rating: 1101 &rarr; <strong>1082</strong><br />(-19 for losing)\n|raw|bioarmor01's rating: 1191 &rarr; <strong>1210</strong><br />(+19 for winning)\n|l|\u2606PyroTheManiacMan\n|player|p1|\n",
+  "uploadtime": 1776066988,
+  "views": 13,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1082,
+  "private": 0,
+  "password": null
+}

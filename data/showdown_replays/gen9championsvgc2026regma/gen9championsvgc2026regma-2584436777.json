@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584436777",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Beboppps",
+    "Sharkhy_"
+  ],
+  "log": "|j|\u2606Beboppps\n|j|\u2606Sharkhy_\n|t:|1776260777\n|gametype|doubles\n|player|p1|Beboppps|2|1094\n|player|p2|Sharkhy_|2|1031\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Aerodactyl, L50, F|\n|poke|p2|Charizard, L50, F|\n|poke|p2|Maushold-Four, L50|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Dragapult, L50, F|\n|poke|p2|Kingambit, L50, M|\n|poke|p2|Garchomp, L50, F|\n|teampreview|4\n|\n|t:|1776260800\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Garchomp|Garchomp, L50, M|100/100\n|switch|p1b: Basculegion|Basculegion, L50, M|100/100\n|switch|p2a: Sneasler|Sneasler, L50, F|100/100\n|switch|p2b: Kingambit|Kingambit, L50, M|100/100\n|turn|1\n|\n|t:|1776260820\n|switch|p1b: Aerodactyl|Aerodactyl, L50, F|100/100\n|-ability|p1b: Aerodactyl|Unnerve\n|move|p2a: Sneasler|Fake Out|p1a: Garchomp\n|-damage|p1a: Garchomp|86/100\n|-damage|p2a: Sneasler|88/100|[from] ability: Rough Skin|[of] p1a: Garchomp\n|cant|p1a: Garchomp|flinch\n|move|p2b: Kingambit|Kowtow Cleave|p1b: Aerodactyl\n|-damage|p1b: Aerodactyl|8/100\n|\n|upkeep\n|turn|2\n|\n|t:|1776260838\n|move|p2b: Kingambit|Protect|p2b: Kingambit\n|-singleturn|p2b: Kingambit|Protect\n|move|p2a: Sneasler|Feint|p1b: Aerodactyl\n|-resisted|p1b: Aerodactyl|1\n|-damage|p1b: Aerodactyl|0 fnt\n|faint|p1b: Aerodactyl\n|move|p1a: Garchomp|Earthquake|p2a: Sneasler|[spread] p2a\n|-activate|p2b: Kingambit|move: Protect\n|-supereffective|p2a: Sneasler|1\n|-damage|p2a: Sneasler|0 fnt\n|faint|p2a: Sneasler\n|\n|upkeep\n|\n|t:|1776260850\n|switch|p1b: Basculegion|Basculegion, L50, M|100/100\n|switch|p2a: Maushold|Maushold-Four, L50|100/100\n|turn|3\n|\n|t:|1776260883\n|switch|p1b: Incineroar|Incineroar, L50, F|100/100\n|-ability|p1b: Incineroar|Intimidate|boost\n|-unboost|p2a: Maushold|atk|1\n|-unboost|p2b: Kingambit|atk|1\n|-ability|p2b: Kingambit|Defiant|boost\n|-boost|p2b: Kingambit|atk|2\n|switch|p2b: Charizard|Charizard, L50, F|100/100\n|move|p2a: Maushold|Protect|p2a: Maushold\n|-singleturn|p2a: Maushold|Protect\n|move|p1a: Garchomp|Earthquake|p2b: Charizard|[spread] p1b\n|-activate|p2a: Maushold|move: Protect\n|-immune|p2b: Charizard\n|-supereffective|p1b: Incineroar|1\n|-damage|p1b: Incineroar|20/100\n|\n|upkeep\n|turn|4\n|-message|Beboppps forfeited.\n|\n|win|Sharkhy_\n|raw|Beboppps's rating: 1094 &rarr; <strong>1066</strong><br />(-28 for losing)\n|raw|Sharkhy_'s rating: 1031 &rarr; <strong>1073</strong><br />(+42 for winning)\n|l|\u2606Beboppps\n|player|p1|\n",
+  "uploadtime": 1776260912,
+  "views": 31,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1066,
+  "private": 0,
+  "password": null
+}

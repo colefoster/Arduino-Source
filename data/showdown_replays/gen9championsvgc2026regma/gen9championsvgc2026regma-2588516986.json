@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2588516986",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "lhh980210",
+    "DGENERAT"
+  ],
+  "log": "|j|\u2606lhh980210\n|j|\u2606DGENERAT\n|t:|1776640804\n|gametype|doubles\n|player|p1|lhh980210|170|1306\n|player|p2|DGENERAT|guzma|1292\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Gallade, L50, M, shiny|\n|poke|p1|Talonflame, L50, M, shiny|\n|poke|p1|Garchomp, L50, M, shiny|\n|poke|p1|Delphox, L50, F, shiny|\n|poke|p1|Sinistcha-Masterpiece, L50|\n|poke|p1|Orthworm, L50, M, shiny|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Blastoise, L50, M|\n|poke|p2|Talonflame, L50, F, shiny|\n|poke|p2|Gardevoir, L50, M, shiny|\n|poke|p2|Sinistcha-Masterpiece, L50, shiny|\n|poke|p2|Incineroar, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by DGENERAT)\n|\n|t:|1776640836\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Talonflame|Talonflame, L50, M, shiny|100/100\n|switch|p1b: Gallade|Gallade, L50, M, shiny|100/100\n|switch|p2a: Talonflame|Talonflame, L50, F, shiny|100/100\n|switch|p2b: Blastoise|Blastoise, L50, M|100/100\n|turn|1\n|\n|t:|1776640843\n|move|p2b: Blastoise|Protect|p2b: Blastoise\n|-singleturn|p2b: Blastoise|Protect\n|move|p2a: Talonflame|Dual Wingbeat|p1b: Gallade\n|-supereffective|p1b: Gallade|1\n|-damage|p1b: Gallade|34/100\n|-supereffective|p1b: Gallade|1\n|-damage|p1b: Gallade|0 fnt\n|faint|p1b: Gallade\n|-hitcount|p1: Gallade|2\n|move|p1a: Talonflame|Tailwind|p1a: Talonflame\n|-sidestart|p1: lhh980210|move: Tailwind\n|\n|upkeep\n|\n|t:|1776640852\n|switch|p1b: Delphox|Delphox, L50, F, shiny|100/100\n|turn|2\n|\n|t:|1776640870\n|detailschange|p1b: Delphox|Delphox-Mega, L50, F, shiny\n|-mega|p1b: Delphox|Delphox|Delphoxite\n|detailschange|p2b: Blastoise|Blastoise-Mega, L50, M\n|-mega|p2b: Blastoise|Blastoise|Blastoisinite\n|move|p1a: Talonflame|Brave Bird|p2a: Talonflame\n|-damage|p2a: Talonflame|27/100\n|-damage|p1a: Talonflame|76/100|[from] Recoil\n|move|p1b: Delphox|Dazzling Gleam|p2a: Talonflame|[spread] p2a,p2b\n|-resisted|p2a: Talonflame|1\n|-damage|p2a: Talonflame|7/100\n|-damage|p2b: Blastoise|77/100\n|move|p2a: Talonflame|Rain Dance|p2a: Talonflame\n|-weather|RainDance\n|move|p2b: Blastoise|Water Spout|p1a: Talonflame|[spread] p1a,p1b\n|-supereffective|p1a: Talonflame|1\n|-supereffective|p1b: Delphox|1\n|-damage|p1a: Talonflame|0 fnt\n|-damage|p1b: Delphox|0 fnt\n|faint|p1a: Talonflame\n|faint|p1b: Delphox\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|-message|lhh980210 forfeited.\n|\n|win|DGENERAT\n|raw|lhh980210's rating: 1306 &rarr; <strong>1285</strong><br />(-21 for losing)\n|raw|DGENERAT's rating: 1292 &rarr; <strong>1318</strong><br />(+26 for winning)\n|l|\u2606lhh980210\n|player|p1|\n",
+  "uploadtime": 1776640892,
+  "views": 15,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1285,
+  "private": 0,
+  "password": null
+}

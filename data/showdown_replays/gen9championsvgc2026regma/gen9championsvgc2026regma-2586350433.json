@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586350433",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Kyooby",
+    "Zanermate"
+  ],
+  "log": "|j|\u2606Kyooby\n|j|\u2606Zanermate\n|t:|1776427813\n|gametype|doubles\n|player|p1|Kyooby|volkner|1084\n|player|p2|Zanermate|265|1000\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Maushold-Four, L50|\n|poke|p1|Gardevoir, L50, M|\n|poke|p1|Espathra, L50, M|\n|poke|p1|Kommo-o, L50, M|\n|poke|p1|Gyarados, L50, M|\n|poke|p1|Heliolisk, L50, M|\n|poke|p2|Aggron, L50, F|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Dragonite, L50, F|\n|poke|p2|Pelipper, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Kyooby)\n|inactive|Kyooby has 60 seconds left.\n|inactive|Zanermate has 60 seconds left.\n|\n|t:|1776427864\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Maushold|Maushold-Four, L50|100/100\n|switch|p1b: Kommo-o|Kommo-o, L50, M|100/100\n|switch|p2a: Aggron|Aggron, L50, F|100/100\n|switch|p2b: Incineroar|Incineroar, L50, M|100/100\n|-ability|p2b: Incineroar|Intimidate|boost\n|-unboost|p1a: Maushold|atk|1\n|-unboost|p1b: Kommo-o|atk|1\n|turn|1\n|inactive|Kyooby has 30 seconds left.\n|inactive|Kyooby has 20 seconds left.\n|\n|t:|1776427901\n|detailschange|p2a: Aggron|Aggron-Mega, L50, F\n|-mega|p2a: Aggron|Aggron|Aggronite\n|move|p1a: Maushold|Protect|p1a: Maushold\n|-singleturn|p1a: Maushold|Protect\n|move|p2b: Incineroar|Fake Out|p1b: Kommo-o\n|-damage|p1b: Kommo-o|92/100\n|cant|p1b: Kommo-o|flinch\n|move|p2a: Aggron|Iron Defense|p2a: Aggron\n|-boost|p2a: Aggron|def|2\n|\n|-heal|p1b: Kommo-o|98/100|[from] item: Leftovers\n|upkeep\n|turn|2\n|inactive|Zanermate has 30 seconds left.\n|\n|t:|1776427928\n|move|p1a: Maushold|Encore|p2a: Aggron\n|-start|p2a: Aggron|Encore\n|move|p1b: Kommo-o|Clangorous Soul|p1b: Kommo-o\n|-boost|p1b: Kommo-o|atk|1\n|-boost|p1b: Kommo-o|def|1\n|-boost|p1b: Kommo-o|spa|1\n|-boost|p1b: Kommo-o|spd|1\n|-boost|p1b: Kommo-o|spe|1\n|-damage|p1b: Kommo-o|65/100\n|move|p2b: Incineroar|Parting Shot|p1b: Kommo-o\n|-unboost|p1b: Kommo-o|atk|1\n|-unboost|p1b: Kommo-o|spa|1\n|\n|t:|1776427941\n|switch|p2b: Basculegion|Basculegion, L50, M|100/100|[from] Parting Shot\n|move|p2a: Aggron|Iron Defense|p2a: Aggron\n|-boost|p2a: Aggron|def|2\n|\n|-heal|p1b: Kommo-o|71/100|[from] item: Leftovers\n|upkeep\n|turn|3\n|-message|Zanermate forfeited.\n|\n|win|Kyooby\n|raw|Kyooby's rating: 1084 &rarr; <strong>1105</strong><br />(+21 for winning)\n|raw|Zanermate's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n",
+  "uploadtime": 1776427962,
+  "views": 27,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

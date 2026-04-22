@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2585937626",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "F14ppy6ird",
+    "ewyeuwifw"
+  ],
+  "log": "|j|\u2606F14ppy6ird\n|j|\u203dewyeuwifw\n|t:|1776383142\n|gametype|doubles\n|player|p1|F14ppy6ird|2|1081\n|player|p2|ewyeuwifw|102|1000\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Gardevoir, L50, M|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Corviknight, L50, M|\n|poke|p1|Rotom-Wash, L50|\n|poke|p1|Clefable, L50, F|\n|poke|p2|Froslass, L50, F|\n|poke|p2|Sableye, L50, M|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Tauros-Paldea-Blaze, L50, M|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Zoroark-Hisui, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by ewyeuwifw)\n|inactive|F14ppy6ird has 60 seconds left.\n|\n|t:|1776383177\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: ButterKnife|Corviknight, L50, M, shiny|100/100\n|switch|p1b: MachineHeart|Rotom-Wash, L50, shiny|100/100\n|switch|p2a: Basculegion|Basculegion, L50, M|100/100\n|switch|p2b: Sableye|Sableye, L50, M|100/100\n|turn|1\n|-activate|p1b: MachineHeart|item: Quick Claw\n|\n|t:|1776383197\n|move|p2b: Sableye|Fake Out|p1b: MachineHeart\n|-damage|p1b: MachineHeart|92/100\n|cant|p1b: MachineHeart|flinch\n|move|p2a: Basculegion|Flip Turn|p1b: MachineHeart\n|-resisted|p1b: MachineHeart|1\n|-damage|p1b: MachineHeart|72/100\n|\n|t:|1776383203\n|switch|p2a: Tauros|Tauros-Paldea-Blaze, L50, M|100/100|[from] Flip Turn\n|move|p1a: ButterKnife|Tailwind|p1a: ButterKnife\n|-sidestart|p1: F14ppy6ird|move: Tailwind\n|\n|upkeep\n|turn|2\n|\n|t:|1776383225\n|move|p2b: Sableye|Quash|p1b: MachineHeart\n|-activate|p1b: MachineHeart|move: Quash\n|move|p1a: ButterKnife|Iron Defense|p1a: ButterKnife\n|-boost|p1a: ButterKnife|def|2\n|move|p2a: Tauros|Close Combat|p1b: MachineHeart\n|-damage|p1b: MachineHeart|11/100\n|-unboost|p2a: Tauros|def|1\n|-unboost|p2a: Tauros|spd|1\n|move|p1b: MachineHeart|Hydro Pump|p2a: Tauros\n|-supereffective|p2a: Tauros|1\n|-damage|p2a: Tauros|0 fnt\n|faint|p2a: Tauros\n|\n|upkeep\n|\n|t:|1776383231\n|switch|p2a: Froslass|Froslass, L50, F|100/100\n|turn|3\n|-message|ewyeuwifw forfeited.\n|\n|win|F14ppy6ird\n|raw|F14ppy6ird's rating: 1081 &rarr; <strong>1102</strong><br />(+21 for winning)\n|raw|ewyeuwifw's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|l|\u203dewyeuwifw\n|player|p2|\n",
+  "uploadtime": 1776383250,
+  "views": 22,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

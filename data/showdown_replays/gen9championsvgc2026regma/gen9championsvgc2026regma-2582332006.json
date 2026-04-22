@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582332006",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Zani1200",
+    "evokenz"
+  ],
+  "log": "|j|\u2606Zani1200\n|j|\u2606evokenz\n|t:|1776084057\n|gametype|doubles\n|player|p1|Zani1200|169|1112\n|player|p2|evokenz|265|1198\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Farigiraf, L50, M|\n|poke|p1|Drampa, L50, F|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Torkoal, L50, F|\n|poke|p1|Sneasler, L50, F|\n|poke|p1|Kingambit, L50, M|\n|poke|p2|Dragapult, L50, F|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Maushold, L50|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Kingambit, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Zani1200)\nZani1200 rejected open team sheets.\n|\n|t:|1776084105\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Farigiraf|Farigiraf, L50, M|100/100\n|switch|p1b: Sneasler|Sneasler, L50, F|100/100\n|switch|p2a: Kingambit|Kingambit, L50, F|100/100\n|switch|p2b: Dragapult|Dragapult, L50, F|100/100\n|turn|1\n|\n|t:|1776084120\n|move|p2a: Kingambit|Protect|p2a: Kingambit\n|-singleturn|p2a: Kingambit|Protect\n|move|p2b: Dragapult|Will-O-Wisp|p1b: Sneasler\n|-status|p1b: Sneasler|brn\n|move|p1b: Sneasler|Close Combat|p2a: Kingambit\n|-activate|p2a: Kingambit|move: Protect\n|move|p1a: Farigiraf|Trick Room|p1a: Farigiraf\n|-fieldstart|move: Trick Room|[of] p1a: Farigiraf\n|\n|-damage|p1b: Sneasler|95/100 brn|[from] brn\n|upkeep\n|turn|2\n|inactive|Zani1200 has 30 seconds left.\n|inactive|Zani1200 has 20 seconds left.\n|inactive|Zani1200 has 15 seconds left.\n|inactive|Zani1200 has 10 seconds left.\n|\n|t:|1776084167\n|switch|p1a: Kingambit|Kingambit, L50, M|100/100\n|switch|p1b: Drampa|Drampa, L50, F|100/100\n|move|p2a: Kingambit|Kowtow Cleave|p1a: Kingambit\n|-resisted|p1a: Kingambit|1\n|-damage|p1a: Kingambit|81/100\n|move|p2b: Dragapult|Draco Meteor|p1b: Drampa\n|-supereffective|p1b: Drampa|1\n|-damage|p1b: Drampa|0 fnt\n|-unboost|p2b: Dragapult|spa|2\n|faint|p1b: Drampa\n|\n|upkeep\n|\n|t:|1776084181\n|switch|p1b: Sneasler|Sneasler, L50, F|95/100 brn\n|turn|3\n|\n|t:|1776084205\n|switch|p2a: Floette|Floette-Eternal, L50, F|100/100\n|move|p1a: Kingambit|Low Kick|p2a: Floette\n|-resisted|p2a: Floette|1\n|-damage|p2a: Floette|95/100\n|move|p1b: Sneasler|Dire Claw|p2b: Dragapult\n|-resisted|p2b: Dragapult|1\n|-damage|p2b: Dragapult|85/100\n|move|p2b: Dragapult|Will-O-Wisp|p1a: Kingambit\n|-status|p1a: Kingambit|brn\n|\n|-damage|p1a: Kingambit|75/100 brn|[from] brn\n|-damage|p1b: Sneasler|89/100 brn|[from] brn\n|upkeep\n|turn|4\n|-message|Zani1200 forfeited.\n|\n|win|evokenz\n|raw|Zani1200's rating: 1112 &rarr; <strong>1093</strong><br />(-19 for losing)\n|raw|evokenz's rating: 1198 &rarr; <strong>1217</strong><br />(+19 for winning)\n",
+  "uploadtime": 1776084218,
+  "views": 8,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1093,
+  "private": 0,
+  "password": null
+}

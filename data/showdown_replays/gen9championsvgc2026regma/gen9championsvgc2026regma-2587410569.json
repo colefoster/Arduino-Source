@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2587410569",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "KleeStan",
+    "Devta"
+  ],
+  "log": "|j|\u2606KleeStan\n|j|\u2606Devta\n|t:|1776529518\n|gametype|doubles\n|player|p1|KleeStan|guitarist-gen4|1263\n|player|p2|Devta|hexmaniac-gen6|1236\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Sableye, L50, M, shiny|\n|poke|p1|Gengar, L50, M|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Lucario, L50, F, shiny|\n|poke|p1|Maushold, L50|\n|poke|p1|Aerodactyl, L50, F|\n|poke|p2|Delphox, L50, F, shiny|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Kingambit, L50, F|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Floette-Eternal, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by KleeStan)\n|inactive|KleeStan has 60 seconds left.\n|inactive|Devta has 60 seconds left.\n|\n|t:|1776529555\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Sableye|Sableye, L50, M, shiny|100/100\n|switch|p1b: Gengar|Gengar, L50, M|100/100\n|switch|p2a: Sneasler|Sneasler, L50, M|100/100\n|switch|p2b: Basculegion|Basculegion, L50, M|100/100\n|turn|1\n|inactive|Devta has 30 seconds left.\n|\n|t:|1776529582\n|switch|p2a: Kingambit|Kingambit, L50, F|100/100\n|move|p1a: Sableye|Thunder Wave|p2b: Basculegion\n|-status|p2b: Basculegion|par\n|move|p1b: Gengar|Hex|p2b: Basculegion\n|-supereffective|p2b: Basculegion|1\n|-damage|p2b: Basculegion|0 fnt\n|faint|p2b: Basculegion\n|\n|upkeep\n|\n|t:|1776529589\n|switch|p2b: Floette|Floette-Eternal, L50, F|100/100\n|turn|2\n|\n|t:|1776529609\n|detailschange|p2b: Floette|Floette-Mega, L50, F\n|-mega|p2b: Floette|Floette|Floettite\n|-ability|p2b: Floette|Fairy Aura\n|move|p2a: Kingambit|Sucker Punch||[still]\n|-fail|p2a: Kingambit\n|move|p1a: Sableye|Gravity|p1a: Sableye\n|-fieldstart|move: Gravity\n|move|p1b: Gengar|Hypnosis|p2a: Kingambit\n|-status|p2a: Kingambit|slp|[from] move: Hypnosis\n|move|p2b: Floette|Dazzling Gleam|p1a: Sableye|[spread] p1a,p1b\n|-supereffective|p1a: Sableye|1\n|-enditem|p1a: Sableye|Roseli Berry|[eat]\n|-enditem|p1a: Sableye|Roseli Berry|[weaken]\n|-resisted|p1b: Gengar|1\n|-damage|p1a: Sableye|41/100\n|-damage|p1b: Gengar|57/100\n|-start|p2b: Floette|Disable|Dazzling Gleam|[from] ability: Cursed Body|[of] p1b: Gengar\n|\n|upkeep\n|turn|3\n|\n|t:|1776529629\n|move|p1a: Sableye|Encore|p2b: Floette\n|-start|p2b: Floette|Encore\n|move|p1b: Gengar|Sludge Bomb|p2b: Floette\n|-supereffective|p2b: Floette|1\n|-damage|p2b: Floette|20/100\n|cant|p2b: Floette|Disable|Dazzling Gleam\n|cant|p2a: Kingambit|slp\n|\n|upkeep\n|turn|4\n|-message|Devta forfeited.\n|\n|win|KleeStan\n|raw|KleeStan's rating: 1263 &rarr; <strong>1286</strong><br />(+23 for winning)\n|raw|Devta's rating: 1236 &rarr; <strong>1213</strong><br />(-23 for losing)\n",
+  "uploadtime": 1776529635,
+  "views": 32,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1213,
+  "private": 0,
+  "password": null
+}

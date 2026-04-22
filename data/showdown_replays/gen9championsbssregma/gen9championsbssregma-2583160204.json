@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2583160204",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "haya7taka",
+    "DeaRubbish"
+  ],
+  "log": "|j|\u2606haya7taka\n|j|\u2606DeaRubbish\n|t:|1776149343\n|gametype|singles\n|player|p1|haya7taka|102|1132\n|player|p2|DeaRubbish|2|1154\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Aerodactyl, L50, M|\n|poke|p1|Gyarados, L50, M|\n|poke|p1|Sableye, L50, M|\n|poke|p1|Volcarona, L50, M|\n|poke|p1|Goodra-Hisui, L50, M|\n|poke|p1|Ditto, L50|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Charizard, L50, F|\n|poke|p2|Gengar, L50, F|\n|poke|p2|Corviknight, L50, M|\n|poke|p2|Umbreon, L50, F|\n|poke|p2|Primarina, L50, M|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by haya7taka)\n|inactive|haya7taka has 60 seconds left.\n|inactive|DeaRubbish has 60 seconds left.\n|\n|t:|1776149400\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Aerodactyl|Aerodactyl, L50, M|100/100\n|switch|p2a: Corviknight|Corviknight, L50, M|100/100\n|-ability|p1a: Aerodactyl|Pressure\n|-ability|p2a: Corviknight|Pressure\n|turn|1\n|\n|t:|1776149409\n|move|p1a: Aerodactyl|Stealth Rock|p2a: Corviknight\n|-sidestart|p2: DeaRubbish|move: Stealth Rock\n|move|p2a: Corviknight|U-turn|p1a: Aerodactyl\n|-resisted|p1a: Aerodactyl|1\n|-damage|p1a: Aerodactyl|93/100\n|\n|t:|1776149414\n|switch|p2a: Garchomp|Garchomp, L50, M|100/100|[from] U-turn\n|-damage|p2a: Garchomp|94/100|[from] Stealth Rock\n|\n|upkeep\n|turn|2\n|\n|t:|1776149422\n|move|p1a: Aerodactyl|Taunt|p2a: Garchomp\n|-start|p2a: Garchomp|move: Taunt\n|cant|p2a: Garchomp|move: Taunt|Stealth Rock\n|\n|upkeep\n|turn|3\n|j| p74\n|\n|t:|1776149430\n|move|p1a: Aerodactyl|Earthquake|p2a: Garchomp\n|-damage|p2a: Garchomp|66/100\n|move|p2a: Garchomp|Rock Tomb|p1a: Aerodactyl\n|-supereffective|p1a: Aerodactyl|1\n|-damage|p1a: Aerodactyl|46/100\n|-unboost|p1a: Aerodactyl|spe|1\n|\n|upkeep\n|turn|4\n|\n|t:|1776149447\n|move|p2a: Garchomp|Rock Tomb|p1a: Aerodactyl\n|-supereffective|p1a: Aerodactyl|1\n|-damage|p1a: Aerodactyl|2/100\n|-unboost|p1a: Aerodactyl|spe|1\n|move|p1a: Aerodactyl|Rock Tomb|p2a: Garchomp\n|-resisted|p2a: Garchomp|1\n|-damage|p2a: Garchomp|54/100\n|-unboost|p2a: Garchomp|spe|1\n|\n|-end|p2a: Garchomp|move: Taunt\n|upkeep\n|turn|5\n|\n|t:|1776149460\n|move|p2a: Garchomp|Stealth Rock|p1a: Aerodactyl\n|-sidestart|p1: haya7taka|move: Stealth Rock\n|move|p1a: Aerodactyl|Earthquake|p2a: Garchomp\n|-damage|p2a: Garchomp|27/100\n|\n|upkeep\n|turn|6\n|-message|haya7taka forfeited.\n|\n|win|DeaRubbish\n|raw|haya7taka's rating: 1132 &rarr; <strong>1109</strong><br />(-23 for losing)\n|raw|DeaRubbish's rating: 1154 &rarr; <strong>1177</strong><br />(+23 for winning)\n|l|\u2606haya7taka\n|player|p1|\n",
+  "uploadtime": 1776149472,
+  "views": 5,
+  "formatid": "gen9championsbssregma",
+  "rating": 1109,
+  "private": 0,
+  "password": null
+}

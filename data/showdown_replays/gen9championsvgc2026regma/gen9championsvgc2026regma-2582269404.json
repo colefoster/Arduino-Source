@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582269404",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "HMQ0512",
+    "maxd08"
+  ],
+  "log": "|j|\u2606HMQ0512\n|j|\u2606maxd08\n|t:|1776078183\n|gametype|doubles\n|player|p1|HMQ0512|169|1090\n|player|p2|maxd08|skierf|1000\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Charizard, L50, F|\n|poke|p1|Kingambit, L50, M|\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Aerodactyl, L50, F|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Rotom-Wash, L50|\n|poke|p2|Gardevoir, L50, F|\n|poke|p2|Farigiraf, L50, F|\n|poke|p2|Aggron, L50, M|\n|poke|p2|Glimmora, L50, F|\n|poke|p2|Mr. Rime, L50, M|\n|poke|p2|Meowstic, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by maxd08)\nmaxd08 rejected open team sheets.\n|\n|t:|1776078221\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Charizard|Charizard, L50, F|100/100\n|switch|p1b: Garchomp|Garchomp, L50, F|100/100\n|switch|p2a: Aggron|Aggron, L50, M, shiny|100/100\n|switch|p2b: Meowstic|Meowstic, L50, M|100/100\n|turn|1\n|\n|t:|1776078234\n|detailschange|p1a: Charizard|Charizard-Mega-Y, L50, F\n|-mega|p1a: Charizard|Charizard|Charizardite Y\n|-weather|SunnyDay|[from] ability: Drought|[of] p1a: Charizard\n|move|p2b: Meowstic|Light Screen|p2b: Meowstic\n|-sidestart|p2: maxd08|move: Light Screen\n|move|p1b: Garchomp|Earthquake|p2b: Meowstic|[spread] p2a,p2b\n|-immune|p1a: Charizard\n|-supereffective|p2a: Aggron|2\n|-damage|p2a: Aggron|13/100\n|-damage|p2b: Meowstic|40/100\n|move|p1a: Charizard|Heat Wave|p2a: Aggron|[spread] p2a,p2b\n|-damage|p2a: Aggron|0 fnt\n|-damage|p2b: Meowstic|0 fnt\n|faint|p2a: Aggron\n|faint|p2b: Meowstic\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|-message|maxd08 forfeited.\n|\n|win|HMQ0512\n|raw|HMQ0512's rating: 1090 &rarr; <strong>1110</strong><br />(+20 for winning)\n|raw|maxd08's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n",
+  "uploadtime": 1776078248,
+  "views": 9,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

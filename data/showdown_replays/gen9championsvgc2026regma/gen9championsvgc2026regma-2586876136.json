@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586876136",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "geometry12345",
+    "thoribbin"
+  ],
+  "log": "|j|\u2606geometry12345\n|j|\u2606thoribbin\n|t:|1776467598\n|gametype|doubles\n|player|p1|geometry12345|170|1095\n|player|p2|thoribbin|delinquent|1000\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Camerupt, L50, M|\n|poke|p1|Oranguru, L50, M|\n|poke|p1|Sneasler, L50, F|\n|poke|p1|Emboar, L50, F|\n|poke|p1|Kingambit, L50, M|\n|poke|p1|Sylveon, L50, F|\n|poke|p2|Beedrill, L50, M|\n|poke|p2|Scizor, L50, F|\n|poke|p2|Araquanid, L50, M|\n|poke|p2|Vivillon-Fancy, L50, M|\n|poke|p2|Kleavor, L50, F|\n|poke|p2|Volcarona, L50, M|\n|teampreview|4\nthoribbin rejected open team sheets.\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by geometry12345)\n|\n|t:|1776467634\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Camerupt|Camerupt, L50, M|100/100\n|switch|p1b: Oranguru|Oranguru, L50, M|100/100\n|switch|p2a: Vivillon|Vivillon-Fancy, L50, M, shiny|100/100\n|switch|p2b: Volcarona|Volcarona, L50, M, shiny|100/100\n|turn|1\n|\n|t:|1776467653\n|switch|p2b: Araquanid|Araquanid, L50, M, shiny|100/100\n|detailschange|p1a: Camerupt|Camerupt-Mega, L50, M\n|-mega|p1a: Camerupt|Camerupt|Cameruptite\n|move|p1a: Camerupt|Protect|p1a: Camerupt\n|-singleturn|p1a: Camerupt|Protect\n|move|p2a: Vivillon|Sleep Powder|p1a: Camerupt\n|-activate|p1a: Camerupt|move: Protect\n|move|p1b: Oranguru|Trick Room|p1b: Oranguru\n|-fieldstart|move: Trick Room|[of] p1b: Oranguru\n|\n|upkeep\n|turn|2\n|\n|t:|1776467674\n|move|p2b: Araquanid|Wide Guard|p2b: Araquanid\n|-singleturn|p2b: Araquanid|Wide Guard\n|move|p1a: Camerupt|Heat Wave|p2a: Vivillon|[spread] \n|-activate|p2a: Vivillon|move: Wide Guard\n|-activate|p2b: Araquanid|move: Wide Guard\n|move|p1b: Oranguru|Instruct|p1a: Camerupt\n|-singleturn|p1a: Camerupt|move: Instruct|[of] p1b: Oranguru\n|move|p1a: Camerupt|Heat Wave|p2b: Araquanid|[spread] \n|-activate|p2a: Vivillon|move: Wide Guard\n|-activate|p2b: Araquanid|move: Wide Guard\n|move|p2a: Vivillon|Sleep Powder|p1a: Camerupt\n|-status|p1a: Camerupt|slp|[from] move: Sleep Powder\n|\n|upkeep\n|turn|3\n|-message|geometry12345 forfeited.\n|\n|win|thoribbin\n|raw|geometry12345's rating: 1095 &rarr; <strong>1064</strong><br />(-31 for losing)\n|raw|thoribbin's rating: 1000 &rarr; <strong>1051</strong><br />(+51 for winning)\n|l|\u2606geometry12345\n|player|p1|\n",
+  "uploadtime": 1776467696,
+  "views": 37,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1051,
+  "private": 0,
+  "password": null
+}

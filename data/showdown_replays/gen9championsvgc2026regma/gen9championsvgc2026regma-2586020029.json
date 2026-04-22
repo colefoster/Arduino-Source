@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586020029",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "toxmyself",
+    "Teik"
+  ],
+  "log": "|j|\u2606toxmyself\n|j|\u2606Teik\n|t:|1776390905\n|gametype|doubles\n|player|p1|toxmyself|norman|1317\n|player|p2|Teik|266|1276\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Charizard, L50, F|\n|poke|p1|Milotic, L50, F|\n|poke|p1|Aegislash, L50, F|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Aerodactyl, L50, F|\n|poke|p1|Sylveon, L50, M|\n|poke|p2|Aggron, L50, F|\n|poke|p2|Pelipper, L50, F|\n|poke|p2|Decidueye-Hisui, L50, M|\n|poke|p2|Farigiraf, L50, M|\n|poke|p2|Rhyperior, L50, M|\n|poke|p2|Bellibolt, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by toxmyself)\n|inactive|toxmyself has 60 seconds left.\n|inactive|Teik has 60 seconds left.\n|\n|t:|1776390936\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Sneasler|Sneasler, L50, M|100/100\n|switch|p1b: Sylveon|Sylveon, L50, M|100/100\n|switch|p2a: Rhyperior|Rhyperior, L50, M|100/100\n|switch|p2b: Farigiraf|Farigiraf, L50, M|100/100\n|turn|1\n|\n|t:|1776390953\n|move|p2b: Farigiraf|Protect|p2b: Farigiraf\n|-singleturn|p2b: Farigiraf|Protect\n|move|p1a: Sneasler|Dire Claw|p2b: Farigiraf\n|-activate|p2b: Farigiraf|move: Protect\n|move|p1b: Sylveon|Hyper Voice|p2b: Farigiraf|[spread] p2a\n|-activate|p2b: Farigiraf|move: Protect\n|-damage|p2a: Rhyperior|47/100\n|move|p2a: Rhyperior|Earthquake|p1b: Sylveon|[spread] p1a,p1b\n|-activate|p2b: Farigiraf|move: Protect\n|-supereffective|p1a: Sneasler|1\n|-damage|p1a: Sneasler|0 fnt\n|-damage|p1b: Sylveon|56/100\n|faint|p1a: Sneasler\n|\n|upkeep\n|c|\u2606toxmyself|yea\n|-message|toxmyself forfeited.\n|\n|win|Teik\n|raw|toxmyself's rating: 1317 &rarr; <strong>1295</strong><br />(-22 for losing)\n|raw|Teik's rating: 1276 &rarr; <strong>1304</strong><br />(+28 for winning)\n",
+  "uploadtime": 1776390959,
+  "views": 39,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1295,
+  "private": 0,
+  "password": null
+}

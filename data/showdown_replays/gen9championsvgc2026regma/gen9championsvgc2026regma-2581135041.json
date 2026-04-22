@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2581135041",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "lilsxooby",
+    "ehk1ttymay"
+  ],
+  "log": "|j|\u2606lilsxooby\n|j|\u2606ehk1ttymay\n|t:|1775963239\n|gametype|doubles\n|player|p1|lilsxooby|benga|1000\n|player|p2|ehk1ttymay|266|1000\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Glimmora, L50, M|\n|poke|p1|Gardevoir, L50, F|\n|poke|p1|Delphox, L50, F|\n|poke|p1|Aerodactyl, L50, M|\n|poke|p1|Meowstic, L50, M|\n|poke|p1|Dragapult, L50, M|\n|poke|p2|Meganium, L50, F|\n|poke|p2|Clefable, L50, M|\n|poke|p2|Glimmora, L50, F|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Espathra, L50, M|\n|poke|p2|Aerodactyl, L50, M|\n|teampreview|4\n|c|\u2606lilsxooby|glhf!\n|c|\u2606ehk1ttymay|glhf!\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by ehk1ttymay)\nehk1ttymay rejected open team sheets.\n|\n|t:|1775963304\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Aerodactyl|Aerodactyl, L50, M|100/100\n|switch|p1b: The Rock|Glimmora, L50, M, shiny|100/100\n|switch|p2a: Meganium|Meganium, L50, F|100/100\n|switch|p2b: Clefable|Clefable, L50, M|100/100\n|turn|1\n|\n|t:|1775963318\n|detailschange|p2a: Meganium|Meganium-Mega, L50, F\n|-mega|p2a: Meganium|Meganium|Meganiumite\n|move|p1b: The Rock|Protect|p1b: The Rock\n|-singleturn|p1b: The Rock|Protect\n|move|p2b: Clefable|Follow Me|p2b: Clefable\n|-singleturn|p2b: Clefable|move: Follow Me\n|move|p1a: Aerodactyl|Tailwind|p1a: Aerodactyl\n|-sidestart|p1: lilsxooby|move: Tailwind\n|move|p2a: Meganium|Sunny Day|p2a: Meganium\n|-weather|SunnyDay\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|turn|2\n|\n|t:|1775963341\n|switch|p1a: Gardevoir|Gardevoir, L50, F|100/100\n|detailschange|p1b: The Rock|Glimmora-Mega, L50, M, shiny\n|-mega|p1b: The Rock|Glimmora|Glimmoranite\n|move|p1b: The Rock|Sludge Wave|p2b: Clefable|[spread] p2a,p2b\n|-activate|p1a: Gardevoir|ability: Telepathy\n|-supereffective|p2a: Meganium|2\n|-supereffective|p2b: Clefable|1\n|-damage|p2a: Meganium|0 fnt\n|-enditem|p2b: Clefable|Focus Sash\n|-damage|p2b: Clefable|1/100\n|faint|p2a: Meganium\n|move|p2b: Clefable|Cosmic Power|p2b: Clefable\n|-boost|p2b: Clefable|def|1\n|-boost|p2b: Clefable|spd|1\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|-message|ehk1ttymay forfeited.\n|\n|win|lilsxooby\n|raw|lilsxooby's rating: 1000 &rarr; <strong>1040</strong><br />(+40 for winning)\n|raw|ehk1ttymay's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|l|\u2606ehk1ttymay\n|player|p2|\n",
+  "uploadtime": 1775963362,
+  "views": 12,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2585647918",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "InSeqntial",
+    "jacrepid"
+  ],
+  "log": "|j|\u2606InSeqntial\n|j|\u2606jacrepid\n|t:|1776361117\n|gametype|doubles\n|player|p1|InSeqntial|hugh|1083\n|player|p2|jacrepid|acetrainer-gen4dp|1120\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Meganium, L50, F|\n|poke|p1|Aerodactyl, L50, F|\n|poke|p1|Tauros-Paldea-Aqua, L50, M|\n|poke|p1|Kangaskhan, L50, F|\n|poke|p1|Typhlosion-Hisui, L50, M|\n|poke|p1|Archaludon, L50, F|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Charizard, L50, M|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Whimsicott, L50, F|\n|poke|p2|Incineroar, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by InSeqntial)\n|inactive|InSeqntial has 60 seconds left.\n|inactive|InSeqntial has 30 seconds left.\n|inactive|InSeqntial has 20 seconds left.\n|inactive|InSeqntial has 15 seconds left.\n|inactive|InSeqntial has 10 seconds left.\n|inactive|InSeqntial has 5 seconds left.\n|\n|t:|1776361208\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Meganium|Meganium, L50, F|100/100\n|switch|p1b: Aerodactyl|Aerodactyl, L50, F|100/100\n|switch|p2a: Floette|Floette-Eternal, L50, F|100/100\n|switch|p2b: Sneasler|Sneasler, L50, F|100/100\n|-ability|p1b: Aerodactyl|Unnerve\n|turn|1\n|inactive|InSeqntial has 30 seconds left.\n|inactive|InSeqntial has 20 seconds left.\n|inactive|InSeqntial has 15 seconds left.\n|inactive|InSeqntial has 10 seconds left.\n|inactive|InSeqntial has 5 seconds left.\n|\n|t:|1776361260\n|move|p2b: Sneasler|Fake Out|p1a: Meganium\n|-damage|p1a: Meganium|86/100\n|move|p1b: Aerodactyl|Tailwind|p1b: Aerodactyl\n|-sidestart|p1: InSeqntial|move: Tailwind\n|cant|p1a: Meganium|flinch\n|move|p2a: Floette|Calm Mind|p2a: Floette\n|-boost|p2a: Floette|spa|1\n|-boost|p2a: Floette|spd|1\n|\n|upkeep\n|turn|2\n|-message|InSeqntial forfeited.\n|\n|win|jacrepid\n|raw|InSeqntial's rating: 1083 &rarr; <strong>1063</strong><br />(-20 for losing)\n|raw|jacrepid's rating: 1120 &rarr; <strong>1142</strong><br />(+22 for winning)\n",
+  "uploadtime": 1776361266,
+  "views": 17,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1063,
+  "private": 0,
+  "password": null
+}

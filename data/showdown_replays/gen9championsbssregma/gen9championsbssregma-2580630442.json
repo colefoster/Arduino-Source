@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2580630442",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "Mimiropu",
+    "Selena2002"
+  ],
+  "log": "|j|\u2606Mimiropu\n|j|\u2606Selena2002\n|t:|1775919633\n|gametype|singles\n|player|p1|Mimiropu|266|1107\n|player|p2|Selena2002|266|1008\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Manectric, L50, F|\n|poke|p1|Scizor, L50, F|\n|poke|p1|Milotic, L50, M|\n|poke|p1|Ditto, L50|\n|poke|p1|Skarmory, L50, F|\n|poke|p1|Gengar, L50, F|\n|poke|p2|Venusaur, L50, M|\n|poke|p2|Milotic, L50, F|\n|poke|p2|Greninja-*, L50, F|\n|poke|p2|Skarmory, L50, F|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Chandelure, L50, M|\n|teampreview|3\n|\n|t:|1775919644\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Manectric|Manectric, L50, F|100/100\n|switch|p2a: Garchomp|Garchomp, L50, M|100/100\n|turn|1\n|\n|t:|1775919655\n|switch|p1a: Milotic|Milotic, L50, M|100/100\n|move|p2a: Garchomp|Rock Slide|p1a: Milotic|[miss]\n|-miss|p2a: Garchomp|p1a: Milotic\n|\n|upkeep\n|turn|2\n|j| saddeq\n|l| saddeq\n|\n|t:|1775919663\n|switch|p2a: Venusaur|Venusaur, L50, M|100/100\n|move|p1a: Milotic|Scald|p2a: Venusaur\n|-resisted|p2a: Venusaur|1\n|-damage|p2a: Venusaur|84/100\n|-status|p2a: Venusaur|brn\n|\n|-damage|p2a: Venusaur|79/100 brn|[from] brn\n|upkeep\n|turn|3\n|\n|t:|1775919676\n|detailschange|p2a: Venusaur|Venusaur-Mega, L50, M\n|-mega|p2a: Venusaur|Venusaur|Venusaurite\n|move|p2a: Venusaur|Giga Drain|p1a: Milotic\n|-supereffective|p1a: Milotic|1\n|-damage|p1a: Milotic|56/100\n|-heal|p2a: Venusaur|100/100 brn|[from] drain|[of] p1a: Milotic\n|move|p1a: Milotic|Mirror Coat|p2a: Venusaur\n|-damage|p2a: Venusaur|4/100 brn\n|\n|-damage|p2a: Venusaur|0 fnt|[from] brn\n|faint|p2a: Venusaur\n|upkeep\n|\n|t:|1775919689\n|switch|p2a: Garchomp|Garchomp, L50, M|100/100\n|turn|4\n|\n|t:|1775919693\n|move|p2a: Garchomp|Earthquake|p1a: Milotic\n|-damage|p1a: Milotic|20/100\n|move|p1a: Milotic|Recover|p1a: Milotic\n|-heal|p1a: Milotic|70/100\n|\n|upkeep\n|turn|5\n|-message|Selena2002 forfeited.\n|\n|win|Mimiropu\n|raw|Mimiropu's rating: 1107 &rarr; <strong>1125</strong><br />(+18 for winning)\n|raw|Selena2002's rating: 1008 &rarr; <strong>1000</strong><br />(-8 for losing)\n|l|\u2606Selena2002\n|player|p2|\n",
+  "uploadtime": 1775919707,
+  "views": 29,
+  "formatid": "gen9championsbssregma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

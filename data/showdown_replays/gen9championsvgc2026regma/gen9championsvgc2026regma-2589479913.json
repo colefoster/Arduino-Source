@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2589479913",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Shadowflamepkm",
+    "pedrohangares14"
+  ],
+  "log": "|j|\u2606Shadowflamepkm\n|j|\u2606pedrohangares14\n|t:|1776726727\n|gametype|doubles\n|player|p1|Shadowflamepkm|red|1252\n|player|p2|pedrohangares14|266|1277\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Charizard, L50, F, shiny|\n|poke|p1|Venusaur, L50, F|\n|poke|p1|Sneasler, L50, M, shiny|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Farigiraf, L50, F|\n|poke|p1|Torkoal, L50, M|\n|poke|p2|Gengar, L50, M|\n|poke|p2|Politoed, L50, M|\n|poke|p2|Palafin, L50, M|\n|poke|p2|Sinistcha-Masterpiece, L50|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Archaludon, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by pedrohangares14)\n|c|\u2606Shadowflamepkm|Glhf\nShadowflamepkm has agreed to open team sheets.\n|inactive|Shadowflamepkm has 60 seconds left.\n|\n|t:|1776726777\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Charizard|Charizard, L50, F, shiny|100/100\n|switch|p1b: Venusaur|Venusaur, L50, F|100/100\n|switch|p2a: Gengar|Gengar, L50, M|100/100\n|switch|p2b: Palafin|Palafin, L50, M|100/100\n|turn|1\n|\n|t:|1776726791\n|detailschange|p2a: Gengar|Gengar-Mega, L50, M\n|-mega|p2a: Gengar|Gengar|Gengarite\n|detailschange|p1a: Charizard|Charizard-Mega-Y, L50, F, shiny\n|-mega|p1a: Charizard|Charizard|Charizardite Y\n|-weather|SunnyDay|[from] ability: Drought|[of] p1a: Charizard\n|move|p1b: Venusaur|Leaf Storm|p2b: Palafin\n|-supereffective|p2b: Palafin|1\n|-damage|p2b: Palafin|0 fnt\n|-unboost|p1b: Venusaur|spa|2\n|faint|p2b: Palafin\n|move|p2a: Gengar|Perish Song|p2a: Gengar\n|-start|p1a: Charizard|perish3|[silent]\n|-start|p1b: Venusaur|perish3|[silent]\n|-start|p2a: Gengar|perish3|[silent]\n|-fieldactivate|move: Perish Song\n|move|p1a: Charizard|Weather Ball|p2a: Gengar\n|-damage|p2a: Gengar|0 fnt\n|faint|p2a: Gengar\n|\n|-weather|SunnyDay|[upkeep]\n|-start|p1b: Venusaur|perish3\n|-start|p1a: Charizard|perish3\n|upkeep\n|-message|pedrohangares14 forfeited.\n|\n|win|Shadowflamepkm\n|raw|Shadowflamepkm's rating: 1252 &rarr; <strong>1279</strong><br />(+27 for winning)\n|raw|pedrohangares14's rating: 1277 &rarr; <strong>1250</strong><br />(-27 for losing)\n|l|\u2606pedrohangares14\n|player|p2|\n",
+  "uploadtime": 1776726811,
+  "views": 8,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1250,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584827341",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "toxmyself",
+    "skeledirgeforpres"
+  ],
+  "log": "|j|\u2606toxmyself\n|j|\u2606skeledirgeforpres\n|t:|1776286694\n|gametype|doubles\n|player|p1|toxmyself|norman|1230\n|player|p2|skeledirgeforpres|rocketgrunt|1157\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Charizard, L50, M|\n|poke|p1|Venusaur, L50, M|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Gardevoir, L50, M|\n|poke|p1|Milotic, L50, F|\n|poke|p2|Aegislash, L50, F|\n|poke|p2|Lopunny, L50, M|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Aerodactyl, L50, M|\n|poke|p2|Espathra, L50, M|\n|poke|p2|Glimmora, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by toxmyself)\n|inactive|toxmyself has 60 seconds left.\n|\n|t:|1776286726\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Gardevoir|Gardevoir, L50, M|100/100\n|switch|p1b: Garchomp|Garchomp, L50, F|100/100\n|switch|p2a: Glimmora|Glimmora, L50, M|100/100\n|switch|p2b: Aerodactyl|Aerodactyl, L50, M|100/100\n|-ability|p2b: Aerodactyl|Unnerve\n|turn|1\n|\n|t:|1776286740\n|move|p2a: Glimmora|Spiky Shield|p2a: Glimmora\n|-singleturn|p2a: Glimmora|move: Protect\n|move|p1a: Gardevoir|Moonblast|p2b: Aerodactyl\n|-crit|p2b: Aerodactyl\n|-damage|p2b: Aerodactyl|0 fnt\n|faint|p2b: Aerodactyl\n|move|p1b: Garchomp|Dragon Claw|p2a: Glimmora\n|-activate|p2a: Glimmora|move: Protect\n|-damage|p1b: Garchomp|88/100|[from] Spiky Shield|[of] p2a: Glimmora\n|\n|upkeep\n|\n|t:|1776286751\n|switch|p2b: Espathra|Espathra, L50, M|100/100\n|turn|2\n|\n|t:|1776286764\n|detailschange|p2a: Glimmora|Glimmora-Mega, L50, M\n|-mega|p2a: Glimmora|Glimmora|Glimmoranite\n|move|p1a: Gardevoir|Moonblast|p2b: Espathra\n|-damage|p2b: Espathra|37/100\n|move|p1b: Garchomp|Earthquake|p2a: Glimmora|[spread] p2a,p2b\n|-activate|p1a: Gardevoir|ability: Telepathy\n|-supereffective|p2a: Glimmora|2\n|-damage|p2a: Glimmora|0 fnt\n|-damage|p2b: Espathra|0 fnt\n|faint|p2a: Glimmora\n|faint|p2b: Espathra\n|\n|upkeep\n|-message|skeledirgeforpres forfeited.\n|\n|win|toxmyself\n|raw|toxmyself's rating: 1230 &rarr; <strong>1250</strong><br />(+20 for winning)\n|raw|skeledirgeforpres's rating: 1157 &rarr; <strong>1137</strong><br />(-20 for losing)\n",
+  "uploadtime": 1776286775,
+  "views": 21,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1137,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2581537155",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "SunTufo",
+    "King_Dabes"
+  ],
+  "log": "|j|\u2606SunTufo\n|j|\u2606King_Dabes\n|t:|1776009141\n|gametype|doubles\n|player|p1|SunTufo|li|1092\n|player|p2|King_Dabes|266|1153\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Skarmory, L50, M|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Milotic, L50, F|\n|poke|p1|Rotom-Heat, L50|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Tyranitar, L50, M|\n|poke|p2|Glimmora, L50, M|\n|poke|p2|Tyranitar, L50, M|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Rotom-Wash, L50|\n|poke|p2|Corviknight, L50, M|\n|poke|p2|Gardevoir, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by SunTufo)\n|inactive|King_Dabes has 60 seconds left.\n|\n|t:|1776009174\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Skarmory|Skarmory, L50, M, shiny|100/100\n|switch|p1b: Milotic|Milotic, L50, F, shiny|100/100\n|switch|p2a: Rotom|Rotom-Wash, L50|100/100\n|switch|p2b: Incineroar|Incineroar, L50, F|100/100\n|-ability|p2b: Incineroar|Intimidate|boost\n|-unboost|p1a: Skarmory|atk|1\n|-unboost|p1b: Milotic|atk|1\n|-ability|p1b: Milotic|Competitive|boost\n|-boost|p1b: Milotic|spa|2\n|turn|1\n|inactive|SunTufo has 30 seconds left.\n|\n|t:|1776009204\n|move|p1a: Skarmory|Protect|p1a: Skarmory\n|-singleturn|p1a: Skarmory|Protect\n|move|p1b: Milotic|Protect|p1b: Milotic\n|-singleturn|p1b: Milotic|Protect\n|move|p2a: Rotom|Thunder Wave|p1b: Milotic\n|-activate|p1b: Milotic|move: Protect\n|move|p2b: Incineroar|Flare Blitz|p1a: Skarmory\n|-activate|p1a: Skarmory|move: Protect\n|\n|upkeep\n|turn|2\n|\n|t:|1776009217\n|switch|p2b: Corviknight|Corviknight, L50, M|100/100\n|move|p1a: Skarmory|Tailwind|p1a: Skarmory\n|-sidestart|p1: SunTufo|move: Tailwind\n|move|p1b: Milotic|Scald|p2b: Corviknight\n|-damage|p2b: Corviknight|35/100\n|-status|p2b: Corviknight|brn\n|move|p2a: Rotom|Thunder Wave|p1b: Milotic\n|-status|p1b: Milotic|par\n|\n|-damage|p2b: Corviknight|29/100 brn|[from] brn\n|upkeep\n|turn|3\n|\n|t:|1776009232\n|switch|p1a: Garchomp|Garchomp, L50, M, shiny|100/100\n|move|p1b: Milotic|Scald|p2b: Corviknight\n|-damage|p2b: Corviknight|0 fnt\n|faint|p2b: Corviknight\n|move|p2a: Rotom|Volt Switch|p1a: Garchomp\n|-immune|p1a: Garchomp\n|\n|upkeep\n|-message|King_Dabes forfeited.\n|\n|win|SunTufo\n|raw|SunTufo's rating: 1092 &rarr; <strong>1123</strong><br />(+31 for winning)\n|raw|King_Dabes's rating: 1153 &rarr; <strong>1124</strong><br />(-29 for losing)\n",
+  "uploadtime": 1776009240,
+  "views": 20,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1123,
+  "private": 0,
+  "password": null
+}

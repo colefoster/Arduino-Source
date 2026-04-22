@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2588303422",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Duetti",
+    "emmesg"
+  ],
+  "log": "|j|\u2606Duetti\n|j|\u2606emmesg\n|t:|1776622460\n|gametype|doubles\n|player|p1|Duetti|265|1528\n|player|p2|emmesg|102|1633\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Charizard, L50, F, shiny|\n|poke|p1|Whimsicott, L50, F, shiny|\n|poke|p1|Garchomp, L50, M, shiny|\n|poke|p1|Sneasler, L50, F, shiny|\n|poke|p1|Sinistcha, L50, shiny|\n|poke|p1|Aggron, L50, F, shiny|\n|poke|p2|Kingambit, L50, M|\n|poke|p2|Gengar, L50, M|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Palafin, L50, M|\n|poke|p2|Sableye, L50, M|\n|poke|p2|Politoed, L50, M|\n|teampreview|4\n|\n|t:|1776622483\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Garchomp|Garchomp, L50, M, shiny|100/100\n|switch|p1b: Sneasler|Sneasler, L50, F, shiny|100/100\n|switch|p2a: Gengar|Gengar, L50, M|100/100\n|switch|p2b: Sableye|Sableye, L50, M|100/100\n|turn|1\n|j| RedPlaysVGC\n|\n|t:|1776622515\n|detailschange|p2a: Gengar|Gengar-Mega, L50, M\n|-mega|p2a: Gengar|Gengar|Gengarite\n|move|p1b: Sneasler|Quick Guard|p1b: Sneasler\n|-singleturn|p1b: Sneasler|Quick Guard\n|move|p2b: Sableye|Fake Out|p1a: Garchomp\n|-activate|p1a: Garchomp|move: Quick Guard\n|move|p1a: Garchomp|Stomping Tantrum|p2a: Gengar\n|-supereffective|p2a: Gengar|1\n|-damage|p2a: Gengar|0 fnt\n|faint|p2a: Gengar\n|\n|upkeep\n|j| crosschampion\n|-message|emmesg forfeited.\n|\n|win|Duetti\n|raw|Duetti's rating: 1528 &rarr; <strong>1554</strong><br />(+26 for winning)\n|raw|emmesg's rating: 1633 &rarr; <strong>1607</strong><br />(-26 for losing)\n|l|\u2606emmesg\n|player|p2|\n",
+  "uploadtime": 1776622532,
+  "views": 13,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1554,
+  "private": 0,
+  "password": null
+}

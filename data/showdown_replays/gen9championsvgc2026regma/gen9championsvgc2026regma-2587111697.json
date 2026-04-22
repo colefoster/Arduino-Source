@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2587111697",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "chaini xD",
+    "Spwert"
+  ],
+  "log": "|j|\u2606chaini xD\n|j|\u2606Spwert\n|t:|1776495022\n|gametype|doubles\n|player|p1|chaini xD|nurseryaide|1159\n|player|p2|Spwert|yellow|1130\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Skarmory, L50, F|\n|poke|p1|Sneasler, L50, F, shiny|\n|poke|p1|Tyranitar, L50, F|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Incineroar, L50, M, shiny|\n|poke|p1|Rotom-Wash, L50, shiny|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Aerodactyl, L50, M|\n|poke|p2|Clefable, L50, M|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Sneasler, L50, F|\n|teampreview|4\n|\n|t:|1776495045\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: DAAAAAMMMM|Skarmory, L50, F|100/100\n|switch|p1b: Sneasler|Sneasler, L50, F, shiny|100/100\n|switch|p2a: Floette|Floette-Eternal, L50, F|100/100\n|switch|p2b: Sinistcha|Sinistcha, L50|100/100\n|turn|1\n|\n|t:|1776495055\n|detailschange|p2a: Floette|Floette-Mega, L50, F\n|-mega|p2a: Floette|Floette|Floettite\n|-ability|p2a: Floette|Fairy Aura\n|detailschange|p1a: DAAAAAMMMM|Skarmory-Mega, L50, F\n|-mega|p1a: DAAAAAMMMM|Skarmory|Skarmorite\n|move|p2b: Sinistcha|Rage Powder|p2b: Sinistcha\n|-singleturn|p2b: Sinistcha|move: Rage Powder\n|move|p1b: Sneasler|Coaching|p1a: DAAAAAMMMM\n|-boost|p1a: DAAAAAMMMM|atk|1\n|-boost|p1a: DAAAAAMMMM|def|1\n|move|p1a: DAAAAAMMMM|Iron Head|p2a: Floette\n|-supereffective|p2a: Floette|1\n|-damage|p2a: Floette|0 fnt\n|faint|p2a: Floette\n|\n|upkeep\n|-message|Spwert forfeited.\n|\n|win|chaini xD\n|raw|chaini xD's rating: 1159 &rarr; <strong>1182</strong><br />(+23 for winning)\n|raw|Spwert's rating: 1130 &rarr; <strong>1107</strong><br />(-23 for losing)\n|l|\u2606Spwert\n|player|p2|\n",
+  "uploadtime": 1776495071,
+  "views": 23,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1107,
+  "private": 0,
+  "password": null
+}

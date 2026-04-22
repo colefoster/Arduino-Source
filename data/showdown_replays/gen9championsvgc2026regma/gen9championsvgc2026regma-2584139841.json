@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584139841",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "catpotatt",
+    "Skadoty"
+  ],
+  "log": "|j|\u2606catpotatt\n|j|\u2606Skadoty\n|t:|1776229706\n|gametype|doubles\n|player|p1|catpotatt|roxie|1147\n|player|p2|Skadoty|2|1062\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Talonflame, L50, M|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Gardevoir, L50, F|\n|poke|p1|Rotom-Heat, L50|\n|poke|p2|Tyranitar, L50, M|\n|poke|p2|Farigiraf, L50, F|\n|poke|p2|Torkoal, L50, F|\n|poke|p2|Crabominable, L50, M|\n|poke|p2|Kingambit, L50, M|\n|poke|p2|Dragonite, L50, F|\n|teampreview|4\n|\n|t:|1776229732\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Gardevoir|Gardevoir, L50, F|100/100\n|switch|p1b: Floette|Floette-Eternal, L50, F|100/100\n|switch|p2a: Farigiraf|Farigiraf, L50, F|100/100\n|switch|p2b: Kingambit|Kingambit, L50, M|100/100\n|turn|1\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Skadoty)\n|\n|t:|1776229749\n|detailschange|p1b: Floette|Floette-Mega, L50, F\n|-mega|p1b: Floette|Floette|Floettite\n|-ability|p1b: Floette|Fairy Aura\n|move|p1b: Floette|Light of Ruin|p2b: Kingambit\n|-damage|p2b: Kingambit|0 fnt\n|faint|p2b: Kingambit\n|-damage|p1b: Floette|37/100|[from] Recoil\n|move|p1a: Gardevoir|Imprison|p1a: Gardevoir\n|-start|p1a: Gardevoir|move: Imprison\n|cant|p2a: Farigiraf|move: Imprison|Trick Room\n|\n|upkeep\n|\n|t:|1776229762\n|switch|p2b: Crabominable|Crabominable, L50, M|100/100\n|turn|2\n|inactive|catpotatt has 30 seconds left.\n|\n|t:|1776229788\n|detailschange|p2b: Crabominable|Crabominable-Mega, L50, M\n|-mega|p2b: Crabominable|Crabominable|Crabominite\n|move|p1b: Floette|Dazzling Gleam|p2b: Crabominable|[spread] p2a,p2b\n|-supereffective|p2b: Crabominable|1\n|-crit|p2b: Crabominable\n|-damage|p2a: Farigiraf|53/100\n|-damage|p2b: Crabominable|0 fnt\n|faint|p2b: Crabominable\n|move|p1a: Gardevoir|Moonblast|p2a: Farigiraf\n|-damage|p2a: Farigiraf|4/100\n|move|p2a: Farigiraf|Dazzling Gleam|p1a: Gardevoir|[spread] p1a,p1b\n|-crit|p1b: Floette\n|-damage|p1a: Gardevoir|81/100\n|-damage|p1b: Floette|10/100\n|\n|upkeep\n|-message|Skadoty forfeited.\n|\n|win|catpotatt\n|raw|catpotatt's rating: 1147 &rarr; <strong>1166</strong><br />(+19 for winning)\n|raw|Skadoty's rating: 1062 &rarr; <strong>1047</strong><br />(-15 for losing)\n|l|\u2606Skadoty\n|player|p2|\n",
+  "uploadtime": 1776229800,
+  "views": 27,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1047,
+  "private": 0,
+  "password": null
+}

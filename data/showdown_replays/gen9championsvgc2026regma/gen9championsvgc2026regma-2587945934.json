@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2587945934",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "pppoopoo2",
+    "brojonski"
+  ],
+  "log": "|j|\u2606pppoopoo2\n|j|\u2606brojonski\n|t:|1776582949\n|gametype|doubles\n|player|p1|pppoopoo2|2|1165\n|player|p2|brojonski|brock|1250\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Cofagrigus, L50, F, shiny|\n|poke|p1|Crabominable, L50, F, shiny|\n|poke|p1|Avalugg, L50, M, shiny|\n|poke|p1|Slowking, L50, M, shiny|\n|poke|p1|Farigiraf, L50, F, shiny|\n|poke|p1|Camerupt, L50, M, shiny|\n|poke|p2|Kommo-o, L50, F|\n|poke|p2|Gengar, L50, F|\n|poke|p2|Tyranitar, L50, F|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Excadrill, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by brojonski)\n|inactive|brojonski has 60 seconds left.\n|\n|t:|1776582992\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Slowking|Slowking, L50, M, shiny|100/100\n|switch|p1b: Avalugg|Avalugg, L50, M, shiny|100/100\n|switch|p2a: Gengar|Gengar, L50, F|100/100\n|switch|p2b: Incineroar|Incineroar, L50, F|100/100\n|-ability|p2b: Incineroar|Intimidate|boost\n|-unboost|p1a: Slowking|atk|1\n|-unboost|p1b: Avalugg|atk|1\n|turn|1\n|\n|t:|1776583009\n|move|p1b: Avalugg|Protect|p1b: Avalugg\n|-singleturn|p1b: Avalugg|Protect\n|move|p2b: Incineroar|Fake Out|p1a: Slowking\n|-damage|p1a: Slowking|90/100\n|move|p2a: Gengar|Shadow Ball|p1a: Slowking\n|-supereffective|p1a: Slowking|1\n|-damage|p1a: Slowking|45/100\n|cant|p1a: Slowking|flinch\n|\n|upkeep\n|turn|2\n|-message|pppoopoo2 forfeited.\n|\n|win|brojonski\n|raw|pppoopoo2's rating: 1165 &rarr; <strong>1146</strong><br />(-19 for losing)\n|raw|brojonski's rating: 1250 &rarr; <strong>1269</strong><br />(+19 for winning)\n|l|\u2606pppoopoo2\n|player|p1|\n",
+  "uploadtime": 1776583026,
+  "views": 10,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1146,
+  "private": 0,
+  "password": null
+}

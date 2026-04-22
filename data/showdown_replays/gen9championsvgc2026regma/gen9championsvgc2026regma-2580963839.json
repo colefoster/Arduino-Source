@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2580963839",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "frrrmchl",
+    "kabutopsdomal"
+  ],
+  "log": "|j|\u2606frrrmchl\n|j|\u2606kabutopsdomal\n|t:|1775947180\n|gametype|doubles\n|player|p1|frrrmchl|101|1152\n|player|p2|kabutopsdomal|265|1252\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Oranguru, L50, M|\n|poke|p1|Torkoal, L50, F|\n|poke|p1|Bellibolt, L50, F|\n|poke|p1|Sinistcha-Masterpiece, L50|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Golurk, L50|\n|poke|p2|Clefable, L50, F|\n|poke|p2|Kingambit, L50, M|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Dragonite, L50, M|\n|poke|p2|Delphox, L50, M|\n|poke|p2|Basculegion, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by kabutopsdomal)\n|inactive|frrrmchl has 60 seconds left.\n|inactive|kabutopsdomal has 60 seconds left.\n|\n|t:|1775947236\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Oranguru|Oranguru, L50, M|100/100\n|switch|p1b: Incineroar|Incineroar, L50, F|100/100\n|switch|p2a: Kingambit|Kingambit, L50, M|100/100\n|switch|p2b: Basculegion|Basculegion, L50, M|100/100\n|-ability|p1b: Incineroar|Intimidate|boost\n|-unboost|p2a: Kingambit|atk|1\n|-ability|p2a: Kingambit|Defiant|boost\n|-boost|p2a: Kingambit|atk|2\n|-unboost|p2b: Basculegion|atk|1\n|turn|1\n|inactive|kabutopsdomal has 30 seconds left.\n|\n|t:|1775947265\n|move|p2b: Basculegion|Wave Crash|p1b: Incineroar\n|-supereffective|p1b: Incineroar|1\n|-damage|p1b: Incineroar|0 fnt\n|faint|p1b: Incineroar\n|-damage|p2b: Basculegion|67/100|[from] Recoil\n|move|p2a: Kingambit|Kowtow Cleave|p1a: Oranguru\n|-supereffective|p1a: Oranguru|1\n|-damage|p1a: Oranguru|0 fnt\n|faint|p1a: Oranguru\n|\n|upkeep\n|\n|t:|1775947275\n|switch|p1b: Bellibolt|Bellibolt, L50, F|100/100\n|switch|p1a: Golurk|Golurk, L50|100/100\n|turn|2\n|\n|t:|1775947285\n|detailschange|p1a: Golurk|Golurk-Mega, L50\n|-mega|p1a: Golurk|Golurk|Golurkite\n|move|p2a: Kingambit|Sucker Punch|p1a: Golurk\n|-supereffective|p1a: Golurk|1\n|-damage|p1a: Golurk|0 fnt\n|faint|p1a: Golurk\n|move|p2b: Basculegion|Wave Crash|p1b: Bellibolt\n|-damage|p1b: Bellibolt|54/100\n|-start|p1b: Bellibolt|Charge|Wave Crash|[from] ability: Electromorphosis\n|-damage|p2b: Basculegion|52/100|[from] Recoil\n|move|p1b: Bellibolt|Thunderbolt|p2b: Basculegion\n|-supereffective|p2b: Basculegion|1\n|-damage|p2b: Basculegion|0 fnt\n|faint|p2b: Basculegion\n|-end|p1b: Bellibolt|Charge|[silent]\n|\n|upkeep\n|-message|frrrmchl forfeited.\n|\n|win|kabutopsdomal\n|raw|frrrmchl's rating: 1152 &rarr; <strong>1134</strong><br />(-18 for losing)\n|raw|kabutopsdomal's rating: 1252 &rarr; <strong>1270</strong><br />(+18 for winning)\n|l|\u2606frrrmchl\n|player|p1|\n",
+  "uploadtime": 1775947305,
+  "views": 16,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1134,
+  "private": 0,
+  "password": null
+}

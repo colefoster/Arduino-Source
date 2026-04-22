@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2588129990",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Mango404",
+    "TwoZice"
+  ],
+  "log": "|j|\u2606Mango404\n|j|\u2606TwoZice\n|t:|1776607428\n|gametype|doubles\n|player|p1|Mango404|harlequin|1088\n|player|p2|TwoZice|266|1046\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Gardevoir, L50, F|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Slowking, L50, M|\n|poke|p1|Chandelure, L50, M|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Sableye, L50, M|\n|poke|p2|Meganium, L50, M|\n|poke|p2|Pelipper, L50, M|\n|poke|p2|Basculegion, L50, M, shiny|\n|poke|p2|Archaludon, L50, F|\n|poke|p2|Arcanine-Hisui, L50, F|\n|poke|p2|Gengar, L50, M|\n|teampreview|4\n|\n|t:|1776607454\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Gardevoir|Gardevoir, L50, F|100/100\n|switch|p1b: Sableye|Sableye, L50, M|100/100\n|switch|p2a: Pelipper|Pelipper, L50, M|100/100\n|switch|p2b: Basculegion|Basculegion, L50, M, shiny|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p2a: Pelipper\n|-ability|p1a: Gardevoir|Swift Swim|Trace|[from] ability: Trace|[of] p2b: Basculegion\n|turn|1\n|\n|t:|1776607475\n|detailschange|p1a: Gardevoir|Gardevoir-Mega, L50, F\n|-mega|p1a: Gardevoir|Gardevoir|Gardevoirite\n|move|p1b: Sableye|Quash|p2b: Basculegion\n|-activate|p2b: Basculegion|move: Quash\n|move|p1a: Gardevoir|Hyper Voice|p2a: Pelipper|[spread] p2a,p2b\n|-crit|p2a: Pelipper\n|-damage|p2a: Pelipper|0 fnt\n|-damage|p2b: Basculegion|45/100\n|-enditem|p2b: Basculegion|Sitrus Berry|[eat]\n|-heal|p2b: Basculegion|70/100|[from] item: Sitrus Berry\n|faint|p2a: Pelipper\n|move|p2b: Basculegion|Last Respects|p1b: Sableye\n|-damage|p1b: Sableye|53/100\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|-message|TwoZice forfeited.\n|\n|win|Mango404\n|raw|Mango404's rating: 1088 &rarr; <strong>1112</strong><br />(+24 for winning)\n|raw|TwoZice's rating: 1046 &rarr; <strong>1031</strong><br />(-15 for losing)\n|l|\u2606TwoZice\n|player|p2|\n",
+  "uploadtime": 1776607489,
+  "views": 25,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1031,
+  "private": 0,
+  "password": null
+}

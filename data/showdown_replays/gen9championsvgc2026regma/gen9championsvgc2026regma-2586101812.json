@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586101812",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "ScrafteGuy",
+    "Andiom123"
+  ],
+  "log": "|j|\u2606ScrafteGuy\n|j|\u2606Andiom123\n|t:|1776399199\n|gametype|doubles\n|player|p1|ScrafteGuy|pokemaniac|1143\n|player|p2|Andiom123|102|1147\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Whimsicott, L50, M|\n|poke|p1|Milotic, L50, F|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Delphox, L50, F|\n|poke|p1|Incineroar, L50, M|\n|poke|p2|Charizard, L50, F|\n|poke|p2|Typhlosion-Hisui, L50, F|\n|poke|p2|Venusaur, L50, F|\n|poke|p2|Aerodactyl, L50, M|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Garchomp, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by ScrafteGuy)\n|inactive|ScrafteGuy has 60 seconds left.\n|inactive|Andiom123 has 60 seconds left.\n|\n|t:|1776399240\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Whimsicott|Whimsicott, L50, M|100/100\n|switch|p1b: Garchomp|Garchomp, L50, M|100/100\n|switch|p2a: Charizard|Charizard, L50, F|100/100\n|switch|p2b: Aerodactyl|Aerodactyl, L50, M|100/100\n|-ability|p2b: Aerodactyl|Unnerve\n|turn|1\n|\n|t:|1776399263\n|move|p2a: Charizard|Protect|p2a: Charizard\n|-singleturn|p2a: Charizard|Protect\n|move|p1a: Whimsicott|Tailwind|p1a: Whimsicott\n|-sidestart|p1: ScrafteGuy|move: Tailwind\n|move|p1b: Garchomp|Dragon Claw|p2a: Charizard\n|-activate|p2a: Charizard|move: Protect\n|move|p2b: Aerodactyl|Dual Wingbeat|p1a: Whimsicott\n|-supereffective|p1a: Whimsicott|1\n|-damage|p1a: Whimsicott|46/100\n|-supereffective|p1a: Whimsicott|1\n|-damage|p1a: Whimsicott|0 fnt\n|faint|p1a: Whimsicott\n|-hitcount|p1: Whimsicott|2\n|\n|upkeep\n|\n|t:|1776399276\n|switch|p1a: Delphox|Delphox, L50, F|100/100\n|turn|2\n|-message|ScrafteGuy forfeited.\n|\n|win|Andiom123\n|raw|ScrafteGuy's rating: 1143 &rarr; <strong>1118</strong><br />(-25 for losing)\n|raw|Andiom123's rating: 1147 &rarr; <strong>1172</strong><br />(+25 for winning)\n|l|\u2606ScrafteGuy\n|player|p1|\n",
+  "uploadtime": 1776399317,
+  "views": 17,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1118,
+  "private": 0,
+  "password": null
+}

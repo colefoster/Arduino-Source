@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2587862769",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "c4nvm",
+    "TestProject"
+  ],
+  "log": "|j|\u203dc4nvm\n|j|\u2606TestProject\n|t:|1776571893\n|gametype|doubles\n|player|p1|c4nvm|102|1052\n|player|p2|TestProject|170|1015\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Talonflame, L50, M|\n|poke|p1|Primarina, L50, M, shiny|\n|poke|p1|Meowscarada, L50, F|\n|poke|p1|Zoroark-Hisui, L50, M, shiny|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Corviknight, L50, M|\n|poke|p2|Vaporeon, L50, F|\n|poke|p2|Araquanid, L50, F|\n|poke|p2|Slowbro, L50, M|\n|poke|p2|Meganium, L50, F|\n|poke|p2|Pelipper, L50, M|\n|poke|p2|Aggron, L50, F|\n|teampreview|4\nc4nvm rejected open team sheets.\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by c4nvm)\n|\n|t:|1776571928\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Talonflame|Talonflame, L50, M|100/100\n|switch|p1b: Garchomp|Garchomp, L50, M|100/100\n|switch|p2a: Araquanid|Araquanid, L50, F|100/100\n|switch|p2b: Slowbro|Slowbro, L50, M|100/100\n|turn|1\n|\n|t:|1776571942\n|move|p1a: Talonflame|Tailwind|p1a: Talonflame\n|-sidestart|p1: c4nvm|move: Tailwind\n|move|p1b: Garchomp|Shadow Ball|p2b: Slowbro\n|-supereffective|p2b: Slowbro|1\n|-damage|p2b: Slowbro|0 fnt\n|faint|p2b: Slowbro\n|move|p2a: Araquanid|Entrainment|p2: Slowbro|[notarget]\n|-fail|p2a: Araquanid\n|\n|upkeep\n|-message|TestProject forfeited.\n|\n|win|c4nvm\n|raw|c4nvm's rating: 1052 &rarr; <strong>1081</strong><br />(+29 for winning)\n|raw|TestProject's rating: 1015 &rarr; <strong>1004</strong><br />(-11 for losing)\n|l|\u2606TestProject\n|player|p2|\n",
+  "uploadtime": 1776571957,
+  "views": 17,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1004,
+  "private": 0,
+  "password": null
+}

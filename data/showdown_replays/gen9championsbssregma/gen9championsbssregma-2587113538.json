@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2587113538",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "sadalmelik",
+    "nowhere60"
+  ],
+  "log": "|j|\u2606sadalmelik\n|j|\u2606nowhere60\n|t:|1776495287\n|gametype|singles\n|player|p1|sadalmelik|1|1258\n|player|p2|nowhere60|170|1215\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Scizor, L50, M|\n|poke|p1|Gengar, L50, F|\n|poke|p1|Primarina, L50, M|\n|poke|p1|Gyarados, L50, F|\n|poke|p1|Kingambit, L50, F|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Ditto, L50|\n|poke|p2|Charizard, L50, M|\n|poke|p2|Mimikyu, L50, M|\n|poke|p2|Corviknight, L50, M|\n|poke|p2|Greninja, L50, F|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by sadalmelik)\n|inactive|sadalmelik has 60 seconds left.\n|inactive|sadalmelik has 30 seconds left.\n|inactive|sadalmelik has 20 seconds left.\n|inactive|sadalmelik has 15 seconds left.\n|\n|t:|1776495367\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Garchomp|Garchomp, L50, F|100/100\n|switch|p2a: Corviknight|Corviknight, L50, M|100/100\n|turn|1\n|\n|t:|1776495373\n|move|p1a: Garchomp|Stealth Rock|p2a: Corviknight\n|-sidestart|p2: nowhere60|move: Stealth Rock\n|move|p2a: Corviknight|Bulk Up|p2a: Corviknight\n|-boost|p2a: Corviknight|atk|1\n|-boost|p2a: Corviknight|def|1\n|\n|upkeep\n|turn|2\n|\n|t:|1776495381\n|move|p2a: Corviknight|Bulk Up|p2a: Corviknight\n|-boost|p2a: Corviknight|atk|1\n|-boost|p2a: Corviknight|def|1\n|move|p1a: Garchomp|Dragon Tail|p2a: Corviknight\n|-resisted|p2a: Corviknight|1\n|-damage|p2a: Corviknight|95/100\n|drag|p2a: Charizard|Charizard, L50, M|100/100\n|-damage|p2a: Charizard|51/100|[from] Stealth Rock\n|\n|upkeep\n|turn|3\n|\n|t:|1776495394\n|detailschange|p2a: Charizard|Charizard-Mega-Y, L50, M\n|-mega|p2a: Charizard|Charizard|Charizardite Y\n|-weather|SunnyDay|[from] ability: Drought|[of] p2a: Charizard\n|move|p2a: Charizard|Dragon Pulse|p1a: Garchomp\n|-supereffective|p1a: Garchomp|1\n|-damage|p1a: Garchomp|36/100\n|-enditem|p1a: Garchomp|Sitrus Berry|[eat]\n|-heal|p1a: Garchomp|61/100|[from] item: Sitrus Berry\n|move|p1a: Garchomp|Dragon Tail|p2a: Charizard\n|-damage|p2a: Charizard|14/100\n|drag|p2a: Mimikyu|Mimikyu, L50, M|100/100\n|-damage|p2a: Mimikyu|88/100|[from] Stealth Rock\n|\n|-weather|SunnyDay|[upkeep]\n|-heal|p2a: Mimikyu|94/100|[from] item: Leftovers\n|upkeep\n|turn|4\n|-message|nowhere60 forfeited.\n|\n|win|sadalmelik\n|raw|sadalmelik's rating: 1258 &rarr; <strong>1280</strong><br />(+22 for winning)\n|raw|nowhere60's rating: 1215 &rarr; <strong>1193</strong><br />(-22 for losing)\n|l|\u2606nowhere60\n|player|p2|\n",
+  "uploadtime": 1776495467,
+  "views": 12,
+  "formatid": "gen9championsbssregma",
+  "rating": 1193,
+  "private": 0,
+  "password": null
+}

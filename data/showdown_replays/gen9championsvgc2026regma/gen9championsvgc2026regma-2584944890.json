@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584944890",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "amongdripgoku",
+    "asdeph"
+  ],
+  "log": "|j|\u2606amongdripgoku\n|j|\u2606asdeph\n|t:|1776296898\n|gametype|doubles\n|player|p1|amongdripgoku|170|1171\n|player|p2|asdeph|169|1139\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Pelipper, L50, F|\n|poke|p1|Gengar, L50, F|\n|poke|p1|Greninja-*, L50, F|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Archaludon, L50, M|\n|poke|p1|Decidueye-Hisui, L50, F|\n|poke|p2|Flapple, L50, M|\n|poke|p2|Sableye, L50, M|\n|poke|p2|Aerodactyl, L50, M|\n|poke|p2|Empoleon, L50, M|\n|poke|p2|Altaria, L50, M|\n|poke|p2|Lopunny, L50, M|\n|teampreview|4\n|\n|t:|1776296927\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Greninja|Greninja, L50, F|100/100\n|switch|p1b: Archaludon|Archaludon, L50, M|100/100\n|switch|p2a: Flapple|Flapple, L50, M|100/100\n|switch|p2b: Sableye|Sableye, L50, M|100/100\n|turn|1\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by amongdripgoku)\n|\n|t:|1776296940\n|move|p2b: Sableye|Gravity|p2b: Sableye\n|-fieldstart|move: Gravity\n|move|p1a: Greninja|Ice Beam|p2a: Flapple\n|-start|p1a: Greninja|typechange|Ice|[from] ability: Protean\n|-supereffective|p2a: Flapple|2\n|-enditem|p2a: Flapple|Focus Sash\n|-damage|p2a: Flapple|1/100\n|move|p2a: Flapple|Grav Apple|p1a: Greninja\n|-damage|p1a: Greninja|0 fnt\n|faint|p1a: Greninja\n|move|p1b: Archaludon|Draco Meteor|p2a: Flapple\n|-supereffective|p2a: Flapple|1\n|-damage|p2a: Flapple|0 fnt\n|-unboost|p1b: Archaludon|spa|2\n|faint|p2a: Flapple\n|\n|upkeep\n|\n|t:|1776296956\n|switch|p1a: Basculegion|Basculegion, L50, M|100/100\n|switch|p2a: Lopunny|Lopunny, L50, M|100/100\n|turn|2\n|\n|t:|1776296969\n|switch|p1b: Pelipper|Pelipper, L50, F|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p1b: Pelipper\n|detailschange|p2a: Lopunny|Lopunny-Mega, L50, M\n|-mega|p2a: Lopunny|Lopunny|Lopunnite\n|move|p2a: Lopunny|Fake Out|p1a: Basculegion\n|-damage|p1a: Basculegion|70/100\n|move|p2b: Sableye|Encore||[still]\n|-fail|p2b: Sableye\n|cant|p1a: Basculegion|flinch\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|turn|3\n|\n|t:|1776296988\n|move|p2b: Sableye|Thunder Wave|p1a: Basculegion\n|-status|p1a: Basculegion|par\n|move|p2a: Lopunny|Close Combat|p1a: Basculegion\n|-damage|p1a: Basculegion|0 fnt\n|-unboost|p2a: Lopunny|def|1\n|-unboost|p2a: Lopunny|spd|1\n|faint|p1a: Basculegion\n|move|p1b: Pelipper|Weather Ball|p2b: Sableye\n|-damage|p2b: Sableye|27/100\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|-message|amongdripgoku forfeited.\n|\n|win|asdeph\n|raw|amongdripgoku's rating: 1171 &rarr; <strong>1144</strong><br />(-27 for losing)\n|raw|asdeph's rating: 1139 &rarr; <strong>1166</strong><br />(+27 for winning)\n",
+  "uploadtime": 1776296996,
+  "views": 21,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1144,
+  "private": 0,
+  "password": null
+}

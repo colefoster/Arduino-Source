@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2583342925",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Nambawan",
+    "vilchezboi117"
+  ],
+  "log": "|j|\u2606Nambawan\n|j|\u2606vilchezboi117\n|t:|1776168621\n|gametype|doubles\n|player|p1|Nambawan|silver|1176\n|player|p2|vilchezboi117|102|1112\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Meganium, L50, M|\n|poke|p1|Corviknight, L50, F|\n|poke|p1|Rotom-Wash, L50|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Tyranitar, L50, M|\n|poke|p1|Excadrill, L50, M|\n|poke|p2|Alakazam, L50, M|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Aerodactyl, L50, M|\n|poke|p2|Gyarados, L50, M|\n|poke|p2|Kingambit, L50, F|\n|poke|p2|Camerupt, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Nambawan)\n|\n|t:|1776168646\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Tyranitar|Tyranitar, L50, M|100/100\n|switch|p1b: Excadrill|Excadrill, L50, M|100/100\n|switch|p2a: Kingambit|Kingambit, L50, F|100/100\n|switch|p2b: Alakazam|Alakazam, L50, M|100/100\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p1a: Tyranitar\n|turn|1\n|\n|t:|1776168666\n|move|p1b: Excadrill|High Horsepower|p2b: Alakazam\n|-damage|p2b: Alakazam|0 fnt\n|faint|p2b: Alakazam\n|move|p1a: Tyranitar|Low Kick|p2a: Kingambit\n|-supereffective|p2a: Kingambit|2\n|-damage|p2a: Kingambit|0 fnt\n|faint|p2a: Kingambit\n|\n|-weather|Sandstorm|[upkeep]\n|upkeep\n|-message|vilchezboi117 forfeited.\n|\n|win|Nambawan\n|raw|Nambawan's rating: 1176 &rarr; <strong>1196</strong><br />(+20 for winning)\n|raw|vilchezboi117's rating: 1112 &rarr; <strong>1092</strong><br />(-20 for losing)\n|l|\u2606vilchezboi117\n|player|p2|\n",
+  "uploadtime": 1776168678,
+  "views": 22,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1092,
+  "private": 0,
+  "password": null
+}

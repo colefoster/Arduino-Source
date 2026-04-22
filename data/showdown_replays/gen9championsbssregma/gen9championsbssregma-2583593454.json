@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2583593454",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "moonack2",
+    "EkCantDrawLol"
+  ],
+  "log": "|j|\u2606moonack2\n|j|\u203dEkCantDrawLol\n|t:|1776185372\n|gametype|singles\n|player|p1|moonack2|170|1059\n|player|p2|EkCantDrawLol|skierf|1062\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Charizard, L50, F|\n|poke|p1|Whimsicott, L50, F|\n|poke|p1|Dragonite, L50, M|\n|poke|p1|Starmie, L50|\n|poke|p1|Aegislash, L50, F|\n|poke|p1|Garchomp, L50, F|\n|poke|p2|Garchomp, L50, F|\n|poke|p2|Rotom-Frost, L50|\n|poke|p2|Gengar, L50, M|\n|poke|p2|Lucario, L50, M|\n|poke|p2|Sylveon, L50, M|\n|poke|p2|Starmie, L50|\n|teampreview|3\n|\n|t:|1776185395\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Starmie|Starmie, L50|100/100\n|switch|p2a: Gengar|Gengar, L50, M|100/100\n|turn|1\n|l|\u203dEkCantDrawLol\n|player|p2|\n|j|\u203dEkCantDrawLol\n|player|p2|EkCantDrawLol|skierf|\n|n|\u203dEkCantDrawLol|ekcantdrawlol\n|\n|t:|1776185421\n|switch|p2a: Garchomp|Garchomp, L50, F|100/100\n|move|p1a: Starmie|Minimize|p1a: Starmie\n|-boost|p1a: Starmie|evasion|2\n|\n|upkeep\n|turn|2\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by EkCantDrawLol)\n|\n|t:|1776185428\n|move|p1a: Starmie|Minimize|p1a: Starmie\n|-boost|p1a: Starmie|evasion|2\n|move|p2a: Garchomp|Substitute|p2a: Garchomp\n|-start|p2a: Garchomp|Substitute\n|-damage|p2a: Garchomp|76/100\n|\n|upkeep\n|turn|3\n|\n|t:|1776185435\n|move|p1a: Starmie|Scald|p2a: Garchomp\n|-end|p2a: Garchomp|Substitute\n|move|p2a: Garchomp|Swords Dance|p2a: Garchomp\n|-boost|p2a: Garchomp|atk|2\n|\n|upkeep\n|turn|4\n|\n|t:|1776185442\n|move|p1a: Starmie|Scald|p2a: Garchomp\n|-damage|p2a: Garchomp|46/100\n|move|p2a: Garchomp|Earthquake|p1a: Starmie\n|-damage|p1a: Starmie|0 fnt\n|faint|p1a: Starmie\n|\n|upkeep\n|\n|t:|1776185457\n|switch|p1a: Charizard|Charizard, L50, F|100/100\n|turn|5\n|\n|t:|1776185470\n|detailschange|p1a: Charizard|Charizard-Mega-Y, L50, F\n|-mega|p1a: Charizard|Charizard|Charizardite Y\n|-weather|SunnyDay|[from] ability: Drought|[of] p1a: Charizard\n|move|p2a: Garchomp|Dragon Claw|p1a: Charizard\n|-damage|p1a: Charizard|0 fnt\n|faint|p1a: Charizard\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|\n|t:|1776185479\n|switch|p1a: Aegislash|Aegislash, L50, F|100/100\n|turn|6\n|\n|t:|1776185483\n|move|p2a: Garchomp|Earthquake|p1a: Aegislash\n|-supereffective|p1a: Aegislash|1\n|-damage|p1a: Aegislash|0 fnt\n|faint|p1a: Aegislash\n|\n|win|EkCantDrawLol\n|raw|moonack2's rating: 1059 &rarr; <strong>1040</strong><br />(-19 for losing)\n|raw|EkCantDrawLol's rating: 1062 &rarr; <strong>1092</strong><br />(+30 for winning)\n",
+  "uploadtime": 1776185485,
+  "views": 2,
+  "formatid": "gen9championsbssregma",
+  "rating": 1040,
+  "private": 0,
+  "password": null
+}

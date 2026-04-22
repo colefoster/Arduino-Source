@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2585072386",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "kaloncpu57",
+    "AlexVaz001"
+  ],
+  "log": "|j|\u2606kaloncpu57\n|j|\u2606AlexVaz001\n|t:|1776308904\n|gametype|doubles\n|player|p1|kaloncpu57|steven|1128\n|player|p2|AlexVaz001|169|1141\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Skarmory, L50, M|\n|poke|p1|Whimsicott, L50, M|\n|poke|p1|Farigiraf, L50, F|\n|poke|p1|Gardevoir, L50, F|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Azumarill, L50, F|\n|poke|p2|Sableye, L50, F|\n|poke|p2|Aerodactyl, L50, F|\n|poke|p2|Kangaskhan, L50, F|\n|poke|p2|Meganium, L50, M|\n|poke|p2|Aegislash, L50, F|\n|poke|p2|Krookodile, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by kaloncpu57)\n|\n|t:|1776308925\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Skarmory|Skarmory, L50, M|100/100\n|switch|p1b: Whimsicott|Whimsicott, L50, M|100/100\n|switch|p2a: Aerodactyl|Aerodactyl, L50, F|100/100\n|switch|p2b: Meganium|Meganium, L50, M|100/100\n|-ability|p2a: Aerodactyl|Unnerve\n|turn|1\n|\n|t:|1776308940\n|detailschange|p1a: Skarmory|Skarmory-Mega, L50, M\n|-mega|p1a: Skarmory|Skarmory|Skarmorite\n|move|p2b: Meganium|Protect|p2b: Meganium\n|-singleturn|p2b: Meganium|Protect\n|move|p1b: Whimsicott|Tailwind|p1b: Whimsicott\n|-sidestart|p1: kaloncpu57|move: Tailwind\n|move|p1a: Skarmory|Iron Head|p2b: Meganium\n|-activate|p2b: Meganium|move: Protect\n|move|p2a: Aerodactyl|Tailwind|p2a: Aerodactyl\n|-sidestart|p2: AlexVaz001|move: Tailwind\n|\n|upkeep\n|turn|2\n|\n|t:|1776308956\n|detailschange|p2b: Meganium|Meganium-Mega, L50, M\n|-mega|p2b: Meganium|Meganium|Meganiumite\n|move|p1b: Whimsicott|Encore|p2a: Aerodactyl\n|-start|p2a: Aerodactyl|Encore\n|move|p2a: Aerodactyl|Tailwind||[still]\n|-fail|p2a: Aerodactyl\n|move|p1a: Skarmory|Iron Head|p2b: Meganium\n|-supereffective|p2b: Meganium|1\n|-damage|p2b: Meganium|0 fnt\n|faint|p2b: Meganium\n|\n|upkeep\n|\n|t:|1776308965\n|switch|p2b: Krookodile|Krookodile, L50, F|100/100\n|-ability|p2b: Krookodile|Intimidate|boost\n|-unboost|p1a: Skarmory|atk|1\n|-unboost|p1b: Whimsicott|atk|1\n|turn|3\n|-message|AlexVaz001 forfeited.\n|\n|win|kaloncpu57\n|raw|kaloncpu57's rating: 1128 &rarr; <strong>1154</strong><br />(+26 for winning)\n|raw|AlexVaz001's rating: 1141 &rarr; <strong>1115</strong><br />(-26 for losing)\n|l|\u2606AlexVaz001\n|player|p2|\n|l|\u2606kaloncpu57\n|player|p1|\n|j|\u2606kaloncpu57\n|player|p1|kaloncpu57|steven|\n",
+  "uploadtime": 1776308997,
+  "views": 19,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1115,
+  "private": 0,
+  "password": null
+}

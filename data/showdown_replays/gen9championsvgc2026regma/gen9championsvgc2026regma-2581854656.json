@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2581854656",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "thomas_shelby_obe",
+    "TheTailwindEnjoyer"
+  ],
+  "log": "|j|\u2606thomas_shelby_obe\n|j|\u2606TheTailwindEnjoyer\n|t:|1776033963\n|gametype|doubles\n|player|p1|thomas_shelby_obe|169|1000\n|player|p2|TheTailwindEnjoyer|2|1000\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Froslass, L50, F|\n|poke|p1|Infernape, L50, M|\n|poke|p1|Decidueye-Hisui, L50, M|\n|poke|p1|Sneasler, L50, F|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Maushold-Four, L50|\n|poke|p2|Gengar, L50, F|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Typhlosion-Hisui, L50, M|\n|poke|p2|Whimsicott, L50, F|\n|poke|p2|Dragonite, L50, M|\n|poke|p2|Sneasler, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by TheTailwindEnjoyer)\n|inactive|TheTailwindEnjoyer has 60 seconds left.\n|\n|t:|1776034000\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Sneasler|Sneasler, L50, F|100/100\n|switch|p1b: Maushold|Maushold-Four, L50|100/100\n|switch|p2a: Gengar|Gengar, L50, F|100/100\n|switch|p2b: Typhlosion|Typhlosion-Hisui, L50, M|100/100\n|-item|p1a: Sneasler|White Herb|[from] ability: Frisk|[of] p2b: Typhlosion\n|-item|p1b: Maushold|Focus Sash|[from] ability: Frisk|[of] p2b: Typhlosion\n|turn|1\n|inactive|thomas_shelby_obe has 30 seconds left.\n|-message|thomas_shelby_obe forfeited.\n|\n|win|TheTailwindEnjoyer\n|raw|thomas_shelby_obe's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|raw|TheTailwindEnjoyer's rating: 1000 &rarr; <strong>1040</strong><br />(+40 for winning)\n|l|\u2606thomas_shelby_obe\n|player|p1|\n",
+  "uploadtime": 1776034033,
+  "views": 12,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586918716",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "gruntymarco",
+    "gdog6969"
+  ],
+  "log": "|j|\u2606gruntymarco\n|j|\u2606gdog6969\n|t:|1776471747\n|gametype|doubles\n|player|p1|gruntymarco|marlon|1198\n|player|p2|gdog6969|266|1102\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Charizard, L50, M|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Serperior, L50, F|\n|poke|p1|Archaludon, L50, F|\n|poke|p1|Hydreigon, L50, M|\n|poke|p1|Palafin, L50, F|\n|poke|p2|Lucario, L50, F|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Clefable, L50, F|\n|poke|p2|Espathra, L50, F|\n|poke|p2|Orthworm, L50, M|\n|poke|p2|Farigiraf, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by gruntymarco)\n|inactive|gdog6969 has 60 seconds left.\n|\n|t:|1776471779\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Allmight|Palafin, L50, F, shiny|100/100\n|switch|p1b: Archer|Hydreigon, L50, M|100/100\n|switch|p2a: Lucario|Lucario, L50, F|100/100\n|switch|p2b: Farigiraf|Farigiraf, L50, M|100/100\n|turn|1\n|inactive|gruntymarco has 30 seconds left.\n|\n|t:|1776471809\n|switch|p1b: Balerion|Charizard, L50, M, shiny|100/100\n|move|p1a: Allmight|Flip Turn|p2a: Lucario\n|-damage|p2a: Lucario|62/100\n|\n|t:|1776471819\n|detailschange|p1a: Allmight|Palafin-Hero, L50, F, shiny\n|switch|p1a: Archer|Hydreigon, L50, M|100/100|[from] Flip Turn\n|move|p2a: Lucario|Substitute|p2a: Lucario\n|-start|p2a: Lucario|Substitute\n|-damage|p2a: Lucario|37/100\n|move|p2b: Farigiraf|Beat Up|p2a: Lucario\n|-resisted|p2a: Lucario|1\n|-activate|p2a: Lucario|move: Substitute|[damage]\n|-resisted|p2a: Lucario|1\n|-activate|p2a: Lucario|move: Substitute|[damage]\n|-resisted|p2a: Lucario|1\n|-activate|p2a: Lucario|move: Substitute|[damage]\n|-resisted|p2a: Lucario|1\n|-activate|p2a: Lucario|move: Substitute|[damage]\n|-hitcount|p2a: Lucario|4\n|\n|upkeep\n|turn|2\n|-message|gdog6969 forfeited.\n|\n|win|gruntymarco\n|raw|gruntymarco's rating: 1198 &rarr; <strong>1216</strong><br />(+18 for winning)\n|raw|gdog6969's rating: 1102 &rarr; <strong>1084</strong><br />(-18 for losing)\n|l|\u2606gdog6969\n|player|p2|\n|c|\u2606gruntymarco|Jurified?\n|l|\u2606gruntymarco\n|player|p1|\n|j|\u2606gruntymarco\n|player|p1|gruntymarco|marlon|\n",
+  "uploadtime": 1776471881,
+  "views": 18,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1084,
+  "private": 0,
+  "password": null
+}

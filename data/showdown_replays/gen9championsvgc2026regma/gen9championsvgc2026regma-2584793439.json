@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584793439",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Kian1104",
+    "thealex610"
+  ],
+  "log": "|j|\u2606Kian1104\n|j|\u2606thealex610\n|t:|1776284080\n|gametype|doubles\n|player|p1|Kian1104|102|1048\n|player|p2|thealex610|101|1137\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Pelipper, L50, M|\n|poke|p1|Archaludon, L50, F|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Meganium, L50, F|\n|poke|p1|Aerodactyl, L50, F|\n|poke|p1|Kangaskhan, L50, F|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Talonflame, L50, F|\n|poke|p2|Milotic, L50, F|\n|poke|p2|Aegislash, L50, F|\n|poke|p2|Scizor, L50, F|\n|poke|p2|Tyranitar, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by thealex610)\n|\n|t:|1776284110\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Pelipper|Pelipper, L50, M|100/100\n|switch|p1b: Archaludon|Archaludon, L50, F|100/100\n|switch|p2a: Sneasler|Sneasler, L50, M|100/100\n|switch|p2b: Tyranitar|Tyranitar, L50, F|100/100\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p2b: Tyranitar\n|-weather|RainDance|[from] ability: Drizzle|[of] p1a: Pelipper\n|turn|1\n|\n|t:|1776284135\n|detailschange|p2b: Tyranitar|Tyranitar-Mega, L50, F\n|-mega|p2b: Tyranitar|Tyranitar|Tyranitarite\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p2b: Tyranitar\n|move|p2a: Sneasler|Close Combat|p1b: Archaludon\n|-supereffective|p1b: Archaludon|1\n|-damage|p1b: Archaludon|6/100\n|-unboost|p2a: Sneasler|def|1\n|-unboost|p2a: Sneasler|spd|1\n|-ability|p1b: Archaludon|Stamina|boost\n|-boost|p1b: Archaludon|def|1\n|-enditem|p2a: Sneasler|White Herb\n|-clearnegativeboost|p2a: Sneasler|[silent]\n|move|p1b: Archaludon|Flash Cannon|p2b: Tyranitar\n|-supereffective|p2b: Tyranitar|1\n|-damage|p2b: Tyranitar|49/100\n|-unboost|p2b: Tyranitar|spd|1\n|move|p2b: Tyranitar|Rock Slide|p1a: Pelipper|[spread] p1a,p1b\n|-supereffective|p1a: Pelipper|1\n|-resisted|p1b: Archaludon|1\n|-damage|p1a: Pelipper|29/100\n|-damage|p1b: Archaludon|0 fnt\n|faint|p1b: Archaludon\n|cant|p1a: Pelipper|flinch\n|\n|-weather|Sandstorm|[upkeep]\n|-damage|p2a: Sneasler|95/100|[from] Sandstorm\n|-damage|p1a: Pelipper|23/100|[from] Sandstorm\n|-heal|p1a: Pelipper|29/100|[from] item: Leftovers\n|upkeep\n|-message|Kian1104 forfeited.\n|\n|win|thealex610\n|raw|Kian1104's rating: 1048 &rarr; <strong>1035</strong><br />(-13 for losing)\n|raw|thealex610's rating: 1137 &rarr; <strong>1156</strong><br />(+19 for winning)\n|l|\u2606Kian1104\n|player|p1|\n",
+  "uploadtime": 1776284160,
+  "views": 28,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1035,
+  "private": 0,
+  "password": null
+}

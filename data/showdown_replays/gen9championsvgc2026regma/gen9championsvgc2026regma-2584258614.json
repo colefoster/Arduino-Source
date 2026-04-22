@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584258614",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "jollyhex_8",
+    "kumsumkneeda"
+  ],
+  "log": "|j|\u2606jollyhex_8\n|j|\u2606kumsumkneeda\n|t:|1776244164\n|gametype|doubles\n|player|p1|jollyhex_8|hilbert|1062\n|player|p2|kumsumkneeda|101|1089\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Froslass, L50, F|\n|poke|p1|Rotom-Frost, L50|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Empoleon, L50, M|\n|poke|p1|Kingambit, L50, M|\n|poke|p2|Charizard, L50, M|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Venusaur, L50, F|\n|poke|p2|Primarina, L50, M|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Garchomp, L50, M|\n|teampreview|4\n|\n|t:|1776244195\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Garchomp|Garchomp, L50, F|100/100\n|switch|p1b: Rotom|Rotom-Frost, L50|100/100\n|switch|p2a: Charizard|Charizard, L50, M|100/100\n|switch|p2b: Venusaur|Venusaur, L50, F, shiny|100/100\n|turn|1\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by kumsumkneeda)\n|\n|t:|1776244214\n|detailschange|p2a: Charizard|Charizard-Mega-Y, L50, M\n|-mega|p2a: Charizard|Charizard|Charizardite Y\n|-weather|SunnyDay|[from] ability: Drought|[of] p2a: Charizard\n|move|p2b: Venusaur|Energy Ball|p1a: Garchomp\n|-damage|p1a: Garchomp|50/100\n|move|p1b: Rotom|Blizzard|p2a: Charizard|[spread] p2a,p2b\n|-supereffective|p2b: Venusaur|1\n|-damage|p2a: Charizard|65/100\n|-damage|p2b: Venusaur|18/100\n|move|p1a: Garchomp|Rock Slide|p2a: Charizard|[spread] p2a,p2b\n|-supereffective|p2a: Charizard|2\n|-damage|p2a: Charizard|0 fnt\n|-damage|p2b: Venusaur|0 fnt\n|faint|p2a: Charizard\n|faint|p2b: Venusaur\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|-message|kumsumkneeda forfeited.\n|\n|win|jollyhex_8\n|raw|jollyhex_8's rating: 1062 &rarr; <strong>1095</strong><br />(+33 for winning)\n|raw|kumsumkneeda's rating: 1089 &rarr; <strong>1064</strong><br />(-25 for losing)\n|l|\u2606kumsumkneeda\n|player|p2|\n|c|\u2606jollyhex_8|gg\n",
+  "uploadtime": 1776244253,
+  "views": 20,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1064,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2589421047",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "llampis98",
+    "minicloudymagic2"
+  ],
+  "log": "|j|\u2606llampis98\n|j|\u2606minicloudymagic2\n|t:|1776721524\n|gametype|doubles\n|player|p1|llampis98|1|1065\n|player|p2|minicloudymagic2|102|1039\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Manectric, L50, M, shiny|\n|poke|p1|Jolteon, L50, M|\n|poke|p1|Pelipper, L50, M, shiny|\n|poke|p1|Whimsicott, L50, F, shiny|\n|poke|p1|Incineroar, L50, M, shiny|\n|poke|p1|Aegislash, L50, M|\n|poke|p2|Zoroark-Hisui, L50, M|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Feraligatr, L50, F|\n|poke|p2|Kingambit, L50, F|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Talonflame, L50, F|\n|teampreview|4\n|\n|t:|1776721539\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Jolteon|Jolteon, L50, M|100/100\n|switch|p1b: Manectric|Manectric, L50, M, shiny|100/100\n|switch|p2a: Sneasler|Sneasler, L50, M|100/100\n|switch|p2b: Feraligatr|Feraligatr, L50, F|100/100\n|turn|1\n|\n|t:|1776721563\n|detailschange|p2b: Feraligatr|Feraligatr-Mega, L50, F\n|-mega|p2b: Feraligatr|Feraligatr|Feraligite\n|move|p1a: Jolteon|Discharge|p2b: Feraligatr|[spread] p2a,p2b\n|-ability|p1b: Manectric|Lightning Rod|boost\n|-boost|p1b: Manectric|spa|1\n|-damage|p2a: Sneasler|60/100\n|-damage|p2b: Feraligatr|67/100\n|-status|p2a: Sneasler|par\n|move|p1b: Manectric|Discharge|p2b: Feraligatr|[spread] p2a,p2b\n|-immune|p1a: Jolteon|[from] ability: Volt Absorb\n|-damage|p2a: Sneasler|1/100 par\n|-damage|p2b: Feraligatr|20/100\n|move|p2b: Feraligatr|Double-Edge|p1a: Jolteon\n|-damage|p1a: Jolteon|0 fnt\n|faint|p1a: Jolteon\n|-damage|p2b: Feraligatr|0 fnt|[from] Recoil\n|faint|p2b: Feraligatr\n|move|p2a: Sneasler|Coaching|p2: Feraligatr|[notarget]\n|-fail|p2a: Sneasler\n|\n|upkeep\n|-message|minicloudymagic2 forfeited.\n|\n|win|llampis98\n|raw|llampis98's rating: 1065 &rarr; <strong>1093</strong><br />(+28 for winning)\n|raw|minicloudymagic2's rating: 1039 &rarr; <strong>1024</strong><br />(-15 for losing)\n|l|\u2606minicloudymagic2\n|player|p2|\n",
+  "uploadtime": 1776721601,
+  "views": 5,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1024,
+  "private": 0,
+  "password": null
+}

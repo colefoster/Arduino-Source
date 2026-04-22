@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582528370",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Lolitcher",
+    "itsjustsomni"
+  ],
+  "log": "|j|\u2606Lolitcher\n|j|\u2606itsjustsomni\n|t:|1776097431\n|gametype|doubles\n|player|p1|Lolitcher|alder|1026\n|player|p2|itsjustsomni|cyrus|1033\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Pelipper, L50, F|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Archaludon, L50, M|\n|poke|p1|Dragonite, L50, F|\n|poke|p2|Charizard, L50, M|\n|poke|p2|Venusaur, L50, F|\n|poke|p2|Whimsicott, L50, M|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Gardevoir, L50, F|\n|poke|p2|Garchomp, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by itsjustsomni)\n|inactive|Lolitcher also wants the timer to be on.\n|\n|t:|1776097444\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Pelipper|Pelipper, L50, F|100/100\n|switch|p1b: Basculegion|Basculegion, L50, M|100/100\n|switch|p2a: Whimsicott|Whimsicott, L50, M|100/100\n|switch|p2b: Garchomp|Garchomp, L50, F|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p1a: Pelipper\n|turn|1\n|inactive|Lolitcher has 30 seconds left.\n|inactive|itsjustsomni has 30 seconds left.\n|\n|t:|1776097474\n|switch|p1a: Incineroar|Incineroar, L50, M|100/100\n|-ability|p1a: Incineroar|Intimidate|boost\n|-unboost|p2a: Whimsicott|atk|1\n|-unboost|p2b: Garchomp|atk|1\n|move|p2a: Whimsicott|Taunt|p1a: Incineroar\n|-hint|Since gen 7, Dark is immune to Prankster moves.\n|-immune|p1a: Incineroar\n|move|p1b: Basculegion|Wave Crash|p2b: Garchomp\n|-damage|p2b: Garchomp|0 fnt\n|faint|p2b: Garchomp\n|-damage|p1b: Basculegion|69/100|[from] Recoil\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|\n|t:|1776097491\n|switch|p2b: Gardevoir|Gardevoir, L50, F, shiny|100/100\n|-ability|p2b: Gardevoir|Intimidate|Trace|[from] ability: Trace|[of] p1a: Incineroar\n|-ability|p2b: Gardevoir|Intimidate|boost\n|-unboost|p1a: Incineroar|atk|1\n|-unboost|p1b: Basculegion|atk|1\n|turn|2\n|inactive|Lolitcher has 30 seconds left.\n|\n|t:|1776097522\n|detailschange|p2b: Gardevoir|Gardevoir-Mega, L50, F, shiny\n|-mega|p2b: Gardevoir|Gardevoir|Gardevoirite\n|move|p1a: Incineroar|Fake Out|p2b: Gardevoir\n|-damage|p2b: Gardevoir|88/100\n|move|p2a: Whimsicott|Tailwind|p2a: Whimsicott\n|-sidestart|p2: itsjustsomni|move: Tailwind\n|cant|p2b: Gardevoir|flinch\n|move|p1b: Basculegion|Wave Crash|p2b: Gardevoir\n|-crit|p2b: Gardevoir\n|-damage|p2b: Gardevoir|0 fnt\n|faint|p2b: Gardevoir\n|-damage|p1b: Basculegion|47/100|[from] Recoil\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|-message|itsjustsomni forfeited.\n|\n|win|Lolitcher\n|raw|Lolitcher's rating: 1026 &rarr; <strong>1063</strong><br />(+37 for winning)\n|raw|itsjustsomni's rating: 1033 &rarr; <strong>1018</strong><br />(-15 for losing)\n",
+  "uploadtime": 1776097537,
+  "views": 16,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1018,
+  "private": 0,
+  "password": null
+}

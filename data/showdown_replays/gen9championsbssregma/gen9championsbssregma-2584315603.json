@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2584315603",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "2siu",
+    "tukitiko"
+  ],
+  "log": "|j|\u26062siu\n|j|\u2606tukitiko\n|t:|1776250403\n|gametype|singles\n|player|p1|2siu|170|1247\n|player|p2|tukitiko|aquasuit|1285\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Starmie, L50|\n|poke|p1|Archaludon, L50, F|\n|poke|p1|Pelipper, L50, F|\n|poke|p1|Banette, L50, M|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Rotom-Heat, L50|\n|poke|p2|Lucario, L50, M|\n|poke|p2|Skeledirge, L50, M|\n|poke|p2|Zoroark, L50, M|\n|poke|p2|Decidueye-Hisui, L50, M|\n|poke|p2|Feraligatr, L50, M|\n|poke|p2|Diggersby, L50, M|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by 2siu)\n|inactive|tukitiko has 60 seconds left.\n|\n|t:|1776250455\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Starmie|Starmie, L50|100/100\n|switch|p2a: Wolframio|Lucario, L50, M|100/100\n|turn|1\n|\n|t:|1776250463\n|detailschange|p1a: Starmie|Starmie-Mega, L50\n|-mega|p1a: Starmie|Starmie|Starminite\n|detailschange|p2a: Wolframio|Lucario-Mega, L50, M\n|-mega|p2a: Wolframio|Lucario|Lucarionite\n|move|p2a: Wolframio|Meteor Mash|p1a: Starmie\n|-resisted|p1a: Starmie|1\n|-damage|p1a: Starmie|58/100\n|move|p1a: Starmie|Flip Turn|p2a: Wolframio\n|-damage|p2a: Wolframio|17/100\n|\n|t:|1776250472\n|switch|p1a: Pelipper|Pelipper, L50, F|100/100|[from] Flip Turn\n|-weather|RainDance|[from] ability: Drizzle|[of] p1a: Pelipper\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|turn|2\n|\n|t:|1776250481\n|move|p2a: Wolframio|Close Combat|p1a: Pelipper\n|-resisted|p1a: Pelipper|1\n|-damage|p1a: Pelipper|59/100\n|-unboost|p2a: Wolframio|def|1\n|-unboost|p2a: Wolframio|spd|1\n|move|p1a: Pelipper|U-turn|p2a: Wolframio\n|-resisted|p2a: Wolframio|2\n|-damage|p2a: Wolframio|12/100\n|\n|t:|1776250489\n|switch|p1a: Archaludon|Archaludon, L50, F|100/100|[from] U-turn\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|turn|3\n|\n|t:|1776250495\n|move|p2a: Wolframio|Close Combat|p1a: Archaludon\n|-supereffective|p1a: Archaludon|1\n|-damage|p1a: Archaludon|0 fnt\n|-unboost|p2a: Wolframio|def|1\n|-unboost|p2a: Wolframio|spd|1\n|faint|p1a: Archaludon\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|\n|t:|1776250504\n|switch|p1a: Starmie|Starmie-Mega, L50|58/100\n|turn|4\n|\n|t:|1776250508\n|move|p2a: Wolframio|Close Combat|p1a: Starmie\n|-resisted|p1a: Starmie|1\n|-damage|p1a: Starmie|0 fnt\n|-unboost|p2a: Wolframio|def|1\n|-unboost|p2a: Wolframio|spd|1\n|faint|p1a: Starmie\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|-message|2siu forfeited.\n|\n|win|tukitiko\n|raw|2siu's rating: 1247 &rarr; <strong>1225</strong><br />(-22 for losing)\n|raw|tukitiko's rating: 1285 &rarr; <strong>1307</strong><br />(+22 for winning)\n|l|\u26062siu\n|player|p1|\n",
+  "uploadtime": 1776250514,
+  "views": 10,
+  "formatid": "gen9championsbssregma",
+  "rating": 1225,
+  "private": 0,
+  "password": null
+}

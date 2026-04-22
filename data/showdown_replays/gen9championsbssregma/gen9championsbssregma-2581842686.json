@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2581842686",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "Addcoffeeplease",
+    "hoshigumo1101"
+  ],
+  "log": "|j|\u2606Addcoffeeplease\n|j|\u2606hoshigumo1101\n|t:|1776032943\n|gametype|singles\n|player|p1|Addcoffeeplease|266|1000\n|player|p2|hoshigumo1101|acetrainerf|1299\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Empoleon, L50, F|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Talonflame, L50, F|\n|poke|p1|Umbreon, L50, M|\n|poke|p1|Rotom-Wash, L50|\n|poke|p2|Lucario, L50, F|\n|poke|p2|Rotom-Wash, L50|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Charizard, L50, M|\n|poke|p2|Hatterene, L50, F|\n|poke|p2|Greninja-*, L50, M|\n|teampreview|3\n|\n|t:|1776032979\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Umbreon|Umbreon, L50, M|100/100\n|switch|p2a: Lucario|Lucario, L50, F|100/100\n|turn|1\n|c|\u2606Addcoffeeplease|Wait this is singles\u2026. Welp gg\n|\n|t:|1776032996\n|detailschange|p2a: Lucario|Lucario-Mega, L50, F\n|-mega|p2a: Lucario|Lucario|Lucarionite\n|move|p2a: Lucario|Meteor Mash|p1a: Umbreon\n|-damage|p1a: Umbreon|56/100\n|move|p1a: Umbreon|Foul Play|p2a: Lucario\n|-resisted|p2a: Lucario|1\n|-damage|p2a: Lucario|65/100\n|\n|-heal|p1a: Umbreon|62/100|[from] item: Leftovers\n|upkeep\n|turn|2\n|\n|t:|1776033009\n|switch|p1a: Empoleon|Empoleon, L50, F|100/100\n|move|p2a: Lucario|Close Combat|p1a: Empoleon\n|-supereffective|p1a: Empoleon|1\n|-damage|p1a: Empoleon|0 fnt\n|-unboost|p2a: Lucario|def|1\n|-unboost|p2a: Lucario|spd|1\n|faint|p1a: Empoleon\n|\n|upkeep\n|\n|t:|1776033012\n|switch|p1a: Floette|Floette-Eternal, L50, F|100/100\n|turn|3\n|\n|t:|1776033015\n|detailschange|p1a: Floette|Floette-Mega, L50, F\n|-mega|p1a: Floette|Floette|Floettite\n|-ability|p1a: Floette|Fairy Aura\n|move|p2a: Lucario|Meteor Mash|p1a: Floette\n|-supereffective|p1a: Floette|1\n|-damage|p1a: Floette|0 fnt\n|faint|p1a: Floette\n|\n|upkeep\n|\n|t:|1776033021\n|switch|p1a: Umbreon|Umbreon, L50, M|62/100\n|turn|4\n|\n|t:|1776033024\n|move|p2a: Lucario|Close Combat|p1a: Umbreon\n|-supereffective|p1a: Umbreon|1\n|-damage|p1a: Umbreon|0 fnt\n|-unboost|p2a: Lucario|def|1\n|-unboost|p2a: Lucario|spd|1\n|faint|p1a: Umbreon\n|\n|win|hoshigumo1101\n|raw|Addcoffeeplease's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|raw|hoshigumo1101's rating: 1299 &rarr; <strong>1307</strong><br />(+8 for winning)\n|l|\u2606Addcoffeeplease\n|player|p1|\n",
+  "uploadtime": 1776033050,
+  "views": 4,
+  "formatid": "gen9championsbssregma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

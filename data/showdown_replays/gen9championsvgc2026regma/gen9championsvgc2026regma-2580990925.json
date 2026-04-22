@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2580990925",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "NoxxinVGC",
+    "cartaguito21"
+  ],
+  "log": "|j|\u2606NoxxinVGC\n|j|\u2606cartaguito21\n|t:|1775949630\n|gametype|doubles\n|player|p1|NoxxinVGC|giovanni|1136\n|player|p2|cartaguito21|101|1129\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Delphox, L50, F|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Clefable, L50, F|\n|poke|p1|Kingambit, L50, M|\n|poke|p1|Dragonite, L50, M|\n|poke|p1|Sneasler, L50, F|\n|poke|p2|Glimmora, L50, F|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Gyarados, L50, M|\n|poke|p2|Froslass, L50, F|\n|poke|p2|Whimsicott, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by NoxxinVGC)\n|inactive|cartaguito21 has 60 seconds left.\n|\n|t:|1775949667\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Delphox|Delphox, L50, F|100/100\n|switch|p1b: Basculegion|Basculegion, L50, M|100/100\n|switch|p2a: Glimmora|Glimmora, L50, F|100/100\n|switch|p2b: Whimsicott|Whimsicott, L50, M|100/100\n|turn|1\n|inactive|NoxxinVGC has 30 seconds left.\n|\n|t:|1775949700\n|detailschange|p1a: Delphox|Delphox-Mega, L50, F\n|-mega|p1a: Delphox|Delphox|Delphoxite\n|move|p2a: Glimmora|Spiky Shield|p2a: Glimmora\n|-singleturn|p2a: Glimmora|move: Protect\n|move|p2b: Whimsicott|Tailwind|p2b: Whimsicott\n|-sidestart|p2: cartaguito21|move: Tailwind\n|move|p1a: Delphox|Heat Wave|p2a: Glimmora|[spread] p2b\n|-activate|p2a: Glimmora|move: Protect\n|-supereffective|p2b: Whimsicott|1\n|-enditem|p2b: Whimsicott|Focus Sash\n|-damage|p2b: Whimsicott|1/100\n|move|p1b: Basculegion|Wave Crash|p2a: Glimmora\n|-activate|p2a: Glimmora|move: Protect\n|-damage|p1b: Basculegion|88/100|[from] Spiky Shield|[of] p2a: Glimmora\n|\n|upkeep\n|turn|2\n|inactive|cartaguito21 has 30 seconds left.\n|\n|t:|1775949729\n|detailschange|p2a: Glimmora|Glimmora-Mega, L50, F\n|-mega|p2a: Glimmora|Glimmora|Glimmoranite\n|move|p2b: Whimsicott|Moonblast|p1b: Basculegion\n|-damage|p1b: Basculegion|49/100\n|move|p2a: Glimmora|Earth Power|p1b: Basculegion\n|-damage|p1b: Basculegion|9/100\n|move|p1a: Delphox|Heat Wave|p2b: Whimsicott|[spread] p2a,p2b\n|-resisted|p2a: Glimmora|1\n|-supereffective|p2b: Whimsicott|1\n|-damage|p2a: Glimmora|74/100\n|-damage|p2b: Whimsicott|0 fnt\n|faint|p2b: Whimsicott\n|move|p1b: Basculegion|Wave Crash|p2a: Glimmora\n|-supereffective|p2a: Glimmora|1\n|-damage|p2a: Glimmora|0 fnt\n|faint|p2a: Glimmora\n|-damage|p1b: Basculegion|0 fnt|[from] Recoil\n|faint|p1b: Basculegion\n|\n|upkeep\n|-message|cartaguito21 forfeited.\n|\n|win|NoxxinVGC\n|raw|NoxxinVGC's rating: 1136 &rarr; <strong>1160</strong><br />(+24 for winning)\n|raw|cartaguito21's rating: 1129 &rarr; <strong>1105</strong><br />(-24 for losing)\n",
+  "uploadtime": 1775949740,
+  "views": 15,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1105,
+  "private": 0,
+  "password": null
+}

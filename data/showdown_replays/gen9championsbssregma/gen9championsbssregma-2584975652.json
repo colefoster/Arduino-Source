@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2584975652",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "c11h17n3o8",
+    "goku s0los"
+  ],
+  "log": "|j|\u2606c11h17n3o8\n|j|\u2606goku s0los\n|t:|1776299797\n|gametype|singles\n|player|p1|c11h17n3o8|266|1164\n|player|p2|goku s0los|265|1192\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Gengar, L50, F|\n|poke|p1|Corviknight, L50, F|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Gyarados, L50, M|\n|poke|p1|Clefable, L50, F|\n|poke|p1|Hydreigon, L50, F|\n|poke|p2|Aggron, L50, M|\n|poke|p2|Serperior, L50, M|\n|poke|p2|Palafin, L50, M|\n|poke|p2|Gallade, L50, M|\n|poke|p2|Zoroark-Hisui, L50, F|\n|poke|p2|Arcanine-Hisui, L50, M|\n|teampreview|3\n|j| p74\n|\n|t:|1776299851\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Garchomp|Garchomp, L50, F|100/100\n|switch|p2a: Serperior|Serperior, L50, M, shiny|100/100\n|turn|1\n|\n|t:|1776299862\n|move|p2a: Serperior|Leaf Storm|p1a: Garchomp\n|-damage|p1a: Garchomp|54/100\n|-boost|p2a: Serperior|spa|2\n|move|p1a: Garchomp|Stealth Rock|p2a: Serperior\n|-sidestart|p2: goku s0los|move: Stealth Rock\n|\n|upkeep\n|turn|2\n|\n|t:|1776299871\n|move|p2a: Serperior|Leaf Storm|p1a: Garchomp\n|-damage|p1a: Garchomp|0 fnt\n|-boost|p2a: Serperior|spa|2\n|faint|p1a: Garchomp\n|\n|upkeep\n|\n|t:|1776299880\n|switch|p1a: Hydreigon|Hydreigon, L50, F|100/100\n|turn|3\n|\n|t:|1776299909\n|move|p1a: Hydreigon|U-turn|p2a: Serperior\n|-supereffective|p2a: Serperior|1\n|-damage|p2a: Serperior|65/100\n|-message|c11h17n3o8 forfeited.\n|\n|win|goku s0los\n|raw|c11h17n3o8's rating: 1164 &rarr; <strong>1141</strong><br />(-23 for losing)\n|raw|goku s0los's rating: 1192 &rarr; <strong>1215</strong><br />(+23 for winning)\n|l|\u2606c11h17n3o8\n|player|p1|\n|l|\u2606goku s0los\n|player|p2|\n",
+  "uploadtime": 1776299946,
+  "views": 9,
+  "formatid": "gen9championsbssregma",
+  "rating": 1141,
+  "private": 0,
+  "password": null
+}

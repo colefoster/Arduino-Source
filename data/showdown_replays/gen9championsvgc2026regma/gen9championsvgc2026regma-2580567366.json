@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2580567366",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "imperialdave1",
+    "CarnageY"
+  ],
+  "log": "|j|\u2606imperialdave1\n|j|\u2606CarnageY\n|t:|1775913658\n|gametype|doubles\n|player|p1|imperialdave1|170|1140\n|player|p2|CarnageY|pokemaniac|1085\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Scovillain, L50, M|\n|poke|p1|Zoroark-Hisui, L50, M|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Kleavor, L50, M|\n|poke|p1|Sneasler, L50, F|\n|poke|p2|Crabominable, L50, M|\n|poke|p2|Farigiraf, L50, M|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Torkoal, L50, M|\n|poke|p2|Basculegion, L50, M|\n|teampreview|4\n|\n|t:|1775913689\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Scovillain|Scovillain, L50, M|100/100\n|switch|p1b: Incineroar|Incineroar, L50, F|100/100\n|switch|p2a: Farigiraf|Farigiraf, L50, M|100/100\n|switch|p2b: Basculegion|Basculegion, L50, M|100/100\n|-ability|p1b: Incineroar|Intimidate|boost\n|-unboost|p2a: Farigiraf|atk|1\n|-unboost|p2b: Basculegion|atk|1\n|turn|1\n|\n|t:|1775913709\n|switch|p2b: Torkoal|Torkoal, L50, M|100/100\n|-weather|SunnyDay|[from] ability: Drought|[of] p2b: Torkoal\n|move|p1a: Scovillain|Hyper Voice|p2a: Farigiraf|[spread] p2a,p2b\n|-damage|p2a: Farigiraf|64/100\n|-damage|p2b: Torkoal|58/100\n|move|p1b: Incineroar|Darkest Lariat|p2a: Farigiraf\n|-supereffective|p2a: Farigiraf|1\n|-damage|p2a: Farigiraf|0 fnt\n|faint|p2a: Farigiraf\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|-message|CarnageY forfeited.\n|\n|win|imperialdave1\n|raw|imperialdave1's rating: 1140 &rarr; <strong>1161</strong><br />(+21 for winning)\n|raw|CarnageY's rating: 1085 &rarr; <strong>1066</strong><br />(-19 for losing)\n|l|\u2606CarnageY\n|player|p2|\n|l|\u2606imperialdave1\n|player|p1|\n|j| Suplich\n|l| Suplich\n|j|\u2606imperialdave1\n|player|p1|imperialdave1|170|\n",
+  "uploadtime": 1775914144,
+  "views": 13,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1066,
+  "private": 0,
+  "password": null
+}

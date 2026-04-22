@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586436982",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "alessandra addams",
+    "ArataKyoto"
+  ],
+  "log": "|j|\u2606alessandra addams\n|j|\u2606ArataKyoto\n|t:|1776434617\n|gametype|doubles\n|player|p1|alessandra addams|cheryl|1000\n|player|p2|ArataKyoto|170|1100\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Hatterene, L50, F|\n|poke|p1|Froslass, L50, F|\n|poke|p1|Aggron, L50, M|\n|poke|p1|Snorlax, L50, F|\n|poke|p1|Scovillain, L50, M|\n|poke|p1|Drampa, L50, F|\n|poke|p2|Aerodactyl, L50, F|\n|poke|p2|Typhlosion-Hisui, L50, M|\n|poke|p2|Archaludon, L50, M|\n|poke|p2|Tauros-Paldea-Aqua, L50, M|\n|poke|p2|Meganium, L50, M|\n|poke|p2|Kangaskhan, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by ArataKyoto)\n|\n|t:|1776434641\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Hatterene|Hatterene, L50, F|100/100\n|switch|p1b: Drampa|Drampa, L50, F|100/100\n|switch|p2a: Aerodactyl|Aerodactyl, L50, F|100/100\n|switch|p2b: Meganium|Meganium, L50, M|100/100\n|-ability|p2a: Aerodactyl|Unnerve\n|turn|1\n|\n|t:|1776434662\n|detailschange|p2b: Meganium|Meganium-Mega, L50, M\n|-mega|p2b: Meganium|Meganium|Meganiumite\n|move|p2a: Aerodactyl|Rock Slide|p1a: Hatterene|[spread] p1a,p1b\n|-damage|p1a: Hatterene|72/100\n|-damage|p1b: Drampa|75/100\n|move|p2b: Meganium|Dazzling Gleam|p1b: Drampa|[spread] p1a,p1b\n|-supereffective|p1b: Drampa|1\n|-damage|p1a: Hatterene|29/100\n|-damage|p1b: Drampa|8/100\n|-ability|p1b: Drampa|Berserk|boost\n|-boost|p1b: Drampa|spa|1\n|move|p1b: Drampa|Blizzard|p2b: Meganium|[spread] p2a,p2b\n|-supereffective|p2a: Aerodactyl|1\n|-supereffective|p2b: Meganium|1\n|-enditem|p2a: Aerodactyl|Focus Sash\n|-damage|p2a: Aerodactyl|1/100\n|-damage|p2b: Meganium|25/100\n|-status|p2b: Meganium|frz\n|move|p1a: Hatterene|Trick Room|p1a: Hatterene\n|-fieldstart|move: Trick Room|[of] p1a: Hatterene\n|\n|upkeep\n|turn|2\n|-message|ArataKyoto forfeited.\n|\n|win|alessandra addams\n|raw|alessandra addams's rating: 1000 &rarr; <strong>1051</strong><br />(+51 for winning)\n|raw|ArataKyoto's rating: 1100 &rarr; <strong>1068</strong><br />(-32 for losing)\n|l|\u2606ArataKyoto\n|player|p2|\n",
+  "uploadtime": 1776434690,
+  "views": 39,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1051,
+  "private": 0,
+  "password": null
+}

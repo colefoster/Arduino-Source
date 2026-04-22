@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2580652060",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "grok how do i win?",
+    "Yor 4ger"
+  ],
+  "log": "|j|\u2606grok how do i win?\n|j|\u2606Yor 4ger\n|t:|1775921463\n|gametype|doubles\n|player|p1|grok how do i win?|2|1000\n|player|p2|Yor 4ger|1|1019\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Charizard, L50, M|\n|poke|p1|Venusaur, L50, M|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Whimsicott, L50, M|\n|poke|p1|Raichu, L50, F|\n|poke|p2|Emboar, L50, F|\n|poke|p2|Espathra, L50, M|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Maushold, L50|\n|poke|p2|Rotom-Wash, L50|\n|poke|p2|Garchomp, L50, M|\n|teampreview|4\n|\n|t:|1775921490\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Charizard|Charizard, L50, M, shiny|100/100\n|switch|p1b: Whimsicott|Whimsicott, L50, M, shiny|100/100\n|switch|p2a: Emboar|Emboar, L50, F|100/100\n|switch|p2b: Espathra|Espathra, L50, M|100/100\n|turn|1\n|\n|t:|1775921513\n|detailschange|p1a: Charizard|Charizard-Mega-Y, L50, M, shiny\n|-mega|p1a: Charizard|Charizard|Charizardite Y\n|-weather|SunnyDay|[from] ability: Drought|[of] p1a: Charizard\n|detailschange|p2a: Emboar|Emboar-Mega, L50, F\n|-mega|p2a: Emboar|Emboar|Emboarite\n|-ability|p2a: Emboar|Mold Breaker\n|move|p1b: Whimsicott|Fake Tears|p2a: Emboar\n|-unboost|p2a: Emboar|spd|2\n|move|p2b: Espathra|Skill Swap|p2a: Emboar\n|-activate|p2b: Espathra|Skill Swap|||[of] p2a: Emboar\n|-ability|p2b: Espathra|Mold Breaker\n|move|p1a: Charizard|Air Slash|p2a: Emboar\n|-supereffective|p2a: Emboar|1\n|-damage|p2a: Emboar|0 fnt\n|faint|p2a: Emboar\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|-message|Yor 4ger forfeited.\n|\n|win|grok how do i win?\n|raw|grok how do i win?'s rating: 1000 &rarr; <strong>1042</strong><br />(+42 for winning)\n|raw|Yor 4ger's rating: 1019 &rarr; <strong>1005</strong><br />(-14 for losing)\n|l|\u2606Yor 4ger\n|player|p2|\n",
+  "uploadtime": 1775921528,
+  "views": 10,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1005,
+  "private": 0,
+  "password": null
+}

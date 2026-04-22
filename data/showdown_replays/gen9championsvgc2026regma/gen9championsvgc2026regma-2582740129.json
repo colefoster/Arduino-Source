@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582740129",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "VC824",
+    "Pisoskeri"
+  ],
+  "log": "|j|\u2606VC824\n|j|\u2606Pisoskeri\n|t:|1776110816\n|gametype|doubles\n|player|p1|VC824|riley|1000\n|player|p2|Pisoskeri|102|1000\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Gardevoir, L50, F|\n|poke|p1|Gallade, L50, M|\n|poke|p1|Farigiraf, L50, F|\n|poke|p1|Hatterene, L50, F|\n|poke|p1|Raichu, L50, F|\n|poke|p1|Sneasler, L50, M|\n|poke|p2|Medicham, L50, M|\n|poke|p2|Garganacl, L50, M|\n|poke|p2|Whimsicott, L50, F|\n|poke|p2|Gyarados, L50, M|\n|poke|p2|Maushold-Four, L50|\n|poke|p2|Cofagrigus, L50, F|\n|teampreview|4\nVC824 has agreed to open team sheets.\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Pisoskeri)\n|\n|t:|1776110844\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Farigiraf|Farigiraf, L50, F|100/100\n|switch|p1b: Hatterene|Hatterene, L50, F|100/100\n|switch|p2a: Whimsicott|Whimsicott, L50, F|100/100\n|switch|p2b: Cofagrigus|Cofagrigus, L50, F|100/100\n|turn|1\n|\n|t:|1776110866\n|move|p2a: Whimsicott|Substitute|p2a: Whimsicott\n|-start|p2a: Whimsicott|Substitute\n|-damage|p2a: Whimsicott|76/100\n|move|p1a: Farigiraf|Psychic Terrain|p1a: Farigiraf\n|-fieldstart|move: Psychic Terrain\n|move|p2b: Cofagrigus|Night Shade|p1a: Farigiraf\n|-immune|p1a: Farigiraf\n|move|p1b: Hatterene|Psychic Terrain||[still]\n|-fail|p1b: Hatterene\n|\n|-heal|p2a: Whimsicott|82/100|[from] item: Leftovers\n|upkeep\n|turn|2\n|\n|t:|1776110885\n|move|p2a: Whimsicott|Leech Seed||[still]\n|cant|p1a: Farigiraf|ability: Armor Tail|Leech Seed|[of] p2a: Whimsicott\n|move|p2b: Cofagrigus|Toxic Spikes|p1a: Farigiraf\n|move|p1b: Hatterene|Toxic Spikes|p2b: Cofagrigus|[from] ability: Magic Bounce\n|-sidestart|p2: Pisoskeri|move: Toxic Spikes\n|move|p1b: Hatterene|Expanding Force|p2b: Cofagrigus|[spread] p2a,p2b\n|-end|p2a: Whimsicott|Substitute\n|-damage|p2b: Cofagrigus|49/100\n|-enditem|p2b: Cofagrigus|Sitrus Berry|[eat]\n|-heal|p2b: Cofagrigus|74/100|[from] item: Sitrus Berry\n|move|p1a: Farigiraf|Trick Room|p1a: Farigiraf\n|-fieldstart|move: Trick Room|[of] p1a: Farigiraf\n|\n|-heal|p2a: Whimsicott|88/100|[from] item: Leftovers\n|upkeep\n|turn|3\n|-message|Pisoskeri forfeited.\n|\n|win|VC824\n|raw|VC824's rating: 1000 &rarr; <strong>1040</strong><br />(+40 for winning)\n|raw|Pisoskeri's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|l|\u2606Pisoskeri\n|player|p2|\n",
+  "uploadtime": 1776111020,
+  "views": 35,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

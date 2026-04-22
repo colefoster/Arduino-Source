@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2585193998",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "Silentsummer",
+    "ninjadog202"
+  ],
+  "log": "|j|\u2606Silentsummer\n|j|\u2606ninjadog202\n|t:|1776323430\n|gametype|singles\n|player|p1|Silentsummer|2|1140\n|player|p2|ninjadog202|2|1102\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Archaludon, L50, F|\n|poke|p1|Ninetales-Alola, L50, M|\n|poke|p1|Blastoise, L50, M|\n|poke|p1|Scizor, L50, F|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Toxapex, L50, M|\n|poke|p2|Glimmora, L50, F|\n|poke|p2|Meowscarada, L50, M|\n|poke|p2|Mimikyu, L50, M|\n|poke|p2|Charizard, L50, F|\n|poke|p2|Rotom-Wash, L50|\n|poke|p2|Lucario, L50, F|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Silentsummer)\n|j| The Educated Fool\n|\n|t:|1776323448\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Garchomp|Garchomp, L50, M|100/100\n|switch|p2a: Lucario|Lucario, L50, F|100/100\n|turn|1\n|\n|t:|1776323457\n|switch|p2a: Charizard|Charizard, L50, F|100/100\n|move|p1a: Garchomp|Stealth Rock|p2a: Charizard\n|-sidestart|p2: ninjadog202|move: Stealth Rock\n|\n|upkeep\n|turn|2\n|\n|t:|1776323463\n|move|p1a: Garchomp|Rock Tomb|p2a: Charizard\n|-supereffective|p2a: Charizard|2\n|-damage|p2a: Charizard|0 fnt\n|faint|p2a: Charizard\n|\n|upkeep\n|\n|t:|1776323466\n|switch|p2a: Rotom|Rotom-Wash, L50|100/100\n|-damage|p2a: Rotom|89/100|[from] Stealth Rock\n|turn|3\n|\n|t:|1776323479\n|move|p2a: Rotom|Hydro Pump|p1a: Garchomp\n|-damage|p1a: Garchomp|46/100\n|move|p1a: Garchomp|Outrage|p2a: Rotom\n|-damage|p2a: Rotom|10/100\n|\n|upkeep\n|turn|4\n|\n|t:|1776323486\n|move|p2a: Rotom|Hydro Pump|p1a: Garchomp\n|-damage|p1a: Garchomp|0 fnt\n|faint|p1a: Garchomp\n|\n|upkeep\n|\n|t:|1776323489\n|switch|p1a: Blastoise|Blastoise, L50, M|100/100\n|turn|5\n|-message|ninjadog202 forfeited.\n|\n|win|Silentsummer\n|raw|Silentsummer's rating: 1140 &rarr; <strong>1162</strong><br />(+22 for winning)\n|raw|ninjadog202's rating: 1102 &rarr; <strong>1080</strong><br />(-22 for losing)\n|l|\u2606ninjadog202\n|player|p2|\n|l|\u2606Silentsummer\n|player|p1|\n",
+  "uploadtime": 1776324949,
+  "views": 7,
+  "formatid": "gen9championsbssregma",
+  "rating": 1080,
+  "private": 0,
+  "password": null
+}

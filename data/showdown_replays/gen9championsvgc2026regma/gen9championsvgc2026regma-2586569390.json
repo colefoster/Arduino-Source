@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586569390",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "1#MiraidonHater",
+    "Pa7mmm"
+  ],
+  "log": "|j|\u26061#MiraidonHater\n|j|\u2606Pa7mmm\n|t:|1776443684\n|gametype|doubles\n|player|p1|1#MiraidonHater|1|1377\n|player|p2|Pa7mmm|101|1370\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Gardevoir, L50, F|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Tsareena, L50, F|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Pelipper, L50, M|\n|poke|p1|Archaludon, L50, M|\n|poke|p2|Corviknight, L50, F|\n|poke|p2|Garchomp, L50, F|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Venusaur, L50, F|\n|poke|p2|Tyranitar, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Pa7mmm)\n|inactive|1#MiraidonHater has 60 seconds left.\n|inactive|Pa7mmm has 60 seconds left.\n|inactive|1#MiraidonHater has 30 seconds left.\n|\n|t:|1776443749\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: EVERY LAST DROP|Archaludon, L50, M|100/100\n|switch|p1b: Basculegion|Basculegion, L50, M|100/100\n|switch|p2a: Corviknight|Corviknight, L50, F|100/100\n|switch|p2b: Tyranitar|Tyranitar, L50, F|100/100\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p2b: Tyranitar\n|turn|1\n|inactive|Pa7mmm has 30 seconds left.\n|l|\u2606Pa7mmm\n|inactive|Pa7mmm disconnected and has a minute to reconnect!\n|player|p2|\n|\n|t:|1776443803\n|detailschange|p2b: Tyranitar|Tyranitar-Mega, L50, F\n|-mega|p2b: Tyranitar|Tyranitar|Tyranitarite\n|move|p1b: Basculegion|Flip Turn|p2b: Tyranitar\n|-supereffective|p2b: Tyranitar|1\n|-damage|p2b: Tyranitar|54/100\n|inactive|1#MiraidonHater has 30 seconds left.\n|inactive|1#MiraidonHater has 20 seconds left.\n|\n|t:|1776443868\n|switch|p1b: Pelipper|Pelipper, L50, M|100/100|[from] Flip Turn\n|-weather|RainDance|[from] ability: Drizzle|[of] p1b: Pelipper\n|move|p1a: EVERY LAST DROP|Electro Shot||[still]\n|-prepare|p1a: EVERY LAST DROP|Electro Shot\n|-boost|p1a: EVERY LAST DROP|spa|1\n|-anim|p1a: EVERY LAST DROP|Electro Shot|p2a: Corviknight\n|-supereffective|p2a: Corviknight|1\n|-damage|p2a: Corviknight|0 fnt\n|faint|p2a: Corviknight\n|move|p2b: Tyranitar|Rock Slide|p1a: EVERY LAST DROP|[spread] p1a,p1b\n|-resisted|p1a: EVERY LAST DROP|1\n|-supereffective|p1b: Pelipper|1\n|-damage|p1a: EVERY LAST DROP|86/100\n|-damage|p1b: Pelipper|12/100\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|inactive|Pa7mmm has 30 seconds left.\n|inactive|Pa7mmm has 20 seconds left.\n|inactive|Pa7mmm has 15 seconds left.\n|inactive|Pa7mmm has 10 seconds left.\n|inactive|Pa7mmm has 5 seconds left.\n|-message|Pa7mmm lost due to inactivity.\n|\n|win|1#MiraidonHater\n",
+  "uploadtime": 1776443687,
+  "views": 17,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": null,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582653620",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "hiker stahl",
+    "Braute"
+  ],
+  "log": "|j|\u2606hiker stahl\n|j|\u2606Braute\n|t:|1776105165\n|gametype|doubles\n|player|p1|hiker stahl|hiker-gen4|1285\n|player|p2|Braute|miku-fire|1280\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Rotom-Wash, L50|\n|poke|p1|Dragonite, L50, M|\n|poke|p2|Beedrill, L50, F|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Talonflame, L50, F|\n|poke|p2|Kingambit, L50, F|\n|poke|p2|Tyranitar, L50, F|\n|poke|p2|Excadrill, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Braute)\n|inactive|hiker stahl has 60 seconds left.\n|inactive|hiker stahl has 30 seconds left.\n|inactive|hiker stahl has 20 seconds left.\n|\n|t:|1776105238\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Rotom|Rotom-Wash, L50|100/100\n|switch|p1b: Dragonite|Dragonite, L50, M|100/100\n|switch|p2a: Kingambit|Kingambit, L50, F, shiny|100/100\n|switch|p2b: Talonflame|Talonflame, L50, F|100/100\n|turn|1\n|\n|t:|1776105255\n|move|p2b: Talonflame|Protect|p2b: Talonflame\n|-singleturn|p2b: Talonflame|Protect\n|move|p1b: Dragonite|Scale Shot|p2b: Talonflame\n|-activate|p2b: Talonflame|move: Protect\n|move|p1a: Rotom|Will-O-Wisp|p2a: Kingambit|[miss]\n|-miss|p1a: Rotom|p2a: Kingambit\n|move|p2a: Kingambit|Kowtow Cleave|p1a: Rotom\n|-damage|p1a: Rotom|47/100\n|\n|-heal|p1a: Rotom|53/100|[from] item: Leftovers\n|upkeep\n|turn|2\n|\n|t:|1776105266\n|move|p2b: Talonflame|Tailwind|p2b: Talonflame\n|-sidestart|p2: Braute|move: Tailwind\n|move|p1b: Dragonite|Scale Shot|p2b: Talonflame\n|-damage|p2b: Talonflame|84/100\n|-damage|p2b: Talonflame|66/100\n|-hitcount|p2b: Talonflame|2\n|-unboost|p1b: Dragonite|def|1\n|-boost|p1b: Dragonite|spe|1\n|move|p2a: Kingambit|Kowtow Cleave|p1a: Rotom\n|-damage|p1a: Rotom|0 fnt\n|faint|p1a: Rotom\n|\n|upkeep\n|-message|hiker stahl forfeited.\n|\n|win|Braute\n|raw|hiker stahl's rating: 1285 &rarr; <strong>1260</strong><br />(-25 for losing)\n|raw|Braute's rating: 1280 &rarr; <strong>1305</strong><br />(+25 for winning)\n",
+  "uploadtime": 1776105282,
+  "views": 33,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1260,
+  "private": 0,
+  "password": null
+}

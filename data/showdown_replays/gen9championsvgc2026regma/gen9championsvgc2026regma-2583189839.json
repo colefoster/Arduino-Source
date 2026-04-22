@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2583189839",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Dahaha233",
+    "shin-tv07"
+  ],
+  "log": "|j|\u2606Dahaha233\n|j|\u2606shin-tv07\n|t:|1776152803\n|gametype|doubles\n|player|p1|Dahaha233|rosa|1202\n|player|p2|shin-tv07|twins-gen4dp|1119\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Charizard, L50, M|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Whimsicott, L50, M|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Rotom-Wash, L50|\n|poke|p1|Sneasler, L50, M|\n|poke|p2|Mimikyu, L50, F|\n|poke|p2|Snorlax, L50, F|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Oranguru, L50, F|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Dragonite, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Dahaha233)\n|inactive|Dahaha233 has 60 seconds left.\n|\n|t:|1776152847\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Sneasler|Sneasler, L50, M|100/100\n|switch|p1b: Garchomp|Garchomp, L50, F|100/100\n|switch|p2a: Mimikyu|Mimikyu, L50, F|100/100\n|switch|p2b: Snorlax|Snorlax, L50, F|100/100\n|turn|1\n|\n|t:|1776152870\n|move|p2b: Snorlax|Protect|p2b: Snorlax\n|-singleturn|p2b: Snorlax|Protect\n|move|p1a: Sneasler|Fake Out|p2b: Snorlax\n|-activate|p2b: Snorlax|move: Protect\n|move|p1b: Garchomp|Earthquake|p2a: Mimikyu|[spread] p1a,p2a\n|-activate|p2b: Snorlax|move: Protect\n|-supereffective|p1a: Sneasler|1\n|-damage|p1a: Sneasler|0 fnt\n|-activate|p2a: Mimikyu|ability: Disguise\n|-damage|p2a: Mimikyu|100/100\n|detailschange|p2a: Mimikyu|Mimikyu-Busted, L50, F\n|-damage|p2a: Mimikyu|88/100|[from] pokemon: Mimikyu-Busted\n|faint|p1a: Sneasler\n|move|p2a: Mimikyu|Trick Room|p2a: Mimikyu\n|-fieldstart|move: Trick Room|[of] p2a: Mimikyu\n|\n|upkeep\n|-message|Dahaha233 forfeited.\n|\n|win|shin-tv07\n|raw|Dahaha233's rating: 1202 &rarr; <strong>1171</strong><br />(-31 for losing)\n|raw|shin-tv07's rating: 1119 &rarr; <strong>1150</strong><br />(+31 for winning)\n|l|\u2606Dahaha233\n|player|p1|\n",
+  "uploadtime": 1776152882,
+  "views": 22,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1150,
+  "private": 0,
+  "password": null
+}

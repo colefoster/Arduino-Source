@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582711459",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "GenoXeno",
+    "LVP362"
+  ],
+  "log": "|j|\u2606GenoXeno\n|j|\u2606LVP362\n|t:|1776108904\n|gametype|doubles\n|player|p1|GenoXeno|acetrainer-gen4dp|1100\n|player|p2|LVP362|169|1040\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Oranguru, L50, M|\n|poke|p1|Snorlax, L50, F|\n|poke|p1|Torkoal, L50, M|\n|poke|p1|Steelix, L50, M|\n|poke|p1|Appletun, L50, M|\n|poke|p2|Tyranitar, L50, F|\n|poke|p2|Excadrill, L50, F|\n|poke|p2|Gyarados, L50, F|\n|poke|p2|Corviknight, L50, M|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Rotom-Heat, L50|\n|teampreview|4\nGenoXeno has agreed to open team sheets.\n|\n|t:|1776108937\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Incineroar|Incineroar, L50, M|100/100\n|switch|p1b: Oranguru|Oranguru, L50, M|100/100\n|switch|p2a: Gyarados|Gyarados, L50, F|100/100\n|switch|p2b: Rotom|Rotom-Heat, L50|100/100\n|-ability|p2a: Gyarados|Intimidate|boost\n|-unboost|p1a: Incineroar|atk|1\n|-fail|p1b: Oranguru|unboost|Attack|[from] ability: Inner Focus|[of] p1b: Oranguru\n|-ability|p1a: Incineroar|Intimidate|boost\n|-unboost|p2a: Gyarados|atk|1\n|-unboost|p2b: Rotom|atk|1\n|turn|1\n|\n|t:|1776108973\n|move|p2b: Rotom|Trick|p1b: Oranguru\n|-activate|p2b: Rotom|move: Trick|[of] p1b: Oranguru\n|-item|p1b: Oranguru|Choice Scarf|[from] move: Trick\n|-item|p2b: Rotom|Focus Sash|[from] move: Trick\n|move|p2a: Gyarados|Taunt|p1b: Oranguru\n|-start|p1b: Oranguru|move: Taunt\n|move|p1a: Incineroar|Parting Shot|p2b: Rotom\n|-unboost|p2b: Rotom|atk|1\n|-unboost|p2b: Rotom|spa|1\n|-message|GenoXeno forfeited.\n|\n|win|LVP362\n|raw|GenoXeno's rating: 1100 &rarr; <strong>1071</strong><br />(-29 for losing)\n|raw|LVP362's rating: 1040 &rarr; <strong>1080</strong><br />(+40 for winning)\n|l|\u2606GenoXeno\n|player|p1|\n",
+  "uploadtime": 1776108988,
+  "views": 20,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1071,
+  "private": 0,
+  "password": null
+}

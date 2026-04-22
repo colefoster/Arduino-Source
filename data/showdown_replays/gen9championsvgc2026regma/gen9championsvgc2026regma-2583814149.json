@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2583814149",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "chilledskys",
+    "lemvan"
+  ],
+  "log": "|j|\u2606chilledskys\n|j|\u2606lemvan\n|t:|1776199750\n|gametype|doubles\n|player|p1|chilledskys|waiter|1137\n|player|p2|lemvan|170|1038\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Blastoise, L50, F|\n|poke|p1|Gallade, L50, M|\n|poke|p1|Cofagrigus, L50, M|\n|poke|p1|Hatterene, L50, F|\n|poke|p1|Torkoal, L50, F|\n|poke|p1|Corviknight, L50, F|\n|poke|p2|Victreebel, L50, M|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Aegislash, L50, M|\n|poke|p2|Primarina, L50, F|\n|poke|p2|Zoroark-Hisui, L50, M|\n|poke|p2|Bellibolt, L50, M|\n|teampreview|4\n|c|\u2606chilledskys|glhf\n|\n|t:|1776199787\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: ryu|Blastoise, L50, F, shiny|100/100\n|switch|p1b: uro|Hatterene, L50, F, shiny|100/100\n|switch|p2a: Victreebel|Victreebel, L50, M|100/100\n|switch|p2b: Aegislash|Aegislash, L50, M|100/100\n|turn|1\n|\n|t:|1776199822\n|detailschange|p2a: Victreebel|Victreebel-Mega, L50, M\n|-mega|p2a: Victreebel|Victreebel|Victreebelite\n|move|p1a: ryu|Fake Out|p2a: Victreebel\n|-damage|p2a: Victreebel|91/100\n|cant|p2a: Victreebel|flinch\n|-formechange|p2b: Aegislash|Aegislash-Blade|\n|move|p2b: Aegislash|Shadow Ball|p1b: uro\n|-supereffective|p1b: uro|1\n|-damage|p1b: uro|0 fnt\n|faint|p1b: uro\n|\n|upkeep\n|\n|t:|1776199834\n|switch|p1b: bird strike|Corviknight, L50, F, shiny|100/100\n|turn|2\n|\n|t:|1776199845\n|detailschange|p1a: ryu|Blastoise-Mega, L50, F, shiny\n|-mega|p1a: ryu|Blastoise|Blastoisinite\n|move|p1a: ryu|Protect|p1a: ryu\n|-singleturn|p1a: ryu|Protect\n|-formechange|p2b: Aegislash|Aegislash|\n|move|p2b: Aegislash|King's Shield|p2b: Aegislash\n|-singleturn|p2b: Aegislash|Protect\n|move|p2a: Victreebel|Energy Ball|p1a: ryu\n|-activate|p1a: ryu|move: Protect\n|move|p1b: bird strike|Brave Bird|p2a: Victreebel\n|-supereffective|p2a: Victreebel|1\n|-damage|p2a: Victreebel|0 fnt\n|-damage|p1b: bird strike|18/100|[from] ability: Innards Out|[of] p2a: Victreebel\n|faint|p2a: Victreebel\n|-damage|p1b: bird strike|0 fnt|[from] Recoil\n|faint|p1b: bird strike\n|\n|upkeep\n|-message|chilledskys forfeited.\n|\n|win|lemvan\n|raw|chilledskys's rating: 1137 &rarr; <strong>1105</strong><br />(-32 for losing)\n|raw|lemvan's rating: 1038 &rarr; <strong>1082</strong><br />(+44 for winning)\n|l|\u2606chilledskys\n|player|p1|\n",
+  "uploadtime": 1776199868,
+  "views": 34,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1082,
+  "private": 0,
+  "password": null
+}

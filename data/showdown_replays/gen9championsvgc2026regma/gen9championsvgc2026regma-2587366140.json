@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2587366140",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "ilimejuice93!",
+    "Edudus"
+  ],
+  "log": "|j|\u2606ilimejuice93!\n|j|\u2606Edudus\n|t:|1776525749\n|gametype|doubles\n|player|p1|ilimejuice93!|169|1179\n|player|p2|Edudus|shauntal|1164\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Gengar, L50, F|\n|poke|p1|Politoed, L50, F|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Kingambit, L50, F|\n|poke|p1|Palafin, L50, M|\n|poke|p1|Sableye, L50, F|\n|poke|p2|Volcarona, L50, M|\n|poke|p2|Rotom-Wash, L50|\n|poke|p2|Whimsicott, L50, M|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Aggron, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Edudus)\n|inactive|ilimejuice93! has 60 seconds left.\n|inactive|Edudus has 60 seconds left.\n|\n|t:|1776525807\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Gengar|Gengar, L50, F|100/100\n|switch|p1b: Sableye|Sableye, L50, F|100/100\n|switch|p2a: Aggron|Aggron, L50, M|100/100\n|switch|p2b: Rotom|Rotom-Wash, L50|100/100\n|turn|1\n|\n|t:|1776525832\n|detailschange|p1a: Gengar|Gengar-Mega, L50, F\n|-mega|p1a: Gengar|Gengar|Gengarite\n|detailschange|p2a: Aggron|Aggron-Mega, L50, M\n|-mega|p2a: Aggron|Aggron|Aggronite\n|move|p1b: Sableye|Detect|p1b: Sableye\n|-singleturn|p1b: Sableye|Protect\n|move|p1a: Gengar|Protect|p1a: Gengar\n|-singleturn|p1a: Gengar|Protect\n|move|p2b: Rotom|Thunderbolt|p1a: Gengar\n|-activate|p1a: Gengar|move: Protect\n|move|p2a: Aggron|Heavy Slam|p1a: Gengar\n|-activate|p1a: Gengar|move: Protect\n|\n|upkeep\n|turn|2\n|inactive|ilimejuice93! has 30 seconds left.\n|\n|t:|1776525860\n|move|p1b: Sableye|Disable|p2b: Rotom\n|-start|p2b: Rotom|Disable|Thunderbolt\n|cant|p2b: Rotom|Disable|Thunderbolt\n|move|p1a: Gengar|Disable|p2a: Aggron\n|-start|p2a: Aggron|Disable|Heavy Slam\n|cant|p2a: Aggron|Disable|Heavy Slam\n|\n|upkeep\n|turn|3\n|-message|Edudus forfeited.\n|\n|win|ilimejuice93!\n|raw|ilimejuice93!'s rating: 1179 &rarr; <strong>1203</strong><br />(+24 for winning)\n|raw|Edudus's rating: 1164 &rarr; <strong>1140</strong><br />(-24 for losing)\n|l|\u2606Edudus\n|player|p2|\n",
+  "uploadtime": 1776525884,
+  "views": 12,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1140,
+  "private": 0,
+  "password": null
+}

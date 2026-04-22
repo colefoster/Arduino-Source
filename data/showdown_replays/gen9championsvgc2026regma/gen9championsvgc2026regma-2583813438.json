@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2583813438",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Mayawan",
+    "uujdjdjdjd"
+  ],
+  "log": "|j|\u2606Mayawan\n|j|\u203duujdjdjdjd\n|t:|1776199692\n|gametype|doubles\n|player|p1|Mayawan|lebanne|1042\n|player|p2|uujdjdjdjd|101|1000\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Glalie, L50, F|\n|poke|p1|Ninetales-Alola, L50, M|\n|poke|p1|Forretress, L50, M|\n|poke|p1|Reuniclus, L50, F|\n|poke|p1|Empoleon, L50, F|\n|poke|p1|Chandelure, L50, F|\n|poke|p2|Feraligatr, L50, F|\n|poke|p2|Slowking-Galar, L50, M|\n|poke|p2|Clefable, L50, M|\n|poke|p2|Cofagrigus, L50, F|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Armarouge, L50, M|\n|teampreview|4\n|\n|t:|1776199721\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Netanyahu|Glalie, L50, F|100/100\n|switch|p1b: Netanjahu|Forretress, L50, M|100/100\n|switch|p2a: Feraligatr|Feraligatr, L50, F, shiny|100/100\n|switch|p2b: Armarouge|Armarouge, L50, M|100/100\n|turn|1\n|\n|t:|1776199755\n|move|p1a: Netanyahu|Protect|p1a: Netanyahu\n|-singleturn|p1a: Netanyahu|Protect\n|move|p2a: Feraligatr|Waterfall|p1a: Netanyahu\n|-activate|p1a: Netanyahu|move: Protect\n|move|p2b: Armarouge|Flamethrower|p1b: Netanjahu\n|-supereffective|p1b: Netanjahu|2\n|-ability|p1b: Netanjahu|Sturdy\n|-damage|p1b: Netanjahu|1/100\n|move|p1b: Netanjahu|Explosion|p2a: Feraligatr|[spread] p2a,p2b\n|-activate|p1a: Netanyahu|move: Protect\n|-damage|p2a: Feraligatr|64/100\n|-damage|p2b: Armarouge|61/100\n|faint|p1b: Netanjahu\n|\n|-ability|p1a: Netanyahu|Moody|boost\n|-boost|p1a: Netanyahu|spd|2\n|-unboost|p1a: Netanyahu|spe|1\n|upkeep\n|\n|t:|1776199780\n|switch|p1b: Sara Netanyahu|Ninetales-Alola, L50, M|100/100\n|-weather|Snowscape|[from] ability: Snow Warning|[of] p1b: Sara Netanyahu\n|turn|2\n|\n|t:|1776199802\n|switch|p2a: Sneasler|Sneasler, L50, F|100/100\n|-ability|p2a: Sneasler|Pressure\n|detailschange|p1a: Netanyahu|Glalie-Mega, L50, F\n|-mega|p1a: Netanyahu|Glalie|Glalitite\n|move|p1b: Sara Netanyahu|Protect|p1b: Sara Netanyahu\n|-singleturn|p1b: Sara Netanyahu|Protect\n|move|p1a: Netanyahu|Explosion|p2a: Sneasler|[spread] p2a,p2b\n|-activate|p1b: Sara Netanyahu|move: Protect\n|-resisted|p2b: Armarouge|1\n|-damage|p2a: Sneasler|0 fnt\n|-damage|p2b: Armarouge|0 fnt\n|faint|p1a: Netanyahu\n|faint|p2a: Sneasler\n|faint|p2b: Armarouge\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|\n|t:|1776199831\n|switch|p2a: Feraligatr|Feraligatr, L50, F, shiny|64/100\n|switch|p1a: Weizman|Empoleon, L50, F|100/100\n|switch|p2b: Cofagrigus|Cofagrigus, L50, F|100/100\n|turn|3\n|-message|uujdjdjdjd forfeited.\n|\n|win|Mayawan\n|raw|Mayawan's rating: 1042 &rarr; <strong>1072</strong><br />(+30 for winning)\n|raw|uujdjdjdjd's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|l|\u203duujdjdjdjd\n|player|p2|\n",
+  "uploadtime": 1776199910,
+  "views": 15,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

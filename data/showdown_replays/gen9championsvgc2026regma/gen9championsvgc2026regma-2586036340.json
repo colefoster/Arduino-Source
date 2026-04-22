@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586036340",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Spectre Ace",
+    "Saachan46"
+  ],
+  "log": "|j|\u2606Spectre Ace\n|j|\u2606Saachan46\n|t:|1776392477\n|gametype|doubles\n|player|p1|Spectre Ace|juggler|1179\n|player|p2|Saachan46|170|1229\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Typhlosion-Hisui, L50, M|\n|poke|p1|Whimsicott, L50, F|\n|poke|p1|Charizard, L50, F|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Kingambit, L50, M|\n|poke|p1|Farigiraf, L50, F|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Aegislash, L50, M|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Rotom-Wash, L50|\n|poke|p2|Greninja-*, L50, M|\n|teampreview|4\nSpectre Ace rejected open team sheets.\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Spectre Ace)\n|\n|t:|1776392515\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Kingambit|Kingambit, L50, M|100/100\n|switch|p1b: Farigiraf|Farigiraf, L50, F, shiny|100/100\n|switch|p2a: Sneasler|Sneasler, L50, M|100/100\n|switch|p2b: Rotom|Rotom-Wash, L50|100/100\n|turn|1\n|\n|t:|1776392527\n|move|p1a: Kingambit|Protect|p1a: Kingambit\n|-singleturn|p1a: Kingambit|Protect\n|move|p2b: Rotom|Thunderbolt|p1b: Farigiraf\n|-damage|p1b: Farigiraf|74/100\n|move|p2a: Sneasler|Dire Claw|p1b: Farigiraf\n|-damage|p1b: Farigiraf|33/100\n|move|p1b: Farigiraf|Twin Beam|p2a: Sneasler\n|-supereffective|p2a: Sneasler|2\n|-damage|p2a: Sneasler|23/100\n|-supereffective|p2a: Sneasler|2\n|-damage|p2a: Sneasler|0 fnt\n|faint|p2a: Sneasler\n|-hitcount|p2: Sneasler|2\n|\n|-heal|p1b: Farigiraf|39/100|[from] item: Leftovers\n|upkeep\n|\n|t:|1776392538\n|switch|p2a: Greninja|Greninja, L50, M|100/100\n|turn|2\n|\n|t:|1776392548\n|detailschange|p2a: Greninja|Greninja-Mega, L50, M\n|-mega|p2a: Greninja|Greninja|Greninjite\n|move|p1b: Farigiraf|Protect|p1b: Farigiraf\n|-singleturn|p1b: Farigiraf|Protect\n|move|p2a: Greninja|Water Shuriken||[still]\n|cant|p1b: Farigiraf|ability: Armor Tail|Water Shuriken|[of] p2a: Greninja\n|move|p2b: Rotom|Thunderbolt|p1a: Kingambit\n|-damage|p1a: Kingambit|55/100\n|move|p1a: Kingambit|Low Kick|p2a: Greninja\n|-supereffective|p2a: Greninja|1\n|-damage|p2a: Greninja|33/100\n|\n|-heal|p1b: Farigiraf|45/100|[from] item: Leftovers\n|upkeep\n|turn|3\n|-message|Saachan46 forfeited.\n|\n|win|Spectre Ace\n|raw|Spectre Ace's rating: 1179 &rarr; <strong>1208</strong><br />(+29 for winning)\n|raw|Saachan46's rating: 1229 &rarr; <strong>1200</strong><br />(-29 for losing)\n",
+  "uploadtime": 1776392564,
+  "views": 34,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1200,
+  "private": 0,
+  "password": null
+}

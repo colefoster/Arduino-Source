@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2585457460",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "dkapflzksh",
+    "cookbayz"
+  ],
+  "log": "|j|\u2606dkapflzksh\n|j|\u2606cookbayz\n|t:|1776348591\n|gametype|doubles\n|player|p1|dkapflzksh|scientist-gen4dp|1391\n|player|p2|cookbayz|dancer|1375\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Dragonite, L50, F|\n|poke|p1|Archaludon, L50, M|\n|poke|p1|Pelipper, L50, M|\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Kingambit, L50, F|\n|poke|p2|Golurk, L50|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Farigiraf, L50, M|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Torkoal, L50, M|\n|poke|p2|Venusaur, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by cookbayz)\n|inactive|dkapflzksh has 60 seconds left.\n|\n|t:|1776348629\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Basculegion|Basculegion, L50, M, shiny|100/100\n|switch|p1b: Kingambit|Kingambit, L50, F, shiny|100/100\n|switch|p2a: Farigiraf|Farigiraf, L50, M|100/100\n|switch|p2b: Incineroar|Incineroar, L50, M|100/100\n|-ability|p2b: Incineroar|Intimidate|boost\n|-unboost|p1a: Basculegion|atk|1\n|-unboost|p1b: Kingambit|atk|1\n|-ability|p1b: Kingambit|Defiant|boost\n|-boost|p1b: Kingambit|atk|2\n|turn|1\n|inactive|dkapflzksh has 30 seconds left.\n|inactive|cookbayz has 30 seconds left.\n|\n|t:|1776348665\n|move|p2a: Farigiraf|Helping Hand|p2b: Incineroar\n|-singleturn|p2b: Incineroar|Helping Hand|[of] p2a: Farigiraf\n|move|p1b: Kingambit|Protect|p1b: Kingambit\n|-singleturn|p1b: Kingambit|Protect\n|move|p1a: Basculegion|Flip Turn|p2a: Farigiraf\n|-damage|p2a: Farigiraf|78/100\n|-message|cookbayz forfeited.\n|\n|win|dkapflzksh\n|raw|dkapflzksh's rating: 1391 &rarr; <strong>1410</strong><br />(+19 for winning)\n|raw|cookbayz's rating: 1375 &rarr; <strong>1356</strong><br />(-19 for losing)\n",
+  "uploadtime": 1776348674,
+  "views": 54,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1356,
+  "private": 0,
+  "password": null
+}

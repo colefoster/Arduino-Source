@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2580791883",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "MasterpieceDivded",
+    "LamestAmos"
+  ],
+  "log": "|j|\u2606MasterpieceDivded\n|j|\u2606LamestAmos\n|t:|1775932827\n|gametype|doubles\n|player|p1|MasterpieceDivded|169|1095\n|player|p2|LamestAmos|veteran|1000\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Farigiraf, L50, F|\n|poke|p1|Golurk, L50|\n|poke|p1|Clefable, L50, F|\n|poke|p1|Kingambit, L50, F|\n|poke|p1|Mimikyu, L50, F|\n|poke|p1|Camerupt, L50, F|\n|poke|p2|Aggron, L50, F|\n|poke|p2|Sinistcha-Masterpiece, L50|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Politoed, L50, M|\n|poke|p2|Garchomp, L50, F|\n|teampreview|4\n|\n|t:|1775932850\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Mimikyu|Mimikyu, L50, F|100/100\n|switch|p1b: Golurk|Golurk, L50|100/100\n|switch|p2a: The Wall|Aggron, L50, F|100/100\n|switch|p2b: Incineroar|Incineroar, L50, M|100/100\n|-ability|p2b: Incineroar|Intimidate|boost\n|-unboost|p1a: Mimikyu|atk|1\n|-unboost|p1b: Golurk|atk|1\n|turn|1\n|c|\u2606MasterpieceDivded|glhf\n|c|\u2606LamestAmos|u2\n|\n|t:|1775932866\n|detailschange|p1b: Golurk|Golurk-Mega, L50\n|-mega|p1b: Golurk|Golurk|Golurkite\n|detailschange|p2a: The Wall|Aggron-Mega, L50, F\n|-mega|p2a: The Wall|Aggron|Aggronite\n|move|p1b: Golurk|Headlong Rush|p2a: The Wall\n|-supereffective|p2a: The Wall|1\n|-damage|p2a: The Wall|63/100\n|-unboost|p1b: Golurk|def|1\n|-unboost|p1b: Golurk|spd|1\n|move|p2b: Incineroar|Parting Shot|p1b: Golurk\n|-unboost|p1b: Golurk|atk|1\n|-unboost|p1b: Golurk|spa|1\n|c|\u2606MasterpieceDivded|DAMN\n|c|\u2606MasterpieceDivded|37????\n|\n|t:|1775932877\n|switch|p2b: Sinistcha|Sinistcha-Masterpiece, L50|100/100|[from] Parting Shot\n|-heal|p2a: The Wall|88/100|[from] ability: Hospitality|[of] p2b: Sinistcha\n|move|p2a: The Wall|Iron Defense|p2a: The Wall\n|-boost|p2a: The Wall|def|2\n|move|p1a: Mimikyu|Trick Room|p1a: Mimikyu\n|-fieldstart|move: Trick Room|[of] p1a: Mimikyu\n|\n|upkeep\n|turn|2\n|c|\u2606LamestAmos|he walls\n|c|\u2606MasterpieceDivded|yo i shoulda picked camerupt\n|c|\u2606MasterpieceDivded|gg\n|-message|MasterpieceDivded forfeited.\n|\n|win|LamestAmos\n|raw|MasterpieceDivded's rating: 1095 &rarr; <strong>1064</strong><br />(-31 for losing)\n|raw|LamestAmos's rating: 1000 &rarr; <strong>1051</strong><br />(+51 for winning)\n|l|\u2606MasterpieceDivded\n|player|p1|\n|c|\u2606LamestAmos|gg wp\n",
+  "uploadtime": 1775932910,
+  "views": 14,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1051,
+  "private": 0,
+  "password": null
+}

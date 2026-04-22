@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2581949393",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "starstorm295",
+    "MysticJJustin"
+  ],
+  "log": "|j|\u2606starstorm295\n|j|\u2606MysticJJustin\n|t:|1776042455\n|gametype|doubles\n|player|p1|starstorm295|102|1011\n|player|p2|MysticJJustin|veteran|1054\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Rotom-Wash, L50|\n|poke|p1|Lopunny, L50, F|\n|poke|p1|Volcarona, L50, F|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Kingambit, L50, M|\n|poke|p1|Ninetales-Alola, L50, M|\n|poke|p2|Gallade, L50, M|\n|poke|p2|Farigiraf, L50, F|\n|poke|p2|Rotom-Wash, L50|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Archaludon, L50, F|\n|poke|p2|Tyranitar, L50, F|\n|teampreview|4\n|\n|t:|1776042509\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Rotom|Rotom-Wash, L50|100/100\n|switch|p1b: Sinistcha|Sinistcha, L50|100/100\n|switch|p2a: Farigiraf|Farigiraf, L50, F|100/100\n|switch|p2b: Tyranitar|Tyranitar, L50, F|100/100\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p2b: Tyranitar\n|turn|1\n|l|\u2606MysticJJustin\n|player|p2|\n|j|\u2606MysticJJustin\n|player|p2|MysticJJustin|veteran|\n|\n|t:|1776042542\n|move|p2b: Tyranitar|Crunch|p1b: Sinistcha\n|-supereffective|p1b: Sinistcha|1\n|-damage|p1b: Sinistcha|36/100\n|move|p1a: Rotom|Will-O-Wisp|p2b: Tyranitar\n|-status|p2b: Tyranitar|brn\n|move|p1b: Sinistcha|Matcha Gotcha|p2b: Tyranitar|[spread] p2a,p2b\n|-supereffective|p2b: Tyranitar|1\n|-damage|p2a: Farigiraf|82/100\n|-heal|p1b: Sinistcha|49/100|[from] drain|[of] p2a: Farigiraf\n|-damage|p2b: Tyranitar|65/100 brn\n|-heal|p1b: Sinistcha|66/100|[from] drain|[of] p2b: Tyranitar\n|-status|p2a: Farigiraf|brn\n|move|p2a: Farigiraf|Psychic Noise|p1a: Rotom\n|-damage|p1a: Rotom|73/100\n|-start|p1a: Rotom|move: Heal Block\n|\n|-weather|Sandstorm|[upkeep]\n|-damage|p1a: Rotom|68/100|[from] Sandstorm\n|-damage|p1b: Sinistcha|60/100|[from] Sandstorm\n|-damage|p2a: Farigiraf|75/100 brn|[from] Sandstorm\n|-heal|p1b: Sinistcha|66/100|[from] item: Leftovers\n|-damage|p2b: Tyranitar|59/100 brn|[from] brn\n|-damage|p2a: Farigiraf|69/100 brn|[from] brn\n|upkeep\n|turn|2\n|-message|MysticJJustin forfeited.\n|\n|win|starstorm295\n|raw|starstorm295's rating: 1011 &rarr; <strong>1054</strong><br />(+43 for winning)\n|raw|MysticJJustin's rating: 1054 &rarr; <strong>1034</strong><br />(-20 for losing)\n|l|\u2606MysticJJustin\n|player|p2|\n",
+  "uploadtime": 1776042591,
+  "views": 9,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1034,
+  "private": 0,
+  "password": null
+}

@@ -21,8 +21,10 @@
 #define PokemonAutomation_PokemonChampions_TeamSelectReader_H
 
 #include <array>
+#include <cstdint>
 #include <string>
 #include "CommonFramework/Language.h"
+#include "CommonFramework/Logging/Logger.h"
 #include "CommonFramework/ImageTools/ImageBoxes.h"
 #include "CommonFramework/VideoPipeline/VideoOverlayScopes.h"
 

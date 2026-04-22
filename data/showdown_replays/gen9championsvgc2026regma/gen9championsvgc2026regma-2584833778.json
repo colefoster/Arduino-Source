@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584833778",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "oshoa",
+    "toxmyself"
+  ],
+  "log": "|j|\u2606oshoa\n|j|\u2606toxmyself\n|t:|1776287223\n|gametype|doubles\n|player|p1|oshoa|266|1207\n|player|p2|toxmyself|norman|1248\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Goodra-Hisui, L50, F|\n|poke|p1|Aerodactyl, L50, F|\n|poke|p1|Milotic, L50, M|\n|poke|p1|Tsareena, L50, F|\n|poke|p1|Sableye, L50, M|\n|poke|p1|Manectric, L50, F|\n|poke|p2|Charizard, L50, M|\n|poke|p2|Venusaur, L50, F|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Gardevoir, L50, F|\n|poke|p2|Milotic, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by toxmyself)\n|inactive|oshoa has 60 seconds left.\n|inactive|toxmyself has 60 seconds left.\n|\n|t:|1776287263\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Goodra|Goodra-Hisui, L50, F|100/100\n|switch|p1b: Aerodactyl|Aerodactyl, L50, F|100/100\n|switch|p2a: Garchomp|Garchomp, L50, M|100/100\n|switch|p2b: Charizard|Charizard, L50, M|100/100\n|-ability|p1b: Aerodactyl|Unnerve\n|turn|1\n|inactive|oshoa has 30 seconds left.\n|\n|t:|1776287298\n|detailschange|p2b: Charizard|Charizard-Mega-Y, L50, M\n|-mega|p2b: Charizard|Charizard|Charizardite Y\n|-weather|SunnyDay|[from] ability: Drought|[of] p2b: Charizard\n|move|p1a: Goodra|Protect|p1a: Goodra\n|-singleturn|p1a: Goodra|Protect\n|move|p1b: Aerodactyl|Rock Slide|p2a: Garchomp|[spread] p2a,p2b\n|-resisted|p2a: Garchomp|1\n|-supereffective|p2b: Charizard|2\n|-damage|p2a: Garchomp|88/100\n|-damage|p2b: Charizard|0 fnt\n|faint|p2b: Charizard\n|cant|p2a: Garchomp|flinch\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|-message|toxmyself forfeited.\n|\n|win|oshoa\n|raw|oshoa's rating: 1207 &rarr; <strong>1235</strong><br />(+28 for winning)\n|raw|toxmyself's rating: 1248 &rarr; <strong>1220</strong><br />(-28 for losing)\n",
+  "uploadtime": 1776287310,
+  "views": 40,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1220,
+  "private": 0,
+  "password": null
+}

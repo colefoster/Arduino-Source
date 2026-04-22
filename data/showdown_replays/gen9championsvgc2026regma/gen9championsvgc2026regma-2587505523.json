@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2587505523",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Isidino",
+    "The Best Optimel"
+  ],
+  "log": "|j|\u203dIsidino\n|j|\u2606The Best Optimel\n|t:|1776537551\n|gametype|doubles\n|player|p1|Isidino|266|1225\n|player|p2|The Best Optimel|170|1140\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Pelipper, L50, M|\n|poke|p1|Basculegion-F, L50, F, shiny|\n|poke|p1|Starmie, L50, shiny|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Sableye, L50, M, shiny|\n|poke|p1|Scovillain, L50, F, shiny|\n|poke|p2|Hatterene, L50, F|\n|poke|p2|Torkoal, L50, M|\n|poke|p2|Aggron, L50, M|\n|poke|p2|Conkeldurr, L50, M|\n|poke|p2|Farigiraf, L50, F|\n|poke|p2|Spiritomb, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Isidino)\n|inactive|The Best Optimel has 60 seconds left.\n|\n|t:|1776537589\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Starmie|Starmie, L50, shiny|100/100\n|switch|p1b: Sneasler|Sneasler, L50, M|100/100\n|switch|p2a: Spiritomb|Spiritomb, L50, F|100/100\n|switch|p2b: Torkoal|Torkoal, L50, M|100/100\n|-ability|p2a: Spiritomb|Pressure\n|-weather|SunnyDay|[from] ability: Drought|[of] p2b: Torkoal\n|turn|1\n|\n|t:|1776537608\n|switch|p1b: Pelipper|Pelipper, L50, M|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p1b: Pelipper\n|detailschange|p1a: Starmie|Starmie-Mega, L50, shiny\n|-mega|p1a: Starmie|Starmie|Starminite\n|move|p2b: Torkoal|Protect|p2b: Torkoal\n|-singleturn|p2b: Torkoal|Protect\n|move|p1a: Starmie|Liquidation|p2a: Spiritomb\n|-crit|p2a: Spiritomb\n|-damage|p2a: Spiritomb|0 fnt\n|faint|p2a: Spiritomb\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|-message|The Best Optimel forfeited.\n|\n|win|Isidino\n|raw|Isidino's rating: 1225 &rarr; <strong>1244</strong><br />(+19 for winning)\n|raw|The Best Optimel's rating: 1140 &rarr; <strong>1121</strong><br />(-19 for losing)\n|l|\u2606The Best Optimel\n|player|p2|\n",
+  "uploadtime": 1776537621,
+  "views": 12,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1121,
+  "private": 0,
+  "password": null
+}

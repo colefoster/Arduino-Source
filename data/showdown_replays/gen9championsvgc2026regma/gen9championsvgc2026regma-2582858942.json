@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582858942",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "trevoryu",
+    "Duoxy"
+  ],
+  "log": "|j|\u2606trevoryu\n|j|\u2606Duoxy\n|t:|1776119730\n|gametype|doubles\n|player|p1|trevoryu|169|1140\n|player|p2|Duoxy|rosa|1115\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Hawlucha, L50, F|\n|poke|p1|Excadrill, L50, F|\n|poke|p1|Rotom-Heat, L50|\n|poke|p1|Aerodactyl, L50, M|\n|poke|p2|Dragonite, L50, F|\n|poke|p2|Starmie, L50|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Kingambit, L50, F|\n|poke|p2|Pelipper, L50, M|\n|teampreview|4\nDuoxy rejected open team sheets.\n|\n|t:|1776119753\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Hawlucha|Hawlucha, L50, F, shiny|100/100\n|switch|p1b: Excadrill|Excadrill, L50, F|100/100\n|switch|p2a: Pelipper|Pelipper, L50, M|100/100\n|switch|p2b: Starmie|Starmie, L50|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p2a: Pelipper\n|turn|1\n|\n|t:|1776119775\n|detailschange|p1a: Hawlucha|Hawlucha-Mega, L50, F, shiny\n|-mega|p1a: Hawlucha|Hawlucha|Hawluchanite\n|detailschange|p2b: Starmie|Starmie-Mega, L50\n|-mega|p2b: Starmie|Starmie|Starminite\n|move|p2b: Starmie|Liquidation|p1b: Excadrill\n|-supereffective|p1b: Excadrill|1\n|-damage|p1b: Excadrill|0 fnt\n|faint|p1b: Excadrill\n|move|p1a: Hawlucha|Entrainment|p1: Excadrill|[notarget]\n|-fail|p1a: Hawlucha\n|move|p2a: Pelipper|Weather Ball|p1a: Hawlucha\n|-damage|p1a: Hawlucha|19/100\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by trevoryu)\n|\n|t:|1776119782\n|switch|p1b: Rotom|Rotom-Heat, L50, shiny|100/100\n|turn|2\n|-message|trevoryu forfeited.\n|\n|win|Duoxy\n|raw|trevoryu's rating: 1140 &rarr; <strong>1113</strong><br />(-27 for losing)\n|raw|Duoxy's rating: 1115 &rarr; <strong>1142</strong><br />(+27 for winning)\n|l|\u2606trevoryu\n|player|p1|\n",
+  "uploadtime": 1776119824,
+  "views": 21,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1113,
+  "private": 0,
+  "password": null
+}

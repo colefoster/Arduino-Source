@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2583172316",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "TheRealDevron",
+    "sonurikyo"
+  ],
+  "log": "|j|\u2606TheRealDevron\n|j|\u2606sonurikyo\n|t:|1776150798\n|gametype|doubles\n|player|p1|TheRealDevron|will|1174\n|player|p2|sonurikyo|elesa|1129\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Camerupt, L50, M|\n|poke|p1|Hatterene, L50, F|\n|poke|p1|Crabominable, L50, M|\n|poke|p1|Chesnaught, L50, F|\n|poke|p1|Primarina, L50, F|\n|poke|p1|Farigiraf, L50, M|\n|poke|p2|Milotic, L50, M|\n|poke|p2|Gengar, L50, F|\n|poke|p2|Whimsicott, L50, F|\n|poke|p2|Typhlosion-Hisui, L50, F|\n|poke|p2|Jolteon, L50, M|\n|poke|p2|Sneasler, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by sonurikyo)\n|inactive|sonurikyo has 60 seconds left.\n|\n|t:|1776150839\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Camerupt|Camerupt, L50, M, shiny|100/100\n|switch|p1b: Farigiraf|Farigiraf, L50, M|100/100\n|switch|p2a: Gengar|Gengar, L50, F|100/100\n|switch|p2b: Sneasler|Sneasler, L50, F|100/100\n|turn|1\n|\n|t:|1776150848\n|detailschange|p2a: Gengar|Gengar-Mega, L50, F\n|-mega|p2a: Gengar|Gengar|Gengarite\n|detailschange|p1a: Camerupt|Camerupt-Mega, L50, M, shiny\n|-mega|p1a: Camerupt|Camerupt|Cameruptite\n|move|p2a: Gengar|Shadow Ball|p1a: Camerupt\n|-damage|p1a: Camerupt|49/100\n|-unboost|p1a: Camerupt|spd|1\n|move|p2b: Sneasler|Throat Chop|p1b: Farigiraf\n|-supereffective|p1b: Farigiraf|1\n|-damage|p1b: Farigiraf|48/100\n|-start|p1b: Farigiraf|Throat Chop|[silent]\n|move|p1a: Camerupt|Earth Power|p2a: Gengar\n|-supereffective|p2a: Gengar|1\n|-damage|p2a: Gengar|0 fnt\n|faint|p2a: Gengar\n|move|p1b: Farigiraf|Trick Room|p1b: Farigiraf\n|-fieldstart|move: Trick Room|[of] p1b: Farigiraf\n|\n|upkeep\n|\n|t:|1776150866\n|switch|p2a: Whimsicott|Whimsicott, L50, F|100/100\n|turn|2\n|-message|sonurikyo forfeited.\n|\n|win|TheRealDevron\n|raw|TheRealDevron's rating: 1174 &rarr; <strong>1196</strong><br />(+22 for winning)\n|raw|sonurikyo's rating: 1129 &rarr; <strong>1107</strong><br />(-22 for losing)\n|l|\u2606sonurikyo\n|player|p2|\n",
+  "uploadtime": 1776150872,
+  "views": 19,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1107,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582186827",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Synthiox",
+    "jijiojioj"
+  ],
+  "log": "|j|\u2606Synthiox\n|j|\u2606jijiojioj\n|t:|1776068927\n|gametype|doubles\n|player|p1|Synthiox|ethan|1111\n|player|p2|jijiojioj|will|1064\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Delphox, L50, F|\n|poke|p1|Ninetales, L50, M|\n|poke|p1|Corviknight, L50, F|\n|poke|p1|Milotic, L50, F|\n|poke|p1|Clefable, L50, M|\n|poke|p1|Arcanine-Hisui, L50, M|\n|poke|p2|Klefki, L50, F|\n|poke|p2|Armarouge, L50, F|\n|poke|p2|Meowstic, L50, M|\n|poke|p2|Garchomp, L50, F|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Incineroar, L50, F|\n|teampreview|4\n|\n|t:|1776068973\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Corviknight|Corviknight, L50, F|100/100\n|switch|p1b: Milotic|Milotic, L50, F|100/100\n|switch|p2a: Klefki|Klefki, L50, F|100/100\n|switch|p2b: Incineroar|Incineroar, L50, F|100/100\n|-ability|p2b: Incineroar|Intimidate|boost\n|-ability|p1a: Corviknight|Mirror Armor\n|-unboost|p2b: Incineroar|atk|1\n|-unboost|p1b: Milotic|atk|1\n|-ability|p1b: Milotic|Competitive|boost\n|-boost|p1b: Milotic|spa|2\n|turn|1\n|\n|t:|1776069001\n|move|p2b: Incineroar|Fake Out|p1b: Milotic\n|-damage|p1b: Milotic|94/100\n|cant|p1b: Milotic|flinch\n|move|p1a: Corviknight|Tailwind|p1a: Corviknight\n|-sidestart|p1: Synthiox|move: Tailwind\n|move|p2a: Klefki|Trick Room|p2a: Klefki\n|-fieldstart|move: Trick Room|[of] p2a: Klefki\n|\n|-heal|p1b: Milotic|99/100|[from] item: Leftovers\n|upkeep\n|turn|2\n|\n|t:|1776069038\n|switch|p2b: Armarouge|Armarouge, L50, F|100/100\n|move|p2a: Klefki|Magic Room|p2a: Klefki\n|-fieldstart|move: Magic Room|[of] p2a: Klefki\n|move|p1a: Corviknight|Brave Bird|p2b: Armarouge\n|-damage|p2b: Armarouge|59/100\n|-ability|p2b: Armarouge|Weak Armor|boost\n|-unboost|p2b: Armarouge|def|1\n|-boost|p2b: Armarouge|spe|2\n|-damage|p1a: Corviknight|90/100|[from] Recoil\n|move|p1b: Milotic|Scald|p2a: Klefki\n|-damage|p2a: Klefki|47/100\n|\n|upkeep\n|turn|3\n|\n|t:|1776069078\n|move|p2a: Klefki|Thunder Wave|p1b: Milotic\n|-status|p1b: Milotic|par\n|move|p1b: Milotic|Scald|p2b: Armarouge\n|-supereffective|p2b: Armarouge|1\n|-damage|p2b: Armarouge|0 fnt\n|faint|p2b: Armarouge\n|move|p1a: Corviknight|Body Press|p2a: Klefki\n|-damage|p2a: Klefki|18/100\n|\n|upkeep\n|\n|t:|1776069089\n|switch|p2b: Incineroar|Incineroar, L50, F|100/100\n|-ability|p2b: Incineroar|Intimidate|boost\n|-ability|p1a: Corviknight|Mirror Armor\n|-unboost|p2b: Incineroar|atk|1\n|-unboost|p1b: Milotic|atk|1\n|-ability|p1b: Milotic|Competitive|boost\n|-boost|p1b: Milotic|spa|2\n|turn|4\n|-message|jijiojioj forfeited.\n|\n|win|Synthiox\n|raw|Synthiox's rating: 1111 &rarr; <strong>1133</strong><br />(+22 for winning)\n|raw|jijiojioj's rating: 1064 &rarr; <strong>1047</strong><br />(-17 for losing)\n|l|\u2606jijiojioj\n|player|p2|\n",
+  "uploadtime": 1776069099,
+  "views": 9,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1047,
+  "private": 0,
+  "password": null
+}

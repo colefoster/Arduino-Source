@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584859111",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "thealex610",
+    "yuriimon"
+  ],
+  "log": "|j|\u2606thealex610\n|j|\u2606yuriimon\n|t:|1776289283\n|gametype|doubles\n|player|p1|thealex610|101|1110\n|player|p2|yuriimon|waitress-gen4|1075\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Talonflame, L50, F|\n|poke|p1|Milotic, L50, F|\n|poke|p1|Aegislash, L50, F|\n|poke|p1|Scizor, L50, F|\n|poke|p1|Tyranitar, L50, F|\n|poke|p2|Glimmora, L50, F|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Archaludon, L50, F|\n|poke|p2|Politoed, L50, M|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Chesnaught, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by yuriimon)\n|inactive|thealex610 also wants the timer to be on.\n|\n|t:|1776289307\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Milotic|Milotic, L50, F|100/100\n|switch|p1b: Sneasler|Sneasler, L50, M|100/100\n|switch|p2a: Archaludon|Archaludon, L50, F|100/100\n|switch|p2b: Politoed|Politoed, L50, M|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p2b: Politoed\n|turn|1\n|inactive|thealex610 has 30 seconds left.\n|\n|t:|1776289333\n|switch|p1a: Tyranitar|Tyranitar, L50, F|100/100\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p1a: Tyranitar\n|move|p1b: Sneasler|Close Combat|p2a: Archaludon\n|-supereffective|p2a: Archaludon|1\n|-enditem|p2a: Archaludon|Chople Berry|[eat]\n|-enditem|p2a: Archaludon|Chople Berry|[weaken]\n|-damage|p2a: Archaludon|44/100\n|-unboost|p1b: Sneasler|def|1\n|-unboost|p1b: Sneasler|spd|1\n|-ability|p2a: Archaludon|Stamina|boost\n|-boost|p2a: Archaludon|def|1\n|-enditem|p1b: Sneasler|White Herb\n|-clearnegativeboost|p1b: Sneasler|[silent]\n|move|p2a: Archaludon|Electro Shot||[still]\n|-prepare|p2a: Archaludon|Electro Shot\n|-boost|p2a: Archaludon|spa|1\n|move|p2b: Politoed|Encore|p1b: Sneasler\n|-start|p1b: Sneasler|Encore\n|\n|-weather|Sandstorm|[upkeep]\n|-damage|p1b: Sneasler|95/100|[from] Sandstorm\n|-damage|p2b: Politoed|95/100|[from] Sandstorm\n|upkeep\n|turn|2\n|-message|yuriimon forfeited.\n|\n|win|thealex610\n|raw|thealex610's rating: 1110 &rarr; <strong>1132</strong><br />(+22 for winning)\n|raw|yuriimon's rating: 1075 &rarr; <strong>1056</strong><br />(-19 for losing)\n|l|\u2606yuriimon\n|player|p2|\n",
+  "uploadtime": 1776289361,
+  "views": 19,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1056,
+  "private": 0,
+  "password": null
+}

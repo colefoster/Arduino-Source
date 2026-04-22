@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2585852534",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Bona1718",
+    "Randi89"
+  ],
+  "log": "|j|\u2606Bona1718\n|j|\u2606Randi89\n|t:|1776375597\n|gametype|doubles\n|player|p1|Bona1718|2|1110\n|player|p2|Randi89|bugcatcher-gen4dp|1034\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Aegislash, L50, F|\n|poke|p1|Kangaskhan, L50, F|\n|poke|p1|Milotic, L50, M|\n|poke|p1|Rotom-Heat, L50|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Aerodactyl, L50, F|\n|poke|p2|Armarouge, L50, F|\n|poke|p2|Steelix, L50, M|\n|poke|p2|Victreebel, L50, F|\n|poke|p2|Hawlucha, L50, M|\n|poke|p2|Manectric, L50, F|\n|poke|p2|Hydreigon, L50, F|\n|teampreview|4\n|\n|t:|1776375654\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Rotom|Rotom-Heat, L50|100/100\n|switch|p1b: Aerodactyl|Aerodactyl, L50, F|100/100\n|switch|p2a: Cris|Armarouge, L50, F|100/100\n|switch|p2b: Coco|Victreebel, L50, F|100/100\n|-ability|p1b: Aerodactyl|Unnerve\n|turn|1\n|\n|t:|1776375684\n|switch|p2b: Edu|Hydreigon, L50, F|100/100\n|move|p1a: Rotom|Overheat|p2b: Edu|[miss]\n|-miss|p1a: Rotom|p2b: Edu\n|move|p1b: Aerodactyl|Tailwind|p1b: Aerodactyl\n|-sidestart|p1: Bona1718|move: Tailwind\n|move|p2a: Cris|Trick Room|p2a: Cris\n|-fieldstart|move: Trick Room|[of] p2a: Cris\n|\n|upkeep\n|turn|2\n|\n|t:|1776375711\n|switch|p1a: Kangaskhan|Kangaskhan, L50, F|100/100\n|move|p2a: Cris|Psychic Terrain|p2a: Cris\n|-fieldstart|move: Psychic Terrain\n|move|p2b: Edu|Dark Pulse|p1b: Aerodactyl\n|-damage|p1b: Aerodactyl|33/100\n|cant|p1b: Aerodactyl|flinch\n|\n|upkeep\n|turn|3\n|l|\u2606Bona1718\n|player|p1|\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Randi89)\n|inactive|Bona1718 has 30 seconds to reconnect!\n|inactive|Bona1718 has 20 seconds to reconnect!\n|inactive|Bona1718 has 15 seconds to reconnect!\n|inactive|Bona1718 has 10 seconds to reconnect!\n|inactive|Bona1718 has 5 seconds to reconnect!\n|-message|Bona1718 lost due to inactivity.\n|\n|win|Randi89\n|raw|Bona1718's rating: 1110 &rarr; <strong>1080</strong><br />(-30 for losing)\n|raw|Randi89's rating: 1034 &rarr; <strong>1076</strong><br />(+42 for winning)\n",
+  "uploadtime": 1776375877,
+  "views": 21,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1076,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2581914101",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Ycatkit",
+    "TapedCrusader"
+  ],
+  "log": "|j|\u2606Ycatkit\n|j|\u2606TapedCrusader\n|t:|1776039275\n|gametype|doubles\n|player|p1|Ycatkit|clair|1050\n|player|p2|TapedCrusader|red|1132\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Feraligatr, L50, M|\n|poke|p1|Pelipper, L50, F|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Sneasler, L50, F|\n|poke|p1|Archaludon, L50, M|\n|poke|p1|Sinistcha, L50|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Gengar, L50, M|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Whimsicott, L50, F|\n|poke|p2|Basculegion, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Ycatkit)\n|\n|t:|1776039297\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Pelipper|Pelipper, L50, F|100/100\n|switch|p1b: Incineroar|Incineroar, L50, M|100/100\n|switch|p2a: Floette|Floette-Eternal, L50, F|100/100\n|switch|p2b: Sneasler|Sneasler, L50, M|100/100\n|-ability|p2b: Sneasler|Pressure\n|-weather|RainDance|[from] ability: Drizzle|[of] p1a: Pelipper\n|-ability|p1b: Incineroar|Intimidate|boost\n|-unboost|p2a: Floette|atk|1\n|-unboost|p2b: Sneasler|atk|1\n|-enditem|p2b: Sneasler|White Herb\n|-clearnegativeboost|p2b: Sneasler|[silent]\n|turn|1\n|inactive|Ycatkit has 30 seconds left.\n|inactive|TapedCrusader has 30 seconds left.\n|\n|t:|1776039324\n|detailschange|p2a: Floette|Floette-Mega, L50, F\n|-mega|p2a: Floette|Floette|Floettite\n|-ability|p2a: Floette|Fairy Aura\n|move|p2b: Sneasler|Fake Out|p1a: Pelipper\n|-damage|p1a: Pelipper|84/100\n|move|p1b: Incineroar|Fake Out|p2b: Sneasler\n|-damage|p2b: Sneasler|78/100\n|move|p2a: Floette|Dazzling Gleam|p1a: Pelipper|[spread] p1a,p1b\n|-damage|p1a: Pelipper|0 fnt\n|-damage|p1b: Incineroar|57/100\n|faint|p1a: Pelipper\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|\n|t:|1776039337\n|switch|p1a: Sinistcha|Sinistcha, L50|100/100\n|-heal|p1b: Incineroar|82/100|[from] ability: Hospitality|[of] p1a: Sinistcha\n|turn|2\n|\n|t:|1776039355\n|move|p2b: Sneasler|Close Combat|p1b: Incineroar\n|-supereffective|p1b: Incineroar|1\n|-damage|p1b: Incineroar|0 fnt\n|-unboost|p2b: Sneasler|def|1\n|-unboost|p2b: Sneasler|spd|1\n|faint|p1b: Incineroar\n|move|p2a: Floette|Light of Ruin|p1a: Sinistcha\n|-damage|p1a: Sinistcha|0 fnt\n|faint|p1a: Sinistcha\n|-damage|p2a: Floette|48/100|[from] Recoil\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|-message|Ycatkit forfeited.\n|\n|win|TapedCrusader\n|raw|Ycatkit's rating: 1050 &rarr; <strong>1037</strong><br />(-13 for losing)\n|raw|TapedCrusader's rating: 1132 &rarr; <strong>1151</strong><br />(+19 for winning)\n|l|\u2606Ycatkit\n|player|p1|\n",
+  "uploadtime": 1776039422,
+  "views": 14,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1037,
+  "private": 0,
+  "password": null
+}

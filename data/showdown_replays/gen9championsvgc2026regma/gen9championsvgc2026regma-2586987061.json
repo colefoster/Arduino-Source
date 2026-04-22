@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586987061",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "LychClickedRecover",
+    "Sunky42"
+  ],
+  "log": "|j|\u2606LychClickedRecover\n|j|\u2606Sunky42\n|t:|1776478538\n|gametype|doubles\n|player|p1|LychClickedRecover|cyclist|1100\n|player|p2|Sunky42|cheryl|1000\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Froslass, L50, F|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Corviknight, L50, F|\n|poke|p1|Gyarados, L50, M|\n|poke|p1|Farigiraf, L50, F|\n|poke|p2|Scizor, L50, M|\n|poke|p2|Tyranitar, L50, M|\n|poke|p2|Excadrill, L50, M|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Arcanine-Hisui, L50, F|\n|poke|p2|Archaludon, L50, M|\n|teampreview|4\n|\n|t:|1776478576\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Incineroar|Incineroar, L50, F|100/100\n|switch|p1b: Gyarados|Gyarados, L50, M|100/100\n|switch|p2a: Scizor|Scizor, L50, M|100/100\n|switch|p2b: Sneasler|Sneasler, L50, F|100/100\n|-ability|p1b: Gyarados|Intimidate|boost\n|-unboost|p2a: Scizor|atk|1\n|-unboost|p2b: Sneasler|atk|1\n|-ability|p1a: Incineroar|Intimidate|boost\n|-unboost|p2a: Scizor|atk|1\n|-unboost|p2b: Sneasler|atk|1\n|turn|1\n|\n|t:|1776478593\n|switch|p2a: Tyranitar|Tyranitar, L50, M|100/100\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p2a: Tyranitar\n|move|p2b: Sneasler|Fake Out|p1b: Gyarados\n|-damage|p1b: Gyarados|91/100\n|cant|p1b: Gyarados|flinch\n|move|p1a: Incineroar|Parting Shot|p2b: Sneasler\n|-unboost|p2b: Sneasler|atk|1\n|-unboost|p2b: Sneasler|spa|1\n|\n|t:|1776478604\n|switch|p1a: Garchomp|Garchomp, L50, F|100/100|[from] Parting Shot\n|\n|-weather|Sandstorm|[upkeep]\n|-damage|p2b: Sneasler|95/100|[from] Sandstorm\n|-damage|p1b: Gyarados|85/100|[from] Sandstorm\n|upkeep\n|turn|2\n|\n|t:|1776478649\n|move|p1a: Garchomp|Earthquake|p2b: Sneasler|[spread] p2a,p2b\n|-immune|p1b: Gyarados\n|-supereffective|p2a: Tyranitar|1\n|-supereffective|p2b: Sneasler|1\n|-damage|p2a: Tyranitar|31/100\n|-damage|p2b: Sneasler|0 fnt\n|faint|p2b: Sneasler\n|move|p1b: Gyarados|Waterfall|p2a: Tyranitar\n|-supereffective|p2a: Tyranitar|1\n|-damage|p2a: Tyranitar|0 fnt\n|faint|p2a: Tyranitar\n|\n|-weather|Sandstorm|[upkeep]\n|-damage|p1b: Gyarados|79/100|[from] Sandstorm\n|upkeep\n|-message|Sunky42 forfeited.\n|\n|win|LychClickedRecover\n|raw|LychClickedRecover's rating: 1100 &rarr; <strong>1118</strong><br />(+18 for winning)\n|raw|Sunky42's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|l|\u2606Sunky42\n|player|p2|\n",
+  "uploadtime": 1776478674,
+  "views": 17,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

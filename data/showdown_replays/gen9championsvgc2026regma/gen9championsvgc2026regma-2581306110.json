@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2581306110",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "fusesrt",
+    "daedae007"
+  ],
+  "log": "|j|\u2606fusesrt\n|j|\u2606daedae007\n|t:|1775984242\n|gametype|doubles\n|player|p1|fusesrt|266|1253\n|player|p2|daedae007|1|1300\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Kingambit, L50, M|\n|poke|p1|Froslass, L50, F|\n|poke|p1|Glimmora, L50, F|\n|poke|p1|Sinistcha-Masterpiece, L50|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Rotom-Frost, L50|\n|poke|p2|Greninja-*, L50, F|\n|poke|p2|Kingambit, L50, F|\n|poke|p2|Kommo-o, L50, M|\n|poke|p2|Sinistcha-Masterpiece, L50|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Charizard, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by fusesrt)\n|\n|t:|1775984270\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Kingambit|Kingambit, L50, M|100/100\n|switch|p1b: Glimmora|Glimmora, L50, F|100/100\n|switch|p2a: Kingambit|Kingambit, L50, F|100/100\n|switch|p2b: Greninja|Greninja, L50, F|100/100\n|turn|1\n|inactive|daedae007 has 30 seconds left.\n|\n|t:|1775984299\n|move|p2b: Greninja|Extrasensory|p1b: Glimmora\n|-start|p2b: Greninja|typechange|Psychic|[from] ability: Protean\n|-supereffective|p1b: Glimmora|1\n|-damage|p1b: Glimmora|3/100\n|move|p1b: Glimmora|Stealth Rock|p2b: Greninja\n|-sidestart|p2: daedae007|move: Stealth Rock\n|move|p1a: Kingambit|Low Kick|p2a: Kingambit\n|-supereffective|p2a: Kingambit|2\n|-crit|p2a: Kingambit\n|-damage|p2a: Kingambit|0 fnt\n|faint|p2a: Kingambit\n|\n|upkeep\n|\n|t:|1775984308\n|switch|p2a: Sinistcha|Sinistcha-Masterpiece, L50|100/100\n|-damage|p2a: Sinistcha|88/100|[from] Stealth Rock\n|turn|2\n|j| gE1xjZRtuhW2DdT0AK\n|-message|daedae007 forfeited.\n|\n|win|fusesrt\n|raw|fusesrt's rating: 1253 &rarr; <strong>1281</strong><br />(+28 for winning)\n|raw|daedae007's rating: 1300 &rarr; <strong>1272</strong><br />(-28 for losing)\n|l|\u2606daedae007\n|player|p2|\n|l|\u2606fusesrt\n|player|p1|\n",
+  "uploadtime": 1775984357,
+  "views": 35,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1272,
+  "private": 0,
+  "password": null
+}

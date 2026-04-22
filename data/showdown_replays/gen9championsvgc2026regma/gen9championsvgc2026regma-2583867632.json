@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2583867632",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "callmehavoc",
+    "I Kamp"
+  ],
+  "log": "|j|\u2606callmehavoc\n|j|\u2606I Kamp\n|t:|1776203964\n|gametype|doubles\n|player|p1|callmehavoc|bugcatcher-gen4dp|1079\n|player|p2|I Kamp|2|1014\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Heracross, L50, M|\n|poke|p1|Umbreon, L50, M|\n|poke|p1|Blastoise, L50, M|\n|poke|p1|Pelipper, L50, M|\n|poke|p1|Arcanine, L50, M|\n|poke|p1|Tsareena, L50, F|\n|poke|p2|Aggron, L50, F|\n|poke|p2|Raichu, L50, M|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Pelipper, L50, M|\n|poke|p2|Palafin, L50, F|\n|poke|p2|Zoroark, L50, F|\n|teampreview|4\n|\n|t:|1776204009\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Arcanine|Arcanine, L50, M|100/100\n|switch|p1b: Tsareena|Tsareena, L50, F|100/100\n|switch|p2a: Palafin|Palafin, L50, F|100/100\n|switch|p2b: Raichu|Raichu, L50, M|100/100\n|-ability|p1a: Arcanine|Intimidate|boost\n|-unboost|p2a: Palafin|atk|1\n|-unboost|p2b: Raichu|atk|1\n|turn|1\n|\n|t:|1776204044\n|move|p2a: Palafin|Flip Turn|p1b: Tsareena\n|-resisted|p1b: Tsareena|1\n|-damage|p1b: Tsareena|93/100\n|\n|t:|1776204050\n|detailschange|p2a: Palafin|Palafin-Hero, L50, F\n|switch|p2a: Pelipper|Pelipper, L50, M|100/100|[from] Flip Turn\n|-weather|RainDance|[from] ability: Drizzle|[of] p2a: Pelipper\n|move|p1a: Arcanine|Howl|p1a: Arcanine|[spread] p1a,p1b\n|-boost|p1a: Arcanine|atk|1\n|-boost|p1b: Tsareena|atk|1\n|move|p1b: Tsareena|Trop Kick|p2a: Pelipper\n|-crit|p2a: Pelipper\n|-enditem|p2a: Pelipper|Focus Sash\n|-damage|p2a: Pelipper|1/100\n|-unboost|p2a: Pelipper|atk|1\n|move|p2b: Raichu|Nuzzle|p1a: Arcanine\n|-damage|p1a: Arcanine|95/100\n|-status|p1a: Arcanine|par\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|turn|2\n|\n|t:|1776204083\n|move|p1a: Arcanine|Extreme Speed|p2a: Pelipper\n|-damage|p2a: Pelipper|0 fnt\n|faint|p2a: Pelipper\n|move|p1b: Tsareena|Trop Kick|p2b: Raichu\n|-damage|p2b: Raichu|0 fnt\n|faint|p2b: Raichu\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|\n|t:|1776204097\n|switch|p2b: Sinistcha|Sinistcha, L50|100/100\n|switch|p2a: Palafin|Palafin-Hero, L50, F|100/100\n|-activate|p2a: Palafin|ability: Zero to Hero\n|turn|3\n|-message|I Kamp forfeited.\n|\n|win|callmehavoc\n|raw|callmehavoc's rating: 1079 &rarr; <strong>1102</strong><br />(+23 for winning)\n|raw|I Kamp's rating: 1014 &rarr; <strong>1004</strong><br />(-10 for losing)\n",
+  "uploadtime": 1776204106,
+  "views": 20,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1004,
+  "private": 0,
+  "password": null
+}

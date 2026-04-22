@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2584873032",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "Condamnation",
+    "mangerion"
+  ],
+  "log": "|j|\u2606Condamnation\n|j|\u2606mangerion\n|t:|1776290439\n|gametype|singles\n|player|p1|Condamnation|veteranf|1353\n|player|p2|mangerion|2|1414\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Kangaskhan, L50, F|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Dragapult, L50, M|\n|poke|p1|Primarina, L50, F|\n|poke|p1|Corviknight, L50, F|\n|poke|p1|Volcarona, L50, F|\n|poke|p2|Glimmora, L50, M|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Gengar, L50, M|\n|poke|p2|Umbreon, L50, F|\n|poke|p2|Scizor, L50, M|\n|poke|p2|Rotom-Wash, L50|\n|teampreview|3\n|\n|t:|1776290510\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Primarina|Primarina, L50, F|100/100\n|switch|p2a: Glimmora|Glimmora, L50, M|100/100\n|turn|1\n|\n|t:|1776290518\n|move|p2a: Glimmora|Stealth Rock|p1a: Primarina\n|-sidestart|p1: Condamnation|move: Stealth Rock\n|move|p1a: Primarina|Sparkling Aria|p2a: Glimmora\n|-supereffective|p2a: Glimmora|1\n|-enditem|p2a: Glimmora|Focus Sash\n|-damage|p2a: Glimmora|1/100\n|\n|upkeep\n|turn|2\n|j| p74\n|\n|t:|1776290526\n|move|p1a: Primarina|Aqua Jet|p2a: Glimmora\n|-supereffective|p2a: Glimmora|1\n|-damage|p2a: Glimmora|0 fnt\n|-activate|p2a: Glimmora|ability: Toxic Debris\n|-sidestart|p1: Condamnation|move: Toxic Spikes\n|faint|p2a: Glimmora\n|\n|upkeep\n|\n|t:|1776290534\n|switch|p2a: Scizor|Scizor, L50, M|100/100\n|turn|3\n|\n|t:|1776290543\n|detailschange|p2a: Scizor|Scizor-Mega, L50, M\n|-mega|p2a: Scizor|Scizor|Scizorite\n|move|p1a: Primarina|Sparkling Aria|p2a: Scizor\n|-damage|p2a: Scizor|46/100\n|move|p2a: Scizor|Swords Dance|p2a: Scizor\n|-boost|p2a: Scizor|atk|2\n|\n|upkeep\n|turn|4\n|\n|t:|1776290556\n|move|p2a: Scizor|Bullet Punch|p1a: Primarina\n|-enditem|p1a: Primarina|Focus Sash\n|-damage|p1a: Primarina|1/100\n|move|p1a: Primarina|Sparkling Aria|p2a: Scizor\n|-damage|p2a: Scizor|0 fnt\n|faint|p2a: Scizor\n|\n|upkeep\n|\n|t:|1776290564\n|switch|p2a: Rotom|Rotom-Wash, L50|100/100\n|turn|5\n|\n|t:|1776290569\n|move|p1a: Primarina|Perish Song|p1a: Primarina\n|-start|p1a: Primarina|perish3|[silent]\n|-start|p2a: Rotom|perish3|[silent]\n|-fieldactivate|move: Perish Song\n|move|p2a: Rotom|Thunderbolt|p1a: Primarina\n|-supereffective|p1a: Primarina|1\n|-damage|p1a: Primarina|0 fnt\n|faint|p1a: Primarina\n|\n|-start|p2a: Rotom|perish3\n|upkeep\n|\n|t:|1776290573\n|switch|p1a: Dragapult|Dragapult, L50, M|100/100\n|-damage|p1a: Dragapult|88/100|[from] Stealth Rock\n|-status|p1a: Dragapult|psn\n|turn|6\n|-message|mangerion forfeited.\n|\n|win|Condamnation\n|raw|Condamnation's rating: 1353 &rarr; <strong>1376</strong><br />(+23 for winning)\n|raw|mangerion's rating: 1414 &rarr; <strong>1391</strong><br />(-23 for losing)\n|l|\u2606mangerion\n|player|p2|\n|l|\u2606Condamnation\n|player|p1|\n",
+  "uploadtime": 1776290590,
+  "views": 9,
+  "formatid": "gen9championsbssregma",
+  "rating": 1376,
+  "private": 0,
+  "password": null
+}

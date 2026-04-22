@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2587153154",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "dankiel",
+    "BHeast42"
+  ],
+  "log": "|j|\u2606dankiel\n|j|\u2606BHeast42\n|t:|1776501219\n|gametype|doubles\n|player|p1|dankiel|morty|1203\n|player|p2|BHeast42|2|1172\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Rampardos, L50, F|\n|poke|p1|Ninetales-Alola, L50, F|\n|poke|p1|Starmie, L50|\n|poke|p1|Rhyperior, L50, F|\n|poke|p1|Slowking-Galar, L50, M|\n|poke|p1|Incineroar, L50, F|\n|poke|p2|Torkoal, L50, F|\n|poke|p2|Slowbro, L50, M|\n|poke|p2|Kingambit, L50, M|\n|poke|p2|Oranguru, L50, F|\n|poke|p2|Sinistcha-Masterpiece, L50|\n|poke|p2|Floette-Eternal, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by BHeast42)\ndankiel rejected open team sheets.\n|\n|t:|1776501243\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Starmie|Starmie, L50|100/100\n|switch|p1b: Rampardos|Rampardos, L50, F|100/100\n|switch|p2a: Slowbro|Slowbro, L50, M|100/100\n|switch|p2b: Oranguru|Oranguru, L50, F|100/100\n|turn|1\n|\n|t:|1776501254\n|detailschange|p1a: Starmie|Starmie-Mega, L50\n|-mega|p1a: Starmie|Starmie|Starminite\n|move|p2b: Oranguru|Protect|p2b: Oranguru\n|-singleturn|p2b: Oranguru|Protect\n|move|p2a: Slowbro|Protect|p2a: Slowbro\n|-singleturn|p2a: Slowbro|Protect\n|move|p1a: Starmie|Skill Swap|p1b: Rampardos\n|-activate|p1a: Starmie|Skill Swap|||[of] p1b: Rampardos\n|move|p1b: Rampardos|Rock Slide|p2a: Slowbro|[spread] \n|-activate|p2a: Slowbro|move: Protect\n|-activate|p2b: Oranguru|move: Protect\n|\n|upkeep\n|turn|2\n|\n|t:|1776501272\n|move|p1a: Starmie|Thunderbolt|p2a: Slowbro\n|-supereffective|p2a: Slowbro|1\n|-damage|p2a: Slowbro|9/100\n|-enditem|p2a: Slowbro|Sitrus Berry|[eat]\n|-heal|p2a: Slowbro|34/100|[from] item: Sitrus Berry\n|move|p1b: Rampardos|Rock Slide|p2a: Slowbro|[spread] p2a,p2b\n|-damage|p2a: Slowbro|0 fnt\n|-damage|p2b: Oranguru|47/100\n|faint|p2a: Slowbro\n|move|p2b: Oranguru|Psychic Terrain|p2b: Oranguru\n|-fieldstart|move: Psychic Terrain\n|\n|upkeep\n|\n|t:|1776501283\n|switch|p2a: Floette|Floette-Eternal, L50, F|100/100\n|turn|3\n|\n|t:|1776501297\n|detailschange|p2a: Floette|Floette-Mega, L50, F\n|-mega|p2a: Floette|Floette|Floettite\n|-ability|p2a: Floette|Fairy Aura\n|move|p1a: Starmie|Scald|p2a: Floette\n|-damage|p2a: Floette|61/100\n|move|p1b: Rampardos|Rock Slide|p2b: Oranguru|[spread] p2a,p2b\n|-damage|p2a: Floette|0 fnt\n|-damage|p2b: Oranguru|0 fnt\n|faint|p2a: Floette\n|faint|p2b: Oranguru\n|\n|upkeep\n|-message|BHeast42 forfeited.\n|\n|win|dankiel\n|raw|dankiel's rating: 1203 &rarr; <strong>1226</strong><br />(+23 for winning)\n|raw|BHeast42's rating: 1172 &rarr; <strong>1149</strong><br />(-23 for losing)\n|l|\u2606BHeast42\n|player|p2|\n",
+  "uploadtime": 1776501311,
+  "views": 13,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1149,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2582716690",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "phifth",
+    "lazy01"
+  ],
+  "log": "|j|\u2606phifth\n|j|\u2606lazy01\n|t:|1776109252\n|gametype|singles\n|player|p1|phifth|rosa|1092\n|player|p2|lazy01|101|1000\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Gliscor, L50, M|\n|poke|p1|Tyranitar, L50, F|\n|poke|p1|Meganium, L50, F|\n|poke|p1|Archaludon, L50, M|\n|poke|p1|Excadrill, L50, M|\n|poke|p1|Glimmora, L50, M|\n|poke|p2|Scovillain, L50, M|\n|poke|p2|Torkoal, L50, M|\n|poke|p2|Venusaur, L50, F|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Weavile, L50, M|\n|poke|p2|Dragonite, L50, F|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by lazy01)\n|inactive|phifth has 60 seconds left.\n|\n|t:|1776109292\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Excadrill|Excadrill, L50, M|100/100\n|switch|p2a: Torkoal|Torkoal, L50, M|100/100\n|-weather|SunnyDay|[from] ability: Drought|[of] p2a: Torkoal\n|turn|1\n|\n|t:|1776109302\n|switch|p1a: Tyranitar|Tyranitar, L50, F|100/100\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p1a: Tyranitar\n|move|p2a: Torkoal|Overheat|p1a: Tyranitar\n|-resisted|p1a: Tyranitar|1\n|-damage|p1a: Tyranitar|92/100\n|-unboost|p2a: Torkoal|spa|2\n|\n|-weather|Sandstorm|[upkeep]\n|-damage|p2a: Torkoal|94/100|[from] Sandstorm\n|upkeep\n|turn|2\n|\n|t:|1776109315\n|switch|p2a: Scovillain|Scovillain, L50, M|100/100\n|move|p1a: Tyranitar|Rock Slide|p2a: Scovillain\n|-supereffective|p2a: Scovillain|1\n|-damage|p2a: Scovillain|0 fnt\n|faint|p2a: Scovillain\n|\n|-weather|Sandstorm|[upkeep]\n|upkeep\n|-message|lazy01 forfeited.\n|\n|win|phifth\n|raw|phifth's rating: 1092 &rarr; <strong>1111</strong><br />(+19 for winning)\n|raw|lazy01's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|l|\u2606lazy01\n|player|p2|\n|c|\u2606phifth|gg\n",
+  "uploadtime": 1776109328,
+  "views": 3,
+  "formatid": "gen9championsbssregma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

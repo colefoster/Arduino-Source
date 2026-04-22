@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586904880",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "UngaBunba",
+    "NathanaelW19"
+  ],
+  "log": "|j|\u2606UngaBunba\n|j|\u2606NathanaelW19\n|t:|1776470393\n|gametype|doubles\n|player|p1|UngaBunba|janitor|1139\n|player|p2|NathanaelW19|dragontamer|1091\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Conkeldurr, L50, F|\n|poke|p1|Delphox, L50, M|\n|poke|p1|Sableye, L50, M|\n|poke|p1|Pelipper, L50, F|\n|poke|p1|Blastoise, L50, F|\n|poke|p1|Sinistcha-Masterpiece, L50|\n|poke|p2|Medicham, L50, M|\n|poke|p2|Banette, L50, M|\n|poke|p2|Ninetales-Alola, L50, F|\n|poke|p2|Arcanine-Hisui, L50, M|\n|poke|p2|Kommo-o, L50, M|\n|poke|p2|Corviknight, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by NathanaelW19)\n|\n|t:|1776470409\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Conkeldurr|Conkeldurr, L50, F|100/100\n|switch|p1b: Blastoise|Blastoise, L50, F|100/100\n|switch|p2a: Medicham|Medicham, L50, M, shiny|100/100\n|switch|p2b: Banette|Banette, L50, M, shiny|100/100\n|-item|p1a: Conkeldurr|Payapa Berry|[from] ability: Frisk|[of] p2b: Banette\n|-item|p1b: Blastoise|Blastoisinite|[from] ability: Frisk|[of] p2b: Banette\n|turn|1\n|\n|t:|1776470427\n|switch|p1a: Pelipper|Pelipper, L50, F|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p1a: Pelipper\n|detailschange|p1b: Blastoise|Blastoise-Mega, L50, F\n|-mega|p1b: Blastoise|Blastoise|Blastoisinite\n|detailschange|p2b: Banette|Banette-Mega, L50, M, shiny\n|-mega|p2b: Banette|Banette|Banettite\n|move|p2a: Medicham|Fake Out|p1b: Blastoise\n|-damage|p1b: Blastoise|84/100\n|move|p2b: Banette|Skill Swap|p2a: Medicham\n|-activate|p2b: Banette|Skill Swap|||[of] p2a: Medicham\n|cant|p1b: Blastoise|flinch\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|turn|2\n|\n|t:|1776470447\n|move|p2a: Medicham|Coaching|p2b: Banette\n|-boost|p2b: Banette|atk|1\n|-boost|p2b: Banette|def|1\n|move|p2b: Banette|Shadow Sneak|p1b: Blastoise\n|-damage|p1b: Blastoise|0 fnt\n|faint|p1b: Blastoise\n|move|p1a: Pelipper|Tailwind|p1a: Pelipper\n|-sidestart|p1: UngaBunba|move: Tailwind\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|-message|UngaBunba forfeited.\n|\n|win|NathanaelW19\n|raw|UngaBunba's rating: 1139 &rarr; <strong>1111</strong><br />(-28 for losing)\n|raw|NathanaelW19's rating: 1091 &rarr; <strong>1121</strong><br />(+30 for winning)\n|l|\u2606UngaBunba\n|player|p1|\n",
+  "uploadtime": 1776470459,
+  "views": 19,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1111,
+  "private": 0,
+  "password": null
+}

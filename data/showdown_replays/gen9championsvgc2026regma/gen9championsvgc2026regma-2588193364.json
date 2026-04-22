@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2588193364",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "tarakan",
+    "Tunderboltz"
+  ],
+  "log": "|j|\u203dtarakan\n|j|\u2606Tunderboltz\n|t:|1776613199\n|gametype|doubles\n|player|p1|tarakan|roxie|1199\n|player|p2|Tunderboltz|drayton|1102\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Blastoise, L50, M|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Gengar, L50, M|\n|poke|p1|Ceruledge, L50, M|\n|poke|p1|Hydreigon, L50, M|\n|poke|p1|Liepard, L50, F|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Aegislash, L50, M, shiny|\n|poke|p2|Pelipper, L50, M|\n|poke|p2|Archaludon, L50, M|\n|poke|p2|Greninja, L50, F, shiny|\n|poke|p2|Lopunny, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Tunderboltz)\n|\n|t:|1776613217\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Gengar|Gengar, L50, M|100/100\n|switch|p1b: Liepard|Liepard, L50, F|100/100\n|switch|p2a: Clover|Lopunny, L50, F|100/100\n|switch|p2b: Bellion|Archaludon, L50, M|100/100\n|turn|1\n|\n|t:|1776613231\n|detailschange|p1a: Gengar|Gengar-Mega, L50, M\n|-mega|p1a: Gengar|Gengar|Gengarite\n|detailschange|p2a: Clover|Lopunny-Mega, L50, F\n|-mega|p2a: Clover|Lopunny|Lopunnite\n|move|p1b: Liepard|Protect|p1b: Liepard\n|-singleturn|p1b: Liepard|Protect\n|move|p1a: Gengar|Protect|p1a: Gengar\n|-singleturn|p1a: Gengar|Protect\n|move|p2a: Clover|Fake Out|p1b: Liepard\n|-activate|p1b: Liepard|move: Protect\n|move|p2b: Bellion|Draco Meteor|p1a: Gengar\n|-activate|p1a: Gengar|move: Protect\n|\n|upkeep\n|turn|2\n|\n|t:|1776613247\n|move|p1b: Liepard|Encore|p2a: Clover\n|-start|p2a: Clover|Encore\n|move|p2a: Clover|Fake Out||[still]\n|-hint|Fake Out only works on your first turn out.\n|-fail|p2a: Clover\n|move|p1a: Gengar|Disable|p2b: Bellion\n|-start|p2b: Bellion|Disable|Draco Meteor\n|cant|p2b: Bellion|Disable|Draco Meteor\n|\n|upkeep\n|turn|3\n|-message|Tunderboltz forfeited.\n|\n|win|tarakan\n|raw|tarakan's rating: 1199 &rarr; <strong>1217</strong><br />(+18 for winning)\n|raw|Tunderboltz's rating: 1102 &rarr; <strong>1084</strong><br />(-18 for losing)\n|l|\u2606Tunderboltz\n|player|p2|\n",
+  "uploadtime": 1776613259,
+  "views": 7,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1084,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2589419930",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "breloomb01",
+    "EifieLisa"
+  ],
+  "log": "|j|\u2606breloomb01\n|j|\u2606EifieLisa\n|t:|1776721434\n|gametype|doubles\n|player|p1|breloomb01|roughneck|1517\n|player|p2|EifieLisa|winona|1571\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Charizard, L50, M|\n|poke|p1|Tyranitar, L50, F|\n|poke|p1|Milotic, L50, M|\n|poke|p1|Sneasler, L50, F|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Sinistcha, L50|\n|poke|p2|Meganium, L50, M|\n|poke|p2|Talonflame, L50, F|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Kingambit, L50, F|\n|teampreview|4\n|\n|t:|1776721490\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Charizard|Charizard, L50, M|100/100\n|switch|p1b: Sneasler|Sneasler, L50, F|100/100\n|switch|p2a: Kingambit|Kingambit, L50, F|100/100\n|switch|p2b: Garchomp|Garchomp, L50, M|100/100\n|turn|1\n|\n|t:|1776721511\n|switch|p2a: Basculegion|Basculegion, L50, M|100/100\n|move|p2b: Garchomp|Protect|p2b: Garchomp\n|-singleturn|p2b: Garchomp|Protect\n|move|p1b: Sneasler|Fake Out|p2b: Garchomp\n|-activate|p2b: Garchomp|move: Protect\n|move|p1a: Charizard|Dragon Dance|p1a: Charizard\n|-boost|p1a: Charizard|atk|1\n|-boost|p1a: Charizard|spe|1\n|\n|upkeep\n|turn|2\n|\n|t:|1776721530\n|switch|p1b: Incineroar|Incineroar, L50, F|100/100\n|-ability|p1b: Incineroar|Intimidate|boost\n|-unboost|p2a: Basculegion|atk|1\n|-unboost|p2b: Garchomp|atk|1\n|detailschange|p1a: Charizard|Charizard-Mega-X, L50, M\n|-mega|p1a: Charizard|Charizard|Charizardite X\n|move|p1a: Charizard|Dragon Claw|p2b: Garchomp\n|-supereffective|p2b: Garchomp|1\n|-damage|p2b: Garchomp|0 fnt\n|-damage|p1a: Charizard|88/100|[from] ability: Rough Skin|[of] p2b: Garchomp\n|faint|p2b: Garchomp\n|move|p2a: Basculegion|Wave Crash|p1a: Charizard\n|-damage|p1a: Charizard|38/100\n|-damage|p2a: Basculegion|86/100|[from] Recoil\n|\n|upkeep\n|c|\u2606EifieLisa|classic ladder bo1 cheese\n|c|\u2606EifieLisa|u must be really proud\n|-message|EifieLisa forfeited.\n|\n|win|breloomb01\n|raw|breloomb01's rating: 1517 &rarr; <strong>1540</strong><br />(+23 for winning)\n|raw|EifieLisa's rating: 1571 &rarr; <strong>1548</strong><br />(-23 for losing)\n|l|\u2606EifieLisa\n|player|p2|\n",
+  "uploadtime": 1776721587,
+  "views": 8,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1540,
+  "private": 0,
+  "password": null
+}

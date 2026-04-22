@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2581027968",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Kibadda12345",
+    "Phatedfool"
+  ],
+  "log": "|j|\u2606Kibadda12345\n|j|\u2606Phatedfool\n|t:|1775953097\n|gametype|doubles\n|player|p1|Kibadda12345|ingo|1181\n|player|p2|Phatedfool|cynthia|1296\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Torkoal, L50, M|\n|poke|p1|Oranguru, L50, F|\n|poke|p1|Armarouge, L50, F|\n|poke|p1|Hatterene, L50, F|\n|poke|p1|Camerupt, L50, F|\n|poke|p1|Sinistcha, L50|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Meowscarada, L50, F|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Gyarados, L50, F|\n|poke|p2|Rotom-Heat, L50|\n|poke|p2|Aegislash, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Kibadda12345)\n|\n|t:|1775953143\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Hatterene|Hatterene, L50, F|100/100\n|switch|p1b: Armarouge|Armarouge, L50, F|100/100\n|switch|p2a: Garchomp|Garchomp, L50, M|100/100\n|switch|p2b: Meowscarada|Meowscarada, L50, F|100/100\n|turn|1\n|\n|t:|1775953157\n|move|p2b: Meowscarada|Protect|p2b: Meowscarada\n|-singleturn|p2b: Meowscarada|Protect\n|move|p2a: Garchomp|Earthquake|p1a: Hatterene|[spread] p1a,p1b\n|-activate|p2b: Meowscarada|move: Protect\n|-supereffective|p1b: Armarouge|1\n|-damage|p1a: Hatterene|58/100\n|-damage|p1b: Armarouge|37/100\n|move|p1b: Armarouge|Psychic Terrain|p1b: Armarouge\n|-fieldstart|move: Psychic Terrain\n|move|p1a: Hatterene|Trick Room|p1a: Hatterene\n|-fieldstart|move: Trick Room|[of] p1a: Hatterene\n|\n|upkeep\n|turn|2\n|\n|t:|1775953180\n|move|p2a: Garchomp|Protect|p2a: Garchomp\n|-singleturn|p2a: Garchomp|Protect\n|move|p1a: Hatterene|Dazzling Gleam|p2a: Garchomp|[spread] p2b\n|-activate|p2a: Garchomp|move: Protect\n|-supereffective|p2b: Meowscarada|1\n|-damage|p2b: Meowscarada|2/100\n|move|p1b: Armarouge|Armor Cannon|p2b: Meowscarada\n|-supereffective|p2b: Meowscarada|1\n|-damage|p2b: Meowscarada|0 fnt\n|-unboost|p1b: Armarouge|def|1\n|-unboost|p1b: Armarouge|spd|1\n|faint|p2b: Meowscarada\n|\n|upkeep\n|\n|t:|1775953189\n|switch|p2b: Rotom|Rotom-Heat, L50|100/100\n|turn|3\n|\n|t:|1775953196\n|move|p1a: Hatterene|Expanding Force|p2a: Garchomp|[spread] p2a,p2b\n|-damage|p2a: Garchomp|39/100\n|-damage|p2b: Rotom|39/100\n|move|p1b: Armarouge|Expanding Force|p2b: Rotom|[spread] p2a,p2b\n|-crit|p2a: Garchomp\n|-damage|p2a: Garchomp|0 fnt\n|-damage|p2b: Rotom|0 fnt\n|faint|p2a: Garchomp\n|faint|p2b: Rotom\n|\n|upkeep\n|-message|Phatedfool forfeited.\n|\n|win|Kibadda12345\n|raw|Kibadda12345's rating: 1181 &rarr; <strong>1214</strong><br />(+33 for winning)\n|raw|Phatedfool's rating: 1296 &rarr; <strong>1263</strong><br />(-33 for losing)\n|l|\u2606Phatedfool\n|player|p2|\n",
+  "uploadtime": 1775953206,
+  "views": 39,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1214,
+  "private": 0,
+  "password": null
+}

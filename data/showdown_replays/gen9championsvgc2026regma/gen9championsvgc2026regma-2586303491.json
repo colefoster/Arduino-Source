@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586303491",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "sezan",
+    "colfox"
+  ],
+  "log": "|j|\u2606sezan\n|j|\u203dcolfox\n|t:|1776423240\n|gametype|doubles\n|player|p1|sezan|265|1280\n|player|p2|colfox|2|1291\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Maushold-Four, L50|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Lopunny, L50, M|\n|poke|p1|Scizor, L50, F|\n|poke|p1|Whimsicott, L50, M|\n|poke|p1|Milotic, L50, M|\n|poke|p2|Tyranitar, L50, F|\n|poke|p2|Excadrill, L50, F|\n|poke|p2|Dragapult, L50, F|\n|poke|p2|Milotic, L50, F|\n|poke|p2|Raichu, L50, M|\n|poke|p2|Scizor, L50, M|\n|teampreview|4\n|\n|t:|1776423275\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Whimsicott|Whimsicott, L50, M|100/100\n|switch|p1b: Lopunny|Lopunny, L50, M|100/100\n|switch|p2a: Raichu|Raichu, L50, M|100/100\n|switch|p2b: Scizor|Scizor, L50, M|100/100\n|turn|1\n|\n|t:|1776423301\n|switch|p1b: Incineroar|Incineroar, L50, F|100/100\n|-ability|p1b: Incineroar|Intimidate|boost\n|-unboost|p2a: Raichu|atk|1\n|-unboost|p2b: Scizor|atk|1\n|detailschange|p2b: Scizor|Scizor-Mega, L50, M\n|-mega|p2b: Scizor|Scizor|Scizorite\n|move|p1a: Whimsicott|Protect|p1a: Whimsicott\n|-singleturn|p1a: Whimsicott|Protect\n|move|p2a: Raichu|Fake Out|p1a: Whimsicott\n|-activate|p1a: Whimsicott|move: Protect\n|move|p2b: Scizor|Swords Dance|p2b: Scizor\n|-boost|p2b: Scizor|atk|2\n|\n|upkeep\n|turn|2\n|l|\u2606sezan\n|player|p1|\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by colfox)\n|inactive|sezan has 30 seconds to reconnect!\n|inactive|sezan has 20 seconds to reconnect!\n|inactive|sezan has 15 seconds to reconnect!\n|inactive|sezan has 10 seconds to reconnect!\n|inactive|sezan has 5 seconds to reconnect!\n|-message|sezan lost due to inactivity.\n|\n|win|colfox\n|raw|sezan's rating: 1280 &rarr; <strong>1256</strong><br />(-24 for losing)\n|raw|colfox's rating: 1291 &rarr; <strong>1315</strong><br />(+24 for winning)\n",
+  "uploadtime": 1776423441,
+  "views": 49,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1256,
+  "private": 0,
+  "password": null
+}

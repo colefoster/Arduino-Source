@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2585920283",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "BryanBossL",
+    "2009 hometown hero"
+  ],
+  "log": "|j|\u2606BryanBossL\n|j|\u26062009 hometown hero\n|t:|1776381551\n|gametype|doubles\n|player|p1|BryanBossL|firebreather|1004\n|player|p2|2009 hometown hero|evelyn|1070\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Excadrill, L50, M|\n|poke|p1|Rotom-Heat, L50|\n|poke|p1|Sylveon, L50, M|\n|poke|p1|Gyarados, L50, F|\n|poke|p1|Mimikyu, L50, M|\n|poke|p1|Scizor, L50, F|\n|poke|p2|Farigiraf, L50, F|\n|poke|p2|Crabominable, L50, F|\n|poke|p2|Liepard, L50, F|\n|poke|p2|Conkeldurr, L50, F|\n|poke|p2|Ninetales-Alola, L50, M|\n|poke|p2|Mimikyu, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by 2009 hometown hero)\n|\n|t:|1776381566\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Gyarados|Gyarados, L50, F|100/100\n|switch|p1b: Sylveon|Sylveon, L50, M|100/100\n|switch|p2a: Farigiraf|Farigiraf, L50, F|100/100\n|switch|p2b: Liepard|Liepard, L50, F|100/100\n|-ability|p1a: Gyarados|Intimidate|boost\n|-unboost|p2a: Farigiraf|atk|1\n|-unboost|p2b: Liepard|atk|1\n|turn|1\n|\n|t:|1776381585\n|detailschange|p1a: Gyarados|Gyarados-Mega, L50, F\n|-mega|p1a: Gyarados|Gyarados|Gyaradosite\n|-ability|p1a: Gyarados|Mold Breaker\n|move|p2b: Liepard|Fake Out|p1b: Sylveon\n|-damage|p1b: Sylveon|94/100\n|move|p1a: Gyarados|Crunch|p2a: Farigiraf\n|-supereffective|p2a: Farigiraf|1\n|-crit|p2a: Farigiraf\n|-damage|p2a: Farigiraf|0 fnt\n|faint|p2a: Farigiraf\n|cant|p1b: Sylveon|flinch\n|\n|upkeep\n|\n|t:|1776381593\n|switch|p2a: Conkeldurr|Conkeldurr, L50, F|100/100\n|turn|2\n|\n|t:|1776381611\n|move|p1a: Gyarados|Protect|p1a: Gyarados\n|-singleturn|p1a: Gyarados|Protect\n|move|p2b: Liepard|U-turn|p1b: Sylveon\n|-resisted|p1b: Sylveon|1\n|-damage|p1b: Sylveon|89/100\n|\n|t:|1776381616\n|switch|p2b: Crabominable|Crabominable, L50, F|100/100|[from] U-turn\n|move|p1b: Sylveon|Hyper Voice|p2a: Conkeldurr|[spread] p2a,p2b\n|-supereffective|p2a: Conkeldurr|1\n|-supereffective|p2b: Crabominable|1\n|-damage|p2a: Conkeldurr|10/100\n|-damage|p2b: Crabominable|8/100\n|move|p2a: Conkeldurr|Drain Punch|p1a: Gyarados\n|-activate|p1a: Gyarados|move: Protect\n|\n|upkeep\n|turn|3\n|-message|2009 hometown hero forfeited.\n|\n|win|BryanBossL\n|raw|BryanBossL's rating: 1004 &rarr; <strong>1051</strong><br />(+47 for winning)\n|raw|2009 hometown hero's rating: 1070 &rarr; <strong>1046</strong><br />(-24 for losing)\n|l|\u26062009 hometown hero\n|player|p2|\n",
+  "uploadtime": 1776381636,
+  "views": 32,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1046,
+  "private": 0,
+  "password": null
+}

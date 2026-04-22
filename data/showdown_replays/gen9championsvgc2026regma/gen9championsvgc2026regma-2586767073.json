@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586767073",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Quaza15",
+    "theyluvhugio"
+  ],
+  "log": "|j|\u2606Quaza15\n|j|\u2606theyluvhugio\n|t:|1776458282\n|gametype|doubles\n|player|p1|Quaza15|ruinmaniac|1339\n|player|p2|theyluvhugio|veteranf|1237\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Aerodactyl, L50, F|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Mamoswine, L50, M|\n|poke|p1|Charizard, L50, F|\n|poke|p1|Kingambit, L50, M|\n|poke|p1|Rotom-Wash, L50|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Alcremie-Rainbow-Swirl, L50, F|\n|poke|p2|Krookodile, L50, M|\n|poke|p2|Espathra, L50, F|\n|poke|p2|Ninetales-Alola, L50, F|\n|poke|p2|Farigiraf, L50, F|\n|teampreview|4\n|\n|t:|1776458323\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Kingambit|Kingambit, L50, M|100/100\n|switch|p1b: Rotom|Rotom-Wash, L50|100/100\n|switch|p2a: Espathra|Espathra, L50, F|100/100\n|switch|p2b: Alcremie|Alcremie-Rainbow-Swirl, L50, F|100/100\n|turn|1\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by theyluvhugio)\n|\n|t:|1776458346\n|move|p2a: Espathra|Protect|p2a: Espathra\n|-singleturn|p2a: Espathra|Protect\n|move|p1b: Rotom|Electroweb|p2b: Alcremie|[spread] \n|-activate|p2a: Espathra|move: Protect\n|-miss|p1b: Rotom|p2b: Alcremie\n|move|p2b: Alcremie|Decorate|p2a: Espathra\n|-boost|p2a: Espathra|atk|2\n|-boost|p2a: Espathra|spa|2\n|move|p1a: Kingambit|Iron Head|p2b: Alcremie\n|-supereffective|p2b: Alcremie|1\n|-damage|p2b: Alcremie|9/100\n|-enditem|p2b: Alcremie|Sitrus Berry|[eat]\n|-heal|p2b: Alcremie|34/100|[from] item: Sitrus Berry\n|\n|-ability|p2a: Espathra|Speed Boost|boost\n|-boost|p2a: Espathra|spe|1\n|upkeep\n|turn|2\n|inactive|theyluvhugio has 30 seconds left.\n|inactive|theyluvhugio has 20 seconds left.\n|\n|t:|1776458382\n|move|p2b: Alcremie|Protect|p2b: Alcremie\n|-singleturn|p2b: Alcremie|Protect\n|move|p2a: Espathra|Baton Pass|p2a: Espathra\n|\n|t:|1776458387\n|switch|p2a: Floette|Floette-Eternal, L50, F|100/100|[from] Baton Pass\n|move|p1b: Rotom|Electroweb|p2b: Alcremie|[spread] p2a\n|-activate|p2b: Alcremie|move: Protect\n|-damage|p2a: Floette|86/100\n|-unboost|p2a: Floette|spe|1\n|move|p1a: Kingambit|Iron Head|p2a: Floette\n|-supereffective|p2a: Floette|1\n|-damage|p2a: Floette|0 fnt\n|faint|p2a: Floette\n|\n|upkeep\n|-message|theyluvhugio forfeited.\n|\n|win|Quaza15\n|raw|Quaza15's rating: 1339 &rarr; <strong>1353</strong><br />(+14 for winning)\n|raw|theyluvhugio's rating: 1237 &rarr; <strong>1219</strong><br />(-18 for losing)\n|l|\u2606theyluvhugio\n|player|p2|\n",
+  "uploadtime": 1776458399,
+  "views": 48,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1219,
+  "private": 0,
+  "password": null
+}

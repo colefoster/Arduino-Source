@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586181026",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "thunderbolt9867",
+    "B1ACKM3W"
+  ],
+  "log": "|j|\u2606thunderbolt9867\n|j|\u2606B1ACKM3W\n|t:|1776409279\n|gametype|doubles\n|player|p1|thunderbolt9867|265|1095\n|player|p2|B1ACKM3W|1|1000\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Orthworm, L50, M|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Aerodactyl, L50, M|\n|poke|p1|Scizor, L50, M|\n|poke|p1|Rotom-Wash, L50|\n|poke|p2|Bellibolt, L50, M|\n|poke|p2|Altaria, L50, M|\n|poke|p2|Dragapult, L50, F|\n|poke|p2|Hydrapple, L50, F|\n|poke|p2|Archaludon, L50, F|\n|poke|p2|Avalugg, L50, M|\n|teampreview|4\n|\n|t:|1776409304\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Incineroar|Incineroar, L50, M|100/100\n|switch|p1b: Aerodactyl|Aerodactyl, L50, M|100/100\n|switch|p2a: Avalugg|Avalugg, L50, M|100/100\n|switch|p2b: Altaria|Altaria, L50, M|100/100\n|-ability|p1b: Aerodactyl|Unnerve\n|-ability|p2b: Altaria|Cloud Nine\n|-ability|p1a: Incineroar|Intimidate|boost\n|-unboost|p2a: Avalugg|atk|1\n|-unboost|p2b: Altaria|atk|1\n|turn|1\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by B1ACKM3W)\n|\n|t:|1776409323\n|detailschange|p2b: Altaria|Altaria-Mega, L50, M\n|-mega|p2b: Altaria|Altaria|Altarianite\n|move|p1a: Incineroar|Fake Out|p2a: Avalugg\n|-damage|p2a: Avalugg|96/100\n|move|p1b: Aerodactyl|Rock Slide|p2b: Altaria|[spread] p2a,p2b\n|-supereffective|p2a: Avalugg|1\n|-damage|p2a: Avalugg|75/100\n|-damage|p2b: Altaria|80/100\n|move|p2b: Altaria|Cotton Guard|p2b: Altaria\n|-boost|p2b: Altaria|def|3\n|cant|p2a: Avalugg|flinch\n|\n|upkeep\n|turn|2\n|\n|t:|1776409346\n|move|p1b: Aerodactyl|Taunt|p2b: Altaria\n|-start|p2b: Altaria|move: Taunt\n|cant|p2b: Altaria|move: Taunt|Cotton Guard\n|move|p1a: Incineroar|Flare Blitz|p2a: Avalugg\n|-supereffective|p2a: Avalugg|1\n|-damage|p2a: Avalugg|39/100\n|-damage|p1a: Incineroar|89/100|[from] Recoil\n|move|p2a: Avalugg|Body Press|p1a: Incineroar\n|-supereffective|p1a: Incineroar|1\n|-damage|p1a: Incineroar|18/100\n|\n|upkeep\n|turn|3\n|-message|thunderbolt9867 forfeited.\n|\n|win|B1ACKM3W\n|raw|thunderbolt9867's rating: 1095 &rarr; <strong>1064</strong><br />(-31 for losing)\n|raw|B1ACKM3W's rating: 1000 &rarr; <strong>1051</strong><br />(+51 for winning)\n|l|\u2606thunderbolt9867\n|player|p1|\n",
+  "uploadtime": 1776409368,
+  "views": 26,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1051,
+  "private": 0,
+  "password": null
+}

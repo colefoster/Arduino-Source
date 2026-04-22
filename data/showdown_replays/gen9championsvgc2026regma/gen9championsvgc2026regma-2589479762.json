@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2589479762",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "underlinegui",
+    "nontelo"
+  ],
+  "log": "|j|\u2606underlinegui\n|j|\u2606nontelo\n|t:|1776726714\n|gametype|doubles\n|player|p1|underlinegui|2|1525\n|player|p2|nontelo|cress|1446\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Meganium, L50, M, shiny|\n|poke|p1|Sableye, L50, F, shiny|\n|poke|p1|Archaludon, L50, F|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Pelipper, L50, M|\n|poke|p1|Sneasler, L50, M|\n|poke|p2|Tyranitar, L50, M|\n|poke|p2|Excadrill, L50, F|\n|poke|p2|Corviknight, L50, F|\n|poke|p2|Hydreigon, L50, F|\n|poke|p2|Rotom-Wash, L50|\n|poke|p2|Clefable, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by underlinegui)\n|inactive|underlinegui has 60 seconds left.\n|\n|t:|1776726753\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Mega^2nium|Meganium, L50, M, shiny|100/100\n|switch|p1b: Basculegion|Basculegion, L50, M|100/100\n|switch|p2a: Tyranitar|Tyranitar, L50, M|100/100\n|switch|p2b: Excadrill|Excadrill, L50, F|100/100\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p2a: Tyranitar\n|turn|1\n|inactive|underlinegui has 30 seconds left.\n|inactive|underlinegui has 20 seconds left.\n|inactive|underlinegui has 15 seconds left.\n|inactive|underlinegui has 10 seconds left.\n|\n|t:|1776726798\n|switch|p2a: Corviknight|Corviknight, L50, F|100/100\n|move|p1a: Mega^2nium|Protect|p1a: Mega^2nium\n|-singleturn|p1a: Mega^2nium|Protect\n|move|p2b: Excadrill|Iron Head|p1a: Mega^2nium\n|-activate|p1a: Mega^2nium|move: Protect\n|move|p1b: Basculegion|Flip Turn|p2b: Excadrill\n|-supereffective|p2b: Excadrill|1\n|-enditem|p2b: Excadrill|Focus Sash\n|-damage|p2b: Excadrill|1/100\n|\n|t:|1776726813\n|switch|p1b: Pelipper|Pelipper, L50, M|100/100|[from] Flip Turn\n|-weather|RainDance|[from] ability: Drizzle|[of] p1b: Pelipper\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|turn|2\n|\n|t:|1776726834\n|switch|p2b: Tyranitar|Tyranitar, L50, M|100/100\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p2b: Tyranitar\n|detailschange|p1a: Mega^2nium|Meganium-Mega, L50, M, shiny\n|-mega|p1a: Mega^2nium|Meganium|Meganiumite\n|move|p1b: Pelipper|Tailwind|p1b: Pelipper\n|-sidestart|p1: underlinegui|move: Tailwind\n|move|p1a: Mega^2nium|Weather Ball|p2a: Corviknight\n|-supereffective|p2a: Corviknight|1\n|-damage|p2a: Corviknight|0 fnt\n|faint|p2a: Corviknight\n|\n|-weather|Sandstorm|[upkeep]\n|-damage|p1b: Pelipper|95/100|[from] Sandstorm\n|-damage|p1a: Mega^2nium|95/100|[from] Sandstorm\n|upkeep\n|-message|nontelo forfeited.\n|\n|win|underlinegui\n|raw|underlinegui's rating: 1525 &rarr; <strong>1541</strong><br />(+16 for winning)\n|raw|nontelo's rating: 1446 &rarr; <strong>1430</strong><br />(-16 for losing)\n|l|\u2606nontelo\n|player|p2|\n",
+  "uploadtime": 1776727055,
+  "views": 9,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1430,
+  "private": 0,
+  "password": null
+}

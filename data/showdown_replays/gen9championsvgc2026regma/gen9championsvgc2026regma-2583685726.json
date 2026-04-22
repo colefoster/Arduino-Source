@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2583685726",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "koraidonrider3565",
+    "agam3r650"
+  ],
+  "log": "|j|\u203dkoraidonrider3565\n|j|\u2606agam3r650\n|t:|1776190962\n|gametype|doubles\n|player|p1|koraidonrider3565|170|1003\n|player|p2|agam3r650|101|1033\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Glimmora, L50, F|\n|poke|p1|Garganacl, L50, F|\n|poke|p1|Vanilluxe, L50, F|\n|poke|p1|Glalie, L50, M|\n|poke|p1|Gourgeist-*, L50, F|\n|poke|p1|Garbodor, L50, F|\n|poke|p2|Gardevoir, L50, F|\n|poke|p2|Kangaskhan, L50, F|\n|poke|p2|Azumarill, L50, F|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Aegislash, L50, F|\n|poke|p2|Hydrapple, L50, F|\n|teampreview|4\n|j| ytyp\n|\n|t:|1776190981\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Vanilluxe|Vanilluxe, L50, F|100/100\n|switch|p1b: Garbodor|Garbodor, L50, F|100/100\n|switch|p2a: Sneasler|Sneasler, L50, F|100/100\n|switch|p2b: Hydrapple|Hydrapple, L50, F|100/100\n|-weather|Snowscape|[from] ability: Snow Warning|[of] p1a: Vanilluxe\n|turn|1\n|\n|t:|1776190994\n|move|p2a: Sneasler|Fake Out|p1b: Garbodor\n|-damage|p1b: Garbodor|82/100\n|-ability|p1b: Garbodor|Weak Armor|boost\n|-unboost|p1b: Garbodor|def|1\n|-boost|p1b: Garbodor|spe|2\n|move|p1a: Vanilluxe|Explosion|p2a: Sneasler|[spread] p1b,p2a,p2b\n|-damage|p1b: Garbodor|0 fnt\n|-damage|p2a: Sneasler|10/100\n|-damage|p2b: Hydrapple|61/100\n|faint|p1a: Vanilluxe\n|faint|p1b: Garbodor\n|move|p2b: Hydrapple|Earth Power|p1: Vanilluxe|[notarget]\n|-fail|p2b: Hydrapple\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|\n|t:|1776191008\n|switch|p1a: Garganacl|Garganacl, L50, F|100/100\n|switch|p1b: Glimmora|Glimmora, L50, F|100/100\n|turn|2\n|\n|t:|1776191039\n|detailschange|p1b: Glimmora|Glimmora-Mega, L50, F\n|-mega|p1b: Glimmora|Glimmora|Glimmoranite\n|move|p2a: Sneasler|Close Combat|p1a: Garganacl\n|-supereffective|p1a: Garganacl|1\n|-damage|p1a: Garganacl|1/100\n|-unboost|p2a: Sneasler|def|1\n|-unboost|p2a: Sneasler|spd|1\n|move|p1b: Glimmora|Explosion|p2a: Sneasler|[spread] p1a,p2a,p2b\n|-resisted|p1a: Garganacl|1\n|-damage|p1a: Garganacl|0 fnt\n|-damage|p2a: Sneasler|0 fnt\n|-damage|p2b: Hydrapple|21/100\n|faint|p1b: Glimmora\n|faint|p1a: Garganacl\n|faint|p2a: Sneasler\n|\n|win|agam3r650\n|raw|koraidonrider3565's rating: 1003 &rarr; <strong>1000</strong><br />(-3 for losing)\n|raw|agam3r650's rating: 1033 &rarr; <strong>1065</strong><br />(+32 for winning)\n",
+  "uploadtime": 1776191057,
+  "views": 15,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

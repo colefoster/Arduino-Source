@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584254110",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "terapito",
+    "sancet farlopa eta"
+  ],
+  "log": "|j|\u2606terapito\n|j|\u2606sancet farlopa eta\n|t:|1776243653\n|gametype|doubles\n|player|p1|terapito|li|1095\n|player|p2|sancet farlopa eta|depotagent|1043\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Kingambit, L50, F|\n|poke|p1|Tyranitar, L50, M|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Hatterene, L50, F|\n|poke|p1|Hawlucha, L50, M|\n|poke|p1|Whimsicott, L50, M|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Aerodactyl, L50, F|\n|poke|p2|Rotom-Mow, L50|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Aegislash, L50, M|\n|teampreview|4\n|\n|t:|1776243677\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Tyranitar|Tyranitar, L50, M|100/100\n|switch|p1b: Hatterene|Hatterene, L50, F|100/100\n|switch|p2a: Aegislash|Aegislash, L50, M|100/100\n|switch|p2b: Sneasler|Sneasler, L50, M|100/100\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p1a: Tyranitar\n|turn|1\n|\n|t:|1776243694\n|move|p1a: Tyranitar|Protect|p1a: Tyranitar\n|-singleturn|p1a: Tyranitar|Protect\n|move|p2b: Sneasler|Close Combat|p1a: Tyranitar\n|-activate|p1a: Tyranitar|move: Protect\n|-formechange|p2a: Aegislash|Aegislash-Blade|\n|move|p2a: Aegislash|Flash Cannon|p1b: Hatterene\n|-supereffective|p1b: Hatterene|1\n|-damage|p1b: Hatterene|44/100\n|-enditem|p1b: Hatterene|Sitrus Berry|[eat]\n|-heal|p1b: Hatterene|69/100|[from] item: Sitrus Berry\n|move|p1b: Hatterene|Psychic|p2b: Sneasler\n|-supereffective|p2b: Sneasler|2\n|-enditem|p2b: Sneasler|Focus Sash\n|-damage|p2b: Sneasler|1/100\n|\n|-weather|Sandstorm|[upkeep]\n|-damage|p2b: Sneasler|0 fnt|[from] Sandstorm\n|-damage|p1b: Hatterene|63/100|[from] Sandstorm\n|faint|p2b: Sneasler\n|upkeep\n|\n|t:|1776243714\n|switch|p2b: Rotom|Rotom-Mow, L50|100/100\n|turn|2\n|\n|t:|1776243743\n|detailschange|p1a: Tyranitar|Tyranitar-Mega, L50, M\n|-mega|p1a: Tyranitar|Tyranitar|Tyranitarite\n|move|p2b: Rotom|Leaf Storm|p1a: Tyranitar\n|-supereffective|p1a: Tyranitar|1\n|-damage|p1a: Tyranitar|55/100\n|-unboost|p2b: Rotom|spa|2\n|move|p1a: Tyranitar|Knock Off|p2a: Aegislash\n|-supereffective|p2a: Aegislash|1\n|-damage|p2a: Aegislash|0 fnt\n|-enditem|p2a: Aegislash|Spell Tag|[from] move: Knock Off|[of] p1a: Tyranitar\n|faint|p2a: Aegislash\n|move|p1b: Hatterene|Trick Room|p1b: Hatterene\n|-fieldstart|move: Trick Room|[of] p1b: Hatterene\n|\n|-weather|Sandstorm|[upkeep]\n|-damage|p1b: Hatterene|57/100|[from] Sandstorm\n|-damage|p2b: Rotom|95/100|[from] Sandstorm\n|upkeep\n|-message|sancet farlopa eta forfeited.\n|\n|win|terapito\n|raw|terapito's rating: 1095 &rarr; <strong>1117</strong><br />(+22 for winning)\n|raw|sancet farlopa eta's rating: 1043 &rarr; <strong>1029</strong><br />(-14 for losing)\n",
+  "uploadtime": 1776243756,
+  "views": 18,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1029,
+  "private": 0,
+  "password": null
+}

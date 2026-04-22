@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586571064",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "BroDontFuckWithMe",
+    "reserviste"
+  ],
+  "log": "|j|\u2606BroDontFuckWithMe\n|j|\u2606reserviste\n|t:|1776443836\n|gametype|doubles\n|player|p1|BroDontFuckWithMe|170|1287\n|player|p2|reserviste|unknown|1263\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Starmie, L50|\n|poke|p1|Rotom-Heat, L50|\n|poke|p1|Excadrill, L50, M|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Tyranitar, L50, M|\n|poke|p1|Gardevoir, L50, M|\n|poke|p2|Clefable, L50, F|\n|poke|p2|Medicham, L50, F|\n|poke|p2|Aerodactyl, L50, F|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Bellibolt, L50, M|\n|poke|p2|Raichu, L50, F|\n|teampreview|4\n|l|\u2606reserviste\n|player|p2|\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by BroDontFuckWithMe)\n|inactive|reserviste has 30 seconds to reconnect!\n|inactive|reserviste has 20 seconds to reconnect!\n|inactive|reserviste has 15 seconds to reconnect!\n|inactive|reserviste has 10 seconds to reconnect!\n|inactive|reserviste has 5 seconds to reconnect!\n|-message|reserviste lost due to inactivity.\n|\n|win|BroDontFuckWithMe\n|raw|BroDontFuckWithMe's rating: 1287 &rarr; <strong>1310</strong><br />(+23 for winning)\n|raw|reserviste's rating: 1263 &rarr; <strong>1240</strong><br />(-23 for losing)\n",
+  "uploadtime": 1776443958,
+  "views": 51,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1240,
+  "private": 0,
+  "password": null
+}

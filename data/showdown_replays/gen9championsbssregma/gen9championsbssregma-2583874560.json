@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2583874560",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "kita zaki",
+    "isaacmora22"
+  ],
+  "log": "|j|\u2606kita zaki\n|j|\u2606isaacmora22\n|t:|1776204526\n|gametype|singles\n|player|p1|kita zaki|169|1171\n|player|p2|isaacmora22|hilbert|1092\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Hydreigon, L50, F|\n|poke|p1|Aegislash, L50, M|\n|poke|p1|Azumarill, L50, F|\n|poke|p1|Venusaur, L50, M|\n|poke|p1|Rotom-Heat, L50|\n|poke|p1|Garchomp, L50, F|\n|poke|p2|Flareon, L50, M|\n|poke|p2|Dragonite, L50, M|\n|poke|p2|Luxray, L50, M|\n|poke|p2|Clawitzer, L50, M|\n|poke|p2|Sableye, L50, M|\n|teampreview|3\n|\n|t:|1776204552\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Aegislash|Aegislash, L50, M|100/100\n|switch|p2a: Erwin|Clawitzer, L50, M|100/100\n|turn|1\n|\n|t:|1776204559\n|-formechange|p1a: Aegislash|Aegislash-Blade|\n|move|p1a: Aegislash|Poltergeist|p2a: Erwin\n|-activate|p2a: Erwin|move: Poltergeist|Scope Lens\n|-damage|p2a: Erwin|26/100\n|move|p2a: Erwin|Dark Pulse|p1a: Aegislash\n|-supereffective|p1a: Aegislash|1\n|-damage|p1a: Aegislash|0 fnt\n|faint|p1a: Aegislash\n|\n|upkeep\n|\n|t:|1776204570\n|switch|p1a: Garchomp|Garchomp, L50, F|100/100\n|turn|2\n|\n|t:|1776204573\n|move|p2a: Erwin|Aqua Jet|p1a: Garchomp\n|-damage|p1a: Garchomp|91/100\n|-damage|p2a: Erwin|14/100|[from] ability: Rough Skin|[of] p1a: Garchomp\n|move|p1a: Garchomp|Earthquake|p2a: Erwin\n|-damage|p2a: Erwin|0 fnt\n|faint|p2a: Erwin\n|\n|upkeep\n|\n|t:|1776204582\n|switch|p2a: Migo|Dragonite, L50, M|100/100\n|turn|3\n|\n|t:|1776204586\n|detailschange|p2a: Migo|Dragonite-Mega, L50, M\n|-mega|p2a: Migo|Dragonite|Dragoninite\n|move|p1a: Garchomp|Rock Tomb|p2a: Migo\n|-supereffective|p2a: Migo|1\n|-damage|p2a: Migo|82/100\n|-unboost|p2a: Migo|spe|1\n|move|p2a: Migo|Ice Beam|p1a: Garchomp\n|-supereffective|p1a: Garchomp|2\n|-damage|p1a: Garchomp|0 fnt\n|faint|p1a: Garchomp\n|\n|upkeep\n|\n|t:|1776204597\n|switch|p1a: Azumarill|Azumarill, L50, F|100/100\n|turn|4\n|\n|t:|1776204603\n|move|p2a: Migo|Air Slash|p1a: Azumarill\n|-damage|p1a: Azumarill|55/100\n|move|p1a: Azumarill|Play Rough|p2a: Migo\n|-supereffective|p2a: Migo|1\n|-damage|p2a: Migo|0 fnt\n|faint|p2a: Migo\n|\n|upkeep\n|\n|t:|1776204611\n|switch|p2a: Rex|Luxray, L50, M|100/100\n|-ability|p2a: Rex|Intimidate|boost\n|-unboost|p1a: Azumarill|atk|1\n|turn|5\n|\n|t:|1776204616\n|move|p2a: Rex|Wild Charge|p1a: Azumarill\n|-supereffective|p1a: Azumarill|1\n|-damage|p1a: Azumarill|0 fnt\n|faint|p1a: Azumarill\n|-damage|p2a: Rex|85/100|[from] Recoil\n|\n|win|isaacmora22\n|raw|kita zaki's rating: 1171 &rarr; <strong>1140</strong><br />(-31 for losing)\n|raw|isaacmora22's rating: 1092 &rarr; <strong>1124</strong><br />(+32 for winning)\n|l|\u2606kita zaki\n|player|p1|\n",
+  "uploadtime": 1776204626,
+  "views": 6,
+  "formatid": "gen9championsbssregma",
+  "rating": 1124,
+  "private": 0,
+  "password": null
+}

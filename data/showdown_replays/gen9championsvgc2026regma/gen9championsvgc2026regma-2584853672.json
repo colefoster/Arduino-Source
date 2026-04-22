@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584853672",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "SunTufo",
+    "miratrice"
+  ],
+  "log": "|j|\u2606SunTufo\n|j|\u2606miratrice\n|t:|1776288831\n|gametype|doubles\n|player|p1|SunTufo|li|1235\n|player|p2|miratrice|psychicf-gen4|1195\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Sinistcha-Masterpiece, L50|\n|poke|p1|Skarmory, L50, M|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Milotic, L50, M|\n|poke|p2|Meganium, L50, M|\n|poke|p2|Pelipper, L50, M|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Scizor, L50, M|\n|poke|p2|Garchomp, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by SunTufo)\n|inactive|SunTufo has 60 seconds left.\n|inactive|miratrice has 60 seconds left.\n|\n|t:|1776288889\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Floette|Floette-Eternal, L50, F|100/100\n|switch|p1b: Incineroar|Incineroar, L50, M|100/100\n|switch|p2a: Pelipper|Pelipper, L50, M|100/100\n|switch|p2b: Sneasler|Sneasler, L50, M|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p2a: Pelipper\n|-ability|p1b: Incineroar|Intimidate|boost\n|-unboost|p2a: Pelipper|atk|1\n|-unboost|p2b: Sneasler|atk|1\n|-enditem|p2b: Sneasler|White Herb\n|-clearnegativeboost|p2b: Sneasler|[silent]\n|turn|1\n|\n|t:|1776288903\n|switch|p1b: Sinistcha|Sinistcha-Masterpiece, L50|100/100\n|move|p1a: Floette|Protect|p1a: Floette\n|-singleturn|p1a: Floette|Protect\n|move|p2b: Sneasler|Fake Out|p1b: Sinistcha\n|-immune|p1b: Sinistcha\n|move|p2a: Pelipper|Tailwind|p2a: Pelipper\n|-sidestart|p2: miratrice|move: Tailwind\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|turn|2\n|\n|t:|1776288918\n|switch|p1a: Incineroar|Incineroar, L50, M|100/100\n|-ability|p1a: Incineroar|Intimidate|boost\n|-unboost|p2a: Pelipper|atk|1\n|-unboost|p2b: Sneasler|atk|1\n|switch|p1b: Milotic|Milotic, L50, M, shiny|100/100\n|move|p2b: Sneasler|Dire Claw|p1a: Incineroar\n|-damage|p1a: Incineroar|77/100\n|move|p2a: Pelipper|Hurricane|p1b: Milotic\n|-damage|p1b: Milotic|68/100\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|turn|3\n|-message|SunTufo forfeited.\n|\n|win|miratrice\n|raw|SunTufo's rating: 1235 &rarr; <strong>1207</strong><br />(-28 for losing)\n|raw|miratrice's rating: 1195 &rarr; <strong>1223</strong><br />(+28 for winning)\n",
+  "uploadtime": 1776288926,
+  "views": 38,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1207,
+  "private": 0,
+  "password": null
+}

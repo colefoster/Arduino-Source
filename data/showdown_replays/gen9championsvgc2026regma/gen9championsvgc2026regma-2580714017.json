@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2580714017",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "atfalse",
+    "ohko_muk"
+  ],
+  "log": "|j|\u2606atfalse\n|j|\u2606ohko_muk\n|t:|1775926481\n|gametype|doubles\n|player|p1|atfalse|shadowtriad|1251\n|player|p2|ohko_muk|gambler|1290\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Maushold, L50|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Rotom-Wash, L50|\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Talonflame, L50, F|\n|poke|p1|Aegislash, L50, M|\n|poke|p2|Delphox, L50, M|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Kingambit, L50, F|\n|teampreview|4\n|\n|t:|1775926517\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Garchomp|Garchomp, L50, F|100/100\n|switch|p1b: Talonflame|Talonflame, L50, F|100/100\n|switch|p2a: Floette|Floette-Eternal, L50, F|100/100\n|switch|p2b: Sneasler|Sneasler, L50, F|100/100\n|turn|1\n|\n|t:|1775926539\n|detailschange|p2a: Floette|Floette-Mega, L50, F\n|-mega|p2a: Floette|Floette|Floettite\n|-ability|p2a: Floette|Fairy Aura\n|move|p1a: Garchomp|Protect|p1a: Garchomp\n|-singleturn|p1a: Garchomp|Protect\n|move|p2b: Sneasler|Fake Out|p1a: Garchomp\n|-activate|p1a: Garchomp|move: Protect\n|move|p1b: Talonflame|Tailwind|p1b: Talonflame\n|-sidestart|p1: atfalse|move: Tailwind\n|move|p2a: Floette|Draining Kiss|p1a: Garchomp\n|-activate|p1a: Garchomp|move: Protect\n|\n|upkeep\n|turn|2\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by ohko_muk)\n|\n|t:|1775926569\n|switch|p2b: Garchomp|Garchomp, L50, M|100/100\n|move|p1b: Talonflame|Acrobatics|p2a: Floette\n|-damage|p2a: Floette|52/100\n|move|p1a: Garchomp|Earthquake|p2a: Floette|[spread] p2a,p2b\n|-immune|p1b: Talonflame\n|-damage|p2a: Floette|0 fnt\n|-damage|p2b: Garchomp|57/100\n|faint|p2a: Floette\n|\n|upkeep\n|-message|ohko_muk forfeited.\n|\n|win|atfalse\n|raw|atfalse's rating: 1251 &rarr; <strong>1279</strong><br />(+28 for winning)\n|raw|ohko_muk's rating: 1290 &rarr; <strong>1262</strong><br />(-28 for losing)\n|l|\u2606ohko_muk\n|player|p2|\n|l|\u2606atfalse\n|player|p1|\n",
+  "uploadtime": 1775926652,
+  "views": 69,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1262,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584748215",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "pictochatvgc",
+    "jenny ki"
+  ],
+  "log": "|j|\u2606pictochatvgc\n|j|\u2606jenny ki\n|t:|1776280875\n|gametype|doubles\n|player|p1|pictochatvgc|skier|1260\n|player|p2|jenny ki|170|1328\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Greninja-*, L50, M|\n|poke|p1|Rotom-Mow, L50|\n|poke|p1|Chandelure, L50, M|\n|poke|p1|Talonflame, L50, F|\n|poke|p1|Azumarill, L50, M|\n|poke|p1|Maushold-Four, L50|\n|poke|p2|Flapple, L50, M|\n|poke|p2|Meowstic, L50, M|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Whimsicott, L50, M|\n|poke|p2|Tyranitar, L50, M|\n|poke|p2|Milotic, L50, M|\n|teampreview|4\n|\n|t:|1776280914\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Talonflame|Talonflame, L50, F|100/100\n|switch|p1b: Greninja|Greninja, L50, M, shiny|100/100\n|switch|p2a: Meowstic|Meowstic, L50, M|100/100\n|switch|p2b: Flapple|Flapple, L50, M|100/100\n|turn|1\n|\n|t:|1776280944\n|switch|p2b: Floette|Floette-Eternal, L50, F|100/100\n|move|p2a: Meowstic|Fake Out|p1a: Talonflame\n|-damage|p1a: Talonflame|93/100\n|cant|p1a: Talonflame|flinch\n|move|p1b: Greninja|Gunk Shot|p2b: Floette\n|-start|p1b: Greninja|typechange|Poison|[from] ability: Protean\n|-supereffective|p2b: Floette|1\n|-damage|p2b: Floette|0 fnt\n|faint|p2b: Floette\n|\n|upkeep\n|\n|t:|1776280960\n|switch|p2b: Flapple|Flapple, L50, M|100/100\n|turn|2\n|\n|t:|1776280971\n|move|p2a: Meowstic|Gravity|p2a: Meowstic\n|-fieldstart|move: Gravity\n|move|p2b: Flapple|Grav Apple|p1b: Greninja\n|-resisted|p1b: Greninja|1\n|-damage|p1b: Greninja|7/100\n|-unboost|p1b: Greninja|def|1\n|move|p1a: Talonflame|Tailwind|p1a: Talonflame\n|-sidestart|p1: pictochatvgc|move: Tailwind\n|move|p1b: Greninja|Gunk Shot|p2b: Flapple\n|-supereffective|p2b: Flapple|1\n|-damage|p2b: Flapple|0 fnt\n|faint|p2b: Flapple\n|\n|upkeep\n|-message|jenny ki forfeited.\n|\n|win|pictochatvgc\n|raw|pictochatvgc's rating: 1260 &rarr; <strong>1290</strong><br />(+30 for winning)\n|raw|jenny ki's rating: 1328 &rarr; <strong>1304</strong><br />(-24 for losing)\n|l|\u2606jenny ki\n|player|p2|\n",
+  "uploadtime": 1776281021,
+  "views": 48,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1290,
+  "private": 0,
+  "password": null
+}

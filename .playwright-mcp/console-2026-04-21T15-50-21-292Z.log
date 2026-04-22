@@ -1,0 +1,32 @@
+[    1310ms] Error: Minified React error #418; visit https://react.dev/errors/418?args[]=HTML&args[]= for the full message or use the non-minified dev environment for full errors and additional helpful warnings.
+    at rY (https://metavgc.com/_next/static/chunks/0rwwge57xnfls.js:1:40207)
+    at rZ (https://metavgc.com/_next/static/chunks/0rwwge57xnfls.js:1:41575)
+    at https://metavgc.com/_next/static/chunks/0rwwge57xnfls.js:1:135582
+    at sh (https://metavgc.com/_next/static/chunks/0rwwge57xnfls.js:1:140749)
+    at sd (https://metavgc.com/_next/static/chunks/0rwwge57xnfls.js:1:131999)
+    at https://metavgc.com/_next/static/chunks/0rwwge57xnfls.js:1:126824
+    at se (https://metavgc.com/_next/static/chunks/0rwwge57xnfls.js:1:126925)
+    at sH (https://metavgc.com/_next/static/chunks/0rwwge57xnfls.js:1:153489)
+    at MessagePort._ (https://metavgc.com/_next/static/chunks/0rwwge57xnfls.js:1:1647)
+[    1309ms] [ERROR] Error: no_div
+    at https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5371322473234864:185:83
+    at Xj.g (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5371322473234864:79:555)
+    at ek (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5371322473234864:80:706)
+    at op (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5371322473234864:189:41)
+    at https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5371322473234864:188:555
+    at https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5371322473234864:79:722
+    at Xj.g (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5371322473234864:79:555)
+    at https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5371322473234864:79:712
+    at Y.id [as f] (https://pagead2.googlesyndication.com/pagead/managed/js/adsense/m202604160101/show_ads_impl_fy2021.js:893:2115)
+    at a0.W (https://pagead2.googlesyndication.com/pagead/managed/js/adsense/m202604160101/show_ads_impl_fy2021.js:681:445) @ https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5371322473234864:78
+[    1576ms] TypeError: Cannot read properties of null (reading 'parentNode')
+    at $RS (https://metavgc.com/:65:65744)
+    at https://metavgc.com/:65:65855
+[    6179ms] [WARNING] The resource https://go.ezodn.com/ezoic/ezorca.min.js was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ https://metavgc.com/:0
+[    6319ms] [ERROR] Failed to load resource: net::ERR_TOO_MANY_REDIRECTS @ https://pixel.tapad.com/idsync/ex/push?partner_id=2922&partner_url=https%3A%2F%2Fid5-sync.com%2Fc%2F457%2F108%2F0%2F9.gif%3Fpuid%3D%24%7BTA_DEVICE_ID%7D%26gdpr%3D0%26gdpr_consent%3D&gdpr=0&gdpr_consent=:0
+[    9321ms] [WARNING] The resource https://go.ezodn.com/ezoic/ezorca.min.js was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ https://metavgc.com/:0
+[   13994ms] [WARNING] The resource https://go.ezodn.com/ezoic/ezorca.min.js was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ https://metavgc.com/teams/queercrocodile-pokepoke-champions-cup-1st--lot-69dd61af48d465883f712db3-queercrocodile:0
+[   20293ms] [WARNING] The resource https://go.ezodn.com/ezoic/ezorca.min.js was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ https://metavgc.com/teams/queercrocodile-pokepoke-champions-cup-1st--lot-69dd61af48d465883f712db3-queercrocodile:0
+[   25397ms] [WARNING] The resource https://go.ezodn.com/ezoic/ezorca.min.js was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ https://metavgc.com/teams/queercrocodile-pokepoke-champions-cup-1st--lot-69dd61af48d465883f712db3-queercrocodile:0
+[   29173ms] [WARNING] The resource https://go.ezodn.com/ezoic/ezorca.min.js was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ https://metavgc.com/teams/queercrocodile-pokepoke-champions-cup-1st--lot-69dd61af48d465883f712db3-queercrocodile:0
+[   35295ms] [WARNING] The resource https://go.ezodn.com/ezoic/ezorca.min.js was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ https://metavgc.com/teams/queercrocodile-pokepoke-champions-cup-1st--lot-69dd61af48d465883f712db3-queercrocodile:0

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582665323",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "goated w da sauce",
+    "gordindoido"
+  ],
+  "log": "|j|\u2606goated w da sauce\n|j|\u2606gordindoido\n|t:|1776105905\n|gametype|doubles\n|player|p1|goated w da sauce|lida|1000\n|player|p2|gordindoido|101|1040\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Lucario, L50, M|\n|poke|p1|Aerodactyl, L50, M|\n|poke|p1|Milotic, L50, F|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Incineroar, L50, M|\n|poke|p2|Archaludon, L50, F|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Pelipper, L50, F|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Meganium, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by goated w da sauce)\ngoated w da sauce rejected open team sheets.\n|inactive|goated w da sauce has 60 seconds left.\n|\n|t:|1776105958\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Lucario|Lucario, L50, M|100/100\n|switch|p1b: Sinistcha|Sinistcha, L50|100/100\n|switch|p2a: Meganium|Meganium, L50, F|100/100\n|switch|p2b: Incineroar|Incineroar, L50, M|100/100\n|-ability|p2b: Incineroar|Intimidate|boost\n|-fail|p1a: Lucario|unboost|Attack|[from] ability: Inner Focus|[of] p1a: Lucario\n|-unboost|p1b: Sinistcha|atk|1\n|turn|1\n|\n|t:|1776105980\n|detailschange|p2a: Meganium|Meganium-Mega, L50, F\n|-mega|p2a: Meganium|Meganium|Meganiumite\n|move|p2b: Incineroar|Fake Out|p1b: Sinistcha\n|-immune|p1b: Sinistcha\n|move|p1b: Sinistcha|Rage Powder|p1b: Sinistcha\n|-singleturn|p1b: Sinistcha|move: Rage Powder\n|move|p1a: Lucario|Swords Dance|p1a: Lucario\n|-boost|p1a: Lucario|atk|2\n|move|p2a: Meganium|Weather Ball|p1a: Lucario\n|-supereffective|p1a: Lucario|1\n|-crit|p1a: Lucario\n|-damage|p1a: Lucario|0 fnt\n|faint|p1a: Lucario\n|\n|upkeep\n|-message|goated w da sauce forfeited.\n|\n|win|gordindoido\n|raw|goated w da sauce's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|raw|gordindoido's rating: 1040 &rarr; <strong>1070</strong><br />(+30 for winning)\n|l|\u2606goated w da sauce\n|player|p1|\n",
+  "uploadtime": 1776106005,
+  "views": 19,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

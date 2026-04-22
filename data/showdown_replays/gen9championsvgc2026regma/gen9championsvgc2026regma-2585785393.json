@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2585785393",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Drunklombre",
+    "Megaknightshade"
+  ],
+  "log": "|j|\u2606Drunklombre\n|j|\u2606Megaknightshade\n|t:|1776370477\n|gametype|doubles\n|player|p1|Drunklombre|102|1155\n|player|p2|Megaknightshade|n|1120\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Slowking, L50, F|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Crabominable, L50, M|\n|poke|p1|Hatterene, L50, F|\n|poke|p1|Tsareena, L50, F|\n|poke|p1|Camerupt, L50, F|\n|poke|p2|Pelipper, L50, F|\n|poke|p2|Chesnaught, L50, M|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Meowscarada, L50, F|\n|poke|p2|Archaludon, L50, M|\n|poke|p2|Floette-Eternal, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Drunklombre)\n|inactive|Megaknightshade has 60 seconds left.\n|\n|t:|1776370513\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Slowking|Slowking, L50, F|100/100\n|switch|p1b: Incineroar|Incineroar, L50, F|100/100\n|switch|p2a: Pelipper|Pelipper, L50, F|100/100\n|switch|p2b: Chesnaught|Chesnaught, L50, M|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p2a: Pelipper\n|-ability|p1b: Incineroar|Intimidate|boost\n|-unboost|p2a: Pelipper|atk|1\n|-unboost|p2b: Chesnaught|atk|1\n|turn|1\n|\n|t:|1776370537\n|switch|p2b: Meowscarada|Meowscarada, L50, F|100/100\n|move|p1b: Incineroar|Fake Out|p2a: Pelipper\n|-damage|p2a: Pelipper|88/100\n|cant|p2a: Pelipper|flinch\n|move|p1a: Slowking|Trick Room|p1a: Slowking\n|-fieldstart|move: Trick Room|[of] p1a: Slowking\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|turn|2\n|\n|t:|1776370554\n|-prepare|p1a: Slowking|Chilly Reception|[premajor]\n|move|p1a: Slowking|Chilly Reception|p1a: Slowking\n|-weather|Snowscape\n|\n|t:|1776370560\n|switch|p1a: Crabominable|Crabominable, L50, M|100/100|[from] Chilly Reception\n|move|p1b: Incineroar|Flare Blitz|p2b: Meowscarada\n|-supereffective|p2b: Meowscarada|1\n|-damage|p2b: Meowscarada|0 fnt\n|faint|p2b: Meowscarada\n|-damage|p1b: Incineroar|72/100|[from] Recoil\n|move|p2a: Pelipper|Weather Ball|p1b: Incineroar\n|-resisted|p1b: Incineroar|1\n|-damage|p1b: Incineroar|62/100\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|\n|t:|1776370575\n|switch|p2b: Chesnaught|Chesnaught, L50, M|100/100\n|turn|3\n|-message|Megaknightshade forfeited.\n|\n|win|Drunklombre\n|raw|Drunklombre's rating: 1155 &rarr; <strong>1177</strong><br />(+22 for winning)\n|raw|Megaknightshade's rating: 1120 &rarr; <strong>1098</strong><br />(-22 for losing)\n|l|\u2606Megaknightshade\n|player|p2|\n",
+  "uploadtime": 1776370587,
+  "views": 23,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1098,
+  "private": 0,
+  "password": null
+}

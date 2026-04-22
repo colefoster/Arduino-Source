@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582938863",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "putitadeleche",
+    "Mischievouz"
+  ],
+  "log": "|j|\u2606putitadeleche\n|j|\u2606Mischievouz\n|t:|1776126743\n|gametype|doubles\n|player|p1|putitadeleche|cynthia-gen4|1081\n|player|p2|Mischievouz|cynthia-gen4|1004\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Oranguru, L50, M|\n|poke|p1|Mimikyu, L50, M|\n|poke|p1|Hydrapple, L50, M|\n|poke|p1|Torkoal, L50, M|\n|poke|p1|Blastoise, L50, M|\n|poke|p1|Machamp, L50, F|\n|poke|p2|Maushold, L50|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Talonflame, L50, F|\n|poke|p2|Rotom-Wash, L50|\n|poke|p2|Aegislash, L50, F|\n|poke|p2|Floette-Eternal, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by putitadeleche)\n|\n|t:|1776126813\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Oranguru|Oranguru, L50, M|100/100\n|switch|p1b: Mimikyu|Mimikyu, L50, M|100/100\n|switch|p2a: Maushold|Maushold, L50, shiny|100/100\n|switch|p2b: Floette|Floette-Eternal, L50, F, shiny|100/100\n|turn|1\n|\n|t:|1776126834\n|switch|p1a: Blastoise|Blastoise, L50, M|100/100\n|detailschange|p2b: Floette|Floette-Mega, L50, F, shiny\n|-mega|p2b: Floette|Floette|Floettite\n|-ability|p2b: Floette|Fairy Aura\n|move|p2a: Maushold|Taunt|p1b: Mimikyu\n|-start|p1b: Mimikyu|move: Taunt\n|move|p2b: Floette|Calm Mind|p2b: Floette\n|-boost|p2b: Floette|spa|1\n|-boost|p2b: Floette|spd|1\n|cant|p1b: Mimikyu|move: Taunt|Trick Room\n|\n|upkeep\n|turn|2\n|\n|t:|1776126856\n|switch|p1b: Oranguru|Oranguru, L50, M|100/100\n|detailschange|p1a: Blastoise|Blastoise-Mega, L50, M\n|-mega|p1a: Blastoise|Blastoise|Blastoisinite\n|move|p2a: Maushold|Super Fang|p1a: Blastoise\n|-damage|p1a: Blastoise|50/100\n|move|p2b: Floette|Dazzling Gleam|p1b: Oranguru|[spread] p1a,p1b\n|-damage|p1a: Blastoise|0 fnt\n|-damage|p1b: Oranguru|49/100\n|faint|p1a: Blastoise\n|\n|upkeep\n|\n|t:|1776126867\n|switch|p1a: Mimikyu|Mimikyu, L50, M|100/100\n|turn|3\n|\n|t:|1776126889\n|move|p1b: Oranguru|Protect|p1b: Oranguru\n|-singleturn|p1b: Oranguru|Protect\n|move|p2a: Maushold|Taunt|p1a: Mimikyu\n|-start|p1a: Mimikyu|move: Taunt\n|move|p2b: Floette|Moonblast|p1b: Oranguru\n|-activate|p1b: Oranguru|move: Protect\n|cant|p1a: Mimikyu|move: Taunt|Trick Room\n|\n|upkeep\n|turn|4\n|-message|putitadeleche forfeited.\n|\n|win|Mischievouz\n|raw|putitadeleche's rating: 1081 &rarr; <strong>1054</strong><br />(-27 for losing)\n|raw|Mischievouz's rating: 1004 &rarr; <strong>1052</strong><br />(+48 for winning)\n|l|\u2606putitadeleche\n|player|p1|\n",
+  "uploadtime": 1776126900,
+  "views": 18,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1052,
+  "private": 0,
+  "password": null
+}

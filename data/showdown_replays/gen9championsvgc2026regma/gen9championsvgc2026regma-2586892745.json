@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586892745",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "AidzPlayz",
+    "Vgcproto"
+  ],
+  "log": "|j|\u2606AidzPlayz\n|j|\u2606Vgcproto\n|t:|1776469206\n|gametype|doubles\n|player|p1|AidzPlayz|ghetsis-gen5bw|1323\n|player|p2|Vgcproto|101|1281\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Aerodactyl, L50, M|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Sneasler, L50, F|\n|poke|p2|Tyranitar, L50, F|\n|poke|p2|Excadrill, L50, F|\n|poke|p2|Garchomp, L50, F|\n|poke|p2|Meowscarada, L50, M|\n|poke|p2|Glimmora, L50, F|\n|poke|p2|Basculegion, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Vgcproto)\n|\n|t:|1776469236\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Aerodactyl|Aerodactyl, L50, M|100/100\n|switch|p1b: Garchomp|Garchomp, L50, M|100/100\n|switch|p2a: Glimmora|Glimmora, L50, F|100/100\n|switch|p2b: Basculegion|Basculegion, L50, M|100/100\n|-ability|p1a: Aerodactyl|Unnerve\n|turn|1\n|inactive|Vgcproto has 30 seconds left.\n|\n|t:|1776469269\n|move|p2b: Basculegion|Aqua Jet|p1a: Aerodactyl\n|-supereffective|p1a: Aerodactyl|1\n|-damage|p1a: Aerodactyl|15/100\n|move|p1a: Aerodactyl|Tailwind|p1a: Aerodactyl\n|-sidestart|p1: AidzPlayz|move: Tailwind\n|move|p1b: Garchomp|Earthquake|p2a: Glimmora|[spread] p2a,p2b\n|-immune|p1a: Aerodactyl\n|-supereffective|p2a: Glimmora|2\n|-damage|p2a: Glimmora|0 fnt\n|-damage|p2b: Basculegion|44/100\n|-activate|p2a: Glimmora|ability: Toxic Debris\n|-sidestart|p1: AidzPlayz|move: Toxic Spikes\n|faint|p2a: Glimmora\n|\n|upkeep\n|\n|t:|1776469281\n|switch|p2a: Tyranitar|Tyranitar, L50, F|100/100\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p2a: Tyranitar\n|turn|2\n|\n|t:|1776469291\n|move|p1a: Aerodactyl|Protect|p1a: Aerodactyl\n|-singleturn|p1a: Aerodactyl|Protect\n|move|p2b: Basculegion|Aqua Jet|p1a: Aerodactyl\n|-activate|p1a: Aerodactyl|move: Protect\n|move|p1b: Garchomp|Earthquake|p2a: Tyranitar|[spread] p2a,p2b\n|-activate|p1a: Aerodactyl|move: Protect\n|-supereffective|p2a: Tyranitar|1\n|-damage|p2a: Tyranitar|31/100\n|-damage|p2b: Basculegion|0 fnt\n|faint|p2b: Basculegion\n|move|p2a: Tyranitar|Rock Slide|p1b: Garchomp|[spread] p1b\n|-activate|p1a: Aerodactyl|move: Protect\n|-resisted|p1b: Garchomp|1\n|-damage|p1b: Garchomp|82/100\n|\n|-weather|Sandstorm|[upkeep]\n|upkeep\n|-message|Vgcproto forfeited.\n|\n|win|AidzPlayz\n|raw|AidzPlayz's rating: 1323 &rarr; <strong>1341</strong><br />(+18 for winning)\n|raw|Vgcproto's rating: 1281 &rarr; <strong>1259</strong><br />(-22 for losing)\n",
+  "uploadtime": 1776469299,
+  "views": 43,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1259,
+  "private": 0,
+  "password": null
+}

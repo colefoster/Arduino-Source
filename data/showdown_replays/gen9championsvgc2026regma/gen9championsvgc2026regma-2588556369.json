@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2588556369",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "alexmvand",
+    "soulo333"
+  ],
+  "log": "|j|\u2606alexmvand\n|j|\u2606soulo333\n|t:|1776644644\n|gametype|doubles\n|player|p1|alexmvand|n|1162\n|player|p2|soulo333|102|1254\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Tyranitar, L50, M|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Froslass, L50, F|\n|poke|p1|Goodra-Hisui, L50, M|\n|poke|p1|Gyarados, L50, M|\n|poke|p1|Rotom-Heat, L50|\n|poke|p2|Charizard, L50, M|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Milotic, L50, F|\n|poke|p2|Tyranitar, L50, M|\n|teampreview|4\n|\n|t:|1776644670\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Tyranitar|Tyranitar, L50, M|100/100\n|switch|p1b: Garchomp|Garchomp, L50, M|100/100\n|switch|p2a: Sneasler|Sneasler, L50, M|100/100\n|switch|p2b: Charizard|Charizard, L50, M|100/100\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p1a: Tyranitar\n|turn|1\n|\n|t:|1776644697\n|switch|p2a: Incineroar|Incineroar, L50, F|100/100\n|-ability|p2a: Incineroar|Intimidate|boost\n|-unboost|p1a: Tyranitar|atk|1\n|-unboost|p1b: Garchomp|atk|1\n|detailschange|p2b: Charizard|Charizard-Mega-X, L50, M\n|-mega|p2b: Charizard|Charizard|Charizardite X\n|detailschange|p1a: Tyranitar|Tyranitar-Mega, L50, M\n|-mega|p1a: Tyranitar|Tyranitar|Tyranitarite\n|move|p1a: Tyranitar|Protect|p1a: Tyranitar\n|-singleturn|p1a: Tyranitar|Protect\n|move|p1b: Garchomp|Earthquake|p2b: Charizard|[spread] p2a,p2b\n|-activate|p1a: Tyranitar|move: Protect\n|-supereffective|p2a: Incineroar|1\n|-supereffective|p2b: Charizard|1\n|-damage|p2a: Incineroar|57/100\n|-damage|p2b: Charizard|49/100\n|move|p2b: Charizard|Dragon Dance|p2b: Charizard\n|-boost|p2b: Charizard|atk|1\n|-boost|p2b: Charizard|spe|1\n|\n|-weather|Sandstorm|[upkeep]\n|-damage|p2b: Charizard|43/100|[from] Sandstorm\n|-damage|p2a: Incineroar|51/100|[from] Sandstorm\n|upkeep\n|turn|2\n|\n|t:|1776644718\n|move|p2a: Incineroar|Fake Out|p1a: Tyranitar\n|-resisted|p1a: Tyranitar|1\n|-damage|p1a: Tyranitar|96/100\n|move|p1b: Garchomp|Earthquake|p2a: Incineroar|[spread] p1a,p2a,p2b\n|-supereffective|p1a: Tyranitar|1\n|-supereffective|p2a: Incineroar|1\n|-supereffective|p2b: Charizard|1\n|-damage|p1a: Tyranitar|66/100\n|-damage|p2a: Incineroar|6/100\n|-damage|p2b: Charizard|0 fnt\n|-enditem|p2a: Incineroar|Sitrus Berry|[eat]\n|-heal|p2a: Incineroar|31/100|[from] item: Sitrus Berry\n|faint|p2b: Charizard\n|cant|p1a: Tyranitar|flinch\n|\n|-weather|Sandstorm|[upkeep]\n|-damage|p2a: Incineroar|25/100|[from] Sandstorm\n|upkeep\n|-message|soulo333 forfeited.\n|\n|win|alexmvand\n|raw|alexmvand's rating: 1162 &rarr; <strong>1193</strong><br />(+31 for winning)\n|raw|soulo333's rating: 1254 &rarr; <strong>1223</strong><br />(-31 for losing)\n",
+  "uploadtime": 1776644724,
+  "views": 5,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1193,
+  "private": 0,
+  "password": null
+}

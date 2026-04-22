@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2582987628",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "ssslizard",
+    "imagine dreepy"
+  ],
+  "log": "|j|\u2606ssslizard\n|j|\u2606imagine dreepy\n|t:|1776131054\n|gametype|singles\n|player|p1|ssslizard|170|1287\n|player|p2|imagine dreepy|unknown|1191\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Lopunny, L50, M|\n|poke|p1|Rotom-Heat, L50|\n|poke|p1|Toxapex, L50, F|\n|poke|p1|Meowscarada, L50, F|\n|poke|p1|Kingambit, L50, F|\n|poke|p1|Hippowdon, L50, F|\n|poke|p2|Glimmora, L50, F|\n|poke|p2|Lopunny, L50, F|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Kingambit, L50, M|\n|poke|p2|Rotom-Wash, L50|\n|poke|p2|Venusaur, L50, M|\n|teampreview|3\n|\n|t:|1776131097\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Lopunny|Lopunny, L50, M|100/100\n|switch|p2a: Rotom|Rotom-Wash, L50|100/100\n|turn|1\n|\n|t:|1776131102\n|detailschange|p1a: Lopunny|Lopunny-Mega, L50, M\n|-mega|p1a: Lopunny|Lopunny|Lopunnite\n|move|p1a: Lopunny|Fake Out|p2a: Rotom\n|-damage|p2a: Rotom|78/100\n|cant|p2a: Rotom|flinch\n|\n|-heal|p2a: Rotom|83/100|[from] item: Leftovers\n|upkeep\n|turn|2\n|j| p74\n|\n|t:|1776131119\n|move|p1a: Lopunny|Close Combat|p2a: Rotom\n|-damage|p2a: Rotom|18/100\n|-unboost|p1a: Lopunny|def|1\n|-unboost|p1a: Lopunny|spd|1\n|move|p2a: Rotom|Will-O-Wisp|p1a: Lopunny\n|-status|p1a: Lopunny|brn\n|\n|-heal|p2a: Rotom|23/100|[from] item: Leftovers\n|-damage|p1a: Lopunny|95/100 brn|[from] brn\n|upkeep\n|turn|3\n|\n|t:|1776131125\n|move|p1a: Lopunny|Close Combat|p2a: Rotom\n|-damage|p2a: Rotom|0 fnt\n|-unboost|p1a: Lopunny|def|1\n|-unboost|p1a: Lopunny|spd|1\n|faint|p2a: Rotom\n|\n|-damage|p1a: Lopunny|89/100 brn|[from] brn\n|upkeep\n|\n|t:|1776131146\n|switch|p2a: Lopunny|Lopunny, L50, F|100/100\n|turn|4\n|\n|t:|1776131153\n|switch|p1a: Meowscarada|Meowscarada, L50, F|100/100\n|detailschange|p2a: Lopunny|Lopunny-Mega, L50, F\n|-mega|p2a: Lopunny|Lopunny|Lopunnite\n|move|p2a: Lopunny|Mach Punch|p1a: Meowscarada\n|-supereffective|p1a: Meowscarada|1\n|-damage|p1a: Meowscarada|33/100\n|\n|upkeep\n|turn|5\n|-message|ssslizard forfeited.\n|\n|win|imagine dreepy\n|raw|ssslizard's rating: 1287 &rarr; <strong>1255</strong><br />(-32 for losing)\n|raw|imagine dreepy's rating: 1191 &rarr; <strong>1223</strong><br />(+32 for winning)\n|l|\u2606ssslizard\n|player|p1|\n",
+  "uploadtime": 1776131329,
+  "views": 4,
+  "formatid": "gen9championsbssregma",
+  "rating": 1223,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586308460",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "patryandmorty",
+    "jiren2026"
+  ],
+  "log": "|j|\u2606patryandmorty\n|j|\u2606jiren2026\n|t:|1776423762\n|gametype|doubles\n|player|p1|patryandmorty|li|1112\n|player|p2|jiren2026|n|1195\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Farigiraf, L50, M|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Torkoal, L50, F|\n|poke|p1|Blastoise, L50, M|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Venusaur, L50, M|\n|poke|p2|Gardevoir, L50, F|\n|poke|p2|Farigiraf, L50, F|\n|poke|p2|Whimsicott, L50, F|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Krookodile, L50, M|\n|poke|p2|Rotom-Wash, L50|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by jiren2026)\n|\n|t:|1776423799\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Blastoise|Blastoise, L50, M|100/100\n|switch|p1b: Farigiraf|Farigiraf, L50, M|100/100\n|switch|p2a: Gardevoir|Gardevoir, L50, F, shiny|100/100\n|switch|p2b: Farigiraf|Farigiraf, L50, F, shiny|100/100\n|turn|1\n|\n|t:|1776423821\n|detailschange|p2a: Gardevoir|Gardevoir-Mega, L50, F, shiny\n|-mega|p2a: Gardevoir|Gardevoir|Gardevoirite\n|move|p1b: Farigiraf|Helping Hand|p1a: Blastoise\n|-singleturn|p1a: Blastoise|Helping Hand|[of] p1b: Farigiraf\n|move|p2b: Farigiraf|Helping Hand|p2a: Gardevoir\n|-singleturn|p2a: Gardevoir|Helping Hand|[of] p2b: Farigiraf\n|move|p2a: Gardevoir|Hyper Voice|p1b: Farigiraf|[spread] p1a,p1b\n|-damage|p1a: Blastoise|23/100\n|-damage|p1b: Farigiraf|17/100\n|move|p1a: Blastoise|Water Spout|p2b: Farigiraf|[spread] p2a,p2b\n|-damage|p2a: Gardevoir|86/100\n|-damage|p2b: Farigiraf|84/100\n|\n|-heal|p2b: Farigiraf|90/100|[from] item: Leftovers\n|upkeep\n|turn|2\n|-message|patryandmorty forfeited.\n|\n|win|jiren2026\n|raw|patryandmorty's rating: 1112 &rarr; <strong>1093</strong><br />(-19 for losing)\n|raw|jiren2026's rating: 1195 &rarr; <strong>1214</strong><br />(+19 for winning)\n|l|\u2606patryandmorty\n|player|p1|\n",
+  "uploadtime": 1776423839,
+  "views": 26,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1093,
+  "private": 0,
+  "password": null
+}

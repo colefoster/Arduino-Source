@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584533975",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "RPOJUGEPOJER",
+    "DriftmanREALVEVO"
+  ],
+  "log": "|j|\u2606RPOJUGEPOJER\n|j|\u2606DriftmanREALVEVO\n|t:|1776267124\n|gametype|doubles\n|player|p1|RPOJUGEPOJER|2|1059\n|player|p2|DriftmanREALVEVO|rood|1081\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Gengar, L50, F|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Orthworm, L50, F|\n|poke|p1|Sneasler, L50, F|\n|poke|p1|Sableye, L50, F|\n|poke|p1|Whimsicott, L50, M|\n|poke|p2|Kingambit, L50, M|\n|poke|p2|Salazzle, L50, F|\n|poke|p2|Kleavor, L50, M|\n|poke|p2|Slowking-Galar, L50, M|\n|poke|p2|Starmie, L50|\n|poke|p2|Drampa, L50, M|\n|teampreview|4\n|\n|t:|1776267173\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Gengar|Gengar, L50, F|100/100\n|switch|p1b: Whimsicott|Whimsicott, L50, M|100/100\n|switch|p2a: Kleavor|Kleavor, L50, M, shiny|100/100\n|switch|p2b: Starmie|Starmie, L50, shiny|100/100\n|turn|1\n|\n|t:|1776267204\n|detailschange|p1a: Gengar|Gengar-Mega, L50, F\n|-mega|p1a: Gengar|Gengar|Gengarite\n|detailschange|p2b: Starmie|Starmie-Mega, L50, shiny\n|-mega|p2b: Starmie|Starmie|Starminite\n|move|p1b: Whimsicott|Tailwind|p1b: Whimsicott\n|-sidestart|p1: RPOJUGEPOJER|move: Tailwind\n|move|p1a: Gengar|Perish Song|p1a: Gengar\n|-start|p1a: Gengar|perish3|[silent]\n|-start|p1b: Whimsicott|perish3|[silent]\n|-start|p2a: Kleavor|perish3|[silent]\n|-start|p2b: Starmie|perish3|[silent]\n|-fieldactivate|move: Perish Song\n|move|p2a: Kleavor|Stone Axe|p1b: Whimsicott\n|-damage|p1b: Whimsicott|33/100\n|-sidestart|p1: RPOJUGEPOJER|move: Stealth Rock\n|move|p2b: Starmie|Psycho Cut|p1a: Gengar\n|-supereffective|p1a: Gengar|1\n|-damage|p1a: Gengar|0 fnt\n|faint|p1a: Gengar\n|\n|-start|p1b: Whimsicott|perish3\n|-start|p2a: Kleavor|perish3\n|-start|p2b: Starmie|perish3\n|upkeep\n|-message|RPOJUGEPOJER forfeited.\n|\n|win|DriftmanREALVEVO\n|raw|RPOJUGEPOJER's rating: 1059 &rarr; <strong>1041</strong><br />(-18 for losing)\n|raw|DriftmanREALVEVO's rating: 1081 &rarr; <strong>1107</strong><br />(+26 for winning)\n|l|\u2606RPOJUGEPOJER\n|player|p1|\n",
+  "uploadtime": 1776267243,
+  "views": 25,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1041,
+  "private": 0,
+  "password": null
+}

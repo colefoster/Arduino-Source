@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2582991682",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "Marioipod",
+    "Dh718"
+  ],
+  "log": "|j|\u2606Marioipod\n|j|\u2606Dh718\n|t:|1776131415\n|gametype|singles\n|player|p1|Marioipod|may-rs|1051\n|player|p2|Dh718|101|1061\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Meganium, L50, F|\n|poke|p1|Archaludon, L50, M|\n|poke|p1|Dragonite, L50, F|\n|poke|p1|Kleavor, L50, M|\n|poke|p1|Kingambit, L50, M|\n|poke|p1|Clawitzer, L50, F|\n|poke|p2|Beedrill, L50, M|\n|poke|p2|Primarina, L50, F|\n|poke|p2|Glimmora, L50, F|\n|poke|p2|Rotom-Heat, L50|\n|poke|p2|Decidueye, L50, M|\n|poke|p2|Goodra-Hisui, L50, M|\n|teampreview|3\n|\n|t:|1776131481\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Archaludon|Archaludon, L50, M|100/100\n|switch|p2a: Glimmora|Glimmora, L50, F|100/100\n|turn|1\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Dh718)\n|\n|t:|1776131504\n|move|p2a: Glimmora|Earth Power|p1a: Archaludon\n|-supereffective|p1a: Archaludon|1\n|-damage|p1a: Archaludon|45/100\n|-ability|p1a: Archaludon|Stamina|boost\n|-boost|p1a: Archaludon|def|1\n|move|p1a: Archaludon|Heavy Slam|p2a: Glimmora\n|-supereffective|p2a: Glimmora|1\n|-damage|p2a: Glimmora|65/100\n|-activate|p2a: Glimmora|ability: Toxic Debris\n|-sidestart|p1: Marioipod|move: Toxic Spikes\n|\n|-heal|p1a: Archaludon|51/100|[from] item: Leftovers\n|upkeep\n|turn|2\n|\n|t:|1776131517\n|move|p2a: Glimmora|Earth Power|p1a: Archaludon\n|-supereffective|p1a: Archaludon|1\n|-damage|p1a: Archaludon|0 fnt\n|faint|p1a: Archaludon\n|\n|upkeep\n|\n|t:|1776131523\n|switch|p1a: Kingambit|Kingambit, L50, M|100/100\n|-activate|p1a: Kingambit|ability: Supreme Overlord\n|-start|p1a: Kingambit|fallen1|[silent]\n|turn|3\n|-activate|p1a: Kingambit|item: Quick Claw\n|\n|t:|1776131531\n|switch|p2a: Rotom|Rotom-Heat, L50|100/100\n|move|p1a: Kingambit|Iron Head|p2a: Rotom\n|-resisted|p2a: Rotom|2\n|-damage|p2a: Rotom|86/100\n|\n|upkeep\n|turn|4\n|\n|t:|1776131545\n|move|p2a: Rotom|Nasty Plot|p2a: Rotom\n|-boost|p2a: Rotom|spa|2\n|move|p1a: Kingambit|Kowtow Cleave|p2a: Rotom\n|-damage|p2a: Rotom|32/100\n|\n|upkeep\n|turn|5\n|\n|t:|1776131552\n|move|p1a: Kingambit|Sucker Punch|p2a: Rotom\n|-damage|p2a: Rotom|0 fnt\n|faint|p2a: Rotom\n|\n|upkeep\n|\n|t:|1776131556\n|switch|p2a: Beedrill|Beedrill, L50, M|100/100\n|turn|6\n|\n|t:|1776131562\n|detailschange|p2a: Beedrill|Beedrill-Mega, L50, M\n|-mega|p2a: Beedrill|Beedrill|Beedrillite\n|move|p1a: Kingambit|Sucker Punch|p2a: Beedrill\n|-crit|p2a: Beedrill\n|-damage|p2a: Beedrill|0 fnt\n|faint|p2a: Beedrill\n|\n|upkeep\n|-message|Dh718 forfeited.\n|\n|win|Marioipod\n|raw|Marioipod's rating: 1051 &rarr; <strong>1084</strong><br />(+33 for winning)\n|raw|Dh718's rating: 1061 &rarr; <strong>1041</strong><br />(-20 for losing)\n|l|\u2606Dh718\n|player|p2|\n",
+  "uploadtime": 1776131571,
+  "views": 2,
+  "formatid": "gen9championsbssregma",
+  "rating": 1041,
+  "private": 0,
+  "password": null
+}

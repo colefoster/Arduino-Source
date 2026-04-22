@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584469861",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "ascasf",
+    "Shitmon Scientist"
+  ],
+  "log": "|j|\u2606ascasf\n|j|\u2606Shitmon Scientist\n|t:|1776263005\n|gametype|doubles\n|player|p1|ascasf|102|1031\n|player|p2|Shitmon Scientist|scientist-gen4dp|1000\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Crabominable, L50, M|\n|poke|p1|Oranguru, L50, M|\n|poke|p1|Empoleon, L50, F|\n|poke|p1|Cofagrigus, L50, F|\n|poke|p1|Bastiodon, L50, M|\n|poke|p1|Stunfisk, L50, F|\n|poke|p2|Glalie, L50, F|\n|poke|p2|Maushold-Four, L50|\n|poke|p2|Snorlax, L50, M|\n|poke|p2|Noivern, L50, F|\n|poke|p2|Blastoise, L50, M|\n|poke|p2|Chesnaught, L50, M|\n|teampreview|4\nascasf rejected open team sheets.\n|\n|t:|1776263027\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Crabominable|Crabominable, L50, M|100/100\n|switch|p1b: Oranguru|Oranguru, L50, M|100/100\n|switch|p2a: Maushold|Maushold-Four, L50|100/100\n|switch|p2b: Snorlax|Snorlax, L50, M|100/100\n|turn|1\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by ascasf)\n|inactive|Shitmon Scientist also wants the timer to be on.\n|\n|t:|1776263044\n|move|p1a: Crabominable|Protect|p1a: Crabominable\n|-singleturn|p1a: Crabominable|Protect\n|move|p2a: Maushold|Taunt|p1b: Oranguru\n|-start|p1b: Oranguru|move: Taunt\n|move|p2b: Snorlax|Belly Drum|p2b: Snorlax\n|-damage|p2b: Snorlax|50/100\n|-setboost|p2b: Snorlax|atk|6|[from] move: Belly Drum\n|-enditem|p2b: Snorlax|Sitrus Berry|[eat]\n|-heal|p2b: Snorlax|75/100|[from] item: Sitrus Berry\n|cant|p1b: Oranguru|move: Taunt|Trick Room\n|\n|upkeep\n|turn|2\n|inactive|ascasf has 30 seconds left.\n|\n|t:|1776263072\n|move|p1a: Crabominable|Upper Hand||[still]\n|-fail|p1a: Crabominable\n|move|p2a: Maushold|Follow Me|p2a: Maushold\n|-singleturn|p2a: Maushold|move: Follow Me\n|move|p1b: Oranguru|Psychic|p2a: Maushold\n|-damage|p2a: Maushold|63/100\n|move|p2b: Snorlax|Last Resort|p1a: Crabominable\n|-damage|p1a: Crabominable|0 fnt\n|faint|p1a: Crabominable\n|\n|upkeep\n|-message|ascasf forfeited.\n|\n|win|Shitmon Scientist\n|raw|ascasf's rating: 1031 &rarr; <strong>1015</strong><br />(-16 for losing)\n|raw|Shitmon Scientist's rating: 1000 &rarr; <strong>1044</strong><br />(+44 for winning)\n|l|\u2606ascasf\n|player|p1|\n",
+  "uploadtime": 1776263088,
+  "views": 27,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1015,
+  "private": 0,
+  "password": null
+}

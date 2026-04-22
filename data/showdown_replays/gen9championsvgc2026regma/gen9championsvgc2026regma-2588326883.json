@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2588326883",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "SunTufo",
+    "Scrubby009"
+  ],
+  "log": "|j|\u2606SunTufo\n|j|\u2606Scrubby009\n|t:|1776624373\n|gametype|doubles\n|player|p1|SunTufo|li|1486\n|player|p2|Scrubby009|skyla|1392\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Delphox, L50, M, shiny|\n|poke|p1|Aerodactyl, L50, M, shiny|\n|poke|p1|Sneasler, L50, F|\n|poke|p1|Tsareena, L50, F, shiny|\n|poke|p1|Milotic, L50, F, shiny|\n|poke|p1|Garchomp, L50, M|\n|poke|p2|Lopunny, L50, F, shiny|\n|poke|p2|Rotom-Wash, L50|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Talonflame, L50, M|\n|poke|p2|Kingambit, L50, F|\n|poke|p2|Garchomp, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by SunTufo)\n|inactive|Scrubby009 has 60 seconds left.\n|\n|t:|1776624406\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Aerodactyl|Aerodactyl, L50, M, shiny|100/100\n|switch|p1b: Tsareena|Tsareena, L50, F, shiny|100/100\n|switch|p2a: B-Girl Kelly|Lopunny, L50, F, shiny|100/100\n|switch|p2b: Hot Pocket|Rotom-Wash, L50|100/100\n|-ability|p1a: Aerodactyl|Unnerve\n|turn|1\n|\n|t:|1776624422\n|detailschange|p1a: Aerodactyl|Aerodactyl-Mega, L50, M, shiny\n|-mega|p1a: Aerodactyl|Aerodactyl|Aerodactylite\n|detailschange|p2a: B-Girl Kelly|Lopunny-Mega, L50, F, shiny\n|-mega|p2a: B-Girl Kelly|Lopunny|Lopunnite\n|move|p1a: Aerodactyl|Tailwind|p1a: Aerodactyl\n|-sidestart|p1: SunTufo|move: Tailwind\n|move|p1b: Tsareena|Power Whip|p2b: Hot Pocket\n|-supereffective|p2b: Hot Pocket|1\n|-damage|p2b: Hot Pocket|0 fnt\n|faint|p2b: Hot Pocket\n|move|p2a: B-Girl Kelly|Triple Axel|p1a: Aerodactyl\n|-supereffective|p1a: Aerodactyl|1\n|-damage|p1a: Aerodactyl|83/100\n|-supereffective|p1a: Aerodactyl|1\n|-damage|p1a: Aerodactyl|42/100\n|-supereffective|p1a: Aerodactyl|1\n|-damage|p1a: Aerodactyl|0 fnt\n|faint|p1a: Aerodactyl\n|-hitcount|p1: Aerodactyl|3\n|\n|upkeep\n|\n|t:|1776624444\n|switch|p1a: Sneasler|Sneasler, L50, F|100/100\n|switch|p2b: Terrafin|Garchomp, L50, M|100/100\n|turn|2\n|\n|t:|1776624453\n|switch|p2a: Tea Time|Sinistcha, L50|100/100\n|move|p1a: Sneasler|Close Combat|p2a: Tea Time\n|-immune|p2a: Tea Time\n|move|p1b: Tsareena|Triple Axel|p2b: Terrafin\n|-supereffective|p2b: Terrafin|2\n|-damage|p2b: Terrafin|68/100\n|-damage|p1b: Tsareena|88/100|[from] ability: Rough Skin|[of] p2b: Terrafin\n|-supereffective|p2b: Terrafin|2\n|-damage|p2b: Terrafin|0 fnt\n|-damage|p1b: Tsareena|76/100|[from] ability: Rough Skin|[of] p2b: Terrafin\n|faint|p2b: Terrafin\n|-hitcount|p2: Terrafin|2\n|\n|upkeep\n|-message|Scrubby009 forfeited.\n|\n|win|SunTufo\n|raw|SunTufo's rating: 1486 &rarr; <strong>1501</strong><br />(+15 for winning)\n|raw|Scrubby009's rating: 1392 &rarr; <strong>1377</strong><br />(-15 for losing)\n",
+  "uploadtime": 1776624461,
+  "views": 10,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1377,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2580931818",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "EstemanACG1",
+    "testerqsh"
+  ],
+  "log": "|j|\u2606EstemanACG1\n|j|\u2606testerqsh\n|t:|1775944399\n|gametype|singles\n|player|p1|EstemanACG1|riley|1103\n|player|p2|testerqsh|2|1000\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Dragapult, L50, F|\n|poke|p1|Pinsir, L50, F|\n|poke|p1|Garganacl, L50, M|\n|poke|p1|Volcarona, L50, M|\n|poke|p1|Espathra, L50, F|\n|poke|p1|Polteageist-Antique, L50|\n|poke|p2|Pelipper, L50, F|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Gengar, L50, M|\n|poke|p2|Kommo-o, L50, M|\n|poke|p2|Archaludon, L50, M|\n|poke|p2|Rotom-Wash, L50|\n|teampreview|3\n|c|\u2606EstemanACG1|glhf\n|\n|t:|1775944420\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Espathra|Espathra, L50, F|100/100\n|switch|p2a: Pelipper|Pelipper, L50, F|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p2a: Pelipper\n|turn|1\n|\n|t:|1775944428\n|move|p1a: Espathra|Protect|p1a: Espathra\n|-singleturn|p1a: Espathra|Protect\n|move|p2a: Pelipper|Protect||[still]\n|-fail|p2a: Pelipper\n|\n|-weather|RainDance|[upkeep]\n|-ability|p1a: Espathra|Speed Boost|boost\n|-boost|p1a: Espathra|spe|1\n|upkeep\n|turn|2\n|\n|t:|1775944437\n|move|p1a: Espathra|Calm Mind|p1a: Espathra\n|-boost|p1a: Espathra|spa|1\n|-boost|p1a: Espathra|spd|1\n|move|p2a: Pelipper|Tailwind|p2a: Pelipper\n|-sidestart|p2: testerqsh|move: Tailwind\n|\n|-weather|RainDance|[upkeep]\n|-ability|p1a: Espathra|Speed Boost|boost\n|-boost|p1a: Espathra|spe|1\n|upkeep\n|turn|3\n|\n|t:|1775944444\n|move|p1a: Espathra|Stored Power|p2a: Pelipper\n|-enditem|p2a: Pelipper|Focus Sash\n|-damage|p2a: Pelipper|1/100\n|move|p2a: Pelipper|U-turn|p1a: Espathra\n|-supereffective|p1a: Espathra|1\n|-damage|p1a: Espathra|73/100\n|\n|t:|1775944455\n|switch|p2a: Kommo-o|Kommo-o, L50, M|100/100|[from] U-turn\n|\n|-weather|RainDance|[upkeep]\n|-ability|p1a: Espathra|Speed Boost|boost\n|-boost|p1a: Espathra|spe|1\n|upkeep\n|turn|4\n|\n|t:|1775944462\n|move|p1a: Espathra|Protect|p1a: Espathra\n|-singleturn|p1a: Espathra|Protect\n|move|p2a: Kommo-o|Protect||[still]\n|-fail|p2a: Kommo-o\n|\n|-weather|RainDance|[upkeep]\n|-ability|p1a: Espathra|Speed Boost|boost\n|-boost|p1a: Espathra|spe|1\n|upkeep\n|turn|5\n|\n|t:|1775944470\n|move|p1a: Espathra|Dazzling Gleam|p2a: Kommo-o\n|-supereffective|p2a: Kommo-o|2\n|-damage|p2a: Kommo-o|0 fnt\n|faint|p2a: Kommo-o\n|\n|-weather|none\n|-sideend|p2: testerqsh|move: Tailwind\n|-ability|p1a: Espathra|Speed Boost|boost\n|-boost|p1a: Espathra|spe|1\n|upkeep\n|-message|testerqsh forfeited.\n|\n|win|EstemanACG1\n|raw|EstemanACG1's rating: 1103 &rarr; <strong>1121</strong><br />(+18 for winning)\n|raw|testerqsh's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|l|\u2606testerqsh\n|player|p2|\n",
+  "uploadtime": 1775944481,
+  "views": 11,
+  "formatid": "gen9championsbssregma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584768134",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "WaluigiVGC",
+    "69ingIncineroar"
+  ],
+  "log": "|j|\u2606WaluigiVGC\n|j|\u260669ingIncineroar\n|t:|1776282282\n|gametype|doubles\n|player|p1|WaluigiVGC|101|1134\n|player|p2|69ingIncineroar|flannery|1146\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Pelipper, L50, M|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Sinistcha, L50|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Kingambit, L50, F|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Delphox, L50, F|\n|poke|p2|Aerodactyl, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by 69ingIncineroar)\n|\n|t:|1776282310\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Sneasler|Sneasler, L50, M|100/100\n|switch|p1b: Floette|Floette-Eternal, L50, F|100/100\n|switch|p2a: Kingambit|Kingambit, L50, F|100/100\n|switch|p2b: Sneasler|Sneasler, L50, F|100/100\n|turn|1\n|inactive|WaluigiVGC has 30 seconds left.\n|inactive|69ingIncineroar has 30 seconds left.\n|inactive|WaluigiVGC has 20 seconds left.\n|inactive|WaluigiVGC has 15 seconds left.\n|inactive|WaluigiVGC has 10 seconds left.\n|\n|t:|1776282357\n|move|p2b: Sneasler|Protect|p2b: Sneasler\n|-singleturn|p2b: Sneasler|Protect\n|move|p1b: Floette|Protect|p1b: Floette\n|-singleturn|p1b: Floette|Protect\n|move|p1a: Sneasler|Close Combat|p2a: Kingambit\n|-supereffective|p2a: Kingambit|2\n|-damage|p2a: Kingambit|0 fnt\n|-unboost|p1a: Sneasler|def|1\n|-unboost|p1a: Sneasler|spd|1\n|faint|p2a: Kingambit\n|-enditem|p1a: Sneasler|White Herb\n|-clearnegativeboost|p1a: Sneasler|[silent]\n|\n|upkeep\n|inactive|69ingIncineroar has 30 seconds left.\n|-message|69ingIncineroar forfeited.\n|\n|win|WaluigiVGC\n|raw|WaluigiVGC's rating: 1134 &rarr; <strong>1160</strong><br />(+26 for winning)\n|raw|69ingIncineroar's rating: 1146 &rarr; <strong>1120</strong><br />(-26 for losing)\n|l|\u260669ingIncineroar\n|player|p2|\n",
+  "uploadtime": 1776282388,
+  "views": 20,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1120,
+  "private": 0,
+  "password": null
+}

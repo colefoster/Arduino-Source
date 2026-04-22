@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2585316085",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "RBG_LOL",
+    "meow509"
+  ],
+  "log": "|j|\u2606RBG_LOL\n|j|\u2606meow509\n|t:|1776337028\n|gametype|doubles\n|player|p1|RBG_LOL|ghetsis-gen5bw|1067\n|player|p2|meow509|lance|1057\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Froslass, L50, F|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Kingambit, L50, M|\n|poke|p1|Talonflame, L50, M|\n|poke|p1|Milotic, L50, F|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Garchomp, L50, F|\n|poke|p2|Avalugg-Hisui, L50, M|\n|poke|p2|Froslass, L50, F|\n|poke|p2|Ninetales-Alola, L50, F|\n|poke|p2|Whimsicott, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by meow509)\n|\n|t:|1776337061\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Kingambit|Kingambit, L50, M|100/100\n|switch|p1b: Milotic|Milotic, L50, F|100/100\n|switch|p2a: i want vodka|Garchomp, L50, F, shiny|100/100\n|switch|p2b: prankster!|Whimsicott, L50, F|100/100\n|turn|1\n|\n|t:|1776337080\n|move|p1a: Kingambit|Protect|p1a: Kingambit\n|-singleturn|p1a: Kingambit|Protect\n|move|p2b: prankster!|Tailwind|p2b: prankster!\n|-sidestart|p2: meow509|move: Tailwind\n|move|p2a: i want vodka|Earthquake|p1a: Kingambit|[spread] p2b,p1b\n|-activate|p1a: Kingambit|move: Protect\n|-resisted|p2b: prankster!|1\n|-damage|p2b: prankster!|79/100\n|-damage|p1b: Milotic|59/100\n|move|p1b: Milotic|Icy Wind|p2a: i want vodka|[spread] p2a,p2b\n|-supereffective|p2a: i want vodka|2\n|-supereffective|p2b: prankster!|1\n|-crit|p2b: prankster!\n|-damage|p2a: i want vodka|42/100\n|-damage|p2b: prankster!|37/100\n|-unboost|p2a: i want vodka|spe|1\n|-unboost|p2b: prankster!|spe|1\n|\n|-heal|p1b: Milotic|65/100|[from] item: Leftovers\n|upkeep\n|turn|2\n|\n|t:|1776337101\n|move|p2b: prankster!|Encore|p1a: Kingambit\n|-hint|Since gen 7, Dark is immune to Prankster moves.\n|-immune|p1a: Kingambit\n|move|p1a: Kingambit|Sucker Punch|p2a: i want vodka\n|-crit|p2a: i want vodka\n|-damage|p2a: i want vodka|0 fnt\n|-damage|p1a: Kingambit|88/100|[from] ability: Rough Skin|[of] p2a: i want vodka\n|faint|p2a: i want vodka\n|move|p1b: Milotic|Icy Wind|p2b: prankster!\n|-supereffective|p2b: prankster!|1\n|-damage|p2b: prankster!|0 fnt\n|faint|p2b: prankster!\n|\n|-heal|p1b: Milotic|71/100|[from] item: Leftovers\n|upkeep\n|-message|meow509 forfeited.\n|\n|win|RBG_LOL\n|raw|RBG_LOL's rating: 1067 &rarr; <strong>1096</strong><br />(+29 for winning)\n|raw|meow509's rating: 1057 &rarr; <strong>1039</strong><br />(-18 for losing)\n|l|\u2606meow509\n|player|p2|\n",
+  "uploadtime": 1776337117,
+  "views": 20,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1039,
+  "private": 0,
+  "password": null
+}

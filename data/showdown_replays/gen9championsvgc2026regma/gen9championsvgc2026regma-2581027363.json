@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2581027363",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "bored_bones00",
+    "cacles"
+  ],
+  "log": "|j|\u2606bored_bones00\n|j|\u2606cacles\n|t:|1775953042\n|gametype|doubles\n|player|p1|bored_bones00|rosa|1197\n|player|p2|cacles|169|1234\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Froslass, L50, F|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Crabominable, L50, M|\n|poke|p1|Farigiraf, L50, M|\n|poke|p1|Incineroar, L50, F|\n|poke|p2|Chesnaught, L50, M|\n|poke|p2|Glimmora, L50, M|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Tyranitar, L50, M|\n|poke|p2|Kingambit, L50, F|\n|poke|p2|Froslass, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by cacles)\n|inactive|bored_bones00 has 60 seconds left.\n|inactive|cacles has 60 seconds left.\n|\n|t:|1775953075\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Froslass|Froslass, L50, F|100/100\n|switch|p1b: Sneasler|Sneasler, L50, M|100/100\n|switch|p2a: Chesnaught|Chesnaught, L50, M|100/100\n|switch|p2b: Sinistcha|Sinistcha, L50|100/100\n|turn|1\n|inactive|bored_bones00 has 30 seconds left.\n|inactive|cacles has 30 seconds left.\n|\n|t:|1775953113\n|switch|p2a: Tyranitar|Tyranitar, L50, M|100/100\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p2a: Tyranitar\n|detailschange|p1a: Froslass|Froslass-Mega, L50, F\n|-mega|p1a: Froslass|Froslass|Froslassite\n|-weather|Snowscape|[from] ability: Snow Warning|[of] p1a: Froslass\n|move|p1a: Froslass|Blizzard|p2b: Sinistcha|[spread] p2a,p2b\n|-supereffective|p2b: Sinistcha|1\n|-damage|p2a: Tyranitar|62/100\n|-damage|p2b: Sinistcha|35/100\n|-status|p2a: Tyranitar|frz\n|-status|p2b: Sinistcha|frz\n|move|p1b: Sneasler|Dire Claw|p2a: Tyranitar\n|-resisted|p2a: Tyranitar|1\n|-damage|p2a: Tyranitar|41/100 frz\n|-curestatus|p2b: Sinistcha|frz|[from] move: Matcha Gotcha\n|move|p2b: Sinistcha|Matcha Gotcha|p1a: Froslass|[spread] p1a,p1b\n|-resisted|p1b: Sneasler|1\n|-damage|p1a: Froslass|76/100\n|-heal|p2b: Sinistcha|47/100|[from] drain|[of] p1a: Froslass\n|-damage|p1b: Sneasler|84/100\n|-heal|p2b: Sinistcha|54/100|[from] drain|[of] p1b: Sneasler\n|\n|-weather|Snowscape|[upkeep]\n|-heal|p2b: Sinistcha|60/100|[from] item: Leftovers\n|upkeep\n|turn|2\n|-message|cacles forfeited.\n|\n|win|bored_bones00\n|raw|bored_bones00's rating: 1197 &rarr; <strong>1225</strong><br />(+28 for winning)\n|raw|cacles's rating: 1234 &rarr; <strong>1206</strong><br />(-28 for losing)\n|l|\u2606cacles\n|player|p2|\n",
+  "uploadtime": 1775953156,
+  "views": 32,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1206,
+  "private": 0,
+  "password": null
+}

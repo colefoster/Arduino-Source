@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586611491",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Skadoty",
+    "wolffizin"
+  ],
+  "log": "|j|\u2606Skadoty\n|j|\u2606wolffizin\n|t:|1776446686\n|gametype|doubles\n|player|p1|Skadoty|1|1161\n|player|p2|wolffizin|n|1118\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Meowscarada, L50, F|\n|poke|p1|Farigiraf, L50, M|\n|poke|p1|Torkoal, L50, M|\n|poke|p1|Crabominable, L50, M|\n|poke|p1|Kingambit, L50, F|\n|poke|p1|Whimsicott, L50, M|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Meowscarada, L50, M|\n|poke|p2|Talonflame, L50, M|\n|poke|p2|Primarina, L50, M|\n|poke|p2|Kingambit, L50, F|\n|poke|p2|Garchomp, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Skadoty)\n|\n|t:|1776446716\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Farigiraf|Farigiraf, L50, M|100/100\n|switch|p1b: Meowscarada|Meowscarada, L50, F|100/100\n|switch|p2a: Foca|Primarina, L50, M|100/100\n|switch|p2b: Galinha|Talonflame, L50, M|100/100\n|turn|1\n|\n|t:|1776446736\n|move|p2b: Galinha|Brave Bird||[still]\n|cant|p1a: Farigiraf|ability: Armor Tail|Brave Bird|[of] p2b: Galinha\n|move|p1b: Meowscarada|Flower Trick|p2a: Foca\n|-supereffective|p2a: Foca|1\n|-crit|p2a: Foca\n|-damage|p2a: Foca|0 fnt\n|faint|p2a: Foca\n|move|p1a: Farigiraf|Trick Room|p1a: Farigiraf\n|-fieldstart|move: Trick Room|[of] p1a: Farigiraf\n|\n|upkeep\n|\n|t:|1776446747\n|switch|p2a: Soca gostoso|Sneasler, L50, F|100/100\n|turn|2\n|inactive|Skadoty has 30 seconds left.\n|\n|t:|1776446773\n|move|p1a: Farigiraf|Psychic|p2a: Soca gostoso\n|-supereffective|p2a: Soca gostoso|2\n|-damage|p2a: Soca gostoso|0 fnt\n|faint|p2a: Soca gostoso\n|move|p1b: Meowscarada|Knock Off|p2b: Galinha\n|-damage|p2b: Galinha|24/100\n|-enditem|p2b: Galinha|Sharp Beak|[from] move: Knock Off|[of] p1b: Meowscarada\n|move|p2b: Galinha|Fire Blast|p1b: Meowscarada\n|-supereffective|p1b: Meowscarada|1\n|-damage|p1b: Meowscarada|19/100\n|\n|upkeep\n|\n|t:|1776446787\n|switch|p2a: Xadrez|Kingambit, L50, F|100/100\n|turn|3\n|\n|t:|1776446801\n|move|p2a: Xadrez|Kowtow Cleave|p1a: Farigiraf\n|-supereffective|p1a: Farigiraf|1\n|-enditem|p1a: Farigiraf|Colbur Berry|[eat]\n|-enditem|p1a: Farigiraf|Colbur Berry|[weaken]\n|-damage|p1a: Farigiraf|54/100\n|move|p1a: Farigiraf|Psychic|p2b: Galinha\n|-damage|p2b: Galinha|0 fnt\n|faint|p2b: Galinha\n|move|p1b: Meowscarada|Low Kick|p2a: Xadrez\n|-supereffective|p2a: Xadrez|2\n|-damage|p2a: Xadrez|0 fnt\n|faint|p2a: Xadrez\n|\n|win|Skadoty\n|raw|Skadoty's rating: 1161 &rarr; <strong>1183</strong><br />(+22 for winning)\n|raw|wolffizin's rating: 1118 &rarr; <strong>1096</strong><br />(-22 for losing)\n|l|\u2606wolffizin\n|player|p2|\n",
+  "uploadtime": 1776446820,
+  "views": 30,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1096,
+  "private": 0,
+  "password": null
+}

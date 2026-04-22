@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2581290668",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "loklastaji",
+    "nikina"
+  ],
+  "log": "|j|\u2606loklastaji\n|j|\u2606nikina\n|t:|1775982091\n|gametype|doubles\n|player|p1|loklastaji|266|1157\n|player|p2|nikina|169|1062\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Samurott-Hisui, L50, M|\n|poke|p1|Mamoswine, L50, M|\n|poke|p1|Delphox, L50, F|\n|poke|p1|Clefable, L50, M|\n|poke|p1|Corviknight, L50, F|\n|poke|p1|Dragonite, L50, F|\n|poke|p2|Greninja-*, L50, F|\n|poke|p2|Pelipper, L50, M|\n|poke|p2|Venusaur, L50, F|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Raichu, L50, M|\n|poke|p2|Scizor, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by nikina)\n|\n|t:|1775982125\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Delphox|Delphox, L50, F|100/100\n|switch|p1b: Samurott|Samurott-Hisui, L50, M|100/100\n|switch|p2a: Greninja|Greninja, L50, F|100/100\n|switch|p2b: Pelipper|Pelipper, L50, M|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p2b: Pelipper\n|turn|1\n|\n|t:|1775982147\n|detailschange|p2a: Greninja|Greninja-Mega, L50, F\n|-mega|p2a: Greninja|Greninja|Greninjite\n|move|p1a: Delphox|Protect|p1a: Delphox\n|-singleturn|p1a: Delphox|Protect\n|move|p2a: Greninja|Liquidation|p1a: Delphox\n|-start|p2a: Greninja|typechange|Water|[from] ability: Protean\n|-activate|p1a: Delphox|move: Protect\n|move|p1b: Samurott|Sacred Sword|p2a: Greninja\n|-damage|p2a: Greninja|27/100\n|move|p2b: Pelipper|Hurricane|p1a: Delphox\n|-activate|p1a: Delphox|move: Protect\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|turn|2\n|inactive|loklastaji has 30 seconds left.\n|\n|t:|1775982177\n|detailschange|p1a: Delphox|Delphox-Mega, L50, F\n|-mega|p1a: Delphox|Delphox|Delphoxite\n|move|p1b: Samurott|Sucker Punch|p2a: Greninja\n|-damage|p2a: Greninja|0 fnt\n|faint|p2a: Greninja\n|move|p1a: Delphox|Psychic|p2b: Pelipper\n|-damage|p2b: Pelipper|18/100\n|-unboost|p2b: Pelipper|spd|1\n|move|p2b: Pelipper|Tailwind|p2b: Pelipper\n|-sidestart|p2: nikina|move: Tailwind\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|-message|nikina forfeited.\n|\n|win|loklastaji\n|raw|loklastaji's rating: 1157 &rarr; <strong>1175</strong><br />(+18 for winning)\n|raw|nikina's rating: 1062 &rarr; <strong>1048</strong><br />(-14 for losing)\n|l|\u2606nikina\n|player|p2|\n",
+  "uploadtime": 1775982190,
+  "views": 13,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1048,
+  "private": 0,
+  "password": null
+}

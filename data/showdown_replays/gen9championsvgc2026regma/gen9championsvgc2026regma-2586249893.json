@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586249893",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "desrichards",
+    "KulaIce"
+  ],
+  "log": "|j|\u2606desrichards\n|j|\u2606KulaIce\n|t:|1776417317\n|gametype|doubles\n|player|p1|desrichards|hilbert|1064\n|player|p2|KulaIce|morty|1000\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Farigiraf, L50, F|\n|poke|p1|Empoleon, L50, M|\n|poke|p1|Camerupt, L50, M|\n|poke|p1|Torkoal, L50, M|\n|poke|p1|Heliolisk, L50, F|\n|poke|p1|Lucario, L50, F|\n|poke|p2|Froslass, L50, F|\n|poke|p2|Clefable, L50, M|\n|poke|p2|Whimsicott, L50, F|\n|poke|p2|Azumarill, L50, F|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Glaceon, L50, M|\n|teampreview|4\n|\n|t:|1776417340\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Farigiraf|Farigiraf, L50, F|100/100\n|switch|p1b: Empoleon|Empoleon, L50, M|100/100\n|switch|p2a: Froslass|Froslass, L50, F, shiny|100/100\n|switch|p2b: Whimsicott|Whimsicott, L50, F, shiny|100/100\n|turn|1\n|\n|t:|1776417364\n|move|p2b: Whimsicott|Taunt||[still]\n|cant|p1a: Farigiraf|ability: Armor Tail|Taunt|[of] p2b: Whimsicott\n|move|p2a: Froslass|Nasty Plot|p2a: Froslass\n|-boost|p2a: Froslass|spa|2\n|move|p1b: Empoleon|Flash Cannon|p2b: Whimsicott\n|-supereffective|p2b: Whimsicott|1\n|-enditem|p2b: Whimsicott|Focus Sash\n|-damage|p2b: Whimsicott|1/100\n|move|p1a: Farigiraf|Trick Room|p1a: Farigiraf\n|-fieldstart|move: Trick Room|[of] p1a: Farigiraf\n|\n|upkeep\n|turn|2\n|\n|t:|1776417418\n|detailschange|p2a: Froslass|Froslass-Mega, L50, F, shiny\n|-mega|p2a: Froslass|Froslass|Froslassite\n|-weather|Snowscape|[from] ability: Snow Warning|[of] p2a: Froslass\n|move|p2b: Whimsicott|Encore||[still]\n|cant|p1a: Farigiraf|ability: Armor Tail|Encore|[of] p2b: Whimsicott\n|move|p1a: Farigiraf|Psychic Noise|p2b: Whimsicott\n|-damage|p2b: Whimsicott|0 fnt\n|faint|p2b: Whimsicott\n|move|p1b: Empoleon|Flash Cannon|p2a: Froslass\n|-supereffective|p2a: Froslass|1\n|-damage|p2a: Froslass|0 fnt\n|faint|p2a: Froslass\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|-message|KulaIce forfeited.\n|\n|win|desrichards\n|raw|desrichards's rating: 1064 &rarr; <strong>1089</strong><br />(+25 for winning)\n|raw|KulaIce's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|l|\u2606KulaIce\n|player|p2|\n",
+  "uploadtime": 1776417435,
+  "views": 20,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

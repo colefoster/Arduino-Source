@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582433896",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "agam3r650",
+    "Jadedragon61"
+  ],
+  "log": "|j|\u2606agam3r650\n|j|\u2606Jadedragon61\n|t:|1776091411\n|gametype|doubles\n|player|p1|agam3r650|102|1000\n|player|p2|Jadedragon61|beni-ninja|1057\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Samurott-Hisui, L50, M|\n|poke|p1|Glimmora, L50, F|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Gardevoir, L50, M|\n|poke|p1|Arcanine-Hisui, L50, M|\n|poke|p1|Klefki, L50, F|\n|poke|p2|Talonflame, L50, F|\n|poke|p2|Tyranitar, L50, F|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Rotom-Wash, L50|\n|poke|p2|Sneasler, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Jadedragon61)\n|inactive|Jadedragon61 has 60 seconds left.\n|\n|t:|1776091455\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Samurott|Samurott-Hisui, L50, M|100/100\n|switch|p1b: Glimmora|Glimmora, L50, F|100/100\n|switch|p2a: Garchomp|Garchomp, L50, M|100/100\n|switch|p2b: Sneasler|Sneasler, L50, M|100/100\n|turn|1\n|\n|t:|1776091472\n|move|p2b: Sneasler|Protect|p2b: Sneasler\n|-singleturn|p2b: Sneasler|Protect\n|move|p2a: Garchomp|Earthquake|p1a: Samurott|[spread] p1a,p1b\n|-activate|p2b: Sneasler|move: Protect\n|-supereffective|p1b: Glimmora|2\n|-damage|p1a: Samurott|52/100\n|-enditem|p1b: Glimmora|Focus Sash\n|-damage|p1b: Glimmora|1/100\n|move|p1b: Glimmora|Rock Slide|p2a: Garchomp|[spread] p2a\n|-activate|p2b: Sneasler|move: Protect\n|-resisted|p2a: Garchomp|1\n|-damage|p2a: Garchomp|96/100\n|move|p1a: Samurott|Ceaseless Edge|p2a: Garchomp\n|-damage|p2a: Garchomp|67/100\n|-damage|p1a: Samurott|40/100|[from] ability: Rough Skin|[of] p2a: Garchomp\n|-sidestart|p2: Jadedragon61|Spikes\n|\n|upkeep\n|turn|2\n|\n|t:|1776091496\n|switch|p2b: Rotom|Rotom-Wash, L50|100/100\n|move|p2a: Garchomp|Earthquake|p1b: Glimmora|[spread] p1a,p1b\n|-immune|p2b: Rotom|[from] ability: Levitate\n|-supereffective|p1b: Glimmora|2\n|-damage|p1a: Samurott|0 fnt\n|-damage|p1b: Glimmora|0 fnt\n|faint|p1a: Samurott\n|faint|p1b: Glimmora\n|\n|upkeep\n|-message|agam3r650 forfeited.\n|\n|win|Jadedragon61\n|raw|agam3r650's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|raw|Jadedragon61's rating: 1057 &rarr; <strong>1083</strong><br />(+26 for winning)\n|l|\u2606agam3r650\n|player|p1|\n",
+  "uploadtime": 1776091507,
+  "views": 10,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

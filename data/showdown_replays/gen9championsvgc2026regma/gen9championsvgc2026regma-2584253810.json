@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584253810",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Barber1",
+    "Travency"
+  ],
+  "log": "|j|\u2606Barber1\n|j|\u2606Travency\n|t:|1776243621\n|gametype|doubles\n|player|p1|Barber1|cynthia-gen4|1282\n|player|p2|Travency|169|1208\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Aerodactyl, L50, F|\n|poke|p1|Delphox, L50, M|\n|poke|p1|Kingambit, L50, F|\n|poke|p1|Garchomp, L50, F|\n|poke|p2|Milotic, L50, F|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Meowscarada, L50, F|\n|poke|p2|Gengar, L50, F|\n|poke|p2|Whimsicott, L50, M|\n|poke|p2|Garchomp, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Barber1)\n|inactive|Barber1 has 60 seconds left.\n|l|\u2606Travency\n|inactive|Travency disconnected and has a minute to reconnect!\n|player|p2|\n|inactive|Barber1 has 30 seconds left.\n|\n|t:|1776243683\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Kingambit|Kingambit, L50, F|100/100\n|switch|p1b: Floette|Floette-Eternal, L50, F|100/100\n|switch|p2a: Milotic|Milotic, L50, F|100/100\n|switch|p2b: Gengar|Gengar, L50, F|100/100\n|turn|1\n|inactive|Travency has 30 seconds left.\n|inactive|Travency has 20 seconds left.\n|inactive|Travency has 15 seconds left.\n|inactive|Travency has 10 seconds left.\n|inactive|Travency has 5 seconds left.\n|-message|Travency lost due to inactivity.\n|\n|win|Barber1\n|raw|Barber1's rating: 1282 &rarr; <strong>1302</strong><br />(+20 for winning)\n|raw|Travency's rating: 1208 &rarr; <strong>1188</strong><br />(-20 for losing)\n",
+  "uploadtime": 1776243748,
+  "views": 24,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1188,
+  "private": 0,
+  "password": null
+}

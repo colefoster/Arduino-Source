@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2588743358",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "xMajestyCz.",
+    "fluttim man"
+  ],
+  "log": "|j|\u2606xMajestyCz.\n|j|\u2606fluttim man\n|t:|1776664891\n|gametype|doubles\n|player|p1|xMajestyCz.|2|1321\n|player|p2|fluttim man|#smogonxnpa2025draftee|1305\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Kingambit, L50, F|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Charizard, L50, F, shiny|\n|poke|p1|Maushold-Four, L50|\n|poke|p1|Sneasler, L50, F|\n|poke|p1|Dragapult, L50, M|\n|poke|p2|Delphox, L50, M, shiny|\n|poke|p2|Kingambit, L50, F, shiny|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Clefable, L50, M, shiny|\n|poke|p2|Ninetales-Alola, L50, M, shiny|\n|teampreview|4\nxMajestyCz. has agreed to open team sheets.\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by fluttim man)\n|\n|t:|1776664954\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Sneasler|Sneasler, L50, F|100/100\n|switch|p1b: Charizard|Charizard, L50, F, shiny|100/100\n|switch|p2a: Delphox|Delphox, L50, M, shiny|100/100\n|switch|p2b: Clefable|Clefable, L50, M, shiny|100/100\n|turn|1\n|\n|t:|1776664971\n|detailschange|p1b: Charizard|Charizard-Mega-Y, L50, F, shiny\n|-mega|p1b: Charizard|Charizard|Charizardite Y\n|-weather|SunnyDay|[from] ability: Drought|[of] p1b: Charizard\n|move|p2a: Delphox|Protect|p2a: Delphox\n|-singleturn|p2a: Delphox|Protect\n|move|p2b: Clefable|Protect|p2b: Clefable\n|-singleturn|p2b: Clefable|Protect\n|move|p1a: Sneasler|Fake Out|p2a: Delphox\n|-activate|p2a: Delphox|move: Protect\n|move|p1b: Charizard|Overheat|p2b: Clefable\n|-activate|p2b: Clefable|move: Protect\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|turn|2\n|\n|t:|1776664989\n|switch|p1a: Kingambit|Kingambit, L50, F|100/100\n|detailschange|p2a: Delphox|Delphox-Mega, L50, M, shiny\n|-mega|p2a: Delphox|Delphox|Delphoxite\n|move|p2b: Clefable|Helping Hand|p2a: Delphox\n|-singleturn|p2a: Delphox|Helping Hand|[of] p2b: Clefable\n|move|p2a: Delphox|Heat Wave|p1b: Charizard|[spread] p1a,p1b\n|-supereffective|p1a: Kingambit|1\n|-resisted|p1b: Charizard|1\n|-damage|p1a: Kingambit|0 fnt\n|-damage|p1b: Charizard|60/100\n|faint|p1a: Kingambit\n|move|p1b: Charizard|Overheat|p2b: Clefable|[miss]\n|-miss|p1b: Charizard|p2b: Clefable\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|-message|xMajestyCz. forfeited.\n|\n|win|fluttim man\n|raw|xMajestyCz.'s rating: 1321 &rarr; <strong>1300</strong><br />(-21 for losing)\n|raw|fluttim man's rating: 1305 &rarr; <strong>1326</strong><br />(+21 for winning)\n|l|\u2606xMajestyCz.\n|player|p1|\n",
+  "uploadtime": 1776665007,
+  "views": 12,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1300,
+  "private": 0,
+  "password": null
+}

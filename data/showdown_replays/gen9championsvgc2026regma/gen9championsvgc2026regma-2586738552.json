@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586738552",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Cxmbi",
+    "HR3"
+  ],
+  "log": "|j|\u2606Cxmbi\n|j|\u2606HR3\n|t:|1776456067\n|gametype|doubles\n|player|p1|Cxmbi|266|1247\n|player|p2|HR3|burglar|1300\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Kingambit, L50, M|\n|poke|p1|Camerupt, L50, M|\n|poke|p1|Farigiraf, L50, M|\n|poke|p1|Araquanid, L50, M|\n|poke|p1|Maushold, L50|\n|poke|p1|Hydrapple, L50, F|\n|poke|p2|Froslass, L50, F|\n|poke|p2|Clefable, L50, F|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Kingambit, L50, M|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Rotom-Heat, L50|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Cxmbi)\n|inactive|Cxmbi has 60 seconds left.\n|\n|t:|1776456105\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Farigiraf|Farigiraf, L50, M, shiny|100/100\n|switch|p1b: Maushold|Maushold, L50|100/100\n|switch|p2a: Froslass|Froslass, L50, F|100/100\n|switch|p2b: Kingambit|Kingambit, L50, M|100/100\n|turn|1\n|\n|t:|1776456123\n|detailschange|p2a: Froslass|Froslass-Mega, L50, F\n|-mega|p2a: Froslass|Froslass|Froslassite\n|-weather|Snowscape|[from] ability: Snow Warning|[of] p2a: Froslass\n|move|p1b: Maushold|Follow Me|p1b: Maushold\n|-singleturn|p1b: Maushold|move: Follow Me\n|move|p2a: Froslass|Blizzard|p1b: Maushold|[spread] p1a,p1b\n|-damage|p1a: Farigiraf|63/100\n|-damage|p1b: Maushold|37/100\n|move|p2b: Kingambit|Assurance|p1b: Maushold\n|-damage|p1b: Maushold|0 fnt\n|faint|p1b: Maushold\n|move|p1a: Farigiraf|Trick Room|p1a: Farigiraf\n|-fieldstart|move: Trick Room|[of] p1a: Farigiraf\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|\n|t:|1776456125\n|switch|p1b: Camerupt|Camerupt, L50, M, shiny|100/100\n|turn|2\n|\n|t:|1776456137\n|detailschange|p1b: Camerupt|Camerupt-Mega, L50, M, shiny\n|-mega|p1b: Camerupt|Camerupt|Cameruptite\n|move|p2b: Kingambit|Protect|p2b: Kingambit\n|-singleturn|p2b: Kingambit|Protect\n|move|p1b: Camerupt|Heat Wave|p2a: Froslass|[spread] p2a\n|-activate|p2b: Kingambit|move: Protect\n|-supereffective|p2a: Froslass|1\n|-damage|p2a: Froslass|0 fnt\n|faint|p2a: Froslass\n|move|p1a: Farigiraf|Thunderbolt|p2b: Kingambit\n|-activate|p2b: Kingambit|move: Protect\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|-message|HR3 forfeited.\n|\n|win|Cxmbi\n|raw|Cxmbi's rating: 1247 &rarr; <strong>1276</strong><br />(+29 for winning)\n|raw|HR3's rating: 1300 &rarr; <strong>1271</strong><br />(-29 for losing)\n|l|\u2606HR3\n|player|p2|\n",
+  "uploadtime": 1776456153,
+  "views": 51,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1271,
+  "private": 0,
+  "password": null
+}

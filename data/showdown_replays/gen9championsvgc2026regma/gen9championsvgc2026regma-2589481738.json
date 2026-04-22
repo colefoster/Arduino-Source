@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2589481738",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "blazegeo",
+    "Smerphie"
+  ],
+  "log": "|j|\u2606blazegeo\n|j|\u2606Smerphie\n|t:|1776726898\n|gametype|doubles\n|player|p1|blazegeo|266|1056\n|player|p2|Smerphie|101|1000\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Greninja, L50, M|\n|poke|p1|Zoroark-Hisui, L50, M|\n|poke|p1|Talonflame, L50, F|\n|poke|p1|Farigiraf, L50, F|\n|poke|p1|Tyranitar, L50, M|\n|poke|p1|Aegislash, L50, M|\n|poke|p2|Aggron, L50, M|\n|poke|p2|Palafin, L50, F|\n|poke|p2|Archaludon, L50, M|\n|poke|p2|Aegislash, L50, F|\n|poke|p2|Alcremie, L50, F|\n|poke|p2|Abomasnow, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by blazegeo)\n|inactive|blazegeo has 60 seconds left.\n|inactive|blazegeo has 30 seconds left.\n|inactive|blazegeo has 20 seconds left.\n|\n|t:|1776726972\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Talonflame|Talonflame, L50, F|100/100\n|switch|p1b: Tyranitar|Tyranitar, L50, M|100/100\n|switch|p2a: Aggron|Aggron, L50, M|100/100\n|switch|p2b: Palafin|Palafin, L50, F|100/100\n|turn|1\n|inactive|Smerphie has 30 seconds left.\n|\n|t:|1776727009\n|detailschange|p2a: Aggron|Aggron-Mega, L50, M\n|-mega|p2a: Aggron|Aggron|Aggronite\n|move|p1a: Talonflame|Tailwind|p1a: Talonflame\n|-sidestart|p1: blazegeo|move: Tailwind\n|move|p1b: Tyranitar|Bitter Malice|p2a: Aggron\n|-damage|p2a: Aggron|55/100\n|-unboost|p2a: Aggron|atk|1\n|move|p2b: Palafin|Close Combat|p1b: Tyranitar\n|-immune|p1b: Tyranitar\n|move|p2a: Aggron|Curse|p2a: Aggron\n|-unboost|p2a: Aggron|spe|1\n|-boost|p2a: Aggron|atk|1\n|-boost|p2a: Aggron|def|1\n|\n|upkeep\n|turn|2\n|inactive|Smerphie has 30 seconds left.\n|\n|t:|1776727035\n|detailschange|p2b: Palafin|Palafin-Hero, L50, F\n|switch|p2b: Archaludon|Archaludon, L50, M|100/100\n|move|p1a: Talonflame|Flare Blitz|p2a: Aggron\n|-supereffective|p2a: Aggron|1\n|-damage|p2a: Aggron|30/100\n|-damage|p1a: Talonflame|93/100|[from] Recoil\n|move|p1b: Tyranitar|Flamethrower|p2a: Aggron\n|-supereffective|p2a: Aggron|1\n|-damage|p2a: Aggron|0 fnt\n|faint|p2a: Aggron\n|\n|upkeep\n|-message|Smerphie forfeited.\n|\n|win|blazegeo\n|raw|blazegeo's rating: 1056 &rarr; <strong>1083</strong><br />(+27 for winning)\n|raw|Smerphie's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|l|\u2606Smerphie\n|player|p2|\n",
+  "uploadtime": 1776727055,
+  "views": 5,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

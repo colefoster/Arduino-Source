@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2587712910",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "yrfjngdfhsf",
+    "SlashXYZ"
+  ],
+  "log": "|j|\u2606yrfjngdfhsf\n|j|\u2606SlashXYZ\n|t:|1776556478\n|gametype|doubles\n|player|p1|yrfjngdfhsf|hilbert-wonderlauncher|1000\n|player|p2|SlashXYZ|102|1095\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Garchomp, L50, M, shiny|\n|poke|p1|Gengar, L50, F|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Froslass, L50, F|\n|poke|p1|Whimsicott, L50, M|\n|poke|p2|Gallade, L50, M, shiny|\n|poke|p2|Tsareena, L50, F, shiny|\n|poke|p2|Kingambit, L50, M|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Talonflame, L50, F, shiny|\n|poke|p2|Rotom-Wash, L50|\n|teampreview|4\nyrfjngdfhsf has agreed to open team sheets.\n|\n|t:|1776556524\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Incineroar|Incineroar, L50, M|100/100\n|switch|p1b: Whimsicott|Whimsicott, L50, M|100/100\n|switch|p2a: Tsurugi|Gallade, L50, M, shiny|100/100\n|switch|p2b: Nobu|Kingambit, L50, M|100/100\n|-ability|p1a: Incineroar|Intimidate|boost\n|-unboost|p2a: Tsurugi|atk|1\n|-unboost|p2b: Nobu|atk|1\n|-ability|p2b: Nobu|Defiant|boost\n|-boost|p2b: Nobu|atk|2\n|turn|1\n|\n|t:|1776556548\n|switch|p2b: Aliza|Tsareena, L50, F, shiny|100/100\n|detailschange|p2a: Tsurugi|Gallade-Mega, L50, M, shiny\n|-mega|p2a: Tsurugi|Gallade|Galladite\n|move|p1b: Whimsicott|Tailwind|p1b: Whimsicott\n|-sidestart|p1: yrfjngdfhsf|move: Tailwind\n|move|p1a: Incineroar|Flare Blitz|p2b: Aliza\n|-supereffective|p2b: Aliza|1\n|-damage|p2b: Aliza|0 fnt\n|faint|p2b: Aliza\n|-damage|p1a: Incineroar|74/100|[from] Recoil\n|move|p2a: Tsurugi|Trick Room|p2a: Tsurugi\n|-fieldstart|move: Trick Room|[of] p2a: Tsurugi\n|\n|upkeep\n|\n|t:|1776556561\n|switch|p2b: Nobu|Kingambit, L50, M|100/100\n|turn|2\n|\n|t:|1776556574\n|move|p1b: Whimsicott|Encore|p2a: Tsurugi\n|-start|p2a: Tsurugi|Encore\n|move|p2b: Nobu|Iron Head|p1b: Whimsicott\n|-supereffective|p1b: Whimsicott|1\n|-damage|p1b: Whimsicott|7/100\n|move|p1a: Incineroar|Flare Blitz|p2b: Nobu\n|-supereffective|p2b: Nobu|1\n|-damage|p2b: Nobu|0 fnt\n|faint|p2b: Nobu\n|-damage|p1a: Incineroar|43/100|[from] Recoil\n|-enditem|p1a: Incineroar|Sitrus Berry|[eat]\n|-heal|p1a: Incineroar|68/100|[from] item: Sitrus Berry\n|move|p2a: Tsurugi|Trick Room|p2a: Tsurugi\n|-fieldend|move: Trick Room\n|\n|upkeep\n|\n|t:|1776556586\n|switch|p2b: Suzaku|Talonflame, L50, F, shiny|100/100\n|turn|3\n|-message|SlashXYZ forfeited.\n|\n|win|yrfjngdfhsf\n|raw|yrfjngdfhsf's rating: 1000 &rarr; <strong>1051</strong><br />(+51 for winning)\n|raw|SlashXYZ's rating: 1095 &rarr; <strong>1064</strong><br />(-31 for losing)\n|l|\u2606SlashXYZ\n|player|p2|\n",
+  "uploadtime": 1776556592,
+  "views": 15,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1051,
+  "private": 0,
+  "password": null
+}

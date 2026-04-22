@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582083545",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "ConquestGanda",
+    "loklastaji"
+  ],
+  "log": "|j|\u2606ConquestGanda\n|j|\u2606loklastaji\n|t:|1776055779\n|gametype|doubles\n|player|p1|ConquestGanda|2|1241\n|player|p2|loklastaji|265|1338\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Froslass, L50, F|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Rotom-Frost, L50|\n|poke|p1|Empoleon, L50, M|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Kingambit, L50, F|\n|poke|p2|Samurott-Hisui, L50, M|\n|poke|p2|Mamoswine, L50, M|\n|poke|p2|Delphox, L50, M|\n|poke|p2|Tsareena, L50, F|\n|poke|p2|Corviknight, L50, F|\n|poke|p2|Altaria, L50, F|\n|teampreview|4\nConquestGanda rejected open team sheets.\n|\n|t:|1776055822\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Rotom|Rotom-Frost, L50|100/100\n|switch|p1b: Garchomp|Garchomp, L50, F|100/100\n|switch|p2a: Delphox|Delphox, L50, M|100/100\n|switch|p2b: Mamoswine|Mamoswine, L50, M|100/100\n|turn|1\n|\n|t:|1776055847\n|detailschange|p2a: Delphox|Delphox-Mega, L50, M\n|-mega|p2a: Delphox|Delphox|Delphoxite\n|move|p2b: Mamoswine|Ice Shard|p1b: Garchomp\n|-supereffective|p1b: Garchomp|2\n|-damage|p1b: Garchomp|16/100\n|move|p1a: Rotom|Volt Switch|p2a: Delphox\n|-damage|p2a: Delphox|68/100\n|\n|t:|1776055864\n|switch|p1a: Froslass|Froslass, L50, F|100/100|[from] Volt Switch\n|move|p2a: Delphox|Heat Wave|p1b: Garchomp|[spread] p1a,p1b\n|-supereffective|p1a: Froslass|1\n|-resisted|p1b: Garchomp|1\n|-damage|p1a: Froslass|0 fnt\n|-damage|p1b: Garchomp|0 fnt\n|-start|p2a: Delphox|Disable|Heat Wave|[from] ability: Cursed Body|[of] p1a: Froslass\n|faint|p1a: Froslass\n|faint|p1b: Garchomp\n|\n|upkeep\n|-message|ConquestGanda forfeited.\n|\n|win|loklastaji\n|raw|ConquestGanda's rating: 1241 &rarr; <strong>1223</strong><br />(-18 for losing)\n|raw|loklastaji's rating: 1338 &rarr; <strong>1353</strong><br />(+15 for winning)\n|l|\u2606ConquestGanda\n|player|p1|\n",
+  "uploadtime": 1776055877,
+  "views": 29,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1223,
+  "private": 0,
+  "password": null
+}

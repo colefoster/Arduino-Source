@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582029914",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Zmr56",
+    "Hello9209109"
+  ],
+  "log": "|j|\u2606Zmr56\n|j|\u2606Hello9209109\n|t:|1776049952\n|gametype|doubles\n|player|p1|Zmr56|bruno|1150\n|player|p2|Hello9209109|266|1103\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Meganium, L50, M|\n|poke|p1|Politoed, L50, M|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Hatterene, L50, F|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Basculegion, L50, M|\n|poke|p2|Pelipper, L50, F|\n|poke|p2|Meganium, L50, M|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Archaludon, L50, F|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Greninja-*, L50, M|\n|teampreview|4\nZmr56 has agreed to open team sheets.\n|c|\u2606Zmr56|Glhf\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Hello9209109)\n|\n|t:|1776049995\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Hatterene|Hatterene, L50, F|100/100\n|switch|p1b: Meganium|Meganium, L50, M|100/100\n|switch|p2a: Archaludon|Archaludon, L50, F|100/100\n|switch|p2b: Greninja|Greninja, L50, M|100/100\n|turn|1\n|\n|t:|1776050008\n|detailschange|p1b: Meganium|Meganium-Mega, L50, M\n|-mega|p1b: Meganium|Meganium|Meganiumite\n|move|p2b: Greninja|Icy Wind|p1a: Hatterene|[spread] p1a,p1b\n|-start|p2b: Greninja|typechange|Ice|[from] ability: Protean\n|-supereffective|p1b: Meganium|1\n|-crit|p1b: Meganium\n|-damage|p1a: Hatterene|82/100\n|-damage|p1b: Meganium|62/100\n|-unboost|p1a: Hatterene|spe|1\n|-unboost|p1b: Meganium|spe|1\n|move|p2a: Archaludon|Flash Cannon|p1b: Meganium\n|-supereffective|p1b: Meganium|1\n|-damage|p1b: Meganium|6/100\n|-unboost|p1b: Meganium|spd|1\n|move|p1b: Meganium|Weather Ball|p2a: Archaludon\n|-damage|p2a: Archaludon|35/100\n|move|p1a: Hatterene|Trick Room|p1a: Hatterene\n|-fieldstart|move: Trick Room|[of] p1a: Hatterene\n|\n|upkeep\n|turn|2\n|inactive|Zmr56 has 30 seconds left.\n|inactive|Hello9209109 has 30 seconds left.\n|-message|Hello9209109 forfeited.\n|\n|win|Zmr56\n|raw|Zmr56's rating: 1150 &rarr; <strong>1172</strong><br />(+22 for winning)\n|raw|Hello9209109's rating: 1103 &rarr; <strong>1081</strong><br />(-22 for losing)\n|l|\u2606Hello9209109\n|player|p2|\n",
+  "uploadtime": 1776050078,
+  "views": 21,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1081,
+  "private": 0,
+  "password": null
+}
