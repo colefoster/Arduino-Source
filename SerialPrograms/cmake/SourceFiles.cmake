@@ -1328,8 +1328,12 @@ file(GLOB LIBRARY_SOURCES
     Source/PokemonChampions/PokemonChampions_Settings.h
     Source/PokemonChampions/Programs/PokemonChampions_AutoLadder.cpp
     Source/PokemonChampions/Programs/PokemonChampions_AutoLadder.h
+    Source/PokemonChampions/Programs/PokemonChampions_BattleStateTracker.cpp
+    Source/PokemonChampions/Programs/PokemonChampions_BattleStateTracker.h
     Source/PokemonChampions/Programs/PokemonChampions_DetectorTest.cpp
     Source/PokemonChampions/Programs/PokemonChampions_DetectorTest.h
+    Source/PokemonChampions/Programs/PokemonChampions_InferenceClient.cpp
+    Source/PokemonChampions/Programs/PokemonChampions_InferenceClient.h
     Source/PokemonBDSP/Inference/Battles/PokemonBDSP_BattleBallReader.cpp
     Source/PokemonBDSP/Inference/Battles/PokemonBDSP_BattleBallReader.h
     Source/PokemonBDSP/Inference/Battles/PokemonBDSP_BattleMenuDetector.cpp
