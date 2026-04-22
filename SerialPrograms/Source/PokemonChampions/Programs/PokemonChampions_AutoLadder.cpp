@@ -462,8 +462,6 @@ void AutoLadder::program(SingleSwitchProgramEnvironment& env, ProControllerConte
 // ─── AI Move Selection ───────────────────────────────────────────
 
 void AutoLadder::select_move_ai(SingleSwitchProgramEnvironment& env, ProControllerContext& context){
-    GameSettings& settings = GameSettings::instance();
-
     //  If inference client isn't available, fall back to first move.
     if (!m_inference_client){
         env.console.log("[AI] No inference server. Falling back to first move.", COLOR_RED);
