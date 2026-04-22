@@ -128,9 +128,11 @@ AutoLadder::AutoLadder()
         false
     )
     , AI_SERVER_URL(
+        false,
         "<b>AI Inference Server URL:</b><br>"
         "URL of the Python inference server. Only used when Move Strategy is AI.",
         LockMode::LOCK_WHILE_RUNNING,
+        "http://localhost:8265",
         "http://localhost:8265"
     )
     , GO_HOME_WHEN_DONE(false)
