@@ -20,6 +20,8 @@
 
 #include "CommonFramework/ImageTypes/ImageViewRGB32.h"
 #include "CommonFramework/ImageTools/ImageBoxes.h"
+#include "CommonFramework/ImageTools/ImageStats.h"
+#include "CommonTools/Images/SolidColorTest.h"
 #include "CommonTools/OCR/OCR_RawOCR.h"
 #include "PokemonChampions_BattleModeDetector.h"
 
@@ -28,15 +30,23 @@ namespace NintendoSwitch{
 namespace PokemonChampions{
 
 
+//  "Ranked Battles" header: blue-purple panel color.
+//  Measured: avg RGB (128, 120, 250), ratio (0.26, 0.24, 0.50)
+static const FloatPixel RANKED_HEADER_BLUE{0.26, 0.24, 0.50};
+
+
 BattleModeDetector::BattleModeDetector()
-    //  Format label at top of matchmaking / team select screen.
-    //  Placeholder coordinates — update with pixel_inspector measurements.
-    //  These cover the "Single Battle" / "Double Battle" text in the header.
-    : m_format_label(0.250, 0.005, 0.300, 0.035)
+    //  "Ranked Battles" header — used to confirm we're on the matchmaking screen.
+    //  Measured from live capture: x=1083, y=146, w=246, h=46 (1920x1080)
+    : m_ranked_header(0.5641, 0.1352, 0.1281, 0.0426)
+    //  "Double Battle" or "Single Battle" text.
+    //  Measured from live capture: x=1048, y=279, w=236, h=44 (1920x1080)
+    , m_format_label(0.5458, 0.2583, 0.1229, 0.0407)
 {}
 
 
 void BattleModeDetector::make_overlays(VideoOverlaySet& items) const{
+    items.add(COLOR_CYAN, m_ranked_header);
     items.add(COLOR_YELLOW, m_format_label);
 }
 
@@ -44,6 +54,13 @@ void BattleModeDetector::make_overlays(VideoOverlaySet& items) const{
 BattleMode BattleModeDetector::read_mode(
     Logger& logger, const ImageViewRGB32& screen
 ) const{
+    //  First check if the "Ranked Battles" header is visible — confirms
+    //  we're on the matchmaking screen. Skip OCR if not.
+    const ImageStats header_stats = image_stats(extract_box_reference(screen, m_ranked_header));
+    if (!is_solid(header_stats, RANKED_HEADER_BLUE, 0.18, 150)){
+        return BattleMode::UNKNOWN;
+    }
+
     ImageViewRGB32 cropped = extract_box_reference(screen, m_format_label);
     std::string text = OCR::ocr_read(Language::English, cropped, OCR::PageSegMode::SINGLE_LINE);
 
@@ -81,10 +98,13 @@ BattleMode BattleModeDetector::read_mode(
 
 
 bool BattleModeDetector::detect(const ImageViewRGB32& screen){
-    //  We don't have a logger in the StaticScreenDetector interface,
-    //  so we use a null logger for the detect() path.
-    //  The read_mode() with a real logger is preferred for programs.
     m_mode = BattleMode::UNKNOWN;
+
+    //  Gate: check for "Ranked Battles" header color first.
+    const ImageStats header_stats = image_stats(extract_box_reference(screen, m_ranked_header));
+    if (!is_solid(header_stats, RANKED_HEADER_BLUE, 0.18, 150)){
+        return false;
+    }
 
     ImageViewRGB32 cropped = extract_box_reference(screen, m_format_label);
     std::string text = OCR::ocr_read(Language::English, cropped, OCR::PageSegMode::SINGLE_LINE);

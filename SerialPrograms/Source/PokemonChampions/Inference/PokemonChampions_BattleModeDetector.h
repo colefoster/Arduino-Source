@@ -56,8 +56,11 @@ public:
     BattleMode read_mode(Logger& logger, const ImageViewRGB32& screen) const;
 
 private:
-    //  The format label region at the top of the matchmaking / team select screen.
-    //  Expected to contain "Single Battle" or "Double Battle".
+    //  "Ranked Battles" header — blue panel, used to confirm we're on the
+    //  matchmaking screen before attempting OCR on the format label.
+    ImageFloatBox m_ranked_header;
+
+    //  The format label: "Single Battle" or "Double Battle" text.
     ImageFloatBox m_format_label;
 
     BattleMode m_mode = BattleMode::UNKNOWN;
