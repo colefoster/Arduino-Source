@@ -24,6 +24,8 @@
  */
 
 #include <regex>
+#include <vector>
+#include "CommonFramework/ImageTypes/ImageRGB32.h"
 #include "CommonFramework/ImageTypes/ImageViewRGB32.h"
 #include "CommonFramework/ImageTools/ImageBoxes.h"
 #include "CommonTools/OCR/OCR_RawOCR.h"
@@ -63,24 +65,65 @@ OCR::StringMatchResult SpeciesNameOCR::read_substring(
 // ─── Helpers ─────────────────────────────────────────────────────
 
 static std::string raw_ocr_line(const ImageViewRGB32& crop){
+    //  Upscale small crops for better Tesseract accuracy.
+    //  If the crop is under 200px wide, scale up to ~300px.
+    if (crop.width() < 200 && crop.width() > 0){
+        size_t scale = 300 / crop.width() + 1;
+        ImageRGB32 scaled = crop.scale_to(crop.width() * scale, crop.height() * scale);
+        return OCR::ocr_read(Language::English, scaled, OCR::PageSegMode::SINGLE_LINE);
+    }
     return OCR::ocr_read(Language::English, crop, OCR::PageSegMode::SINGLE_LINE);
 }
 
+//  Extract all digit sequences from OCR text.
+//  "1757175" -> {175, 7175} if we split on non-digit
+//  "175/175" -> {175, 175}
+//  "100%"    -> {100}
+static std::vector<int> extract_numbers(const std::string& text){
+    std::vector<int> nums;
+    std::string current;
+    for (char c : text){
+        if (c >= '0' && c <= '9'){
+            current += c;
+        }else{
+            if (!current.empty()){
+                try{ nums.push_back(std::stoi(current)); } catch(...){}
+                current.clear();
+            }
+        }
+    }
+    if (!current.empty()){
+        try{ nums.push_back(std::stoi(current)); } catch(...){}
+    }
+    return nums;
+}
+
 static std::pair<int, int> parse_fraction(const std::string& text){
+    //  Try the clean regex first: "175/175" or "175 / 175"
     std::regex re(R"((\d+)\s*/\s*(\d+))");
     std::smatch m;
     if (std::regex_search(text, m, re)){
         return {std::stoi(m[1].str()), std::stoi(m[2].str())};
     }
+
+    //  Fallback: extract all numbers. If we get exactly 2, assume current/max.
+    //  Handles "1757175" (where Tesseract dropped the slash).
+    auto nums = extract_numbers(text);
+    if (nums.size() == 2){
+        return {nums[0], nums[1]};
+    }
+    //  If we get 1 number, return it as current with unknown max.
+    if (nums.size() == 1){
+        return {nums[0], -1};
+    }
     return {-1, -1};
 }
 
 static int parse_percentage(const std::string& text){
-    std::regex re(R"((\d+)\s*%?)");
-    std::smatch m;
-    if (std::regex_search(text, m, re)){
-        int val = std::stoi(m[1].str());
-        if (val >= 0 && val <= 100) return val;
+    //  Extract all digit sequences and take the first one that's 0-100.
+    auto nums = extract_numbers(text);
+    for (int n : nums){
+        if (n >= 0 && n <= 100) return n;
     }
     return -1;
 }
