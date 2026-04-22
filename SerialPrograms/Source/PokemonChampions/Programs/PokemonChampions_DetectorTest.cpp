@@ -165,6 +165,7 @@ void DetectorTest::program(SingleSwitchProgramEnvironment& env, ProControllerCon
             BattleMode detected_mode = battle_mode_detector.read_mode(env.console, frame);
             if (detected_mode != BattleMode::UNKNOWN && detected_mode != current_mode){
                 current_mode = detected_mode;
+                hud_reader.set_mode(current_mode);
                 env.console.log(
                     "[Mode] Detected: " + std::string(battle_mode_str(current_mode)),
                     COLOR_BLUE
@@ -256,45 +257,57 @@ void DetectorTest::program(SingleSwitchProgramEnvironment& env, ProControllerCon
         //  We re-run OCR every time the screen is MOVE_SELECT so you can
         //  see if results are stable across frames.
         if (d_move){
-            //  Move names.
-            auto moves = move_reader.read_all_moves(env.console, frame);
-            env.console.log(
-                "[OCR Moves] " +
-                slug_display(moves[0]) + " | " +
-                slug_display(moves[1]) + " | " +
-                slug_display(moves[2]) + " | " +
-                slug_display(moves[3]),
-                COLOR_BLUE
-            );
+            uint8_t slots = (current_mode == BattleMode::DOUBLES) ? 2 : 1;
 
-            //  Opponent species.
-            std::string opp = hud_reader.read_opponent_species(env.console, frame);
-            int opp_hp = hud_reader.read_opponent_hp_pct(env.console, frame);
-            env.console.log(
-                "[OCR Opponent] " + slug_display(opp) +
-                "  HP=" + (opp_hp >= 0 ? std::to_string(opp_hp) + "%" : "??"),
-                COLOR_BLUE
-            );
+            //  Move names (singles only — doubles shows them after FIGHT press).
+            if (current_mode != BattleMode::DOUBLES){
+                auto moves = move_reader.read_all_moves(env.console, frame);
+                env.console.log(
+                    "[OCR Moves] " +
+                    slug_display(moves[0]) + " | " +
+                    slug_display(moves[1]) + " | " +
+                    slug_display(moves[2]) + " | " +
+                    slug_display(moves[3]),
+                    COLOR_BLUE
+                );
+            }
+
+            //  Opponent species + HP.
+            for (uint8_t i = 0; i < slots; i++){
+                std::string opp = hud_reader.read_opponent_species(env.console, frame, i);
+                int opp_hp = hud_reader.read_opponent_hp_pct(env.console, frame, i);
+                std::string slot_label = (slots > 1) ? "[OCR Opp " + std::to_string(i) + "] " : "[OCR Opponent] ";
+                env.console.log(
+                    slot_label + slug_display(opp) +
+                    "  HP=" + (opp_hp >= 0 ? std::to_string(opp_hp) + "%" : "??"),
+                    COLOR_BLUE
+                );
+            }
 
             //  Own HP.
-            auto own_hp = hud_reader.read_own_hp(env.console, frame);
-            env.console.log(
-                "[OCR Own HP] " +
-                (own_hp.first >= 0
-                    ? std::to_string(own_hp.first) + "/" + std::to_string(own_hp.second)
-                    : "??"),
-                COLOR_BLUE
-            );
-
-            //  PP for each move.
-            std::string pp_str = "[OCR PP]";
-            for (uint8_t i = 0; i < 4; i++){
-                auto pp = hud_reader.read_move_pp(env.console, frame, i);
-                pp_str += " " + (pp.first >= 0
-                    ? std::to_string(pp.first) + "/" + std::to_string(pp.second)
-                    : "??");
+            for (uint8_t i = 0; i < slots; i++){
+                auto own_hp = hud_reader.read_own_hp(env.console, frame, i);
+                std::string slot_label = (slots > 1) ? "[OCR Own " + std::to_string(i) + " HP] " : "[OCR Own HP] ";
+                env.console.log(
+                    slot_label +
+                    (own_hp.first >= 0
+                        ? std::to_string(own_hp.first) + "/" + std::to_string(own_hp.second)
+                        : "??"),
+                    COLOR_BLUE
+                );
             }
-            env.console.log(pp_str, COLOR_BLUE);
+
+            //  PP (singles only).
+            if (current_mode != BattleMode::DOUBLES){
+                std::string pp_str = "[OCR PP]";
+                for (uint8_t i = 0; i < 4; i++){
+                    auto pp = hud_reader.read_move_pp(env.console, frame, i);
+                    pp_str += " " + (pp.first >= 0
+                        ? std::to_string(pp.first) + "/" + std::to_string(pp.second)
+                        : "??");
+                }
+                env.console.log(pp_str, COLOR_BLUE);
+            }
         }
 
         //  ── OCR: Battle Log Text Bar ─────────────────────────────

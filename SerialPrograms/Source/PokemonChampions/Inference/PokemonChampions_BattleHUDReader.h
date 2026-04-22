@@ -2,15 +2,17 @@
  *
  *  From: https://github.com/PokemonAutomation/
  *
- *  Reads numeric and text elements from the battle HUD visible during the
- *  move-select screen:
+ *  Reads numeric and text elements from the battle HUD. Mode-aware:
  *
- *    Top-right:    Opponent species name badge, opponent HP%, pokeball row
- *    Bottom-left:  Own Pokemon nickname, own HP (current / max)
- *    Right panel:  PP counts (current / max) for each of the 4 moves
- *    Right panel:  Effectiveness labels below each move name
+ *  SINGLES (BSS):
+ *    Top-right:    1 opponent species badge + HP%
+ *    Bottom-left:  1 own Pokemon name + HP (current/max)
+ *    Right panel:  4 move pills with PP counts
  *
- *  Coordinates measured from ref_frames/1/frame_00080.jpg (1920x1080).
+ *  DOUBLES (VGC):
+ *    Top-right:    2 opponent species badges + HP%
+ *    Bottom-left:  2 own Pokemon names + HP (current/max)
+ *    Bottom-right: FIGHT / POKEMON circle buttons (no move pills on action screen)
  *
  */
 
@@ -23,6 +25,7 @@
 #include "CommonFramework/ImageTools/ImageBoxes.h"
 #include "CommonFramework/VideoPipeline/VideoOverlayScopes.h"
 #include "CommonTools/OCR/OCR_SmallDictionaryMatcher.h"
+#include "PokemonChampions_BattleModeDetector.h"
 
 namespace PokemonAutomation{
 namespace NintendoSwitch{
@@ -50,56 +53,78 @@ private:
 };
 
 
+//  Per-slot Pokemon info read from the HUD.
+struct HUDPokemonInfo{
+    std::string species;    //  slug, e.g. "greninja". Empty if unreadable.
+    int         hp_current = -1;    //  absolute HP or -1
+    int         hp_max     = -1;    //  absolute HP or -1
+    int         hp_pct     = -1;    //  0-100 or -1 (opponents show % only)
+};
+
 struct BattleHUDState{
-    //  Opponent info (top-right badge).
-    std::string opponent_species;   //  slug, e.g. "greninja"
-    int         opponent_hp_pct;    //  0-100, or -1 if unreadable
+    BattleMode mode = BattleMode::UNKNOWN;
 
-    //  Own info (bottom-left bar).
-    int         own_hp_current;     //  absolute HP, or -1 if unreadable
-    int         own_hp_max;         //  absolute HP, or -1 if unreadable
+    //  Opponent slots (1 for singles, 2 for doubles).
+    std::array<HUDPokemonInfo, 2> opponents;
 
-    //  Per-move PP (4 slots, from move-select panel).
+    //  Own slots (1 for singles, 2 for doubles).
+    std::array<HUDPokemonInfo, 2> own;
+
+    //  Per-move PP (4 slots, singles only — doubles shows moves after selecting FIGHT).
     struct MovePP{
         int current = -1;
         int max     = -1;
     };
     std::array<MovePP, 4> move_pp;
+
+    //  How many active slots for the current mode.
+    uint8_t slot_count() const{
+        return (mode == BattleMode::DOUBLES) ? 2 : 1;
+    }
 };
 
 
 class BattleHUDReader{
 public:
-    BattleHUDReader(Language language = Language::English);
+    BattleHUDReader(Language language = Language::English,
+                    BattleMode mode = BattleMode::SINGLES);
+
+    //  Change mode at runtime (updates which boxes are active).
+    void set_mode(BattleMode mode);
+    BattleMode mode() const{ return m_mode; }
 
     void make_overlays(VideoOverlaySet& items) const;
 
-    //  Read the opponent species name from the top-right badge.
-    std::string read_opponent_species(Logger& logger, const ImageViewRGB32& screen) const;
+    //  Read opponent species name from badge (slot 0 or 1).
+    std::string read_opponent_species(Logger& logger, const ImageViewRGB32& screen, uint8_t slot = 0) const;
 
-    //  Read opponent HP percentage from the top-right badge (returns 0-100, or -1).
-    int read_opponent_hp_pct(Logger& logger, const ImageViewRGB32& screen) const;
+    //  Read opponent HP% (slot 0 or 1). Returns 0-100 or -1.
+    int read_opponent_hp_pct(Logger& logger, const ImageViewRGB32& screen, uint8_t slot = 0) const;
 
-    //  Read own HP (current/max) from the bottom-left bar.
-    //  Returns {current, max} or {-1, -1} on failure.
-    std::pair<int, int> read_own_hp(Logger& logger, const ImageViewRGB32& screen) const;
+    //  Read own HP current/max (slot 0 or 1). Returns {current, max} or {-1, -1}.
+    std::pair<int, int> read_own_hp(Logger& logger, const ImageViewRGB32& screen, uint8_t slot = 0) const;
 
-    //  Read PP for a single move slot (0-3). Returns {current, max} or {-1, -1}.
+    //  Read PP for a move slot (0-3). Singles only.
     std::pair<int, int> read_move_pp(Logger& logger, const ImageViewRGB32& screen, uint8_t slot) const;
 
     //  Read everything at once.
     BattleHUDState read_all(Logger& logger, const ImageViewRGB32& screen) const;
 
 private:
-    Language m_language;
+    void init_singles_boxes();
+    void init_doubles_boxes();
 
-    //  Opponent species name in the top-right colored badge.
-    ImageFloatBox m_opponent_name_box;
-    //  Opponent HP % text just below the badge.
-    ImageFloatBox m_opponent_hp_box;
-    //  Own HP "current/max" text in bottom-left info bar.
-    ImageFloatBox m_own_hp_box;
-    //  PP "current/max" text at the right end of each move pill.
+    Language m_language;
+    BattleMode m_mode;
+
+    //  Up to 2 opponent name badges and HP% boxes.
+    std::array<ImageFloatBox, 2> m_opponent_name_boxes;
+    std::array<ImageFloatBox, 2> m_opponent_hp_boxes;
+
+    //  Up to 2 own Pokemon HP boxes.
+    std::array<ImageFloatBox, 2> m_own_hp_boxes;
+
+    //  PP boxes (singles only, 4 slots).
     std::array<ImageFloatBox, 4> m_pp_boxes;
 };
 
