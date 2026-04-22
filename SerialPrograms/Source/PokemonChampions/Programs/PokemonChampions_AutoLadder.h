@@ -7,13 +7,17 @@
 #ifndef PokemonAutomation_PokemonChampions_AutoLadder_H
 #define PokemonAutomation_PokemonChampions_AutoLadder_H
 
+#include <memory>
 #include "Common/Cpp/Options/SimpleIntegerOption.h"
 #include "Common/Cpp/Options/EnumDropdownOption.h"
 #include "Common/Cpp/Options/BooleanCheckBoxOption.h"
+#include "Common/Cpp/Options/StringOption.h"
 #include "Common/Cpp/Options/ButtonOption.h"
 #include "CommonFramework/Notifications/EventNotificationsTable.h"
 #include "NintendoSwitch/NintendoSwitch_SingleSwitchProgram.h"
 #include "NintendoSwitch/Options/NintendoSwitch_GoHomeWhenDoneOption.h"
+#include "PokemonChampions_BattleStateTracker.h"
+#include "PokemonChampions_InferenceClient.h"
 
 namespace PokemonAutomation{
 
@@ -34,6 +38,7 @@ enum class MoveStrategy{
     RoundRobin,
     RandomMove,
     MashA,
+    AI,             //  Query the inference server for move decisions.
 };
 
 //  Team-selection strategy for bring-6-pick-3. Pokemon Champions is a
@@ -86,6 +91,12 @@ private:
     //  the chosen move slot based on MOVE_STRATEGY.
     void select_next_move(SingleSwitchProgramEnvironment& env, ProControllerContext& context);
 
+    //  AI move selection: OCR the screen, query inference server, execute action.
+    void select_move_ai(SingleSwitchProgramEnvironment& env, ProControllerContext& context);
+
+    //  Execute a model action index (0-13) as button presses.
+    void execute_action(SingleSwitchProgramEnvironment& env, ProControllerContext& context, uint8_t action_idx);
+
     //  At the post-match screen, confirm "Continue Battling" (or Quit if we
     //  want to stop). Returns true if we're re-queueing, false if quitting.
     bool handle_post_match(SingleSwitchProgramEnvironment& env, ProControllerContext& context);
@@ -102,12 +113,19 @@ private:
     BooleanCheckBoxOption ALLOW_MEGA;
     GoHomeWhenDoneOption GO_HOME_WHEN_DONE;
 
+    //  AI-specific options (only used when MOVE_STRATEGY == AI).
+    StringOption AI_SERVER_URL;
+
     EventNotificationOption NOTIFICATION_STATUS_UPDATE;
     EventNotificationOption NOTIFICATION_MATCH_FINISHED;
     EventNotificationsOption NOTIFICATIONS;
 
     //  Per-match state.
     uint8_t m_rr_cursor = 0;
+
+    //  AI state (created when strategy is AI).
+    BattleStateTracker m_state_tracker;
+    std::unique_ptr<InferenceClient> m_inference_client;
 };
 
 

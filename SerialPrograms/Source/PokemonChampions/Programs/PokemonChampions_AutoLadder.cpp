@@ -23,6 +23,7 @@
 
 #include "CommonFramework/Notifications/ProgramNotifications.h"
 #include "CommonFramework/ProgramStats/StatsTracking.h"
+#include "CommonFramework/VideoPipeline/VideoFeed.h"
 #include "CommonTools/Async/InferenceRoutines.h"
 #include "NintendoSwitch/Commands/NintendoSwitch_Commands_PushButtons.h"
 #include "Pokemon/Pokemon_Strings.h"
@@ -33,6 +34,10 @@
 #include "PokemonChampions/Inference/PokemonChampions_PreparingForBattleDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_BattleEndDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_PostMatchDetector.h"
+#include "PokemonChampions/Inference/PokemonChampions_MoveNameReader.h"
+#include "PokemonChampions/Inference/PokemonChampions_BattleHUDReader.h"
+#include "PokemonChampions/Inference/PokemonChampions_BattleLogReader.h"
+#include "PokemonChampions/Inference/PokemonChampions_BattleModeDetector.h"
 #include "PokemonChampions/Programs/PokemonChampions_AutoLadder.h"
 
 namespace PokemonAutomation{
@@ -105,12 +110,13 @@ AutoLadder::AutoLadder()
     )
     , MOVE_STRATEGY(
         "<b>Move Selection Strategy:</b><br>"
-        "How to pick a move each turn. Type-aware strategies will come once the battle menu inference expands.",
+        "How to pick a move each turn.",
         {
             {MoveStrategy::AlwaysFirstMove, "first",       "Always pick the first move"},
             {MoveStrategy::RoundRobin,      "round-robin", "Cycle through moves 1-2-3-4"},
             {MoveStrategy::RandomMove,      "random",      "Pick a random move each turn"},
             {MoveStrategy::MashA,           "mash-a",      "Mash A (fastest; relies on default cursor)"},
+            {MoveStrategy::AI,             "ai",          "AI (query inference server for move decisions)"},
         },
         LockMode::LOCK_WHILE_RUNNING,
         MoveStrategy::AlwaysFirstMove
@@ -120,6 +126,12 @@ AutoLadder::AutoLadder()
         "If enabled, press R to toggle Mega Evolve before confirming the move on the first eligible turn.",
         LockMode::LOCK_WHILE_RUNNING,
         false
+    )
+    , AI_SERVER_URL(
+        "<b>AI Inference Server URL:</b><br>"
+        "URL of the Python inference server. Only used when Move Strategy is AI.",
+        LockMode::LOCK_WHILE_RUNNING,
+        "http://localhost:8265"
     )
     , GO_HOME_WHEN_DONE(false)
     , NOTIFICATION_STATUS_UPDATE("Status Update", true, false, std::chrono::seconds(3600))
@@ -136,6 +148,7 @@ AutoLadder::AutoLadder()
     PA_ADD_OPTION(TEAM_STRATEGY);
     PA_ADD_OPTION(MOVE_STRATEGY);
     PA_ADD_OPTION(ALLOW_MEGA);
+    PA_ADD_OPTION(AI_SERVER_URL);
     PA_ADD_OPTION(GO_HOME_WHEN_DONE);
     PA_ADD_OPTION(NOTIFICATIONS);
 }
@@ -263,6 +276,12 @@ void AutoLadder::select_next_move(SingleSwitchProgramEnvironment& env, ProContro
     //  Optional Mega toggle. In Champions the prompt is R (seen in ref_frames).
     if (ALLOW_MEGA){
         pbf_press_button(context, BUTTON_R, 80ms, 160ms);
+    }
+
+    //  AI strategy: delegate entirely to select_move_ai().
+    if (MOVE_STRATEGY == MoveStrategy::AI){
+        select_move_ai(env, context);
+        return;
     }
 
     //  Decide which slot to pick.
@@ -414,6 +433,17 @@ void AutoLadder::program(SingleSwitchProgramEnvironment& env, ProControllerConte
 
     DeferredStopButtonOption::ResetOnExit reset_on_exit(STOP_AFTER_CURRENT);
 
+    //  Initialize AI components if using AI strategy.
+    if (MOVE_STRATEGY == MoveStrategy::AI){
+        m_inference_client = std::make_unique<InferenceClient>(AI_SERVER_URL);
+        if (!m_inference_client->health_check(env.console)){
+            env.console.log("AI inference server not reachable. Falling back to AlwaysFirstMove.", COLOR_RED);
+            m_inference_client.reset();
+        }else{
+            env.console.log("AI inference server connected.", COLOR_GREEN);
+        }
+    }
+
     while (NUM_MATCHES == 0 || stats.matches < NUM_MATCHES){
         bool should_continue = run_one_match(env, context);
         if (!should_continue){
@@ -426,6 +456,109 @@ void AutoLadder::program(SingleSwitchProgramEnvironment& env, ProControllerConte
     GO_HOME_WHEN_DONE.run_end_of_program(context);
 }
 
+
+// ─── AI Move Selection ───────────────────────────────────────────
+
+void AutoLadder::select_move_ai(SingleSwitchProgramEnvironment& env, ProControllerContext& context){
+    GameSettings& settings = GameSettings::instance();
+
+    //  If inference client isn't available, fall back to first move.
+    if (!m_inference_client){
+        env.console.log("[AI] No inference server. Falling back to first move.", COLOR_RED);
+        //  Press A on FIGHT, then A on first move.
+        pbf_press_button(context, BUTTON_A, 80ms, 320ms);
+        context.wait_for(std::chrono::milliseconds(500));
+        pbf_press_button(context, BUTTON_A, 80ms, 160ms);
+        pbf_press_button(context, BUTTON_A, 80ms, 160ms);
+        return;
+    }
+
+    //  1. Take a snapshot and run HUD OCR.
+    VideoSnapshot snapshot = env.console.video().snapshot();
+    if (snapshot){
+        BattleHUDReader hud_reader(Language::English, m_state_tracker.mode());
+        BattleHUDState hud = hud_reader.read_all(env.console, snapshot);
+        m_state_tracker.update_from_hud(hud);
+    }
+
+    //  2. Query the inference server.
+    JsonObject game_state = m_state_tracker.to_predict_json();
+    ActionPrediction prediction = m_inference_client->predict(env.console, game_state);
+
+    if (!prediction.success){
+        env.console.log("[AI] Prediction failed. Falling back to first move.", COLOR_RED);
+        pbf_press_button(context, BUTTON_A, 80ms, 320ms);
+        context.wait_for(std::chrono::milliseconds(500));
+        pbf_press_button(context, BUTTON_A, 80ms, 160ms);
+        pbf_press_button(context, BUTTON_A, 80ms, 160ms);
+        return;
+    }
+
+    //  3. Execute the predicted action.
+    env.console.log(
+        "[AI] Action: " + action_name(prediction.action_a) +
+        " (p=" + std::to_string(static_cast<int>(prediction.probs_a[prediction.action_a] * 100)) + "%)",
+        COLOR_BLUE
+    );
+
+    execute_action(env, context, prediction.action_a);
+    m_state_tracker.advance_turn();
+}
+
+
+void AutoLadder::execute_action(
+    SingleSwitchProgramEnvironment& env, ProControllerContext& context, uint8_t action_idx
+){
+    if (action_idx >= 12){
+        //  Switch action: press down to POKEMON button, then navigate to bench slot.
+        uint8_t switch_slot = action_idx - 12;  //  0 or 1
+
+        //  Press down to move cursor from FIGHT to POKEMON.
+        pbf_press_dpad(context, DPAD_DOWN, 80ms, 160ms);
+        pbf_press_button(context, BUTTON_A, 80ms, 320ms);
+
+        //  Navigate to the bench slot (slot 0 is first, slot 1 is second).
+        for (uint8_t i = 0; i < switch_slot; i++){
+            pbf_press_dpad(context, DPAD_DOWN, 80ms, 160ms);
+        }
+        pbf_press_button(context, BUTTON_A, 80ms, 160ms);
+        return;
+    }
+
+    //  Move action: action_idx = move_slot * 3 + target
+    uint8_t move_slot = action_idx / 3;
+    //  uint8_t target = action_idx % 3;  //  TODO: handle target selection for doubles
+
+    //  Press A on FIGHT to enter move select.
+    pbf_press_button(context, BUTTON_A, 80ms, 320ms);
+
+    //  Wait for move select menu.
+    MoveSelectWatcher move_menu_watcher;
+    int ret = wait_until(
+        env.console, context,
+        std::chrono::seconds(10),
+        {move_menu_watcher}
+    );
+    if (ret < 0){
+        env.console.log("[AI] Move select didn't appear. Recovering.", COLOR_RED);
+        pbf_press_button(context, BUTTON_B, 80ms, 320ms);
+        return;
+    }
+
+    //  Optional Mega toggle.
+    if (ALLOW_MEGA){
+        pbf_press_button(context, BUTTON_R, 80ms, 160ms);
+    }
+
+    //  Navigate to the move slot.
+    for (uint8_t i = 0; i < move_slot; i++){
+        pbf_press_dpad(context, DPAD_DOWN, 80ms, 160ms);
+    }
+    pbf_press_button(context, BUTTON_A, 80ms, 160ms);
+
+    //  Confirm target (for doubles, just press A — default target for now).
+    pbf_press_button(context, BUTTON_A, 80ms, 160ms);
+}
 
 
 }
