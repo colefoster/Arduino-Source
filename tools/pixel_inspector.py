@@ -1048,11 +1048,31 @@ class MeasureMode:
         desc_label.pack(fill="x")
 
         # Info bar (coordinates)
-        self.info_var = tk.StringVar(value="Drag to select box region  |  Enter=confirm  Esc=skip  Backspace=prev  q=quit")
+        self.info_var = tk.StringVar(value="Drag a box on the image below, then click Confirm.")
         info_label = tk.Label(self.root, textvariable=self.info_var, anchor="w",
-                              font=("Menlo", 10), bg="#333333", fg="#aaaaff",
-                              padx=8, pady=2)
+                              font=("Menlo", 11), bg="#333333", fg="#aaaaff",
+                              padx=8, pady=4)
         info_label.pack(fill="x")
+
+        # Button bar
+        btn_frame = tk.Frame(self.root, bg="#222222")
+        btn_frame.pack(fill="x")
+
+        btn_style = {
+            "font": ("Menlo", 11, "bold"),
+            "padx": 12, "pady": 6, "relief": "flat", "bd": 0,
+            "activebackground": "#444444",
+        }
+        tk.Button(btn_frame, text="< Prev (Backspace)", command=self.prev_box,
+                  bg="#3a3a3a", fg="#ffffff", **btn_style).pack(side="left", padx=4, pady=4)
+        tk.Button(btn_frame, text="Skip (Esc)", command=self.skip_box,
+                  bg="#5a4a2a", fg="#ffffff", **btn_style).pack(side="left", padx=4, pady=4)
+        tk.Button(btn_frame, text="Clear (Right-click)", command=self.clear_selection,
+                  bg="#3a3a3a", fg="#ffffff", **btn_style).pack(side="left", padx=4, pady=4)
+        tk.Button(btn_frame, text="Save + Quit (q)", command=self.quit,
+                  bg="#3a3a3a", fg="#ffffff", **btn_style).pack(side="right", padx=4, pady=4)
+        tk.Button(btn_frame, text="Confirm >  (Enter)", command=self.confirm_box,
+                  bg="#2a6a2a", fg="#ffffff", **btn_style).pack(side="right", padx=4, pady=4)
 
         # Canvas
         self.canvas = tk.Canvas(self.root, bg="#111", highlightthickness=0)
@@ -1352,6 +1372,9 @@ class MeasureMode:
             f"{px_w}x{px_h}px  |  Press Enter to confirm")
 
     def on_right_click(self, event):
+        self.clear_selection()
+
+    def clear_selection(self):
         self.sel_coords = None
         if self.sel_rect:
             self.canvas.delete(self.sel_rect)
