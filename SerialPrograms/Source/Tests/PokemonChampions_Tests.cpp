@@ -23,6 +23,7 @@
 #include "PokemonChampions/Inference/PokemonChampions_MainMenuDetector.h"
 
 //  OCR readers
+#include "PokemonChampions/Inference/PokemonChampions_BattleModeDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_MoveNameReader.h"
 #include "PokemonChampions/Inference/PokemonChampions_BattleHUDReader.h"
 #include "PokemonChampions/Inference/PokemonChampions_BattleLogReader.h"
@@ -279,7 +280,7 @@ int test_pokemonChampions_OCRDump(const ImageViewRGB32& image){
 
     //  HUD (singles)
     {
-        BattleHUDReader reader(Language::English);
+        BattleHUDReader reader(Language::English, BattleMode::SINGLES);
         cout << "=== Battle HUD (Singles) ===" << endl;
 
         std::string species = reader.read_opponent_species(logger, image, 0);
@@ -294,6 +295,25 @@ int test_pokemonChampions_OCRDump(const ImageViewRGB32& image){
         for (uint8_t i = 0; i < 4; i++){
             auto pp = reader.read_move_pp(logger, image, i);
             cout << "  PP slot " << (int)i << ": " << pp.first << "/" << pp.second << endl;
+        }
+    }
+
+    //  HUD (doubles)
+    {
+        BattleHUDReader reader(Language::English, BattleMode::DOUBLES);
+        cout << "=== Battle HUD (Doubles) ===" << endl;
+
+        for (uint8_t slot = 0; slot < 2; slot++){
+            std::string species = reader.read_opponent_species(logger, image, slot);
+            cout << "  opp " << (int)slot << " species: \"" << species << "\"" << endl;
+
+            int hp_pct = reader.read_opponent_hp_pct(logger, image, slot);
+            cout << "  opp " << (int)slot << " HP%: " << hp_pct << endl;
+        }
+
+        for (uint8_t slot = 0; slot < 2; slot++){
+            auto own_hp = reader.read_own_hp(logger, image, slot);
+            cout << "  own " << (int)slot << " HP: " << own_hp.first << "/" << own_hp.second << endl;
         }
     }
 
