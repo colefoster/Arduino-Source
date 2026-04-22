@@ -33,6 +33,7 @@
 #include "PokemonChampions/Inference/PokemonChampions_MoveNameReader.h"
 #include "PokemonChampions/Inference/PokemonChampions_BattleHUDReader.h"
 #include "PokemonChampions/Inference/PokemonChampions_BattleLogReader.h"
+#include "PokemonChampions/Inference/PokemonChampions_BattleModeDetector.h"
 #include "PokemonChampions_DetectorTest.h"
 
 namespace PokemonAutomation{
@@ -97,6 +98,7 @@ void DetectorTest::program(SingleSwitchProgramEnvironment& env, ProControllerCon
     PreparingForBattleDetector preparing;
     ResultScreenDetector     result_screen;
     PostMatchScreenDetector  post_match;
+    BattleModeDetector       battle_mode_detector;
 
     //  Create OCR readers.
     MoveNameReader   move_reader(Language::English);
@@ -110,6 +112,7 @@ void DetectorTest::program(SingleSwitchProgramEnvironment& env, ProControllerCon
     preparing.make_overlays(overlay_set);
     result_screen.make_overlays(overlay_set);
     post_match.make_overlays(overlay_set);
+    battle_mode_detector.make_overlays(overlay_set);
     move_reader.make_overlays(overlay_set);
     hud_reader.make_overlays(overlay_set);
     log_reader.make_overlays(overlay_set);
@@ -138,6 +141,8 @@ void DetectorTest::program(SingleSwitchProgramEnvironment& env, ProControllerCon
 
     std::string last_screen;
     std::string last_log_text;   //  Deduplicate repeated battle log messages.
+    BattleMode current_mode = BattleMode::UNKNOWN;
+    bool screen_changed_last_frame = true;  //  Start true so first frame checks mode.
 
     //  Auto-screenshot state.
     uint32_t screenshot_count = 0;
@@ -152,6 +157,20 @@ void DetectorTest::program(SingleSwitchProgramEnvironment& env, ProControllerCon
             continue;
         }
         const ImageViewRGB32& frame = snapshot;
+
+        //  Check for battle mode (Singles vs Doubles).
+        //  Only run OCR if we haven't detected a mode yet, or on screen
+        //  transitions (to catch mode changes between matches).
+        if (current_mode == BattleMode::UNKNOWN || screen_changed_last_frame){
+            BattleMode detected_mode = battle_mode_detector.read_mode(env.console, frame);
+            if (detected_mode != BattleMode::UNKNOWN && detected_mode != current_mode){
+                current_mode = detected_mode;
+                env.console.log(
+                    "[Mode] Detected: " + std::string(battle_mode_str(current_mode)),
+                    COLOR_BLUE
+                );
+            }
+        }
 
         //  Run all detectors.
         bool d_action     = action_menu.detect(frame);
@@ -197,6 +216,7 @@ void DetectorTest::program(SingleSwitchProgramEnvironment& env, ProControllerCon
             env.console.log("[Screen] " + full_label, color);
             last_screen = full_label;
         }
+        screen_changed_last_frame = screen_changed;
 
         //  ── Auto-Screenshot ─────────────────────────────────────
         //
