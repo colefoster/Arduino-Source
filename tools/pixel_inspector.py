@@ -18,6 +18,7 @@ Usage:
   python3 tools/pixel_inspector.py --list
   python3 tools/pixel_inspector.py --measure            (walk through pending boxes)
   python3 tools/pixel_inspector.py --measure-status      (show progress)
+  python3 tools/pixel_inspector.py --remeasure <name>...  (re-open specific boxes for adjustment)
 
 Controls (interactive mode):
   Click + drag    Select a region
@@ -1018,18 +1019,40 @@ def measure_status():
 
 
 class MeasureMode:
-    """Interactive mode that walks through pending box definitions one by one."""
+    """Interactive mode that walks through pending box definitions one by one.
+
+    If remeasure_names is provided, walks through ONLY those boxes
+    (even if already confirmed) so the user can adjust them.
+    """
 
     CROSSHAIR_SIZE = 12
 
-    def __init__(self):
+    def __init__(self, remeasure_names=None):
         self.data = load_box_definitions()
-        self.boxes = self.data["boxes"]
-        self.current_idx = self._find_first_pending()
+        all_boxes = self.data["boxes"]
 
-        if self.current_idx is None:
-            print("All boxes are already confirmed! Use --measure-status to see them.")
-            sys.exit(0)
+        if remeasure_names:
+            # Filter to just the requested names (order preserved from argv)
+            name_set = set(remeasure_names)
+            self.boxes = [b for b in all_boxes if b["name"] in name_set]
+            missing = name_set - {b["name"] for b in self.boxes}
+            if missing:
+                print(f"Unknown box names: {', '.join(sorted(missing))}")
+                print("Run --measure-status to see valid names.")
+                sys.exit(1)
+            # Map filtered boxes back to full list so saves persist correctly.
+            self._full_boxes = all_boxes
+            self.current_idx = 0
+            print(f"Re-measuring {len(self.boxes)} box(es): {', '.join(b['name'] for b in self.boxes)}")
+        else:
+            self.boxes = all_boxes
+            self._full_boxes = all_boxes
+            self.current_idx = self._find_first_pending()
+
+            if self.current_idx is None:
+                print("All boxes are already confirmed! Use --measure-status to see them.")
+                print("To adjust a specific box, use: --remeasure <name>")
+                sys.exit(0)
 
         self.root = tk.Tk()
 
@@ -1442,6 +1465,15 @@ if __name__ == "__main__":
 
     if len(sys.argv) >= 2 and sys.argv[1] in ("--measure-status", "--ms"):
         measure_status()
+        sys.exit(0)
+
+    if len(sys.argv) >= 2 and sys.argv[1] == "--remeasure":
+        names = sys.argv[2:]
+        if not names:
+            print("Usage: --remeasure <box_name> [box_name2] ...")
+            print("Run --measure-status to see available names.")
+            sys.exit(1)
+        MeasureMode(remeasure_names=names)
         sys.exit(0)
 
     # CLI modes that require an image path as first arg
