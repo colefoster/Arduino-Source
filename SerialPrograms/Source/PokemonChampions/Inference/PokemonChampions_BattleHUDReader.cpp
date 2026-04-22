@@ -126,13 +126,14 @@ void BattleHUDReader::init_doubles_boxes(){
     //
     //  NOTE: These are estimated — update with pixel inspector for precision.
 
-    m_opponent_name_boxes[0] = ImageFloatBox(0.445, 0.048, 0.095, 0.028);
-    m_opponent_name_boxes[1] = ImageFloatBox(0.590, 0.048, 0.105, 0.028);
-    m_opponent_hp_boxes[0]   = ImageFloatBox(0.470, 0.076, 0.050, 0.026);
-    m_opponent_hp_boxes[1]   = ImageFloatBox(0.615, 0.076, 0.050, 0.026);
+    //  Measured with pixel_inspector on live capture frame_00116.
+    m_opponent_name_boxes[0] = ImageFloatBox(0.6172, 0.0454, 0.1219, 0.0417);
+    m_opponent_name_boxes[1] = ImageFloatBox(0.8286, 0.0481, 0.1151, 0.0417);
+    m_opponent_hp_boxes[0]   = ImageFloatBox(0.6917, 0.1139, 0.0573, 0.0454);
+    m_opponent_hp_boxes[1]   = ImageFloatBox(0.8984, 0.1130, 0.0563, 0.0426);
 
-    m_own_hp_boxes[0] = ImageFloatBox(0.040, 0.896, 0.100, 0.040);
-    m_own_hp_boxes[1] = ImageFloatBox(0.170, 0.896, 0.100, 0.040);
+    m_own_hp_boxes[0] = ImageFloatBox(0.1313, 0.9324, 0.0766, 0.0407);
+    m_own_hp_boxes[1] = ImageFloatBox(0.3365, 0.9315, 0.0786, 0.0463);
 
     //  No PP boxes on the doubles action menu screen.
     //  (Moves are shown after pressing FIGHT, in a different layout.)
