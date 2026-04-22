@@ -55,8 +55,12 @@ int test_pokemonChampions_TeamSelectDetector(const ImageViewRGB32& image, bool t
 //  Filename: <prefix>_<species0>_<species1>_..._<species5>.png (6 species slugs)
 int test_pokemonChampions_TeamSelectReader(const ImageViewRGB32& image, const std::vector<std::string>& words);
 
-//  Filename: <prefix>_<species>_<move0>_<move1>_<move2>_<move3>_<ability>_<item>.png
+//  Filename: <prefix>_<species0>_<species1>_..._<species5>.png
+//  Reads all 6 cards from the "Moves & More" grid; verifies species only.
 int test_pokemonChampions_TeamSummaryReader(const ImageViewRGB32& image, const std::vector<std::string>& words);
+
+//  Filename: standard bool-target convention.
+int test_pokemonChampions_MovesMoreDetector(const ImageViewRGB32& image, bool target);
 
 //  ── Void (development / debug) ─────────────────────────────────────
 

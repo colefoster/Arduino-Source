@@ -2,20 +2,18 @@
  *
  *  From: https://github.com/PokemonAutomation/
  *
- *  Detects the team select screen that appears after matchmaking finds
- *  an opponent. This screen shows all 6 own Pokemon on the left side
- *  with a "0/4 Done" (doubles) or "0/3 Done" (singles) counter.
+ *  Detects the "Team Registration" screen where 5 team tabs are visible
+ *  and one is highlighted yellow. Also exposes which team is selected.
  *
- *  Detection strategy:
- *    1. Check for the "Ranked Battles" blue header (shared with matchmaking)
- *    2. Check for the dark left panel where team slots are displayed
- *    3. OCR the "Done" counter text at the bottom-right
+ *  Assumes the user has not scrolled beyond the leftmost page (teams 1-5).
  *
  */
 
 #ifndef PokemonAutomation_PokemonChampions_TeamSelectDetector_H
 #define PokemonAutomation_PokemonChampions_TeamSelectDetector_H
 
+#include <array>
+#include <cstdint>
 #include "CommonFramework/ImageTools/ImageBoxes.h"
 #include "CommonFramework/Logging/Logger.h"
 #include "CommonFramework/VideoPipeline/VideoOverlayScopes.h"
@@ -33,17 +31,17 @@ public:
     virtual void make_overlays(VideoOverlaySet& items) const override;
     virtual bool detect(const ImageViewRGB32& screen) override;
 
+    //  Valid after detect() returns true: 0-4 for team slot.
+    uint8_t selected_team() const{ return m_selected_tab; }
+
+    //  Standalone check: returns selected tab index (0-4) or -1 if none
+    //  of the 5 tab positions shows the yellow highlight.
+    int selected_tab(const ImageViewRGB32& screen) const;
+
 private:
-    //  "Ranked Battles" header — blue panel, confirms we're on a ranked screen.
-    ImageFloatBox m_ranked_header;
-
-    //  Dark left panel where team Pokemon are listed.
-    //  Used as a secondary gate — the team select has a distinctive dark
-    //  panel on the left half of the screen.
-    ImageFloatBox m_left_panel;
-
-    //  "Done" counter text region at bottom-right (e.g. "0/4 Done").
-    ImageFloatBox m_done_counter;
+    std::array<ImageFloatBox, 5> m_tab_slots;
+    ImageFloatBox m_scroll_indicator;
+    uint8_t m_selected_tab = 0;
 };
 
 
