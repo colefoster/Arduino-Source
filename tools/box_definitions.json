@@ -1,0 +1,109 @@
+{
+  "_comment": "Boxes needed for Team Scanner OCR. Run: python3 tools/pixel_inspector.py --measure",
+  "boxes": [
+    {
+      "name": "moves_more/tab_label",
+      "scene": "View Details - Moves & More tab",
+      "screenshot": "screenshots/screenshot-20260422-160514341816.png",
+      "description": "The 'Moves & More' tab label text at the top (for screen detection)",
+      "status": "pending",
+      "box": null
+    },
+    {
+      "name": "moves_more/card_bg_0",
+      "scene": "View Details - Moves & More tab",
+      "screenshot": "screenshots/screenshot-20260422-160514341816.png",
+      "description": "Solid purple background region inside card 0 (Garchomp) — for color-gate detection",
+      "status": "pending",
+      "box": null
+    },
+    {
+      "name": "moves_more/species_0",
+      "scene": "View Details - Moves & More tab",
+      "screenshot": "screenshots/screenshot-20260422-160514341816.png",
+      "description": "Species name 'Garchomp' text — top-left card (card 0). Crop tightly around the text only.",
+      "status": "pending",
+      "box": null
+    },
+    {
+      "name": "moves_more/species_1",
+      "scene": "View Details - Moves & More tab",
+      "screenshot": "screenshots/screenshot-20260422-160514341816.png",
+      "description": "Species name 'Venusaur' text — top-right card (card 1). Same height/width as species_0, shifted right.",
+      "status": "pending",
+      "box": null
+    },
+    {
+      "name": "moves_more/species_2",
+      "scene": "View Details - Moves & More tab",
+      "screenshot": "screenshots/screenshot-20260422-160514341816.png",
+      "description": "Species name 'Charizard' text — middle-left card (card 2). Same as species_0, shifted down one row.",
+      "status": "pending",
+      "box": null
+    },
+    {
+      "name": "moves_more/ability_0",
+      "scene": "View Details - Moves & More tab",
+      "screenshot": "screenshots/screenshot-20260422-160514341816.png",
+      "description": "Ability name 'Rough Skin' text in card 0 (Garchomp). Below species name, smaller text.",
+      "status": "pending",
+      "box": null
+    },
+    {
+      "name": "moves_more/move_0_0",
+      "scene": "View Details - Moves & More tab",
+      "screenshot": "screenshots/screenshot-20260422-160514341816.png",
+      "description": "First move 'Earthquake' text in card 0 (Garchomp). After the type icon, just the move name text.",
+      "status": "pending",
+      "box": null
+    },
+    {
+      "name": "moves_more/move_0_1",
+      "scene": "View Details - Moves & More tab",
+      "screenshot": "screenshots/screenshot-20260422-160514341816.png",
+      "description": "Second move 'Rock Slide' text in card 0 (Garchomp).",
+      "status": "pending",
+      "box": null
+    },
+    {
+      "name": "moves_more/move_0_2",
+      "scene": "View Details - Moves & More tab",
+      "screenshot": "screenshots/screenshot-20260422-160514341816.png",
+      "description": "Third move 'Dragon Claw' text in card 0 (Garchomp).",
+      "status": "pending",
+      "box": null
+    },
+    {
+      "name": "moves_more/move_0_3",
+      "scene": "View Details - Moves & More tab",
+      "screenshot": "screenshots/screenshot-20260422-160514341816.png",
+      "description": "Fourth move 'Stomping Tantrum' text in card 0 (Garchomp). Last move — used to compute vertical spacing.",
+      "status": "pending",
+      "box": null
+    },
+    {
+      "name": "team_reg/species_0",
+      "scene": "Team Registration screen",
+      "screenshot": "screenshots/screenshot-20260422-160451227419.png",
+      "description": "First species name 'Garchomp' in the team list (left column, top slot).",
+      "status": "pending",
+      "box": null
+    },
+    {
+      "name": "team_reg/species_5",
+      "scene": "Team Registration screen",
+      "screenshot": "screenshots/screenshot-20260422-160451227419.png",
+      "description": "Last species name 'Incineroar' in the team list (left column, bottom slot). Used with species_0 to compute vertical spacing.",
+      "status": "pending",
+      "box": null
+    },
+    {
+      "name": "team_reg/team_tab_bg",
+      "scene": "Team Registration screen",
+      "screenshot": "screenshots/screenshot-20260422-160451227419.png",
+      "description": "The green/yellow 'Team 1' (or 'Team 2') selected tab background — for color-gate detection of this screen.",
+      "status": "pending",
+      "box": null
+    }
+  ]
+}

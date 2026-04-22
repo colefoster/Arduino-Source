@@ -16,6 +16,8 @@ Usage:
   python3 tools/pixel_inspector.py <img> --load action_menu/fight_button
   python3 tools/pixel_inspector.py <img> --check-all
   python3 tools/pixel_inspector.py --list
+  python3 tools/pixel_inspector.py --measure            (walk through pending boxes)
+  python3 tools/pixel_inspector.py --measure-status      (show progress)
 
 Controls (interactive mode):
   Click + drag    Select a region
@@ -29,6 +31,15 @@ Controls (interactive mode):
   n / p           Cycle through loaded boxes (next/prev)
   a               Toggle all box overlays
   q               Quit
+
+Controls (--measure mode):
+  Click + drag    Select the box region
+  Right-click     Clear selection
+  Enter / Return  Confirm current selection and advance to next box
+  Backspace       Go back to previous box
+  Escape          Skip current box
+  Scroll / Pan    Zoom and pan as usual
+  q               Save progress and quit
 """
 
 import json
@@ -46,6 +57,7 @@ from PIL import Image, ImageTk
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 REPO_ROOT = os.path.dirname(SCRIPT_DIR)
 SAVED_BOXES_PATH = os.path.join(SCRIPT_DIR, "pixel_inspector_boxes.json")
+BOX_DEFINITIONS_PATH = os.path.join(SCRIPT_DIR, "box_definitions.json")
 INFERENCE_DIR = os.path.join(
     REPO_ROOT, "SerialPrograms", "Source", "PokemonChampions", "Inference"
 )
@@ -961,6 +973,435 @@ class PixelInspector:
                 f"norm=({ix/self.img_w:.4f},{iy/self.img_h:.4f})")
 
 
+# ─── Box Definitions (--measure mode) ──────────────────────────────────────
+
+def load_box_definitions():
+    """Load the box definitions file."""
+    if not os.path.exists(BOX_DEFINITIONS_PATH):
+        print(f"No box definitions file at {BOX_DEFINITIONS_PATH}")
+        sys.exit(1)
+    with open(BOX_DEFINITIONS_PATH, "r") as f:
+        return json.load(f)
+
+
+def save_box_definitions(data):
+    """Save box definitions back to file."""
+    with open(BOX_DEFINITIONS_PATH, "w") as f:
+        json.dump(data, f, indent=2)
+
+
+def measure_status():
+    """Print progress summary of pending box measurements."""
+    data = load_box_definitions()
+    boxes = data["boxes"]
+    pending = [b for b in boxes if b["status"] == "pending"]
+    confirmed = [b for b in boxes if b["status"] == "confirmed"]
+
+    print(f"\n  Box measurement progress: {len(confirmed)}/{len(boxes)} confirmed\n")
+
+    # Group by scene
+    scenes = {}
+    for b in boxes:
+        scenes.setdefault(b["scene"], []).append(b)
+
+    for scene, items in scenes.items():
+        done = sum(1 for b in items if b["status"] == "confirmed")
+        print(f"  [{scene}]  ({done}/{len(items)})")
+        for b in items:
+            status = "OK" if b["status"] == "confirmed" else ".."
+            box_s = ""
+            if b["box"]:
+                bx = b["box"]
+                box_s = f"  ({bx[0]:.4f}, {bx[1]:.4f}, {bx[2]:.4f}, {bx[3]:.4f})"
+            print(f"    [{status}] {b['name']:<30s}{box_s}")
+    print()
+
+
+class MeasureMode:
+    """Interactive mode that walks through pending box definitions one by one."""
+
+    CROSSHAIR_SIZE = 12
+
+    def __init__(self):
+        self.data = load_box_definitions()
+        self.boxes = self.data["boxes"]
+        self.current_idx = self._find_first_pending()
+
+        if self.current_idx is None:
+            print("All boxes are already confirmed! Use --measure-status to see them.")
+            sys.exit(0)
+
+        self.root = tk.Tk()
+
+        # Top bar: box name + progress
+        self.progress_var = tk.StringVar()
+        progress_label = tk.Label(self.root, textvariable=self.progress_var, anchor="w",
+                                  font=("Menlo", 12, "bold"), bg="#1e1e1e", fg="#00ff88",
+                                  padx=8, pady=4)
+        progress_label.pack(fill="x")
+
+        # Description bar
+        self.desc_var = tk.StringVar()
+        desc_label = tk.Label(self.root, textvariable=self.desc_var, anchor="w",
+                              font=("Menlo", 11), bg="#2a2a2a", fg="#ffcc66",
+                              padx=8, pady=4, wraplength=900, justify="left")
+        desc_label.pack(fill="x")
+
+        # Info bar (coordinates)
+        self.info_var = tk.StringVar(value="Drag to select box region  |  Enter=confirm  Esc=skip  Backspace=prev  q=quit")
+        info_label = tk.Label(self.root, textvariable=self.info_var, anchor="w",
+                              font=("Menlo", 10), bg="#333333", fg="#aaaaff",
+                              padx=8, pady=2)
+        info_label.pack(fill="x")
+
+        # Canvas
+        self.canvas = tk.Canvas(self.root, bg="#111", highlightthickness=0)
+        self.canvas.pack(fill="both", expand=True)
+
+        # State
+        self.zoom = 1.0
+        self.offset_x = 0.0
+        self.offset_y = 0.0
+        self.sel_start = None
+        self.sel_rect = None
+        self.sel_coords = None  # (px_x, px_y, px_w, px_h) in image space
+        self.pan_start = None
+        self.crosshair_items = []
+        self.img = None
+        self.img_w = 0
+        self.img_h = 0
+        self.current_screenshot = None
+
+        # Bindings
+        self.canvas.bind("<ButtonPress-1>", self.on_press)
+        self.canvas.bind("<B1-Motion>", self.on_drag)
+        self.canvas.bind("<ButtonRelease-1>", self.on_release)
+        self.canvas.bind("<ButtonPress-2>", self.on_pan_start)
+        self.canvas.bind("<B2-Motion>", self.on_pan_move)
+        self.canvas.bind("<ButtonPress-3>", self.on_right_click)
+        self.canvas.bind("<MouseWheel>", self.on_scroll)
+        self.canvas.bind("<Button-4>", self.on_scroll_up)
+        self.canvas.bind("<Button-5>", self.on_scroll_down)
+        self.canvas.bind("<Motion>", self.on_motion)
+        self.canvas.bind("<Configure>", lambda e: self.redraw())
+        self.root.bind("<Return>", lambda e: self.confirm_box())
+        self.root.bind("<Escape>", lambda e: self.skip_box())
+        self.root.bind("<BackSpace>", lambda e: self.prev_box())
+        self.root.bind("<q>", lambda e: self.quit())
+
+        self._load_current_box()
+
+        self.root.update_idletasks()
+        screen_w = self.root.winfo_screenwidth()
+        screen_h = self.root.winfo_screenheight()
+        win_w = min(self.img_w, int(screen_w * 0.85))
+        win_h = min(self.img_h + 80, int(screen_h * 0.85))
+        self.root.geometry(f"{win_w}x{win_h}")
+
+        self.root.after(100, self.fit_to_window)
+        self.root.mainloop()
+
+    def _find_first_pending(self):
+        for i, b in enumerate(self.boxes):
+            if b["status"] == "pending":
+                return i
+        return None
+
+    def _load_current_box(self):
+        box_def = self.boxes[self.current_idx]
+        screenshot = os.path.join(REPO_ROOT, box_def["screenshot"])
+
+        # Only reload image if screenshot changed
+        if screenshot != self.current_screenshot:
+            self.img = Image.open(screenshot).convert("RGB")
+            self.img_w, self.img_h = self.img.size
+            self.current_screenshot = screenshot
+
+        self.sel_start = None
+        self.sel_rect = None
+        self.sel_coords = None
+
+        # If box was previously confirmed, show it
+        if box_def["box"]:
+            b = box_def["box"]
+            self.sel_coords = (
+                int(b[0] * self.img_w), int(b[1] * self.img_h),
+                int(b[2] * self.img_w), int(b[3] * self.img_h),
+            )
+
+        confirmed = sum(1 for b in self.boxes if b["status"] == "confirmed")
+        total = len(self.boxes)
+        self.root.title(f"Measure Mode — {box_def['name']}  [{confirmed}/{total} done]")
+        self.progress_var.set(
+            f"[{self.current_idx + 1}/{total}]  {box_def['name']}  "
+            f"({confirmed}/{total} confirmed)  |  Scene: {box_def['scene']}"
+        )
+        self.desc_var.set(box_def["description"])
+
+        status = box_def["status"]
+        if status == "confirmed" and box_def["box"]:
+            b = box_def["box"]
+            self.info_var.set(
+                f"CONFIRMED: ({b[0]:.4f}, {b[1]:.4f}, {b[2]:.4f}, {b[3]:.4f})  "
+                f"|  Redraw to update  |  Enter=keep  Esc=skip  Backspace=prev"
+            )
+        else:
+            self.info_var.set("Drag to select box region  |  Enter=confirm  Esc=skip  Backspace=prev  q=quit")
+
+    def confirm_box(self):
+        if not self.sel_coords:
+            self.info_var.set("Nothing selected — draw a box first!")
+            return
+
+        px_x, px_y, px_w, px_h = self.sel_coords
+        fx, fy, fw, fh = format_report(self.img_w, self.img_h, px_x, px_y, px_w, px_h)
+
+        box_def = self.boxes[self.current_idx]
+        box_def["box"] = [round(fx, 4), round(fy, 4), round(fw, 4), round(fh, 4)]
+        box_def["status"] = "confirmed"
+
+        # Store color stats for reference
+        pixels = extract_pixels(self.img, px_x, px_y, px_w, px_h)
+        avg, sd, count = image_stats(pixels)
+        ratio = color_ratio(avg)
+        box_def["avg_rgb"] = [round(avg[0], 1), round(avg[1], 1), round(avg[2], 1)]
+        box_def["stddev_sum"] = round(sd[0] + sd[1] + sd[2], 1)
+        box_def["color_ratio"] = [round(ratio[0], 4), round(ratio[1], 4), round(ratio[2], 4)]
+
+        save_box_definitions(self.data)
+
+        print(f"  Confirmed: {box_def['name']}  ({fx:.4f}, {fy:.4f}, {fw:.4f}, {fh:.4f})")
+
+        # Advance to next
+        self._advance()
+
+    def skip_box(self):
+        self._advance()
+
+    def prev_box(self):
+        if self.current_idx > 0:
+            self.current_idx -= 1
+            self._load_current_box()
+            self.fit_to_window()
+
+    def _advance(self):
+        """Move to the next box, or finish if all done."""
+        if self.current_idx + 1 < len(self.boxes):
+            self.current_idx += 1
+            self._load_current_box()
+            # Only re-fit if screenshot changed
+            self.redraw()
+        else:
+            confirmed = sum(1 for b in self.boxes if b["status"] == "confirmed")
+            total = len(self.boxes)
+            if confirmed == total:
+                print(f"\n  All {total} boxes confirmed! Results saved to {BOX_DEFINITIONS_PATH}\n")
+            else:
+                print(f"\n  Reached end. {confirmed}/{total} boxes confirmed.\n")
+                print(f"  Re-run --measure to continue with remaining boxes.\n")
+            self.root.destroy()
+
+    def quit(self):
+        save_box_definitions(self.data)
+        confirmed = sum(1 for b in self.boxes if b["status"] == "confirmed")
+        print(f"\n  Progress saved. {confirmed}/{len(self.boxes)} boxes confirmed.\n")
+        self.root.destroy()
+
+    # ── Drawing ──
+
+    def fit_to_window(self):
+        cw = self.canvas.winfo_width()
+        ch = self.canvas.winfo_height()
+        if cw < 10 or ch < 10:
+            return
+        zx = cw / self.img_w
+        zy = ch / self.img_h
+        self.zoom = min(zx, zy)
+        self.offset_x = (cw - self.img_w * self.zoom) / 2
+        self.offset_y = (ch - self.img_h * self.zoom) / 2
+        self.redraw()
+
+    def img_to_canvas(self, ix, iy):
+        return ix * self.zoom + self.offset_x, iy * self.zoom + self.offset_y
+
+    def canvas_to_img(self, cx, cy):
+        return (cx - self.offset_x) / self.zoom, (cy - self.offset_y) / self.zoom
+
+    def redraw(self):
+        self.canvas.delete("all")
+
+        if self.img is None:
+            return
+
+        cw = self.canvas.winfo_width()
+        ch = self.canvas.winfo_height()
+
+        ix0, iy0 = self.canvas_to_img(0, 0)
+        ix1, iy1 = self.canvas_to_img(cw, ch)
+        ix0 = max(0, int(ix0))
+        iy0 = max(0, int(iy0))
+        ix1 = min(self.img_w, int(ix1) + 1)
+        iy1 = min(self.img_h, int(iy1) + 1)
+        if ix1 <= ix0 or iy1 <= iy0:
+            return
+
+        crop = self.img.crop((ix0, iy0, ix1, iy1))
+        disp_w = max(1, int((ix1 - ix0) * self.zoom))
+        disp_h = max(1, int((iy1 - iy0) * self.zoom))
+        resized = crop.resize((disp_w, disp_h), Image.NEAREST if self.zoom > 2 else Image.BILINEAR)
+        self._photo = ImageTk.PhotoImage(resized)
+        cx0, cy0 = self.img_to_canvas(ix0, iy0)
+        self.canvas.create_image(cx0, cy0, image=self._photo, anchor="nw")
+
+        # Draw previously confirmed boxes from same screenshot (dimmed)
+        for i, b in enumerate(self.boxes):
+            if i == self.current_idx:
+                continue
+            if b["box"] and b["screenshot"] == self.boxes[self.current_idx]["screenshot"]:
+                bx = b["box"]
+                px = bx[0] * self.img_w
+                py = bx[1] * self.img_h
+                pw = bx[2] * self.img_w
+                ph = bx[3] * self.img_h
+                cx0, cy0 = self.img_to_canvas(px, py)
+                cx1, cy1 = self.img_to_canvas(px + pw, py + ph)
+                self.canvas.create_rectangle(cx0, cy0, cx1, cy1,
+                                             outline="#666666", width=1, dash=(3, 3))
+                short = b["name"].split("/")[-1]
+                self.canvas.create_text(cx0 + 2, cy0 - 2, text=short,
+                                        fill="#666666", anchor="sw", font=("Menlo", 8))
+
+        # Draw current selection
+        if self.sel_coords:
+            px_x, px_y, px_w, px_h = self.sel_coords
+            sx0, sy0 = self.img_to_canvas(px_x, px_y)
+            sx1, sy1 = self.img_to_canvas(px_x + px_w, px_y + px_h)
+            self.canvas.create_rectangle(sx0, sy0, sx1, sy1,
+                                         outline="#00ffff", width=2, dash=(4, 4))
+
+    def draw_crosshair(self, cx, cy):
+        for item in self.crosshair_items:
+            self.canvas.delete(item)
+        self.crosshair_items.clear()
+        s = self.CROSSHAIR_SIZE
+        self.crosshair_items.append(
+            self.canvas.create_line(cx - s, cy, cx + s, cy, fill="#ff0", width=1))
+        self.crosshair_items.append(
+            self.canvas.create_line(cx, cy - s, cx, cy + s, fill="#ff0", width=1))
+
+    # ── Selection ──
+
+    def on_press(self, event):
+        self.sel_start = (event.x, event.y)
+        self.sel_coords = None
+        if self.sel_rect:
+            self.canvas.delete(self.sel_rect)
+            self.sel_rect = None
+
+    def on_drag(self, event):
+        if not self.sel_start:
+            return
+        x0, y0 = self.sel_start
+        x1, y1 = event.x, event.y
+        if self.sel_rect:
+            self.canvas.delete(self.sel_rect)
+        self.sel_rect = self.canvas.create_rectangle(
+            x0, y0, x1, y1, outline="#00ffff", width=2, dash=(4, 4))
+        ix0, iy0 = self.canvas_to_img(min(x0, x1), min(y0, y1))
+        ix1, iy1 = self.canvas_to_img(max(x0, x1), max(y0, y1))
+        ix0, iy0 = max(0, int(ix0)), max(0, int(iy0))
+        ix1, iy1 = min(self.img_w, int(ix1)), min(self.img_h, int(iy1))
+        pw, ph = ix1 - ix0, iy1 - iy0
+        if pw > 0 and ph > 0:
+            fx, fy = ix0 / self.img_w, iy0 / self.img_h
+            fw, fh = pw / self.img_w, ph / self.img_h
+            self.info_var.set(
+                f"Selecting: ({ix0},{iy0}) {pw}x{ph}px  |  "
+                f"Box({fx:.4f}, {fy:.4f}, {fw:.4f}, {fh:.4f})  |  Enter=confirm")
+
+    def on_release(self, event):
+        if not self.sel_start:
+            return
+        x0, y0 = self.sel_start
+        x1, y1 = event.x, event.y
+        ix0, iy0 = self.canvas_to_img(min(x0, x1), min(y0, y1))
+        ix1, iy1 = self.canvas_to_img(max(x0, x1), max(y0, y1))
+        px_x = max(0, int(ix0))
+        px_y = max(0, int(iy0))
+        px_w = min(self.img_w, int(ix1)) - px_x
+        px_h = min(self.img_h, int(iy1)) - px_y
+        self.sel_start = None
+
+        if px_w < 2 or px_h < 2:
+            # Single pixel click — show info
+            ix, iy = self.canvas_to_img(event.x, event.y)
+            ix, iy = int(ix), int(iy)
+            if 0 <= ix < self.img_w and 0 <= iy < self.img_h:
+                p = self.img.getpixel((ix, iy))
+                self.info_var.set(
+                    f"Pixel ({ix},{iy}): RGB=({p[0]},{p[1]},{p[2]})  "
+                    f"norm=({ix/self.img_w:.4f},{iy/self.img_h:.4f})")
+            return
+
+        self.sel_coords = (px_x, px_y, px_w, px_h)
+        self.redraw()
+
+        fx, fy, fw, fh = format_report(self.img_w, self.img_h, px_x, px_y, px_w, px_h)
+        self.info_var.set(
+            f"Selected: Box({fx:.4f}, {fy:.4f}, {fw:.4f}, {fh:.4f})  "
+            f"{px_w}x{px_h}px  |  Press Enter to confirm")
+
+    def on_right_click(self, event):
+        self.sel_coords = None
+        if self.sel_rect:
+            self.canvas.delete(self.sel_rect)
+            self.sel_rect = None
+        self.redraw()
+        self.info_var.set("Selection cleared — draw a new box")
+
+    # ── Pan / Zoom ──
+
+    def on_pan_start(self, event):
+        self.pan_start = (event.x, event.y, self.offset_x, self.offset_y)
+
+    def on_pan_move(self, event):
+        if not self.pan_start:
+            return
+        sx, sy, ox, oy = self.pan_start
+        self.offset_x = ox + (event.x - sx)
+        self.offset_y = oy + (event.y - sy)
+        self.redraw()
+
+    def do_zoom(self, event, factor):
+        ix, iy = self.canvas_to_img(event.x, event.y)
+        self.zoom *= factor
+        self.zoom = max(0.1, min(50, self.zoom))
+        self.offset_x = event.x - ix * self.zoom
+        self.offset_y = event.y - iy * self.zoom
+        self.redraw()
+
+    def on_scroll(self, event):
+        self.do_zoom(event, 1.15 if event.delta > 0 else 1 / 1.15)
+
+    def on_scroll_up(self, event):
+        self.do_zoom(event, 1.15)
+
+    def on_scroll_down(self, event):
+        self.do_zoom(event, 1 / 1.15)
+
+    def on_motion(self, event):
+        if self.sel_start:
+            return
+        self.draw_crosshair(event.x, event.y)
+        ix, iy = self.canvas_to_img(event.x, event.y)
+        ix, iy = int(ix), int(iy)
+        if 0 <= ix < self.img_w and 0 <= iy < self.img_h:
+            p = self.img.getpixel((ix, iy))
+            self.info_var.set(
+                f"({ix},{iy})  RGB=({p[0]:3d},{p[1]:3d},{p[2]:3d})  "
+                f"norm=({ix/self.img_w:.4f},{iy/self.img_h:.4f})")
+
+
 # ─── Main ───────────────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
@@ -970,6 +1411,14 @@ if __name__ == "__main__":
 
     if len(sys.argv) >= 2 and sys.argv[1] == "--list":
         list_all_boxes()
+        sys.exit(0)
+
+    if len(sys.argv) >= 2 and sys.argv[1] == "--measure":
+        MeasureMode()
+        sys.exit(0)
+
+    if len(sys.argv) >= 2 and sys.argv[1] in ("--measure-status", "--ms"):
+        measure_status()
         sys.exit(0)
 
     # CLI modes that require an image path as first arg
