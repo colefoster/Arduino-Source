@@ -135,6 +135,14 @@ AutoLadder::AutoLadder()
         "http://localhost:8265",
         "http://localhost:8265"
     )
+    , AI_TEAM_PASTE(
+        "<b>Team (Showdown Paste):</b><br>"
+        "Paste your team in Showdown format. Used by the AI to know your own team's moves, items, and abilities. "
+        "Export from the team builder or copy from Showdown.",
+        LockMode::LOCK_WHILE_RUNNING,
+        "",
+        "Kingambit @ Bright Powder\nAbility: Defiant\n- Sucker Punch\n- Iron Head\n- Swords Dance\n- Protect\n\n..."
+    )
     , GO_HOME_WHEN_DONE(false)
     , NOTIFICATION_STATUS_UPDATE("Status Update", true, false, std::chrono::seconds(3600))
     , NOTIFICATION_MATCH_FINISHED("Match Finished", true, false, std::chrono::seconds(0))
@@ -151,6 +159,7 @@ AutoLadder::AutoLadder()
     PA_ADD_OPTION(MOVE_STRATEGY);
     PA_ADD_OPTION(ALLOW_MEGA);
     PA_ADD_OPTION(AI_SERVER_URL);
+    PA_ADD_OPTION(AI_TEAM_PASTE);
     PA_ADD_OPTION(GO_HOME_WHEN_DONE);
     PA_ADD_OPTION(NOTIFICATIONS);
 }
@@ -437,6 +446,32 @@ void AutoLadder::program(SingleSwitchProgramEnvironment& env, ProControllerConte
 
     //  Initialize AI components if using AI strategy.
     if (MOVE_STRATEGY == MoveStrategy::AI){
+        //  Parse team from Showdown paste.
+        std::string paste = AI_TEAM_PASTE;
+        if (!paste.empty()){
+            int parsed = m_state_tracker.load_team_from_showdown_paste(paste);
+            env.console.log(
+                "[AI] Loaded " + std::to_string(parsed) + " Pokemon from team paste.",
+                COLOR_GREEN
+            );
+            for (int i = 0; i < parsed; i++){
+                const auto& mon = m_state_tracker.own(i);
+                std::string moves_str;
+                for (const auto& m : mon.known_moves){
+                    if (!moves_str.empty()) moves_str += ", ";
+                    moves_str += m;
+                }
+                env.console.log(
+                    "  " + mon.species + " @ " + mon.item +
+                    " [" + mon.ability + "] {" + moves_str + "}",
+                    COLOR_BLUE
+                );
+            }
+        }else{
+            env.console.log("[AI] No team paste provided. Own team info will be incomplete.", COLOR_RED);
+        }
+
+        //  Connect to inference server.
         m_inference_client = std::make_unique<InferenceClient>(AI_SERVER_URL);
         if (!m_inference_client->health_check(env.console)){
             env.console.log("AI inference server not reachable. Falling back to AlwaysFirstMove.", COLOR_RED);

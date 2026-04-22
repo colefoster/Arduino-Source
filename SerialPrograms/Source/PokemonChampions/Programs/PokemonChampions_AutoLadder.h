@@ -12,6 +12,7 @@
 #include "Common/Cpp/Options/EnumDropdownOption.h"
 #include "Common/Cpp/Options/BooleanCheckBoxOption.h"
 #include "Common/Cpp/Options/StringOption.h"
+#include "Common/Cpp/Options/TextEditOption.h"
 #include "Common/Cpp/Options/ButtonOption.h"
 #include "CommonFramework/Notifications/EventNotificationsTable.h"
 #include "NintendoSwitch/NintendoSwitch_SingleSwitchProgram.h"
@@ -115,6 +116,7 @@ private:
 
     //  AI-specific options (only used when MOVE_STRATEGY == AI).
     StringOption AI_SERVER_URL;
+    TextEditOption AI_TEAM_PASTE;
 
     EventNotificationOption NOTIFICATION_STATUS_UPDATE;
     EventNotificationOption NOTIFICATION_MATCH_FINISHED;
