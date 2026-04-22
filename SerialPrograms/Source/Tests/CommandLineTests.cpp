@@ -293,4 +293,77 @@ int run_command_line_tests(){
 }
 
 
+int run_command_line_tests(const std::string& path){
+    const QString cleaned = QDir::cleanPath(QString::fromStdString(path));
+    QFileInfo info(cleaned);
+
+    if (!info.exists()){
+        cerr << "Error: path does not exist: " << path << endl;
+        return 1;
+    }
+
+    std::vector<QString> ignore_list;  // empty — no ignore list in CLI mode
+    size_t num_passed = 0;
+
+    if (info.isFile()){
+        //  Single file: derive test_space and test_name from parent directories.
+        //  Expected: .../TestSpace/TestObject/file.png
+        QDir obj_dir  = info.dir();
+        QDir space_dir = QDir(obj_dir.path());
+        // Go up one level to get the space dir
+        // obj_dir = .../PokemonChampions/OCRDump
+        // We need obj_dir's parent = .../PokemonChampions
+        // and obj_dir's name = OCRDump
+        std::string test_name  = obj_dir.dirName().toStdString();
+
+        QDir parent_of_obj(obj_dir.path());
+        parent_of_obj.cdUp();
+        std::string test_space = QFileInfo(obj_dir.path()).dir().dirName().toStdString();
+
+        const TestFunction test_func = find_test_function(test_space, test_name);
+        if (test_func == nullptr){
+            cerr << "Error: no test registered for " << test_space << "_" << test_name << endl;
+            return 2;
+        }
+
+        print_equals();
+        cout << "Testing " << test_space << "/" << test_name << ":" << endl;
+        RETURN_IF_TEST_FAILED(test_func, cleaned.toStdString(), num_passed);
+    }else{
+        //  Directory: figure out what level we're at.
+        //  Check if this directory IS a test object (has a registered test).
+        QDir dir(cleaned);
+        std::string dir_name = dir.dirName().toStdString();
+        std::string parent_name = QFileInfo(dir.path()).dir().dirName().toStdString();
+
+        //  Try as test object: parent = test_space, dir = test_name
+        TestFunction test_func = find_test_function(parent_name, dir_name);
+        if (test_func != nullptr){
+            //  This is a test object directory.
+            print_equals();
+            cout << "Testing " << dir_name << ":" << endl;
+            RETURN_IF_NOT_ZERO(run_test_obj_dir(test_func, cleaned, num_passed, ignore_list));
+        }else{
+            //  Try as test space: dir contains test object subdirectories.
+            QFileInfo space_info(cleaned);
+            int ret = run_test_space(space_info, num_passed, ignore_list);
+            if (ret != 0) return ret;
+
+            //  If that found nothing, try as root: dir contains test space subdirectories.
+            if (num_passed == 0){
+                dir.setFilter(QDir::Filter::Dirs);
+                const QFileInfoList sub_dirs = dir.entryInfoList();
+                for (const QFileInfo& sub : sub_dirs){
+                    RETURN_IF_NOT_ZERO(run_test_space(sub, num_passed, ignore_list));
+                }
+            }
+        }
+    }
+
+    print_equals();
+    cout << num_passed << " test" << (num_passed > 1 ? "s" : "") << " passed" << endl;
+    return 0;
+}
+
+
 }

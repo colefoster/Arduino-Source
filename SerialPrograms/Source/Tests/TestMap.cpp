@@ -9,6 +9,7 @@
 #include "CommonFramework_Tests.h"
 #include "Kernels_Tests.h"
 #include "NintendoSwitch_Tests.h"
+#include "PokemonChampions_Tests.h"
 #include "PokemonFRLG_Tests.h"
 #include "PokemonHome_Tests.h"
 #include "PokemonLA_Tests.h"
@@ -309,6 +310,21 @@ const std::map<std::string, TestFunction> TEST_MAP = {
     {"PokemonLZA_HyperspaceCalorieDetector", std::bind(image_int_detector_helper, test_pokemonLZA_HyperspaceCalorieDetector, _1)},
     {"PokemonLZA_FlavorPowerScreenDetector", test_pokemonLZA_FlavorPowerScreenDetector},
     {"PokemonLZA_DonutBerriesReader", test_pokemonLZA_DonutBerriesReader},
+    //  PokemonChampions — Screen Detectors
+    {"PokemonChampions_MoveSelectDetector", std::bind(image_bool_detector_helper, test_pokemonChampions_MoveSelectDetector, _1)},
+    {"PokemonChampions_ActionMenuDetector", std::bind(image_bool_detector_helper, test_pokemonChampions_ActionMenuDetector, _1)},
+    {"PokemonChampions_ResultScreenDetector", std::bind(image_bool_detector_helper, test_pokemonChampions_ResultScreenDetector, _1)},
+    {"PokemonChampions_PreparingForBattleDetector", std::bind(image_bool_detector_helper, test_pokemonChampions_PreparingForBattleDetector, _1)},
+    {"PokemonChampions_PostMatchScreenDetector", std::bind(image_bool_detector_helper, test_pokemonChampions_PostMatchScreenDetector, _1)},
+    {"PokemonChampions_MainMenuDetector", std::bind(image_bool_detector_helper, test_pokemonChampions_MainMenuDetector, _1)},
+    //  PokemonChampions — OCR Readers
+    {"PokemonChampions_MoveNameReader", std::bind(image_words_detector_helper, test_pokemonChampions_MoveNameReader, _1)},
+    {"PokemonChampions_SpeciesReader", std::bind(image_words_detector_helper, test_pokemonChampions_SpeciesReader, _1)},
+    {"PokemonChampions_OpponentHPReader", std::bind(image_int_detector_helper, test_pokemonChampions_OpponentHPReader, _1)},
+    {"PokemonChampions_BattleLogReader", std::bind(image_words_detector_helper, test_pokemonChampions_BattleLogReader, _1)},
+    {"PokemonChampions_MoveSelectCursorSlot", std::bind(image_int_detector_helper, test_pokemonChampions_MoveSelectCursorSlot, _1)},
+    //  PokemonChampions — Dev/Debug
+    {"PokemonChampions_OCRDump", std::bind(image_void_detector_helper, test_pokemonChampions_OCRDump, _1)},
     {"PokemonFRLG_AdvanceWhiteDialogDetector", std::bind(image_bool_detector_helper, test_pokemonFRLG_AdvanceWhiteDialogDetector, _1)},
     {"PokemonFRLG_ShinySymbolDetector", std::bind(image_bool_detector_helper, test_pokemonFRLG_ShinySymbolDetector, _1)},
     {"PokemonFRLG_SelectionDialogDetector", std::bind(image_bool_detector_helper, test_pokemonFRLG_SelectionDialogDetector, _1)},
