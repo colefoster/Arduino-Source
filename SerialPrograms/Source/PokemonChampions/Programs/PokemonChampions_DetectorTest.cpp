@@ -71,8 +71,8 @@ DetectorTest::DetectorTest()
         "Milliseconds between auto-screenshots. Only saves on screen transitions or "
         "at this interval within the same screen type.",
         LockMode::UNLOCK_WHILE_RUNNING,
-        2000,
-        500
+        500,
+        100
     )
 {
     PA_ADD_OPTION(AUTO_SCREENSHOT);
@@ -150,7 +150,7 @@ void DetectorTest::program(SingleSwitchProgramEnvironment& env, ProControllerCon
 
     //  Poll loop.
     while (true){
-        context.wait_for(std::chrono::milliseconds(500));
+        context.wait_for(std::chrono::milliseconds(250));
 
         VideoSnapshot snapshot = env.console.video().snapshot();
         if (!snapshot){
