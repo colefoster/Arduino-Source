@@ -64,6 +64,10 @@ public:
     void set_mode(BattleMode mode);
     void set_own_team(const std::array<ConfiguredPokemon, 6>& team);
 
+    //  Parse a Showdown paste format team string and populate own team.
+    //  Returns the number of Pokemon successfully parsed (0-6).
+    int load_team_from_showdown_paste(const std::string& paste);
+
     //  ── Per-frame updates ───────────────────────────────────────
 
     //  Update from the HUD reader (opponent species + HP, own HP).

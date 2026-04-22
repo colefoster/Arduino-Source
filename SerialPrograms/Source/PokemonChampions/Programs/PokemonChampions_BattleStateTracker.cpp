@@ -59,6 +59,129 @@ void BattleStateTracker::set_mode(BattleMode mode){
     m_mode = mode;
 }
 
+// ─── Showdown paste parser ────────────────────────────────────────
+
+//  Convert a display name to a slug: "Sucker Punch" -> "sucker-punch"
+static std::string to_slug(const std::string& name){
+    std::string slug;
+    for (char c : name){
+        if (c == ' ') slug += '-';
+        else if (c == '\'') {}  //  skip apostrophes
+        else slug += static_cast<char>(std::tolower(static_cast<unsigned char>(c)));
+    }
+    return slug;
+}
+
+static std::string trim(const std::string& s){
+    size_t start = s.find_first_not_of(" \t\r\n");
+    if (start == std::string::npos) return "";
+    size_t end = s.find_last_not_of(" \t\r\n");
+    return s.substr(start, end - start + 1);
+}
+
+
+int BattleStateTracker::load_team_from_showdown_paste(const std::string& paste){
+    //  Parse Showdown paste format:
+    //    Species @ Item        (or: Nickname (Species) @ Item)
+    //    Ability: AbilityName
+    //    EVs: ...
+    //    Nature Nature
+    //    - Move 1
+    //    - Move 2
+    //    - Move 3
+    //    - Move 4
+    //    (blank line separates Pokemon)
+
+    std::array<ConfiguredPokemon, 6> team;
+    int count = 0;
+
+    //  Split into lines.
+    std::vector<std::string> lines;
+    std::string current_line;
+    for (char c : paste){
+        if (c == '\n'){
+            lines.push_back(current_line);
+            current_line.clear();
+        }else{
+            current_line += c;
+        }
+    }
+    if (!current_line.empty()) lines.push_back(current_line);
+
+    ConfiguredPokemon* current = nullptr;
+    int move_idx = 0;
+
+    for (const auto& raw_line : lines){
+        std::string line = trim(raw_line);
+
+        //  Blank line = end of current Pokemon.
+        if (line.empty()){
+            if (current != nullptr){
+                current = nullptr;
+            }
+            continue;
+        }
+
+        //  Start a new Pokemon (first non-blank line after a gap).
+        if (current == nullptr){
+            if (count >= 6) break;
+            current = &team[count];
+            move_idx = 0;
+            count++;
+
+            //  Parse "Species @ Item" or "Nickname (Species) @ Item"
+            std::string left, item;
+            size_t at_pos = line.find('@');
+            if (at_pos != std::string::npos){
+                left = trim(line.substr(0, at_pos));
+                item = trim(line.substr(at_pos + 1));
+                current->item = to_slug(item);
+            }else{
+                left = trim(line);
+            }
+
+            //  Handle nickname: "Nickname (Species)" or just "Species"
+            size_t paren_open = left.find('(');
+            size_t paren_close = left.find(')');
+            if (paren_open != std::string::npos && paren_close != std::string::npos){
+                current->species = to_slug(trim(left.substr(paren_open + 1, paren_close - paren_open - 1)));
+            }else{
+                //  Strip gender suffix: "Kingambit (M)" or "Kingambit (F)"
+                if (left.size() > 4 && left[left.size()-1] == ')' &&
+                    (left[left.size()-2] == 'M' || left[left.size()-2] == 'F') &&
+                    left[left.size()-3] == '(')
+                {
+                    left = trim(left.substr(0, left.size() - 4));
+                }
+                current->species = to_slug(left);
+            }
+            continue;
+        }
+
+        //  Ability line.
+        if (line.size() > 9 && line.substr(0, 8) == "Ability:"){
+            current->ability = to_slug(trim(line.substr(8)));
+            continue;
+        }
+
+        //  Move line.
+        if (line.size() > 2 && line[0] == '-' && line[1] == ' '){
+            if (move_idx < 4){
+                current->moves[move_idx] = to_slug(trim(line.substr(2)));
+                move_idx++;
+            }
+            continue;
+        }
+
+        //  Skip EVs, IVs, Nature, Level lines — not needed for the model.
+    }
+
+    //  Finalize.
+    set_own_team(team);
+    return count;
+}
+
+
 void BattleStateTracker::set_own_team(const std::array<ConfiguredPokemon, 6>& team){
     for (size_t i = 0; i < 6; i++){
         m_own_team[i].species = team[i].species;
