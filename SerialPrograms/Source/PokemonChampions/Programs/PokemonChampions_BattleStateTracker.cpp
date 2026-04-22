@@ -150,9 +150,9 @@ void BattleStateTracker::update_from_log(const BattleLogEvent& event){
             auto& team = event.is_opponent ? m_opp_team : m_own_team;
             auto& active = event.is_opponent ? m_opp_active : m_own_active;
             //  Apply to first active slot (simplified).
-            team[active[0]].boosts[idx] = std::clamp(
-                (int)(team[active[0]].boosts[idx]) + event.boost_stages, -6, 6
-            );
+            team[active[0]].boosts[idx] = static_cast<int8_t>(std::clamp(
+                static_cast<int>(team[active[0]].boosts[idx]) + event.boost_stages, -6, 6
+            ));
         }
         break;
     }
