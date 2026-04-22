@@ -65,10 +65,11 @@ OCR::StringMatchResult SpeciesNameOCR::read_substring(
 // ─── Helpers ─────────────────────────────────────────────────────
 
 static std::string raw_ocr_line(const ImageViewRGB32& crop){
-    //  Upscale small crops for better Tesseract accuracy.
-    //  If the crop is under 200px wide, scale up to ~300px.
-    if (crop.width() < 200 && crop.width() > 0){
-        size_t scale = 300 / crop.width() + 1;
+    //  Always upscale HP/number crops for better Tesseract accuracy.
+    //  The game's italic bold font is hard to read at native resolution.
+    //  Scale up to at least 400px wide.
+    if (crop.width() > 0 && crop.width() < 400){
+        size_t scale = 400 / crop.width() + 1;
         ImageRGB32 scaled = crop.scale_to(crop.width() * scale, crop.height() * scale);
         return OCR::ocr_read(Language::English, scaled, OCR::PageSegMode::SINGLE_LINE);
     }
