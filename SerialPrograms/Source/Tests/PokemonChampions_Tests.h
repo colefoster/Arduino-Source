@@ -47,6 +47,17 @@ int test_pokemonChampions_BattleLogReader(const ImageViewRGB32& image, const std
 //  Filename: <prefix>_<cursor-slot>.png  (e.g. frame_2.png for slot 2)
 int test_pokemonChampions_MoveSelectCursorSlot(const ImageViewRGB32& image, int target);
 
+//  ── Team Scanner ──────────────────────────────────────────────────
+
+//  Filename: standard bool-target convention.
+int test_pokemonChampions_TeamSelectDetector(const ImageViewRGB32& image, bool target);
+
+//  Filename: <prefix>_<species0>_<species1>_..._<species5>.png (6 species slugs)
+int test_pokemonChampions_TeamSelectReader(const ImageViewRGB32& image, const std::vector<std::string>& words);
+
+//  Filename: <prefix>_<species>_<move0>_<move1>_<move2>_<move3>_<ability>_<item>.png
+int test_pokemonChampions_TeamSummaryReader(const ImageViewRGB32& image, const std::vector<std::string>& words);
+
 //  ── Void (development / debug) ─────────────────────────────────────
 
 //  Runs all OCR readers and prints results. No pass/fail — for dev iteration.

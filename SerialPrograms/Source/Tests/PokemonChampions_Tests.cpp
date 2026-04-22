@@ -28,6 +28,11 @@
 #include "PokemonChampions/Inference/PokemonChampions_BattleHUDReader.h"
 #include "PokemonChampions/Inference/PokemonChampions_BattleLogReader.h"
 
+//  Team scanner
+#include "PokemonChampions/Inference/PokemonChampions_TeamSelectDetector.h"
+#include "PokemonChampions/Inference/PokemonChampions_TeamSelectReader.h"
+#include "PokemonChampions/Inference/PokemonChampions_TeamSummaryReader.h"
+
 #include <iostream>
 using std::cout;
 using std::cerr;
@@ -260,6 +265,108 @@ int test_pokemonChampions_MoveSelectCursorSlot(const ImageViewRGB32& image, int 
 }
 
 
+// ─── TeamSelectDetector ─────────────────────────────────────────────
+
+int test_pokemonChampions_TeamSelectDetector(const ImageViewRGB32& image, bool target){
+    TeamSelectDetector detector;
+    bool result = detector.detect(image);
+    TEST_RESULT_EQUAL(result, target);
+    return 0;
+}
+
+
+// ─── TeamSelectReader ───────────────────────────────────────────────
+//
+//  Filename convention: <prefix>_<species0>_<species1>_..._<species5>.png
+//  Each species is a slug. Use "NONE" for unreadable/nicknamed slots.
+
+int test_pokemonChampions_TeamSelectReader(const ImageViewRGB32& image, const std::vector<std::string>& words){
+    if (words.size() < 6){
+        cerr << "Error: TeamSelectReader test needs 6 species slugs in filename "
+             << "(got " << words.size() << " words total)." << endl;
+        return 1;
+    }
+
+    std::array<std::string, 6> expected;
+    for (size_t i = 0; i < 6; i++){
+        const std::string& slug = words[words.size() - 6 + i];
+        expected[i] = (slug == "NONE") ? "" : slug;
+    }
+
+    auto& logger = global_logger_command_line();
+    TeamSelectReader reader(Language::English);
+    auto result = reader.read_all_slots(logger, image);
+
+    for (size_t i = 0; i < 6; i++){
+        if (result[i].species != expected[i]){
+            cerr << "Error: TeamSelectReader slot " << i
+                 << " species got \"" << result[i].species
+                 << "\" but expected \"" << expected[i] << "\"." << endl;
+            return 1;
+        }
+    }
+
+    cout << "TeamSelectReader: all 6 species matched." << endl;
+    return 0;
+}
+
+
+// ─── TeamSummaryReader ──────────────────────────────────────────────
+//
+//  Filename convention:
+//    <prefix>_<species>_<move0>_<move1>_<move2>_<move3>_<ability>_<item>.png
+//  Last 7 words: species, 4 moves, ability, item. Use "NONE" for failures.
+
+int test_pokemonChampions_TeamSummaryReader(const ImageViewRGB32& image, const std::vector<std::string>& words){
+    if (words.size() < 7){
+        cerr << "Error: TeamSummaryReader test needs 7 slugs in filename "
+             << "(species, 4 moves, ability, item). Got " << words.size() << " words." << endl;
+        return 1;
+    }
+
+    size_t base = words.size() - 7;
+    std::string exp_species = (words[base] == "NONE") ? "" : words[base];
+    std::array<std::string, 4> exp_moves;
+    for (size_t i = 0; i < 4; i++){
+        exp_moves[i] = (words[base + 1 + i] == "NONE") ? "" : words[base + 1 + i];
+    }
+    std::string exp_ability = (words[base + 5] == "NONE") ? "" : words[base + 5];
+    std::string exp_item    = (words[base + 6] == "NONE") ? "" : words[base + 6];
+
+    auto& logger = global_logger_command_line();
+    TeamSummaryReader reader(Language::English);
+    TeamSummaryInfo result = reader.read_all(logger, image);
+
+    bool ok = true;
+    if (result.species != exp_species){
+        cerr << "Error: TeamSummaryReader species got \"" << result.species
+             << "\" expected \"" << exp_species << "\"." << endl;
+        ok = false;
+    }
+    for (size_t i = 0; i < 4; i++){
+        if (result.moves[i] != exp_moves[i]){
+            cerr << "Error: TeamSummaryReader move " << i << " got \"" << result.moves[i]
+                 << "\" expected \"" << exp_moves[i] << "\"." << endl;
+            ok = false;
+        }
+    }
+    if (result.ability != exp_ability){
+        cerr << "Error: TeamSummaryReader ability got \"" << result.ability
+             << "\" expected \"" << exp_ability << "\"." << endl;
+        ok = false;
+    }
+    if (result.item != exp_item){
+        cerr << "Error: TeamSummaryReader item got \"" << result.item
+             << "\" expected \"" << exp_item << "\"." << endl;
+        ok = false;
+    }
+
+    if (!ok) return 1;
+    cout << "TeamSummaryReader: all fields matched." << endl;
+    return 0;
+}
+
+
 // ─── OCR Dump (void/dev) ────────────────────────────────────────────
 //
 //  Runs all readers on the image and prints results. Always returns 0.
@@ -315,6 +422,34 @@ int test_pokemonChampions_OCRDump(const ImageViewRGB32& image){
             auto own_hp = reader.read_own_hp(logger, image, slot);
             cout << "  own " << (int)slot << " HP: " << own_hp.first << "/" << own_hp.second << endl;
         }
+    }
+
+    //  Team select
+    {
+        TeamSelectDetector detector;
+        cout << "=== Team Select Detector ===" << endl;
+        cout << "  detected: " << detector.detect(image) << endl;
+
+        TeamSelectReader ts_reader(Language::English);
+        auto slots = ts_reader.read_all_slots(logger, image);
+        cout << "=== Team Select Reader ===" << endl;
+        for (size_t i = 0; i < 6; i++){
+            cout << "  slot " << i << ": species=\"" << slots[i].species
+                 << "\" item=\"" << slots[i].item << "\"" << endl;
+        }
+    }
+
+    //  Team summary
+    {
+        TeamSummaryReader summary_reader(Language::English);
+        auto info = summary_reader.read_all(logger, image);
+        cout << "=== Team Summary Reader ===" << endl;
+        cout << "  species: \"" << info.species << "\"" << endl;
+        for (size_t i = 0; i < 4; i++){
+            cout << "  move " << i << ": \"" << info.moves[i] << "\"" << endl;
+        }
+        cout << "  ability: \"" << info.ability << "\"" << endl;
+        cout << "  item: \"" << info.item << "\"" << endl;
     }
 
     //  Battle log
