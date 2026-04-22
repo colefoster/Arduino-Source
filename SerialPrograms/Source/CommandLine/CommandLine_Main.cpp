@@ -3,64 +3,56 @@
  *  From: https://github.com/PokemonAutomation/
  *
  *  Command-line executable for Pokemon Automation utilities.
- *  GUI-free tool for tasks like camera stream checks, debugging, etc.
+ *
+ *  Usage:
+ *    SerialProgramsCommandLine --test <path>     Run tests on a directory or file
+ *    SerialProgramsCommandLine <port_name>       Test controller on a serial port
+ *
+ *  Test path can be:
+ *    CommandLineTests/                                          (run all tests)
+ *    CommandLineTests/PokemonChampions/                         (run all Champions tests)
+ *    CommandLineTests/PokemonChampions/OCRDump/                 (run one test category)
+ *    CommandLineTests/PokemonChampions/OCRDump/frame.png        (run on a single file)
  */
 
 #include <iostream>
+#include <string>
+#include <cstring>
 #include "Common/Cpp/Color.h"
 #include "CommonFramework/Logging/Logger.h"
-// #include "CommonFramework/Logging/OutputRedirector.h"
+#include "Tests/CommandLineTests.h"
 #include "Integrations/PybindSwitchController.h"
 #include "NintendoSwitch/Controllers/NintendoSwitch_ControllerButtons.h"
 
 using namespace PokemonAutomation;
 using namespace PokemonAutomation::NintendoSwitch;
 
-int main(int argc, char* argv[]){
-//     // Set up output redirection for logging
-//     OutputRedirector redirect_stdout(std::cout, "stdout", Color());
-//     OutputRedirector redirect_stderr(std::cerr, "stderr", COLOR_RED);
+static void print_usage(const char* argv0){
+    std::cerr << "Usage:" << std::endl;
+    std::cerr << "  " << argv0 << " --test <path>     Run tests on a directory or file" << std::endl;
+    std::cerr << "  " << argv0 << " <port_name>       Test controller on a serial port" << std::endl;
+}
 
-    // Get the global command-line logger (suitable for command-line tools)
-    Logger& logger = global_logger_command_line();
-
-    logger.log("================================================================================");
-    logger.log("Starting Program...");
-    logger.log("Pokemon Automation - Command Line Tool");
-
-    // Check if port name argument is provided
-    if (argc < 2){
-        logger.log("Usage: " + std::string(argv[0]) + " <port_name>", COLOR_RED);
-        logger.log("Example: " + std::string(argv[0]) + " cu.usbserial-0001");
-        return 1;
-    }
-
-    // Test PybindSwitchProController
+static int run_controller_test(Logger& logger, const std::string& port_name){
     logger.log("================================================================================");
     logger.log("Testing PybindSwitchProController...");
 
     try{
-        // Create controller with port name from command-line argument
-        const std::string port_name = argv[1];
         logger.log("Creating PybindSwitchProController with port: " + port_name);
 
         PybindSwitchProController controller(port_name);
         controller.wait_for_ready(5000);
 
-        // Check if controller is ready
         if (controller.is_ready()){
             logger.log("Controller is ready!", COLOR_GREEN);
             logger.log("Status: " + controller.current_status());
 
-            // Mash A button for 3 seconds
             logger.log("Mashing A button for 3 seconds...");
 
             for (int i = 0; i < 30; i++){
-                // Push A button: delay=0ms, hold=50ms, release=50ms, button=BUTTON_A
                 controller.push_button(0, 50, 50, static_cast<uint32_t>(BUTTON_A));
             }
 
-            // Wait for all button commands to complete
             logger.log("Waiting for all requests to complete...");
             controller.wait_for_all_requests();
 
@@ -74,9 +66,44 @@ int main(int argc, char* argv[]){
         logger.log("Error during controller test: " + std::string(e.what()), COLOR_RED);
     }
 
-    logger.log("================================================================================");
-    logger.log("Program completed successfully.");
-    logger.log("================================================================================");
-
     return 0;
+}
+
+int main(int argc, char* argv[]){
+    Logger& logger = global_logger_command_line();
+
+    logger.log("================================================================================");
+    logger.log("Pokemon Automation - Command Line Tool");
+
+    if (argc < 2){
+        print_usage(argv[0]);
+        return 1;
+    }
+
+    //  --test mode: run the test framework on a given path.
+    if (std::strcmp(argv[1], "--test") == 0){
+        if (argc < 3){
+            std::cerr << "Error: --test requires a path argument." << std::endl;
+            print_usage(argv[0]);
+            return 1;
+        }
+        const std::string test_path = argv[2];
+        logger.log("Running tests on: " + test_path);
+        int ret = run_command_line_tests(test_path);
+        logger.log("================================================================================");
+        if (ret == 0){
+            logger.log("All tests passed.", COLOR_GREEN);
+        }else{
+            logger.log("Tests failed.", COLOR_RED);
+        }
+        return ret;
+    }
+
+    //  Legacy mode: controller test.
+    const std::string port_name = argv[1];
+    int ret = run_controller_test(logger, port_name);
+
+    logger.log("================================================================================");
+    logger.log("Program completed.");
+    return ret;
 }

@@ -89,6 +89,7 @@
 #ifndef PokemonAutomation_Tests_CommandLineTests_H
 #define PokemonAutomation_Tests_CommandLineTests_H
 
+#include <string>
 
 namespace PokemonAutomation{
 
@@ -97,6 +98,15 @@ namespace PokemonAutomation{
 // This function is only called when GlobalSettings::COMMAND_LINE_TEST_MODE is true.
 // Return 0 if all tests are passed.
 int run_command_line_tests();
+
+// Standalone version: run tests from a given path without needing GlobalSettings.
+// `path` can be:
+//   - A root test folder  (e.g. "CommandLineTests/")
+//   - A test space         (e.g. "CommandLineTests/PokemonChampions/")
+//   - A test object        (e.g. "CommandLineTests/PokemonChampions/OCRDump/")
+//   - A single test file   (e.g. "CommandLineTests/PokemonChampions/OCRDump/frame.png")
+// Return 0 if all tests passed.
+int run_command_line_tests(const std::string& path);
 
 
 
