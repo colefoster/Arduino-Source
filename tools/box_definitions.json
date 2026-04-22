@@ -318,48 +318,144 @@
       "scene": "Team Registration screen",
       "screenshot": "screenshots/screenshot-20260422-160451227419.png",
       "description": "Bottom scrollbar / page-position indicator. Select the region that shows 'we're scrolled to the leftmost position' (teams 1-5 visible). Any text/arrow/dots indicator works. We'll use this to refuse running team scan unless scrolled left.",
-      "status": "pending",
-      "box": null
+      "status": "confirmed",
+      "box": [
+        0.0661,
+        0.9176,
+        0.1724,
+        0.0093
+      ],
+      "avg_rgb": [
+        255.0,
+        255.0,
+        255.0
+      ],
+      "stddev_sum": 0.0,
+      "color_ratio": [
+        0.3333,
+        0.3333,
+        0.3333
+      ]
     },
     {
       "name": "team_reg/tab_slot_0",
       "scene": "Team Registration screen",
       "screenshot": "screenshots/screenshot-20260422-160451227419.png",
       "description": "Position of Team 1's tab pill (leftmost). Select the center of the pill \u2014 the color won't matter here, only the position. This is where we'll check for the selected-green color.",
-      "status": "pending",
-      "box": null
+      "status": "confirmed",
+      "box": [
+        0.1005,
+        0.1435,
+        0.0318,
+        0.0194
+      ],
+      "avg_rgb": [
+        255.0,
+        255.0,
+        255.0
+      ],
+      "stddev_sum": 0.0,
+      "color_ratio": [
+        0.3333,
+        0.3333,
+        0.3333
+      ]
     },
     {
       "name": "team_reg/tab_slot_1",
       "scene": "Team Registration screen",
       "screenshot": "screenshots/screenshot-20260422-160451227419.png",
       "description": "Position of Team 2's tab pill. Select the center of the pill (whether highlighted or not).",
-      "status": "pending",
-      "box": null
+      "status": "confirmed",
+      "box": [
+        0.2844,
+        0.1426,
+        0.0276,
+        0.0222
+      ],
+      "avg_rgb": [
+        255.0,
+        255.0,
+        2.9
+      ],
+      "stddev_sum": 1.4,
+      "color_ratio": [
+        0.4971,
+        0.4971,
+        0.0057
+      ]
     },
     {
       "name": "team_reg/tab_slot_2",
       "scene": "Team Registration screen",
       "screenshot": "screenshots/screenshot-20260422-160451227419.png",
       "description": "Position of Team 3's tab pill. Select the center of the pill.",
-      "status": "pending",
-      "box": null
+      "status": "confirmed",
+      "box": [
+        0.4755,
+        0.1407,
+        0.0359,
+        0.0213
+      ],
+      "avg_rgb": [
+        255.0,
+        255.0,
+        255.0
+      ],
+      "stddev_sum": 0.0,
+      "color_ratio": [
+        0.3333,
+        0.3333,
+        0.3333
+      ]
     },
     {
       "name": "team_reg/tab_slot_3",
       "scene": "Team Registration screen",
       "screenshot": "screenshots/screenshot-20260422-160451227419.png",
       "description": "Position of Team 4's tab pill. Select the center of the pill.",
-      "status": "pending",
-      "box": null
+      "status": "confirmed",
+      "box": [
+        0.6646,
+        0.138,
+        0.037,
+        0.0222
+      ],
+      "avg_rgb": [
+        255.0,
+        255.0,
+        255.0
+      ],
+      "stddev_sum": 0.0,
+      "color_ratio": [
+        0.3333,
+        0.3333,
+        0.3333
+      ]
     },
     {
       "name": "team_reg/tab_slot_4",
       "scene": "Team Registration screen",
       "screenshot": "screenshots/screenshot-20260422-160451227419.png",
       "description": "Position of Team 5's tab pill (rightmost when scrolled left). Select the center of the pill.",
-      "status": "pending",
-      "box": null
+      "status": "confirmed",
+      "box": [
+        0.8562,
+        0.1426,
+        0.0359,
+        0.0185
+      ],
+      "avg_rgb": [
+        255.0,
+        255.0,
+        255.0
+      ],
+      "stddev_sum": 0.0,
+      "color_ratio": [
+        0.3333,
+        0.3333,
+        0.3333
+      ]
     }
   ]
 }

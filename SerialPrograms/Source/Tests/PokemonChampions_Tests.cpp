@@ -311,58 +311,53 @@ int test_pokemonChampions_TeamSelectReader(const ImageViewRGB32& image, const st
 }
 
 
-// ─── TeamSummaryReader ──────────────────────────────────────────────
+// ─── TeamSummaryReader (Moves & More grid) ─────────────────────────
 //
-//  Filename convention:
-//    <prefix>_<species>_<move0>_<move1>_<move2>_<move3>_<ability>_<item>.png
-//  Last 7 words: species, 4 moves, ability, item. Use "NONE" for failures.
+//  Reads all 6 Pokemon from the "Moves & More" tab of View Details.
+//  Filename convention is just the 6 species slugs:
+//    <prefix>_<slot0>_<slot1>_<slot2>_<slot3>_<slot4>_<slot5>.png
+//  Use "NONE" for empty/unreadable slots. Only species is verified by
+//  this test; a full move/ability verification uses a separate test.
 
 int test_pokemonChampions_TeamSummaryReader(const ImageViewRGB32& image, const std::vector<std::string>& words){
-    if (words.size() < 7){
-        cerr << "Error: TeamSummaryReader test needs 7 slugs in filename "
-             << "(species, 4 moves, ability, item). Got " << words.size() << " words." << endl;
+    if (words.size() < 6){
+        cerr << "Error: TeamSummaryReader test needs 6 species slugs in filename "
+             << "(got " << words.size() << " words total)." << endl;
         return 1;
     }
 
-    size_t base = words.size() - 7;
-    std::string exp_species = (words[base] == "NONE") ? "" : words[base];
-    std::array<std::string, 4> exp_moves;
-    for (size_t i = 0; i < 4; i++){
-        exp_moves[i] = (words[base + 1 + i] == "NONE") ? "" : words[base + 1 + i];
+    std::array<std::string, 6> expected;
+    for (size_t i = 0; i < 6; i++){
+        const std::string& slug = words[words.size() - 6 + i];
+        expected[i] = (slug == "NONE") ? "" : slug;
     }
-    std::string exp_ability = (words[base + 5] == "NONE") ? "" : words[base + 5];
-    std::string exp_item    = (words[base + 6] == "NONE") ? "" : words[base + 6];
 
     auto& logger = global_logger_command_line();
     TeamSummaryReader reader(Language::English);
-    TeamSummaryInfo result = reader.read_all(logger, image);
+    auto team = reader.read_team(logger, image);
 
     bool ok = true;
-    if (result.species != exp_species){
-        cerr << "Error: TeamSummaryReader species got \"" << result.species
-             << "\" expected \"" << exp_species << "\"." << endl;
-        ok = false;
-    }
-    for (size_t i = 0; i < 4; i++){
-        if (result.moves[i] != exp_moves[i]){
-            cerr << "Error: TeamSummaryReader move " << i << " got \"" << result.moves[i]
-                 << "\" expected \"" << exp_moves[i] << "\"." << endl;
+    for (size_t i = 0; i < 6; i++){
+        if (team[i].species != expected[i]){
+            cerr << "Error: TeamSummaryReader slot " << i
+                 << " species got \"" << team[i].species
+                 << "\" but expected \"" << expected[i] << "\"." << endl;
             ok = false;
         }
     }
-    if (result.ability != exp_ability){
-        cerr << "Error: TeamSummaryReader ability got \"" << result.ability
-             << "\" expected \"" << exp_ability << "\"." << endl;
-        ok = false;
-    }
-    if (result.item != exp_item){
-        cerr << "Error: TeamSummaryReader item got \"" << result.item
-             << "\" expected \"" << exp_item << "\"." << endl;
-        ok = false;
-    }
 
     if (!ok) return 1;
-    cout << "TeamSummaryReader: all fields matched." << endl;
+    cout << "TeamSummaryReader: all 6 species matched." << endl;
+    return 0;
+}
+
+
+// ─── MovesMoreDetector ─────────────────────────────────────────────
+
+int test_pokemonChampions_MovesMoreDetector(const ImageViewRGB32& image, bool target){
+    MovesMoreDetector detector;
+    bool result = detector.detect(image);
+    TEST_RESULT_EQUAL(result, target);
     return 0;
 }
 
@@ -439,17 +434,22 @@ int test_pokemonChampions_OCRDump(const ImageViewRGB32& image){
         }
     }
 
-    //  Team summary
+    //  Team summary (Moves & More grid)
     {
+        MovesMoreDetector mm_detector;
+        cout << "=== Moves & More Detector ===" << endl;
+        cout << "  detected: " << mm_detector.detect(image) << endl;
+
         TeamSummaryReader summary_reader(Language::English);
-        auto info = summary_reader.read_all(logger, image);
-        cout << "=== Team Summary Reader ===" << endl;
-        cout << "  species: \"" << info.species << "\"" << endl;
-        for (size_t i = 0; i < 4; i++){
-            cout << "  move " << i << ": \"" << info.moves[i] << "\"" << endl;
+        auto team = summary_reader.read_team(logger, image);
+        cout << "=== Team Summary Reader (6 cards) ===" << endl;
+        for (size_t i = 0; i < 6; i++){
+            cout << "  slot " << i << ": species=\"" << team[i].species
+                 << "\" ability=\"" << team[i].ability << "\"" << endl;
+            for (size_t m = 0; m < 4; m++){
+                cout << "    move " << m << ": \"" << team[i].moves[m] << "\"" << endl;
+            }
         }
-        cout << "  ability: \"" << info.ability << "\"" << endl;
-        cout << "  item: \"" << info.item << "\"" << endl;
     }
 
     //  Battle log
