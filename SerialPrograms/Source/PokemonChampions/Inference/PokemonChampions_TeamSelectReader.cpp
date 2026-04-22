@@ -28,6 +28,20 @@ namespace NintendoSwitch{
 namespace PokemonChampions{
 
 
+//  Team Registration screen uses dark-navy text (~RGB 5,45,124) on a pale
+//  lavender pill. BLACK_TEXT_FILTERS fails because the B channel is high.
+//  These custom ranges accept pixels where all channels are darker than a
+//  progressively looser ceiling, with the blue ceiling higher than RG.
+static const std::vector<OCR::TextColorRange>& dark_navy_text_filters(){
+    static const std::vector<OCR::TextColorRange> filters{
+        {0xff000000, 0xff6080a0},  //  tight: R<=96 G<=128 B<=160
+        {0xff000000, 0xff8099b0},  //  medium
+        {0xff000000, 0xffa0b0c0},  //  loose (anti-aliased edges)
+    };
+    return filters;
+}
+
+
 TeamSelectReader::TeamSelectReader(Language language)
     : m_language(language)
 {
@@ -68,7 +82,7 @@ TeamSelectSlotInfo TeamSelectReader::read_slot(
 
     ImageViewRGB32 cropped = extract_box_reference(screen, m_species_boxes[slot]);
     OCR::StringMatchResult result = SpeciesNameOCR::instance().read_substring(
-        logger, m_language, cropped, OCR::BLACK_TEXT_FILTERS()
+        logger, m_language, cropped, dark_navy_text_filters()
     );
     if (!result.results.empty()){
         info.species = result.results.begin()->second.token;
