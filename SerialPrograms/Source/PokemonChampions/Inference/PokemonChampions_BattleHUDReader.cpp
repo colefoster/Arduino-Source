@@ -2,20 +2,24 @@
  *
  *  From: https://github.com/PokemonAutomation/
  *
- *  Pixel measurements from ref_frames/1/frame_00080.jpg (1920x1080):
+ *  Mode-aware HUD reader. Coordinates differ between Singles and Doubles:
  *
- *  Opponent species badge (top-right):
- *    "Greninja" text:  x ~1716-1862, y ~30-56     (white on colored pill)
- *    HP "1%":          x ~1836-1880, y ~60-86      (white text)
+ *  SINGLES (measured from ref_frames/1/frame_00080.jpg):
+ *    Opponent name:  (0.833, 0.042, 0.130, 0.032)   — 1 badge top-right
+ *    Opponent HP%:   (0.964, 0.057, 0.034, 0.031)
+ *    Own HP:         (0.133, 0.944, 0.078, 0.042)    — 1 bar bottom-left
+ *    PP boxes:       right edge of 4 move pills
  *
- *  Own Pokemon info (bottom-left):
- *    Nickname:         x ~110-230,  y ~944-966     (white text on blue bar)
- *    HP "41/187":      x ~82-196,   y ~984-1014    (green number / white number)
+ *  DOUBLES (measured from live capture frame_116):
+ *    Opponent 1 name: (0.440, 0.050, 0.110, 0.030)   — left badge top-center
+ *    Opponent 2 name: (0.580, 0.050, 0.110, 0.030)   — right badge
+ *    Opponent 1 HP%:  (0.465, 0.082, 0.055, 0.028)
+ *    Opponent 2 HP%:  (0.610, 0.082, 0.055, 0.028)
+ *    Own 1 HP:        (0.040, 0.900, 0.105, 0.040)   — left bar bottom-left
+ *    Own 2 HP:        (0.175, 0.900, 0.105, 0.040)   — right bar
  *
- *  PP counts (right side of each move pill):
- *    Large number:     x ~1818-1870, y ~528-560    (slot 0, bold colored)
- *    Small "/12":      x ~1870-1900, y ~540-560    (slot 0, smaller gray)
- *    Spacing: same as move pills, ~130px vertical
+ *  NOTE: Doubles coordinates are estimated from the captured frames and
+ *  may need fine-tuning with the pixel inspector.
  *
  */
 
@@ -31,7 +35,7 @@ namespace NintendoSwitch{
 namespace PokemonChampions{
 
 
-// ─── Species Name OCR ────────────────────────────────────────────────
+// ─── Species Name OCR ────────────────────────────────────────────
 
 SpeciesNameOCR& SpeciesNameOCR::instance(){
     static SpeciesNameOCR reader;
@@ -56,14 +60,12 @@ OCR::StringMatchResult SpeciesNameOCR::read_substring(
 }
 
 
-// ─── Helpers ─────────────────────────────────────────────────────────
+// ─── Helpers ─────────────────────────────────────────────────────
 
-//  OCR a cropped region and return raw text (single line).
 static std::string raw_ocr_line(const ImageViewRGB32& crop){
     return OCR::ocr_read(Language::English, crop, OCR::PageSegMode::SINGLE_LINE);
 }
 
-//  Parse "41/187" or "41 / 187" → {41, 187}. Returns {-1,-1} on failure.
 static std::pair<int, int> parse_fraction(const std::string& text){
     std::regex re(R"((\d+)\s*/\s*(\d+))");
     std::smatch m;
@@ -73,95 +75,156 @@ static std::pair<int, int> parse_fraction(const std::string& text){
     return {-1, -1};
 }
 
-//  Parse "45%" or "45 %" → 45. Returns -1 on failure.
 static int parse_percentage(const std::string& text){
     std::regex re(R"((\d+)\s*%?)");
     std::smatch m;
     if (std::regex_search(text, m, re)){
-        return std::stoi(m[1].str());
+        int val = std::stoi(m[1].str());
+        if (val >= 0 && val <= 100) return val;
     }
     return -1;
 }
 
 
-// ─── BattleHUDReader ─────────────────────────────────────────────────
+// ─── Box initialization ─────────────────────────────────────────
 
-BattleHUDReader::BattleHUDReader(Language language)
-    : m_language(language)
-{
-    //  Opponent species name: "Greninja" in top-right pink/red badge.
-    //  x: 1600-1850 / 1920, y: 45-80 / 1080
-    m_opponent_name_box = ImageFloatBox(0.833, 0.042, 0.130, 0.032);
+void BattleHUDReader::init_singles_boxes(){
+    //  Singles: 1 opponent top-right, 1 own bottom-left.
+    //  Measured from ref_frames/1/frame_00080.jpg
 
-    //  Opponent HP %: "1%" or "45%" below/right of the badge.
-    //  x: 1850-1915 / 1920, y: 62-95 / 1080
-    m_opponent_hp_box = ImageFloatBox(0.964, 0.057, 0.034, 0.031);
+    m_opponent_name_boxes[0] = ImageFloatBox(0.833, 0.042, 0.130, 0.032);
+    m_opponent_hp_boxes[0]   = ImageFloatBox(0.964, 0.057, 0.034, 0.031);
+    m_opponent_name_boxes[1] = ImageFloatBox(0, 0, 0, 0);  // unused
+    m_opponent_hp_boxes[1]   = ImageFloatBox(0, 0, 0, 0);
 
-    //  Own HP "41/187" in bottom-left, below HP bar.
-    //  x: 255-405 / 1920, y: 1020-1065 / 1080
-    m_own_hp_box = ImageFloatBox(0.133, 0.944, 0.078, 0.042);
+    m_own_hp_boxes[0] = ImageFloatBox(0.133, 0.944, 0.078, 0.042);
+    m_own_hp_boxes[1] = ImageFloatBox(0, 0, 0, 0);  // unused
 
-    //  PP counts — right end of each move pill.
-    //  x: 1780-1890 / 1920, ~55px tall, same vertical spacing as moves.
+    //  PP boxes — right edge of each move pill.
     const double PP_X      = 0.927;
     const double PP_WIDTH  = 0.057;
     const double PP_HEIGHT = 0.051;
-    const double Y_SLOTS[4] = {
-        0.500,   //  slot 0: y = 540/1080
-        0.620,   //  slot 1: y = 670/1080
-        0.741,   //  slot 2: y = 800/1080
-        0.861,   //  slot 3: y = 930/1080
-    };
+    const double PP_Y[4] = { 0.500, 0.620, 0.741, 0.861 };
     for (size_t i = 0; i < 4; i++){
-        m_pp_boxes[i] = ImageFloatBox(PP_X, Y_SLOTS[i], PP_WIDTH, PP_HEIGHT);
+        m_pp_boxes[i] = ImageFloatBox(PP_X, PP_Y[i], PP_WIDTH, PP_HEIGHT);
+    }
+}
+
+void BattleHUDReader::init_doubles_boxes(){
+    //  Doubles: 2 opponents top-center/right, 2 own bottom-left.
+    //  Measured from live capture frame_00116 (1920x1080).
+    //
+    //  Opponent badges: pink pills in the top area.
+    //    Opp 1 "Hawlucha":  name ~x=850-1020, y=52-80   (after sprite)
+    //    Opp 2 "Hydreigon": name ~x=1120-1310, y=52-80
+    //    Opp 1 HP%:         x=900-980,  y=82-110
+    //    Opp 2 HP%:         x=1170-1250, y=82-110
+    //
+    //  Own bars: blue gradient bars at bottom-left.
+    //    Own 1 "Kingambit":  HP x=75-230,  y=968-1008
+    //    Own 2 "Glimmora":   HP x=320-480, y=968-1008
+    //
+    //  NOTE: These are estimated — update with pixel inspector for precision.
+
+    m_opponent_name_boxes[0] = ImageFloatBox(0.445, 0.048, 0.095, 0.028);
+    m_opponent_name_boxes[1] = ImageFloatBox(0.590, 0.048, 0.105, 0.028);
+    m_opponent_hp_boxes[0]   = ImageFloatBox(0.470, 0.076, 0.050, 0.026);
+    m_opponent_hp_boxes[1]   = ImageFloatBox(0.615, 0.076, 0.050, 0.026);
+
+    m_own_hp_boxes[0] = ImageFloatBox(0.040, 0.896, 0.100, 0.040);
+    m_own_hp_boxes[1] = ImageFloatBox(0.170, 0.896, 0.100, 0.040);
+
+    //  No PP boxes on the doubles action menu screen.
+    //  (Moves are shown after pressing FIGHT, in a different layout.)
+    for (size_t i = 0; i < 4; i++){
+        m_pp_boxes[i] = ImageFloatBox(0, 0, 0, 0);
+    }
+}
+
+
+// ─── BattleHUDReader ─────────────────────────────────────────────
+
+BattleHUDReader::BattleHUDReader(Language language, BattleMode mode)
+    : m_language(language)
+    , m_mode(mode)
+{
+    if (mode == BattleMode::DOUBLES){
+        init_doubles_boxes();
+    }else{
+        init_singles_boxes();
+    }
+}
+
+void BattleHUDReader::set_mode(BattleMode mode){
+    if (mode == m_mode) return;
+    m_mode = mode;
+    if (mode == BattleMode::DOUBLES){
+        init_doubles_boxes();
+    }else{
+        init_singles_boxes();
     }
 }
 
 void BattleHUDReader::make_overlays(VideoOverlaySet& items) const{
-    items.add(COLOR_MAGENTA, m_opponent_name_box);
-    items.add(COLOR_MAGENTA, m_opponent_hp_box);
-    items.add(COLOR_BLUE, m_own_hp_box);
-    for (const ImageFloatBox& box : m_pp_boxes){
-        items.add(COLOR_YELLOW, box);
+    uint8_t slots = (m_mode == BattleMode::DOUBLES) ? 2 : 1;
+    for (uint8_t i = 0; i < slots; i++){
+        if (m_opponent_name_boxes[i].width > 0){
+            items.add(COLOR_MAGENTA, m_opponent_name_boxes[i]);
+        }
+        if (m_opponent_hp_boxes[i].width > 0){
+            items.add(COLOR_MAGENTA, m_opponent_hp_boxes[i]);
+        }
+        if (m_own_hp_boxes[i].width > 0){
+            items.add(COLOR_BLUE, m_own_hp_boxes[i]);
+        }
+    }
+    if (m_mode != BattleMode::DOUBLES){
+        for (const ImageFloatBox& box : m_pp_boxes){
+            if (box.width > 0){
+                items.add(COLOR_YELLOW, box);
+            }
+        }
     }
 }
 
 
 std::string BattleHUDReader::read_opponent_species(
-    Logger& logger, const ImageViewRGB32& screen
+    Logger& logger, const ImageViewRGB32& screen, uint8_t slot
 ) const{
-    ImageViewRGB32 cropped = extract_box_reference(screen, m_opponent_name_box);
+    if (slot >= 2 || m_opponent_name_boxes[slot].width == 0) return "";
+    ImageViewRGB32 cropped = extract_box_reference(screen, m_opponent_name_boxes[slot]);
     OCR::StringMatchResult result = SpeciesNameOCR::instance().read_substring(
         logger, m_language, cropped, OCR::WHITE_TEXT_FILTERS()
     );
-
-    if (result.results.empty()){
-        return "";
-    }
+    if (result.results.empty()) return "";
     return result.results.begin()->second.token;
 }
 
 int BattleHUDReader::read_opponent_hp_pct(
-    Logger& logger, const ImageViewRGB32& screen
+    Logger& logger, const ImageViewRGB32& screen, uint8_t slot
 ) const{
-    ImageViewRGB32 cropped = extract_box_reference(screen, m_opponent_hp_box);
+    if (slot >= 2 || m_opponent_hp_boxes[slot].width == 0) return -1;
+    ImageViewRGB32 cropped = extract_box_reference(screen, m_opponent_hp_boxes[slot]);
     std::string text = raw_ocr_line(cropped);
     int pct = parse_percentage(text);
     if (pct < 0 || pct > 100){
-        logger.log("BattleHUDReader: failed to parse opponent HP% from '" + text + "'", COLOR_RED);
+        logger.log("BattleHUDReader: failed to parse opponent HP% slot " +
+                   std::to_string(slot) + " from '" + text + "'", COLOR_RED);
         return -1;
     }
     return pct;
 }
 
 std::pair<int, int> BattleHUDReader::read_own_hp(
-    Logger& logger, const ImageViewRGB32& screen
+    Logger& logger, const ImageViewRGB32& screen, uint8_t slot
 ) const{
-    ImageViewRGB32 cropped = extract_box_reference(screen, m_own_hp_box);
+    if (slot >= 2 || m_own_hp_boxes[slot].width == 0) return {-1, -1};
+    ImageViewRGB32 cropped = extract_box_reference(screen, m_own_hp_boxes[slot]);
     std::string text = raw_ocr_line(cropped);
     auto hp = parse_fraction(text);
     if (hp.first < 0){
-        logger.log("BattleHUDReader: failed to parse own HP from '" + text + "'", COLOR_RED);
+        logger.log("BattleHUDReader: failed to parse own HP slot " +
+                   std::to_string(slot) + " from '" + text + "'", COLOR_RED);
     }
     return hp;
 }
@@ -169,18 +232,13 @@ std::pair<int, int> BattleHUDReader::read_own_hp(
 std::pair<int, int> BattleHUDReader::read_move_pp(
     Logger& logger, const ImageViewRGB32& screen, uint8_t slot
 ) const{
-    if (slot >= 4){
-        return {-1, -1};
-    }
+    if (slot >= 4 || m_pp_boxes[slot].width == 0) return {-1, -1};
     ImageViewRGB32 cropped = extract_box_reference(screen, m_pp_boxes[slot]);
     std::string text = raw_ocr_line(cropped);
     auto pp = parse_fraction(text);
     if (pp.first < 0){
-        logger.log(
-            "BattleHUDReader: failed to parse PP for slot " +
-            std::to_string(slot) + " from '" + text + "'",
-            COLOR_RED
-        );
+        logger.log("BattleHUDReader: failed to parse PP slot " +
+                   std::to_string(slot) + " from '" + text + "'", COLOR_RED);
     }
     return pp;
 }
@@ -189,18 +247,28 @@ BattleHUDState BattleHUDReader::read_all(
     Logger& logger, const ImageViewRGB32& screen
 ) const{
     BattleHUDState state;
-    state.opponent_species = read_opponent_species(logger, screen);
-    state.opponent_hp_pct  = read_opponent_hp_pct(logger, screen);
+    state.mode = m_mode;
 
-    auto own_hp = read_own_hp(logger, screen);
-    state.own_hp_current = own_hp.first;
-    state.own_hp_max     = own_hp.second;
+    uint8_t slots = state.slot_count();
 
-    for (uint8_t i = 0; i < 4; i++){
-        auto pp = read_move_pp(logger, screen, i);
-        state.move_pp[i].current = pp.first;
-        state.move_pp[i].max     = pp.second;
+    for (uint8_t i = 0; i < slots; i++){
+        state.opponents[i].species = read_opponent_species(logger, screen, i);
+        state.opponents[i].hp_pct  = read_opponent_hp_pct(logger, screen, i);
+
+        auto own_hp = read_own_hp(logger, screen, i);
+        state.own[i].hp_current = own_hp.first;
+        state.own[i].hp_max     = own_hp.second;
     }
+
+    //  PP only in singles.
+    if (m_mode != BattleMode::DOUBLES){
+        for (uint8_t i = 0; i < 4; i++){
+            auto pp = read_move_pp(logger, screen, i);
+            state.move_pp[i].current = pp.first;
+            state.move_pp[i].max     = pp.second;
+        }
+    }
+
     return state;
 }
 
