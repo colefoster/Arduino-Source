@@ -561,8 +561,8 @@ void AutoLadder::execute_action(
     }
 
     //  Move action: action_idx = move_slot * 3 + target
-    uint8_t move_slot = action_idx / 3;
-    //  uint8_t target = action_idx % 3;  //  TODO: handle target selection for doubles
+    uint8_t move_slot = static_cast<uint8_t>(action_idx / 3);
+    //  uint8_t target = static_cast<uint8_t>(action_idx % 3);  //  TODO: handle target selection for doubles
 
     //  Press A on FIGHT to enter move select.
     pbf_press_button(context, BUTTON_A, 80ms, 320ms);
