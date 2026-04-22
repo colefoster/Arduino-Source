@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584932442",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "FBISurveillanceMan",
+    "Gaoga"
+  ],
+  "log": "|j|\u2606FBISurveillanceMan\n|j|\u2606Gaoga\n|t:|1776295739\n|gametype|doubles\n|player|p1|FBISurveillanceMan|101|1000\n|player|p2|Gaoga|clerk|1042\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Hatterene, L50, F|\n|poke|p1|Farigiraf, L50, F|\n|poke|p1|Torkoal, L50, F|\n|poke|p1|Kingambit, L50, M|\n|poke|p1|Scovillain, L50, M|\n|poke|p2|Florges-Orange, L50, F|\n|poke|p2|Chesnaught, L50, F|\n|poke|p2|Alakazam, L50, M|\n|poke|p2|Venusaur, L50, M|\n|poke|p2|Ninetales, L50, F|\n|poke|p2|Aegislash, L50, M|\n|teampreview|4\n|\n|t:|1776295770\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Farigiraf|Farigiraf, L50, F|100/100\n|switch|p1b: Incineroar|Incineroar, L50, M|100/100\n|switch|p2a: Chesnaught|Chesnaught, L50, F|100/100\n|switch|p2b: Florges|Florges-Orange, L50, F, shiny|100/100\n|-ability|p1b: Incineroar|Intimidate|boost\n|-unboost|p2a: Chesnaught|atk|1\n|-unboost|p2b: Florges|atk|1\n|turn|1\n|\n|t:|1776295792\n|move|p1b: Incineroar|Fake Out|p2a: Chesnaught\n|-damage|p2a: Chesnaught|90/100\n|move|p2b: Florges|Grassy Terrain|p2b: Florges\n|-fieldstart|move: Grassy Terrain\n|cant|p2a: Chesnaught|flinch\n|move|p1a: Farigiraf|Trick Room|p1a: Farigiraf\n|-fieldstart|move: Trick Room|[of] p1a: Farigiraf\n|\n|-heal|p2a: Chesnaught|96/100|[from] Grassy Terrain\n|upkeep\n|turn|2\n|\n|t:|1776295813\n|move|p1b: Incineroar|Flare Blitz|p2b: Florges\n|-damage|p2b: Florges|47/100\n|-damage|p1b: Incineroar|84/100|[from] Recoil\n|move|p1a: Farigiraf|Psychic|p2a: Chesnaught\n|-supereffective|p2a: Chesnaught|1\n|-damage|p2a: Chesnaught|36/100\n|-enditem|p2a: Chesnaught|Sitrus Berry|[eat]\n|-heal|p2a: Chesnaught|61/100|[from] item: Sitrus Berry\n|-activate|p2b: Florges|ability: Symbiosis|Choice Scarf|[of] p2a: Chesnaught\n|move|p2b: Florges|Grassy Terrain||[still]\n|-fail|p2b: Florges\n|move|p2a: Chesnaught|Belly Drum|p2a: Chesnaught\n|-damage|p2a: Chesnaught|11/100\n|-setboost|p2a: Chesnaught|atk|6|[from] move: Belly Drum\n|\n|-heal|p1b: Incineroar|90/100|[from] Grassy Terrain\n|-heal|p2b: Florges|53/100|[from] Grassy Terrain\n|-heal|p2a: Chesnaught|17/100|[from] Grassy Terrain\n|upkeep\n|turn|3\n|-message|Gaoga forfeited.\n|\n|win|FBISurveillanceMan\n|raw|FBISurveillanceMan's rating: 1000 &rarr; <strong>1045</strong><br />(+45 for winning)\n|raw|Gaoga's rating: 1042 &rarr; <strong>1024</strong><br />(-18 for losing)\n|l|\u2606Gaoga\n|player|p2|\n",
+  "uploadtime": 1776296082,
+  "views": 26,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1024,
+  "private": 0,
+  "password": null
+}

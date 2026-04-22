@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584400463",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Laser52",
+    "pepitoito"
+  ],
+  "log": "|j|\u2606Laser52\n|j|\u2606pepitoito\n|t:|1776258132\n|gametype|doubles\n|player|p1|Laser52|265|1118\n|player|p2|pepitoito|miku-ghost|1217\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Meowstic, L50, M|\n|poke|p1|Primarina, L50, M|\n|poke|p1|Excadrill, L50, M|\n|poke|p1|Sneasler, L50, F|\n|poke|p2|Delphox, L50, F|\n|poke|p2|Mamoswine, L50, F|\n|poke|p2|Rotom-Wash, L50|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Kingambit, L50, F|\n|teampreview|4\n|\n|t:|1776258187\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Excadrill|Excadrill, L50, M|100/100\n|switch|p1b: Sinistcha|Sinistcha, L50|100/100\n|switch|p2a: Sneasler|Sneasler, L50, M|100/100\n|switch|p2b: Delphox|Delphox, L50, F|100/100\n|-ability|p1a: Excadrill|Mold Breaker\n|turn|1\n|\n|t:|1776258208\n|detailschange|p2b: Delphox|Delphox-Mega, L50, F\n|-mega|p2b: Delphox|Delphox|Delphoxite\n|move|p2a: Sneasler|Fake Out|p1a: Excadrill\n|-resisted|p1a: Excadrill|1\n|-damage|p1a: Excadrill|90/100\n|move|p1b: Sinistcha|Rage Powder|p1b: Sinistcha\n|-singleturn|p1b: Sinistcha|move: Rage Powder\n|move|p2b: Delphox|Nasty Plot|p2b: Delphox\n|-boost|p2b: Delphox|spa|2\n|cant|p1a: Excadrill|flinch\n|\n|upkeep\n|turn|2\n|\n|t:|1776258224\n|move|p1b: Sinistcha|Rage Powder|p1b: Sinistcha\n|-singleturn|p1b: Sinistcha|move: Rage Powder\n|move|p2b: Delphox|Heat Wave|p1b: Sinistcha|[spread] p1a\n|-miss|p2b: Delphox|p1b: Sinistcha\n|-supereffective|p1a: Excadrill|1\n|-damage|p1a: Excadrill|0 fnt\n|faint|p1a: Excadrill\n|move|p2a: Sneasler|Dire Claw|p1b: Sinistcha\n|-damage|p1b: Sinistcha|59/100\n|\n|-heal|p1b: Sinistcha|64/100|[from] item: Leftovers\n|upkeep\n|\n|t:|1776258236\n|switch|p1a: Floette|Floette-Eternal, L50, F|100/100\n|turn|3\n|\n|t:|1776258247\n|detailschange|p1a: Floette|Floette-Mega, L50, F\n|-mega|p1a: Floette|Floette|Floettite\n|-ability|p1a: Floette|Fairy Aura\n|move|p2b: Delphox|Heat Wave|p1b: Sinistcha|[spread] p1a,p1b\n|-supereffective|p1b: Sinistcha|1\n|-damage|p1a: Floette|33/100\n|-damage|p1b: Sinistcha|0 fnt\n|faint|p1b: Sinistcha\n|move|p2a: Sneasler|Dire Claw|p1a: Floette\n|-supereffective|p1a: Floette|1\n|-damage|p1a: Floette|0 fnt\n|faint|p1a: Floette\n|\n|upkeep\n|\n|t:|1776258254\n|switch|p1b: Meowstic|Meowstic, L50, M|100/100\n|turn|4\n|\n|t:|1776258268\n|move|p1b: Meowstic|Fake Out|p2a: Sneasler\n|-damage|p2a: Sneasler|92/100\n|move|p2b: Delphox|Heat Wave|p1b: Meowstic\n|-damage|p1b: Meowstic|0 fnt\n|faint|p1b: Meowstic\n|\n|win|pepitoito\n|raw|Laser52's rating: 1118 &rarr; <strong>1100</strong><br />(-18 for losing)\n|raw|pepitoito's rating: 1217 &rarr; <strong>1235</strong><br />(+18 for winning)\n|l|\u2606Laser52\n|player|p1|\n",
+  "uploadtime": 1776258277,
+  "views": 30,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1100,
+  "private": 0,
+  "password": null
+}

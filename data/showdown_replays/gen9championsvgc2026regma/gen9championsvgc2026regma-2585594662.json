@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2585594662",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "FrozenXEclipse",
+    "purplespacetaco"
+  ],
+  "log": "|j|\u2606FrozenXEclipse\n|j|\u2606purplespacetaco\n|t:|1776357740\n|gametype|doubles\n|player|p1|FrozenXEclipse|zinnia|1102\n|player|p2|purplespacetaco|veteran|1007\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Charizard, L50, F|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Aerodactyl, L50, F|\n|poke|p1|Venusaur, L50, F|\n|poke|p1|Rotom-Wash, L50|\n|poke|p2|Pelipper, L50, M|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Meganium, L50, F|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Archaludon, L50, F|\n|teampreview|4\n|\n|t:|1776357761\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Aerodactyl|Aerodactyl, L50, F|100/100\n|switch|p1b: Charizard|Charizard, L50, F, shiny|100/100\n|switch|p2a: Pelipper|Pelipper, L50, M|100/100\n|switch|p2b: Meganium|Meganium, L50, F|100/100\n|-ability|p1a: Aerodactyl|Unnerve\n|-weather|RainDance|[from] ability: Drizzle|[of] p2a: Pelipper\n|turn|1\n|\n|t:|1776357789\n|switch|p2b: Basculegion|Basculegion, L50, M, shiny|100/100\n|detailschange|p1b: Charizard|Charizard-Mega-Y, L50, F, shiny\n|-mega|p1b: Charizard|Charizard|Charizardite Y\n|-weather|SunnyDay|[from] ability: Drought|[of] p1b: Charizard\n|move|p1a: Aerodactyl|Tailwind|p1a: Aerodactyl\n|-sidestart|p1: FrozenXEclipse|move: Tailwind\n|move|p1b: Charizard|Heat Wave|p2b: Basculegion|[spread] p2a,p2b\n|-resisted|p2a: Pelipper|1\n|-resisted|p2b: Basculegion|1\n|-damage|p2a: Pelipper|39/100\n|-damage|p2b: Basculegion|62/100\n|-status|p2a: Pelipper|brn\n|move|p2a: Pelipper|Tailwind|p2a: Pelipper\n|-sidestart|p2: purplespacetaco|move: Tailwind\n|\n|-weather|SunnyDay|[upkeep]\n|-damage|p2a: Pelipper|33/100 brn|[from] brn\n|upkeep\n|turn|2\n|\n|t:|1776357812\n|switch|p2a: Archaludon|Archaludon, L50, F|100/100\n|move|p1a: Aerodactyl|Rock Slide|p2a: Archaludon|[spread] p2a,p2b\n|-resisted|p2a: Archaludon|1\n|-damage|p2a: Archaludon|90/100\n|-damage|p2b: Basculegion|32/100\n|move|p1b: Charizard|Heat Wave|p2b: Basculegion|[spread] p2a,p2b\n|-resisted|p2b: Basculegion|1\n|-damage|p2a: Archaludon|0 fnt\n|-damage|p2b: Basculegion|0 fnt\n|faint|p2a: Archaludon\n|faint|p2b: Basculegion\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|-message|purplespacetaco forfeited.\n|\n|win|FrozenXEclipse\n|raw|FrozenXEclipse's rating: 1102 &rarr; <strong>1120</strong><br />(+18 for winning)\n|raw|purplespacetaco's rating: 1007 &rarr; <strong>1000</strong><br />(-7 for losing)\n|l|\u2606purplespacetaco\n|player|p2|\n",
+  "uploadtime": 1776357839,
+  "views": 22,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

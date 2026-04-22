@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2585402986",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "The Red Lynx",
+    "Cryotoxin\u2748"
+  ],
+  "log": "|j|\u2606The Red Lynx\n|j|\u2606Cryotoxin\u2748\n|t:|1776344753\n|gametype|singles\n|player|p1|The Red Lynx|n|1111\n|player|p2|Cryotoxin\u2748|morty-masters2|1028\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Charizard, L50, M|\n|poke|p1|Dragonite, L50, M|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Gyarados, L50, M|\n|poke|p1|Alakazam, L50, M|\n|poke|p1|Kleavor, L50, F|\n|poke|p2|Gengar, L50, F|\n|poke|p2|Tyranitar, L50, M|\n|poke|p2|Scizor, L50, M|\n|poke|p2|Dragonite, L50, F|\n|poke|p2|Aegislash, L50, M|\n|poke|p2|Serperior, L50, M|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Cryotoxin\u2748)\n|inactive|The Red Lynx has 60 seconds left.\n|\n|t:|1776344794\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Kleavor|Kleavor, L50, F|100/100\n|switch|p2a: Gengar|Gengar, L50, F|100/100\n|turn|1\n|\n|t:|1776344805\n|detailschange|p2a: Gengar|Gengar-Mega, L50, F\n|-mega|p2a: Gengar|Gengar|Gengarite\n|move|p1a: Kleavor|Stone Axe|p2a: Gengar\n|-damage|p2a: Gengar|13/100\n|-sidestart|p2: Cryotoxin\u2748|move: Stealth Rock\n|move|p2a: Gengar|Nasty Plot|p2a: Gengar\n|-boost|p2a: Gengar|spa|2\n|\n|upkeep\n|turn|2\n|\n|t:|1776344812\n|move|p1a: Kleavor|Stone Axe|p2a: Gengar\n|-damage|p2a: Gengar|0 fnt\n|faint|p2a: Gengar\n|\n|upkeep\n|\n|t:|1776344826\n|switch|p2a: Serperior|Serperior, L50, M|100/100\n|-damage|p2a: Serperior|88/100|[from] Stealth Rock\n|turn|3\n|\n|t:|1776344829\n|move|p2a: Serperior|Leaf Storm|p1a: Kleavor\n|-damage|p1a: Kleavor|13/100\n|-boost|p2a: Serperior|spa|2\n|move|p1a: Kleavor|Stone Axe|p2a: Serperior\n|-damage|p2a: Serperior|15/100\n|\n|upkeep\n|turn|4\n|\n|t:|1776344835\n|move|p2a: Serperior|Leaf Storm|p1a: Kleavor\n|-damage|p1a: Kleavor|0 fnt\n|-boost|p2a: Serperior|spa|2\n|faint|p1a: Kleavor\n|\n|upkeep\n|\n|t:|1776344844\n|switch|p1a: Dragonite|Dragonite, L50, M|100/100\n|turn|5\n|\n|t:|1776344850\n|move|p1a: Dragonite|Extreme Speed|p2a: Serperior\n|-damage|p2a: Serperior|0 fnt\n|faint|p2a: Serperior\n|\n|upkeep\n|\n|t:|1776344853\n|switch|p2a: Dragonite|Dragonite, L50, F|100/100\n|-damage|p2a: Dragonite|76/100|[from] Stealth Rock\n|turn|6\n|\n|t:|1776344859\n|move|p1a: Dragonite|Dragon Claw|p2a: Dragonite\n|-supereffective|p2a: Dragonite|1\n|-damage|p2a: Dragonite|0 fnt\n|faint|p2a: Dragonite\n|\n|win|The Red Lynx\n|raw|The Red Lynx's rating: 1111 &rarr; <strong>1130</strong><br />(+19 for winning)\n|raw|Cryotoxin\u2748's rating: 1028 &rarr; <strong>1017</strong><br />(-11 for losing)\n|l|\u2606Cryotoxin\u2748\n|player|p2|\n|c|\u2606The Red Lynx|Gg\n",
+  "uploadtime": 1776344871,
+  "views": 4,
+  "formatid": "gen9championsbssregma",
+  "rating": 1017,
+  "private": 0,
+  "password": null
+}

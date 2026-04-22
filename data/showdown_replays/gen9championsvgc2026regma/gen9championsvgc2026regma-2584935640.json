@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584935640",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Blokeoney",
+    "Hypnozja"
+  ],
+  "log": "|j|\u203dBlokeoney\n|j|\u2606Hypnozja\n|t:|1776296040\n|gametype|doubles\n|player|p1|Blokeoney|265|1000\n|player|p2|Hypnozja|2|1029\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Kangaskhan, L50, F|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Whimsicott, L50, M|\n|poke|p1|Ninetales, L50, F|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Venusaur, L50, M|\n|poke|p2|Delphox, L50, M|\n|poke|p2|Orthworm, L50, F|\n|poke|p2|Farigiraf, L50, M|\n|poke|p2|Garchomp, L50, F|\n|poke|p2|Rotom-Wash, L50|\n|poke|p2|Sinistcha-Masterpiece, L50|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Blokeoney)\n|\n|t:|1776296084\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Ninetales|Ninetales, L50, F, shiny|100/100\n|switch|p1b: Venusaur|Venusaur, L50, M|100/100\n|switch|p2a: Farigiraf|Farigiraf, L50, M|100/100\n|switch|p2b: Orthworm|Orthworm, L50, F|100/100\n|-weather|SunnyDay|[from] ability: Drought|[of] p1a: Ninetales\n|turn|1\n|\n|t:|1776296104\n|switch|p2b: Delphox|Delphox, L50, M, shiny|100/100\n|move|p1b: Venusaur|Sleep Powder|p2a: Farigiraf\n|-status|p2a: Farigiraf|slp|[from] move: Sleep Powder\n|move|p1a: Ninetales|Heat Wave|p2b: Delphox|[spread] p2b\n|-miss|p1a: Ninetales|p2a: Farigiraf\n|-resisted|p2b: Delphox|1\n|-damage|p2b: Delphox|72/100\n|cant|p2a: Farigiraf|slp\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|turn|2\n|inactive|Blokeoney has 30 seconds left.\n|\n|t:|1776296133\n|move|p2b: Delphox|Protect|p2b: Delphox\n|-singleturn|p2b: Delphox|Protect\n|move|p1b: Venusaur|Sludge Bomb|p2b: Delphox\n|-activate|p2b: Delphox|move: Protect\n|move|p1a: Ninetales|Weather Ball|p2a: Farigiraf\n|-crit|p2a: Farigiraf\n|-damage|p2a: Farigiraf|0 fnt\n|faint|p2a: Farigiraf\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|-message|Hypnozja forfeited.\n|\n|win|Blokeoney\n|raw|Blokeoney's rating: 1000 &rarr; <strong>1043</strong><br />(+43 for winning)\n|raw|Hypnozja's rating: 1029 &rarr; <strong>1013</strong><br />(-16 for losing)\n|l|\u2606Hypnozja\n|player|p2|\n",
+  "uploadtime": 1776296152,
+  "views": 33,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1013,
+  "private": 0,
+  "password": null
+}

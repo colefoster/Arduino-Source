@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2581283101",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "daedae007",
+    "Lyiter"
+  ],
+  "log": "|j|\u2606daedae007\n|j|\u2606Lyiter\n|t:|1775981028\n|gametype|doubles\n|player|p1|daedae007|1|1306\n|player|p2|Lyiter|skier|1399\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Greninja-*, L50, M|\n|poke|p1|Kingambit, L50, M|\n|poke|p1|Kommo-o, L50, M|\n|poke|p1|Sinistcha-Masterpiece, L50|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Aerodactyl, L50, F|\n|poke|p2|Excadrill, L50, M|\n|poke|p2|Weavile, L50, M|\n|poke|p2|Tyranitar, L50, F|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Azumarill, L50, F|\n|poke|p2|Gardevoir, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by daedae007)\n|j| gE1xjZRtuhW2DdT0AK\nLyiter rejected open team sheets.\n|j| Crvstal_K!tty\n|c| Crvstal_K!tty|these teams are so peak\n|inactive|daedae007 has 60 seconds left.\n|c|\u2606Lyiter|mine or your or both?\n|c| Crvstal_K!tty|both teams\n|c|\u2606Lyiter|Agreed this is a fun format\n|\n|t:|1775981083\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Greninja|Greninja, L50, M|100/100\n|switch|p1b: Incineroar|Incineroar, L50, M|100/100\n|switch|p2a: Azumarill|Azumarill, L50, F|100/100\n|switch|p2b: Sneasler|Sneasler, L50, M|100/100\n|-ability|p1b: Incineroar|Intimidate|boost\n|-unboost|p2a: Azumarill|atk|1\n|-unboost|p2b: Sneasler|atk|1\n|-enditem|p2b: Sneasler|White Herb\n|-clearnegativeboost|p2b: Sneasler|[silent]\n|turn|1\n|\n|t:|1775981098\n|move|p2b: Sneasler|Fake Out|p1a: Greninja\n|-damage|p1a: Greninja|73/100\n|move|p1b: Incineroar|Fake Out|p2a: Azumarill\n|-damage|p2a: Azumarill|88/100\n|cant|p1a: Greninja|flinch\n|cant|p2a: Azumarill|flinch\n|\n|upkeep\n|turn|2\n|\n|t:|1775981121\n|move|p2b: Sneasler|Close Combat|p1a: Greninja\n|-supereffective|p1a: Greninja|1\n|-damage|p1a: Greninja|0 fnt\n|-unboost|p2b: Sneasler|def|1\n|-unboost|p2b: Sneasler|spd|1\n|faint|p1a: Greninja\n|move|p1b: Incineroar|Parting Shot|p2a: Azumarill\n|-unboost|p2a: Azumarill|atk|1\n|-unboost|p2a: Azumarill|spa|1\n|\n|t:|1775981127\n|switch|p1b: Sinistcha|Sinistcha-Masterpiece, L50|100/100|[from] Parting Shot\n|move|p2a: Azumarill|Belly Drum|p2a: Azumarill\n|-damage|p2a: Azumarill|38/100\n|-setboost|p2a: Azumarill|atk|6|[from] move: Belly Drum\n|-enditem|p2a: Azumarill|Sitrus Berry|[eat]\n|-heal|p2a: Azumarill|63/100|[from] item: Sitrus Berry\n|\n|upkeep\n|\n|t:|1775981129\n|switch|p1a: Kommo-o|Kommo-o, L50, M|100/100\n|turn|3\n|-message|daedae007 forfeited.\n|\n|win|Lyiter\n|raw|daedae007's rating: 1306 &rarr; <strong>1291</strong><br />(-15 for losing)\n|raw|Lyiter's rating: 1399 &rarr; <strong>1414</strong><br />(+15 for winning)\n|l|\u2606daedae007\n|player|p1|\n|c|\u2606Lyiter|gg\n|l|\u2606Lyiter\n|player|p2|\n",
+  "uploadtime": 1775981168,
+  "views": 44,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1291,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2583777908",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "MefShowdown0",
+    "jehlk"
+  ],
+  "log": "|j|\u2606MefShowdown0\n|j|\u2606jehlk\n|t:|1776197031\n|gametype|doubles\n|player|p1|MefShowdown0|selene-masters2|1199\n|player|p2|jehlk|cynthia-gen4|1131\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Aerodactyl, L50, F|\n|poke|p1|Sneasler, L50, F|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Sinistcha, L50|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Aerodactyl, L50, F|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Charizard, L50, F|\n|poke|p2|Venusaur, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by MefShowdown0)\n|inactive|jehlk has 60 seconds left.\n|\n|t:|1776197104\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Aerodactyl|Aerodactyl, L50, F|100/100\n|switch|p1b: Garchomp|Garchomp, L50, M|100/100\n|switch|p2a: Aerodactyl|Aerodactyl, L50, F|100/100\n|switch|p2b: Incineroar|Incineroar, L50, M|100/100\n|-ability|p1a: Aerodactyl|Unnerve\n|-ability|p2a: Aerodactyl|Unnerve\n|-ability|p2b: Incineroar|Intimidate|boost\n|-unboost|p1a: Aerodactyl|atk|1\n|-unboost|p1b: Garchomp|atk|1\n|turn|1\n|\n|t:|1776197125\n|move|p1b: Garchomp|Rock Slide|p2b: Incineroar|[spread] p2a,p2b\n|-supereffective|p2a: Aerodactyl|1\n|-supereffective|p2b: Incineroar|1\n|-damage|p2a: Aerodactyl|65/100\n|-damage|p2b: Incineroar|79/100\n|move|p1a: Aerodactyl|Tailwind|p1a: Aerodactyl\n|-sidestart|p1: MefShowdown0|move: Tailwind\n|move|p2a: Aerodactyl|Tailwind|p2a: Aerodactyl\n|-sidestart|p2: jehlk|move: Tailwind\n|move|p2b: Incineroar|Parting Shot|p1b: Garchomp\n|-unboost|p1b: Garchomp|atk|1\n|-unboost|p1b: Garchomp|spa|1\n|inactive|jehlk has 30 seconds left.\n|inactive|jehlk has 20 seconds left.\n|inactive|jehlk has 15 seconds left.\n|inactive|jehlk has 10 seconds left.\n|\n|t:|1776197173\n|switch|p2b: Venusaur|Venusaur, L50, M|100/100|[from] Parting Shot\n|\n|upkeep\n|turn|2\n|\n|t:|1776197190\n|move|p1b: Garchomp|Rock Slide|p2a: Aerodactyl|[spread] p2a\n|-miss|p1b: Garchomp|p2b: Venusaur\n|-supereffective|p2a: Aerodactyl|1\n|-damage|p2a: Aerodactyl|36/100\n|move|p1a: Aerodactyl|Dual Wingbeat|p2b: Venusaur\n|-supereffective|p2b: Venusaur|1\n|-damage|p2b: Venusaur|66/100\n|-supereffective|p2b: Venusaur|1\n|-damage|p2b: Venusaur|34/100\n|-hitcount|p2b: Venusaur|2\n|cant|p2a: Aerodactyl|flinch\n|move|p2b: Venusaur|Sleep Powder|p1b: Garchomp|[miss]\n|-miss|p2b: Venusaur|p1b: Garchomp\n|\n|upkeep\n|turn|3\n|-message|jehlk forfeited.\n|\n|win|MefShowdown0\n|raw|MefShowdown0's rating: 1199 &rarr; <strong>1219</strong><br />(+20 for winning)\n|raw|jehlk's rating: 1131 &rarr; <strong>1111</strong><br />(-20 for losing)\n",
+  "uploadtime": 1776197204,
+  "views": 14,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1111,
+  "private": 0,
+  "password": null
+}

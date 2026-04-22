@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2587129639",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "smubfinger",
+    "hey223"
+  ],
+  "log": "|j|\u2606smubfinger\n|j|\u2606hey223\n|t:|1776497654\n|gametype|doubles\n|player|p1|smubfinger|lady-gen4|1030\n|player|p2|hey223|170|1041\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Froslass, L50, F|\n|poke|p1|Weavile, L50, M|\n|poke|p1|Ninetales-Alola, L50, F|\n|poke|p1|Araquanid, L50, M|\n|poke|p1|Aerodactyl, L50, F|\n|poke|p1|Tinkaton, L50, F|\n|poke|p2|Absol, L50, M|\n|poke|p2|Aerodactyl, L50, M|\n|poke|p2|Farigiraf, L50, M|\n|poke|p2|Milotic, L50, F|\n|poke|p2|Alakazam, L50, M|\n|poke|p2|Volcarona, L50, F, shiny|\n|teampreview|4\nsmubfinger rejected open team sheets.\n|\n|t:|1776497679\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Aerodactyl|Aerodactyl, L50, F|100/100\n|switch|p1b: Ninetales|Ninetales-Alola, L50, F|100/100\n|switch|p2a: Volcarona|Volcarona, L50, F, shiny|100/100\n|switch|p2b: Aerodactyl|Aerodactyl, L50, M|100/100\n|-ability|p2b: Aerodactyl|Unnerve\n|-ability|p1a: Aerodactyl|Unnerve\n|-weather|Snowscape|[from] ability: Snow Warning|[of] p1b: Ninetales\n|turn|1\n|\n|t:|1776497688\n|move|p2b: Aerodactyl|Taunt|p1b: Ninetales\n|-start|p1b: Ninetales|move: Taunt\n|move|p1a: Aerodactyl|Tailwind|p1a: Aerodactyl\n|-sidestart|p1: smubfinger|move: Tailwind\n|cant|p1b: Ninetales|move: Taunt|Aurora Veil\n|move|p2a: Volcarona|Quiver Dance|p2a: Volcarona\n|-boost|p2a: Volcarona|spa|1\n|-boost|p2a: Volcarona|spd|1\n|-boost|p2a: Volcarona|spe|1\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|turn|2\n|\n|t:|1776497703\n|move|p1a: Aerodactyl|Rock Slide|p2b: Aerodactyl|[spread] p2a,p2b\n|-supereffective|p2a: Volcarona|2\n|-supereffective|p2b: Aerodactyl|1\n|-damage|p2a: Volcarona|0 fnt\n|-damage|p2b: Aerodactyl|20/100\n|faint|p2a: Volcarona\n|move|p1b: Ninetales|Blizzard|p2b: Aerodactyl\n|-supereffective|p2b: Aerodactyl|1\n|-damage|p2b: Aerodactyl|0 fnt\n|faint|p2b: Aerodactyl\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|-message|hey223 forfeited.\n|\n|win|smubfinger\n|raw|smubfinger's rating: 1030 &rarr; <strong>1067</strong><br />(+37 for winning)\n|raw|hey223's rating: 1041 &rarr; <strong>1024</strong><br />(-17 for losing)\n|l|\u2606hey223\n|player|p2|\n",
+  "uploadtime": 1776497712,
+  "views": 15,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1024,
+  "private": 0,
+  "password": null
+}

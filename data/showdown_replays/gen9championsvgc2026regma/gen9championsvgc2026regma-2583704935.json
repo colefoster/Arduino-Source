@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2583704935",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Yoshiforlife",
+    "ByClick_Vb"
+  ],
+  "log": "|j|\u2606Yoshiforlife\n|j|\u2606ByClick_Vb\n|t:|1776192150\n|gametype|doubles\n|player|p1|Yoshiforlife|2|1034\n|player|p2|ByClick_Vb|169|1095\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Delphox, L50, F|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Clefable, L50, M|\n|poke|p1|Kingambit, L50, M|\n|poke|p1|Dragonite, L50, F|\n|poke|p1|Sneasler, L50, F|\n|poke|p2|Alcremie, L50, F|\n|poke|p2|Kangaskhan, L50, F|\n|poke|p2|Whimsicott, L50, M|\n|poke|p2|Kingambit, L50, F|\n|poke|p2|Manectric, L50, F|\n|poke|p2|Basculegion, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Yoshiforlife)\n|c|\u2606Yoshiforlife|gl hf\n|inactive|ByClick_Vb has 60 seconds left.\n|\n|t:|1776192190\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Sneasler|Sneasler, L50, F|100/100\n|switch|p1b: Kingambit|Kingambit, L50, M|100/100\n|switch|p2a: Manectric|Manectric, L50, F|100/100\n|switch|p2b: Alcremie|Alcremie, L50, F|100/100\n|turn|1\n|\n|t:|1776192205\n|move|p2a: Manectric|Overheat|p1b: Kingambit\n|-supereffective|p1b: Kingambit|1\n|-damage|p1b: Kingambit|22/100\n|-unboost|p2a: Manectric|spa|2\n|move|p1a: Sneasler|Dire Claw|p2b: Alcremie\n|-supereffective|p2b: Alcremie|1\n|-damage|p2b: Alcremie|0 fnt\n|faint|p2b: Alcremie\n|move|p1b: Kingambit|Swords Dance|p1b: Kingambit\n|-boost|p1b: Kingambit|atk|2\n|\n|upkeep\n|\n|t:|1776192216\n|switch|p2b: Basculegion|Basculegion, L50, M|100/100\n|turn|2\n|\n|t:|1776192224\n|switch|p2a: Kangaskhan|Kangaskhan, L50, F|100/100\n|move|p1b: Kingambit|Protect|p1b: Kingambit\n|-singleturn|p1b: Kingambit|Protect\n|move|p2b: Basculegion|Aqua Jet|p1b: Kingambit\n|-activate|p1b: Kingambit|move: Protect\n|move|p1a: Sneasler|Dire Claw|p2b: Basculegion\n|-resisted|p2b: Basculegion|1\n|-damage|p2b: Basculegion|77/100\n|-status|p2b: Basculegion|slp\n|\n|upkeep\n|turn|3\n|-message|ByClick_Vb forfeited.\n|\n|win|Yoshiforlife\n|raw|Yoshiforlife's rating: 1034 &rarr; <strong>1075</strong><br />(+41 for winning)\n|raw|ByClick_Vb's rating: 1095 &rarr; <strong>1067</strong><br />(-28 for losing)\n|l|\u2606ByClick_Vb\n|player|p2|\n",
+  "uploadtime": 1776192237,
+  "views": 34,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1067,
+  "private": 0,
+  "password": null
+}

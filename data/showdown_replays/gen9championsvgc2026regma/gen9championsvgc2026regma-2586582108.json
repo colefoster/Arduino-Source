@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586582108",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Isidino",
+    "Cappercino0117"
+  ],
+  "log": "|j|\u2606Isidino\n|j|\u2606Cappercino0117\n|t:|1776444695\n|gametype|doubles\n|player|p1|Isidino|266|1274\n|player|p2|Cappercino0117|265|1373\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Pelipper, L50, M|\n|poke|p1|Basculegion-F, L50, F|\n|poke|p1|Starmie, L50|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Sableye, L50, M|\n|poke|p1|Lucario, L50, M|\n|poke|p2|Aerodactyl, L50, F|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Rotom-Wash, L50|\n|poke|p2|Torkoal, L50, M|\n|poke|p2|Farigiraf, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Isidino)\n|inactive|Isidino has 60 seconds left.\n|inactive|Cappercino0117 has 60 seconds left.\n|inactive|Isidino has 30 seconds left.\n|\n|t:|1776444759\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Pelipper|Pelipper, L50, M|100/100\n|switch|p1b: Basculegion|Basculegion-F, L50, F, shiny|100/100\n|switch|p2a: Aerodactyl|Aerodactyl, L50, F|100/100\n|switch|p2b: Sneasler|Sneasler, L50, M|100/100\n|-ability|p2a: Aerodactyl|Unnerve\n|-weather|RainDance|[from] ability: Drizzle|[of] p1a: Pelipper\n|turn|1\n|\n|t:|1776444776\n|detailschange|p2a: Aerodactyl|Aerodactyl-Mega, L50, F\n|-mega|p2a: Aerodactyl|Aerodactyl|Aerodactylite\n|move|p1b: Basculegion|Muddy Water|p2b: Sneasler|[spread] p2a,p2b\n|-supereffective|p2a: Aerodactyl|1\n|-damage|p2a: Aerodactyl|0 fnt\n|-damage|p2b: Sneasler|19/100\n|-unboost|p2b: Sneasler|accuracy|1\n|faint|p2a: Aerodactyl\n|-enditem|p2b: Sneasler|White Herb\n|-clearnegativeboost|p2b: Sneasler|[silent]\n|move|p2b: Sneasler|Close Combat|p1a: Pelipper\n|-resisted|p1a: Pelipper|1\n|-damage|p1a: Pelipper|57/100\n|-unboost|p2b: Sneasler|def|1\n|-unboost|p2b: Sneasler|spd|1\n|move|p1a: Pelipper|Tailwind|p1a: Pelipper\n|-sidestart|p1: Isidino|move: Tailwind\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|-message|Cappercino0117 forfeited.\n|\n|win|Isidino\n|raw|Isidino's rating: 1274 &rarr; <strong>1306</strong><br />(+32 for winning)\n|raw|Cappercino0117's rating: 1373 &rarr; <strong>1347</strong><br />(-26 for losing)\n|l|\u2606Cappercino0117\n|player|p2|\n",
+  "uploadtime": 1776444795,
+  "views": 49,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1306,
+  "private": 0,
+  "password": null
+}

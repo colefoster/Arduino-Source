@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2585287856",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "jabulari",
+    "jimmyjinx"
+  ],
+  "log": "|j|\u203djabulari\n|j|\u2606jimmyjinx\n|t:|1776334102\n|gametype|doubles\n|player|p1|jabulari|102|1091\n|player|p2|jimmyjinx|giovanni|1156\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Orthworm, L50, M|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Rotom-Frost, L50|\n|poke|p1|Froslass, L50, F|\n|poke|p1|Garchomp, L50, F|\n|poke|p2|Starmie, L50|\n|poke|p2|Sableye, L50, F|\n|poke|p2|Weavile, L50, F|\n|poke|p2|Lucario, L50, F|\n|poke|p2|Typhlosion-Hisui, L50, F|\n|poke|p2|Hydreigon, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by jimmyjinx)\n|inactive|jimmyjinx has 60 seconds left.\n|\n|t:|1776334146\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Incineroar|Incineroar, L50, M|100/100\n|switch|p1b: Orthworm|Orthworm, L50, M|100/100\n|switch|p2a: Lucario|Lucario, L50, F|100/100\n|switch|p2b: Weavile|Weavile, L50, F|100/100\n|-ability|p2b: Weavile|Pressure\n|-ability|p1a: Incineroar|Intimidate|boost\n|-fail|p2a: Lucario|unboost|Attack|[from] ability: Inner Focus|[of] p2a: Lucario\n|-unboost|p2b: Weavile|atk|1\n|turn|1\n|\n|t:|1776334162\n|move|p2b: Weavile|Fake Out|p1b: Orthworm\n|-resisted|p1b: Orthworm|1\n|-damage|p1b: Orthworm|98/100\n|move|p1a: Incineroar|Fake Out|p2a: Lucario\n|-resisted|p2a: Lucario|1\n|-damage|p2a: Lucario|92/100\n|move|p2a: Lucario|Close Combat|p1a: Incineroar\n|-supereffective|p1a: Incineroar|1\n|-damage|p1a: Incineroar|0 fnt\n|-unboost|p2a: Lucario|def|1\n|-unboost|p2a: Lucario|spd|1\n|faint|p1a: Incineroar\n|cant|p1b: Orthworm|flinch\n|\n|upkeep\n|-message|jabulari forfeited.\n|\n|win|jimmyjinx\n|raw|jabulari's rating: 1091 &rarr; <strong>1072</strong><br />(-19 for losing)\n|raw|jimmyjinx's rating: 1156 &rarr; <strong>1176</strong><br />(+20 for winning)\n|l|\u203djabulari\n|player|p1|\n",
+  "uploadtime": 1776334190,
+  "views": 20,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1072,
+  "private": 0,
+  "password": null
+}

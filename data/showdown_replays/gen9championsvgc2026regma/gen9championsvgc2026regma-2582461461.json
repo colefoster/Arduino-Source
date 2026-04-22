@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582461461",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Jollepapu",
+    "jonen"
+  ],
+  "log": "|j|\u2606Jollepapu\n|j|\u2606jonen\n|t:|1776093205\n|gametype|doubles\n|player|p1|Jollepapu|ethan|1029\n|player|p2|jonen|medium|1110\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Arbok, L50, F|\n|poke|p1|Whimsicott, L50, F|\n|poke|p1|Tyranitar, L50, F|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Tinkaton, L50, F|\n|poke|p1|Snorlax, L50, F|\n|poke|p2|Kleavor, L50, M|\n|poke|p2|Hippowdon, L50, F|\n|poke|p2|Chesnaught, L50, F|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Incineroar, L50, F|\n|teampreview|4\n|\n|t:|1776093254\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Weather|Tyranitar, L50, F|100/100\n|switch|p1b: MyBeloved|Garchomp, L50, F, shiny|100/100\n|switch|p2a: Kleavor|Kleavor, L50, M, shiny|100/100\n|switch|p2b: Incineroar|Incineroar, L50, F|100/100\n|-ability|p2b: Incineroar|Intimidate|boost\n|-unboost|p1a: Weather|atk|1\n|-unboost|p1b: MyBeloved|atk|1\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p1a: Weather\n|turn|1\n|\n|t:|1776093301\n|move|p2b: Incineroar|Fake Out|p1b: MyBeloved\n|-damage|p1b: MyBeloved|89/100\n|move|p2a: Kleavor|Close Combat|p1a: Weather\n|-supereffective|p1a: Weather|2\n|-damage|p1a: Weather|0 fnt\n|-unboost|p2a: Kleavor|def|1\n|-unboost|p2a: Kleavor|spd|1\n|faint|p1a: Weather\n|cant|p1b: MyBeloved|flinch\n|\n|-weather|Sandstorm|[upkeep]\n|-damage|p2b: Incineroar|95/100|[from] Sandstorm\n|upkeep\n|\n|t:|1776093318\n|switch|p1a: Gerson|Tinkaton, L50, F|100/100\n|-ability|p1a: Gerson|Mold Breaker\n|turn|2\n|\n|t:|1776093346\n|switch|p2a: Chesnaught|Chesnaught, L50, F|100/100\n|detailschange|p1b: MyBeloved|Garchomp-Mega, L50, F, shiny\n|-mega|p1b: MyBeloved|Garchomp|Garchompite\n|move|p1b: MyBeloved|Earthquake|p2b: Incineroar|[spread] p1a,p2a,p2b\n|-supereffective|p1a: Gerson|1\n|-resisted|p2a: Chesnaught|1\n|-supereffective|p2b: Incineroar|1\n|-damage|p1a: Gerson|1/100\n|-damage|p2a: Chesnaught|86/100\n|-damage|p2b: Incineroar|20/100\n|-enditem|p2b: Incineroar|Sitrus Berry|[eat]\n|-heal|p2b: Incineroar|45/100|[from] item: Sitrus Berry\n|move|p1a: Gerson|Gigaton Hammer|p2a: Chesnaught\n|-damage|p2a: Chesnaught|32/100\n|move|p2b: Incineroar|Parting Shot|p1a: Gerson\n|-unboost|p1a: Gerson|atk|1\n|-unboost|p1a: Gerson|spa|1\n|-message|Jollepapu forfeited.\n|\n|win|jonen\n|raw|Jollepapu's rating: 1029 &rarr; <strong>1018</strong><br />(-11 for losing)\n|raw|jonen's rating: 1110 &rarr; <strong>1129</strong><br />(+19 for winning)\n",
+  "uploadtime": 1776093361,
+  "views": 12,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1018,
+  "private": 0,
+  "password": null
+}

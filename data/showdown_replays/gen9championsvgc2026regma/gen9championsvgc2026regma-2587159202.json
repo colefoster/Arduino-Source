@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2587159202",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "azumarillsky",
+    "ScribbleScribble"
+  ],
+  "log": "|j|\u2606azumarillsky\n|j|\u2606ScribbleScribble\n|t:|1776502104\n|gametype|doubles\n|player|p1|azumarillsky|102|1477\n|player|p2|ScribbleScribble|mina-lgpe|1657\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Scovillain, L50, M|\n|poke|p1|Snorlax, L50, M|\n|poke|p1|Farigiraf, L50, F|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Maushold-Four, L50|\n|poke|p1|Gengar, L50, F|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Aerodactyl, L50, M|\n|poke|p2|Kingambit, L50, F|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Farigiraf, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by ScribbleScribble)\n|j| Crvstal_K!tty\n|\n|t:|1776502127\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Scovillain|Scovillain, L50, M|100/100\n|switch|p1b: Snorlax|Snorlax, L50, M|100/100\n|switch|p2a: Aerodactyl|Aerodactyl, L50, M|100/100\n|switch|p2b: Floette|Floette-Eternal, L50, F|100/100\n|-ability|p2a: Aerodactyl|Unnerve\n|turn|1\n|j| siczler\n|\n|t:|1776502145\n|detailschange|p2b: Floette|Floette-Mega, L50, F\n|-mega|p2b: Floette|Floette|Floettite\n|-ability|p2b: Floette|Fairy Aura\n|detailschange|p1a: Scovillain|Scovillain-Mega, L50, M\n|-mega|p1a: Scovillain|Scovillain|Scovillainite\n|move|p1a: Scovillain|Rage Powder|p1a: Scovillain\n|-singleturn|p1a: Scovillain|move: Rage Powder\n|move|p2a: Aerodactyl|Tailwind|p2a: Aerodactyl\n|-sidestart|p2: ScribbleScribble|move: Tailwind\n|move|p2b: Floette|Calm Mind|p2b: Floette\n|-boost|p2b: Floette|spa|1\n|-boost|p2b: Floette|spd|1\n|move|p1b: Snorlax|Belly Drum|p1b: Snorlax\n|-damage|p1b: Snorlax|50/100\n|-setboost|p1b: Snorlax|atk|6|[from] move: Belly Drum\n|\n|upkeep\n|turn|2\n|\n|t:|1776502165\n|switch|p1a: Maushold|Maushold-Four, L50|100/100\n|move|p2a: Aerodactyl|Rock Slide|p1b: Snorlax|[spread] p1a,p1b\n|-damage|p1a: Maushold|67/100\n|-damage|p1b: Snorlax|36/100\n|move|p2b: Floette|Dazzling Gleam|p1b: Snorlax|[spread] p1a,p1b\n|-damage|p1a: Maushold|0 fnt\n|-damage|p1b: Snorlax|0 fnt\n|faint|p1a: Maushold\n|faint|p1b: Snorlax\n|\n|upkeep\n|-message|azumarillsky forfeited.\n|\n|win|ScribbleScribble\n|raw|azumarillsky's rating: 1477 &rarr; <strong>1467</strong><br />(-10 for losing)\n|raw|ScribbleScribble's rating: 1657 &rarr; <strong>1667</strong><br />(+10 for winning)\n|l|\u2606azumarillsky\n|player|p1|\n|l| Crvstal_K!tty\n|l|\u2606ScribbleScribble\n|player|p2|\n|l| siczler\n",
+  "uploadtime": 1776502244,
+  "views": 86,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1467,
+  "private": 0,
+  "password": null
+}

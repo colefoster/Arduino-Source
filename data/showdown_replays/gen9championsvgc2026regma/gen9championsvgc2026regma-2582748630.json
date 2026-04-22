@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582748630",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "CaptainOrb",
+    "hyunbelievable"
+  ],
+  "log": "|j|\u2606CaptainOrb\n|j|\u2606hyunbelievable\n|t:|1776111394\n|gametype|doubles\n|player|p1|CaptainOrb|169|1078\n|player|p2|hyunbelievable|guzma|1108\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Scovillain, L50, F|\n|poke|p1|Corviknight, L50, M|\n|poke|p1|Dragapult, L50, M|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Tyranitar, L50, F|\n|poke|p1|Gyarados, L50, F|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Aerodactyl, L50, M|\n|poke|p2|Excadrill, L50, M|\n|poke|p2|Tyranitar, L50, M|\n|poke|p2|Orthworm, L50, M|\n|poke|p2|Rotom-Mow, L50|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by CaptainOrb)\nCaptainOrb rejected open team sheets.\n|\n|t:|1776111426\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Scovillain|Scovillain, L50, F|100/100\n|switch|p1b: Dragapult|Dragapult, L50, M|100/100\n|switch|p2a: Orthworm|Orthworm, L50, M|100/100\n|switch|p2b: Rotom|Rotom-Mow, L50|100/100\n|turn|1\n|c|\u2606hyunbelievable|oh lord i forgot about the burn monster\n|c|\u2606hyunbelievable|hes lowk scaring me\n|inactive|hyunbelievable has 30 seconds left.\n|\n|t:|1776111460\n|detailschange|p1a: Scovillain|Scovillain-Mega, L50, F\n|-mega|p1a: Scovillain|Scovillain|Scovillainite\n|move|p2b: Rotom|Volt Switch|p1b: Dragapult\n|-resisted|p1b: Dragapult|1\n|-damage|p1b: Dragapult|82/100\n|\n|t:|1776111465\n|switch|p2b: Tyranitar|Tyranitar, L50, M|100/100|[from] Volt Switch\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p2b: Tyranitar\n|move|p1b: Dragapult|Light Screen|p1b: Dragapult\n|-sidestart|p1: CaptainOrb|move: Light Screen\n|move|p1a: Scovillain|Leech Seed|p2a: Orthworm|[miss]\n|-miss|p1a: Scovillain|p2a: Orthworm\n|move|p2a: Orthworm|Shed Tail|p2a: Orthworm\n|-start|p2a: Orthworm|Substitute|[from] move: Shed Tail\n|-damage|p2a: Orthworm|50/100\n|-enditem|p2a: Orthworm|Sitrus Berry|[eat]\n|-heal|p2a: Orthworm|75/100|[from] item: Sitrus Berry\n|-message|CaptainOrb forfeited.\n|\n|win|hyunbelievable\n|raw|CaptainOrb's rating: 1106 &rarr; <strong>1081</strong><br />(-25 for losing)\n|raw|hyunbelievable's rating: 1108 &rarr; <strong>1133</strong><br />(+25 for winning)\n|l|\u2606CaptainOrb\n|player|p1|\n",
+  "uploadtime": 1776111478,
+  "views": 12,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1081,
+  "private": 0,
+  "password": null
+}

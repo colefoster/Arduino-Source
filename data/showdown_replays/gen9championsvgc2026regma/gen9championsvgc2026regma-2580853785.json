@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2580853785",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "SleepyPumpk1n",
+    "Michael YunGOOBian"
+  ],
+  "log": "|j|\u2606SleepyPumpk1n\n|j|\u2606Michael YunGOOBian\n|t:|1775937887\n|gametype|doubles\n|player|p1|SleepyPumpk1n|red-masters3|1014\n|player|p2|Michael YunGOOBian|benga|1000\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Tyranitar, L50, F|\n|poke|p1|Aerodactyl, L50, F|\n|poke|p1|Sinistcha-Masterpiece, L50|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Sneasler, L50, M|\n|poke|p2|Hatterene, L50, F|\n|poke|p2|Oranguru, L50, M|\n|poke|p2|Golurk, L50|\n|poke|p2|Clefable, L50, F|\n|poke|p2|Hydreigon, L50, F|\n|poke|p2|Torkoal, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by SleepyPumpk1n)\n|inactive|Michael YunGOOBian has 60 seconds left.\n|inactive|Michael YunGOOBian has 30 seconds left.\n|\n|t:|1775937956\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Incineroar|Incineroar, L50, M|100/100\n|switch|p1b: Tyranitar|Tyranitar, L50, F|100/100\n|switch|p2a: Hatterene|Hatterene, L50, F|100/100\n|switch|p2b: Clefable|Clefable, L50, F|100/100\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p1b: Tyranitar\n|-ability|p1a: Incineroar|Intimidate|boost\n|-unboost|p2a: Hatterene|atk|1\n|-unboost|p2b: Clefable|atk|1\n|turn|1\n|inactive|SleepyPumpk1n has 30 seconds left.\n|inactive|Michael YunGOOBian has 30 seconds left.\n|inactive|Michael YunGOOBian has 20 seconds left.\n|\n|t:|1775937996\n|switch|p2a: Torkoal|Torkoal, L50, F|100/100\n|move|p1a: Incineroar|Fake Out|p2b: Clefable\n|-damage|p2b: Clefable|90/100\n|move|p1b: Tyranitar|Rock Slide|p2b: Clefable|[spread] p2a,p2b\n|-supereffective|p2a: Torkoal|1\n|-crit|p2b: Clefable\n|-damage|p2a: Torkoal|52/100\n|-damage|p2b: Clefable|32/100\n|cant|p2b: Clefable|flinch\n|\n|-weather|Sandstorm|[upkeep]\n|-damage|p1a: Incineroar|95/100|[from] Sandstorm\n|-damage|p2b: Clefable|26/100|[from] Sandstorm\n|-damage|p2a: Torkoal|46/100|[from] Sandstorm\n|upkeep\n|turn|2\n|-message|Michael YunGOOBian forfeited.\n|\n|win|SleepyPumpk1n\n|raw|SleepyPumpk1n's rating: 1014 &rarr; <strong>1050</strong><br />(+36 for winning)\n|raw|Michael YunGOOBian's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|l|\u2606Michael YunGOOBian\n|player|p2|\n",
+  "uploadtime": 1775938011,
+  "views": 16,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

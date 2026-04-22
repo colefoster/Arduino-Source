@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2588373526",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "namo09",
+    "bigpedro"
+  ],
+  "log": "|j|\u2606namo09\n|j|\u2606bigpedro\n|t:|1776628137\n|gametype|doubles\n|player|p1|namo09|265|1184\n|player|p2|bigpedro|wallace|1277\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Delphox, L50, F|\n|poke|p1|Dragonite, L50, F|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Primarina, L50, F|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Mamoswine, L50, M|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Delphox, L50, F|\n|poke|p2|Aerodactyl, L50, F|\n|poke|p2|Garchomp, L50, F|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Sinistcha, L50|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by bigpedro)\n|inactive|bigpedro has 60 seconds left.\n|inactive|bigpedro has 30 seconds left.\n|inactive|bigpedro has 20 seconds left.\n|\n|t:|1776628212\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Delphox|Delphox, L50, F|100/100\n|switch|p1b: Sneasler|Sneasler, L50, M|100/100\n|switch|p2a: Aerodactyl|Aerodactyl, L50, F|100/100\n|switch|p2b: Basculegion|Basculegion, L50, M|100/100\n|-ability|p2a: Aerodactyl|Unnerve\n|turn|1\n|inactive|namo09 has 30 seconds left.\n|\n|t:|1776628241\n|move|p2a: Aerodactyl|Protect|p2a: Aerodactyl\n|-singleturn|p2a: Aerodactyl|Protect\n|move|p1a: Delphox|Protect|p1a: Delphox\n|-singleturn|p1a: Delphox|Protect\n|move|p1b: Sneasler|Fake Out|p2a: Aerodactyl\n|-activate|p2a: Aerodactyl|move: Protect\n|move|p2b: Basculegion|Wave Crash|p1a: Delphox\n|-activate|p1a: Delphox|move: Protect\n|\n|upkeep\n|turn|2\n|\n|t:|1776628255\n|switch|p1a: Primarina|Primarina, L50, F|100/100\n|move|p2b: Basculegion|Wave Crash|p1a: Primarina\n|-resisted|p1a: Primarina|1\n|-damage|p1a: Primarina|45/100\n|-damage|p2b: Basculegion|86/100|[from] Recoil\n|move|p2a: Aerodactyl|Dual Wingbeat|p1b: Sneasler|[miss]\n|-miss|p2a: Aerodactyl|p1b: Sneasler\n|move|p1b: Sneasler|Dire Claw|p2a: Aerodactyl\n|-resisted|p2a: Aerodactyl|1\n|-damage|p2a: Aerodactyl|66/100\n|\n|upkeep\n|turn|3\n|\n|t:|1776628280\n|move|p2b: Basculegion|Wave Crash|p1a: Primarina\n|-resisted|p1a: Primarina|1\n|-damage|p1a: Primarina|0 fnt\n|faint|p1a: Primarina\n|-damage|p2b: Basculegion|74/100|[from] Recoil\n|move|p2a: Aerodactyl|Dual Wingbeat|p1b: Sneasler\n|-supereffective|p1b: Sneasler|1\n|-damage|p1b: Sneasler|37/100\n|-supereffective|p1b: Sneasler|1\n|-damage|p1b: Sneasler|0 fnt\n|faint|p1b: Sneasler\n|-hitcount|p1: Sneasler|2\n|\n|upkeep\n|-message|namo09 forfeited.\n|\n|win|bigpedro\n|raw|namo09's rating: 1184 &rarr; <strong>1166</strong><br />(-18 for losing)\n|raw|bigpedro's rating: 1277 &rarr; <strong>1295</strong><br />(+18 for winning)\n|l|\u2606namo09\n|player|p1|\n",
+  "uploadtime": 1776628301,
+  "views": 15,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1166,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2589562916",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "ScribbleScribble",
+    "Ae310"
+  ],
+  "log": "|j|\u2606ScribbleScribble\n|j|\u2606Ae310\n|t:|1776734434\n|gametype|doubles\n|player|p1|ScribbleScribble|mina-lgpe|1574\n|player|p2|Ae310|gardenia|1612\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Meganium, L50, F|\n|poke|p1|Sneasler, L50, F|\n|poke|p1|Aerodactyl, L50, F|\n|poke|p1|Kingambit, L50, M|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Farigiraf, L50, F|\n|poke|p2|Aerodactyl, L50, M|\n|poke|p2|Meganium, L50, F|\n|poke|p2|Farigiraf, L50, F|\n|poke|p2|Aegislash, L50, F|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Sneasler, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by ScribbleScribble)\n|c|\u2606Ae310|nice\n|inactive|ScribbleScribble has 60 seconds left.\n|\n|t:|1776734466\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Farigiraf|Farigiraf, L50, F|100/100\n|switch|p1b: Meganium|Meganium, L50, F|100/100\n|switch|p2a: Meganium|Meganium, L50, F|100/100\n|switch|p2b: Aerodactyl|Aerodactyl, L50, M|100/100\n|-ability|p2b: Aerodactyl|Unnerve\n|turn|1\n|\n|t:|1776734479\n|detailschange|p2a: Meganium|Meganium-Mega, L50, F\n|-mega|p2a: Meganium|Meganium|Meganiumite\n|detailschange|p1b: Meganium|Meganium-Mega, L50, F\n|-mega|p1b: Meganium|Meganium|Meganiumite\n|move|p1b: Meganium|Protect|p1b: Meganium\n|-singleturn|p1b: Meganium|Protect\n|move|p2b: Aerodactyl|Rock Slide|p1a: Farigiraf|[spread] p1a\n|-activate|p1b: Meganium|move: Protect\n|-damage|p1a: Farigiraf|78/100\n|move|p2a: Meganium|Weather Ball|p1b: Meganium\n|-activate|p1b: Meganium|move: Protect\n|move|p1a: Farigiraf|Trick Room|p1a: Farigiraf\n|-fieldstart|move: Trick Room|[of] p1a: Farigiraf\n|\n|upkeep\n|turn|2\n|\n|t:|1776734492\n|move|p1a: Farigiraf|Hyper Voice|p2a: Meganium|[spread] p2a,p2b\n|-resisted|p2b: Aerodactyl|1\n|-damage|p2a: Meganium|72/100\n|-damage|p2b: Aerodactyl|81/100\n|move|p1b: Meganium|Solar Beam||[still]\n|-prepare|p1b: Meganium|Solar Beam\n|-activate|p1b: Meganium|ability: Mega Sol\n|-anim|p1b: Meganium|Solar Beam|p2b: Aerodactyl\n|-damage|p2b: Aerodactyl|0 fnt\n|faint|p2b: Aerodactyl\n|move|p2a: Meganium|Weather Ball|p1b: Meganium\n|-supereffective|p1b: Meganium|1\n|-damage|p1b: Meganium|6/100\n|\n|upkeep\n|\n|t:|1776734497\n|switch|p2b: Sneasler|Sneasler, L50, M|100/100\n|turn|3\n|-message|Ae310 forfeited.\n|\n|win|ScribbleScribble\n|raw|ScribbleScribble's rating: 1574 &rarr; <strong>1596</strong><br />(+22 for winning)\n|raw|Ae310's rating: 1612 &rarr; <strong>1590</strong><br />(-22 for losing)\n|l|\u2606Ae310\n|player|p2|\n|l|\u2606ScribbleScribble\n|player|p1|\n",
+  "uploadtime": 1776735419,
+  "views": 4,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1590,
+  "private": 0,
+  "password": null
+}

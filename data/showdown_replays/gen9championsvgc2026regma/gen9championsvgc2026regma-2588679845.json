@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2588679845",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "idontknouu",
+    "stinkyvomit"
+  ],
+  "log": "|j|\u2606idontknouu\n|j|\u2606stinkyvomit\n|t:|1776656959\n|gametype|doubles\n|player|p1|idontknouu|170|1146\n|player|p2|stinkyvomit|waiter|1046\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Excadrill, L50, M|\n|poke|p1|Tyranitar, L50, M|\n|poke|p1|Milotic, L50, M|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Talonflame, L50, M|\n|poke|p1|Glimmora, L50, F|\n|poke|p2|Greninja, L50, F|\n|poke|p2|Aggron, L50, M, shiny|\n|poke|p2|Vanilluxe, L50, M|\n|poke|p2|Whimsicott, L50, M, shiny|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Garchomp, L50, M|\n|teampreview|4\n|\n|t:|1776656978\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Milotic|Milotic, L50, M|100/100\n|switch|p1b: Talonflame|Talonflame, L50, M|100/100\n|switch|p2a: Sinistcha|Sinistcha, L50|100/100\n|switch|p2b: Vanilluxe|Vanilluxe, L50, M|100/100\n|-weather|Snowscape|[from] ability: Snow Warning|[of] p2b: Vanilluxe\n|turn|1\n|\n|t:|1776656992\n|move|p1b: Talonflame|Tailwind|p1b: Talonflame\n|-sidestart|p1: idontknouu|move: Tailwind\n|move|p1a: Milotic|Muddy Water|p2a: Sinistcha|[spread] p2b\n|-miss|p1a: Milotic|p2a: Sinistcha\n|-damage|p2b: Vanilluxe|66/100\n|move|p2b: Vanilluxe|Aurora Veil|p2b: Vanilluxe\n|-sidestart|p2: stinkyvomit|move: Aurora Veil\n|move|p2a: Sinistcha|Trick Room|p2a: Sinistcha\n|-fieldstart|move: Trick Room|[of] p2a: Sinistcha\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|turn|2\n|-message|idontknouu forfeited.\n|\n|win|stinkyvomit\n|raw|idontknouu's rating: 1146 &rarr; <strong>1114</strong><br />(-32 for losing)\n|raw|stinkyvomit's rating: 1046 &rarr; <strong>1088</strong><br />(+42 for winning)\n|l|\u2606idontknouu\n|player|p1|\n|j| Gellapo\n",
+  "uploadtime": 1776657040,
+  "views": 10,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1088,
+  "private": 0,
+  "password": null
+}

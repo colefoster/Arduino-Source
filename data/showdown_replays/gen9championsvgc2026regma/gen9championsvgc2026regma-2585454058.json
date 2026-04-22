@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2585454058",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "shelmerVGC",
+    "Pokeventurer"
+  ],
+  "log": "|j|\u2606shelmerVGC\n|j|\u2606Pokeventurer\n|t:|1776348367\n|gametype|doubles\n|player|p1|shelmerVGC|2|1305\n|player|p2|Pokeventurer|265|1251\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Delphox, L50, F|\n|poke|p1|Aerodactyl, L50, M|\n|poke|p1|Maushold-Four, L50|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Incineroar, L50, M|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Kingambit, L50, F|\n|poke|p2|Mamoswine, L50, M|\n|poke|p2|Aerodactyl, L50, M|\n|poke|p2|Tsareena, L50, F|\n|poke|p2|Talonflame, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by shelmerVGC)\n|inactive|shelmerVGC has 60 seconds left.\n|\n|t:|1776348409\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Garchomp|Garchomp, L50, M|100/100\n|switch|p1b: Aerodactyl|Aerodactyl, L50, M|100/100\n|switch|p2a: Talonflame|Talonflame, L50, M|100/100\n|switch|p2b: Mamoswine|Mamoswine, L50, M|100/100\n|-ability|p1b: Aerodactyl|Unnerve\n|turn|1\n|j| 1#MiraidonHater\n|\n|t:|1776348424\n|move|p2a: Talonflame|Tailwind|p2a: Talonflame\n|-sidestart|p2: Pokeventurer|move: Tailwind\n|move|p2b: Mamoswine|Icicle Crash|p1a: Garchomp\n|-supereffective|p1a: Garchomp|2\n|-crit|p1a: Garchomp\n|-damage|p1a: Garchomp|0 fnt\n|faint|p1a: Garchomp\n|move|p1b: Aerodactyl|Rock Slide|p2b: Mamoswine|[spread] p2a,p2b\n|-supereffective|p2a: Talonflame|2\n|-damage|p2a: Talonflame|0 fnt\n|-damage|p2b: Mamoswine|68/100\n|faint|p2a: Talonflame\n|\n|upkeep\n|\n|t:|1776348435\n|switch|p2a: Basculegion|Basculegion, L50, M|100/100\n|switch|p1a: Floette|Floette-Eternal, L50, F|100/100\n|turn|2\n|\n|t:|1776348443\n|switch|p1b: Incineroar|Incineroar, L50, M|100/100\n|-ability|p1b: Incineroar|Intimidate|boost\n|-unboost|p2a: Basculegion|atk|1\n|-fail|p2b: Mamoswine|unboost|Attack|[from] ability: Oblivious|[of] p2b: Mamoswine\n|detailschange|p1a: Floette|Floette-Mega, L50, F\n|-mega|p1a: Floette|Floette|Floettite\n|-ability|p1a: Floette|Fairy Aura\n|move|p2a: Basculegion|Wave Crash|p1b: Incineroar\n|-supereffective|p1b: Incineroar|1\n|-crit|p1b: Incineroar\n|-damage|p1b: Incineroar|0 fnt\n|faint|p1b: Incineroar\n|-damage|p2a: Basculegion|66/100|[from] Recoil\n|move|p2b: Mamoswine|Rock Slide|p1a: Floette\n|-damage|p1a: Floette|71/100\n|cant|p1a: Floette|flinch\n|\n|upkeep\n|-message|shelmerVGC forfeited.\n|\n|win|Pokeventurer\n|raw|shelmerVGC's rating: 1305 &rarr; <strong>1282</strong><br />(-23 for losing)\n|raw|Pokeventurer's rating: 1251 &rarr; <strong>1280</strong><br />(+29 for winning)\n|l|\u2606shelmerVGC\n|player|p1|\n",
+  "uploadtime": 1776348418,
+  "views": 64,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1280,
+  "private": 0,
+  "password": null
+}

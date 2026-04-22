@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586625157",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Leg1ble",
+    "P0keJr"
+  ],
+  "log": "|j|\u2606Leg1ble\n|j|\u2606P0keJr\n|t:|1776447714\n|gametype|doubles\n|player|p1|Leg1ble|2|1103\n|player|p2|P0keJr|266|1072\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Gyarados, L50, F|\n|poke|p1|Volcarona, L50, F|\n|poke|p1|Torkoal, L50, M|\n|poke|p1|Jolteon, L50, M|\n|poke|p1|Tsareena, L50, F|\n|poke|p1|Feraligatr, L50, F|\n|poke|p2|Alakazam, L50, F|\n|poke|p2|Meowstic, L50, M|\n|poke|p2|Primarina, L50, F|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Maushold, L50|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Leg1ble)\n|\n|t:|1776447743\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Gyarados|Gyarados, L50, F|100/100\n|switch|p1b: Torkoal|Torkoal, L50, M, shiny|100/100\n|switch|p2a: Alakazam|Alakazam, L50, F|100/100\n|switch|p2b: Meowstic|Meowstic, L50, M|100/100\n|-ability|p1a: Gyarados|Intimidate|boost\n|-unboost|p2a: Alakazam|atk|1\n|-unboost|p2b: Meowstic|atk|1\n|-weather|SunnyDay|[from] ability: Drought|[of] p1b: Torkoal\n|turn|1\n|inactive|P0keJr has 30 seconds left.\n|\n|t:|1776447772\n|detailschange|p2a: Alakazam|Alakazam-Mega, L50, F\n|-mega|p2a: Alakazam|Alakazam|Alakazite\n|-ability|p2a: Alakazam|Drought|Trace|[from] ability: Trace|[of] p1b: Torkoal\n|move|p2b: Meowstic|Psychic Terrain|p2b: Meowstic\n|-fieldstart|move: Psychic Terrain\n|move|p2a: Alakazam|Expanding Force|p1a: Gyarados|[spread] p1a,p1b\n|-damage|p1a: Gyarados|29/100\n|-damage|p1b: Torkoal|0 fnt\n|faint|p1b: Torkoal\n|move|p1a: Gyarados|Temper Flare|p2a: Alakazam\n|-damage|p2a: Alakazam|33/100\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|\n|t:|1776447786\n|switch|p1b: Volcarona|Volcarona, L50, F, shiny|100/100\n|turn|2\n|\n|t:|1776447799\n|move|p1a: Gyarados|Protect|p1a: Gyarados\n|-singleturn|p1a: Gyarados|Protect\n|move|p2a: Alakazam|Expanding Force|p1a: Gyarados|[spread] p1b\n|-activate|p1a: Gyarados|move: Protect\n|-damage|p1b: Volcarona|12/100\n|move|p1b: Volcarona|Quiver Dance|p1b: Volcarona\n|-boost|p1b: Volcarona|spa|1\n|-boost|p1b: Volcarona|spd|1\n|-boost|p1b: Volcarona|spe|1\n|move|p2b: Meowstic|Expanding Force|p1b: Volcarona|[spread] p1b\n|-activate|p1a: Gyarados|move: Protect\n|-damage|p1b: Volcarona|0 fnt\n|faint|p1b: Volcarona\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|\n|t:|1776447815\n|switch|p1b: Feraligatr|Feraligatr, L50, F|100/100\n|turn|3\n|-message|Leg1ble forfeited.\n|\n|win|P0keJr\n|raw|Leg1ble's rating: 1103 &rarr; <strong>1076</strong><br />(-27 for losing)\n|raw|P0keJr's rating: 1072 &rarr; <strong>1104</strong><br />(+32 for winning)\n|l|\u2606Leg1ble\n|player|p1|\n",
+  "uploadtime": 1776447834,
+  "views": 38,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1076,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582391298",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "carlyraejespeon",
+    "TerraDelta"
+  ],
+  "log": "|j|\u2606carlyraejespeon\n|j|\u2606TerraDelta\n|t:|1776088566\n|gametype|doubles\n|player|p1|carlyraejespeon|elesa|1054\n|player|p2|TerraDelta|clair|1111\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Maushold-Four, L50|\n|poke|p1|Volcarona, L50, F|\n|poke|p1|Tyranitar, L50, F|\n|poke|p1|Excadrill, L50, F|\n|poke|p1|Primarina, L50, F|\n|poke|p1|Sinistcha, L50|\n|poke|p2|Alakazam, L50, F|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Rotom-Heat, L50|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Gyarados, L50, F|\n|poke|p2|Sinistcha, L50|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by carlyraejespeon)\n|\n|t:|1776088592\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Maushold|Maushold-Four, L50|100/100\n|switch|p1b: Volcarona|Volcarona, L50, F|100/100\n|switch|p2a: Sneasler|Sneasler, L50, M|100/100\n|switch|p2b: Alakazam|Alakazam, L50, F|100/100\n|turn|1\n|\n|t:|1776088603\n|detailschange|p2b: Alakazam|Alakazam-Mega, L50, F\n|-mega|p2b: Alakazam|Alakazam|Alakazite\n|-ability|p2b: Alakazam|Friend Guard|Trace|[from] ability: Trace|[of] p1a: Maushold\n|move|p1b: Volcarona|Protect|p1b: Volcarona\n|-singleturn|p1b: Volcarona|Protect\n|move|p2a: Sneasler|Fake Out|p1b: Volcarona\n|-activate|p1b: Volcarona|move: Protect\n|move|p2b: Alakazam|Psychic Terrain|p2b: Alakazam\n|-fieldstart|move: Psychic Terrain\n|move|p1a: Maushold|Taunt|p2b: Alakazam\n|-start|p2b: Alakazam|move: Taunt\n|\n|upkeep\n|turn|2\n|\n|t:|1776088622\n|move|p1a: Maushold|Follow Me|p1a: Maushold\n|-singleturn|p1a: Maushold|move: Follow Me\n|move|p2b: Alakazam|Expanding Force|p1a: Maushold|[spread] p1a,p1b\n|-damage|p1a: Maushold|0 fnt\n|-damage|p1b: Volcarona|46/100\n|faint|p1a: Maushold\n|move|p2a: Sneasler|Dire Claw|p1b: Volcarona\n|-damage|p1b: Volcarona|0 fnt\n|faint|p1b: Volcarona\n|\n|upkeep\n|-message|carlyraejespeon forfeited.\n|\n|win|TerraDelta\n|raw|carlyraejespeon's rating: 1054 &rarr; <strong>1039</strong><br />(-15 for losing)\n|raw|TerraDelta's rating: 1111 &rarr; <strong>1132</strong><br />(+21 for winning)\n",
+  "uploadtime": 1776088632,
+  "views": 10,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1039,
+  "private": 0,
+  "password": null
+}

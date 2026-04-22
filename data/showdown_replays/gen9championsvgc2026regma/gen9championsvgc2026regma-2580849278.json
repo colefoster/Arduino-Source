@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2580849278",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "AgsAllDay12",
+    "tusssk"
+  ],
+  "log": "|j|\u2606AgsAllDay12\n|j|\u2606tusssk\n|t:|1775937512\n|gametype|doubles\n|player|p1|AgsAllDay12|265|1077\n|player|p2|tusssk|koga|1164\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Delphox, L50, M|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Aerodactyl, L50, F|\n|poke|p1|Maushold, L50|\n|poke|p1|Garchomp, L50, M|\n|poke|p2|Torkoal, L50, M|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Wyrdeer, L50, M|\n|poke|p2|Venusaur, L50, M|\n|poke|p2|Victreebel, L50, M|\n|poke|p2|Milotic, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by tusssk)\n|inactive|AgsAllDay12 has 60 seconds left.\n|\n|t:|1775937565\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Garchomp|Garchomp, L50, M|100/100\n|switch|p1b: Aerodactyl|Aerodactyl, L50, F|100/100\n|switch|p2a: Milotic|Milotic, L50, M|100/100\n|switch|p2b: Wyrdeer|Wyrdeer, L50, M|100/100\n|-ability|p1b: Aerodactyl|Unnerve\n|-ability|p2b: Wyrdeer|Intimidate|boost\n|-unboost|p1a: Garchomp|atk|1\n|-unboost|p1b: Aerodactyl|atk|1\n|-enditem|p1a: Garchomp|White Herb\n|-clearnegativeboost|p1a: Garchomp|[silent]\n|turn|1\n|inactive|AgsAllDay12 has 30 seconds left.\n|inactive|tusssk has 30 seconds left.\n|inactive|AgsAllDay12 has 20 seconds left.\n|inactive|AgsAllDay12 has 15 seconds left.\n|\n|t:|1775937608\n|switch|p1a: Maushold|Maushold, L50|100/100\n|move|p1b: Aerodactyl|Protect|p1b: Aerodactyl\n|-singleturn|p1b: Aerodactyl|Protect\n|move|p2a: Milotic|Ice Beam|p1a: Maushold\n|-damage|p1a: Maushold|61/100\n|move|p2b: Wyrdeer|Trick Room|p2b: Wyrdeer\n|-fieldstart|move: Trick Room|[of] p2b: Wyrdeer\n|\n|upkeep\n|turn|2\n|\n|t:|1775937625\n|move|p2b: Wyrdeer|Psyshield Bash|p1b: Aerodactyl\n|-damage|p1b: Aerodactyl|43/100\n|-boost|p2b: Wyrdeer|def|1\n|move|p2a: Milotic|Scald|p1a: Maushold\n|-damage|p1a: Maushold|0 fnt\n|faint|p1a: Maushold\n|move|p1b: Aerodactyl|Dual Wingbeat|p2a: Milotic\n|-damage|p2a: Milotic|88/100\n|-damage|p2a: Milotic|74/100\n|-hitcount|p2a: Milotic|2\n|\n|upkeep\n|-message|AgsAllDay12 forfeited.\n|\n|win|tusssk\n",
+  "uploadtime": 1775937515,
+  "views": 11,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": null,
+  "private": 0,
+  "password": null
+}

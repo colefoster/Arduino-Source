@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582119457",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "oddest-odd",
+    "Kwiper"
+  ],
+  "log": "|j|\u2606oddest-odd\n|j|\u2606Kwiper\n|t:|1776060415\n|gametype|doubles\n|player|p1|oddest-odd|101|1020\n|player|p2|Kwiper|sycamore|1000\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Alakazam, L50, M|\n|poke|p1|Scizor, L50, M|\n|poke|p1|Manectric, L50, M|\n|poke|p1|Lucario, L50, M|\n|poke|p1|Meowstic, L50, M|\n|poke|p1|Mudsdale, L50, M|\n|poke|p2|Starmie, L50|\n|poke|p2|Tyranitar, L50, M|\n|poke|p2|Garchomp, L50, F|\n|poke|p2|Aegislash, L50, M|\n|poke|p2|Aerodactyl, L50, F|\n|poke|p2|Rotom-Heat, L50|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Kwiper)\n|inactive|oddest-odd has 60 seconds left.\n|inactive|Kwiper has 60 seconds left.\n|l|\u2606oddest-odd\n|inactive|oddest-odd disconnected and has a minute to reconnect!\n|player|p1|\n|inactive|oddest-odd has 30 seconds left.\n|inactive|oddest-odd has 20 seconds left.\n|inactive|oddest-odd has 15 seconds left.\n|inactive|oddest-odd has 10 seconds left.\n|inactive|oddest-odd has 5 seconds left.\n|-message|oddest-odd lost due to inactivity.\n|\n|win|Kwiper\n|raw|oddest-odd's rating: 1020 &rarr; <strong>1006</strong><br />(-14 for losing)\n|raw|Kwiper's rating: 1000 &rarr; <strong>1042</strong><br />(+42 for winning)\n",
+  "uploadtime": 1776060505,
+  "views": 11,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1006,
+  "private": 0,
+  "password": null
+}

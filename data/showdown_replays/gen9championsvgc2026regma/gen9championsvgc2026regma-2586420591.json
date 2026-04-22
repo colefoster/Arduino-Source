@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586420591",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "kiwemi",
+    "SpockyFrogo"
+  ],
+  "log": "|j|\u2606kiwemi\n|j|\u2606SpockyFrogo\n|t:|1776433457\n|gametype|doubles\n|player|p1|kiwemi|iris-gen5bw2|1113\n|player|p2|SpockyFrogo|101|1107\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Froslass, L50, F|\n|poke|p1|Zoroark-Hisui, L50, F|\n|poke|p1|Ninetales-Alola, L50, F|\n|poke|p1|Chesnaught, L50, F|\n|poke|p1|Samurott-Hisui, L50, F|\n|poke|p2|Sylveon, L50, F|\n|poke|p2|Milotic, L50, F|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Pelipper, L50, M|\n|poke|p2|Typhlosion-Hisui, L50, F|\n|poke|p2|Garchomp, L50, M|\n|teampreview|4\nkiwemi rejected open team sheets.\n|\n|t:|1776433489\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Kitsune|Ninetales-Alola, L50, F, shiny|100/100\n|switch|p1b: Queen|Froslass, L50, F, shiny|100/100\n|switch|p2a: Milotic|Milotic, L50, F|100/100\n|switch|p2b: Typhlosion|Typhlosion-Hisui, L50, F|100/100\n|-item|p1a: Kitsune|Quick Claw|[from] ability: Frisk|[of] p2b: Typhlosion\n|-item|p1b: Queen|Froslassite|[from] ability: Frisk|[of] p2b: Typhlosion\n|-weather|Snowscape|[from] ability: Snow Warning|[of] p1a: Kitsune\n|turn|1\n|\n|t:|1776433513\n|switch|p2a: Pelipper|Pelipper, L50, M|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p2a: Pelipper\n|detailschange|p1b: Queen|Froslass-Mega, L50, F, shiny\n|-mega|p1b: Queen|Froslass|Froslassite\n|-weather|Snowscape|[from] ability: Snow Warning|[of] p1b: Queen\n|move|p2b: Typhlosion|Eruption|p1a: Kitsune|[spread] p1a,p1b\n|-supereffective|p1a: Kitsune|1\n|-supereffective|p1b: Queen|1\n|-damage|p1a: Kitsune|0 fnt\n|-damage|p1b: Queen|0 fnt\n|faint|p1a: Kitsune\n|faint|p1b: Queen\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|-message|kiwemi forfeited.\n|\n|win|SpockyFrogo\n|raw|kiwemi's rating: 1113 &rarr; <strong>1088</strong><br />(-25 for losing)\n|raw|SpockyFrogo's rating: 1107 &rarr; <strong>1132</strong><br />(+25 for winning)\n|l|\u2606kiwemi\n|player|p1|\n",
+  "uploadtime": 1776433530,
+  "views": 29,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1088,
+  "private": 0,
+  "password": null
+}

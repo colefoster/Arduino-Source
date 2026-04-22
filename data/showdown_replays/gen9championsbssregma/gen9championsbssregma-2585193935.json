@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2585193935",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "koni-ta",
+    "iamanewbie2"
+  ],
+  "log": "|j|\u2606koni-ta\n|j|\u2606iamanewbie2\n|t:|1776323423\n|gametype|singles\n|player|p1|koni-ta|1|1217\n|player|p2|iamanewbie2|102|1175\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Aegislash, L50, F|\n|poke|p1|Rotom-Mow, L50|\n|poke|p1|Samurott-Hisui, L50, M|\n|poke|p1|Charizard, L50, F|\n|poke|p1|Sylveon, L50, M|\n|poke|p2|Victreebel, L50, F|\n|poke|p2|Kangaskhan, L50, F|\n|poke|p2|Lucario, L50, M|\n|poke|p2|Charizard, L50, M|\n|poke|p2|Torkoal, L50, F|\n|poke|p2|Heliolisk, L50, M|\n|teampreview|3\n|j| The Educated Fool\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by iamanewbie2)\n|\n|t:|1776323500\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Garchomp|Garchomp, L50, M|100/100\n|switch|p2a: Victreebel|Victreebel, L50, F|100/100\n|turn|1\n|\n|t:|1776323526\n|detailschange|p2a: Victreebel|Victreebel-Mega, L50, F\n|-mega|p2a: Victreebel|Victreebel|Victreebelite\n|move|p1a: Garchomp|Stealth Rock|p2a: Victreebel\n|-sidestart|p2: iamanewbie2|move: Stealth Rock\n|move|p2a: Victreebel|Sleep Powder|p1a: Garchomp\n|-status|p1a: Garchomp|slp|[from] move: Sleep Powder\n|\n|upkeep\n|turn|2\n|-message|iamanewbie2 forfeited.\n|\n|win|koni-ta\n|raw|koni-ta's rating: 1217 &rarr; <strong>1239</strong><br />(+22 for winning)\n|raw|iamanewbie2's rating: 1175 &rarr; <strong>1153</strong><br />(-22 for losing)\n|l|\u2606iamanewbie2\n|player|p2|\n|l|\u2606koni-ta\n|player|p1|\n",
+  "uploadtime": 1776325554,
+  "views": 8,
+  "formatid": "gen9championsbssregma",
+  "rating": 1153,
+  "private": 0,
+  "password": null
+}

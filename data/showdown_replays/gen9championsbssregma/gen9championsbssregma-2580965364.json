@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2580965364",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "Selena2002",
+    "phifth"
+  ],
+  "log": "|j|\u2606Selena2002\n|j|\u2606phifth\n|t:|1775947317\n|gametype|singles\n|player|p1|Selena2002|2|1000\n|player|p2|phifth|rosa|1053\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Spiritomb, L50, M|\n|poke|p1|Gardevoir, L50, F|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Volcarona, L50, F|\n|poke|p1|Raichu-Alola, L50, F|\n|poke|p1|Skarmory, L50, M|\n|poke|p2|Clefable, L50, F|\n|poke|p2|Gengar, L50, F|\n|poke|p2|Espeon, L50, M|\n|poke|p2|Gliscor, L50, M|\n|poke|p2|Espathra, L50, M|\n|poke|p2|Sneasler, L50, F|\n|teampreview|3\n|\n|t:|1775947337\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Garchomp|Garchomp, L50, F|100/100\n|switch|p2a: Espathra|Espathra, L50, M|100/100\n|turn|1\n|\n|t:|1775947346\n|move|p2a: Espathra|Protect|p2a: Espathra\n|-singleturn|p2a: Espathra|Protect\n|move|p1a: Garchomp|Swords Dance|p1a: Garchomp\n|-boost|p1a: Garchomp|atk|2\n|\n|-ability|p2a: Espathra|Speed Boost|boost\n|-boost|p2a: Espathra|spe|1\n|upkeep\n|turn|2\n|c|\u2606phifth|bruh gg\n|\n|t:|1775947362\n|move|p2a: Espathra|Baton Pass|p2a: Espathra\n|\n|t:|1775947364\n|switch|p2a: Clefable|Clefable, L50, F|100/100|[from] Baton Pass\n|move|p1a: Garchomp|Dragon Claw|p2a: Clefable\n|-immune|p2a: Clefable\n|\n|upkeep\n|turn|3\n|\n|t:|1775947374\n|switch|p1a: Skarmory|Skarmory, L50, M, shiny|100/100\n|move|p2a: Clefable|Cosmic Power|p2a: Clefable\n|-boost|p2a: Clefable|def|1\n|-boost|p2a: Clefable|spd|1\n|\n|upkeep\n|turn|4\n|\n|t:|1775947386\n|detailschange|p2a: Clefable|Clefable-Mega, L50, F\n|-mega|p2a: Clefable|Clefable|Clefablite\n|move|p2a: Clefable|Cosmic Power|p2a: Clefable\n|-boost|p2a: Clefable|def|1\n|-boost|p2a: Clefable|spd|1\n|move|p1a: Skarmory|Whirlwind|p2a: Clefable\n|move|p2a: Clefable|Whirlwind|p1a: Skarmory|[from] ability: Magic Bounce\n|drag|p1a: Garchomp|Garchomp, L50, F|100/100\n|\n|upkeep\n|turn|5\n|\n|t:|1775947404\n|switch|p1a: Spiritomb|Spiritomb, L50, M|100/100\n|move|p2a: Clefable|Cosmic Power|p2a: Clefable\n|-boost|p2a: Clefable|def|1\n|-boost|p2a: Clefable|spd|1\n|\n|upkeep\n|turn|6\n|\n|t:|1775947413\n|move|p2a: Clefable|Moonblast|p1a: Spiritomb\n|-supereffective|p1a: Spiritomb|1\n|-crit|p1a: Spiritomb\n|-damage|p1a: Spiritomb|0 fnt\n|faint|p1a: Spiritomb\n|\n|upkeep\n|-message|Selena2002 forfeited.\n|\n|win|phifth\n|raw|Selena2002's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|raw|phifth's rating: 1053 &rarr; <strong>1080</strong><br />(+27 for winning)\n|l|\u2606Selena2002\n|player|p1|\n|c|\u2606phifth|gg\n",
+  "uploadtime": 1775947424,
+  "views": 26,
+  "formatid": "gen9championsbssregma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

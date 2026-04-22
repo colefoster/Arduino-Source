@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2589550355",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "aeriys",
+    "brand rats"
+  ],
+  "log": "|j|\u2606aeriys\n|j|\u2606brand rats\n|t:|1776733267\n|gametype|doubles\n|player|p1|aeriys|dawn|1108\n|player|p2|brand rats|winona|1061\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Chandelure, L50, F|\n|poke|p1|Whimsicott, L50, M|\n|poke|p1|Jolteon, L50, F|\n|poke|p1|Sneasler, L50, F|\n|poke|p1|Meganium, L50, F|\n|poke|p1|Gyarados, L50, F|\n|poke|p2|Tsareena, L50, F|\n|poke|p2|Zoroark-Hisui, L50, F|\n|poke|p2|Meowstic-F, L50, F|\n|poke|p2|Klefki, L50, F|\n|poke|p2|Blastoise, L50, M|\n|poke|p2|Incineroar, L50, F|\n|teampreview|4\n|\n|t:|1776733295\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Chandelure|Chandelure, L50, F|100/100\n|switch|p1b: Sneasler|Sneasler, L50, F|100/100\n|switch|p2a: Incineroar|Incineroar, L50, F|100/100\n|switch|p2b: Meowstic|Meowstic-F, L50, F|100/100\n|-ability|p2a: Incineroar|Intimidate|boost\n|-unboost|p1a: Chandelure|atk|1\n|-unboost|p1b: Sneasler|atk|1\n|-enditem|p1b: Sneasler|White Herb\n|-clearnegativeboost|p1b: Sneasler|[silent]\n|turn|1\n|\n|t:|1776733330\n|move|p2b: Meowstic|Protect|p2b: Meowstic\n|-singleturn|p2b: Meowstic|Protect\n|move|p1b: Sneasler|Fake Out|p2b: Meowstic\n|-activate|p2b: Meowstic|move: Protect\n|move|p1a: Chandelure|Shadow Ball|p2b: Meowstic\n|-activate|p2b: Meowstic|move: Protect\n|move|p2a: Incineroar|Flare Blitz|p1b: Sneasler\n|-damage|p1b: Sneasler|0 fnt\n|faint|p1b: Sneasler\n|-damage|p2a: Incineroar|74/100|[from] Recoil\n|\n|upkeep\n|\n|t:|1776733344\n|switch|p1b: Jolteon|Jolteon, L50, F|100/100\n|turn|2\n|\n|t:|1776733355\n|move|p1a: Chandelure|Shadow Ball|p2b: Meowstic\n|-immune|p2b: Meowstic\n|move|p1b: Jolteon|Thunderbolt|p2a: Incineroar\n|-damage|p2a: Incineroar|29/100\n|move|p2b: Meowstic|Nasty Plot|p2b: Meowstic\n|-boost|p2b: Meowstic|spa|2\n|move|p2a: Incineroar|Darkest Lariat|p1a: Chandelure\n|-supereffective|p1a: Chandelure|1\n|-damage|p1a: Chandelure|0 fnt\n|faint|p1a: Chandelure\n|\n|upkeep\n|\n|t:|1776733368\n|switch|p1a: Meganium|Meganium, L50, F|100/100\n|turn|3\n|-message|aeriys forfeited.\n|\n|win|brand rats\n|raw|aeriys's rating: 1108 &rarr; <strong>1080</strong><br />(-28 for losing)\n|raw|brand rats's rating: 1061 &rarr; <strong>1096</strong><br />(+35 for winning)\n|l|\u2606aeriys\n|player|p1|\n",
+  "uploadtime": 1776733374,
+  "views": 5,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1080,
+  "private": 0,
+  "password": null
+}

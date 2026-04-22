@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2588069647",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "qweralt",
+    "Uatthescool"
+  ],
+  "log": "|j|\u2606qweralt\n|j|\u2606Uatthescool\n|t:|1776600662\n|gametype|singles\n|player|p1|qweralt|boarder|1087\n|player|p2|Uatthescool|170|1044\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Delphox, L50, F|\n|poke|p1|Hatterene, L50, F|\n|poke|p1|Weavile, L50, M|\n|poke|p1|Volcarona, L50, F|\n|poke|p1|Dragonite, L50, F|\n|poke|p1|Rotom-Wash, L50|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Clefable, L50, F|\n|poke|p2|Corviknight, L50, F|\n|poke|p2|Hydrapple, L50, M|\n|poke|p2|Umbreon, L50, M, shiny|\n|poke|p2|Primarina, L50, F, shiny|\n|teampreview|3\n|\n|t:|1776600708\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Weavile|Weavile, L50, M|100/100\n|switch|p2a: Garchomp|Garchomp, L50, M|100/100\n|-ability|p1a: Weavile|Pressure\n|turn|1\n|\n|t:|1776600748\n|switch|p2a: Corviknight|Corviknight, L50, F|100/100\n|-ability|p2a: Corviknight|Pressure\n|move|p1a: Weavile|Triple Axel|p2a: Corviknight\n|-damage|p2a: Corviknight|92/100\n|-damage|p2a: Corviknight|75/100\n|-hitcount|p2a: Corviknight|2\n|\n|upkeep\n|turn|2\n|\n|t:|1776600757\n|switch|p1a: Rotom|Rotom-Wash, L50|100/100\n|move|p2a: Corviknight|Body Press|p1a: Rotom|[miss]\n|-miss|p2a: Corviknight|p1a: Rotom\n|\n|upkeep\n|turn|3\n|\n|t:|1776600767\n|switch|p2a: Hydrapple|Hydrapple, L50, M|100/100\n|move|p1a: Rotom|Will-O-Wisp|p2a: Hydrapple\n|-status|p2a: Hydrapple|brn\n|\n|-damage|p2a: Hydrapple|94/100 brn|[from] brn\n|upkeep\n|turn|4\n|\n|t:|1776600774\n|move|p1a: Rotom|Volt Switch|p2a: Hydrapple\n|-resisted|p2a: Hydrapple|2\n|-damage|p2a: Hydrapple|89/100 brn\n|\n|t:|1776600780\n|switch|p1a: Hatterene|Hatterene, L50, F|100/100|[from] Volt Switch\n|move|p2a: Hydrapple|Draco Meteor|p1a: Hatterene\n|-immune|p1a: Hatterene\n|\n|-damage|p2a: Hydrapple|83/100 brn|[from] brn\n|upkeep\n|turn|5\n|\n|t:|1776600788\n|switch|p2a: Corviknight|Corviknight, L50, F|75/100\n|-ability|p2a: Corviknight|Pressure\n|move|p1a: Hatterene|Calm Mind|p1a: Hatterene\n|-boost|p1a: Hatterene|spa|1\n|-boost|p1a: Hatterene|spd|1\n|\n|upkeep\n|turn|6\n|-message|Uatthescool forfeited.\n|\n|win|qweralt\n|raw|qweralt's rating: 1087 &rarr; <strong>1111</strong><br />(+24 for winning)\n|raw|Uatthescool's rating: 1044 &rarr; <strong>1029</strong><br />(-15 for losing)\n|l|\u2606Uatthescool\n|player|p2|\n",
+  "uploadtime": 1776600799,
+  "views": 1,
+  "formatid": "gen9championsbssregma",
+  "rating": 1029,
+  "private": 0,
+  "password": null
+}

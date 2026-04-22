@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586114412",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "turlesenjoyer",
+    "dem0n2011"
+  ],
+  "log": "|j|\u2606turlesenjoyer\n|j|\u203ddem0n2011\n|t:|1776400693\n|gametype|doubles\n|player|p1|turlesenjoyer|elesa|1170\n|player|p2|dem0n2011|benga|1208\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Alakazam, L50, F|\n|poke|p1|Drampa, L50, M|\n|poke|p1|Kingambit, L50, M|\n|poke|p1|Azumarill, L50, M|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Arcanine, L50, F|\n|poke|p2|Clefable, L50, F|\n|poke|p2|Absol, L50, F|\n|poke|p2|Aerodactyl, L50, F|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Rotom-Wash, L50|\n|poke|p2|Meganium, L50, M|\n|teampreview|4\n|\n|t:|1776400709\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Alakazam|Alakazam, L50, F|100/100\n|switch|p1b: Azumarill|Azumarill, L50, M|100/100\n|switch|p2a: Aerodactyl|Aerodactyl, L50, F|100/100\n|switch|p2b: Incineroar|Incineroar, L50, M|100/100\n|-ability|p2a: Aerodactyl|Unnerve\n|-ability|p2b: Incineroar|Intimidate|boost\n|-unboost|p1a: Alakazam|atk|1\n|-unboost|p1b: Azumarill|atk|1\n|turn|1\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by dem0n2011)\n|\n|t:|1776400718\n|move|p2b: Incineroar|Fake Out|p1b: Azumarill\n|-damage|p1b: Azumarill|88/100\n|move|p2a: Aerodactyl|Tailwind|p2a: Aerodactyl\n|-sidestart|p2: dem0n2011|move: Tailwind\n|move|p1a: Alakazam|Speed Swap|p1b: Azumarill\n|-activate|p1a: Alakazam|move: Speed Swap|[of] p1b: Azumarill\n|cant|p1b: Azumarill|flinch\n|\n|upkeep\n|turn|2\n|\n|t:|1776400742\n|move|p2a: Aerodactyl|Dual Wingbeat|p1b: Azumarill\n|-damage|p1b: Azumarill|71/100\n|-damage|p1b: Azumarill|54/100\n|-hitcount|p1b: Azumarill|2\n|move|p1b: Azumarill|Belly Drum|p1b: Azumarill\n|-damage|p1b: Azumarill|4/100\n|-setboost|p1b: Azumarill|atk|6|[from] move: Belly Drum\n|move|p2b: Incineroar|Snarl|p1b: Azumarill|[spread] p1a,p1b\n|-supereffective|p1a: Alakazam|1\n|-resisted|p1b: Azumarill|1\n|-damage|p1a: Alakazam|68/100\n|-damage|p1b: Azumarill|0 fnt\n|-unboost|p1a: Alakazam|spa|1\n|faint|p1b: Azumarill\n|move|p1a: Alakazam|Psyshock|p2a: Aerodactyl\n|-damage|p2a: Aerodactyl|55/100\n|\n|upkeep\n|\n|t:|1776400756\n|switch|p1b: Sinistcha|Sinistcha, L50|100/100\n|-heal|p1a: Alakazam|93/100|[from] ability: Hospitality|[of] p1b: Sinistcha\n|turn|3\n|-message|turlesenjoyer forfeited.\n|\n|win|dem0n2011\n|raw|turlesenjoyer's rating: 1170 &rarr; <strong>1148</strong><br />(-22 for losing)\n|raw|dem0n2011's rating: 1208 &rarr; <strong>1230</strong><br />(+22 for winning)\n|l|\u2606turlesenjoyer\n|player|p1|\n",
+  "uploadtime": 1776400760,
+  "views": 17,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1148,
+  "private": 0,
+  "password": null
+}

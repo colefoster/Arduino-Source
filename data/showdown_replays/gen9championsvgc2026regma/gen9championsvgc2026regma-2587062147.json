@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2587062147",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "larryzang",
+    "Zerox94"
+  ],
+  "log": "|j|\u2606larryzang\n|j|\u2606Zerox94\n|t:|1776488350\n|gametype|doubles\n|player|p1|larryzang|265|1385\n|player|p2|Zerox94|silver|1339\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Aegislash, L50, F|\n|poke|p1|Charizard, L50, F|\n|poke|p1|Venusaur, L50, F|\n|poke|p1|Rotom-Wash, L50|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Incineroar, L50, M|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Zoroark-Hisui, L50, M, shiny|\n|poke|p2|Umbreon, L50, M, shiny|\n|poke|p2|Sableye, L50, F|\n|poke|p2|Aerodactyl, L50, F|\n|poke|p2|Arcanine-Hisui, L50, F, shiny|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by larryzang)\n|inactive|Zerox94 has 60 seconds left.\n|\n|t:|1776488426\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Aegislash|Aegislash, L50, F|100/100\n|switch|p1b: Incineroar|Incineroar, L50, M|100/100\n|switch|p2a: Arcanine|Arcanine-Hisui, L50, F, shiny|100/100\n|switch|p2b: Aerodactyl|Aerodactyl, L50, F|100/100\n|-ability|p1b: Incineroar|Intimidate|boost\n|-unboost|p2a: Arcanine|atk|1\n|-unboost|p2b: Aerodactyl|atk|1\n|turn|1\n|inactive|Zerox94 has 30 seconds left.\n|\n|t:|1776488456\n|switch|p2b: Sinistcha|Sinistcha, L50|100/100\n|switch|p1b: Garchomp|Garchomp, L50, F|100/100\n|move|p2a: Arcanine|Focus Blast|p1b: Garchomp|[miss]\n|-miss|p2a: Arcanine|p1b: Garchomp\n|-formechange|p1a: Aegislash|Aegislash-Blade|\n|move|p1a: Aegislash|Shadow Ball|p2b: Sinistcha\n|-supereffective|p2b: Sinistcha|1\n|-enditem|p2b: Sinistcha|Focus Sash\n|-damage|p2b: Sinistcha|1/100\n|\n|upkeep\n|turn|2\n|inactive|Zerox94 has 30 seconds left.\n|inactive|Zerox94 has 20 seconds left.\n|inactive|Zerox94 has 15 seconds left.\n|inactive|Zerox94 has 10 seconds left.\n|inactive|Zerox94 has 5 seconds left.\n|\n|t:|1776488508\n|switch|p2a: Aerodactyl|Aerodactyl, L50, F|100/100\n|switch|p1a: Incineroar|Incineroar, L50, M|100/100\n|-ability|p1a: Incineroar|Intimidate|boost\n|-unboost|p2a: Aerodactyl|atk|1\n|-unboost|p2b: Sinistcha|atk|1\n|move|p1b: Garchomp|Rock Slide|p2b: Sinistcha|[spread] p2a,p2b\n|-supereffective|p2a: Aerodactyl|1\n|-damage|p2a: Aerodactyl|27/100\n|-damage|p2b: Sinistcha|0 fnt\n|faint|p2b: Sinistcha\n|\n|upkeep\n|-message|Zerox94 forfeited.\n|\n|win|larryzang\n|raw|larryzang's rating: 1385 &rarr; <strong>1402</strong><br />(+17 for winning)\n|raw|Zerox94's rating: 1339 &rarr; <strong>1322</strong><br />(-17 for losing)\n|l|\u2606Zerox94\n|player|p2|\n",
+  "uploadtime": 1776488527,
+  "views": 38,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1322,
+  "private": 0,
+  "password": null
+}

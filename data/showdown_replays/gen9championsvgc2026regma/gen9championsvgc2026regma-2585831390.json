@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2585831390",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "terminatorplayz",
+    "louistsang25"
+  ],
+  "log": "|j|\u2606terminatorplayz\n|j|\u2606louistsang25\n|t:|1776373916\n|gametype|doubles\n|player|p1|terminatorplayz|2|1097\n|player|p2|louistsang25|2|1151\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Golurk, L50|\n|poke|p1|Farigiraf, L50, F|\n|poke|p1|Torkoal, L50, F|\n|poke|p1|Venusaur, L50, M|\n|poke|p1|Sneasler, L50, F|\n|poke|p1|Incineroar, L50, M|\n|poke|p2|Feraligatr, L50, F|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Chandelure, L50, F|\n|poke|p2|Aerodactyl, L50, F|\n|teampreview|4\n|\n|t:|1776373952\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Torkoal|Torkoal, L50, F|100/100\n|switch|p1b: Farigiraf|Farigiraf, L50, F|100/100\n|switch|p2a: Chandelure|Chandelure, L50, F|100/100\n|switch|p2b: Aerodactyl|Aerodactyl, L50, F|100/100\n|-ability|p2b: Aerodactyl|Unnerve\n|-weather|SunnyDay|[from] ability: Drought|[of] p1a: Torkoal\n|turn|1\n|\n|t:|1776373971\n|move|p1a: Torkoal|Protect|p1a: Torkoal\n|-singleturn|p1a: Torkoal|Protect\n|move|p2b: Aerodactyl|Taunt|p1b: Farigiraf\n|-start|p1b: Farigiraf|move: Taunt\n|move|p2a: Chandelure|Heat Wave|p1a: Torkoal|[spread] p1b\n|-activate|p1a: Torkoal|move: Protect\n|-damage|p1b: Farigiraf|33/100\n|cant|p1b: Farigiraf|move: Taunt|Trick Room\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|turn|2\n|-message|terminatorplayz forfeited.\n|\n|win|louistsang25\n|raw|terminatorplayz's rating: 1097 &rarr; <strong>1076</strong><br />(-21 for losing)\n|raw|louistsang25's rating: 1151 &rarr; <strong>1172</strong><br />(+21 for winning)\n|l|\u2606terminatorplayz\n|player|p1|\n",
+  "uploadtime": 1776373989,
+  "views": 16,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1076,
+  "private": 0,
+  "password": null
+}

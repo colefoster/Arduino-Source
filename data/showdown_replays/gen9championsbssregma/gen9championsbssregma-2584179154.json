@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2584179154",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "fjkgher",
+    "Lonewolf3593"
+  ],
+  "log": "|j|\u2606fjkgher\n|j|\u2606Lonewolf3593\n|t:|1776234866\n|gametype|singles\n|player|p1|fjkgher|1|1102\n|player|p2|Lonewolf3593|101|1064\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Banette, L50, M|\n|poke|p1|Mamoswine, L50, M|\n|poke|p1|Scizor, L50, F|\n|poke|p1|Primarina, L50, M|\n|poke|p1|Hydreigon, L50, M|\n|poke|p1|Arcanine-Hisui, L50, M|\n|poke|p2|Froslass, L50, F|\n|poke|p2|Palafin, L50, M|\n|poke|p2|Meganium, L50, F|\n|poke|p2|Kingambit, L50, M|\n|poke|p2|Talonflame, L50, F|\n|poke|p2|Garchomp, L50, F|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Lonewolf3593)\n|inactive|fjkgher has 60 seconds left.\n|\n|t:|1776234929\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Banette|Banette, L50, M|100/100\n|switch|p2a: Palafin|Palafin, L50, M|100/100\n|-item|p2a: Palafin|Sitrus Berry|[from] ability: Frisk|[of] p1a: Banette\n|turn|1\n|\n|t:|1776234935\n|detailschange|p1a: Banette|Banette-Mega, L50, M\n|-mega|p1a: Banette|Banette|Banettite\n|move|p2a: Palafin|Flip Turn|p1a: Banette\n|-damage|p1a: Banette|72/100\n|\n|t:|1776234940\n|detailschange|p2a: Palafin|Palafin-Hero, L50, M\n|switch|p2a: Talonflame|Talonflame, L50, F|100/100|[from] Flip Turn\n|move|p1a: Banette|Poltergeist|p2a: Talonflame\n|-activate|p2a: Talonflame|move: Poltergeist|Focus Sash\n|-enditem|p2a: Talonflame|Focus Sash\n|-damage|p2a: Talonflame|1/100\n|\n|upkeep\n|turn|2\n|\n|t:|1776234945\n|move|p1a: Banette|Shadow Sneak|p2a: Talonflame\n|-damage|p2a: Talonflame|0 fnt\n|faint|p2a: Talonflame\n|\n|upkeep\n|\n|t:|1776234951\n|switch|p2a: Palafin|Palafin-Hero, L50, M|100/100\n|-activate|p2a: Palafin|ability: Zero to Hero\n|turn|3\n|\n|t:|1776234955\n|move|p1a: Banette|Destiny Bond|p1a: Banette\n|-singlemove|p1a: Banette|Destiny Bond\n|move|p2a: Palafin|Wave Crash|p1a: Banette\n|-damage|p1a: Banette|0 fnt\n|faint|p1a: Banette\n|-activate|p1a: Banette|move: Destiny Bond\n|faint|p2a: Palafin\n|\n|upkeep\n|\n|t:|1776234959\n|switch|p2a: Meganium|Meganium, L50, F|100/100\n|switch|p1a: Arcanine|Arcanine-Hisui, L50, M|100/100\n|turn|4\n|\n|t:|1776234964\n|detailschange|p2a: Meganium|Meganium-Mega, L50, F\n|-mega|p2a: Meganium|Meganium|Meganiumite\n|move|p1a: Arcanine|Flare Blitz|p2a: Meganium\n|-supereffective|p2a: Meganium|1\n|-damage|p2a: Meganium|0 fnt\n|faint|p2a: Meganium\n|\n|win|fjkgher\n|raw|fjkgher's rating: 1123 &rarr; <strong>1144</strong><br />(+21 for winning)\n|raw|Lonewolf3593's rating: 1064 &rarr; <strong>1048</strong><br />(-16 for losing)\n",
+  "uploadtime": 1776234967,
+  "views": 9,
+  "formatid": "gen9championsbssregma",
+  "rating": 1048,
+  "private": 0,
+  "password": null
+}

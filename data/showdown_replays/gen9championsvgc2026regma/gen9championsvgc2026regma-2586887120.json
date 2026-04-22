@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586887120",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "loklastaji",
+    "Piterrcxd5"
+  ],
+  "log": "|j|\u2606loklastaji\n|j|\u2606Piterrcxd5\n|t:|1776468656\n|gametype|doubles\n|player|p1|loklastaji|2|1032\n|player|p2|Piterrcxd5|265|1100\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Samurott-Hisui, L50, M|\n|poke|p1|Delphox, L50, M|\n|poke|p1|Tinkaton, L50, F|\n|poke|p1|Decidueye-Hisui, L50, M|\n|poke|p1|Altaria, L50, M|\n|poke|p1|Farigiraf, L50, M|\n|poke|p2|Dragonite, L50, F|\n|poke|p2|Glimmora, L50, M|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Sinistcha-Masterpiece, L50|\n|poke|p2|Froslass, L50, F|\n|poke|p2|Rotom-Wash, L50|\n|teampreview|4\n|\n|t:|1776468707\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Decidueye|Decidueye-Hisui, L50, M|100/100\n|switch|p1b: Tinkaton|Tinkaton, L50, F|100/100\n|switch|p2a: Glimmora|Glimmora, L50, M|100/100\n|switch|p2b: Incineroar|Incineroar, L50, F|100/100\n|-ability|p2b: Incineroar|Intimidate|boost\n|-fail|p1a: Decidueye|unboost|Attack|[from] ability: Scrappy|[of] p1a: Decidueye\n|-fail|p1b: Tinkaton|unboost|Attack|[from] ability: Own Tempo|[of] p1b: Tinkaton\n|turn|1\n|\n|t:|1776468729\n|move|p1a: Decidueye|Close Combat|p2b: Incineroar\n|-supereffective|p2b: Incineroar|1\n|-damage|p2b: Incineroar|0 fnt\n|-unboost|p1a: Decidueye|def|1\n|-unboost|p1a: Decidueye|spd|1\n|faint|p2b: Incineroar\n|move|p1b: Tinkaton|Gigaton Hammer|p2a: Glimmora\n|-supereffective|p2a: Glimmora|1\n|-damage|p2a: Glimmora|12/100\n|-activate|p2a: Glimmora|ability: Toxic Debris\n|-sidestart|p1: loklastaji|move: Toxic Spikes\n|move|p2a: Glimmora|Sand Tomb|p1b: Tinkaton|[miss]\n|-miss|p2a: Glimmora|p1b: Tinkaton\n|\n|-heal|p2a: Glimmora|18/100|[from] item: Leftovers\n|upkeep\n|-message|Piterrcxd5 forfeited.\n|\n|win|loklastaji\n|raw|loklastaji's rating: 1032 &rarr; <strong>1074</strong><br />(+42 for winning)\n|raw|Piterrcxd5's rating: 1100 &rarr; <strong>1070</strong><br />(-30 for losing)\n|l|\u2606Piterrcxd5\n|player|p2|\n",
+  "uploadtime": 1776468746,
+  "views": 20,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1070,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2581007399",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "danz12",
+    "TorkoalWQuickclaw"
+  ],
+  "log": "|j|\u2606danz12\n|j|\u2606TorkoalWQuickclaw\n|t:|1775951153\n|gametype|doubles\n|player|p1|danz12|101|1104\n|player|p2|TorkoalWQuickclaw|gwynn|1151\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Charizard, L50, M|\n|poke|p1|Venusaur, L50, M|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Whimsicott, L50, M|\n|poke|p1|Farigiraf, L50, F|\n|poke|p1|Kangaskhan, L50, F|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Maushold, L50|\n|poke|p2|Garchomp, L50, F|\n|poke|p2|Talonflame, L50, M|\n|poke|p2|Rotom-Wash, L50|\n|poke|p2|Aegislash, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by TorkoalWQuickclaw)\nTorkoalWQuickclaw has agreed to open team sheets.\n|\n|t:|1775951167\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Drax|Charizard, L50, M|100/100\n|switch|p1b: Tigre To\u00f1o|Incineroar, L50, F|100/100\n|switch|p2a: Floette|Floette-Eternal, L50, F|100/100\n|switch|p2b: Maushold|Maushold, L50|100/100\n|-ability|p1b: Tigre To\u00f1o|Intimidate|boost\n|-unboost|p2a: Floette|atk|1\n|-unboost|p2b: Maushold|atk|1\n|turn|1\n|\n|t:|1775951178\n|detailschange|p1a: Drax|Charizard-Mega-Y, L50, M\n|-mega|p1a: Drax|Charizard|Charizardite Y\n|-weather|SunnyDay|[from] ability: Drought|[of] p1a: Drax\n|detailschange|p2a: Floette|Floette-Mega, L50, F\n|-mega|p2a: Floette|Floette|Floettite\n|-ability|p2a: Floette|Fairy Aura\n|move|p1b: Tigre To\u00f1o|Fake Out|p2a: Floette\n|-damage|p2a: Floette|92/100\n|move|p2b: Maushold|Follow Me|p2b: Maushold\n|-singleturn|p2b: Maushold|move: Follow Me\n|move|p1a: Drax|Heat Wave|p2b: Maushold|[spread] p2a,p2b\n|-crit|p2b: Maushold\n|-damage|p2a: Floette|56/100\n|-enditem|p2b: Maushold|Focus Sash\n|-damage|p2b: Maushold|1/100\n|cant|p2a: Floette|flinch\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|turn|2\n|\n|t:|1775951196\n|move|p2b: Maushold|Super Fang|p1a: Drax\n|-damage|p1a: Drax|51/100\n|move|p1a: Drax|Heat Wave|p2b: Maushold|[spread] p2a,p2b\n|-damage|p2a: Floette|24/100\n|-damage|p2b: Maushold|0 fnt\n|faint|p2b: Maushold\n|move|p2a: Floette|Dazzling Gleam|p1b: Tigre To\u00f1o|[spread] p1a,p1b\n|-resisted|p1a: Drax|1\n|-damage|p1a: Drax|23/100\n|-damage|p1b: Tigre To\u00f1o|60/100\n|move|p1b: Tigre To\u00f1o|Parting Shot|p2a: Floette\n|-unboost|p2a: Floette|atk|1\n|-unboost|p2a: Floette|spa|1\n|-message|TorkoalWQuickclaw forfeited.\n|\n|win|danz12\n|raw|danz12's rating: 1104 &rarr; <strong>1132</strong><br />(+28 for winning)\n|raw|TorkoalWQuickclaw's rating: 1151 &rarr; <strong>1123</strong><br />(-28 for losing)\n|l|\u2606TorkoalWQuickclaw\n|player|p2|\n",
+  "uploadtime": 1775951207,
+  "views": 14,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1123,
+  "private": 0,
+  "password": null
+}

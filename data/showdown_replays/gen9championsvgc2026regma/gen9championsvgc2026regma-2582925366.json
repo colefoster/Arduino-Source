@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582925366",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Tuco_Taco",
+    "George Mcgriffen"
+  ],
+  "log": "|j|\u2606Tuco_Taco\n|j|\u2606George Mcgriffen\n|t:|1776125520\n|gametype|doubles\n|player|p1|Tuco_Taco|wallace|1048\n|player|p2|George Mcgriffen|dawn|1013\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Lopunny, L50, M|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Corviknight, L50, F|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Kingambit, L50, F|\n|poke|p2|Alakazam, L50, F|\n|poke|p2|Camerupt, L50, M|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Heliolisk, L50, M|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Torkoal, L50, F|\n|teampreview|4\n|\n|t:|1776125573\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Basculegion|Basculegion, L50, M|100/100\n|switch|p1b: Lopunny|Lopunny, L50, M|100/100\n|switch|p2a: Torkoal|Torkoal, L50, F|100/100\n|switch|p2b: Camerupt|Camerupt, L50, M|100/100\n|-weather|SunnyDay|[from] ability: Drought|[of] p2a: Torkoal\n|turn|1\n|\n|t:|1776125593\n|switch|p2a: Alakazam|Alakazam, L50, F|100/100\n|detailschange|p1b: Lopunny|Lopunny-Mega, L50, M\n|-mega|p1b: Lopunny|Lopunny|Lopunnite\n|move|p2b: Camerupt|Protect|p2b: Camerupt\n|-singleturn|p2b: Camerupt|Protect\n|move|p1b: Lopunny|Fake Out|p2a: Alakazam\n|-damage|p2a: Alakazam|52/100\n|move|p1a: Basculegion|Wave Crash|p2b: Camerupt\n|-activate|p2b: Camerupt|move: Protect\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|turn|2\n|\n|t:|1776125618\n|switch|p1b: Incineroar|Incineroar, L50, F|100/100\n|-ability|p1b: Incineroar|Intimidate|boost\n|-fail|p2a: Alakazam|unboost|Attack|[from] ability: Inner Focus|[of] p2a: Alakazam\n|-unboost|p2b: Camerupt|atk|1\n|detailschange|p2b: Camerupt|Camerupt-Mega, L50, M\n|-mega|p2b: Camerupt|Camerupt|Cameruptite\n|move|p1a: Basculegion|Wave Crash|p2b: Camerupt\n|-supereffective|p2b: Camerupt|2\n|-damage|p2b: Camerupt|0 fnt\n|faint|p2b: Camerupt\n|-damage|p1a: Basculegion|71/100|[from] Recoil\n|move|p2a: Alakazam|Speed Swap|p2: Camerupt|[notarget]\n|-fail|p2a: Alakazam\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|c|\u2606George Mcgriffen|how did that move first\n|-message|George Mcgriffen forfeited.\n|\n|win|Tuco_Taco\n|raw|Tuco_Taco's rating: 1048 &rarr; <strong>1078</strong><br />(+30 for winning)\n|raw|George Mcgriffen's rating: 1013 &rarr; <strong>1002</strong><br />(-11 for losing)\n|l|\u2606George Mcgriffen\n|player|p2|\n",
+  "uploadtime": 1776125652,
+  "views": 16,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1002,
+  "private": 0,
+  "password": null
+}

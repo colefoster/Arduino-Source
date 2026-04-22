@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586882522",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "zCamii",
+    "SakikoPlushie"
+  ],
+  "log": "|j|\u2606zCamii\n|j|\u2606SakikoPlushie\n|t:|1776468211\n|gametype|doubles\n|player|p1|zCamii|iono-masters|\n|player|p2|SakikoPlushie|miku-ghost|\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Aerodactyl, L50, M|\n|poke|p1|Aegislash, L50, M|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Alakazam, L50, M|\n|poke|p1|Pelipper, L50, M|\n|poke|p2|Gengar, L50, M|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Archaludon, L50, F|\n|poke|p2|Pelipper, L50, F|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Floette-Eternal, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by zCamii)\n|c|\u2606SakikoPlushie|AJSKGAJHAHA\n|inactiveoff|Battle timer is now OFF.\n|c|\u2606zCamii|qe\n|c|\u2606SakikoPlushie|Nada nada\n|\n|t:|1776468250\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Aegislash|Aegislash, L50, M|100/100\n|switch|p1b: Alakazam|Alakazam, L50, M|100/100\n|switch|p2a: Luka|Incineroar, L50, F|100/100\n|switch|p2b: Ogurin|Archaludon, L50, F|100/100\n|-ability|p2a: Luka|Intimidate|boost\n|-unboost|p1a: Aegislash|atk|1\n|-unboost|p1b: Alakazam|atk|1\n|turn|1\n|\n|t:|1776468267\n|switch|p1b: Garchomp|Garchomp, L50, M|100/100\n|move|p2b: Ogurin|Protect|p2b: Ogurin\n|-singleturn|p2b: Ogurin|Protect\n|move|p1a: Aegislash|King's Shield|p1a: Aegislash\n|-singleturn|p1a: Aegislash|Protect\n|move|p2a: Luka|Taunt|p1a: Aegislash\n|-start|p1a: Aegislash|move: Taunt\n|\n|upkeep\n|turn|2\n|\n|t:|1776468288\n|switch|p2b: Juvia|Pelipper, L50, F|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p2b: Juvia\n|switch|p1a: Sneasler|Sneasler, L50, M|100/100\n|move|p1b: Garchomp|Stomping Tantrum|p2b: Juvia\n|-immune|p2b: Juvia\n|move|p2a: Luka|Parting Shot|p1b: Garchomp\n|-unboost|p1b: Garchomp|atk|1\n|-unboost|p1b: Garchomp|spa|1\n|c|\u2606zCamii|aji si estuvo bien\n|c|\u2606zCamii|viste\n|c|\u2606SakikoPlushie|zzz\n|c|\u2606zCamii|ahora si era necesario un cambio\n|c|\u2606zCamii|listo\n|\n|t:|1776468303\n|switch|p2a: RiceShower|Basculegion, L50, M|100/100|[from] Parting Shot\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|turn|3\n|c|\u2606zCamii|no juego mas\n|-message|zCamii forfeited.\n|\n|win|SakikoPlushie\n|l|\u2606zCamii\n|player|p1|\n",
+  "uploadtime": 1776468215,
+  "views": 15,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": null,
+  "private": 0,
+  "password": null
+}

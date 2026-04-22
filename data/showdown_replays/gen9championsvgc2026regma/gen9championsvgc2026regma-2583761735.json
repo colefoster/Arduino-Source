@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2583761735",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Lihoiuyguog",
+    "markneace"
+  ],
+  "log": "|j|\u203dLihoiuyguog\n|j|\u2606markneace\n|t:|1776195948\n|gametype|doubles\n|player|p1|Lihoiuyguog|101|1000\n|player|p2|markneace|2|1000\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Tyranitar, L50, F|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Excadrill, L50, F|\n|poke|p1|Rotom-Wash, L50|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Corviknight, L50, F|\n|poke|p2|Drampa, L50, M|\n|poke|p2|Farigiraf, L50, F|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Torkoal, L50, F|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Hatterene, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Lihoiuyguog)\n|inactive|markneace has 60 seconds left.\n|\n|t:|1776195986\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Tyranitar|Tyranitar, L50, F|100/100\n|switch|p1b: Corviknight|Corviknight, L50, F|100/100\n|switch|p2a: Drampa|Drampa, L50, M|100/100\n|switch|p2b: Farigiraf|Farigiraf, L50, F|100/100\n|-ability|p1b: Corviknight|Unnerve\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p1a: Tyranitar\n|-ability|p2a: Drampa|Cloud Nine\n|turn|1\n|inactive|markneace has 30 seconds left.\n|\n|t:|1776196020\n|move|p2a: Drampa|Protect|p2a: Drampa\n|-singleturn|p2a: Drampa|Protect\n|move|p1a: Tyranitar|Knock Off|p2b: Farigiraf\n|-supereffective|p2b: Farigiraf|1\n|-damage|p2b: Farigiraf|0 fnt\n|-enditem|p2b: Farigiraf|Mental Herb|[from] move: Knock Off|[of] p1a: Tyranitar\n|faint|p2b: Farigiraf\n|move|p1b: Corviknight|Iron Head|p2a: Drampa\n|-activate|p2a: Drampa|move: Protect\n|\n|-weather|Sandstorm|[upkeep]\n|upkeep\n|-message|markneace forfeited.\n|\n|win|Lihoiuyguog\n|raw|Lihoiuyguog's rating: 1000 &rarr; <strong>1040</strong><br />(+40 for winning)\n|raw|markneace's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|l|\u2606markneace\n|player|p2|\n",
+  "uploadtime": 1776196042,
+  "views": 30,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

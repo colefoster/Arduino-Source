@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586790002",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "prawnwizard",
+    "areestoo"
+  ],
+  "log": "|j|\u2606prawnwizard\n|j|\u2606areestoo\n|t:|1776460095\n|gametype|doubles\n|player|p1|prawnwizard|harlequin|1194\n|player|p2|areestoo|101|1286\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Glimmora, L50, M|\n|poke|p1|Aegislash, L50, F|\n|poke|p1|Garganacl, L50, M|\n|poke|p1|Pinsir, L50, F|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Milotic, L50, F|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Farigiraf, L50, M|\n|poke|p2|Torkoal, L50, F|\n|poke|p2|Scovillain, L50, M|\n|poke|p2|Hatterene, L50, F|\n|poke|p2|Crabominable, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by areestoo)\n|inactive|prawnwizard also wants the timer to be on.\n|inactive|prawnwizard has 60 seconds left.\n|inactive|areestoo has 60 seconds left.\n|\n|t:|1776460149\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Glimmora|Glimmora, L50, M|100/100\n|switch|p1b: Garganacl|Garganacl, L50, M|100/100\n|switch|p2a: Farigiraf|Farigiraf, L50, M|100/100\n|switch|p2b: Scovillain|Scovillain, L50, M|100/100\n|turn|1\n|\n|t:|1776460172\n|move|p2b: Scovillain|Rage Powder|p2b: Scovillain\n|-singleturn|p2b: Scovillain|move: Rage Powder\n|move|p1a: Glimmora|Power Gem|p2b: Scovillain\n|-supereffective|p2b: Scovillain|1\n|-damage|p2b: Scovillain|0 fnt\n|faint|p2b: Scovillain\n|move|p1b: Garganacl|Iron Defense|p1b: Garganacl\n|-boost|p1b: Garganacl|def|2\n|move|p2a: Farigiraf|Trick Room|p2a: Farigiraf\n|-fieldstart|move: Trick Room|[of] p2a: Farigiraf\n|\n|upkeep\n|\n|t:|1776460179\n|switch|p2b: Crabominable|Crabominable, L50, M|100/100\n|turn|2\n|inactive|areestoo has 30 seconds left.\n|\n|t:|1776460210\n|detailschange|p2b: Crabominable|Crabominable-Mega, L50, M\n|-mega|p2b: Crabominable|Crabominable|Crabominite\n|move|p2b: Crabominable|Ice Hammer|p1b: Garganacl\n|-damage|p1b: Garganacl|71/100\n|-unboost|p2b: Crabominable|spe|1\n|move|p1b: Garganacl|Body Press|p2b: Crabominable\n|-supereffective|p2b: Crabominable|1\n|-damage|p2b: Crabominable|31/100\n|move|p2a: Farigiraf|Nasty Plot|p2a: Farigiraf\n|-boost|p2a: Farigiraf|spa|2\n|move|p1a: Glimmora|Power Gem|p2b: Crabominable\n|-damage|p2b: Crabominable|0 fnt\n|faint|p2b: Crabominable\n|\n|-heal|p1b: Garganacl|77/100|[from] item: Leftovers\n|upkeep\n|\n|t:|1776460214\n|switch|p2b: Torkoal|Torkoal, L50, F|100/100\n|-weather|SunnyDay|[from] ability: Drought|[of] p2b: Torkoal\n|turn|3\n|-message|areestoo forfeited.\n|\n|win|prawnwizard\n|raw|prawnwizard's rating: 1194 &rarr; <strong>1225</strong><br />(+31 for winning)\n|raw|areestoo's rating: 1286 &rarr; <strong>1255</strong><br />(-31 for losing)\n",
+  "uploadtime": 1776460219,
+  "views": 51,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1225,
+  "private": 0,
+  "password": null
+}

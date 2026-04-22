@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582125855",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "loklastaji",
+    "tastyfloop"
+  ],
+  "log": "|j|\u2606loklastaji\n|j|\u2606tastyfloop\n|t:|1776061283\n|gametype|doubles\n|player|p1|loklastaji|265|1213\n|player|p2|tastyfloop|ghetsis|1304\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Samurott-Hisui, L50, F|\n|poke|p1|Mamoswine, L50, M|\n|poke|p1|Delphox, L50, F|\n|poke|p1|Tsareena, L50, F|\n|poke|p1|Corviknight, L50, M|\n|poke|p1|Altaria, L50, F|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Archaludon, L50, M|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Pelipper, L50, F|\n|poke|p2|Gengar, L50, F|\n|poke|p2|Sneasler, L50, F|\n|teampreview|4\n|\n|t:|1776061322\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Mamoswine|Mamoswine, L50, M|100/100\n|switch|p1b: Samurott|Samurott-Hisui, L50, F|100/100\n|switch|p2a: don't blink|Gengar, L50, F|100/100\n|switch|p2b: tuff ahh esdeekid|Sneasler, L50, F|100/100\n|turn|1\n|\n|t:|1776061340\n|switch|p1b: Tsareena|Tsareena, L50, F|100/100\n|detailschange|p2a: don't blink|Gengar-Mega, L50, F\n|-mega|p2a: don't blink|Gengar|Gengarite\n|move|p1a: Mamoswine|Earthquake|p2a: don't blink|[spread] p1b,p2a,p2b\n|-resisted|p1b: Tsareena|1\n|-supereffective|p2a: don't blink|1\n|-supereffective|p2b: tuff ahh esdeekid|1\n|-damage|p1b: Tsareena|76/100\n|-damage|p2a: don't blink|0 fnt\n|-damage|p2b: tuff ahh esdeekid|0 fnt\n|faint|p2a: don't blink\n|faint|p2b: tuff ahh esdeekid\n|\n|upkeep\n|c|\u2606tastyfloop|lmao\n|-message|tastyfloop forfeited.\n|\n|win|loklastaji\n|raw|loklastaji's rating: 1213 &rarr; <strong>1244</strong><br />(+31 for winning)\n|raw|tastyfloop's rating: 1304 &rarr; <strong>1279</strong><br />(-25 for losing)\n",
+  "uploadtime": 1776061352,
+  "views": 35,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1244,
+  "private": 0,
+  "password": null
+}

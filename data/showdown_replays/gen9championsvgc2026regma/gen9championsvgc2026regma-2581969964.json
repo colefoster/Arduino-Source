@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2581969964",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Exulvos",
+    "N Side Gravity"
+  ],
+  "log": "|j|\u2606Exulvos\n|j|\u2606N Side Gravity\n|t:|1776044315\n|gametype|doubles\n|player|p1|Exulvos|169|1000\n|player|p2|N Side Gravity|colress|1000\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Aggron, L50, F|\n|poke|p1|Farigiraf, L50, M|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Tyranitar, L50, M|\n|poke|p1|Golurk, L50|\n|poke|p1|Incineroar, L50, M|\n|poke|p2|Excadrill, L50, M|\n|poke|p2|Hawlucha, L50, M|\n|poke|p2|Tyranitar, L50, M|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Gyarados, L50, M|\n|poke|p2|Rotom-Wash, L50|\n|teampreview|4\n|\n|t:|1776044343\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Aggron|Aggron, L50, F|100/100\n|switch|p1b: Farigiraf|Farigiraf, L50, M|100/100\n|switch|p2a: Hawlucha|Hawlucha, L50, M, shiny|100/100\n|switch|p2b: Excadrill|Excadrill, L50, M, shiny|100/100\n|turn|1\n|\n|t:|1776044358\n|detailschange|p2a: Hawlucha|Hawlucha-Mega, L50, M, shiny\n|-mega|p2a: Hawlucha|Hawlucha|Hawluchanite\n|detailschange|p1a: Aggron|Aggron-Mega, L50, F\n|-mega|p1a: Aggron|Aggron|Aggronite\n|move|p2a: Hawlucha|Entrainment|p2b: Excadrill\n|-ability|p2b: Excadrill|No Guard|Sand Rush|[from] move: Entrainment|[of] p2a: Hawlucha\n|move|p2b: Excadrill|Fissure|p1b: Farigiraf\n|-damage|p1b: Farigiraf|0 fnt\n|faint|p1b: Farigiraf\n|-ohko\n|move|p1a: Aggron|Iron Defense|p1a: Aggron\n|-boost|p1a: Aggron|def|2\n|\n|upkeep\n|\n|t:|1776044370\n|switch|p1b: Sinistcha|Sinistcha, L50|100/100\n|turn|2\n|\n|t:|1776044404\n|move|p2a: Hawlucha|Brave Bird|p1b: Sinistcha\n|-supereffective|p1b: Sinistcha|1\n|-damage|p1b: Sinistcha|0 fnt\n|faint|p1b: Sinistcha\n|-damage|p2a: Hawlucha|62/100|[from] Recoil\n|move|p2b: Excadrill|Fissure|p1a: Aggron\n|-damage|p1a: Aggron|0 fnt\n|faint|p1a: Aggron\n|-ohko\n|\n|upkeep\n|\n|t:|1776044418\n|switch|p1a: Incineroar|Incineroar, L50, M|100/100\n|-ability|p1a: Incineroar|Intimidate|boost\n|-unboost|p2a: Hawlucha|atk|1\n|-unboost|p2b: Excadrill|atk|1\n|turn|3\n|\n|t:|1776044430\n|move|p2a: Hawlucha|Close Combat|p1a: Incineroar\n|-supereffective|p1a: Incineroar|1\n|-damage|p1a: Incineroar|24/100\n|-unboost|p2a: Hawlucha|def|1\n|-unboost|p2a: Hawlucha|spd|1\n|-enditem|p1a: Incineroar|Sitrus Berry|[eat]\n|-heal|p1a: Incineroar|49/100|[from] item: Sitrus Berry\n|move|p2b: Excadrill|Fissure|p1a: Incineroar\n|-damage|p1a: Incineroar|0 fnt\n|faint|p1a: Incineroar\n|-ohko\n|\n|win|N Side Gravity\n|raw|Exulvos's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|raw|N Side Gravity's rating: 1000 &rarr; <strong>1040</strong><br />(+40 for winning)\n|l|\u2606Exulvos\n|player|p1|\n",
+  "uploadtime": 1776044447,
+  "views": 19,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

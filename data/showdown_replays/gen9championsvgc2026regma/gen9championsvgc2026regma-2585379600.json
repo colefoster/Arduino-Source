@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2585379600",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Xtreme diarheaa",
+    "DarkDragon59122"
+  ],
+  "log": "|j|\u2606Xtreme diarheaa\n|j|\u2606DarkDragon59122\n|t:|1776342872\n|gametype|doubles\n|player|p1|Xtreme diarheaa|shadowtriad|1118\n|player|p2|DarkDragon59122|102|1114\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Spiritomb, L50, M|\n|poke|p1|Sableye, L50, F|\n|poke|p1|Tyranitar, L50, F|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Umbreon, L50, F|\n|poke|p1|Kingambit, L50, F|\n|poke|p2|Froslass, L50, F|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Kingambit, L50, M|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Primarina, L50, M|\n|poke|p2|Charizard, L50, M|\n|teampreview|4\n|\n|t:|1776342905\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Spiritomb|Spiritomb, L50, M|100/100\n|switch|p1b: Sableye|Sableye, L50, F|100/100\n|switch|p2a: Primarina|Primarina, L50, M|100/100\n|switch|p2b: Sneasler|Sneasler, L50, M|100/100\n|turn|1\n|\n|t:|1776342932\n|move|p2b: Sneasler|Dire Claw|p1b: Sableye\n|-resisted|p1b: Sableye|1\n|-damage|p1b: Sableye|72/100\n|move|p2a: Primarina|Moonblast|p1a: Spiritomb\n|-supereffective|p1a: Spiritomb|1\n|-damage|p1a: Spiritomb|0 fnt\n|faint|p1a: Spiritomb\n|move|p1b: Sableye|Knock Off|p2a: Primarina\n|-resisted|p2a: Primarina|1\n|-damage|p2a: Primarina|85/100\n|-enditem|p2a: Primarina|Fairy Feather|[from] move: Knock Off|[of] p1b: Sableye\n|\n|upkeep\n|\n|t:|1776342939\n|switch|p1a: Tyranitar|Tyranitar, L50, F|100/100\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p1a: Tyranitar\n|turn|2\n|\n|t:|1776342947\n|detailschange|p1a: Tyranitar|Tyranitar-Mega, L50, F\n|-mega|p1a: Tyranitar|Tyranitar|Tyranitarite\n|move|p1b: Sableye|Quash|p2b: Sneasler\n|-activate|p2b: Sneasler|move: Quash\n|move|p1a: Tyranitar|Heavy Slam|p2a: Primarina\n|-damage|p2a: Primarina|29/100\n|move|p2a: Primarina|Moonblast|p1b: Sableye\n|-supereffective|p1b: Sableye|1\n|-damage|p1b: Sableye|0 fnt\n|faint|p1b: Sableye\n|move|p2b: Sneasler|Close Combat|p1a: Tyranitar\n|-supereffective|p1a: Tyranitar|2\n|-damage|p1a: Tyranitar|0 fnt\n|-unboost|p2b: Sneasler|def|1\n|-unboost|p2b: Sneasler|spd|1\n|faint|p1a: Tyranitar\n|\n|-weather|Sandstorm|[upkeep]\n|-damage|p2b: Sneasler|95/100|[from] Sandstorm\n|-damage|p2a: Primarina|23/100|[from] Sandstorm\n|upkeep\n|-message|Xtreme diarheaa forfeited.\n|\n|win|DarkDragon59122\n|raw|Xtreme diarheaa's rating: 1118 &rarr; <strong>1093</strong><br />(-25 for losing)\n|raw|DarkDragon59122's rating: 1114 &rarr; <strong>1139</strong><br />(+25 for winning)\n|l|\u2606Xtreme diarheaa\n|player|p1|\n",
+  "uploadtime": 1776342958,
+  "views": 27,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1093,
+  "private": 0,
+  "password": null
+}

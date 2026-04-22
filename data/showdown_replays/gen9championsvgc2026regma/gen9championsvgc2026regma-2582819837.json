@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582819837",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "JeanPierre693",
+    "Catmagoooooo"
+  ],
+  "log": "|j|\u2606JeanPierre693\n|j|\u2606Catmagoooooo\n|t:|1776116553\n|gametype|doubles\n|player|p1|JeanPierre693|elio|1080\n|player|p2|Catmagoooooo|roughneck|1101\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Froslass, L50, F|\n|poke|p1|Glaceon, L50, F|\n|poke|p1|Mamoswine, L50, M|\n|poke|p1|Milotic, L50, F|\n|poke|p1|Hatterene, L50, F|\n|poke|p1|Aurorus, L50, F|\n|poke|p2|Hawlucha, L50, F|\n|poke|p2|Kingambit, L50, M|\n|poke|p2|Sinistcha-Masterpiece, L50|\n|poke|p2|Milotic, L50, F|\n|poke|p2|Politoed, L50, M|\n|poke|p2|Incineroar, L50, M|\n|teampreview|4\n|\n|t:|1776116606\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Milotic|Milotic, L50, F|100/100\n|switch|p1b: Froslass|Froslass, L50, F|100/100\n|switch|p2a: Sinistcha|Sinistcha-Masterpiece, L50|100/100\n|switch|p2b: Incineroar|Incineroar, L50, M|100/100\n|-ability|p2b: Incineroar|Intimidate|boost\n|-unboost|p1a: Milotic|atk|1\n|-ability|p1a: Milotic|Competitive|boost\n|-boost|p1a: Milotic|spa|2\n|-unboost|p1b: Froslass|atk|1\n|turn|1\n|\n|t:|1776116636\n|switch|p2a: Kingambit|Kingambit, L50, M|100/100\n|detailschange|p1b: Froslass|Froslass-Mega, L50, F\n|-mega|p1b: Froslass|Froslass|Froslassite\n|-weather|Snowscape|[from] ability: Snow Warning|[of] p1b: Froslass\n|move|p1b: Froslass|Aurora Veil|p1b: Froslass\n|-sidestart|p1: JeanPierre693|move: Aurora Veil\n|move|p1a: Milotic|Scald|p2b: Incineroar\n|-supereffective|p2b: Incineroar|1\n|-damage|p2b: Incineroar|0 fnt\n|faint|p2b: Incineroar\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|-message|Catmagoooooo forfeited.\n|\n|win|JeanPierre693\n|raw|JeanPierre693's rating: 1080 &rarr; <strong>1110</strong><br />(+30 for winning)\n|raw|Catmagoooooo's rating: 1101 &rarr; <strong>1074</strong><br />(-27 for losing)\n|l|\u2606Catmagoooooo\n|player|p2|\n",
+  "uploadtime": 1776116663,
+  "views": 24,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1074,
+  "private": 0,
+  "password": null
+}

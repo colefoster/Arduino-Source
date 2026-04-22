@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2587109625",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "firov",
+    "KevMev"
+  ],
+  "log": "|j|\u2606firov\n|j|\u2606KevMev\n|t:|1776494722\n|gametype|singles\n|player|p1|firov|2|1338\n|player|p2|KevMev|waiter-gen4|1372\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Gengar, L50, M|\n|poke|p1|Kingambit, L50, F|\n|poke|p1|Primarina, L50, M|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Corviknight, L50, M|\n|poke|p1|Charizard, L50, M|\n|poke|p2|Sneasler, L50, F, shiny|\n|poke|p2|Archaludon, L50, M, shiny|\n|poke|p2|Garchomp, L50, F, shiny|\n|poke|p2|Meowscarada, L50, F, shiny|\n|poke|p2|Starmie, L50, shiny|\n|poke|p2|Mimikyu, L50, F|\n|teampreview|3\n|j| p74\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by KevMev)\n|\n|t:|1776494760\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Garchomp|Garchomp, L50, F|100/100\n|switch|p2a: Meowscarada|Meowscarada, L50, F, shiny|100/100\n|turn|1\n|\n|t:|1776494763\n|switch|p1a: Corviknight|Corviknight, L50, M|100/100\n|move|p2a: Meowscarada|Triple Axel|p1a: Corviknight|[miss]\n|-start|p2a: Meowscarada|typechange|Ice|[from] ability: Protean\n|-miss|p2a: Meowscarada|p1a: Corviknight\n|\n|upkeep\n|turn|2\n|\n|t:|1776494775\n|switch|p2a: Archaludon|Archaludon, L50, M, shiny|100/100\n|move|p1a: Corviknight|Iron Defense|p1a: Corviknight\n|-boost|p1a: Corviknight|def|2\n|\n|upkeep\n|turn|3\n|\n|t:|1776494782\n|move|p2a: Archaludon|Aura Sphere|p1a: Corviknight\n|-damage|p1a: Corviknight|69/100\n|move|p1a: Corviknight|Body Press|p2a: Archaludon\n|-supereffective|p2a: Archaludon|1\n|-damage|p2a: Archaludon|17/100\n|\n|-heal|p2a: Archaludon|23/100|[from] item: Leftovers\n|-heal|p1a: Corviknight|75/100|[from] item: Leftovers\n|upkeep\n|turn|4\n|\n|t:|1776494789\n|move|p2a: Archaludon|Aura Sphere|p1a: Corviknight\n|-damage|p1a: Corviknight|46/100\n|move|p1a: Corviknight|Roost|p1a: Corviknight\n|-heal|p1a: Corviknight|96/100\n|-singleturn|p1a: Corviknight|move: Roost\n|\n|-heal|p2a: Archaludon|29/100|[from] item: Leftovers\n|-heal|p1a: Corviknight|100/100|[from] item: Leftovers\n|upkeep\n|turn|5\n|-message|KevMev forfeited.\n|\n|win|firov\n|raw|firov's rating: 1338 &rarr; <strong>1360</strong><br />(+22 for winning)\n|raw|KevMev's rating: 1372 &rarr; <strong>1350</strong><br />(-22 for losing)\n|l|\u2606KevMev\n|player|p2|\n|l|\u2606firov\n|player|p1|\n",
+  "uploadtime": 1776495462,
+  "views": 5,
+  "formatid": "gen9championsbssregma",
+  "rating": 1350,
+  "private": 0,
+  "password": null
+}

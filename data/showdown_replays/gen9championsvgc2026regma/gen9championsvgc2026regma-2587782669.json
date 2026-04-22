@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2587782669",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "derpybaits",
+    "Zzalen"
+  ],
+  "log": "|j|\u2606derpybaits\n|j|\u2606Zzalen\n|t:|1776563509\n|gametype|doubles\n|player|p1|derpybaits|170|1217\n|player|p2|Zzalen|ghetsis|1239\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Sableye, L50, M|\n|poke|p1|Talonflame, L50, M|\n|poke|p2|Volcarona, L50, M|\n|poke|p2|Kingambit, L50, M|\n|poke|p2|Meganium, L50, F|\n|poke|p2|Sableye, L50, F|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Sneasler, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by derpybaits)\nderpybaits rejected open team sheets.\n|\n|t:|1776563587\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Floette|Floette-Eternal, L50, F|100/100\n|switch|p1b: Sableye|Sableye, L50, M|100/100\n|switch|p2a: Volcarona|Volcarona, L50, M|100/100\n|switch|p2b: Kingambit|Kingambit, L50, M|100/100\n|turn|1\n|inactive|derpybaits has 30 seconds left.\n|\n|t:|1776563621\n|detailschange|p1a: Floette|Floette-Mega, L50, F\n|-mega|p1a: Floette|Floette|Floettite\n|-ability|p1a: Floette|Fairy Aura\n|move|p1b: Sableye|Fake Out|p2a: Volcarona\n|-damage|p2a: Volcarona|93/100\n|move|p1a: Floette|Calm Mind|p1a: Floette\n|-boost|p1a: Floette|spa|1\n|-boost|p1a: Floette|spd|1\n|cant|p2a: Volcarona|flinch\n|move|p2b: Kingambit|Iron Head|p1a: Floette\n|-supereffective|p1a: Floette|1\n|-damage|p1a: Floette|0 fnt\n|faint|p1a: Floette\n|\n|upkeep\n|\n|t:|1776563629\n|switch|p1a: Incineroar|Incineroar, L50, M|100/100\n|-ability|p1a: Incineroar|Intimidate|boost\n|-unboost|p2a: Volcarona|atk|1\n|-unboost|p2b: Kingambit|atk|1\n|-ability|p2b: Kingambit|Defiant|boost\n|-boost|p2b: Kingambit|atk|2\n|turn|2\n|-message|derpybaits forfeited.\n|\n|win|Zzalen\n|raw|derpybaits's rating: 1217 &rarr; <strong>1194</strong><br />(-23 for losing)\n|raw|Zzalen's rating: 1239 &rarr; <strong>1262</strong><br />(+23 for winning)\n|l|\u2606derpybaits\n|player|p1|\n|l|\u2606Zzalen\n|player|p2|\n|j|\u2606Zzalen\n|player|p2|Zzalen|ghetsis|\n",
+  "uploadtime": 1776564076,
+  "views": 21,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1194,
+  "private": 0,
+  "password": null
+}

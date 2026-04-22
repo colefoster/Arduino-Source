@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2583203797",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Fxenchy",
+    "25528989d"
+  ],
+  "log": "|j|\u2606Fxenchy\n|j|\u260625528989d\n|t:|1776154384\n|gametype|doubles\n|player|p1|Fxenchy|red|1026\n|player|p2|25528989d|roxie-masters|1102\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Archaludon, L50, M|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Tinkaton, L50, F|\n|poke|p1|Whimsicott, L50, M|\n|poke|p1|Manectric, L50, F|\n|poke|p1|Pelipper, L50, M|\n|poke|p2|Charizard, L50, F|\n|poke|p2|Tyranitar, L50, M|\n|poke|p2|Gyarados, L50, F|\n|poke|p2|Garchomp, L50, F|\n|poke|p2|Rotom-Mow, L50|\n|poke|p2|Lucario, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Fxenchy)\n|inactive|25528989d has 60 seconds left.\n|\n|t:|1776154431\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Pelipper|Pelipper, L50, M|100/100\n|switch|p1b: Archaludon|Archaludon, L50, M|100/100\n|switch|p2a: Charizard|Charizard, L50, F|100/100\n|switch|p2b: Gyarados|Gyarados, L50, F|100/100\n|-ability|p2b: Gyarados|Intimidate|boost\n|-unboost|p1a: Pelipper|atk|1\n|-unboost|p1b: Archaludon|atk|1\n|-weather|RainDance|[from] ability: Drizzle|[of] p1a: Pelipper\n|turn|1\n|inactive|Fxenchy has 30 seconds left.\n|\n|t:|1776154457\n|detailschange|p2a: Charizard|Charizard-Mega-Y, L50, F\n|-mega|p2a: Charizard|Charizard|Charizardite Y\n|-weather|SunnyDay|[from] ability: Drought|[of] p2a: Charizard\n|move|p2a: Charizard|Heat Wave|p1a: Pelipper|[spread] p1a,p1b\n|-resisted|p1a: Pelipper|1\n|-damage|p1a: Pelipper|52/100\n|-damage|p1b: Archaludon|21/100\n|-ability|p1b: Archaludon|Stamina|boost\n|-boost|p1b: Archaludon|def|1\n|move|p1b: Archaludon|Electro Shot||[still]\n|-prepare|p1b: Archaludon|Electro Shot\n|-boost|p1b: Archaludon|spa|1\n|move|p2b: Gyarados|Thunder Wave|p1b: Archaludon\n|-status|p1b: Archaludon|par\n|move|p1a: Pelipper|Weather Ball|p2a: Charizard\n|-resisted|p2a: Charizard|1\n|-damage|p2a: Charizard|81/100\n|\n|-weather|SunnyDay|[upkeep]\n|-heal|p1b: Archaludon|27/100 par|[from] item: Leftovers\n|upkeep\n|turn|2\n|inactive|Fxenchy has 30 seconds left.\n|\n|t:|1776154488\n|switch|p1a: Manectric|Manectric, L50, F|100/100\n|move|p2b: Gyarados|Helping Hand|p2a: Charizard\n|-singleturn|p2a: Charizard|Helping Hand|[of] p2b: Gyarados\n|move|p2a: Charizard|Heat Wave|p1a: Manectric|[spread] p1a,p1b\n|-damage|p1a: Manectric|0 fnt\n|-damage|p1b: Archaludon|0 fnt\n|faint|p1a: Manectric\n|faint|p1b: Archaludon\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|-message|Fxenchy forfeited.\n|\n|win|25528989d\n|raw|Fxenchy's rating: 1026 &rarr; <strong>1015</strong><br />(-11 for losing)\n|raw|25528989d's rating: 1102 &rarr; <strong>1122</strong><br />(+20 for winning)\n",
+  "uploadtime": 1776154499,
+  "views": 24,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1015,
+  "private": 0,
+  "password": null
+}

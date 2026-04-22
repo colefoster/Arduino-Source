@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2588355421",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "DavidTIS",
+    "Mikemyfatone"
+  ],
+  "log": "|j|\u2606DavidTIS\n|j|\u2606Mikemyfatone\n|t:|1776626681\n|gametype|doubles\n|player|p1|DavidTIS|1|1163\n|player|p2|Mikemyfatone|266|1157\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Starmie, L50|\n|poke|p1|Lucario, L50, M|\n|poke|p1|Lycanroc-Dusk, L50, F|\n|poke|p1|Hydreigon, L50, F|\n|poke|p1|Gengar, L50, M|\n|poke|p1|Tauros-Paldea-Aqua, L50, M|\n|poke|p2|Houndoom, L50, M|\n|poke|p2|Ninetales, L50, F|\n|poke|p2|Venusaur, L50, M|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Gyarados, L50, F|\n|poke|p2|Whimsicott, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by DavidTIS)\n|inactive|DavidTIS has 60 seconds left.\n|\n|t:|1776626736\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Starmie|Starmie, L50|100/100\n|switch|p1b: Hydreigon|Hydreigon, L50, F|100/100\n|switch|p2a: Venusaur|Venusaur, L50, M|100/100\n|switch|p2b: Whimsicott|Whimsicott, L50, F|100/100\n|turn|1\n|\n|t:|1776626753\n|detailschange|p1a: Starmie|Starmie-Mega, L50\n|-mega|p1a: Starmie|Starmie|Starminite\n|move|p2b: Whimsicott|Protect|p2b: Whimsicott\n|-singleturn|p2b: Whimsicott|Protect\n|move|p1a: Starmie|Psycho Cut|p2a: Venusaur\n|-supereffective|p2a: Venusaur|1\n|-enditem|p2a: Venusaur|Focus Sash\n|-damage|p2a: Venusaur|1/100\n|move|p1b: Hydreigon|Tailwind|p1b: Hydreigon\n|-sidestart|p1: DavidTIS|move: Tailwind\n|move|p2a: Venusaur|Energy Ball|p1a: Starmie\n|-supereffective|p1a: Starmie|1\n|-damage|p1a: Starmie|1/100\n|-unboost|p1a: Starmie|spd|1\n|\n|upkeep\n|turn|2\n|l|\u2606Mikemyfatone\n|inactive|Mikemyfatone disconnected and has a minute to reconnect!\n|player|p2|\n|inactive|DavidTIS has 30 seconds left.\n|inactive|Mikemyfatone has 30 seconds left.\n|inactive|Mikemyfatone has 20 seconds left.\n|j|\u2606Mikemyfatone\n|inactive|Mikemyfatone reconnected and has 20 seconds left.\n|player|p2|Mikemyfatone|266|\n|inactive|Mikemyfatone has 15 seconds left.\n|inactive|Mikemyfatone has 10 seconds left.\n|\n|t:|1776626802\n|switch|p2a: Ninetales|Ninetales, L50, F|100/100\n|-weather|SunnyDay|[from] ability: Drought|[of] p2a: Ninetales\n|move|p1a: Starmie|Ice Spinner|p2b: Whimsicott\n|-supereffective|p2b: Whimsicott|1\n|-damage|p2b: Whimsicott|0 fnt\n|faint|p2b: Whimsicott\n|move|p1b: Hydreigon|Dark Pulse|p2a: Ninetales\n|-damage|p2a: Ninetales|48/100\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|-message|Mikemyfatone forfeited.\n|\n|win|DavidTIS\n|raw|DavidTIS's rating: 1163 &rarr; <strong>1188</strong><br />(+25 for winning)\n|raw|Mikemyfatone's rating: 1157 &rarr; <strong>1132</strong><br />(-25 for losing)\n|l|\u2606Mikemyfatone\n|player|p2|\n",
+  "uploadtime": 1776626819,
+  "views": 11,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1132,
+  "private": 0,
+  "password": null
+}

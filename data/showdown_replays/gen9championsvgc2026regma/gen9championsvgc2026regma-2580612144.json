@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2580612144",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Red Sinnoh",
+    "porpal_goji"
+  ],
+  "log": "|j|\u2606Red Sinnoh\n|j|\u2606porpal_goji\n|t:|1775918014\n|gametype|doubles\n|player|p1|Red Sinnoh|veteran|1041\n|player|p2|porpal_goji|clair|1000\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Whimsicott, L50, M|\n|poke|p1|Toucannon, L50, M|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Toxapex, L50, F|\n|poke|p1|Absol, L50, M|\n|poke|p1|Corviknight, L50, F|\n|poke|p2|Blastoise, L50, F|\n|poke|p2|Pelipper, L50, M|\n|poke|p2|Kommo-o, L50, M|\n|poke|p2|Garchomp, L50, F|\n|poke|p2|Gyarados, L50, M|\n|poke|p2|Hydreigon, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Red Sinnoh)\nRed Sinnoh has agreed to open team sheets.\n|\n|t:|1775918036\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Whimsicott|Whimsicott, L50, M, shiny|100/100\n|switch|p1b: Toucannon|Toucannon, L50, M, shiny|100/100\n|switch|p2a: Blastoise|Blastoise, L50, F, shiny|100/100\n|switch|p2b: Pelipper|Pelipper, L50, M|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p2b: Pelipper\n|turn|1\n|\n|t:|1775918058\n|detailschange|p2a: Blastoise|Blastoise-Mega, L50, F, shiny\n|-mega|p2a: Blastoise|Blastoise|Blastoisinite\n|move|p1b: Toucannon|Protect|p1b: Toucannon\n|-singleturn|p1b: Toucannon|Protect\n|move|p1a: Whimsicott|Tailwind|p1a: Whimsicott\n|-sidestart|p1: Red Sinnoh|move: Tailwind\n|move|p2a: Blastoise|Water Spout|p1a: Whimsicott|[spread] p1a\n|-activate|p1b: Toucannon|move: Protect\n|-resisted|p1a: Whimsicott|1\n|-damage|p1a: Whimsicott|28/100\n|move|p2b: Pelipper|Tailwind|p2b: Pelipper\n|-sidestart|p2: porpal_goji|move: Tailwind\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|turn|2\n|inactive|porpal_goji has 30 seconds left.\n|\n|t:|1775918088\n|move|p1a: Whimsicott|Stun Spore|p2a: Blastoise|[miss]\n|-miss|p1a: Whimsicott|p2a: Blastoise\n|move|p2a: Blastoise|Water Spout|p1b: Toucannon|[spread] p1a,p1b\n|-resisted|p1a: Whimsicott|1\n|-damage|p1a: Whimsicott|0 fnt\n|-damage|p1b: Toucannon|0 fnt\n|faint|p1a: Whimsicott\n|faint|p1b: Toucannon\n|move|p2b: Pelipper|Weather Ball|p1: Whimsicott|[notarget]\n|-fail|p2b: Pelipper\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|-message|Red Sinnoh forfeited.\n|\n|win|porpal_goji\n|raw|Red Sinnoh's rating: 1041 &rarr; <strong>1023</strong><br />(-18 for losing)\n|raw|porpal_goji's rating: 1000 &rarr; <strong>1045</strong><br />(+45 for winning)\n|l|\u2606Red Sinnoh\n|player|p1|\n",
+  "uploadtime": 1775918102,
+  "views": 10,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1023,
+  "private": 0,
+  "password": null
+}

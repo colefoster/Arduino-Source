@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2585686730",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Bleachexe2",
+    "drewew97"
+  ],
+  "log": "|j|\u2606Bleachexe2\n|j|\u2606drewew97\n|t:|1776363737\n|gametype|doubles\n|player|p1|Bleachexe2|lucas|1100\n|player|p2|drewew97|169|1097\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Tyranitar, L50, F|\n|poke|p1|Corviknight, L50, F|\n|poke|p1|Milotic, L50, M|\n|poke|p1|Rotom-Heat, L50|\n|poke|p1|Sinistcha, L50|\n|poke|p2|Tyranitar, L50, F|\n|poke|p2|Gyarados, L50, M|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Rotom-Mow, L50|\n|poke|p2|Charizard, L50, M|\n|poke|p2|Skarmory, L50, F|\n|teampreview|4\n|\n|t:|1776363782\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Tyranitar|Tyranitar, L50, F|100/100\n|switch|p1b: Corviknight|Corviknight, L50, F|100/100\n|switch|p2a: Charizard|Charizard, L50, M|100/100\n|switch|p2b: Rotom|Rotom-Mow, L50|100/100\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p1a: Tyranitar\n|turn|1\n|\n|t:|1776363818\n|detailschange|p1a: Tyranitar|Tyranitar-Mega, L50, F\n|-mega|p1a: Tyranitar|Tyranitar|Tyranitarite\n|move|p2a: Charizard|Protect|p2a: Charizard\n|-singleturn|p2a: Charizard|Protect\n|move|p1b: Corviknight|Tailwind|p1b: Corviknight\n|-sidestart|p1: Bleachexe2|move: Tailwind\n|move|p1a: Tyranitar|Dragon Dance|p1a: Tyranitar\n|-boost|p1a: Tyranitar|atk|1\n|-boost|p1a: Tyranitar|spe|1\n|move|p2b: Rotom|Will-O-Wisp|p1b: Corviknight\n|-status|p1b: Corviknight|brn\n|-enditem|p1b: Corviknight|Lum Berry|[eat]\n|-curestatus|p1b: Corviknight|brn|[msg]\n|\n|-weather|Sandstorm|[upkeep]\n|-damage|p2a: Charizard|94/100|[from] Sandstorm\n|-damage|p2b: Rotom|95/100|[from] Sandstorm\n|upkeep\n|turn|2\n|\n|t:|1776363844\n|switch|p2b: Gyarados|Gyarados, L50, M|100/100\n|-ability|p2b: Gyarados|Intimidate|boost\n|-unboost|p1a: Tyranitar|atk|1\n|-ability|p1b: Corviknight|Mirror Armor\n|-unboost|p2b: Gyarados|atk|1\n|detailschange|p2a: Charizard|Charizard-Mega-Y, L50, M\n|-mega|p2a: Charizard|Charizard|Charizardite Y\n|-weather|SunnyDay|[from] ability: Drought|[of] p2a: Charizard\n|move|p1a: Tyranitar|Rock Slide|p2b: Gyarados|[spread] p2a,p2b\n|-supereffective|p2a: Charizard|2\n|-supereffective|p2b: Gyarados|1\n|-damage|p2a: Charizard|0 fnt\n|-damage|p2b: Gyarados|32/100\n|faint|p2a: Charizard\n|move|p1b: Corviknight|Taunt|p2b: Gyarados\n|-start|p2b: Gyarados|move: Taunt\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|-message|drewew97 forfeited.\n|\n|win|Bleachexe2\n|raw|Bleachexe2's rating: 1100 &rarr; <strong>1125</strong><br />(+25 for winning)\n|raw|drewew97's rating: 1097 &rarr; <strong>1073</strong><br />(-24 for losing)\n",
+  "uploadtime": 1776363858,
+  "views": 14,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1073,
+  "private": 0,
+  "password": null
+}

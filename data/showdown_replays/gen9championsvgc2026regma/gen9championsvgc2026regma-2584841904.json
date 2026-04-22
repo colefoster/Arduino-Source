@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584841904",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "soooo 123141",
+    "CaguamaHeineken"
+  ],
+  "log": "|j|\u2606soooo 123141\n|j|\u2606CaguamaHeineken\n|t:|1776287875\n|gametype|doubles\n|player|p1|soooo 123141|giovanni|1142\n|player|p2|CaguamaHeineken|flannery|1041\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Hydreigon, L50, F|\n|poke|p1|Orthworm, L50, F|\n|poke|p1|Typhlosion-Hisui, L50, F|\n|poke|p1|Sneasler, L50, F|\n|poke|p1|Rotom-Wash, L50|\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p2|Charizard, L50, F|\n|poke|p2|Venusaur, L50, F|\n|poke|p2|Kingambit, L50, F|\n|poke|p2|Kommo-o, L50, F|\n|poke|p2|Whimsicott, L50, M|\n|poke|p2|Rampardos, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by soooo 123141)\n|inactive|soooo 123141 has 60 seconds left.\n|\n|t:|1776287913\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Typhlosion|Typhlosion-Hisui, L50, F|100/100\n|switch|p1b: Rotom|Rotom-Wash, L50|100/100\n|switch|p2a: Whimsicott|Whimsicott, L50, M|100/100\n|switch|p2b: Rampardos|Rampardos, L50, F|100/100\n|-item|p2a: Whimsicott|Focus Sash|[from] ability: Frisk|[of] p1a: Typhlosion\n|-item|p2b: Rampardos|Choice Scarf|[from] ability: Frisk|[of] p1a: Typhlosion\n|turn|1\n|inactive|soooo 123141 has 30 seconds left.\n|inactive|soooo 123141 has 20 seconds left.\n|inactive|soooo 123141 has 15 seconds left.\n|inactive|soooo 123141 has 10 seconds left.\n|inactive|soooo 123141 has 5 seconds left.\n|\n|t:|1776287964\n|move|p2a: Whimsicott|Tailwind|p2a: Whimsicott\n|-sidestart|p2: CaguamaHeineken|move: Tailwind\n|move|p2b: Rampardos|Rock Slide|p1a: Typhlosion|[spread] p1a,p1b\n|-supereffective|p1a: Typhlosion|1\n|-damage|p1a: Typhlosion|0 fnt\n|-damage|p1b: Rotom|37/100\n|faint|p1a: Typhlosion\n|move|p1b: Rotom|Hydro Pump|p2b: Rampardos\n|-supereffective|p2b: Rampardos|1\n|-damage|p2b: Rampardos|0 fnt\n|faint|p2b: Rampardos\n|\n|-heal|p1b: Rotom|43/100|[from] item: Leftovers\n|upkeep\n|\n|t:|1776287977\n|switch|p1a: Floette|Floette-Eternal, L50, F|100/100\n|switch|p2b: Charizard|Charizard, L50, F|100/100\n|turn|2\n|-message|soooo 123141 forfeited.\n|\n|win|CaguamaHeineken\n|raw|soooo 123141's rating: 1142 &rarr; <strong>1110</strong><br />(-32 for losing)\n|raw|CaguamaHeineken's rating: 1041 &rarr; <strong>1084</strong><br />(+43 for winning)\n|l|\u2606soooo 123141\n|player|p1|\n",
+  "uploadtime": 1776287995,
+  "views": 26,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1084,
+  "private": 0,
+  "password": null
+}

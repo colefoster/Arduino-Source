@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2585999189",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "thedoverboys",
+    "JasmineThia"
+  ],
+  "log": "|j|\u2606thedoverboys\n|j|\u2606JasmineThia\n|t:|1776388927\n|gametype|doubles\n|player|p1|thedoverboys|266|1223\n|player|p2|JasmineThia|selene-masters2|1177\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Hatterene, L50, F|\n|poke|p1|Farigiraf, L50, F|\n|poke|p1|Gallade, L50, M|\n|poke|p1|Camerupt, L50, M|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Rotom-Wash, L50|\n|poke|p2|Kangaskhan, L50, F|\n|poke|p2|Primarina, L50, M|\n|poke|p2|Aegislash, L50, F|\n|poke|p2|Dragonite, L50, F|\n|poke|p2|Farigiraf, L50, M|\n|poke|p2|Volcarona, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by JasmineThia)\nthedoverboys rejected open team sheets.\n|inactive|thedoverboys has 60 seconds left.\n|\n|t:|1776388974\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: AllOrNothing|Incineroar, L50, M|100/100\n|switch|p1b: RetraSoft|Rotom-Wash, L50|100/100\n|switch|p2a: Farigiraf|Farigiraf, L50, M|100/100\n|switch|p2b: Primarina|Primarina, L50, M|100/100\n|-ability|p1a: AllOrNothing|Intimidate|boost\n|-unboost|p2a: Farigiraf|atk|1\n|-unboost|p2b: Primarina|atk|1\n|turn|1\n|inactive|thedoverboys has 30 seconds left.\n|\n|t:|1776389008\n|move|p2a: Farigiraf|Helping Hand|p2b: Primarina\n|-singleturn|p2b: Primarina|Helping Hand|[of] p2a: Farigiraf\n|move|p1b: RetraSoft|Thunderbolt|p2b: Primarina\n|-supereffective|p2b: Primarina|1\n|-damage|p2b: Primarina|35/100\n|move|p1a: AllOrNothing|Throat Chop|p2b: Primarina\n|-resisted|p2b: Primarina|1\n|-damage|p2b: Primarina|21/100\n|-start|p2b: Primarina|Throat Chop|[silent]\n|cant|p2b: Primarina|move: Throat Chop\n|\n|upkeep\n|turn|2\n|-message|JasmineThia forfeited.\n|\n|win|thedoverboys\n|raw|thedoverboys's rating: 1223 &rarr; <strong>1245</strong><br />(+22 for winning)\n|raw|JasmineThia's rating: 1177 &rarr; <strong>1155</strong><br />(-22 for losing)\n|l|\u2606JasmineThia\n|player|p2|\n",
+  "uploadtime": 1776389020,
+  "views": 20,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1155,
+  "private": 0,
+  "password": null
+}

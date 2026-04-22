@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2580524527",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "yuriimon",
+    "shar0makai"
+  ],
+  "log": "|j|\u2606yuriimon\n|j|\u2606shar0makai\n|t:|1775908665\n|gametype|doubles\n|player|p1|yuriimon|waitress-gen4|1026\n|player|p2|shar0makai|wicke|1033\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Maushold-Four, L50|\n|poke|p1|Glimmora, L50, M|\n|poke|p1|Talonflame, L50, M|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Farigiraf, L50, F|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Whimsicott, L50, M|\n|poke|p2|Dragapult, L50, F|\n|poke|p2|Gallade, L50, M|\n|poke|p2|Maushold-Four, L50|\n|poke|p2|Incineroar, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by yuriimon)\n|inactive|yuriimon has 60 seconds left.\n|inactive|shar0makai has 60 seconds left.\n|\n|t:|1775908716\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Floette|Floette-Eternal, L50, F|100/100\n|switch|p1b: Talonflame|Talonflame, L50, M|100/100\n|switch|p2a: Gallade|Gallade, L50, M|100/100\n|switch|p2b: Whimsicott|Whimsicott, L50, M|100/100\n|turn|1\n|inactive|yuriimon has 30 seconds left.\n|inactive|shar0makai has 30 seconds left.\n|\n|t:|1775908753\n|detailschange|p1a: Floette|Floette-Mega, L50, F\n|-mega|p1a: Floette|Floette|Floettite\n|-ability|p1a: Floette|Fairy Aura\n|move|p2a: Gallade|Protect|p2a: Gallade\n|-singleturn|p2a: Gallade|Protect\n|move|p1b: Talonflame|Brave Bird|p2b: Whimsicott\n|-supereffective|p2b: Whimsicott|1\n|-damage|p2b: Whimsicott|0 fnt\n|faint|p2b: Whimsicott\n|-damage|p1b: Talonflame|65/100|[from] Recoil\n|move|p1a: Floette|Moonblast|p2a: Gallade\n|-activate|p2a: Gallade|move: Protect\n|\n|upkeep\n|\n|t:|1775908758\n|switch|p2b: Incineroar|Incineroar, L50, M|100/100\n|-ability|p2b: Incineroar|Intimidate|boost\n|-unboost|p1a: Floette|atk|1\n|-unboost|p1b: Talonflame|atk|1\n|turn|2\n|\n|t:|1775908764\n|move|p1b: Talonflame|Protect|p1b: Talonflame\n|-singleturn|p1b: Talonflame|Protect\n|move|p1a: Floette|Protect|p1a: Floette\n|-singleturn|p1a: Floette|Protect\n|move|p2b: Incineroar|Fake Out|p1a: Floette\n|-activate|p1a: Floette|move: Protect\n|move|p2a: Gallade|Rock Slide|p1a: Floette|[spread] \n|-activate|p1a: Floette|move: Protect\n|-activate|p1b: Talonflame|move: Protect\n|\n|upkeep\n|turn|3\n|-message|shar0makai forfeited.\n|\n|win|yuriimon\n|raw|yuriimon's rating: 1026 &rarr; <strong>1063</strong><br />(+37 for winning)\n|raw|shar0makai's rating: 1033 &rarr; <strong>1018</strong><br />(-15 for losing)\n|l|\u2606shar0makai\n|player|p2|\n",
+  "uploadtime": 1775908796,
+  "views": 15,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1018,
+  "private": 0,
+  "password": null
+}

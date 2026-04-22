@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584124561",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Dinnersaurusrex",
+    "cookbayz"
+  ],
+  "log": "|j|\u2606Dinnersaurusrex\n|j|\u2606cookbayz\n|t:|1776227849\n|gametype|doubles\n|player|p1|Dinnersaurusrex|caitlin-masters|1166\n|player|p2|cookbayz|dancer|1112\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Camerupt, L50, M|\n|poke|p1|Farigiraf, L50, M|\n|poke|p1|Kingambit, L50, M|\n|poke|p1|Aerodactyl, L50, M|\n|poke|p1|Froslass, L50, F|\n|poke|p1|Gallade, L50, M|\n|poke|p2|Meganium, L50, M|\n|poke|p2|Rotom-Wash, L50|\n|poke|p2|Excadrill, L50, F|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Tyranitar, L50, F|\n|poke|p2|Dragapult, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by cookbayz)\n|inactive|Dinnersaurusrex has 60 seconds left.\n|inactive|cookbayz has 60 seconds left.\n|inactive|Dinnersaurusrex has 30 seconds left.\n|inactive|Dinnersaurusrex has 20 seconds left.\n|\n|t:|1776227924\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Nort|Farigiraf, L50, M|100/100\n|switch|p1b: Saber|Gallade, L50, M, shiny|100/100\n|switch|p2a: Excadrill|Excadrill, L50, F|100/100\n|switch|p2b: Tyranitar|Tyranitar, L50, F|100/100\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p2b: Tyranitar\n|turn|1\n|\n|t:|1776227945\n|move|p2a: Excadrill|High Horsepower|p1a: Nort\n|-damage|p1a: Nort|50/100\n|move|p1b: Saber|Sacred Sword|p2b: Tyranitar\n|-supereffective|p2b: Tyranitar|2\n|-enditem|p2b: Tyranitar|Chople Berry|[eat]\n|-enditem|p2b: Tyranitar|Chople Berry|[weaken]\n|-damage|p2b: Tyranitar|0 fnt\n|faint|p2b: Tyranitar\n|move|p1a: Nort|Trick Room|p1a: Nort\n|-fieldstart|move: Trick Room|[of] p1a: Nort\n|\n|-weather|Sandstorm|[upkeep]\n|-damage|p1a: Nort|44/100|[from] Sandstorm\n|-damage|p1b: Saber|95/100|[from] Sandstorm\n|upkeep\n|inactive|cookbayz has 30 seconds left.\n|\n|t:|1776227978\n|switch|p2b: Rotom|Rotom-Wash, L50|100/100\n|turn|2\n|\n|t:|1776227987\n|move|p1a: Nort|Hyper Voice|p2b: Rotom|[spread] p2a,p2b\n|-resisted|p2a: Excadrill|1\n|-damage|p2a: Excadrill|81/100\n|-damage|p2b: Rotom|70/100\n|move|p1b: Saber|Sacred Sword|p2b: Rotom\n|-damage|p2b: Rotom|0 fnt\n|faint|p2b: Rotom\n|move|p2a: Excadrill|Earthquake|p1a: Nort|[spread] p1a,p1b\n|-crit|p1a: Nort\n|-damage|p1a: Nort|0 fnt\n|-damage|p1b: Saber|40/100\n|faint|p1a: Nort\n|\n|-weather|Sandstorm|[upkeep]\n|-damage|p1b: Saber|34/100|[from] Sandstorm\n|upkeep\n|\n|t:|1776227997\n|switch|p1a: EXPLOSION!!!!|Camerupt, L50, M, shiny|100/100\n|switch|p2b: Meganium|Meganium, L50, M|100/100\n|turn|3\n|-message|cookbayz forfeited.\n|\n|win|Dinnersaurusrex\n|raw|Dinnersaurusrex's rating: 1166 &rarr; <strong>1187</strong><br />(+21 for winning)\n|raw|cookbayz's rating: 1112 &rarr; <strong>1091</strong><br />(-21 for losing)\n|l|\u2606cookbayz\n|player|p2|\n",
+  "uploadtime": 1776228006,
+  "views": 16,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1091,
+  "private": 0,
+  "password": null
+}

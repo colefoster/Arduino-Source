@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586878507",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Tarakona",
+    "PauVi"
+  ],
+  "log": "|j|\u2606Tarakona\n|j|\u2606PauVi\n|t:|1776467831\n|gametype|doubles\n|player|p1|Tarakona|265|1258\n|player|p2|PauVi|juggler|1294\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Delphox, L50, F|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Rotom-Wash, L50|\n|poke|p1|Tyranitar, L50, M|\n|poke|p1|Kingambit, L50, F|\n|poke|p1|Sneasler, L50, F|\n|poke|p2|Beedrill, L50, F|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Infernape, L50, F|\n|poke|p2|Primarina, L50, F|\n|poke|p2|Meowstic, L50, M|\n|poke|p2|Kingambit, L50, M|\n|teampreview|4\nTarakona has agreed to open team sheets.\n|\n|t:|1776467865\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Regina|Sneasler, L50, F|100/100\n|switch|p1b: Nobunaga|Kingambit, L50, F|100/100\n|switch|p2a: Primarina|Primarina, L50, F|100/100\n|switch|p2b: Meowstic|Meowstic, L50, M|100/100\n|turn|1\n|\n|t:|1776467896\n|move|p1a: Regina|Fake Out|p2b: Meowstic\n|-damage|p2b: Meowstic|83/100\n|cant|p2b: Meowstic|flinch\n|move|p2a: Primarina|Hyper Voice|p1b: Nobunaga|[spread] p1a,p1b\n|-damage|p1a: Regina|53/100\n|-damage|p1b: Nobunaga|62/100\n|move|p1b: Nobunaga|Kowtow Cleave|p2b: Meowstic\n|-supereffective|p2b: Meowstic|1\n|-damage|p2b: Meowstic|0 fnt\n|faint|p2b: Meowstic\n|\n|upkeep\n|\n|t:|1776467908\n|switch|p2b: Beedrill|Beedrill, L50, F|100/100\n|turn|2\n|\n|t:|1776467934\n|detailschange|p2b: Beedrill|Beedrill-Mega, L50, F\n|-mega|p2b: Beedrill|Beedrill|Beedrillite\n|move|p1b: Nobunaga|Sucker Punch|p2b: Beedrill\n|-damage|p2b: Beedrill|0 fnt\n|faint|p2b: Beedrill\n|move|p1a: Regina|Dire Claw|p2a: Primarina\n|-supereffective|p2a: Primarina|1\n|-damage|p2a: Primarina|0 fnt\n|faint|p2a: Primarina\n|\n|upkeep\n|-message|PauVi forfeited.\n|\n|win|Tarakona\n|raw|Tarakona's rating: 1258 &rarr; <strong>1286</strong><br />(+28 for winning)\n|raw|PauVi's rating: 1294 &rarr; <strong>1266</strong><br />(-28 for losing)\n|l|\u2606PauVi\n|player|p2|\n",
+  "uploadtime": 1776467955,
+  "views": 44,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1266,
+  "private": 0,
+  "password": null
+}

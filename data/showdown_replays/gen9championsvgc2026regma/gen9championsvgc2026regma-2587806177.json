@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2587806177",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "oooohx",
+    "yandero"
+  ],
+  "log": "|j|\u2606oooohx\n|j|\u2606yandero\n|t:|1776565886\n|gametype|doubles\n|player|p1|oooohx|265|1071\n|player|p2|yandero|102|1169\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Whimsicott, L50, M, shiny|\n|poke|p1|Camerupt, L50, M|\n|poke|p1|Farigiraf, L50, M|\n|poke|p1|Sharpedo, L50, M|\n|poke|p1|Aggron, L50, F|\n|poke|p1|Sinistcha-Masterpiece, L50|\n|poke|p2|Archaludon, L50, F|\n|poke|p2|Pelipper, L50, M|\n|poke|p2|Dragonite, L50, M|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Sneasler, L50, F|\n|teampreview|4\n|\n|t:|1776565915\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Camerupt|Camerupt, L50, M|100/100\n|switch|p1b: Sinistcha|Sinistcha-Masterpiece, L50|100/100\n|switch|p2a: Pelipper|Pelipper, L50, M|100/100\n|switch|p2b: Dragonite|Dragonite, L50, M|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p2a: Pelipper\n|turn|1\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by yandero)\n|\n|t:|1776565955\n|switch|p1a: Farigiraf|Farigiraf, L50, M|100/100\n|detailschange|p2b: Dragonite|Dragonite-Mega, L50, M\n|-mega|p2b: Dragonite|Dragonite|Dragoninite\n|move|p2b: Dragonite|Hurricane|p1b: Sinistcha\n|-supereffective|p1b: Sinistcha|1\n|-enditem|p1b: Sinistcha|Focus Sash\n|-damage|p1b: Sinistcha|1/100\n|move|p1b: Sinistcha|Matcha Gotcha|p2a: Pelipper|[spread] p2a,p2b\n|-resisted|p2b: Dragonite|2\n|-damage|p2a: Pelipper|77/100\n|-heal|p1b: Sinistcha|12/100|[from] drain|[of] p2a: Pelipper\n|-damage|p2b: Dragonite|98/100\n|-heal|p1b: Sinistcha|13/100|[from] drain|[of] p2b: Dragonite\n|move|p2a: Pelipper|Weather Ball|p1a: Farigiraf\n|-damage|p1a: Farigiraf|47/100\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|turn|2\n|inactive|yandero has 30 seconds left.\n|inactive|yandero has 20 seconds left.\n|inactive|yandero has 15 seconds left.\n|\n|t:|1776565999\n|move|p1b: Sinistcha|Rage Powder|p1b: Sinistcha\n|-singleturn|p1b: Sinistcha|move: Rage Powder\n|move|p2b: Dragonite|Hurricane|p1b: Sinistcha\n|-supereffective|p1b: Sinistcha|1\n|-damage|p1b: Sinistcha|0 fnt\n|faint|p1b: Sinistcha\n|move|p1a: Farigiraf|Hyper Voice|p2a: Pelipper|[spread] p2a,p2b\n|-damage|p2a: Pelipper|52/100\n|-damage|p2b: Dragonite|75/100\n|move|p2a: Pelipper|Weather Ball|p1a: Farigiraf\n|-damage|p1a: Farigiraf|0 fnt\n|faint|p1a: Farigiraf\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|-message|oooohx forfeited.\n|\n|win|yandero\n|raw|oooohx's rating: 1071 &rarr; <strong>1056</strong><br />(-15 for losing)\n|raw|yandero's rating: 1169 &rarr; <strong>1187</strong><br />(+18 for winning)\n|l|\u2606oooohx\n|player|p1|\n",
+  "uploadtime": 1776566222,
+  "views": 8,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1056,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2583162331",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "alt18",
+    "hrztkb"
+  ],
+  "log": "|j|\u2606alt18\n|j|\u2606hrztkb\n|t:|1776149603\n|gametype|singles\n|player|p1|alt18|169|1172\n|player|p2|hrztkb|266|1306\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Froslass, L50, F|\n|poke|p1|Glimmora, L50, M|\n|poke|p1|Garganacl, L50, M|\n|poke|p1|Blastoise, L50, F|\n|poke|p1|Meowscarada, L50, F|\n|poke|p1|Skarmory, L50, F|\n|poke|p2|Hatterene, L50, F|\n|poke|p2|Volcarona, L50, F|\n|poke|p2|Hydreigon, L50, F|\n|poke|p2|Gyarados, L50, M|\n|poke|p2|Aegislash, L50, M|\n|poke|p2|Garchomp, L50, M|\n|teampreview|3\n|j| p74\n|\n|t:|1776149642\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Glimmora|Glimmora, L50, M|100/100\n|switch|p2a: Hydreigon|Hydreigon, L50, F|100/100\n|turn|1\n|\n|t:|1776149651\n|move|p2a: Hydreigon|Dark Pulse|p1a: Glimmora\n|-damage|p1a: Glimmora|45/100\n|move|p1a: Glimmora|Sludge Bomb|p2a: Hydreigon\n|-damage|p2a: Hydreigon|44/100\n|\n|upkeep\n|turn|2\n|\n|t:|1776149658\n|move|p2a: Hydreigon|Dark Pulse|p1a: Glimmora\n|-damage|p1a: Glimmora|0 fnt\n|faint|p1a: Glimmora\n|\n|upkeep\n|\n|t:|1776149666\n|switch|p1a: Garganacl|Garganacl, L50, M|100/100\n|turn|3\n|\n|t:|1776149669\n|move|p2a: Hydreigon|Dark Pulse|p1a: Garganacl\n|-damage|p1a: Garganacl|75/100\n|move|p1a: Garganacl|Iron Defense|p1a: Garganacl\n|-boost|p1a: Garganacl|def|2\n|\n|-heal|p1a: Garganacl|81/100|[from] item: Leftovers\n|upkeep\n|turn|4\n|\n|t:|1776149678\n|move|p2a: Hydreigon|Dark Pulse|p1a: Garganacl\n|-damage|p1a: Garganacl|54/100\n|cant|p1a: Garganacl|flinch\n|\n|-heal|p1a: Garganacl|59/100|[from] item: Leftovers\n|upkeep\n|turn|5\n|\n|t:|1776149685\n|move|p2a: Hydreigon|Dark Pulse|p1a: Garganacl\n|-damage|p1a: Garganacl|35/100\n|cant|p1a: Garganacl|flinch\n|\n|-heal|p1a: Garganacl|41/100|[from] item: Leftovers\n|upkeep\n|turn|6\n|\n|t:|1776149691\n|move|p2a: Hydreigon|Dark Pulse|p1a: Garganacl\n|-damage|p1a: Garganacl|15/100\n|cant|p1a: Garganacl|flinch\n|\n|-heal|p1a: Garganacl|20/100|[from] item: Leftovers\n|upkeep\n|turn|7\n|\n|t:|1776149697\n|move|p2a: Hydreigon|Dark Pulse|p1a: Garganacl\n|-damage|p1a: Garganacl|0 fnt\n|faint|p1a: Garganacl\n|\n|upkeep\n|\n|t:|1776149699\n|switch|p1a: Froslass|Froslass, L50, F|100/100\n|turn|8\n|\n|t:|1776149703\n|detailschange|p1a: Froslass|Froslass-Mega, L50, F\n|-mega|p1a: Froslass|Froslass|Froslassite\n|-weather|Snowscape|[from] ability: Snow Warning|[of] p1a: Froslass\n|move|p2a: Hydreigon|Dark Pulse|p1a: Froslass\n|-supereffective|p1a: Froslass|1\n|-damage|p1a: Froslass|0 fnt\n|faint|p1a: Froslass\n|\n|win|hrztkb\n|raw|alt18's rating: 1172 &rarr; <strong>1156</strong><br />(-16 for losing)\n|raw|hrztkb's rating: 1306 &rarr; <strong>1319</strong><br />(+13 for winning)\n|l|\u2606hrztkb\n|player|p2|\n|l|\u2606alt18\n|player|p1|\n",
+  "uploadtime": 1776150261,
+  "views": 36,
+  "formatid": "gen9championsbssregma",
+  "rating": 1156,
+  "private": 0,
+  "password": null
+}

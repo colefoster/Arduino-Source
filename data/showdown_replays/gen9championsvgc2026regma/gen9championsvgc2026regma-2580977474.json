@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2580977474",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Takiyako",
+    "CinnamonClub"
+  ],
+  "log": "|j|\u2606Takiyako\n|j|\u2606CinnamonClub\n|t:|1775948406\n|gametype|doubles\n|player|p1|Takiyako|1|1123\n|player|p2|CinnamonClub|1|1114\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Pelipper, L50, F|\n|poke|p1|Archaludon, L50, M|\n|poke|p1|Kommo-o, L50, M|\n|poke|p1|Oranguru, L50, M|\n|poke|p1|Reuniclus, L50, M|\n|poke|p1|Arcanine-Hisui, L50, M|\n|poke|p2|Orthworm, L50, M|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Whimsicott, L50, F|\n|poke|p2|Rotom-Wash, L50|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Tyranitar, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Takiyako)\n|inactive|CinnamonClub has 60 seconds left.\n|\n|t:|1775948439\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Kommo-o|Kommo-o, L50, M|100/100\n|switch|p1b: Oranguru|Oranguru, L50, M|100/100\n|switch|p2a: Whimsicott|Whimsicott, L50, F|100/100\n|switch|p2b: Orthworm|Orthworm, L50, M|100/100\n|turn|1\n|\n|t:|1775948457\n|move|p1a: Kommo-o|Clangorous Soul|p1a: Kommo-o\n|-boost|p1a: Kommo-o|atk|1\n|-boost|p1a: Kommo-o|def|1\n|-boost|p1a: Kommo-o|spa|1\n|-boost|p1a: Kommo-o|spd|1\n|-boost|p1a: Kommo-o|spe|1\n|-damage|p1a: Kommo-o|68/100\n|move|p2a: Whimsicott|Moonblast|p1a: Kommo-o\n|-supereffective|p1a: Kommo-o|2\n|-damage|p1a: Kommo-o|0 fnt\n|faint|p1a: Kommo-o\n|move|p1b: Oranguru|Instruct|p1: Kommo-o|[notarget]\n|-fail|p1b: Oranguru\n|move|p2b: Orthworm|Shed Tail|p2b: Orthworm\n|-start|p2b: Orthworm|Substitute|[from] move: Shed Tail\n|-damage|p2b: Orthworm|50/100\n|-enditem|p2b: Orthworm|Sitrus Berry|[eat]\n|-heal|p2b: Orthworm|75/100|[from] item: Sitrus Berry\n|-message|Takiyako forfeited.\n|\n|win|CinnamonClub\n|raw|Takiyako's rating: 1123 &rarr; <strong>1097</strong><br />(-26 for losing)\n|raw|CinnamonClub's rating: 1114 &rarr; <strong>1140</strong><br />(+26 for winning)\n|l|\u2606Takiyako\n|player|p1|\n|c|\u2606CinnamonClub|Lol ggs\n",
+  "uploadtime": 1775948486,
+  "views": 17,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1097,
+  "private": 0,
+  "password": null
+}

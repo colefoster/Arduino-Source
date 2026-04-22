@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586706771",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Cookiecrumble123",
+    "SukyShiro"
+  ],
+  "log": "|j|\u2606Cookiecrumble123\n|j|\u2606SukyShiro\n|t:|1776453684\n|gametype|doubles\n|player|p1|Cookiecrumble123|169|1032\n|player|p2|SukyShiro|dawn|1074\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Alcremie, L50, F|\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Whimsicott, L50, M|\n|poke|p1|Crabominable, L50, F|\n|poke|p1|Sinistcha-Masterpiece, L50|\n|poke|p2|Whimsicott, L50, F|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Glalie, L50, M|\n|poke|p2|Pelipper, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by SukyShiro)\n|inactive|Cookiecrumble123 also wants the timer to be on.\n|inactive|Cookiecrumble123 has 60 seconds left.\n|\n|t:|1776453717\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Alcremie|Alcremie, L50, F|100/100\n|switch|p1b: Floette|Floette-Eternal, L50, F|100/100\n|switch|p2a: ajuda|Whimsicott, L50, F|100/100\n|switch|p2b: O BOMBO|Glalie, L50, M|100/100\n|turn|1\n|\n|t:|1776453729\n|detailschange|p1b: Floette|Floette-Mega, L50, F\n|-mega|p1b: Floette|Floette|Floettite\n|-ability|p1b: Floette|Fairy Aura\n|detailschange|p2b: O BOMBO|Glalie-Mega, L50, M\n|-mega|p2b: O BOMBO|Glalie|Glalitite\n|move|p2a: ajuda|Tailwind|p2a: ajuda\n|-sidestart|p2: SukyShiro|move: Tailwind\n|move|p2b: O BOMBO|Explosion|p1b: Floette|[spread] p2a,p1a,p1b\n|-supereffective|p2a: ajuda|1\n|-enditem|p2a: ajuda|Focus Sash\n|-damage|p2a: ajuda|1/100\n|-damage|p1a: Alcremie|0 fnt\n|-damage|p1b: Floette|0 fnt\n|faint|p2b: O BOMBO\n|faint|p1a: Alcremie\n|faint|p1b: Floette\n|\n|upkeep\n|\n|t:|1776453747\n|switch|p1b: Sinistcha|Sinistcha-Masterpiece, L50|100/100\n|switch|p2b: Basculegion|Basculegion, L50, M|100/100\n|switch|p1a: Whimsicott|Whimsicott, L50, M|100/100\n|turn|2\n|\n|t:|1776453761\n|switch|p2a: Pelipper|Pelipper, L50, M|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p2a: Pelipper\n|move|p1a: Whimsicott|Tailwind|p1a: Whimsicott\n|-sidestart|p1: Cookiecrumble123|move: Tailwind\n|move|p2b: Basculegion|Last Respects|p1b: Sinistcha\n|-supereffective|p1b: Sinistcha|1\n|-damage|p1b: Sinistcha|0 fnt\n|faint|p1b: Sinistcha\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|turn|3\n|-message|Cookiecrumble123 forfeited.\n|\n|win|SukyShiro\n|raw|Cookiecrumble123's rating: 1032 &rarr; <strong>1019</strong><br />(-13 for losing)\n|raw|SukyShiro's rating: 1074 &rarr; <strong>1099</strong><br />(+25 for winning)\n|l|\u2606Cookiecrumble123\n|player|p1|\n",
+  "uploadtime": 1776453779,
+  "views": 27,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1019,
+  "private": 0,
+  "password": null
+}

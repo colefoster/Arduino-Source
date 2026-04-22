@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582344885",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "DenziVGC",
+    "Mdjfbd"
+  ],
+  "log": "|j|\u2606DenziVGC\n|j|\u2606Mdjfbd\n|t:|1776085111\n|gametype|doubles\n|player|p1|DenziVGC|102|1000\n|player|p2|Mdjfbd|101|1000\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Maushold, L50|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Talonflame, L50, F|\n|poke|p1|Rotom-Wash, L50|\n|poke|p1|Aegislash, L50, M|\n|poke|p2|Medicham, L50, M|\n|poke|p2|Politoed, L50, F|\n|poke|p2|Ninetales, L50, M|\n|poke|p2|Tyranitar, L50, M|\n|poke|p2|Aerodactyl, L50, M|\n|poke|p2|Floette-Eternal, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Mdjfbd)\n|inactive|DenziVGC has 60 seconds left.\n|\n|t:|1776085146\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Floette|Floette-Eternal, L50, F|100/100\n|switch|p1b: Maushold|Maushold, L50|100/100\n|switch|p2a: Medicham|Medicham, L50, M, shiny|100/100\n|switch|p2b: Aerodactyl|Aerodactyl, L50, M|100/100\n|-ability|p2b: Aerodactyl|Unnerve\n|turn|1\n|\n|t:|1776085165\n|detailschange|p1a: Floette|Floette-Mega, L50, F\n|-mega|p1a: Floette|Floette|Floettite\n|-ability|p1a: Floette|Fairy Aura\n|move|p1b: Maushold|Follow Me|p1b: Maushold\n|-singleturn|p1b: Maushold|move: Follow Me\n|move|p2b: Aerodactyl|Rock Slide|p1a: Floette|[spread] p1b\n|-miss|p2b: Aerodactyl|p1a: Floette\n|-damage|p1b: Maushold|67/100\n|move|p2a: Medicham|Skill Swap|p1b: Maushold\n|-activate|p2a: Medicham|Skill Swap|Friend Guard|Pure Power|[of] p1b: Maushold\n|move|p1a: Floette|Calm Mind|p1a: Floette\n|-boost|p1a: Floette|spa|1\n|-boost|p1a: Floette|spd|1\n|\n|upkeep\n|turn|2\n|-message|Mdjfbd forfeited.\n|\n|win|DenziVGC\n|raw|DenziVGC's rating: 1000 &rarr; <strong>1040</strong><br />(+40 for winning)\n|raw|Mdjfbd's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|l|\u2606Mdjfbd\n|player|p2|\n",
+  "uploadtime": 1776085186,
+  "views": 10,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

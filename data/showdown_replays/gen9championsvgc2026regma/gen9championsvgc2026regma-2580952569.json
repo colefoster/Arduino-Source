@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2580952569",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "tryson69",
+    "GVB0"
+  ],
+  "log": "|j|\u2606tryson69\n|j|\u2606GVB0\n|t:|1775946195\n|gametype|doubles\n|player|p1|tryson69|crasherwake|1092\n|player|p2|GVB0|clown|1000\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Aggron, L50, F|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Tyranitar, L50, F|\n|poke|p1|Rotom-Wash, L50|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Sinistcha, L50|\n|poke|p2|Noivern, L50, F|\n|poke|p2|Kommo-o, L50, F|\n|poke|p2|Audino, L50, F|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Arcanine-Hisui, L50, F|\n|poke|p2|Slowking-Galar, L50, F|\n|teampreview|4\n|\n|t:|1775946221\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Garchomp|Garchomp, L50, F|100/100\n|switch|p1b: Mr Cat|Incineroar, L50, F|100/100\n|switch|p2a: Arcanine|Arcanine-Hisui, L50, F|100/100\n|switch|p2b: Audino|Audino, L50, F|100/100\n|-ability|p2a: Arcanine|Intimidate|boost\n|-unboost|p1a: Garchomp|atk|1\n|-unboost|p1b: Mr Cat|atk|1\n|-ability|p1b: Mr Cat|Intimidate|boost\n|-unboost|p2a: Arcanine|atk|1\n|-unboost|p2b: Audino|atk|1\n|turn|1\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by GVB0)\n|inactive|tryson69 has 60 seconds left.\n|\n|t:|1775946266\n|switch|p2a: Kommo-o|Kommo-o, L50, F|100/100\n|detailschange|p2b: Audino|Audino-Mega, L50, F\n|-mega|p2b: Audino|Audino|Audinite\n|move|p1b: Mr Cat|Fake Out|p2a: Kommo-o\n|-damage|p2a: Kommo-o|94/100\n|move|p1a: Garchomp|Swords Dance|p1a: Garchomp\n|-boost|p1a: Garchomp|atk|2\n|move|p2b: Audino|Simple Beam|p2a: Kommo-o\n|-ability|p2a: Kommo-o|Simple|Soundproof|[from] move: Simple Beam\n|\n|upkeep\n|turn|2\n|\n|t:|1775946281\n|move|p2b: Audino|Ally Switch|p2b: Audino\n|swap|p2b: Audino|0|[from] move: Ally Switch\n|move|p1a: Garchomp|Scale Shot|p2a: Audino\n|-immune|p2a: Audino\n|move|p2b: Kommo-o|Clangorous Soul|p2b: Kommo-o\n|-boost|p2b: Kommo-o|atk|2\n|-boost|p2b: Kommo-o|def|2\n|-boost|p2b: Kommo-o|spa|2\n|-boost|p2b: Kommo-o|spd|2\n|-boost|p2b: Kommo-o|spe|2\n|-damage|p2b: Kommo-o|61/100\n|move|p1b: Mr Cat|Parting Shot|p2a: Audino\n|-unboost|p2a: Audino|atk|1\n|-unboost|p2a: Audino|spa|1\n|\n|t:|1775946288\n|switch|p1b: Rotom|Rotom-Wash, L50|100/100|[from] Parting Shot\n|\n|upkeep\n|turn|3\n|-message|tryson69 forfeited.\n|\n|win|GVB0\n|raw|tryson69's rating: 1092 &rarr; <strong>1062</strong><br />(-30 for losing)\n|raw|GVB0's rating: 1000 &rarr; <strong>1050</strong><br />(+50 for winning)\n|l|\u2606tryson69\n|player|p1|\n",
+  "uploadtime": 1775946309,
+  "views": 23,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1050,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2586195571",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "dem0n2011",
+    "D1KYPR0STA1NT"
+  ],
+  "log": "|j|\u203ddem0n2011\n|j|\u2606D1KYPR0STA1NT\n|t:|1776411040\n|gametype|singles\n|player|p1|dem0n2011|benga|1010\n|player|p2|D1KYPR0STA1NT|265|1097\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Absol, L50, F|\n|poke|p1|Orthworm, L50, M|\n|poke|p1|Gengar, L50, M|\n|poke|p1|Milotic, L50, F|\n|poke|p1|Armarouge, L50, F|\n|poke|p1|Garchomp, L50, M|\n|poke|p2|Toxapex, L50, M|\n|poke|p2|Garchomp, L50, F|\n|poke|p2|Umbreon, L50, M|\n|poke|p2|Gengar, L50, M|\n|poke|p2|Arcanine, L50, M|\n|poke|p2|Basculegion, L50, M|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by D1KYPR0STA1NT)\n|\n|t:|1776411065\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Orthworm|Orthworm, L50, M|100/100\n|switch|p2a: Arcanine|Arcanine, L50, M|100/100\n|-ability|p2a: Arcanine|Intimidate|boost\n|-unboost|p1a: Orthworm|atk|1\n|turn|1\n|\n|t:|1776411076\n|move|p2a: Arcanine|Flare Blitz|p1a: Orthworm\n|-supereffective|p1a: Orthworm|1\n|-enditem|p1a: Orthworm|Occa Berry|[eat]\n|-enditem|p1a: Orthworm|Occa Berry|[weaken]\n|-damage|p1a: Orthworm|61/100\n|-damage|p2a: Arcanine|87/100|[from] Recoil\n|move|p1a: Orthworm|Shed Tail|p1a: Orthworm\n|-start|p1a: Orthworm|Substitute|[from] move: Shed Tail\n|-damage|p1a: Orthworm|11/100\n|\n|t:|1776411083\n|switch|p1a: Absol|Absol, L50, F|100/100|[from] Shed Tail\n|\n|upkeep\n|turn|2\n|\n|t:|1776411089\n|move|p2a: Arcanine|Play Rough|p1a: Absol\n|-supereffective|p1a: Absol|1\n|-end|p1a: Absol|Substitute\n|move|p1a: Absol|Swords Dance|p1a: Absol\n|-boost|p1a: Absol|atk|2\n|\n|upkeep\n|turn|3\n|\n|t:|1776411097\n|detailschange|p1a: Absol|Absol-Mega, L50, F\n|-mega|p1a: Absol|Absol|Absolite\n|move|p1a: Absol|Sucker Punch|p2a: Arcanine\n|-damage|p2a: Arcanine|0 fnt\n|faint|p2a: Arcanine\n|\n|upkeep\n|\n|t:|1776411103\n|switch|p2a: Gengar|Gengar, L50, M|100/100\n|turn|4\n|\n|t:|1776411111\n|detailschange|p2a: Gengar|Gengar-Mega, L50, M\n|-mega|p2a: Gengar|Gengar|Gengarite\n|move|p1a: Absol|Sucker Punch|p2a: Gengar\n|-supereffective|p2a: Gengar|1\n|-damage|p2a: Gengar|0 fnt\n|faint|p2a: Gengar\n|\n|upkeep\n|\n|t:|1776411116\n|switch|p2a: Basculegion|Basculegion, L50, M|100/100\n|turn|5\n|\n|t:|1776411123\n|move|p1a: Absol|Sucker Punch|p2a: Basculegion\n|-supereffective|p2a: Basculegion|1\n|-damage|p2a: Basculegion|0 fnt\n|faint|p2a: Basculegion\n|\n|win|dem0n2011\n|raw|dem0n2011's rating: 1010 &rarr; <strong>1058</strong><br />(+48 for winning)\n|raw|D1KYPR0STA1NT's rating: 1097 &rarr; <strong>1066</strong><br />(-31 for losing)\n",
+  "uploadtime": 1776411125,
+  "views": 5,
+  "formatid": "gen9championsbssregma",
+  "rating": 1058,
+  "private": 0,
+  "password": null
+}

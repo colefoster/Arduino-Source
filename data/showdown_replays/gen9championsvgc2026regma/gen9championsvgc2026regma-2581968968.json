@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2581968968",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "amongdripgoku",
+    "esekir"
+  ],
+  "log": "|j|\u2606amongdripgoku\n|j|\u2606esekir\n|t:|1776044228\n|gametype|doubles\n|player|p1|amongdripgoku|169|1081\n|player|p2|esekir|265|1112\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Pelipper, L50, M|\n|poke|p1|Gengar, L50, M|\n|poke|p1|Greninja-*, L50, F|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Archaludon, L50, F|\n|poke|p1|Whimsicott, L50, F|\n|poke|p2|Delphox, L50, M|\n|poke|p2|Meowstic, L50, M|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Garchomp, L50, F|\n|poke|p2|Rotom-Mow, L50|\n|teampreview|4\n|\n|t:|1776044286\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Pelipper|Pelipper, L50, M|100/100\n|switch|p1b: Basculegion|Basculegion, L50, M|100/100\n|switch|p2a: Delphox|Delphox, L50, M|100/100\n|switch|p2b: Meowstic|Meowstic, L50, M|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p1a: Pelipper\n|turn|1\n|\n|t:|1776044315\n|detailschange|p2a: Delphox|Delphox-Mega, L50, M\n|-mega|p2a: Delphox|Delphox|Delphoxite\n|move|p2a: Delphox|Protect|p2a: Delphox\n|-singleturn|p2a: Delphox|Protect\n|move|p2b: Meowstic|Psychic Terrain|p2b: Meowstic\n|-fieldstart|move: Psychic Terrain\n|move|p1b: Basculegion|Flip Turn|p2a: Delphox\n|-activate|p2a: Delphox|move: Protect\n|move|p1a: Pelipper|Weather Ball|p2b: Meowstic\n|-damage|p2b: Meowstic|44/100\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|turn|2\n|\n|t:|1776044333\n|move|p1a: Pelipper|Wide Guard|p1a: Pelipper\n|-singleturn|p1a: Pelipper|Wide Guard\n|move|p2b: Meowstic|Skill Swap|p2a: Delphox\n|-activate|p2b: Meowstic|Skill Swap|||[of] p2a: Delphox\n|move|p1b: Basculegion|Flip Turn|p2b: Meowstic\n|-damage|p2b: Meowstic|0 fnt\n|faint|p2b: Meowstic\n|-message|esekir forfeited.\n|\n|win|amongdripgoku\n|raw|amongdripgoku's rating: 1081 &rarr; <strong>1111</strong><br />(+30 for winning)\n|raw|esekir's rating: 1112 &rarr; <strong>1085</strong><br />(-27 for losing)\n",
+  "uploadtime": 1776044339,
+  "views": 10,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1085,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584648148",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "namboyVGC",
+    "parshat"
+  ],
+  "log": "|j|\u2606namboyVGC\n|j|\u2606parshat\n|t:|1776274326\n|gametype|doubles\n|player|p1|namboyVGC|pokemonranger-gen4|1038\n|player|p2|parshat|hilbert-wonderlauncher|1023\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Alakazam, L50, F|\n|poke|p1|Typhlosion-Hisui, L50, M|\n|poke|p1|Whimsicott, L50, F|\n|poke|p1|Meowstic, L50, M|\n|poke|p1|Starmie, L50|\n|poke|p1|Maushold-Four, L50|\n|poke|p2|Archaludon, L50, M|\n|poke|p2|Umbreon, L50, F|\n|poke|p2|Kangaskhan, L50, F|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Arcanine, L50, F|\n|poke|p2|Meganium, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by namboyVGC)\nnamboyVGC has agreed to open team sheets.\n|\n|t:|1776274356\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Alakazam|Alakazam, L50, F|100/100\n|switch|p1b: Meowstic|Meowstic, L50, M|100/100\n|switch|p2a: Umbreon|Umbreon, L50, F|100/100\n|switch|p2b: Kangaskhan|Kangaskhan, L50, F|100/100\n|turn|1\n|\n|t:|1776274374\n|detailschange|p2b: Kangaskhan|Kangaskhan-Mega, L50, F\n|-mega|p2b: Kangaskhan|Kangaskhan|Kangaskhanite\n|move|p1a: Alakazam|Protect|p1a: Alakazam\n|-singleturn|p1a: Alakazam|Protect\n|move|p2b: Kangaskhan|Fake Out|p1a: Alakazam\n|-activate|p1a: Alakazam|move: Protect\n|move|p1b: Meowstic|Gravity|p1b: Meowstic\n|-fieldstart|move: Gravity\n|move|p2a: Umbreon|Snarl|p1a: Alakazam|[spread] p1b\n|-activate|p1a: Alakazam|move: Protect\n|-supereffective|p1b: Meowstic|1\n|-damage|p1b: Meowstic|81/100\n|-unboost|p1b: Meowstic|spa|1\n|\n|upkeep\n|turn|2\n|\n|t:|1776274396\n|detailschange|p1a: Alakazam|Alakazam-Mega, L50, F\n|-mega|p1a: Alakazam|Alakazam|Alakazite\n|-ability|p1a: Alakazam|Parental Bond|Trace|[from] ability: Trace|[of] p2b: Kangaskhan\n|move|p2b: Kangaskhan|Sucker Punch|p1a: Alakazam\n|-supereffective|p1a: Alakazam|1\n|-damage|p1a: Alakazam|0 fnt\n|faint|p1a: Alakazam\n|-hitcount|p1: Alakazam|1\n|move|p1b: Meowstic|Psychic Terrain|p1b: Meowstic\n|-fieldstart|move: Psychic Terrain\n|move|p2a: Umbreon|Snarl|p1b: Meowstic\n|-supereffective|p1b: Meowstic|1\n|-damage|p1b: Meowstic|55/100\n|-unboost|p1b: Meowstic|spa|1\n|\n|upkeep\n|-message|namboyVGC forfeited.\n|\n|win|parshat\n|raw|namboyVGC's rating: 1038 &rarr; <strong>1022</strong><br />(-16 for losing)\n|raw|parshat's rating: 1023 &rarr; <strong>1061</strong><br />(+38 for winning)\n",
+  "uploadtime": 1776274411,
+  "views": 21,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1022,
+  "private": 0,
+  "password": null
+}

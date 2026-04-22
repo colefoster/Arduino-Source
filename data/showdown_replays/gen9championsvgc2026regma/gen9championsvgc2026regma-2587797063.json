@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2587797063",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "flurrage",
+    "vanthoci"
+  ],
+  "log": "|j|\u2606flurrage\n|j|\u2606vanthoci\n|t:|1776564957\n|gametype|doubles\n|player|p1|flurrage|caitlin|1480\n|player|p2|vanthoci|liko|1454\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Tyranitar, L50, M|\n|poke|p1|Rotom-Wash, L50|\n|poke|p1|Venusaur, L50, M|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Corviknight, L50, F|\n|poke|p1|Farigiraf, L50, M|\n|poke|p2|Scizor, L50, F|\n|poke|p2|Dragonite, L50, M|\n|poke|p2|Archaludon, L50, M|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Pelipper, L50, M|\n|teampreview|4\n|j| visael mk. II\n|\n|t:|1776565028\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Farigiraf|Farigiraf, L50, M|100/100\n|switch|p1b: Tyranitar|Tyranitar, L50, M|100/100\n|switch|p2a: Sneasler|Sneasler, L50, F|100/100\n|switch|p2b: Scizor|Scizor, L50, F|100/100\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p1b: Tyranitar\n|turn|1\n|\n|t:|1776565038\n|detailschange|p2b: Scizor|Scizor-Mega, L50, F\n|-mega|p2b: Scizor|Scizor|Scizorite\n|move|p1b: Tyranitar|Protect|p1b: Tyranitar\n|-singleturn|p1b: Tyranitar|Protect\n|move|p2a: Sneasler|Taunt|p1a: Farigiraf\n|-start|p1a: Farigiraf|move: Taunt\n|move|p2b: Scizor|Swords Dance|p2b: Scizor\n|-boost|p2b: Scizor|atk|2\n|cant|p1a: Farigiraf|move: Taunt|Trick Room\n|\n|-weather|Sandstorm|[upkeep]\n|-damage|p2a: Sneasler|95/100|[from] Sandstorm\n|-damage|p1a: Farigiraf|95/100|[from] Sandstorm\n|-heal|p1a: Farigiraf|100/100|[from] item: Leftovers\n|upkeep\n|turn|2\n|\n|t:|1776565056\n|move|p2a: Sneasler|Close Combat|p1b: Tyranitar\n|-supereffective|p1b: Tyranitar|2\n|-damage|p1b: Tyranitar|0 fnt\n|-unboost|p2a: Sneasler|def|1\n|-unboost|p2a: Sneasler|spd|1\n|faint|p1b: Tyranitar\n|-enditem|p2a: Sneasler|White Herb\n|-clearnegativeboost|p2a: Sneasler|[silent]\n|move|p2b: Scizor|Bug Bite|p1a: Farigiraf\n|-supereffective|p1a: Farigiraf|1\n|-damage|p1a: Farigiraf|0 fnt\n|faint|p1a: Farigiraf\n|\n|-weather|Sandstorm|[upkeep]\n|-damage|p2a: Sneasler|89/100|[from] Sandstorm\n|upkeep\n|-message|flurrage forfeited.\n|\n|win|vanthoci\n|raw|flurrage's rating: 1480 &rarr; <strong>1459</strong><br />(-21 for losing)\n|raw|vanthoci's rating: 1454 &rarr; <strong>1475</strong><br />(+21 for winning)\n|l|\u2606flurrage\n|player|p1|\n|l|\u2606vanthoci\n|player|p2|\n",
+  "uploadtime": 1776565086,
+  "views": 16,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1459,
+  "private": 0,
+  "password": null
+}

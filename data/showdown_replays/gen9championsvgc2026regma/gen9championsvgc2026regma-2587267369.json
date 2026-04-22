@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2587267369",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "isacco_new",
+    "brojonski"
+  ],
+  "log": "|j|\u2606isacco_new\n|j|\u2606brojonski\n|t:|1776516376\n|gametype|doubles\n|player|p1|isacco_new|1|1259\n|player|p2|brojonski|brock|1292\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Pelipper, L50, F|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Meganium, L50, M|\n|poke|p1|Archaludon, L50, M|\n|poke|p1|Skarmory, L50, F|\n|poke|p1|Sneasler, L50, F|\n|poke|p2|Crabominable, L50, F|\n|poke|p2|Zoroark-Hisui, L50, F|\n|poke|p2|Slowking, L50, F|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Tsareena, L50, F|\n|poke|p2|Glimmora, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by brojonski)\n|inactive|brojonski has 60 seconds left.\n|inactive|brojonski has 30 seconds left.\nisacco_new rejected open team sheets.\n|inactive|brojonski has 20 seconds left.\n|inactive|brojonski has 15 seconds left.\n|inactive|brojonski has 10 seconds left.\n|\n|t:|1776516461\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Pelipper|Pelipper, L50, F|100/100\n|switch|p1b: Archaludon|Archaludon, L50, M|100/100\n|switch|p2a: Slowking|Slowking, L50, F|100/100\n|switch|p2b: Glimmora|Glimmora, L50, F|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p1a: Pelipper\n|turn|1\n|\n|t:|1776516482\n|detailschange|p2b: Glimmora|Glimmora-Mega, L50, F\n|-mega|p2b: Glimmora|Glimmora|Glimmoranite\n|move|p2b: Glimmora|Earth Power|p1b: Archaludon\n|-supereffective|p1b: Archaludon|1\n|-damage|p1b: Archaludon|0 fnt\n|faint|p1b: Archaludon\n|move|p1a: Pelipper|Hurricane|p2a: Slowking\n|-damage|p2a: Slowking|65/100\n|move|p2a: Slowking|Trick Room|p2a: Slowking\n|-fieldstart|move: Trick Room|[of] p2a: Slowking\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|-message|isacco_new forfeited.\n|\n|win|brojonski\n|raw|isacco_new's rating: 1259 &rarr; <strong>1236</strong><br />(-23 for losing)\n|raw|brojonski's rating: 1292 &rarr; <strong>1315</strong><br />(+23 for winning)\n",
+  "uploadtime": 1776516494,
+  "views": 42,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1236,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586830572",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "iamsoselfconscius",
+    "Bvghhhhhb"
+  ],
+  "log": "|j|\u203diamsoselfconscius\n|j|\u2606Bvghhhhhb\n|t:|1776463487\n|gametype|doubles\n|player|p1|iamsoselfconscius|169|1067\n|player|p2|Bvghhhhhb|265|1000\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Excadrill, L50, M|\n|poke|p1|Talonflame, L50, F|\n|poke|p1|Milotic, L50, M|\n|poke|p1|Froslass, L50, F|\n|poke|p1|Meowscarada, L50, F|\n|poke|p1|Glimmora, L50, F|\n|poke|p2|Aerodactyl, L50, F|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Kingambit, L50, M|\n|poke|p2|Garchomp, L50, F|\n|poke|p2|Whimsicott, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Bvghhhhhb)\n|\n|t:|1776463513\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Excadrill|Excadrill, L50, M|100/100\n|switch|p1b: Talonflame|Talonflame, L50, F|100/100\n|switch|p2a: Whimsicott|Whimsicott, L50, F|100/100\n|switch|p2b: Sneasler|Sneasler, L50, M|100/100\n|turn|1\n|\n|t:|1776463537\n|move|p1b: Talonflame|Protect|p1b: Talonflame\n|-singleturn|p1b: Talonflame|Protect\n|move|p2b: Sneasler|Fake Out|p1b: Talonflame\n|-activate|p1b: Talonflame|move: Protect\n|move|p2a: Whimsicott|Tailwind|p2a: Whimsicott\n|-sidestart|p2: Bvghhhhhb|move: Tailwind\n|move|p1a: Excadrill|Earthquake|p2a: Whimsicott|[spread] p2a,p2b\n|-activate|p1b: Talonflame|move: Protect\n|-resisted|p2a: Whimsicott|1\n|-supereffective|p2b: Sneasler|1\n|-crit|p2b: Sneasler\n|-damage|p2a: Whimsicott|76/100\n|-damage|p2b: Sneasler|0 fnt\n|faint|p2b: Sneasler\n|\n|upkeep\n|\n|t:|1776463551\n|switch|p2b: Floette|Floette-Eternal, L50, F|100/100\n|turn|2\n|\n|t:|1776463573\n|detailschange|p2b: Floette|Floette-Mega, L50, F\n|-mega|p2b: Floette|Floette|Floettite\n|-ability|p2b: Floette|Fairy Aura\n|move|p2a: Whimsicott|Fake Tears|p1a: Excadrill\n|-unboost|p1a: Excadrill|spd|2\n|move|p1b: Talonflame|Tailwind|p1b: Talonflame\n|-sidestart|p1: iamsoselfconscius|move: Tailwind\n|move|p2b: Floette|Dazzling Gleam|p1a: Excadrill|[spread] p1a,p1b\n|-resisted|p1a: Excadrill|1\n|-resisted|p1b: Talonflame|1\n|-damage|p1a: Excadrill|34/100\n|-damage|p1b: Talonflame|65/100\n|move|p1a: Excadrill|Iron Head|p2b: Floette\n|-supereffective|p2b: Floette|1\n|-damage|p2b: Floette|0 fnt\n|faint|p2b: Floette\n|\n|upkeep\n|-message|Bvghhhhhb forfeited.\n|\n|win|iamsoselfconscius\n|raw|iamsoselfconscius's rating: 1067 &rarr; <strong>1091</strong><br />(+24 for winning)\n|raw|Bvghhhhhb's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|l|\u2606Bvghhhhhb\n|player|p2|\n",
+  "uploadtime": 1776463592,
+  "views": 20,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

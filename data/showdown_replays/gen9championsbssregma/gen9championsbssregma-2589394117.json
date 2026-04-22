@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2589394117",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "Leyser10",
+    "ShinyHaunter05"
+  ],
+  "log": "|j|\u2606Leyser10\n|j|\u2606ShinyHaunter05\n|t:|1776719414\n|gametype|singles\n|player|p1|Leyser10|1|1150\n|player|p2|ShinyHaunter05|102|1091\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Charizard, L50, M, shiny|\n|poke|p1|Venusaur, L50, F|\n|poke|p1|Scizor, L50, M|\n|poke|p1|Rotom-Wash, L50|\n|poke|p1|Hippowdon, L50, F|\n|poke|p1|Aegislash, L50, M|\n|poke|p2|Corviknight, L50, M|\n|poke|p2|Hydreigon, L50, F|\n|poke|p2|Altaria, L50, F, shiny|\n|poke|p2|Gengar, L50, M, shiny|\n|poke|p2|Empoleon, L50, F, shiny|\n|poke|p2|Froslass, L50, F|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by ShinyHaunter05)\n|\n|t:|1776719458\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Rotom|Rotom-Wash, L50|100/100\n|switch|p2a: Hydreigon|Hydreigon, L50, F|100/100\n|turn|1\n|\n|t:|1776719472\n|move|p2a: Hydreigon|Draco Meteor|p1a: Rotom\n|-damage|p1a: Rotom|0 fnt\n|-unboost|p2a: Hydreigon|spa|2\n|faint|p1a: Rotom\n|\n|upkeep\n|\n|t:|1776719483\n|switch|p1a: Charizard|Charizard, L50, M, shiny|100/100\n|turn|2\n|\n|t:|1776719491\n|move|p2a: Hydreigon|Draco Meteor|p1a: Charizard|[miss]\n|-miss|p2a: Hydreigon|p1a: Charizard\n|move|p1a: Charizard|Dragon Dance|p1a: Charizard\n|-boost|p1a: Charizard|atk|1\n|-boost|p1a: Charizard|spe|1\n|\n|upkeep\n|turn|3\n|\n|t:|1776719503\n|switch|p2a: Corviknight|Corviknight, L50, M|100/100\n|-ability|p2a: Corviknight|Pressure\n|move|p1a: Charizard|Dragon Dance|p1a: Charizard\n|-boost|p1a: Charizard|atk|1\n|-boost|p1a: Charizard|spe|1\n|\n|upkeep\n|turn|4\n|\n|t:|1776719513\n|detailschange|p1a: Charizard|Charizard-Mega-X, L50, M, shiny\n|-mega|p1a: Charizard|Charizard|Charizardite X\n|move|p1a: Charizard|Flare Blitz|p2a: Corviknight\n|-supereffective|p2a: Corviknight|1\n|-damage|p2a: Corviknight|0 fnt\n|faint|p2a: Corviknight\n|-damage|p1a: Charizard|57/100|[from] Recoil\n|\n|upkeep\n|\n|t:|1776719517\n|switch|p2a: Hydreigon|Hydreigon, L50, F|100/100\n|turn|5\n|\n|t:|1776719530\n|move|p1a: Charizard|Dragon Claw|p2a: Hydreigon\n|-supereffective|p2a: Hydreigon|1\n|-damage|p2a: Hydreigon|0 fnt\n|faint|p2a: Hydreigon\n|\n|upkeep\n|\n|t:|1776719534\n|switch|p2a: Gengar|Gengar, L50, M, shiny|100/100\n|turn|6\n|\n|t:|1776719542\n|detailschange|p2a: Gengar|Gengar-Mega, L50, M, shiny\n|-mega|p2a: Gengar|Gengar|Gengarite\n|move|p1a: Charizard|Earthquake|p2a: Gengar\n|-supereffective|p2a: Gengar|1\n|-damage|p2a: Gengar|0 fnt\n|faint|p2a: Gengar\n|\n|win|Leyser10\n|raw|Leyser10's rating: 1150 &rarr; <strong>1171</strong><br />(+21 for winning)\n|raw|ShinyHaunter05's rating: 1091 &rarr; <strong>1071</strong><br />(-20 for losing)\n",
+  "uploadtime": 1776719548,
+  "views": 2,
+  "formatid": "gen9championsbssregma",
+  "rating": 1071,
+  "private": 0,
+  "password": null
+}

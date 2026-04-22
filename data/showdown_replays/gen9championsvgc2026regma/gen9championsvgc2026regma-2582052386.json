@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582052386",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "KangarooToodleloo",
+    "mokka_ice"
+  ],
+  "log": "|j|\u2606KangarooToodleloo\n|j|\u2606mokka_ice\n|t:|1776052222\n|gametype|doubles\n|player|p1|KangarooToodleloo|blue-masters|1331\n|player|p2|mokka_ice|266|1346\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Gyarados, L50, M|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Gengar, L50, M|\n|poke|p1|Kommo-o, L50, M|\n|poke|p1|Sinistcha-Masterpiece, L50|\n|poke|p1|Kangaskhan, L50, F|\n|poke|p2|Ninetales-Alola, L50, M|\n|poke|p2|Froslass, L50, F|\n|poke|p2|Arcanine-Hisui, L50, F|\n|poke|p2|Zoroark-Hisui, L50, M|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Kingambit, L50, M|\n|teampreview|4\n|j| IMTezca\n|\n|t:|1776052279\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Kangaskhan|Kangaskhan, L50, F|100/100\n|switch|p1b: Gengar|Gengar, L50, M|100/100\n|switch|p2a: Kingambit|Kingambit, L50, M|100/100\n|switch|p2b: Froslass|Froslass, L50, F|100/100\n|turn|1\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by mokka_ice)\n|\n|t:|1776052310\n|detailschange|p1b: Gengar|Gengar-Mega, L50, M\n|-mega|p1b: Gengar|Gengar|Gengarite\n|detailschange|p2b: Froslass|Froslass-Mega, L50, F\n|-mega|p2b: Froslass|Froslass|Froslassite\n|-weather|Snowscape|[from] ability: Snow Warning|[of] p2b: Froslass\n|move|p1a: Kangaskhan|Fake Out|p2a: Kingambit\n|-damage|p2a: Kingambit|68/100\n|replace|p2a: Zoroark|Zoroark-Hisui, L50, M\n|-end|p2a: Zoroark|Illusion\n|move|p1b: Gengar|Shadow Ball|p2b: Froslass\n|-supereffective|p2b: Froslass|1\n|-damage|p2b: Froslass|0 fnt\n|faint|p2b: Froslass\n|cant|p2a: Zoroark|flinch\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|-message|mokka_ice forfeited.\n|\n|win|KangarooToodleloo\n|raw|KangarooToodleloo's rating: 1331 &rarr; <strong>1352</strong><br />(+21 for winning)\n|raw|mokka_ice's rating: 1346 &rarr; <strong>1325</strong><br />(-21 for losing)\n|l|\u2606mokka_ice\n|player|p2|\n",
+  "uploadtime": 1776052325,
+  "views": 22,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1325,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586721472",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Alphasky97",
+    "Tosshii"
+  ],
+  "log": "|j|\u2606Alphasky97\n|j|\u2606Tosshii\n|t:|1776454782\n|gametype|doubles\n|player|p1|Alphasky97|266|1084\n|player|p2|Tosshii|proton|1096\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Drampa, L50, F|\n|poke|p1|Alakazam, L50, F|\n|poke|p1|Froslass, L50, F|\n|poke|p1|Sinistcha-Masterpiece, L50|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Milotic, L50, F|\n|poke|p2|Tyranitar, L50, M|\n|poke|p2|Meganium, L50, M|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Aerodactyl, L50, M|\n|teampreview|4\n|\n|t:|1776454837\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Alakazam|Alakazam, L50, F|100/100\n|switch|p1b: Drampa|Drampa, L50, F|100/100\n|switch|p2a: Sneasler|Sneasler, L50, F|100/100\n|switch|p2b: Garchomp|Garchomp, L50, M|100/100\n|-ability|p1b: Drampa|Cloud Nine\n|turn|1\n|\n|t:|1776454860\n|move|p2b: Garchomp|Protect|p2b: Garchomp\n|-singleturn|p2b: Garchomp|Protect\n|move|p2a: Sneasler|Fake Out|p1a: Alakazam\n|-damage|p1a: Alakazam|60/100\n|move|p1a: Alakazam|Speed Swap|p1b: Drampa\n|-activate|p1a: Alakazam|move: Speed Swap|[of] p1b: Drampa\n|move|p1b: Drampa|Calm Mind|p1b: Drampa\n|-boost|p1b: Drampa|spa|1\n|-boost|p1b: Drampa|spd|1\n|\n|upkeep\n|turn|2\n|\n|t:|1776454890\n|switch|p1a: Incineroar|Incineroar, L50, M|100/100\n|-ability|p1a: Incineroar|Intimidate|boost\n|-unboost|p2a: Sneasler|atk|1\n|-unboost|p2b: Garchomp|atk|1\n|-enditem|p2a: Sneasler|White Herb\n|-clearnegativeboost|p2a: Sneasler|[silent]\n|detailschange|p1b: Drampa|Drampa-Mega, L50, F\n|-mega|p1b: Drampa|Drampa|Drampanite\n|move|p2a: Sneasler|Close Combat|p1b: Drampa\n|-supereffective|p1b: Drampa|1\n|-damage|p1b: Drampa|0 fnt\n|-unboost|p2a: Sneasler|def|1\n|-unboost|p2a: Sneasler|spd|1\n|faint|p1b: Drampa\n|move|p2b: Garchomp|Scale Shot|p1a: Incineroar|[miss]\n|-miss|p2b: Garchomp|p1a: Incineroar\n|\n|upkeep\n|-message|Alphasky97 forfeited.\n|\n|win|Tosshii\n|raw|Alphasky97's rating: 1084 &rarr; <strong>1062</strong><br />(-22 for losing)\n|raw|Tosshii's rating: 1096 &rarr; <strong>1121</strong><br />(+25 for winning)\n|l|\u2606Alphasky97\n|player|p1|\n",
+  "uploadtime": 1776454916,
+  "views": 27,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1062,
+  "private": 0,
+  "password": null
+}

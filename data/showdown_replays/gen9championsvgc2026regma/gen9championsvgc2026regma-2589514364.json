@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2589514364",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "dumina",
+    "huzzrepellant"
+  ],
+  "log": "|j|\u2606dumina\n|j|\u2606huzzrepellant\n|t:|1776729905\n|gametype|doubles\n|player|p1|dumina|lucas|1000\n|player|p2|huzzrepellant|hilda-masters2|1084\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Scizor, L50, F|\n|poke|p1|Dragapult, L50, M|\n|poke|p1|Talonflame, L50, M|\n|poke|p1|Gyarados, L50, F|\n|poke|p1|Whimsicott, L50, F|\n|poke|p1|Goodra-Hisui, L50, M|\n|poke|p2|Tsareena, L50, F, shiny|\n|poke|p2|Venusaur, L50, M, shiny|\n|poke|p2|Charizard, L50, M, shiny|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Empoleon, L50, M|\n|poke|p2|Clefable, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by dumina)\n|inactive|dumina has 60 seconds left.\n|inactive|huzzrepellant has 60 seconds left.\n|\n|t:|1776729966\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Scizor|Scizor, L50, F|100/100\n|switch|p1b: Talonflame|Talonflame, L50, M|100/100\n|switch|p2a: Tsareena|Tsareena, L50, F, shiny|100/100\n|switch|p2b: Charizard|Charizard, L50, M, shiny|100/100\n|turn|1\n|\n|t:|1776729982\n|detailschange|p2b: Charizard|Charizard-Mega-Y, L50, M, shiny\n|-mega|p2b: Charizard|Charizard|Charizardite Y\n|-weather|SunnyDay|[from] ability: Drought|[of] p2b: Charizard\n|detailschange|p1a: Scizor|Scizor-Mega, L50, F\n|-mega|p1a: Scizor|Scizor|Scizorite\n|move|p1b: Talonflame|Brave Bird||[still]\n|cant|p2a: Tsareena|ability: Queenly Majesty|Brave Bird|[of] p1b: Talonflame\n|move|p1a: Scizor|Bullet Punch||[still]\n|cant|p2a: Tsareena|ability: Queenly Majesty|Bullet Punch|[of] p1a: Scizor\n|move|p2b: Charizard|Ancient Power|p1b: Talonflame\n|-supereffective|p1b: Talonflame|2\n|-damage|p1b: Talonflame|0 fnt\n|-boost|p2b: Charizard|atk|1\n|-boost|p2b: Charizard|def|1\n|-boost|p2b: Charizard|spa|1\n|-boost|p2b: Charizard|spd|1\n|-boost|p2b: Charizard|spe|1\n|faint|p1b: Talonflame\n|move|p2a: Tsareena|Reflect|p2a: Tsareena\n|-sidestart|p2: huzzrepellant|Reflect\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|-message|dumina forfeited.\n|\n|win|huzzrepellant\n|raw|dumina's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|raw|huzzrepellant's rating: 1084 &rarr; <strong>1105</strong><br />(+21 for winning)\n|l|\u2606dumina\n|player|p1|\n",
+  "uploadtime": 1776730001,
+  "views": 2,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2581884152",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "IsikoVGC",
+    "kimius64"
+  ],
+  "log": "|j|\u2606IsikoVGC\n|j|\u2606kimius64\n|t:|1776036570\n|gametype|doubles\n|player|p1|IsikoVGC|101|1093\n|player|p2|kimius64|iris-gen5bw2|1091\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Dragapult, L50, F|\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Maushold-Four, L50|\n|poke|p1|Aerodactyl, L50, F|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Sneasler, L50, M|\n|poke|p2|Slowking, L50, F|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Crabominable, L50, F|\n|poke|p2|Hatterene, L50, F|\n|poke|p2|Tsareena, L50, F|\n|poke|p2|Camerupt, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by IsikoVGC)\n|\n|t:|1776036605\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Basculegion|Basculegion, L50, M|100/100\n|switch|p1b: Dragapult|Dragapult, L50, F, shiny|100/100\n|switch|p2a: Hatterene|Hatterene, L50, F|100/100\n|switch|p2b: Incineroar|Incineroar, L50, F|100/100\n|-ability|p2b: Incineroar|Intimidate|boost\n|-unboost|p1a: Basculegion|atk|1\n|-fail|p1b: Dragapult|unboost|[from] ability: Clear Body|[of] p1b: Dragapult\n|turn|1\n|inactive|IsikoVGC has 30 seconds left.\n|\n|t:|1776036632\n|move|p1a: Basculegion|Wave Crash|p2a: Hatterene\n|-damage|p2a: Hatterene|36/100\n|-damage|p1a: Basculegion|83/100|[from] Recoil\n|move|p1b: Dragapult|Psychic Fangs|p2a: Hatterene\n|-resisted|p2a: Hatterene|1\n|-damage|p2a: Hatterene|19/100\n|move|p2b: Incineroar|Darkest Lariat|p1a: Basculegion\n|-supereffective|p1a: Basculegion|1\n|-crit|p1a: Basculegion\n|-damage|p1a: Basculegion|0 fnt\n|faint|p1a: Basculegion\n|move|p2a: Hatterene|Trick Room|p2a: Hatterene\n|-fieldstart|move: Trick Room|[of] p2a: Hatterene\n|\n|upkeep\n|\n|t:|1776036643\n|switch|p1a: Floette|Floette-Eternal, L50, F|100/100\n|turn|2\n|\n|t:|1776036657\n|detailschange|p1a: Floette|Floette-Mega, L50, F\n|-mega|p1a: Floette|Floette|Floettite\n|-ability|p1a: Floette|Fairy Aura\n|move|p2a: Hatterene|Dazzling Gleam|p1a: Floette|[spread] p1a,p1b\n|-supereffective|p1b: Dragapult|1\n|-damage|p1a: Floette|52/100\n|-damage|p1b: Dragapult|0 fnt\n|faint|p1b: Dragapult\n|move|p2b: Incineroar|Flare Blitz|p1a: Floette\n|-damage|p1a: Floette|0 fnt\n|faint|p1a: Floette\n|-damage|p2b: Incineroar|88/100|[from] Recoil\n|\n|upkeep\n|-message|IsikoVGC forfeited.\n|\n|win|kimius64\n|raw|IsikoVGC's rating: 1093 &rarr; <strong>1069</strong><br />(-24 for losing)\n|raw|kimius64's rating: 1091 &rarr; <strong>1118</strong><br />(+27 for winning)\n|l|\u2606IsikoVGC\n|player|p1|\n",
+  "uploadtime": 1776036668,
+  "views": 14,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1069,
+  "private": 0,
+  "password": null
+}

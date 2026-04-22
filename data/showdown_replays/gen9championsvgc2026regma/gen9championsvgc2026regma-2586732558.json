@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586732558",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Jirachi548",
+    "testeteste3teste"
+  ],
+  "log": "|j|\u2606Jirachi548\n|j|\u2606testeteste3teste\n|t:|1776455611\n|gametype|doubles\n|player|p1|Jirachi548|serena-anime|1208\n|player|p2|testeteste3teste|101|1133\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Lycanroc-Dusk, L50, M|\n|poke|p1|Meowstic, L50, M|\n|poke|p1|Lucario, L50, F|\n|poke|p1|Tyranitar, L50, F|\n|poke|p2|Sableye, L50, F|\n|poke|p2|Dragonite, L50, M|\n|poke|p2|Scizor, L50, M|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Froslass, L50, F|\n|poke|p2|Talonflame, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by testeteste3teste)\n|\n|t:|1776455666\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Lycanroc|Lycanroc-Dusk, L50, M, shiny|100/100\n|switch|p1b: Incineroar|Incineroar, L50, M|100/100\n|switch|p2a: Sneasler|Sneasler, L50, M, shiny|100/100\n|switch|p2b: Dragonite|Dragonite, L50, M|100/100\n|-ability|p1b: Incineroar|Intimidate|boost\n|-unboost|p2a: Sneasler|atk|1\n|-fail|p2b: Dragonite|unboost|Attack|[from] ability: Inner Focus|[of] p2b: Dragonite\n|-enditem|p2a: Sneasler|White Herb\n|-clearnegativeboost|p2a: Sneasler|[silent]\n|turn|1\n|inactive|testeteste3teste has 30 seconds left.\n|inactive|Jirachi548 has 30 seconds left.\n|\n|t:|1776455711\n|switch|p2b: Scizor|Scizor, L50, M|100/100\n|move|p1b: Incineroar|Fake Out|p2a: Sneasler\n|-damage|p2a: Sneasler|87/100\n|cant|p2a: Sneasler|flinch\n|move|p1a: Lycanroc|Psychic Fangs|p2a: Sneasler\n|-supereffective|p2a: Sneasler|2\n|-damage|p2a: Sneasler|0 fnt\n|faint|p2a: Sneasler\n|\n|upkeep\n|\n|t:|1776455729\n|switch|p2a: Dragonite|Dragonite, L50, M|100/100\n|turn|2\n|\n|t:|1776455742\n|switch|p1a: Meowstic|Meowstic, L50, M, shiny|100/100\n|move|p2a: Dragonite|Draco Meteor|p1b: Incineroar\n|-damage|p1b: Incineroar|51/100\n|-unboost|p2a: Dragonite|spa|2\n|move|p2b: Scizor|Close Combat|p1a: Meowstic\n|-resisted|p1a: Meowstic|1\n|-damage|p1a: Meowstic|80/100\n|-unboost|p2b: Scizor|def|1\n|-unboost|p2b: Scizor|spd|1\n|move|p1b: Incineroar|Flare Blitz|p2b: Scizor\n|-supereffective|p2b: Scizor|2\n|-crit|p2b: Scizor\n|-damage|p2b: Scizor|0 fnt\n|faint|p2b: Scizor\n|-damage|p1b: Incineroar|22/100|[from] Recoil\n|-enditem|p1b: Incineroar|Sitrus Berry|[eat]\n|-heal|p1b: Incineroar|47/100|[from] item: Sitrus Berry\n|\n|upkeep\n|-message|testeteste3teste forfeited.\n|\n|win|Jirachi548\n|raw|Jirachi548's rating: 1208 &rarr; <strong>1228</strong><br />(+20 for winning)\n|raw|testeteste3teste's rating: 1133 &rarr; <strong>1113</strong><br />(-20 for losing)\n|l|\u2606testeteste3teste\n|player|p2|\n",
+  "uploadtime": 1776455765,
+  "views": 28,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1113,
+  "private": 0,
+  "password": null
+}

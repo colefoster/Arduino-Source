@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584617231",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "klipce",
+    "Putricio Zomb"
+  ],
+  "log": "|j|\u2606klipce\n|j|\u2606Putricio Zomb\n|t:|1776272388\n|gametype|doubles\n|player|p1|klipce|1|1131\n|player|p2|Putricio Zomb|169|1143\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Scovillain, L50, F|\n|poke|p1|Sinistcha-Masterpiece, L50|\n|poke|p1|Rhyperior, L50, M|\n|poke|p1|Torkoal, L50, F|\n|poke|p1|Sableye, L50, F|\n|poke|p1|Kingambit, L50, M|\n|poke|p2|Drampa, L50, F|\n|poke|p2|Farigiraf, L50, F|\n|poke|p2|Torkoal, L50, M|\n|poke|p2|Slowking, L50, M|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Crabominable, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Putricio Zomb)\n|\n|t:|1776272430\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Knife|Kingambit, L50, M|100/100\n|switch|p1b: Rhyperior|Rhyperior, L50, M|100/100\n|switch|p2a: Farigiraf|Farigiraf, L50, F|100/100\n|switch|p2b: Crabominable|Crabominable, L50, F|100/100\n|turn|1\n|\n|t:|1776272455\n|move|p2b: Crabominable|Protect|p2b: Crabominable\n|-singleturn|p2b: Crabominable|Protect\n|move|p1a: Knife|Kowtow Cleave|p2a: Farigiraf\n|-supereffective|p2a: Farigiraf|1\n|-enditem|p2a: Farigiraf|Focus Sash\n|-damage|p2a: Farigiraf|1/100\n|move|p1b: Rhyperior|Rock Slide|p2b: Crabominable|[spread] p2a\n|-activate|p2b: Crabominable|move: Protect\n|-damage|p2a: Farigiraf|0 fnt\n|faint|p2a: Farigiraf\n|\n|upkeep\n|\n|t:|1776272465\n|switch|p2a: Torkoal|Torkoal, L50, M|100/100\n|-weather|SunnyDay|[from] ability: Drought|[of] p2a: Torkoal\n|turn|2\n|\n|t:|1776272483\n|detailschange|p2b: Crabominable|Crabominable-Mega, L50, F\n|-mega|p2b: Crabominable|Crabominable|Crabominite\n|move|p1a: Knife|Iron Head|p2b: Crabominable\n|-supereffective|p2b: Crabominable|1\n|-damage|p2b: Crabominable|34/100\n|move|p1b: Rhyperior|Rock Slide|p2a: Torkoal|[spread] p2a,p2b\n|-supereffective|p2a: Torkoal|1\n|-damage|p2a: Torkoal|49/100\n|-damage|p2b: Crabominable|7/100\n|cant|p2b: Crabominable|flinch\n|cant|p2a: Torkoal|flinch\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|turn|3\n|-message|Putricio Zomb forfeited.\n|\n|win|klipce\n|raw|klipce's rating: 1131 &rarr; <strong>1157</strong><br />(+26 for winning)\n|raw|Putricio Zomb's rating: 1143 &rarr; <strong>1117</strong><br />(-26 for losing)\n|l|\u2606Putricio Zomb\n|player|p2|\n",
+  "uploadtime": 1776272499,
+  "views": 23,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1117,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584258992",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "darksol1111",
+    "SimMikaze"
+  ],
+  "log": "|j|\u2606darksol1111\n|j|\u2606SimMikaze\n|t:|1776244214\n|gametype|doubles\n|player|p1|darksol1111|veteran|1143\n|player|p2|SimMikaze|miku-ghost|1200\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Froslass, L50, F|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Rotom-Frost, L50|\n|poke|p1|Empoleon, L50, M|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Kingambit, L50, M|\n|poke|p2|Gengar, L50, M|\n|poke|p2|Maushold, L50|\n|poke|p2|Whimsicott, L50, M|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Empoleon, L50, M|\n|poke|p2|Kommo-o, L50, F|\n|teampreview|4\n|\n|t:|1776244256\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Froslass|Froslass, L50, F|100/100\n|switch|p1b: Empoleon|Empoleon, L50, M|100/100\n|switch|p2a: Gengar|Gengar, L50, M, shiny|100/100\n|switch|p2b: Whimsicott|Whimsicott, L50, M|100/100\n|turn|1\n|\n|t:|1776244269\n|detailschange|p2a: Gengar|Gengar-Mega, L50, M, shiny\n|-mega|p2a: Gengar|Gengar|Gengarite\n|detailschange|p1a: Froslass|Froslass-Mega, L50, F\n|-mega|p1a: Froslass|Froslass|Froslassite\n|-weather|Snowscape|[from] ability: Snow Warning|[of] p1a: Froslass\n|move|p2b: Whimsicott|Fake Tears|p1a: Froslass\n|-unboost|p1a: Froslass|spd|2\n|move|p2a: Gengar|Shadow Ball|p1a: Froslass\n|-supereffective|p1a: Froslass|1\n|-damage|p1a: Froslass|0 fnt\n|faint|p1a: Froslass\n|move|p1b: Empoleon|Roar|p2a: Gengar\n|drag|p2a: Empoleon|Empoleon, L50, M|100/100\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|\n|t:|1776244283\n|switch|p1a: Rotom|Rotom-Frost, L50|100/100\n|turn|2\n|\n|t:|1776244293\n|move|p2b: Whimsicott|Encore|p1b: Empoleon\n|-start|p1b: Empoleon|Encore\n|move|p1a: Rotom|Thunderbolt|p2a: Empoleon\n|-supereffective|p2a: Empoleon|1\n|-damage|p2a: Empoleon|28/100\n|move|p2a: Empoleon|Flash Cannon|p1a: Rotom\n|-damage|p1a: Rotom|44/100\n|move|p1b: Empoleon|Roar|p2b: Whimsicott\n|drag|p2b: Kommo-o|Kommo-o, L50, F|100/100\n|\n|-weather|Snowscape|[upkeep]\n|-heal|p2a: Empoleon|34/100|[from] item: Leftovers\n|upkeep\n|turn|3\n|\n|t:|1776244321\n|move|p2a: Empoleon|Protect|p2a: Empoleon\n|-singleturn|p2a: Empoleon|Protect\n|move|p1a: Rotom|Thunderbolt|p2a: Empoleon\n|-activate|p2a: Empoleon|move: Protect\n|move|p2b: Kommo-o|Body Press|p1a: Rotom\n|-supereffective|p1a: Rotom|1\n|-damage|p1a: Rotom|0 fnt\n|faint|p1a: Rotom\n|move|p1b: Empoleon|Roar|p2b: Kommo-o\n|-immune|p2b: Kommo-o|[from] ability: Soundproof\n|\n|-weather|Snowscape|[upkeep]\n|-heal|p2a: Empoleon|40/100|[from] item: Leftovers\n|upkeep\n|-message|darksol1111 forfeited.\n|\n|win|SimMikaze\n|raw|darksol1111's rating: 1143 &rarr; <strong>1122</strong><br />(-21 for losing)\n|raw|SimMikaze's rating: 1200 &rarr; <strong>1221</strong><br />(+21 for winning)\n|l|\u2606darksol1111\n|player|p1|\n",
+  "uploadtime": 1776244335,
+  "views": 23,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1122,
+  "private": 0,
+  "password": null
+}

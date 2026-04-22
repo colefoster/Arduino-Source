@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2582087610",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "Mitarashi",
+    "zaliyeyuan"
+  ],
+  "log": "|j|\u2606Mitarashi\n|j|\u2606zaliyeyuan\n|t:|1776056283\n|gametype|singles\n|player|p1|Mitarashi|266|1325\n|player|p2|zaliyeyuan|102|1321\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Delphox, L50, M|\n|poke|p1|Meganium, L50, F|\n|poke|p1|Primarina, L50, M|\n|poke|p1|Archaludon, L50, M|\n|poke|p1|Meowscarada, L50, M|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Lopunny, L50, F|\n|poke|p2|Volcarona, L50, M|\n|poke|p2|Mimikyu, L50, M|\n|poke|p2|Corviknight, L50, F|\n|poke|p2|Rotom-Wash, L50|\n|teampreview|3\n|j| p74\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by zaliyeyuan)\n|\n|t:|1776056339\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Delphox|Delphox, L50, M|100/100\n|switch|p2a: Garchomp|Garchomp, L50, M|100/100\n|turn|1\n|\n|t:|1776056348\n|detailschange|p1a: Delphox|Delphox-Mega, L50, M\n|-mega|p1a: Delphox|Delphox|Delphoxite\n|move|p1a: Delphox|Substitute|p1a: Delphox\n|-start|p1a: Delphox|Substitute\n|-damage|p1a: Delphox|75/100\n|move|p2a: Garchomp|Earthquake|p1a: Delphox\n|-immune|p1a: Delphox|[from] ability: Levitate\n|\n|upkeep\n|turn|2\n|\n|t:|1776056360\n|move|p1a: Delphox|Psychic|p2a: Garchomp\n|-damage|p2a: Garchomp|42/100\n|move|p2a: Garchomp|Rock Slide|p1a: Delphox\n|-supereffective|p1a: Delphox|1\n|-end|p1a: Delphox|Substitute\n|\n|upkeep\n|turn|3\n|\n|t:|1776056373\n|move|p1a: Delphox|Psychic|p2a: Garchomp\n|-damage|p2a: Garchomp|0 fnt\n|faint|p2a: Garchomp\n|\n|upkeep\n|\n|t:|1776056381\n|switch|p2a: Volcarona|Volcarona, L50, M|100/100\n|turn|4\n|\n|t:|1776056389\n|move|p1a: Delphox|Psychic|p2a: Volcarona\n|-damage|p2a: Volcarona|48/100\n|-enditem|p2a: Volcarona|Sitrus Berry|[eat]\n|-heal|p2a: Volcarona|73/100|[from] item: Sitrus Berry\n|move|p2a: Volcarona|Quiver Dance|p2a: Volcarona\n|-boost|p2a: Volcarona|spa|1\n|-boost|p2a: Volcarona|spd|1\n|-boost|p2a: Volcarona|spe|1\n|\n|upkeep\n|turn|5\n|\n|t:|1776056398\n|move|p2a: Volcarona|Quiver Dance|p2a: Volcarona\n|-boost|p2a: Volcarona|spa|1\n|-boost|p2a: Volcarona|spd|1\n|-boost|p2a: Volcarona|spe|1\n|move|p1a: Delphox|Psychic|p2a: Volcarona\n|-crit|p2a: Volcarona\n|-damage|p2a: Volcarona|0 fnt\n|faint|p2a: Volcarona\n|\n|upkeep\n|-message|zaliyeyuan forfeited.\n|\n|win|Mitarashi\n|raw|Mitarashi's rating: 1325 &rarr; <strong>1345</strong><br />(+20 for winning)\n|raw|zaliyeyuan's rating: 1321 &rarr; <strong>1301</strong><br />(-20 for losing)\n|l|\u2606Mitarashi\n|player|p1|\n",
+  "uploadtime": 1776056461,
+  "views": 7,
+  "formatid": "gen9championsbssregma",
+  "rating": 1301,
+  "private": 0,
+  "password": null
+}

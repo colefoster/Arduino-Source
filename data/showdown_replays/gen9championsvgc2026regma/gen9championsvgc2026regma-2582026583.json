@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582026583",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Mark Smith",
+    "Fergala"
+  ],
+  "log": "|j|\u2606Mark Smith\n|j|\u2606Fergala\n|t:|1776049619\n|gametype|doubles\n|player|p1|Mark Smith|2|1149\n|player|p2|Fergala|lucas|1056\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Heracross, L50, F|\n|poke|p1|Maushold-Four, L50|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Aurorus, L50, F|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Azumarill, L50, F|\n|poke|p2|Infernape, L50, M|\n|poke|p2|Rotom-Wash, L50|\n|poke|p2|Whimsicott, L50, M|\n|poke|p2|Charizard, L50, M|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Gengar, L50, F|\n|teampreview|4\n|c|\u2606Fergala|so many cringe incenaroar players jesus\n|c|\u2606Mark Smith|sorry I wasn't cool enough to bring M charizard\nMark Smith rejected open team sheets.\n|\n|t:|1776049692\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Maushold|Maushold-Four, L50|100/100\n|switch|p1b: Azumarill|Azumarill, L50, F|100/100\n|switch|p2a: Whimsicott|Whimsicott, L50, M, shiny|100/100\n|switch|p2b: Rotom|Rotom-Wash, L50|100/100\n|turn|1\n|\n|t:|1776049720\n|move|p2a: Whimsicott|Tailwind|p2a: Whimsicott\n|-sidestart|p2: Fergala|move: Tailwind\n|move|p2b: Rotom|Volt Switch|p1b: Azumarill\n|-supereffective|p1b: Azumarill|1\n|-damage|p1b: Azumarill|56/100\n|\n|t:|1776049733\n|switch|p2b: Infernape|Infernape, L50, M|100/100|[from] Volt Switch\n|move|p1a: Maushold|Super Fang|p2b: Infernape\n|-damage|p2b: Infernape|51/100\n|move|p1b: Azumarill|Play Rough|p2b: Infernape\n|-damage|p2b: Infernape|0 fnt\n|faint|p2b: Infernape\n|\n|upkeep\n|\n|t:|1776049743\n|switch|p2b: Rotom|Rotom-Wash, L50|100/100\n|turn|2\n|\n|t:|1776049762\n|switch|p1a: Sinistcha|Sinistcha, L50|100/100\n|-heal|p1b: Azumarill|81/100|[from] ability: Hospitality|[of] p1a: Sinistcha\n|move|p2a: Whimsicott|Protect|p2a: Whimsicott\n|-singleturn|p2a: Whimsicott|Protect\n|move|p2b: Rotom|Volt Switch|p1b: Azumarill\n|-supereffective|p1b: Azumarill|1\n|-damage|p1b: Azumarill|28/100\n|-enditem|p1b: Azumarill|Sitrus Berry|[eat]\n|-heal|p1b: Azumarill|53/100|[from] item: Sitrus Berry\n|\n|t:|1776049772\n|switch|p2b: Garchomp|Garchomp, L50, M|100/100|[from] Volt Switch\n|move|p1b: Azumarill|Play Rough|p2b: Garchomp\n|-supereffective|p2b: Garchomp|1\n|-damage|p2b: Garchomp|0 fnt\n|-damage|p1b: Azumarill|41/100|[from] ability: Rough Skin|[of] p2b: Garchomp\n|faint|p2b: Garchomp\n|\n|upkeep\n|-message|Fergala forfeited.\n|\n|win|Mark Smith\n|raw|Mark Smith's rating: 1149 &rarr; <strong>1167</strong><br />(+18 for winning)\n|raw|Fergala's rating: 1056 &rarr; <strong>1042</strong><br />(-14 for losing)\n|l|\u2606Fergala\n|player|p2|\n|c|\u2606Mark Smith|cringe\n",
+  "uploadtime": 1776049801,
+  "views": 38,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1042,
+  "private": 0,
+  "password": null
+}

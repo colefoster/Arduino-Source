@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2584292354",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "Hinya",
+    "cumdoy"
+  ],
+  "log": "|j|\u2606Hinya\n|j|\u2606cumdoy\n|t:|1776247900\n|gametype|singles\n|player|p1|Hinya|emma-lza|1110\n|player|p2|cumdoy|clay|1000\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Aegislash, L50, M|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Meowscarada, L50, M|\n|poke|p1|Dragonite, L50, M|\n|poke|p2|Pelipper, L50, M|\n|poke|p2|Archaludon, L50, F|\n|poke|p2|Starmie, L50|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Meganium, L50, F|\n|poke|p2|Kingambit, L50, F|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Hinya)\n|inactive|Hinya has 60 seconds left.\n|\n|t:|1776247939\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: \ud50c\ub77c\uc5e3\ud14c|Floette-Eternal, L50, F|100/100\n|switch|p2a: Pelipper|Pelipper, L50, M|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p2a: Pelipper\n|turn|1\n|\n|t:|1776247957\n|detailschange|p1a: \ud50c\ub77c\uc5e3\ud14c|Floette-Mega, L50, F\n|-mega|p1a: \ud50c\ub77c\uc5e3\ud14c|Floette|Floettite\n|-ability|p1a: \ud50c\ub77c\uc5e3\ud14c|Fairy Aura\n|move|p1a: \ud50c\ub77c\uc5e3\ud14c|Calm Mind|p1a: \ud50c\ub77c\uc5e3\ud14c\n|-boost|p1a: \ud50c\ub77c\uc5e3\ud14c|spa|1\n|-boost|p1a: \ud50c\ub77c\uc5e3\ud14c|spd|1\n|move|p2a: Pelipper|Hurricane|p1a: \ud50c\ub77c\uc5e3\ud14c\n|-damage|p1a: \ud50c\ub77c\uc5e3\ud14c|76/100\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|turn|2\n|\n|t:|1776247971\n|switch|p2a: Basculegion|Basculegion, L50, M|100/100\n|move|p1a: \ud50c\ub77c\uc5e3\ud14c|Substitute|p1a: \ud50c\ub77c\uc5e3\ud14c\n|-start|p1a: \ud50c\ub77c\uc5e3\ud14c|Substitute\n|-damage|p1a: \ud50c\ub77c\uc5e3\ud14c|51/100\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|turn|3\n|\n|t:|1776247980\n|move|p2a: Basculegion|Wave Crash|p1a: \ud50c\ub77c\uc5e3\ud14c\n|-end|p1a: \ud50c\ub77c\uc5e3\ud14c|Substitute\n|-damage|p2a: Basculegion|94/100|[from] Recoil|[of] p1a: \ud50c\ub77c\uc5e3\ud14c\n|move|p1a: \ud50c\ub77c\uc5e3\ud14c|Moonblast|p2a: Basculegion\n|-damage|p2a: Basculegion|0 fnt\n|faint|p2a: Basculegion\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|\n|t:|1776247991\n|switch|p2a: Archaludon|Archaludon, L50, F|100/100\n|turn|4\n|\n|t:|1776247995\n|move|p1a: \ud50c\ub77c\uc5e3\ud14c|Draining Kiss|p2a: Archaludon\n|-crit|p2a: Archaludon\n|-damage|p2a: Archaludon|0 fnt\n|-heal|p1a: \ud50c\ub77c\uc5e3\ud14c|100/100|[from] drain|[of] p2a: Archaludon\n|faint|p2a: Archaludon\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|-message|cumdoy forfeited.\n|\n|win|Hinya\n|raw|Hinya's rating: 1110 &rarr; <strong>1127</strong><br />(+17 for winning)\n|raw|cumdoy's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|l|\u2606cumdoy\n|player|p2|\n",
+  "uploadtime": 1776248005,
+  "views": 18,
+  "formatid": "gen9championsbssregma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

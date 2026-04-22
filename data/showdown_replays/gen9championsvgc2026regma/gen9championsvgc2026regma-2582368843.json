@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582368843",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "kingler86",
+    "SirNeru"
+  ],
+  "log": "|j|\u2606kingler86\n|j|\u2606SirNeru\n|t:|1776086959\n|gametype|doubles\n|player|p1|kingler86|265|1148\n|player|p2|SirNeru|2|1189\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Talonflame, L50, F|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Maushold, L50|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Sneasler, L50, M|\n|poke|p2|Beedrill, L50, F|\n|poke|p2|Palafin, L50, F|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Whimsicott, L50, M|\n|poke|p2|Weavile, L50, M|\n|poke|p2|Aerodactyl, L50, M|\n|teampreview|4\n|\n|t:|1776086984\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Floette|Floette-Eternal, L50, F|100/100\n|switch|p1b: Maushold|Maushold, L50, shiny|100/100\n|switch|p2a: Whimsicott|Whimsicott, L50, M, shiny|100/100\n|switch|p2b: Aerodactyl|Aerodactyl, L50, M|100/100\n|turn|1\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by kingler86)\n|\n|t:|1776087000\n|detailschange|p1a: Floette|Floette-Mega, L50, F\n|-mega|p1a: Floette|Floette|Floettite\n|-ability|p1a: Floette|Fairy Aura\n|move|p2b: Aerodactyl|Rock Slide|p1b: Maushold|[spread] p1a,p1b\n|-crit|p1a: Floette\n|-damage|p1a: Floette|70/100\n|-damage|p1b: Maushold|75/100\n|move|p2a: Whimsicott|Moonblast|p1b: Maushold\n|-damage|p1b: Maushold|25/100\n|cant|p1a: Floette|flinch\n|cant|p1b: Maushold|flinch\n|\n|upkeep\n|turn|2\n|-message|kingler86 forfeited.\n|\n|win|SirNeru\n|raw|kingler86's rating: 1148 &rarr; <strong>1126</strong><br />(-22 for losing)\n|raw|SirNeru's rating: 1189 &rarr; <strong>1211</strong><br />(+22 for winning)\n|l|\u2606kingler86\n|player|p1|\n",
+  "uploadtime": 1776087015,
+  "views": 20,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1126,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2589403812",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "austineatzyt",
+    "nk.luna"
+  ],
+  "log": "|j|\u2606austineatzyt\n|j|\u2606nk.luna\n|t:|1776720155\n|gametype|doubles\n|player|p1|austineatzyt|266|1095\n|player|p2|nk.luna|marley|1156\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Kingambit, L50, M|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Farigiraf, L50, M|\n|poke|p1|Crabominable, L50, M|\n|poke|p1|Rampardos, L50, M|\n|poke|p1|Oranguru, L50, M|\n|poke|p2|Gardevoir, L50, F, shiny|\n|poke|p2|Whimsicott, L50, F|\n|poke|p2|Primarina, L50, M|\n|poke|p2|Meowstic, L50, M|\n|poke|p2|Ceruledge, L50, F|\n|poke|p2|Meowscarada, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by nk.luna)\n|\n|t:|1776720186\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Oranguru|Oranguru, L50, M|100/100\n|switch|p1b: Crabominable|Crabominable, L50, M|100/100\n|switch|p2a: Primarina|Primarina, L50, M|100/100\n|switch|p2b: meowmeow|Meowscarada, L50, F|100/100\n|turn|1\n|\n|t:|1776720197\n|move|p1b: Crabominable|Protect|p1b: Crabominable\n|-singleturn|p1b: Crabominable|Protect\n|move|p2b: meowmeow|Knock Off|p1a: Oranguru\n|-start|p2b: meowmeow|typechange|Dark|[from] ability: Protean\n|-supereffective|p1a: Oranguru|1\n|-damage|p1a: Oranguru|20/100\n|-enditem|p1a: Oranguru|Bright Powder|[from] move: Knock Off|[of] p2b: meowmeow\n|move|p2a: Primarina|Moonblast|p1a: Oranguru\n|-crit|p1a: Oranguru\n|-damage|p1a: Oranguru|0 fnt\n|faint|p1a: Oranguru\n|\n|upkeep\n|\n|t:|1776720216\n|switch|p1a: Rampardos|Rampardos, L50, M|100/100\n|turn|2\n|\n|t:|1776720233\n|detailschange|p1b: Crabominable|Crabominable-Mega, L50, M\n|-mega|p1b: Crabominable|Crabominable|Crabominite\n|move|p2b: meowmeow|Flower Trick|p1a: Rampardos\n|-supereffective|p1a: Rampardos|1\n|-crit|p1a: Rampardos\n|-damage|p1a: Rampardos|0 fnt\n|faint|p1a: Rampardos\n|move|p2a: Primarina|Moonblast|p1b: Crabominable\n|-supereffective|p1b: Crabominable|1\n|-crit|p1b: Crabominable\n|-damage|p1b: Crabominable|0 fnt\n|faint|p1b: Crabominable\n|\n|upkeep\n|-message|austineatzyt forfeited.\n|\n|win|nk.luna\n|raw|austineatzyt's rating: 1095 &rarr; <strong>1075</strong><br />(-20 for losing)\n|raw|nk.luna's rating: 1156 &rarr; <strong>1177</strong><br />(+21 for winning)\n|l|\u2606austineatzyt\n|player|p1|\n",
+  "uploadtime": 1776720251,
+  "views": 8,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1075,
+  "private": 0,
+  "password": null
+}

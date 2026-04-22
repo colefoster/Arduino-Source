@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586518002",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "KaFe-03",
+    "NathanKimbap"
+  ],
+  "log": "|j|\u2606KaFe-03\n|j|\u2606NathanKimbap\n|t:|1776440131\n|gametype|doubles\n|player|p1|KaFe-03|crispin|1087\n|player|p2|NathanKimbap|hiker|1077\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Archaludon, L50, M|\n|poke|p1|Pelipper, L50, F|\n|poke|p1|Sinistcha-Masterpiece, L50|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Dragonite, L50, F|\n|poke|p1|Basculegion, L50, M|\n|poke|p2|Venusaur, L50, F|\n|poke|p2|Gallade, L50, M|\n|poke|p2|Espathra, L50, F|\n|poke|p2|Kingambit, L50, M|\n|poke|p2|Charizard, L50, M|\n|poke|p2|Milotic, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by NathanKimbap)\n|inactive|KaFe-03 also wants the timer to be on.\n|inactive|KaFe-03 has 60 seconds left.\n|inactive|KaFe-03 has 30 seconds left.\n|inactive|KaFe-03 has 20 seconds left.\n|\n|t:|1776440202\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Sneasler|Sneasler, L50, M|100/100\n|switch|p1b: Dragonite|Dragonite, L50, F|100/100\n|switch|p2a: Gallade|Gallade, L50, M|100/100\n|switch|p2b: Kingambit|Kingambit, L50, M|100/100\n|turn|1\n|\n|t:|1776440227\n|detailschange|p1b: Dragonite|Dragonite-Mega, L50, F\n|-mega|p1b: Dragonite|Dragonite|Dragoninite\n|move|p2b: Kingambit|Protect|p2b: Kingambit\n|-singleturn|p2b: Kingambit|Protect\n|move|p1a: Sneasler|Fake Out|p2a: Gallade\n|-damage|p2a: Gallade|75/100\n|move|p1b: Dragonite|Tailwind|p1b: Dragonite\n|-sidestart|p1: KaFe-03|move: Tailwind\n|cant|p2a: Gallade|flinch\n|\n|upkeep\n|turn|2\n|inactive|KaFe-03 has 30 seconds left.\n|inactive|NathanKimbap has 30 seconds left.\n|\n|t:|1776440257\n|move|p1a: Sneasler|Close Combat|p2b: Kingambit\n|-supereffective|p2b: Kingambit|2\n|-damage|p2b: Kingambit|0 fnt\n|-unboost|p1a: Sneasler|def|1\n|-unboost|p1a: Sneasler|spd|1\n|faint|p2b: Kingambit\n|-enditem|p1a: Sneasler|White Herb\n|-clearnegativeboost|p1a: Sneasler|[silent]\n|move|p1b: Dragonite|Hurricane|p2a: Gallade\n|-supereffective|p2a: Gallade|1\n|-damage|p2a: Gallade|0 fnt\n|faint|p2a: Gallade\n|\n|upkeep\n|-message|NathanKimbap forfeited.\n|\n|win|KaFe-03\n|raw|KaFe-03's rating: 1087 &rarr; <strong>1113</strong><br />(+26 for winning)\n|raw|NathanKimbap's rating: 1077 &rarr; <strong>1056</strong><br />(-21 for losing)\n|l|\u2606NathanKimbap\n|player|p2|\n",
+  "uploadtime": 1776440271,
+  "views": 25,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1056,
+  "private": 0,
+  "password": null
+}

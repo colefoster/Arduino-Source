@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2585236060",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "BxnnyBride",
+    "Xtreme diarheaa"
+  ],
+  "log": "|j|\u2606BxnnyBride\n|j|\u2606Xtreme diarheaa\n|t:|1776328363\n|gametype|doubles\n|player|p1|BxnnyBride|jacinthe|1062\n|player|p2|Xtreme diarheaa|shadowtriad|1060\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Lopunny, L50, F|\n|poke|p1|Tinkaton, L50, F|\n|poke|p1|Dragonite, L50, M|\n|poke|p1|Goodra, L50, F|\n|poke|p1|Dragapult, L50, F|\n|poke|p1|Samurott-Hisui, L50, M|\n|poke|p2|Hydreigon, L50, M|\n|poke|p2|Krookodile, L50, F|\n|poke|p2|Meowscarada, L50, F|\n|poke|p2|Kingambit, L50, F|\n|poke|p2|Greninja-*, L50, M|\n|poke|p2|Tyranitar, L50, M|\n|teampreview|4\n|\n|t:|1776328403\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Dragapult|Dragapult, L50, F|100/100\n|switch|p1b: Lopunny|Lopunny, L50, F|100/100\n|switch|p2a: Krookodile|Krookodile, L50, F|100/100\n|switch|p2b: Meowscarada|Meowscarada, L50, F|100/100\n|turn|1\n|c|\u2606Xtreme diarheaa|U a blk queen irl?\n|c|\u2606BxnnyBride|No lmao sorry to disappoint!\n|\n|t:|1776328443\n|move|p1b: Lopunny|Fake Out|p2a: Krookodile\n|-damage|p2a: Krookodile|90/100\n|move|p1a: Dragapult|Flamethrower|p2b: Meowscarada\n|-supereffective|p2b: Meowscarada|1\n|-damage|p2b: Meowscarada|6/100\n|move|p2b: Meowscarada|Flower Trick|p2a: Krookodile\n|-start|p2b: Meowscarada|typechange|Grass|[from] ability: Protean\n|-supereffective|p2a: Krookodile|1\n|-crit|p2a: Krookodile\n|-enditem|p2a: Krookodile|Rindo Berry|[eat]\n|-enditem|p2a: Krookodile|Rindo Berry|[weaken]\n|-damage|p2a: Krookodile|52/100\n|-setboost|p2a: Krookodile|atk|6|[from] ability: Anger Point\n|cant|p2a: Krookodile|flinch\n|\n|upkeep\n|turn|2\n|c|\u2606Xtreme diarheaa|Imposter!\n|\n|t:|1776328485\n|move|p1a: Dragapult|Draco Meteor|p2a: Krookodile\n|-damage|p2a: Krookodile|0 fnt\n|-unboost|p1a: Dragapult|spa|2\n|faint|p2a: Krookodile\n|move|p2b: Meowscarada|Knock Off|p1a: Dragapult\n|-supereffective|p1a: Dragapult|1\n|-damage|p1a: Dragapult|12/100\n|-enditem|p1a: Dragapult|Sitrus Berry|[from] move: Knock Off|[of] p2b: Meowscarada\n|move|p1b: Lopunny|U-turn|p2b: Meowscarada\n|-supereffective|p2b: Meowscarada|1\n|-damage|p2b: Meowscarada|0 fnt\n|faint|p2b: Meowscarada\n|-message|Xtreme diarheaa forfeited.\n|\n|win|BxnnyBride\n|raw|BxnnyBride's rating: 1062 &rarr; <strong>1093</strong><br />(+31 for winning)\n|raw|Xtreme diarheaa's rating: 1060 &rarr; <strong>1041</strong><br />(-19 for losing)\n|l|\u2606Xtreme diarheaa\n|player|p2|\n",
+  "uploadtime": 1776328497,
+  "views": 24,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1041,
+  "private": 0,
+  "password": null
+}

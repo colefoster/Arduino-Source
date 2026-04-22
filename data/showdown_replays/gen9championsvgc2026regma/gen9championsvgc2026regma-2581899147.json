@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2581899147",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Gemifi996644",
+    "otisssss"
+  ],
+  "log": "|j|\u2606Gemifi996644\n|j|\u2606otisssss\n|t:|1776037921\n|gametype|doubles\n|player|p1|Gemifi996644|101|1077\n|player|p2|otisssss|2|1000\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Maushold-Four, L50|\n|poke|p1|Froslass, L50, F|\n|poke|p1|Arcanine-Hisui, L50, F|\n|poke|p1|Dragonite, L50, F|\n|poke|p1|Corviknight, L50, F|\n|poke|p1|Sneasler, L50, M|\n|poke|p2|Excadrill, L50, M|\n|poke|p2|Tyranitar, L50, M|\n|poke|p2|Rotom-Wash, L50|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Hawlucha, L50, M|\n|poke|p2|Sinistcha, L50|\n|teampreview|4\notisssss rejected open team sheets.\n|\n|t:|1776037963\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Corviknight|Corviknight, L50, F|100/100\n|switch|p1b: Sneasler|Sneasler, L50, M|100/100\n|switch|p2a: Excadrill|Excadrill, L50, M|100/100\n|switch|p2b: Hawlucha|Hawlucha, L50, M|100/100\n|-ability|p1b: Sneasler|Pressure\n|turn|1\n|\n|t:|1776038010\n|detailschange|p2b: Hawlucha|Hawlucha-Mega, L50, M\n|-mega|p2b: Hawlucha|Hawlucha|Hawluchanite\n|move|p1b: Sneasler|Fake Out|p2a: Excadrill\n|-resisted|p2a: Excadrill|1\n|-damage|p2a: Excadrill|90/100\n|move|p2b: Hawlucha|Entrainment|p2a: Excadrill\n|-ability|p2a: Excadrill|No Guard|Sand Rush|[from] move: Entrainment|[of] p2b: Hawlucha\n|cant|p2a: Excadrill|flinch\n|move|p1a: Corviknight|Tailwind|p1a: Corviknight\n|-sidestart|p1: Gemifi996644|move: Tailwind\n|\n|upkeep\n|turn|2\n|-message|otisssss forfeited.\n|\n|win|Gemifi996644\n|raw|Gemifi996644's rating: 1077 &rarr; <strong>1099</strong><br />(+22 for winning)\n|raw|otisssss's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|l|\u2606otisssss\n|player|p2|\n",
+  "uploadtime": 1776038024,
+  "views": 10,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

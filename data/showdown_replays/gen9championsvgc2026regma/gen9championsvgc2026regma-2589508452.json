@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2589508452",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Hickstar",
+    "Quaza15"
+  ],
+  "log": "|j|\u2606Hickstar\n|j|\u2606Quaza15\n|t:|1776729356\n|gametype|doubles\n|player|p1|Hickstar|170|1462\n|player|p2|Quaza15|ruinmaniac|1483\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Aerodactyl, L50, F|\n|poke|p1|Meganium, L50, F|\n|poke|p1|Farigiraf, L50, M, shiny|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Kingambit, L50, F, shiny|\n|poke|p2|Aerodactyl, L50, F|\n|poke|p2|Garchomp, L50, F|\n|poke|p2|Mamoswine, L50, F|\n|poke|p2|Charizard, L50, M|\n|poke|p2|Kingambit, L50, M|\n|poke|p2|Rotom-Wash, L50|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Hickstar)\n|inactive|Quaza15 has 60 seconds left.\n|\n|t:|1776729411\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Aerodactyl|Aerodactyl, L50, F|100/100\n|switch|p1b: Sneasler|Sneasler, L50, M|100/100\n|switch|p2a: Charizard|Charizard, L50, M|100/100\n|switch|p2b: Mamoswine|Mamoswine, L50, F|100/100\n|-ability|p1a: Aerodactyl|Unnerve\n|turn|1\n|\n|t:|1776729432\n|detailschange|p2a: Charizard|Charizard-Mega-Y, L50, M\n|-mega|p2a: Charizard|Charizard|Charizardite Y\n|-weather|SunnyDay|[from] ability: Drought|[of] p2a: Charizard\n|move|p1b: Sneasler|Fake Out|p2b: Mamoswine\n|-damage|p2b: Mamoswine|83/100\n|move|p1a: Aerodactyl|Rock Slide|p2b: Mamoswine|[spread] p2a,p2b\n|-supereffective|p2a: Charizard|2\n|-damage|p2a: Charizard|0 fnt\n|-damage|p2b: Mamoswine|55/100\n|faint|p2a: Charizard\n|cant|p2b: Mamoswine|flinch\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|-message|Quaza15 forfeited.\n|\n|win|Hickstar\n|raw|Hickstar's rating: 1462 &rarr; <strong>1483</strong><br />(+21 for winning)\n|raw|Quaza15's rating: 1483 &rarr; <strong>1462</strong><br />(-21 for losing)\n",
+  "uploadtime": 1776729442,
+  "views": 10,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1462,
+  "private": 0,
+  "password": null
+}

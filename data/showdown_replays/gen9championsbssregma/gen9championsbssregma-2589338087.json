@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2589338087",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "b1rksy",
+    "Pignona"
+  ],
+  "log": "|j|\u2606b1rksy\n|j|\u2606Pignona\n|t:|1776715302\n|gametype|singles\n|player|p1|b1rksy|lucas|1000\n|player|p2|Pignona|ninjaboy|1000\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Dragapult, L50, F, shiny|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Farigiraf, L50, F, shiny|\n|poke|p1|Torkoal, L50, F, shiny|\n|poke|p1|Meganium, L50, M, shiny|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Dragonite, L50, F|\n|poke|p2|Meganium, L50, M|\n|poke|p2|Arcanine-Hisui, L50, F|\n|poke|p2|Sinistcha, L50|\n|teampreview|3\n|\n|t:|1776715347\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Farigiraf|Farigiraf, L50, F, shiny|100/100\n|switch|p2a: Dragonite|Dragonite, L50, F|100/100\n|turn|1\n|c|\u2606b1rksy|wait\n|c|\u2606b1rksy|I thought i loaded into doubles lol\n|c|\u2606Pignona|me too lol\n|c|\u2606b1rksy|hahahahahahah\n|c|\u2606b1rksy|gg\n|-message|b1rksy forfeited.\n|\n|win|Pignona\n|raw|b1rksy's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|raw|Pignona's rating: 1000 &rarr; <strong>1040</strong><br />(+40 for winning)\n",
+  "uploadtime": 1776715380,
+  "views": 12,
+  "formatid": "gen9championsbssregma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

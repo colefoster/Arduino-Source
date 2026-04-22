@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2581700645",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "toxicwyvern",
+    "Affrogado"
+  ],
+  "log": "|j|\u2606toxicwyvern\n|j|\u2606Affrogado\n|t:|1776021760\n|gametype|doubles\n|player|p1|toxicwyvern|266|1082\n|player|p2|Affrogado|pokemaniac|1016\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Whimsicott, L50, M|\n|poke|p1|Typhlosion, L50, F|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Charizard, L50, F|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Milotic, L50, M|\n|poke|p2|Meganium, L50, M|\n|poke|p2|Pelipper, L50, M|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Archaludon, L50, M|\n|poke|p2|Maushold-Four, L50|\n|poke|p2|Basculegion, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Affrogado)\n|inactive|toxicwyvern has 60 seconds left.\n|inactive|Affrogado has 60 seconds left.\ntoxicwyvern has agreed to open team sheets.\n|\n|t:|1776021812\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Whimsicott|Whimsicott, L50, M|100/100\n|switch|p1b: Milotic|Milotic, L50, M|100/100\n|switch|p2a: Maushold|Maushold-Four, L50|100/100\n|switch|p2b: Archaludon|Archaludon, L50, M|100/100\n|turn|1\n|\n|t:|1776021831\n|move|p2b: Archaludon|Protect|p2b: Archaludon\n|-singleturn|p2b: Archaludon|Protect\n|move|p1a: Whimsicott|Tailwind|p1a: Whimsicott\n|-sidestart|p1: toxicwyvern|move: Tailwind\n|move|p1b: Milotic|Icy Wind|p2b: Archaludon|[spread] p2a\n|-activate|p2b: Archaludon|move: Protect\n|-damage|p2a: Maushold|84/100\n|-unboost|p2a: Maushold|spe|1\n|move|p2a: Maushold|Rain Dance|p2a: Maushold\n|-weather|RainDance\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|turn|2\n|inactive|toxicwyvern has 30 seconds left.\n|inactive|toxicwyvern has 20 seconds left.\n|inactive|toxicwyvern has 15 seconds left.\n|\n|t:|1776021872\n|move|p1a: Whimsicott|Encore|p2b: Archaludon\n|-start|p2b: Archaludon|Encore\n|move|p2b: Archaludon|Protect|p2b: Archaludon\n|-singleturn|p2b: Archaludon|Protect\n|move|p1b: Milotic|Scald|p2a: Maushold\n|-damage|p2a: Maushold|15/100\n|-status|p2a: Maushold|brn\n|move|p2a: Maushold|Beat Up|p2b: Archaludon\n|-activate|p2b: Archaludon|move: Protect\n|\n|-weather|RainDance|[upkeep]\n|-damage|p2a: Maushold|9/100 brn|[from] brn\n|upkeep\n|turn|3\n|-message|Affrogado forfeited.\n|\n|win|toxicwyvern\n|raw|toxicwyvern's rating: 1082 &rarr; <strong>1105</strong><br />(+23 for winning)\n|raw|Affrogado's rating: 1016 &rarr; <strong>1006</strong><br />(-10 for losing)\n|l|\u2606Affrogado\n|player|p2|\n",
+  "uploadtime": 1776021897,
+  "views": 12,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1006,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582861721",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "drewew",
+    "Apocalyplant"
+  ],
+  "log": "|j|\u2606drewew\n|j|\u2606Apocalyplant\n|t:|1776119965\n|gametype|doubles\n|player|p1|drewew|1|1076\n|player|p2|Apocalyplant|2|1012\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Charizard, L50, F|\n|poke|p1|Tyranitar, L50, F|\n|poke|p1|Gyarados, L50, M|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Rotom-Mow, L50|\n|poke|p1|Lucario, L50, F|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Golurk, L50|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Milotic, L50, M|\n|poke|p2|Tyranitar, L50, F|\n|teampreview|4\n|\n|t:|1776120020\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Lucario|Lucario, L50, F|100/100\n|switch|p1b: Rotom|Rotom-Mow, L50|100/100\n|switch|p2a: Sinistcha|Sinistcha, L50|100/100\n|switch|p2b: Golurk|Golurk, L50|100/100\n|turn|1\n|\n|t:|1776120063\n|switch|p1a: Gyarados|Gyarados, L50, M|100/100\n|-ability|p1a: Gyarados|Intimidate|boost\n|-unboost|p2a: Sinistcha|atk|1\n|-unboost|p2b: Golurk|atk|1\n|move|p2b: Golurk|Protect|p2b: Golurk\n|-singleturn|p2b: Golurk|Protect\n|move|p1b: Rotom|Leaf Storm|p2b: Golurk\n|-activate|p2b: Golurk|move: Protect\n|move|p2a: Sinistcha|Trick Room|p2a: Sinistcha\n|-fieldstart|move: Trick Room|[of] p2a: Sinistcha\n|\n|upkeep\n|turn|2\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Apocalyplant)\n|inactive|drewew has 60 seconds left.\n|\n|t:|1776120110\n|detailschange|p2b: Golurk|Golurk-Mega, L50\n|-mega|p2b: Golurk|Golurk|Golurkite\n|move|p2a: Sinistcha|Rage Powder|p2a: Sinistcha\n|-singleturn|p2a: Sinistcha|move: Rage Powder\n|move|p2b: Golurk|Rock Slide|p1a: Gyarados|[spread] p1a,p1b\n|-supereffective|p1a: Gyarados|1\n|-crit|p1b: Rotom\n|-damage|p1a: Gyarados|69/100\n|-damage|p1b: Rotom|71/100\n|move|p1a: Gyarados|Thunder Wave|p2a: Sinistcha\n|-status|p2a: Sinistcha|par\n|move|p1b: Rotom|Will-O-Wisp|p2b: Golurk\n|-status|p2b: Golurk|brn\n|\n|-damage|p2b: Golurk|94/100 brn|[from] brn\n|upkeep\n|turn|3\n|inactive|drewew has 30 seconds left.\n|inactive|drewew has 20 seconds left.\n|-message|Apocalyplant forfeited.\n|\n|win|drewew\n|raw|drewew's rating: 1076 &rarr; <strong>1099</strong><br />(+23 for winning)\n|raw|Apocalyplant's rating: 1012 &rarr; <strong>1002</strong><br />(-10 for losing)\n",
+  "uploadtime": 1776120148,
+  "views": 9,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1002,
+  "private": 0,
+  "password": null
+}

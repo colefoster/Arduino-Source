@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584584565",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "jo112",
+    "idrinkwithmj"
+  ],
+  "log": "|j|\u2606jo112\n|j|\u2606idrinkwithmj\n|t:|1776270339\n|gametype|doubles\n|player|p1|jo112|2|1117\n|player|p2|idrinkwithmj|169|1080\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Sneasler, L50, F|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Charizard, L50, M|\n|poke|p1|Venusaur, L50, F|\n|poke|p1|Rotom-Wash, L50|\n|poke|p2|Meganium, L50, M|\n|poke|p2|Pelipper, L50, F|\n|poke|p2|Orthworm, L50, F|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Archaludon, L50, M|\n|poke|p2|Krookodile, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by jo112)\n|inactive|jo112 has 60 seconds left.\n|inactive|idrinkwithmj has 60 seconds left.\n|\n|t:|1776270389\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Incineroar|Incineroar, L50, F|100/100\n|switch|p1b: Rotom|Rotom-Wash, L50|100/100\n|switch|p2a: Archaludon|Archaludon, L50, M, shiny|100/100\n|switch|p2b: Pelipper|Pelipper, L50, F, shiny|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p2b: Pelipper\n|-ability|p1a: Incineroar|Intimidate|boost\n|-unboost|p2a: Archaludon|atk|1\n|-unboost|p2b: Pelipper|atk|1\n|-enditem|p2a: Archaludon|White Herb\n|-clearnegativeboost|p2a: Archaludon|[silent]\n|turn|1\n|\n|t:|1776270412\n|switch|p2b: Krookodile|Krookodile, L50, M, shiny|100/100\n|-ability|p2b: Krookodile|Intimidate|boost\n|-unboost|p1a: Incineroar|atk|1\n|-unboost|p1b: Rotom|atk|1\n|move|p1a: Incineroar|Fake Out|p2b: Krookodile\n|-damage|p2b: Krookodile|88/100\n|move|p1b: Rotom|Thunderbolt|p2b: Krookodile\n|-immune|p2b: Krookodile\n|move|p2a: Archaludon|Electro Shot||[still]\n|-prepare|p2a: Archaludon|Electro Shot\n|-boost|p2a: Archaludon|spa|1\n|-anim|p2a: Archaludon|Electro Shot|p1b: Rotom\n|-damage|p1b: Rotom|38/100\n|\n|-weather|RainDance|[upkeep]\n|-heal|p1b: Rotom|44/100|[from] item: Leftovers\n|upkeep\n|turn|2\n|l|\u2606jo112\n|inactive|jo112 disconnected and has a minute to reconnect!\n|player|p1|\n|inactive|jo112 has 30 seconds left.\n|inactive|idrinkwithmj has 30 seconds left.\n|inactive|jo112 has 20 seconds left.\n|inactive|jo112 has 15 seconds left.\n|inactive|jo112 has 10 seconds left.\n|inactive|jo112 has 5 seconds left.\n|-message|jo112 lost due to inactivity.\n|\n|win|idrinkwithmj\n|raw|jo112's rating: 1117 &rarr; <strong>1089</strong><br />(-28 for losing)\n|raw|idrinkwithmj's rating: 1080 &rarr; <strong>1111</strong><br />(+31 for winning)\n",
+  "uploadtime": 1776270474,
+  "views": 18,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1089,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2587936200",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Tepig_nNz_498",
+    "roykeenkennedy"
+  ],
+  "log": "|j|\u2606Tepig_nNz_498\n|j|\u2606roykeenkennedy\n|t:|1776581513\n|gametype|doubles\n|player|p1|Tepig_nNz_498|169|1529\n|player|p2|roykeenkennedy|102|1586\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Politoed, L50, M|\n|poke|p1|Archaludon, L50, M|\n|poke|p1|Pelipper, L50, M|\n|poke|p1|Dragonite, L50, M|\n|poke|p1|Whimsicott, L50, F|\n|poke|p1|Basculegion, L50, M|\n|poke|p2|Sableye, L50, M|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Archaludon, L50, M|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Aerodactyl, L50, M|\n|poke|p2|Venusaur, L50, M|\n|teampreview|4\n|\n|t:|1776581552\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Archaludon|Archaludon, L50, M|100/100\n|switch|p1b: Politoed|Politoed, L50, M|100/100\n|switch|p2a: Venusaur|Venusaur, L50, M|100/100\n|switch|p2b: Archaludon|Archaludon, L50, M|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p1b: Politoed\n|turn|1\n|\n|t:|1776581571\n|detailschange|p2a: Venusaur|Venusaur-Mega, L50, M\n|-mega|p2a: Venusaur|Venusaur|Venusaurite\n|move|p2b: Archaludon|Electro Shot||[still]\n|-prepare|p2b: Archaludon|Electro Shot\n|-boost|p2b: Archaludon|spa|1\n|-anim|p2b: Archaludon|Electro Shot|p1b: Politoed\n|-supereffective|p1b: Politoed|1\n|-damage|p1b: Politoed|0 fnt\n|faint|p1b: Politoed\n|move|p1a: Archaludon|Electro Shot||[still]\n|-prepare|p1a: Archaludon|Electro Shot\n|-boost|p1a: Archaludon|spa|1\n|-anim|p1a: Archaludon|Electro Shot|p2a: Venusaur\n|-resisted|p2a: Venusaur|1\n|-damage|p2a: Venusaur|73/100\n|move|p2a: Venusaur|Leech Seed|p1a: Archaludon\n|-start|p1a: Archaludon|move: Leech Seed\n|\n|-weather|RainDance|[upkeep]\n|-damage|p1a: Archaludon|88/100|[from] Leech Seed|[of] p2a: Venusaur\n|-heal|p2a: Venusaur|86/100|[silent]\n|upkeep\n|l|\u2606Tepig_nNz_498\n|player|p1|\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by roykeenkennedy)\n|j| sammap\n|j| Enq\n|inactive|Tepig_nNz_498 has 30 seconds to reconnect!\n|inactive|Tepig_nNz_498 has 20 seconds to reconnect!\n|inactive|Tepig_nNz_498 has 15 seconds to reconnect!\n|inactive|Tepig_nNz_498 has 10 seconds to reconnect!\n|inactive|Tepig_nNz_498 has 5 seconds to reconnect!\n|-message|Tepig_nNz_498 lost due to inactivity.\n|\n|win|roykeenkennedy\n|raw|Tepig_nNz_498's rating: 1529 &rarr; <strong>1512</strong><br />(-17 for losing)\n|raw|roykeenkennedy's rating: 1586 &rarr; <strong>1603</strong><br />(+17 for winning)\n|l|\u2606roykeenkennedy\n|player|p2|\n|l| Enq\n",
+  "uploadtime": 1776581702,
+  "views": 18,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1512,
+  "private": 0,
+  "password": null
+}

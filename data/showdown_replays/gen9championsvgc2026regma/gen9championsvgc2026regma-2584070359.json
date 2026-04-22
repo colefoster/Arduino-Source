@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584070359",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "bl4ze4444",
+    "Caosking"
+  ],
+  "log": "|j|\u2606bl4ze4444\n|j|\u2606Caosking\n|t:|1776222124\n|gametype|doubles\n|player|p1|bl4ze4444|steven|1140\n|player|p2|Caosking|265|1058\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Zoroark-Hisui, L50, F|\n|poke|p1|Glimmora, L50, M|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Kingambit, L50, M|\n|poke|p2|Banette, L50, M|\n|poke|p2|Hatterene, L50, F|\n|poke|p2|Reuniclus, L50, F|\n|poke|p2|Camerupt, L50, F|\n|poke|p2|Garganacl, L50, M|\n|poke|p2|Excadrill, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Caosking)\n|\n|t:|1776222171\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Glimmora|Glimmora, L50, M|100/100\n|switch|p1b: Basculegion|Basculegion, L50, M|100/100\n|switch|p2a: Reuniclus|Reuniclus, L50, F|100/100\n|switch|p2b: Camerupt|Camerupt, L50, F|100/100\n|turn|1\n|inactive|bl4ze4444 has 30 seconds left.\n|inactive|bl4ze4444 has 20 seconds left.\n|inactive|bl4ze4444 has 15 seconds left.\n|\n|t:|1776222211\n|switch|p2b: Excadrill|Excadrill, L50, M|100/100\n|-ability|p2b: Excadrill|Mold Breaker\n|move|p1b: Basculegion|Last Respects|p2a: Reuniclus\n|-supereffective|p2a: Reuniclus|1\n|-damage|p2a: Reuniclus|38/100\n|move|p1a: Glimmora|Shadow Ball|p2a: Reuniclus\n|-supereffective|p2a: Reuniclus|1\n|-damage|p2a: Reuniclus|0 fnt\n|faint|p2a: Reuniclus\n|\n|upkeep\n|-message|Caosking forfeited.\n|\n|win|bl4ze4444\n|raw|bl4ze4444's rating: 1140 &rarr; <strong>1159</strong><br />(+19 for winning)\n|raw|Caosking's rating: 1058 &rarr; <strong>1044</strong><br />(-14 for losing)\n|l|\u2606Caosking\n|player|p2|\n",
+  "uploadtime": 1776222237,
+  "views": 16,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1044,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2586965969",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "karbain",
+    "NXC 8876113"
+  ],
+  "log": "|j|\u2606karbain\n|j|\u2606NXC 8876113\n|t:|1776476401\n|gametype|singles\n|player|p1|karbain|265|1353\n|player|p2|NXC 8876113|266|1342\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Gengar, L50, F|\n|poke|p1|Mimikyu, L50, M|\n|poke|p1|Lopunny, L50, F|\n|poke|p1|Arcanine-Hisui, L50, F|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Mamoswine, L50, F|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Scizor, L50, F|\n|poke|p2|Dragapult, L50, F|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Mimikyu, L50, M|\n|poke|p2|Hydreigon, L50, F|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by NXC 8876113)\n|\n|t:|1776476435\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Mamoswine|Mamoswine, L50, F|100/100\n|switch|p2a: Hydreigon|Hydreigon, L50, F|100/100\n|turn|1\n|\n|t:|1776476442\n|move|p2a: Hydreigon|U-turn|p1a: Mamoswine\n|-damage|p1a: Mamoswine|83/100\n|\n|t:|1776476446\n|switch|p2a: Scizor|Scizor, L50, F|100/100|[from] U-turn\n|move|p1a: Mamoswine|Icicle Crash|p2a: Scizor\n|-resisted|p2a: Scizor|1\n|-damage|p2a: Scizor|78/100\n|\n|upkeep\n|turn|2\n|j| p74\n|\n|t:|1776476452\n|detailschange|p2a: Scizor|Scizor-Mega, L50, F\n|-mega|p2a: Scizor|Scizor|Scizorite\n|move|p1a: Mamoswine|Earthquake|p2a: Scizor\n|-damage|p2a: Scizor|32/100\n|move|p2a: Scizor|Swords Dance|p2a: Scizor\n|-boost|p2a: Scizor|atk|2\n|\n|upkeep\n|turn|3\n|\n|t:|1776476460\n|move|p2a: Scizor|Bullet Punch|p1a: Mamoswine\n|-supereffective|p1a: Mamoswine|1\n|-damage|p1a: Mamoswine|0 fnt\n|faint|p1a: Mamoswine\n|\n|upkeep\n|\n|t:|1776476465\n|switch|p1a: Lopunny|Lopunny, L50, F|100/100\n|turn|4\n|\n|t:|1776476479\n|detailschange|p1a: Lopunny|Lopunny-Mega, L50, F\n|-mega|p1a: Lopunny|Lopunny|Lopunnite\n|move|p1a: Lopunny|Mach Punch|p2a: Scizor\n|-damage|p2a: Scizor|15/100\n|move|p2a: Scizor|Bullet Punch|p1a: Lopunny\n|-damage|p1a: Lopunny|0 fnt\n|faint|p1a: Lopunny\n|\n|upkeep\n|\n|t:|1776476486\n|switch|p1a: Sinistcha|Sinistcha, L50|100/100\n|turn|5\n|-message|karbain forfeited.\n|\n|win|NXC 8876113\n|raw|karbain's rating: 1353 &rarr; <strong>1332</strong><br />(-21 for losing)\n|raw|NXC 8876113's rating: 1342 &rarr; <strong>1363</strong><br />(+21 for winning)\n|l|\u2606karbain\n|player|p1|\n|l|\u2606NXC 8876113\n|player|p2|\n",
+  "uploadtime": 1776476512,
+  "views": 4,
+  "formatid": "gen9championsbssregma",
+  "rating": 1332,
+  "private": 0,
+  "password": null
+}

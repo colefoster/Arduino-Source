@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2588655777",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "oaodkdnnx",
+    "ogrelord20"
+  ],
+  "log": "|j|\u2606oaodkdnnx\n|j|\u2606ogrelord20\n|t:|1776654383\n|gametype|doubles\n|player|p1|oaodkdnnx|266|1031\n|player|p2|ogrelord20|101|1120\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Rotom-Wash, L50|\n|poke|p1|Kingambit, L50, F|\n|poke|p1|Mamoswine, L50, M|\n|poke|p1|Tsareena, L50, F|\n|poke|p1|Meowstic, L50, M|\n|poke|p1|Chandelure, L50, M|\n|poke|p2|Sinistcha-Masterpiece, L50|\n|poke|p2|Scovillain, L50, M, shiny|\n|poke|p2|Primarina, L50, M, shiny|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Corviknight, L50, M|\n|poke|p2|Floette-Eternal, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by oaodkdnnx)\n|\n|t:|1776654422\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Tsareena|Tsareena, L50, F|100/100\n|switch|p1b: Chandelure|Chandelure, L50, M|100/100\n|switch|p2a: Garchomp|Garchomp, L50, M|100/100\n|switch|p2b: Corviknight|Corviknight, L50, M|100/100\n|-ability|p2b: Corviknight|Pressure\n|turn|1\n|inactive|oaodkdnnx has 30 seconds left.\n|inactive|oaodkdnnx has 20 seconds left.\n|inactive|oaodkdnnx has 15 seconds left.\n|inactive|oaodkdnnx has 10 seconds left.\n|inactive|oaodkdnnx has 5 seconds left.\n|\n|t:|1776654477\n|move|p2a: Garchomp|Earthquake|p1a: Tsareena|[spread] p1a,p1b\n|-immune|p2b: Corviknight\n|-resisted|p1a: Tsareena|1\n|-supereffective|p1b: Chandelure|1\n|-damage|p1a: Tsareena|78/100\n|-damage|p1b: Chandelure|0 fnt\n|faint|p1b: Chandelure\n|move|p1a: Tsareena|Trop Kick|p2b: Corviknight\n|-resisted|p2b: Corviknight|2\n|-damage|p2b: Corviknight|92/100\n|-unboost|p2b: Corviknight|atk|1\n|move|p2b: Corviknight|Iron Defense|p2b: Corviknight\n|-boost|p2b: Corviknight|def|2\n|\n|-heal|p2b: Corviknight|98/100|[from] item: Leftovers\n|upkeep\n|inactive|oaodkdnnx has 30 seconds left.\n|-message|oaodkdnnx forfeited.\n|\n|win|ogrelord20\n|raw|oaodkdnnx's rating: 1031 &rarr; <strong>1020</strong><br />(-11 for losing)\n|raw|ogrelord20's rating: 1120 &rarr; <strong>1139</strong><br />(+19 for winning)\n",
+  "uploadtime": 1776654512,
+  "views": 8,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1020,
+  "private": 0,
+  "password": null
+}

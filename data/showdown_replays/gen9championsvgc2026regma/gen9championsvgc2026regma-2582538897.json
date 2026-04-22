@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582538897",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Flopidy",
+    "yuriimon"
+  ],
+  "log": "|j|\u2606Flopidy\n|j|\u2606yuriimon\n|t:|1776098087\n|gametype|doubles\n|player|p1|Flopidy|266|1129\n|player|p2|yuriimon|waitress-gen4|1144\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Archaludon, L50, F|\n|poke|p1|Talonflame, L50, F|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Politoed, L50, M|\n|poke|p1|Sneasler, L50, F|\n|poke|p1|Meganium, L50, M|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Sableye, L50, M|\n|poke|p2|Talonflame, L50, F|\n|poke|p2|Kingambit, L50, F|\n|poke|p2|Golurk, L50|\n|poke|p2|Garchomp, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by yuriimon)\n|inactive|Flopidy has 60 seconds left.\n|\n|t:|1776098118\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Sneasler|Sneasler, L50, F|100/100\n|switch|p1b: Basculegion|Basculegion, L50, M|100/100\n|switch|p2a: Garchomp|Garchomp, L50, M|100/100\n|switch|p2b: Talonflame|Talonflame, L50, F|100/100\n|turn|1\n|\n|t:|1776098142\n|move|p2b: Talonflame|Quick Guard|p2b: Talonflame\n|-singleturn|p2b: Talonflame|Quick Guard\n|move|p1a: Sneasler|Fake Out|p2b: Talonflame\n|-activate|p2b: Talonflame|move: Quick Guard\n|move|p1b: Basculegion|Waterfall|p2a: Garchomp\n|-damage|p2a: Garchomp|61/100\n|-damage|p1b: Basculegion|88/100|[from] ability: Rough Skin|[of] p2a: Garchomp\n|move|p2a: Garchomp|Earthquake|p1b: Basculegion|[spread] p1a,p1b\n|-immune|p2b: Talonflame\n|-supereffective|p1a: Sneasler|1\n|-damage|p1a: Sneasler|0 fnt\n|-damage|p1b: Basculegion|33/100\n|faint|p1a: Sneasler\n|\n|upkeep\n|\n|t:|1776098158\n|switch|p1a: Politoed|Politoed, L50, M|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p1a: Politoed\n|turn|2\n|\n|t:|1776098166\n|move|p2b: Talonflame|Tailwind|p2b: Talonflame\n|-sidestart|p2: yuriimon|move: Tailwind\n|move|p1b: Basculegion|Waterfall|p2a: Garchomp\n|-damage|p2a: Garchomp|2/100\n|-damage|p1b: Basculegion|21/100|[from] ability: Rough Skin|[of] p2a: Garchomp\n|move|p2a: Garchomp|Rock Slide|p1b: Basculegion|[spread] p1a,p1b\n|-damage|p1a: Politoed|77/100\n|-damage|p1b: Basculegion|0 fnt\n|faint|p1b: Basculegion\n|cant|p1a: Politoed|flinch\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|\n|t:|1776098187\n|switch|p1b: Archaludon|Archaludon, L50, F|100/100\n|turn|3\n|-message|Flopidy forfeited.\n|\n|win|yuriimon\n|raw|Flopidy's rating: 1129 &rarr; <strong>1105</strong><br />(-24 for losing)\n|raw|yuriimon's rating: 1144 &rarr; <strong>1168</strong><br />(+24 for winning)\n|l|\u2606Flopidy\n|player|p1|\n|j| Bladedead\n",
+  "uploadtime": 1776098197,
+  "views": 12,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1105,
+  "private": 0,
+  "password": null
+}

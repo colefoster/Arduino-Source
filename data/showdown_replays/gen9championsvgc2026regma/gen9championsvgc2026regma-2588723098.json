@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2588723098",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "VannThousand",
+    "donutdace646"
+  ],
+  "log": "|j|\u2606VannThousand\n|j|\u2606donutdace646\n|t:|1776662153\n|gametype|doubles\n|player|p1|VannThousand|fisherman-gen4|1079\n|player|p2|donutdace646|265|1095\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Tyranitar, L50, F|\n|poke|p1|Excadrill, L50, M|\n|poke|p1|Corviknight, L50, M|\n|poke|p1|Maushold, L50|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Milotic, L50, M|\n|poke|p2|Tyranitar, L50, F|\n|poke|p2|Excadrill, L50, M|\n|poke|p2|Corviknight, L50, M|\n|poke|p2|Kommo-o, L50, F|\n|poke|p2|Incineroar, L50, F, shiny|\n|poke|p2|Sinistcha, L50|\n|teampreview|4\n|l|\u2606donutdace646\n|player|p2|\n|j|\u2606donutdace646\n|player|p2|donutdace646|265|\n|\n|t:|1776662258\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Milotic|Milotic, L50, M|100/100\n|switch|p1b: Maushold|Maushold, L50|100/100\n|switch|p2a: Corviknight|Corviknight, L50, M|100/100\n|switch|p2b: Incineroar|Incineroar, L50, F, shiny|100/100\n|-ability|p2a: Corviknight|Pressure\n|turn|1\n|\n|t:|1776662278\n|move|p1b: Maushold|Protect|p1b: Maushold\n|-singleturn|p1b: Maushold|Protect\n|move|p1a: Milotic|Protect|p1a: Milotic\n|-singleturn|p1a: Milotic|Protect\n|move|p2b: Incineroar|Fake Out|p1a: Milotic\n|-activate|p1a: Milotic|move: Protect\n|move|p2a: Corviknight|Bulk Up|p2a: Corviknight\n|-boost|p2a: Corviknight|atk|1\n|-boost|p2a: Corviknight|def|1\n|\n|upkeep\n|turn|2\n|\n|t:|1776662319\n|move|p1b: Maushold|Encore|p2a: Corviknight\n|-start|p2a: Corviknight|Encore\n|move|p1a: Milotic|Scald|p2b: Incineroar\n|-supereffective|p2b: Incineroar|1\n|-enditem|p2b: Incineroar|Passho Berry|[eat]\n|-enditem|p2b: Incineroar|Passho Berry|[weaken]\n|-damage|p2b: Incineroar|73/100\n|move|p2a: Corviknight|Bulk Up|p2a: Corviknight\n|-boost|p2a: Corviknight|atk|1\n|-boost|p2a: Corviknight|def|1\n|move|p2b: Incineroar|Parting Shot|p1a: Milotic\n|-unboost|p1a: Milotic|atk|1\n|-ability|p1a: Milotic|Competitive|boost\n|-boost|p1a: Milotic|spa|2\n|-unboost|p1a: Milotic|spa|1\n|-ability|p1a: Milotic|Competitive|boost\n|-boost|p1a: Milotic|spa|2\n|-message|donutdace646 forfeited.\n|\n|win|VannThousand\n|raw|VannThousand's rating: 1079 &rarr; <strong>1108</strong><br />(+29 for winning)\n|raw|donutdace646's rating: 1095 &rarr; <strong>1070</strong><br />(-25 for losing)\n|l|\u2606donutdace646\n|player|p2|\n|l|\u2606VannThousand\n|player|p1|\n|j|\u2606VannThousand\n|player|p1|VannThousand|fisherman-gen4|\n",
+  "uploadtime": 1776662373,
+  "views": 11,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1070,
+  "private": 0,
+  "password": null
+}

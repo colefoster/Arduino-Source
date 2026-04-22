@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584241976",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "GringleBerry",
+    "Manthis"
+  ],
+  "log": "|j|\u2606GringleBerry\n|j|\u2606Manthis\n|t:|1776242278\n|gametype|doubles\n|player|p1|GringleBerry|101|1036\n|player|p2|Manthis|170|1025\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Starmie, L50|\n|poke|p1|Drampa, L50, M|\n|poke|p1|Farigiraf, L50, F|\n|poke|p1|Whimsicott, L50, M|\n|poke|p1|Araquanid, L50, M|\n|poke|p1|Sneasler, L50, F|\n|poke|p2|Gengar, L50, M|\n|poke|p2|Sableye, L50, M|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Lucario, L50, F|\n|poke|p2|Kingambit, L50, F|\n|poke|p2|Aerodactyl, L50, M|\n|teampreview|4\n|\n|t:|1776242298\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Sneasler|Sneasler, L50, F|100/100\n|switch|p1b: Farigiraf|Farigiraf, L50, F|100/100\n|switch|p2a: Gengar|Gengar, L50, M|100/100\n|switch|p2b: Sableye|Sableye, L50, M|100/100\n|turn|1\n|\n|t:|1776242323\n|detailschange|p2a: Gengar|Gengar-Mega, L50, M\n|-mega|p2a: Gengar|Gengar|Gengarite\n|move|p2b: Sableye|Gravity|p2b: Sableye\n|-fieldstart|move: Gravity\n|move|p2a: Gengar|Hypnosis|p1b: Farigiraf\n|-status|p1b: Farigiraf|slp|[from] move: Hypnosis\n|move|p1a: Sneasler|U-turn|p2a: Gengar\n|-resisted|p2a: Gengar|2\n|-damage|p2a: Gengar|90/100\n|\n|t:|1776242345\n|switch|p1a: Araquanid|Araquanid, L50, M|100/100|[from] U-turn\n|cant|p1b: Farigiraf|slp\n|\n|upkeep\n|turn|2\n|\n|t:|1776242363\n|move|p2a: Gengar|Hypnosis|p1a: Araquanid\n|-status|p1a: Araquanid|slp|[from] move: Hypnosis\n|move|p2b: Sableye|Foul Play|p1b: Farigiraf\n|-supereffective|p1b: Farigiraf|1\n|-damage|p1b: Farigiraf|45/100 slp\n|cant|p1a: Araquanid|slp\n|cant|p1b: Farigiraf|slp\n|\n|-heal|p1b: Farigiraf|51/100 slp|[from] item: Leftovers\n|upkeep\n|turn|3\n|\n|t:|1776242386\n|move|p2a: Gengar|Shadow Ball|p1a: Araquanid\n|-damage|p1a: Araquanid|58/100 slp\n|-unboost|p1a: Araquanid|spd|1\n|move|p2b: Sableye|Foul Play|p1b: Farigiraf\n|-supereffective|p1b: Farigiraf|1\n|-damage|p1b: Farigiraf|0 fnt\n|faint|p1b: Farigiraf\n|cant|p1a: Araquanid|slp\n|\n|upkeep\n|-message|GringleBerry forfeited.\n|\n|win|Manthis\n|raw|GringleBerry's rating: 1036 &rarr; <strong>1020</strong><br />(-16 for losing)\n|raw|Manthis's rating: 1025 &rarr; <strong>1062</strong><br />(+37 for winning)\n|l|\u2606GringleBerry\n|player|p1|\n",
+  "uploadtime": 1776242399,
+  "views": 20,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1020,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2586985855",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "LOL.XD.9",
+    "hackercat01"
+  ],
+  "log": "|j|\u2606LOL.XD.9\n|j|\u2606hackercat01\n|t:|1776478414\n|gametype|singles\n|player|p1|LOL.XD.9|red|1175\n|player|p2|hackercat01|veteran|1068\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Corviknight, L50, M|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Hawlucha, L50, M|\n|poke|p1|Sylveon, L50, F|\n|poke|p1|Greninja-*, L50, M|\n|poke|p1|Blastoise, L50, M|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Gengar, L50, M|\n|poke|p2|Hydreigon, L50, F|\n|poke|p2|Sylveon, L50, F|\n|poke|p2|Skarmory, L50, M|\n|poke|p2|Klefki, L50, F|\n|teampreview|3\n|\n|t:|1776478456\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Sylveon|Sylveon, L50, F|100/100\n|switch|p2a: Klefki|Klefki, L50, F, shiny|100/100\n|turn|1\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by hackercat01)\n|\n|t:|1776478466\n|move|p2a: Klefki|Steel Beam|p1a: Sylveon\n|-supereffective|p1a: Sylveon|1\n|-damage|p1a: Sylveon|35/100\n|-damage|p2a: Klefki|50/100|[from] steelbeam\n|move|p1a: Sylveon|Mystical Fire|p2a: Klefki\n|-supereffective|p2a: Klefki|1\n|-damage|p2a: Klefki|0 fnt\n|faint|p2a: Klefki\n|\n|upkeep\n|\n|t:|1776478474\n|switch|p2a: Garchomp|Garchomp, L50, M, shiny|100/100\n|turn|2\n|\n|t:|1776478479\n|move|p2a: Garchomp|Poison Jab|p1a: Sylveon\n|-supereffective|p1a: Sylveon|1\n|-damage|p1a: Sylveon|0 fnt\n|faint|p1a: Sylveon\n|\n|upkeep\n|\n|t:|1776478484\n|switch|p1a: Blastoise|Blastoise, L50, M|100/100\n|turn|3\n|\n|t:|1776478491\n|detailschange|p2a: Garchomp|Garchomp-Mega, L50, M, shiny\n|-mega|p2a: Garchomp|Garchomp|Garchompite\n|detailschange|p1a: Blastoise|Blastoise-Mega, L50, M\n|-mega|p1a: Blastoise|Blastoise|Blastoisinite\n|move|p2a: Garchomp|Scale Shot|p1a: Blastoise\n|-damage|p1a: Blastoise|88/100\n|-damage|p1a: Blastoise|74/100\n|-hitcount|p1a: Blastoise|2\n|-unboost|p2a: Garchomp|def|1\n|-boost|p2a: Garchomp|spe|1\n|move|p1a: Blastoise|Ice Beam|p2a: Garchomp\n|-supereffective|p2a: Garchomp|2\n|-damage|p2a: Garchomp|0 fnt\n|faint|p2a: Garchomp\n|\n|upkeep\n|\n|t:|1776478504\n|switch|p2a: Hydreigon|Hydreigon, L50, F, shiny|100/100\n|turn|4\n|\n|t:|1776478509\n|move|p2a: Hydreigon|Draco Meteor|p1a: Blastoise\n|-damage|p1a: Blastoise|17/100\n|-unboost|p2a: Hydreigon|spa|2\n|move|p1a: Blastoise|Dragon Pulse|p2a: Hydreigon\n|-supereffective|p2a: Hydreigon|1\n|-damage|p2a: Hydreigon|0 fnt\n|faint|p2a: Hydreigon\n|\n|win|LOL.XD.9\n|raw|LOL.XD.9's rating: 1175 &rarr; <strong>1193</strong><br />(+18 for winning)\n|raw|hackercat01's rating: 1068 &rarr; <strong>1054</strong><br />(-14 for losing)\n|l|\u2606hackercat01\n|player|p2|\n",
+  "uploadtime": 1776478518,
+  "views": 4,
+  "formatid": "gen9championsbssregma",
+  "rating": 1054,
+  "private": 0,
+  "password": null
+}

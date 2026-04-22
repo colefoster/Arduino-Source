@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2583879131",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "hyunbelievable",
+    "sheen5678"
+  ],
+  "log": "|j|\u2606hyunbelievable\n|j|\u2606sheen5678\n|t:|1776204898\n|gametype|doubles\n|player|p1|hyunbelievable|guzma|1080\n|player|p2|sheen5678|266|1126\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Blastoise, L50, M|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Liepard, L50, M|\n|poke|p1|Aerodactyl, L50, M|\n|poke|p1|Talonflame, L50, F|\n|poke|p1|Farigiraf, L50, M|\n|poke|p2|Slowbro, L50, F|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Meganium, L50, M|\n|poke|p2|Archaludon, L50, M|\n|poke|p2|Pelipper, L50, M|\n|poke|p2|Incineroar, L50, F|\n|teampreview|4\n|\n|t:|1776204952\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: The Defect|Blastoise, L50, M|100/100\n|switch|p1b: The Ironclad|Talonflame, L50, F|100/100\n|switch|p2a: Archaludon|Archaludon, L50, M|100/100\n|switch|p2b: Pelipper|Pelipper, L50, M|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p2b: Pelipper\n|turn|1\n|\n|t:|1776204967\n|detailschange|p1a: The Defect|Blastoise-Mega, L50, M\n|-mega|p1a: The Defect|Blastoise|Blastoisinite\n|move|p1b: The Ironclad|Tailwind|p1b: The Ironclad\n|-sidestart|p1: hyunbelievable|move: Tailwind\n|move|p1a: The Defect|Aura Sphere|p2a: Archaludon\n|-supereffective|p2a: Archaludon|1\n|-damage|p2a: Archaludon|0 fnt\n|faint|p2a: Archaludon\n|move|p2b: Pelipper|Tailwind|p2b: Pelipper\n|-sidestart|p2: sheen5678|move: Tailwind\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|\n|t:|1776204986\n|switch|p2a: Incineroar|Incineroar, L50, F|100/100\n|-ability|p2a: Incineroar|Intimidate|boost\n|-unboost|p1a: The Defect|atk|1\n|-unboost|p1b: The Ironclad|atk|1\n|turn|2\n|\n|t:|1776205000\n|switch|p1b: The Watcher|Farigiraf, L50, M|100/100\n|move|p2a: Incineroar|Fake Out||[still]\n|cant|p1b: The Watcher|ability: Armor Tail|Fake Out|[of] p2a: Incineroar\n|move|p1a: The Defect|Water Spout|p2a: Incineroar|[spread] p2a,p2b\n|-supereffective|p2a: Incineroar|1\n|-resisted|p2b: Pelipper|1\n|-damage|p2a: Incineroar|0 fnt\n|-damage|p2b: Pelipper|21/100\n|faint|p2a: Incineroar\n|move|p2b: Pelipper|Weather Ball|p1b: The Watcher\n|-damage|p1b: The Watcher|43/100\n|-enditem|p1b: The Watcher|Sitrus Berry|[eat]\n|-heal|p1b: The Watcher|68/100|[from] item: Sitrus Berry\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|-message|sheen5678 forfeited.\n|\n|win|hyunbelievable\n|raw|hyunbelievable's rating: 1080 &rarr; <strong>1112</strong><br />(+32 for winning)\n|raw|sheen5678's rating: 1126 &rarr; <strong>1098</strong><br />(-28 for losing)\n|l|\u2606sheen5678\n|player|p2|\n",
+  "uploadtime": 1776205010,
+  "views": 17,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1098,
+  "private": 0,
+  "password": null
+}

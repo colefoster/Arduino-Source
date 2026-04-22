@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2585216595",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "cheesenbaconshapes",
+    "loklastaji"
+  ],
+  "log": "|j|\u2606cheesenbaconshapes\n|j|\u2606loklastaji\n|t:|1776326105\n|gametype|doubles\n|player|p1|cheesenbaconshapes|265|1166\n|player|p2|loklastaji|102|1239\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Aggron, L50, F|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Maushold, L50|\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Aerodactyl, L50, F|\n|poke|p1|Incineroar, L50, M|\n|poke|p2|Samurott-Hisui, L50, F|\n|poke|p2|Delphox, L50, M|\n|poke|p2|Tinkaton, L50, F|\n|poke|p2|Decidueye-Hisui, L50, M|\n|poke|p2|Dragonite, L50, M|\n|poke|p2|Farigiraf, L50, F|\n|teampreview|4\n|j| VegitoSKBEST\n|\n|t:|1776326140\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Floette|Floette-Eternal, L50, F|100/100\n|switch|p1b: Maushold|Maushold, L50|100/100\n|switch|p2a: Tinkaton|Tinkaton, L50, F|100/100\n|switch|p2b: Dragonite|Dragonite, L50, M|100/100\n|-ability|p2a: Tinkaton|Mold Breaker\n|turn|1\n|l| VegitoSKBEST\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by cheesenbaconshapes)\n|\n|t:|1776326200\n|switch|p1b: Incineroar|Incineroar, L50, M|100/100\n|-ability|p1b: Incineroar|Intimidate|boost\n|-unboost|p2a: Tinkaton|atk|1\n|-fail|p2b: Dragonite|unboost|Attack|[from] ability: Inner Focus|[of] p2b: Dragonite\n|detailschange|p1a: Floette|Floette-Mega, L50, F\n|-mega|p1a: Floette|Floette|Floettite\n|-ability|p1a: Floette|Fairy Aura\n|move|p1a: Floette|Protect|p1a: Floette\n|-singleturn|p1a: Floette|Protect\n|move|p2a: Tinkaton|Fake Out|p1a: Floette\n|-activate|p1a: Floette|move: Protect\n|move|p2b: Dragonite|Air Slash|p1b: Incineroar\n|-damage|p1b: Incineroar|73/100\n|\n|upkeep\n|turn|2\n|l|\u2606cheesenbaconshapes\n|inactive|cheesenbaconshapes disconnected and has a minute to reconnect!\n|player|p1|\n|inactive|cheesenbaconshapes has 30 seconds left.\n|inactive|cheesenbaconshapes has 20 seconds left.\n|inactive|cheesenbaconshapes has 15 seconds left.\n|inactive|cheesenbaconshapes has 10 seconds left.\n|inactive|cheesenbaconshapes has 5 seconds left.\n|-message|cheesenbaconshapes lost due to inactivity.\n|\n|win|loklastaji\n|raw|cheesenbaconshapes's rating: 1166 &rarr; <strong>1144</strong><br />(-22 for losing)\n|raw|loklastaji's rating: 1209 &rarr; <strong>1231</strong><br />(+22 for winning)\n|j|\u2606cheesenbaconshapes\n|player|p1|cheesenbaconshapes|265|\n",
+  "uploadtime": 1776326272,
+  "views": 23,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1144,
+  "private": 0,
+  "password": null
+}

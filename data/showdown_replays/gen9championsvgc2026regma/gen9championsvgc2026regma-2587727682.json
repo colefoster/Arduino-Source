@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2587727682",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "guillehue",
+    "lpaky"
+  ],
+  "log": "|j|\u2606guillehue\n|j|\u2606lpaky\n|t:|1776557960\n|gametype|doubles\n|player|p1|guillehue|n|1520\n|player|p2|lpaky|170|1479\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Meganium, L50, M|\n|poke|p1|Dragonite, L50, F, shiny|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Kingambit, L50, M|\n|poke|p1|Politoed, L50, M|\n|poke|p2|Chesnaught, L50, M|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Weavile, L50, F|\n|poke|p2|Tinkaton, L50, F|\n|poke|p2|Rotom-Heat, L50|\n|poke|p2|Garchomp, L50, M|\n|teampreview|4\n|j| Dinkleburg4201\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by guillehue)\n|\n|t:|1776557989\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Dragonite|Dragonite, L50, F, shiny|100/100\n|switch|p1b: Sneasler|Sneasler, L50, M|100/100\n|switch|p2a: Weavile|Weavile, L50, F|100/100\n|switch|p2b: Chesnaught|Chesnaught, L50, M|100/100\n|-ability|p2a: Weavile|Pressure\n|turn|1\n|\n|t:|1776558006\n|switch|p2b: Tinkaton|Tinkaton, L50, F|100/100\n|detailschange|p1a: Dragonite|Dragonite-Mega, L50, F, shiny\n|-mega|p1a: Dragonite|Dragonite|Dragoninite\n|move|p1a: Dragonite|Protect|p1a: Dragonite\n|-singleturn|p1a: Dragonite|Protect\n|move|p2a: Weavile|Fake Out|p1b: Sneasler\n|-damage|p1b: Sneasler|76/100\n|cant|p1b: Sneasler|flinch\n|\n|upkeep\n|turn|2\n|\n|t:|1776558028\n|move|p2a: Weavile|Triple Axel|p1a: Dragonite\n|-supereffective|p1a: Dragonite|2\n|-damage|p1a: Dragonite|85/100\n|-supereffective|p1a: Dragonite|2\n|-damage|p1a: Dragonite|15/100\n|-supereffective|p1a: Dragonite|2\n|-damage|p1a: Dragonite|0 fnt\n|faint|p1a: Dragonite\n|-hitcount|p1: Dragonite|3\n|move|p1b: Sneasler|Close Combat|p2a: Weavile\n|-supereffective|p2a: Weavile|2\n|-crit|p2a: Weavile\n|-enditem|p2a: Weavile|Focus Sash\n|-damage|p2a: Weavile|1/100\n|-unboost|p1b: Sneasler|def|1\n|-unboost|p1b: Sneasler|spd|1\n|move|p2b: Tinkaton|Gigaton Hammer|p1b: Sneasler\n|-damage|p1b: Sneasler|0 fnt\n|faint|p1b: Sneasler\n|\n|upkeep\n|-message|guillehue forfeited.\n|\n|win|lpaky\n|raw|guillehue's rating: 1520 &rarr; <strong>1498</strong><br />(-22 for losing)\n|raw|lpaky's rating: 1479 &rarr; <strong>1501</strong><br />(+22 for winning)\n|l|\u2606guillehue\n|player|p1|\n|l|\u2606lpaky\n|player|p2|\n|j|\u2606lpaky\n|player|p2|lpaky|170|\n",
+  "uploadtime": 1776558115,
+  "views": 18,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1498,
+  "private": 0,
+  "password": null
+}

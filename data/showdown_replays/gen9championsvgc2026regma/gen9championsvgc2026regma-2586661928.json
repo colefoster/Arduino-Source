@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586661928",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "0TX - Zenith",
+    "DC7seven"
+  ],
+  "log": "|j|\u26060TX - Zenith\n|j|\u2606DC7seven\n|t:|1776450231\n|gametype|doubles\n|player|p1|0TX - Zenith|gambler|1254\n|player|p2|DC7seven|ethan|1160\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Whimsicott, L50, M|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Hawlucha, L50, M|\n|poke|p1|Vanilluxe, L50, M|\n|poke|p1|Milotic, L50, F|\n|poke|p1|Aegislash, L50, M|\n|poke|p2|Hatterene, L50, F|\n|poke|p2|Oranguru, L50, F|\n|poke|p2|Golurk, L50|\n|poke|p2|Clefable, L50, M|\n|poke|p2|Hydreigon, L50, F|\n|poke|p2|Torkoal, L50, F|\n|teampreview|4\n0TX - Zenith rejected open team sheets.\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by DC7seven)\n|inactive|0TX - Zenith has 60 seconds left.\n|inactive|DC7seven has 60 seconds left.\n|\n|t:|1776450278\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Hawlucha|Hawlucha, L50, M|100/100\n|switch|p1b: Vanilluxe|Vanilluxe, L50, M|100/100\n|switch|p2a: Oranguru|Oranguru, L50, F|100/100\n|switch|p2b: Golurk|Golurk, L50|100/100\n|-weather|Snowscape|[from] ability: Snow Warning|[of] p1b: Vanilluxe\n|turn|1\n|\n|t:|1776450292\n|detailschange|p1a: Hawlucha|Hawlucha-Mega, L50, M\n|-mega|p1a: Hawlucha|Hawlucha|Hawluchanite\n|detailschange|p2b: Golurk|Golurk-Mega, L50\n|-mega|p2b: Golurk|Golurk|Golurkite\n|move|p2b: Golurk|Protect|p2b: Golurk\n|-singleturn|p2b: Golurk|Protect\n|move|p1a: Hawlucha|Entrainment|p1b: Vanilluxe\n|-ability|p1b: Vanilluxe|No Guard|Snow Warning|[from] move: Entrainment|[of] p1a: Hawlucha\n|move|p1b: Vanilluxe|Sheer Cold|p2a: Oranguru\n|-damage|p2a: Oranguru|0 fnt\n|faint|p2a: Oranguru\n|-ohko\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|\n|t:|1776450305\n|switch|p2a: Hydreigon|Hydreigon, L50, F|100/100\n|turn|2\n|\n|t:|1776450316\n|move|p2a: Hydreigon|Draco Meteor|p1a: Hawlucha\n|-damage|p1a: Hawlucha|22/100\n|-unboost|p2a: Hydreigon|spa|2\n|move|p1a: Hawlucha|Cross Chop|p2a: Hydreigon\n|-supereffective|p2a: Hydreigon|1\n|-damage|p2a: Hydreigon|0 fnt\n|faint|p2a: Hydreigon\n|move|p1b: Vanilluxe|Sheer Cold|p2b: Golurk\n|-damage|p2b: Golurk|0 fnt\n|faint|p2b: Golurk\n|-ohko\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|\n|t:|1776450329\n|switch|p2b: Torkoal|Torkoal, L50, F|100/100\n|-weather|SunnyDay|[from] ability: Drought|[of] p2b: Torkoal\n|turn|3\n|\n|t:|1776450335\n|move|p1a: Hawlucha|Cross Chop|p2b: Torkoal\n|-damage|p2b: Torkoal|56/100\n|move|p1b: Vanilluxe|Sheer Cold|p2b: Torkoal\n|-damage|p2b: Torkoal|0 fnt\n|faint|p2b: Torkoal\n|-ohko\n|\n|win|0TX - Zenith\n|raw|0TX - Zenith's rating: 1254 &rarr; <strong>1272</strong><br />(+18 for winning)\n|raw|DC7seven's rating: 1160 &rarr; <strong>1142</strong><br />(-18 for losing)\n",
+  "uploadtime": 1776450347,
+  "views": 27,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1142,
+  "private": 0,
+  "password": null
+}

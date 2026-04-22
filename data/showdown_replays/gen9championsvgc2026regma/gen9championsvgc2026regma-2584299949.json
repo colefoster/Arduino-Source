@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584299949",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Mdjfbd",
+    "Ijoputa"
+  ],
+  "log": "|j|\u2606Mdjfbd\n|j|\u2606Ijoputa\n|t:|1776248732\n|gametype|doubles\n|player|p1|Mdjfbd|266|1085\n|player|p2|Ijoputa|2|1005\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Delphox, L50, M|\n|poke|p1|Whimsicott, L50, F|\n|poke|p1|Rotom-Wash, L50|\n|poke|p1|Mamoswine, L50, M|\n|poke|p1|Dragonite, L50, F|\n|poke|p1|Gliscor, L50, F|\n|poke|p2|Abomasnow, L50, M|\n|poke|p2|Froslass, L50, F|\n|poke|p2|Azumarill, L50, F|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Whimsicott, L50, F|\n|poke|p2|Garchomp, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Ijoputa)\n|\n|t:|1776248758\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Delphox|Delphox, L50, M|100/100\n|switch|p1b: Mamoswine|Mamoswine, L50, M|100/100\n|switch|p2a: Froslass|Froslass, L50, F, shiny|100/100\n|switch|p2b: Abomasnow|Abomasnow, L50, M, shiny|100/100\n|-weather|Snowscape|[from] ability: Snow Warning|[of] p2b: Abomasnow\n|turn|1\n|\n|t:|1776248775\n|detailschange|p1a: Delphox|Delphox-Mega, L50, M\n|-mega|p1a: Delphox|Delphox|Delphoxite\n|detailschange|p2a: Froslass|Froslass-Mega, L50, F, shiny\n|-mega|p2a: Froslass|Froslass|Froslassite\n|move|p1a: Delphox|Heat Wave|p2b: Abomasnow|[spread] p2a,p2b\n|-supereffective|p2a: Froslass|1\n|-supereffective|p2b: Abomasnow|2\n|-crit|p2b: Abomasnow\n|-damage|p2a: Froslass|11/100\n|-damage|p2b: Abomasnow|0 fnt\n|faint|p2b: Abomasnow\n|move|p2a: Froslass|Shadow Ball|p1a: Delphox\n|-supereffective|p1a: Delphox|1\n|-damage|p1a: Delphox|4/100\n|move|p1b: Mamoswine|Earthquake|p2a: Froslass|[spread] p2a\n|-immune|p1a: Delphox|[from] ability: Levitate\n|-damage|p2a: Froslass|0 fnt\n|faint|p2a: Froslass\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|l|\u2606Ijoputa\n|inactive|Ijoputa disconnected and has a minute to reconnect!\n|player|p2|\n|j|\u2606Ijoputa\n|inactive|Ijoputa reconnected and has 35 seconds left.\n|player|p2|Ijoputa|2|\n|inactive|Ijoputa has 30 seconds left.\n|-message|Ijoputa forfeited.\n|\n|win|Mdjfbd\n|raw|Mdjfbd's rating: 1085 &rarr; <strong>1106</strong><br />(+21 for winning)\n|raw|Ijoputa's rating: 1005 &rarr; <strong>1000</strong><br />(-5 for losing)\n|l|\u2606Ijoputa\n|player|p2|\n",
+  "uploadtime": 1776248809,
+  "views": 17,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

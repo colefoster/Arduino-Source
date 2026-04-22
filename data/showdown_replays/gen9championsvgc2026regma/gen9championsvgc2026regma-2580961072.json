@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2580961072",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "fwejfiowj",
+    "bugawup"
+  ],
+  "log": "|j|\u203dfwejfiowj\n|j|\u2606bugawup\n|t:|1775946939\n|gametype|doubles\n|player|p1|fwejfiowj|169|1023\n|player|p2|bugawup|101|1083\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Abomasnow, L50, M|\n|poke|p1|Oranguru, L50, F|\n|poke|p1|Maushold, L50|\n|poke|p1|Kingambit, L50, M|\n|poke|p2|Meowscarada, L50, F|\n|poke|p2|Mudsdale, L50, F|\n|poke|p2|Skarmory, L50, F|\n|poke|p2|Lucario, L50, F|\n|poke|p2|Whimsicott, L50, F|\n|poke|p2|Zoroark-Hisui, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by fwejfiowj)\n|\n|t:|1775946970\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Oranguru|Oranguru, L50, F|100/100\n|switch|p1b: Maushold|Maushold, L50|100/100\n|switch|p2a: Meowscarada|Meowscarada, L50, F|100/100\n|switch|p2b: Lucario|Lucario, L50, F|100/100\n|turn|1\n|inactive|bugawup has 30 seconds left.\n|\n|t:|1775946996\n|detailschange|p2b: Lucario|Lucario-Mega, L50, F\n|-mega|p2b: Lucario|Lucario|Lucarionite\n|move|p1b: Maushold|Follow Me|p1b: Maushold\n|-singleturn|p1b: Maushold|move: Follow Me\n|move|p2b: Lucario|Aura Sphere|p1b: Maushold\n|-supereffective|p1b: Maushold|1\n|-enditem|p1b: Maushold|Chople Berry|[eat]\n|-enditem|p1b: Maushold|Chople Berry|[weaken]\n|-damage|p1b: Maushold|34/100\n|move|p2a: Meowscarada|Hyper Voice|p1a: Oranguru|[spread] p1a,p1b\n|-damage|p1a: Oranguru|79/100\n|-damage|p1b: Maushold|0 fnt\n|faint|p1b: Maushold\n|move|p1a: Oranguru|Trick Room|p1a: Oranguru\n|-fieldstart|move: Trick Room|[of] p1a: Oranguru\n|\n|upkeep\n|\n|t:|1775947005\n|switch|p1b: Abomasnow|Abomasnow, L50, M|100/100\n|-weather|Snowscape|[from] ability: Snow Warning|[of] p1b: Abomasnow\n|turn|2\n|\n|t:|1775947029\n|detailschange|p1b: Abomasnow|Abomasnow-Mega, L50, M\n|-mega|p1b: Abomasnow|Abomasnow|Abomasite\n|move|p2b: Lucario|Protect|p2b: Lucario\n|-singleturn|p2b: Lucario|Protect\n|move|p1b: Abomasnow|Earth Power|p2b: Lucario\n|-activate|p2b: Lucario|move: Protect\n|move|p1a: Oranguru|Instruct|p1b: Abomasnow\n|-singleturn|p1b: Abomasnow|move: Instruct|[of] p1a: Oranguru\n|move|p1b: Abomasnow|Earth Power|p2b: Lucario\n|-activate|p2b: Lucario|move: Protect\n|move|p2a: Meowscarada|Flamethrower|p1b: Abomasnow\n|-supereffective|p1b: Abomasnow|2\n|-damage|p1b: Abomasnow|0 fnt\n|faint|p1b: Abomasnow\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|-message|fwejfiowj forfeited.\n|\n|win|bugawup\n|raw|fwejfiowj's rating: 1023 &rarr; <strong>1012</strong><br />(-11 for losing)\n|raw|bugawup's rating: 1083 &rarr; <strong>1106</strong><br />(+23 for winning)\n|l|\u203dfwejfiowj\n|player|p1|\n",
+  "uploadtime": 1775947066,
+  "views": 29,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1012,
+  "private": 0,
+  "password": null
+}

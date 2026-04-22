@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584190109",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Noobilio",
+    "Centric07"
+  ],
+  "log": "|j|\u2606Noobilio\n|j|\u2606Centric07\n|t:|1776236197\n|gametype|doubles\n|player|p1|Noobilio|nurse|1262\n|player|p2|Centric07|hilda-wonderlauncher|1288\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Hawlucha, L50, F|\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Snorlax, L50, F|\n|poke|p1|Rotom-Wash, L50|\n|poke|p2|Pelipper, L50, M|\n|poke|p2|Archaludon, L50, M|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Farigiraf, L50, F|\n|poke|p2|Gengar, L50, M|\n|poke|p2|Sinistcha-Masterpiece, L50|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Centric07)\n|\n|t:|1776236222\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Hawlucha|Hawlucha, L50, F, shiny|100/100\n|switch|p1b: Snorlax|Snorlax, L50, F|100/100\n|switch|p2a: Sweetooth|Gengar, L50, M, shiny|100/100\n|switch|p2b: King|Incineroar, L50, M|100/100\n|-ability|p1a: Hawlucha|Mold Breaker\n|-ability|p2b: King|Intimidate|boost\n|-unboost|p1a: Hawlucha|atk|1\n|-unboost|p1b: Snorlax|atk|1\n|turn|1\n|\n|t:|1776236243\n|detailschange|p2a: Sweetooth|Gengar-Mega, L50, M, shiny\n|-mega|p2a: Sweetooth|Gengar|Gengarite\n|detailschange|p1a: Hawlucha|Hawlucha-Mega, L50, F, shiny\n|-mega|p1a: Hawlucha|Hawlucha|Hawluchanite\n|move|p1b: Snorlax|Protect|p1b: Snorlax\n|-singleturn|p1b: Snorlax|Protect\n|move|p2b: King|Fake Out|p1a: Hawlucha\n|-damage|p1a: Hawlucha|85/100\n|move|p2a: Sweetooth|Perish Song|p2a: Sweetooth\n|-start|p1a: Hawlucha|perish3|[silent]\n|-start|p1b: Snorlax|perish3|[silent]\n|-start|p2a: Sweetooth|perish3|[silent]\n|-start|p2b: King|perish3|[silent]\n|-fieldactivate|move: Perish Song\n|cant|p1a: Hawlucha|flinch\n|\n|-start|p2a: Sweetooth|perish3\n|-start|p1a: Hawlucha|perish3\n|-start|p2b: King|perish3\n|-start|p1b: Snorlax|perish3\n|upkeep\n|turn|2\n|\n|t:|1776236264\n|switch|p2a: Iris|Farigiraf, L50, F|100/100\n|move|p1a: Hawlucha|Entrainment|p1b: Snorlax\n|-ability|p1b: Snorlax|No Guard|Thick Fat|[from] move: Entrainment|[of] p1a: Hawlucha\n|move|p2b: King|Parting Shot|p1a: Hawlucha\n|-unboost|p1a: Hawlucha|atk|1\n|-unboost|p1a: Hawlucha|spa|1\n|\n|t:|1776236286\n|switch|p2b: Sweetooth|Gengar-Mega, L50, M, shiny|100/100|[from] Parting Shot\n|move|p1b: Snorlax|Fissure|p2b: Sweetooth\n|-damage|p2b: Sweetooth|0 fnt\n|faint|p2b: Sweetooth\n|-ohko\n|\n|-start|p1a: Hawlucha|perish2\n|-start|p1b: Snorlax|perish2\n|upkeep\n|-message|Centric07 forfeited.\n|\n|win|Noobilio\n|raw|Noobilio's rating: 1262 &rarr; <strong>1289</strong><br />(+27 for winning)\n|raw|Centric07's rating: 1288 &rarr; <strong>1261</strong><br />(-27 for losing)\n|l|\u2606Centric07\n|player|p2|\n",
+  "uploadtime": 1776236302,
+  "views": 34,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1261,
+  "private": 0,
+  "password": null
+}

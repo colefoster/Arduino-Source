@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2587806310",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "pinnecks",
+    "RosieCola"
+  ],
+  "log": "|j|\u2606pinnecks\n|j|\u2606RosieCola\n|t:|1776565899\n|gametype|doubles\n|player|p1|pinnecks|lyra|1112\n|player|p2|RosieCola|waitress-gen4|1134\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Altaria, L50, F, shiny|\n|poke|p1|Aerodactyl, L50, M|\n|poke|p1|Milotic, L50, F|\n|poke|p1|Houndoom, L50, M, shiny|\n|poke|p1|Raichu-Alola, L50, M|\n|poke|p1|Aegislash, L50, M, shiny|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Farigiraf, L50, F, shiny|\n|poke|p2|Golurk, L50|\n|poke|p2|Sinistcha, L50, shiny|\n|poke|p2|Vivillon, L50, M|\n|poke|p2|Palafin, L50, M|\n|teampreview|4\n|\n|t:|1776565913\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Milotic|Milotic, L50, F|100/100\n|switch|p1b: Houndoom|Houndoom, L50, M, shiny|100/100\n|switch|p2a: furia|Incineroar, L50, F|100/100\n|switch|p2b: Farigiraf|Farigiraf, L50, F, shiny|100/100\n|-ability|p1b: Houndoom|Unnerve\n|-ability|p2a: furia|Intimidate|boost\n|-unboost|p1a: Milotic|atk|1\n|-ability|p1a: Milotic|Competitive|boost\n|-boost|p1a: Milotic|spa|2\n|-unboost|p1b: Houndoom|atk|1\n|turn|1\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by pinnecks)\n|\n|t:|1776565930\n|move|p1a: Milotic|Protect|p1a: Milotic\n|-singleturn|p1a: Milotic|Protect\n|move|p2a: furia|Fake Out|p1a: Milotic\n|-activate|p1a: Milotic|move: Protect\n|move|p1b: Houndoom|Dark Pulse|p2b: Farigiraf\n|-supereffective|p2b: Farigiraf|1\n|-damage|p2b: Farigiraf|18/100\n|move|p2b: Farigiraf|Trick Room|p2b: Farigiraf\n|-fieldstart|move: Trick Room|[of] p2b: Farigiraf\n|\n|-heal|p2b: Farigiraf|24/100|[from] item: Leftovers\n|upkeep\n|turn|2\n|\n|t:|1776565950\n|move|p2b: Farigiraf|Dazzling Gleam|p1a: Milotic|[spread] p1a,p1b\n|-damage|p1a: Milotic|87/100\n|-damage|p1b: Houndoom|74/100\n|move|p2a: furia|Parting Shot|p1b: Houndoom\n|-unboost|p1b: Houndoom|atk|1\n|-unboost|p1b: Houndoom|spa|1\n|\n|t:|1776565959\n|switch|p2a: Golurk|Golurk, L50|100/100|[from] Parting Shot\n|move|p1a: Milotic|Muddy Water|p2a: Golurk|[spread] p2a\n|-miss|p1a: Milotic|p2b: Farigiraf\n|-supereffective|p2a: Golurk|1\n|-crit|p2a: Golurk\n|-damage|p2a: Golurk|0 fnt\n|faint|p2a: Golurk\n|move|p1b: Houndoom|Scorching Sands|p2b: Farigiraf\n|-damage|p2b: Farigiraf|7/100\n|-status|p2b: Farigiraf|brn\n|\n|-heal|p2b: Farigiraf|13/100 brn|[from] item: Leftovers\n|-heal|p1a: Milotic|93/100|[from] item: Leftovers\n|-damage|p2b: Farigiraf|7/100 brn|[from] brn\n|upkeep\n|-message|RosieCola forfeited.\n|\n|win|pinnecks\n|raw|pinnecks's rating: 1112 &rarr; <strong>1139</strong><br />(+27 for winning)\n|raw|RosieCola's rating: 1134 &rarr; <strong>1107</strong><br />(-27 for losing)\n|l|\u2606RosieCola\n|player|p2|\n",
+  "uploadtime": 1776565974,
+  "views": 10,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1107,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584569505",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Jthepoke",
+    "heroisemcalssa"
+  ],
+  "log": "|j|\u2606Jthepoke\n|j|\u2606heroisemcalssa\n|t:|1776269383\n|gametype|doubles\n|player|p1|Jthepoke|cyrus|1121\n|player|p2|heroisemcalssa|swimmer|1150\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Kingambit, L50, M|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Froslass, L50, F|\n|poke|p2|Aggron, L50, F|\n|poke|p2|Sableye, L50, M|\n|poke|p2|Pelipper, L50, M|\n|poke|p2|Milotic, L50, F|\n|poke|p2|Gyarados, L50, M|\n|poke|p2|Oranguru, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by heroisemcalssa)\n|\n|t:|1776269465\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Floette|Floette-Eternal, L50, F|100/100\n|switch|p1b: Kingambit|Kingambit, L50, M|100/100\n|switch|p2a: Oranguru|Oranguru, L50, F|100/100\n|switch|p2b: Aggron|Aggron, L50, F|100/100\n|turn|1\n|inactive|heroisemcalssa has 30 seconds left.\n|\n|t:|1776269490\n|detailschange|p1a: Floette|Floette-Mega, L50, F\n|-mega|p1a: Floette|Floette|Floettite\n|-ability|p1a: Floette|Fairy Aura\n|detailschange|p2b: Aggron|Aggron-Mega, L50, F\n|-mega|p2b: Aggron|Aggron|Aggronite\n|move|p1a: Floette|Moonblast|p2a: Oranguru\n|-damage|p2a: Oranguru|35/100\n|move|p1b: Kingambit|Kowtow Cleave|p2a: Oranguru\n|-supereffective|p2a: Oranguru|1\n|-damage|p2a: Oranguru|0 fnt\n|faint|p2a: Oranguru\n|move|p2b: Aggron|Iron Defense|p2b: Aggron\n|-boost|p2b: Aggron|def|2\n|\n|upkeep\n|\n|t:|1776269510\n|switch|p2a: Sableye|Sableye, L50, M|100/100\n|turn|2\n|inactive|Jthepoke has 30 seconds left.\n|\n|t:|1776269540\n|move|p2a: Sableye|Disable|p1a: Floette\n|-start|p1a: Floette|Disable|Moonblast\n|move|p1a: Floette|Light of Ruin|p2b: Aggron\n|-resisted|p2b: Aggron|1\n|-crit|p2b: Aggron\n|-damage|p2b: Aggron|3/100\n|-damage|p1a: Floette|48/100|[from] Recoil\n|move|p1b: Kingambit|Low Kick|p2b: Aggron\n|-supereffective|p2b: Aggron|1\n|-crit|p2b: Aggron\n|-damage|p2b: Aggron|0 fnt\n|faint|p2b: Aggron\n|\n|upkeep\n|-message|heroisemcalssa forfeited.\n|\n|win|Jthepoke\n|raw|Jthepoke's rating: 1121 &rarr; <strong>1148</strong><br />(+27 for winning)\n|raw|heroisemcalssa's rating: 1150 &rarr; <strong>1123</strong><br />(-27 for losing)\n|l|\u2606heroisemcalssa\n|player|p2|\n",
+  "uploadtime": 1776269559,
+  "views": 26,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1123,
+  "private": 0,
+  "password": null
+}

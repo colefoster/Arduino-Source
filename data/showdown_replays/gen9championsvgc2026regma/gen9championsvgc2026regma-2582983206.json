@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582983206",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "ippsy_436",
+    "hariez"
+  ],
+  "log": "|j|\u2606ippsy_436\n|j|\u2606hariez\n|t:|1776130661\n|gametype|doubles\n|player|p1|ippsy_436|bugcatcher-gen4dp|1242\n|player|p2|hariez|266|1178\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Kingambit, L50, M|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Talonflame, L50, M|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Froslass, L50, F|\n|poke|p1|Milotic, L50, F|\n|poke|p2|Froslass, L50, F|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Tsareena, L50, F|\n|poke|p2|Aerodactyl, L50, M|\n|poke|p2|Rotom-Wash, L50|\n|poke|p2|Sneasler, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by ippsy_436)\n|inactive|ippsy_436 has 60 seconds left.\n|inactive|hariez has 60 seconds left.\n|\n|t:|1776130714\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Sneasler|Sneasler, L50, M|100/100\n|switch|p1b: Milotic|Milotic, L50, F|100/100\n|switch|p2a: Aerodactyl|Aerodactyl, L50, M|100/100\n|switch|p2b: Tsareena|Tsareena, L50, F|100/100\n|-ability|p2a: Aerodactyl|Unnerve\n|turn|1\n|\n|t:|1776130732\n|move|p2a: Aerodactyl|Dual Wingbeat|p1a: Sneasler|[miss]\n|-miss|p2a: Aerodactyl|p1a: Sneasler\n|move|p1a: Sneasler|Dire Claw|p2b: Tsareena\n|-supereffective|p2b: Tsareena|1\n|-enditem|p2b: Tsareena|Kebia Berry|[eat]\n|-enditem|p2b: Tsareena|Kebia Berry|[weaken]\n|-damage|p2b: Tsareena|55/100\n|-status|p2b: Tsareena|slp\n|move|p1b: Milotic|Scald|p2a: Aerodactyl\n|-supereffective|p2a: Aerodactyl|1\n|-enditem|p2a: Aerodactyl|Focus Sash\n|-damage|p2a: Aerodactyl|1/100\n|-status|p2a: Aerodactyl|brn\n|cant|p2b: Tsareena|slp\n|\n|-damage|p2a: Aerodactyl|0 fnt|[from] brn\n|faint|p2a: Aerodactyl\n|upkeep\n|c|\u2606hariez|??\n|-message|hariez forfeited.\n|\n|win|ippsy_436\n|raw|ippsy_436's rating: 1242 &rarr; <strong>1262</strong><br />(+20 for winning)\n|raw|hariez's rating: 1178 &rarr; <strong>1158</strong><br />(-20 for losing)\n|l|\u2606hariez\n|player|p2|\n",
+  "uploadtime": 1776130766,
+  "views": 12,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1158,
+  "private": 0,
+  "password": null
+}

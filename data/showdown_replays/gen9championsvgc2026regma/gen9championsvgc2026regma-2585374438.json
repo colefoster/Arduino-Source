@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2585374438",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "yashyz",
+    "Sol4ri"
+  ],
+  "log": "|j|\u203dyashyz\n|j|\u2606Sol4ri\n|t:|1776342442\n|gametype|doubles\n|player|p1|yashyz|nate|1000\n|player|p2|Sol4ri|will|1083\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Archaludon, L50, M|\n|poke|p1|Pelipper, L50, M|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Sneasler, L50, F|\n|poke|p1|Dragonite, L50, F|\n|poke|p2|Zoroark-Hisui, L50, F|\n|poke|p2|Whimsicott, L50, F|\n|poke|p2|Aegislash, L50, F|\n|poke|p2|Houndoom, L50, M|\n|poke|p2|Milotic, L50, M|\n|poke|p2|Dragonite, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Sol4ri)\n|\n|t:|1776342493\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Dragonite|Dragonite, L50, F|100/100\n|switch|p1b: Sneasler|Sneasler, L50, F|100/100\n|switch|p2a: Aegislash|Aegislash, L50, F|100/100\n|switch|p2b: Whimsicott|Whimsicott, L50, F|100/100\n|turn|1\n|inactive|yashyz has 30 seconds left.\n|inactive|yashyz has 20 seconds left.\n|inactive|yashyz has 15 seconds left.\n|inactive|yashyz has 10 seconds left.\n|inactive|yashyz has 5 seconds left.\n|\n|t:|1776342548\n|move|p1b: Sneasler|Fake Out|p2b: Whimsicott\n|-immune|p2b: Whimsicott\n|move|p1a: Dragonite|Extreme Speed|p2b: Whimsicott\n|-immune|p2b: Whimsicott\n|move|p2b: Whimsicott|Icy Wind|p1b: Sneasler|[spread] p1a,p1b\n|-supereffective|p1a: Dragonite|2\n|-damage|p1a: Dragonite|38/100\n|-damage|p1b: Sneasler|81/100\n|-unboost|p1a: Dragonite|spe|1\n|-unboost|p1b: Sneasler|spe|1\n|-formechange|p2a: Aegislash|Aegislash-Blade|\n|move|p2a: Aegislash|Shadow Ball|p1a: Dragonite\n|-damage|p1a: Dragonite|0 fnt\n|faint|p1a: Dragonite\n|\n|upkeep\n|-message|yashyz forfeited.\n|\n|win|Sol4ri\n|raw|yashyz's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|raw|Sol4ri's rating: 1083 &rarr; <strong>1104</strong><br />(+21 for winning)\n|l|\u203dyashyz\n|player|p1|\n",
+  "uploadtime": 1776342572,
+  "views": 24,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

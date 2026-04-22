@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2587760620",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "Chance the Wapper",
+    "anov"
+  ],
+  "log": "|j|\u2606Chance the Wapper\n|j|\u2606anov\n|t:|1776561274\n|gametype|singles\n|player|p1|Chance the Wapper|2|1079\n|player|p2|anov|rosa|1021\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Gengar, L50, F|\n|poke|p1|Maushold-Four, L50|\n|poke|p1|Starmie, L50|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Forretress, L50, M|\n|poke|p1|Blastoise, L50, M|\n|poke|p2|Charizard, L50, M|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Araquanid, L50, M|\n|poke|p2|Hatterene, L50, F|\n|poke|p2|Toxapex, L50, M|\n|poke|p2|Hippowdon, L50, F|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Chance the Wapper)\n|\n|t:|1776561290\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Maushold|Maushold-Four, L50|100/100\n|switch|p2a: Araquanid|Araquanid, L50, M|100/100\n|turn|1\n|\n|t:|1776561299\n|move|p1a: Maushold|Population Bomb|p2a: Araquanid\n|-damage|p2a: Araquanid|90/100\n|-damage|p2a: Araquanid|81/100\n|-damage|p2a: Araquanid|71/100\n|-damage|p2a: Araquanid|62/100\n|-damage|p2a: Araquanid|51/100\n|-damage|p2a: Araquanid|40/100\n|-damage|p2a: Araquanid|30/100\n|-damage|p2a: Araquanid|19/100\n|-damage|p2a: Araquanid|9/100\n|-damage|p2a: Araquanid|0 fnt\n|faint|p2a: Araquanid\n|-hitcount|p2: Araquanid|10\n|\n|upkeep\n|\n|t:|1776561318\n|switch|p2a: Toxapex|Toxapex, L50, M|100/100\n|turn|2\n|\n|t:|1776561322\n|move|p1a: Maushold|Population Bomb|p2a: Toxapex\n|-damage|p2a: Toxapex|94/100\n|-damage|p2a: Toxapex|86/100\n|-damage|p2a: Toxapex|79/100\n|-damage|p2a: Toxapex|71/100\n|-damage|p2a: Toxapex|65/100\n|-damage|p2a: Toxapex|57/100\n|-damage|p2a: Toxapex|49/100\n|-enditem|p2a: Toxapex|Sitrus Berry|[eat]\n|-heal|p2a: Toxapex|74/100|[from] item: Sitrus Berry\n|-damage|p2a: Toxapex|67/100\n|-damage|p2a: Toxapex|59/100\n|-damage|p2a: Toxapex|52/100\n|-hitcount|p2a: Toxapex|10\n|cant|p2a: Toxapex|flinch\n|\n|upkeep\n|turn|3\n|\n|t:|1776561341\n|move|p1a: Maushold|Population Bomb|p2a: Toxapex\n|-damage|p2a: Toxapex|44/100\n|-damage|p2a: Toxapex|36/100\n|-damage|p2a: Toxapex|30/100\n|-damage|p2a: Toxapex|22/100\n|-damage|p2a: Toxapex|15/100\n|-damage|p2a: Toxapex|7/100\n|-damage|p2a: Toxapex|0 fnt\n|faint|p2a: Toxapex\n|-hitcount|p2: Toxapex|7\n|\n|upkeep\n|-message|anov forfeited.\n|\n|win|Chance the Wapper\n|raw|Chance the Wapper's rating: 1079 &rarr; <strong>1102</strong><br />(+23 for winning)\n|raw|anov's rating: 1021 &rarr; <strong>1010</strong><br />(-11 for losing)\n|l|\u2606anov\n|player|p2|\n",
+  "uploadtime": 1776561355,
+  "views": 6,
+  "formatid": "gen9championsbssregma",
+  "rating": 1010,
+  "private": 0,
+  "password": null
+}

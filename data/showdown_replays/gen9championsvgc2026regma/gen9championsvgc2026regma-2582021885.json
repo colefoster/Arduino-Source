@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582021885",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "bbas5",
+    "Carniva1"
+  ],
+  "log": "|j|\u2606bbas5\n|j|\u2606Carniva1\n|t:|1776049161\n|gametype|doubles\n|player|p1|bbas5|2|1056\n|player|p2|Carniva1|veteran|1117\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Golurk, L50|\n|poke|p1|Farigiraf, L50, F|\n|poke|p1|Sneasler, L50, F|\n|poke|p1|Torkoal, L50, M|\n|poke|p1|Kingambit, L50, F|\n|poke|p1|Araquanid, L50, F|\n|poke|p2|Froslass, L50, F|\n|poke|p2|Typhlosion-Hisui, L50, F|\n|poke|p2|Whimsicott, L50, F|\n|poke|p2|Farigiraf, L50, M|\n|poke|p2|Garchomp, L50, F|\n|poke|p2|Kingambit, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Carniva1)\n|\n|t:|1776049204\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Farigiraf|Farigiraf, L50, F|100/100\n|switch|p1b: Sneasler|Sneasler, L50, F|100/100\n|switch|p2a: Typhlosion|Typhlosion-Hisui, L50, F|100/100\n|switch|p2b: Froslass|Froslass, L50, F|100/100\n|-item|p1a: Farigiraf|Colbur Berry|[from] ability: Frisk|[of] p2a: Typhlosion\n|-item|p1b: Sneasler|Focus Sash|[from] ability: Frisk|[of] p2a: Typhlosion\n|turn|1\n|\n|t:|1776049223\n|detailschange|p2b: Froslass|Froslass-Mega, L50, F\n|-mega|p2b: Froslass|Froslass|Froslassite\n|-weather|Snowscape|[from] ability: Snow Warning|[of] p2b: Froslass\n|move|p2a: Typhlosion|Eruption|p1b: Sneasler|[spread] p1a,p1b\n|-damage|p1a: Farigiraf|50/100\n|-damage|p1b: Sneasler|25/100\n|move|p2b: Froslass|Blizzard|p1b: Sneasler|[spread] p1a,p1b\n|-damage|p1a: Farigiraf|11/100\n|-damage|p1b: Sneasler|0 fnt\n|-status|p1a: Farigiraf|frz\n|faint|p1b: Sneasler\n|cant|p1a: Farigiraf|frz\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|-message|bbas5 forfeited.\n|\n|win|Carniva1\n|raw|bbas5's rating: 1056 &rarr; <strong>1041</strong><br />(-15 for losing)\n|raw|Carniva1's rating: 1117 &rarr; <strong>1138</strong><br />(+21 for winning)\n|l|\u2606bbas5\n|player|p1|\n",
+  "uploadtime": 1776049244,
+  "views": 25,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1041,
+  "private": 0,
+  "password": null
+}

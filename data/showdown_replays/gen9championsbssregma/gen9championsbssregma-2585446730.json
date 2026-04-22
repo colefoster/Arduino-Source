@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2585446730",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "Keyan_Sans",
+    "bryannoah2309"
+  ],
+  "log": "|j|\u2606Keyan_Sans\n|j|\u2606bryannoah2309\n|t:|1776347882\n|gametype|singles\n|player|p1|Keyan_Sans|hugh|1208\n|player|p2|bryannoah2309|silver|1192\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Aegislash, L50, F|\n|poke|p1|Primarina, L50, F|\n|poke|p1|Glimmora, L50, F|\n|poke|p1|Meowscarada, L50, F|\n|poke|p1|Dragonite, L50, F|\n|poke|p1|Lopunny, L50, F|\n|poke|p2|Greninja-*, L50, M|\n|poke|p2|Gengar, L50, M|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Dragonite, L50, M|\n|poke|p2|Hatterene, L50, F|\n|poke|p2|Scizor, L50, M|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Keyan_Sans)\n|inactive|Keyan_Sans has 60 seconds left.\n|inactive|bryannoah2309 has 60 seconds left.\n|\n|t:|1776347932\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Meowscarada|Meowscarada, L50, F|100/100\n|switch|p2a: Garchomp|Garchomp, L50, M|100/100\n|turn|1\n|\n|t:|1776347938\n|switch|p2a: Scizor|Scizor, L50, M|100/100\n|move|p1a: Meowscarada|Play Rough|p2a: Scizor\n|-start|p1a: Meowscarada|typechange|Fairy|[from] ability: Protean\n|-resisted|p2a: Scizor|1\n|-damage|p2a: Scizor|78/100\n|\n|upkeep\n|turn|2\n|\n|t:|1776347950\n|switch|p1a: Dragonite|Dragonite, L50, F|100/100\n|move|p2a: Scizor|U-turn|p1a: Dragonite\n|-resisted|p1a: Dragonite|1\n|-damage|p1a: Dragonite|89/100\n|\n|t:|1776347956\n|switch|p2a: Gengar|Gengar, L50, M, shiny|100/100|[from] U-turn\n|\n|upkeep\n|turn|3\n|\n|t:|1776347961\n|switch|p1a: Meowscarada|Meowscarada, L50, F|100/100\n|detailschange|p2a: Gengar|Gengar-Mega, L50, M, shiny\n|-mega|p2a: Gengar|Gengar|Gengarite\n|move|p2a: Gengar|Icy Wind|p1a: Meowscarada\n|-supereffective|p1a: Meowscarada|1\n|-damage|p1a: Meowscarada|29/100\n|-unboost|p1a: Meowscarada|spe|1\n|\n|upkeep\n|turn|4\n|\n|t:|1776347971\n|move|p2a: Gengar|Icy Wind|p1a: Meowscarada\n|-supereffective|p1a: Meowscarada|1\n|-crit|p1a: Meowscarada\n|-damage|p1a: Meowscarada|0 fnt\n|faint|p1a: Meowscarada\n|\n|upkeep\n|\n|t:|1776347978\n|switch|p1a: Primarina|Primarina, L50, F|100/100\n|turn|5\n|\n|t:|1776347982\n|move|p2a: Gengar|Sludge Wave|p1a: Primarina\n|-supereffective|p1a: Primarina|1\n|-damage|p1a: Primarina|0 fnt\n|faint|p1a: Primarina\n|\n|upkeep\n|-message|Keyan_Sans forfeited.\n|\n|win|bryannoah2309\n|raw|Keyan_Sans's rating: 1208 &rarr; <strong>1182</strong><br />(-26 for losing)\n|raw|bryannoah2309's rating: 1192 &rarr; <strong>1218</strong><br />(+26 for winning)\n|l|\u2606Keyan_Sans\n|player|p1|\n",
+  "uploadtime": 1776348014,
+  "views": 18,
+  "formatid": "gen9championsbssregma",
+  "rating": 1182,
+  "private": 0,
+  "password": null
+}

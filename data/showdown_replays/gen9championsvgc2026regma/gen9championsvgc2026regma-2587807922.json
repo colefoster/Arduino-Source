@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2587807922",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Twishts",
+    "BossgodoraII"
+  ],
+  "log": "|j|\u2606Twishts\n|j|\u2606BossgodoraII\n|t:|1776566070\n|gametype|doubles\n|player|p1|Twishts|policeman-gen4|1468\n|player|p2|BossgodoraII|gentleman-gen4|1480\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Aerodactyl, L50, F|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Milotic, L50, M|\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Scizor, L50, F|\n|poke|p2|Delphox, L50, M|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Aerodactyl, L50, F|\n|poke|p2|Garchomp, L50, F|\n|poke|p2|Kingambit, L50, M|\n|teampreview|4\nBossgodoraII rejected open team sheets.\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by BossgodoraII)\n|\n|t:|1776566095\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Aerodactyl|Aerodactyl, L50, F|100/100\n|switch|p1b: Garchomp|Garchomp, L50, F|100/100\n|switch|p2a: Delphox|Delphox, L50, M|100/100\n|switch|p2b: Sneasler|Sneasler, L50, M|100/100\n|-ability|p1a: Aerodactyl|Unnerve\n|turn|1\n|j| CY1573\n|inactive|BossgodoraII has 30 seconds left.\n|inactive|BossgodoraII has 20 seconds left.\n|\n|t:|1776566134\n|detailschange|p2a: Delphox|Delphox-Mega, L50, M\n|-mega|p2a: Delphox|Delphox|Delphoxite\n|move|p1a: Aerodactyl|Protect|p1a: Aerodactyl\n|-singleturn|p1a: Aerodactyl|Protect\n|move|p1b: Garchomp|Protect|p1b: Garchomp\n|-singleturn|p1b: Garchomp|Protect\n|move|p2b: Sneasler|Fake Out|p1a: Aerodactyl\n|-activate|p1a: Aerodactyl|move: Protect\n|move|p2a: Delphox|Psychic|p1b: Garchomp\n|-activate|p1b: Garchomp|move: Protect\n|\n|upkeep\n|turn|2\n|inactive|Twishts has 30 seconds left.\n|\n|t:|1776566163\n|move|p2a: Delphox|Heat Wave|p1a: Aerodactyl|[spread] p1b\n|-miss|p2a: Delphox|p1a: Aerodactyl\n|-resisted|p1b: Garchomp|1\n|-damage|p1b: Garchomp|80/100\n|move|p1a: Aerodactyl|Tailwind|p1a: Aerodactyl\n|-sidestart|p1: Twishts|move: Tailwind\n|move|p1b: Garchomp|Rock Slide|p2b: Sneasler|[spread] p2a,p2b\n|-supereffective|p2a: Delphox|1\n|-crit|p2a: Delphox\n|-resisted|p2b: Sneasler|1\n|-damage|p2a: Delphox|19/100\n|-damage|p2b: Sneasler|84/100\n|move|p2b: Sneasler|Close Combat|p1b: Garchomp\n|-damage|p1b: Garchomp|17/100\n|-unboost|p2b: Sneasler|def|1\n|-unboost|p2b: Sneasler|spd|1\n|-damage|p2b: Sneasler|72/100|[from] ability: Rough Skin|[of] p1b: Garchomp\n|-enditem|p2b: Sneasler|White Herb\n|-clearnegativeboost|p2b: Sneasler|[silent]\n|\n|upkeep\n|turn|3\n|-message|BossgodoraII forfeited.\n|\n|win|Twishts\n|raw|Twishts's rating: 1468 &rarr; <strong>1489</strong><br />(+21 for winning)\n|raw|BossgodoraII's rating: 1480 &rarr; <strong>1459</strong><br />(-21 for losing)\n|l|\u2606BossgodoraII\n|player|p2|\n|l|\u2606Twishts\n|player|p1|\n|l| CY1573\n",
+  "uploadtime": 1776566272,
+  "views": 14,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1459,
+  "private": 0,
+  "password": null
+}

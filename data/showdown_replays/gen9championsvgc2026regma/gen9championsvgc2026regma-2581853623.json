@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2581853623",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "steamboatwilly",
+    "KermitFrogge"
+  ],
+  "log": "|j|\u2606steamboatwilly\n|j|\u2606KermitFrogge\n|t:|1776033872\n|gametype|doubles\n|player|p1|steamboatwilly|cynthia|1126\n|player|p2|KermitFrogge|unknown|1175\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Ninetales-Alola, L50, F|\n|poke|p1|Froslass, L50, F|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Aerodactyl, L50, F|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Basculegion, L50, M|\n|poke|p2|Rotom-Mow, L50|\n|poke|p2|Aerodactyl, L50, F|\n|poke|p2|Tyranitar, L50, M|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Sneasler, L50, M|\n|teampreview|4\n|\n|t:|1776033917\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Froslass|Froslass, L50, F|100/100\n|switch|p1b: Aerodactyl|Aerodactyl, L50, F|100/100\n|switch|p2a: Floette|Floette-Eternal, L50, F|100/100\n|switch|p2b: Sneasler|Sneasler, L50, M|100/100\n|-ability|p1b: Aerodactyl|Unnerve\n|turn|1\n|\n|t:|1776033948\n|detailschange|p1a: Froslass|Froslass-Mega, L50, F\n|-mega|p1a: Froslass|Froslass|Froslassite\n|-weather|Snowscape|[from] ability: Snow Warning|[of] p1a: Froslass\n|detailschange|p2a: Floette|Floette-Mega, L50, F\n|-mega|p2a: Floette|Floette|Floettite\n|-ability|p2a: Floette|Fairy Aura\n|move|p1b: Aerodactyl|Protect|p1b: Aerodactyl\n|-singleturn|p1b: Aerodactyl|Protect\n|move|p2b: Sneasler|Fake Out|p1b: Aerodactyl\n|-activate|p1b: Aerodactyl|move: Protect\n|move|p1a: Froslass|Blizzard|p2b: Sneasler|[spread] p2a,p2b\n|-damage|p2a: Floette|63/100\n|-damage|p2b: Sneasler|43/100\n|-status|p2a: Floette|frz\n|cant|p2a: Floette|frz\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|turn|2\n|c|\u2606KermitFrogge|awesome\n|-message|KermitFrogge forfeited.\n|\n|win|steamboatwilly\n|raw|steamboatwilly's rating: 1126 &rarr; <strong>1155</strong><br />(+29 for winning)\n|raw|KermitFrogge's rating: 1175 &rarr; <strong>1146</strong><br />(-29 for losing)\n|l|\u2606KermitFrogge\n|player|p2|\n",
+  "uploadtime": 1776033983,
+  "views": 14,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1146,
+  "private": 0,
+  "password": null
+}

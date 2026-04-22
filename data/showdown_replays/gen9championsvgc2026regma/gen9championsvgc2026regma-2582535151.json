@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582535151",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "itsjustsomni",
+    "siryoshikenobi"
+  ],
+  "log": "|j|\u2606itsjustsomni\n|j|\u2606siryoshikenobi\n|t:|1776097857\n|gametype|doubles\n|player|p1|itsjustsomni|cyrus|1057\n|player|p2|siryoshikenobi|101|1013\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Charizard, L50, M|\n|poke|p1|Venusaur, L50, M|\n|poke|p1|Whimsicott, L50, M|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Gardevoir, L50, M|\n|poke|p1|Garchomp, L50, M|\n|poke|p2|Volcarona, L50, F|\n|poke|p2|Hatterene, L50, F|\n|poke|p2|Crabominable, L50, M|\n|poke|p2|Lycanroc-Dusk, L50, M|\n|poke|p2|Aegislash, L50, F|\n|poke|p2|Torkoal, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by siryoshikenobi)\n|inactive|itsjustsomni also wants the timer to be on.\n|\n|t:|1776097879\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Charizard|Charizard, L50, M, shiny|100/100\n|switch|p1b: Venusaur|Venusaur, L50, M|100/100\n|switch|p2a: Volcarona|Volcarona, L50, F|100/100\n|switch|p2b: Hatterene|Hatterene, L50, F|100/100\n|turn|1\n|inactive|siryoshikenobi has 30 seconds left.\n|\n|t:|1776097904\n|detailschange|p1a: Charizard|Charizard-Mega-Y, L50, M, shiny\n|-mega|p1a: Charizard|Charizard|Charizardite Y\n|-weather|SunnyDay|[from] ability: Drought|[of] p1a: Charizard\n|move|p1b: Venusaur|Sludge Bomb|p2b: Hatterene\n|-supereffective|p2b: Hatterene|1\n|-damage|p2b: Hatterene|46/100\n|move|p2a: Volcarona|U-turn|p1b: Venusaur\n|-crit|p1b: Venusaur\n|-damage|p1b: Venusaur|74/100\n|\n|t:|1776097916\n|switch|p2a: Crabominable|Crabominable, L50, M|100/100|[from] U-turn\n|move|p1a: Charizard|Heat Wave|p2a: Crabominable|[spread] p2a\n|-miss|p1a: Charizard|p2b: Hatterene\n|-supereffective|p2a: Crabominable|1\n|-damage|p2a: Crabominable|0 fnt\n|faint|p2a: Crabominable\n|move|p2b: Hatterene|Trick Room|p2b: Hatterene\n|-fieldstart|move: Trick Room|[of] p2b: Hatterene\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|-message|siryoshikenobi forfeited.\n|\n|win|itsjustsomni\n|raw|itsjustsomni's rating: 1057 &rarr; <strong>1084</strong><br />(+27 for winning)\n|raw|siryoshikenobi's rating: 1013 &rarr; <strong>1003</strong><br />(-10 for losing)\n|l|\u2606siryoshikenobi\n|player|p2|\n",
+  "uploadtime": 1776097927,
+  "views": 15,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1003,
+  "private": 0,
+  "password": null
+}

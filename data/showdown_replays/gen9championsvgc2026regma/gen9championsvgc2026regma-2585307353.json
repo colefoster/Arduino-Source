@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2585307353",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "toadic6",
+    "olecram2102"
+  ],
+  "log": "|j|\u2606toadic6\n|j|\u2606olecram2102\n|t:|1776336131\n|gametype|doubles\n|player|p1|toadic6|101|1119\n|player|p2|olecram2102|silver|1137\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Hawlucha, L50, F|\n|poke|p1|Excadrill, L50, M|\n|poke|p1|Kingambit, L50, M|\n|poke|p1|Whimsicott, L50, M|\n|poke|p1|Weavile, L50, F|\n|poke|p1|Tyranitar, L50, M|\n|poke|p2|Goodra-Hisui, L50, F|\n|poke|p2|Farigiraf, L50, F|\n|poke|p2|Conkeldurr, L50, F|\n|poke|p2|Sableye, L50, M|\n|poke|p2|Torkoal, L50, M|\n|poke|p2|Azumarill, L50, F|\n|teampreview|4\n|\n|t:|1776336201\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Hawlucha|Hawlucha, L50, F|100/100\n|switch|p1b: Excadrill|Excadrill, L50, M|100/100\n|switch|p2a: Farigiraf|Farigiraf, L50, F|100/100\n|switch|p2b: Azumarill|Azumarill, L50, F|100/100\n|-ability|p1a: Hawlucha|Mold Breaker\n|-ability|p1b: Excadrill|Mold Breaker\n|turn|1\n|\n|t:|1776336235\n|detailschange|p1a: Hawlucha|Hawlucha-Mega, L50, F\n|-mega|p1a: Hawlucha|Hawlucha|Hawluchanite\n|move|p2a: Farigiraf|Protect|p2a: Farigiraf\n|-singleturn|p2a: Farigiraf|Protect\n|move|p1a: Hawlucha|Entrainment|p1b: Excadrill\n|-ability|p1b: Excadrill|No Guard|Mold Breaker|[from] move: Entrainment|[of] p1a: Hawlucha\n|move|p1b: Excadrill|Fissure|p2a: Farigiraf\n|-activate|p2a: Farigiraf|move: Protect\n|move|p2b: Azumarill|Liquidation|p1b: Excadrill\n|-supereffective|p1b: Excadrill|1\n|-enditem|p1b: Excadrill|Focus Sash\n|-damage|p1b: Excadrill|1/100\n|\n|upkeep\n|turn|2\n|\n|t:|1776336261\n|switch|p2a: Torkoal|Torkoal, L50, M|100/100\n|-weather|SunnyDay|[from] ability: Drought|[of] p2a: Torkoal\n|move|p2b: Azumarill|Aqua Jet|p1b: Excadrill\n|-supereffective|p1b: Excadrill|1\n|-damage|p1b: Excadrill|0 fnt\n|faint|p1b: Excadrill\n|move|p1a: Hawlucha|Entrainment|p1: Excadrill|[notarget]\n|-fail|p1a: Hawlucha\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|-message|toadic6 forfeited.\n|\n|win|olecram2102\n|raw|toadic6's rating: 1119 &rarr; <strong>1095</strong><br />(-24 for losing)\n|raw|olecram2102's rating: 1137 &rarr; <strong>1161</strong><br />(+24 for winning)\n|l|\u2606toadic6\n|player|p1|\n",
+  "uploadtime": 1776336278,
+  "views": 21,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1095,
+  "private": 0,
+  "password": null
+}

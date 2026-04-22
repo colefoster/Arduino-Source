@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2583608681",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "catpotatt",
+    "quelan"
+  ],
+  "log": "|j|\u2606catpotatt\n|j|\u2606quelan\n|t:|1776186289\n|gametype|doubles\n|player|p1|catpotatt|roxie|1107\n|player|p2|quelan|clown|1103\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Skarmory, L50, F|\n|poke|p1|Sneasler, L50, F|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Milotic, L50, M|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Feraligatr, L50, F|\n|poke|p2|Pelipper, L50, F|\n|poke|p2|Dragonite, L50, F|\n|poke|p2|Archaludon, L50, M|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Raichu, L50, F|\n|teampreview|4\nquelan has agreed to open team sheets.\n|\n|t:|1776186331\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Feraligatr|Feraligatr, L50, F|100/100\n|switch|p1b: Milotic|Milotic, L50, M|100/100\n|switch|p2a: Rainy Trump|Pelipper, L50, F, shiny|100/100\n|switch|p2b: DONALDO TRUMPO|Raichu, L50, F, shiny|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p2a: Rainy Trump\n|turn|1\n|\n|t:|1776186360\n|move|p1a: Feraligatr|Protect|p1a: Feraligatr\n|-singleturn|p1a: Feraligatr|Protect\n|move|p2b: DONALDO TRUMPO|Fake Out|p1b: Milotic\n|-damage|p1b: Milotic|91/100\n|move|p2a: Rainy Trump|Tailwind|p2a: Rainy Trump\n|-sidestart|p2: quelan|move: Tailwind\n|cant|p1b: Milotic|flinch\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|turn|2\n|\n|t:|1776186405\n|switch|p2b: Dragon Trump|Dragonite, L50, F|100/100\n|detailschange|p1a: Feraligatr|Feraligatr-Mega, L50, F\n|-mega|p1a: Feraligatr|Feraligatr|Feraligite\n|move|p2a: Rainy Trump|Weather Ball|p1b: Milotic\n|-resisted|p1b: Milotic|1\n|-crit|p1b: Milotic\n|-damage|p1b: Milotic|53/100\n|move|p1a: Feraligatr|Double-Edge|p2b: Dragon Trump\n|-supereffective|p2b: Dragon Trump|1\n|-damage|p2b: Dragon Trump|0 fnt\n|faint|p2b: Dragon Trump\n|-damage|p1a: Feraligatr|71/100|[from] Recoil\n|move|p1b: Milotic|Icy Wind|p2a: Rainy Trump\n|-damage|p2a: Rainy Trump|68/100\n|-unboost|p2a: Rainy Trump|spe|1\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|-message|quelan forfeited.\n|\n|win|catpotatt\n|raw|catpotatt's rating: 1107 &rarr; <strong>1132</strong><br />(+25 for winning)\n|raw|quelan's rating: 1103 &rarr; <strong>1078</strong><br />(-25 for losing)\n|l|\u2606quelan\n|player|p2|\n",
+  "uploadtime": 1776186419,
+  "views": 17,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1078,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2588223999",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Johten",
+    "Azumalex III"
+  ],
+  "log": "|j|\u2606Johten\n|j|\u203dAzumalex III\n|t:|1776615859\n|gametype|doubles\n|player|p1|Johten|169|1185\n|player|p2|Azumalex III|102|1222\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Raichu, L50, M|\n|poke|p1|Farigiraf, L50, M|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Aggron, L50, M|\n|poke|p1|Gallade, L50, M|\n|poke|p1|Rotom-Heat, L50|\n|poke|p2|Sableye, L50, M|\n|poke|p2|Milotic, L50, M|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Meganium, L50, M|\n|poke|p2|Archaludon, L50, M|\n|poke|p2|Pelipper, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Johten)\n|\n|t:|1776615882\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Raichu|Raichu, L50, M|100/100\n|switch|p1b: Farigiraf|Farigiraf, L50, M|100/100\n|switch|p2a: Sableye|Sableye, L50, M|100/100\n|switch|p2b: Milotic|Milotic, L50, M|100/100\n|turn|1\n|\n|t:|1776615893\n|move|p2a: Sableye|Light Screen|p2a: Sableye\n|-sidestart|p2: Azumalex III|move: Light Screen\n|move|p1a: Raichu|Volt Switch|p2a: Sableye\n|-damage|p2a: Sableye|84/100\n|\n|t:|1776615897\n|switch|p1a: Gallade|Gallade, L50, M|100/100|[from] Volt Switch\n|move|p2b: Milotic|Hypnosis|p1b: Farigiraf|[miss]\n|-miss|p2b: Milotic|p1b: Farigiraf\n|move|p1b: Farigiraf|Beat Up|p1a: Gallade\n|-damage|p1a: Gallade|95/100\n|-ability|p1a: Gallade|Justified|boost\n|-boost|p1a: Gallade|atk|1\n|-damage|p1a: Gallade|91/100\n|-ability|p1a: Gallade|Justified|boost\n|-boost|p1a: Gallade|atk|1\n|-damage|p1a: Gallade|87/100\n|-ability|p1a: Gallade|Justified|boost\n|-boost|p1a: Gallade|atk|1\n|-damage|p1a: Gallade|83/100\n|-ability|p1a: Gallade|Justified|boost\n|-boost|p1a: Gallade|atk|1\n|-hitcount|p1a: Gallade|4\n|\n|upkeep\n|turn|2\n|-message|Azumalex III forfeited.\n|\n|win|Johten\n|raw|Johten's rating: 1185 &rarr; <strong>1213</strong><br />(+28 for winning)\n|raw|Azumalex III's rating: 1222 &rarr; <strong>1194</strong><br />(-28 for losing)\n|l|\u203dAzumalex III\n|player|p2|\n",
+  "uploadtime": 1776615914,
+  "views": 18,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1194,
+  "private": 0,
+  "password": null
+}

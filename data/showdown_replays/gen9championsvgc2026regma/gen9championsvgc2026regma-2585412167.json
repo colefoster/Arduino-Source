@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2585412167",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Cube Holder",
+    "unfurroml"
+  ],
+  "log": "|j|\u2606Cube Holder\n|j|\u2606unfurroml\n|t:|1776345451\n|gametype|doubles\n|player|p1|Cube Holder|2|1169\n|player|p2|unfurroml|spark|1187\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Aerodactyl, L50, F|\n|poke|p1|Greninja-*, L50, F|\n|poke|p1|Charizard, L50, M|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Kangaskhan, L50, F|\n|poke|p1|Venusaur, L50, M|\n|poke|p2|Pidgeot, L50, F|\n|poke|p2|Raichu, L50, F|\n|poke|p2|Garchomp, L50, F|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Farigiraf, L50, F|\n|teampreview|4\n|\n|t:|1776345481\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Kangaskhan|Kangaskhan, L50, F|100/100\n|switch|p1b: Sneasler|Sneasler, L50, M|100/100\n|switch|p2a: Pidgeot|Pidgeot, L50, F, shiny|100/100\n|switch|p2b: Incineroar|Incineroar, L50, M|100/100\n|-ability|p2b: Incineroar|Intimidate|boost\n|-fail|p1a: Kangaskhan|unboost|Attack|[from] ability: Scrappy|[of] p1a: Kangaskhan\n|-unboost|p1b: Sneasler|atk|1\n|-enditem|p1b: Sneasler|White Herb\n|-clearnegativeboost|p1b: Sneasler|[silent]\n|turn|1\n|\n|t:|1776345498\n|switch|p2b: Farigiraf|Farigiraf, L50, F|100/100\n|detailschange|p2a: Pidgeot|Pidgeot-Mega, L50, F, shiny\n|-mega|p2a: Pidgeot|Pidgeot|Pidgeotite\n|detailschange|p1a: Kangaskhan|Kangaskhan-Mega, L50, F\n|-mega|p1a: Kangaskhan|Kangaskhan|Kangaskhanite\n|move|p1b: Sneasler|Fake Out||[still]\n|cant|p2b: Farigiraf|ability: Armor Tail|Fake Out|[of] p1b: Sneasler\n|move|p1a: Kangaskhan|Fake Out||[still]\n|cant|p2b: Farigiraf|ability: Armor Tail|Fake Out|[of] p1a: Kangaskhan\n|move|p2a: Pidgeot|Tailwind|p2a: Pidgeot\n|-sidestart|p2: unfurroml|move: Tailwind\n|\n|upkeep\n|turn|2\n|\n|t:|1776345515\n|switch|p2b: Incineroar|Incineroar, L50, M|100/100\n|-ability|p2b: Incineroar|Intimidate|boost\n|-unboost|p1a: Kangaskhan|atk|1\n|-unboost|p1b: Sneasler|atk|1\n|move|p2a: Pidgeot|Hurricane|p1b: Sneasler\n|-supereffective|p1b: Sneasler|1\n|-damage|p1b: Sneasler|0 fnt\n|faint|p1b: Sneasler\n|move|p1a: Kangaskhan|Ice Punch|p2a: Pidgeot\n|-supereffective|p2a: Pidgeot|1\n|-damage|p2a: Pidgeot|55/100\n|-supereffective|p2a: Pidgeot|1\n|-damage|p2a: Pidgeot|44/100\n|-hitcount|p2a: Pidgeot|2\n|\n|upkeep\n|-message|Cube Holder forfeited.\n|\n|win|unfurroml\n|raw|Cube Holder's rating: 1169 &rarr; <strong>1145</strong><br />(-24 for losing)\n|raw|unfurroml's rating: 1187 &rarr; <strong>1211</strong><br />(+24 for winning)\n|l|\u2606Cube Holder\n|player|p1|\n",
+  "uploadtime": 1776345541,
+  "views": 23,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1145,
+  "private": 0,
+  "password": null
+}

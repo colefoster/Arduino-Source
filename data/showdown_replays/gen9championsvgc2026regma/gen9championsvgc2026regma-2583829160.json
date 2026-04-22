@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2583829160",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "jadex842",
+    "G4rdivoir"
+  ],
+  "log": "|j|\u2606jadex842\n|j|\u2606G4rdivoir\n|t:|1776200959\n|gametype|doubles\n|player|p1|jadex842|ghetsis|1085\n|player|p2|G4rdivoir|miku-fire|1025\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Golurk, L50|\n|poke|p1|Farigiraf, L50, F|\n|poke|p1|Torkoal, L50, F|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Venusaur, L50, M|\n|poke|p2|Kangaskhan, L50, F|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Garchomp, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by jadex842)\n|\n|t:|1776201010\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Golurk|Golurk, L50|100/100\n|switch|p1b: Farigiraf|Farigiraf, L50, F|100/100\n|switch|p2a: Kangaskhan|Kangaskhan, L50, F, shiny|100/100\n|switch|p2b: Incineroar|Incineroar, L50, F, shiny|100/100\n|-ability|p2b: Incineroar|Intimidate|boost\n|-unboost|p1a: Golurk|atk|1\n|-unboost|p1b: Farigiraf|atk|1\n|turn|1\n|\n|t:|1776201035\n|detailschange|p2a: Kangaskhan|Kangaskhan-Mega, L50, F, shiny\n|-mega|p2a: Kangaskhan|Kangaskhan|Kangaskhanite\n|detailschange|p1a: Golurk|Golurk-Mega, L50\n|-mega|p1a: Golurk|Golurk|Golurkite\n|move|p2a: Kangaskhan|Drain Punch|p1a: Golurk\n|-immune|p1a: Golurk\n|move|p1a: Golurk|Headlong Rush|p2b: Incineroar\n|-supereffective|p2b: Incineroar|1\n|-damage|p2b: Incineroar|0 fnt\n|-unboost|p1a: Golurk|def|1\n|-unboost|p1a: Golurk|spd|1\n|faint|p2b: Incineroar\n|move|p1b: Farigiraf|Trick Room|p1b: Farigiraf\n|-fieldstart|move: Trick Room|[of] p1b: Farigiraf\n|\n|upkeep\n|-message|G4rdivoir forfeited.\n|\n|win|jadex842\n|raw|jadex842's rating: 1085 &rarr; <strong>1108</strong><br />(+23 for winning)\n|raw|G4rdivoir's rating: 1025 &rarr; <strong>1014</strong><br />(-11 for losing)\n|l|\u2606G4rdivoir\n|player|p2|\n",
+  "uploadtime": 1776201054,
+  "views": 26,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1014,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584842444",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Rocket Bear",
+    "messymylo"
+  ],
+  "log": "|j|\u2606Rocket Bear\n|j|\u2606messymylo\n|t:|1776287919\n|gametype|doubles\n|player|p1|Rocket Bear|101|1065\n|player|p2|messymylo|bruno|1128\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Crabominable, L50, F|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Pelipper, L50, F|\n|poke|p1|Archaludon, L50, M|\n|poke|p1|Meowscarada, L50, F|\n|poke|p1|Farigiraf, L50, M|\n|poke|p2|Delphox, L50, F|\n|poke|p2|Clefable, L50, F|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Kingambit, L50, M|\n|poke|p2|Dragonite, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by messymylo)\n|\n|t:|1776287953\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Meowscarada|Meowscarada, L50, F|100/100\n|switch|p1b: Farigiraf|Farigiraf, L50, M|100/100\n|switch|p2a: Clefable|Clefable, L50, F|100/100\n|switch|p2b: Kingambit|Kingambit, L50, M, shiny|100/100\n|turn|1\n|\n|t:|1776287973\n|move|p1a: Meowscarada|Low Kick|p2b: Kingambit\n|-start|p1a: Meowscarada|typechange|Fighting|[from] ability: Protean\n|-supereffective|p2b: Kingambit|2\n|-damage|p2b: Kingambit|0 fnt\n|faint|p2b: Kingambit\n|move|p2a: Clefable|Moonblast|p1a: Meowscarada\n|-supereffective|p1a: Meowscarada|1\n|-damage|p1a: Meowscarada|4/100\n|move|p1b: Farigiraf|Trick Room|p1b: Farigiraf\n|-fieldstart|move: Trick Room|[of] p1b: Farigiraf\n|\n|upkeep\n|\n|t:|1776287980\n|switch|p2b: Sneasler|Sneasler, L50, M|100/100\n|turn|2\n|\n|t:|1776287991\n|switch|p1a: Incineroar|Incineroar, L50, F|100/100\n|-ability|p1a: Incineroar|Intimidate|boost\n|-unboost|p2a: Clefable|atk|1\n|-unboost|p2b: Sneasler|atk|1\n|-enditem|p2b: Sneasler|White Herb\n|-clearnegativeboost|p2b: Sneasler|[silent]\n|move|p2b: Sneasler|Fake Out||[still]\n|cant|p1b: Farigiraf|ability: Armor Tail|Fake Out|[of] p2b: Sneasler\n|move|p1b: Farigiraf|Twin Beam|p2b: Sneasler\n|-supereffective|p2b: Sneasler|2\n|-damage|p2b: Sneasler|8/100\n|-supereffective|p2b: Sneasler|2\n|-damage|p2b: Sneasler|0 fnt\n|faint|p2b: Sneasler\n|-hitcount|p2: Sneasler|2\n|move|p2a: Clefable|Encore|p1b: Farigiraf\n|-start|p1b: Farigiraf|Encore\n|-enditem|p1b: Farigiraf|Mental Herb\n|-end|p1b: Farigiraf|Encore\n|\n|upkeep\n|-message|messymylo forfeited.\n|\n|win|Rocket Bear\n|raw|Rocket Bear's rating: 1065 &rarr; <strong>1101</strong><br />(+36 for winning)\n|raw|messymylo's rating: 1128 &rarr; <strong>1099</strong><br />(-29 for losing)\n",
+  "uploadtime": 1776288011,
+  "views": 21,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1099,
+  "private": 0,
+  "password": null
+}

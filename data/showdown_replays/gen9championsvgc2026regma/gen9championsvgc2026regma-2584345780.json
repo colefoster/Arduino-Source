@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584345780",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "iamfurthermaths",
+    "LucaSnivy"
+  ],
+  "log": "|j|\u2606iamfurthermaths\n|j|\u2606LucaSnivy\n|t:|1776253448\n|gametype|doubles\n|player|p1|iamfurthermaths|102|1000\n|player|p2|LucaSnivy|guitarist|1088\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Palafin, L50, F|\n|poke|p1|Politoed, L50, F|\n|poke|p1|Feraligatr, L50, F|\n|poke|p1|Delphox, L50, M|\n|poke|p1|Meowstic, L50, M|\n|poke|p1|Froslass, L50, F|\n|poke|p2|Serperior, L50, F|\n|poke|p2|Meowstic, L50, M|\n|poke|p2|Starmie, L50|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Houndoom, L50, F|\n|poke|p2|Ninetales-Alola, L50, F|\n|teampreview|4\n|\n|t:|1776253484\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Palafin|Palafin, L50, F|100/100\n|switch|p1b: Politoed|Politoed, L50, F|100/100\n|switch|p2a: Garchomp|Garchomp, L50, M|100/100\n|switch|p2b: Ninetales|Ninetales-Alola, L50, F|100/100\n|-weather|Snowscape|[from] ability: Snow Warning|[of] p2b: Ninetales\n|-weather|RainDance|[from] ability: Drizzle|[of] p1b: Politoed\n|turn|1\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by iamfurthermaths)\n|\n|t:|1776253504\n|move|p1a: Palafin|Protect|p1a: Palafin\n|-singleturn|p1a: Palafin|Protect\n|move|p2a: Garchomp|Stomping Tantrum|p1b: Politoed\n|-damage|p1b: Politoed|51/100\n|move|p2b: Ninetales|Freeze-Dry|p1b: Politoed\n|-supereffective|p1b: Politoed|1\n|-crit|p1b: Politoed\n|-damage|p1b: Politoed|0 fnt\n|faint|p1b: Politoed\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|-message|iamfurthermaths forfeited.\n|\n|win|LucaSnivy\n|raw|iamfurthermaths's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|raw|LucaSnivy's rating: 1088 &rarr; <strong>1108</strong><br />(+20 for winning)\n|l|\u2606iamfurthermaths\n|player|p1|\n",
+  "uploadtime": 1776253521,
+  "views": 29,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

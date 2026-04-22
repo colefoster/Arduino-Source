@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2589151785",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "malfatopsilo",
+    "PopinoVT"
+  ],
+  "log": "|j|\u2606malfatopsilo\n|j|\u2606PopinoVT\n|t:|1776702987\n|gametype|singles\n|player|p1|malfatopsilo|gambler|1023\n|player|p2|PopinoVT|cynthia|1128\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Feraligatr, L50, M|\n|poke|p1|Orthworm, L50, F|\n|poke|p1|Mimikyu, L50, F|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Meowscarada, L50, F|\n|poke|p1|Hatterene, L50, F|\n|poke|p2|Lucario, L50, F|\n|poke|p2|Meowscarada, L50, M|\n|poke|p2|Garchomp, L50, F|\n|poke|p2|Delphox, L50, M|\n|poke|p2|Milotic, L50, F|\n|poke|p2|Kingambit, L50, F|\n|teampreview|3\n|\n|t:|1776703013\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Orthworm|Orthworm, L50, F|100/100\n|switch|p2a: Meowscarada|Meowscarada, L50, M|100/100\n|turn|1\n|\n|t:|1776703024\n|move|p2a: Meowscarada|U-turn|p1a: Orthworm\n|-start|p2a: Meowscarada|typechange|Bug|[from] ability: Protean\n|-resisted|p1a: Orthworm|1\n|-damage|p1a: Orthworm|90/100\n|\n|t:|1776703028\n|switch|p2a: Garchomp|Garchomp, L50, F|100/100|[from] U-turn\n|move|p1a: Orthworm|Stealth Rock|p2a: Garchomp\n|-sidestart|p2: PopinoVT|move: Stealth Rock\n|\n|upkeep\n|turn|2\n|\n|t:|1776703038\n|move|p2a: Garchomp|Swords Dance|p2a: Garchomp\n|-boost|p2a: Garchomp|atk|2\n|move|p1a: Orthworm|Shed Tail|p1a: Orthworm\n|-start|p1a: Orthworm|Substitute|[from] move: Shed Tail\n|-damage|p1a: Orthworm|40/100\n|-enditem|p1a: Orthworm|Sitrus Berry|[eat]\n|-heal|p1a: Orthworm|65/100|[from] item: Sitrus Berry\n|\n|t:|1776703042\n|switch|p1a: Feraligatr|Feraligatr, L50, M|100/100|[from] Shed Tail\n|\n|upkeep\n|turn|3\n|\n|t:|1776703049\n|detailschange|p1a: Feraligatr|Feraligatr-Mega, L50, M\n|-mega|p1a: Feraligatr|Feraligatr|Feraligite\n|move|p2a: Garchomp|Scale Shot|p1a: Feraligatr\n|-supereffective|p1a: Feraligatr|1\n|-end|p1a: Feraligatr|Substitute\n|-supereffective|p1a: Feraligatr|1\n|-damage|p1a: Feraligatr|48/100\n|-supereffective|p1a: Feraligatr|1\n|-damage|p1a: Feraligatr|0 fnt\n|faint|p1a: Feraligatr\n|-hitcount|p1: Feraligatr|3\n|-unboost|p2a: Garchomp|def|1\n|-boost|p2a: Garchomp|spe|1\n|\n|upkeep\n|-message|malfatopsilo forfeited.\n|\n|win|PopinoVT\n|raw|malfatopsilo's rating: 1023 &rarr; <strong>1013</strong><br />(-10 for losing)\n|raw|PopinoVT's rating: 1128 &rarr; <strong>1146</strong><br />(+18 for winning)\n|l|\u2606malfatopsilo\n|player|p1|\n",
+  "uploadtime": 1776703066,
+  "views": 5,
+  "formatid": "gen9championsbssregma",
+  "rating": 1013,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582950414",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "retrojp",
+    "Riyahi"
+  ],
+  "log": "|j|\u2606retrojp\n|j|\u2606Riyahi\n|t:|1776127760\n|gametype|doubles\n|player|p1|retrojp|1|1052\n|player|p2|Riyahi|birdkeeper|1065\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Tyranitar, L50, F|\n|poke|p1|Corviknight, L50, M|\n|poke|p1|Primarina, L50, M|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Excadrill, L50, M|\n|poke|p1|Sinistcha, L50|\n|poke|p2|Drampa, L50, M|\n|poke|p2|Farigiraf, L50, M|\n|poke|p2|Pelipper, L50, F|\n|poke|p2|Archaludon, L50, F|\n|poke|p2|Jolteon, L50, M|\n|poke|p2|Meganium, L50, M|\n|teampreview|4\n|\n|t:|1776127800\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Tyranitar|Tyranitar, L50, F|100/100\n|switch|p1b: Excadrill|Excadrill, L50, M|100/100\n|switch|p2a: Farigiraf|Farigiraf, L50, M|100/100\n|switch|p2b: Jolteon|Jolteon, L50, M|100/100\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p1a: Tyranitar\n|turn|1\n|\n|t:|1776127825\n|move|p1b: Excadrill|High Horsepower|p2b: Jolteon\n|-supereffective|p2b: Jolteon|1\n|-enditem|p2b: Jolteon|Focus Sash\n|-damage|p2b: Jolteon|1/100\n|move|p2b: Jolteon|Electric Terrain|p2b: Jolteon\n|-fieldstart|move: Electric Terrain\n|move|p1a: Tyranitar|Crunch|p2a: Farigiraf\n|-supereffective|p2a: Farigiraf|1\n|-crit|p2a: Farigiraf\n|-damage|p2a: Farigiraf|0 fnt\n|faint|p2a: Farigiraf\n|\n|-weather|Sandstorm|[upkeep]\n|-damage|p2b: Jolteon|0 fnt|[from] Sandstorm\n|faint|p2b: Jolteon\n|upkeep\n|\n|t:|1776127841\n|switch|p2b: Pelipper|Pelipper, L50, F|100/100\n|switch|p2a: Archaludon|Archaludon, L50, F|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p2b: Pelipper\n|turn|2\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by retrojp)\n|\n|t:|1776127882\n|move|p1b: Excadrill|High Horsepower|p2a: Archaludon\n|-supereffective|p2a: Archaludon|1\n|-crit|p2a: Archaludon\n|-damage|p2a: Archaludon|0 fnt\n|faint|p2a: Archaludon\n|move|p1a: Tyranitar|Rock Slide|p2b: Pelipper\n|-supereffective|p2b: Pelipper|1\n|-damage|p2b: Pelipper|17/100\n|move|p2b: Pelipper|Weather Ball|p1b: Excadrill\n|-supereffective|p1b: Excadrill|1\n|-enditem|p1b: Excadrill|Focus Sash\n|-damage|p1b: Excadrill|1/100\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|turn|3\n|\n|t:|1776127900\n|detailschange|p1a: Tyranitar|Tyranitar-Mega, L50, F\n|-mega|p1a: Tyranitar|Tyranitar|Tyranitarite\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p1a: Tyranitar\n|move|p1b: Excadrill|Iron Head|p2b: Pelipper\n|-resisted|p2b: Pelipper|1\n|-crit|p2b: Pelipper\n|-damage|p2b: Pelipper|0 fnt\n|faint|p2b: Pelipper\n|\n|win|retrojp\n|raw|retrojp's rating: 1052 &rarr; <strong>1085</strong><br />(+33 for winning)\n|raw|Riyahi's rating: 1065 &rarr; <strong>1045</strong><br />(-20 for losing)\n",
+  "uploadtime": 1776127910,
+  "views": 9,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1045,
+  "private": 0,
+  "password": null
+}

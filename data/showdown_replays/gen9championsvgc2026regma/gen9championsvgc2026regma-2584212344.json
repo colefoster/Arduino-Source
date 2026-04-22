@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584212344",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "kurama512",
+    "mrw1sh"
+  ],
+  "log": "|j|\u2606kurama512\n|j|\u2606mrw1sh\n|t:|1776238841\n|gametype|doubles\n|player|p1|kurama512|1|1349\n|player|p2|mrw1sh|169|1327\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Victreebel, L50, M|\n|poke|p1|Torkoal, L50, F|\n|poke|p1|Dragonite, L50, M|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Farigiraf, L50, M|\n|poke|p1|Garchomp, L50, M|\n|poke|p2|Alakazam, L50, F|\n|poke|p2|Meowstic, L50, M|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Aerodactyl, L50, F|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Kingambit, L50, F|\n|teampreview|4\n|\n|t:|1776238880\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Victreebel|Victreebel, L50, M|100/100\n|switch|p1b: Farigiraf|Farigiraf, L50, M|100/100\n|switch|p2a: Alakazam|Alakazam, L50, F|100/100\n|switch|p2b: Meowstic|Meowstic, L50, M|100/100\n|turn|1\n|\n|t:|1776238914\n|detailschange|p2a: Alakazam|Alakazam-Mega, L50, F\n|-mega|p2a: Alakazam|Alakazam|Alakazite\n|-ability|p2a: Alakazam|Armor Tail|Trace|[from] ability: Trace|[of] p1b: Farigiraf\n|detailschange|p1a: Victreebel|Victreebel-Mega, L50, M\n|-mega|p1a: Victreebel|Victreebel|Victreebelite\n|move|p2b: Meowstic|Psychic Terrain|p2b: Meowstic\n|-fieldstart|move: Psychic Terrain\n|move|p2a: Alakazam|Expanding Force|p1b: Farigiraf|[spread] p1a,p1b\n|-supereffective|p1a: Victreebel|1\n|-resisted|p1b: Farigiraf|1\n|-damage|p1a: Victreebel|0 fnt\n|-damage|p1b: Farigiraf|61/100\n|-damage|p2a: Alakazam|0 fnt|[from] ability: Innards Out|[of] p1a: Victreebel\n|faint|p1a: Victreebel\n|faint|p2a: Alakazam\n|move|p1b: Farigiraf|Trick Room|p1b: Farigiraf\n|-fieldstart|move: Trick Room|[of] p1b: Farigiraf\n|\n|upkeep\n|-message|mrw1sh forfeited.\n|\n|win|kurama512\n|raw|kurama512's rating: 1349 &rarr; <strong>1368</strong><br />(+19 for winning)\n|raw|mrw1sh's rating: 1327 &rarr; <strong>1308</strong><br />(-19 for losing)\n|l|\u2606mrw1sh\n|player|p2|\n",
+  "uploadtime": 1776238940,
+  "views": 38,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1308,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2587967431",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "SmallGun",
+    "asasdfaf"
+  ],
+  "log": "|j|\u2606SmallGun\n|j|\u2606asasdfaf\n|t:|1776586177\n|gametype|singles\n|player|p1|SmallGun|265|1323\n|player|p2|asasdfaf|265|1243\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Charizard, L50, M, shiny|\n|poke|p1|Chimecho, L50, F|\n|poke|p1|Primarina, L50, M|\n|poke|p1|Kingambit, L50, M|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Basculegion, L50, M|\n|poke|p2|Feraligatr, L50, M|\n|poke|p2|Aegislash, L50, M|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Rotom-Heat, L50|\n|poke|p2|Venusaur, L50, M|\n|poke|p2|Clefable, L50, M|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by asasdfaf)\n|\n|t:|1776586232\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Garchomp|Garchomp, L50, F|100/100\n|switch|p2a: Clefable|Clefable, L50, M|100/100\n|turn|1\n|\n|t:|1776586242\n|switch|p1a: Chimecho|Chimecho, L50, F|100/100\n|move|p2a: Clefable|Moonblast|p1a: Chimecho\n|-damage|p1a: Chimecho|65/100\n|\n|upkeep\n|turn|2\n|\n|t:|1776586246\n|switch|p2a: Aegislash|Aegislash, L50, M|100/100\n|detailschange|p1a: Chimecho|Chimecho-Mega, L50, F\n|-mega|p1a: Chimecho|Chimecho|Chimechite\n|move|p1a: Chimecho|Trick Room|p1a: Chimecho\n|-fieldstart|move: Trick Room|[of] p1a: Chimecho\n|\n|upkeep\n|turn|3\n|\n|t:|1776586254\n|switch|p1a: Kingambit|Kingambit, L50, M|100/100\n|-formechange|p2a: Aegislash|Aegislash-Blade|\n|move|p2a: Aegislash|Shadow Ball|p1a: Kingambit\n|-resisted|p1a: Kingambit|1\n|-damage|p1a: Kingambit|77/100\n|\n|upkeep\n|turn|4\n|\n|t:|1776586263\n|move|p1a: Kingambit|Swords Dance|p1a: Kingambit\n|-boost|p1a: Kingambit|atk|2\n|move|p2a: Aegislash|Close Combat|p1a: Kingambit\n|-supereffective|p1a: Kingambit|2\n|-damage|p1a: Kingambit|0 fnt\n|-unboost|p2a: Aegislash|def|1\n|-unboost|p2a: Aegislash|spd|1\n|faint|p1a: Kingambit\n|-end|p1a: Kingambit|fallenundefined|[silent]\n|\n|upkeep\n|-message|SmallGun forfeited.\n|\n|win|asasdfaf\n|raw|SmallGun's rating: 1323 &rarr; <strong>1298</strong><br />(-25 for losing)\n|raw|asasdfaf's rating: 1243 &rarr; <strong>1274</strong><br />(+31 for winning)\n|l|\u2606SmallGun\n|player|p1|\n",
+  "uploadtime": 1776586267,
+  "views": 3,
+  "formatid": "gen9championsbssregma",
+  "rating": 1274,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586946773",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "loklastaji",
+    "MvillMpersonality"
+  ],
+  "log": "|j|\u2606loklastaji\n|j|\u2606MvillMpersonality\n|t:|1776474480\n|gametype|doubles\n|player|p1|loklastaji|2|1032\n|player|p2|MvillMpersonality|pokemaniac|1067\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Samurott-Hisui, L50, F|\n|poke|p1|Delphox, L50, M|\n|poke|p1|Tinkaton, L50, F|\n|poke|p1|Decidueye-Hisui, L50, M|\n|poke|p1|Altaria, L50, F|\n|poke|p1|Farigiraf, L50, F|\n|poke|p2|Scovillain, L50, M|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Hatterene, L50, F|\n|poke|p2|Kingambit, L50, M|\n|poke|p2|Rhyperior, L50, M|\n|poke|p2|Tyranitar, L50, M|\n|teampreview|4\n|\n|t:|1776474518\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Delphox|Delphox, L50, M|100/100\n|switch|p1b: Tinkaton|Tinkaton, L50, F|100/100\n|switch|p2a: The Antagonist|Scovillain, L50, M|100/100\n|switch|p2b: Rhyperior|Rhyperior, L50, M|100/100\n|turn|1\n|\n|t:|1776474558\n|switch|p1a: Decidueye|Decidueye-Hisui, L50, M|100/100\n|detailschange|p2a: The Antagonist|Scovillain-Mega, L50, M\n|-mega|p2a: The Antagonist|Scovillain|Scovillainite\n|move|p2b: Rhyperior|Protect|p2b: Rhyperior\n|-singleturn|p2b: Rhyperior|Protect\n|move|p1b: Tinkaton|Fake Out|p2b: Rhyperior\n|-activate|p2b: Rhyperior|move: Protect\n|move|p2a: The Antagonist|Overheat|p1b: Tinkaton|[miss]\n|-miss|p2a: The Antagonist|p1b: Tinkaton\n|\n|upkeep\n|turn|2\n|c|\u2606MvillMpersonality|T.T\n|\n|t:|1776474580\n|move|p1b: Tinkaton|Protect|p1b: Tinkaton\n|-singleturn|p1b: Tinkaton|Protect\n|move|p2a: The Antagonist|Rage Powder|p2a: The Antagonist\n|-singleturn|p2a: The Antagonist|move: Rage Powder\n|move|p1a: Decidueye|Leaf Blade|p2b: Rhyperior\n|-supereffective|p2b: Rhyperior|2\n|-crit|p2b: Rhyperior\n|-damage|p2b: Rhyperior|0 fnt\n|faint|p2b: Rhyperior\n|\n|upkeep\n|c|\u2606MvillMpersonality|grass.... that's on me but still\n|-message|MvillMpersonality forfeited.\n|\n|win|loklastaji\n|raw|loklastaji's rating: 1020 &rarr; <strong>1062</strong><br />(+42 for winning)\n|raw|MvillMpersonality's rating: 1067 &rarr; <strong>1044</strong><br />(-23 for losing)\n|l|\u2606MvillMpersonality\n|player|p2|\n",
+  "uploadtime": 1776474595,
+  "views": 16,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1044,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2581346611",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "jjoony",
+    "pacmaster000"
+  ],
+  "log": "|j|\u2606jjoony\n|j|\u2606pacmaster000\n|t:|1775989779\n|gametype|singles\n|player|p1|jjoony|169|1099\n|player|p2|pacmaster000|scientist-gen4dp|1089\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Tyranitar, L50, M|\n|poke|p1|Hippowdon, L50, F|\n|poke|p1|Primarina, L50, M|\n|poke|p1|Excadrill, L50, F|\n|poke|p1|Hydreigon, L50, F|\n|poke|p1|Scizor, L50, M|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Froslass, L50, F|\n|poke|p2|Rotom-Wash, L50|\n|poke|p2|Garchomp, L50, F|\n|poke|p2|Kingambit, L50, M|\n|poke|p2|Mimikyu, L50, F|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by jjoony)\n|inactive|jjoony has 60 seconds left.\n|\n|t:|1775989813\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Scizor|Scizor, L50, M|100/100\n|switch|p2a: Rotom|Rotom-Wash, L50|100/100\n|turn|1\n|\n|t:|1775989824\n|detailschange|p1a: Scizor|Scizor-Mega, L50, M\n|-mega|p1a: Scizor|Scizor|Scizorite\n|move|p2a: Rotom|Will-O-Wisp|p1a: Scizor\n|-status|p1a: Scizor|brn\n|move|p1a: Scizor|Swords Dance|p1a: Scizor\n|-boost|p1a: Scizor|atk|2\n|\n|-damage|p1a: Scizor|95/100 brn|[from] brn\n|upkeep\n|turn|2\n|\n|t:|1775989829\n|move|p2a: Rotom|Hydro Pump|p1a: Scizor\n|-damage|p1a: Scizor|60/100 brn\n|move|p1a: Scizor|Swords Dance|p1a: Scizor\n|-boost|p1a: Scizor|atk|2\n|\n|-damage|p1a: Scizor|55/100 brn|[from] brn\n|upkeep\n|turn|3\n|\n|t:|1775989832\n|move|p2a: Rotom|Hydro Pump|p1a: Scizor\n|-crit|p1a: Scizor\n|-damage|p1a: Scizor|0 fnt\n|faint|p1a: Scizor\n|\n|upkeep\n|\n|t:|1775989836\n|switch|p1a: Tyranitar|Tyranitar, L50, M|100/100\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p1a: Tyranitar\n|turn|4\n|\n|t:|1775989844\n|move|p1a: Tyranitar|Dragon Dance|p1a: Tyranitar\n|-boost|p1a: Tyranitar|atk|1\n|-boost|p1a: Tyranitar|spe|1\n|move|p2a: Rotom|Will-O-Wisp|p1a: Tyranitar\n|-status|p1a: Tyranitar|brn\n|\n|-weather|Sandstorm|[upkeep]\n|-damage|p2a: Rotom|95/100|[from] Sandstorm\n|-heal|p2a: Rotom|100/100|[from] item: Leftovers\n|-damage|p1a: Tyranitar|95/100 brn|[from] brn\n|upkeep\n|turn|5\n|-message|jjoony forfeited.\n|\n|win|pacmaster000\n|raw|jjoony's rating: 1099 &rarr; <strong>1073</strong><br />(-26 for losing)\n|raw|pacmaster000's rating: 1089 &rarr; <strong>1116</strong><br />(+27 for winning)\n|l|\u2606jjoony\n|player|p1|\n",
+  "uploadtime": 1775989853,
+  "views": 9,
+  "formatid": "gen9championsbssregma",
+  "rating": 1073,
+  "private": 0,
+  "password": null
+}

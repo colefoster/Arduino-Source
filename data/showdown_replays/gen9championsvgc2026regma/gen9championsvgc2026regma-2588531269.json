@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2588531269",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "eevee1ynn",
+    "LUISD13G0com"
+  ],
+  "log": "|j|\u2606eevee1ynn\n|j|\u2606LUISD13G0com\n|t:|1776642189\n|gametype|doubles\n|player|p1|eevee1ynn|lass-gen8|1291\n|player|p2|LUISD13G0com|265|1273\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Gallade, L50, M|\n|poke|p1|Charizard, L50, F|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Whimsicott, L50, F|\n|poke|p1|Rotom-Wash, L50|\n|poke|p2|Chesnaught, L50, M|\n|poke|p2|Sableye, L50, F, shiny|\n|poke|p2|Basculegion-F, L50, F|\n|poke|p2|Primarina, L50, F|\n|poke|p2|Corviknight, L50, M|\n|poke|p2|Farigiraf, L50, F|\n|teampreview|4\n|\n|t:|1776642234\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Rotom|Rotom-Wash, L50|100/100\n|switch|p1b: Charizard|Charizard, L50, F|100/100\n|switch|p2a: Basculegion|Basculegion-F, L50, F|100/100\n|switch|p2b: Farigiraf|Farigiraf, L50, F|100/100\n|turn|1\n|\n|t:|1776642252\n|move|p1b: Charizard|Protect|p1b: Charizard\n|-singleturn|p1b: Charizard|Protect\n|move|p1a: Rotom|Volt Switch|p2a: Basculegion\n|-supereffective|p2a: Basculegion|1\n|-damage|p2a: Basculegion|30/100\n|\n|t:|1776642256\n|switch|p1a: Incineroar|Incineroar, L50, F|100/100|[from] Volt Switch\n|-ability|p1a: Incineroar|Intimidate|boost\n|-unboost|p2a: Basculegion|atk|1\n|-unboost|p2b: Farigiraf|atk|1\n|move|p2a: Basculegion|Flip Turn|p1b: Charizard\n|-activate|p1b: Charizard|move: Protect\n|move|p2b: Farigiraf|Hyper Voice|p1b: Charizard|[spread] p1a\n|-activate|p1b: Charizard|move: Protect\n|-damage|p1a: Incineroar|75/100\n|\n|upkeep\n|turn|2\n|\n|t:|1776642275\n|switch|p2a: Sableye|Sableye, L50, F, shiny|100/100\n|detailschange|p1b: Charizard|Charizard-Mega-Y, L50, F\n|-mega|p1b: Charizard|Charizard|Charizardite Y\n|-weather|SunnyDay|[from] ability: Drought|[of] p1b: Charizard\n|move|p1b: Charizard|Weather Ball|p2a: Sableye\n|-damage|p2a: Sableye|0 fnt\n|faint|p2a: Sableye\n|move|p1a: Incineroar|Throat Chop|p2b: Farigiraf\n|-supereffective|p2b: Farigiraf|1\n|-damage|p2b: Farigiraf|31/100\n|-start|p2b: Farigiraf|Throat Chop|[silent]\n|move|p2b: Farigiraf|Imprison|p2b: Farigiraf\n|-start|p2b: Farigiraf|move: Imprison\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|\n|t:|1776642294\n|switch|p2a: Corviknight|Corviknight, L50, M|100/100\n|turn|3\n|-message|LUISD13G0com forfeited.\n|\n|win|eevee1ynn\n|raw|eevee1ynn's rating: 1291 &rarr; <strong>1315</strong><br />(+24 for winning)\n|raw|LUISD13G0com's rating: 1273 &rarr; <strong>1249</strong><br />(-24 for losing)\n",
+  "uploadtime": 1776642298,
+  "views": 11,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1249,
+  "private": 0,
+  "password": null
+}

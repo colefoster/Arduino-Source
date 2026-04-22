@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586179591",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "juqiantangnang",
+    "FlintAndSteelType"
+  ],
+  "log": "|j|\u2606juqiantangnang\n|j|\u203dFlintAndSteelType\n|t:|1776409101\n|gametype|doubles\n|player|p1|juqiantangnang|cynthia|1252\n|player|p2|FlintAndSteelType|170|1197\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Scizor, L50, F|\n|poke|p1|Palafin, L50, M|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Hydreigon, L50, M|\n|poke|p1|Pelipper, L50, M|\n|poke|p2|Gengar, L50, M|\n|poke|p2|Politoed, L50, F|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Palafin, L50, F|\n|poke|p2|Sableye, L50, M|\n|poke|p2|Kingambit, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by juqiantangnang)\n|inactive|FlintAndSteelType has 60 seconds left.\njuqiantangnang rejected open team sheets.\n|inactive|FlintAndSteelType has 30 seconds left.\n|\n|t:|1776409162\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Palafin|Palafin, L50, M|100/100\n|switch|p1b: Hydreigon|Hydreigon, L50, M|100/100\n|switch|p2a: Gengar|Gengar, L50, M|100/100\n|switch|p2b: Palafin|Palafin, L50, F|100/100\n|turn|1\n|\n|t:|1776409180\n|detailschange|p2a: Gengar|Gengar-Mega, L50, M\n|-mega|p2a: Gengar|Gengar|Gengarite\n|move|p2a: Gengar|Protect|p2a: Gengar\n|-singleturn|p2a: Gengar|Protect\n|move|p1b: Hydreigon|Dark Pulse|p2a: Gengar\n|-activate|p2a: Gengar|move: Protect\n|move|p2b: Palafin|Flip Turn|p1a: Palafin\n|-resisted|p1a: Palafin|1\n|-damage|p1a: Palafin|86/100\n|\n|t:|1776409192\n|detailschange|p2b: Palafin|Palafin-Hero, L50, F\n|switch|p2b: Sableye|Sableye, L50, M|100/100|[from] Flip Turn\n|move|p1a: Palafin|Flip Turn|p2b: Sableye\n|-damage|p2b: Sableye|64/100\n|\n|t:|1776409199\n|detailschange|p1a: Palafin|Palafin-Hero, L50, M\n|switch|p1a: Scizor|Scizor, L50, F|100/100|[from] Flip Turn\n|\n|upkeep\n|turn|2\n|\n|t:|1776409209\n|detailschange|p1a: Scizor|Scizor-Mega, L50, F\n|-mega|p1a: Scizor|Scizor|Scizorite\n|move|p2b: Sableye|Fake Out|p1a: Scizor\n|-resisted|p1a: Scizor|1\n|-damage|p1a: Scizor|98/100\n|cant|p1a: Scizor|flinch\n|move|p1b: Hydreigon|Dark Pulse|p2a: Gengar\n|-supereffective|p2a: Gengar|1\n|-damage|p2a: Gengar|0 fnt\n|faint|p2a: Gengar\n|\n|upkeep\n|-message|FlintAndSteelType forfeited.\n|\n|win|juqiantangnang\n|raw|juqiantangnang's rating: 1252 &rarr; <strong>1273</strong><br />(+21 for winning)\n|raw|FlintAndSteelType's rating: 1197 &rarr; <strong>1176</strong><br />(-21 for losing)\n|l|\u203dFlintAndSteelType\n|player|p2|\n",
+  "uploadtime": 1776409240,
+  "views": 22,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1176,
+  "private": 0,
+  "password": null
+}

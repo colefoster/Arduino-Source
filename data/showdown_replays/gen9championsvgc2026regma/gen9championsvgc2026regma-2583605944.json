@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2583605944",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Dremtrin",
+    "ravioliez"
+  ],
+  "log": "|j|\u203dDremtrin\n|j|\u2606ravioliez\n|t:|1776186121\n|gametype|doubles\n|player|p1|Dremtrin|1|1158\n|player|p2|ravioliez|pokemonranger-gen6|1143\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Camerupt, L50, M|\n|poke|p1|Torkoal, L50, M|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Sableye, L50, F|\n|poke|p1|Hatterene, L50, F|\n|poke|p1|Araquanid, L50, M|\n|poke|p2|Charizard, L50, M|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Whimsicott, L50, M|\n|poke|p2|Kingambit, L50, F|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Aerodactyl, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Dremtrin)\n|inactive|Dremtrin has 60 seconds left.\nravioliez rejected open team sheets.\n|\n|t:|1776186182\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Araquanid|Araquanid, L50, M|100/100\n|switch|p1b: Hatterene|Hatterene, L50, F|100/100\n|switch|p2a: Nitro|Charizard, L50, M|100/100\n|switch|p2b: Bisturi|Sneasler, L50, F|100/100\n|-ability|p2b: Bisturi|Pressure\n|turn|1\n|inactive|ravioliez has 30 seconds left.\n|inactive|ravioliez has 20 seconds left.\n|\n|t:|1776186219\n|detailschange|p2a: Nitro|Charizard-Mega-X, L50, M\n|-mega|p2a: Nitro|Charizard|Charizardite X\n|move|p1a: Araquanid|Wide Guard|p1a: Araquanid\n|-singleturn|p1a: Araquanid|Wide Guard\n|move|p2b: Bisturi|Dire Claw|p1b: Hatterene\n|-supereffective|p1b: Hatterene|1\n|-damage|p1b: Hatterene|11/100\n|move|p2a: Nitro|Steel Wing|p1b: Hatterene\n|-supereffective|p1b: Hatterene|1\n|-damage|p1b: Hatterene|0 fnt\n|faint|p1b: Hatterene\n|\n|upkeep\n|\n|t:|1776186229\n|switch|p1b: Sableye|Sableye, L50, F|100/100\n|turn|2\n|\n|t:|1776186253\n|switch|p1a: Camerupt|Camerupt, L50, M|100/100\n|move|p1b: Sableye|Will-O-Wisp|p2b: Bisturi|[miss]\n|-miss|p1b: Sableye|p2b: Bisturi\n|move|p2b: Bisturi|Coaching|p2a: Nitro\n|-boost|p2a: Nitro|atk|1\n|-boost|p2a: Nitro|def|1\n|move|p2a: Nitro|Dragon Claw|p1a: Camerupt\n|-damage|p1a: Camerupt|0 fnt\n|faint|p1a: Camerupt\n|\n|upkeep\n|-message|Dremtrin forfeited.\n|\n|win|ravioliez\n|raw|Dremtrin's rating: 1158 &rarr; <strong>1132</strong><br />(-26 for losing)\n|raw|ravioliez's rating: 1143 &rarr; <strong>1169</strong><br />(+26 for winning)\n|l|\u203dDremtrin\n|player|p1|\n",
+  "uploadtime": 1776186286,
+  "views": 29,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1132,
+  "private": 0,
+  "password": null
+}

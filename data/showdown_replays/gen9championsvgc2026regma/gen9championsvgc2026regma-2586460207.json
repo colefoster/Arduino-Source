@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586460207",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "1#MiraidonHater",
+    "uuuop0"
+  ],
+  "log": "|j|\u26061#MiraidonHater\n|j|\u2606uuuop0\n|t:|1776436214\n|gametype|doubles\n|player|p1|1#MiraidonHater|1|1250\n|player|p2|uuuop0|170|1328\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Glimmora, L50, F|\n|poke|p1|Rotom-Heat, L50|\n|poke|p1|Kommo-o, L50, F|\n|poke|p1|Kangaskhan, L50, F|\n|poke|p1|Sinistcha-Masterpiece, L50|\n|poke|p1|Primarina, L50, F|\n|poke|p2|Gengar, L50, F|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Pelipper, L50, F|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Maushold-Four, L50|\n|poke|p2|Basculegion, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by uuuop0)\n|\n|t:|1776436279\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Kangaskhan|Kangaskhan, L50, F|100/100\n|switch|p1b: Rotom|Rotom-Heat, L50|100/100\n|switch|p2a: Pelipper|Pelipper, L50, F|100/100\n|switch|p2b: Basculegion|Basculegion, L50, M|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p2a: Pelipper\n|turn|1\n|inactive|uuuop0 has 30 seconds left.\n|inactive|1#MiraidonHater has 30 seconds left.\n|inactive|1#MiraidonHater has 20 seconds left.\n|inactive|1#MiraidonHater has 15 seconds left.\n|inactive|1#MiraidonHater has 10 seconds left.\n|\n|t:|1776436333\n|detailschange|p1a: Kangaskhan|Kangaskhan-Mega, L50, F\n|-mega|p1a: Kangaskhan|Kangaskhan|Kangaskhanite\n|move|p2b: Basculegion|Protect|p2b: Basculegion\n|-singleturn|p2b: Basculegion|Protect\n|move|p1a: Kangaskhan|Sucker Punch||[still]\n|-fail|p1a: Kangaskhan\n|move|p1b: Rotom|Thunderbolt|p2b: Basculegion\n|-activate|p2b: Basculegion|move: Protect\n|move|p2a: Pelipper|Weather Ball|p1b: Rotom\n|-supereffective|p1b: Rotom|1\n|-damage|p1b: Rotom|0 fnt\n|faint|p1b: Rotom\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|inactive|1#MiraidonHater has 30 seconds left.\n|-message|1#MiraidonHater forfeited.\n|\n|win|uuuop0\n",
+  "uploadtime": 1776436228,
+  "views": 19,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": null,
+  "private": 0,
+  "password": null
+}

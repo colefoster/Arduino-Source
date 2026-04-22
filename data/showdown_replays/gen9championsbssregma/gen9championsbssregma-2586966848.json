@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2586966848",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "leftmygfforafemboy",
+    "Jskim2437"
+  ],
+  "log": "|j|\u2606leftmygfforafemboy\n|j|\u2606Jskim2437\n|t:|1776476489\n|gametype|singles\n|player|p1|leftmygfforafemboy|lucas|1335\n|player|p2|Jskim2437|scientist-gen4dp|1331\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Gengar, L50, F|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Mamoswine, L50, F|\n|poke|p1|Aegislash, L50, M|\n|poke|p1|Volcarona, L50, M|\n|poke|p1|Clefable, L50, F|\n|poke|p2|Meowscarada, L50, M|\n|poke|p2|Hippowdon, L50, M|\n|poke|p2|Charizard, L50, M|\n|poke|p2|Gyarados, L50, F|\n|poke|p2|Arcanine-Hisui, L50, F|\n|poke|p2|Mimikyu, L50, M|\n|teampreview|3\n|j| p74\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by leftmygfforafemboy)\n|\n|t:|1776476512\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Mamoswine|Mamoswine, L50, F|100/100\n|switch|p2a: Charizard|Charizard, L50, M|100/100\n|turn|1\n|\n|t:|1776476521\n|detailschange|p2a: Charizard|Charizard-Mega-Y, L50, M\n|-mega|p2a: Charizard|Charizard|Charizardite Y\n|-weather|SunnyDay|[from] ability: Drought|[of] p2a: Charizard\n|move|p2a: Charizard|Flame Charge|p1a: Mamoswine\n|-supereffective|p1a: Mamoswine|1\n|-damage|p1a: Mamoswine|45/100\n|-boost|p2a: Charizard|spe|1\n|move|p1a: Mamoswine|Icicle Spear|p2a: Charizard\n|-damage|p2a: Charizard|83/100\n|-damage|p2a: Charizard|66/100\n|-hitcount|p2a: Charizard|2\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|turn|2\n|\n|t:|1776476534\n|move|p1a: Mamoswine|Ice Shard|p2a: Charizard\n|-damage|p2a: Charizard|39/100\n|move|p2a: Charizard|Flame Charge|p1a: Mamoswine\n|-supereffective|p1a: Mamoswine|1\n|-damage|p1a: Mamoswine|0 fnt\n|-boost|p2a: Charizard|spe|1\n|faint|p1a: Mamoswine\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|\n|t:|1776476540\n|switch|p1a: Garchomp|Garchomp, L50, M|100/100\n|turn|3\n|inactive|Jskim2437 has 30 seconds left.\n|inactive|Jskim2437 has 20 seconds left.\n|\n|t:|1776476576\n|switch|p2a: Hippowdon|Hippowdon, L50, M|100/100\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p2a: Hippowdon\n|move|p1a: Garchomp|Dragon Claw|p2a: Hippowdon\n|-damage|p2a: Hippowdon|77/100\n|\n|-weather|Sandstorm|[upkeep]\n|-heal|p2a: Hippowdon|83/100|[from] item: Leftovers\n|upkeep\n|turn|4\n|-message|leftmygfforafemboy forfeited.\n|\n|win|Jskim2437\n|raw|leftmygfforafemboy's rating: 1335 &rarr; <strong>1315</strong><br />(-20 for losing)\n|raw|Jskim2437's rating: 1331 &rarr; <strong>1351</strong><br />(+20 for winning)\n|l|\u2606leftmygfforafemboy\n|player|p1|\n|l|\u2606Jskim2437\n|player|p2|\n",
+  "uploadtime": 1776476650,
+  "views": 3,
+  "formatid": "gen9championsbssregma",
+  "rating": 1315,
+  "private": 0,
+  "password": null
+}

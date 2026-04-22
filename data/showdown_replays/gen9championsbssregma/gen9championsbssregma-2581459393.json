@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2581459393",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "Ssul",
+    "PlatinumPassport"
+  ],
+  "log": "|j|\u2606Ssul\n|j|\u2606PlatinumPassport\n|t:|1776002488\n|gametype|singles\n|player|p1|Ssul|265|1222\n|player|p2|PlatinumPassport|1|1308\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Corviknight, L50, M|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Rotom-Heat, L50|\n|poke|p1|Kingambit, L50, F|\n|poke|p1|Meganium, L50, F|\n|poke|p1|Clefable, L50, F|\n|poke|p2|Hippowdon, L50, M|\n|poke|p2|Dragonite, L50, F|\n|poke|p2|Aegislash, L50, F|\n|poke|p2|Greninja-*, L50, F|\n|poke|p2|Garchomp, L50, F|\n|poke|p2|Volcarona, L50, M|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Ssul)\n|inactive|Ssul has 60 seconds left.\n|inactive|PlatinumPassport has 60 seconds left.\n|\n|t:|1776002545\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Clefable|Clefable, L50, F|100/100\n|switch|p2a: Dragonite|Dragonite, L50, F, shiny|100/100\n|turn|1\n|\n|t:|1776002551\n|switch|p2a: Volcarona|Volcarona, L50, M, shiny|100/100\n|move|p1a: Clefable|Calm Mind|p1a: Clefable\n|-boost|p1a: Clefable|spa|1\n|-boost|p1a: Clefable|spd|1\n|\n|upkeep\n|turn|2\n|\n|t:|1776002555\n|move|p2a: Volcarona|Quiver Dance|p2a: Volcarona\n|-boost|p2a: Volcarona|spa|1\n|-boost|p2a: Volcarona|spd|1\n|-boost|p2a: Volcarona|spe|1\n|move|p1a: Clefable|Calm Mind|p1a: Clefable\n|-boost|p1a: Clefable|spa|1\n|-boost|p1a: Clefable|spd|1\n|\n|upkeep\n|turn|3\n|\n|t:|1776002560\n|move|p2a: Volcarona|Quiver Dance|p2a: Volcarona\n|-boost|p2a: Volcarona|spa|1\n|-boost|p2a: Volcarona|spd|1\n|-boost|p2a: Volcarona|spe|1\n|move|p1a: Clefable|Flamethrower|p2a: Volcarona\n|-damage|p2a: Volcarona|61/100\n|\n|upkeep\n|turn|4\n|\n|t:|1776002567\n|move|p2a: Volcarona|Flamethrower|p1a: Clefable\n|-damage|p1a: Clefable|68/100\n|move|p1a: Clefable|Flamethrower|p2a: Volcarona\n|-damage|p2a: Volcarona|22/100\n|\n|upkeep\n|turn|5\n|\n|t:|1776002573\n|move|p2a: Volcarona|Flamethrower|p1a: Clefable\n|-damage|p1a: Clefable|39/100\n|move|p1a: Clefable|Moonlight|p1a: Clefable\n|-heal|p1a: Clefable|89/100\n|\n|upkeep\n|turn|6\n|\n|t:|1776002578\n|move|p2a: Volcarona|Flamethrower|p1a: Clefable\n|-damage|p1a: Clefable|59/100\n|move|p1a: Clefable|Flamethrower|p2a: Volcarona\n|-damage|p2a: Volcarona|0 fnt\n|faint|p2a: Volcarona\n|\n|upkeep\n|-message|PlatinumPassport forfeited.\n|\n|win|Ssul\n|raw|Ssul's rating: 1222 &rarr; <strong>1253</strong><br />(+31 for winning)\n|raw|PlatinumPassport's rating: 1308 &rarr; <strong>1283</strong><br />(-25 for losing)\n|l|\u2606PlatinumPassport\n|player|p2|\n|l|\u2606Ssul\n|player|p1|\n",
+  "uploadtime": 1776002601,
+  "views": 32,
+  "formatid": "gen9championsbssregma",
+  "rating": 1253,
+  "private": 0,
+  "password": null
+}

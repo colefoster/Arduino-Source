@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2582860124",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "dialestdial",
+    "ray-1055"
+  ],
+  "log": "|j|\u2606dialestdial\n|j|\u2606ray-1055\n|t:|1776119830\n|gametype|singles\n|player|p1|dialestdial|plasmagruntf|1096\n|player|p2|ray-1055|2|1127\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Kingambit, L50, M|\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Ninetales-Alola, L50, F|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Charizard, L50, M|\n|poke|p1|Meowscarada, L50, M|\n|poke|p2|Gengar, L50, M|\n|poke|p2|Charizard, L50, M|\n|poke|p2|Ditto, L50|\n|poke|p2|Corviknight, L50, M|\n|poke|p2|Palafin, L50, M|\n|poke|p2|Heliolisk, L50, F|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by dialestdial)\n|inactive|dialestdial has 60 seconds left.\n|\n|t:|1776119862\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Meowscarada|Meowscarada, L50, M|100/100\n|switch|p2a: Charizard|Charizard, L50, M|100/100\n|turn|1\n|\n|t:|1776119874\n|detailschange|p2a: Charizard|Charizard-Mega-Y, L50, M\n|-mega|p2a: Charizard|Charizard|Charizardite Y\n|-weather|SunnyDay|[from] ability: Drought|[of] p2a: Charizard\n|move|p1a: Meowscarada|Thunder Punch|p2a: Charizard\n|-start|p1a: Meowscarada|typechange|Electric|[from] ability: Protean\n|-supereffective|p2a: Charizard|1\n|-damage|p2a: Charizard|0 fnt\n|faint|p2a: Charizard\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|\n|t:|1776119881\n|switch|p2a: Heliolisk|Heliolisk, L50, F|100/100\n|turn|2\n|\n|t:|1776119888\n|switch|p1a: Ninetales|Ninetales-Alola, L50, F, shiny|100/100\n|-weather|Snowscape|[from] ability: Snow Warning|[of] p1a: Ninetales\n|move|p2a: Heliolisk|Hyper Voice|p1a: Ninetales\n|-damage|p1a: Ninetales|65/100\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|turn|3\n|\n|t:|1776119901\n|move|p2a: Heliolisk|Thunderbolt|p1a: Ninetales\n|-damage|p1a: Ninetales|22/100\n|move|p1a: Ninetales|Aurora Veil|p1a: Ninetales\n|-sidestart|p1: dialestdial|move: Aurora Veil\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|turn|4\n|\n|t:|1776119910\n|move|p2a: Heliolisk|Glare|p1a: Ninetales\n|-status|p1a: Ninetales|par\n|move|p1a: Ninetales|Blizzard|p2a: Heliolisk\n|-crit|p2a: Heliolisk\n|-damage|p2a: Heliolisk|38/100\n|-status|p2a: Heliolisk|frz\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|turn|5\n|-message|ray-1055 forfeited.\n|\n|win|dialestdial\n|raw|dialestdial's rating: 1096 &rarr; <strong>1124</strong><br />(+28 for winning)\n|raw|ray-1055's rating: 1127 &rarr; <strong>1100</strong><br />(-27 for losing)\n|l|\u2606ray-1055\n|player|p2|\n",
+  "uploadtime": 1776119933,
+  "views": 15,
+  "formatid": "gen9championsbssregma",
+  "rating": 1100,
+  "private": 0,
+  "password": null
+}

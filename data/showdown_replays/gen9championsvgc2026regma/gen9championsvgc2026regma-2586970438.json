@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586970438",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Yosoynolazco",
+    "hoooooboi26"
+  ],
+  "log": "|j|\u2606Yosoynolazco\n|j|\u2606hoooooboi26\n|t:|1776476850\n|gametype|doubles\n|player|p1|Yosoynolazco|265|1136\n|player|p2|hoooooboi26|170|1198\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Gengar, L50, F|\n|poke|p1|Maushold-Four, L50|\n|poke|p1|Decidueye-Hisui, L50, M|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Primarina, L50, F|\n|poke|p1|Aegislash, L50, F|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Aerodactyl, L50, F|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Kingambit, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by hoooooboi26)\n|inactive|Yosoynolazco also wants the timer to be on.\n|inactive|Yosoynolazco has 60 seconds left.\n|\n|t:|1776476886\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Decidueye|Decidueye-Hisui, L50, M, shiny|100/100\n|switch|p1b: Aegislash|Aegislash, L50, F|100/100\n|switch|p2a: Aerodactyl|Aerodactyl, L50, F|100/100\n|switch|p2b: Garchomp|Garchomp, L50, M|100/100\n|-ability|p2a: Aerodactyl|Unnerve\n|turn|1\n|inactive|hoooooboi26 has 30 seconds left.\n|\n|t:|1776476915\n|detailschange|p2a: Aerodactyl|Aerodactyl-Mega, L50, F\n|-mega|p2a: Aerodactyl|Aerodactyl|Aerodactylite\n|move|p1b: Aegislash|King's Shield|p1b: Aegislash\n|-singleturn|p1b: Aegislash|Protect\n|move|p2a: Aerodactyl|Dual Wingbeat|p1a: Decidueye\n|-supereffective|p1a: Decidueye|2\n|-enditem|p1a: Decidueye|Focus Sash\n|-damage|p1a: Decidueye|1/100\n|-supereffective|p1a: Decidueye|2\n|-damage|p1a: Decidueye|0 fnt\n|faint|p1a: Decidueye\n|-hitcount|p1: Decidueye|2\n|move|p2b: Garchomp|Earthquake|p1b: Aegislash|[spread] \n|-activate|p1b: Aegislash|move: Protect\n|-immune|p2a: Aerodactyl\n|\n|upkeep\n|\n|t:|1776476925\n|switch|p1a: Primarina|Primarina, L50, F|100/100\n|turn|2\n|\n|t:|1776476940\n|move|p2a: Aerodactyl|Rock Slide|p1b: Aegislash|[spread] p1a,p1b\n|-resisted|p1b: Aegislash|1\n|-damage|p1a: Primarina|57/100\n|-damage|p1b: Aegislash|88/100\n|move|p2b: Garchomp|Stomping Tantrum|p1b: Aegislash\n|-supereffective|p1b: Aegislash|1\n|-damage|p1b: Aegislash|0 fnt\n|faint|p1b: Aegislash\n|cant|p1a: Primarina|flinch\n|\n|upkeep\n|-message|Yosoynolazco forfeited.\n|\n|win|hoooooboi26\n|raw|Yosoynolazco's rating: 1136 &rarr; <strong>1115</strong><br />(-21 for losing)\n|raw|hoooooboi26's rating: 1198 &rarr; <strong>1219</strong><br />(+21 for winning)\n|l|\u2606Yosoynolazco\n|player|p1|\n",
+  "uploadtime": 1776476996,
+  "views": 21,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1115,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2581640348",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "gallium1005",
+    "anit24"
+  ],
+  "log": "|j|\u2606gallium1005\n|j|\u2606anit24\n|t:|1776017210\n|gametype|doubles\n|player|p1|gallium1005|hilbert|1100\n|player|p2|anit24|169|1000\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Sneasler, L50, F|\n|poke|p1|Delphox, L50, M|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Whimsicott, L50, F|\n|poke|p1|Rotom-Wash, L50|\n|poke|p1|Corviknight, L50, F|\n|poke|p2|Starmie, L50|\n|poke|p2|Tyranitar, L50, F|\n|poke|p2|Excadrill, L50, M|\n|poke|p2|Rotom-Heat, L50|\n|poke|p2|Archaludon, L50, M|\n|poke|p2|Basculegion, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by anit24)\nanit24 rejected open team sheets.\n|inactive|gallium1005 has 60 seconds left.\n|\n|t:|1776017251\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Whimsicott|Whimsicott, L50, F|100/100\n|switch|p1b: Garchomp|Garchomp, L50, F|100/100\n|switch|p2a: Starmie|Starmie, L50|100/100\n|switch|p2b: Tyranitar|Tyranitar, L50, F|100/100\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p2b: Tyranitar\n|turn|1\n|\n|t:|1776017274\n|switch|p2b: Excadrill|Excadrill, L50, M|100/100\n|detailschange|p2a: Starmie|Starmie-Mega, L50\n|-mega|p2a: Starmie|Starmie|Starminite\n|move|p1a: Whimsicott|Tailwind|p1a: Whimsicott\n|-sidestart|p1: gallium1005|move: Tailwind\n|move|p1b: Garchomp|Earthquake|p2a: Starmie|[spread] p1a,p2a,p2b\n|-resisted|p1a: Whimsicott|1\n|-supereffective|p2b: Excadrill|1\n|-damage|p1a: Whimsicott|80/100\n|-damage|p2a: Starmie|59/100\n|-damage|p2b: Excadrill|0 fnt\n|faint|p2b: Excadrill\n|move|p2a: Starmie|Skill Swap|p2: Excadrill|[notarget]\n|-fail|p2a: Starmie\n|\n|-weather|Sandstorm|[upkeep]\n|-damage|p1a: Whimsicott|74/100|[from] Sandstorm\n|-damage|p2a: Starmie|53/100|[from] Sandstorm\n|upkeep\n|-message|anit24 forfeited.\n|\n|win|gallium1005\n|raw|gallium1005's rating: 1100 &rarr; <strong>1118</strong><br />(+18 for winning)\n|raw|anit24's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|l|\u2606anit24\n|player|p2|\n",
+  "uploadtime": 1776017292,
+  "views": 20,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586320817",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Yousoku",
+    "Fornias"
+  ],
+  "log": "|j|\u2606Yousoku\n|j|\u2606Fornias\n|t:|1776425009\n|gametype|doubles\n|player|p1|Yousoku|dawn|1030\n|player|p2|Fornias|harlequin|1000\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Venusaur, L50, M|\n|poke|p1|Archaludon, L50, M|\n|poke|p1|Pelipper, L50, M|\n|poke|p1|Blastoise, L50, F|\n|poke|p1|Tyranitar, L50, F|\n|poke|p2|Tyranitar, L50, F|\n|poke|p2|Excadrill, L50, F|\n|poke|p2|Aerodactyl, L50, M|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Hippowdon, L50, F|\n|poke|p2|Aggron, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Fornias)\n|\n|t:|1776425022\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Pelipper|Pelipper, L50, M|100/100\n|switch|p1b: Archaludon|Archaludon, L50, M|100/100\n|switch|p2a: Aggron|Aggron, L50, M|100/100\n|switch|p2b: Hippowdon|Hippowdon, L50, F|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p1a: Pelipper\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p2b: Hippowdon\n|turn|1\n|inactive|Yousoku has 30 seconds left.\n|inactive|Yousoku has 20 seconds left.\n|\n|t:|1776425058\n|switch|p1b: Tyranitar|Tyranitar, L50, F|100/100\n|detailschange|p2a: Aggron|Aggron-Mega, L50, M\n|-mega|p2a: Aggron|Aggron|Aggronite\n|move|p1a: Pelipper|Tailwind|p1a: Pelipper\n|-sidestart|p1: Yousoku|move: Tailwind\n|move|p2b: Hippowdon|Yawn|p1b: Tyranitar\n|-start|p1b: Tyranitar|move: Yawn|[of] p2b: Hippowdon\n|move|p2a: Aggron|Iron Defense|p2a: Aggron\n|-boost|p2a: Aggron|def|2\n|\n|-weather|Sandstorm|[upkeep]\n|-damage|p1a: Pelipper|95/100|[from] Sandstorm\n|upkeep\n|turn|2\n|inactive|Yousoku has 30 seconds left.\n|inactive|Fornias has 30 seconds left.\n|inactive|Yousoku has 20 seconds left.\n|\n|t:|1776425097\n|detailschange|p1b: Tyranitar|Tyranitar-Mega, L50, F\n|-mega|p1b: Tyranitar|Tyranitar|Tyranitarite\n|move|p1a: Pelipper|Hurricane|p2b: Hippowdon\n|-damage|p2b: Hippowdon|64/100\n|move|p1b: Tyranitar|High Horsepower|p2a: Aggron\n|-supereffective|p2a: Aggron|1\n|-damage|p2a: Aggron|87/100\n|move|p2b: Hippowdon|Stealth Rock|p1b: Tyranitar\n|-sidestart|p1: Yousoku|move: Stealth Rock\n|move|p2a: Aggron|Body Press|p1b: Tyranitar\n|-supereffective|p1b: Tyranitar|2\n|-damage|p1b: Tyranitar|0 fnt\n|faint|p1b: Tyranitar\n|\n|-weather|Sandstorm|[upkeep]\n|-damage|p1a: Pelipper|89/100|[from] Sandstorm\n|upkeep\n|-message|Yousoku forfeited.\n|\n|win|Fornias\n|raw|Yousoku's rating: 1030 &rarr; <strong>1014</strong><br />(-16 for losing)\n|raw|Fornias's rating: 1000 &rarr; <strong>1043</strong><br />(+43 for winning)\n|l|\u2606Yousoku\n|player|p1|\n",
+  "uploadtime": 1776425118,
+  "views": 31,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1014,
+  "private": 0,
+  "password": null
+}

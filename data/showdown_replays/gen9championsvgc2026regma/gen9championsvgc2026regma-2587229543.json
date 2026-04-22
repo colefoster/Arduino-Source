@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2587229543",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "ojifijod",
+    "banana superior"
+  ],
+  "log": "|j|\u2606ojifijod\n|j|\u2606banana superior\n|t:|1776511882\n|gametype|doubles\n|player|p1|ojifijod|101|1269\n|player|p2|banana superior|smasher|1360\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Torkoal, L50, M|\n|poke|p1|Farigiraf, L50, M|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Aggron, L50, M|\n|poke|p1|Venusaur, L50, F|\n|poke|p1|Blastoise, L50, M|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Incineroar, L50, F, shiny|\n|poke|p2|Mimikyu, L50, F, shiny|\n|poke|p2|Torkoal, L50, M|\n|poke|p2|Sinistcha-Masterpiece, L50|\n|poke|p2|Kingambit, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by ojifijod)\n|\n|t:|1776511907\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Farigiraf|Farigiraf, L50, M|100/100\n|switch|p1b: Torkoal|Torkoal, L50, M|100/100\n|switch|p2a: Mimikyu|Mimikyu, L50, F, shiny|100/100\n|switch|p2b: Incineroar|Incineroar, L50, F, shiny|100/100\n|-ability|p2b: Incineroar|Intimidate|boost\n|-unboost|p1a: Farigiraf|atk|1\n|-unboost|p1b: Torkoal|atk|1\n|-weather|SunnyDay|[from] ability: Drought|[of] p1b: Torkoal\n|turn|1\n|\n|t:|1776511923\n|move|p1b: Torkoal|Protect|p1b: Torkoal\n|-singleturn|p1b: Torkoal|Protect\n|move|p2a: Mimikyu|Play Rough|p1a: Farigiraf\n|-damage|p1a: Farigiraf|60/100\n|move|p2b: Incineroar|Darkest Lariat|p1a: Farigiraf\n|-supereffective|p1a: Farigiraf|1\n|-damage|p1a: Farigiraf|0 fnt\n|faint|p1a: Farigiraf\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|-message|ojifijod forfeited.\n|\n|win|banana superior\n|raw|ojifijod's rating: 1269 &rarr; <strong>1250</strong><br />(-19 for losing)\n|raw|banana superior's rating: 1360 &rarr; <strong>1375</strong><br />(+15 for winning)\n|l|\u2606ojifijod\n|player|p1|\n",
+  "uploadtime": 1776511939,
+  "views": 44,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1250,
+  "private": 0,
+  "password": null
+}

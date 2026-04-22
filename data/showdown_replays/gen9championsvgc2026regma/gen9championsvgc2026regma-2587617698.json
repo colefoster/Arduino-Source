@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2587617698",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Manobolastio",
+    "Verror"
+  ],
+  "log": "|j|\u2606Manobolastio\n|j|\u2606Verror\n|t:|1776547398\n|gametype|doubles\n|player|p1|Manobolastio|nate|1069\n|player|p2|Verror|gentleman-gen4|1166\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Aggron, L50, F, shiny|\n|poke|p1|Sinistcha-Masterpiece, L50|\n|poke|p1|Sneasler, L50, M, shiny|\n|poke|p1|Rotom-Wash, L50|\n|poke|p1|Tyranitar, L50, M, shiny|\n|poke|p1|Farigiraf, L50, F|\n|poke|p2|Bastiodon, L50, F, shiny|\n|poke|p2|Noivern, L50, F, shiny|\n|poke|p2|Kommo-o, L50, F, shiny|\n|poke|p2|Gengar, L50, F, shiny|\n|poke|p2|Delphox, L50, F|\n|poke|p2|Maushold-Four, L50, shiny|\n|teampreview|4\nVerror rejected open team sheets.\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Verror)\n|\n|t:|1776547430\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Aggron|Aggron, L50, F, shiny|100/100\n|switch|p1b: Sinistcha|Sinistcha-Masterpiece, L50|100/100\n|switch|p2a: Kommo-o|Kommo-o, L50, F, shiny|100/100\n|switch|p2b: Delphox|Delphox, L50, F|100/100\n|turn|1\n|\n|t:|1776547445\n|detailschange|p2b: Delphox|Delphox-Mega, L50, F\n|-mega|p2b: Delphox|Delphox|Delphoxite\n|detailschange|p1a: Aggron|Aggron-Mega, L50, F, shiny\n|-mega|p1a: Aggron|Aggron|Aggronite\n|move|p2a: Kommo-o|Earthquake|p1b: Sinistcha|[spread] p1a,p1b\n|-immune|p2b: Delphox|[from] ability: Levitate\n|-supereffective|p1a: Aggron|1\n|-resisted|p1b: Sinistcha|1\n|-damage|p1a: Aggron|83/100\n|-damage|p1b: Sinistcha|90/100\n|move|p2b: Delphox|Heat Wave|p1b: Sinistcha|[spread] p1a,p1b\n|-supereffective|p1a: Aggron|1\n|-supereffective|p1b: Sinistcha|1\n|-damage|p1a: Aggron|26/100\n|-damage|p1b: Sinistcha|0 fnt\n|-status|p1a: Aggron|brn\n|faint|p1b: Sinistcha\n|move|p1a: Aggron|Iron Defense|p1a: Aggron\n|-boost|p1a: Aggron|def|2\n|\n|-damage|p1a: Aggron|20/100 brn|[from] brn\n|upkeep\n|-message|Manobolastio forfeited.\n|\n|win|Verror\n|raw|Manobolastio's rating: 1069 &rarr; <strong>1054</strong><br />(-15 for losing)\n|raw|Verror's rating: 1166 &rarr; <strong>1184</strong><br />(+18 for winning)\n|l|\u2606Manobolastio\n|player|p1|\n",
+  "uploadtime": 1776547476,
+  "views": 23,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1054,
+  "private": 0,
+  "password": null
+}

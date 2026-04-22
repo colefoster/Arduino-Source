@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2588892291",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "gan112",
+    "Lelouch 249"
+  ],
+  "log": "|j|\u2606gan112\n|j|\u203dLelouch 249\n|t:|1776683116\n|gametype|doubles\n|player|p1|gan112|2|1335\n|player|p2|Lelouch 249|cynthia-masters|1233\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Aerodactyl, L50, F|\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Typhlosion-Hisui, L50, M|\n|poke|p1|Sneasler, L50, F|\n|poke|p1|Tauros-Paldea-Aqua, L50, M|\n|poke|p1|Scovillain, L50, M|\n|poke|p2|Araquanid, L50, F, shiny|\n|poke|p2|Clefable, L50, F, shiny|\n|poke|p2|Camerupt, L50, F, shiny|\n|poke|p2|Kingambit, L50, F, shiny|\n|poke|p2|Oranguru, L50, F, shiny|\n|poke|p2|Conkeldurr, L50, F, shiny|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Lelouch 249)\n|inactive|Lelouch 249 has 60 seconds left.\n|\n|t:|1776683148\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Aerodactyl|Aerodactyl, L50, F|100/100\n|switch|p1b: Floette|Floette-Eternal, L50, F|100/100\n|switch|p2a: Oranguru|Oranguru, L50, F, shiny|100/100\n|switch|p2b: Araquanid|Araquanid, L50, F, shiny|100/100\n|turn|1\n|\n|t:|1776683165\n|detailschange|p1b: Floette|Floette-Mega, L50, F\n|-mega|p1b: Floette|Floette|Floettite\n|-ability|p1b: Floette|Fairy Aura\n|move|p2b: Araquanid|Wide Guard|p2b: Araquanid\n|-singleturn|p2b: Araquanid|Wide Guard\n|move|p1a: Aerodactyl|Taunt|p2a: Oranguru\n|-start|p2a: Oranguru|move: Taunt\n|-enditem|p2a: Oranguru|Mental Herb\n|-end|p2a: Oranguru|move: Taunt\n|move|p1b: Floette|Light of Ruin|p2b: Araquanid\n|-crit|p2b: Araquanid\n|-damage|p2b: Araquanid|0 fnt\n|faint|p2b: Araquanid\n|-damage|p1b: Floette|52/100|[from] Recoil\n|move|p2a: Oranguru|Trick Room|p2a: Oranguru\n|-fieldstart|move: Trick Room|[of] p2a: Oranguru\n|\n|upkeep\n|\n|t:|1776683177\n|switch|p2b: Camerupt|Camerupt, L50, F, shiny|100/100\n|turn|2\n|-message|gan112 forfeited.\n|\n|win|Lelouch 249\n|raw|gan112's rating: 1335 &rarr; <strong>1309</strong><br />(-26 for losing)\n|raw|Lelouch 249's rating: 1233 &rarr; <strong>1265</strong><br />(+32 for winning)\n|l|\u2606gan112\n|player|p1|\n",
+  "uploadtime": 1776683194,
+  "views": 17,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1265,
+  "private": 0,
+  "password": null
+}

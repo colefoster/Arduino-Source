@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2581728397",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "PYS_Max",
+    "SunTufo"
+  ],
+  "log": "|j|\u2606PYS_Max\n|j|\u2606SunTufo\n|t:|1776023864\n|gametype|doubles\n|player|p1|PYS_Max|clay|1309\n|player|p2|SunTufo|li|1244\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Charizard, L50, M|\n|poke|p1|Venusaur, L50, F|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Rotom-Wash, L50|\n|poke|p1|Sneasler, L50, F|\n|poke|p1|Incineroar, L50, F|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Pelipper, L50, M|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Archaludon, L50, M|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Talonflame, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by SunTufo)\n|\n|t:|1776023891\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Garchomp|Garchomp, L50, M|100/100\n|switch|p1b: Charizard|Charizard, L50, M|100/100\n|switch|p2a: Talonflame|Talonflame, L50, F|100/100\n|switch|p2b: Basculegion|Basculegion, L50, M|100/100\n|turn|1\n|\n|t:|1776023912\n|detailschange|p1b: Charizard|Charizard-Mega-Y, L50, M\n|-mega|p1b: Charizard|Charizard|Charizardite Y\n|-weather|SunnyDay|[from] ability: Drought|[of] p1b: Charizard\n|move|p2a: Talonflame|Tailwind|p2a: Talonflame\n|-sidestart|p2: SunTufo|move: Tailwind\n|move|p2b: Basculegion|Wave Crash|p1b: Charizard\n|-supereffective|p1b: Charizard|1\n|-damage|p1b: Charizard|0 fnt\n|faint|p1b: Charizard\n|-damage|p2b: Basculegion|74/100|[from] Recoil\n|move|p1a: Garchomp|Rock Slide|p2a: Talonflame|[spread] p2a,p2b\n|-supereffective|p2a: Talonflame|2\n|-damage|p2a: Talonflame|0 fnt\n|-damage|p2b: Basculegion|45/100\n|faint|p2a: Talonflame\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|\n|t:|1776023932\n|switch|p2a: Pelipper|Pelipper, L50, M|100/100\n|switch|p1b: Venusaur|Venusaur, L50, F|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p2a: Pelipper\n|turn|2\n|\n|t:|1776023950\n|move|p2b: Basculegion|Wave Crash|p1a: Garchomp\n|-damage|p1a: Garchomp|0 fnt\n|-damage|p2b: Basculegion|33/100|[from] ability: Rough Skin|[of] p1a: Garchomp\n|faint|p1a: Garchomp\n|-damage|p2b: Basculegion|2/100|[from] Recoil\n|move|p2a: Pelipper|Hurricane|p1b: Venusaur\n|-supereffective|p1b: Venusaur|1\n|-enditem|p1b: Venusaur|Focus Sash\n|-damage|p1b: Venusaur|1/100\n|move|p1b: Venusaur|Leaf Storm|p2a: Pelipper|[miss]\n|-miss|p1b: Venusaur|p2a: Pelipper\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|\n|t:|1776023963\n|switch|p1a: Sneasler|Sneasler, L50, F|100/100\n|turn|3\n|-message|PYS_Max forfeited.\n|\n|win|SunTufo\n|raw|PYS_Max's rating: 1309 &rarr; <strong>1284</strong><br />(-25 for losing)\n|raw|SunTufo's rating: 1222 &rarr; <strong>1253</strong><br />(+31 for winning)\n",
+  "uploadtime": 1776023972,
+  "views": 38,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1253,
+  "private": 0,
+  "password": null
+}

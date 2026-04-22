@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2587156689",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Synthiox",
+    "utkatana"
+  ],
+  "log": "|j|\u2606Synthiox\n|j|\u2606utkatana\n|t:|1776501740\n|gametype|doubles\n|player|p1|Synthiox|ethan|1162\n|player|p2|utkatana|102|1233\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Ampharos, L50, M, shiny|\n|poke|p1|Orthworm, L50, F, shiny|\n|poke|p1|Slowking-Galar, L50, F|\n|poke|p1|Conkeldurr, L50, M|\n|poke|p1|Primarina, L50, M|\n|poke|p1|Pelipper, L50, M|\n|poke|p2|Froslass, L50, F|\n|poke|p2|Aegislash, L50, F|\n|poke|p2|Garchomp, L50, F|\n|poke|p2|Aerodactyl, L50, M|\n|poke|p2|Passimian, L50, M|\n|poke|p2|Milotic, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Synthiox)\n|inactive|utkatana has 60 seconds left.\n|\n|t:|1776501825\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Primarina|Primarina, L50, M|100/100\n|switch|p1b: Pelipper|Pelipper, L50, M|100/100\n|switch|p2a: Passimian|Passimian, L50, M|100/100\n|switch|p2b: Froslass|Froslass, L50, F|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p1b: Pelipper\n|turn|1\n|inactive|utkatana has 30 seconds left.\n|\n|t:|1776501853\n|detailschange|p2b: Froslass|Froslass-Mega, L50, F\n|-mega|p2b: Froslass|Froslass|Froslassite\n|-weather|Snowscape|[from] ability: Snow Warning|[of] p2b: Froslass\n|move|p1b: Pelipper|Wide Guard|p1b: Pelipper\n|-singleturn|p1b: Pelipper|Wide Guard\n|move|p2b: Froslass|Blizzard|p1b: Pelipper|[spread] \n|-activate|p1a: Primarina|move: Wide Guard\n|-activate|p1b: Pelipper|move: Wide Guard\n|move|p2a: Passimian|Rock Slide|p1b: Pelipper|[spread] \n|-activate|p1a: Primarina|move: Wide Guard\n|-activate|p1b: Pelipper|move: Wide Guard\n|move|p1a: Primarina|Moonblast|p2b: Froslass\n|-damage|p2b: Froslass|26/100\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|turn|2\n|\n|t:|1776501876\n|move|p1b: Pelipper|Wide Guard|p1b: Pelipper\n|-singleturn|p1b: Pelipper|Wide Guard\n|move|p2b: Froslass|Blizzard|p1b: Pelipper|[spread] \n|-activate|p1a: Primarina|move: Wide Guard\n|-activate|p1b: Pelipper|move: Wide Guard\n|move|p2a: Passimian|Rock Slide|p1b: Pelipper|[spread] \n|-activate|p1a: Primarina|move: Wide Guard\n|-activate|p1b: Pelipper|move: Wide Guard\n|move|p1a: Primarina|Moonblast|p2b: Froslass\n|-damage|p2b: Froslass|0 fnt\n|faint|p2b: Froslass\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|-message|utkatana forfeited.\n|\n|win|Synthiox\n|raw|Synthiox's rating: 1162 &rarr; <strong>1192</strong><br />(+30 for winning)\n|raw|utkatana's rating: 1233 &rarr; <strong>1203</strong><br />(-30 for losing)\n|l|\u2606utkatana\n|player|p2|\n",
+  "uploadtime": 1776501891,
+  "views": 20,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1192,
+  "private": 0,
+  "password": null
+}

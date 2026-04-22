@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2587805730",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "zhz2021",
+    "ScribbleScribble"
+  ],
+  "log": "|j|\u2606zhz2021\n|j|\u2606ScribbleScribble\n|t:|1776565836\n|gametype|doubles\n|player|p1|zhz2021|marley|1577\n|player|p2|ScribbleScribble|mina-lgpe|1626\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Sableye, L50, M|\n|poke|p1|Archaludon, L50, M|\n|poke|p1|Scovillain, L50, F, shiny|\n|poke|p1|Basculegion-F, L50, F, shiny|\n|poke|p1|Pelipper, L50, F|\n|poke|p1|Mamoswine, L50, F|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Sneasler, L50, F, shiny|\n|poke|p2|Aerodactyl, L50, F|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Farigiraf, L50, F|\n|poke|p2|Kingambit, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by ScribbleScribble)\n|inactive|ScribbleScribble has 60 seconds left.\n|\n|t:|1776565892\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Mamoswine|Mamoswine, L50, F|100/100\n|switch|p1b: Pelipper|Pelipper, L50, F|100/100\n|switch|p2a: Aerodactyl|Aerodactyl, L50, F|100/100\n|switch|p2b: Floette|Floette-Eternal, L50, F|100/100\n|-ability|p2a: Aerodactyl|Unnerve\n|-weather|RainDance|[from] ability: Drizzle|[of] p1b: Pelipper\n|turn|1\n|j| visael mk. II\n|\n|t:|1776565912\n|detailschange|p2b: Floette|Floette-Mega, L50, F\n|-mega|p2b: Floette|Floette|Floettite\n|-ability|p2b: Floette|Fairy Aura\n|move|p2a: Aerodactyl|Rock Slide|p1a: Mamoswine|[spread] p1a,p1b\n|-supereffective|p1b: Pelipper|1\n|-damage|p1a: Mamoswine|70/100\n|-damage|p1b: Pelipper|35/100\n|cant|p1a: Mamoswine|flinch\n|move|p2b: Floette|Dazzling Gleam|p1a: Mamoswine|[spread] p1a,p1b\n|-crit|p1b: Pelipper\n|-damage|p1a: Mamoswine|0 fnt\n|-damage|p1b: Pelipper|0 fnt\n|faint|p1a: Mamoswine\n|faint|p1b: Pelipper\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|-message|zhz2021 forfeited.\n|\n|win|ScribbleScribble\n|raw|zhz2021's rating: 1577 &rarr; <strong>1560</strong><br />(-17 for losing)\n|raw|ScribbleScribble's rating: 1626 &rarr; <strong>1643</strong><br />(+17 for winning)\n|l|\u2606zhz2021\n|player|p1|\n|l|\u2606ScribbleScribble\n|player|p2|\n|l| visael mk. II\n",
+  "uploadtime": 1776565950,
+  "views": 32,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1560,
+  "private": 0,
+  "password": null
+}

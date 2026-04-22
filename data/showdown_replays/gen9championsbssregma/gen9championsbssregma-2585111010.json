@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2585111010",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "yutafrancisgiles",
+    "MarkInTime"
+  ],
+  "log": "|j|\u2606yutafrancisgiles\n|j|\u2606MarkInTime\n|t:|1776312998\n|gametype|singles\n|player|p1|yutafrancisgiles|102|1084\n|player|p2|MarkInTime|ash-kalos|1153\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Tinkaton, L50, F|\n|poke|p1|Aegislash, L50, M|\n|poke|p1|Feraligatr, L50, M|\n|poke|p1|Hydrapple, L50, M|\n|poke|p1|Corviknight, L50, M|\n|poke|p2|Greninja-*, L50, M|\n|poke|p2|Skarmory, L50, M|\n|poke|p2|Meowscarada, L50, F|\n|poke|p2|Ceruledge, L50, M|\n|poke|p2|Garchomp, L50, F|\n|poke|p2|Clefable, L50, F|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by yutafrancisgiles)\n|c|\u2606yutafrancisgiles|glhf\n|c|\u2606MarkInTime|gl!\n|inactive|MarkInTime has 60 seconds left.\n|\n|t:|1776313048\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Sneasler|Sneasler, L50, M, shiny|100/100\n|switch|p2a: Greninja|Greninja, L50, M|100/100\n|turn|1\n|\n|t:|1776313062\n|switch|p2a: Ceruledge|Ceruledge, L50, M|100/100\n|move|p1a: Sneasler|Fake Out|p2a: Ceruledge\n|-immune|p2a: Ceruledge\n|\n|upkeep\n|turn|2\n|\n|t:|1776313066\n|move|p1a: Sneasler|Swords Dance|p1a: Sneasler\n|-boost|p1a: Sneasler|atk|2\n|move|p2a: Ceruledge|Swords Dance|p2a: Ceruledge\n|-boost|p2a: Ceruledge|atk|2\n|\n|upkeep\n|turn|3\n|\n|t:|1776313073\n|move|p1a: Sneasler|Dire Claw|p2a: Ceruledge\n|-resisted|p2a: Ceruledge|1\n|-damage|p2a: Ceruledge|46/100\n|-ability|p2a: Ceruledge|Weak Armor|boost\n|-unboost|p2a: Ceruledge|def|1\n|-boost|p2a: Ceruledge|spe|2\n|move|p2a: Ceruledge|Swords Dance|p2a: Ceruledge\n|-boost|p2a: Ceruledge|atk|2\n|\n|upkeep\n|turn|4\n|\n|t:|1776313082\n|move|p2a: Ceruledge|Bitter Blade|p1a: Sneasler\n|-damage|p1a: Sneasler|0 fnt\n|-heal|p2a: Ceruledge|98/100|[from] drain|[of] p1a: Sneasler\n|faint|p1a: Sneasler\n|\n|upkeep\n|\n|t:|1776313085\n|switch|p1a: Aegislash|Aegislash, L50, M, shiny|100/100\n|turn|5\n|\n|t:|1776313091\n|move|p2a: Ceruledge|Bitter Blade|p1a: Aegislash\n|-supereffective|p1a: Aegislash|1\n|-damage|p1a: Aegislash|0 fnt\n|-heal|p2a: Ceruledge|100/100|[from] drain|[of] p1a: Aegislash\n|faint|p1a: Aegislash\n|\n|upkeep\n|\n|t:|1776313093\n|switch|p1a: Feraligatr|Feraligatr, L50, M, shiny|100/100\n|turn|6\n|\n|t:|1776313097\n|move|p2a: Ceruledge|Close Combat|p1a: Feraligatr\n|-damage|p1a: Feraligatr|0 fnt\n|-unboost|p2a: Ceruledge|def|1\n|-unboost|p2a: Ceruledge|spd|1\n|faint|p1a: Feraligatr\n|\n|win|MarkInTime\n|raw|yutafrancisgiles's rating: 1084 &rarr; <strong>1066</strong><br />(-18 for losing)\n|raw|MarkInTime's rating: 1153 &rarr; <strong>1173</strong><br />(+20 for winning)\n|c|\u2606MarkInTime|gg\n|c|\u2606yutafrancisgiles|gg\n|l|\u2606yutafrancisgiles\n|player|p1|\n",
+  "uploadtime": 1776313118,
+  "views": 13,
+  "formatid": "gen9championsbssregma",
+  "rating": 1066,
+  "private": 0,
+  "password": null
+}

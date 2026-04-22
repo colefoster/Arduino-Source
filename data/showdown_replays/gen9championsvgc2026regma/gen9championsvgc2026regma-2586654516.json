@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586654516",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "jack0985890",
+    "Ranmados"
+  ],
+  "log": "|j|\u203djack0985890\n|j|\u2606Ranmados\n|t:|1776449718\n|gametype|doubles\n|player|p1|jack0985890|2|1131\n|player|p2|Ranmados|coin|1213\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Oranguru, L50, M|\n|poke|p1|Torkoal, L50, F|\n|poke|p1|Aegislash, L50, F|\n|poke|p1|Primarina, L50, M|\n|poke|p1|Drampa, L50, M|\n|poke|p1|Rotom-Mow, L50|\n|poke|p2|Hawlucha, L50, M|\n|poke|p2|Maushold-Four, L50|\n|poke|p2|Snorlax, L50, F|\n|poke|p2|Rotom-Wash, L50|\n|poke|p2|Delphox, L50, F|\n|poke|p2|Garchomp, L50, M|\n|teampreview|4\n|\n|t:|1776449743\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Oranguru|Oranguru, L50, M|100/100\n|switch|p1b: Rotom|Rotom-Mow, L50|100/100\n|switch|p2a: Snorlax|Snorlax, L50, F|100/100\n|switch|p2b: Hawlucha|Hawlucha, L50, M|100/100\n|turn|1\n|\n|t:|1776449770\n|move|p2b: Hawlucha|Detect|p2b: Hawlucha\n|-singleturn|p2b: Hawlucha|Protect\n|move|p1b: Rotom|Volt Switch|p2b: Hawlucha\n|-activate|p2b: Hawlucha|move: Protect\n|move|p2a: Snorlax|Stockpile|p2a: Snorlax\n|-start|p2a: Snorlax|stockpile1\n|-boost|p2a: Snorlax|def|1\n|-boost|p2a: Snorlax|spd|1\n|move|p1a: Oranguru|Trick Room|p1a: Oranguru\n|-fieldstart|move: Trick Room|[of] p1a: Oranguru\n|\n|upkeep\n|turn|2\n|\n|t:|1776449792\n|switch|p1b: Torkoal|Torkoal, L50, F|100/100\n|-weather|SunnyDay|[from] ability: Drought|[of] p1b: Torkoal\n|detailschange|p2b: Hawlucha|Hawlucha-Mega, L50, M\n|-mega|p2b: Hawlucha|Hawlucha|Hawluchanite\n|move|p2a: Snorlax|Stockpile|p2a: Snorlax\n|-start|p2a: Snorlax|stockpile2\n|-boost|p2a: Snorlax|def|1\n|-boost|p2a: Snorlax|spd|1\n|move|p1a: Oranguru|Future Sight|p2b: Hawlucha\n|-start|p1a: Oranguru|move: Future Sight\n|move|p2b: Hawlucha|Entrainment|p2a: Snorlax\n|-ability|p2a: Snorlax|No Guard|Thick Fat|[from] move: Entrainment|[of] p2b: Hawlucha\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|turn|3\n|\n|t:|1776449811\n|move|p2b: Hawlucha|Detect|p2b: Hawlucha\n|-singleturn|p2b: Hawlucha|Protect\n|move|p1b: Torkoal|Eruption|p2b: Hawlucha|[spread] p2a\n|-activate|p2b: Hawlucha|move: Protect\n|-damage|p2a: Snorlax|80/100\n|move|p2a: Snorlax|Fissure|p1b: Torkoal\n|-damage|p1b: Torkoal|0 fnt\n|faint|p1b: Torkoal\n|-ohko\n|move|p1a: Oranguru|Instruct|p1: Torkoal|[notarget]\n|-fail|p1a: Oranguru\n|\n|-weather|SunnyDay|[upkeep]\n|-heal|p2a: Snorlax|86/100|[from] item: Leftovers\n|upkeep\n|-message|jack0985890 forfeited.\n|\n|win|Ranmados\n|raw|jack0985890's rating: 1131 &rarr; <strong>1112</strong><br />(-19 for losing)\n|raw|Ranmados's rating: 1213 &rarr; <strong>1232</strong><br />(+19 for winning)\n|l|\u203djack0985890\n|player|p1|\n",
+  "uploadtime": 1776449836,
+  "views": 31,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1112,
+  "private": 0,
+  "password": null
+}

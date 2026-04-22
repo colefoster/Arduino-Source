@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2585249936",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "mystymt",
+    "bryannoah2309"
+  ],
+  "log": "|j|\u2606mystymt\n|j|\u2606bryannoah2309\n|t:|1776329918\n|gametype|singles\n|player|p1|mystymt|1|1191\n|player|p2|bryannoah2309|silver|1304\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Lopunny, L50, M|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Espathra, L50, F|\n|poke|p1|Umbreon, L50, M|\n|poke|p1|Corviknight, L50, F|\n|poke|p2|Greninja-*, L50, M|\n|poke|p2|Gengar, L50, M|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Dragonite, L50, M|\n|poke|p2|Hatterene, L50, F|\n|poke|p2|Scizor, L50, M|\n|teampreview|3\n|\n|t:|1776329952\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Espathra|Espathra, L50, F|100/100\n|switch|p2a: Gengar|Gengar, L50, M, shiny|100/100\n|turn|1\n|\n|t:|1776329960\n|detailschange|p2a: Gengar|Gengar-Mega, L50, M, shiny\n|-mega|p2a: Gengar|Gengar|Gengarite\n|move|p1a: Espathra|Protect|p1a: Espathra\n|-singleturn|p1a: Espathra|Protect\n|move|p2a: Gengar|Substitute|p2a: Gengar\n|-start|p2a: Gengar|Substitute\n|-damage|p2a: Gengar|76/100\n|\n|-ability|p1a: Espathra|Speed Boost|boost\n|-boost|p1a: Espathra|spe|1\n|upkeep\n|turn|2\n|\n|t:|1776329970\n|move|p1a: Espathra|Lumina Crash|p2a: Gengar\n|-supereffective|p2a: Gengar|1\n|-end|p2a: Gengar|Substitute\n|move|p2a: Gengar|Shadow Ball|p1a: Espathra\n|-supereffective|p1a: Espathra|1\n|-enditem|p1a: Espathra|Focus Sash\n|-damage|p1a: Espathra|1/100\n|-unboost|p1a: Espathra|spd|1\n|\n|-ability|p1a: Espathra|Speed Boost|boost\n|-boost|p1a: Espathra|spe|1\n|upkeep\n|turn|3\n|\n|t:|1776329999\n|switch|p2a: Greninja|Greninja, L50, M, shiny|100/100\n|move|p1a: Espathra|Lumina Crash|p2a: Greninja\n|-immune|p2a: Greninja\n|\n|-ability|p1a: Espathra|Speed Boost|boost\n|-boost|p1a: Espathra|spe|1\n|upkeep\n|turn|4\n|\n|t:|1776330009\n|switch|p1a: Floette|Floette-Eternal, L50, F|100/100\n|move|p2a: Greninja|U-turn|p1a: Floette\n|-start|p2a: Greninja|typechange|Bug|[from] ability: Protean\n|-resisted|p1a: Floette|1\n|-damage|p1a: Floette|90/100\n|\n|t:|1776330017\n|switch|p2a: Gengar|Gengar-Mega, L50, M, shiny|76/100|[from] U-turn\n|\n|upkeep\n|turn|5\n|\n|t:|1776330025\n|detailschange|p1a: Floette|Floette-Mega, L50, F\n|-mega|p1a: Floette|Floette|Floettite\n|-ability|p1a: Floette|Fairy Aura\n|move|p2a: Gengar|Sludge Wave|p1a: Floette\n|-supereffective|p1a: Floette|1\n|-damage|p1a: Floette|0 fnt\n|faint|p1a: Floette\n|\n|upkeep\n|-message|mystymt forfeited.\n|\n|win|bryannoah2309\n|raw|mystymt's rating: 1191 &rarr; <strong>1174</strong><br />(-17 for losing)\n|raw|bryannoah2309's rating: 1304 &rarr; <strong>1318</strong><br />(+14 for winning)\n|l|\u2606mystymt\n|player|p1|\n",
+  "uploadtime": 1776330040,
+  "views": 21,
+  "formatid": "gen9championsbssregma",
+  "rating": 1174,
+  "private": 0,
+  "password": null
+}

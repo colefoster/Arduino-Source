@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2583630693",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "moomoomilkers00",
+    "BloodTrailedCometV"
+  ],
+  "log": "|j|\u2606moomoomilkers00\n|j|\u2606BloodTrailedCometV\n|t:|1776187600\n|gametype|doubles\n|player|p1|moomoomilkers00|volkner|1059\n|player|p2|BloodTrailedCometV|lance-masters2|1134\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Charizard, L50, F|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Venusaur, L50, M|\n|poke|p1|Clefable, L50, M|\n|poke|p1|Whimsicott, L50, F|\n|poke|p1|Gyarados, L50, M|\n|poke|p2|Golurk, L50|\n|poke|p2|Crabominable, L50, F|\n|poke|p2|Hatterene, L50, F|\n|poke|p2|Sinistcha-Masterpiece, L50|\n|poke|p2|Kingambit, L50, M|\n|poke|p2|Torkoal, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by BloodTrailedCometV)\n|inactive|moomoomilkers00 also wants the timer to be on.\n|\n|t:|1776187617\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Charizard|Charizard, L50, F|100/100\n|switch|p1b: Venusaur|Venusaur, L50, M|100/100\n|switch|p2a: Crabominable|Crabominable, L50, F, shiny|100/100\n|switch|p2b: Hatterene|Hatterene, L50, F|100/100\n|turn|1\n|\n|t:|1776187626\n|detailschange|p1a: Charizard|Charizard-Mega-Y, L50, F\n|-mega|p1a: Charizard|Charizard|Charizardite Y\n|-weather|SunnyDay|[from] ability: Drought|[of] p1a: Charizard\n|detailschange|p2a: Crabominable|Crabominable-Mega, L50, F, shiny\n|-mega|p2a: Crabominable|Crabominable|Crabominite\n|move|p2a: Crabominable|Wide Guard|p2a: Crabominable\n|-singleturn|p2a: Crabominable|Wide Guard\n|move|p1b: Venusaur|Sludge Wave|p2a: Crabominable|[spread] p1a\n|-activate|p2a: Crabominable|move: Wide Guard\n|-activate|p2b: Hatterene|move: Wide Guard\n|-damage|p1a: Charizard|67/100\n|move|p1a: Charizard|Heat Wave|p2b: Hatterene|[spread] \n|-activate|p2a: Crabominable|move: Wide Guard\n|-activate|p2b: Hatterene|move: Wide Guard\n|move|p2b: Hatterene|Trick Room|p2b: Hatterene\n|-fieldstart|move: Trick Room|[of] p2b: Hatterene\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|turn|2\n|-message|moomoomilkers00 forfeited.\n|\n|win|BloodTrailedCometV\n|raw|moomoomilkers00's rating: 1059 &rarr; <strong>1044</strong><br />(-15 for losing)\n|raw|BloodTrailedCometV's rating: 1134 &rarr; <strong>1154</strong><br />(+20 for winning)\n|l|\u2606moomoomilkers00\n|player|p1|\n",
+  "uploadtime": 1776187648,
+  "views": 15,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1044,
+  "private": 0,
+  "password": null
+}

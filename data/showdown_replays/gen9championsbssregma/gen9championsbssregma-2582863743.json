@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2582863743",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "swaig",
+    "bluwu12"
+  ],
+  "log": "|j|\u2606swaig\n|j|\u2606bluwu12\n|t:|1776120140\n|gametype|singles\n|player|p1|swaig|170|1000\n|player|p2|bluwu12|2|1023\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Steelix, L50, F|\n|poke|p1|Mimikyu, L50, F|\n|poke|p1|Tyranitar, L50, F|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Lucario, L50, F|\n|poke|p1|Hatterene, L50, F|\n|poke|p2|Crabominable, L50, F|\n|poke|p2|Drampa, L50, F|\n|poke|p2|Torkoal, L50, M|\n|poke|p2|Chesnaught, L50, M|\n|poke|p2|Hydrapple, L50, M|\n|poke|p2|Mimikyu, L50, F|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by bluwu12)\n|j| SuperMYL\n|inactive|swaig has 60 seconds left.\n|\n|t:|1776120184\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Incineroar|Incineroar, L50, F|100/100\n|switch|p2a: Chesnaught|Chesnaught, L50, M|100/100\n|-ability|p1a: Incineroar|Intimidate|boost\n|-unboost|p2a: Chesnaught|atk|1\n|turn|1\n|-message|swaig forfeited.\n|\n|win|bluwu12\n|raw|swaig's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|raw|bluwu12's rating: 1023 &rarr; <strong>1057</strong><br />(+34 for winning)\n|l|\u2606swaig\n|player|p1|\n",
+  "uploadtime": 1776120211,
+  "views": 13,
+  "formatid": "gen9championsbssregma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

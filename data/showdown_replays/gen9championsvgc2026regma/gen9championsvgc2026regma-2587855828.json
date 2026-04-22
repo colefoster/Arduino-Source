@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2587855828",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "DracoShower94",
+    "ScribbleScribble"
+  ],
+  "log": "|j|\u2606DracoShower94\n|j|\u2606ScribbleScribble\n|t:|1776571112\n|gametype|doubles\n|player|p1|DracoShower94|iris-gen5bw2|1569\n|player|p2|ScribbleScribble|mina-lgpe|1544\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Tyranitar, L50, F|\n|poke|p1|Excadrill, L50, F|\n|poke|p1|Gallade, L50, M|\n|poke|p1|Volcarona, L50, M|\n|poke|p1|Milotic, L50, M|\n|poke|p1|Weavile, L50, M|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Aerodactyl, L50, M|\n|poke|p2|Kingambit, L50, M|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Farigiraf, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by ScribbleScribble)\n|inactive|DracoShower94 also wants the timer to be on.\n|inactive|DracoShower94 has 60 seconds left.\n|\n|t:|1776571147\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Weavile|Weavile, L50, M|100/100\n|switch|p1b: Gallade|Gallade, L50, M|100/100\n|switch|p2a: Aerodactyl|Aerodactyl, L50, M|100/100\n|switch|p2b: Sneasler|Sneasler, L50, M|100/100\n|-ability|p2a: Aerodactyl|Unnerve\n|-ability|p1a: Weavile|Pressure\n|turn|1\n|\n|t:|1776571161\n|move|p1a: Weavile|Fake Out|p2a: Aerodactyl\n|-resisted|p2a: Aerodactyl|1\n|-damage|p2a: Aerodactyl|89/100\n|move|p1b: Gallade|Psycho Cut|p2a: Aerodactyl\n|-damage|p2a: Aerodactyl|5/100\n|cant|p2a: Aerodactyl|flinch\n|move|p2b: Sneasler|Close Combat|p1a: Weavile\n|-supereffective|p1a: Weavile|2\n|-damage|p1a: Weavile|0 fnt\n|-unboost|p2b: Sneasler|def|1\n|-unboost|p2b: Sneasler|spd|1\n|faint|p1a: Weavile\n|-enditem|p2b: Sneasler|White Herb\n|-clearnegativeboost|p2b: Sneasler|[silent]\n|\n|upkeep\n|\n|t:|1776571168\n|switch|p1a: Volcarona|Volcarona, L50, M|100/100\n|turn|2\n|\n|t:|1776571189\n|move|p2b: Sneasler|Dire Claw|p1b: Gallade\n|-damage|p1b: Gallade|20/100\n|-status|p1b: Gallade|par\n|move|p2a: Aerodactyl|Rock Slide|p1a: Volcarona|[spread] p1a,p1b\n|-supereffective|p1a: Volcarona|2\n|-resisted|p1b: Gallade|1\n|-damage|p1a: Volcarona|0 fnt\n|-damage|p1b: Gallade|0 fnt\n|faint|p1a: Volcarona\n|faint|p1b: Gallade\n|\n|upkeep\n|-message|DracoShower94 forfeited.\n|\n|win|ScribbleScribble\n|raw|DracoShower94's rating: 1569 &rarr; <strong>1548</strong><br />(-21 for losing)\n|raw|ScribbleScribble's rating: 1544 &rarr; <strong>1565</strong><br />(+21 for winning)\n|l|\u2606DracoShower94\n|player|p1|\n",
+  "uploadtime": 1776571253,
+  "views": 34,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1548,
+  "private": 0,
+  "password": null
+}

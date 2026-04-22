@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2588235568",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "The Andreottian",
+    "Anditto612"
+  ],
+  "log": "|j|\u2606The Andreottian\n|j|\u2606Anditto612\n|t:|1776616829\n|gametype|doubles\n|player|p1|The Andreottian|benga|1121\n|player|p2|Anditto612|1|1167\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Delphox, L50, M|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Clefable, L50, F|\n|poke|p1|Aerodactyl, L50, F|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Sinistcha-Masterpiece, L50|\n|poke|p2|Typhlosion-Hisui, L50, M|\n|poke|p2|Whimsicott, L50, F|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Farigiraf, L50, F|\n|poke|p2|Primarina, L50, F|\n|poke|p2|Venusaur, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by The Andreottian)\n|\n|t:|1776616867\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Delphox|Delphox, L50, M|100/100\n|switch|p1b: Aerodactyl|Aerodactyl, L50, F|100/100\n|switch|p2a: Garchomp|Garchomp, L50, M|100/100\n|switch|p2b: Whimsicott|Whimsicott, L50, F|100/100\n|turn|1\n|\n|t:|1776616880\n|detailschange|p1a: Delphox|Delphox-Mega, L50, M\n|-mega|p1a: Delphox|Delphox|Delphoxite\n|move|p2b: Whimsicott|Tailwind|p2b: Whimsicott\n|-sidestart|p2: Anditto612|move: Tailwind\n|move|p2a: Garchomp|Rock Slide|p1b: Aerodactyl|[spread] p1a,p1b\n|-supereffective|p1a: Delphox|1\n|-supereffective|p1b: Aerodactyl|1\n|-damage|p1a: Delphox|45/100\n|-damage|p1b: Aerodactyl|37/100\n|cant|p1a: Delphox|flinch\n|cant|p1b: Aerodactyl|flinch\n|\n|upkeep\n|turn|2\n|-message|The Andreottian forfeited.\n|\n|win|Anditto612\n|raw|The Andreottian's rating: 1121 &rarr; <strong>1099</strong><br />(-22 for losing)\n|raw|Anditto612's rating: 1167 &rarr; <strong>1189</strong><br />(+22 for winning)\n|l|\u2606The Andreottian\n|player|p1|\n",
+  "uploadtime": 1776616901,
+  "views": 12,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1099,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2588118598",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "campeondelfitness",
+    "rajyesh1"
+  ],
+  "log": "|j|\u2606campeondelfitness\n|j|\u2606rajyesh1\n|t:|1776606277\n|gametype|doubles\n|player|p1|campeondelfitness|swimmer|1286\n|player|p2|rajyesh1|unknown|1289\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Tyranitar, L50, F|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Heliolisk, L50, M|\n|poke|p1|Rotom-Heat, L50|\n|poke|p1|Orthworm, L50, M|\n|poke|p1|Aerodactyl, L50, M|\n|poke|p2|Charizard, L50, M|\n|poke|p2|Venusaur, L50, F|\n|poke|p2|Garchomp, L50, F|\n|poke|p2|Rotom-Wash, L50|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Incineroar, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by rajyesh1)\n|inactive|campeondelfitness also wants the timer to be on.\n|inactive|campeondelfitness has 60 seconds left.\n|inactive|rajyesh1 has 60 seconds left.\n|inactive|rajyesh1 has 30 seconds left.\n|inactive|rajyesh1 has 20 seconds left.\n|\n|t:|1776606351\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Rotom|Rotom-Heat, L50|100/100\n|switch|p1b: Aerodactyl|Aerodactyl, L50, M|100/100\n|switch|p2a: Rotom|Rotom-Wash, L50|100/100\n|switch|p2b: Garchomp|Garchomp, L50, F|100/100\n|-ability|p1b: Aerodactyl|Unnerve\n|turn|1\n|inactive|campeondelfitness has 30 seconds left.\n|inactive|rajyesh1 has 30 seconds left.\n|inactive|rajyesh1 has 20 seconds left.\n|\n|t:|1776606390\n|switch|p2a: Venusaur|Venusaur, L50, F|100/100\n|move|p2b: Garchomp|Earthquake|p1a: Rotom|[spread] p2a\n|-immune|p1a: Rotom|[from] ability: Levitate\n|-immune|p1b: Aerodactyl\n|-damage|p2a: Venusaur|46/100\n|move|p1b: Aerodactyl|Tailwind|p1b: Aerodactyl\n|-sidestart|p1: campeondelfitness|move: Tailwind\n|move|p1a: Rotom|Volt Switch|p2a: Venusaur\n|-resisted|p2a: Venusaur|1\n|-damage|p2a: Venusaur|33/100\n|-message|rajyesh1 forfeited.\n|\n|win|campeondelfitness\n|raw|campeondelfitness's rating: 1286 &rarr; <strong>1311</strong><br />(+25 for winning)\n|raw|rajyesh1's rating: 1289 &rarr; <strong>1264</strong><br />(-25 for losing)\n|l|\u2606rajyesh1\n|player|p2|\n",
+  "uploadtime": 1776606409,
+  "views": 18,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1264,
+  "private": 0,
+  "password": null
+}

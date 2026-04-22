@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2580985040",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "skibidionthewall",
+    "buglover9"
+  ],
+  "log": "|j|\u2606skibidionthewall\n|j|\u2606buglover9\n|t:|1775949093\n|gametype|doubles\n|player|p1|skibidionthewall|1|1000\n|player|p2|buglover9|bugcatcher-gen4dp|1020\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Whimsicott, L50, M|\n|poke|p1|Tyranitar, L50, F|\n|poke|p1|Orthworm, L50, M|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Incineroar, L50, M|\n|poke|p2|Torkoal, L50, M|\n|poke|p2|Farigiraf, L50, M|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Venusaur, L50, M|\n|poke|p2|Dragonite, L50, F|\n|poke|p2|Typhlosion-Hisui, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by skibidionthewall)\n|inactive|buglover9 has 60 seconds left.\n|\n|t:|1775949127\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Orthworm|Orthworm, L50, M|100/100\n|switch|p1b: Garchomp|Garchomp, L50, F|100/100\n|switch|p2a: Typhlosion|Typhlosion-Hisui, L50, M|100/100\n|switch|p2b: Torkoal|Torkoal, L50, M|100/100\n|-item|p1a: Orthworm|Leftovers|[from] ability: Frisk|[of] p2a: Typhlosion\n|-item|p1b: Garchomp|Choice Scarf|[from] ability: Frisk|[of] p2a: Typhlosion\n|-weather|SunnyDay|[from] ability: Drought|[of] p2b: Torkoal\n|turn|1\n|\n|t:|1775949151\n|move|p2b: Torkoal|Helping Hand|p2a: Typhlosion\n|-singleturn|p2a: Typhlosion|Helping Hand|[of] p2b: Torkoal\n|move|p1a: Orthworm|Protect|p1a: Orthworm\n|-singleturn|p1a: Orthworm|Protect\n|move|p1b: Garchomp|Earthquake|p2a: Typhlosion|[spread] p2a,p2b\n|-activate|p1a: Orthworm|move: Protect\n|-supereffective|p2a: Typhlosion|1\n|-supereffective|p2b: Torkoal|1\n|-damage|p2a: Typhlosion|0 fnt\n|-damage|p2b: Torkoal|36/100\n|faint|p2a: Typhlosion\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|-message|buglover9 forfeited.\n|\n|win|skibidionthewall\n|raw|skibidionthewall's rating: 1000 &rarr; <strong>1042</strong><br />(+42 for winning)\n|raw|buglover9's rating: 1020 &rarr; <strong>1006</strong><br />(-14 for losing)\n|l|\u2606buglover9\n|player|p2|\n",
+  "uploadtime": 1775949168,
+  "views": 17,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1006,
+  "private": 0,
+  "password": null
+}

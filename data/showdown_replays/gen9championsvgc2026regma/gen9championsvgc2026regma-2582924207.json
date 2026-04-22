@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582924207",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Archglord",
+    "EveJiie"
+  ],
+  "log": "|j|\u2606Archglord\n|j|\u2606EveJiie\n|t:|1776125423\n|gametype|doubles\n|player|p1|Archglord|morty|1066\n|player|p2|EveJiie|waitress-gen4|1040\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Charizard, L50, M|\n|poke|p1|Venusaur, L50, M|\n|poke|p1|Farigiraf, L50, F|\n|poke|p1|Whimsicott, L50, M|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Sneasler, L50, F|\n|poke|p2|Oranguru, L50, F|\n|poke|p2|Camerupt, L50, F|\n|poke|p2|Mimikyu, L50, M|\n|poke|p2|Feraligatr, L50, F|\n|poke|p2|Corviknight, L50, F|\n|poke|p2|Incineroar, L50, M|\n|teampreview|4\n|\n|t:|1776125451\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Sneasler|Sneasler, L50, F|100/100\n|switch|p1b: Venusaur|Venusaur, L50, M|100/100\n|switch|p2a: Oranguru|Oranguru, L50, F|100/100\n|switch|p2b: Camerupt|Camerupt, L50, F|100/100\n|turn|1\n|\n|t:|1776125462\n|move|p2b: Camerupt|Protect|p2b: Camerupt\n|-singleturn|p2b: Camerupt|Protect\n|move|p1a: Sneasler|Fake Out|p2a: Oranguru\n|-damage|p2a: Oranguru|87/100\n|move|p1b: Venusaur|Sleep Powder|p2b: Camerupt\n|-activate|p2b: Camerupt|move: Protect\n|move|p2a: Oranguru|Trick Room|p2a: Oranguru\n|-fieldstart|move: Trick Room|[of] p2a: Oranguru\n|\n|upkeep\n|turn|2\n|\n|t:|1776125480\n|detailschange|p2b: Camerupt|Camerupt-Mega, L50, F\n|-mega|p2b: Camerupt|Camerupt|Cameruptite\n|move|p2b: Camerupt|Eruption|p1a: Sneasler|[spread] p1a,p1b\n|-supereffective|p1b: Venusaur|1\n|-damage|p1a: Sneasler|0 fnt\n|-damage|p1b: Venusaur|0 fnt\n|faint|p1a: Sneasler\n|faint|p1b: Venusaur\n|move|p2a: Oranguru|Instruct|p2b: Camerupt\n|-singleturn|p2b: Camerupt|move: Instruct|[of] p2a: Oranguru\n|move|p2b: Camerupt|Eruption|p1: Sneasler|[notarget]\n|-fail|p2b: Camerupt\n|\n|upkeep\n|-message|Archglord forfeited.\n|\n|win|EveJiie\n|raw|Archglord's rating: 1066 &rarr; <strong>1047</strong><br />(-19 for losing)\n|raw|EveJiie's rating: 1077 &rarr; <strong>1105</strong><br />(+28 for winning)\n|l|\u2606Archglord\n|player|p1|\n",
+  "uploadtime": 1776125494,
+  "views": 10,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1047,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582896233",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "SKucha",
+    "vnunesp12"
+  ],
+  "log": "|j|\u2606SKucha\n|j|\u2606vnunesp12\n|t:|1776122938\n|gametype|doubles\n|player|p1|SKucha|1|1077\n|player|p2|vnunesp12|red|1035\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Tauros-Paldea-Blaze, L50, M|\n|poke|p1|Meowscarada, L50, M|\n|poke|p1|Talonflame, L50, M|\n|poke|p1|Froslass, L50, F|\n|poke|p1|Farigiraf, L50, M|\n|poke|p1|Crabominable, L50, F|\n|poke|p2|Manectric, L50, M|\n|poke|p2|Pelipper, L50, M|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Kingambit, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by vnunesp12)\n|\n|t:|1776122968\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Tauros|Tauros-Paldea-Blaze, L50, M|100/100\n|switch|p1b: Meowscarada|Meowscarada, L50, M|100/100\n|switch|p2a: Luciano Juba|Manectric, L50, M|100/100\n|switch|p2b: Pulga|Sneasler, L50, M|100/100\n|turn|1\n|\n|t:|1776122989\n|detailschange|p2a: Luciano Juba|Manectric-Mega, L50, M\n|-mega|p2a: Luciano Juba|Manectric|Manectite\n|-ability|p2a: Luciano Juba|Intimidate|boost\n|-unboost|p1a: Tauros|atk|1\n|-unboost|p1b: Meowscarada|atk|1\n|move|p2b: Pulga|Fake Out|p1b: Meowscarada\n|-damage|p1b: Meowscarada|82/100\n|cant|p1b: Meowscarada|flinch\n|move|p1a: Tauros|Earthquake|p2b: Pulga|[spread] p1b,p2a,p2b\n|-resisted|p1b: Meowscarada|1\n|-supereffective|p2a: Luciano Juba|1\n|-supereffective|p2b: Pulga|1\n|-damage|p1b: Meowscarada|72/100\n|-damage|p2a: Luciano Juba|52/100\n|-damage|p2b: Pulga|42/100\n|move|p2a: Luciano Juba|Flamethrower|p1b: Meowscarada\n|-supereffective|p1b: Meowscarada|1\n|-damage|p1b: Meowscarada|0 fnt\n|faint|p1b: Meowscarada\n|\n|upkeep\n|\n|t:|1776123005\n|switch|p1b: Talonflame|Talonflame, L50, M|100/100\n|turn|2\n|\n|t:|1776123022\n|move|p2b: Pulga|Protect|p2b: Pulga\n|-singleturn|p2b: Pulga|Protect\n|move|p1b: Talonflame|Tailwind|p1b: Talonflame\n|-sidestart|p1: SKucha|move: Tailwind\n|move|p1a: Tauros|Earthquake|p2b: Pulga|[spread] p2a\n|-activate|p2b: Pulga|move: Protect\n|-immune|p1b: Talonflame\n|-supereffective|p2a: Luciano Juba|1\n|-damage|p2a: Luciano Juba|7/100\n|move|p2a: Luciano Juba|Volt Switch|p1b: Talonflame\n|-supereffective|p1b: Talonflame|1\n|-damage|p1b: Talonflame|0 fnt\n|faint|p1b: Talonflame\n|-message|SKucha forfeited.\n|\n|win|vnunesp12\n|raw|SKucha's rating: 1077 &rarr; <strong>1053</strong><br />(-24 for losing)\n|raw|vnunesp12's rating: 1035 &rarr; <strong>1074</strong><br />(+39 for winning)\n|l|\u2606SKucha\n|player|p1|\n",
+  "uploadtime": 1776123048,
+  "views": 16,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1053,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582146363",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "grapejuiceplaysyt",
+    "ccvdfs"
+  ],
+  "log": "|j|\u2606grapejuiceplaysyt\n|j|\u2606ccvdfs\n|t:|1776063967\n|gametype|doubles\n|player|p1|grapejuiceplaysyt|roughneck-gen4|1031\n|player|p2|ccvdfs|266|1000\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Starmie, L50|\n|poke|p1|Farigiraf, L50, M|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Aerodactyl, L50, F|\n|poke|p1|Rampardos, L50, M|\n|poke|p1|Dragonite, L50, F|\n|poke|p2|Pelipper, L50, F|\n|poke|p2|Politoed, L50, F|\n|poke|p2|Starmie, L50|\n|poke|p2|Meganium, L50, F|\n|poke|p2|Araquanid, L50, M|\n|poke|p2|Noivern, L50, M|\n|teampreview|4\n|\n|t:|1776063992\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Starmie|Starmie, L50, shiny|100/100\n|switch|p1b: Dragonite|Dragonite, L50, F, shiny|100/100\n|switch|p2a: Pelipper|Pelipper, L50, F|100/100\n|switch|p2b: Meganium|Meganium, L50, F|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p2a: Pelipper\n|turn|1\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by grapejuiceplaysyt)\n|\n|t:|1776064010\n|detailschange|p1a: Starmie|Starmie-Mega, L50, shiny\n|-mega|p1a: Starmie|Starmie|Starminite\n|detailschange|p2b: Meganium|Meganium-Mega, L50, F\n|-mega|p2b: Meganium|Meganium|Meganiumite\n|move|p1a: Starmie|Skill Swap|p1b: Dragonite\n|-activate|p1a: Starmie|Skill Swap|||[of] p1b: Dragonite\n|move|p1b: Dragonite|Iron Head|p2b: Meganium\n|-supereffective|p2b: Meganium|1\n|-damage|p2b: Meganium|0 fnt\n|faint|p2b: Meganium\n|move|p2a: Pelipper|U-turn|p1a: Starmie\n|-supereffective|p1a: Starmie|1\n|-damage|p1a: Starmie|89/100\n|-message|ccvdfs forfeited.\n|\n|win|grapejuiceplaysyt\n|raw|grapejuiceplaysyt's rating: 1031 &rarr; <strong>1063</strong><br />(+32 for winning)\n|raw|ccvdfs's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|l|\u2606ccvdfs\n|player|p2|\n",
+  "uploadtime": 1776064036,
+  "views": 15,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

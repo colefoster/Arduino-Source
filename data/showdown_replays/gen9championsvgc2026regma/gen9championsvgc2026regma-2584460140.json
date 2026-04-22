@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584460140",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "thatsaltyguy",
+    "marapanin"
+  ],
+  "log": "|j|\u2606thatsaltyguy\n|j|\u2606marapanin\n|t:|1776262375\n|gametype|doubles\n|player|p1|thatsaltyguy|1|1140\n|player|p2|marapanin|1|1076\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Farigiraf, L50, M|\n|poke|p1|Crabominable, L50, F|\n|poke|p1|Torkoal, L50, M|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Rhyperior, L50, M|\n|poke|p2|Chandelure, L50, M|\n|poke|p2|Clefable, L50, F|\n|poke|p2|Aerodactyl, L50, M|\n|poke|p2|Ninetales-Alola, L50, F|\n|poke|p2|Garchomp, L50, F|\n|poke|p2|Sinistcha, L50|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by marapanin)\n|inactive|thatsaltyguy has 60 seconds left.\n|inactive|marapanin has 60 seconds left.\n|\n|t:|1776262422\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Farigiraf|Farigiraf, L50, M, shiny|100/100\n|switch|p1b: Torkoal|Torkoal, L50, M, shiny|100/100\n|switch|p2a: Chandelure|Chandelure, L50, M|100/100\n|switch|p2b: Sinistcha|Sinistcha, L50|100/100\n|-weather|SunnyDay|[from] ability: Drought|[of] p1b: Torkoal\n|turn|1\n|inactive|marapanin has 30 seconds left.\n|inactive|thatsaltyguy has 30 seconds left.\n|\n|t:|1776262454\n|detailschange|p2a: Chandelure|Chandelure-Mega, L50, M\n|-mega|p2a: Chandelure|Chandelure|Chandelurite\n|move|p2a: Chandelure|Heat Wave|p1a: Farigiraf|[spread] p1a,p1b\n|-resisted|p1b: Torkoal|1\n|-damage|p1a: Farigiraf|36/100\n|-damage|p1b: Torkoal|55/100\n|move|p1a: Farigiraf|Psychic|p2a: Chandelure\n|-damage|p2a: Chandelure|60/100\n|move|p1b: Torkoal|Earth Power|p2a: Chandelure\n|-supereffective|p2a: Chandelure|1\n|-damage|p2a: Chandelure|0 fnt\n|faint|p2a: Chandelure\n|move|p2b: Sinistcha|Trick Room|p2b: Sinistcha\n|-fieldstart|move: Trick Room|[of] p2b: Sinistcha\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|\n|t:|1776262466\n|switch|p2a: Clefable|Clefable, L50, F|100/100\n|turn|2\n|\n|t:|1776262476\n|move|p1a: Farigiraf|Helping Hand|p1b: Torkoal\n|-singleturn|p1b: Torkoal|Helping Hand|[of] p1a: Farigiraf\n|move|p1b: Torkoal|Eruption|p2b: Sinistcha|[spread] p2a,p2b\n|-supereffective|p2b: Sinistcha|1\n|-damage|p2a: Clefable|45/100\n|-damage|p2b: Sinistcha|0 fnt\n|-enditem|p2a: Clefable|Sitrus Berry|[eat]\n|-heal|p2a: Clefable|70/100|[from] item: Sitrus Berry\n|faint|p2b: Sinistcha\n|move|p2a: Clefable|Moonblast|p1b: Torkoal\n|-resisted|p1b: Torkoal|1\n|-damage|p1b: Torkoal|36/100\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|-message|marapanin forfeited.\n|\n|win|thatsaltyguy\n|raw|thatsaltyguy's rating: 1140 &rarr; <strong>1160</strong><br />(+20 for winning)\n|raw|marapanin's rating: 1076 &rarr; <strong>1058</strong><br />(-18 for losing)\n|l|\u2606marapanin\n|player|p2|\n",
+  "uploadtime": 1776262494,
+  "views": 46,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1058,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2585153423",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "csgogo",
+    "nagichan0121"
+  ],
+  "log": "|j|\u2606csgogo\n|j|\u2606nagichan0121\n|t:|1776318371\n|gametype|singles\n|player|p1|csgogo|hiker-gen4|1360\n|player|p2|nagichan0121|169|1314\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Hydreigon, L50, F|\n|poke|p1|Rotom-Wash, L50|\n|poke|p1|Lopunny, L50, F|\n|poke|p1|Archaludon, L50, M|\n|poke|p1|Slowking-Galar, L50, F|\n|poke|p1|Aegislash, L50, F|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Delphox, L50, M|\n|poke|p2|Venusaur, L50, M|\n|poke|p2|Corviknight, L50, F|\n|poke|p2|Azumarill, L50, M|\n|poke|p2|Volcarona, L50, M|\n|teampreview|3\n|j| p74\n|\n|t:|1776318438\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Rotom|Rotom-Wash, L50|100/100\n|switch|p2a: Venusaur|Venusaur, L50, M|100/100\n|turn|1\n|j| jolextestteam22\n|\n|t:|1776318461\n|switch|p1a: Archaludon|Archaludon, L50, M|100/100\n|detailschange|p2a: Venusaur|Venusaur-Mega, L50, M\n|-mega|p2a: Venusaur|Venusaur|Venusaurite\n|move|p2a: Venusaur|Leech Seed|p1a: Archaludon\n|-start|p1a: Archaludon|move: Leech Seed\n|\n|-damage|p1a: Archaludon|88/100|[from] Leech Seed|[of] p2a: Venusaur\n|upkeep\n|turn|2\n|\n|t:|1776318473\n|move|p2a: Venusaur|Earth Power|p1a: Archaludon\n|-supereffective|p1a: Archaludon|1\n|-damage|p1a: Archaludon|20/100\n|-ability|p1a: Archaludon|Stamina|boost\n|-boost|p1a: Archaludon|def|1\n|move|p1a: Archaludon|Thunder Wave|p2a: Venusaur\n|-status|p2a: Venusaur|par\n|\n|-damage|p1a: Archaludon|8/100|[from] Leech Seed|[of] p2a: Venusaur\n|upkeep\n|turn|3\n|\n|t:|1776318493\n|move|p1a: Archaludon|Flash Cannon|p2a: Venusaur\n|-crit|p2a: Venusaur\n|-damage|p2a: Venusaur|67/100 par\n|move|p2a: Venusaur|Synthesis|p2a: Venusaur\n|-heal|p2a: Venusaur|100/100 par\n|\n|-damage|p1a: Archaludon|0 fnt|[from] Leech Seed|[of] p2a: Venusaur\n|faint|p1a: Archaludon\n|upkeep\n|\n|t:|1776318502\n|switch|p1a: Lopunny|Lopunny, L50, F|100/100\n|turn|4\n|\n|t:|1776318507\n|switch|p2a: Volcarona|Volcarona, L50, M|100/100\n|detailschange|p1a: Lopunny|Lopunny-Mega, L50, F\n|-mega|p1a: Lopunny|Lopunny|Lopunnite\n|move|p1a: Lopunny|Fake Out|p2a: Volcarona\n|-damage|p2a: Volcarona|69/100\n|\n|upkeep\n|turn|5\n|\n|t:|1776318519\n|move|p2a: Volcarona|Overheat|p1a: Lopunny\n|-damage|p1a: Lopunny|0 fnt\n|-unboost|p2a: Volcarona|spa|2\n|faint|p1a: Lopunny\n|\n|upkeep\n|-message|csgogo forfeited.\n|\n|win|nagichan0121\n|raw|csgogo's rating: 1360 &rarr; <strong>1337</strong><br />(-23 for losing)\n|raw|nagichan0121's rating: 1314 &rarr; <strong>1337</strong><br />(+23 for winning)\n|l|\u2606csgogo\n|player|p1|\n|l|\u2606nagichan0121\n|player|p2|\n|l| jolextestteam22\n",
+  "uploadtime": 1776318561,
+  "views": 3,
+  "formatid": "gen9championsbssregma",
+  "rating": 1337,
+  "private": 0,
+  "password": null
+}

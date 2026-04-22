@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582012341",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "ye979166426",
+    "StrikerMohamud"
+  ],
+  "log": "|j|\u203dye979166426\n|j|\u2606StrikerMohamud\n|t:|1776048256\n|gametype|doubles\n|player|p1|ye979166426|265|1217\n|player|p2|StrikerMohamud|unknown|1272\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Pelipper, L50, M|\n|poke|p1|Archaludon, L50, F|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Manectric, L50, M|\n|poke|p1|Kingambit, L50, M|\n|poke|p2|Kangaskhan, L50, F|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Azumarill, L50, F|\n|poke|p2|Froslass, L50, F|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Talonflame, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by ye979166426)\nStrikerMohamud has agreed to open team sheets.\n|\n|t:|1776048367\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Basculegion|Basculegion, L50, M|100/100\n|switch|p1b: Sneasler|Sneasler, L50, M|100/100\n|switch|p2a: Talonflame|Talonflame, L50, F, shiny|100/100\n|switch|p2b: Garchomp|Garchomp, L50, M|100/100\n|turn|1\n|inactive|ye979166426 has 30 seconds left.\n|inactive|ye979166426 has 20 seconds left.\n|inactive|ye979166426 has 15 seconds left.\n|\n|t:|1776048410\n|move|p2a: Talonflame|Quick Guard|p2a: Talonflame\n|-singleturn|p2a: Talonflame|Quick Guard\n|move|p1b: Sneasler|Fake Out|p2b: Garchomp\n|-activate|p2b: Garchomp|move: Quick Guard\n|move|p2b: Garchomp|Earthquake|p1a: Basculegion|[spread] p1a,p1b\n|-immune|p2a: Talonflame\n|-supereffective|p1b: Sneasler|1\n|-damage|p1a: Basculegion|45/100\n|-damage|p1b: Sneasler|0 fnt\n|faint|p1b: Sneasler\n|move|p1a: Basculegion|Wave Crash|p2b: Garchomp\n|-damage|p2b: Garchomp|18/100\n|-damage|p1a: Basculegion|33/100|[from] ability: Rough Skin|[of] p2b: Garchomp\n|-damage|p1a: Basculegion|8/100|[from] Recoil\n|\n|upkeep\n|\n|t:|1776048416\n|switch|p1b: Pelipper|Pelipper, L50, M, shiny|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p1b: Pelipper\n|turn|2\n|\n|t:|1776048432\n|move|p2a: Talonflame|Tailwind|p2a: Talonflame\n|-sidestart|p2: StrikerMohamud|move: Tailwind\n|move|p2b: Garchomp|Earthquake|p1a: Basculegion|[spread] p1a\n|-immune|p2a: Talonflame\n|-immune|p1b: Pelipper\n|-damage|p1a: Basculegion|0 fnt\n|faint|p1a: Basculegion\n|move|p1b: Pelipper|Tailwind|p1b: Pelipper\n|-sidestart|p1: ye979166426|move: Tailwind\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|-message|ye979166426 forfeited.\n|\n|win|StrikerMohamud\n|raw|ye979166426's rating: 1217 &rarr; <strong>1196</strong><br />(-21 for losing)\n|raw|StrikerMohamud's rating: 1272 &rarr; <strong>1293</strong><br />(+21 for winning)\n|l|\u203dye979166426\n|player|p1|\n",
+  "uploadtime": 1776048258,
+  "views": 16,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1196,
+  "private": 0,
+  "password": null
+}

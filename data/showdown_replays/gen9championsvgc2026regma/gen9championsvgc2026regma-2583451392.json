@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2583451392",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "bj48uh9g8irht",
+    "leoscerni"
+  ],
+  "log": "|j|\u2606bj48uh9g8irht\n|j|\u2606leoscerni\n|t:|1776176515\n|gametype|doubles\n|player|p1|bj48uh9g8irht|kieran|1265\n|player|p2|leoscerni|1|1321\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Meganium, L50, M|\n|poke|p1|Raichu, L50, M|\n|poke|p1|Talonflame, L50, F|\n|poke|p1|Farigiraf, L50, F|\n|poke|p1|Hydreigon, L50, M|\n|poke|p1|Milotic, L50, M|\n|poke|p2|Scovillain, L50, M|\n|poke|p2|Dragapult, L50, F|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Milotic, L50, F|\n|poke|p2|Aerodactyl, L50, M|\n|poke|p2|Incineroar, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by leoscerni)\n|\n|t:|1776176541\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Hydreigon|Hydreigon, L50, M|100/100\n|switch|p1b: Raichu|Raichu, L50, M|100/100\n|switch|p2a: Scovillain|Scovillain, L50, M|100/100\n|switch|p2b: Sneasler|Sneasler, L50, M|100/100\n|turn|1\n|inactive|leoscerni has 30 seconds left.\n|\n|t:|1776176566\n|detailschange|p2a: Scovillain|Scovillain-Mega, L50, M\n|-mega|p2a: Scovillain|Scovillain|Scovillainite\n|move|p1a: Hydreigon|Protect|p1a: Hydreigon\n|-singleturn|p1a: Hydreigon|Protect\n|move|p2b: Sneasler|Fake Out|p1b: Raichu\n|-damage|p1b: Raichu|74/100\n|cant|p1b: Raichu|flinch\n|move|p2a: Scovillain|Spicy Extract|p2b: Sneasler\n|-boost|p2b: Sneasler|atk|2\n|-unboost|p2b: Sneasler|def|2\n|-enditem|p2b: Sneasler|White Herb\n|-clearnegativeboost|p2b: Sneasler|[silent]\n|\n|upkeep\n|turn|2\n|inactive|leoscerni has 30 seconds left.\n|\n|t:|1776176593\n|move|p2a: Scovillain|Rage Powder|p2a: Scovillain\n|-singleturn|p2a: Scovillain|move: Rage Powder\n|move|p2b: Sneasler|Dire Claw|p1b: Raichu\n|-damage|p1b: Raichu|0 fnt\n|faint|p1b: Raichu\n|move|p1a: Hydreigon|Draco Meteor|p2a: Scovillain|[miss]\n|-miss|p1a: Hydreigon|p2a: Scovillain\n|\n|upkeep\n|\n|t:|1776176600\n|switch|p1b: Talonflame|Talonflame, L50, F|100/100\n|turn|3\n|\n|t:|1776176620\n|switch|p2a: Incineroar|Incineroar, L50, F|100/100\n|-ability|p2a: Incineroar|Intimidate|boost\n|-unboost|p1a: Hydreigon|atk|1\n|-unboost|p1b: Talonflame|atk|1\n|move|p2b: Sneasler|Protect|p2b: Sneasler\n|-singleturn|p2b: Sneasler|Protect\n|move|p1b: Talonflame|Brave Bird|p2a: Incineroar\n|-damage|p2a: Incineroar|73/100\n|-damage|p1b: Talonflame|89/100|[from] Recoil\n|move|p1a: Hydreigon|Draco Meteor|p2b: Sneasler\n|-activate|p2b: Sneasler|move: Protect\n|\n|upkeep\n|turn|4\n|-message|bj48uh9g8irht forfeited.\n|\n|win|leoscerni\n|raw|bj48uh9g8irht's rating: 1265 &rarr; <strong>1244</strong><br />(-21 for losing)\n|raw|leoscerni's rating: 1321 &rarr; <strong>1338</strong><br />(+17 for winning)\n|l|\u2606bj48uh9g8irht\n|player|p1|\n",
+  "uploadtime": 1776176640,
+  "views": 35,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1244,
+  "private": 0,
+  "password": null
+}

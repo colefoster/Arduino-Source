@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2588410057",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Northx213",
+    "LukeSkinwalker"
+  ],
+  "log": "|j|\u2606Northx213\n|j|\u2606LukeSkinwalker\n|t:|1776631149\n|gametype|doubles\n|player|p1|Northx213|1|1072\n|player|p2|LukeSkinwalker|swimmer-gen4dp|1090\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Chesnaught, L50, M|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Farigiraf, L50, M|\n|poke|p1|Rotom-Wash, L50|\n|poke|p1|Tyranitar, L50, F|\n|poke|p1|Scizor, L50, F|\n|poke|p2|Empoleon, L50, M, shiny|\n|poke|p2|Aerodactyl, L50, M, shiny|\n|poke|p2|Chandelure, L50, F, shiny|\n|poke|p2|Whimsicott, L50, M|\n|poke|p2|Farigiraf, L50, M, shiny|\n|poke|p2|Garchomp, L50, M, shiny|\n|teampreview|4\n|\n|t:|1776631190\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Scizor|Scizor, L50, F|100/100\n|switch|p1b: Rotom|Rotom-Wash, L50|100/100\n|switch|p2a: Empoleon|Empoleon, L50, M, shiny|100/100\n|switch|p2b: Farigiraf|Farigiraf, L50, M, shiny|100/100\n|turn|1\n|\n|t:|1776631223\n|detailschange|p1a: Scizor|Scizor-Mega, L50, F\n|-mega|p1a: Scizor|Scizor|Scizorite\n|move|p2a: Empoleon|Protect|p2a: Empoleon\n|-singleturn|p2a: Empoleon|Protect\n|move|p1b: Rotom|Volt Switch|p2b: Farigiraf\n|-damage|p2b: Farigiraf|75/100\n|\n|t:|1776631241\n|switch|p1b: Incineroar|Incineroar, L50, M|100/100|[from] Volt Switch\n|-ability|p1b: Incineroar|Intimidate|boost\n|-unboost|p2a: Empoleon|atk|1\n|-ability|p2a: Empoleon|Competitive|boost\n|-boost|p2a: Empoleon|spa|2\n|-unboost|p2b: Farigiraf|atk|1\n|move|p1a: Scizor|Bug Bite|p2b: Farigiraf\n|-supereffective|p2b: Farigiraf|1\n|-damage|p2b: Farigiraf|0 fnt\n|faint|p2b: Farigiraf\n|\n|upkeep\n|\n|t:|1776631270\n|switch|p2b: Aerodactyl|Aerodactyl, L50, M, shiny|100/100\n|-ability|p2b: Aerodactyl|Unnerve\n|turn|2\n|\n|t:|1776631284\n|move|p1a: Scizor|Bullet Punch|p2b: Aerodactyl\n|-supereffective|p2b: Aerodactyl|1\n|-damage|p2b: Aerodactyl|0 fnt\n|faint|p2b: Aerodactyl\n|move|p1b: Incineroar|Parting Shot|p2a: Empoleon\n|-unboost|p2a: Empoleon|atk|1\n|-ability|p2a: Empoleon|Competitive|boost\n|-boost|p2a: Empoleon|spa|2\n|-unboost|p2a: Empoleon|spa|1\n|-ability|p2a: Empoleon|Competitive|boost\n|-boost|p2a: Empoleon|spa|2\n|c|\u2606LukeSkinwalker|Jesus\n|\n|t:|1776631293\n|switch|p1b: Rotom|Rotom-Wash, L50|100/100|[from] Parting Shot\n|move|p2a: Empoleon|Surf|p1a: Scizor|[spread] p1a,p1b\n|-resisted|p1b: Rotom|1\n|-damage|p1a: Scizor|0 fnt\n|-damage|p1b: Rotom|37/100\n|faint|p1a: Scizor\n|\n|upkeep\n|-message|Northx213 forfeited.\n|\n|win|LukeSkinwalker\n|raw|Northx213's rating: 1072 &rarr; <strong>1052</strong><br />(-20 for losing)\n|raw|LukeSkinwalker's rating: 1090 &rarr; <strong>1115</strong><br />(+25 for winning)\n|l|\u2606Northx213\n|player|p1|\n",
+  "uploadtime": 1776631327,
+  "views": 14,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1052,
+  "private": 0,
+  "password": null
+}

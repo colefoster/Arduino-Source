@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2580896763",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "LopunnyAdmirer",
+    "relooo"
+  ],
+  "log": "|j|\u2606LopunnyAdmirer\n|j|\u2606relooo\n|t:|1775941424\n|gametype|doubles\n|player|p1|LopunnyAdmirer|ethan|1107\n|player|p2|relooo|170|1169\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Froslass, L50, F|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Meowstic, L50, M|\n|poke|p1|Starmie, L50|\n|poke|p1|Rotom-Frost, L50|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Torkoal, L50, F|\n|poke|p2|Farigiraf, L50, M|\n|poke|p2|Delphox, L50, M|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Kingambit, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by LopunnyAdmirer)\n|\n|t:|1775941452\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Starmie|Starmie, L50|100/100\n|switch|p1b: Meowstic|Meowstic, L50, M|100/100\n|switch|p2a: Kingambit|Kingambit, L50, F|100/100\n|switch|p2b: Incineroar|Incineroar, L50, F|100/100\n|-ability|p2b: Incineroar|Intimidate|boost\n|-unboost|p1a: Starmie|atk|1\n|-unboost|p1b: Meowstic|atk|1\n|turn|1\n|\n|t:|1775941473\n|detailschange|p1a: Starmie|Starmie-Mega, L50\n|-mega|p1a: Starmie|Starmie|Starminite\n|move|p2b: Incineroar|Fake Out|p1a: Starmie\n|-damage|p1a: Starmie|86/100\n|move|p1b: Meowstic|Sucker Punch||[still]\n|-fail|p1b: Meowstic\n|cant|p1a: Starmie|flinch\n|move|p2a: Kingambit|Swords Dance|p2a: Kingambit\n|-boost|p2a: Kingambit|atk|2\n|\n|upkeep\n|turn|2\n|\n|t:|1775941498\n|move|p1b: Meowstic|Sucker Punch|p2a: Kingambit\n|-resisted|p2a: Kingambit|1\n|-damage|p2a: Kingambit|99/100\n|move|p2a: Kingambit|Sucker Punch|p1a: Starmie\n|-supereffective|p1a: Starmie|1\n|-damage|p1a: Starmie|0 fnt\n|faint|p1a: Starmie\n|move|p2b: Incineroar|Darkest Lariat|p1b: Meowstic\n|-supereffective|p1b: Meowstic|1\n|-damage|p1b: Meowstic|17/100\n|\n|upkeep\n|-message|LopunnyAdmirer forfeited.\n|\n|win|relooo\n|raw|LopunnyAdmirer's rating: 1107 &rarr; <strong>1086</strong><br />(-21 for losing)\n|raw|relooo's rating: 1169 &rarr; <strong>1190</strong><br />(+21 for winning)\n|l|\u2606LopunnyAdmirer\n|player|p1|\n",
+  "uploadtime": 1775941519,
+  "views": 12,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1086,
+  "private": 0,
+  "password": null
+}

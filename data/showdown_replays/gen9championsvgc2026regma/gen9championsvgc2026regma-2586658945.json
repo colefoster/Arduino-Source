@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586658945",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "callmehavoc",
+    "bebjin"
+  ],
+  "log": "|j|\u2606callmehavoc\n|j|\u2606bebjin\n|t:|1776450025\n|gametype|doubles\n|player|p1|callmehavoc|bugcatcher-gen4dp|1077\n|player|p2|bebjin|bugcatcher-gen4dp|1084\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Blastoise, L50, M|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Froslass, L50, F|\n|poke|p1|Orthworm, L50, F|\n|poke|p1|Sneasler, L50, F|\n|poke|p2|Tyranitar, L50, M|\n|poke|p2|Excadrill, L50, F|\n|poke|p2|Corviknight, L50, F|\n|poke|p2|Primarina, L50, F|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Sinistcha, L50|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by bebjin)\n|\n|t:|1776450078\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Garchomp|Garchomp, L50, M|100/100\n|switch|p1b: Blastoise|Blastoise, L50, M|100/100\n|switch|p2a: Tyranitar|Tyranitar, L50, M|100/100\n|switch|p2b: Excadrill|Excadrill, L50, F|100/100\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p2a: Tyranitar\n|turn|1\n|\n|t:|1776450096\n|detailschange|p1b: Blastoise|Blastoise-Mega, L50, M\n|-mega|p1b: Blastoise|Blastoise|Blastoisinite\n|move|p1b: Blastoise|Protect|p1b: Blastoise\n|-singleturn|p1b: Blastoise|Protect\n|move|p2b: Excadrill|Earthquake|p1b: Blastoise|[spread] p2a,p1a\n|-activate|p1b: Blastoise|move: Protect\n|-supereffective|p2a: Tyranitar|1\n|-damage|p2a: Tyranitar|29/100\n|-damage|p1a: Garchomp|56/100\n|move|p1a: Garchomp|Earthquake|p2a: Tyranitar|[spread] p2a,p2b\n|-activate|p1b: Blastoise|move: Protect\n|-supereffective|p2a: Tyranitar|1\n|-supereffective|p2b: Excadrill|1\n|-damage|p2a: Tyranitar|0 fnt\n|-enditem|p2b: Excadrill|Focus Sash\n|-damage|p2b: Excadrill|1/100\n|faint|p2a: Tyranitar\n|\n|-weather|Sandstorm|[upkeep]\n|-damage|p1b: Blastoise|94/100|[from] Sandstorm\n|upkeep\n|-message|bebjin forfeited.\n|\n|win|callmehavoc\n|raw|callmehavoc's rating: 1077 &rarr; <strong>1106</strong><br />(+29 for winning)\n|raw|bebjin's rating: 1084 &rarr; <strong>1061</strong><br />(-23 for losing)\n",
+  "uploadtime": 1776450111,
+  "views": 24,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1061,
+  "private": 0,
+  "password": null
+}

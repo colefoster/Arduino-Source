@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2588368085",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "BoysenOrange",
+    "ismelllikesocksbro"
+  ],
+  "log": "|j|\u2606BoysenOrange\n|j|\u2606ismelllikesocksbro\n|t:|1776627694\n|gametype|doubles\n|player|p1|BoysenOrange|turo|1245\n|player|p2|ismelllikesocksbro|dancer|1312\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Farigiraf, L50, M|\n|poke|p1|Gardevoir, L50, M|\n|poke|p1|Kangaskhan, L50, F|\n|poke|p1|Camerupt, L50, F|\n|poke|p1|Conkeldurr, L50, M|\n|poke|p1|Tinkaton, L50, F|\n|poke|p2|Victreebel, L50, M|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Mamoswine, L50, F|\n|poke|p2|Charizard, L50, F, shiny|\n|poke|p2|Aerodactyl, L50, M|\n|poke|p2|Rotom-Wash, L50|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by ismelllikesocksbro)\n|inactive|BoysenOrange has 60 seconds left.\n|\n|t:|1776627729\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Gardevoir|Gardevoir, L50, M|100/100\n|switch|p1b: Tinkaton|Tinkaton, L50, F|100/100\n|switch|p2a: Nerf Miner|Floette-Eternal, L50, F|100/100\n|switch|p2b: Phonk Monster|Victreebel, L50, M|100/100\n|-ability|p1b: Tinkaton|Mold Breaker\n|-ability|p1a: Gardevoir|Flower Veil|Trace|[from] ability: Trace|[of] p2a: Nerf Miner\n|turn|1\n|\n|t:|1776627748\n|move|p2a: Nerf Miner|Protect|p2a: Nerf Miner\n|-singleturn|p2a: Nerf Miner|Protect\n|move|p1b: Tinkaton|Fake Out|p2b: Phonk Monster\n|-damage|p2b: Phonk Monster|87/100\n|cant|p2b: Phonk Monster|flinch\n|move|p1a: Gardevoir|Trick Room|p1a: Gardevoir\n|-fieldstart|move: Trick Room|[of] p1a: Gardevoir\n|\n|upkeep\n|turn|2\n|\n|t:|1776627764\n|detailschange|p2a: Nerf Miner|Floette-Mega, L50, F\n|-mega|p2a: Nerf Miner|Floette|Floettite\n|-ability|p2a: Nerf Miner|Fairy Aura\n|move|p1a: Gardevoir|Psychic|p2b: Phonk Monster\n|-supereffective|p2b: Phonk Monster|1\n|-damage|p2b: Phonk Monster|0 fnt\n|faint|p2b: Phonk Monster\n|move|p1b: Tinkaton|Gigaton Hammer|p2a: Nerf Miner\n|-supereffective|p2a: Nerf Miner|1\n|-damage|p2a: Nerf Miner|0 fnt\n|faint|p2a: Nerf Miner\n|\n|upkeep\n|-message|ismelllikesocksbro forfeited.\n|\n|win|BoysenOrange\n|raw|BoysenOrange's rating: 1245 &rarr; <strong>1275</strong><br />(+30 for winning)\n|raw|ismelllikesocksbro's rating: 1312 &rarr; <strong>1288</strong><br />(-24 for losing)\n|l|\u2606ismelllikesocksbro\n|player|p2|\n",
+  "uploadtime": 1776627774,
+  "views": 13,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1275,
+  "private": 0,
+  "password": null
+}

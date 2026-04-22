@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2583134651",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Novicebest",
+    "Niko highway"
+  ],
+  "log": "|j|\u2606Novicebest\n|j|\u2606Niko highway\n|t:|1776146192\n|gametype|doubles\n|player|p1|Novicebest|dawn|1352\n|player|p2|Niko highway|169|1418\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Kingambit, L50, M|\n|poke|p1|Gengar, L50, F|\n|poke|p1|Kommo-o, L50, M|\n|poke|p1|Politoed, L50, M|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Basculegion, L50, M|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Conkeldurr, L50, M|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Cofagrigus, L50, F|\n|poke|p2|Drampa, L50, F|\n|poke|p2|Aegislash, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Niko highway)\n|\n|t:|1776146253\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Kingambit|Kingambit, L50, M|100/100\n|switch|p1b: Kommo-o|Kommo-o, L50, M|100/100\n|switch|p2a: Cofagrigus|Cofagrigus, L50, F|100/100\n|switch|p2b: Drampa|Drampa, L50, F|100/100\n|-ability|p2b: Drampa|Cloud Nine\n|turn|1\n|\n|t:|1776146274\n|move|p1b: Kommo-o|Clanging Scales|p2b: Drampa|[spread] p2a,p2b\n|-supereffective|p2b: Drampa|1\n|-damage|p2a: Cofagrigus|55/100\n|-damage|p2b: Drampa|0 fnt\n|faint|p2b: Drampa\n|-unboost|p1b: Kommo-o|def|1\n|move|p1a: Kingambit|Kowtow Cleave|p2a: Cofagrigus\n|-supereffective|p2a: Cofagrigus|1\n|-crit|p2a: Cofagrigus\n|-damage|p2a: Cofagrigus|0 fnt\n|-activate|p2a: Cofagrigus|ability: Mummy|p1a: Kingambit|[ability] Defiant\n|faint|p2a: Cofagrigus\n|\n|upkeep\n|-message|Niko highway forfeited.\n|\n|win|Novicebest\n|raw|Novicebest's rating: 1352 &rarr; <strong>1376</strong><br />(+24 for winning)\n|raw|Niko highway's rating: 1418 &rarr; <strong>1394</strong><br />(-24 for losing)\n|l|\u2606Niko highway\n|player|p2|\n",
+  "uploadtime": 1776146289,
+  "views": 49,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1376,
+  "private": 0,
+  "password": null
+}

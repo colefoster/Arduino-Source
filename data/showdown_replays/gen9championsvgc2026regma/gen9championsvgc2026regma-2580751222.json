@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2580751222",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "takemikawuchi",
+    "slr_pwr"
+  ],
+  "log": "|j|\u2606takemikawuchi\n|j|\u2606slr_pwr\n|t:|1775929508\n|gametype|doubles\n|player|p1|takemikawuchi|gambler|1040\n|player|p2|slr_pwr|alder|1035\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Charizard, L50, M|\n|poke|p1|Venusaur, L50, F|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Whimsicott, L50, F|\n|poke|p2|Samurott-Hisui, L50, F|\n|poke|p2|Pelipper, L50, M|\n|poke|p2|Krookodile, L50, F|\n|poke|p2|Aggron, L50, M|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Liepard, L50, M|\n|teampreview|4\n|\n|t:|1775929531\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Charizard|Charizard, L50, M|100/100\n|switch|p1b: Venusaur|Venusaur, L50, F|100/100\n|switch|p2a: Aggron|Aggron, L50, M|100/100\n|switch|p2b: Liepard|Liepard, L50, M|100/100\n|turn|1\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by slr_pwr)\n|\n|t:|1775929548\n|detailschange|p1a: Charizard|Charizard-Mega-Y, L50, M\n|-mega|p1a: Charizard|Charizard|Charizardite Y\n|-weather|SunnyDay|[from] ability: Drought|[of] p1a: Charizard\n|detailschange|p2a: Aggron|Aggron-Mega, L50, M\n|-mega|p2a: Aggron|Aggron|Aggronite\n|move|p2b: Liepard|Rain Dance|p2b: Liepard\n|-weather|RainDance\n|move|p1a: Charizard|Heat Wave|p2a: Aggron|[spread] p2a,p2b\n|-supereffective|p2a: Aggron|1\n|-damage|p2a: Aggron|63/100\n|-damage|p2b: Liepard|52/100\n|-status|p2b: Liepard|brn\n|move|p1b: Venusaur|Growth|p1b: Venusaur\n|-boost|p1b: Venusaur|atk|1\n|-boost|p1b: Venusaur|spa|1\n|move|p2a: Aggron|Rock Slide|p1b: Venusaur|[spread] p1a,p1b\n|-supereffective|p1a: Charizard|2\n|-damage|p1a: Charizard|0 fnt\n|-damage|p1b: Venusaur|75/100\n|faint|p1a: Charizard\n|\n|-weather|RainDance|[upkeep]\n|-heal|p1b: Venusaur|80/100|[from] item: Leftovers\n|-damage|p2b: Liepard|46/100 brn|[from] brn\n|upkeep\n|\n|t:|1775929560\n|switch|p1a: Garchomp|Garchomp, L50, M|100/100\n|turn|2\n|inactive|slr_pwr has 30 seconds left.\n|\n|t:|1775929587\n|switch|p2b: Pelipper|Pelipper, L50, M|100/100\n|move|p1a: Garchomp|Earthquake|p2b: Pelipper|[spread] p1b,p2a\n|-immune|p2b: Pelipper\n|-supereffective|p2a: Aggron|1\n|-damage|p1b: Venusaur|31/100\n|-damage|p2a: Aggron|40/100\n|move|p1b: Venusaur|Solar Beam||[still]\n|-prepare|p1b: Venusaur|Solar Beam\n|move|p2a: Aggron|Heavy Slam|p1b: Venusaur\n|-damage|p1b: Venusaur|0 fnt\n|faint|p1b: Venusaur\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|\n|t:|1775929596\n|switch|p1b: Whimsicott|Whimsicott, L50, F|100/100\n|turn|3\n|-message|takemikawuchi forfeited.\n|\n|win|slr_pwr\n|raw|takemikawuchi's rating: 1040 &rarr; <strong>1024</strong><br />(-16 for losing)\n|raw|slr_pwr's rating: 1035 &rarr; <strong>1070</strong><br />(+35 for winning)\n|l|\u2606takemikawuchi\n|player|p1|\n",
+  "uploadtime": 1775929614,
+  "views": 11,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1024,
+  "private": 0,
+  "password": null
+}

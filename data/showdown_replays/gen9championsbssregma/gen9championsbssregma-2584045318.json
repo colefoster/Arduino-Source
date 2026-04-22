@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2584045318",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "perdicionn",
+    "deokso king"
+  ],
+  "log": "|j|\u2606perdicionn\n|j|\u2606deokso king\n|t:|1776219729\n|gametype|singles\n|player|p1|perdicionn|crasherwake|1243\n|player|p2|deokso king|bellelba|1373\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Aegislash, L50, M|\n|poke|p1|Kingambit, L50, F|\n|poke|p1|Volcarona, L50, M|\n|poke|p1|Gyarados, L50, M|\n|poke|p1|Starmie, L50|\n|poke|p1|Manectric, L50, F|\n|poke|p2|Toxapex, L50, M|\n|poke|p2|Garchomp, L50, F|\n|poke|p2|Hydreigon, L50, M|\n|poke|p2|Delphox, L50, F|\n|poke|p2|Gengar, L50, M|\n|poke|p2|Aegislash, L50, M|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by deokso king)\n|\n|t:|1776219781\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Gyarados|Gyarados, L50, M|100/100\n|switch|p2a: Garchomp|Garchomp, L50, F|100/100\n|-ability|p1a: Gyarados|Intimidate|boost\n|-unboost|p2a: Garchomp|atk|1\n|turn|1\n|\n|t:|1776219793\n|switch|p2a: Aegislash|Aegislash, L50, M|100/100\n|move|p1a: Gyarados|Ice Fang|p2a: Aegislash\n|-resisted|p2a: Aegislash|1\n|-damage|p2a: Aegislash|90/100\n|\n|-heal|p2a: Aegislash|96/100|[from] item: Leftovers\n|upkeep\n|turn|2\n|\n|t:|1776219802\n|move|p1a: Gyarados|Dragon Dance|p1a: Gyarados\n|-boost|p1a: Gyarados|atk|1\n|-boost|p1a: Gyarados|spe|1\n|move|p2a: Aegislash|Swords Dance|p2a: Aegislash\n|-boost|p2a: Aegislash|atk|2\n|\n|-heal|p2a: Aegislash|100/100|[from] item: Leftovers\n|upkeep\n|turn|3\n|\n|t:|1776219809\n|-formechange|p2a: Aegislash|Aegislash-Blade|\n|move|p2a: Aegislash|Shadow Sneak|p1a: Gyarados\n|-damage|p1a: Gyarados|34/100\n|move|p1a: Gyarados|Earthquake|p2a: Aegislash\n|-supereffective|p2a: Aegislash|1\n|-damage|p2a: Aegislash|0 fnt\n|faint|p2a: Aegislash\n|\n|upkeep\n|\n|t:|1776219824\n|switch|p2a: Gengar|Gengar, L50, M|100/100\n|turn|4\n|j| p74\n|\n|t:|1776219828\n|detailschange|p2a: Gengar|Gengar-Mega, L50, M\n|-mega|p2a: Gengar|Gengar|Gengarite\n|move|p1a: Gyarados|Earthquake|p2a: Gengar\n|-supereffective|p2a: Gengar|1\n|-damage|p2a: Gengar|0 fnt\n|faint|p2a: Gengar\n|\n|upkeep\n|-message|deokso king forfeited.\n|\n|win|perdicionn\n|raw|perdicionn's rating: 1243 &rarr; <strong>1277</strong><br />(+34 for winning)\n|raw|deokso king's rating: 1373 &rarr; <strong>1346</strong><br />(-27 for losing)\n|l|\u2606deokso king\n|player|p2|\n|l|\u2606perdicionn\n|player|p1|\n",
+  "uploadtime": 1776219897,
+  "views": 1,
+  "formatid": "gen9championsbssregma",
+  "rating": 1277,
+  "private": 0,
+  "password": null
+}

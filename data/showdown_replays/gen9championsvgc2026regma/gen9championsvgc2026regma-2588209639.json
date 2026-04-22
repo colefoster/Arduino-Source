@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2588209639",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "ronjansje",
+    "Pokepane"
+  ],
+  "log": "|j|\u2606ronjansje\n|j|\u2606Pokepane\n|t:|1776614633\n|gametype|doubles\n|player|p1|ronjansje|ninjaboy|1362\n|player|p2|Pokepane|169|1313\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Hatterene, L50, F|\n|poke|p1|Farigiraf, L50, M|\n|poke|p1|Torkoal, L50, M|\n|poke|p1|Kingambit, L50, F|\n|poke|p1|Charizard, L50, F|\n|poke|p2|Politoed, L50, M|\n|poke|p2|Meganium, L50, M, shiny|\n|poke|p2|Archaludon, L50, F|\n|poke|p2|Ariados, L50, M, shiny|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Rhyperior, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by ronjansje)\n|\n|t:|1776614665\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Charizard|Charizard, L50, F|100/100\n|switch|p1b: Farigiraf|Farigiraf, L50, M|100/100\n|switch|p2a: Rhyperior|Rhyperior, L50, M|100/100\n|switch|p2b: Ariados|Ariados, L50, M, shiny|100/100\n|turn|1\n|inactive|ronjansje has 30 seconds left.\n|\n|t:|1776614697\n|detailschange|p1a: Charizard|Charizard-Mega-Y, L50, F\n|-mega|p1a: Charizard|Charizard|Charizardite Y\n|-weather|SunnyDay|[from] ability: Drought|[of] p1a: Charizard\n|move|p1a: Charizard|Protect|p1a: Charizard\n|-singleturn|p1a: Charizard|Protect\n|move|p1b: Farigiraf|Hyper Voice|p2b: Ariados|[spread] p2a,p2b\n|-resisted|p2a: Rhyperior|1\n|-crit|p2b: Ariados\n|-damage|p2a: Rhyperior|77/100\n|-damage|p2b: Ariados|56/100\n|move|p2a: Rhyperior|Rock Slide|p1b: Farigiraf|[spread] p1b\n|-activate|p1a: Charizard|move: Protect\n|-damage|p1b: Farigiraf|69/100\n|move|p2b: Ariados|Struggle Bug|p1b: Farigiraf|[spread] p1b\n|-activate|p1a: Charizard|move: Protect\n|-supereffective|p1b: Farigiraf|1\n|-damage|p1b: Farigiraf|55/100\n|-unboost|p1b: Farigiraf|spa|1\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|turn|2\n|inactive|ronjansje has 30 seconds left.\n|inactive|ronjansje has 20 seconds left.\n|inactive|ronjansje has 15 seconds left.\n|\n|t:|1776614742\n|switch|p2b: Politoed|Politoed, L50, M|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p2b: Politoed\n|move|p1a: Charizard|Weather Ball|p2a: Rhyperior\n|-supereffective|p2a: Rhyperior|2\n|-damage|p2a: Rhyperior|0 fnt\n|faint|p2a: Rhyperior\n|move|p1b: Farigiraf|Hyper Voice|p2b: Politoed\n|-damage|p2b: Politoed|76/100\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|c|\u2606Pokepane|Gg\n|-message|Pokepane forfeited.\n|\n|win|ronjansje\n|raw|ronjansje's rating: 1362 &rarr; <strong>1379</strong><br />(+17 for winning)\n|raw|Pokepane's rating: 1313 &rarr; <strong>1296</strong><br />(-17 for losing)\n|l|\u2606Pokepane\n|player|p2|\n",
+  "uploadtime": 1776614767,
+  "views": 10,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1296,
+  "private": 0,
+  "password": null
+}

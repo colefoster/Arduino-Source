@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2588243018",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Eternal prisoner",
+    "Stanyel"
+  ],
+  "log": "|j|\u2606Eternal prisoner\n|j|\u2606Stanyel\n|t:|1776617458\n|gametype|doubles\n|player|p1|Eternal prisoner|az|1073\n|player|p2|Stanyel|169|1095\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Delphox, L50, F|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Palafin, L50, M|\n|poke|p1|Kingambit, L50, F|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Ninetales-Alola, L50, F|\n|poke|p2|Meganium, L50, F, shiny|\n|poke|p2|Archaludon, L50, F|\n|poke|p2|Aerodactyl, L50, M|\n|poke|p2|Typhlosion-Hisui, L50, F|\n|poke|p2|Tauros-Paldea-Aqua, L50, M|\n|poke|p2|Appletun, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Stanyel)\n|\n|t:|1776617515\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Sneasler|Sneasler, L50, M|100/100\n|switch|p1b: Kingambit|Kingambit, L50, F|100/100\n|switch|p2a: Typhlosion|Typhlosion-Hisui, L50, F|100/100\n|switch|p2b: Appletun|Appletun, L50, M|100/100\n|-item|p1a: Sneasler|White Herb|[from] ability: Frisk|[of] p2a: Typhlosion\n|-item|p1b: Kingambit|Black Glasses|[from] ability: Frisk|[of] p2a: Typhlosion\n|turn|1\n|\n|t:|1776617531\n|move|p2b: Appletun|Helping Hand|p2a: Typhlosion\n|-singleturn|p2a: Typhlosion|Helping Hand|[of] p2b: Appletun\n|move|p2a: Typhlosion|Eruption|p1b: Kingambit|[spread] p1a,p1b\n|-supereffective|p1b: Kingambit|1\n|-damage|p1a: Sneasler|0 fnt\n|-damage|p1b: Kingambit|0 fnt\n|faint|p1a: Sneasler\n|faint|p1b: Kingambit\n|\n|upkeep\n|-message|Eternal prisoner forfeited.\n|\n|win|Stanyel\n",
+  "uploadtime": 1776617461,
+  "views": 6,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": null,
+  "private": 0,
+  "password": null
+}

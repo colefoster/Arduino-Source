@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2581723432",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Pokey209",
+    "zen077"
+  ],
+  "log": "|j|\u2606Pokey209\n|j|\u2606zen077\n|t:|1776023491\n|gametype|doubles\n|player|p1|Pokey209|brock|1200\n|player|p2|zen077|2|1198\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Charizard, L50, F|\n|poke|p1|Venusaur, L50, F|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Whimsicott, L50, M|\n|poke|p1|Zoroark-Hisui, L50, M|\n|poke|p2|Gengar, L50, M|\n|poke|p2|Pelipper, L50, M|\n|poke|p2|Archaludon, L50, F|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Whimsicott, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by zen077)\n|inactive|zen077 has 60 seconds left.\n|\n|t:|1776023537\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Whimsicott|Whimsicott, L50, M|100/100\n|switch|p1b: Floette|Floette-Eternal, L50, F|100/100\n|switch|p2a: Incineroar|Incineroar, L50, M|100/100\n|switch|p2b: Gengar|Gengar, L50, M, shiny|100/100\n|-ability|p2a: Incineroar|Intimidate|boost\n|-unboost|p1a: Whimsicott|atk|1\n|-unboost|p1b: Floette|atk|1\n|turn|1\n|\n|t:|1776023554\n|detailschange|p2b: Gengar|Gengar-Mega, L50, M, shiny\n|-mega|p2b: Gengar|Gengar|Gengarite\n|move|p1b: Floette|Protect|p1b: Floette\n|-singleturn|p1b: Floette|Protect\n|move|p2a: Incineroar|Fake Out|p1a: Whimsicott\n|-immune|p1a: Whimsicott\n|move|p1a: Whimsicott|Shadow Ball|p2b: Gengar\n|-supereffective|p2b: Gengar|1\n|-damage|p2b: Gengar|0 fnt\n|faint|p2b: Gengar\n|\n|upkeep\n|-message|zen077 forfeited.\n|\n|win|Pokey209\n|raw|Pokey209's rating: 1200 &rarr; <strong>1225</strong><br />(+25 for winning)\n|raw|zen077's rating: 1198 &rarr; <strong>1173</strong><br />(-25 for losing)\n|l|\u2606zen077\n|player|p2|\n",
+  "uploadtime": 1776023578,
+  "views": 23,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1173,
+  "private": 0,
+  "password": null
+}

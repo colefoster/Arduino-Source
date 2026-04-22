@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2588734444",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "nipter",
+    "Gaby Glytxii"
+  ],
+  "log": "|j|\u203dnipter\n|j|\u2606Gaby Glytxii\n|t:|1776663653\n|gametype|doubles\n|player|p1|nipter|az|1075\n|player|p2|Gaby Glytxii|iris|1063\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Aerodactyl, L50, F, shiny|\n|poke|p1|Garchomp, L50, F, shiny|\n|poke|p1|Maushold, L50, shiny|\n|poke|p1|Aegislash, L50, F, shiny|\n|poke|p1|Delphox, L50, F, shiny|\n|poke|p1|Floette-Eternal, L50, F, shiny|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Aerodactyl, L50, M|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Spiritomb, L50, M|\n|poke|p2|Gallade, L50, M|\n|poke|p2|Goodra, L50, M, shiny|\n|teampreview|4\nnipter has agreed to open team sheets.\n|\n|t:|1776663674\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Floette|Floette-Eternal, L50, F, shiny|100/100\n|switch|p1b: Aerodactyl|Aerodactyl, L50, F, shiny|100/100\n|switch|p2a: Sneasler|Sneasler, L50, M|100/100\n|switch|p2b: Gallade|Gallade, L50, M|100/100\n|-ability|p1b: Aerodactyl|Unnerve\n|turn|1\n|\n|t:|1776663694\n|detailschange|p1a: Floette|Floette-Mega, L50, F, shiny\n|-mega|p1a: Floette|Floette|Floettite\n|-ability|p1a: Floette|Fairy Aura\n|detailschange|p2b: Gallade|Gallade-Mega, L50, M\n|-mega|p2b: Gallade|Gallade|Galladite\n|move|p1b: Aerodactyl|Dual Wingbeat|p2a: Sneasler|[miss]\n|-miss|p1b: Aerodactyl|p2a: Sneasler\n|move|p2b: Gallade|Rock Slide|p1a: Floette|[spread] p1a,p1b\n|-supereffective|p1b: Aerodactyl|1\n|-damage|p1a: Floette|69/100\n|-damage|p1b: Aerodactyl|24/100\n|move|p2a: Sneasler|Rock Slide|p1a: Floette|[spread] p1a,p1b\n|-supereffective|p1b: Aerodactyl|1\n|-damage|p1a: Floette|44/100\n|-damage|p1b: Aerodactyl|0 fnt\n|faint|p1b: Aerodactyl\n|cant|p1a: Floette|flinch\n|\n|upkeep\n|\n|t:|1776663711\n|switch|p1b: Maushold|Maushold, L50, shiny|100/100\n|turn|2\n|\n|t:|1776663718\n|move|p1b: Maushold|Super Fang|p2b: Gallade\n|-damage|p2b: Gallade|51/100\n|move|p2b: Gallade|Rock Slide|p1b: Maushold|[spread] p1a,p1b\n|-damage|p1a: Floette|22/100\n|-damage|p1b: Maushold|70/100\n|move|p2a: Sneasler|Rock Slide|p1b: Maushold|[spread] p1a,p1b\n|-damage|p1a: Floette|0 fnt\n|-damage|p1b: Maushold|42/100\n|faint|p1a: Floette\n|\n|upkeep\n|-message|nipter forfeited.\n|\n|win|Gaby Glytxii\n|raw|nipter's rating: 1075 &rarr; <strong>1053</strong><br />(-22 for losing)\n|raw|Gaby Glytxii's rating: 1063 &rarr; <strong>1095</strong><br />(+32 for winning)\n|l|\u203dnipter\n|player|p1|\n",
+  "uploadtime": 1776663732,
+  "views": 10,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1053,
+  "private": 0,
+  "password": null
+}

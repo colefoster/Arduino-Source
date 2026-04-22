@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2588036510",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "filie",
+    "adfsdfsdfsdaf"
+  ],
+  "log": "|j|\u2606filie\n|j|\u2606adfsdfsdfsdaf\n|t:|1776596230\n|gametype|singles\n|player|p1|filie|101|1000\n|player|p2|adfsdfsdfsdaf|2|1064\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Gengar, L50, F|\n|poke|p1|Politoed, L50, F|\n|poke|p1|Ninetales-Alola, L50, F|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Kommo-o, L50, M|\n|poke|p1|Sinistcha, L50|\n|poke|p2|Feraligatr, L50, M|\n|poke|p2|Aegislash, L50, M|\n|poke|p2|Garchomp, L50, F|\n|poke|p2|Rotom-Heat, L50|\n|poke|p2|Venusaur, L50, F|\n|poke|p2|Clefable, L50, M|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by adfsdfsdfsdaf)\n|\n|t:|1776596270\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Gengar|Gengar, L50, F|100/100\n|switch|p2a: Rotom|Rotom-Heat, L50|100/100\n|turn|1\n|-message|filie forfeited.\n|\n|win|adfsdfsdfsdaf\n|raw|filie's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|raw|adfsdfsdfsdaf's rating: 1064 &rarr; <strong>1089</strong><br />(+25 for winning)\n|l|\u2606filie\n|player|p1|\n",
+  "uploadtime": 1776596278,
+  "views": 1,
+  "formatid": "gen9championsbssregma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

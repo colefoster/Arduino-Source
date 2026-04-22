@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582510514",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "poopsled",
+    "kingambit kahn"
+  ],
+  "log": "|j|\u2606poopsled\n|j|\u2606kingambit kahn\n|t:|1776096310\n|gametype|doubles\n|player|p1|poopsled|169|1108\n|player|p2|kingambit kahn|roughneck|1117\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Charizard, L50, M|\n|poke|p1|Venusaur, L50, M|\n|poke|p1|Arcanine-Hisui, L50, M|\n|poke|p1|Sneasler, L50, F|\n|poke|p1|Rotom-Wash, L50|\n|poke|p1|Basculegion, L50, M|\n|poke|p2|Kingambit, L50, M|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Dragapult, L50, F|\n|poke|p2|Whimsicott, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by kingambit kahn)\n|inactive|poopsled has 60 seconds left.\n|inactive|kingambit kahn has 60 seconds left.\n|\n|t:|1776096366\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Rotom|Rotom-Wash, L50|100/100\n|switch|p1b: Sneasler|Sneasler, L50, F|100/100\n|switch|p2a: Whimsicott|Whimsicott, L50, M|100/100\n|switch|p2b: Dragapult|Dragapult, L50, F|100/100\n|turn|1\n|inactive|kingambit kahn has 30 seconds left.\n|\n|t:|1776096395\n|move|p2a: Whimsicott|Helping Hand|p2b: Dragapult\n|-singleturn|p2b: Dragapult|Helping Hand|[of] p2a: Whimsicott\n|move|p1b: Sneasler|Fake Out|p2a: Whimsicott\n|-damage|p2a: Whimsicott|82/100\n|move|p2b: Dragapult|Draco Meteor|p1a: Rotom\n|-damage|p1a: Rotom|0 fnt\n|-unboost|p2b: Dragapult|spa|2\n|faint|p1a: Rotom\n|\n|upkeep\n|\n|t:|1776096410\n|switch|p1a: Basculegion|Basculegion, L50, M|100/100\n|turn|2\n|\n|t:|1776096429\n|switch|p2b: Incineroar|Incineroar, L50, M|100/100\n|-ability|p2b: Incineroar|Intimidate|boost\n|-unboost|p1a: Basculegion|atk|1\n|-unboost|p1b: Sneasler|atk|1\n|-enditem|p1b: Sneasler|White Herb\n|-clearnegativeboost|p1b: Sneasler|[silent]\n|move|p2a: Whimsicott|Encore|p1b: Sneasler\n|-start|p1b: Sneasler|Encore\n|move|p1b: Sneasler|Fake Out||[still]\n|-hint|Fake Out only works on your first turn out.\n|-fail|p1b: Sneasler\n|move|p1a: Basculegion|Last Respects|p2b: Incineroar\n|-resisted|p2b: Incineroar|1\n|-damage|p2b: Incineroar|79/100\n|\n|upkeep\n|turn|3\n|-message|poopsled forfeited.\n|\n|win|kingambit kahn\n|raw|poopsled's rating: 1108 &rarr; <strong>1084</strong><br />(-24 for losing)\n|raw|kingambit kahn's rating: 1117 &rarr; <strong>1141</strong><br />(+24 for winning)\n|l|\u2606poopsled\n|player|p1|\n",
+  "uploadtime": 1776096491,
+  "views": 27,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1084,
+  "private": 0,
+  "password": null
+}

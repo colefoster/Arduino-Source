@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2587936575",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Noobilio",
+    "W0kMeDed"
+  ],
+  "log": "|j|\u2606Noobilio\n|j|\u2606W0kMeDed\n|t:|1776581570\n|gametype|doubles\n|player|p1|Noobilio|nurse|1368\n|player|p2|W0kMeDed|palmer|1416\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Froslass, L50, F|\n|poke|p1|Palafin, L50, F|\n|poke|p1|Kingambit, L50, F|\n|poke|p1|Arcanine-Hisui, L50, F|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Sneasler, L50, M|\n|poke|p2|Espathra, L50, M|\n|poke|p2|Chandelure, L50, F|\n|poke|p2|Aerodactyl, L50, F|\n|poke|p2|Kingambit, L50, M|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Rotom-Wash, L50|\n|teampreview|4\n|\n|t:|1776581600\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Palafin|Palafin, L50, F|100/100\n|switch|p1b: Kingambit|Kingambit, L50, F|100/100\n|switch|p2a: Lavash|Espathra, L50, M|100/100\n|switch|p2b: Vega|Sneasler, L50, M|100/100\n|turn|1\n|\n|t:|1776581613\n|detailschange|p1a: Palafin|Palafin-Hero, L50, F\n|switch|p1a: Sneasler|Sneasler, L50, M|100/100\n|move|p2a: Lavash|Protect|p2a: Lavash\n|-singleturn|p2a: Lavash|Protect\n|move|p1b: Kingambit|Protect|p1b: Kingambit\n|-singleturn|p1b: Kingambit|Protect\n|move|p2b: Vega|Fake Out|p1a: Sneasler\n|-damage|p1a: Sneasler|76/100\n|\n|-ability|p2a: Lavash|Speed Boost|boost\n|-boost|p2a: Lavash|spe|1\n|upkeep\n|turn|2\n|\n|t:|1776581632\n|move|p1a: Sneasler|Fake Out|p2b: Vega\n|-damage|p2b: Vega|72/100\n|move|p2a: Lavash|Baton Pass|p2a: Lavash\n|\n|t:|1776581639\n|switch|p2a: Mishima H.|Kingambit, L50, M|100/100|[from] Baton Pass\n|cant|p2b: Vega|flinch\n|move|p1b: Kingambit|Swords Dance|p1b: Kingambit\n|-boost|p1b: Kingambit|atk|2\n|\n|upkeep\n|turn|3\n|\n|t:|1776581656\n|move|p2a: Mishima H.|Protect|p2a: Mishima H.\n|-singleturn|p2a: Mishima H.|Protect\n|move|p1b: Kingambit|Sucker Punch|p2b: Vega\n|-resisted|p2b: Vega|1\n|-damage|p2b: Vega|0 fnt\n|faint|p2b: Vega\n|move|p1a: Sneasler|Close Combat|p2a: Mishima H.\n|-activate|p2a: Mishima H.|move: Protect\n|\n|upkeep\n|\n|t:|1776581664\n|switch|p2b: Elgee|Rotom-Wash, L50|100/100\n|turn|4\n|-message|W0kMeDed forfeited.\n|\n|win|Noobilio\n|raw|Noobilio's rating: 1368 &rarr; <strong>1391</strong><br />(+23 for winning)\n|raw|W0kMeDed's rating: 1416 &rarr; <strong>1393</strong><br />(-23 for losing)\n|l|\u2606W0kMeDed\n|player|p2|\n",
+  "uploadtime": 1776581672,
+  "views": 19,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1391,
+  "private": 0,
+  "password": null
+}

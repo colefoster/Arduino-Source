@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2581087021",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "sadwithpower",
+    "SilenceBtwnSongs"
+  ],
+  "log": "|j|\u2606sadwithpower\n|j|\u2606SilenceBtwnSongs\n|t:|1775958599\n|gametype|doubles\n|player|p1|sadwithpower|gentleman|1000\n|player|p2|SilenceBtwnSongs|lyra|1000\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Vaporeon, L50, M|\n|poke|p1|Dragonite, L50, F|\n|poke|p1|Pelipper, L50, M|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Archaludon, L50, M|\n|poke|p2|Typhlosion-Hisui, L50, M|\n|poke|p2|Charizard, L50, M|\n|poke|p2|Maushold-Four, L50|\n|poke|p2|Garganacl, L50, M|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Toxapex, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by SilenceBtwnSongs)\n|\n|t:|1775958646\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Vaporeon|Vaporeon, L50, M|100/100\n|switch|p1b: Dragonite|Dragonite, L50, F|100/100\n|switch|p2a: Typhlosion|Typhlosion-Hisui, L50, M|100/100\n|switch|p2b: Charizard|Charizard, L50, M|100/100\n|-item|p1a: Vaporeon|Sitrus Berry|[from] ability: Frisk|[of] p2a: Typhlosion\n|-item|p1b: Dragonite|Dragoninite|[from] ability: Frisk|[of] p2a: Typhlosion\n|turn|1\n|inactive|sadwithpower has 30 seconds left.\n|inactive|SilenceBtwnSongs has 30 seconds left.\n|inactive|sadwithpower has 20 seconds left.\n|\n|t:|1775958681\n|switch|p1a: Pelipper|Pelipper, L50, M|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p1a: Pelipper\n|detailschange|p2b: Charizard|Charizard-Mega-Y, L50, M\n|-mega|p2b: Charizard|Charizard|Charizardite Y\n|-weather|SunnyDay|[from] ability: Drought|[of] p2b: Charizard\n|detailschange|p1b: Dragonite|Dragonite-Mega, L50, F\n|-mega|p1b: Dragonite|Dragonite|Dragoninite\n|move|p2a: Typhlosion|Solar Beam||[still]\n|-prepare|p2a: Typhlosion|Solar Beam\n|-anim|p2a: Typhlosion|Solar Beam|p1a: Pelipper\n|-damage|p1a: Pelipper|27/100\n|move|p1b: Dragonite|Thunder|p2b: Charizard|[miss]\n|-miss|p1b: Dragonite|p2b: Charizard\n|move|p2b: Charizard|Air Slash|p1b: Dragonite\n|-damage|p1b: Dragonite|79/100\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|turn|2\n|-message|sadwithpower forfeited.\n|\n|win|SilenceBtwnSongs\n|raw|sadwithpower's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|raw|SilenceBtwnSongs's rating: 1000 &rarr; <strong>1040</strong><br />(+40 for winning)\n|l|\u2606sadwithpower\n|player|p1|\n",
+  "uploadtime": 1775958707,
+  "views": 16,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

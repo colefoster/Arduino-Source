@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2587458757",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "gt_theminer",
+    "AirusX"
+  ],
+  "log": "|j|\u2606gt_theminer\n|j|\u2606AirusX\n|t:|1776533558\n|gametype|doubles\n|player|p1|gt_theminer|pokekid|1101\n|player|p2|AirusX|lady|1189\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Tyranitar, L50, M|\n|poke|p1|Orthworm, L50, M|\n|poke|p1|Corviknight, L50, F|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Sinistcha, L50|\n|poke|p2|Meganium, L50, F|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Archaludon, L50, M|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Pelipper, L50, M|\n|poke|p2|Kingambit, L50, F|\n|teampreview|4\n|\n|t:|1776533585\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Garchomp|Garchomp, L50, F|100/100\n|switch|p1b: Orthworm|Orthworm, L50, M|100/100\n|switch|p2a: Meganium|Meganium, L50, F|100/100\n|switch|p2b: Basculegion|Basculegion, L50, M|100/100\n|turn|1\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by AirusX)\n|inactive|gt_theminer has 60 seconds left.\n|inactive|gt_theminer has 30 seconds left.\n|inactive|gt_theminer has 20 seconds left.\n|inactive|gt_theminer has 15 seconds left.\n|inactive|gt_theminer has 10 seconds left.\n|inactive|gt_theminer has 5 seconds left.\n|\n|t:|1776533724\n|detailschange|p2a: Meganium|Meganium-Mega, L50, F\n|-mega|p2a: Meganium|Meganium|Meganiumite\n|move|p2b: Basculegion|Flip Turn|p1a: Garchomp\n|-damage|p1a: Garchomp|68/100\n|\n|t:|1776533733\n|switch|p2b: Pelipper|Pelipper, L50, M|100/100|[from] Flip Turn\n|-weather|RainDance|[from] ability: Drizzle|[of] p2b: Pelipper\n|move|p1a: Garchomp|Dragon Claw|p2a: Meganium\n|-immune|p2a: Meganium\n|move|p2a: Meganium|Dazzling Gleam|p1a: Garchomp|[spread] p1a,p1b\n|-supereffective|p1a: Garchomp|1\n|-crit|p1a: Garchomp\n|-resisted|p1b: Orthworm|1\n|-damage|p1a: Garchomp|0 fnt\n|-damage|p1b: Orthworm|84/100\n|faint|p1a: Garchomp\n|move|p1b: Orthworm|Body Press|p2b: Pelipper\n|-resisted|p2b: Pelipper|1\n|-damage|p2b: Pelipper|84/100\n|\n|-weather|RainDance|[upkeep]\n|-heal|p1b: Orthworm|90/100|[from] item: Leftovers\n|upkeep\n|-message|gt_theminer forfeited.\n|\n|win|AirusX\n|raw|gt_theminer's rating: 1101 &rarr; <strong>1082</strong><br />(-19 for losing)\n|raw|AirusX's rating: 1189 &rarr; <strong>1208</strong><br />(+19 for winning)\n|l|\u2606gt_theminer\n|player|p1|\n|l|\u2606AirusX\n|player|p2|\n|j|\u2606AirusX\n|player|p2|AirusX|lady-gen4|\n",
+  "uploadtime": 1776534476,
+  "views": 13,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1082,
+  "private": 0,
+  "password": null
+}

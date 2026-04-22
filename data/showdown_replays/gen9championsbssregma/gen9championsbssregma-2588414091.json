@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2588414091",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "MegayaRaykaza",
+    "ssune"
+  ],
+  "log": "|j|\u2606MegayaRaykaza\n|j|\u2606ssune\n|t:|1776631486\n|gametype|singles\n|player|p1|MegayaRaykaza|cynthia|1106\n|player|p2|ssune|caitlin|1040\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Aggron, L50, F|\n|poke|p1|Toxapex, L50, M|\n|poke|p1|Gliscor, L50, F|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Sneasler, L50, F|\n|poke|p1|Basculegion, L50, M|\n|poke|p2|Hatterene, L50, F|\n|poke|p2|Mamoswine, L50, M|\n|poke|p2|Samurott-Hisui, L50, F|\n|poke|p2|Typhlosion-Hisui, L50, M|\n|poke|p2|Dragonite, L50, F|\n|poke|p2|Whimsicott, L50, F|\n|teampreview|3\n|\n|t:|1776631570\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Aggron|Aggron, L50, F|100/100\n|switch|p2a: Mamoswine|Mamoswine, L50, M|100/100\n|turn|1\n|\n|t:|1776631583\n|detailschange|p1a: Aggron|Aggron-Mega, L50, F\n|-mega|p1a: Aggron|Aggron|Aggronite\n|move|p2a: Mamoswine|High Horsepower|p1a: Aggron\n|-supereffective|p1a: Aggron|1\n|-damage|p1a: Aggron|73/100\n|move|p1a: Aggron|Substitute|p1a: Aggron\n|-start|p1a: Aggron|Substitute\n|-damage|p1a: Aggron|48/100\n|\n|upkeep\n|turn|2\n|\n|t:|1776631603\n|move|p2a: Mamoswine|High Horsepower|p1a: Aggron\n|-supereffective|p1a: Aggron|1\n|-end|p1a: Aggron|Substitute\n|move|p1a: Aggron|Body Press|p2a: Mamoswine\n|-supereffective|p2a: Mamoswine|1\n|-damage|p2a: Mamoswine|0 fnt\n|faint|p2a: Mamoswine\n|\n|upkeep\n|-message|ssune forfeited.\n|\n|win|MegayaRaykaza\n|raw|MegayaRaykaza's rating: 1106 &rarr; <strong>1126</strong><br />(+20 for winning)\n|raw|ssune's rating: 1040 &rarr; <strong>1027</strong><br />(-13 for losing)\n|l|\u2606ssune\n|player|p2|\n",
+  "uploadtime": 1776631618,
+  "views": 4,
+  "formatid": "gen9championsbssregma",
+  "rating": 1027,
+  "private": 0,
+  "password": null
+}

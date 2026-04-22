@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586673553",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Loafus06",
+    "dante2110"
+  ],
+  "log": "|j|\u2606Loafus06\n|j|\u2606dante2110\n|t:|1776451036\n|gametype|doubles\n|player|p1|Loafus06|burnet|1000\n|player|p2|dante2110|harlequin|1080\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Meowstic-F, L50, F|\n|poke|p1|Clefable, L50, M|\n|poke|p1|Talonflame, L50, M|\n|poke|p1|Dragonite, L50, M|\n|poke|p1|Aegislash, L50, M|\n|poke|p1|Diggersby, L50, M|\n|poke|p2|Delphox, L50, F|\n|poke|p2|Garchomp, L50, F|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Milotic, L50, M|\n|poke|p2|Aerodactyl, L50, F|\n|poke|p2|Sneasler, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Loafus06)\n|inactive|dante2110 has 60 seconds left.\n|\n|t:|1776451068\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Meowstic|Meowstic-F, L50, F|100/100\n|switch|p1b: Diggersby|Diggersby, L50, M|100/100\n|switch|p2a: Sneasler|Sneasler, L50, F|100/100\n|switch|p2b: Floette|Floette-Eternal, L50, F|100/100\n|turn|1\n|\n|t:|1776451085\n|detailschange|p1a: Meowstic|Meowstic-F-Mega, L50, F\n|-mega|p1a: Meowstic|Meowstic|Meowsticite\n|-ability|p1a: Meowstic|Unburden|Trace|[from] ability: Trace|[of] p2a: Sneasler\n|detailschange|p2b: Floette|Floette-Mega, L50, F\n|-mega|p2b: Floette|Floette|Floettite\n|-ability|p2b: Floette|Fairy Aura\n|move|p1a: Meowstic|Fake Out|p2a: Sneasler\n|-damage|p2a: Sneasler|92/100\n|cant|p2a: Sneasler|flinch\n|move|p1b: Diggersby|High Horsepower|p2b: Floette\n|-damage|p2b: Floette|37/100\n|move|p2b: Floette|Calm Mind|p2b: Floette\n|-boost|p2b: Floette|spa|1\n|-boost|p2b: Floette|spd|1\n|\n|upkeep\n|turn|2\n|\n|t:|1776451105\n|move|p1b: Diggersby|High Horsepower|p2b: Floette\n|-damage|p2b: Floette|0 fnt\n|faint|p2b: Floette\n|move|p1a: Meowstic|Psychic|p2a: Sneasler\n|-supereffective|p2a: Sneasler|2\n|-damage|p2a: Sneasler|0 fnt\n|faint|p2a: Sneasler\n|\n|upkeep\n|-message|dante2110 forfeited.\n|\n|win|Loafus06\n|raw|Loafus06's rating: 1000 &rarr; <strong>1049</strong><br />(+49 for winning)\n|raw|dante2110's rating: 1080 &rarr; <strong>1053</strong><br />(-27 for losing)\n|l|\u2606dante2110\n|player|p2|\n",
+  "uploadtime": 1776451119,
+  "views": 37,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1049,
+  "private": 0,
+  "password": null
+}

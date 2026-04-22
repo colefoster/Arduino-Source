@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2588012964",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Magnum7x",
+    "MefShowdown0"
+  ],
+  "log": "|j|\u2606Magnum7x\n|j|\u2606MefShowdown0\n|t:|1776592873\n|gametype|doubles\n|player|p1|Magnum7x|102|1317\n|player|p2|MefShowdown0|selene-masters2|1371\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Milotic, L50, M|\n|poke|p1|Sableye, L50, M|\n|poke|p1|Tinkaton, L50, F|\n|poke|p1|Raichu, L50, F|\n|poke|p1|Tsareena, L50, F|\n|poke|p1|Wyrdeer, L50, M|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Aerodactyl, L50, M|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Milotic, L50, M|\n|teampreview|4\n|c|\u2606MefShowdown0|lmao that hammers covers sableye entirely\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Magnum7x)\n|c|\u2606MefShowdown0|also raichu is in front of tink for some reason\n|inactive|MefShowdown0 has 60 seconds left.\n|\n|t:|1776592951\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Milotic|Milotic, L50, M|100/100\n|switch|p1b: Wyrdeer|Wyrdeer, L50, M|100/100\n|switch|p2a: Floette|Floette-Eternal, L50, F|100/100\n|switch|p2b: Sneasler|Sneasler, L50, M|100/100\n|-ability|p1b: Wyrdeer|Intimidate|boost\n|-unboost|p2a: Floette|atk|1\n|-unboost|p2b: Sneasler|atk|1\n|-enditem|p2b: Sneasler|White Herb\n|-clearnegativeboost|p2b: Sneasler|[silent]\n|turn|1\n|\n|t:|1776592972\n|detailschange|p2a: Floette|Floette-Mega, L50, F\n|-mega|p2a: Floette|Floette|Floettite\n|-ability|p2a: Floette|Fairy Aura\n|move|p2b: Sneasler|Fake Out|p1b: Wyrdeer\n|-damage|p1b: Wyrdeer|87/100\n|move|p2a: Floette|Calm Mind|p2a: Floette\n|-boost|p2a: Floette|spa|1\n|-boost|p2a: Floette|spd|1\n|move|p1a: Milotic|Coil|p1a: Milotic\n|-boost|p1a: Milotic|atk|1\n|-boost|p1a: Milotic|def|1\n|-boost|p1a: Milotic|accuracy|1\n|cant|p1b: Wyrdeer|flinch\n|\n|upkeep\n|turn|2\n|inactive|MefShowdown0 has 30 seconds left.\n|\n|t:|1776593005\n|move|p2b: Sneasler|Close Combat|p1b: Wyrdeer\n|-damage|p1b: Wyrdeer|31/100\n|-unboost|p2b: Sneasler|def|1\n|-unboost|p2b: Sneasler|spd|1\n|move|p2a: Floette|Dazzling Gleam|p1b: Wyrdeer|[spread] p1a,p1b\n|-damage|p1a: Milotic|42/100\n|-damage|p1b: Wyrdeer|0 fnt\n|faint|p1b: Wyrdeer\n|move|p1a: Milotic|Hydro Pump|p2a: Floette\n|-damage|p2a: Floette|75/100\n|\n|-heal|p1a: Milotic|48/100|[from] item: Leftovers\n|upkeep\n|-message|Magnum7x forfeited.\n|\n|win|MefShowdown0\n|raw|Magnum7x's rating: 1317 &rarr; <strong>1300</strong><br />(-17 for losing)\n|raw|MefShowdown0's rating: 1371 &rarr; <strong>1388</strong><br />(+17 for winning)\n",
+  "uploadtime": 1776593025,
+  "views": 22,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1300,
+  "private": 0,
+  "password": null
+}

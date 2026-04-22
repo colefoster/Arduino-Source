@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2587132107",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "razdahooman",
+    "smubfinger"
+  ],
+  "log": "|j|\u2606razdahooman\n|j|\u2606smubfinger\n|t:|1776498016\n|gametype|doubles\n|player|p1|razdahooman|colress|1026\n|player|p2|smubfinger|lady-gen4|1043\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Delphox, L50, M|\n|poke|p1|Flapple, L50, M|\n|poke|p1|Maushold, L50|\n|poke|p1|Farigiraf, L50, M|\n|poke|p1|Chimecho, L50, M|\n|poke|p1|Ninetales, L50, F|\n|poke|p2|Froslass, L50, F|\n|poke|p2|Weavile, L50, M|\n|poke|p2|Ninetales-Alola, L50, F|\n|poke|p2|Araquanid, L50, M|\n|poke|p2|Aerodactyl, L50, M|\n|poke|p2|Tinkaton, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by razdahooman)\n|\n|t:|1776498028\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Delphox|Delphox, L50, M|100/100\n|switch|p1b: Farigiraf|Farigiraf, L50, M|100/100\n|switch|p2a: Aerodactyl|Aerodactyl, L50, M|100/100\n|switch|p2b: Ninetales|Ninetales-Alola, L50, F|100/100\n|-ability|p2a: Aerodactyl|Unnerve\n|-weather|Snowscape|[from] ability: Snow Warning|[of] p2b: Ninetales\n|turn|1\n|inactive|razdahooman has 30 seconds left.\n|\n|t:|1776498058\n|detailschange|p1a: Delphox|Delphox-Mega, L50, M\n|-mega|p1a: Delphox|Delphox|Delphoxite\n|move|p1a: Delphox|Psychic Terrain|p1a: Delphox\n|-fieldstart|move: Psychic Terrain\n|move|p2a: Aerodactyl|Tailwind|p2a: Aerodactyl\n|-sidestart|p2: smubfinger|move: Tailwind\n|move|p2b: Ninetales|Aurora Veil|p2b: Ninetales\n|-sidestart|p2: smubfinger|move: Aurora Veil\n|move|p1b: Farigiraf|Skill Swap|p1a: Delphox\n|-activate|p1b: Farigiraf|Skill Swap|||[of] p1a: Delphox\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|turn|2\n|\n|t:|1776498077\n|move|p1b: Farigiraf|Helping Hand|p1a: Delphox\n|-singleturn|p1a: Delphox|Helping Hand|[of] p1b: Farigiraf\n|move|p2a: Aerodactyl|Rock Slide|p1a: Delphox|[spread] p1a,p1b\n|-supereffective|p1a: Delphox|1\n|-damage|p1a: Delphox|16/100\n|-damage|p1b: Farigiraf|76/100\n|move|p2b: Ninetales|Blizzard|p1b: Farigiraf|[spread] p1a,p1b\n|-resisted|p1a: Delphox|1\n|-damage|p1a: Delphox|2/100\n|-damage|p1b: Farigiraf|56/100\n|move|p1a: Delphox|Expanding Force|p2b: Ninetales|[spread] p2a,p2b\n|-damage|p2a: Aerodactyl|8/100\n|-damage|p2b: Ninetales|20/100\n|\n|-weather|Snowscape|[upkeep]\n|-heal|p2b: Ninetales|26/100|[from] item: Leftovers\n|upkeep\n|turn|3\n|-message|razdahooman forfeited.\n|\n|win|smubfinger\n|raw|razdahooman's rating: 1026 &rarr; <strong>1013</strong><br />(-13 for losing)\n|raw|smubfinger's rating: 1043 &rarr; <strong>1075</strong><br />(+32 for winning)\n|l|\u2606razdahooman\n|player|p1|\n",
+  "uploadtime": 1776498095,
+  "views": 14,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1013,
+  "private": 0,
+  "password": null
+}

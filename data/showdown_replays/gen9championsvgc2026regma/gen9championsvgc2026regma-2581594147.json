@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2581594147",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Mighty strategist",
+    "tobytec"
+  ],
+  "log": "|j|\u2606Mighty strategist\n|j|\u2606tobytec\n|t:|1776013655\n|gametype|doubles\n|player|p1|Mighty strategist|riley|1071\n|player|p2|tobytec|lucas|1044\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Banette, L50, F|\n|poke|p1|Farigiraf, L50, F|\n|poke|p1|Meowstic, L50, M|\n|poke|p1|Bastiodon, L50, M|\n|poke|p1|Abomasnow, L50, F|\n|poke|p1|Mr. Rime, L50, M|\n|poke|p2|Froslass, L50, F|\n|poke|p2|Lopunny, L50, F|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Archaludon, L50, F|\n|poke|p2|Basculegion-F, L50, F|\n|poke|p2|Excadrill, L50, F|\n|teampreview|4\ntobytec has agreed to open team sheets.\n|\n|t:|1776013683\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Banette|Banette, L50, F|100/100\n|switch|p1b: Farigiraf|Farigiraf, L50, F|100/100\n|switch|p2a: Froslass|Froslass, L50, F|100/100\n|switch|p2b: Excadrill|Excadrill, L50, F|100/100\n|-ability|p2b: Excadrill|Mold Breaker\n|turn|1\n|\n|t:|1776013708\n|detailschange|p2a: Froslass|Froslass-Mega, L50, F\n|-mega|p2a: Froslass|Froslass|Froslassite\n|-weather|Snowscape|[from] ability: Snow Warning|[of] p2a: Froslass\n|detailschange|p1a: Banette|Banette-Mega, L50, F\n|-mega|p1a: Banette|Banette|Banettite\n|move|p1a: Banette|Will-O-Wisp|p2b: Excadrill|[miss]\n|-miss|p1a: Banette|p2b: Excadrill\n|move|p2a: Froslass|Aurora Veil|p2a: Froslass\n|-sidestart|p2: tobytec|move: Aurora Veil\n|move|p2b: Excadrill|High Horsepower|p1b: Farigiraf\n|-damage|p1b: Farigiraf|48/100\n|move|p1b: Farigiraf|Trick Room|p1b: Farigiraf\n|-fieldstart|move: Trick Room|[of] p1b: Farigiraf\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|turn|2\n|\n|t:|1776013728\n|switch|p2b: Basculegion|Basculegion-F, L50, F|100/100\n|move|p1b: Farigiraf|Bulldoze|p2b: Basculegion|[spread] p1a,p2a,p2b\n|-damage|p1a: Banette|90/100\n|-damage|p2a: Froslass|93/100\n|-damage|p2b: Basculegion|93/100\n|-unboost|p1a: Banette|spe|1\n|-unboost|p2a: Froslass|spe|1\n|-unboost|p2b: Basculegion|spe|1\n|move|p1a: Banette|Lash Out|p2a: Froslass\n|-supereffective|p2a: Froslass|1\n|-damage|p2a: Froslass|16/100\n|move|p2a: Froslass|Shadow Ball|p1a: Banette\n|-supereffective|p1a: Banette|1\n|-damage|p1a: Banette|0 fnt\n|faint|p1a: Banette\n|\n|-weather|Snowscape|[upkeep]\n|-heal|p2b: Basculegion|99/100|[from] item: Leftovers\n|upkeep\n|-message|Mighty strategist forfeited.\n|\n|win|tobytec\n|raw|Mighty strategist's rating: 1071 &rarr; <strong>1049</strong><br />(-22 for losing)\n|raw|tobytec's rating: 1044 &rarr; <strong>1080</strong><br />(+36 for winning)\n|l|\u2606Mighty strategist\n|player|p1|\n",
+  "uploadtime": 1776013845,
+  "views": 22,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1049,
+  "private": 0,
+  "password": null
+}

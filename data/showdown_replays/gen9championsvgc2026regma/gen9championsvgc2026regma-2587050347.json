@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2587050347",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "StevenWo0",
+    "Princess Nezu"
+  ],
+  "log": "|j|\u2606StevenWo0\n|j|\u2606Princess Nezu\n|t:|1776486886\n|gametype|doubles\n|player|p1|StevenWo0|lucas|1017\n|player|p2|Princess Nezu|heroine2-conquest|1000\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Torterra, L50, M|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Farigiraf, L50, F|\n|poke|p1|Whimsicott, L50, M|\n|poke|p1|Dragonite, L50, F|\n|poke|p1|Tyranitar, L50, M|\n|poke|p2|Gardevoir, L50, M, shiny|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Farigiraf, L50, F|\n|poke|p2|Kingambit, L50, F|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Crabominable, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Princess Nezu)\n|inactive|StevenWo0 has 60 seconds left.\n|\n|t:|1776486926\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Incineroar|Incineroar, L50, M|100/100\n|switch|p1b: Whimsicott|Whimsicott, L50, M|100/100\n|switch|p2a: Checkmate|Kingambit, L50, F|100/100\n|switch|p2b: The Keeper|Sneasler, L50, M|100/100\n|-ability|p1a: Incineroar|Intimidate|boost\n|-unboost|p2a: Checkmate|atk|1\n|-ability|p2a: Checkmate|Defiant|boost\n|-boost|p2a: Checkmate|atk|2\n|-unboost|p2b: The Keeper|atk|1\n|-enditem|p2b: The Keeper|White Herb\n|-clearnegativeboost|p2b: The Keeper|[silent]\n|turn|1\n|inactive|StevenWo0 has 30 seconds left.\n|\n|t:|1776486955\n|move|p2b: The Keeper|Fake Out|p1a: Incineroar\n|-damage|p1a: Incineroar|87/100\n|move|p1b: Whimsicott|Tailwind|p1b: Whimsicott\n|-sidestart|p1: StevenWo0|move: Tailwind\n|cant|p1a: Incineroar|flinch\n|move|p2a: Checkmate|Iron Head|p1b: Whimsicott\n|-supereffective|p1b: Whimsicott|1\n|-damage|p1b: Whimsicott|0 fnt\n|faint|p1b: Whimsicott\n|\n|upkeep\n|\n|t:|1776486969\n|switch|p1b: Farigiraf|Farigiraf, L50, F|100/100\n|turn|2\n|\n|t:|1776486978\n|move|p2b: The Keeper|Close Combat|p1a: Incineroar\n|-supereffective|p1a: Incineroar|1\n|-damage|p1a: Incineroar|0 fnt\n|-unboost|p2b: The Keeper|def|1\n|-unboost|p2b: The Keeper|spd|1\n|faint|p1a: Incineroar\n|move|p1b: Farigiraf|Psychic|p2b: The Keeper\n|-supereffective|p2b: The Keeper|2\n|-damage|p2b: The Keeper|0 fnt\n|faint|p2b: The Keeper\n|move|p2a: Checkmate|Kowtow Cleave|p1b: Farigiraf\n|-supereffective|p1b: Farigiraf|1\n|-damage|p1b: Farigiraf|0 fnt\n|faint|p1b: Farigiraf\n|\n|upkeep\n|-message|StevenWo0 forfeited.\n|\n|win|Princess Nezu\n|raw|StevenWo0's rating: 1017 &rarr; <strong>1004</strong><br />(-13 for losing)\n|raw|Princess Nezu's rating: 1000 &rarr; <strong>1042</strong><br />(+42 for winning)\n|l|\u2606StevenWo0\n|player|p1|\n",
+  "uploadtime": 1776487005,
+  "views": 26,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1004,
+  "private": 0,
+  "password": null
+}

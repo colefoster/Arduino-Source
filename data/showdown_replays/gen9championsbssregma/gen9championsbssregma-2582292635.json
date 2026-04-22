@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2582292635",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "aredayoiku",
+    "diggersboy660"
+  ],
+  "log": "|j|\u2606aredayoiku\n|j|\u2606diggersboy660\n|t:|1776080502\n|gametype|singles\n|player|p1|aredayoiku|265|1228\n|player|p2|diggersboy660|n|1334\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Froslass, L50, F|\n|poke|p1|Kangaskhan, L50, F|\n|poke|p1|Aegislash, L50, M|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Primarina, L50, F|\n|poke|p1|Gallade, L50, M|\n|poke|p2|Mamoswine, L50, F|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Aegislash, L50, F|\n|poke|p2|Chimecho, L50, M|\n|poke|p2|Gyarados, L50, M|\n|poke|p2|Diggersby, L50, M|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by aredayoiku)\n|\n|t:|1776080536\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Froslass|Froslass, L50, F|100/100\n|switch|p2a: Mamoswine|Mamoswine, L50, F|100/100\n|turn|1\n|\n|t:|1776080539\n|detailschange|p1a: Froslass|Froslass-Mega, L50, F\n|-mega|p1a: Froslass|Froslass|Froslassite\n|-weather|Snowscape|[from] ability: Snow Warning|[of] p1a: Froslass\n|move|p1a: Froslass|Blizzard|p2a: Mamoswine\n|-damage|p2a: Mamoswine|3/100\n|move|p2a: Mamoswine|Earthquake|p1a: Froslass\n|-damage|p1a: Froslass|39/100\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|turn|2\n|\n|t:|1776080547\n|move|p2a: Mamoswine|Ice Shard|p1a: Froslass\n|-resisted|p1a: Froslass|1\n|-damage|p1a: Froslass|28/100\n|move|p1a: Froslass|Blizzard|p2a: Mamoswine\n|-damage|p2a: Mamoswine|0 fnt\n|faint|p2a: Mamoswine\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|\n|t:|1776080550\n|switch|p2a: Gyarados|Gyarados, L50, M|100/100\n|-ability|p2a: Gyarados|Intimidate|boost\n|-unboost|p1a: Froslass|atk|1\n|turn|3\n|\n|t:|1776080553\n|move|p1a: Froslass|Thunderbolt|p2a: Gyarados\n|-supereffective|p2a: Gyarados|2\n|-crit|p2a: Gyarados\n|-damage|p2a: Gyarados|0 fnt\n|faint|p2a: Gyarados\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|\n|t:|1776080554\n|switch|p2a: Chimecho|Chimecho, L50, M|100/100\n|turn|4\n|\n|t:|1776080556\n|detailschange|p2a: Chimecho|Chimecho-Mega, L50, M\n|-mega|p2a: Chimecho|Chimecho|Chimechite\n|move|p1a: Froslass|Shadow Ball|p2a: Chimecho\n|-supereffective|p2a: Chimecho|1\n|-damage|p2a: Chimecho|32/100\n|move|p2a: Chimecho|Cosmic Power|p2a: Chimecho\n|-boost|p2a: Chimecho|def|1\n|-boost|p2a: Chimecho|spd|1\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|turn|5\n|j| p74\n|\n|t:|1776080559\n|move|p1a: Froslass|Shadow Ball|p2a: Chimecho\n|-supereffective|p2a: Chimecho|1\n|-damage|p2a: Chimecho|0 fnt\n|faint|p2a: Chimecho\n|\n|win|aredayoiku\n|raw|aredayoiku's rating: 1228 &rarr; <strong>1260</strong><br />(+32 for winning)\n|raw|diggersboy660's rating: 1334 &rarr; <strong>1308</strong><br />(-26 for losing)\n|l|\u2606diggersboy660\n|player|p2|\n|l|\u2606aredayoiku\n|player|p1|\n",
+  "uploadtime": 1776080562,
+  "views": 11,
+  "formatid": "gen9championsbssregma",
+  "rating": 1260,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2583022293",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "w4toto",
+    "N11ru"
+  ],
+  "log": "|j|\u2606w4toto\n|j|\u2606N11ru\n|t:|1776134152\n|gametype|doubles\n|player|p1|w4toto|volkner|1214\n|player|p2|N11ru|1|1171\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Tyranitar, L50, M|\n|poke|p1|Excadrill, L50, M|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Primarina, L50, F|\n|poke|p1|Farigiraf, L50, F|\n|poke|p1|Sinistcha, L50|\n|poke|p2|Chandelure, L50, M|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Clefable, L50, F|\n|poke|p2|Espathra, L50, F|\n|poke|p2|Ninetales-Alola, L50, F|\n|poke|p2|Incineroar, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by w4toto)\n|\n|t:|1776134187\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: GOJIRA|Tyranitar, L50, M|100/100\n|switch|p1b: SANDMAN|Excadrill, L50, M|100/100\n|switch|p2a: Sneasler|Sneasler, L50, F|100/100\n|switch|p2b: Neneta|Ninetales-Alola, L50, F|100/100\n|-weather|Snowscape|[from] ability: Snow Warning|[of] p2b: Neneta\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p1a: GOJIRA\n|turn|1\n|\n|t:|1776134211\n|switch|p1a: Farigiraf|Farigiraf, L50, F|100/100\n|move|p2a: Sneasler|Fake Out||[still]\n|cant|p1a: Farigiraf|ability: Armor Tail|Fake Out|[of] p2a: Sneasler\n|move|p1b: SANDMAN|Iron Head|p2b: Neneta\n|-supereffective|p2b: Neneta|2\n|-damage|p2b: Neneta|0 fnt\n|faint|p2b: Neneta\n|\n|-weather|Sandstorm|[upkeep]\n|-damage|p2a: Sneasler|95/100|[from] Sandstorm\n|-damage|p1a: Farigiraf|94/100|[from] Sandstorm\n|upkeep\n|\n|t:|1776134224\n|switch|p2b: Clefable|Clefable, L50, F|100/100\n|turn|2\n|-message|N11ru forfeited.\n|\n|win|w4toto\n|raw|w4toto's rating: 1214 &rarr; <strong>1236</strong><br />(+22 for winning)\n|raw|N11ru's rating: 1171 &rarr; <strong>1149</strong><br />(-22 for losing)\n|l|\u2606N11ru\n|player|p2|\n",
+  "uploadtime": 1776134236,
+  "views": 26,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1149,
+  "private": 0,
+  "password": null
+}

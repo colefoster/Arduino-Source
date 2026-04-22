@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582938464",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "gomibako35",
+    "kuanyou"
+  ],
+  "log": "|j|\u2606gomibako35\n|j|\u2606kuanyou\n|t:|1776126708\n|gametype|doubles\n|player|p1|gomibako35|265|1068\n|player|p2|kuanyou|169|1152\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Palafin, L50, F|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Crabominable, L50, F|\n|poke|p1|Pelipper, L50, F|\n|poke|p1|Farigiraf, L50, F|\n|poke|p2|Scovillain, L50, F|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Primarina, L50, M|\n|poke|p2|Kingambit, L50, M|\n|poke|p2|Aerodactyl, L50, M|\n|poke|p2|Garchomp, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by gomibako35)\n|inactive|gomibako35 has 60 seconds left.\n|\n|t:|1776126756\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Pelipper|Pelipper, L50, F|100/100\n|switch|p1b: Palafin|Palafin, L50, F|100/100\n|switch|p2a: Scovillain|Scovillain, L50, F|100/100\n|switch|p2b: Primarina|Primarina, L50, M|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p1a: Pelipper\n|turn|1\n|inactive|gomibako35 has 30 seconds left.\n|\n|t:|1776126784\n|move|p1b: Palafin|Protect|p1b: Palafin\n|-singleturn|p1b: Palafin|Protect\n|move|p2a: Scovillain|Protect|p2a: Scovillain\n|-singleturn|p2a: Scovillain|Protect\n|move|p1a: Pelipper|Hurricane|p2a: Scovillain\n|-activate|p2a: Scovillain|move: Protect\n|move|p2b: Primarina|Calm Mind|p2b: Primarina\n|-boost|p2b: Primarina|spa|1\n|-boost|p2b: Primarina|spd|1\n|\n|-weather|RainDance|[upkeep]\n|-ability|p2a: Scovillain|Moody|boost\n|-boost|p2a: Scovillain|spa|2\n|-unboost|p2a: Scovillain|spe|1\n|upkeep\n|turn|2\n|\n|t:|1776126808\n|switch|p2a: Kingambit|Kingambit, L50, M|100/100\n|move|p1b: Palafin|Flip Turn|p2a: Kingambit\n|-damage|p2a: Kingambit|68/100\n|\n|t:|1776126818\n|detailschange|p1b: Palafin|Palafin-Hero, L50, F\n|switch|p1b: Farigiraf|Farigiraf, L50, F|100/100|[from] Flip Turn\n|move|p2b: Primarina|Moonblast|p1b: Farigiraf\n|-damage|p1b: Farigiraf|26/100\n|move|p1a: Pelipper|Hurricane|p2a: Kingambit\n|-resisted|p2a: Kingambit|1\n|-damage|p2a: Kingambit|43/100\n|-start|p2a: Kingambit|confusion\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|turn|3\n|\n|t:|1776126837\n|move|p1a: Pelipper|Wide Guard|p1a: Pelipper\n|-singleturn|p1a: Pelipper|Wide Guard\n|move|p2b: Primarina|Moonblast|p1b: Farigiraf\n|-damage|p1b: Farigiraf|0 fnt\n|faint|p1b: Farigiraf\n|-activate|p2a: Kingambit|confusion\n|move|p2a: Kingambit|Kowtow Cleave|p1a: Pelipper\n|-damage|p1a: Pelipper|39/100\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|-message|gomibako35 forfeited.\n|\n|win|kuanyou\n|raw|gomibako35's rating: 1068 &rarr; <strong>1053</strong><br />(-15 for losing)\n|raw|kuanyou's rating: 1152 &rarr; <strong>1171</strong><br />(+19 for winning)\n",
+  "uploadtime": 1776126849,
+  "views": 13,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1053,
+  "private": 0,
+  "password": null
+}

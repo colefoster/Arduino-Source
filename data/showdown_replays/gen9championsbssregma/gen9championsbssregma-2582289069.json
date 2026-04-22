@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2582289069",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "M6F2Y0",
+    "zftt23"
+  ],
+  "log": "|j|\u2606M6F2Y0\n|j|\u2606zftt23\n|t:|1776080158\n|gametype|singles\n|player|p1|M6F2Y0|ingo|1102\n|player|p2|zftt23|red|1167\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Lucario, L50, F|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Mimikyu, L50, M|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Charizard, L50, M|\n|poke|p1|Primarina, L50, F|\n|poke|p2|Hippowdon, L50, M|\n|poke|p2|Skarmory, L50, M|\n|poke|p2|Meowscarada, L50, M|\n|poke|p2|Charizard, L50, M|\n|poke|p2|Primarina, L50, F|\n|poke|p2|Aegislash, L50, M|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by zftt23)\n|inactive|M6F2Y0 also wants the timer to be on.\n|inactive|M6F2Y0 has 60 seconds left.\n|inactive|zftt23 has 60 seconds left.\n|\n|t:|1776080216\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Basculegion|Basculegion, L50, M|100/100\n|switch|p2a: Skarmory|Skarmory, L50, M, shiny|100/100\n|turn|1\n|\n|t:|1776080224\n|move|p1a: Basculegion|Flip Turn|p2a: Skarmory\n|-damage|p2a: Skarmory|62/100\n|-ability|p2a: Skarmory|Weak Armor|boost\n|-unboost|p2a: Skarmory|def|1\n|-boost|p2a: Skarmory|spe|2\n|\n|t:|1776080230\n|switch|p1a: Primarina|Primarina, L50, F|100/100|[from] Flip Turn\n|move|p2a: Skarmory|Swords Dance|p2a: Skarmory\n|-boost|p2a: Skarmory|atk|2\n|\n|upkeep\n|turn|2\n|\n|t:|1776080248\n|detailschange|p2a: Skarmory|Skarmory-Mega, L50, M, shiny\n|-mega|p2a: Skarmory|Skarmory|Skarmorite\n|move|p2a: Skarmory|Iron Head|p1a: Primarina\n|-crit|p1a: Primarina\n|-damage|p1a: Primarina|0 fnt\n|faint|p1a: Primarina\n|\n|upkeep\n|\n|t:|1776080254\n|switch|p1a: Lucario|Lucario, L50, F|100/100\n|turn|3\n|\n|t:|1776080272\n|detailschange|p1a: Lucario|Lucario-Mega, L50, F\n|-mega|p1a: Lucario|Lucario|Lucarionite\n|move|p2a: Skarmory|Brave Bird|p1a: Lucario\n|-damage|p1a: Lucario|0 fnt\n|faint|p1a: Lucario\n|-damage|p2a: Skarmory|28/100|[from] Recoil\n|\n|upkeep\n|\n|t:|1776080275\n|switch|p1a: Basculegion|Basculegion, L50, M|100/100\n|turn|4\n|\n|t:|1776080281\n|move|p2a: Skarmory|Brave Bird|p1a: Basculegion\n|-damage|p1a: Basculegion|0 fnt\n|faint|p1a: Basculegion\n|-damage|p2a: Skarmory|0 fnt|[from] Recoil\n|faint|p2a: Skarmory\n|\n|win|zftt23\n|raw|M6F2Y0's rating: 1102 &rarr; <strong>1082</strong><br />(-20 for losing)\n|raw|zftt23's rating: 1167 &rarr; <strong>1187</strong><br />(+20 for winning)\n|l|\u2606zftt23\n|player|p2|\n|l|\u2606M6F2Y0\n|player|p1|\n",
+  "uploadtime": 1776080429,
+  "views": 7,
+  "formatid": "gen9championsbssregma",
+  "rating": 1082,
+  "private": 0,
+  "password": null
+}

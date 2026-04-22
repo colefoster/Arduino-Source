@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2580976919",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "NoxxinVGC",
+    "DeltaZ82"
+  ],
+  "log": "|j|\u2606NoxxinVGC\n|j|\u2606DeltaZ82\n|t:|1775948356\n|gametype|doubles\n|player|p1|NoxxinVGC|giovanni|1079\n|player|p2|DeltaZ82|benga|1000\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Delphox, L50, M|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Clefable, L50, M|\n|poke|p1|Kingambit, L50, F|\n|poke|p1|Dragonite, L50, M|\n|poke|p1|Sneasler, L50, F|\n|poke|p2|Gengar, L50, M|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Tyranitar, L50, M|\n|poke|p2|Excadrill, L50, M|\n|poke|p2|Skarmory, L50, M|\n|poke|p2|Incineroar, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by NoxxinVGC)\n|inactive|NoxxinVGC has 60 seconds left.\n|inactive|NoxxinVGC has 30 seconds left.\n|inactive|NoxxinVGC has 20 seconds left.\n|inactive|NoxxinVGC has 15 seconds left.\n|\n|t:|1775948434\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Delphox|Delphox, L50, M|100/100\n|switch|p1b: Basculegion|Basculegion, L50, M|100/100\n|switch|p2a: Gengar|Gengar, L50, M, shiny|100/100\n|switch|p2b: Sneasler|Sneasler, L50, M, shiny|100/100\n|turn|1\n|inactive|NoxxinVGC has 30 seconds left.\n|\n|t:|1775948465\n|detailschange|p1a: Delphox|Delphox-Mega, L50, M\n|-mega|p1a: Delphox|Delphox|Delphoxite\n|move|p1a: Delphox|Protect|p1a: Delphox\n|-singleturn|p1a: Delphox|Protect\n|move|p1b: Basculegion|Last Respects|p2a: Gengar\n|-supereffective|p2a: Gengar|1\n|-damage|p2a: Gengar|0 fnt\n|faint|p2a: Gengar\n|move|p2b: Sneasler|Rock Slide|p1b: Basculegion|[spread] p1b\n|-activate|p1a: Delphox|move: Protect\n|-damage|p1b: Basculegion|75/100\n|\n|upkeep\n|\n|t:|1775948477\n|switch|p2a: Excadrill|Excadrill, L50, M, shiny|100/100\n|turn|2\n|-message|DeltaZ82 forfeited.\n|\n|win|NoxxinVGC\n|raw|NoxxinVGC's rating: 1079 &rarr; <strong>1101</strong><br />(+22 for winning)\n|raw|DeltaZ82's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n",
+  "uploadtime": 1775948488,
+  "views": 13,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

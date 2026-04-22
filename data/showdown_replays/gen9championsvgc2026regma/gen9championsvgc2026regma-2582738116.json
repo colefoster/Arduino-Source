@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582738116",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "hyunbelievable",
+    "Regarel"
+  ],
+  "log": "|j|\u2606hyunbelievable\n|j|\u2606Regarel\n|t:|1776110683\n|gametype|doubles\n|player|p1|hyunbelievable|guzma|1049\n|player|p2|Regarel|pokemaniac|1000\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Aerodactyl, L50, M|\n|poke|p1|Excadrill, L50, F|\n|poke|p1|Tyranitar, L50, F|\n|poke|p1|Orthworm, L50, F|\n|poke|p1|Rotom-Mow, L50|\n|poke|p2|Whimsicott, L50, M|\n|poke|p2|Arcanine, L50, M|\n|poke|p2|Ninetales, L50, F|\n|poke|p2|Typhlosion-Hisui, L50, M|\n|poke|p2|Weavile, L50, F|\n|poke|p2|Aerodactyl, L50, F|\n|teampreview|4\n|\n|t:|1776110710\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Floette|Floette-Eternal, L50, F|100/100\n|switch|p1b: Aerodactyl|Aerodactyl, L50, M|100/100\n|switch|p2a: Ninetales|Ninetales, L50, F|100/100\n|switch|p2b: Typhlosion|Typhlosion-Hisui, L50, M|100/100\n|-weather|SunnyDay|[from] ability: Drought|[of] p2a: Ninetales\n|turn|1\n|\n|t:|1776110736\n|switch|p2a: Weavile|Weavile, L50, F|100/100\n|switch|p1a: Tyranitar|Tyranitar, L50, F|100/100\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p1a: Tyranitar\n|detailschange|p1b: Aerodactyl|Aerodactyl-Mega, L50, M\n|-mega|p1b: Aerodactyl|Aerodactyl|Aerodactylite\n|move|p1b: Aerodactyl|Rock Slide|p2a: Weavile|[spread] p2a,p2b\n|-supereffective|p2a: Weavile|1\n|-supereffective|p2b: Typhlosion|1\n|-enditem|p2a: Weavile|Focus Sash\n|-damage|p2a: Weavile|1/100\n|-damage|p2b: Typhlosion|8/100\n|move|p2b: Typhlosion|Eruption|p1b: Aerodactyl|[spread] p1a,p1b\n|-resisted|p1a: Tyranitar|1\n|-resisted|p1b: Aerodactyl|1\n|-damage|p1a: Tyranitar|98/100\n|-damage|p1b: Aerodactyl|98/100\n|\n|-weather|Sandstorm|[upkeep]\n|-damage|p2b: Typhlosion|2/100|[from] Sandstorm\n|-damage|p2a: Weavile|0 fnt|[from] Sandstorm\n|faint|p2a: Weavile\n|upkeep\n|-message|Regarel forfeited.\n|\n|win|hyunbelievable\n|raw|hyunbelievable's rating: 1049 &rarr; <strong>1077</strong><br />(+28 for winning)\n|raw|Regarel's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|l|\u2606Regarel\n|player|p2|\n",
+  "uploadtime": 1776110752,
+  "views": 17,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

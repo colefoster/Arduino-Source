@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584842217",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "eevee1995",
+    "arashizzz"
+  ],
+  "log": "|j|\u2606eevee1995\n|j|\u2606arashizzz\n|t:|1776287901\n|gametype|doubles\n|player|p1|eevee1995|pokekidf-gen8|1077\n|player|p2|arashizzz|veteran-gen4|1033\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Torkoal, L50, M|\n|poke|p1|Victreebel, L50, F|\n|poke|p1|Farigiraf, L50, M|\n|poke|p1|Dragonite, L50, M|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Garchomp, L50, F|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Dragonite, L50, M|\n|poke|p2|Pelipper, L50, M|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Garchomp, L50, M|\n|teampreview|4\n|\n|t:|1776287945\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: sneeeeeeeeeeeeeeek|Sneasler, L50, M, shiny|100/100\n|switch|p1b: Mr Nite|Dragonite, L50, M, shiny|100/100\n|switch|p2a: Floette|Floette-Eternal, L50, F, shiny|100/100\n|switch|p2b: Sneasler|Sneasler, L50, F|100/100\n|turn|1\n|\n|t:|1776287970\n|detailschange|p2a: Floette|Floette-Mega, L50, F, shiny\n|-mega|p2a: Floette|Floette|Floettite\n|-ability|p2a: Floette|Fairy Aura\n|move|p1a: sneeeeeeeeeeeeeeek|Fake Out|p2a: Floette\n|-damage|p2a: Floette|86/100\n|move|p2b: Sneasler|Fake Out|p1a: sneeeeeeeeeeeeeeek\n|-damage|p1a: sneeeeeeeeeeeeeeek|74/100\n|cant|p2a: Floette|flinch\n|move|p1b: Mr Nite|Scale Shot|p2b: Sneasler\n|-damage|p2b: Sneasler|74/100\n|-damage|p2b: Sneasler|48/100\n|-damage|p2b: Sneasler|25/100\n|-hitcount|p2b: Sneasler|3\n|-unboost|p1b: Mr Nite|def|1\n|-boost|p1b: Mr Nite|spe|1\n|\n|upkeep\n|turn|2\n|\n|t:|1776287989\n|move|p1b: Mr Nite|Protect|p1b: Mr Nite\n|-singleturn|p1b: Mr Nite|Protect\n|move|p2b: Sneasler|Protect|p2b: Sneasler\n|-singleturn|p2b: Sneasler|Protect\n|move|p1a: sneeeeeeeeeeeeeeek|Dire Claw|p2a: Floette\n|-supereffective|p2a: Floette|1\n|-damage|p2a: Floette|0 fnt\n|faint|p2a: Floette\n|\n|upkeep\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by eevee1995)\n|-message|arashizzz forfeited.\n|\n|win|eevee1995\n|raw|eevee1995's rating: 1077 &rarr; <strong>1102</strong><br />(+25 for winning)\n|raw|arashizzz's rating: 1033 &rarr; <strong>1020</strong><br />(-13 for losing)\n|l|\u2606arashizzz\n|player|p2|\n",
+  "uploadtime": 1776288006,
+  "views": 18,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1020,
+  "private": 0,
+  "password": null
+}

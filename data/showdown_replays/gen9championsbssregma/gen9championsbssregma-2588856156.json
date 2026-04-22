@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2588856156",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "Gon1108",
+    "Bbbkty"
+  ],
+  "log": "|j|\u2606Gon1108\n|j|\u2606Bbbkty\n|t:|1776679077\n|gametype|singles\n|player|p1|Gon1108|2|1195\n|player|p2|Bbbkty|1|1166\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Mimikyu, L50, F|\n|poke|p1|Delphox, L50, M|\n|poke|p1|Scizor, L50, M|\n|poke|p1|Meowscarada, L50, F|\n|poke|p1|Primarina, L50, F|\n|poke|p1|Archaludon, L50, F|\n|poke|p2|Clefable, L50, M|\n|poke|p2|Charizard, L50, M|\n|poke|p2|Mimikyu, L50, M|\n|poke|p2|Kingambit, L50, F|\n|poke|p2|Espathra, L50, F|\n|poke|p2|Glimmora, L50, M|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Bbbkty)\n|inactive|Gon1108 has 60 seconds left.\n|\n|t:|1776679115\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Scizor|Scizor, L50, M|100/100\n|switch|p2a: Espathra|Espathra, L50, F|100/100\n|turn|1\n|l|\u2606Bbbkty\n|inactive|Bbbkty disconnected and has a minute to reconnect!\n|player|p2|\n|inactive|Bbbkty has 30 seconds left.\n|j|\u2606Bbbkty\n|inactive|Bbbkty reconnected and has 25 seconds left.\n|player|p2|Bbbkty|1|\n|\n|t:|1776679148\n|move|p2a: Espathra|Protect|p2a: Espathra\n|-singleturn|p2a: Espathra|Protect\n|move|p1a: Scizor|Swords Dance|p1a: Scizor\n|-boost|p1a: Scizor|atk|2\n|\n|-ability|p2a: Espathra|Speed Boost|boost\n|-boost|p2a: Espathra|spe|1\n|upkeep\n|turn|2\n|l|\u2606Gon1108\n|inactive|Gon1108 disconnected and has a minute to reconnect!\n|player|p1|\n|inactive|Gon1108 has 30 seconds left.\n|inactive|Gon1108 has 20 seconds left.\n|inactive|Gon1108 has 15 seconds left.\n|inactive|Gon1108 has 10 seconds left.\n|inactive|Gon1108 has 5 seconds left.\n|-message|Gon1108 lost due to inactivity.\n|\n|win|Bbbkty\n|raw|Gon1108's rating: 1195 &rarr; <strong>1168</strong><br />(-27 for losing)\n|raw|Bbbkty's rating: 1166 &rarr; <strong>1193</strong><br />(+27 for winning)\n",
+  "uploadtime": 1776679210,
+  "views": 1,
+  "formatid": "gen9championsbssregma",
+  "rating": 1168,
+  "private": 0,
+  "password": null
+}

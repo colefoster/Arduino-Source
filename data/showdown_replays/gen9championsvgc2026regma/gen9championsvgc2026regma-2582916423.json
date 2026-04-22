@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582916423",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Burning Bridge",
+    "saddeq"
+  ],
+  "log": "|j|\u2606Burning Bridge\n|j|\u2606saddeq\n|t:|1776124727\n|gametype|doubles\n|player|p1|Burning Bridge|firebreather|1153\n|player|p2|saddeq|marshal|1053\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Blastoise, L50, M|\n|poke|p1|Clefable, L50, M|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Meowscarada, L50, M|\n|poke|p1|Politoed, L50, M|\n|poke|p1|Basculegion, L50, M|\n|poke|p2|Aerodactyl, L50, M|\n|poke|p2|Sylveon, L50, F|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Lucario, L50, F|\n|poke|p2|Ninetales-Alola, L50, M|\n|poke|p2|Rotom-Wash, L50|\n|teampreview|4\n|\n|t:|1776124758\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Blastoise|Blastoise, L50, M|100/100\n|switch|p1b: Clefable|Clefable, L50, M|100/100\n|switch|p2a: Lucario|Lucario, L50, F|100/100\n|switch|p2b: Incineroar|Incineroar, L50, F|100/100\n|-ability|p2b: Incineroar|Intimidate|boost\n|-unboost|p1a: Blastoise|atk|1\n|-unboost|p1b: Clefable|atk|1\n|turn|1\n|\n|t:|1776124779\n|detailschange|p2a: Lucario|Lucario-Mega, L50, F\n|-mega|p2a: Lucario|Lucario|Lucarionite\n|detailschange|p1a: Blastoise|Blastoise-Mega, L50, M\n|-mega|p1a: Blastoise|Blastoise|Blastoisinite\n|move|p1a: Blastoise|Protect|p1a: Blastoise\n|-singleturn|p1a: Blastoise|Protect\n|move|p2b: Incineroar|Fake Out|p1a: Blastoise\n|-activate|p1a: Blastoise|move: Protect\n|move|p2a: Lucario|Swords Dance|p2a: Lucario\n|-boost|p2a: Lucario|atk|2\n|move|p1b: Clefable|Flamethrower|p2a: Lucario\n|-supereffective|p2a: Lucario|1\n|-crit|p2a: Lucario\n|-damage|p2a: Lucario|0 fnt\n|faint|p2a: Lucario\n|\n|upkeep\n|-message|saddeq forfeited.\n|\n|win|Burning Bridge\n|raw|Burning Bridge's rating: 1153 &rarr; <strong>1171</strong><br />(+18 for winning)\n|raw|saddeq's rating: 1053 &rarr; <strong>1040</strong><br />(-13 for losing)\n|l|\u2606saddeq\n|player|p2|\n",
+  "uploadtime": 1776124798,
+  "views": 18,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1040,
+  "private": 0,
+  "password": null
+}

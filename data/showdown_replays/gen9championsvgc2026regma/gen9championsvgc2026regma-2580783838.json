@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2580783838",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "fangyusuhe",
+    "user638468287"
+  ],
+  "log": "|j|\u2606fangyusuhe\n|j|\u2606user638468287\n|t:|1775932173\n|gametype|doubles\n|player|p1|fangyusuhe|dawn|1040\n|player|p2|user638468287|169|1034\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Charizard, L50, F|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Venusaur, L50, M|\n|poke|p2|Sinistcha-Masterpiece, L50|\n|poke|p2|Alcremie, L50, F|\n|poke|p2|Meganium, L50, F|\n|poke|p2|Excadrill, L50, M|\n|poke|p2|Tyranitar, L50, M|\n|poke|p2|Incineroar, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by fangyusuhe)\n|\n|t:|1775932213\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Sneasler|Sneasler, L50, M|100/100\n|switch|p1b: Basculegion|Basculegion, L50, M|100/100\n|switch|p2a: Josuke|Excadrill, L50, M|100/100\n|switch|p2b: The other girl|Meganium, L50, F|100/100\n|turn|1\n|\n|t:|1775932233\n|move|p2a: Josuke|Protect|p2a: Josuke\n|-singleturn|p2a: Josuke|Protect\n|move|p2b: The other girl|Protect|p2b: The other girl\n|-singleturn|p2b: The other girl|Protect\n|move|p1b: Basculegion|Flip Turn|p2a: Josuke\n|-activate|p2a: Josuke|move: Protect\n|move|p1a: Sneasler|Dire Claw|p2b: The other girl\n|-activate|p2b: The other girl|move: Protect\n|\n|upkeep\n|turn|2\n|inactive|user638468287 has 30 seconds left.\n|\n|t:|1775932260\n|switch|p2b: Paolo Bonolis|Tyranitar, L50, M|100/100\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p2b: Paolo Bonolis\n|detailschange|p2a: Josuke|Excadrill-Mega, L50, M\n|-mega|p2a: Josuke|Excadrill|Excadrite\n|move|p1b: Basculegion|Flip Turn|p2a: Josuke\n|-supereffective|p2a: Josuke|1\n|-damage|p2a: Josuke|21/100\n|\n|t:|1775932267\n|switch|p1b: Garchomp|Garchomp, L50, M|100/100|[from] Flip Turn\n|move|p1a: Sneasler|Close Combat|p2a: Josuke\n|-supereffective|p2a: Josuke|1\n|-damage|p2a: Josuke|0 fnt\n|-unboost|p1a: Sneasler|def|1\n|-unboost|p1a: Sneasler|spd|1\n|faint|p2a: Josuke\n|-enditem|p1a: Sneasler|White Herb\n|-clearnegativeboost|p1a: Sneasler|[silent]\n|\n|-weather|Sandstorm|[upkeep]\n|-damage|p1a: Sneasler|95/100|[from] Sandstorm\n|upkeep\n|-message|user638468287 forfeited.\n|\n|win|fangyusuhe\n|raw|fangyusuhe's rating: 1040 &rarr; <strong>1073</strong><br />(+33 for winning)\n|raw|user638468287's rating: 1034 &rarr; <strong>1019</strong><br />(-15 for losing)\n|l|\u2606user638468287\n|player|p2|\n",
+  "uploadtime": 1775932297,
+  "views": 10,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1019,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2580686045",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "koiru256",
+    "Meteorplayz_"
+  ],
+  "log": "|j|\u2606koiru256\n|j|\u2606Meteorplayz_\n|t:|1775924207\n|gametype|singles\n|player|p1|koiru256|rocketgrunt|1091\n|player|p2|Meteorplayz_|winona-gen6|1000\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Lucario, L50, M|\n|poke|p1|Sneasler, L50, F|\n|poke|p1|Gallade, L50, M|\n|poke|p1|Mimikyu, L50, M|\n|poke|p1|Gengar, L50, F|\n|poke|p1|Basculegion, L50, M|\n|poke|p2|Meowscarada, L50, M|\n|poke|p2|Milotic, L50, F|\n|poke|p2|Aegislash, L50, M|\n|poke|p2|Dragonite, L50, F|\n|poke|p2|Slowking-Galar, L50, F|\n|poke|p2|Lopunny, L50, M|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by koiru256)\n|\n|t:|1775924222\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Mimikyu|Mimikyu, L50, M|100/100\n|switch|p2a: Slowking|Slowking-Galar, L50, F|100/100\n|turn|1\n|\n|t:|1775924228\n|move|p1a: Mimikyu|Swords Dance|p1a: Mimikyu\n|-boost|p1a: Mimikyu|atk|2\n|move|p2a: Slowking|Toxic|p1a: Mimikyu\n|-status|p1a: Mimikyu|tox\n|\n|-damage|p1a: Mimikyu|95/100 tox|[from] psn\n|upkeep\n|turn|2\n|\n|t:|1775924234\n|move|p1a: Mimikyu|Shadow Claw|p2a: Slowking\n|-supereffective|p2a: Slowking|1\n|-damage|p2a: Slowking|0 fnt\n|faint|p2a: Slowking\n|\n|-damage|p1a: Mimikyu|84/100 tox|[from] psn\n|upkeep\n|\n|t:|1775924238\n|switch|p2a: Aegislash|Aegislash, L50, M|100/100\n|turn|3\n|\n|t:|1775924243\n|move|p2a: Aegislash|King's Shield|p2a: Aegislash\n|-singleturn|p2a: Aegislash|Protect\n|move|p1a: Mimikyu|Swords Dance|p1a: Mimikyu\n|-boost|p1a: Mimikyu|atk|2\n|\n|-damage|p1a: Mimikyu|67/100 tox|[from] psn\n|upkeep\n|turn|4\n|\n|t:|1775924249\n|move|p2a: Aegislash|King's Shield||[still]\n|-fail|p2a: Aegislash\n|move|p1a: Mimikyu|Shadow Claw|p2a: Aegislash\n|-supereffective|p2a: Aegislash|1\n|-damage|p2a: Aegislash|0 fnt\n|faint|p2a: Aegislash\n|\n|-damage|p1a: Mimikyu|44/100 tox|[from] psn\n|upkeep\n|\n|t:|1775924252\n|switch|p2a: Meowscarada|Meowscarada, L50, M|100/100\n|turn|5\n|\n|t:|1775924259\n|move|p2a: Meowscarada|Triple Axel|p1a: Mimikyu\n|-start|p2a: Meowscarada|typechange|Ice|[from] ability: Protean\n|-activate|p1a: Mimikyu|ability: Disguise\n|-damage|p1a: Mimikyu|44/100 tox\n|detailschange|p1a: Mimikyu|Mimikyu-Busted, L50, M\n|-damage|p1a: Mimikyu|32/100 tox|[from] pokemon: Mimikyu-Busted\n|-damage|p1a: Mimikyu|7/100 tox\n|-hitcount|p1a: Mimikyu|2\n|move|p1a: Mimikyu|Play Rough|p2a: Meowscarada\n|-damage|p2a: Meowscarada|0 fnt\n|faint|p2a: Meowscarada\n|\n|win|koiru256\n|raw|koiru256's rating: 1091 &rarr; <strong>1111</strong><br />(+20 for winning)\n|raw|Meteorplayz_'s rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n",
+  "uploadtime": 1775924259,
+  "views": 14,
+  "formatid": "gen9championsbssregma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

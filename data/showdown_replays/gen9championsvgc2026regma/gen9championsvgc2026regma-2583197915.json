@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2583197915",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "xiaodaisama",
+    "La Clemstim"
+  ],
+  "log": "|j|\u2606xiaodaisama\n|j|\u2606La Clemstim\n|t:|1776153727\n|gametype|doubles\n|player|p1|xiaodaisama|169|1013\n|player|p2|La Clemstim|2|1112\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Pelipper, L50, F|\n|poke|p1|Archaludon, L50, F|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Incineroar, L50, F|\n|poke|p2|Charizard, L50, F|\n|poke|p2|Venusaur, L50, F|\n|poke|p2|Rotom-Wash, L50|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Kingambit, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by La Clemstim)\n|\n|t:|1776153746\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Floette|Floette-Eternal, L50, F|100/100\n|switch|p1b: Incineroar|Incineroar, L50, F|100/100\n|switch|p2a: Sneasler|Sneasler, L50, F|100/100\n|switch|p2b: Kingambit|Kingambit, L50, F|100/100\n|-ability|p1b: Incineroar|Intimidate|boost\n|-unboost|p2a: Sneasler|atk|1\n|-unboost|p2b: Kingambit|atk|1\n|-ability|p2b: Kingambit|Defiant|boost\n|-boost|p2b: Kingambit|atk|2\n|-enditem|p2a: Sneasler|White Herb\n|-clearnegativeboost|p2a: Sneasler|[silent]\n|turn|1\n|\n|t:|1776153770\n|detailschange|p1a: Floette|Floette-Mega, L50, F\n|-mega|p1a: Floette|Floette|Floettite\n|-ability|p1a: Floette|Fairy Aura\n|move|p2a: Sneasler|Fake Out|p1b: Incineroar\n|-damage|p1b: Incineroar|87/100\n|cant|p1b: Incineroar|flinch\n|move|p1a: Floette|Calm Mind|p1a: Floette\n|-boost|p1a: Floette|spa|1\n|-boost|p1a: Floette|spd|1\n|move|p2b: Kingambit|Iron Head|p1a: Floette\n|-supereffective|p1a: Floette|1\n|-damage|p1a: Floette|0 fnt\n|faint|p1a: Floette\n|\n|upkeep\n|-message|xiaodaisama forfeited.\n|\n|win|La Clemstim\n|raw|xiaodaisama's rating: 1013 &rarr; <strong>1004</strong><br />(-9 for losing)\n|raw|La Clemstim's rating: 1112 &rarr; <strong>1130</strong><br />(+18 for winning)\n|l|\u2606xiaodaisama\n|player|p1|\n",
+  "uploadtime": 1776153794,
+  "views": 28,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1004,
+  "private": 0,
+  "password": null
+}

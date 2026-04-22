@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2581395842",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "lllokth",
+    "hoshigumo1101"
+  ],
+  "log": "|j|\u2606lllokth\n|j|\u2606hoshigumo1101\n|t:|1775995939\n|gametype|singles\n|player|p1|lllokth|dancer|1142\n|player|p2|hoshigumo1101|acetrainerf|1188\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Espathra, L50, M|\n|poke|p1|Orthworm, L50, F|\n|poke|p1|Chandelure, L50, M|\n|poke|p1|Sandaconda, L50, M|\n|poke|p1|Tyranitar, L50, F|\n|poke|p1|Azumarill, L50, M|\n|poke|p2|Lucario, L50, M|\n|poke|p2|Rotom-Wash, L50|\n|poke|p2|Garchomp, L50, F|\n|poke|p2|Charizard, L50, M|\n|poke|p2|Hatterene, L50, F|\n|poke|p2|Greninja-*, L50, F|\n|teampreview|3\n|\n|t:|1775995972\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Orthworm|Orthworm, L50, F|100/100\n|switch|p2a: Greninja|Greninja, L50, F|100/100\n|turn|1\n|\n|t:|1775995979\n|detailschange|p2a: Greninja|Greninja-Mega, L50, F\n|-mega|p2a: Greninja|Greninja|Greninjite\n|move|p2a: Greninja|Dark Pulse|p1a: Orthworm\n|-start|p2a: Greninja|typechange|Dark|[from] ability: Protean\n|-damage|p1a: Orthworm|26/100\n|cant|p1a: Orthworm|flinch\n|\n|upkeep\n|turn|2\n|\n|t:|1775995993\n|move|p2a: Greninja|Dark Pulse|p1a: Orthworm\n|-damage|p1a: Orthworm|0 fnt\n|faint|p1a: Orthworm\n|\n|upkeep\n|\n|t:|1775995996\n|switch|p1a: Azumarill|Azumarill, L50, M|100/100\n|turn|3\n|\n|t:|1775996000\n|switch|p2a: Rotom|Rotom-Wash, L50|100/100\n|move|p1a: Azumarill|Belly Drum|p1a: Azumarill\n|-damage|p1a: Azumarill|51/100\n|-setboost|p1a: Azumarill|atk|6|[from] move: Belly Drum\n|\n|upkeep\n|turn|4\n|\n|t:|1775996004\n|move|p2a: Rotom|Volt Switch|p1a: Azumarill\n|-supereffective|p1a: Azumarill|1\n|-damage|p1a: Azumarill|0 fnt\n|faint|p1a: Azumarill\n|\n|t:|1775996009\n|switch|p2a: Greninja|Greninja-Mega, L50, F|100/100|[from] Volt Switch\n|\n|upkeep\n|\n|t:|1775996012\n|switch|p1a: Espathra|Espathra, L50, M|100/100\n|turn|5\n|-message|lllokth forfeited.\n|\n|win|hoshigumo1101\n|raw|lllokth's rating: 1142 &rarr; <strong>1120</strong><br />(-22 for losing)\n|raw|hoshigumo1101's rating: 1188 &rarr; <strong>1210</strong><br />(+22 for winning)\n|l|\u2606lllokth\n|player|p1|\n",
+  "uploadtime": 1775996022,
+  "views": 9,
+  "formatid": "gen9championsbssregma",
+  "rating": 1120,
+  "private": 0,
+  "password": null
+}

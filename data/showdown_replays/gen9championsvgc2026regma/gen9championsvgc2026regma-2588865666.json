@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2588865666",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "daniperez19",
+    "soulo333"
+  ],
+  "log": "|j|\u2606daniperez19\n|j|\u2606soulo333\n|t:|1776680189\n|gametype|doubles\n|player|p1|daniperez19|lance|1196\n|player|p2|soulo333|102|1262\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Golurk, L50|\n|poke|p1|Drampa, L50, F|\n|poke|p1|Kingambit, L50, F|\n|poke|p1|Torkoal, L50, M|\n|poke|p1|Farigiraf, L50, M|\n|poke|p1|Slowbro, L50, M|\n|poke|p2|Charizard, L50, M|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Milotic, L50, F|\n|poke|p2|Tyranitar, L50, F|\n|teampreview|4\ndaniperez19 rejected open team sheets.\n|\n|t:|1776680219\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Farigiraf|Farigiraf, L50, M|100/100\n|switch|p1b: Torkoal|Torkoal, L50, M|100/100\n|switch|p2a: Sneasler|Sneasler, L50, M|100/100\n|switch|p2b: Tyranitar|Tyranitar, L50, F|100/100\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p2b: Tyranitar\n|-weather|SunnyDay|[from] ability: Drought|[of] p1b: Torkoal\n|turn|1\n|\n|t:|1776680232\n|detailschange|p2b: Tyranitar|Tyranitar-Mega, L50, F\n|-mega|p2b: Tyranitar|Tyranitar|Tyranitarite\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p2b: Tyranitar\n|move|p1b: Torkoal|Protect|p1b: Torkoal\n|-singleturn|p1b: Torkoal|Protect\n|move|p2a: Sneasler|Coaching|p2b: Tyranitar\n|-boost|p2b: Tyranitar|atk|1\n|-boost|p2b: Tyranitar|def|1\n|move|p2b: Tyranitar|Crunch|p1a: Farigiraf\n|-supereffective|p1a: Farigiraf|1\n|-damage|p1a: Farigiraf|0 fnt\n|faint|p1a: Farigiraf\n|\n|-weather|Sandstorm|[upkeep]\n|-damage|p2a: Sneasler|95/100|[from] Sandstorm\n|-damage|p1b: Torkoal|94/100|[from] Sandstorm\n|upkeep\n|\n|t:|1776680248\n|switch|p1a: Kingambit|Kingambit, L50, F|100/100\n|turn|2\n|\n|t:|1776680261\n|move|p1b: Torkoal|Protect||[still]\n|-fail|p1b: Torkoal\n|move|p2a: Sneasler|Close Combat|p1a: Kingambit\n|-supereffective|p1a: Kingambit|2\n|-damage|p1a: Kingambit|0 fnt\n|-unboost|p2a: Sneasler|def|1\n|-unboost|p2a: Sneasler|spd|1\n|faint|p1a: Kingambit\n|-enditem|p2a: Sneasler|White Herb\n|-clearnegativeboost|p2a: Sneasler|[silent]\n|move|p2b: Tyranitar|High Horsepower|p1b: Torkoal\n|-supereffective|p1b: Torkoal|1\n|-damage|p1b: Torkoal|0 fnt\n|faint|p1b: Torkoal\n|\n|-weather|Sandstorm|[upkeep]\n|-damage|p2a: Sneasler|89/100|[from] Sandstorm\n|upkeep\n|-message|daniperez19 forfeited.\n|\n|win|soulo333\n|raw|daniperez19's rating: 1196 &rarr; <strong>1176</strong><br />(-20 for losing)\n|raw|soulo333's rating: 1262 &rarr; <strong>1282</strong><br />(+20 for winning)\n",
+  "uploadtime": 1776680267,
+  "views": 13,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1176,
+  "private": 0,
+  "password": null
+}

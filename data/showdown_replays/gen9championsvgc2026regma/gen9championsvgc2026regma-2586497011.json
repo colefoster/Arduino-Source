@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586497011",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Ghostkller",
+    "Rockletz"
+  ],
+  "log": "|j|\u2606Ghostkller\n|j|\u2606Rockletz\n|t:|1776438740\n|gametype|doubles\n|player|p1|Ghostkller|265|1152\n|player|p2|Rockletz|hilda-wonderlauncher|1076\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Talonflame, L50, F|\n|poke|p1|Dragonite, L50, M|\n|poke|p1|Milotic, L50, F|\n|poke|p1|Sableye, L50, M|\n|poke|p1|Basculegion, L50, M|\n|poke|p2|Gengar, L50, M|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Politoed, L50, M|\n|poke|p2|Sableye, L50, M|\n|poke|p2|Kingambit, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Ghostkller)\n|inactive|Ghostkller has 60 seconds left.\n|inactive|Rockletz has 60 seconds left.\n|inactive|Ghostkller has 30 seconds left.\n|\n|t:|1776438811\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Milotic|Milotic, L50, F|100/100\n|switch|p1b: Basculegion|Basculegion, L50, M|100/100\n|switch|p2a: Gengar|Gengar, L50, M, shiny|100/100\n|switch|p2b: Politoed|Politoed, L50, M|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p2b: Politoed\n|turn|1\n|inactive|Ghostkller has 30 seconds left.\n|inactive|Ghostkller has 20 seconds left.\n|inactive|Rockletz has 30 seconds left.\n|inactive|Ghostkller has 15 seconds left.\n|inactive|Rockletz has 20 seconds left.\n|inactive|Rockletz has 15 seconds left.\n|inactive|Ghostkller has 10 seconds left.\n|inactive|Rockletz has 10 seconds left.\n|\n|t:|1776438869\n|switch|p1a: Sableye|Sableye, L50, M|100/100\n|detailschange|p2a: Gengar|Gengar-Mega, L50, M, shiny\n|-mega|p2a: Gengar|Gengar|Gengarite\n|move|p1b: Basculegion|Wave Crash|p2a: Gengar\n|-damage|p2a: Gengar|0 fnt\n|faint|p2a: Gengar\n|-damage|p1b: Basculegion|72/100|[from] Recoil\n|move|p2b: Politoed|Perish Song|p2b: Politoed\n|-start|p1a: Sableye|perish3|[silent]\n|-start|p1b: Basculegion|perish3|[silent]\n|-start|p2b: Politoed|perish3|[silent]\n|-fieldactivate|move: Perish Song\n|\n|-weather|RainDance|[upkeep]\n|-start|p1b: Basculegion|perish3\n|-start|p2b: Politoed|perish3\n|-start|p1a: Sableye|perish3\n|upkeep\n|-message|Rockletz forfeited.\n|\n|win|Ghostkller\n|raw|Ghostkller's rating: 1152 &rarr; <strong>1172</strong><br />(+20 for winning)\n|raw|Rockletz's rating: 1076 &rarr; <strong>1059</strong><br />(-17 for losing)\n|l|\u2606Rockletz\n|player|p2|\n",
+  "uploadtime": 1776438907,
+  "views": 21,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1059,
+  "private": 0,
+  "password": null
+}

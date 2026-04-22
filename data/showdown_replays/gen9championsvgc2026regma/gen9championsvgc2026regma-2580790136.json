@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2580790136",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "siriaco el sabroso",
+    "thunder in night"
+  ],
+  "log": "|j|\u2606siriaco el sabroso\n|j|\u2606thunder in night\n|t:|1775932678\n|gametype|doubles\n|player|p1|siriaco el sabroso|265|1067\n|player|p2|thunder in night|hilbert|1134\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Froslass, L50, F|\n|poke|p1|Weavile, L50, M|\n|poke|p1|Archaludon, L50, M|\n|poke|p1|Beartic, L50, M|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Zoroark-Hisui, L50, F|\n|poke|p2|Forretress, L50, F|\n|poke|p2|Araquanid, L50, M|\n|poke|p2|Charizard, L50, F|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Maushold-Four, L50|\n|poke|p2|Glimmora, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by thunder in night)\n|\n|t:|1775932697\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Froslass|Froslass, L50, F|100/100\n|switch|p1b: Archaludon|Archaludon, L50, M|100/100\n|switch|p2a: Sneasler|Sneasler, L50, F|100/100\n|switch|p2b: Araquanid|Araquanid, L50, M|100/100\n|turn|1\n|inactive|thunder in night has 30 seconds left.\n|\n|t:|1775932725\n|detailschange|p1a: Froslass|Froslass-Mega, L50, F\n|-mega|p1a: Froslass|Froslass|Froslassite\n|-weather|Snowscape|[from] ability: Snow Warning|[of] p1a: Froslass\n|move|p1a: Froslass|Aurora Veil|p1a: Froslass\n|-sidestart|p1: siriaco el sabroso|move: Aurora Veil\n|move|p1b: Archaludon|Nasty Plot|p1b: Archaludon\n|-boost|p1b: Archaludon|spa|2\n|move|p2a: Sneasler|Close Combat|p1b: Archaludon\n|-immune|p1b: Archaludon\n|move|p2b: Araquanid|Mirror Coat||[still]\n|-fail|p2b: Araquanid\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|turn|2\n|\n|t:|1775932748\n|move|p1a: Froslass|Blizzard|p2b: Araquanid|[spread] p2a,p2b\n|-resisted|p2b: Araquanid|1\n|-damage|p2a: Sneasler|43/100\n|-damage|p2b: Araquanid|86/100\n|-status|p2b: Araquanid|frz\n|move|p1b: Archaludon|Hyper Voice|p2b: Araquanid|[spread] p2a,p2b\n|-damage|p2a: Sneasler|0 fnt\n|-damage|p2b: Araquanid|35/100 frz\n|faint|p2a: Sneasler\n|cant|p2b: Araquanid|frz\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|\n|t:|1775932764\n|switch|p2a: Charizard|Charizard, L50, F|100/100\n|turn|3\n|\n|t:|1775932774\n|move|p1a: Froslass|Shadow Ball|p2a: Charizard\n|-damage|p2a: Charizard|46/100\n|move|p1b: Archaludon|Hyper Voice|p2a: Charizard|[spread] p2a,p2b\n|-damage|p2a: Charizard|0 fnt\n|-damage|p2b: Araquanid|0 fnt\n|faint|p2a: Charizard\n|faint|p2b: Araquanid\n|\n|-weather|Snowscape|[upkeep]\n|upkeep\n|-message|thunder in night forfeited.\n|\n|win|siriaco el sabroso\n|raw|siriaco el sabroso's rating: 1067 &rarr; <strong>1103</strong><br />(+36 for winning)\n|raw|thunder in night's rating: 1134 &rarr; <strong>1104</strong><br />(-30 for losing)\n|l|\u2606thunder in night\n|player|p2|\n",
+  "uploadtime": 1775932790,
+  "views": 12,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1103,
+  "private": 0,
+  "password": null
+}

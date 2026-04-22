@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582654698",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Jpxfrd55",
+    "HasanDiddyPiker"
+  ],
+  "log": "|j|\u2606Jpxfrd55\n|j|\u2606HasanDiddyPiker\n|t:|1776105232\n|gametype|doubles\n|player|p1|Jpxfrd55|iris-gen5bw2|1076\n|player|p2|HasanDiddyPiker|1|1127\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Drampa, L50, F|\n|poke|p1|Farigiraf, L50, M|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Scizor, L50, M|\n|poke|p1|Milotic, L50, M|\n|poke|p1|Incineroar, L50, M|\n|poke|p2|Weavile, L50, F|\n|poke|p2|Lucario, L50, F|\n|poke|p2|Gallade, L50, M|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Pelipper, L50, F|\n|poke|p2|Meganium, L50, M|\n|teampreview|4\n|\n|t:|1776105247\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: RAAAAAAAGHH|Drampa, L50, F|100/100\n|switch|p1b: Farigiraf|Farigiraf, L50, M|100/100\n|switch|p2a: Lucario|Lucario, L50, F|100/100\n|switch|p2b: Weavile|Weavile, L50, F|100/100\n|-ability|p2b: Weavile|Pressure\n|-ability|p1a: RAAAAAAAGHH|Cloud Nine\n|turn|1\n|\n|t:|1776105264\n|switch|p1b: Sinistcha|Sinistcha, L50|100/100\n|detailschange|p1a: RAAAAAAAGHH|Drampa-Mega, L50, F\n|-mega|p1a: RAAAAAAAGHH|Drampa|Drampanite\n|move|p1a: RAAAAAAAGHH|Protect|p1a: RAAAAAAAGHH\n|-singleturn|p1a: RAAAAAAAGHH|Protect\n|move|p2b: Weavile|Knock Off|p1b: Sinistcha\n|-supereffective|p1b: Sinistcha|1\n|-damage|p1b: Sinistcha|15/100\n|-enditem|p1b: Sinistcha|Occa Berry|[from] move: Knock Off|[of] p2b: Weavile\n|move|p2a: Lucario|Close Combat|p1b: Sinistcha\n|-immune|p1b: Sinistcha\n|\n|upkeep\n|turn|2\n|\n|t:|1776105288\n|switch|p1a: Incineroar|Incineroar, L50, M|100/100\n|-ability|p1a: Incineroar|Intimidate|boost\n|-fail|p2a: Lucario|unboost|Attack|[from] ability: Inner Focus|[of] p2a: Lucario\n|-unboost|p2b: Weavile|atk|1\n|move|p2b: Weavile|Knock Off|p1b: Sinistcha\n|-supereffective|p1b: Sinistcha|1\n|-damage|p1b: Sinistcha|0 fnt\n|faint|p1b: Sinistcha\n|move|p2a: Lucario|Close Combat|p1a: Incineroar\n|-supereffective|p1a: Incineroar|1\n|-damage|p1a: Incineroar|0 fnt\n|-unboost|p2a: Lucario|def|1\n|-unboost|p2a: Lucario|spd|1\n|faint|p1a: Incineroar\n|\n|upkeep\n|\n|t:|1776105293\n|switch|p1b: RAAAAAAAGHH|Drampa-Mega, L50, F|100/100\n|switch|p1a: Farigiraf|Farigiraf, L50, M|100/100\n|turn|3\n|c|\u2606HasanDiddyPiker|Gg\n|-message|Jpxfrd55 forfeited.\n|\n|win|HasanDiddyPiker\n|raw|Jpxfrd55's rating: 1076 &rarr; <strong>1058</strong><br />(-18 for losing)\n|raw|HasanDiddyPiker's rating: 1127 &rarr; <strong>1148</strong><br />(+21 for winning)\n|l|\u2606Jpxfrd55\n|player|p1|\n",
+  "uploadtime": 1776105303,
+  "views": 14,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1058,
+  "private": 0,
+  "password": null
+}

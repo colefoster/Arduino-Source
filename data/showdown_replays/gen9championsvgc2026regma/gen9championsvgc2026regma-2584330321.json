@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584330321",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "sbrot",
+    "smp on whimsicott"
+  ],
+  "log": "|j|\u2606sbrot\n|j|\u2606smp on whimsicott\n|t:|1776251939\n|gametype|doubles\n|player|p1|sbrot|265|1104\n|player|p2|smp on whimsicott|artist-gen4|1191\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Ceruledge, L50, F|\n|poke|p1|Meganium, L50, F|\n|poke|p1|Noivern, L50, F|\n|poke|p1|Toxicroak, L50, F|\n|poke|p1|Kleavor, L50, M|\n|poke|p1|Alakazam, L50, F|\n|poke|p2|Arcanine, L50, M|\n|poke|p2|Venusaur, L50, F|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Rotom-Wash, L50|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Corviknight, L50, F|\n|teampreview|4\n|\n|t:|1776251981\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Ceruledge|Ceruledge, L50, F|100/100\n|switch|p1b: Noivern|Noivern, L50, F, shiny|100/100\n|switch|p2a: Corviknight|Corviknight, L50, F|100/100\n|switch|p2b: Garchomp|Garchomp, L50, M|100/100\n|-item|p2a: Corviknight|Leftovers|[from] ability: Frisk|[of] p1b: Noivern\n|-item|p2b: Garchomp|White Herb|[from] ability: Frisk|[of] p1b: Noivern\n|turn|1\n|\n|t:|1776252000\n|move|p1b: Noivern|Tailwind|p1b: Noivern\n|-sidestart|p1: sbrot|move: Tailwind\n|move|p1a: Ceruledge|Swords Dance|p1a: Ceruledge\n|-boost|p1a: Ceruledge|atk|2\n|move|p2b: Garchomp|Earthquake|p1a: Ceruledge|[spread] p1a\n|-immune|p2a: Corviknight\n|-immune|p1b: Noivern\n|-supereffective|p1a: Ceruledge|1\n|-enditem|p1a: Ceruledge|Focus Sash\n|-damage|p1a: Ceruledge|1/100\n|-ability|p1a: Ceruledge|Weak Armor|boost\n|-unboost|p1a: Ceruledge|def|1\n|-boost|p1a: Ceruledge|spe|2\n|move|p2a: Corviknight|Bulk Up|p2a: Corviknight\n|-boost|p2a: Corviknight|atk|1\n|-boost|p2a: Corviknight|def|1\n|\n|upkeep\n|turn|2\n|\n|t:|1776252024\n|move|p1a: Ceruledge|Bitter Blade|p2a: Corviknight\n|-supereffective|p2a: Corviknight|1\n|-damage|p2a: Corviknight|0 fnt\n|-heal|p1a: Ceruledge|64/100|[from] drain|[of] p2a: Corviknight\n|faint|p2a: Corviknight\n|move|p1b: Noivern|Draco Meteor|p2b: Garchomp\n|-supereffective|p2b: Garchomp|1\n|-damage|p2b: Garchomp|0 fnt\n|-unboost|p1b: Noivern|spa|2\n|faint|p2b: Garchomp\n|\n|upkeep\n|\n|t:|1776252027\n|switch|p2b: Rotom|Rotom-Wash, L50|100/100\n|switch|p2a: Venusaur|Venusaur, L50, F|100/100\n|turn|3\n|-message|smp on whimsicott forfeited.\n|\n|win|sbrot\n|raw|sbrot's rating: 1104 &rarr; <strong>1135</strong><br />(+31 for winning)\n|raw|smp on whimsicott's rating: 1191 &rarr; <strong>1160</strong><br />(-31 for losing)\n",
+  "uploadtime": 1776252030,
+  "views": 26,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1135,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582292178",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "TheSandFromDune",
+    "colfox"
+  ],
+  "log": "|j|\u2606TheSandFromDune\n|j|\u2606colfox\n|t:|1776080459\n|gametype|doubles\n|player|p1|TheSandFromDune|roughneck|1000\n|player|p2|colfox|1|1057\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Starmie, L50|\n|poke|p1|Clefable, L50, M|\n|poke|p1|Tyranitar, L50, F|\n|poke|p1|Corviknight, L50, M|\n|poke|p1|Dragapult, L50, F|\n|poke|p2|Ninetales, L50, M|\n|poke|p2|Dragonite, L50, M|\n|poke|p2|Sylveon, L50, F|\n|poke|p2|Milotic, L50, M|\n|poke|p2|Delphox, L50, F|\n|poke|p2|Garchomp, L50, F|\n|teampreview|4\n|\n|t:|1776080514\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Starmie|Starmie, L50|100/100\n|switch|p1b: Tyranitar|Tyranitar, L50, F|100/100\n|switch|p2a: Milotic|Milotic, L50, M|100/100\n|switch|p2b: Dragonite|Dragonite, L50, M|100/100\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p1b: Tyranitar\n|turn|1\n|\n|t:|1776080548\n|switch|p1b: Incineroar|Incineroar, L50, F|100/100\n|-ability|p1b: Incineroar|Intimidate|boost\n|-unboost|p2a: Milotic|atk|1\n|-ability|p2a: Milotic|Competitive|boost\n|-boost|p2a: Milotic|spa|2\n|-fail|p2b: Dragonite|unboost|Attack|[from] ability: Inner Focus|[of] p2b: Dragonite\n|detailschange|p1a: Starmie|Starmie-Mega, L50\n|-mega|p1a: Starmie|Starmie|Starminite\n|move|p1a: Starmie|Skill Swap|p1b: Incineroar\n|-activate|p1a: Starmie|Skill Swap|||[of] p1b: Incineroar\n|-ability|p1a: Starmie|Intimidate|boost\n|-unboost|p2a: Milotic|atk|1\n|-ability|p2a: Milotic|Competitive|boost\n|-boost|p2a: Milotic|spa|2\n|-fail|p2b: Dragonite|unboost|Attack|[from] ability: Inner Focus|[of] p2b: Dragonite\n|move|p2b: Dragonite|Tailwind|p2b: Dragonite\n|-sidestart|p2: colfox|move: Tailwind\n|move|p2a: Milotic|Scald|p1b: Incineroar\n|-supereffective|p1b: Incineroar|1\n|-damage|p1b: Incineroar|0 fnt\n|faint|p1b: Incineroar\n|\n|-weather|Sandstorm|[upkeep]\n|-damage|p2b: Dragonite|95/100|[from] Sandstorm\n|-damage|p2a: Milotic|95/100|[from] Sandstorm\n|-damage|p1a: Starmie|95/100|[from] Sandstorm\n|-heal|p2a: Milotic|100/100|[from] item: Leftovers\n|upkeep\n|-message|TheSandFromDune forfeited.\n|\n|win|colfox\n|raw|TheSandFromDune's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|raw|colfox's rating: 1057 &rarr; <strong>1083</strong><br />(+26 for winning)\n|l|\u2606TheSandFromDune\n|player|p1|\n",
+  "uploadtime": 1776080579,
+  "views": 38,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

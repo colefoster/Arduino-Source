@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2581295059",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "sonic1",
+    "pokebizness"
+  ],
+  "log": "|j|\u2606sonic1\n|j|\u2606pokebizness\n|t:|1775982699\n|gametype|doubles\n|player|p1|sonic1|169|1293\n|player|p2|pokebizness|firebreather|1254\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Whimsicott, L50, M|\n|poke|p1|Charizard, L50, M|\n|poke|p1|Sneasler, L50, F|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Kingambit, L50, M|\n|poke|p1|Farigiraf, L50, F|\n|poke|p2|Glimmora, L50, M|\n|poke|p2|Whimsicott, L50, M|\n|poke|p2|Volcarona, L50, F|\n|poke|p2|Tyranitar, L50, F|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Sylveon, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by pokebizness)\n|inactive|sonic1 also wants the timer to be on.\n|j| gE1xjZRtuhW2DdT0AK\n|inactive|sonic1 has 60 seconds left.\n|\n|t:|1775982734\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Garchomp|Garchomp, L50, F|100/100\n|switch|p1b: Sneasler|Sneasler, L50, F|100/100\n|switch|p2a: Whimsicott|Whimsicott, L50, M|100/100\n|switch|p2b: Glimmora|Glimmora, L50, M|100/100\n|turn|1\n|\n|t:|1775982757\n|switch|p2a: Basculegion|Basculegion, L50, M, shiny|100/100\n|switch|p2b: Sylveon|Sylveon, L50, M, shiny|100/100\n|move|p1a: Garchomp|Stomping Tantrum|p2b: Sylveon\n|-damage|p2b: Sylveon|45/100\n|move|p1b: Sneasler|Dire Claw|p2a: Basculegion\n|-resisted|p2a: Basculegion|1\n|-damage|p2a: Basculegion|70/100\n|\n|upkeep\n|turn|2\n|\n|t:|1775982780\n|move|p2b: Sylveon|Protect|p2b: Sylveon\n|-singleturn|p2b: Sylveon|Protect\n|move|p1a: Garchomp|Stomping Tantrum|p2b: Sylveon\n|-activate|p2b: Sylveon|move: Protect\n|move|p2a: Basculegion|Flip Turn|p1b: Sneasler\n|-damage|p1b: Sneasler|39/100\n|\n|t:|1775982783\n|switch|p2a: Whimsicott|Whimsicott, L50, M|100/100|[from] Flip Turn\n|move|p1b: Sneasler|Dire Claw|p2b: Sylveon\n|-activate|p2b: Sylveon|move: Protect\n|\n|upkeep\n|turn|3\n|\n|t:|1775982793\n|move|p2a: Whimsicott|Tailwind|p2a: Whimsicott\n|-sidestart|p2: pokebizness|move: Tailwind\n|move|p1a: Garchomp|Stomping Tantrum|p2b: Sylveon\n|-crit|p2b: Sylveon\n|-damage|p2b: Sylveon|0 fnt\n|faint|p2b: Sylveon\n|move|p1b: Sneasler|Dire Claw|p2a: Whimsicott\n|-supereffective|p2a: Whimsicott|2\n|-enditem|p2a: Whimsicott|Focus Sash\n|-damage|p2a: Whimsicott|1/100\n|-status|p2a: Whimsicott|slp\n|\n|upkeep\n|-message|pokebizness forfeited.\n|\n|win|sonic1\n|raw|sonic1's rating: 1293 &rarr; <strong>1315</strong><br />(+22 for winning)\n|raw|pokebizness's rating: 1254 &rarr; <strong>1232</strong><br />(-22 for losing)\n|l|\u2606pokebizness\n|player|p2|\n|l|\u2606sonic1\n|player|p1|\n",
+  "uploadtime": 1775982866,
+  "views": 47,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1232,
+  "private": 0,
+  "password": null
+}

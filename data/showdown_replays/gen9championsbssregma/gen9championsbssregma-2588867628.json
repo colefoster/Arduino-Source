@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2588867628",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "karbain",
+    "Oshawottpoke"
+  ],
+  "log": "|j|\u2606karbain\n|j|\u2606Oshawottpoke\n|t:|1776680416\n|gametype|singles\n|player|p1|karbain|2|1350\n|player|p2|Oshawottpoke|169|1342\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Mimikyu, L50, F|\n|poke|p1|Empoleon, L50, M|\n|poke|p1|Charizard, L50, F|\n|poke|p1|Greninja, L50, F|\n|poke|p1|Mudsdale, L50, F|\n|poke|p1|Lucario, L50, M|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Corviknight, L50, F|\n|poke|p2|Skeledirge, L50, M|\n|poke|p2|Venusaur, L50, F|\n|poke|p2|Kingambit, L50, M|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Oshawottpoke)\n|\n|t:|1776680497\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Lucario|Lucario, L50, M|100/100\n|switch|p2a: Garchomp|Garchomp, L50, M|100/100\n|turn|1\n|\n|t:|1776680514\n|switch|p1a: Mudsdale|Mudsdale, L50, F|100/100\n|move|p2a: Garchomp|Earthquake|p1a: Mudsdale\n|-damage|p1a: Mudsdale|67/100\n|-ability|p1a: Mudsdale|Stamina|boost\n|-boost|p1a: Mudsdale|def|1\n|\n|-heal|p1a: Mudsdale|72/100|[from] item: Leftovers\n|upkeep\n|turn|2\n|\n|t:|1776680523\n|switch|p2a: Floette|Floette-Eternal, L50, F|100/100\n|move|p1a: Mudsdale|Stealth Rock|p2a: Floette\n|-sidestart|p2: Oshawottpoke|move: Stealth Rock\n|\n|-heal|p1a: Mudsdale|78/100|[from] item: Leftovers\n|upkeep\n|turn|3\n|\n|t:|1776680535\n|switch|p1a: Lucario|Lucario, L50, M|100/100\n|detailschange|p2a: Floette|Floette-Mega, L50, F\n|-mega|p2a: Floette|Floette|Floettite\n|-ability|p2a: Floette|Fairy Aura\n|move|p2a: Floette|Moonblast|p1a: Lucario\n|-damage|p1a: Lucario|0 fnt\n|faint|p1a: Lucario\n|\n|upkeep\n|\n|t:|1776680545\n|switch|p1a: Mudsdale|Mudsdale, L50, F|78/100\n|turn|4\n|\n|t:|1776680548\n|move|p2a: Floette|Moonblast|p1a: Mudsdale\n|-damage|p1a: Mudsdale|6/100\n|-unboost|p1a: Mudsdale|spa|1\n|-ability|p1a: Mudsdale|Stamina|boost\n|-boost|p1a: Mudsdale|def|1\n|move|p1a: Mudsdale|Earthquake|p2a: Floette\n|-damage|p2a: Floette|57/100\n|\n|-heal|p1a: Mudsdale|12/100|[from] item: Leftovers\n|upkeep\n|turn|5\n|-message|karbain forfeited.\n|\n|win|Oshawottpoke\n|raw|karbain's rating: 1350 &rarr; <strong>1330</strong><br />(-20 for losing)\n|raw|Oshawottpoke's rating: 1342 &rarr; <strong>1362</strong><br />(+20 for winning)\n|l|\u2606karbain\n|player|p1|\n|l|\u2606Oshawottpoke\n|player|p2|\n",
+  "uploadtime": 1776680568,
+  "views": 1,
+  "formatid": "gen9championsbssregma",
+  "rating": 1330,
+  "private": 0,
+  "password": null
+}

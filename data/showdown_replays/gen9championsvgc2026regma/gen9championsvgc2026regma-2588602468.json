@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2588602468",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "CBKreme",
+    "LordLumpi"
+  ],
+  "log": "|j|\u2606CBKreme\n|j|\u2606LordLumpi\n|t:|1776649126\n|gametype|doubles\n|player|p1|CBKreme|interviewers|1001\n|player|p2|LordLumpi|1|1000\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Gardevoir, L50, F, shiny|\n|poke|p1|Ninetales-Alola, L50, F|\n|poke|p1|Froslass, L50, F, shiny|\n|poke|p1|Hatterene, L50, F|\n|poke|p1|Flapple, L50, M, shiny|\n|poke|p1|Sableye, L50, M, shiny|\n|poke|p2|Starmie, L50, shiny|\n|poke|p2|Medicham, L50, M|\n|poke|p2|Garchomp, L50, F|\n|poke|p2|Rotom-Wash, L50|\n|poke|p2|Snorlax, L50, F|\n|poke|p2|Gengar, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by CBKreme)\n|inactive|CBKreme has 60 seconds left.\n|\n|t:|1776649173\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Sableye|Sableye, L50, M, shiny|100/100\n|switch|p1b: Hatterene|Hatterene, L50, F|100/100\n|switch|p2a: Medicham|Medicham, L50, M|100/100\n|switch|p2b: Snorlax|Snorlax, L50, F|100/100\n|turn|1\n|\n|t:|1776649192\n|switch|p2a: Gengar|Gengar, L50, M|100/100\n|move|p1a: Sableye|Reflect|p1a: Sableye\n|-sidestart|p1: CBKreme|Reflect\n|move|p2b: Snorlax|Self-Destruct|p1a: Sableye|[spread] p1b\n|-immune|p2a: Gengar\n|-immune|p1a: Sableye\n|-damage|p1b: Hatterene|61/100\n|faint|p2b: Snorlax\n|move|p1b: Hatterene|Trick Room|p1b: Hatterene\n|-fieldstart|move: Trick Room|[of] p1b: Hatterene\n|\n|upkeep\n|-message|LordLumpi forfeited.\n|\n|win|CBKreme\n|raw|CBKreme's rating: 1001 &rarr; <strong>1041</strong><br />(+40 for winning)\n|raw|LordLumpi's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|l|\u2606LordLumpi\n|player|p2|\n",
+  "uploadtime": 1776649224,
+  "views": 6,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

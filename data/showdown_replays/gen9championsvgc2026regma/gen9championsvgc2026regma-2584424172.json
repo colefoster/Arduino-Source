@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584424172",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "TundaBunda",
+    "blackred123"
+  ],
+  "log": "|j|\u2606TundaBunda\n|j|\u2606blackred123\n|t:|1776259892\n|gametype|doubles\n|player|p1|TundaBunda|pokemonbreeder-gen4|1120\n|player|p2|blackred123|iono-masters|1179\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Empoleon, L50, F|\n|poke|p1|Talonflame, L50, M|\n|poke|p1|Rotom-Wash, L50|\n|poke|p1|Golurk, L50|\n|poke|p1|Meowscarada, L50, F|\n|poke|p1|Sneasler, L50, F|\n|poke|p2|Tyranitar, L50, F|\n|poke|p2|Kingambit, L50, M|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Excadrill, L50, F|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Rotom-Wash, L50|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by blackred123)\n|inactive|TundaBunda has 60 seconds left.\n|inactive|blackred123 has 60 seconds left.\n|\n|t:|1776259931\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Sneasler|Sneasler, L50, F|100/100\n|switch|p1b: Rotom|Rotom-Wash, L50, shiny|100/100\n|switch|p2a: \u57fa\u57fa\u62c9\u65af|Tyranitar, L50, F|100/100\n|switch|p2b: \u6309\u6469\u7a74\uff08\u4f4d\uff09\u8d85\u723d|Excadrill, L50, F|100/100\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p2a: \u57fa\u57fa\u62c9\u65af\n|turn|1\n|\n|t:|1776259958\n|detailschange|p2a: \u57fa\u57fa\u62c9\u65af|Tyranitar-Mega, L50, F\n|-mega|p2a: \u57fa\u57fa\u62c9\u65af|Tyranitar|Tyranitarite\n|move|p2b: \u6309\u6469\u7a74\uff08\u4f4d\uff09\u8d85\u723d|Protect|p2b: \u6309\u6469\u7a74\uff08\u4f4d\uff09\u8d85\u723d\n|-singleturn|p2b: \u6309\u6469\u7a74\uff08\u4f4d\uff09\u8d85\u723d|Protect\n|move|p1a: Sneasler|Fake Out|p2b: \u6309\u6469\u7a74\uff08\u4f4d\uff09\u8d85\u723d\n|-activate|p2b: \u6309\u6469\u7a74\uff08\u4f4d\uff09\u8d85\u723d|move: Protect\n|move|p1b: Rotom|Hydro Pump|p2b: \u6309\u6469\u7a74\uff08\u4f4d\uff09\u8d85\u723d\n|-activate|p2b: \u6309\u6469\u7a74\uff08\u4f4d\uff09\u8d85\u723d|move: Protect\n|move|p2a: \u57fa\u57fa\u62c9\u65af|Rock Slide|p1b: Rotom|[spread] p1a,p1b\n|-resisted|p1a: Sneasler|1\n|-damage|p1a: Sneasler|65/100\n|-damage|p1b: Rotom|57/100\n|\n|-weather|Sandstorm|[upkeep]\n|-damage|p1b: Rotom|52/100|[from] Sandstorm\n|-damage|p1a: Sneasler|60/100|[from] Sandstorm\n|upkeep\n|turn|2\n|-message|TundaBunda forfeited.\n|\n|win|blackred123\n|raw|TundaBunda's rating: 1120 &rarr; <strong>1099</strong><br />(-21 for losing)\n|raw|blackred123's rating: 1179 &rarr; <strong>1200</strong><br />(+21 for winning)\n|l|\u2606TundaBunda\n|player|p1|\n",
+  "uploadtime": 1776259980,
+  "views": 17,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1099,
+  "private": 0,
+  "password": null
+}

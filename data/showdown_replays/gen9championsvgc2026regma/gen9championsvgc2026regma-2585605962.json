@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2585605962",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "elcoon",
+    "YoYutta"
+  ],
+  "log": "|j|\u2606elcoon\n|j|\u2606YoYutta\n|t:|1776358453\n|gametype|doubles\n|player|p1|elcoon|cynthia|1321\n|player|p2|YoYutta|preschooler|1246\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Pelipper, L50, F|\n|poke|p1|Archaludon, L50, M|\n|poke|p1|Dragonite, L50, F|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Kingambit, L50, F|\n|poke|p1|Primarina, L50, M|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Orthworm, L50, M|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Whimsicott, L50, M|\n|poke|p2|Rotom-Heat, L50|\n|poke|p2|Tauros-Paldea-Aqua, L50, M|\n|teampreview|4\n|\n|t:|1776358493\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Pelipper|Pelipper, L50, F|100/100\n|switch|p1b: Primarina|Primarina, L50, M, shiny|100/100\n|switch|p2a: Orthworm|Orthworm, L50, M|100/100\n|switch|p2b: Whimsicott|Whimsicott, L50, M|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p1a: Pelipper\n|turn|1\n|\n|t:|1776358506\n|move|p1b: Primarina|Protect|p1b: Primarina\n|-singleturn|p1b: Primarina|Protect\n|move|p2b: Whimsicott|Tailwind|p2b: Whimsicott\n|-sidestart|p2: YoYutta|move: Tailwind\n|move|p2a: Orthworm|Shed Tail|p2a: Orthworm\n|-start|p2a: Orthworm|Substitute|[from] move: Shed Tail\n|-damage|p2a: Orthworm|50/100\n|-enditem|p2a: Orthworm|Sitrus Berry|[eat]\n|-heal|p2a: Orthworm|75/100|[from] item: Sitrus Berry\n|\n|t:|1776358516\n|switch|p2a: Floette|Floette-Eternal, L50, F|100/100|[from] Shed Tail\n|move|p1a: Pelipper|Tailwind|p1a: Pelipper\n|-sidestart|p1: elcoon|move: Tailwind\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|turn|2\n|\n|t:|1776358527\n|detailschange|p2a: Floette|Floette-Mega, L50, F\n|-mega|p2a: Floette|Floette|Floettite\n|-ability|p2a: Floette|Fairy Aura\n|move|p1a: Pelipper|Helping Hand|p1b: Primarina\n|-singleturn|p1b: Primarina|Helping Hand|[of] p1a: Pelipper\n|move|p2b: Whimsicott|Encore|p1b: Primarina\n|-start|p1b: Primarina|Encore\n|move|p1b: Primarina|Protect||[still]\n|-fail|p1b: Primarina\n|move|p2a: Floette|Calm Mind|p2a: Floette\n|-boost|p2a: Floette|spa|1\n|-boost|p2a: Floette|spd|1\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|turn|3\n|-message|elcoon forfeited.\n|\n|win|YoYutta\n|raw|elcoon's rating: 1321 &rarr; <strong>1297</strong><br />(-24 for losing)\n|raw|YoYutta's rating: 1246 &rarr; <strong>1276</strong><br />(+30 for winning)\n|l|\u2606elcoon\n|player|p1|\n",
+  "uploadtime": 1776358540,
+  "views": 48,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1276,
+  "private": 0,
+  "password": null
+}

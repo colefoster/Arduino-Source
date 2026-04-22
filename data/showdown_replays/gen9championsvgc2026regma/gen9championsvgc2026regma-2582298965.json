@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582298965",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "101doge101",
+    "magolor06"
+  ],
+  "log": "|j|\u2606101doge101\n|j|\u2606magolor06\n|t:|1776081093\n|gametype|doubles\n|player|p1|101doge101|unknown|1206\n|player|p2|magolor06|170|1228\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Hatterene, L50, F|\n|poke|p1|Maushold-Four, L50|\n|poke|p1|Slowbro, L50, F|\n|poke|p1|Tsareena, L50, F|\n|poke|p1|Kingambit, L50, M|\n|poke|p1|Araquanid, L50, M|\n|poke|p2|Dragonite, L50, M|\n|poke|p2|Meganium, L50, F|\n|poke|p2|Pelipper, L50, F|\n|poke|p2|Archaludon, L50, F|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Klefki, L50, F|\n|teampreview|4\n|\n|t:|1776081135\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Hatterene|Hatterene, L50, F|100/100\n|switch|p1b: Maushold|Maushold-Four, L50|100/100\n|switch|p2a: Pelipper|Pelipper, L50, F|100/100\n|switch|p2b: Archaludon|Archaludon, L50, F|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p2a: Pelipper\n|turn|1\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by 101doge101)\n|\n|t:|1776081155\n|move|p2a: Pelipper|Helping Hand|p2b: Archaludon\n|-singleturn|p2b: Archaludon|Helping Hand|[of] p2a: Pelipper\n|move|p1b: Maushold|Follow Me|p1b: Maushold\n|-singleturn|p1b: Maushold|move: Follow Me\n|move|p2b: Archaludon|Flash Cannon|p1a: Hatterene\n|-supereffective|p1a: Hatterene|1\n|-damage|p1a: Hatterene|0 fnt\n|faint|p1a: Hatterene\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|\n|t:|1776081179\n|switch|p1a: Slowbro|Slowbro, L50, F|100/100\n|turn|2\n|\n|t:|1776081192\n|detailschange|p1a: Slowbro|Slowbro-Mega, L50, F\n|-mega|p1a: Slowbro|Slowbro|Slowbronite\n|move|p1b: Maushold|Helping Hand|p1a: Slowbro\n|-singleturn|p1a: Slowbro|Helping Hand|[of] p1b: Maushold\n|move|p2a: Pelipper|Helping Hand|p2b: Archaludon\n|-singleturn|p2b: Archaludon|Helping Hand|[of] p2a: Pelipper\n|move|p2b: Archaludon|Electro Shot||[still]\n|-prepare|p2b: Archaludon|Electro Shot\n|-boost|p2b: Archaludon|spa|1\n|-anim|p2b: Archaludon|Electro Shot|p1a: Slowbro\n|-supereffective|p1a: Slowbro|1\n|-damage|p1a: Slowbro|0 fnt\n|faint|p1a: Slowbro\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|-message|101doge101 forfeited.\n|\n|win|magolor06\n|raw|101doge101's rating: 1206 &rarr; <strong>1183</strong><br />(-23 for losing)\n|raw|magolor06's rating: 1228 &rarr; <strong>1251</strong><br />(+23 for winning)\n|l|\u2606101doge101\n|player|p1|\n",
+  "uploadtime": 1776081228,
+  "views": 22,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1183,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2589455901",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "ShuckleYeager",
+    "michaelgscott"
+  ],
+  "log": "|j|\u2606ShuckleYeager\n|j|\u2606michaelgscott\n|t:|1776724526\n|gametype|doubles\n|player|p1|ShuckleYeager|2|1173\n|player|p2|michaelgscott|veteran|1194\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Skarmory, L50, F|\n|poke|p1|Maushold-Four, L50|\n|poke|p1|Dragonite, L50, F|\n|poke|p1|Gengar, L50, M|\n|poke|p1|Decidueye-Hisui, L50, F|\n|poke|p1|Empoleon, L50, F|\n|poke|p2|Charizard, L50, M|\n|poke|p2|Venusaur, L50, M|\n|poke|p2|Pelipper, L50, M|\n|poke|p2|Jolteon, L50, M|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Scizor, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by ShuckleYeager)\n|\n|t:|1776724552\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Dragonite|Dragonite, L50, F|100/100\n|switch|p1b: Maushold|Maushold-Four, L50|100/100\n|switch|p2a: Charizard|Charizard, L50, M|100/100\n|switch|p2b: Venusaur|Venusaur, L50, M|100/100\n|turn|1\n|\n|t:|1776724575\n|detailschange|p1a: Dragonite|Dragonite-Mega, L50, F\n|-mega|p1a: Dragonite|Dragonite|Dragoninite\n|detailschange|p2a: Charizard|Charizard-Mega-Y, L50, M\n|-mega|p2a: Charizard|Charizard|Charizardite Y\n|-weather|SunnyDay|[from] ability: Drought|[of] p2a: Charizard\n|move|p1b: Maushold|Follow Me|p1b: Maushold\n|-singleturn|p1b: Maushold|move: Follow Me\n|move|p2b: Venusaur|Sleep Powder|p1b: Maushold\n|-status|p1b: Maushold|slp|[from] move: Sleep Powder\n|move|p1a: Dragonite|Ice Beam|p2b: Venusaur\n|-supereffective|p2b: Venusaur|1\n|-damage|p2b: Venusaur|28/100\n|move|p2a: Charizard|Heat Wave|p1b: Maushold|[spread] p1a,p1b\n|-resisted|p1a: Dragonite|1\n|-damage|p1a: Dragonite|88/100\n|-enditem|p1b: Maushold|Focus Sash\n|-damage|p1b: Maushold|1/100 slp\n|-status|p1a: Dragonite|brn\n|\n|-weather|SunnyDay|[upkeep]\n|-damage|p1a: Dragonite|82/100 brn|[from] brn\n|upkeep\n|turn|2\n|c|\u2606ShuckleYeager|bruh\n|-message|ShuckleYeager forfeited.\n|\n|win|michaelgscott\n|raw|ShuckleYeager's rating: 1173 &rarr; <strong>1150</strong><br />(-23 for losing)\n|raw|michaelgscott's rating: 1194 &rarr; <strong>1217</strong><br />(+23 for winning)\n|l|\u2606ShuckleYeager\n|player|p1|\n|c|\u2606michaelgscott|LOL i love your name\n",
+  "uploadtime": 1776725255,
+  "views": 17,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1150,
+  "private": 0,
+  "password": null
+}

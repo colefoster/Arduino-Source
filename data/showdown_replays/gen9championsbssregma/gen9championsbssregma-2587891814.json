@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2587891814",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "meteor1101",
+    "Freddddddddy"
+  ],
+  "log": "|j|\u2606meteor1101\n|j|\u2606Freddddddddy\n|t:|1776575380\n|gametype|singles\n|player|p1|meteor1101|acetrainerf|1119\n|player|p2|Freddddddddy|101|1000\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Banette, L50, F|\n|poke|p1|Primarina, L50, M|\n|poke|p1|Meowscarada, L50, F|\n|poke|p1|Aegislash, L50, F|\n|poke|p1|Dragonite, L50, M|\n|poke|p1|Volcarona, L50, F|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Primarina, L50, F|\n|poke|p2|Charizard, L50, F|\n|poke|p2|Victreebel, L50, M|\n|poke|p2|Glimmora, L50, F|\n|poke|p2|Lopunny, L50, F|\n|teampreview|3\n|\n|t:|1776575408\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Meowscarada|Meowscarada, L50, F|100/100\n|switch|p2a: Primarina|Primarina, L50, F|100/100\n|turn|1\n|\n|t:|1776575421\n|move|p1a: Meowscarada|Flower Trick|p2a: Primarina\n|-start|p1a: Meowscarada|typechange|Grass|[from] ability: Protean\n|-supereffective|p2a: Primarina|1\n|-crit|p2a: Primarina\n|-damage|p2a: Primarina|0 fnt\n|faint|p2a: Primarina\n|\n|upkeep\n|\n|t:|1776575430\n|switch|p2a: Lopunny|Lopunny, L50, F|100/100\n|turn|2\n|\n|t:|1776575435\n|switch|p1a: Volcarona|Volcarona, L50, F|100/100\n|detailschange|p2a: Lopunny|Lopunny-Mega, L50, F\n|-mega|p2a: Lopunny|Lopunny|Lopunnite\n|move|p2a: Lopunny|Close Combat|p1a: Volcarona\n|-resisted|p1a: Volcarona|1\n|-damage|p1a: Volcarona|72/100\n|-unboost|p2a: Lopunny|def|1\n|-unboost|p2a: Lopunny|spd|1\n|-status|p2a: Lopunny|brn|[from] ability: Flame Body|[of] p1a: Volcarona\n|\n|-damage|p2a: Lopunny|95/100 brn|[from] brn\n|upkeep\n|turn|3\n|\n|t:|1776575459\n|switch|p2a: Basculegion|Basculegion, L50, M|100/100\n|move|p1a: Volcarona|Quiver Dance|p1a: Volcarona\n|-boost|p1a: Volcarona|spa|1\n|-boost|p1a: Volcarona|spd|1\n|-boost|p1a: Volcarona|spe|1\n|\n|upkeep\n|turn|4\n|\n|t:|1776575468\n|move|p1a: Volcarona|Giga Drain|p2a: Basculegion\n|-supereffective|p2a: Basculegion|1\n|-damage|p2a: Basculegion|16/100\n|-heal|p1a: Volcarona|100/100|[from] drain|[of] p2a: Basculegion\n|move|p2a: Basculegion|Wave Crash|p1a: Volcarona\n|-supereffective|p1a: Volcarona|1\n|-damage|p1a: Volcarona|0 fnt\n|faint|p1a: Volcarona\n|-damage|p2a: Basculegion|0 fnt|[from] Recoil\n|faint|p2a: Basculegion\n|\n|upkeep\n|\n|t:|1776575480\n|switch|p2a: Lopunny|Lopunny-Mega, L50, F|95/100 brn\n|switch|p1a: Dragonite|Dragonite, L50, M|100/100\n|turn|5\n|\n|t:|1776575488\n|move|p2a: Lopunny|Fake Out|p1a: Dragonite\n|-damage|p1a: Dragonite|89/100\n|move|p1a: Dragonite|Air Slash|p2a: Lopunny\n|-supereffective|p2a: Lopunny|1\n|-damage|p2a: Lopunny|0 fnt\n|faint|p2a: Lopunny\n|\n|win|meteor1101\n|raw|meteor1101's rating: 1119 &rarr; <strong>1136</strong><br />(+17 for winning)\n|raw|Freddddddddy's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n",
+  "uploadtime": 1776575493,
+  "views": 5,
+  "formatid": "gen9championsbssregma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

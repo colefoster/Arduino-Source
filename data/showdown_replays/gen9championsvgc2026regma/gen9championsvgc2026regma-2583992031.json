@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2583992031",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "zukanthropic",
+    "NoxxinVGC"
+  ],
+  "log": "|j|\u2606zukanthropic\n|j|\u2606NoxxinVGC\n|t:|1776214840\n|gametype|doubles\n|player|p1|zukanthropic|unknown|1104\n|player|p2|NoxxinVGC|giovanni|1201\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Farigiraf, L50, F|\n|poke|p1|Golurk, L50|\n|poke|p1|Sneasler, L50, F|\n|poke|p1|Torkoal, L50, F|\n|poke|p1|Venusaur, L50, F|\n|poke|p2|Delphox, L50, F|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Clefable, L50, F|\n|poke|p2|Kingambit, L50, F|\n|poke|p2|Dragonite, L50, M|\n|poke|p2|Sneasler, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by NoxxinVGC)\n|inactive|zukanthropic also wants the timer to be on.\n|inactive|NoxxinVGC has 60 seconds left.\n|\n|t:|1776214876\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Farigiraf|Farigiraf, L50, F|100/100\n|switch|p1b: Golurk|Golurk, L50|100/100\n|switch|p2a: Delphox|Delphox, L50, F, shiny|100/100\n|switch|p2b: Basculegion|Basculegion, L50, M|100/100\n|turn|1\n|inactive|NoxxinVGC has 30 seconds left.\n|\n|t:|1776214910\n|detailschange|p2a: Delphox|Delphox-Mega, L50, F, shiny\n|-mega|p2a: Delphox|Delphox|Delphoxite\n|detailschange|p1b: Golurk|Golurk-Mega, L50\n|-mega|p1b: Golurk|Golurk|Golurkite\n|move|p1b: Golurk|Protect|p1b: Golurk\n|-singleturn|p1b: Golurk|Protect\n|move|p2a: Delphox|Heat Wave|p1b: Golurk|[spread] p1a\n|-activate|p1b: Golurk|move: Protect\n|-damage|p1a: Farigiraf|62/100\n|-status|p1a: Farigiraf|brn\n|move|p2b: Basculegion|Wave Crash|p1a: Farigiraf\n|-damage|p1a: Farigiraf|0 fnt\n|faint|p1a: Farigiraf\n|-damage|p2b: Basculegion|80/100|[from] Recoil\n|\n|upkeep\n|\n|t:|1776214926\n|switch|p1a: Sneasler|Sneasler, L50, F|100/100\n|turn|2\n|\n|t:|1776214935\n|move|p2a: Delphox|Protect|p2a: Delphox\n|-singleturn|p2a: Delphox|Protect\n|move|p1a: Sneasler|Fake Out|p2a: Delphox\n|-activate|p2a: Delphox|move: Protect\n|move|p2b: Basculegion|Wave Crash|p1b: Golurk\n|-supereffective|p1b: Golurk|1\n|-damage|p1b: Golurk|0 fnt\n|faint|p1b: Golurk\n|-damage|p2b: Basculegion|47/100|[from] Recoil\n|\n|upkeep\n|-message|zukanthropic forfeited.\n|\n|win|NoxxinVGC\n|raw|zukanthropic's rating: 1104 &rarr; <strong>1086</strong><br />(-18 for losing)\n|raw|NoxxinVGC's rating: 1201 &rarr; <strong>1219</strong><br />(+18 for winning)\n",
+  "uploadtime": 1776214942,
+  "views": 14,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1086,
+  "private": 0,
+  "password": null
+}

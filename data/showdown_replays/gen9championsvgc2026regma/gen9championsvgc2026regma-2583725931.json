@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2583725931",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "ScribbleScribble",
+    "bobthemango141"
+  ],
+  "log": "|j|\u2606ScribbleScribble\n|j|\u2606bobthemango141\n|t:|1776193496\n|gametype|doubles\n|player|p1|ScribbleScribble|mina-lgpe|1445\n|player|p2|bobthemango141|barry|1373\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Aerodactyl, L50, M|\n|poke|p1|Kingambit, L50, M|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Delphox, L50, M|\n|poke|p2|Vaporeon, L50, F|\n|poke|p2|Jolteon, L50, M|\n|poke|p2|Flareon, L50, M|\n|poke|p2|Espeon, L50, M|\n|poke|p2|Umbreon, L50, F|\n|poke|p2|Sylveon, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by ScribbleScribble)\n|\n|t:|1776193512\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Floette|Floette-Eternal, L50, F|100/100\n|switch|p1b: Aerodactyl|Aerodactyl, L50, M|100/100\n|switch|p2a: Espeon|Espeon, L50, M|100/100\n|switch|p2b: Sylveon|Sylveon, L50, M|100/100\n|-ability|p1b: Aerodactyl|Unnerve\n|turn|1\n|\n|t:|1776193518\n|detailschange|p1a: Floette|Floette-Mega, L50, F\n|-mega|p1a: Floette|Floette|Floettite\n|-ability|p1a: Floette|Fairy Aura\n|move|p1b: Aerodactyl|Tailwind|p1b: Aerodactyl\n|-sidestart|p1: ScribbleScribble|move: Tailwind\n|move|p1a: Floette|Calm Mind|p1a: Floette\n|-boost|p1a: Floette|spa|1\n|-boost|p1a: Floette|spd|1\n|move|p2b: Sylveon|Hyper Voice|p1b: Aerodactyl|[spread] p1a,p1b\n|-damage|p1a: Floette|66/100\n|-damage|p1b: Aerodactyl|12/100\n|move|p2a: Espeon|Trick Room|p2a: Espeon\n|-fieldstart|move: Trick Room|[of] p2a: Espeon\n|\n|upkeep\n|turn|2\n|\n|t:|1776193530\n|move|p1a: Floette|Protect|p1a: Floette\n|-singleturn|p1a: Floette|Protect\n|move|p1b: Aerodactyl|Protect|p1b: Aerodactyl\n|-singleturn|p1b: Aerodactyl|Protect\n|move|p2b: Sylveon|Hyper Voice|p1a: Floette|[spread] \n|-activate|p1a: Floette|move: Protect\n|-activate|p1b: Aerodactyl|move: Protect\n|move|p2a: Espeon|Psyshock|p1a: Floette\n|-activate|p1a: Floette|move: Protect\n|\n|upkeep\n|turn|3\n|\n|t:|1776193544\n|move|p2b: Sylveon|Hyper Voice|p1a: Floette|[spread] p1a,p1b\n|-damage|p1a: Floette|31/100\n|-damage|p1b: Aerodactyl|0 fnt\n|faint|p1b: Aerodactyl\n|move|p2a: Espeon|Psyshock|p1a: Floette\n|-damage|p1a: Floette|0 fnt\n|faint|p1a: Floette\n|\n|upkeep\n|-message|ScribbleScribble forfeited.\n|\n|win|bobthemango141\n|raw|ScribbleScribble's rating: 1445 &rarr; <strong>1421</strong><br />(-24 for losing)\n|raw|bobthemango141's rating: 1373 &rarr; <strong>1397</strong><br />(+24 for winning)\n|l|\u2606ScribbleScribble\n|player|p1|\n|l|\u2606bobthemango141\n|player|p2|\n|j|\u2606bobthemango141\n|player|p2|bobthemango141|barry|\n",
+  "uploadtime": 1776193561,
+  "views": 45,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1397,
+  "private": 0,
+  "password": null
+}

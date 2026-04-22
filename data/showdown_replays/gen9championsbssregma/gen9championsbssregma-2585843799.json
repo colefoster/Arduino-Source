@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2585843799",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "Sn0rlax Main",
+    "carpetmuncher45"
+  ],
+  "log": "|j|\u2606Sn0rlax Main\n|j|\u2606carpetmuncher45\n|t:|1776374898\n|gametype|singles\n|player|p1|Sn0rlax Main|266|1220\n|player|p2|carpetmuncher45|battlegirl-gen4|1293\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Victreebel, L50, M|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Aegislash, L50, F|\n|poke|p1|Clefable, L50, F|\n|poke|p1|Primarina, L50, M|\n|poke|p1|Glimmora, L50, F|\n|poke|p2|Dragonite, L50, F|\n|poke|p2|Aegislash, L50, F|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Samurott-Hisui, L50, M|\n|poke|p2|Espathra, L50, M|\n|poke|p2|Meganium, L50, M|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by carpetmuncher45)\n|\n|t:|1776374949\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Aegislash|Aegislash, L50, F|100/100\n|switch|p2a: Espathra|Espathra, L50, M|100/100\n|turn|1\n|\n|t:|1776374957\n|move|p2a: Espathra|Protect|p2a: Espathra\n|-singleturn|p2a: Espathra|Protect\n|move|p1a: Aegislash|Swords Dance|p1a: Aegislash\n|-boost|p1a: Aegislash|atk|2\n|\n|-ability|p2a: Espathra|Speed Boost|boost\n|-boost|p2a: Espathra|spe|1\n|upkeep\n|turn|2\n|\n|t:|1776374971\n|move|p2a: Espathra|Baton Pass|p2a: Espathra\n|\n|t:|1776374973\n|switch|p2a: Samurott|Samurott-Hisui, L50, M|100/100|[from] Baton Pass\n|-formechange|p1a: Aegislash|Aegislash-Blade|\n|move|p1a: Aegislash|Poltergeist|p2a: Samurott\n|-activate|p2a: Samurott|move: Poltergeist|Black Glasses\n|-resisted|p2a: Samurott|1\n|-damage|p2a: Samurott|14/100\n|\n|upkeep\n|turn|3\n|\n|t:|1776374988\n|move|p1a: Aegislash|Shadow Sneak|p2a: Samurott\n|-resisted|p2a: Samurott|1\n|-damage|p2a: Samurott|0 fnt\n|faint|p2a: Samurott\n|\n|upkeep\n|\n|t:|1776374991\n|switch|p2a: fundip|Meganium, L50, M|100/100\n|turn|4\n|\n|t:|1776374995\n|detailschange|p2a: fundip|Meganium-Mega, L50, M\n|-mega|p2a: fundip|Meganium|Meganiumite\n|move|p2a: fundip|Weather Ball|p1a: Aegislash\n|-supereffective|p1a: Aegislash|1\n|-enditem|p1a: Aegislash|Focus Sash\n|-damage|p1a: Aegislash|1/100\n|move|p1a: Aegislash|Poltergeist|p2a: fundip\n|-activate|p2a: fundip|move: Poltergeist|Meganiumite\n|-crit|p2a: fundip\n|-damage|p2a: fundip|0 fnt\n|faint|p2a: fundip\n|\n|upkeep\n|-message|carpetmuncher45 forfeited.\n|\n|win|Sn0rlax Main\n|raw|Sn0rlax Main's rating: 1220 &rarr; <strong>1250</strong><br />(+30 for winning)\n|raw|carpetmuncher45's rating: 1293 &rarr; <strong>1263</strong><br />(-30 for losing)\n|l|\u2606carpetmuncher45\n|player|p2|\n",
+  "uploadtime": 1776375008,
+  "views": 17,
+  "formatid": "gen9championsbssregma",
+  "rating": 1250,
+  "private": 0,
+  "password": null
+}

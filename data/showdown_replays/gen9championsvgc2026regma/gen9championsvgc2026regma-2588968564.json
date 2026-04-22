@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2588968564",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "holyguacamole123",
+    "yojoko78"
+  ],
+  "log": "|j|\u2606holyguacamole123\n|j|\u2606yojoko78\n|t:|1776690348\n|gametype|doubles\n|player|p1|holyguacamole123|169|1026\n|player|p2|yojoko78|biker|1058\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Rotom-Wash, L50, shiny|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Aerodactyl, L50, M, shiny|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Sneasler, L50, M, shiny|\n|poke|p1|Pinsir, L50, M, shiny|\n|poke|p2|Charizard, L50, M|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Milotic, L50, M|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Venusaur, L50, M|\n|teampreview|4\n|\n|t:|1776690383\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Pinsir|Pinsir, L50, M, shiny|100/100\n|switch|p1b: Aerodactyl|Aerodactyl, L50, M, shiny|100/100\n|switch|p2a: Garchomp|Garchomp, L50, M|100/100\n|switch|p2b: Milotic|Milotic, L50, M|100/100\n|-ability|p1b: Aerodactyl|Unnerve\n|turn|1\n|\n|t:|1776690404\n|detailschange|p1a: Pinsir|Pinsir-Mega, L50, M, shiny\n|-mega|p1a: Pinsir|Pinsir|Pinsirite\n|move|p1b: Aerodactyl|Tailwind|p1b: Aerodactyl\n|-sidestart|p1: holyguacamole123|move: Tailwind\n|move|p1a: Pinsir|Lunge|p2a: Garchomp\n|-damage|p2a: Garchomp|57/100\n|-unboost|p2a: Garchomp|atk|1\n|-damage|p1a: Pinsir|88/100|[from] ability: Rough Skin|[of] p2a: Garchomp\n|move|p2a: Garchomp|Rock Slide|p1b: Aerodactyl|[spread] p1a,p1b\n|-supereffective|p1a: Pinsir|2\n|-supereffective|p1b: Aerodactyl|1\n|-damage|p1a: Pinsir|37/100\n|-damage|p1b: Aerodactyl|58/100\n|move|p2b: Milotic|Coil|p2b: Milotic\n|-boost|p2b: Milotic|atk|1\n|-boost|p2b: Milotic|def|1\n|-boost|p2b: Milotic|accuracy|1\n|\n|upkeep\n|turn|2\n|\n|t:|1776690425\n|move|p1b: Aerodactyl|Rock Slide|p2b: Milotic|[spread] p2a,p2b\n|-resisted|p2a: Garchomp|1\n|-damage|p2a: Garchomp|45/100\n|-damage|p2b: Milotic|87/100\n|move|p1a: Pinsir|Rock Slide|p2b: Milotic|[spread] p2a,p2b\n|-resisted|p2a: Garchomp|1\n|-damage|p2a: Garchomp|35/100\n|-damage|p2b: Milotic|74/100\n|move|p2a: Garchomp|Rock Slide|p1a: Pinsir|[spread] p1a,p1b\n|-supereffective|p1a: Pinsir|2\n|-supereffective|p1b: Aerodactyl|1\n|-damage|p1a: Pinsir|0 fnt\n|-damage|p1b: Aerodactyl|14/100\n|faint|p1a: Pinsir\n|move|p2b: Milotic|Muddy Water|p1b: Aerodactyl\n|-supereffective|p1b: Aerodactyl|1\n|-crit|p1b: Aerodactyl\n|-damage|p1b: Aerodactyl|0 fnt\n|-enditem|p2a: Garchomp|Sitrus Berry|[eat]\n|-heal|p2a: Garchomp|60/100|[from] item: Sitrus Berry\n|faint|p1b: Aerodactyl\n|\n|-heal|p2b: Milotic|80/100|[from] item: Leftovers\n|upkeep\n|-message|holyguacamole123 forfeited.\n|\n|win|yojoko78\n|raw|holyguacamole123's rating: 1026 &rarr; <strong>1013</strong><br />(-13 for losing)\n|raw|yojoko78's rating: 1058 &rarr; <strong>1086</strong><br />(+28 for winning)\n|l|\u2606holyguacamole123\n|player|p1|\n",
+  "uploadtime": 1776690481,
+  "views": 4,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1013,
+  "private": 0,
+  "password": null
+}

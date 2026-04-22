@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582293063",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "ericaikok",
+    "Genius au"
+  ],
+  "log": "|j|\u2606ericaikok\n|j|\u2606Genius au\n|t:|1776080542\n|gametype|doubles\n|player|p1|ericaikok|#ptplvidazzlingdiancies|1060\n|player|p2|Genius au|youngster-gen4dp|1070\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Crabominable, L50, M|\n|poke|p1|Farigiraf, L50, M|\n|poke|p1|Torkoal, L50, M|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Primarina, L50, M|\n|poke|p1|Kingambit, L50, M|\n|poke|p2|Kangaskhan, L50, F|\n|poke|p2|Maushold, L50|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Gengar, L50, M|\n|poke|p2|Rotom-Wash, L50|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by ericaikok)\n|inactive|Genius au has 60 seconds left.\n|\n|t:|1776080576\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Crabominable|Crabominable, L50, M|100/100\n|switch|p1b: Farigiraf|Farigiraf, L50, M|100/100\n|switch|p2a: Rotom|Rotom-Wash, L50|100/100\n|switch|p2b: Maushold|Maushold, L50, shiny|100/100\n|turn|1\n|inactive|Genius au has 30 seconds left.\n|inactive|Genius au has 20 seconds left.\n|inactive|Genius au has 15 seconds left.\n|\n|t:|1776080619\n|switch|p1a: Torkoal|Torkoal, L50, M|100/100\n|-weather|SunnyDay|[from] ability: Drought|[of] p1a: Torkoal\n|move|p2b: Maushold|After You||[still]\n|-fail|p2b: Maushold\n|move|p2a: Rotom|Thunderbolt|p1b: Farigiraf\n|-damage|p1b: Farigiraf|74/100\n|move|p1b: Farigiraf|Trick Room|p1b: Farigiraf\n|-fieldstart|move: Trick Room|[of] p1b: Farigiraf\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|turn|2\n|\n|t:|1776080639\n|move|p2b: Maushold|Protect|p2b: Maushold\n|-singleturn|p2b: Maushold|Protect\n|move|p1a: Torkoal|Eruption|p2b: Maushold|[spread] p2a\n|-activate|p2b: Maushold|move: Protect\n|-resisted|p2a: Rotom|1\n|-damage|p2a: Rotom|56/100\n|move|p1b: Farigiraf|Psychic Noise|p2a: Rotom\n|-damage|p2a: Rotom|27/100\n|-start|p2a: Rotom|move: Heal Block\n|move|p2a: Rotom|Hydro Pump|p1a: Torkoal|[miss]\n|-miss|p2a: Rotom|p1a: Torkoal\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|turn|3\n|-message|Genius au forfeited.\n|\n|win|ericaikok\n|raw|ericaikok's rating: 1060 &rarr; <strong>1094</strong><br />(+34 for winning)\n|raw|Genius au's rating: 1094 &rarr; <strong>1068</strong><br />(-26 for losing)\n|l|\u2606Genius au\n|player|p2|\n",
+  "uploadtime": 1776080656,
+  "views": 23,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1068,
+  "private": 0,
+  "password": null
+}

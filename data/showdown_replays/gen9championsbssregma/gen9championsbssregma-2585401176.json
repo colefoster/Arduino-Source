@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2585401176",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "BBBkty",
+    "ndus here i"
+  ],
+  "log": "|j|\u2606BBBkty\n|j|\u2606ndus here i\n|t:|1776344610\n|gametype|singles\n|player|p1|BBBkty|265|1014\n|player|p2|ndus here i|interviewers|1000\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Dragapult, L50, F|\n|poke|p1|Alakazam, L50, F|\n|poke|p1|Azumarill, L50, F|\n|poke|p1|Clefable, L50, F|\n|poke|p1|Espathra, L50, M|\n|poke|p1|Glimmora, L50, F|\n|poke|p2|Excadrill, L50, M|\n|poke|p2|Hawlucha, L50, F|\n|poke|p2|Tyranitar, L50, F|\n|poke|p2|Starmie, L50|\n|poke|p2|Archaludon, L50, M|\n|poke|p2|Pelipper, L50, M|\n|teampreview|3\n|\n|t:|1776344621\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Glimmora|Glimmora, L50, F|100/100\n|switch|p2a: Excadrill|Excadrill, L50, M, shiny|100/100\n|turn|1\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by BBBkty)\n|-message|ndus here i forfeited.\n|l|\u2606ndus here i\n|inactive|ndus here i disconnected and has a minute to reconnect!\n|player|p2|\n|\n|win|BBBkty\n|raw|BBBkty's rating: 1014 &rarr; <strong>1050</strong><br />(+36 for winning)\n|raw|ndus here i's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n",
+  "uploadtime": 1776344642,
+  "views": 4,
+  "formatid": "gen9championsbssregma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

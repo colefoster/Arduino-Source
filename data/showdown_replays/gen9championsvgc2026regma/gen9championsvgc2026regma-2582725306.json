@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582725306",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "rajyesh1",
+    "Pocketeer"
+  ],
+  "log": "|j|\u2606rajyesh1\n|j|\u2606Pocketeer\n|t:|1776109820\n|gametype|doubles\n|player|p1|rajyesh1|lucas|1089\n|player|p2|Pocketeer|flint|1170\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Charizard, L50, M|\n|poke|p1|Venusaur, L50, F|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Rotom-Wash, L50|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Incineroar, L50, F|\n|poke|p2|Blastoise, L50, F|\n|poke|p2|Alakazam, L50, M|\n|poke|p2|Whimsicott, L50, F|\n|poke|p2|Kingambit, L50, M|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Pelipper, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Pocketeer)\n|inactive|rajyesh1 also wants the timer to be on.\n|inactive|rajyesh1 has 60 seconds left.\n|\n|t:|1776109872\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Sneasler|Sneasler, L50, M|100/100\n|switch|p1b: Rotom|Rotom-Wash, L50|100/100\n|switch|p2a: Blastoise|Blastoise, L50, F|100/100\n|switch|p2b: Alakazam|Alakazam, L50, M|100/100\n|turn|1\n|\n|t:|1776109892\n|switch|p1a: Incineroar|Incineroar, L50, F|100/100\n|-ability|p1a: Incineroar|Intimidate|boost\n|-unboost|p2a: Blastoise|atk|1\n|-fail|p2b: Alakazam|unboost|Attack|[from] ability: Inner Focus|[of] p2b: Alakazam\n|move|p2a: Blastoise|Protect|p2a: Blastoise\n|-singleturn|p2a: Blastoise|Protect\n|move|p2b: Alakazam|Psychic|p1a: Incineroar\n|-immune|p1a: Incineroar\n|move|p1b: Rotom|Thunderbolt|p2a: Blastoise\n|-activate|p2a: Blastoise|move: Protect\n|\n|upkeep\n|turn|2\n|inactive|Pocketeer has 30 seconds left.\n|inactive|Pocketeer has 20 seconds left.\n|\n|t:|1776109930\n|move|p2a: Blastoise|Protect||[still]\n|-fail|p2a: Blastoise\n|move|p2b: Alakazam|Light Screen|p2b: Alakazam\n|-sidestart|p2: Pocketeer|move: Light Screen\n|move|p1b: Rotom|Thunderbolt|p2a: Blastoise\n|-supereffective|p2a: Blastoise|1\n|-damage|p2a: Blastoise|56/100\n|move|p1a: Incineroar|Parting Shot|p2b: Alakazam\n|-unboost|p2b: Alakazam|atk|1\n|-unboost|p2b: Alakazam|spa|1\n|\n|t:|1776109947\n|switch|p1a: Charizard|Charizard, L50, M|100/100|[from] Parting Shot\n|\n|upkeep\n|turn|3\n|-message|Pocketeer forfeited.\n|\n|win|rajyesh1\n|raw|rajyesh1's rating: 1089 &rarr; <strong>1122</strong><br />(+33 for winning)\n|raw|Pocketeer's rating: 1170 &rarr; <strong>1139</strong><br />(-31 for losing)\n|l|\u2606Pocketeer\n|player|p2|\n",
+  "uploadtime": 1776109962,
+  "views": 17,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1122,
+  "private": 0,
+  "password": null
+}

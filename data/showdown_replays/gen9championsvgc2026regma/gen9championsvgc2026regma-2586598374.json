@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586598374",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Elesa Fan Account",
+    "marugod97"
+  ],
+  "log": "|j|\u2606Elesa Fan Account\n|j|\u2606marugod97\n|t:|1776445809\n|gametype|doubles\n|player|p1|Elesa Fan Account|170|1170\n|player|p2|marugod97|gambler|1087\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Meowstic, L50, M|\n|poke|p1|Armarouge, L50, F|\n|poke|p1|Hatterene, L50, F|\n|poke|p1|Torkoal, L50, F|\n|poke|p1|Kingambit, L50, M|\n|poke|p1|Conkeldurr, L50, F|\n|poke|p2|Kangaskhan, L50, F|\n|poke|p2|Aerodactyl, L50, F|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Milotic, L50, F|\n|poke|p2|Froslass, L50, F|\n|poke|p2|Sinistcha, L50|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by marugod97)\n|\n|t:|1776445828\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Meowstic|Meowstic, L50, M|100/100\n|switch|p1b: Hatterene|Hatterene, L50, F|100/100\n|switch|p2a: K|Sneasler, L50, F, shiny|100/100\n|switch|p2b: Pterodactyl|Aerodactyl, L50, F|100/100\n|-ability|p2b: Pterodactyl|Unnerve\n|turn|1\n|\n|t:|1776445846\n|move|p2a: K|Fake Out|p1b: Hatterene\n|-damage|p1b: Hatterene|83/100\n|move|p2b: Pterodactyl|Taunt|p1a: Meowstic\n|-start|p1a: Meowstic|move: Taunt\n|cant|p1a: Meowstic|move: Taunt|Trick Room\n|cant|p1b: Hatterene|flinch\n|\n|upkeep\n|turn|2\n|-message|Elesa Fan Account forfeited.\n|\n|win|marugod97\n|raw|Elesa Fan Account's rating: 1170 &rarr; <strong>1139</strong><br />(-31 for losing)\n|raw|marugod97's rating: 1087 &rarr; <strong>1120</strong><br />(+33 for winning)\n|l|\u2606Elesa Fan Account\n|player|p1|\n",
+  "uploadtime": 1776445857,
+  "views": 26,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1120,
+  "private": 0,
+  "password": null
+}

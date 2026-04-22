@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582507195",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Pegassin",
+    "Formiga Idiota"
+  ],
+  "log": "|j|\u203dPegassin\n|j|\u2606Formiga Idiota\n|t:|1776096095\n|gametype|doubles\n|player|p1|Pegassin|170|1112\n|player|p2|Formiga Idiota|265|1033\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Pelipper, L50, F|\n|poke|p1|Dragonite, L50, M|\n|poke|p1|Archaludon, L50, M|\n|poke|p1|Sneasler, L50, F|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Glimmora, L50, M|\n|poke|p2|Azumarill, L50, M|\n|poke|p2|Armarouge, L50, F|\n|poke|p2|Luxray, L50, F|\n|poke|p2|Audino, L50, M|\n|poke|p2|Tauros, L50, M|\n|poke|p2|Whimsicott, L50, M|\n|teampreview|4\n|\n|t:|1776096139\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Pelipper|Pelipper, L50, F|100/100\n|switch|p1b: Archaludon|Archaludon, L50, M|100/100\n|switch|p2a: Luxray|Luxray, L50, F|100/100\n|switch|p2b: Whimsicott|Whimsicott, L50, M|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p1a: Pelipper\n|turn|1\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Pegassin)\n|-message|Formiga Idiota forfeited.\n|\n|win|Pegassin\n|raw|Pegassin's rating: 1112 &rarr; <strong>1131</strong><br />(+19 for winning)\n|raw|Formiga Idiota's rating: 1033 &rarr; <strong>1021</strong><br />(-12 for losing)\n",
+  "uploadtime": 1776096153,
+  "views": 9,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1021,
+  "private": 0,
+  "password": null
+}

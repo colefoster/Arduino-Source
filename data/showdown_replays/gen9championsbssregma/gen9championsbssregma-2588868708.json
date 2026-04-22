@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2588868708",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "moonack2",
+    "uytuyuyu"
+  ],
+  "log": "|j|\u2606moonack2\n|j|\u2606uytuyuyu\n|t:|1776680536\n|gametype|singles\n|player|p1|moonack2|2|1058\n|player|p2|uytuyuyu|265|1089\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Charizard, L50, M, shiny|\n|poke|p1|Empoleon, L50, M, shiny|\n|poke|p1|Torterra, L50, M, shiny|\n|poke|p1|Excadrill, L50, F|\n|poke|p1|Dragapult, L50, F|\n|poke|p1|Whimsicott, L50, F|\n|poke|p2|Garchomp, L50, F|\n|poke|p2|Banette, L50, F|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Meowscarada, L50, F|\n|poke|p2|Charizard, L50, M|\n|poke|p2|Kingambit, L50, F|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by moonack2)\n|\n|t:|1776680568\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Empoleon|Empoleon, L50, M, shiny|100/100\n|switch|p2a: Sneasler|Sneasler, L50, M|100/100\n|-ability|p2a: Sneasler|Pressure\n|turn|1\n|\n|t:|1776680580\n|move|p2a: Sneasler|Close Combat|p1a: Empoleon\n|-supereffective|p1a: Empoleon|1\n|-damage|p1a: Empoleon|9/100\n|-unboost|p2a: Sneasler|def|1\n|-unboost|p2a: Sneasler|spd|1\n|move|p1a: Empoleon|Chilling Water|p2a: Sneasler\n|-damage|p2a: Sneasler|58/100\n|-unboost|p2a: Sneasler|atk|1\n|\n|-heal|p1a: Empoleon|15/100|[from] item: Leftovers\n|upkeep\n|turn|2\n|\n|t:|1776680598\n|switch|p1a: Dragapult|Dragapult, L50, F|100/100\n|move|p2a: Sneasler|Close Combat|p1a: Dragapult\n|-immune|p1a: Dragapult\n|\n|upkeep\n|turn|3\n|\n|t:|1776680608\n|move|p1a: Dragapult|Dragon Darts|p2a: Sneasler\n|-damage|p2a: Sneasler|0 fnt\n|faint|p2a: Sneasler\n|\n|upkeep\n|\n|t:|1776680619\n|switch|p2a: Garchomp|Garchomp, L50, F|100/100\n|turn|4\n|\n|t:|1776680628\n|move|p1a: Dragapult|Dragon Darts|p2a: Garchomp\n|-supereffective|p2a: Garchomp|1\n|-damage|p2a: Garchomp|41/100\n|-anim|p1a: Dragapult|Dragon Darts|p2a: Garchomp\n|-supereffective|p2a: Garchomp|1\n|-damage|p2a: Garchomp|0 fnt\n|faint|p2a: Garchomp\n|\n|upkeep\n|-message|uytuyuyu forfeited.\n|\n|win|moonack2\n|raw|moonack2's rating: 1058 &rarr; <strong>1092</strong><br />(+34 for winning)\n|raw|uytuyuyu's rating: 1089 &rarr; <strong>1064</strong><br />(-25 for losing)\n|l|\u2606uytuyuyu\n|player|p2|\n",
+  "uploadtime": 1776680636,
+  "views": 0,
+  "formatid": "gen9championsbssregma",
+  "rating": 1064,
+  "private": 0,
+  "password": null
+}

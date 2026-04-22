@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2584878043",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "Clown IRL",
+    "xpoke94"
+  ],
+  "log": "|j|\u2606Clown IRL\n|j|\u2606xpoke94\n|t:|1776290869\n|gametype|singles\n|player|p1|Clown IRL|harlequin|1267\n|player|p2|xpoke94|265|1210\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Starmie, L50|\n|poke|p1|Pelipper, L50, M|\n|poke|p1|Chesnaught, L50, F|\n|poke|p1|Kleavor, L50, F|\n|poke|p1|Hydreigon, L50, M|\n|poke|p1|Toxapex, L50, M|\n|poke|p2|Tyranitar, L50, F|\n|poke|p2|Meganium, L50, M|\n|poke|p2|Rotom-Heat, L50|\n|poke|p2|Aegislash, L50, M|\n|poke|p2|Mamoswine, L50, M|\n|poke|p2|Gyarados, L50, F|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by xpoke94)\n|\n|t:|1776290901\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Kleavor|Kleavor, L50, F|100/100\n|switch|p2a: Rotom|Rotom-Heat, L50|100/100\n|turn|1\n|\n|t:|1776290904\n|move|p2a: Rotom|Volt Switch|p1a: Kleavor\n|-damage|p1a: Kleavor|52/100\n|\n|t:|1776290908\n|switch|p2a: Meganium|Meganium, L50, M|100/100|[from] Volt Switch\n|move|p1a: Kleavor|Stone Axe|p2a: Meganium\n|-damage|p2a: Meganium|41/100\n|-sidestart|p2: xpoke94|move: Stealth Rock\n|\n|upkeep\n|turn|2\n|\n|t:|1776290912\n|detailschange|p2a: Meganium|Meganium-Mega, L50, M\n|-mega|p2a: Meganium|Meganium|Meganiumite\n|move|p1a: Kleavor|X-Scissor|p2a: Meganium\n|-damage|p2a: Meganium|0 fnt\n|faint|p2a: Meganium\n|\n|upkeep\n|j| p74\n|\n|t:|1776290918\n|switch|p2a: Rotom|Rotom-Heat, L50|100/100\n|-damage|p2a: Rotom|76/100|[from] Stealth Rock\n|turn|3\n|\n|t:|1776290920\n|move|p2a: Rotom|Overheat|p1a: Kleavor|[miss]\n|-miss|p2a: Rotom|p1a: Kleavor\n|move|p1a: Kleavor|Stone Axe|p2a: Rotom\n|-supereffective|p2a: Rotom|1\n|-damage|p2a: Rotom|0 fnt\n|faint|p2a: Rotom\n|\n|upkeep\n|\n|t:|1776290922\n|switch|p2a: Tyranitar|Tyranitar, L50, F|100/100\n|-damage|p2a: Tyranitar|88/100|[from] Stealth Rock\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p2a: Tyranitar\n|turn|4\n|-message|xpoke94 forfeited.\n|\n|win|Clown IRL\n|raw|Clown IRL's rating: 1267 &rarr; <strong>1288</strong><br />(+21 for winning)\n|raw|xpoke94's rating: 1210 &rarr; <strong>1189</strong><br />(-21 for losing)\n|l|\u2606xpoke94\n|player|p2|\n|l|\u2606Clown IRL\n|player|p1|\n",
+  "uploadtime": 1776291058,
+  "views": 11,
+  "formatid": "gen9championsbssregma",
+  "rating": 1189,
+  "private": 0,
+  "password": null
+}

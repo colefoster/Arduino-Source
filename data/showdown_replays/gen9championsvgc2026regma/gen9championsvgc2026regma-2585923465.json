@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2585923465",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "YonkoLouis",
+    "werdbugg"
+  ],
+  "log": "|j|\u2606YonkoLouis\n|j|\u2606werdbugg\n|t:|1776381844\n|gametype|doubles\n|player|p1|YonkoLouis|zinnia|1117\n|player|p2|werdbugg|bruno|1040\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Alakazam, L50, M|\n|poke|p1|Meowstic, L50, M|\n|poke|p1|Rotom-Wash, L50|\n|poke|p1|Kingambit, L50, M|\n|poke|p1|Chesnaught, L50, M|\n|poke|p1|Oranguru, L50, M|\n|poke|p2|Charizard, L50, F|\n|poke|p2|Gyarados, L50, M|\n|poke|p2|Whimsicott, L50, F|\n|poke|p2|Dragonite, L50, M|\n|poke|p2|Aegislash, L50, F|\n|poke|p2|Sneasler, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by werdbugg)\n|\n|t:|1776381904\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Spoonman|Alakazam, L50, M, shiny|100/100\n|switch|p1b: Baker of Biscuits|Meowstic, L50, M, shiny|100/100\n|switch|p2a: Whimsicott|Whimsicott, L50, F, shiny|100/100\n|switch|p2b: Gyarados|Gyarados, L50, M|100/100\n|-ability|p2b: Gyarados|Intimidate|boost\n|-fail|p1a: Spoonman|unboost|Attack|[from] ability: Inner Focus|[of] p1a: Spoonman\n|-unboost|p1b: Baker of Biscuits|atk|1\n|turn|1\n|inactive|YonkoLouis has 30 seconds left.\n|\n|t:|1776381935\n|detailschange|p1a: Spoonman|Alakazam-Mega, L50, M, shiny\n|-mega|p1a: Spoonman|Alakazam|Alakazite\n|-ability|p1a: Spoonman|Prankster|Trace|[from] ability: Trace|[of] p2a: Whimsicott\n|move|p1a: Spoonman|Protect|p1a: Spoonman\n|-singleturn|p1a: Spoonman|Protect\n|move|p2a: Whimsicott|Tailwind|p2a: Whimsicott\n|-sidestart|p2: werdbugg|move: Tailwind\n|move|p1b: Baker of Biscuits|Psychic Terrain|p1b: Baker of Biscuits\n|-fieldstart|move: Psychic Terrain\n|move|p2b: Gyarados|Taunt|p1b: Baker of Biscuits\n|-start|p1b: Baker of Biscuits|move: Taunt\n|\n|upkeep\n|turn|2\n|inactive|YonkoLouis has 30 seconds left.\n|inactive|YonkoLouis has 20 seconds left.\n|\n|t:|1776381975\n|move|p2a: Whimsicott|Encore|p1a: Spoonman\n|-activate|p1a: Spoonman|move: Psychic Terrain\n|move|p1a: Spoonman|Expanding Force|p2a: Whimsicott|[spread] p2a,p2b\n|-enditem|p2a: Whimsicott|Focus Sash\n|-damage|p2a: Whimsicott|1/100\n|-damage|p2b: Gyarados|36/100\n|-enditem|p2b: Gyarados|Sitrus Berry|[eat]\n|-heal|p2b: Gyarados|61/100|[from] item: Sitrus Berry\n|move|p2b: Gyarados|Waterfall|p1a: Spoonman\n|-damage|p1a: Spoonman|37/100\n|move|p1b: Baker of Biscuits|Alluring Voice|p2b: Gyarados\n|-damage|p2b: Gyarados|48/100\n|\n|upkeep\n|turn|3\n|-message|werdbugg forfeited.\n|\n|win|YonkoLouis\n|raw|YonkoLouis's rating: 1117 &rarr; <strong>1137</strong><br />(+20 for winning)\n|raw|werdbugg's rating: 1040 &rarr; <strong>1027</strong><br />(-13 for losing)\n|l|\u2606werdbugg\n|player|p2|\n|c|\u2606YonkoLouis|gg\n",
+  "uploadtime": 1776382005,
+  "views": 20,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1027,
+  "private": 0,
+  "password": null
+}

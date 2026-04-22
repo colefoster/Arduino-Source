@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584828482",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "sparkelzlol",
+    "baronmigu"
+  ],
+  "log": "|j|\u2606sparkelzlol\n|j|\u2606baronmigu\n|t:|1776286787\n|gametype|doubles\n|player|p1|sparkelzlol|riley|1259\n|player|p2|baronmigu|plasmagrunt|1161\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Aggron, L50, M|\n|poke|p1|Aerodactyl, L50, M|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Milotic, L50, F|\n|poke|p1|Meowscarada, L50, F|\n|poke|p1|Rotom-Wash, L50|\n|poke|p2|Clawitzer, L50, M|\n|poke|p2|Kingambit, L50, F|\n|poke|p2|Cofagrigus, L50, M|\n|poke|p2|Mudsdale, L50, F|\n|poke|p2|Drampa, L50, F|\n|poke|p2|Incineroar, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by sparkelzlol)\n|\n|t:|1776286807\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Aggron|Aggron, L50, M, shiny|100/100\n|switch|p1b: Meowscarada|Meowscarada, L50, F|100/100\n|switch|p2a: Cofagrigus|Cofagrigus, L50, M|100/100\n|switch|p2b: Incineroar|Incineroar, L50, M|100/100\n|-ability|p2b: Incineroar|Intimidate|boost\n|-unboost|p1a: Aggron|atk|1\n|-unboost|p1b: Meowscarada|atk|1\n|turn|1\n|\n|t:|1776286818\n|detailschange|p1a: Aggron|Aggron-Mega, L50, M, shiny\n|-mega|p1a: Aggron|Aggron|Aggronite\n|move|p2b: Incineroar|Fake Out|p1b: Meowscarada\n|-damage|p1b: Meowscarada|80/100\n|cant|p1b: Meowscarada|flinch\n|move|p1a: Aggron|Iron Defense|p1a: Aggron\n|-boost|p1a: Aggron|def|2\n|move|p2a: Cofagrigus|Trick Room|p2a: Cofagrigus\n|-fieldstart|move: Trick Room|[of] p2a: Cofagrigus\n|\n|upkeep\n|turn|2\n|\n|t:|1776286832\n|switch|p1b: Milotic|Milotic, L50, F|100/100\n|move|p2a: Cofagrigus|Body Press|p1a: Aggron\n|-supereffective|p1a: Aggron|1\n|-damage|p1a: Aggron|90/100\n|move|p1a: Aggron|Body Press|p2b: Incineroar\n|-supereffective|p2b: Incineroar|1\n|-damage|p2b: Incineroar|0 fnt\n|faint|p2b: Incineroar\n|\n|upkeep\n|\n|t:|1776286840\n|switch|p2b: Clawitzer|Clawitzer, L50, M|100/100\n|turn|3\n|\n|t:|1776286851\n|move|p2a: Cofagrigus|Shadow Ball|p1b: Milotic\n|-damage|p1b: Milotic|75/100\n|move|p1a: Aggron|Body Press|p2b: Clawitzer\n|-damage|p2b: Clawitzer|0 fnt\n|faint|p2b: Clawitzer\n|move|p1b: Milotic|Scald|p2a: Cofagrigus\n|-damage|p2a: Cofagrigus|61/100\n|\n|upkeep\n|-message|baronmigu forfeited.\n|\n|win|sparkelzlol\n|raw|sparkelzlol's rating: 1259 &rarr; <strong>1277</strong><br />(+18 for winning)\n|raw|baronmigu's rating: 1161 &rarr; <strong>1143</strong><br />(-18 for losing)\n|l|\u2606baronmigu\n|player|p2|\n",
+  "uploadtime": 1776286871,
+  "views": 70,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1143,
+  "private": 0,
+  "password": null
+}

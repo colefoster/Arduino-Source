@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2587621678",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "pluby5",
+    "abx647"
+  ],
+  "log": "|j|\u2606pluby5\n|j|\u2606abx647\n|t:|1776547752\n|gametype|doubles\n|player|p1|pluby5|harlequin|\n|player|p2|abx647|266|\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Scovillain, L50, F|\n|poke|p1|Torkoal, L50, M|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Milotic, L50, F|\n|poke|p1|Klefki, L50, M|\n|poke|p1|Gengar, L50, M|\n|poke|p2|Hawlucha, L50, F|\n|poke|p2|Tyranitar, L50, F|\n|poke|p2|Excadrill, L50, F|\n|poke|p2|Hippowdon, L50, M|\n|poke|p2|Aerodactyl, L50, M|\n|poke|p2|Sneasler, L50, F|\n|teampreview|4\npluby5 rejected open team sheets.\n|\n|t:|1776547800\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Incineroar|Incineroar, L50, F|100/100\n|switch|p1b: Scovillain|Scovillain, L50, F|100/100\n|switch|p2a: Sneasler|Sneasler, L50, F|100/100\n|switch|p2b: Hippowdon|Hippowdon, L50, M|100/100\n|-ability|p1a: Incineroar|Intimidate|boost\n|-unboost|p2a: Sneasler|atk|1\n|-unboost|p2b: Hippowdon|atk|1\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p2b: Hippowdon\n|turn|1\n|-message|abx647 forfeited.\n|\n|win|pluby5\n|l|\u2606abx647\n|player|p2|\n",
+  "uploadtime": 1776547817,
+  "views": 9,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": null,
+  "private": 0,
+  "password": null
+}

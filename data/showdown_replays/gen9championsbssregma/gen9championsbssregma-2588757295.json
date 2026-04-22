@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2588757295",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "marco 4466",
+    "el_dakka"
+  ],
+  "log": "|j|\u2606marco 4466\n|j|\u2606el_dakka\n|t:|1776666824\n|gametype|singles\n|player|p1|marco 4466|red|1139\n|player|p2|el_dakka|hilda|1267\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Lucario, L50, M|\n|poke|p1|Blastoise, L50, M|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Archaludon, L50, M|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Ninetales-Alola, L50, F|\n|poke|p2|Emboar, L50, F|\n|poke|p2|Gengar, L50, M|\n|poke|p2|Corviknight, L50, M|\n|poke|p2|Garchomp, L50, F|\n|poke|p2|Greninja, L50, F|\n|poke|p2|Gardevoir, L50, F|\n|teampreview|3\n|\n|t:|1776666865\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Archaludon|Archaludon, L50, M|100/100\n|switch|p2a: Greninja|Greninja, L50, F|100/100\n|turn|1\n|\n|t:|1776666876\n|switch|p2a: Emboar|Emboar, L50, F|100/100\n|move|p1a: Archaludon|Stealth Rock|p2a: Emboar\n|-sidestart|p2: el_dakka|move: Stealth Rock\n|\n|upkeep\n|turn|2\n|\n|t:|1776666891\n|switch|p1a: Basculegion|Basculegion, L50, M|100/100\n|detailschange|p2a: Emboar|Emboar-Mega, L50, F\n|-mega|p2a: Emboar|Emboar|Emboarite\n|-ability|p2a: Emboar|Mold Breaker\n|move|p2a: Emboar|Earthquake|p1a: Basculegion\n|-damage|p1a: Basculegion|44/100\n|\n|upkeep\n|turn|3\n|\n|t:|1776666901\n|move|p2a: Emboar|Sucker Punch|p1a: Basculegion\n|-supereffective|p1a: Basculegion|1\n|-damage|p1a: Basculegion|0 fnt\n|faint|p1a: Basculegion\n|\n|upkeep\n|\n|t:|1776666906\n|switch|p1a: Blastoise|Blastoise, L50, M|100/100\n|turn|4\n|\n|t:|1776666915\n|detailschange|p1a: Blastoise|Blastoise-Mega, L50, M\n|-mega|p1a: Blastoise|Blastoise|Blastoisinite\n|move|p1a: Blastoise|Shell Smash|p1a: Blastoise\n|-unboost|p1a: Blastoise|def|1\n|-unboost|p1a: Blastoise|spd|1\n|-boost|p1a: Blastoise|atk|2\n|-boost|p1a: Blastoise|spa|2\n|-boost|p1a: Blastoise|spe|2\n|move|p2a: Emboar|Close Combat|p1a: Blastoise\n|-damage|p1a: Blastoise|0 fnt\n|-unboost|p2a: Emboar|def|1\n|-unboost|p2a: Emboar|spd|1\n|faint|p1a: Blastoise\n|\n|upkeep\n|\n|t:|1776666926\n|switch|p1a: Archaludon|Archaludon, L50, M|100/100\n|turn|5\n|\n|t:|1776666931\n|move|p1a: Archaludon|Draco Meteor|p2a: Emboar\n|-damage|p2a: Emboar|19/100\n|-unboost|p1a: Archaludon|spa|2\n|move|p2a: Emboar|Close Combat|p1a: Archaludon\n|-supereffective|p1a: Archaludon|1\n|-damage|p1a: Archaludon|0 fnt\n|-unboost|p2a: Emboar|def|1\n|-unboost|p2a: Emboar|spd|1\n|faint|p1a: Archaludon\n|\n|win|el_dakka\n|raw|marco 4466's rating: 1139 &rarr; <strong>1123</strong><br />(-16 for losing)\n|raw|el_dakka's rating: 1267 &rarr; <strong>1283</strong><br />(+16 for winning)\n|l|\u2606marco 4466\n|player|p1|\n",
+  "uploadtime": 1776666944,
+  "views": 12,
+  "formatid": "gen9championsbssregma",
+  "rating": 1123,
+  "private": 0,
+  "password": null
+}

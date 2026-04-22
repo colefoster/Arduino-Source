@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2581575682",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "bruhperiod",
+    "NekoMayDow"
+  ],
+  "log": "|j|\u2606bruhperiod\n|j|\u2606NekoMayDow\n|t:|1776012215\n|gametype|doubles\n|player|p1|bruhperiod|riley|1050\n|player|p2|NekoMayDow|101|1000\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Garchomp, L50, F|\n|poke|p1|Talonflame, L50, F|\n|poke|p1|Rotom-Wash, L50|\n|poke|p1|Maushold, L50|\n|poke|p1|Aegislash, L50, F|\n|poke|p2|Camerupt, L50, M|\n|poke|p2|Aerodactyl, L50, F|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Vivillon, L50, M|\n|poke|p2|Farigiraf, L50, F|\n|poke|p2|Kingambit, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by bruhperiod)\n|inactive|NekoMayDow has 60 seconds left.\n|inactive|NekoMayDow has 30 seconds left.\n|inactive|NekoMayDow has 20 seconds left.\n|inactive|NekoMayDow has 15 seconds left.\n|inactive|NekoMayDow has 10 seconds left.\n|\n|t:|1776012327\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Garchomp|Garchomp, L50, F|100/100\n|switch|p1b: Rotom|Rotom-Wash, L50|100/100\n|switch|p2a: Aerodactyl|Aerodactyl, L50, F|100/100\n|switch|p2b: Farigiraf|Farigiraf, L50, F|100/100\n|-ability|p2a: Aerodactyl|Unnerve\n|turn|1\n|\n|t:|1776012342\n|move|p2a: Aerodactyl|Tailwind|p2a: Aerodactyl\n|-sidestart|p2: NekoMayDow|move: Tailwind\n|move|p2b: Farigiraf|Hyper Voice|p1b: Rotom|[spread] p1a,p1b\n|-crit|p1a: Garchomp\n|-damage|p1a: Garchomp|36/100\n|-damage|p1b: Rotom|53/100\n|move|p1a: Garchomp|Earthquake|p2b: Farigiraf|[spread] p2b\n|-immune|p1b: Rotom|[from] ability: Levitate\n|-immune|p2a: Aerodactyl\n|-damage|p2b: Farigiraf|50/100\n|move|p1b: Rotom|Thunderbolt|p2a: Aerodactyl|[miss]\n|-miss|p1b: Rotom|p2a: Aerodactyl\n|\n|upkeep\n|turn|2\n|c|\u2606bruhperiod|you are a bitch\n|inactive|NekoMayDow has 30 seconds left.\n|\n|t:|1776012367\n|move|p2a: Aerodactyl|Rock Tomb|p1b: Rotom\n|-damage|p1b: Rotom|29/100\n|-unboost|p1b: Rotom|spe|1\n|move|p2b: Farigiraf|Hyper Voice|p1a: Garchomp|[spread] p1a,p1b\n|-damage|p1a: Garchomp|0 fnt\n|-damage|p1b: Rotom|0 fnt\n|faint|p1a: Garchomp\n|faint|p1b: Rotom\n|\n|upkeep\n|\n|t:|1776012376\n|switch|p1a: Floette|Floette-Eternal, L50, F|100/100\n|switch|p1b: Talonflame|Talonflame, L50, F|100/100\n|turn|3\n|-message|bruhperiod forfeited.\n|\n|win|NekoMayDow\n|raw|bruhperiod's rating: 1050 &rarr; <strong>1030</strong><br />(-20 for losing)\n|raw|NekoMayDow's rating: 1000 &rarr; <strong>1046</strong><br />(+46 for winning)\n|l|\u2606bruhperiod\n|player|p1|\n",
+  "uploadtime": 1776012402,
+  "views": 19,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1030,
+  "private": 0,
+  "password": null
+}

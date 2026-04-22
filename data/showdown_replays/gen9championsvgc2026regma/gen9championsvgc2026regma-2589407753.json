@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2589407753",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "wiranvgc",
+    "Jim45222"
+  ],
+  "log": "|j|\u2606wiranvgc\n|j|\u203dJim45222\n|t:|1776720456\n|gametype|doubles\n|player|p1|wiranvgc|silver|1044\n|player|p2|Jim45222|waiter|1040\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Espathra, L50, M|\n|poke|p1|Floette-Eternal, L50, F|\n|poke|p1|Charizard, L50, M|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Milotic, L50, M|\n|poke|p1|Sneasler, L50, M|\n|poke|p2|Lucario, L50, F, shiny|\n|poke|p2|Aegislash, L50, F, shiny|\n|poke|p2|Basculegion, L50, M, shiny|\n|poke|p2|Whimsicott, L50, F, shiny|\n|poke|p2|Chandelure, L50, F, shiny|\n|poke|p2|Gliscor, L50, F, shiny|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by wiranvgc)\n|inactive|wiranvgc has 60 seconds left.\n|\n|t:|1776720489\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Sneasler|Sneasler, L50, M|100/100\n|switch|p1b: Charizard|Charizard, L50, M|100/100\n|switch|p2a: Aegislash|Aegislash, L50, F, shiny|100/100\n|switch|p2b: Lucario|Lucario, L50, F, shiny|100/100\n|turn|1\n|\n|t:|1776720514\n|detailschange|p1b: Charizard|Charizard-Mega-Y, L50, M\n|-mega|p1b: Charizard|Charizard|Charizardite Y\n|-weather|SunnyDay|[from] ability: Drought|[of] p1b: Charizard\n|detailschange|p2b: Lucario|Lucario-Mega, L50, F, shiny\n|-mega|p2b: Lucario|Lucario|Lucarionite\n|move|p1a: Sneasler|Close Combat|p2b: Lucario\n|-supereffective|p2b: Lucario|1\n|-damage|p2b: Lucario|0 fnt\n|-unboost|p1a: Sneasler|def|1\n|-unboost|p1a: Sneasler|spd|1\n|faint|p2b: Lucario\n|-enditem|p1a: Sneasler|White Herb\n|-clearnegativeboost|p1a: Sneasler|[silent]\n|move|p1b: Charizard|Heat Wave|p2a: Aegislash\n|-supereffective|p2a: Aegislash|1\n|-damage|p2a: Aegislash|0 fnt\n|faint|p2a: Aegislash\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|-message|Jim45222 forfeited.\n|\n|win|wiranvgc\n|raw|wiranvgc's rating: 1044 &rarr; <strong>1077</strong><br />(+33 for winning)\n|raw|Jim45222's rating: 1040 &rarr; <strong>1024</strong><br />(-16 for losing)\n|l|\u203dJim45222\n|player|p2|\n",
+  "uploadtime": 1776720532,
+  "views": 11,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1024,
+  "private": 0,
+  "password": null
+}

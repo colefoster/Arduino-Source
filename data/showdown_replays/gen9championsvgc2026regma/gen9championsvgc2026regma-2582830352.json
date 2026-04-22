@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582830352",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Perzeaus",
+    "Dextrou_"
+  ],
+  "log": "|j|\u2606Perzeaus\n|j|\u2606Dextrou_\n|t:|1776117382\n|gametype|doubles\n|player|p1|Perzeaus|fisherman-gen4|1106\n|player|p2|Dextrou_|brendan-masters|1027\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Venusaur, L50, M|\n|poke|p1|Aerodactyl, L50, F|\n|poke|p1|Milotic, L50, F|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Aegislash, L50, F|\n|poke|p1|Dragonite, L50, F|\n|poke|p2|Drampa, L50, F|\n|poke|p2|Alakazam, L50, M|\n|poke|p2|Pelipper, L50, F|\n|poke|p2|Sinistcha-Masterpiece, L50|\n|poke|p2|Scizor, L50, F|\n|poke|p2|Basculegion, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Dextrou_)\n|inactive|Perzeaus also wants the timer to be on.\n|\n|t:|1776117412\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Dragonite|Dragonite, L50, F|100/100\n|switch|p1b: Incineroar|Incineroar, L50, M|100/100\n|switch|p2a: Drampa|Drampa, L50, F|100/100\n|switch|p2b: Alakazam|Alakazam, L50, M|100/100\n|-ability|p1b: Incineroar|Intimidate|boost\n|-unboost|p2a: Drampa|atk|1\n|-fail|p2b: Alakazam|unboost|Attack|[from] ability: Inner Focus|[of] p2b: Alakazam\n|turn|1\n|inactive|Perzeaus has 30 seconds left.\n|\n|t:|1776117441\n|move|p1b: Incineroar|Fake Out|p2a: Drampa\n|-damage|p2a: Drampa|87/100\n|move|p2b: Alakazam|Reflect|p2b: Alakazam\n|-sidestart|p2: Dextrou_|Reflect\n|move|p1a: Dragonite|Scale Shot|p2a: Drampa\n|-supereffective|p2a: Drampa|1\n|-damage|p2a: Drampa|66/100\n|-supereffective|p2a: Drampa|1\n|-damage|p2a: Drampa|48/100\n|-supereffective|p2a: Drampa|1\n|-damage|p2a: Drampa|24/100\n|-supereffective|p2a: Drampa|1\n|-damage|p2a: Drampa|4/100\n|-supereffective|p2a: Drampa|1\n|-damage|p2a: Drampa|0 fnt\n|faint|p2a: Drampa\n|-hitcount|p2: Drampa|5\n|-unboost|p1a: Dragonite|def|1\n|-boost|p1a: Dragonite|spe|1\n|\n|upkeep\n|\n|t:|1776117459\n|switch|p2a: Scizor|Scizor, L50, F|100/100\n|turn|2\n|\n|t:|1776117480\n|detailschange|p2a: Scizor|Scizor-Mega, L50, F\n|-mega|p2a: Scizor|Scizor|Scizorite\n|move|p1a: Dragonite|Scale Shot|p2b: Alakazam|[miss]\n|-miss|p1a: Dragonite|p2b: Alakazam\n|move|p2b: Alakazam|Psychic|p1a: Dragonite\n|-damage|p1a: Dragonite|80/100\n|move|p2a: Scizor|Swords Dance|p2a: Scizor\n|-boost|p2a: Scizor|atk|2\n|move|p1b: Incineroar|Flare Blitz|p2a: Scizor\n|-supereffective|p2a: Scizor|2\n|-damage|p2a: Scizor|0 fnt\n|faint|p2a: Scizor\n|-damage|p1b: Incineroar|77/100|[from] Recoil\n|\n|upkeep\n|-message|Dextrou_ forfeited.\n|\n|win|Perzeaus\n|raw|Perzeaus's rating: 1106 &rarr; <strong>1125</strong><br />(+19 for winning)\n|raw|Dextrou_'s rating: 1027 &rarr; <strong>1016</strong><br />(-11 for losing)\n|l|\u2606Dextrou_\n|player|p2|\n",
+  "uploadtime": 1776117502,
+  "views": 26,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1016,
+  "private": 0,
+  "password": null
+}

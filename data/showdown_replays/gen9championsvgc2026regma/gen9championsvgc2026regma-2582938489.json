@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582938489",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Quacklimore",
+    "loklastaji"
+  ],
+  "log": "|j|\u2606Quacklimore\n|j|\u2606loklastaji\n|t:|1776126710\n|gametype|doubles\n|player|p1|Quacklimore|169|1320\n|player|p2|loklastaji|102|1302\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Meganium, L50, M|\n|poke|p1|Rampardos, L50, M|\n|poke|p1|Tyranitar, L50, M|\n|poke|p1|Hatterene, L50, F|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Hydreigon, L50, F|\n|poke|p2|Samurott-Hisui, L50, F|\n|poke|p2|Mamoswine, L50, F|\n|poke|p2|Delphox, L50, M|\n|poke|p2|Tsareena, L50, F|\n|poke|p2|Corviknight, L50, M|\n|poke|p2|Altaria, L50, F|\n|teampreview|4\n|\n|t:|1776126752\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Hatterene|Hatterene, L50, F, shiny|100/100\n|switch|p1b: Rampardos|Rampardos, L50, M, shiny|100/100\n|switch|p2a: Altaria|Altaria, L50, F|100/100\n|switch|p2b: Mamoswine|Mamoswine, L50, F|100/100\n|-ability|p2a: Altaria|Cloud Nine\n|turn|1\n|\n|t:|1776126791\n|detailschange|p2a: Altaria|Altaria-Mega, L50, F\n|-mega|p2a: Altaria|Altaria|Altarianite\n|move|p1b: Rampardos|Protect|p1b: Rampardos\n|-singleturn|p1b: Rampardos|Protect\n|move|p2b: Mamoswine|Hard Press|p1a: Hatterene\n|-supereffective|p1a: Hatterene|1\n|-crit|p1a: Hatterene\n|-damage|p1a: Hatterene|0 fnt\n|faint|p1a: Hatterene\n|move|p2a: Altaria|Hyper Voice|p1b: Rampardos\n|-activate|p1b: Rampardos|move: Protect\n|\n|upkeep\n|\n|t:|1776126827\n|switch|p1a: Hydreigon|Hydreigon, L50, F|100/100\n|turn|2\n|\n|t:|1776126841\n|move|p2b: Mamoswine|Hard Press|p1b: Rampardos\n|-supereffective|p1b: Rampardos|1\n|-damage|p1b: Rampardos|5/100\n|move|p2a: Altaria|Hyper Voice|p1b: Rampardos|[spread] p1a,p1b\n|-supereffective|p1a: Hydreigon|2\n|-damage|p1a: Hydreigon|0 fnt\n|-damage|p1b: Rampardos|0 fnt\n|faint|p1a: Hydreigon\n|faint|p1b: Rampardos\n|\n|upkeep\n|-message|Quacklimore forfeited.\n|\n|win|loklastaji\n|raw|Quacklimore's rating: 1320 &rarr; <strong>1299</strong><br />(-21 for losing)\n|raw|loklastaji's rating: 1302 &rarr; <strong>1323</strong><br />(+21 for winning)\n|l|\u2606Quacklimore\n|player|p1|\n",
+  "uploadtime": 1776126856,
+  "views": 37,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1299,
+  "private": 0,
+  "password": null
+}

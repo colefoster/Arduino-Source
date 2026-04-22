@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2583149964",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Sublamb",
+    "airpodjuniors"
+  ],
+  "log": "|j|\u2606Sublamb\n|j|\u2606airpodjuniors\n|t:|1776148100\n|gametype|doubles\n|player|p1|Sublamb|169|1086\n|player|p2|airpodjuniors|102|1119\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Kingambit, L50, M|\n|poke|p1|Milotic, L50, M|\n|poke|p1|Tauros-Paldea-Blaze, L50, M|\n|poke|p1|Meowscarada, L50, M|\n|poke|p1|Whimsicott, L50, F|\n|poke|p1|Glalie, L50, M|\n|poke|p2|Meganium, L50, F|\n|poke|p2|Archaludon, L50, F|\n|poke|p2|Politoed, L50, F|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Arcanine-Hisui, L50, F|\n|teampreview|4\n|\n|t:|1776148128\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Whimsicott|Whimsicott, L50, F|100/100\n|switch|p1b: Glalie|Glalie, L50, M|100/100\n|switch|p2a: Sneasler|Sneasler, L50, M|100/100\n|switch|p2b: Politoed|Politoed, L50, F|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p2b: Politoed\n|turn|1\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by airpodjuniors)\n|\n|t:|1776148193\n|move|p1a: Whimsicott|Protect|p1a: Whimsicott\n|-singleturn|p1a: Whimsicott|Protect\n|move|p2b: Politoed|Icy Wind|p1a: Whimsicott|[spread] \n|-activate|p1a: Whimsicott|move: Protect\n|-miss|p2b: Politoed|p1b: Glalie\n|move|p2a: Sneasler|Close Combat|p1b: Glalie\n|-supereffective|p1b: Glalie|1\n|-damage|p1b: Glalie|0 fnt\n|-unboost|p2a: Sneasler|def|1\n|-unboost|p2a: Sneasler|spd|1\n|faint|p1b: Glalie\n|-enditem|p2a: Sneasler|White Herb\n|-clearnegativeboost|p2a: Sneasler|[silent]\n|\n|-weather|RainDance|[upkeep]\n|upkeep\n|-message|Sublamb forfeited.\n|\n|win|airpodjuniors\n|raw|Sublamb's rating: 1086 &rarr; <strong>1065</strong><br />(-21 for losing)\n|raw|airpodjuniors's rating: 1119 &rarr; <strong>1142</strong><br />(+23 for winning)\n|l|\u2606Sublamb\n|player|p1|\n",
+  "uploadtime": 1776148207,
+  "views": 23,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1065,
+  "private": 0,
+  "password": null
+}

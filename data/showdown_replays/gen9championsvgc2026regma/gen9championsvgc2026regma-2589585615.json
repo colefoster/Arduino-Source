@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2589585615",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "GengarScary",
+    "MrUCPosting"
+  ],
+  "log": "|j|\u2606GengarScary\n|j|\u2606MrUCPosting\n|t:|1776736534\n|gametype|doubles\n|player|p1|GengarScary|265|1112\n|player|p2|MrUCPosting|unknown|1134\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Lucario, L50, F|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Milotic, L50, F|\n|poke|p1|Pelipper, L50, M|\n|poke|p1|Greninja, L50, M|\n|poke|p2|Gallade, L50, M, shiny|\n|poke|p2|Aerodactyl, L50, M|\n|poke|p2|Altaria, L50, F, shiny|\n|poke|p2|Slowking-Galar, L50, M|\n|poke|p2|Kangaskhan, L50, F|\n|poke|p2|Empoleon, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by GengarScary)\n|\n|t:|1776736563\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Lucario|Lucario, L50, F|100/100\n|switch|p1b: Incineroar|Incineroar, L50, M|100/100\n|switch|p2a: Tea|Aerodactyl, L50, M|100/100\n|switch|p2b: Beer|Empoleon, L50, F|100/100\n|-ability|p2a: Tea|Unnerve\n|-ability|p1b: Incineroar|Intimidate|boost\n|-unboost|p2a: Tea|atk|1\n|-unboost|p2b: Beer|atk|1\n|-ability|p2b: Beer|Competitive|boost\n|-boost|p2b: Beer|spa|2\n|turn|1\n|\n|t:|1776736579\n|move|p2a: Tea|Protect|p2a: Tea\n|-singleturn|p2a: Tea|Protect\n|move|p1b: Incineroar|Fake Out|p2a: Tea\n|-activate|p2a: Tea|move: Protect\n|move|p2b: Beer|Surf|p1a: Lucario|[spread] p1a,p1b\n|-activate|p2a: Tea|move: Protect\n|-supereffective|p1b: Incineroar|1\n|-damage|p1a: Lucario|0 fnt\n|-damage|p1b: Incineroar|0 fnt\n|faint|p1a: Lucario\n|faint|p1b: Incineroar\n|\n|upkeep\n|-message|GengarScary forfeited.\n|\n|win|MrUCPosting\n|raw|GengarScary's rating: 1112 &rarr; <strong>1089</strong><br />(-23 for losing)\n|raw|MrUCPosting's rating: 1134 &rarr; <strong>1157</strong><br />(+23 for winning)\n|l|\u2606GengarScary\n|player|p1|\n",
+  "uploadtime": 1776736597,
+  "views": 2,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1089,
+  "private": 0,
+  "password": null
+}

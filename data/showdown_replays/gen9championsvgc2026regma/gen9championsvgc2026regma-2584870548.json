@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584870548",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "h2obama",
+    "Zwabber"
+  ],
+  "log": "|j|\u2606h2obama\n|j|\u2606Zwabber\n|t:|1776290228\n|gametype|doubles\n|player|p1|h2obama|2|1080\n|player|p2|Zwabber|169|1148\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Starmie, L50|\n|poke|p1|Aerodactyl, L50, F|\n|poke|p1|Tsareena, L50, F|\n|poke|p1|Milotic, L50, M|\n|poke|p1|Kleavor, L50, F|\n|poke|p1|Volcarona, L50, F|\n|poke|p2|Starmie, L50|\n|poke|p2|Aegislash, L50, M|\n|poke|p2|Tyranitar, L50, F|\n|poke|p2|Garchomp, L50, F|\n|poke|p2|Rotom-Heat, L50|\n|poke|p2|Aerodactyl, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Zwabber)\nZwabber rejected open team sheets.\n|\n|t:|1776290276\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Kleavor|Kleavor, L50, F|100/100\n|switch|p1b: Aerodactyl|Aerodactyl, L50, F|100/100\n|switch|p2a: Starmie|Starmie, L50|100/100\n|switch|p2b: Tyranitar|Tyranitar, L50, F|100/100\n|-ability|p1b: Aerodactyl|Unnerve\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p2b: Tyranitar\n|turn|1\n|\n|t:|1776290291\n|detailschange|p2a: Starmie|Starmie-Mega, L50\n|-mega|p2a: Starmie|Starmie|Starminite\n|move|p1a: Kleavor|Close Combat|p2b: Tyranitar\n|-supereffective|p2b: Tyranitar|2\n|-damage|p2b: Tyranitar|0 fnt\n|-unboost|p1a: Kleavor|def|1\n|-unboost|p1a: Kleavor|spd|1\n|faint|p2b: Tyranitar\n|move|p1b: Aerodactyl|Tailwind|p1b: Aerodactyl\n|-sidestart|p1: h2obama|move: Tailwind\n|move|p2a: Starmie|Skill Swap|p2: Tyranitar|[notarget]\n|-fail|p2a: Starmie\n|\n|-weather|Sandstorm|[upkeep]\n|-damage|p2a: Starmie|95/100|[from] Sandstorm\n|upkeep\n|c|\u2606Zwabber|didnt know that got cc\n|c|\u2606Zwabber|gg\n|-message|Zwabber forfeited.\n|\n|win|h2obama\n|raw|h2obama's rating: 1080 &rarr; <strong>1113</strong><br />(+33 for winning)\n|raw|Zwabber's rating: 1148 &rarr; <strong>1118</strong><br />(-30 for losing)\n|l|\u2606Zwabber\n|player|p2|\n|c|\u2606h2obama|gg\n",
+  "uploadtime": 1776290318,
+  "views": 28,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1113,
+  "private": 0,
+  "password": null
+}

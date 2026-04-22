@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2580924522",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "manumunzs",
+    "Aeterna Act 2"
+  ],
+  "log": "|j|\u2606manumunzs\n|j|\u2606Aeterna Act 2\n|t:|1775943781\n|gametype|doubles\n|player|p1|manumunzs|102|1172\n|player|p2|Aeterna Act 2|marnie|1193\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Archaludon, L50, M|\n|poke|p1|Pelipper, L50, M|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Dragonite, L50, M|\n|poke|p1|Sneasler, L50, F|\n|poke|p1|Incineroar, L50, M|\n|poke|p2|Charizard, L50, F|\n|poke|p2|Whimsicott, L50, M|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Venusaur, L50, F|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Farigiraf, L50, F|\n|teampreview|4\n|\n|t:|1775943826\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Sneasler|Sneasler, L50, F, shiny|100/100\n|switch|p1b: Dragonite|Dragonite, L50, M, shiny|100/100\n|switch|p2a: Charizard|Charizard, L50, F|100/100\n|switch|p2b: Basculegion|Basculegion, L50, M|100/100\n|turn|1\n|\n|t:|1775943849\n|switch|p2b: Farigiraf|Farigiraf, L50, F|100/100\n|switch|p1b: Pelipper|Pelipper, L50, M, shiny|100/100\n|-weather|RainDance|[from] ability: Drizzle|[of] p1b: Pelipper\n|detailschange|p2a: Charizard|Charizard-Mega-Y, L50, F\n|-mega|p2a: Charizard|Charizard|Charizardite Y\n|-weather|SunnyDay|[from] ability: Drought|[of] p2a: Charizard\n|move|p2a: Charizard|Weather Ball|p1a: Sneasler\n|-damage|p1a: Sneasler|0 fnt\n|faint|p1a: Sneasler\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by manumunzs)\n|-message|manumunzs forfeited.\n|\n|win|Aeterna Act 2\n|raw|manumunzs's rating: 1172 &rarr; <strong>1149</strong><br />(-23 for losing)\n|raw|Aeterna Act 2's rating: 1193 &rarr; <strong>1216</strong><br />(+23 for winning)\n|l|\u2606manumunzs\n|player|p1|\n",
+  "uploadtime": 1775943873,
+  "views": 12,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1149,
+  "private": 0,
+  "password": null
+}

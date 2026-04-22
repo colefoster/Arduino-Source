@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2588136959",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Dinz77",
+    "MegaArmarougeWhen"
+  ],
+  "log": "|j|\u2606Dinz77\n|j|\u2606MegaArmarougeWhen\n|t:|1776608097\n|gametype|doubles\n|player|p1|Dinz77|2|1247\n|player|p2|MegaArmarougeWhen|102|1216\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Heracross, L50, M|\n|poke|p1|Whimsicott, L50, F|\n|poke|p1|Politoed, L50, M|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Archaludon, L50, F|\n|poke|p2|Slowbro, L50, F|\n|poke|p2|Torterra, L50, F|\n|poke|p2|Chimecho, L50, M|\n|poke|p2|Toxapex, L50, M|\n|poke|p2|Corviknight, L50, M|\n|poke|p2|Incineroar, L50, F|\n|teampreview|4\nDinz77 has agreed to open team sheets.\n|\n|t:|1776608174\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Incineroar|Incineroar, L50, F|100/100\n|switch|p1b: Heracross|Heracross, L50, M|100/100\n|switch|p2a: Chimecho|Chimecho, L50, M|100/100\n|switch|p2b: Torterra|Torterra, L50, F|100/100\n|-ability|p1a: Incineroar|Intimidate|boost\n|-unboost|p2a: Chimecho|atk|1\n|-unboost|p2b: Torterra|atk|1\n|-enditem|p2b: Torterra|White Herb\n|-clearnegativeboost|p2b: Torterra|[silent]\n|turn|1\n|\n|t:|1776608194\n|detailschange|p1b: Heracross|Heracross-Mega, L50, M\n|-mega|p1b: Heracross|Heracross|Heracronite\n|detailschange|p2a: Chimecho|Chimecho-Mega, L50, M\n|-mega|p2a: Chimecho|Chimecho|Chimechite\n|move|p1a: Incineroar|Fake Out|p2a: Chimecho\n|-resisted|p2a: Chimecho|1\n|-damage|p2a: Chimecho|97/100\n|move|p1b: Heracross|Pin Missile|p2a: Chimecho\n|-damage|p2a: Chimecho|80/100\n|-damage|p2a: Chimecho|66/100\n|-damage|p2a: Chimecho|51/100\n|-damage|p2a: Chimecho|34/100\n|-crit|p2a: Chimecho\n|-damage|p2a: Chimecho|10/100\n|-hitcount|p2a: Chimecho|5\n|move|p2b: Torterra|Headlong Rush|p1a: Incineroar\n|-supereffective|p1a: Incineroar|1\n|-damage|p1a: Incineroar|16/100\n|-unboost|p2b: Torterra|def|1\n|-unboost|p2b: Torterra|spd|1\n|-enditem|p1a: Incineroar|Sitrus Berry|[eat]\n|-heal|p1a: Incineroar|41/100|[from] item: Sitrus Berry\n|cant|p2a: Chimecho|flinch\n|\n|upkeep\n|turn|2\n|-message|MegaArmarougeWhen forfeited.\n|\n|win|Dinz77\n|raw|Dinz77's rating: 1247 &rarr; <strong>1270</strong><br />(+23 for winning)\n|raw|MegaArmarougeWhen's rating: 1216 &rarr; <strong>1193</strong><br />(-23 for losing)\n|l|\u2606MegaArmarougeWhen\n|player|p2|\n|c|\u2606Dinz77|gg\n",
+  "uploadtime": 1776608229,
+  "views": 17,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1193,
+  "private": 0,
+  "password": null
+}

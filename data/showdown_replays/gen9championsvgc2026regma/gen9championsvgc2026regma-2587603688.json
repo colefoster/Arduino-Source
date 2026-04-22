@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2587603688",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "thewxfr",
+    "gasertheegyptain"
+  ],
+  "log": "|j|\u2606thewxfr\n|j|\u2606gasertheegyptain\n|t:|1776546147\n|gametype|doubles\n|player|p1|thewxfr|1|\n|player|p2|gasertheegyptain|unknown|\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Slowking-Galar, L50, M|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Beedrill, L50, F|\n|poke|p1|Ariados, L50, F|\n|poke|p1|Gengar, L50, M|\n|poke|p1|Glimmora, L50, M|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Ditto, L50|\n|poke|p2|Clefable, L50, F|\n|poke|p2|Vivillon, L50, F|\n|poke|p2|Sinistcha-Masterpiece, L50|\n|poke|p2|Polteageist, L50|\n|teampreview|4\nthewxfr rejected open team sheets.\n|\n|t:|1776546188\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Beedrill|Beedrill, L50, F|100/100\n|switch|p1b: Sneasler|Sneasler, L50, M|100/100\n|switch|p2a: Polteageist|Polteageist, L50|100/100\n|switch|p2b: Sinistcha|Sinistcha-Masterpiece, L50|100/100\n|turn|1\n|c|\u2606gasertheegyptain|come suck my di-\n|c|\u2606thewxfr|the two teacups\n|c|\u2606gasertheegyptain|yep\n|\n|t:|1776546213\n|detailschange|p1a: Beedrill|Beedrill-Mega, L50, F\n|-mega|p1a: Beedrill|Beedrill|Beedrillite\n|move|p2b: Sinistcha|Rage Powder|p2b: Sinistcha\n|-singleturn|p2b: Sinistcha|move: Rage Powder\n|move|p1a: Beedrill|Poison Jab|p2b: Sinistcha\n|-damage|p2b: Sinistcha|37/100\n|-enditem|p2b: Sinistcha|Sitrus Berry|[eat]\n|-heal|p2b: Sinistcha|62/100|[from] item: Sitrus Berry\n|move|p1b: Sneasler|Coaching|p1a: Beedrill\n|-boost|p1a: Beedrill|atk|1\n|-boost|p1a: Beedrill|def|1\n|move|p2a: Polteageist|Shell Smash|p2a: Polteageist\n|-unboost|p2a: Polteageist|def|1\n|-unboost|p2a: Polteageist|spd|1\n|-boost|p2a: Polteageist|atk|2\n|-boost|p2a: Polteageist|spa|2\n|-boost|p2a: Polteageist|spe|2\n|-enditem|p2a: Polteageist|White Herb\n|-clearnegativeboost|p2a: Polteageist|[silent]\n|\n|upkeep\n|turn|2\n|\n|t:|1776546235\n|move|p2b: Sinistcha|Rage Powder|p2b: Sinistcha\n|-singleturn|p2b: Sinistcha|move: Rage Powder\n|move|p1a: Beedrill|Poison Jab|p2b: Sinistcha\n|-damage|p2b: Sinistcha|0 fnt\n|faint|p2b: Sinistcha\n|move|p1b: Sneasler|Dire Claw|p2a: Polteageist\n|-resisted|p2a: Polteageist|1\n|-damage|p2a: Polteageist|66/100\n|-status|p2a: Polteageist|slp\n|cant|p2a: Polteageist|slp\n|\n|upkeep\n|-message|gasertheegyptain forfeited.\n|\n|win|thewxfr\n|l|\u2606gasertheegyptain\n|player|p2|\n|c|\u2606thewxfr|**this is why dire claw is stupid**\n",
+  "uploadtime": 1776546253,
+  "views": 11,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": null,
+  "private": 0,
+  "password": null
+}

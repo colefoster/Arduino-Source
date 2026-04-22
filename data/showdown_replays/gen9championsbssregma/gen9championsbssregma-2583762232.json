@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2583762232",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "NoSoyLuis33",
+    "LukaHuka"
+  ],
+  "log": "|j|\u2606NoSoyLuis33\n|j|\u2606LukaHuka\n|t:|1776195980\n|gametype|singles\n|player|p1|NoSoyLuis33|wallace|1102\n|player|p2|LukaHuka|102|1197\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Tinkaton, L50, F|\n|poke|p1|Starmie, L50|\n|poke|p1|Pelipper, L50, M|\n|poke|p1|Kingambit, L50, F|\n|poke|p1|Gengar, L50, F|\n|poke|p1|Sneasler, L50, F|\n|poke|p2|Gengar, L50, M|\n|poke|p2|Kingambit, L50, F|\n|poke|p2|Corviknight, L50, M|\n|poke|p2|Garchomp, L50, F|\n|poke|p2|Primarina, L50, M|\n|poke|p2|Ditto, L50|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by NoSoyLuis33)\n|\n|t:|1776195993\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Daia|Tinkaton, L50, F|100/100\n|switch|p2a: Gengar|Gengar, L50, M|100/100\n|turn|1\n|\n|t:|1776196003\n|detailschange|p2a: Gengar|Gengar-Mega, L50, M\n|-mega|p2a: Gengar|Gengar|Gengarite\n|move|p2a: Gengar|Shadow Ball|p1a: Daia\n|-damage|p1a: Daia|52/100\n|move|p1a: Daia|Gigaton Hammer|p2a: Gengar\n|-damage|p2a: Gengar|0 fnt\n|faint|p2a: Gengar\n|\n|upkeep\n|-message|LukaHuka forfeited.\n|\n|win|NoSoyLuis33\n|raw|NoSoyLuis33's rating: 1102 &rarr; <strong>1134</strong><br />(+32 for winning)\n|raw|LukaHuka's rating: 1197 &rarr; <strong>1165</strong><br />(-32 for losing)\n|l|\u2606LukaHuka\n|player|p2|\n",
+  "uploadtime": 1776196025,
+  "views": 26,
+  "formatid": "gen9championsbssregma",
+  "rating": 1134,
+  "private": 0,
+  "password": null
+}

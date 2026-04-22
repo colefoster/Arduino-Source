@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586737804",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "soulo333",
+    "Rikoris"
+  ],
+  "log": "|j|\u2606soulo333\n|j|\u2606Rikoris\n|t:|1776456010\n|gametype|doubles\n|player|p1|soulo333|2|1180\n|player|p2|Rikoris|lady|1192\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Charizard, L50, M|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Milotic, L50, F|\n|poke|p1|Tyranitar, L50, M|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Tauros-Paldea-Aqua, L50, M|\n|poke|p2|Froslass, L50, F|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Kingambit, L50, M|\n|poke|p2|Kleavor, L50, M|\n|teampreview|4\n|\n|t:|1776456035\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Milotic|Milotic, L50, F|100/100\n|switch|p1b: Sinistcha|Sinistcha, L50|100/100\n|switch|p2a: Kleavor|Kleavor, L50, M|100/100\n|switch|p2b: Sneasler|Sneasler, L50, F|100/100\n|turn|1\n|\n|t:|1776456067\n|switch|p2a: Tauros|Tauros-Paldea-Aqua, L50, M|100/100\n|-ability|p2a: Tauros|Intimidate|boost\n|-unboost|p1a: Milotic|atk|1\n|-ability|p1a: Milotic|Competitive|boost\n|-boost|p1a: Milotic|spa|2\n|-unboost|p1b: Sinistcha|atk|1\n|move|p2b: Sneasler|Dire Claw|p1b: Sinistcha\n|-damage|p1b: Sinistcha|63/100\n|move|p1a: Milotic|Scald|p2a: Tauros\n|-resisted|p2a: Tauros|1\n|-damage|p2a: Tauros|54/100\n|move|p1b: Sinistcha|Trick Room|p1b: Sinistcha\n|-fieldstart|move: Trick Room|[of] p1b: Sinistcha\n|\n|upkeep\n|turn|2\n|\n|t:|1776456091\n|move|p1b: Sinistcha|Matcha Gotcha|p2a: Tauros|[spread] p2a,p2b\n|-supereffective|p2a: Tauros|1\n|-resisted|p2b: Sneasler|1\n|-damage|p2a: Tauros|0 fnt\n|-heal|p1b: Sinistcha|86/100|[from] drain|[of] p2a: Tauros\n|-damage|p2b: Sneasler|79/100\n|-heal|p1b: Sinistcha|96/100|[from] drain|[of] p2b: Sneasler\n|-status|p2b: Sneasler|brn\n|faint|p2a: Tauros\n|move|p1a: Milotic|Scald|p2b: Sneasler\n|-damage|p2b: Sneasler|0 fnt\n|faint|p2b: Sneasler\n|\n|upkeep\n|-message|Rikoris forfeited.\n|\n|win|soulo333\n|raw|soulo333's rating: 1180 &rarr; <strong>1206</strong><br />(+26 for winning)\n|raw|Rikoris's rating: 1192 &rarr; <strong>1166</strong><br />(-26 for losing)\n",
+  "uploadtime": 1776456109,
+  "views": 28,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1166,
+  "private": 0,
+  "password": null
+}

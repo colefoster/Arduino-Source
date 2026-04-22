@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2584265268",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "joguri",
+    "jaseam"
+  ],
+  "log": "|j|\u2606joguri\n|j|\u2606jaseam\n|t:|1776244920\n|gametype|singles\n|player|p1|joguri|lass-gen4dp|1268\n|player|p2|jaseam|102|1332\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Pelipper, L50, F|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Archaludon, L50, F|\n|poke|p1|Meganium, L50, F|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Lucario, L50, M|\n|poke|p2|Meowscarada, L50, F|\n|poke|p2|Scizor, L50, M|\n|poke|p2|Charizard, L50, M|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Primarina, L50, F|\n|poke|p2|Aegislash, L50, M|\n|teampreview|3\n|\n|t:|1776244957\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Garchomp|Garchomp, L50, M|100/100\n|switch|p2a: Garchomp|Garchomp, L50, M|100/100\n|turn|1\n|\n|t:|1776244970\n|move|p1a: Garchomp|Earthquake|p2a: Garchomp\n|-damage|p2a: Garchomp|47/100\n|move|p2a: Garchomp|Stealth Rock|p1a: Garchomp\n|-sidestart|p1: joguri|move: Stealth Rock\n|\n|upkeep\n|turn|2\n|\n|t:|1776244976\n|move|p1a: Garchomp|Earthquake|p2a: Garchomp\n|-damage|p2a: Garchomp|0 fnt\n|faint|p2a: Garchomp\n|\n|upkeep\n|\n|t:|1776244979\n|switch|p2a: Meowscarada|Meowscarada, L50, F|100/100\n|turn|3\n|\n|t:|1776244989\n|switch|p1a: Briduras|Archaludon, L50, F|100/100\n|-damage|p1a: Briduras|95/100|[from] Stealth Rock\n|move|p2a: Meowscarada|Triple Axel|p1a: Briduras\n|-start|p2a: Meowscarada|typechange|Ice|[from] ability: Protean\n|-damage|p1a: Briduras|87/100\n|-ability|p1a: Briduras|Stamina|boost\n|-boost|p1a: Briduras|def|1\n|-damage|p1a: Briduras|77/100\n|-ability|p1a: Briduras|Stamina|boost\n|-boost|p1a: Briduras|def|1\n|-damage|p1a: Briduras|68/100\n|-ability|p1a: Briduras|Stamina|boost\n|-boost|p1a: Briduras|def|1\n|-hitcount|p1a: Briduras|3\n|\n|upkeep\n|turn|4\n|\n|t:|1776245005\n|switch|p2a: Scizor|Scizor, L50, M|100/100\n|move|p1a: Briduras|Aura Sphere|p2a: Scizor\n|-crit|p2a: Scizor\n|-damage|p2a: Scizor|41/100\n|\n|upkeep\n|turn|5\n|j| p74\n|\n|t:|1776245019\n|detailschange|p2a: Scizor|Scizor-Mega, L50, M\n|-mega|p2a: Scizor|Scizor|Scizorite\n|move|p1a: Briduras|Draco Meteor|p2a: Scizor\n|-resisted|p2a: Scizor|1\n|-damage|p2a: Scizor|2/100\n|-unboost|p1a: Briduras|spa|2\n|move|p2a: Scizor|Swords Dance|p2a: Scizor\n|-boost|p2a: Scizor|atk|2\n|\n|upkeep\n|turn|6\n|\n|t:|1776245030\n|move|p1a: Briduras|Aura Sphere|p2a: Scizor\n|-damage|p2a: Scizor|0 fnt\n|faint|p2a: Scizor\n|\n|upkeep\n|-message|jaseam forfeited.\n|\n|win|joguri\n|raw|joguri's rating: 1268 &rarr; <strong>1298</strong><br />(+30 for winning)\n|raw|jaseam's rating: 1332 &rarr; <strong>1308</strong><br />(-24 for losing)\n|l|\u2606jaseam\n|player|p2|\n|l|\u2606joguri\n|player|p1|\n",
+  "uploadtime": 1776245054,
+  "views": 6,
+  "formatid": "gen9championsbssregma",
+  "rating": 1298,
+  "private": 0,
+  "password": null
+}

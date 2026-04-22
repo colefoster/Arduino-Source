@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2583005974",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Gaby Glytxii",
+    "TickleBigMeat28"
+  ],
+  "log": "|j|\u2606Gaby Glytxii\n|j|\u2606TickleBigMeat28\n|t:|1776132687\n|gametype|doubles\n|player|p1|Gaby Glytxii|102|1099\n|player|p2|TickleBigMeat28|brycenman|1029\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Gallade, L50, M|\n|poke|p1|Volcarona, L50, F|\n|poke|p1|Zoroark-Hisui, L50, M|\n|poke|p1|Espeon, L50, F|\n|poke|p1|Weavile, L50, F|\n|poke|p1|Meowstic-F, L50, F|\n|poke|p2|Charizard, L50, M|\n|poke|p2|Venusaur, L50, F|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Typhlosion-Hisui, L50, F|\n|poke|p2|Whimsicott, L50, M|\n|poke|p2|Incineroar, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by TickleBigMeat28)\n|inactive|Gaby Glytxii has 60 seconds left.\n|\n|t:|1776132750\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Meowstic|Meowstic-F, L50, F|100/100\n|switch|p1b: Volcarona|Volcarona, L50, F|100/100\n|switch|p2a: Charizard|Charizard, L50, M, shiny|100/100\n|switch|p2b: Typhlosion|Typhlosion-Hisui, L50, F|100/100\n|-item|p1a: Meowstic|Sitrus Berry|[from] ability: Frisk|[of] p2b: Typhlosion\n|-item|p1b: Volcarona|Focus Sash|[from] ability: Frisk|[of] p2b: Typhlosion\n|turn|1\n|\n|t:|1776132762\n|detailschange|p2a: Charizard|Charizard-Mega-Y, L50, M, shiny\n|-mega|p2a: Charizard|Charizard|Charizardite Y\n|-weather|SunnyDay|[from] ability: Drought|[of] p2a: Charizard\n|move|p2b: Typhlosion|Eruption|p1a: Meowstic|[spread] p1a,p1b\n|-damage|p1a: Meowstic|0 fnt\n|-enditem|p1b: Volcarona|Focus Sash\n|-damage|p1b: Volcarona|1/100\n|replace|p1a: Zoroark|Zoroark-Hisui, L50, M\n|-end|p1a: Zoroark|Illusion\n|faint|p1a: Zoroark\n|move|p1b: Volcarona|Tailwind|p1b: Volcarona\n|-sidestart|p1: Gaby Glytxii|move: Tailwind\n|move|p2a: Charizard|Heat Wave|p1b: Volcarona\n|-damage|p1b: Volcarona|0 fnt\n|faint|p1b: Volcarona\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|-message|Gaby Glytxii forfeited.\n|\n|win|TickleBigMeat28\n|raw|Gaby Glytxii's rating: 1099 &rarr; <strong>1069</strong><br />(-30 for losing)\n|raw|TickleBigMeat28's rating: 1029 &rarr; <strong>1072</strong><br />(+43 for winning)\n",
+  "uploadtime": 1776132775,
+  "views": 12,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1069,
+  "private": 0,
+  "password": null
+}

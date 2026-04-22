@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2583225897",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "RevenClop",
+    "Ribbonchu"
+  ],
+  "log": "|j|\u2606RevenClop\n|j|\u2606Ribbonchu\n|t:|1776156832\n|gametype|doubles\n|player|p1|RevenClop|gentleman-gen4|1053\n|player|p2|Ribbonchu|101|1000\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Corviknight, L50, F|\n|poke|p1|Pelipper, L50, M|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Tyranitar, L50, M|\n|poke|p1|Excadrill, L50, M|\n|poke|p2|Zoroark-Hisui, L50, F|\n|poke|p2|Sylveon, L50, F|\n|poke|p2|Dragonite, L50, M|\n|poke|p2|Politoed, L50, M|\n|poke|p2|Whimsicott, L50, F|\n|poke|p2|Lucario, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by RevenClop)\n|\n|t:|1776156900\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Tyranitar|Tyranitar, L50, M|100/100\n|switch|p1b: Incineroar|Incineroar, L50, M|100/100\n|switch|p2a: Dragonite|Dragonite, L50, M, shiny|100/100\n|switch|p2b: Politoed|Politoed, L50, M, shiny|100/100\n|-ability|p1b: Incineroar|Intimidate|boost\n|-unboost|p2a: Dragonite|atk|1\n|-unboost|p2b: Politoed|atk|1\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p1a: Tyranitar\n|turn|1\n|-message|Ribbonchu forfeited.\n|\n|win|RevenClop\n|raw|RevenClop's rating: 1053 &rarr; <strong>1080</strong><br />(+27 for winning)\n|raw|Ribbonchu's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|l|\u2606Ribbonchu\n|player|p2|\n",
+  "uploadtime": 1776156920,
+  "views": 18,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

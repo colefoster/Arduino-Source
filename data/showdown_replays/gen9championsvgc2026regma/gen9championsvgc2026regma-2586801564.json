@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586801564",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "fumbari 24",
+    "General_XY"
+  ],
+  "log": "|j|\u2606fumbari 24\n|j|\u2606General_XY\n|t:|1776461027\n|gametype|doubles\n|player|p1|fumbari 24|ghetsis|1268\n|player|p2|General_XY|265|1345\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Blastoise, L50, M|\n|poke|p1|Pelipper, L50, M|\n|poke|p1|Raichu, L50, M|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Archaludon, L50, M|\n|poke|p1|Lycanroc-Dusk, L50, M|\n|poke|p2|Charizard, L50, M|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Sinistcha-Masterpiece, L50|\n|poke|p2|Aerodactyl, L50, F|\n|poke|p2|Kingambit, L50, M|\n|poke|p2|Tauros-Paldea-Blaze, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by fumbari 24)\n|\n|t:|1776461056\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Pippins|Raichu, L50, M|100/100\n|switch|p1b: Harbor|Blastoise, L50, M|100/100\n|switch|p2a: Floette|Floette-Eternal, L50, F|100/100\n|switch|p2b: Kingambit|Kingambit, L50, M|100/100\n|turn|1\n|\n|t:|1776461075\n|detailschange|p2a: Floette|Floette-Mega, L50, F\n|-mega|p2a: Floette|Floette|Floettite\n|-ability|p2a: Floette|Fairy Aura\n|detailschange|p1b: Harbor|Blastoise-Mega, L50, M\n|-mega|p1b: Harbor|Blastoise|Blastoisinite\n|move|p1a: Pippins|Fake Out|p2a: Floette\n|-damage|p2a: Floette|91/100\n|cant|p2a: Floette|flinch\n|move|p1b: Harbor|Shell Smash|p1b: Harbor\n|-unboost|p1b: Harbor|def|1\n|-unboost|p1b: Harbor|spd|1\n|-boost|p1b: Harbor|atk|2\n|-boost|p1b: Harbor|spa|2\n|-boost|p1b: Harbor|spe|2\n|move|p2b: Kingambit|Swords Dance|p2b: Kingambit\n|-boost|p2b: Kingambit|atk|2\n|\n|upkeep\n|turn|2\n|inactive|General_XY has 30 seconds left.\n|\n|t:|1776461100\n|move|p1a: Pippins|Upper Hand|p2b: Kingambit\n|-supereffective|p2b: Kingambit|2\n|-damage|p2b: Kingambit|62/100\n|cant|p2b: Kingambit|flinch\n|move|p1b: Harbor|Water Spout|p2a: Floette|[spread] p2a,p2b\n|-damage|p2a: Floette|0 fnt\n|-damage|p2b: Kingambit|0 fnt\n|faint|p2a: Floette\n|faint|p2b: Kingambit\n|\n|upkeep\n|inactive|General_XY has 30 seconds left.\n|inactive|General_XY has 20 seconds left.\n|inactive|General_XY has 15 seconds left.\n|inactive|General_XY has 10 seconds left.\n|\n|t:|1776461148\n|switch|p2a: Tauros|Tauros-Paldea-Blaze, L50, M|100/100\n|switch|p2b: Sinistcha|Sinistcha-Masterpiece, L50|100/100\n|-ability|p2a: Tauros|Intimidate|boost\n|-unboost|p1a: Pippins|atk|1\n|-unboost|p1b: Harbor|atk|1\n|turn|3\n|-message|General_XY forfeited.\n|\n|win|fumbari 24\n|raw|fumbari 24's rating: 1268 &rarr; <strong>1298</strong><br />(+30 for winning)\n|raw|General_XY's rating: 1345 &rarr; <strong>1321</strong><br />(-24 for losing)\n|l|\u2606General_XY\n|player|p2|\n",
+  "uploadtime": 1776461158,
+  "views": 32,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1298,
+  "private": 0,
+  "password": null
+}

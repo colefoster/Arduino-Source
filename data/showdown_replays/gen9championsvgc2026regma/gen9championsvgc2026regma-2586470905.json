@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586470905",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "vgctest658",
+    "mezooki"
+  ],
+  "log": "|j|\u2606vgctest658\n|j|\u2606mezooki\n|t:|1776436947\n|gametype|doubles\n|player|p1|vgctest658|hilbert-wonderlauncher|1109\n|player|p2|mezooki|lady|1199\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Aegislash, L50, M|\n|poke|p1|Primarina, L50, F|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Scovillain, L50, F|\n|poke|p2|Victreebel, L50, F|\n|poke|p2|Torkoal, L50, M|\n|poke|p2|Kingambit, L50, M|\n|poke|p2|Oranguru, L50, F|\n|poke|p2|Drampa, L50, F|\n|poke|p2|Runerigus, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by mezooki)\n|inactive|vgctest658 has 60 seconds left.\n|inactive|mezooki has 60 seconds left.\n|\n|t:|1776436996\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Scovillain|Scovillain, L50, F|100/100\n|switch|p1b: Primarina|Primarina, L50, F, shiny|100/100\n|switch|p2a: Runerigus|Runerigus, L50, F|100/100\n|switch|p2b: Kingambit|Kingambit, L50, M|100/100\n|turn|1\n|\n|t:|1776437011\n|switch|p2b: Drampa|Drampa, L50, F|100/100\n|detailschange|p1a: Scovillain|Scovillain-Mega, L50, F\n|-mega|p1a: Scovillain|Scovillain|Scovillainite\n|move|p1a: Scovillain|Leaf Storm|p2a: Runerigus\n|-supereffective|p2a: Runerigus|1\n|-damage|p2a: Runerigus|0 fnt\n|-unboost|p1a: Scovillain|spa|2\n|faint|p2a: Runerigus\n|move|p1b: Primarina|Calm Mind|p1b: Primarina\n|-boost|p1b: Primarina|spa|1\n|-boost|p1b: Primarina|spd|1\n|\n|upkeep\n|-message|mezooki forfeited.\n|\n|win|vgctest658\n|raw|vgctest658's rating: 1109 &rarr; <strong>1140</strong><br />(+31 for winning)\n|raw|mezooki's rating: 1199 &rarr; <strong>1168</strong><br />(-31 for losing)\n|l|\u2606mezooki\n|player|p2|\n",
+  "uploadtime": 1776437026,
+  "views": 17,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1140,
+  "private": 0,
+  "password": null
+}

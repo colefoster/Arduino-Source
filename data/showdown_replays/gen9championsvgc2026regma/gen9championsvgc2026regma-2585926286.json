@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2585926286",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Killian89",
+    "NabbitXz26"
+  ],
+  "log": "|j|\u2606Killian89\n|j|\u2606NabbitXz26\n|t:|1776382098\n|gametype|doubles\n|player|p1|Killian89|101|1170\n|player|p2|NabbitXz26|red|1258\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Blastoise, L50, M|\n|poke|p1|Heliolisk, L50, M|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Sableye, L50, F|\n|poke|p1|Rotom-Wash, L50|\n|poke|p1|Gyarados, L50, M|\n|poke|p2|Charizard, L50, M|\n|poke|p2|Venusaur, L50, M|\n|poke|p2|Garchomp, L50, F|\n|poke|p2|Sneasler, L50, F|\n|poke|p2|Kingambit, L50, F|\n|poke|p2|Farigiraf, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Killian89)\n|\n|t:|1776382147\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Heliolisk|Heliolisk, L50, M|100/100\n|switch|p1b: Sableye|Sableye, L50, F|100/100\n|switch|p2a: Farigiraf|Farigiraf, L50, F|100/100\n|switch|p2b: Sneasler|Sneasler, L50, F|100/100\n|turn|1\n|inactive|Killian89 has 30 seconds left.\n|\n|t:|1776382177\n|move|p2b: Sneasler|Protect|p2b: Sneasler\n|-singleturn|p2b: Sneasler|Protect\n|move|p1a: Heliolisk|Protect|p1a: Heliolisk\n|-singleturn|p1a: Heliolisk|Protect\n|move|p1b: Sableye|Will-O-Wisp||[still]\n|cant|p2a: Farigiraf|ability: Armor Tail|Will-O-Wisp|[of] p1b: Sableye\n|move|p2a: Farigiraf|Imprison|p2a: Farigiraf\n|-start|p2a: Farigiraf|move: Imprison\n|\n|upkeep\n|turn|2\n|inactive|Killian89 has 30 seconds left.\n|\n|t:|1776382202\n|switch|p1a: Incineroar|Incineroar, L50, F|100/100\n|-ability|p1a: Incineroar|Intimidate|boost\n|-unboost|p2a: Farigiraf|atk|1\n|-unboost|p2b: Sneasler|atk|1\n|-enditem|p2b: Sneasler|White Herb\n|-clearnegativeboost|p2b: Sneasler|[silent]\n|move|p1b: Sableye|Will-O-Wisp||[still]\n|cant|p2a: Farigiraf|ability: Armor Tail|Will-O-Wisp|[of] p1b: Sableye\n|move|p2b: Sneasler|Close Combat|p1a: Incineroar\n|-supereffective|p1a: Incineroar|1\n|-damage|p1a: Incineroar|0 fnt\n|-unboost|p2b: Sneasler|def|1\n|-unboost|p2b: Sneasler|spd|1\n|faint|p1a: Incineroar\n|move|p2a: Farigiraf|Psychic|p1b: Sableye\n|-immune|p1b: Sableye\n|\n|upkeep\n|\n|t:|1776382213\n|switch|p1a: Heliolisk|Heliolisk, L50, M|100/100\n|turn|3\n|-message|Killian89 forfeited.\n|\n|win|NabbitXz26\n|raw|Killian89's rating: 1170 &rarr; <strong>1151</strong><br />(-19 for losing)\n|raw|NabbitXz26's rating: 1258 &rarr; <strong>1277</strong><br />(+19 for winning)\n|l|\u2606Killian89\n|player|p1|\n",
+  "uploadtime": 1776382230,
+  "views": 21,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1151,
+  "private": 0,
+  "password": null
+}

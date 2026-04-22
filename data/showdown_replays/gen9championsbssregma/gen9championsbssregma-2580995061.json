@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2580995061",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "EstemanACG1",
+    "trollfyrsten"
+  ],
+  "log": "|j|\u2606EstemanACG1\n|j|\u2606trollfyrsten\n|t:|1775950009\n|gametype|singles\n|player|p1|EstemanACG1|riley|1109\n|player|p2|trollfyrsten|102|1111\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Kommo-o, L50, M|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Mimikyu, L50, M|\n|poke|p1|Feraligatr, L50, M|\n|poke|p1|Primarina, L50, M|\n|poke|p1|Chandelure, L50, M|\n|poke|p2|Krookodile, L50, M|\n|poke|p2|Samurott-Hisui, L50, F|\n|poke|p2|Gengar, L50, F|\n|poke|p2|Quaquaval, L50, F|\n|poke|p2|Vivillon, L50, F|\n|poke|p2|Toxapex, L50, F|\n|teampreview|3\n|c|\u2606EstemanACG1|glhf\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by EstemanACG1)\n|\n|t:|1775950073\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Primarina|Primarina, L50, M|100/100\n|switch|p2a: Krookodile|Krookodile, L50, M|100/100\n|turn|1\n|\n|t:|1775950085\n|move|p2a: Krookodile|Gunk Shot|p1a: Primarina\n|-supereffective|p1a: Primarina|1\n|-damage|p1a: Primarina|28/100\n|-status|p1a: Primarina|psn\n|move|p1a: Primarina|Surf|p2a: Krookodile\n|-supereffective|p2a: Krookodile|1\n|-damage|p2a: Krookodile|0 fnt\n|faint|p2a: Krookodile\n|\n|-heal|p1a: Primarina|34/100 psn|[from] item: Leftovers\n|-damage|p1a: Primarina|21/100 psn|[from] psn\n|upkeep\n|\n|t:|1775950103\n|switch|p2a: Quaquaval|Quaquaval, L50, F|100/100\n|turn|2\n|\n|t:|1775950110\n|move|p2a: Quaquaval|Aqua Step|p1a: Primarina\n|-resisted|p1a: Primarina|1\n|-damage|p1a: Primarina|5/100 psn\n|-boost|p2a: Quaquaval|spe|1\n|move|p1a: Primarina|Energy Ball|p2a: Quaquaval\n|-supereffective|p2a: Quaquaval|1\n|-damage|p2a: Quaquaval|31/100\n|\n|-heal|p1a: Primarina|11/100 psn|[from] item: Leftovers\n|-damage|p1a: Primarina|0 fnt|[from] psn\n|faint|p1a: Primarina\n|upkeep\n|\n|t:|1775950115\n|switch|p1a: Kommo-o|Kommo-o, L50, M|100/100\n|turn|3\n|\n|t:|1775950130\n|move|p2a: Quaquaval|Close Combat|p1a: Kommo-o\n|-damage|p1a: Kommo-o|42/100\n|-unboost|p2a: Quaquaval|def|1\n|-unboost|p2a: Quaquaval|spd|1\n|-enditem|p1a: Kommo-o|Sitrus Berry|[eat]\n|-heal|p1a: Kommo-o|67/100|[from] item: Sitrus Berry\n|move|p1a: Kommo-o|Clangorous Soul|p1a: Kommo-o\n|-boost|p1a: Kommo-o|atk|1\n|-boost|p1a: Kommo-o|def|1\n|-boost|p1a: Kommo-o|spa|1\n|-boost|p1a: Kommo-o|spd|1\n|-boost|p1a: Kommo-o|spe|1\n|-damage|p1a: Kommo-o|34/100\n|\n|upkeep\n|turn|4\n|-message|trollfyrsten forfeited.\n|\n|win|EstemanACG1\n|raw|EstemanACG1's rating: 1109 &rarr; <strong>1134</strong><br />(+25 for winning)\n|raw|trollfyrsten's rating: 1111 &rarr; <strong>1086</strong><br />(-25 for losing)\n|l|\u2606trollfyrsten\n|player|p2|\n",
+  "uploadtime": 1775950142,
+  "views": 14,
+  "formatid": "gen9championsbssregma",
+  "rating": 1086,
+  "private": 0,
+  "password": null
+}

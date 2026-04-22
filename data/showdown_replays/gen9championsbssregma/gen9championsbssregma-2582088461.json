@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsbssregma-2582088461",
+  "format": "[Gen 9 Champions] BSS Reg M-A",
+  "players": [
+    "coffeineadd1ct",
+    "Tripb85"
+  ],
+  "log": "|j|\u2606coffeineadd1ct\n|j|\u2606Tripb85\n|t:|1776056387\n|gametype|singles\n|player|p1|coffeineadd1ct|265|1176\n|player|p2|Tripb85|lida|1119\n|gen|9\n|tier|[Gen 9 Champions] BSS Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Kangaskhan, L50, F|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Rotom-Wash, L50|\n|poke|p1|Aegislash, L50, M|\n|poke|p1|Greninja-*, L50, M|\n|poke|p1|Mimikyu, L50, F|\n|poke|p2|Espathra, L50, M|\n|poke|p2|Clefable, L50, F|\n|poke|p2|Dragapult, L50, F|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Pelipper, L50, F|\n|poke|p2|Feraligatr, L50, M|\n|teampreview|3\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by coffeineadd1ct)\n|inactive|coffeineadd1ct has 60 seconds left.\n|\n|t:|1776056421\n|teamsize|p1|3\n|teamsize|p2|3\n|start\n|switch|p1a: Aegislash|Aegislash, L50, M, shiny|100/100\n|switch|p2a: Dragapult|Dragapult, L50, F|100/100\n|turn|1\n|\n|t:|1776056438\n|move|p2a: Dragapult|Double Team|p2a: Dragapult\n|-boost|p2a: Dragapult|evasion|1\n|-formechange|p1a: Aegislash|Aegislash-Blade|\n|move|p1a: Aegislash|Shadow Ball|p2a: Dragapult\n|-supereffective|p2a: Dragapult|1\n|-damage|p2a: Dragapult|0 fnt\n|faint|p2a: Dragapult\n|\n|upkeep\n|\n|t:|1776056452\n|switch|p2a: Espathra|Espathra, L50, M|100/100\n|turn|2\n|\n|t:|1776056458\n|move|p2a: Espathra|Protect|p2a: Espathra\n|-singleturn|p2a: Espathra|Protect\n|move|p1a: Aegislash|Shadow Ball|p2a: Espathra\n|-activate|p2a: Espathra|move: Protect\n|\n|-ability|p2a: Espathra|Speed Boost|boost\n|-boost|p2a: Espathra|spe|1\n|upkeep\n|turn|3\n|\n|t:|1776056466\n|move|p2a: Espathra|Calm Mind|p2a: Espathra\n|-boost|p2a: Espathra|spa|1\n|-boost|p2a: Espathra|spd|1\n|move|p1a: Aegislash|Shadow Ball|p2a: Espathra\n|-supereffective|p2a: Espathra|1\n|-damage|p2a: Espathra|0 fnt\n|faint|p2a: Espathra\n|\n|upkeep\n|-message|Tripb85 forfeited.\n|\n|win|coffeineadd1ct\n|raw|coffeineadd1ct's rating: 1176 &rarr; <strong>1197</strong><br />(+21 for winning)\n|raw|Tripb85's rating: 1119 &rarr; <strong>1098</strong><br />(-21 for losing)\n|l|\u2606Tripb85\n|player|p2|\n|l|\u2606coffeineadd1ct\n|player|p1|\n|j| p74\n",
+  "uploadtime": 1776056546,
+  "views": 6,
+  "formatid": "gen9championsbssregma",
+  "rating": 1098,
+  "private": 0,
+  "password": null
+}

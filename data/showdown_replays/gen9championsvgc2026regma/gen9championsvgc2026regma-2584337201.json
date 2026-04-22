@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2584337201",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "MvillMpersonality",
+    "Thombom69"
+  ],
+  "log": "|j|\u2606MvillMpersonality\n|j|\u203dThombom69\n|t:|1776252623\n|gametype|doubles\n|player|p1|MvillMpersonality|pokemaniac|1270\n|player|p2|Thombom69|170|1203\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Scovillain, L50, F|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Gallade, L50, M|\n|poke|p1|Kingambit, L50, M|\n|poke|p1|Rhyperior, L50, M|\n|poke|p1|Primarina, L50, F|\n|poke|p2|Floette-Eternal, L50, F|\n|poke|p2|Gardevoir, L50, M|\n|poke|p2|Whimsicott, L50, F|\n|poke|p2|Typhlosion-Hisui, L50, F|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Sneasler, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Thombom69)\n|inactive|MvillMpersonality has 60 seconds left.\n|\n|t:|1776252669\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Scovillain|Scovillain, L50, F|100/100\n|switch|p1b: Kingambit|Kingambit, L50, M|100/100\n|switch|p2a: Floette|Floette-Eternal, L50, F|100/100\n|switch|p2b: Sneasler|Sneasler, L50, F|100/100\n|turn|1\n|inactive|MvillMpersonality has 30 seconds left.\n|\n|t:|1776252695\n|detailschange|p2a: Floette|Floette-Mega, L50, F\n|-mega|p2a: Floette|Floette|Floettite\n|-ability|p2a: Floette|Fairy Aura\n|detailschange|p1a: Scovillain|Scovillain-Mega, L50, F\n|-mega|p1a: Scovillain|Scovillain|Scovillainite\n|move|p1b: Kingambit|Protect|p1b: Kingambit\n|-singleturn|p1b: Kingambit|Protect\n|move|p2b: Sneasler|Fake Out|p1b: Kingambit\n|-activate|p1b: Kingambit|move: Protect\n|move|p2a: Floette|Calm Mind|p2a: Floette\n|-boost|p2a: Floette|spa|1\n|-boost|p2a: Floette|spd|1\n|move|p1a: Scovillain|Overheat|p2a: Floette\n|-damage|p2a: Floette|72/100\n|-unboost|p1a: Scovillain|spa|2\n|\n|upkeep\n|turn|2\n|\n|t:|1776252717\n|switch|p2b: Gardevoir|Gardevoir, L50, M|100/100\n|-ability|p2b: Gardevoir|Defiant|Trace|[from] ability: Trace|[of] p1b: Kingambit\n|move|p1a: Scovillain|Rage Powder|p1a: Scovillain\n|-singleturn|p1a: Scovillain|move: Rage Powder\n|move|p2a: Floette|Calm Mind|p2a: Floette\n|-boost|p2a: Floette|spa|1\n|-boost|p2a: Floette|spd|1\n|move|p1b: Kingambit|Iron Head|p2a: Floette\n|-supereffective|p2a: Floette|1\n|-damage|p2a: Floette|0 fnt\n|faint|p2a: Floette\n|\n|upkeep\n|\n|t:|1776252732\n|switch|p2a: Incineroar|Incineroar, L50, F|100/100\n|-ability|p2a: Incineroar|Intimidate|boost\n|-unboost|p1a: Scovillain|atk|1\n|-unboost|p1b: Kingambit|atk|1\n|-ability|p1b: Kingambit|Defiant|boost\n|-boost|p1b: Kingambit|atk|2\n|turn|3\n|-message|Thombom69 forfeited.\n|\n|win|MvillMpersonality\n|raw|MvillMpersonality's rating: 1270 &rarr; <strong>1290</strong><br />(+20 for winning)\n|raw|Thombom69's rating: 1203 &rarr; <strong>1183</strong><br />(-20 for losing)\n|l|\u203dThombom69\n|player|p2|\n",
+  "uploadtime": 1776252741,
+  "views": 25,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1183,
+  "private": 0,
+  "password": null
+}

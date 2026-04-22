@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2588654908",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "powersmith",
+    "sirchowxd"
+  ],
+  "log": "|j|\u2606powersmith\n|j|\u2606sirchowxd\n|t:|1776654295\n|gametype|doubles\n|player|p1|powersmith|palmer|1039\n|player|p2|sirchowxd|nate|1106\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Tyranitar, L50, F|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Empoleon, L50, M|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Whimsicott, L50, M|\n|poke|p1|Rotom-Fan, L50|\n|poke|p2|Farigiraf, L50, F|\n|poke|p2|Drampa, L50, F|\n|poke|p2|Kingambit, L50, M|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Torkoal, L50, M|\n|poke|p2|Skarmory, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by sirchowxd)\n|inactive|powersmith has 60 seconds left.\n|inactive|sirchowxd has 60 seconds left.\n|inactive|sirchowxd has 30 seconds left.\n|inactive|sirchowxd has 20 seconds left.\n|\n|t:|1776654368\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Garchomp|Garchomp, L50, M|100/100\n|switch|p1b: Tyranitar|Tyranitar, L50, F|100/100\n|switch|p2a: Farigiraf|Farigiraf, L50, F|100/100\n|switch|p2b: Drampa|Drampa, L50, F|100/100\n|-weather|Sandstorm|[from] ability: Sand Stream|[of] p1b: Tyranitar\n|-ability|p2b: Drampa|Cloud Nine\n|turn|1\n|inactive|powersmith has 30 seconds left.\n|inactive|powersmith has 20 seconds left.\n|inactive|powersmith has 15 seconds left.\n|\n|t:|1776654409\n|detailschange|p1a: Garchomp|Garchomp-Mega, L50, M\n|-mega|p1a: Garchomp|Garchomp|Garchompite\n|move|p2b: Drampa|Protect|p2b: Drampa\n|-singleturn|p2b: Drampa|Protect\n|move|p1a: Garchomp|Outrage|p2b: Drampa\n|-activate|p2b: Drampa|move: Protect\n|move|p1b: Tyranitar|Knock Off|p2a: Farigiraf\n|-supereffective|p2a: Farigiraf|1\n|-damage|p2a: Farigiraf|0 fnt\n|-enditem|p2a: Farigiraf|Sitrus Berry|[from] move: Knock Off|[of] p1b: Tyranitar\n|faint|p2a: Farigiraf\n|\n|-weather|Sandstorm|[upkeep]\n|upkeep\n|\n|t:|1776654426\n|switch|p2a: Kingambit|Kingambit, L50, M|100/100\n|turn|2\n|\n|t:|1776654440\n|switch|p2b: Sinistcha|Sinistcha, L50|100/100\n|move|p1b: Tyranitar|Protect|p1b: Tyranitar\n|-singleturn|p1b: Tyranitar|Protect\n|move|p1a: Garchomp|Outrage|p2b: Sinistcha\n|-damage|p2b: Sinistcha|22/100\n|move|p2a: Kingambit|Iron Head|p1b: Tyranitar\n|-activate|p1b: Tyranitar|move: Protect\n|\n|-weather|Sandstorm|[upkeep]\n|-damage|p2b: Sinistcha|16/100|[from] Sandstorm\n|upkeep\n|turn|3\n|-message|sirchowxd forfeited.\n|\n|win|powersmith\n|raw|powersmith's rating: 1039 &rarr; <strong>1080</strong><br />(+41 for winning)\n|raw|sirchowxd's rating: 1106 &rarr; <strong>1076</strong><br />(-30 for losing)\n|l|\u2606sirchowxd\n|player|p2|\n",
+  "uploadtime": 1776654454,
+  "views": 7,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1076,
+  "private": 0,
+  "password": null
+}

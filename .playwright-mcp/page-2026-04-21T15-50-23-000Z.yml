@@ -1,0 +1,540 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e4]:
+        - link "MetaVGC logo MetaVGC" [ref=e6] [cursor=pointer]:
+          - /url: /
+          - img "MetaVGC logo" [ref=e9]
+          - generic [ref=e10]: MetaVGC
+        - navigation "Main navigation" [ref=e11]:
+          - generic [ref=e12]:
+            - menu [ref=e13]:
+              - menuitem "Home" [ref=e14] [cursor=pointer]
+              - menuitem "Team Builder" [ref=e15] [cursor=pointer]
+              - menuitem "Damage calc" [ref=e16] [cursor=pointer]
+              - menuitem "Guides" [ref=e17] [cursor=pointer]
+            - group "Site language" [ref=e18]:
+              - radiogroup "segmented control" [ref=e19]:
+                - generic [ref=e20]:
+                  - generic [ref=e21] [cursor=pointer]:
+                    - radio "EN" [checked]
+                    - generic [ref=e23]:
+                      - generic [ref=e24]: 🇬🇧
+                      - text: EN
+                  - generic [ref=e25] [cursor=pointer]:
+                    - radio "PT"
+                    - generic [ref=e27]:
+                      - generic [ref=e28]: 🇧🇷
+                      - text: PT
+            - button "Switch to dark theme" [ref=e29] [cursor=pointer]:
+              - img [ref=e31]
+    - main [ref=e33]:
+      - main [ref=e36]:
+        - heading "Best Pokémon Champions Teams" [level=1] [ref=e38]
+        - separator [ref=e39]
+        - generic [ref=e42]:
+          - generic [ref=e43]:
+            - generic: Search teams by name, move, item, or ability...
+            - combobox [ref=e44]
+          - img "down" [ref=e46]:
+            - img [ref=e47]
+        - generic [ref=e49]:
+          - generic [ref=e51]: Featured
+          - generic [ref=e53]:
+            - link "Mega Evolution teams Stay on top of the Champions meta — browse top tournament teams from the current format." [ref=e54] [cursor=pointer]:
+              - /url: /teams/featured/mega-evolutions
+              - generic [ref=e56]:
+                - heading "Mega Evolution teams" [level=2] [ref=e57]
+                - paragraph [ref=e58]: Stay on top of the Champions meta — browse top tournament teams from the current format.
+            - generic [ref=e59]:
+              - 'link "QueerCrocodile - PokePoke Champions Cup #1st" [ref=e60] [cursor=pointer]':
+                - /url: /teams/queercrocodile-pokepoke-champions-cup-1st--lot-69dd61af48d465883f712db3-queercrocodile
+                - 'heading "QueerCrocodile - PokePoke Champions Cup #1st" [level=3] [ref=e61]'
+                - generic [ref=e62]:
+                  - img "Gardevoir-Mega" [ref=e64]
+                  - img "Primarina" [ref=e66]
+                  - img "Whimsicott" [ref=e68]
+                  - img "Sneasler" [ref=e70]
+                  - img "Arcanine-Hisui" [ref=e72]
+                  - img "Kingambit" [ref=e74]
+              - 'link "ChosenPig32 - PokePoke Champions Cup #7th" [ref=e75] [cursor=pointer]':
+                - /url: /teams/chosenpig32-pokepoke-champions-cup-7th--lot-69dd61af48d465883f712db3-chosenpig32
+                - 'heading "ChosenPig32 - PokePoke Champions Cup #7th" [level=3] [ref=e76]'
+                - generic [ref=e77]:
+                  - img "Froslass Mega" [ref=e79]
+                  - img "Garchomp" [ref=e81]
+                  - img "Talonflame" [ref=e83]
+                  - img "Sneasler" [ref=e85]
+                  - img "Kingambit" [ref=e87]
+                  - img "Sinistcha" [ref=e89]
+              - 'link "Kotori - PokePoke Champions Cup #5th" [ref=e90] [cursor=pointer]':
+                - /url: /teams/kotori-pokepoke-champions-cup-5th--lot-69dd61af48d465883f712db3-kotori
+                - 'heading "Kotori - PokePoke Champions Cup #5th" [level=3] [ref=e91]'
+                - generic [ref=e92]:
+                  - img "Sneasler" [ref=e94]
+                  - img "Floette-Mega" [ref=e96]
+                  - img "Aerodactyl" [ref=e98]
+                  - img "Maushold" [ref=e100]
+                  - img "Kingambit" [ref=e102]
+                  - img "Delphox-Mega" [ref=e104]
+              - 'link "Trevdog - PokePoke Champions Cup #4th" [ref=e105] [cursor=pointer]':
+                - /url: /teams/trevdog-pokepoke-champions-cup-4th--lot-69dd61af48d465883f712db3-trevdog
+                - 'heading "Trevdog - PokePoke Champions Cup #4th" [level=3] [ref=e106]'
+                - generic [ref=e107]:
+                  - img "Charizard Mega X" [ref=e109]
+                  - img "Sinistcha" [ref=e111]
+                  - img "Kingambit" [ref=e113]
+                  - img "Sneasler" [ref=e115]
+                  - img "Milotic" [ref=e117]
+                  - img "Ninetales-Alola" [ref=e119]
+              - 'link "tsareena - PokePoke Champions Cup #3rd" [ref=e120] [cursor=pointer]':
+                - /url: /teams/tsareena-pokepoke-champions-cup-3rd--lot-69dd61af48d465883f712db3-tsareena
+                - 'heading "tsareena - PokePoke Champions Cup #3rd" [level=3] [ref=e121]'
+                - generic [ref=e122]:
+                  - img "Charizard Mega Y" [ref=e124]
+                  - img "Garchomp" [ref=e126]
+                  - img "Kingambit" [ref=e128]
+                  - img "Sneasler" [ref=e130]
+                  - img "Incineroar" [ref=e132]
+                  - img "Whimsicott" [ref=e134]
+            - link "View full list" [ref=e136] [cursor=pointer]:
+              - /url: /teams/featured/mega-evolutions
+          - generic [ref=e137]:
+            - link "Snow teams Teams with Pokémon running Snow Warning — snow setters and ice-focused lines." [ref=e138] [cursor=pointer]:
+              - /url: /teams/featured/weather-snow
+              - generic [ref=e140]:
+                - heading "Snow teams" [level=2] [ref=e141]
+                - paragraph [ref=e142]: Teams with Pokémon running Snow Warning — snow setters and ice-focused lines.
+            - generic [ref=e143]:
+              - 'link "Trevdog - PokePoke Champions Cup #4th" [ref=e144] [cursor=pointer]':
+                - /url: /teams/trevdog-pokepoke-champions-cup-4th--lot-69dd61af48d465883f712db3-trevdog
+                - 'heading "Trevdog - PokePoke Champions Cup #4th" [level=3] [ref=e145]'
+                - generic [ref=e146]:
+                  - img "Charizard Mega X" [ref=e148]
+                  - img "Sinistcha" [ref=e150]
+                  - img "Kingambit" [ref=e152]
+                  - img "Sneasler" [ref=e154]
+                  - img "Milotic" [ref=e156]
+                  - img "Ninetales-Alola" [ref=e158]
+              - 'link "ChosenPig32 - PokePoke Champions Cup #7th" [ref=e159] [cursor=pointer]':
+                - /url: /teams/chosenpig32-pokepoke-champions-cup-7th--lot-69dd61af48d465883f712db3-chosenpig32
+                - 'heading "ChosenPig32 - PokePoke Champions Cup #7th" [level=3] [ref=e160]'
+                - generic [ref=e161]:
+                  - img "Froslass Mega" [ref=e163]
+                  - img "Garchomp" [ref=e165]
+                  - img "Talonflame" [ref=e167]
+                  - img "Sneasler" [ref=e169]
+                  - img "Kingambit" [ref=e171]
+                  - img "Sinistcha" [ref=e173]
+              - 'link "Sergio Rubiano - Intimidators Champions Challenge #1 - REG M-A #2nd" [ref=e174] [cursor=pointer]':
+                - /url: /teams/sergio-rubiano-intimidators-champions-challenge-1-reg-m-a-2nd--lot-69dbdda978b359b789d60767-sars1120
+                - 'heading "Sergio Rubiano - Intimidators Champions Challenge #1 - REG M-A #2nd" [level=3] [ref=e175]'
+                - generic [ref=e176]:
+                  - img "Lucario-Mega" [ref=e178]
+                  - img "Arcanine" [ref=e180]
+                  - img "Rotom-Wash" [ref=e182]
+                  - img "Ninetales-Alola" [ref=e184]
+                  - img "Dragonite-Mega" [ref=e186]
+                  - img "Sinistcha" [ref=e188]
+              - 'link "GielBakker - Champions Tour LEPE #1 (5€ to 1st) #3rd" [ref=e189] [cursor=pointer]':
+                - /url: /teams/gielbakker-champions-tour-lepe-1-5-to-1st-3rd--lot-69da4dcf48d465883f70f785-gielbakker
+                - 'heading "GielBakker - Champions Tour LEPE #1 (5€ to 1st) #3rd" [level=3] [ref=e190]'
+                - generic [ref=e191]:
+                  - img "Aegislash" [ref=e193]
+                  - img "Arcanine-Hisui" [ref=e195]
+                  - img "Froslass Mega" [ref=e197]
+                  - img "Whimsicott" [ref=e199]
+                  - img "Kommo-O" [ref=e201]
+                  - img "Rotom-Wash" [ref=e203]
+              - 'link "Draxolotl - Head Bussa''s Hoedown#28 ChampionsReg M-A $25 1st #3rd" [ref=e204] [cursor=pointer]':
+                - /url: /teams/draxolotl-head-bussa-s-hoedown-28-championsreg-m-a-25-1st-3rd--lot-69dab39178b359b789d5f611-draxolotl
+                - 'heading "Draxolotl - Head Bussa''s Hoedown#28 ChampionsReg M-A $25 1st #3rd" [level=3] [ref=e205]'
+                - generic [ref=e206]:
+                  - img "Froslass-Mega" [ref=e208]
+                  - img "Arcanine-Hisui" [ref=e210]
+                  - img "Rotom-Wash" [ref=e212]
+                  - img "Sinistcha" [ref=e214]
+                  - img "Kingambit" [ref=e216]
+                  - img "Sneasler" [ref=e218]
+            - link "View full list" [ref=e220] [cursor=pointer]:
+              - /url: /teams/featured/weather-snow
+        - generic [ref=e221]:
+          - generic [ref=e222]:
+            - heading "Damage calculator" [level=2] [ref=e223]
+            - paragraph [ref=e224]: Did the opposing Pokémon survive on 1 HP? Stop being surprised—check damage rolls before you commit.
+          - link "Open damage calculator" [ref=e226] [cursor=pointer]:
+            - /url: /damage-calculator
+        - generic [ref=e229]: Top Pokémon
+        - generic [ref=e231]:
+          - generic [ref=e232]:
+            - link "Charizard artwork Charizard Teams A versatile special attacker with access to Heat Wave and powerful spread damage. Mega or Tera forms give it extra flexibility in team building." [ref=e233] [cursor=pointer]:
+              - /url: /teams/with/charizard
+              - generic [ref=e234]:
+                - img "Charizard artwork" [ref=e235]
+                - generic [ref=e236]:
+                  - heading "Charizard Teams" [level=2] [ref=e237]
+                  - paragraph [ref=e238]: A versatile special attacker with access to Heat Wave and powerful spread damage. Mega or Tera forms give it extra flexibility in team building.
+            - generic [ref=e239]:
+              - 'link "tsareena - PokePoke Champions Cup #3rd" [ref=e240] [cursor=pointer]':
+                - /url: /teams/tsareena-pokepoke-champions-cup-3rd--lot-69dd61af48d465883f712db3-tsareena
+                - 'heading "tsareena - PokePoke Champions Cup #3rd" [level=3] [ref=e241]'
+                - generic [ref=e242]:
+                  - img "Charizard Mega Y" [ref=e244]
+                  - img "Garchomp" [ref=e246]
+                  - img "Kingambit" [ref=e248]
+                  - img "Sneasler" [ref=e250]
+                  - img "Incineroar" [ref=e252]
+                  - img "Whimsicott" [ref=e254]
+              - 'link "Trevdog - PokePoke Champions Cup #4th" [ref=e255] [cursor=pointer]':
+                - /url: /teams/trevdog-pokepoke-champions-cup-4th--lot-69dd61af48d465883f712db3-trevdog
+                - 'heading "Trevdog - PokePoke Champions Cup #4th" [level=3] [ref=e256]'
+                - generic [ref=e257]:
+                  - img "Charizard Mega X" [ref=e259]
+                  - img "Sinistcha" [ref=e261]
+                  - img "Kingambit" [ref=e263]
+                  - img "Sneasler" [ref=e265]
+                  - img "Milotic" [ref=e267]
+                  - img "Ninetales-Alola" [ref=e269]
+              - 'link "BrazBR - PokePoke Champions Cup #12th" [ref=e270] [cursor=pointer]':
+                - /url: /teams/brazbr-pokepoke-champions-cup-12th--lot-69dd61af48d465883f712db3-brazbr
+                - 'heading "BrazBR - PokePoke Champions Cup #12th" [level=3] [ref=e271]'
+                - generic [ref=e272]:
+                  - img "Whimsicott" [ref=e274]
+                  - img "Rotom-Wash" [ref=e276]
+                  - img "Sneasler" [ref=e278]
+                  - img "Incineroar" [ref=e280]
+                  - img "Charizard Mega Y" [ref=e282]
+                  - img "Garchomp" [ref=e284]
+            - link "Charizard Teams" [ref=e286] [cursor=pointer]:
+              - /url: /teams/with/charizard
+          - generic [ref=e287]:
+            - link "Floette artwork Floette Teams A charming and versatile fairy-type. It can be a great offensive and defensive pick." [ref=e288] [cursor=pointer]:
+              - /url: /teams/with/floette
+              - generic [ref=e289]:
+                - img "Floette artwork" [ref=e290]
+                - generic [ref=e291]:
+                  - heading "Floette Teams" [level=2] [ref=e292]
+                  - paragraph [ref=e293]: A charming and versatile fairy-type. It can be a great offensive and defensive pick.
+            - generic [ref=e294]:
+              - 'link "Kotori - PokePoke Champions Cup #5th" [ref=e295] [cursor=pointer]':
+                - /url: /teams/kotori-pokepoke-champions-cup-5th--lot-69dd61af48d465883f712db3-kotori
+                - 'heading "Kotori - PokePoke Champions Cup #5th" [level=3] [ref=e296]'
+                - generic [ref=e297]:
+                  - img "Sneasler" [ref=e299]
+                  - img "Floette-Mega" [ref=e301]
+                  - img "Aerodactyl" [ref=e303]
+                  - img "Maushold" [ref=e305]
+                  - img "Kingambit" [ref=e307]
+                  - img "Delphox-Mega" [ref=e309]
+              - 'link "JazzyLegs - PokePoke Champions Cup #6th" [ref=e310] [cursor=pointer]':
+                - /url: /teams/jazzylegs-pokepoke-champions-cup-6th--lot-69dd61af48d465883f712db3-jazzylegs
+                - 'heading "JazzyLegs - PokePoke Champions Cup #6th" [level=3] [ref=e311]'
+                - generic [ref=e312]:
+                  - img "Dragonite" [ref=e314]
+                  - img "Sinistcha" [ref=e316]
+                  - img "Kingambit" [ref=e318]
+                  - img "Basculegion" [ref=e320]
+                  - img "Floette-Mega" [ref=e322]
+                  - img "Sneasler" [ref=e324]
+              - 'link "NonoVGC - PokePoke Champions Cup #8th" [ref=e325] [cursor=pointer]':
+                - /url: /teams/nonovgc-pokepoke-champions-cup-8th--lot-69dd61af48d465883f712db3-nonovgc
+                - 'heading "NonoVGC - PokePoke Champions Cup #8th" [level=3] [ref=e326]'
+                - generic [ref=e327]:
+                  - img "Floette" [ref=e329]
+                  - img "Delphox Mega" [ref=e331]
+                  - img "Aerodactyl" [ref=e333]
+                  - img "Maushold" [ref=e335]
+                  - img "Garchomp" [ref=e337]
+                  - img "Incineroar" [ref=e339]
+            - link "Floette Teams" [ref=e341] [cursor=pointer]:
+              - /url: /teams/with/floette
+          - generic [ref=e342]:
+            - link "Froslass artwork Froslass Teams A frost-spirit queen with ice-crystal fans. It freezes souls with a single, hauntingly cold glance." [ref=e343] [cursor=pointer]:
+              - /url: /teams/with/froslass
+              - generic [ref=e344]:
+                - img "Froslass artwork" [ref=e345]
+                - generic [ref=e346]:
+                  - heading "Froslass Teams" [level=2] [ref=e347]
+                  - paragraph [ref=e348]: A frost-spirit queen with ice-crystal fans. It freezes souls with a single, hauntingly cold glance.
+            - generic [ref=e349]:
+              - 'link "ChosenPig32 - PokePoke Champions Cup #7th" [ref=e350] [cursor=pointer]':
+                - /url: /teams/chosenpig32-pokepoke-champions-cup-7th--lot-69dd61af48d465883f712db3-chosenpig32
+                - 'heading "ChosenPig32 - PokePoke Champions Cup #7th" [level=3] [ref=e351]'
+                - generic [ref=e352]:
+                  - img "Froslass Mega" [ref=e354]
+                  - img "Garchomp" [ref=e356]
+                  - img "Talonflame" [ref=e358]
+                  - img "Sneasler" [ref=e360]
+                  - img "Kingambit" [ref=e362]
+                  - img "Sinistcha" [ref=e364]
+              - 'link "GielBakker - Champions Tour LEPE #1 (5€ to 1st) #3rd" [ref=e365] [cursor=pointer]':
+                - /url: /teams/gielbakker-champions-tour-lepe-1-5-to-1st-3rd--lot-69da4dcf48d465883f70f785-gielbakker
+                - 'heading "GielBakker - Champions Tour LEPE #1 (5€ to 1st) #3rd" [level=3] [ref=e366]'
+                - generic [ref=e367]:
+                  - img "Aegislash" [ref=e369]
+                  - img "Arcanine-Hisui" [ref=e371]
+                  - img "Froslass Mega" [ref=e373]
+                  - img "Whimsicott" [ref=e375]
+                  - img "Kommo-O" [ref=e377]
+                  - img "Rotom-Wash" [ref=e379]
+              - 'link "Draxolotl - Head Bussa''s Hoedown#28 ChampionsReg M-A $25 1st #3rd" [ref=e380] [cursor=pointer]':
+                - /url: /teams/draxolotl-head-bussa-s-hoedown-28-championsreg-m-a-25-1st-3rd--lot-69dab39178b359b789d5f611-draxolotl
+                - 'heading "Draxolotl - Head Bussa''s Hoedown#28 ChampionsReg M-A $25 1st #3rd" [level=3] [ref=e381]'
+                - generic [ref=e382]:
+                  - img "Froslass-Mega" [ref=e384]
+                  - img "Arcanine-Hisui" [ref=e386]
+                  - img "Rotom-Wash" [ref=e388]
+                  - img "Sinistcha" [ref=e390]
+                  - img "Kingambit" [ref=e392]
+                  - img "Sneasler" [ref=e394]
+            - link "Froslass Teams" [ref=e396] [cursor=pointer]:
+              - /url: /teams/with/froslass
+          - generic [ref=e397]:
+            - link "Gengar artwork Gengar Teams Blazing Speed and Special Attack make it a lethal lead. Its Ghost/Poison typing and wide movepool let it threaten most of the metagame." [ref=e398] [cursor=pointer]:
+              - /url: /teams/with/gengar
+              - generic [ref=e399]:
+                - img "Gengar artwork" [ref=e400]
+                - generic [ref=e401]:
+                  - heading "Gengar Teams" [level=2] [ref=e402]
+                  - paragraph [ref=e403]: Blazing Speed and Special Attack make it a lethal lead. Its Ghost/Poison typing and wide movepool let it threaten most of the metagame.
+            - generic [ref=e404]:
+              - 'link "Italo M - Intimidators Champions Challenge #1 - REG M-A #1st" [ref=e405] [cursor=pointer]':
+                - /url: /teams/italo-m-intimidators-champions-challenge-1-reg-m-a-1st--lot-69dbdda978b359b789d60767-italosichi
+                - 'heading "Italo M - Intimidators Champions Challenge #1 - REG M-A #1st" [level=3] [ref=e406]'
+                - generic [ref=e407]:
+                  - img "Primarina" [ref=e409]
+                  - img "Tyranitar Mega" [ref=e411]
+                  - img "Kommo-O" [ref=e413]
+                  - img "Gengar Mega" [ref=e415]
+                  - img "Sinistcha" [ref=e417]
+                  - img "Incineroar" [ref=e419]
+              - 'link "SlimeGun - VGCA Battle Hall #25 #2nd" [ref=e420] [cursor=pointer]':
+                - /url: /teams/slimegun-vgca-battle-hall-25-2nd--lot-69da6b3548d465883f70f9c8-slimegun
+                - 'heading "SlimeGun - VGCA Battle Hall #25 #2nd" [level=3] [ref=e421]'
+                - generic [ref=e422]:
+                  - img "Gengar Mega" [ref=e424]
+                  - img "Politoed" [ref=e426]
+                  - img "Incineroar" [ref=e428]
+                  - img "Dragonite" [ref=e430]
+                  - img "Archaludon" [ref=e432]
+                  - img "Orthworm" [ref=e434]
+              - 'link "Rahzar - Intimidators Champions Challenge #1 - REG M-A #3rd" [ref=e435] [cursor=pointer]':
+                - /url: /teams/rahzar-intimidators-champions-challenge-1-reg-m-a-3rd--lot-69dbdda978b359b789d60767-rahzar
+                - 'heading "Rahzar - Intimidators Champions Challenge #1 - REG M-A #3rd" [level=3] [ref=e436]'
+                - generic [ref=e437]:
+                  - img "Dragonite" [ref=e439]
+                  - img "Pelipper" [ref=e441]
+                  - img "Archaludon" [ref=e443]
+                  - img "Basculegion" [ref=e445]
+                  - img "Gengar" [ref=e447]
+                  - img "Scizor-Mega" [ref=e449]
+            - link "Gengar Teams" [ref=e451] [cursor=pointer]:
+              - /url: /teams/with/gengar
+          - generic [ref=e453]:
+            - generic [ref=e454]:
+              - heading "Build your team" [level=2] [ref=e455]
+              - paragraph [ref=e456]: Use the Team Builder with Pokémon Champions rules — pick legal Pokémon, moves, and items, then export a Showdown paste.
+            - link "Open Team Builder" [ref=e458] [cursor=pointer]:
+              - /url: /team-builder?preset=champions
+          - generic [ref=e459]:
+            - link "Venusaur artwork Venusaur Teams A staple on sun teams thanks to Chlorophyll doubling its Speed. Sleep Powder and strong Grass STAB make it a top offensive and disruptive pick." [ref=e460] [cursor=pointer]:
+              - /url: /teams/with/venusaur
+              - generic [ref=e461]:
+                - img "Venusaur artwork" [ref=e462]
+                - generic [ref=e463]:
+                  - heading "Venusaur Teams" [level=2] [ref=e464]
+                  - paragraph [ref=e465]: A staple on sun teams thanks to Chlorophyll doubling its Speed. Sleep Powder and strong Grass STAB make it a top offensive and disruptive pick.
+            - generic [ref=e466]:
+              - 'link "SimplyRobin - Red Panda Rumble! Quickfire VGC Reg M-A Tour #2nd" [ref=e467] [cursor=pointer]':
+                - /url: /teams/simplyrobin-red-panda-rumble-quickfire-vgc-reg-m-a-tour-2nd--lot-69d9eb9a78b359b789d5e62f-simplyrobin
+                - 'heading "SimplyRobin - Red Panda Rumble! Quickfire VGC Reg M-A Tour #2nd" [level=3] [ref=e468]'
+                - generic [ref=e469]:
+                  - img "Charizard Mega Y" [ref=e471]
+                  - img "Typhlosion-Hisui" [ref=e473]
+                  - img "Incineroar" [ref=e475]
+                  - img "Garchomp" [ref=e477]
+                  - img "Whimsicott" [ref=e479]
+                  - img "Venusaur" [ref=e481]
+              - 'link "Lukhco - Red Panda Rumble! Quickfire VGC Reg M-A Tour #3rd" [ref=e482] [cursor=pointer]':
+                - /url: /teams/lukhco-red-panda-rumble-quickfire-vgc-reg-m-a-tour-3rd--lot-69d9eb9a78b359b789d5e62f-lukhco
+                - 'heading "Lukhco - Red Panda Rumble! Quickfire VGC Reg M-A Tour #3rd" [level=3] [ref=e483]'
+                - generic [ref=e484]:
+                  - img "Torkoal" [ref=e486]
+                  - img "Incineroar" [ref=e488]
+                  - img "Garchomp" [ref=e490]
+                  - img "Venusaur" [ref=e492]
+                  - img "Dragonite" [ref=e494]
+                  - img "Whimsicott" [ref=e496]
+              - 'link "Jackson L - Intimidators Champions Challenge #1 - REG M-A #4th" [ref=e497] [cursor=pointer]':
+                - /url: /teams/jackson-l-intimidators-champions-challenge-1-reg-m-a-4th--lot-69dbdda978b359b789d60767-joestar117
+                - 'heading "Jackson L - Intimidators Champions Challenge #1 - REG M-A #4th" [level=3] [ref=e498]'
+                - generic [ref=e499]:
+                  - img "Venusaur" [ref=e501]
+                  - img "Charizard Mega Y" [ref=e503]
+                  - img "Incineroar" [ref=e505]
+                  - img "Kingambit" [ref=e507]
+                  - img "Aerodactyl" [ref=e509]
+                  - img "Garchomp" [ref=e511]
+            - link "Venusaur Teams" [ref=e513] [cursor=pointer]:
+              - /url: /teams/with/venusaur
+          - generic [ref=e514]:
+            - link "Dragonite artwork Dragonite Teams Multiscale lets it survive almost any hit at full HP. Great coverage, Extreme Speed priority, and Dragon Dance make it a flexible win condition." [ref=e515] [cursor=pointer]:
+              - /url: /teams/with/dragonite
+              - generic [ref=e516]:
+                - img "Dragonite artwork" [ref=e517]
+                - generic [ref=e518]:
+                  - heading "Dragonite Teams" [level=2] [ref=e519]
+                  - paragraph [ref=e520]: Multiscale lets it survive almost any hit at full HP. Great coverage, Extreme Speed priority, and Dragon Dance make it a flexible win condition.
+            - generic [ref=e521]:
+              - 'link "JazzyLegs - PokePoke Champions Cup #6th" [ref=e522] [cursor=pointer]':
+                - /url: /teams/jazzylegs-pokepoke-champions-cup-6th--lot-69dd61af48d465883f712db3-jazzylegs
+                - 'heading "JazzyLegs - PokePoke Champions Cup #6th" [level=3] [ref=e523]'
+                - generic [ref=e524]:
+                  - img "Dragonite" [ref=e526]
+                  - img "Sinistcha" [ref=e528]
+                  - img "Kingambit" [ref=e530]
+                  - img "Basculegion" [ref=e532]
+                  - img "Floette-Mega" [ref=e534]
+                  - img "Sneasler" [ref=e536]
+              - 'link "OldSweepy - PokePoke Champions Cup #13th" [ref=e537] [cursor=pointer]':
+                - /url: /teams/oldsweepy-pokepoke-champions-cup-13th--lot-69dd61af48d465883f712db3-oldsweepy
+                - 'heading "OldSweepy - PokePoke Champions Cup #13th" [level=3] [ref=e538]'
+                - generic [ref=e539]:
+                  - img "Maushold" [ref=e541]
+                  - img "Dragonite" [ref=e543]
+                  - img "Pelipper" [ref=e545]
+                  - img "Basculegion" [ref=e547]
+                  - img "Sneasler" [ref=e549]
+                  - img "Glimmora Mega" [ref=e551]
+              - 'link "6nerox - The Dark League champions pop up! 5$usd #1st" [ref=e552] [cursor=pointer]':
+                - /url: /teams/6nerox-the-dark-league-champions-pop-up-5-usd-1st--lot-69d7eb93c734cfa1af2b61a1-6nerox
+                - 'heading "6nerox - The Dark League champions pop up! 5$usd #1st" [level=3] [ref=e553]'
+                - generic [ref=e554]:
+                  - img "Delphox Mega" [ref=e556]
+                  - img "Basculegion" [ref=e558]
+                  - img "Kingambit" [ref=e560]
+                  - img "Dragonite" [ref=e562]
+                  - img "Sneasler" [ref=e564]
+                  - img "Clefable" [ref=e566]
+            - link "Dragonite Teams" [ref=e568] [cursor=pointer]:
+              - /url: /teams/with/dragonite
+          - generic [ref=e569]:
+            - link "Garchomp artwork Garchomp Teams High Attack and Speed with a threatening Ground/Dragon profile. Rough Skin chips contact attackers, and strong coverage like Earthquake keeps it a staple offensive pick in doubles." [ref=e570] [cursor=pointer]:
+              - /url: /teams/with/garchomp
+              - generic [ref=e571]:
+                - img "Garchomp artwork" [ref=e572]
+                - generic [ref=e573]:
+                  - heading "Garchomp Teams" [level=2] [ref=e574]
+                  - paragraph [ref=e575]: High Attack and Speed with a threatening Ground/Dragon profile. Rough Skin chips contact attackers, and strong coverage like Earthquake keeps it a staple offensive pick in doubles.
+            - generic [ref=e576]:
+              - 'link "tsareena - PokePoke Champions Cup #3rd" [ref=e577] [cursor=pointer]':
+                - /url: /teams/tsareena-pokepoke-champions-cup-3rd--lot-69dd61af48d465883f712db3-tsareena
+                - 'heading "tsareena - PokePoke Champions Cup #3rd" [level=3] [ref=e578]'
+                - generic [ref=e579]:
+                  - img "Charizard Mega Y" [ref=e581]
+                  - img "Garchomp" [ref=e583]
+                  - img "Kingambit" [ref=e585]
+                  - img "Sneasler" [ref=e587]
+                  - img "Incineroar" [ref=e589]
+                  - img "Whimsicott" [ref=e591]
+              - 'link "ChosenPig32 - PokePoke Champions Cup #7th" [ref=e592] [cursor=pointer]':
+                - /url: /teams/chosenpig32-pokepoke-champions-cup-7th--lot-69dd61af48d465883f712db3-chosenpig32
+                - 'heading "ChosenPig32 - PokePoke Champions Cup #7th" [level=3] [ref=e593]'
+                - generic [ref=e594]:
+                  - img "Froslass Mega" [ref=e596]
+                  - img "Garchomp" [ref=e598]
+                  - img "Talonflame" [ref=e600]
+                  - img "Sneasler" [ref=e602]
+                  - img "Kingambit" [ref=e604]
+                  - img "Sinistcha" [ref=e606]
+              - 'link "NonoVGC - PokePoke Champions Cup #8th" [ref=e607] [cursor=pointer]':
+                - /url: /teams/nonovgc-pokepoke-champions-cup-8th--lot-69dd61af48d465883f712db3-nonovgc
+                - 'heading "NonoVGC - PokePoke Champions Cup #8th" [level=3] [ref=e608]'
+                - generic [ref=e609]:
+                  - img "Floette" [ref=e611]
+                  - img "Delphox Mega" [ref=e613]
+                  - img "Aerodactyl" [ref=e615]
+                  - img "Maushold" [ref=e617]
+                  - img "Garchomp" [ref=e619]
+                  - img "Incineroar" [ref=e621]
+            - link "Garchomp Teams" [ref=e623] [cursor=pointer]:
+              - /url: /teams/with/garchomp
+          - generic [ref=e624]:
+            - link "Gardevoir artwork Gardevoir Teams Psychic/Fairy special pressure with Moonblast and utility options. It's a strong Trick Room setter in the current meta — setting TR while still threatening key Fairy- and Psychic-type answers." [ref=e625] [cursor=pointer]:
+              - /url: /teams/with/gardevoir
+              - generic [ref=e626]:
+                - img "Gardevoir artwork" [ref=e627]
+                - generic [ref=e628]:
+                  - heading "Gardevoir Teams" [level=2] [ref=e629]
+                  - paragraph [ref=e630]: Psychic/Fairy special pressure with Moonblast and utility options. It's a strong Trick Room setter in the current meta — setting TR while still threatening key Fairy- and Psychic-type answers.
+            - generic [ref=e631]:
+              - 'link "QueerCrocodile - PokePoke Champions Cup #1st" [ref=e632] [cursor=pointer]':
+                - /url: /teams/queercrocodile-pokepoke-champions-cup-1st--lot-69dd61af48d465883f712db3-queercrocodile
+                - 'heading "QueerCrocodile - PokePoke Champions Cup #1st" [level=3] [ref=e633]'
+                - generic [ref=e634]:
+                  - img "Gardevoir-Mega" [ref=e636]
+                  - img "Primarina" [ref=e638]
+                  - img "Whimsicott" [ref=e640]
+                  - img "Sneasler" [ref=e642]
+                  - img "Arcanine-Hisui" [ref=e644]
+                  - img "Kingambit" [ref=e646]
+              - 'link "miniman - Pokepal Smackdown #136 (Champions) (Reg M-A) #1st" [ref=e647] [cursor=pointer]':
+                - /url: /teams/miniman-pokepal-smackdown-136-champions-reg-m-a-1st--lot-69c6845ad478313a15a33e79-miniman
+                - 'heading "miniman - Pokepal Smackdown #136 (Champions) (Reg M-A) #1st" [level=3] [ref=e648]'
+                - generic [ref=e649]:
+                  - img "Gardevoir-Mega" [ref=e651]
+                  - img "Incineroar" [ref=e653]
+                  - img "Sinistcha" [ref=e655]
+                  - img "Garchomp" [ref=e657]
+                  - img "Aerodactyl" [ref=e659]
+                  - img "Kingambit" [ref=e661]
+              - 'link "CherryBallad - Pokepal Smackdown #136 (Champions) (Reg M-A) #3rd" [ref=e662] [cursor=pointer]':
+                - /url: /teams/cherryballad-pokepal-smackdown-136-champions-reg-m-a-3rd--lot-69c6845ad478313a15a33e79-cherryballad
+                - 'heading "CherryBallad - Pokepal Smackdown #136 (Champions) (Reg M-A) #3rd" [level=3] [ref=e663]'
+                - generic [ref=e664]:
+                  - img "Garchomp" [ref=e666]
+                  - img "Gardevoir-Mega" [ref=e668]
+                  - img "Whimsicott" [ref=e670]
+                  - img "Sneasler" [ref=e672]
+                  - img "Kingambit" [ref=e674]
+                  - img "Sinistcha" [ref=e676]
+            - link "Gardevoir Teams" [ref=e678] [cursor=pointer]:
+              - /url: /teams/with/gardevoir
+      - generic [ref=e680]:
+        - generic [ref=e681]:
+          - generic [ref=e682]:
+            - link "🇬🇧 EN" [ref=e683] [cursor=pointer]:
+              - /url: /
+            - generic [ref=e684]: "|"
+          - link "🇧🇷 PT" [ref=e686] [cursor=pointer]:
+            - /url: /pt
+        - separator [ref=e687]
+        - navigation "Footer navigation" [ref=e688]:
+          - link "Tournaments" [ref=e689] [cursor=pointer]:
+            - /url: /teams/tournaments
+          - link "Team Builder" [ref=e690] [cursor=pointer]:
+            - /url: /team-builder
+          - link "Guides" [ref=e691] [cursor=pointer]:
+            - /url: /guides
+          - link "About" [ref=e692] [cursor=pointer]:
+            - /url: /about
+          - link "Contact" [ref=e693] [cursor=pointer]:
+            - /url: /contact
+          - link "Privacy Policy" [ref=e694] [cursor=pointer]:
+            - /url: /privacy
+          - link "Terms of Use" [ref=e695] [cursor=pointer]:
+            - /url: /terms
+        - separator [ref=e696]
+        - generic [ref=e697]:
+          - generic [ref=e698]: Help keep MetaVGC online
+          - link "Support on Ko-fi (opens in a new tab)" [ref=e699] [cursor=pointer]:
+            - /url: https://ko-fi.com/I3I31XL1IA
+            - generic [ref=e700]: ☕
+            - text: Support on Ko-fi
+        - generic [ref=e701]:
+          - link "supportmetavgc@gmail.com" [ref=e702] [cursor=pointer]:
+            - /url: mailto:supportmetavgc@gmail.com
+          - link "MetaVGC on X (opens in a new tab)" [ref=e703] [cursor=pointer]:
+            - /url: https://x.com/MetaVGCOfficial
+            - text: 𝕏 @MetaVGCOfficial
+  - alert [ref=e704]

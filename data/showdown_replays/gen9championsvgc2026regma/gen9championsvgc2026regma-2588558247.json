@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2588558247",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "lessa_ped",
+    "Recolor4L"
+  ],
+  "log": "|j|\u2606lessa_ped\n|j|\u2606Recolor4L\n|t:|1776644827\n|gametype|doubles\n|player|p1|lessa_ped|101|1175\n|player|p2|Recolor4L|169|1102\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Sinistcha, L50|\n|poke|p1|Sneasler, L50, F|\n|poke|p1|Kingambit, L50, M, shiny|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Politoed, L50, F|\n|poke|p1|Gengar, L50, M|\n|poke|p2|Sinistcha, L50|\n|poke|p2|Primarina, L50, M|\n|poke|p2|Meganium, L50, F|\n|poke|p2|Ninetales, L50, M|\n|poke|p2|Archaludon, L50, F|\n|poke|p2|Aerodactyl, L50, F|\n|teampreview|4\n|\n|t:|1776644897\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Gengar|Gengar, L50, M|100/100\n|switch|p1b: Sneasler|Sneasler, L50, F|100/100\n|switch|p2a: Primarina|Primarina, L50, M|100/100\n|switch|p2b: Sinistcha|Sinistcha, L50|100/100\n|turn|1\n|l|\u2606Recolor4L\n|player|p2|\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by lessa_ped)\n|inactive|Recolor4L has 30 seconds to reconnect!\n|inactive|Recolor4L has 20 seconds to reconnect!\n|inactive|Recolor4L has 15 seconds to reconnect!\n|inactive|Recolor4L has 10 seconds to reconnect!\n|inactive|Recolor4L has 5 seconds to reconnect!\n|-message|Recolor4L lost due to inactivity.\n|\n|win|lessa_ped\n|raw|lessa_ped's rating: 1175 &rarr; <strong>1195</strong><br />(+20 for winning)\n|raw|Recolor4L's rating: 1102 &rarr; <strong>1082</strong><br />(-20 for losing)\n",
+  "uploadtime": 1776645088,
+  "views": 8,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1082,
+  "private": 0,
+  "password": null
+}

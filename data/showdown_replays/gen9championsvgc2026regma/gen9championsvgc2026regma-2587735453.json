@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2587735453",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Fadilkio",
+    "GrayMDR"
+  ],
+  "log": "|j|\u2606Fadilkio\n|j|\u2606GrayMDR\n|t:|1776558743\n|gametype|doubles\n|player|p1|Fadilkio|2|1099\n|player|p2|GrayMDR|cynthia|1050\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Archaludon, L50, M|\n|poke|p1|Pelipper, L50, F|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Meganium, L50, F|\n|poke|p2|Meganium, L50, M|\n|poke|p2|Reuniclus, L50, F, shiny|\n|poke|p2|Palafin, L50, F|\n|poke|p2|Dragapult, L50, M|\n|poke|p2|Farigiraf, L50, M|\n|poke|p2|Golurk, L50|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by GrayMDR)\n|j| Androyd\n|inactive|Fadilkio has 60 seconds left.\n|\n|t:|1776558797\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Meganium|Meganium, L50, F|100/100\n|switch|p1b: Incineroar|Incineroar, L50, M|100/100\n|switch|p2a: Reuniclus|Reuniclus, L50, F, shiny|100/100\n|switch|p2b: Meganium|Meganium, L50, M|100/100\n|-ability|p1b: Incineroar|Intimidate|boost\n|-unboost|p2a: Reuniclus|atk|1\n|-unboost|p2b: Meganium|atk|1\n|turn|1\n|\n|t:|1776558810\n|detailschange|p1a: Meganium|Meganium-Mega, L50, F\n|-mega|p1a: Meganium|Meganium|Meganiumite\n|detailschange|p2b: Meganium|Meganium-Mega, L50, M\n|-mega|p2b: Meganium|Meganium|Meganiumite\n|move|p1b: Incineroar|Fake Out|p2b: Meganium\n|-damage|p2b: Meganium|92/100\n|move|p1a: Meganium|Weather Ball|p2b: Meganium\n|-supereffective|p2b: Meganium|1\n|-damage|p2b: Meganium|1/100\n|cant|p2b: Meganium|flinch\n|move|p2a: Reuniclus|Trick Room|p2a: Reuniclus\n|-fieldstart|move: Trick Room|[of] p2a: Reuniclus\n|\n|upkeep\n|turn|2\n|inactive|GrayMDR has 30 seconds left.\n|\n|t:|1776558837\n|move|p1a: Meganium|Protect|p1a: Meganium\n|-singleturn|p1a: Meganium|Protect\n|move|p2a: Reuniclus|Focus Blast|p1b: Incineroar\n|-supereffective|p1b: Incineroar|1\n|-damage|p1b: Incineroar|32/100\n|-unboost|p1b: Incineroar|spd|1\n|-enditem|p1b: Incineroar|Sitrus Berry|[eat]\n|-heal|p1b: Incineroar|57/100|[from] item: Sitrus Berry\n|move|p1b: Incineroar|Darkest Lariat|p2b: Meganium\n|-resisted|p2b: Meganium|1\n|-damage|p2b: Meganium|0 fnt\n|faint|p2b: Meganium\n|\n|upkeep\n|c|\u2606GrayMDR|Protect bitch slave\n|-message|GrayMDR forfeited.\n|\n|win|Fadilkio\n",
+  "uploadtime": 1776558855,
+  "views": 11,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": null,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2582835950",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "RedEmperorKing",
+    "prof. jubokko"
+  ],
+  "log": "|j|\u2606RedEmperorKing\n|j|\u2606prof. jubokko\n|t:|1776117830\n|gametype|doubles\n|player|p1|RedEmperorKing|alder|1093\n|player|p2|prof. jubokko|cyrus|1176\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Charizard, L50, M|\n|poke|p1|Typhlosion-Hisui, L50, M|\n|poke|p1|Gardevoir, L50, M|\n|poke|p1|Venusaur, L50, F|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Whimsicott, L50, M|\n|poke|p2|Charizard, L50, F|\n|poke|p2|Venusaur, L50, F|\n|poke|p2|Whimsicott, L50, F|\n|poke|p2|Sylveon, L50, M|\n|poke|p2|Kingambit, L50, F|\n|poke|p2|Arcanine, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by RedEmperorKing)\n|\n|t:|1776117858\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Typhlosion|Typhlosion-Hisui, L50, M, shiny|100/100\n|switch|p1b: Gardevoir|Gardevoir, L50, M|100/100\n|switch|p2a: Venusaur|Venusaur, L50, F|100/100\n|switch|p2b: Kingambit|Kingambit, L50, F|100/100\n|-item|p2a: Venusaur|Venusaurite|[from] ability: Frisk|[of] p1a: Typhlosion\n|-item|p2b: Kingambit|Quick Claw|[from] ability: Frisk|[of] p1a: Typhlosion\n|-ability|p1b: Gardevoir|Defiant|Trace|[from] ability: Trace|[of] p2b: Kingambit\n|turn|1\n|\n|t:|1776117876\n|move|p1b: Gardevoir|Protect|p1b: Gardevoir\n|-singleturn|p1b: Gardevoir|Protect\n|move|p2b: Kingambit|Sucker Punch|p1a: Typhlosion\n|-supereffective|p1a: Typhlosion|1\n|-damage|p1a: Typhlosion|0 fnt\n|faint|p1a: Typhlosion\n|move|p2a: Venusaur|Sleep Powder|p1b: Gardevoir\n|-activate|p1b: Gardevoir|move: Protect\n|\n|upkeep\n|-message|RedEmperorKing forfeited.\n|\n|win|prof. jubokko\n|raw|RedEmperorKing's rating: 1093 &rarr; <strong>1075</strong><br />(-18 for losing)\n|raw|prof. jubokko's rating: 1176 &rarr; <strong>1195</strong><br />(+19 for winning)\n|l|\u2606RedEmperorKing\n|player|p1|\n",
+  "uploadtime": 1776117893,
+  "views": 15,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1075,
+  "private": 0,
+  "password": null
+}

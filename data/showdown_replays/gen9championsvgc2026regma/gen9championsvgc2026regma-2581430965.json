@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2581430965",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Champofchampions",
+    "yuriimon"
+  ],
+  "log": "|j|\u2606Champofchampions\n|j|\u2606yuriimon\n|t:|1775999692\n|gametype|doubles\n|player|p1|Champofchampions|169|1033\n|player|p2|yuriimon|waitress-gen4|1076\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Absol, L50, F|\n|poke|p1|Rotom-Wash, L50|\n|poke|p1|Sneasler, L50, M|\n|poke|p1|Vivillon, L50, M|\n|poke|p1|Alakazam, L50, M|\n|poke|p1|Meowstic, L50, M|\n|poke|p2|Feraligatr, L50, M|\n|poke|p2|Gallade, L50, M|\n|poke|p2|Pelipper, L50, M|\n|poke|p2|Raichu, L50, F|\n|poke|p2|Arcanine-Hisui, L50, F|\n|poke|p2|Clefable, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by yuriimon)\n|inactive|Champofchampions has 60 seconds left.\n|inactive|yuriimon has 60 seconds left.\n|\n|t:|1775999747\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Absol|Absol, L50, F|100/100\n|switch|p1b: Vivillon|Vivillon, L50, M|100/100\n|switch|p2a: Raichu|Raichu, L50, F|100/100\n|switch|p2b: Arcanine|Arcanine-Hisui, L50, F|100/100\n|turn|1\n|\n|t:|1775999768\n|detailschange|p1a: Absol|Absol-Mega, L50, F\n|-mega|p1a: Absol|Absol|Absolite\n|move|p2a: Raichu|Fake Out|p1a: Absol\n|-damage|p1a: Absol|85/100\n|cant|p1a: Absol|flinch\n|move|p2b: Arcanine|Head Smash|p1b: Vivillon\n|-supereffective|p1b: Vivillon|2\n|-enditem|p1b: Vivillon|Focus Sash\n|-damage|p1b: Vivillon|1/100\n|move|p1b: Vivillon|Sleep Powder|p2b: Arcanine|[miss]\n|-miss|p1b: Vivillon|p2b: Arcanine\n|\n|upkeep\n|turn|2\n|-message|Champofchampions forfeited.\n|\n|win|yuriimon\n|raw|Champofchampions's rating: 1033 &rarr; <strong>1020</strong><br />(-13 for losing)\n|raw|yuriimon's rating: 1076 &rarr; <strong>1101</strong><br />(+25 for winning)\n|l|\u2606Champofchampions\n|player|p1|\n",
+  "uploadtime": 1775999785,
+  "views": 17,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1020,
+  "private": 0,
+  "password": null
+}

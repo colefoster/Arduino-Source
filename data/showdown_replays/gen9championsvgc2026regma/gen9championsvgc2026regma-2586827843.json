@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2586827843",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Bominos",
+    "ascii_ch"
+  ],
+  "log": "|j|\u2606Bominos\n|j|\u2606ascii_ch\n|t:|1776463252\n|gametype|doubles\n|player|p1|Bominos|burglar|1051\n|player|p2|ascii_ch|miku-ghost|1047\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Gengar, L50, M|\n|poke|p1|Altaria, L50, M|\n|poke|p1|Blastoise, L50, M|\n|poke|p1|Sableye, L50, M|\n|poke|p1|Kommo-o, L50, M|\n|poke|p1|Incineroar, L50, M|\n|poke|p2|Zoroark-Hisui, L50, F|\n|poke|p2|Chimecho, L50, F|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Rotom-Wash, L50|\n|poke|p2|Talonflame, L50, M|\n|poke|p2|Ninetales-Alola, L50, F|\n|teampreview|4\n|\n|t:|1776463275\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Kommo-o|Kommo-o, L50, M|100/100\n|switch|p1b: Incineroar|Incineroar, L50, M|100/100\n|switch|p2a: Chimecho|Chimecho, L50, F, shiny|100/100\n|switch|p2b: Sneasler|Sneasler, L50, M|100/100\n|-ability|p1b: Incineroar|Intimidate|boost\n|-unboost|p2a: Chimecho|atk|1\n|-unboost|p2b: Sneasler|atk|1\n|-enditem|p2b: Sneasler|White Herb\n|-clearnegativeboost|p2b: Sneasler|[silent]\n|turn|1\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Bominos)\n|\n|t:|1776463292\n|move|p1a: Kommo-o|Protect|p1a: Kommo-o\n|-singleturn|p1a: Kommo-o|Protect\n|move|p2b: Sneasler|Close Combat|p1b: Incineroar\n|-supereffective|p1b: Incineroar|1\n|-damage|p1b: Incineroar|0 fnt\n|-unboost|p2b: Sneasler|def|1\n|-unboost|p2b: Sneasler|spd|1\n|faint|p1b: Incineroar\n|move|p2a: Chimecho|Psychic|p1a: Kommo-o\n|-activate|p1a: Kommo-o|move: Protect\n|\n|upkeep\n|-message|Bominos forfeited.\n|\n|win|ascii_ch\n|raw|Bominos's rating: 1051 &rarr; <strong>1033</strong><br />(-18 for losing)\n|raw|ascii_ch's rating: 1047 &rarr; <strong>1080</strong><br />(+33 for winning)\n|l|\u2606Bominos\n|player|p1|\n",
+  "uploadtime": 1776463308,
+  "views": 21,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1033,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2588374253",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Tamejo",
+    "charonscoin"
+  ],
+  "log": "|j|\u2606Tamejo\n|j|\u2606charonscoin\n|t:|1776628192\n|gametype|doubles\n|player|p1|Tamejo|caitlin|1212\n|player|p2|charonscoin|palmer|1236\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Dragapult, L50, F|\n|poke|p1|Sylveon, L50, F|\n|poke|p1|Whimsicott, L50, M|\n|poke|p1|Glimmora, L50, F|\n|poke|p1|Charizard, L50, M|\n|poke|p1|Kingambit, L50, M|\n|poke|p2|Scizor, L50, F, shiny|\n|poke|p2|Maushold-Four, L50|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Incineroar, L50, M|\n|poke|p2|Whimsicott, L50, M|\n|poke|p2|Glimmora, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by charonscoin)\n|\n|t:|1776628226\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Whimsicott|Whimsicott, L50, M|100/100\n|switch|p1b: Kingambit|Kingambit, L50, M|100/100\n|switch|p2a: Whimsicott|Whimsicott, L50, M|100/100\n|switch|p2b: Glimmora|Glimmora, L50, M|100/100\n|turn|1\n|inactive|Tamejo has 30 seconds left.\n|inactive|charonscoin has 30 seconds left.\n|inactive|Tamejo has 20 seconds left.\n|inactive|charonscoin has 20 seconds left.\n|inactive|Tamejo has 15 seconds left.\n|inactive|charonscoin has 15 seconds left.\n|inactive|Tamejo has 10 seconds left.\n|inactive|charonscoin has 10 seconds left.\n|inactive|charonscoin has 5 seconds left.\n|\n|t:|1776628279\n|move|p1a: Whimsicott|Tailwind|p1a: Whimsicott\n|-sidestart|p1: Tamejo|move: Tailwind\n|move|p2a: Whimsicott|Tailwind|p2a: Whimsicott\n|-sidestart|p2: charonscoin|move: Tailwind\n|move|p2b: Glimmora|Earth Power|p1b: Kingambit\n|-supereffective|p1b: Kingambit|1\n|-damage|p1b: Kingambit|32/100\n|move|p1b: Kingambit|Iron Head|p2b: Glimmora\n|-supereffective|p2b: Glimmora|1\n|-damage|p2b: Glimmora|0 fnt\n|-activate|p2b: Glimmora|ability: Toxic Debris\n|-sidestart|p1: Tamejo|move: Toxic Spikes\n|faint|p2b: Glimmora\n|\n|upkeep\n|\n|t:|1776628296\n|switch|p2b: Basculegion|Basculegion, L50, M|100/100\n|turn|2\n|\n|t:|1776628311\n|move|p1a: Whimsicott|Encore|p2a: Whimsicott\n|-start|p2a: Whimsicott|Encore\n|move|p2a: Whimsicott|Tailwind||[still]\n|-fail|p2a: Whimsicott\n|move|p1b: Kingambit|Sucker Punch|p2b: Basculegion\n|-supereffective|p2b: Basculegion|1\n|-crit|p2b: Basculegion\n|-damage|p2b: Basculegion|0 fnt\n|faint|p2b: Basculegion\n|\n|upkeep\n|-message|charonscoin forfeited.\n|\n|win|Tamejo\n|raw|Tamejo's rating: 1189 &rarr; <strong>1217</strong><br />(+28 for winning)\n|raw|charonscoin's rating: 1236 &rarr; <strong>1208</strong><br />(-28 for losing)\n|l|\u2606charonscoin\n|player|p2|\n",
+  "uploadtime": 1776628324,
+  "views": 13,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1208,
+  "private": 0,
+  "password": null
+}

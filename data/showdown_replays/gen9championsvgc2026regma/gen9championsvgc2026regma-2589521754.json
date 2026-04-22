@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2589521754",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "penledzuu",
+    "scottryan"
+  ],
+  "log": "|j|\u2606penledzuu\n|j|\u2606scottryan\n|t:|1776730591\n|gametype|doubles\n|player|p1|penledzuu|ninjaboy|1361\n|player|p2|scottryan|cynthia|1402\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Pinsir, L50, F, shiny|\n|poke|p1|Basculegion, L50, M|\n|poke|p1|Weavile, L50, F, shiny|\n|poke|p1|Archaludon, L50, F|\n|poke|p1|Pelipper, L50, F|\n|poke|p1|Gengar, L50, M|\n|poke|p2|Meganium, L50, F|\n|poke|p2|Farigiraf, L50, F|\n|poke|p2|Empoleon, L50, M|\n|poke|p2|Kingambit, L50, M|\n|poke|p2|Aerodactyl, L50, M|\n|poke|p2|Incineroar, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by penledzuu)\n|inactive|scottryan has 60 seconds left.\n|\n|t:|1776730624\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Weavile|Weavile, L50, F, shiny|100/100\n|switch|p1b: Pinsir|Pinsir, L50, F, shiny|100/100\n|switch|p2a: Aerodactyl|Aerodactyl, L50, M|100/100\n|switch|p2b: Kingambit|Kingambit, L50, M|100/100\n|-ability|p2a: Aerodactyl|Unnerve\n|turn|1\n|\n|t:|1776730647\n|detailschange|p1b: Pinsir|Pinsir-Mega, L50, F, shiny\n|-mega|p1b: Pinsir|Pinsir|Pinsirite\n|move|p2b: Kingambit|Protect|p2b: Kingambit\n|-singleturn|p2b: Kingambit|Protect\n|move|p1a: Weavile|Fake Out|p2a: Aerodactyl\n|-resisted|p2a: Aerodactyl|1\n|-damage|p2a: Aerodactyl|88/100\n|cant|p2a: Aerodactyl|flinch\n|move|p1b: Pinsir|Rock Tomb|p2a: Aerodactyl\n|-supereffective|p2a: Aerodactyl|1\n|-damage|p2a: Aerodactyl|9/100\n|-unboost|p2a: Aerodactyl|spe|1\n|\n|upkeep\n|turn|2\n|\n|t:|1776730667\n|switch|p2a: Empoleon|Empoleon, L50, M|100/100\n|move|p1a: Weavile|Knock Off|p2a: Empoleon\n|-damage|p2a: Empoleon|34/100\n|-enditem|p2a: Empoleon|Lum Berry|[from] move: Knock Off|[of] p1a: Weavile\n|move|p1b: Pinsir|Close Combat|p2b: Kingambit\n|-supereffective|p2b: Kingambit|2\n|-damage|p2b: Kingambit|0 fnt\n|-unboost|p1b: Pinsir|def|1\n|-unboost|p1b: Pinsir|spd|1\n|faint|p2b: Kingambit\n|\n|upkeep\n|\n|t:|1776730675\n|switch|p2b: Aerodactyl|Aerodactyl, L50, M|9/100\n|-ability|p2b: Aerodactyl|Unnerve\n|turn|3\n|\n|t:|1776730684\n|move|p2b: Aerodactyl|Protect|p2b: Aerodactyl\n|-singleturn|p2b: Aerodactyl|Protect\n|move|p1b: Pinsir|Quick Attack|p2b: Aerodactyl\n|-activate|p2b: Aerodactyl|move: Protect\n|move|p1a: Weavile|Knock Off|p2a: Empoleon\n|-damage|p2a: Empoleon|0 fnt\n|faint|p2a: Empoleon\n|\n|upkeep\n|-message|scottryan forfeited.\n|\n|win|penledzuu\n|raw|penledzuu's rating: 1361 &rarr; <strong>1383</strong><br />(+22 for winning)\n|raw|scottryan's rating: 1402 &rarr; <strong>1380</strong><br />(-22 for losing)\n|l|\u2606scottryan\n|player|p2|\n",
+  "uploadtime": 1776730696,
+  "views": 3,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1380,
+  "private": 0,
+  "password": null
+}

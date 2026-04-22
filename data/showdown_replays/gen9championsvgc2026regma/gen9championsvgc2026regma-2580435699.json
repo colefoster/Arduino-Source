@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2580435699",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Miniassasin101",
+    "biludbilud"
+  ],
+  "log": "|j|\u2606Miniassasin101\n|j|\u2606biludbilud\n|t:|1775896187\n|gametype|doubles\n|player|p1|Miniassasin101|marlon|1021\n|player|p2|biludbilud|dawn|1000\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Aerodactyl, L50, F|\n|poke|p1|Clefable, L50, M|\n|poke|p1|Tinkaton, L50, F|\n|poke|p1|Hydreigon, L50, M|\n|poke|p1|Altaria, L50, M|\n|poke|p1|Runerigus, L50, M|\n|poke|p2|Charizard, L50, F|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Basculegion, L50, M|\n|poke|p2|Garchomp, L50, F|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Venusaur, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Miniassasin101)\n|\n|t:|1775896218\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Aerodactyl|Aerodactyl, L50, F|100/100\n|switch|p1b: Altaria|Altaria, L50, M|100/100\n|switch|p2a: Garchomp|Garchomp, L50, F|100/100\n|switch|p2b: Sneasler|Sneasler, L50, M|100/100\n|-ability|p1a: Aerodactyl|Unnerve\n|-ability|p1b: Altaria|Cloud Nine\n|turn|1\n|\n|t:|1775896240\n|move|p1a: Aerodactyl|Dragon Dance|p1a: Aerodactyl\n|-boost|p1a: Aerodactyl|atk|1\n|-boost|p1a: Aerodactyl|spe|1\n|move|p2b: Sneasler|Rock Slide|p1a: Aerodactyl|[spread] p1a,p1b\n|-supereffective|p1a: Aerodactyl|1\n|-supereffective|p1b: Altaria|1\n|-damage|p1a: Aerodactyl|35/100\n|-damage|p1b: Altaria|50/100\n|move|p2a: Garchomp|Rock Slide|p1b: Altaria|[spread] p1a,p1b\n|-supereffective|p1a: Aerodactyl|1\n|-supereffective|p1b: Altaria|1\n|-damage|p1a: Aerodactyl|0 fnt\n|-damage|p1b: Altaria|7/100\n|faint|p1a: Aerodactyl\n|cant|p1b: Altaria|flinch\n|\n|upkeep\n|\n|t:|1775896256\n|switch|p1a: Tinkaton|Tinkaton, L50, F|100/100\n|-ability|p1a: Tinkaton|Mold Breaker\n|turn|2\n|-message|Miniassasin101 forfeited.\n|\n|win|biludbilud\n|raw|Miniassasin101's rating: 1021 &rarr; <strong>1007</strong><br />(-14 for losing)\n|raw|biludbilud's rating: 1000 &rarr; <strong>1042</strong><br />(+42 for winning)\n|l|\u2606Miniassasin101\n|player|p1|\n",
+  "uploadtime": 1775896270,
+  "views": 26,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1007,
+  "private": 0,
+  "password": null
+}

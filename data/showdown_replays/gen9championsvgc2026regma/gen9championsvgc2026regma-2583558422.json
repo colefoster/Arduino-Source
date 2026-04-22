@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2583558422",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "yuhgurt",
+    "chukecchu"
+  ],
+  "log": "|j|\u2606yuhgurt\n|j|\u2606chukecchu\n|t:|1776183226\n|gametype|doubles\n|player|p1|yuhgurt|266|1029\n|player|p2|chukecchu|cynthia-gen4|1108\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Froslass, L50, F|\n|poke|p1|Quaquaval, L50, F|\n|poke|p1|Raichu-Alola, L50, M|\n|poke|p1|Ninetales-Alola, L50, M|\n|poke|p1|Tauros-Paldea-Aqua, L50, M|\n|poke|p2|Meowstic, L50, M|\n|poke|p2|Gardevoir, L50, M|\n|poke|p2|Rotom-Wash, L50|\n|poke|p2|Armarouge, L50, M|\n|poke|p2|Meowscarada, L50, F|\n|poke|p2|Sneasler, L50, F|\n|teampreview|4\nchukecchu rejected open team sheets.\n|\n|t:|1776183293\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Incineroar|Incineroar, L50, M, shiny|100/100\n|switch|p1b: Raichu|Raichu-Alola, L50, M|100/100\n|switch|p2a: Meowstic|Meowstic, L50, M|100/100\n|switch|p2b: Gardevoir|Gardevoir, L50, M|100/100\n|-ability|p1a: Incineroar|Intimidate|boost\n|-unboost|p2a: Meowstic|atk|1\n|-unboost|p2b: Gardevoir|atk|1\n|turn|1\n|\n|t:|1776183316\n|detailschange|p2b: Gardevoir|Gardevoir-Mega, L50, M\n|-mega|p2b: Gardevoir|Gardevoir|Gardevoirite\n|move|p2a: Meowstic|Fake Out|p1a: Incineroar\n|-damage|p1a: Incineroar|97/100\n|cant|p1a: Incineroar|flinch\n|move|p2b: Gardevoir|Calm Mind|p2b: Gardevoir\n|-boost|p2b: Gardevoir|spa|1\n|-boost|p2b: Gardevoir|spd|1\n|move|p1b: Raichu|Nuzzle|p2a: Meowstic\n|-damage|p2a: Meowstic|90/100\n|-status|p2a: Meowstic|par\n|\n|-heal|p1a: Incineroar|100/100|[from] item: Leftovers\n|upkeep\n|turn|2\n|\n|t:|1776183360\n|move|p2a: Meowstic|Helping Hand|p2b: Gardevoir\n|-singleturn|p2b: Gardevoir|Helping Hand|[of] p2a: Meowstic\n|move|p2b: Gardevoir|Hyper Voice|p1a: Incineroar|[spread] p1a,p1b\n|-damage|p1a: Incineroar|0 fnt\n|-damage|p1b: Raichu|0 fnt\n|faint|p1a: Incineroar\n|faint|p1b: Raichu\n|\n|upkeep\n|\n|t:|1776183372\n|switch|p1b: Ninetales|Ninetales-Alola, L50, M, shiny|100/100\n|switch|p1a: Froslass|Froslass, L50, F|100/100\n|-weather|Snowscape|[from] ability: Snow Warning|[of] p1b: Ninetales\n|turn|3\n|\n|t:|1776183404\n|detailschange|p1a: Froslass|Froslass-Mega, L50, F\n|-mega|p1a: Froslass|Froslass|Froslassite\n|move|p2a: Meowstic|Helping Hand|p2b: Gardevoir\n|-singleturn|p2b: Gardevoir|Helping Hand|[of] p2a: Meowstic\n|move|p2b: Gardevoir|Hyper Voice|p1b: Ninetales|[spread] p1a,p1b\n|-damage|p1a: Froslass|0 fnt\n|-damage|p1b: Ninetales|0 fnt\n|faint|p1a: Froslass\n|faint|p1b: Ninetales\n|\n|win|chukecchu\n|raw|yuhgurt's rating: 1029 &rarr; <strong>1018</strong><br />(-11 for losing)\n|raw|chukecchu's rating: 1108 &rarr; <strong>1127</strong><br />(+19 for winning)\n|l|\u2606yuhgurt\n|player|p1|\n",
+  "uploadtime": 1776183584,
+  "views": 24,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1018,
+  "private": 0,
+  "password": null
+}

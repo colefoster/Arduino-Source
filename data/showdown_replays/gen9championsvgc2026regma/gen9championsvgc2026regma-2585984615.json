@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2585984615",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Na04",
+    "colfox"
+  ],
+  "log": "|j|\u2606Na04\n|j|\u203dcolfox\n|t:|1776387559\n|gametype|doubles\n|player|p1|Na04|lucas|1217\n|player|p2|colfox|1|1307\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Lucario, L50, F|\n|poke|p1|Aerodactyl, L50, F|\n|poke|p1|Incineroar, L50, F|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Milotic, L50, F|\n|poke|p1|Tyranitar, L50, M|\n|poke|p2|Tyranitar, L50, M|\n|poke|p2|Excadrill, L50, M|\n|poke|p2|Dragapult, L50, M|\n|poke|p2|Milotic, L50, M|\n|poke|p2|Raichu, L50, M|\n|poke|p2|Scizor, L50, M|\n|teampreview|4\n|\n|t:|1776387606\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Incineroar|Incineroar, L50, F|100/100\n|switch|p1b: Aerodactyl|Aerodactyl, L50, F|100/100\n|switch|p2a: Milotic|Milotic, L50, M|100/100\n|switch|p2b: Raichu|Raichu, L50, M|100/100\n|-ability|p1b: Aerodactyl|Unnerve\n|-ability|p1a: Incineroar|Intimidate|boost\n|-unboost|p2a: Milotic|atk|1\n|-ability|p2a: Milotic|Competitive|boost\n|-boost|p2a: Milotic|spa|2\n|-unboost|p2b: Raichu|atk|1\n|turn|1\n|\n|t:|1776387623\n|move|p1b: Aerodactyl|Protect|p1b: Aerodactyl\n|-singleturn|p1b: Aerodactyl|Protect\n|move|p2b: Raichu|Fake Out|p1a: Incineroar\n|-damage|p1a: Incineroar|95/100\n|cant|p1a: Incineroar|flinch\n|move|p2a: Milotic|Scald|p1a: Incineroar\n|-supereffective|p1a: Incineroar|1\n|-damage|p1a: Incineroar|0 fnt\n|faint|p1a: Incineroar\n|\n|upkeep\n|\n|t:|1776387634\n|switch|p1a: Lucario|Lucario, L50, F|100/100\n|turn|2\n|\n|t:|1776387642\n|detailschange|p1a: Lucario|Lucario-Mega, L50, F\n|-mega|p1a: Lucario|Lucario|Lucarionite\n|move|p1b: Aerodactyl|Rock Slide|p2b: Raichu|[spread] p2a,p2b\n|-damage|p2a: Milotic|75/100\n|-damage|p2b: Raichu|51/100\n|move|p1a: Lucario|Swords Dance|p1a: Lucario\n|-boost|p1a: Lucario|atk|2\n|cant|p2b: Raichu|flinch\n|move|p2a: Milotic|Icy Wind|p1a: Lucario|[spread] p1a,p1b\n|-resisted|p1a: Lucario|1\n|-supereffective|p1b: Aerodactyl|1\n|-damage|p1a: Lucario|77/100\n|-damage|p1b: Aerodactyl|27/100\n|-unboost|p1a: Lucario|spe|1\n|-unboost|p1b: Aerodactyl|spe|1\n|\n|upkeep\n|turn|3\n|\n|t:|1776387664\n|move|p2b: Raichu|Electroweb|p1b: Aerodactyl|[spread] p1a,p1b\n|-supereffective|p1b: Aerodactyl|1\n|-damage|p1a: Lucario|47/100\n|-damage|p1b: Aerodactyl|0 fnt\n|-unboost|p1a: Lucario|spe|1\n|faint|p1b: Aerodactyl\n|move|p2a: Milotic|Scald|p1a: Lucario\n|-damage|p1a: Lucario|0 fnt\n|faint|p1a: Lucario\n|\n|upkeep\n|-message|Na04 forfeited.\n|\n|win|colfox\n|raw|Na04's rating: 1217 &rarr; <strong>1198</strong><br />(-19 for losing)\n|raw|colfox's rating: 1307 &rarr; <strong>1322</strong><br />(+15 for winning)\n|l|\u2606Na04\n|player|p1|\n",
+  "uploadtime": 1776387680,
+  "views": 41,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1198,
+  "private": 0,
+  "password": null
+}

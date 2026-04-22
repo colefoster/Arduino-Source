@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2581253434",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Matias Bluebaum",
+    "Jean Boby"
+  ],
+  "log": "|j|\u2606Matias Bluebaum\n|j|\u2606Jean Boby\n|t:|1775976748\n|gametype|doubles\n|player|p1|Matias Bluebaum|steven|1022\n|player|p2|Jean Boby|colress|1000\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Typhlosion-Hisui, L50, M|\n|poke|p1|Torkoal, L50, F|\n|poke|p1|Venusaur, L50, M|\n|poke|p1|Dragonite, L50, F|\n|poke|p1|Weavile, L50, M|\n|poke|p1|Slowking, L50, M|\n|poke|p2|Gengar, L50, F|\n|poke|p2|Incineroar, L50, F|\n|poke|p2|Kingambit, L50, M|\n|poke|p2|Klefki, L50, M|\n|poke|p2|Tsareena, L50, F|\n|poke|p2|Aromatisse, L50, M|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Jean Boby)\nMatias Bluebaum rejected open team sheets.\n|\n|t:|1775976767\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Typhlosion|Typhlosion-Hisui, L50, M|100/100\n|switch|p1b: Torkoal|Torkoal, L50, F|100/100\n|switch|p2a: Klefki|Klefki, L50, M|100/100\n|switch|p2b: Gengar|Gengar, L50, F|100/100\n|-weather|SunnyDay|[from] ability: Drought|[of] p1b: Torkoal\n|turn|1\n|\n|t:|1775976791\n|detailschange|p2b: Gengar|Gengar-Mega, L50, F\n|-mega|p2b: Gengar|Gengar|Gengarite\n|move|p1b: Torkoal|Helping Hand|p1a: Typhlosion\n|-singleturn|p1a: Typhlosion|Helping Hand|[of] p1b: Torkoal\n|move|p2a: Klefki|Light Screen|p2a: Klefki\n|-sidestart|p2: Jean Boby|move: Light Screen\n|move|p1a: Typhlosion|Eruption|p2a: Klefki|[spread] p2a,p2b\n|-supereffective|p2a: Klefki|1\n|-damage|p2a: Klefki|0 fnt\n|-damage|p2b: Gengar|0 fnt\n|faint|p2a: Klefki\n|faint|p2b: Gengar\n|\n|-weather|SunnyDay|[upkeep]\n|upkeep\n|-message|Jean Boby forfeited.\n|\n|win|Matias Bluebaum\n|raw|Matias Bluebaum's rating: 1022 &rarr; <strong>1056</strong><br />(+34 for winning)\n|raw|Jean Boby's rating: 1000 &rarr; <strong>1000</strong><br />(+0 for losing)\n|l|\u2606Jean Boby\n|player|p2|\n",
+  "uploadtime": 1775976812,
+  "views": 20,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1000,
+  "private": 0,
+  "password": null
+}

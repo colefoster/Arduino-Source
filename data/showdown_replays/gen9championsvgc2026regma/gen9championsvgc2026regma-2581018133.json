@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2581018133",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "Feebas&Chips",
+    "Mudkip_137"
+  ],
+  "log": "|j|\u2606Feebas&Chips\n|j|\u2606Mudkip_137\n|t:|1775952172\n|gametype|doubles\n|player|p1|Feebas&Chips|169|1090\n|player|p2|Mudkip_137|jasmine|1180\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Aromatisse, L50, F|\n|poke|p1|Drampa, L50, F|\n|poke|p1|Incineroar, L50, M|\n|poke|p1|Cofagrigus, L50, F|\n|poke|p1|Palafin, L50, M|\n|poke|p1|Sinistcha, L50|\n|poke|p2|Gengar, L50, M|\n|poke|p2|Aegislash, L50, M|\n|poke|p2|Talonflame, L50, F|\n|poke|p2|Greninja-*, L50, M|\n|poke|p2|Garchomp, L50, F|\n|poke|p2|Venusaur, L50, M|\n|teampreview|4\n|\n|t:|1775952206\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Cofagrigus|Cofagrigus, L50, F|100/100\n|switch|p1b: Drampa|Drampa, L50, F|100/100\n|switch|p2a: Gengar|Gengar, L50, M|100/100\n|switch|p2b: Aegislash|Aegislash, L50, M|100/100\n|turn|1\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by Mudkip_137)\n|\n|t:|1775952242\n|detailschange|p2a: Gengar|Gengar-Mega, L50, M\n|-mega|p2a: Gengar|Gengar|Gengarite\n|move|p2a: Gengar|Focus Blast|p1b: Drampa\n|-supereffective|p1b: Drampa|1\n|-damage|p1b: Drampa|0 fnt\n|faint|p1b: Drampa\n|-formechange|p2b: Aegislash|Aegislash-Blade|\n|move|p2b: Aegislash|Poltergeist|p1a: Cofagrigus\n|-activate|p1a: Cofagrigus|move: Poltergeist|Leftovers\n|-supereffective|p1a: Cofagrigus|1\n|-damage|p1a: Cofagrigus|0 fnt\n|faint|p1a: Cofagrigus\n|\n|upkeep\n|-message|Feebas&Chips forfeited.\n|\n|win|Mudkip_137\n|raw|Feebas&amp;Chips's rating: 1090 &rarr; <strong>1072</strong><br />(-18 for losing)\n|raw|Mudkip_137's rating: 1180 &rarr; <strong>1199</strong><br />(+19 for winning)\n|l|\u2606Feebas&Chips\n|player|p1|\n",
+  "uploadtime": 1775952257,
+  "views": 15,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1072,
+  "private": 0,
+  "password": null
+}

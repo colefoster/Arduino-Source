@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2587987478",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "B. Farro",
+    "CallMeDman"
+  ],
+  "log": "|j|\u2606B. Farro\n|j|\u2606CallMeDman\n|t:|1776589174\n|gametype|doubles\n|player|p1|B. Farro|ingo|1103\n|player|p2|CallMeDman|shadowtriad|1156\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Glimmora, L50, M|\n|poke|p1|Whimsicott, L50, M|\n|poke|p1|Altaria, L50, M|\n|poke|p1|Talonflame, L50, F|\n|poke|p1|Garchomp, L50, M|\n|poke|p1|Weavile, L50, F|\n|poke|p2|Hawlucha, L50, M|\n|poke|p2|Excadrill, L50, M|\n|poke|p2|Tyranitar, L50, F|\n|poke|p2|Corviknight, L50, M|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Arcanine-Hisui, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by CallMeDman)\n|inactive|B. Farro has 60 seconds left.\n|\n|t:|1776589227\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Weavile|Weavile, L50, F|100/100\n|switch|p1b: Altaria|Altaria, L50, M|100/100\n|switch|p2a: Hawlucha|Hawlucha, L50, M|100/100\n|switch|p2b: Excadrill|Excadrill, L50, M|100/100\n|-ability|p1a: Weavile|Pressure\n|-ability|p2a: Hawlucha|Mold Breaker\n|-ability|p2b: Excadrill|Mold Breaker\n|-ability|p1b: Altaria|Cloud Nine\n|turn|1\n|inactive|B. Farro has 30 seconds left.\n|\n|t:|1776589256\n|move|p2a: Hawlucha|Detect|p2a: Hawlucha\n|-singleturn|p2a: Hawlucha|Protect\n|move|p2b: Excadrill|Protect|p2b: Excadrill\n|-singleturn|p2b: Excadrill|Protect\n|move|p1a: Weavile|Fake Out|p2a: Hawlucha\n|-activate|p2a: Hawlucha|move: Protect\n|move|p1b: Altaria|Tailwind|p1b: Altaria\n|-sidestart|p1: B. Farro|move: Tailwind\n|\n|upkeep\n|turn|2\n|\n|t:|1776589276\n|detailschange|p2a: Hawlucha|Hawlucha-Mega, L50, M\n|-mega|p2a: Hawlucha|Hawlucha|Hawluchanite\n|move|p1a: Weavile|Triple Axel|p2a: Hawlucha\n|-supereffective|p2a: Hawlucha|1\n|-damage|p2a: Hawlucha|80/100\n|-supereffective|p2a: Hawlucha|1\n|-damage|p2a: Hawlucha|44/100\n|-supereffective|p2a: Hawlucha|1\n|-crit|p2a: Hawlucha\n|-damage|p2a: Hawlucha|0 fnt\n|faint|p2a: Hawlucha\n|-hitcount|p2: Hawlucha|3\n|move|p1b: Altaria|Ice Beam|p2b: Excadrill\n|-damage|p2b: Excadrill|65/100\n|-status|p2b: Excadrill|frz\n|cant|p2b: Excadrill|frz\n|\n|upkeep\n|-message|CallMeDman forfeited.\n|\n|win|B. Farro\n|raw|B. Farro's rating: 1103 &rarr; <strong>1132</strong><br />(+29 for winning)\n|raw|CallMeDman's rating: 1156 &rarr; <strong>1127</strong><br />(-29 for losing)\n|l|\u2606CallMeDman\n|player|p2|\n",
+  "uploadtime": 1776589293,
+  "views": 10,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1127,
+  "private": 0,
+  "password": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gen9championsvgc2026regma-2585277847",
+  "format": "[Gen 9 Champions] VGC 2026 Reg M-A",
+  "players": [
+    "anfora34",
+    "RBG_LOL"
+  ],
+  "log": "|j|\u2606anfora34\n|j|\u2606RBG_LOL\n|t:|1776333008\n|gametype|doubles\n|player|p1|anfora34|lucas|1047\n|player|p2|RBG_LOL|ghetsis-gen5bw|1110\n|gen|9\n|tier|[Gen 9 Champions] VGC 2026 Reg M-A\n|rated|\n|rule|Species Clause: Limit one of each Pok\u00e9mon\n|rule|Item Clause: Limit 1 of each item\n|clearpoke\n|poke|p1|Gengar, L50, M|\n|poke|p1|Whimsicott, L50, F|\n|poke|p1|Sinistcha, L50|\n|poke|p1|Toxapex, L50, M|\n|poke|p1|Chesnaught, L50, M|\n|poke|p1|Rotom-Wash, L50|\n|poke|p2|Garchomp, L50, M|\n|poke|p2|Froslass, L50, F|\n|poke|p2|Sneasler, L50, M|\n|poke|p2|Kingambit, L50, M|\n|poke|p2|Talonflame, L50, M|\n|poke|p2|Milotic, L50, F|\n|teampreview|4\n|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by RBG_LOL)\n|\n|t:|1776333079\n|teamsize|p1|4\n|teamsize|p2|4\n|start\n|switch|p1a: Gengar|Gengar, L50, M|100/100\n|switch|p1b: Rotom|Rotom-Wash, L50|100/100\n|switch|p2a: Sneasler|Sneasler, L50, M|100/100\n|switch|p2b: Kingambit|Kingambit, L50, M|100/100\n|turn|1\n|inactive|anfora34 has 30 seconds left.\n|inactive|anfora34 has 20 seconds left.\n|inactive|anfora34 has 15 seconds left.\n|inactive|anfora34 has 10 seconds left.\n|inactive|anfora34 has 5 seconds left.\n|\n|t:|1776333134\n|move|p2a: Sneasler|Fake Out|p1b: Rotom\n|-crit|p1b: Rotom\n|-damage|p1b: Rotom|78/100\n|move|p1a: Gengar|Perish Song|p1a: Gengar\n|-start|p1a: Gengar|perish3|[silent]\n|-start|p1b: Rotom|perish3|[silent]\n|-start|p2a: Sneasler|perish3|[silent]\n|-start|p2b: Kingambit|perish3|[silent]\n|-fieldactivate|move: Perish Song\n|cant|p1b: Rotom|flinch\n|move|p2b: Kingambit|Kowtow Cleave|p1a: Gengar\n|-supereffective|p1a: Gengar|1\n|-damage|p1a: Gengar|0 fnt\n|-start|p2b: Kingambit|Disable|Kowtow Cleave|[from] ability: Cursed Body|[of] p1a: Gengar\n|faint|p1a: Gengar\n|\n|-start|p2a: Sneasler|perish3\n|-start|p1b: Rotom|perish3\n|-start|p2b: Kingambit|perish3\n|upkeep\n|-message|anfora34 forfeited.\n|\n|win|RBG_LOL\n|raw|anfora34's rating: 1047 &rarr; <strong>1033</strong><br />(-14 for losing)\n|raw|RBG_LOL's rating: 1110 &rarr; <strong>1131</strong><br />(+21 for winning)\n|l|\u2606anfora34\n|player|p1|\n",
+  "uploadtime": 1776333149,
+  "views": 17,
+  "formatid": "gen9championsvgc2026regma",
+  "rating": 1033,
+  "private": 0,
+  "password": null
+}
