@@ -222,8 +222,8 @@ void DetectorTest::program(SingleSwitchProgramEnvironment& env, ProControllerCon
         //  ── Auto-Screenshot ─────────────────────────────────────
         //
         //  Save on screen transitions (always) or at the configured
-        //  interval within the same screen type. Skip UNKNOWN frames.
-        if (AUTO_SCREENSHOT && screen != "UNKNOWN"){
+        //  interval within the same screen type.
+        if (AUTO_SCREENSHOT){
             auto now = std::chrono::steady_clock::now();
             auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(
                 now - last_screenshot_time
