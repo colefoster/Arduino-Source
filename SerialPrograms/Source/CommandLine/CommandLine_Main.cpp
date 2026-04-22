@@ -18,6 +18,7 @@
 #include <iostream>
 #include <string>
 #include <cstring>
+#include <QCoreApplication>
 #include "Common/Cpp/Color.h"
 #include "CommonFramework/Logging/Logger.h"
 #include "Tests/CommandLineTests.h"
@@ -70,6 +71,10 @@ static int run_controller_test(Logger& logger, const std::string& port_name){
 }
 
 int main(int argc, char* argv[]){
+    //  QCoreApplication is needed so that QCoreApplication::applicationDirPath()
+    //  works — which RESOURCE_PATH() depends on to find OCR dictionaries.
+    QCoreApplication qt_app(argc, argv);
+
     Logger& logger = global_logger_command_line();
 
     logger.log("================================================================================");
