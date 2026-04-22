@@ -74,6 +74,19 @@ BattleLogEvent BattleLogReader::read_event(
 }
 
 
+// ─── Helpers ─────────────────────────────────────────────────────────
+
+//  Strip leading OCR noise (non-alpha characters) from a pokemon name.
+//  e.g. "~ Rotom" -> "Rotom",  "# _Rotom" -> "Rotom"
+static std::string clean_pokemon_name(const std::string& raw){
+    size_t start = 0;
+    while (start < raw.size() && !std::isalpha(static_cast<unsigned char>(raw[start]))){
+        start++;
+    }
+    return raw.substr(start);
+}
+
+
 // ─── Regex-based parsing ─────────────────────────────────────────────
 
 BattleLogEvent BattleLogReader::parse(const std::string& text){
@@ -87,7 +100,7 @@ BattleLogEvent BattleLogReader::parse(const std::string& text){
         std::regex re(R"((?:The opposing )?(.+?) used (.+?)!)");
         if (std::regex_search(text, m, re)){
             event.type = BattleLogEventType::MOVE_USED;
-            event.pokemon = m[1].str();
+            event.pokemon = clean_pokemon_name(m[1].str());
             event.move = m[2].str();
             event.is_opponent = (text.find("The opposing") != std::string::npos);
             return event;
@@ -99,7 +112,7 @@ BattleLogEvent BattleLogReader::parse(const std::string& text){
         std::regex re(R"((.+?) sent out (.+?)!)");
         if (std::regex_search(text, m, re)){
             event.type = BattleLogEventType::SWITCH_IN;
-            event.pokemon = m[2].str();
+            event.pokemon = clean_pokemon_name(m[2].str());
             //  If the trainer name is not ours, it's opponent.
             //  We can't easily know our own trainer name here, so we mark
             //  this as opponent if it doesn't contain "'s" (which would
@@ -115,7 +128,7 @@ BattleLogEvent BattleLogReader::parse(const std::string& text){
         std::regex re(R"((?:The opposing )?(.+?)'s (.+?) (rose|fell|sharply rose|sharply fell|harshly fell|drastically rose)!)");
         if (std::regex_search(text, m, re)){
             event.type = BattleLogEventType::STAT_CHANGE;
-            event.pokemon = m[1].str();
+            event.pokemon = clean_pokemon_name(m[1].str());
             event.stat = m[2].str();
             event.is_opponent = (text.find("The opposing") != std::string::npos);
 
@@ -135,7 +148,7 @@ BattleLogEvent BattleLogReader::parse(const std::string& text){
         std::regex re(R"((?:The opposing )?(.+?)'s (.+?) (rose|fell)!)");
         if (std::regex_search(text, m, re)){
             event.type = BattleLogEventType::STAT_CHANGE;
-            event.pokemon = m[1].str();
+            event.pokemon = clean_pokemon_name(m[1].str());
             event.stat = m[2].str();  //  "Sp. Atk, Sp. Def, and Speed"
             event.is_opponent = (text.find("The opposing") != std::string::npos);
             event.boost_stages = (m[3].str() == "rose") ? 1 : -1;
@@ -149,7 +162,7 @@ BattleLogEvent BattleLogReader::parse(const std::string& text){
         std::regex re(R"((?:The opposing )?(.+?) was (burned|paralyzed|poisoned|badly poisoned|frozen|put to sleep)!)");
         if (std::regex_search(text, m, re)){
             event.type = BattleLogEventType::STATUS_INFLICTED;
-            event.pokemon = m[1].str();
+            event.pokemon = clean_pokemon_name(m[1].str());
             event.stat = m[2].str();  //  reuse stat field for status name
             event.is_opponent = (text.find("The opposing") != std::string::npos);
             return event;
@@ -161,7 +174,7 @@ BattleLogEvent BattleLogReader::parse(const std::string& text){
         std::regex re(R"((?:The opposing )?(.+?) fainted!)");
         if (std::regex_search(text, m, re)){
             event.type = BattleLogEventType::FAINTED;
-            event.pokemon = m[1].str();
+            event.pokemon = clean_pokemon_name(m[1].str());
             event.is_opponent = (text.find("The opposing") != std::string::npos);
             return event;
         }
@@ -186,7 +199,9 @@ BattleLogEvent BattleLogReader::parse(const std::string& text){
         text.find("started to snow") != std::string::npos ||
         text.find("rain stopped") != std::string::npos ||
         text.find("sunlight faded") != std::string::npos ||
-        text.find("sandstorm subsided") != std::string::npos)
+        text.find("sandstorm subsided") != std::string::npos ||
+        text.find("weather disappeared") != std::string::npos ||
+        text.find("effects of the weather") != std::string::npos)
     {
         event.type = BattleLogEventType::WEATHER;
         return event;
