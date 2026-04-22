@@ -454,7 +454,7 @@ void AutoLadder::program(SingleSwitchProgramEnvironment& env, ProControllerConte
                 "[AI] Loaded " + std::to_string(parsed) + " Pokemon from team paste.",
                 COLOR_GREEN
             );
-            for (int i = 0; i < parsed; i++){
+            for (uint8_t i = 0; i < parsed; i++){
                 const auto& mon = m_state_tracker.own(i);
                 std::string moves_str;
                 for (const auto& m : mon.known_moves){
