@@ -64,16 +64,52 @@ OCR::StringMatchResult SpeciesNameOCR::read_substring(
 
 // ─── Helpers ─────────────────────────────────────────────────────
 
+//  OCR a crop region with upscaling for small text.
 static std::string raw_ocr_line(const ImageViewRGB32& crop){
-    //  Always upscale HP/number crops for better Tesseract accuracy.
-    //  The game's italic bold font is hard to read at native resolution.
-    //  Scale up to at least 400px wide.
     if (crop.width() > 0 && crop.width() < 400){
         size_t scale = 400 / crop.width() + 1;
         ImageRGB32 scaled = crop.scale_to(crop.width() * scale, crop.height() * scale);
         return OCR::ocr_read(Language::English, scaled, OCR::PageSegMode::SINGLE_LINE);
     }
     return OCR::ocr_read(Language::English, crop, OCR::PageSegMode::SINGLE_LINE);
+}
+
+//  OCR a crop region after converting to high-contrast black-on-white.
+//  For HP numbers: the text is bright (white/green/yellow) on dark bg.
+//  Threshold the brightness channel, invert, then upscale for Tesseract.
+static std::string raw_ocr_numbers(const ImageViewRGB32& crop){
+    if (crop.width() == 0 || crop.height() == 0) return "";
+
+    //  Create a high-contrast version: any pixel with max(R,G,B) > threshold
+    //  becomes white text on black bg, then invert to black text on white bg.
+    size_t w = crop.width();
+    size_t h = crop.height();
+    size_t scale = 3;
+    ImageRGB32 bw(w * scale, h * scale);
+
+    for (size_t y = 0; y < h; y++){
+        for (size_t x = 0; x < w; x++){
+            uint32_t pixel = crop.pixel(x, y);
+            uint8_t r = (pixel >> 0) & 0xFF;
+            uint8_t g = (pixel >> 8) & 0xFF;
+            uint8_t b = (pixel >> 16) & 0xFF;
+
+            //  Brightness = max channel. HP numbers are the brightest part.
+            uint8_t brightness = r > g ? (r > b ? r : b) : (g > b ? g : b);
+            //  Threshold: text pixels are bright (> 160), bg is darker.
+            //  Invert: Tesseract prefers dark text on light bg.
+            uint32_t out = (brightness > 160) ? 0xFF000000 : 0xFFFFFFFF;
+
+            //  Fill the scaled pixel block.
+            for (size_t sy = 0; sy < scale; sy++){
+                for (size_t sx = 0; sx < scale; sx++){
+                    bw.pixel(x * scale + sx, y * scale + sy) = out;
+                }
+            }
+        }
+    }
+
+    return OCR::ocr_read(Language::English, bw, OCR::PageSegMode::SINGLE_LINE);
 }
 
 //  Extract all digit sequences from OCR text.
@@ -99,21 +135,44 @@ static std::vector<int> extract_numbers(const std::string& text){
     return nums;
 }
 
+//  Strip everything except digits and '/' from OCR text.
+//  Handles cases where Tesseract reads "WK ¥iri" instead of "118/125"
+//  by extracting only the numeric characters: "118125" or "118/125".
+static std::string digits_only(const std::string& text){
+    std::string out;
+    for (char c : text){
+        if ((c >= '0' && c <= '9') || c == '/'){
+            out += c;
+        }
+    }
+    return out;
+}
+
 static std::pair<int, int> parse_fraction(const std::string& text){
-    //  Try the clean regex first: "175/175" or "175 / 175"
-    std::regex re(R"((\d+)\s*/\s*(\d+))");
+    //  First strip to digits + slash only.
+    std::string clean = digits_only(text);
+
+    //  Try the clean regex: "175/175"
+    std::regex re(R"((\d+)/(\d+))");
     std::smatch m;
-    if (std::regex_search(text, m, re)){
+    if (std::regex_search(clean, m, re)){
         return {std::stoi(m[1].str()), std::stoi(m[2].str())};
     }
 
-    //  Fallback: extract all numbers. If we get exactly 2, assume current/max.
-    //  Handles "1757175" (where Tesseract dropped the slash).
-    auto nums = extract_numbers(text);
+    //  Fallback: extract all digit runs.
+    auto nums = extract_numbers(clean);
     if (nums.size() == 2){
         return {nums[0], nums[1]};
     }
-    //  If we get 1 number, return it as current with unknown max.
+    if (nums.size() == 1){
+        return {nums[0], -1};
+    }
+
+    //  Last resort: try on the original text (might have digit-like chars).
+    nums = extract_numbers(text);
+    if (nums.size() >= 2){
+        return {nums[0], nums[1]};
+    }
     if (nums.size() == 1){
         return {nums[0], -1};
     }
@@ -121,8 +180,13 @@ static std::pair<int, int> parse_fraction(const std::string& text){
 }
 
 static int parse_percentage(const std::string& text){
-    //  Extract all digit sequences and take the first one that's 0-100.
-    auto nums = extract_numbers(text);
+    std::string clean = digits_only(text);
+    auto nums = extract_numbers(clean);
+    for (int n : nums){
+        if (n >= 0 && n <= 100) return n;
+    }
+    //  Fallback to original text.
+    nums = extract_numbers(text);
     for (int n : nums){
         if (n >= 0 && n <= 100) return n;
     }
@@ -250,7 +314,7 @@ int BattleHUDReader::read_opponent_hp_pct(
 ) const{
     if (slot >= 2 || m_opponent_hp_boxes[slot].width == 0) return -1;
     ImageViewRGB32 cropped = extract_box_reference(screen, m_opponent_hp_boxes[slot]);
-    std::string text = raw_ocr_line(cropped);
+    std::string text = raw_ocr_numbers(cropped);
     int pct = parse_percentage(text);
     if (pct < 0 || pct > 100){
         logger.log("BattleHUDReader: failed to parse opponent HP% slot " +
@@ -265,7 +329,7 @@ std::pair<int, int> BattleHUDReader::read_own_hp(
 ) const{
     if (slot >= 2 || m_own_hp_boxes[slot].width == 0) return {-1, -1};
     ImageViewRGB32 cropped = extract_box_reference(screen, m_own_hp_boxes[slot]);
-    std::string text = raw_ocr_line(cropped);
+    std::string text = raw_ocr_numbers(cropped);
     auto hp = parse_fraction(text);
     if (hp.first < 0){
         logger.log("BattleHUDReader: failed to parse own HP slot " +
@@ -279,7 +343,7 @@ std::pair<int, int> BattleHUDReader::read_move_pp(
 ) const{
     if (slot >= 4 || m_pp_boxes[slot].width == 0) return {-1, -1};
     ImageViewRGB32 cropped = extract_box_reference(screen, m_pp_boxes[slot]);
-    std::string text = raw_ocr_line(cropped);
+    std::string text = raw_ocr_numbers(cropped);
     auto pp = parse_fraction(text);
     if (pp.first < 0){
         logger.log("BattleHUDReader: failed to parse PP slot " +
