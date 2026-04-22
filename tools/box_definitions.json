@@ -6,102 +6,358 @@
       "scene": "View Details - Moves & More tab",
       "screenshot": "screenshots/screenshot-20260422-160514341816.png",
       "description": "The 'Moves & More' tab label text at the top (for screen detection)",
-      "status": "pending",
-      "box": null
+      "status": "confirmed",
+      "box": [
+        0.3682,
+        0.2074,
+        0.0875,
+        0.0333
+      ],
+      "avg_rgb": [
+        192.7,
+        220.8,
+        112.1
+      ],
+      "stddev_sum": 244.4,
+      "color_ratio": [
+        0.3666,
+        0.4201,
+        0.2133
+      ]
     },
     {
       "name": "moves_more/card_bg_0",
       "scene": "View Details - Moves & More tab",
       "screenshot": "screenshots/screenshot-20260422-160514341816.png",
-      "description": "Solid purple background region inside card 0 (Garchomp) — for color-gate detection",
-      "status": "pending",
-      "box": null
+      "description": "Solid purple background region inside card 0 (Garchomp) \u00e2\u20ac\u201d for color-gate detection",
+      "status": "confirmed",
+      "box": [
+        0.226,
+        0.3,
+        0.0339,
+        0.0111
+      ],
+      "avg_rgb": [
+        95.8,
+        80.5,
+        222.9
+      ],
+      "stddev_sum": 6.7,
+      "color_ratio": [
+        0.2401,
+        0.2016,
+        0.5583
+      ]
     },
     {
       "name": "moves_more/species_0",
       "scene": "View Details - Moves & More tab",
       "screenshot": "screenshots/screenshot-20260422-160514341816.png",
-      "description": "Species name 'Garchomp' text — top-left card (card 0). Crop tightly around the text only.",
-      "status": "pending",
-      "box": null
+      "description": "Species name 'Garchomp' text \u00e2\u20ac\u201d top-left card (card 0). Crop tightly around the text only.",
+      "status": "confirmed",
+      "box": [
+        0.1391,
+        0.2769,
+        0.087,
+        0.0398
+      ],
+      "avg_rgb": [
+        138.1,
+        124.8,
+        229.1
+      ],
+      "stddev_sum": 132.2,
+      "color_ratio": [
+        0.2806,
+        0.2537,
+        0.4657
+      ]
     },
     {
       "name": "moves_more/species_1",
       "scene": "View Details - Moves & More tab",
       "screenshot": "screenshots/screenshot-20260422-160514341816.png",
-      "description": "Species name 'Venusaur' text — top-right card (card 1). Same height/width as species_0, shifted right.",
-      "status": "pending",
-      "box": null
+      "description": "Species name 'Venusaur' text \u00e2\u20ac\u201d top-right card (card 1). Same height/width as species_0, shifted right.",
+      "status": "confirmed",
+      "box": [
+        0.5552,
+        0.2769,
+        0.0859,
+        0.038
+      ],
+      "avg_rgb": [
+        133.1,
+        120.3,
+        229.5
+      ],
+      "stddev_sum": 127.3,
+      "color_ratio": [
+        0.2756,
+        0.2492,
+        0.4753
+      ]
     },
     {
       "name": "moves_more/species_2",
       "scene": "View Details - Moves & More tab",
       "screenshot": "screenshots/screenshot-20260422-160514341816.png",
-      "description": "Species name 'Charizard' text — middle-left card (card 2). Same as species_0, shifted down one row.",
-      "status": "pending",
-      "box": null
+      "description": "Species name 'Charizard' text \u00e2\u20ac\u201d middle-left card (card 2). Same as species_0, shifted down one row.",
+      "status": "confirmed",
+      "box": [
+        0.137,
+        0.475,
+        0.088,
+        0.038
+      ],
+      "avg_rgb": [
+        139.6,
+        127.4,
+        230.6
+      ],
+      "stddev_sum": 131.9,
+      "color_ratio": [
+        0.2805,
+        0.256,
+        0.4635
+      ]
     },
     {
       "name": "moves_more/ability_0",
       "scene": "View Details - Moves & More tab",
       "screenshot": "screenshots/screenshot-20260422-160514341816.png",
       "description": "Ability name 'Rough Skin' text in card 0 (Garchomp). Below species name, smaller text.",
-      "status": "pending",
-      "box": null
+      "status": "confirmed",
+      "box": [
+        0.1401,
+        0.3231,
+        0.0786,
+        0.0343
+      ],
+      "avg_rgb": [
+        172.2,
+        152.2,
+        241.5
+      ],
+      "stddev_sum": 89.6,
+      "color_ratio": [
+        0.3044,
+        0.2689,
+        0.4267
+      ]
     },
     {
       "name": "moves_more/move_0_0",
       "scene": "View Details - Moves & More tab",
       "screenshot": "screenshots/screenshot-20260422-160514341816.png",
       "description": "First move 'Earthquake' text in card 0 (Garchomp). After the type icon, just the move name text.",
-      "status": "pending",
-      "box": null
+      "status": "confirmed",
+      "box": [
+        0.3531,
+        0.2806,
+        0.0995,
+        0.0324
+      ],
+      "avg_rgb": [
+        185.7,
+        171.5,
+        246.7
+      ],
+      "stddev_sum": 72.2,
+      "color_ratio": [
+        0.3075,
+        0.284,
+        0.4085
+      ]
     },
     {
       "name": "moves_more/move_0_1",
       "scene": "View Details - Moves & More tab",
       "screenshot": "screenshots/screenshot-20260422-160514341816.png",
       "description": "Second move 'Rock Slide' text in card 0 (Garchomp).",
-      "status": "pending",
-      "box": null
+      "status": "confirmed",
+      "box": [
+        0.3526,
+        0.3213,
+        0.0995,
+        0.0343
+      ],
+      "avg_rgb": [
+        169.8,
+        149.8,
+        246.0
+      ],
+      "stddev_sum": 76.5,
+      "color_ratio": [
+        0.3002,
+        0.2649,
+        0.4349
+      ]
     },
     {
       "name": "moves_more/move_0_2",
       "scene": "View Details - Moves & More tab",
       "screenshot": "screenshots/screenshot-20260422-160514341816.png",
       "description": "Third move 'Dragon Claw' text in card 0 (Garchomp).",
-      "status": "pending",
-      "box": null
+      "status": "confirmed",
+      "box": [
+        0.3531,
+        0.363,
+        0.0964,
+        0.0352
+      ],
+      "avg_rgb": [
+        160.1,
+        141.7,
+        238.6
+      ],
+      "stddev_sum": 91.1,
+      "color_ratio": [
+        0.2962,
+        0.2622,
+        0.4415
+      ]
     },
     {
       "name": "moves_more/move_0_3",
       "scene": "View Details - Moves & More tab",
       "screenshot": "screenshots/screenshot-20260422-160514341816.png",
-      "description": "Fourth move 'Stomping Tantrum' text in card 0 (Garchomp). Last move — used to compute vertical spacing.",
-      "status": "pending",
-      "box": null
+      "description": "Fourth move 'Stomping Tantrum' text in card 0 (Garchomp). Last move \u00e2\u20ac\u201d used to compute vertical spacing.",
+      "status": "confirmed",
+      "box": [
+        0.3536,
+        0.4065,
+        0.0948,
+        0.0315
+      ],
+      "avg_rgb": [
+        161.2,
+        149.0,
+        231.5
+      ],
+      "stddev_sum": 111.7,
+      "color_ratio": [
+        0.2975,
+        0.2751,
+        0.4274
+      ]
     },
     {
       "name": "team_reg/species_0",
       "scene": "Team Registration screen",
       "screenshot": "screenshots/screenshot-20260422-160451227419.png",
       "description": "First species name 'Garchomp' in the team list (left column, top slot).",
-      "status": "pending",
-      "box": null
+      "status": "confirmed",
+      "box": [
+        0.0807,
+        0.2194,
+        0.0823,
+        0.0333
+      ],
+      "avg_rgb": [
+        220.7,
+        223.7,
+        247.2
+      ],
+      "stddev_sum": 130.7,
+      "color_ratio": [
+        0.3191,
+        0.3234,
+        0.3575
+      ]
     },
     {
       "name": "team_reg/species_5",
       "scene": "Team Registration screen",
       "screenshot": "screenshots/screenshot-20260422-160451227419.png",
       "description": "Last species name 'Incineroar' in the team list (left column, bottom slot). Used with species_0 to compute vertical spacing.",
-      "status": "pending",
-      "box": null
+      "status": "confirmed",
+      "box": [
+        0.0807,
+        0.7741,
+        0.0849,
+        0.0343
+      ],
+      "avg_rgb": [
+        225.3,
+        226.6,
+        248.3
+      ],
+      "stddev_sum": 121.4,
+      "color_ratio": [
+        0.3217,
+        0.3236,
+        0.3547
+      ]
     },
     {
       "name": "team_reg/team_tab_bg",
       "scene": "Team Registration screen",
       "screenshot": "screenshots/screenshot-20260422-160451227419.png",
-      "description": "The green/yellow 'Team 1' (or 'Team 2') selected tab background — for color-gate detection of this screen.",
+      "description": "The green/yellow 'Team 1' (or 'Team 2') selected tab background \u00e2\u20ac\u201d for color-gate detection of this screen.",
+      "status": "confirmed",
+      "box": [
+        0.2844,
+        0.1435,
+        0.0281,
+        0.0204
+      ],
+      "avg_rgb": [
+        255.0,
+        255.0,
+        2.9
+      ],
+      "stddev_sum": 1.4,
+      "color_ratio": [
+        0.4972,
+        0.4972,
+        0.0056
+      ]
+    },
+    {
+      "name": "team_reg/scroll_position",
+      "scene": "Team Registration screen",
+      "screenshot": "screenshots/screenshot-20260422-160451227419.png",
+      "description": "Bottom scrollbar / page-position indicator. Select the region that shows 'we're scrolled to the leftmost position' (teams 1-5 visible). Any text/arrow/dots indicator works. We'll use this to refuse running team scan unless scrolled left.",
+      "status": "pending",
+      "box": null
+    },
+    {
+      "name": "team_reg/tab_slot_0",
+      "scene": "Team Registration screen",
+      "screenshot": "screenshots/screenshot-20260422-160451227419.png",
+      "description": "Position of Team 1's tab pill (leftmost). Select the center of the pill \u2014 the color won't matter here, only the position. This is where we'll check for the selected-green color.",
+      "status": "pending",
+      "box": null
+    },
+    {
+      "name": "team_reg/tab_slot_1",
+      "scene": "Team Registration screen",
+      "screenshot": "screenshots/screenshot-20260422-160451227419.png",
+      "description": "Position of Team 2's tab pill. Select the center of the pill (whether highlighted or not).",
+      "status": "pending",
+      "box": null
+    },
+    {
+      "name": "team_reg/tab_slot_2",
+      "scene": "Team Registration screen",
+      "screenshot": "screenshots/screenshot-20260422-160451227419.png",
+      "description": "Position of Team 3's tab pill. Select the center of the pill.",
+      "status": "pending",
+      "box": null
+    },
+    {
+      "name": "team_reg/tab_slot_3",
+      "scene": "Team Registration screen",
+      "screenshot": "screenshots/screenshot-20260422-160451227419.png",
+      "description": "Position of Team 4's tab pill. Select the center of the pill.",
+      "status": "pending",
+      "box": null
+    },
+    {
+      "name": "team_reg/tab_slot_4",
+      "scene": "Team Registration screen",
+      "screenshot": "screenshots/screenshot-20260422-160451227419.png",
+      "description": "Position of Team 5's tab pill (rightmost when scrolled left). Select the center of the pill.",
       "status": "pending",
       "box": null
     }
