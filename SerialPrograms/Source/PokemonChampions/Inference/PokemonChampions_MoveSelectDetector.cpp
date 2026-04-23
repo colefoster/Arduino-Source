@@ -71,7 +71,7 @@ bool MoveSelectDetector::is_slot_selected(
     const ImageViewRGB32& screen, const ImageFloatBox& slot
 ) const{
     const ImageStats stats = image_stats(extract_box_reference(screen, slot));
-    return is_solid(stats, SELECTED_MOVE_GREEN, 0.18, 120);
+    return is_solid(stats, SELECTED_MOVE_GREEN, 0.22, 120);
 }
 
 bool MoveSelectDetector::detect(const ImageViewRGB32& screen){
