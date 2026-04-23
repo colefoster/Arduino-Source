@@ -117,7 +117,10 @@ READER_CROPS = {
         {"name": "pokemon_glow", "box": [0.8932, 0.7907, 0.0182, 0.0213]},
     ],
     "ResultScreenDetector":     _bool_detector_boxes,
-    "PreparingForBattleDetector": _bool_detector_boxes,
+    "PreparingForBattleDetector": lambda: [
+        {"name": "player_pill", "box": [0.2280, 0.8695, 0.0016, 0.0204]},
+        {"name": "opponent_pill", "box": [0.7656, 0.8695, 0.0016, 0.0204]},
+    ],
     "PostMatchScreenDetector":  _bool_detector_boxes,
     "MainMenuDetector":         _bool_detector_boxes,
 }

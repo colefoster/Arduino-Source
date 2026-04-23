@@ -27,18 +27,17 @@ namespace NintendoSwitch{
 namespace PokemonChampions{
 
 
-//  Player pill: blue-purple gradient. Dark portion has high B, low R+G.
-static const FloatPixel STANDING_BY_PLAYER_BLUE {0.14, 0.19, 0.67};
-//  Opponent pill: pink. High R, mid B, low G.
-static const FloatPixel STANDING_BY_OPPONENT_PINK{0.48, 0.17, 0.35};
+//  Both pills sample white text from "Standing By" label.
+//  Tightened boxes land on letter strokes — near-white in both cases.
+static const FloatPixel STANDING_BY_WHITE{0.333, 0.333, 0.333};
 
 
 PreparingForBattleDetector::PreparingForBattleDetector()
     //  Box sized to sit inside each pill. In 1920x1080:
     //    Left pill:  x 400-500, y 920-950
     //    Right pill: x 1430-1560, y 925-955
-    : m_left_standing_by (0.2083, 0.8519, 0.0521, 0.0278)
-    , m_right_standing_by(0.7448, 0.8565, 0.0677, 0.0278)
+    : m_left_standing_by (0.2280, 0.8695, 0.0016, 0.0204)
+    , m_right_standing_by(0.7656, 0.8695, 0.0016, 0.0204)
 {}
 
 void PreparingForBattleDetector::make_overlays(VideoOverlaySet& items) const{
@@ -52,8 +51,8 @@ bool PreparingForBattleDetector::detect(const ImageViewRGB32& screen){
 
     //  Require BOTH pills to show their respective colors. A single pill in
     //  isolation could be anything — the pair is the strong signature.
-    return is_solid(left_stats,  STANDING_BY_PLAYER_BLUE,    0.18, 150)
-        && is_solid(right_stats, STANDING_BY_OPPONENT_PINK,  0.18, 120);
+    return is_solid(left_stats,  STANDING_BY_WHITE, 0.05, 80)
+        && is_solid(right_stats, STANDING_BY_WHITE, 0.05, 80);
 }
 
 

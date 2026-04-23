@@ -43,7 +43,7 @@ INDEX_FILE = OUTPUT_DIR / "index.json"
 POLL_INTERVAL = 15
 
 # Max battles to spectate simultaneously (Showdown kicks at ~50 rooms)
-MAX_CONCURRENT = 30
+MAX_CONCURRENT = 40
 
 
 class BattleLog:
@@ -252,7 +252,9 @@ class ShowdownSpectator:
             return
 
         rooms = data.get("rooms", {})
-        for room_id, info in rooms.items():
+        room_items = list(rooms.items())
+        random.shuffle(room_items)
+        for room_id, info in room_items:
             # Don't exceed concurrent limit
             if len(self.joined_rooms) >= MAX_CONCURRENT:
                 break
