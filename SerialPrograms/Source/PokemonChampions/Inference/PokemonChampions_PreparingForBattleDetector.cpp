@@ -16,7 +16,6 @@
  *
  */
 
-#include <iostream>
 #include "Common/Cpp/Color.h"
 #include "CommonFramework/ImageTools/ImageStats.h"
 #include "CommonFramework/VideoPipeline/VideoOverlay.h"
@@ -50,18 +49,7 @@ bool PreparingForBattleDetector::detect(const ImageViewRGB32& screen){
     const ImageStats left_stats  = image_stats(extract_box_reference(screen, m_left_standing_by));
     const ImageStats right_stats = image_stats(extract_box_reference(screen, m_right_standing_by));
 
-    //  Debug: print what we see
-    double ls = left_stats.average.r + left_stats.average.g + left_stats.average.b;
-    double rs = right_stats.average.r + right_stats.average.g + right_stats.average.b;
-    std::cout << "PreparingDebug LEFT:  avg=(" << left_stats.average.r << "," << left_stats.average.g << "," << left_stats.average.b
-              << ") ratio=(" << (ls>0?left_stats.average.r/ls:0) << "," << (ls>0?left_stats.average.g/ls:0) << "," << (ls>0?left_stats.average.b/ls:0)
-              << ") sdsum=" << (left_stats.stddev.r + left_stats.stddev.g + left_stats.stddev.b) << std::endl;
-    std::cout << "PreparingDebug RIGHT: avg=(" << right_stats.average.r << "," << right_stats.average.g << "," << right_stats.average.b
-              << ") ratio=(" << (rs>0?right_stats.average.r/rs:0) << "," << (rs>0?right_stats.average.g/rs:0) << "," << (rs>0?right_stats.average.b/rs:0)
-              << ") sdsum=" << (right_stats.stddev.r + right_stats.stddev.g + right_stats.stddev.b) << std::endl;
-
-    //  Require BOTH pills to show their respective colors. A single pill in
-    //  isolation could be anything — the pair is the strong signature.
+    //  Require BOTH pills to show white text. The pair is a strong signature.
     return is_solid(left_stats,  STANDING_BY_WHITE, 0.08, 200)
         && is_solid(right_stats, STANDING_BY_WHITE, 0.08, 200);
 }
