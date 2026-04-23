@@ -50,23 +50,30 @@ TeamPreviewReader::TeamPreviewReader(Language language)
     : m_language(language)
 {
     //  --- Own species text boxes ---
-    //  Measured anchors: species_0 at (0.0724, 0.1574, 0.0755, 0.0333)
-    //                    species_5 at (0.0724, 0.7398, 0.0927, 0.0370)
-    //  Use slot 0 size; interpolate y between 0 and 5.
+    //  Measured anchors (re-measured 2026-04-22 with tighter crops):
+    //    slot 0: (0.0760, 0.1565, 0.0969, 0.0389)   -- Glimmora (longer word)
+    //    slot 2: (0.0729, 0.3898, 0.0844, 0.0352)   -- Rotom (shorter; midpoint
+    //                                                  validates linear y-spacing)
+    //    slot 5: (0.0724, 0.7389, 0.0922, 0.0361)   -- Kingambit
+    //  Row spacing is linear at ~0.1165 per slot.
+    //  Use min-X and max-W/H so every word fits within the box regardless
+    //  of length; extra pill background is filtered out by OCR.
     const double OWN_SP_X = 0.0724;
-    const double OWN_SP_W = 0.0927;   //  widest of measured extremes
-    const double OWN_SP_H = 0.0370;
-    const double OWN_SP_Y0 = 0.1574;
-    const double OWN_SP_Y5 = 0.7398;
+    const double OWN_SP_W = 0.0969;
+    const double OWN_SP_H = 0.0389;
+    const double OWN_SP_Y0 = 0.1565;
+    const double OWN_SP_Y5 = 0.7389;
     const double OWN_SP_STEP = (OWN_SP_Y5 - OWN_SP_Y0) / 5.0;
 
     //  --- Own item text boxes ---
-    //  item_0 at (0.0974, 0.2019, 0.0885, 0.0287)
-    //  item_5 at (0.0995, 0.7852, 0.0823, 0.0306)
-    const double OWN_IT_X = 0.0974;
-    const double OWN_IT_W = 0.0885;
-    const double OWN_IT_H = 0.0306;
-    const double OWN_IT_Y0 = 0.2019;
+    //  Re-measured anchors:
+    //    slot 0: (0.0964, 0.1981, 0.0786, 0.0333)   -- Focus Sash
+    //    slot 2: (0.0974, 0.4343, 0.0802, 0.0296)   -- Choice Scarf
+    //    slot 5: (0.0995, 0.7852, 0.0823, 0.0306)   -- Bright Powder (longer)
+    const double OWN_IT_X = 0.0964;
+    const double OWN_IT_W = 0.0823;
+    const double OWN_IT_H = 0.0333;
+    const double OWN_IT_Y0 = 0.1981;
     const double OWN_IT_Y5 = 0.7852;
     const double OWN_IT_STEP = (OWN_IT_Y5 - OWN_IT_Y0) / 5.0;
 

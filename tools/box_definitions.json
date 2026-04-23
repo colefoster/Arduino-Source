@@ -488,21 +488,21 @@
       "description": "Own slot 0 (TOP row, unhighlighted Glimmora): species text ONLY. TIGHT crop \u2014 just the dark text pixels, no pill background, no border, no gender icon.",
       "status": "confirmed",
       "box": [
-        0.0724,
-        0.1574,
-        0.0755,
-        0.0333
+        0.076,
+        0.1565,
+        0.0969,
+        0.0389
       ],
       "avg_rgb": [
-        149.4,
-        134.1,
-        254.3
+        137.3,
+        120.9,
+        254.5
       ],
-      "stddev_sum": 99.0,
+      "stddev_sum": 89.0,
       "color_ratio": [
-        0.2778,
-        0.2494,
-        0.4728
+        0.2678,
+        0.2358,
+        0.4964
       ]
     },
     {
@@ -513,20 +513,20 @@
       "status": "confirmed",
       "box": [
         0.0724,
-        0.7398,
-        0.0927,
-        0.037
+        0.7389,
+        0.0922,
+        0.0361
       ],
       "avg_rgb": [
-        143.6,
-        127.9,
+        144.2,
+        128.6,
         254.5
       ],
-      "stddev_sum": 96.2,
+      "stddev_sum": 97.0,
       "color_ratio": [
-        0.273,
-        0.2431,
-        0.4838
+        0.2735,
+        0.2438,
+        0.4827
       ]
     },
     {
@@ -536,21 +536,21 @@
       "description": "Own slot 0: item 'Focus Sash' text ONLY. TIGHT crop on the smaller text below species.",
       "status": "confirmed",
       "box": [
-        0.0974,
-        0.2019,
-        0.0885,
-        0.0287
+        0.0964,
+        0.1981,
+        0.0786,
+        0.0333
       ],
       "avg_rgb": [
-        111.1,
-        101.1,
-        248.3
+        112.4,
+        102.5,
+        249.6
       ],
-      "stddev_sum": 120.9,
+      "stddev_sum": 117.7,
       "color_ratio": [
-        0.2413,
-        0.2196,
-        0.5392
+        0.2419,
+        0.2207,
+        0.5374
       ]
     },
     {
@@ -654,16 +654,48 @@
       "scene": "Pre-battle Team Preview (Select 4)",
       "screenshot": "screenshots/team_preview_3804.png",
       "description": "Own slot 2 (3rd row, unhighlighted): species name 'Rotom'. TIGHT crop around just the dark text \u2014 exclude the pill background and any border. This is a midpoint anchor to improve row interpolation.",
-      "status": "pending",
-      "box": null
+      "status": "confirmed",
+      "box": [
+        0.0729,
+        0.3898,
+        0.0844,
+        0.0352
+      ],
+      "avg_rgb": [
+        138.9,
+        122.2,
+        254.7
+      ],
+      "stddev_sum": 81.8,
+      "color_ratio": [
+        0.2692,
+        0.2369,
+        0.4939
+      ]
     },
     {
       "name": "team_preview/own_item_2",
       "scene": "Pre-battle Team Preview (Select 4)",
       "screenshot": "screenshots/team_preview_3804.png",
       "description": "Own slot 2: item name 'Choice Scarf' below the species. TIGHT crop on the dark text only.",
-      "status": "pending",
-      "box": null
+      "status": "confirmed",
+      "box": [
+        0.0974,
+        0.4343,
+        0.0802,
+        0.0296
+      ],
+      "avg_rgb": [
+        118.2,
+        108.7,
+        248.4
+      ],
+      "stddev_sum": 130.7,
+      "color_ratio": [
+        0.2488,
+        0.2287,
+        0.5225
+      ]
     }
   ]
 }
