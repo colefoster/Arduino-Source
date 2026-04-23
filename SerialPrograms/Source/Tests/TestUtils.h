@@ -149,6 +149,8 @@ public:
         if ((result) != (target)){\
             std::cerr << "Error: " << __func__ << ":" << __LINE__ << " result is " << (result) << " but should be " << (target) << "." << std::endl; \
             return 1; \
+        }else{ \
+            std::cout << "OK: actual=" << (result) << std::endl; \
         } \
     } while (0)
 

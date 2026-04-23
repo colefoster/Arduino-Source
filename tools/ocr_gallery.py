@@ -52,6 +52,17 @@ def _opponent_hp_boxes():
     """OpponentHPReader: HP percentage display."""
     return [{"name": "opp_hp_pct", "box": [0.8963, 0.1098, 0.0498, 0.0524]}]
 
+def _opponent_hp_doubles_boxes():
+    """OpponentHPReader_Doubles: HP percentage for left opponent (slot 0)."""
+    return [{"name": "opp0_hp_pct", "box": [0.694, 0.116, 0.041, 0.038]}]
+
+def _species_reader_doubles_boxes():
+    """SpeciesReader_Doubles: opponent species badges, doubles mode."""
+    return [
+        {"name": "opp0_species", "box": [0.6172, 0.0454, 0.1219, 0.0417]},
+        {"name": "opp1_species", "box": [0.8286, 0.0481, 0.1151, 0.0417]},
+    ]
+
 def _move_select_detector_boxes():
     """MoveSelectDetector: 4 pill indicator strips."""
     y_vals = [0.5116, 0.6338, 0.7542, 0.8746]
@@ -125,6 +136,8 @@ READER_CROPS = {
     ],
     "PostMatchScreenDetector":  _bool_detector_boxes,
     "MainMenuDetector":         _bool_detector_boxes,
+    "OpponentHPReader_Doubles": _opponent_hp_doubles_boxes,
+    "SpeciesReader_Doubles":    _species_reader_doubles_boxes,
 }
 
 
@@ -143,7 +156,7 @@ def parse_ground_truth(filename, reader_name):
     if base.endswith("_False"):
         return {"type": "bool", "values": [False], "raw": base}
 
-    if reader_name in ("OpponentHPReader", "MoveSelectCursorSlot"):
+    if reader_name in ("OpponentHPReader", "OpponentHPReader_Doubles", "MoveSelectCursorSlot"):
         try:
             val = int(words[-1])
             return {"type": "int", "values": [val], "raw": base}
@@ -331,6 +344,12 @@ def run_regression_on_colepc(test_path="CommandLineTests\\PokemonChampions", reb
             }
             continue
 
+        # "OK: actual=X" (printed on success by TEST_RESULT_EQUAL)
+        m = re.match(r'OK: actual=(.+)$', stripped)
+        if m and current_file:
+            results[current_file]["actual"] = m.group(1)
+            continue
+
         # "FAIL  ReaderName  ←  filename.png"
         if stripped.startswith("FAIL"):
             parts = stripped.split("←")
@@ -494,16 +513,19 @@ def build_card_html(entry, crop_defs, reader_name, results):
         html += f'<div class="expected">expected: {labels}</div>\n'
 
     # Actual results (from regression output parsing)
-    if result and not passed:
-        if result.get("actual") and result.get("expected"):
-            html += f'<div class="actual fail">actual: {result["actual"]}  (expected: {result["expected"]})</div>\n'
-        if result.get("slot_errors"):
-            for slot, err in sorted(result["slot_errors"].items()):
-                html += f'<div class="actual fail">slot {slot}: got "{err["actual"]}" expected "{err["expected"]}"</div>\n'
-        if result.get("raw_ocr"):
-            html += f'<div class="actual fail">raw OCR: "{result["raw_ocr"]}"</div>\n'
-        if result.get("detected_type"):
-            html += f'<div class="actual fail">detected: {result["detected_type"]}</div>\n'
+    if result:
+        if passed and result.get("actual"):
+            html += f'<div class="actual pass">actual: {result["actual"]}</div>\n'
+        elif not passed:
+            if result.get("actual") and result.get("expected"):
+                html += f'<div class="actual fail">actual: {result["actual"]}  (expected: {result["expected"]})</div>\n'
+            if result.get("slot_errors"):
+                for slot, err in sorted(result["slot_errors"].items()):
+                    html += f'<div class="actual fail">slot {slot}: got "{err["actual"]}" expected "{err["expected"]}"</div>\n'
+            if result.get("raw_ocr"):
+                html += f'<div class="actual fail">raw OCR: "{result["raw_ocr"]}"</div>\n'
+            if result.get("detected_type"):
+                html += f'<div class="actual fail">detected: {result["detected_type"]}</div>\n'
 
     html += '</div>\n'
     return html
