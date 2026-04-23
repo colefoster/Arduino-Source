@@ -38,6 +38,7 @@
 #include "PokemonChampions/Inference/PokemonChampions_BattleHUDReader.h"
 #include "PokemonChampions/Inference/PokemonChampions_BattleLogReader.h"
 #include "PokemonChampions/Inference/PokemonChampions_BattleModeDetector.h"
+#include "PokemonChampions/Inference/PokemonChampions_TeamSummaryReader.h"
 #include "PokemonChampions/Programs/PokemonChampions_AutoLadder.h"
 
 namespace PokemonAutomation{
@@ -135,10 +136,20 @@ AutoLadder::AutoLadder()
         "http://localhost:8265",
         "http://localhost:8265"
     )
+    , AI_SCAN_TEAM_FROM_GAME(
+        "<b>Scan Team from Game:</b><br>"
+        "If enabled, read your team directly from the 'View Details -> Moves & More' "
+        "screen at program start instead of requiring a Showdown paste. "
+        "Before pressing Start, navigate to that screen for the team you want to use. "
+        "If the screen is not detected, the Showdown paste below is used as a fallback.",
+        LockMode::LOCK_WHILE_RUNNING,
+        false
+    )
     , AI_TEAM_PASTE(
         "<b>Team (Showdown Paste):</b><br>"
         "Paste your team in Showdown format. Used by the AI to know your own team's moves, items, and abilities. "
-        "Export from the team builder or copy from Showdown.",
+        "Export from the team builder or copy from Showdown. "
+        "Ignored if 'Scan Team from Game' is enabled and succeeds.",
         LockMode::LOCK_WHILE_RUNNING,
         "",
         "Kingambit @ Bright Powder\nAbility: Defiant\n- Sucker Punch\n- Iron Head\n- Swords Dance\n- Protect\n\n..."
@@ -159,6 +170,7 @@ AutoLadder::AutoLadder()
     PA_ADD_OPTION(MOVE_STRATEGY);
     PA_ADD_OPTION(ALLOW_MEGA);
     PA_ADD_OPTION(AI_SERVER_URL);
+    PA_ADD_OPTION(AI_SCAN_TEAM_FROM_GAME);
     PA_ADD_OPTION(AI_TEAM_PASTE);
     PA_ADD_OPTION(GO_HOME_WHEN_DONE);
     PA_ADD_OPTION(NOTIFICATIONS);
@@ -186,6 +198,65 @@ void AutoLadder::compute_team_picks(uint8_t picks[3]){
     default:
         picks[0] = 0; picks[1] = 1; picks[2] = 2;
     }
+}
+
+
+int AutoLadder::scan_team_from_game(SingleSwitchProgramEnvironment& env){
+    VideoSnapshot snapshot = env.console.video().snapshot();
+    if (!snapshot){
+        env.console.log("[ScanTeam] Could not grab video frame.", COLOR_RED);
+        return -1;
+    }
+
+    MovesMoreDetector detector;
+    if (!detector.detect(snapshot)){
+        env.console.log(
+            "[ScanTeam] 'Moves & More' screen not detected. "
+            "Navigate to View Details -> Moves & More for the team to scan.",
+            COLOR_RED
+        );
+        return -1;
+    }
+
+    TeamSummaryReader reader(Language::English);
+    auto team = reader.read_team(env.console, snapshot);
+
+    std::array<ConfiguredPokemon, 6> configured;
+    int loaded = 0;
+    for (uint8_t i = 0; i < 6; i++){
+        configured[i] = team[i].to_configured();
+        if (!configured[i].species.empty()){
+            loaded++;
+        }
+    }
+
+    if (loaded == 0){
+        env.console.log("[ScanTeam] Screen detected but no Pokemon OCR'd.", COLOR_RED);
+        return 0;
+    }
+
+    m_state_tracker.set_own_team(configured);
+
+    env.console.log(
+        "[ScanTeam] Loaded " + std::to_string(loaded) + "/6 Pokemon from game.",
+        COLOR_GREEN
+    );
+    for (uint8_t i = 0; i < 6; i++){
+        const auto& c = configured[i];
+        if (c.species.empty()) continue;
+        std::string moves_str;
+        for (const auto& m : c.moves){
+            if (!m.empty()){
+                if (!moves_str.empty()) moves_str += ", ";
+                moves_str += m;
+            }
+        }
+        env.console.log(
+            "  " + c.species + " [" + c.ability + "] {" + moves_str + "}",
+            COLOR_BLUE
+        );
+    }
+    return loaded;
 }
 
 
@@ -446,29 +517,41 @@ void AutoLadder::program(SingleSwitchProgramEnvironment& env, ProControllerConte
 
     //  Initialize AI components if using AI strategy.
     if (MOVE_STRATEGY == MoveStrategy::AI){
-        //  Parse team from Showdown paste.
-        std::string paste = AI_TEAM_PASTE;
-        if (!paste.empty()){
-            int parsed = m_state_tracker.load_team_from_showdown_paste(paste);
-            env.console.log(
-                "[AI] Loaded " + std::to_string(parsed) + " Pokemon from team paste.",
-                COLOR_GREEN
-            );
-            for (uint8_t i = 0; i < parsed; i++){
-                const auto& mon = m_state_tracker.own(i);
-                std::string moves_str;
-                for (const auto& m : mon.known_moves){
-                    if (!moves_str.empty()) moves_str += ", ";
-                    moves_str += m;
-                }
+        //  Populate own team. Priority:
+        //    1. In-game team scan (if enabled and Moves & More screen visible).
+        //    2. Fallback to Showdown paste.
+        int scanned = -1;
+        if (AI_SCAN_TEAM_FROM_GAME){
+            scanned = scan_team_from_game(env);
+        }
+
+        if (scanned <= 0){
+            //  Fall back to Showdown paste.
+            std::string paste = AI_TEAM_PASTE;
+            if (!paste.empty()){
+                int parsed = m_state_tracker.load_team_from_showdown_paste(paste);
                 env.console.log(
-                    "  " + mon.species + " @ " + mon.item +
-                    " [" + mon.ability + "] {" + moves_str + "}",
-                    COLOR_BLUE
+                    "[AI] Loaded " + std::to_string(parsed) + " Pokemon from team paste.",
+                    COLOR_GREEN
                 );
+                for (uint8_t i = 0; i < parsed; i++){
+                    const auto& mon = m_state_tracker.own(i);
+                    std::string moves_str;
+                    for (const auto& m : mon.known_moves){
+                        if (!moves_str.empty()) moves_str += ", ";
+                        moves_str += m;
+                    }
+                    env.console.log(
+                        "  " + mon.species + " @ " + mon.item +
+                        " [" + mon.ability + "] {" + moves_str + "}",
+                        COLOR_BLUE
+                    );
+                }
+            }else if (!AI_SCAN_TEAM_FROM_GAME){
+                env.console.log("[AI] No team paste provided. Own team info will be incomplete.", COLOR_RED);
+            }else{
+                env.console.log("[AI] In-game team scan failed and no paste provided. Own team info will be incomplete.", COLOR_RED);
             }
-        }else{
-            env.console.log("[AI] No team paste provided. Own team info will be incomplete.", COLOR_RED);
         }
 
         //  Connect to inference server.

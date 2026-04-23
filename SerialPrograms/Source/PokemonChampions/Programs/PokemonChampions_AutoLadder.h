@@ -106,6 +106,12 @@ private:
     //  based on TEAM_STRATEGY.
     void compute_team_picks(uint8_t picks[3]);
 
+    //  AI: grab a screenshot and attempt to read the full team from the
+    //  "View Details -> Moves & More" screen. Populates m_state_tracker on
+    //  success. Returns the number of Pokemon loaded (0-6), or -1 if the
+    //  Moves & More screen was not detected.
+    int scan_team_from_game(SingleSwitchProgramEnvironment& env);
+
 private:
     DeferredStopButtonOption STOP_AFTER_CURRENT;
     SimpleIntegerOption<uint32_t> NUM_MATCHES;
@@ -116,6 +122,7 @@ private:
 
     //  AI-specific options (only used when MOVE_STRATEGY == AI).
     StringOption AI_SERVER_URL;
+    BooleanCheckBoxOption AI_SCAN_TEAM_FROM_GAME;
     TextEditOption AI_TEAM_PASTE;
 
     EventNotificationOption NOTIFICATION_STATUS_UPDATE;
