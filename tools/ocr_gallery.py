@@ -54,8 +54,8 @@ def _opponent_hp_boxes():
 
 def _move_select_detector_boxes():
     """MoveSelectDetector: 4 pill indicator strips."""
-    y_vals = [0.5000, 0.6204, 0.7361, 0.8519]
-    return [{"name": f"pill_{i}", "box": [0.7292, y, 0.0156, 0.0278]} for i, y in enumerate(y_vals)]
+    y_vals = [0.5116, 0.6338, 0.7542, 0.8746]
+    return [{"name": f"pill_{i}", "box": [0.7292, y, 0.0101, 0.0139]} for i, y in enumerate(y_vals)]
 
 def _team_select_reader_boxes():
     """TeamSelectReader: 6 species text boxes on team registration screen."""
