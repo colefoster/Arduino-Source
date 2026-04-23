@@ -456,6 +456,70 @@
         0.3333,
         0.3333
       ]
+    },
+    {
+      "name": "team_preview/title_text",
+      "scene": "Pre-battle Team Preview (Select 4)",
+      "screenshot": "screenshots/team_preview_3804.png",
+      "description": "The 'Select 4 Pokemon to send into battle' text in the center. For screen detection via OCR (look for 'Select').",
+      "status": "pending",
+      "box": null
+    },
+    {
+      "name": "team_preview/own_species_0",
+      "scene": "Pre-battle Team Preview (Select 4)",
+      "screenshot": "screenshots/team_preview_3804.png",
+      "description": "Own team slot 0 (top): species name 'Glimmora'. The text only \u2014 not the sprite or gender icon.",
+      "status": "pending",
+      "box": null
+    },
+    {
+      "name": "team_preview/own_species_5",
+      "scene": "Pre-battle Team Preview (Select 4)",
+      "screenshot": "screenshots/team_preview_3804.png",
+      "description": "Own team slot 5 (bottom): species name 'Kingambit'. Used with slot 0 to compute row spacing.",
+      "status": "pending",
+      "box": null
+    },
+    {
+      "name": "team_preview/own_item_0",
+      "scene": "Pre-battle Team Preview (Select 4)",
+      "screenshot": "screenshots/team_preview_3804.png",
+      "description": "Own team slot 0: item name 'Focus Sash' (below the species name in the card).",
+      "status": "pending",
+      "box": null
+    },
+    {
+      "name": "team_preview/own_item_5",
+      "scene": "Pre-battle Team Preview (Select 4)",
+      "screenshot": "screenshots/team_preview_3804.png",
+      "description": "Own team slot 5: item name 'Bright Powder'. Used with slot 0 to compute row spacing.",
+      "status": "pending",
+      "box": null
+    },
+    {
+      "name": "team_preview/opp_sprite_0",
+      "scene": "Pre-battle Team Preview (Select 4)",
+      "screenshot": "screenshots/team_preview_3804.png",
+      "description": "Opponent team slot 0 (top right): bounding box around JUST the sprite artwork. Exclude the item icon and the red/pink background pill edges if possible.",
+      "status": "pending",
+      "box": null
+    },
+    {
+      "name": "team_preview/opp_sprite_5",
+      "scene": "Pre-battle Team Preview (Select 4)",
+      "screenshot": "screenshots/team_preview_3804.png",
+      "description": "Opponent team slot 5 (bottom right): bounding box around the sprite. Used with slot 0 to compute row spacing for opponent column.",
+      "status": "pending",
+      "box": null
+    },
+    {
+      "name": "moves_more/sprite_0",
+      "scene": "View Details - Moves & More tab",
+      "screenshot": "screenshots/screenshot-20260422-160514341816.png",
+      "description": "Bounding box around JUST the Garchomp sprite in card 0 (top-left). This is the reference crop we'll use to bootstrap the sprite atlas. Tight crop: exclude the card border and the species-name pill.",
+      "status": "pending",
+      "box": null
     }
   ]
 }
