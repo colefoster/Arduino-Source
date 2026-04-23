@@ -62,6 +62,12 @@ int test_pokemonChampions_TeamSummaryReader(const ImageViewRGB32& image, const s
 //  Filename: standard bool-target convention.
 int test_pokemonChampions_MovesMoreDetector(const ImageViewRGB32& image, bool target);
 
+//  Filename: standard bool-target convention.
+int test_pokemonChampions_TeamPreviewDetector(const ImageViewRGB32& image, bool target);
+
+//  Filename: <prefix>_<opp0>_<opp1>_..._<opp5>.png (opponent species slugs, NONE for skips)
+int test_pokemonChampions_TeamPreviewReader(const ImageViewRGB32& image, const std::vector<std::string>& words);
+
 //  ── Void (development / debug) ─────────────────────────────────────
 
 //  Runs all OCR readers and prints results. No pass/fail — for dev iteration.

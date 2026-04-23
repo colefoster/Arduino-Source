@@ -32,6 +32,8 @@
 #include "PokemonChampions/Inference/PokemonChampions_TeamSelectDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_TeamSelectReader.h"
 #include "PokemonChampions/Inference/PokemonChampions_TeamSummaryReader.h"
+#include "PokemonChampions/Inference/PokemonChampions_TeamPreviewDetector.h"
+#include "PokemonChampions/Inference/PokemonChampions_TeamPreviewReader.h"
 
 #include <iostream>
 using std::cout;
@@ -358,6 +360,49 @@ int test_pokemonChampions_MovesMoreDetector(const ImageViewRGB32& image, bool ta
     MovesMoreDetector detector;
     bool result = detector.detect(image);
     TEST_RESULT_EQUAL(result, target);
+    return 0;
+}
+
+
+// ─── TeamPreviewDetector ───────────────────────────────────────────
+
+int test_pokemonChampions_TeamPreviewDetector(const ImageViewRGB32& image, bool target){
+    TeamPreviewDetector detector;
+    bool result = detector.detect(image);
+    TEST_RESULT_EQUAL(result, target);
+    return 0;
+}
+
+
+// ─── TeamPreviewReader ─────────────────────────────────────────────
+//  Filename: <prefix>_<opp0>_<opp1>_..._<opp5>.png
+//  Last 6 words are expected opponent species slugs (from sprite match).
+//  Use NONE to skip a slot.
+
+int test_pokemonChampions_TeamPreviewReader(const ImageViewRGB32& image, const std::vector<std::string>& words){
+    if (words.size() < 6){
+        cerr << "Error: TeamPreviewReader test needs 6 opp species slugs." << endl;
+        return 1;
+    }
+    std::array<std::string, 6> expected;
+    for (size_t i = 0; i < 6; i++){
+        const std::string& slug = words[words.size() - 6 + i];
+        expected[i] = (slug == "NONE") ? "" : slug;
+    }
+
+    auto& logger = global_logger_command_line();
+    TeamPreviewReader reader(Language::English);
+    TeamPreviewResult result = reader.read(logger, image);
+
+    for (size_t i = 0; i < 6; i++){
+        if (result.opp_species[i] != expected[i]){
+            cerr << "Error: TeamPreviewReader opp slot " << i
+                 << " got \"" << result.opp_species[i]
+                 << "\" expected \"" << expected[i] << "\"." << endl;
+            return 1;
+        }
+    }
+    cout << "TeamPreviewReader: all 6 opp species matched." << endl;
     return 0;
 }
 

@@ -112,6 +112,16 @@ private:
     //  Moves & More screen was not detected.
     int scan_team_from_game(SingleSwitchProgramEnvironment& env);
 
+    //  AI: poll for the pre-battle Team Preview screen for up to wait_seconds.
+    //  On detection, OCRs own items (filling the gap left by Moves & More)
+    //  and sprite-matches opponent species into m_state_tracker.
+    //  Returns number of opponent species identified (0-6), or -1 on timeout.
+    int scan_team_preview(
+        SingleSwitchProgramEnvironment& env,
+        ProControllerContext& context,
+        int wait_seconds = 20
+    );
+
 private:
     DeferredStopButtonOption STOP_AFTER_CURRENT;
     SimpleIntegerOption<uint32_t> NUM_MATCHES;

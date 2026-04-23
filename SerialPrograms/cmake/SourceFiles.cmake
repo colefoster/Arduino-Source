@@ -1320,6 +1320,14 @@ file(GLOB LIBRARY_SOURCES
     Source/PokemonChampions/Inference/PokemonChampions_MoveSelectDetector.h
     Source/PokemonChampions/Inference/PokemonChampions_AbilityNameReader.cpp
     Source/PokemonChampions/Inference/PokemonChampions_AbilityNameReader.h
+    Source/PokemonChampions/Inference/PokemonChampions_SpriteMatcher.cpp
+    Source/PokemonChampions/Inference/PokemonChampions_SpriteMatcher.h
+    Source/PokemonChampions/Inference/PokemonChampions_TeamPreviewDetector.cpp
+    Source/PokemonChampions/Inference/PokemonChampions_TeamPreviewDetector.h
+    Source/PokemonChampions/Inference/PokemonChampions_TeamPreviewReader.cpp
+    Source/PokemonChampions/Inference/PokemonChampions_TeamPreviewReader.h
+    Source/PokemonChampions/Resources/PokemonChampions_PokemonSprites.cpp
+    Source/PokemonChampions/Resources/PokemonChampions_PokemonSprites.h
     Source/PokemonChampions/Inference/PokemonChampions_ItemNameReader.cpp
     Source/PokemonChampions/Inference/PokemonChampions_ItemNameReader.h
     Source/PokemonChampions/Inference/PokemonChampions_TeamSelectDetector.cpp
