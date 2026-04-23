@@ -97,6 +97,13 @@ bool MoveSelectDetector::detect(const ImageViewRGB32& screen){
         return true;
     }
 
+    //  Fallback: all 4 purple = move panel visible but cursor hasn't
+    //  appeared yet (pre-animation state before highlight renders).
+    if (purple_count >= 4){
+        m_cursor_slot = -1;
+        return true;
+    }
+
     return false;
 }
 
