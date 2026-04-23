@@ -201,7 +201,7 @@ void BattleHUDReader::init_singles_boxes(){
     //  Measured from ref_frames/1/frame_00080.jpg
 
     m_opponent_name_boxes[0] = ImageFloatBox(0.830, 0.052, 0.087, 0.032);
-    m_opponent_hp_boxes[0]   = ImageFloatBox(0.8963, 0.1098, 0.0446, 0.0524);
+    m_opponent_hp_boxes[0]   = ImageFloatBox(0.8963, 0.1098, 0.0498, 0.0524);
     m_opponent_name_boxes[1] = ImageFloatBox(0, 0, 0, 0);  // unused
     m_opponent_hp_boxes[1]   = ImageFloatBox(0, 0, 0, 0);
 
