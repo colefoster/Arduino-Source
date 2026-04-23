@@ -280,7 +280,9 @@
             // Total
             document.getElementById('total-val').textContent = d.total_replays.toLocaleString();
             const fmts = d.formats || {};
-            const parts = Object.values(fmts).map(f => `${f.label}: ${f.total.toLocaleString()}`);
+            const parts = Object.values(fmts).map(f =>
+                `${f.label}: ${f.total.toLocaleString()} (${f.downloaded.toLocaleString()} dl + ${f.spectated.toLocaleString()} spec)`
+            );
             document.getElementById('total-sub').textContent = parts.join(' | ');
 
             // Rate
@@ -295,7 +297,7 @@
                 <div class="format-pill">
                     <div class="fmt-label">${f.label}</div>
                     <div class="fmt-value">${f.total.toLocaleString()}</div>
-                    <div class="fmt-sub">${f.last_1h}/hr | ${f.spectated_24h.toLocaleString()} spectated today</div>
+                    <div class="fmt-sub">${f.downloaded.toLocaleString()} dl + ${f.spectated.toLocaleString()} spec | ${f.last_1h}/hr live</div>
                 </div>
             `).join('');
 
