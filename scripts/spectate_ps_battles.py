@@ -223,19 +223,26 @@ class ShowdownSpectator:
         await self.ws.send(f"|/trn {name},0,")
 
     async def _poll_loop(self):
-        """Periodically query for active battles and join new ones."""
+        """Periodically query for active battles and join new ones.
+
+        Queries at multiple ELO thresholds to work around the PS 100-room cap.
+        """
         # Wait for login
         while not self.logged_in:
             await asyncio.sleep(0.5)
 
+        # ELO slices — each query returns up to 100 rooms at or above the threshold.
+        # Higher slices surface battles hidden by the cap in the base query.
+        elo_slices = [0, 1200, 1400]
+
         while True:
             try:
                 for fmt in self.formats:
-                    cmd = f"|/crq roomlist {fmt}"
-                    if self.min_elo:
-                        cmd = f"|/crq roomlist {fmt},{self.min_elo}"
-                    await self.ws.send(cmd)
-                    await asyncio.sleep(1)
+                    for elo in elo_slices:
+                        threshold = max(elo, self.min_elo)
+                        cmd = f"|/crq roomlist {fmt},{threshold}" if threshold else f"|/crq roomlist {fmt}"
+                        await self.ws.send(cmd)
+                        await asyncio.sleep(0.5)
             except websockets.exceptions.ConnectionClosed:
                 raise
             except Exception as e:
@@ -252,8 +259,14 @@ class ShowdownSpectator:
             return
 
         rooms = data.get("rooms", {})
+        # Sort by rating descending — prioritize high-rated battles, then
+        # shuffle within ties so multiple instances spread out.
         room_items = list(rooms.items())
-        random.shuffle(room_items)
+        random.shuffle(room_items)  # shuffle first for tie-breaking
+        room_items.sort(
+            key=lambda x: x[1].get("minElo", 0) if isinstance(x[1].get("minElo", 0), int) else 0,
+            reverse=True,
+        )
         for room_id, info in room_items:
             # Don't exceed concurrent limit
             if len(self.joined_rooms) >= MAX_CONCURRENT:

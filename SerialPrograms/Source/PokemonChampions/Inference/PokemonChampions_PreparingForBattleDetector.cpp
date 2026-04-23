@@ -16,6 +16,7 @@
  *
  */
 
+#include <iostream>
 #include "Common/Cpp/Color.h"
 #include "CommonFramework/ImageTools/ImageStats.h"
 #include "CommonFramework/VideoPipeline/VideoOverlay.h"
