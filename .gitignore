@@ -82,3 +82,10 @@ SerialPrograms/Source/PokemonChampions/ref_frames/
 
 
 ref_frames/vod_extract/
+
+# Local-only: playwright MCP scratch files (browser screenshots/logs)
+.playwright-mcp/
+
+# Local-only: downloaded Showdown replay JSON (regenerable)
+data/showdown_replays/
+tools/.pokeapi_cache.json
