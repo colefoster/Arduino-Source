@@ -840,6 +840,54 @@
         0.3571,
         0.3183
       ]
+    },
+    {
+      "name": "opponent_hp/doubles_64pct",
+      "scene": "Doubles move select \u2014 opponent at 64%",
+      "screenshot": "CommandLineTests/PokemonChampions/OpponentHPReader/_doubles/20260423-183737819287_64.png",
+      "description": "Select the opponent HP percentage number (top-right area, just the digits)",
+      "status": "confirmed",
+      "box": [
+        0.6927,
+        0.1157,
+        0.0422,
+        0.038
+      ],
+      "avg_rgb": [
+        119.0,
+        131.3,
+        99.9
+      ],
+      "stddev_sum": 308.2,
+      "color_ratio": [
+        0.3397,
+        0.375,
+        0.2853
+      ]
+    },
+    {
+      "name": "opponent_hp/doubles_2pct",
+      "scene": "Doubles move select \u2014 opponent at 2%",
+      "screenshot": "CommandLineTests/PokemonChampions/OpponentHPReader/_doubles/20260423-183905504090_2.png",
+      "description": "Select the opponent HP percentage number (top-right area, just the digits)",
+      "status": "confirmed",
+      "box": [
+        0.6953,
+        0.1167,
+        0.0396,
+        0.037
+      ],
+      "avg_rgb": [
+        81.7,
+        75.6,
+        83.6
+      ],
+      "stddev_sum": 226.8,
+      "color_ratio": [
+        0.339,
+        0.3138,
+        0.3472
+      ]
     }
   ]
 }
