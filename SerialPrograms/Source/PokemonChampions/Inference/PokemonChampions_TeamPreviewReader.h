@@ -43,11 +43,13 @@ public:
     void make_overlays(VideoOverlaySet& items) const;
 
     //  Reads all 12 slots. Opponent species come from sprite matching;
-    //  opp_match_threshold is the max RMSD (lower = stricter).
+    //  opp_match_threshold is the max RMSD (lower = stricter). Default
+    //  0.30 accepts confident matches and rejects ambiguous ones (better
+    //  to return empty than wrong).
     TeamPreviewResult read(
         Logger& logger,
         const ImageViewRGB32& screen,
-        double opp_match_threshold = 0.40
+        double opp_match_threshold = 0.30
     ) const;
 
 private:
