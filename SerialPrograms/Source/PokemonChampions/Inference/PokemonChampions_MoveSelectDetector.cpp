@@ -78,28 +78,22 @@ bool MoveSelectDetector::is_slot_selected(
 bool MoveSelectDetector::detect(const ImageViewRGB32& screen){
     m_cursor_slot = -1;
 
-    //  Method 1: Check for the green selected-pill highlight.
+    //  Count green (selected) and purple (unselected) pill strips.
+    //  Require BOTH: exactly 1 green + at least 2 purple to confirm
+    //  the move select panel is on screen.
+    int green_slot = -1;
+    int purple_count = 0;
     for (int i = 0; i < 4; i++){
-        if (is_slot_selected(screen, m_slots[i])){
-            m_cursor_slot = i;
-            return true;
+        const ImageStats stats = image_stats(extract_box_reference(screen, m_slots[i]));
+        if (is_solid(stats, SELECTED_MOVE_GREEN, 0.18, 120)){
+            green_slot = i;
+        }else if (is_solid(stats, UNSELECTED_PILL_PURPLE, 0.15, 150)){
+            purple_count++;
         }
     }
 
-    //  Method 2: Check for unselected purple-blue pill backgrounds.
-    //  If 2+ pills match the purple background color, the move panel is up
-    //  (even if we can't tell which slot is selected — the cursor may be on
-    //  a slot whose type color overwhelms the green).
-    int pill_count = 0;
-    for (int i = 0; i < 4; i++){
-        const ImageStats stats = image_stats(extract_box_reference(screen, m_slots[i]));
-        if (is_solid(stats, UNSELECTED_PILL_PURPLE, 0.15, 150)){
-            pill_count++;
-        }
-    }
-    if (pill_count >= 2){
-        //  Move panel detected but we don't know which slot is cursored.
-        m_cursor_slot = -1;
+    if (green_slot >= 0 && purple_count >= 2){
+        m_cursor_slot = green_slot;
         return true;
     }
 
