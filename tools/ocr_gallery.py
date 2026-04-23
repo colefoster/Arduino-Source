@@ -239,9 +239,44 @@ def load_regression_results(results_path):
     return {entry.get("file", ""): entry for entry in data}
 
 
-def run_regression_on_colepc(test_path="CommandLineTests\\PokemonChampions"):
-    """SSH to ColePC, run regression, parse text output into results dict."""
+def build_on_colepc():
+    """Pull and rebuild on ColePC. Returns True on success."""
     import subprocess
+
+    print("  Building on ColePC...", flush=True)
+    cmd = (
+        'ssh colepc \'"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community'
+        '\\Common7\\Tools\\VsDevCmd.bat" -arch=amd64 >nul 2>&1 && '
+        'cd C:\\Dev\\pokemon-champions && git pull && cd SerialPrograms && '
+        'cmake --build ..\\build\\Release --config Release '
+        '--target SerialProgramsCommandLine 2>&1\''
+    )
+    try:
+        result = subprocess.run(cmd, shell=True, capture_output=True, text=True, timeout=300)
+        output = result.stdout + result.stderr
+        if "Linking CXX executable" in output or "ninja: no work to do" in output:
+            print("  Build OK", flush=True)
+            return True
+        # Check for build errors
+        if "FAILED" in output or "error C" in output:
+            print(f"  BUILD FAILED — check output", flush=True)
+            print(output[-500:], flush=True)
+            return False
+        print("  Build OK (assumed)", flush=True)
+        return True
+    except subprocess.TimeoutExpired:
+        print("  ERROR: build timed out", flush=True)
+        return False
+
+
+def run_regression_on_colepc(test_path="CommandLineTests\\PokemonChampions", rebuild=True):
+    """SSH to ColePC, optionally rebuild, run regression, parse output into results dict."""
+    import subprocess
+    import re
+
+    if rebuild:
+        if not build_on_colepc():
+            return {}
 
     print("  Running regression on ColePC...", flush=True)
     cmd = (
@@ -256,9 +291,10 @@ def run_regression_on_colepc(test_path="CommandLineTests\\PokemonChampions"):
         print("  ERROR: regression timed out", flush=True)
         return {}
 
-    # Parse output: track current reader, collect pass/fail per file
+    # Parse output: track current reader, collect pass/fail per file + actual values
     results = {}
     current_reader = None
+    current_file = None
 
     for line in output.split("\n"):
         # "Testing ReaderName:"
@@ -266,27 +302,61 @@ def run_regression_on_colepc(test_path="CommandLineTests\\PokemonChampions"):
             current_reader = line[8:-1].strip()
             continue
 
-        # "FAIL  ReaderName  ←  filename.png"
-        if line.strip().startswith("FAIL"):
-            parts = line.strip().split("←")
-            if len(parts) == 2:
-                fname = parts[1].strip()
-                results[fname] = {"passed": False}
-            continue
-
         # Track files that were tested (lines ending in .png)
         stripped = line.strip()
         if stripped.endswith(".png") or stripped.endswith(".jpg"):
             fname = os.path.basename(stripped)
-            # Will be overwritten by FAIL if it fails; otherwise stays as passed
+            current_file = fname
             if fname not in results:
-                results[fname] = {"passed": True}
+                results[fname] = {"passed": True, "reader": current_reader}
+            continue
 
-    # Files in results without a FAIL entry are passes
-    # (already handled above)
+        # "Error: ... result is X but should be Y"
+        m = re.search(r'result is (.+?) but should be (.+?)\.', stripped)
+        if m and current_file:
+            results[current_file]["passed"] = False
+            results[current_file]["actual"] = m.group(1)
+            results[current_file]["expected"] = m.group(2)
+            continue
 
-    passed = sum(1 for r in results.values() if r["passed"])
-    failed = sum(1 for r in results.values() if not r["passed"])
+        # "Error: ReaderName slot N got "X" but expected "Y""
+        m = re.search(r'slot (\d+).*got "(.+?)".*expected "(.+?)"', stripped)
+        if m and current_file:
+            results[current_file]["passed"] = False
+            slot = int(m.group(1))
+            if "slot_errors" not in results[current_file]:
+                results[current_file]["slot_errors"] = {}
+            results[current_file]["slot_errors"][slot] = {
+                "actual": m.group(2), "expected": m.group(3)
+            }
+            continue
+
+        # "FAIL  ReaderName  ←  filename.png"
+        if stripped.startswith("FAIL"):
+            parts = stripped.split("←")
+            if len(parts) == 2:
+                fname = parts[1].strip()
+                if fname not in results:
+                    results[fname] = {"passed": False}
+                else:
+                    results[fname]["passed"] = False
+            continue
+
+        # Reader-specific output lines (move names, species, etc.)
+        # "MoveNameReader: all 4 slots matched."
+        if "all" in stripped and "matched" in stripped and current_file:
+            results[current_file]["detail"] = stripped.strip()
+            continue
+
+        # BattleLogReader raw text
+        m = re.search(r'raw="(.+?)".*type=(\w+)', stripped)
+        if m and current_file:
+            results[current_file]["raw_ocr"] = m.group(1)
+            results[current_file]["detected_type"] = m.group(2)
+            continue
+
+    passed = sum(1 for r in results.values() if r.get("passed"))
+    failed = sum(1 for r in results.values() if not r.get("passed"))
     print(f"  Parsed {passed} passed, {failed} failed from ColePC output", flush=True)
     return results
 
@@ -423,11 +493,17 @@ def build_card_html(entry, crop_defs, reader_name, results):
         labels = " | ".join(v if v else "(none)" for v in gt["values"])
         html += f'<div class="expected">expected: {labels}</div>\n'
 
-    # Actual results
-    if result and result.get("actual"):
-        actual = " | ".join(str(v) if v else "(none)" for v in result["actual"])
-        cls = "pass" if passed else "fail"
-        html += f'<div class="actual {cls}">actual: {actual}</div>\n'
+    # Actual results (from regression output parsing)
+    if result and not passed:
+        if result.get("actual") and result.get("expected"):
+            html += f'<div class="actual fail">actual: {result["actual"]}  (expected: {result["expected"]})</div>\n'
+        if result.get("slot_errors"):
+            for slot, err in sorted(result["slot_errors"].items()):
+                html += f'<div class="actual fail">slot {slot}: got "{err["actual"]}" expected "{err["expected"]}"</div>\n'
+        if result.get("raw_ocr"):
+            html += f'<div class="actual fail">raw OCR: "{result["raw_ocr"]}"</div>\n'
+        if result.get("detected_type"):
+            html += f'<div class="actual fail">detected: {result["detected_type"]}</div>\n'
 
     html += '</div>\n'
     return html

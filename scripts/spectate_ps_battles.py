@@ -36,7 +36,7 @@ FORMATS = [
     "gen9championsbssregma",
 ]
 
-OUTPUT_DIR = Path(__file__).resolve().parent.parent / "data" / "showdown_replays"
+OUTPUT_DIR = Path(__file__).resolve().parent.parent / "data" / "showdown_replays" / "spectated"
 INDEX_FILE = OUTPUT_DIR / "index.json"
 
 # How often to poll for new battles (seconds)

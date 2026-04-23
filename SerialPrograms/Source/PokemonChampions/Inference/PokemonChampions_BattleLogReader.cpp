@@ -109,7 +109,7 @@ BattleLogEvent BattleLogReader::parse(const std::string& text){
 
     //  "[Trainer] sent out X!"
     {
-        std::regex re(R"((.+?) sent out (.+?)!)");
+        std::regex re(R"((.+?) sent out (.+?)!?)");
         if (std::regex_search(text, m, re)){
             event.type = BattleLogEventType::SWITCH_IN;
             event.pokemon = clean_pokemon_name(m[2].str());
@@ -125,7 +125,7 @@ BattleLogEvent BattleLogReader::parse(const std::string& text){
     //  "X's Atk rose!" / "X's Sp. Atk sharply rose!" / "X's Speed harshly fell!"
     //  Also: "The opposing X's Atk rose!"
     {
-        std::regex re(R"((?:The opposing )?(.+?)'s (.+?) (rose|fell|sharply rose|sharply fell|harshly fell|drastically rose)!)");
+        std::regex re(R"((?:The opposing )?(.+?)'s (.+?) (rose|fell|sharply rose|sharply fell|harshly fell|drastically rose)!?)");
         if (std::regex_search(text, m, re)){
             event.type = BattleLogEventType::STAT_CHANGE;
             event.pokemon = clean_pokemon_name(m[1].str());
@@ -145,7 +145,7 @@ BattleLogEvent BattleLogReader::parse(const std::string& text){
 
     //  Multi-stat changes: "The opposing Volcarona's Sp. Atk, Sp. Def, and Speed rose!"
     {
-        std::regex re(R"((?:The opposing )?(.+?)'s (.+?) (rose|fell)!)");
+        std::regex re(R"((?:The opposing )?(.+?)'s (.+?) (rose|fell)!?)");
         if (std::regex_search(text, m, re)){
             event.type = BattleLogEventType::STAT_CHANGE;
             event.pokemon = clean_pokemon_name(m[1].str());
@@ -159,7 +159,7 @@ BattleLogEvent BattleLogReader::parse(const std::string& text){
     //  "X was burned/paralyzed/poisoned/frozen!"
     //  "X fell asleep!" / "X was put to sleep!"
     {
-        std::regex re(R"((?:The opposing )?(.+?) was (burned|paralyzed|poisoned|badly poisoned|frozen|put to sleep)!)");
+        std::regex re(R"((?:The opposing )?(.+?) was (burned|paralyzed|poisoned|badly poisoned|frozen|put to sleep)!?)");
         if (std::regex_search(text, m, re)){
             event.type = BattleLogEventType::STATUS_INFLICTED;
             event.pokemon = clean_pokemon_name(m[1].str());
@@ -171,7 +171,7 @@ BattleLogEvent BattleLogReader::parse(const std::string& text){
 
     //  "X fainted!"
     {
-        std::regex re(R"((?:The opposing )?(.+?) fainted!)");
+        std::regex re(R"((?:The opposing )?(.+?) fainted!?)");
         if (std::regex_search(text, m, re)){
             event.type = BattleLogEventType::FAINTED;
             event.pokemon = clean_pokemon_name(m[1].str());

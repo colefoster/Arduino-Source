@@ -1,4 +1,9 @@
-"""Spectator dashboard — reads replay data directly from disk.
+"""Spectator dashboard — reads replay data from disk.
+
+Data layout:
+    data/showdown_replays/
+        spectated/       <- from live spectating
+        downloaded/      <- from PS replay API
 
 Deploy on ash:
     uvicorn server:app --host 127.0.0.1 --port 8420
@@ -15,14 +20,10 @@ from fastapi import FastAPI
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 
-REPLAY_DIR = Path(__file__).resolve().parent.parent / "data" / "showdown_replays"
+REPLAY_BASE = Path(__file__).resolve().parent.parent / "data" / "showdown_replays"
+SPECTATED_DIR = REPLAY_BASE / "spectated"
+DOWNLOADED_DIR = REPLAY_BASE / "downloaded"
 STATIC_DIR = Path(__file__).parent / "static"
-DATASET_SUMMARY = Path(__file__).parent / "dataset_summary.json"
-SPECTATOR_LOGS = [
-    Path("/var/log/pokemon-spectator.log"),
-    Path("/var/log/pokemon-spectator-2.log"),
-    Path("/var/log/pokemon-spectator-3.log"),
-]
 
 FORMATS = {
     "gen9championsvgc2026regma": "VGC 2026",
@@ -39,25 +40,26 @@ if STATIC_DIR.exists():
 # Helpers
 # ---------------------------------------------------------------------------
 
-def _scan_replays(fmt_id: str) -> list[dict]:
-    """Return metadata for all replays in a format dir. Cached briefly."""
-    fmt_dir = REPLAY_DIR / fmt_id
+def _scan_dir(base: Path, fmt_id: str) -> list[dict]:
+    """Return file metadata for all replays in base/fmt_id/."""
+    fmt_dir = base / fmt_id
     if not fmt_dir.exists():
         return []
+    return [
+        {"path": f, "mtime": f.stat().st_mtime}
+        for f in fmt_dir.iterdir()
+        if f.suffix == ".json" and f.name != "index.json"
+    ]
 
-    results = []
-    for f in fmt_dir.iterdir():
-        if f.suffix != ".json" or f.name == "index.json":
-            continue
-        mtime = f.stat().st_mtime
-        results.append({"path": f, "mtime": mtime})
-    return results
+
+def _scan_all(fmt_id: str) -> list[dict]:
+    """Scan both spectated and downloaded dirs for a format."""
+    return _scan_dir(SPECTATED_DIR, fmt_id) + _scan_dir(DOWNLOADED_DIR, fmt_id)
 
 
 def _read_replay_meta(f: Path) -> dict | None:
-    """Read just the metadata fields from a replay JSON (skip full log)."""
     try:
-        data = json.loads(f.read_text())
+        data = json.loads(f.read_text(errors="replace"))
         return {
             "id": data.get("id", f.stem),
             "format": data.get("format", ""),
@@ -71,7 +73,6 @@ def _read_replay_meta(f: Path) -> dict | None:
 
 
 def _spectator_pids() -> list[int]:
-    """Return PIDs of running spectator processes."""
     try:
         result = subprocess.run(
             ["pgrep", "-f", "spectate_ps_battles"],
@@ -84,19 +85,12 @@ def _spectator_pids() -> list[int]:
     return []
 
 
-def _parse_log_saves(log_path: Path, max_lines: int = 5000) -> list[float]:
-    """Extract save timestamps from spectator log (by file line order)."""
-    if not log_path.exists():
-        return []
-    try:
-        lines = log_path.read_text().splitlines()[-max_lines:]
-        saves = []
-        for line in lines:
-            if "Saved " in line:
-                saves.append(1)  # we'll use file mtimes instead
-        return saves
-    except Exception:
-        return []
+def _rating_buckets(ratings: list[int], step: int = 50) -> dict[str, int]:
+    buckets: dict[str, int] = {}
+    for r in ratings:
+        b = (r // step) * step
+        buckets[str(b)] = buckets.get(str(b), 0) + 1
+    return dict(sorted(buckets.items(), key=lambda x: int(x[0])))
 
 
 # ---------------------------------------------------------------------------
@@ -105,24 +99,23 @@ def _parse_log_saves(log_path: Path, max_lines: int = 5000) -> list[float]:
 
 @app.get("/api/status")
 async def status():
-    """Overall spectator status."""
+    """Overall spectator status — only reads spectated dir for live metrics."""
     now = time.time()
     pids = _spectator_pids()
 
     formats = {}
     total_replays = 0
-    total_spectated = 0
     newest_save = 0
 
     for fmt_id, label in FORMATS.items():
-        fmt_dir = REPLAY_DIR / fmt_id
-        files = _scan_replays(fmt_id)
-        count = len(files)
-        total_replays += count
+        spec_files = _scan_dir(SPECTATED_DIR, fmt_id)
+        dl_files = _scan_dir(DOWNLOADED_DIR, fmt_id)
 
-        spectated = 0
+        spec_count = len(spec_files)
+        dl_count = len(dl_files)
+
         last_1h = last_24h = 0
-        for f in files:
+        for f in spec_files:
             age = now - f["mtime"]
             if age < 3600:
                 last_1h += 1
@@ -131,21 +124,15 @@ async def status():
             if f["mtime"] > newest_save:
                 newest_save = f["mtime"]
 
-        # Count spectated vs downloaded for recent files only (perf)
-        for f in files:
-            if now - f["mtime"] < 86400:
-                meta = _read_replay_meta(f["path"])
-                if meta and meta["source"] == "spectated":
-                    spectated += 1
-
         formats[fmt_id] = {
             "label": label,
-            "total": count,
-            "spectated_24h": spectated,
+            "spectated": spec_count,
+            "downloaded": dl_count,
+            "total": spec_count + dl_count,
             "last_1h": last_1h,
             "last_24h": last_24h,
         }
-        total_spectated += spectated
+        total_replays += spec_count + dl_count
 
     last_save_ago = round(now - newest_save) if newest_save > 0 else -1
 
@@ -161,19 +148,15 @@ async def status():
 
 @app.get("/api/collection")
 async def collection():
-    """Detailed collection stats — hourly buckets for the last 48h."""
+    """Hourly spectated collection rate for the last 48h."""
     now = time.time()
-    bucket_size = 3600  # 1 hour
+    bucket_size = 3600
     num_buckets = 48
 
-    # Initialize buckets per format
-    buckets = {}
-    for fmt_id in FORMATS:
-        buckets[fmt_id] = [0] * num_buckets
+    buckets = {fmt_id: [0] * num_buckets for fmt_id in FORMATS}
 
     for fmt_id in FORMATS:
-        files = _scan_replays(fmt_id)
-        for f in files:
+        for f in _scan_dir(SPECTATED_DIR, fmt_id):
             age = now - f["mtime"]
             if age > bucket_size * num_buckets:
                 continue
@@ -181,15 +164,7 @@ async def collection():
             if 0 <= idx < num_buckets:
                 buckets[fmt_id][idx] += 1
 
-    # Build response — buckets[0] = current hour, buckets[1] = 1h ago, etc.
-    labels = []
-    for i in range(num_buckets):
-        if i == 0:
-            labels.append("now")
-        elif i < 24:
-            labels.append(f"{i}h ago")
-        else:
-            labels.append(f"{i}h ago")
+    labels = ["now"] + [f"{i}h ago" for i in range(1, num_buckets)]
 
     return {
         "bucket_size_sec": bucket_size,
@@ -203,16 +178,15 @@ async def collection():
 
 @app.get("/api/ratings")
 async def ratings():
-    """Rating distribution for recent replays (last 7 days)."""
+    """Rating distribution for recent spectated replays (last 7 days)."""
     now = time.time()
     cutoff = now - 7 * 86400
 
-    bins = list(range(900, 1800, 50))  # 900, 950, ..., 1750
+    bins = list(range(900, 1800, 50))
     distributions = {fmt_id: [0] * len(bins) for fmt_id in FORMATS}
 
     for fmt_id in FORMATS:
-        files = _scan_replays(fmt_id)
-        for f in files:
+        for f in _scan_dir(SPECTATED_DIR, fmt_id):
             if f["mtime"] < cutoff:
                 continue
             meta = _read_replay_meta(f["path"])
@@ -236,14 +210,13 @@ async def ratings():
 
 @app.get("/api/recent")
 async def recent(limit: int = 30):
-    """Most recent saved replays."""
+    """Most recent spectated replays."""
     now = time.time()
     all_files = []
     for fmt_id in FORMATS:
-        for f in _scan_replays(fmt_id):
+        for f in _scan_dir(SPECTATED_DIR, fmt_id):
             all_files.append((f, fmt_id))
 
-    # Sort by mtime desc, take top N
     all_files.sort(key=lambda x: x[0]["mtime"], reverse=True)
 
     results = []
@@ -260,76 +233,65 @@ async def recent(limit: int = 30):
 
 @app.get("/api/dataset")
 async def dataset():
-    """Combined dataset stats — downloaded (from ColePC summary) + spectated (live on ash)."""
-    now = time.time()
+    """Combined dataset stats — downloaded + spectated, both read from disk."""
+    combined = {}
 
-    # Load ColePC downloaded summary
-    downloaded = {}
-    if DATASET_SUMMARY.exists():
-        downloaded = json.loads(DATASET_SUMMARY.read_text())
+    for key, fmt_id in [("vgc", "gen9championsvgc2026regma"), ("bss", "gen9championsbssregma")]:
+        dl_files = _scan_dir(DOWNLOADED_DIR, fmt_id)
+        sp_files = _scan_dir(SPECTATED_DIR, fmt_id)
 
-    # Count spectated replays on ash with rating info
-    spectated = {}
-    for fmt_id, label in FORMATS.items():
-        files = _scan_replays(fmt_id)
-        total = len(files)
-        ratings = []
-        for f in files:
+        dl_ratings = []
+        for f in dl_files:
             meta = _read_replay_meta(f["path"])
             if meta and meta.get("rating"):
-                ratings.append(meta["rating"])
+                dl_ratings.append(meta["rating"])
 
-        buckets = {}
-        for r in ratings:
-            b = (r // 50) * 50
-            buckets[str(b)] = buckets.get(str(b), 0) + 1
+        sp_ratings = []
+        for f in sp_files:
+            meta = _read_replay_meta(f["path"])
+            if meta and meta.get("rating"):
+                sp_ratings.append(meta["rating"])
 
-        key = "bss" if "bss" in fmt_id else "vgc"
-        spectated[key] = {
-            "total": total,
-            "rated": len(ratings),
-            "rating_min": min(ratings) if ratings else 0,
-            "rating_max": max(ratings) if ratings else 0,
-            "rating_median": sorted(ratings)[len(ratings) // 2] if ratings else 0,
-            "rating_buckets": dict(sorted(buckets.items())),
-        }
-
-    # Merge bucket distributions for combined view
-    combined = {}
-    for key in ["vgc", "bss"]:
-        dl = downloaded.get(key, {})
-        sp = spectated.get(key, {})
-        dl_buckets = dl.get("rating_buckets", {})
-        sp_buckets = sp.get("rating_buckets", {})
+        dl_buckets = _rating_buckets(dl_ratings)
+        sp_buckets = _rating_buckets(sp_ratings)
         all_keys = set(list(dl_buckets.keys()) + list(sp_buckets.keys()))
-        merged_buckets = {}
+        merged = {}
         for b in sorted(all_keys, key=lambda x: int(x)):
-            merged_buckets[b] = {
+            merged[b] = {
                 "downloaded": dl_buckets.get(b, 0),
                 "spectated": sp_buckets.get(b, 0),
                 "total": dl_buckets.get(b, 0) + sp_buckets.get(b, 0),
             }
+
+        all_ratings = dl_ratings + sp_ratings
         combined[key] = {
-            "downloaded": dl.get("indexed", dl.get("rated", 0)),
-            "spectated": sp.get("total", 0),
-            "total": dl.get("indexed", 0) + sp.get("total", 0),
-            "rated": dl.get("rated", 0) + sp.get("rated", 0),
-            "rating_min": min(dl.get("rating_min", 9999), sp.get("rating_min", 9999)),
-            "rating_max": max(dl.get("rating_max", 0), sp.get("rating_max", 0)),
-            "rating_buckets": merged_buckets,
+            "downloaded": len(dl_files),
+            "spectated": len(sp_files),
+            "total": len(dl_files) + len(sp_files),
+            "downloaded_rated": len(dl_ratings),
+            "spectated_rated": len(sp_ratings),
+            "rated": len(all_ratings),
+            "rating_min": min(all_ratings) if all_ratings else 0,
+            "rating_max": max(all_ratings) if all_ratings else 0,
+            "rating_median": sorted(all_ratings)[len(all_ratings) // 2] if all_ratings else 0,
+            "rating_buckets": merged,
         }
 
+    grand_total = sum(c["total"] for c in combined.values())
+    grand_dl = sum(c["downloaded"] for c in combined.values())
+    grand_sp = sum(c["spectated"] for c in combined.values())
+
     return {
-        "downloaded_summary_age": now - downloaded.get("generated", now),
         "combined": combined,
-        "downloaded": downloaded,
-        "spectated": spectated,
+        "grand_total": grand_total,
+        "grand_downloaded": grand_dl,
+        "grand_spectated": grand_sp,
     }
 
 
 @app.get("/api/coverage")
 async def coverage():
-    """Estimate coverage — query PS with ELO-sliced queries to get past the 100-room cap."""
+    """Estimate coverage — query PS with ELO-sliced queries."""
     import websockets
     import asyncio
 
@@ -341,14 +303,12 @@ async def coverage():
             ping_interval=30,
             open_timeout=10,
         ) as ws:
-            # Wait for login
             logged_in = False
             while not logged_in:
                 msg = await asyncio.wait_for(ws.recv(), timeout=10)
                 if "|updateuser|" in msg:
                     logged_in = True
 
-            # Query room lists at multiple ELO thresholds
             expected = 0
             for fmt in FORMATS:
                 for elo in elo_slices:
@@ -357,7 +317,6 @@ async def coverage():
                     expected += 1
                     await asyncio.sleep(0.3)
 
-            # Collect all unique rooms per format
             all_rooms: dict[str, set[str]] = {fmt: set() for fmt in FORMATS}
             received = 0
             deadline = time.time() + 8
@@ -376,7 +335,7 @@ async def coverage():
             await ws.close()
 
         pids = _spectator_pids()
-        capacity = len(pids) * 40  # MAX_CONCURRENT per instance
+        capacity = len(pids) * 40
 
         active_battles = {fmt: len(rids) for fmt, rids in all_rooms.items()}
         total_active = sum(active_battles.values())
@@ -399,7 +358,6 @@ async def coverage():
 
 @app.get("/", response_class=HTMLResponse)
 async def index():
-    """Serve the dashboard."""
     index_path = STATIC_DIR / "index.html"
     if index_path.exists():
         return HTMLResponse(index_path.read_text())
