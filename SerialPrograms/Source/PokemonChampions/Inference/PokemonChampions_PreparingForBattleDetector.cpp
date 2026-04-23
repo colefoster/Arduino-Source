@@ -62,8 +62,8 @@ bool PreparingForBattleDetector::detect(const ImageViewRGB32& screen){
 
     //  Require BOTH pills to show their respective colors. A single pill in
     //  isolation could be anything — the pair is the strong signature.
-    return is_solid(left_stats,  STANDING_BY_WHITE, 0.08, 100)
-        && is_solid(right_stats, STANDING_BY_WHITE, 0.08, 100);
+    return is_solid(left_stats,  STANDING_BY_WHITE, 0.08, 200)
+        && is_solid(right_stats, STANDING_BY_WHITE, 0.08, 200);
 }
 
 

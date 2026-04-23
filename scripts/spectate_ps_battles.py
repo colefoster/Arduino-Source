@@ -259,12 +259,13 @@ class ShowdownSpectator:
             return
 
         rooms = data.get("rooms", {})
-        # Sort by rating descending — prioritize high-rated battles, then
-        # shuffle within ties so multiple instances spread out.
+        # Sort by rating descending — prioritize high-rated battles.
+        # Bucket into ~50-point tiers and shuffle within each tier so
+        # multiple instances naturally spread across different rooms.
         room_items = list(rooms.items())
-        random.shuffle(room_items)  # shuffle first for tie-breaking
+        random.shuffle(room_items)
         room_items.sort(
-            key=lambda x: x[1].get("minElo", 0) if isinstance(x[1].get("minElo", 0), int) else 0,
+            key=lambda x: (x[1].get("minElo", 0) if isinstance(x[1].get("minElo", 0), int) else 0) // 50,
             reverse=True,
         )
         for room_id, info in room_items:
