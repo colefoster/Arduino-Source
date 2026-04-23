@@ -149,6 +149,22 @@ int test_pokemonChampions_SpeciesReader(const ImageViewRGB32& image, const std::
     return 0;
 }
 
+int test_pokemonChampions_SpeciesReader_Doubles(const ImageViewRGB32& image, const std::vector<std::string>& words){
+    if (words.empty()){
+        cerr << "Error: SpeciesReader_Doubles test needs a species slug in filename." << endl;
+        return 1;
+    }
+
+    const std::string& expected = words.back();
+
+    auto& logger = global_logger_command_line();
+    BattleHUDReader reader(Language::English, BattleMode::DOUBLES);
+    std::string result = reader.read_opponent_species(logger, image, 0);
+
+    TEST_RESULT_EQUAL(result, expected);
+    return 0;
+}
+
 
 // ─── Opponent HP Reader ─────────────────────────────────────────────
 //
@@ -157,6 +173,15 @@ int test_pokemonChampions_SpeciesReader(const ImageViewRGB32& image, const std::
 int test_pokemonChampions_OpponentHPReader(const ImageViewRGB32& image, int target){
     auto& logger = global_logger_command_line();
     BattleHUDReader reader(Language::English);
+    int result = reader.read_opponent_hp_pct(logger, image, 0);
+
+    TEST_RESULT_EQUAL(result, target);
+    return 0;
+}
+
+int test_pokemonChampions_OpponentHPReader_Doubles(const ImageViewRGB32& image, int target){
+    auto& logger = global_logger_command_line();
+    BattleHUDReader reader(Language::English, BattleMode::DOUBLES);
     int result = reader.read_opponent_hp_pct(logger, image, 0);
 
     TEST_RESULT_EQUAL(result, target);
