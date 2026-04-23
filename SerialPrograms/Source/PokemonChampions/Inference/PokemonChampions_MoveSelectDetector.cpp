@@ -44,15 +44,16 @@ static const FloatPixel UNSELECTED_PILL_PURPLE{0.28, 0.25, 0.46};
 
 MoveSelectDetector::MoveSelectDetector(){
     //  Thin strips on the far-left of each pill — for green-selection check.
-    //  Y values updated from live capture (were ~30px too high from video estimates).
-    const double X_SEL     = 0.7292;   // x = 1400/1920
-    const double W_SEL     = 0.0156;   // 30/1920
-    const double HEIGHT    = 0.0278;   // 30/1080
+    //  Vertically centered on the pill body, avoiding top/bottom borders.
+    //  Measured from labeled/move_select_slot1.png (1920x1080).
+    const double X_SEL     = 0.7292;
+    const double W_SEL     = 0.0101;
+    const double HEIGHT    = 0.0139;
     const double Y_SLOTS[4] = {
-        0.5000,   //  slot 0: y = 540/1080
-        0.6204,   //  slot 1: y = 670/1080
-        0.7361,   //  slot 2: y = 795/1080
-        0.8519,   //  slot 3: y = 920/1080
+        0.5116,   //  slot 0
+        0.6338,   //  slot 1
+        0.7542,   //  slot 2
+        0.8746,   //  slot 3
     };
 
     for (size_t i = 0; i < 4; i++){
