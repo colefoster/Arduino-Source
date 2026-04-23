@@ -17,6 +17,7 @@ from fastapi.staticfiles import StaticFiles
 
 REPLAY_DIR = Path(__file__).resolve().parent.parent / "data" / "showdown_replays"
 STATIC_DIR = Path(__file__).parent / "static"
+DATASET_SUMMARY = Path(__file__).parent / "dataset_summary.json"
 SPECTATOR_LOGS = [
     Path("/var/log/pokemon-spectator.log"),
     Path("/var/log/pokemon-spectator-2.log"),
@@ -255,6 +256,75 @@ async def recent(limit: int = 30):
             results.append(meta)
 
     return results
+
+
+@app.get("/api/dataset")
+async def dataset():
+    """Combined dataset stats — downloaded (from ColePC summary) + spectated (live on ash)."""
+    now = time.time()
+
+    # Load ColePC downloaded summary
+    downloaded = {}
+    if DATASET_SUMMARY.exists():
+        downloaded = json.loads(DATASET_SUMMARY.read_text())
+
+    # Count spectated replays on ash with rating info
+    spectated = {}
+    for fmt_id, label in FORMATS.items():
+        files = _scan_replays(fmt_id)
+        total = len(files)
+        ratings = []
+        for f in files:
+            meta = _read_replay_meta(f["path"])
+            if meta and meta.get("rating"):
+                ratings.append(meta["rating"])
+
+        buckets = {}
+        for r in ratings:
+            b = (r // 50) * 50
+            buckets[str(b)] = buckets.get(str(b), 0) + 1
+
+        key = "bss" if "bss" in fmt_id else "vgc"
+        spectated[key] = {
+            "total": total,
+            "rated": len(ratings),
+            "rating_min": min(ratings) if ratings else 0,
+            "rating_max": max(ratings) if ratings else 0,
+            "rating_median": sorted(ratings)[len(ratings) // 2] if ratings else 0,
+            "rating_buckets": dict(sorted(buckets.items())),
+        }
+
+    # Merge bucket distributions for combined view
+    combined = {}
+    for key in ["vgc", "bss"]:
+        dl = downloaded.get(key, {})
+        sp = spectated.get(key, {})
+        dl_buckets = dl.get("rating_buckets", {})
+        sp_buckets = sp.get("rating_buckets", {})
+        all_keys = set(list(dl_buckets.keys()) + list(sp_buckets.keys()))
+        merged_buckets = {}
+        for b in sorted(all_keys, key=lambda x: int(x)):
+            merged_buckets[b] = {
+                "downloaded": dl_buckets.get(b, 0),
+                "spectated": sp_buckets.get(b, 0),
+                "total": dl_buckets.get(b, 0) + sp_buckets.get(b, 0),
+            }
+        combined[key] = {
+            "downloaded": dl.get("indexed", dl.get("rated", 0)),
+            "spectated": sp.get("total", 0),
+            "total": dl.get("indexed", 0) + sp.get("total", 0),
+            "rated": dl.get("rated", 0) + sp.get("rated", 0),
+            "rating_min": min(dl.get("rating_min", 9999), sp.get("rating_min", 9999)),
+            "rating_max": max(dl.get("rating_max", 0), sp.get("rating_max", 0)),
+            "rating_buckets": merged_buckets,
+        }
+
+    return {
+        "downloaded_summary_age": now - downloaded.get("generated", now),
+        "combined": combined,
+        "downloaded": downloaded,
+        "spectated": spectated,
+    }
 
 
 @app.get("/api/coverage")

@@ -152,14 +152,28 @@
         </div>
     </div>
 
-    <h2>Rating Distribution</h2>
+    <!-- Dataset overview -->
+    <h2>Full Dataset</h2>
+    <div class="status-bar" id="dataset-cards"></div>
     <div class="grid-2">
         <div class="chart-box">
-            <div class="chart-title">VGC 2026 Ratings (last 7 days)</div>
+            <div class="chart-title">VGC Ratings — Downloaded vs Spectated</div>
+            <canvas id="dataset-vgc-chart"></canvas>
+        </div>
+        <div class="chart-box">
+            <div class="chart-title">BSS Ratings — Downloaded vs Spectated</div>
+            <canvas id="dataset-bss-chart"></canvas>
+        </div>
+    </div>
+
+    <h2>Spectated Ratings (last 7 days)</h2>
+    <div class="grid-2">
+        <div class="chart-box">
+            <div class="chart-title">VGC 2026</div>
             <canvas id="rating-vgc-chart"></canvas>
         </div>
         <div class="chart-box">
-            <div class="chart-title">BSS Ratings (last 7 days)</div>
+            <div class="chart-title">BSS</div>
             <canvas id="rating-bss-chart"></canvas>
         </div>
     </div>
@@ -188,7 +202,7 @@
     const VGC_COLOR = '#58a6ff';
     const BSS_COLOR = '#d2a8ff';
 
-    let rateChart, cumulativeChart, ratingVgcChart, ratingBssChart;
+    let rateChart, cumulativeChart, ratingVgcChart, ratingBssChart, datasetVgcChart, datasetBssChart;
 
     function initCharts() {
         rateChart = new Chart(document.getElementById('rate-chart'), {
@@ -218,6 +232,21 @@
             type: 'bar',
             data: { labels: [], datasets: [] },
             options: { ...chartOpts, plugins: { ...chartOpts.plugins, legend: { display: false } } },
+        });
+        const stackedOpts = {
+            ...chartOpts,
+            plugins: { ...chartOpts.plugins, legend: { display: true, labels: chartOpts.plugins.legend.labels } },
+            scales: {
+                ...chartOpts.scales,
+                x: { ...chartOpts.scales.x, stacked: true },
+                y: { ...chartOpts.scales.y, stacked: true },
+            },
+        };
+        datasetVgcChart = new Chart(document.getElementById('dataset-vgc-chart'), {
+            type: 'bar', data: { labels: [], datasets: [] }, options: stackedOpts,
+        });
+        datasetBssChart = new Chart(document.getElementById('dataset-bss-chart'), {
+            type: 'bar', data: { labels: [], datasets: [] }, options: stackedOpts,
         });
     }
 
@@ -416,6 +445,64 @@
         }
     }
 
+    async function loadDataset() {
+        try {
+            const d = await (await fetch(`${API}/api/dataset`)).json();
+            const combined = d.combined || {};
+
+            // Dataset summary cards
+            const cards = document.getElementById('dataset-cards');
+            const DL_COLOR = '#f0883e';
+            const SP_COLOR = '#3fb950';
+            let html = '';
+            for (const [key, data] of Object.entries(combined)) {
+                const label = key.toUpperCase();
+                html += `
+                    <div class="card">
+                        <div class="label">${label} Total</div>
+                        <div class="value">${(data.total || 0).toLocaleString()}</div>
+                        <div class="sub">
+                            <span style="color:${DL_COLOR}">${(data.downloaded || 0).toLocaleString()} downloaded</span> +
+                            <span style="color:${SP_COLOR}">${(data.spectated || 0).toLocaleString()} spectated</span>
+                        </div>
+                        <div class="sub">${(data.rated || 0).toLocaleString()} with ratings</div>
+                    </div>`;
+            }
+            // Total card
+            const grandTotal = Object.values(combined).reduce((a, c) => a + (c.total || 0), 0);
+            const grandDl = Object.values(combined).reduce((a, c) => a + (c.downloaded || 0), 0);
+            const grandSp = Object.values(combined).reduce((a, c) => a + (c.spectated || 0), 0);
+            html += `
+                <div class="card">
+                    <div class="label">Grand Total</div>
+                    <div class="value">${grandTotal.toLocaleString()}</div>
+                    <div class="sub">
+                        <span style="color:${DL_COLOR}">${grandDl.toLocaleString()}</span> +
+                        <span style="color:${SP_COLOR}">${grandSp.toLocaleString()}</span>
+                    </div>
+                </div>`;
+            cards.innerHTML = html;
+
+            // Stacked rating charts
+            function renderDatasetChart(chart, buckets) {
+                const labels = Object.keys(buckets).map(b => `${b}-${parseInt(b)+49}`);
+                const dlData = Object.values(buckets).map(b => b.downloaded || 0);
+                const spData = Object.values(buckets).map(b => b.spectated || 0);
+                chart.data.labels = labels;
+                chart.data.datasets = [
+                    { label: 'Downloaded', data: dlData, backgroundColor: DL_COLOR + '99', borderColor: DL_COLOR, borderWidth: 1 },
+                    { label: 'Spectated', data: spData, backgroundColor: SP_COLOR + '99', borderColor: SP_COLOR, borderWidth: 1 },
+                ];
+                chart.update();
+            }
+
+            if (combined.vgc?.rating_buckets) renderDatasetChart(datasetVgcChart, combined.vgc.rating_buckets);
+            if (combined.bss?.rating_buckets) renderDatasetChart(datasetBssChart, combined.bss.rating_buckets);
+        } catch (e) {
+            console.error('loadDataset:', e);
+        }
+    }
+
     // Init
     initCharts();
     loadStatus();
@@ -423,10 +510,11 @@
     loadRatings();
     loadRecent();
     loadCoverage();
+    loadDataset();
 
     // Auto-refresh
     setInterval(() => { loadStatus(); loadRecent(); }, 30000);
-    setInterval(() => { loadCollection(); loadRatings(); }, 120000);
+    setInterval(() => { loadCollection(); loadRatings(); loadDataset(); }, 120000);
     setInterval(loadCoverage, 300000);  // coverage queries PS, don't spam
     </script>
 </body>
