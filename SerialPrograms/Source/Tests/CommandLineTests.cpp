@@ -15,7 +15,10 @@
 #include <QFileInfo>
 
 #include <iostream>
+#include <iomanip>
 #include <list>
+#include <map>
+#include <vector>
 #include <functional>
 using std::cout;
 using std::cerr;
@@ -362,6 +365,220 @@ int run_command_line_tests(const std::string& path){
 
     print_equals();
     cout << num_passed << " test" << (num_passed > 1 ? "s" : "") << " passed" << endl;
+    return 0;
+}
+
+
+// ═══════════════════════════════════════════════════════════════════════
+//  Regression Report Mode
+//
+//  Runs every test without stopping on failure. Collects per-reader
+//  accuracy stats and prints a summary table at the end.
+// ═══════════════════════════════════════════════════════════════════════
+
+namespace{
+
+struct TestMiss{
+    std::string file;
+    std::string detail;     //  error output captured from stderr
+};
+
+struct ReaderStats{
+    std::string name;
+    size_t passed  = 0;
+    size_t failed  = 0;
+    size_t skipped = 0;
+    std::vector<TestMiss> misses;
+
+    size_t total()    const{ return passed + failed; }
+    double accuracy() const{ return total() == 0 ? 0.0 : 100.0 * passed / total(); }
+};
+
+//  Run a single test file and record the outcome in `stats`.
+void regression_run_file(TestFunction test_func, const std::string& file_path, ReaderStats& stats){
+    cout << file_path << endl;
+
+    int ret = 0;
+    try{
+        ret = test_func(file_path);
+    }catch (const std::exception& e){
+        cerr << "Test: " << file_path << " threw exception: " << e.what() << endl;
+        ret = 1;
+    }catch (const Exception& e){
+        cerr << "Test: " << file_path << " threw " << e.name() << ": <<<" << e.message() << ">>>" << endl;
+        ret = 1;
+    }
+
+    if (ret > 0){
+        stats.failed++;
+        //  Extract just the filename for the miss report.
+        QFileInfo fi(QString::fromStdString(file_path));
+        stats.misses.push_back({fi.fileName().toStdString(), ""});
+    }else if (ret == 0){
+        stats.passed++;
+    }else{
+        stats.skipped++;
+    }
+}
+
+//  Iterate all files under a test-object directory, collecting results.
+void regression_run_obj_dir(TestFunction test_func, const QString& directory_path, ReaderStats& stats){
+    QDirIterator file_iter(directory_path, QDir::Filter::Files, QDirIterator::IteratorFlag::Subdirectories);
+
+    while (file_iter.hasNext()){
+        const QString next_file = file_iter.next();
+        const QFileInfo file_info(next_file);
+        if (file_info.fileName().startsWith('_') || file_info.dir().dirName().startsWith("_")){
+            continue;
+        }
+        regression_run_file(test_func, next_file.toStdString(), stats);
+    }
+}
+
+//  Discover test objects under a test-space directory.
+void regression_run_space(const QFileInfo& space_info, std::map<std::string, ReaderStats>& all_stats){
+    QDir sub_dir(space_info.filePath());
+    if (!sub_dir.exists()) return;
+
+    const std::string test_space = space_info.fileName().toStdString();
+    if (test_space == "." || test_space == "..") return;
+
+    sub_dir.setFilter(QDir::Filter::Dirs);
+    const QFileInfoList obj_list = sub_dir.entryInfoList();
+    for (const QFileInfo& obj_info : obj_list){
+        const std::string test_name = obj_info.fileName().toStdString();
+        if (test_name == "." || test_name == "..") continue;
+
+        const std::string full_key = test_space + "_" + test_name;
+        const TestFunction test_func = find_test_function(test_space, test_name);
+        if (test_func == nullptr) continue;
+
+        ReaderStats& stats = all_stats[full_key];
+        stats.name = test_name;
+
+        cout << "===========================================" << endl;
+        cout << "Testing " << test_name << ":" << endl;
+        regression_run_obj_dir(test_func, obj_info.filePath(), stats);
+    }
+}
+
+void print_regression_summary(const std::map<std::string, ReaderStats>& all_stats){
+    cout << endl;
+    cout << "╔═══════════════════════════════════════════════════════════════╗" << endl;
+    cout << "║                    REGRESSION REPORT                        ║" << endl;
+    cout << "╠══════════════════════════════════╦════════╦═════════╦════════╣" << endl;
+    cout << "║ Reader                           ║ Passed ║  Total  ║  Acc.  ║" << endl;
+    cout << "╠══════════════════════════════════╬════════╬═════════╬════════╣" << endl;
+
+    size_t grand_passed = 0;
+    size_t grand_total  = 0;
+    std::vector<const ReaderStats*> with_misses;
+
+    for (const auto& [key, stats] : all_stats){
+        grand_passed += stats.passed;
+        grand_total  += stats.total();
+
+        //  Pad reader name to 32 chars.
+        std::string display_name = stats.name;
+        if (display_name.size() > 32) display_name = display_name.substr(0, 32);
+
+        cout << "║ " << std::left << std::setw(32) << display_name << " ║ "
+             << std::right << std::setw(3) << stats.passed << "/" << std::left << std::setw(3) << stats.total()
+             << " ║ " << std::right << std::setw(7) << stats.total()
+             << " ║ " << std::right << std::setw(5) << std::fixed << std::setprecision(1) << stats.accuracy() << "%" << " ║" << endl;
+
+        if (!stats.misses.empty()){
+            with_misses.push_back(&stats);
+        }
+    }
+
+    double grand_acc = grand_total == 0 ? 0.0 : 100.0 * grand_passed / grand_total;
+    cout << "╠══════════════════════════════════╬════════╬═════════╬════════╣" << endl;
+    cout << "║ " << std::left << std::setw(32) << "OVERALL" << " ║ "
+         << std::right << std::setw(3) << grand_passed << "/" << std::left << std::setw(3) << grand_total
+         << " ║ " << std::right << std::setw(7) << grand_total
+         << " ║ " << std::right << std::setw(5) << std::fixed << std::setprecision(1) << grand_acc << "%" << " ║" << endl;
+    cout << "╚══════════════════════════════════╩════════╩═════════╩════════╝" << endl;
+
+    //  List every miss.
+    if (!with_misses.empty()){
+        cout << endl;
+        cout << "─── Failures ───────────────────────────────────────────────────" << endl;
+        for (const ReaderStats* stats : with_misses){
+            for (const TestMiss& miss : stats->misses){
+                cout << "  FAIL  " << stats->name << "  ←  " << miss.file << endl;
+            }
+        }
+        cout << "────────────────────────────────────────────────────────────────" << endl;
+    }
+}
+
+} // end anonymous namespace
+
+
+int run_regression_report(const std::string& path){
+    const QString cleaned = QDir::cleanPath(QString::fromStdString(path));
+    QFileInfo info(cleaned);
+
+    if (!info.exists()){
+        cerr << "Error: path does not exist: " << path << endl;
+        return 1;
+    }
+
+    std::map<std::string, ReaderStats> all_stats;
+
+    if (info.isFile()){
+        //  Single file — derive test_space/test_name from parent dirs.
+        QDir obj_dir = info.dir();
+        std::string test_name  = obj_dir.dirName().toStdString();
+        std::string test_space = QFileInfo(obj_dir.path()).dir().dirName().toStdString();
+
+        const TestFunction test_func = find_test_function(test_space, test_name);
+        if (test_func == nullptr){
+            cerr << "Error: no test registered for " << test_space << "_" << test_name << endl;
+            return 2;
+        }
+
+        const std::string full_key = test_space + "_" + test_name;
+        ReaderStats& stats = all_stats[full_key];
+        stats.name = test_name;
+        regression_run_file(test_func, cleaned.toStdString(), stats);
+
+    }else{
+        //  Directory — try as test object, then test space, then root.
+        QDir dir(cleaned);
+        std::string dir_name    = dir.dirName().toStdString();
+        std::string parent_name = QFileInfo(dir.path()).dir().dirName().toStdString();
+
+        TestFunction test_func = find_test_function(parent_name, dir_name);
+        if (test_func != nullptr){
+            //  This is a test-object directory.
+            const std::string full_key = parent_name + "_" + dir_name;
+            ReaderStats& stats = all_stats[full_key];
+            stats.name = dir_name;
+            regression_run_obj_dir(test_func, cleaned, stats);
+        }else{
+            //  Try as test space.
+            QFileInfo space_info(cleaned);
+            regression_run_space(space_info, all_stats);
+
+            //  If that found nothing, try as root.
+            if (all_stats.empty()){
+                dir.setFilter(QDir::Filter::Dirs);
+                const QFileInfoList sub_dirs = dir.entryInfoList();
+                for (const QFileInfo& sub : sub_dirs){
+                    regression_run_space(sub, all_stats);
+                }
+            }
+        }
+    }
+
+    print_regression_summary(all_stats);
+
+    //  Return 1 if anything failed.
+    for (const auto& [key, stats] : all_stats){
+        if (stats.failed > 0) return 1;
+    }
     return 0;
 }
 
