@@ -485,7 +485,7 @@
       "name": "team_preview/own_species_0",
       "scene": "Pre-battle Team Preview (Select 4)",
       "screenshot": "screenshots/team_preview_3804.png",
-      "description": "Own team slot 0 (top): species name 'Glimmora'. The text only \u2014 not the sprite or gender icon.",
+      "description": "Own slot 0 (TOP row, unhighlighted Glimmora): species text ONLY. TIGHT crop \u2014 just the dark text pixels, no pill background, no border, no gender icon.",
       "status": "confirmed",
       "box": [
         0.0724,
@@ -509,7 +509,7 @@
       "name": "team_preview/own_species_5",
       "scene": "Pre-battle Team Preview (Select 4)",
       "screenshot": "screenshots/team_preview_3804.png",
-      "description": "Own team slot 5 (bottom): species name 'Kingambit'. Used with slot 0 to compute row spacing.",
+      "description": "Own slot 5 (BOTTOM row, unhighlighted Kingambit): species text ONLY. TIGHT crop. Used with slot 0 and 2 to compute row spacing.",
       "status": "confirmed",
       "box": [
         0.0724,
@@ -533,7 +533,7 @@
       "name": "team_preview/own_item_0",
       "scene": "Pre-battle Team Preview (Select 4)",
       "screenshot": "screenshots/team_preview_3804.png",
-      "description": "Own team slot 0: item name 'Focus Sash' (below the species name in the card).",
+      "description": "Own slot 0: item 'Focus Sash' text ONLY. TIGHT crop on the smaller text below species.",
       "status": "confirmed",
       "box": [
         0.0974,
@@ -557,7 +557,7 @@
       "name": "team_preview/own_item_5",
       "scene": "Pre-battle Team Preview (Select 4)",
       "screenshot": "screenshots/team_preview_3804.png",
-      "description": "Own team slot 5: item name 'Bright Powder'. Used with slot 0 to compute row spacing.",
+      "description": "Own slot 5: item 'Bright Powder' text ONLY. TIGHT crop.",
       "status": "confirmed",
       "box": [
         0.0995,
@@ -648,6 +648,22 @@
         0.3107,
         0.3688
       ]
+    },
+    {
+      "name": "team_preview/own_species_2",
+      "scene": "Pre-battle Team Preview (Select 4)",
+      "screenshot": "screenshots/team_preview_3804.png",
+      "description": "Own slot 2 (3rd row, unhighlighted): species name 'Rotom'. TIGHT crop around just the dark text \u2014 exclude the pill background and any border. This is a midpoint anchor to improve row interpolation.",
+      "status": "pending",
+      "box": null
+    },
+    {
+      "name": "team_preview/own_item_2",
+      "scene": "Pre-battle Team Preview (Select 4)",
+      "screenshot": "screenshots/team_preview_3804.png",
+      "description": "Own slot 2: item name 'Choice Scarf' below the species. TIGHT crop on the dark text only.",
+      "status": "pending",
+      "box": null
     }
   ]
 }
