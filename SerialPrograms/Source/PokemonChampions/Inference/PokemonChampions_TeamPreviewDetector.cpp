@@ -17,7 +17,7 @@ namespace PokemonChampions{
 TeamPreviewDetector::TeamPreviewDetector()
     //  "Select 4 Pokemon to send into battle" title text region, center of screen.
     //  Measured from screenshots/team_preview_3804.png (1920x1080).
-    : m_title_text(0.3604, 0.2037, 0.1375, 0.0778)
+    : m_title_text(0.3604, 0.2037, 0.1375, 0.0389)
 {}
 
 
