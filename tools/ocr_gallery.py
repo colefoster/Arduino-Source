@@ -50,7 +50,7 @@ def _species_reader_boxes():
 
 def _opponent_hp_boxes():
     """OpponentHPReader: HP percentage display."""
-    return [{"name": "opp_hp_pct", "box": [0.964, 0.057, 0.034, 0.031]}]
+    return [{"name": "opp_hp_pct", "box": [0.9015, 0.1191, 0.042, 0.0338]}]
 
 def _move_select_detector_boxes():
     """MoveSelectDetector: 4 pill indicator strips."""
