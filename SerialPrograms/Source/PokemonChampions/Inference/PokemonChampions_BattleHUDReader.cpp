@@ -237,7 +237,7 @@ void BattleHUDReader::init_doubles_boxes(){
     //  Measured with pixel_inspector on live capture frame_00116.
     m_opponent_name_boxes[0] = ImageFloatBox(0.6172, 0.0454, 0.1219, 0.0417);
     m_opponent_name_boxes[1] = ImageFloatBox(0.8286, 0.0481, 0.1151, 0.0417);
-    m_opponent_hp_boxes[0]   = ImageFloatBox(0.6917, 0.1139, 0.0573, 0.0454);
+    m_opponent_hp_boxes[0]   = ImageFloatBox(0.694, 0.116, 0.041, 0.038);
     m_opponent_hp_boxes[1]   = ImageFloatBox(0.8984, 0.1130, 0.0563, 0.0426);
 
     m_own_hp_boxes[0] = ImageFloatBox(0.1313, 0.9324, 0.0766, 0.0407);
