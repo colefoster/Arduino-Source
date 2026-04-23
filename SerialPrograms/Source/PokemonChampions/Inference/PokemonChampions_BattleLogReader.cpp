@@ -97,7 +97,7 @@ BattleLogEvent BattleLogReader::parse(const std::string& text){
 
     //  "The opposing X used Y!"  or  "X used Y!"
     {
-        std::regex re(R"((?:The opposing )?(.+?) used (.+?)!)");
+        std::regex re(R"((?:The opposing )?(.+?) used (.+?)!?)");
         if (std::regex_search(text, m, re)){
             event.type = BattleLogEventType::MOVE_USED;
             event.pokemon = clean_pokemon_name(m[1].str());
