@@ -39,6 +39,8 @@
 #include "PokemonChampions/Inference/PokemonChampions_BattleLogReader.h"
 #include "PokemonChampions/Inference/PokemonChampions_BattleModeDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_TeamSummaryReader.h"
+#include "PokemonChampions/Inference/PokemonChampions_TeamPreviewDetector.h"
+#include "PokemonChampions/Inference/PokemonChampions_TeamPreviewReader.h"
 #include "PokemonChampions/Programs/PokemonChampions_AutoLadder.h"
 
 namespace PokemonAutomation{
@@ -257,6 +259,67 @@ int AutoLadder::scan_team_from_game(SingleSwitchProgramEnvironment& env){
         );
     }
     return loaded;
+}
+
+
+int AutoLadder::scan_team_preview(
+    SingleSwitchProgramEnvironment& env,
+    ProControllerContext& context,
+    int wait_seconds
+){
+    env.console.log("[TeamPreview] Polling for Team Preview screen...");
+
+    TeamPreviewDetector detector;
+    bool detected = false;
+    for (int i = 0; i < wait_seconds; i++){
+        VideoSnapshot snapshot = env.console.video().snapshot();
+        if (snapshot && detector.detect(snapshot)){
+            detected = true;
+            break;
+        }
+        context.wait_for(std::chrono::seconds(1));
+    }
+
+    if (!detected){
+        env.console.log("[TeamPreview] screen not detected within timeout.", COLOR_YELLOW);
+        return -1;
+    }
+
+    VideoSnapshot snapshot = env.console.video().snapshot();
+    if (!snapshot){
+        env.console.log("[TeamPreview] could not grab frame.", COLOR_RED);
+        return -1;
+    }
+
+    TeamPreviewReader reader(Language::English);
+    TeamPreviewResult result = reader.read(env.console, snapshot);
+
+    int opp_count = 0;
+    for (uint8_t i = 0; i < 6; i++){
+        //  Fill item on already-loaded own team (species/moves come from Moves & More).
+        if (!result.own[i].item.empty()){
+            m_state_tracker.set_own_item(i, result.own[i].item);
+        }
+        //  Seed opponent species.
+        if (!result.opp_species[i].empty()){
+            m_state_tracker.set_opp_species_preview(i, result.opp_species[i]);
+            opp_count++;
+        }
+    }
+
+    env.console.log(
+        "[TeamPreview] Populated " + std::to_string(opp_count) +
+        "/6 opponent species from sprite match.",
+        opp_count >= 4 ? COLOR_GREEN : COLOR_YELLOW
+    );
+    for (uint8_t i = 0; i < 6; i++){
+        env.console.log(
+            "  opp " + std::to_string(i) + ": \"" + result.opp_species[i] + "\"" +
+            "   own " + std::to_string(i) + " item: \"" + result.own[i].item + "\"",
+            COLOR_BLUE
+        );
+    }
+    return opp_count;
 }
 
 
@@ -488,6 +551,13 @@ bool AutoLadder::run_one_match(SingleSwitchProgramEnvironment& env, ProControlle
     //  new team-select, so we can skip enter_matchmaking() after match 1.
     if (stats.matches == 0){
         enter_matchmaking(env, context);
+    }
+
+    //  When running the AI, try to scan the opponent's team from the
+    //  preview screen before picking our 3/4. This also fills in our
+    //  own items (which the Moves & More screen doesn't show).
+    if (MOVE_STRATEGY == MoveStrategy::AI){
+        scan_team_preview(env, context, /* wait_seconds */ 10);
     }
 
     do_team_select(env, context);

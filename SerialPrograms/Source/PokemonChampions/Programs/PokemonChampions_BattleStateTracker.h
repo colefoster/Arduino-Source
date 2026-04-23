@@ -99,6 +99,15 @@ public:
     const TrackedPokemon& opp(uint8_t slot) const{ return m_opp_team[slot]; }
     uint8_t opp_seen_count() const{ return m_opp_seen; }
 
+    //  Fill an item slug on an already-configured own Pokemon (e.g. from
+    //  the Team Preview screen after Moves & More loaded species/moves).
+    void set_own_item(uint8_t slot, const std::string& item);
+
+    //  Pre-populate an opponent slot with a known species (from the Team
+    //  Preview screen's sprite-matcher). Seeds m_opp_team[slot].species
+    //  without marking it as "seen in battle".
+    void set_opp_species_preview(uint8_t slot, const std::string& species);
+
 private:
     //  Find or create an opponent slot for a species. Returns index 0-5.
     uint8_t find_or_add_opponent(const std::string& species);

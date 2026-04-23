@@ -328,6 +328,8 @@ const std::map<std::string, TestFunction> TEST_MAP = {
     {"PokemonChampions_TeamSelectReader", std::bind(image_words_detector_helper, test_pokemonChampions_TeamSelectReader, _1)},
     {"PokemonChampions_MovesMoreDetector", std::bind(image_bool_detector_helper, test_pokemonChampions_MovesMoreDetector, _1)},
     {"PokemonChampions_TeamSummaryReader", std::bind(image_words_detector_helper, test_pokemonChampions_TeamSummaryReader, _1)},
+    {"PokemonChampions_TeamPreviewDetector", std::bind(image_bool_detector_helper, test_pokemonChampions_TeamPreviewDetector, _1)},
+    {"PokemonChampions_TeamPreviewReader", std::bind(image_words_detector_helper, test_pokemonChampions_TeamPreviewReader, _1)},
     //  PokemonChampions — Dev/Debug
     {"PokemonChampions_OCRDump", std::bind(image_void_detector_helper, test_pokemonChampions_OCRDump, _1)},
     {"PokemonFRLG_AdvanceWhiteDialogDetector", std::bind(image_bool_detector_helper, test_pokemonFRLG_AdvanceWhiteDialogDetector, _1)},

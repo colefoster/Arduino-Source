@@ -197,6 +197,21 @@ void BattleStateTracker::set_own_team(const std::array<ConfiguredPokemon, 6>& te
 }
 
 
+void BattleStateTracker::set_own_item(uint8_t slot, const std::string& item){
+    if (slot >= 6) return;
+    m_own_team[slot].item = item;
+}
+
+
+void BattleStateTracker::set_opp_species_preview(uint8_t slot, const std::string& species){
+    if (slot >= 6) return;
+    if (species.empty()) return;
+    //  Pre-seed species without marking the slot as "seen in battle"
+    //  (m_opp_seen stays unchanged until the HUD reader confirms).
+    m_opp_team[slot].species = species;
+}
+
+
 // ─── Updates ─────────────────────────────────────────────────────
 
 void BattleStateTracker::update_from_hud(const BattleHUDState& hud){
