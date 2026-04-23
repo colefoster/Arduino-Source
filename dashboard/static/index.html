@@ -135,6 +135,8 @@
             <div class="coverage-bar-fill" id="cov-bar" style="width:0%; background:#58a6ff;"></div>
             <div class="coverage-bar-label" id="cov-pct"></div>
         </div>
+        <div id="cov-breakdown" style="margin-top:10px; display:flex; gap:12px; flex-wrap:wrap;"></div>
+        <div id="cov-note" style="margin-top:6px; font-size:10px; color:#484f58;"></div>
     </div>
 
     <!-- Charts -->
@@ -244,7 +246,7 @@
             // Instances
             document.getElementById('instances-val').textContent = d.instances;
             document.getElementById('instances-sub').textContent =
-                `${d.instances * 30} room capacity`;
+                `${d.instances * 40} room capacity`;
 
             // Total
             document.getElementById('total-val').textContent = d.total_replays.toLocaleString();
@@ -287,7 +289,7 @@
             const pct = d.coverage_pct || 0;
             document.getElementById('coverage-val').textContent = `${pct}%`;
             document.getElementById('coverage-sub').textContent =
-                `${d.capacity} slots / ${d.total_active} active`;
+                `${d.capacity} slots / ${d.total_active}${d.total_active_note ? '+' : ''} active`;
 
             // Coverage bar
             const barColor = pct >= 80 ? '#3fb950' : pct >= 50 ? '#d29922' : '#f85149';
@@ -295,12 +297,37 @@
             document.getElementById('cov-bar').style.background = barColor;
             document.getElementById('cov-pct').textContent = `${pct}%`;
 
-            const details = Object.entries(d.active_battles || {})
-                .map(([fmt, count]) => `${fmt.replace('gen9champions', '').replace('regma', '')}: ${count}`)
-                .join(', ');
             document.getElementById('cov-label').textContent =
-                `${d.instances} instance${d.instances !== 1 ? 's' : ''} x 30 rooms = ${d.capacity} capacity`;
-            document.getElementById('cov-detail').textContent = details;
+                `${d.instances} instance${d.instances !== 1 ? 's' : ''} x 40 rooms = ${d.capacity} capacity`;
+
+            // Per-format breakdown
+            const fmtNames = {
+                gen9championsvgc2026regma: 'VGC',
+                gen9championsbssregma: 'BSS',
+            };
+            const breakdown = document.getElementById('cov-breakdown');
+            breakdown.innerHTML = Object.entries(d.active_battles || {}).map(([fmt, count]) => {
+                const label = fmtNames[fmt] || fmt;
+                const capped = count >= 100;
+                return `<div style="background:#21262d; border-radius:4px; padding:6px 12px; font-size:12px;">
+                    <span style="color:#8b949e;">${label}:</span>
+                    <strong>${count}${capped ? '+' : ''}</strong> active
+                    ${capped ? '<span style="color:#d29922; font-size:10px;"> (PS 100 cap)</span>' : ''}
+                </div>`;
+            }).join('');
+
+            // ELO slice note
+            const slices = d.elo_slices || [];
+            const note = document.getElementById('cov-note');
+            if (slices.length > 1) {
+                note.textContent = `Querying ${slices.length} ELO slices (${slices.join(', ')}) to discover battles past PS 100-room cap. High-rated battles prioritized.`;
+            }
+
+            // Detail text
+            document.getElementById('cov-detail').textContent =
+                Object.entries(d.active_battles || {})
+                    .map(([fmt, count]) => `${fmtNames[fmt] || fmt}: ${count}${count >= 100 ? '+' : ''}`)
+                    .join(' | ');
         } catch (e) {
             console.error('loadCoverage:', e);
         }

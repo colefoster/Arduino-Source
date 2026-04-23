@@ -20,6 +20,7 @@ STATIC_DIR = Path(__file__).parent / "static"
 SPECTATOR_LOGS = [
     Path("/var/log/pokemon-spectator.log"),
     Path("/var/log/pokemon-spectator-2.log"),
+    Path("/var/log/pokemon-spectator-3.log"),
 ]
 
 FORMATS = {
@@ -258,9 +259,11 @@ async def recent(limit: int = 30):
 
 @app.get("/api/coverage")
 async def coverage():
-    """Estimate coverage — query PS for active battles vs our capacity."""
+    """Estimate coverage — query PS with ELO-sliced queries to get past the 100-room cap."""
     import websockets
     import asyncio
+
+    elo_slices = [0, 1200, 1400]
 
     try:
         async with websockets.connect(
@@ -275,36 +278,49 @@ async def coverage():
                 if "|updateuser|" in msg:
                     logged_in = True
 
-            # Query room lists
+            # Query room lists at multiple ELO thresholds
+            expected = 0
             for fmt in FORMATS:
-                await ws.send(f"|/crq roomlist {fmt}")
+                for elo in elo_slices:
+                    cmd = f"|/crq roomlist {fmt},{elo}" if elo else f"|/crq roomlist {fmt}"
+                    await ws.send(cmd)
+                    expected += 1
+                    await asyncio.sleep(0.3)
 
-            results = {}
-            deadline = time.time() + 5
-            while len(results) < len(FORMATS) and time.time() < deadline:
+            # Collect all unique rooms per format
+            all_rooms: dict[str, set[str]] = {fmt: set() for fmt in FORMATS}
+            received = 0
+            deadline = time.time() + 8
+            while received < expected and time.time() < deadline:
                 msg = await asyncio.wait_for(ws.recv(), timeout=5)
                 if "|queryresponse|roomlist|" in msg:
+                    received += 1
                     json_str = msg.split("|queryresponse|roomlist|", 1)[1]
                     data = json.loads(json_str)
                     rooms = data.get("rooms", {})
-                    # Figure out format from room IDs
                     for fmt_id in FORMATS:
-                        if any(fmt_id in rid for rid in rooms):
-                            results[fmt_id] = len(rooms)
-                            break
+                        for rid in rooms:
+                            if fmt_id in rid:
+                                all_rooms[fmt_id].add(rid)
 
             await ws.close()
 
         pids = _spectator_pids()
         capacity = len(pids) * 40  # MAX_CONCURRENT per instance
 
+        active_battles = {fmt: len(rids) for fmt, rids in all_rooms.items()}
+        total_active = sum(active_battles.values())
+        capped = any(len(rids) >= 100 for rids in all_rooms.values())
+
         return {
-            "active_battles": results,
-            "total_active": sum(results.values()),
+            "active_battles": active_battles,
+            "total_active": total_active,
+            "total_active_note": "100+ (PS caps roomlist at 100 per query)" if capped else None,
             "instances": len(pids),
             "capacity": capacity,
+            "elo_slices": elo_slices,
             "coverage_pct": round(
-                min(capacity / max(sum(results.values()), 1), 1.0) * 100
+                min(capacity / max(total_active, 1), 1.0) * 100
             ),
         }
     except Exception as e:
