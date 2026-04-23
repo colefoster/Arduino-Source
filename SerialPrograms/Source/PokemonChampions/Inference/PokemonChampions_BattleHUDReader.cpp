@@ -200,7 +200,7 @@ void BattleHUDReader::init_singles_boxes(){
     //  Singles: 1 opponent top-right, 1 own bottom-left.
     //  Measured from ref_frames/1/frame_00080.jpg
 
-    m_opponent_name_boxes[0] = ImageFloatBox(0.833, 0.042, 0.130, 0.032);
+    m_opponent_name_boxes[0] = ImageFloatBox(0.830, 0.052, 0.087, 0.032);
     m_opponent_hp_boxes[0]   = ImageFloatBox(0.964, 0.057, 0.034, 0.031);
     m_opponent_name_boxes[1] = ImageFloatBox(0, 0, 0, 0);  // unused
     m_opponent_hp_boxes[1]   = ImageFloatBox(0, 0, 0, 0);

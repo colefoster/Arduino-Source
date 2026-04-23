@@ -46,7 +46,7 @@ def _move_name_boxes():
 
 def _species_reader_boxes():
     """SpeciesReader (BattleHUDReader): opponent species badge, singles mode."""
-    return [{"name": "opp_species", "box": [0.833, 0.042, 0.130, 0.032]}]
+    return [{"name": "opp_species", "box": [0.830, 0.052, 0.087, 0.032]}]
 
 def _opponent_hp_boxes():
     """OpponentHPReader: HP percentage display."""
@@ -339,7 +339,14 @@ h1 { color: #58a6ff; margin-bottom: 8px; font-size: 20px; }
 def build_card_html(entry, crop_defs, reader_name, results):
     gt = entry["ground_truth"]
     result = results.get(entry["filename"])
-    passed = result.get("passed") if result else None
+    if result:
+        passed = result.get("passed")
+    elif results:
+        # Results were loaded but this file isn't in them — assume passed
+        # (the regression runner only explicitly lists failures)
+        passed = True
+    else:
+        passed = None
 
     card_class = "card fail" if passed is False else "card"
 

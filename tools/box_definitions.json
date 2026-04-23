@@ -696,6 +696,150 @@
         0.2287,
         0.5225
       ]
+    },
+    {
+      "name": "species_reader/opp_species_greninja",
+      "scene": "Singles move select \u2014 Greninja opponent",
+      "screenshot": "CommandLineTests/PokemonChampions/SpeciesReader/move_select_greninja.png",
+      "description": "Select the opponent species name badge (top-right, pink/red background with white text)",
+      "status": "confirmed",
+      "box": [
+        0.8307,
+        0.0519,
+        0.087,
+        0.0324
+      ],
+      "avg_rgb": [
+        199.8,
+        79.2,
+        130.7
+      ],
+      "stddev_sum": 152.4,
+      "color_ratio": [
+        0.4877,
+        0.1933,
+        0.319
+      ]
+    },
+    {
+      "name": "species_reader/opp_species_greninja_low",
+      "scene": "Singles move select \u2014 Greninja opponent (low HP)",
+      "screenshot": "CommandLineTests/PokemonChampions/SpeciesReader/move_select_greninja_low_greninja.png",
+      "description": "Select the opponent species name badge (top-right, pink/red background with white text)",
+      "status": "confirmed",
+      "box": [
+        0.8302,
+        0.0537,
+        0.0865,
+        0.0287
+      ],
+      "avg_rgb": [
+        200.0,
+        83.0,
+        132.4
+      ],
+      "stddev_sum": 157.4,
+      "color_ratio": [
+        0.4815,
+        0.1999,
+        0.3187
+      ]
+    },
+    {
+      "name": "species_reader/opp_species_kingambit",
+      "scene": "Singles move select \u2014 Kingambit opponent",
+      "screenshot": "CommandLineTests/PokemonChampions/SpeciesReader/move_select_kingambit.png",
+      "description": "Select the opponent species name badge (top-right, pink/red background with white text)",
+      "status": "confirmed",
+      "box": [
+        0.8302,
+        0.0519,
+        0.087,
+        0.0343
+      ],
+      "avg_rgb": [
+        200.1,
+        86.7,
+        133.8
+      ],
+      "stddev_sum": 165.4,
+      "color_ratio": [
+        0.4758,
+        0.2061,
+        0.3181
+      ]
+    },
+    {
+      "name": "species_reader/opp_species_gengar",
+      "scene": "Battle info \u2014 Gengar opponent",
+      "screenshot": "CommandLineTests/PokemonChampions/SpeciesReader/battle_info_gengar.png",
+      "description": "Select the opponent species name badge (top-right, pink/red background with white text)",
+      "status": "confirmed",
+      "box": [
+        0.0089,
+        0.0213,
+        0.0125,
+        0.0176
+      ],
+      "avg_rgb": [
+        38.5,
+        47.6,
+        38.4
+      ],
+      "stddev_sum": 100.2,
+      "color_ratio": [
+        0.3092,
+        0.3825,
+        0.3083
+      ]
+    },
+    {
+      "name": "species_reader/opp_species_hydreigon",
+      "scene": "Battle info \u2014 Hydreigon opponent",
+      "screenshot": "CommandLineTests/PokemonChampions/SpeciesReader/battle_info_hydreigon.png",
+      "description": "Select the opponent species name badge (top-right, pink/red background with white text)",
+      "status": "confirmed",
+      "box": [
+        0.0156,
+        0.0231,
+        0.013,
+        0.0148
+      ],
+      "avg_rgb": [
+        55.8,
+        70.1,
+        89.8
+      ],
+      "stddev_sum": 5.1,
+      "color_ratio": [
+        0.2589,
+        0.3249,
+        0.4162
+      ]
+    },
+    {
+      "name": "species_reader/opp_species_palafin",
+      "scene": "Battle info \u2014 Palafin opponent",
+      "screenshot": "CommandLineTests/PokemonChampions/SpeciesReader/battle_info_palafin.png",
+      "description": "Select the opponent species name badge (top-right, pink/red background with white text)",
+      "status": "confirmed",
+      "box": [
+        0.0182,
+        0.0324,
+        0.0141,
+        0.0194
+      ],
+      "avg_rgb": [
+        84.1,
+        92.5,
+        82.4
+      ],
+      "stddev_sum": 66.5,
+      "color_ratio": [
+        0.3246,
+        0.3571,
+        0.3183
+      ]
     }
   ]
 }
