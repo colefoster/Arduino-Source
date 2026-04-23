@@ -28,19 +28,21 @@ namespace PokemonChampions{
 
 
 //  Own species/item text on the Team Preview screen has TWO states:
-//    1. Highlighted slot (yellow-green pill): dark-navy text, RGB ~(5, 55, 115).
-//    2. Unhighlighted slots (light-purple pill): medium-purple text,
-//       RGB ~(110, 100, 185) on a light-purple background (R~131, G~114, B~255).
+//    1. Unhighlighted slots (purple pill): WHITE text on purple background.
+//    2. Highlighted slot (lime-green pill): DARK/BLACK text on lime background.
 //
-//  Filter 1 (tight navy): catches highlighted-slot text.
-//  Filter 2 (purple-on-light): catches unhighlighted text without
-//       including the near-white background. B ceiling raised to ~210
-//       but RG kept low to reject the pale-lavender background itself.
+//  Provide both white-text ranges and dark-text ranges; OCR tries each
+//  and uses the best result.
 static const std::vector<OCR::TextColorRange>& own_text_filters(){
     static const std::vector<OCR::TextColorRange> filters{
-        {0xff000000, 0xff6080a0},   // tight navy (highlighted)
-        {0xff000000, 0xff8c7dd2},   // purple text on light-purple bg
-        {0xff000000, 0xffa091e0},   // looser purple (anti-aliased edges)
+        //  White text (unhighlighted purple-pill slots).
+        {0xff808080, 0xffffffff},
+        {0xffa0a0a0, 0xffffffff},
+        {0xffc0c0c0, 0xffffffff},
+        //  Dark text (highlighted lime-pill slot).
+        {0xff000000, 0xff404040},
+        {0xff000000, 0xff606060},
+        {0xff000000, 0xff808080},
     };
     return filters;
 }
