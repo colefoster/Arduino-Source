@@ -42,6 +42,7 @@ public:
 private:
     BooleanCheckBoxOption AUTO_SCREENSHOT;
     SimpleIntegerOption<uint16_t> SCREENSHOT_INTERVAL_MS;
+    BooleanCheckBoxOption SAVE_LABELED_TESTS;
 };
 
 

@@ -74,9 +74,18 @@ DetectorTest::DetectorTest()
         500,
         100
     )
+    , SAVE_LABELED_TESTS(
+        "<b>Save Labeled Test Images:</b><br>"
+        "On screen transitions, save screenshots with OCR results encoded in the "
+        "filename (e.g. MoveNameReader/power-whip_sucker-punch_...). These drop "
+        "directly into CommandLineTests for regression testing.",
+        LockMode::UNLOCK_WHILE_RUNNING,
+        false
+    )
 {
     PA_ADD_OPTION(AUTO_SCREENSHOT);
     PA_ADD_OPTION(SCREENSHOT_INTERVAL_MS);
+    PA_ADD_OPTION(SAVE_LABELED_TESTS);
 }
 
 
@@ -246,6 +255,88 @@ void DetectorTest::program(SingleSwitchProgramEnvironment& env, ProControllerCon
                         "[Screenshot] " + screen + " -> " + filename,
                         COLOR_PURPLE
                     );
+                }
+            }
+        }
+
+        //  ── Save Labeled Test Images ──────────────────────────────
+        //
+        //  On screen transitions, save screenshots with OCR ground truth
+        //  encoded in the filename for the regression test suite.
+        if (SAVE_LABELED_TESTS && screen_changed && screen != "UNKNOWN"){
+            std::string test_base = SCREENSHOTS_PATH() + "labeled_tests/PokemonChampions/";
+            std::string ts = now_to_filestring();
+
+            //  Bool detectors — save with True label.
+            auto save_bool = [&](const std::string& reader_name){
+                std::string path = test_base + reader_name + "/" +
+                    ts + "_True.png";
+                if (frame.save(path)){
+                    env.console.log("[LabeledTest] " + path, COLOR_PURPLE);
+                }
+            };
+
+            if (d_action)    save_bool("ActionMenuDetector");
+            if (d_move)      save_bool("MoveSelectDetector");
+            if (d_preparing) save_bool("PreparingForBattleDetector");
+            if (d_result)    save_bool("ResultScreenDetector");
+            if (d_post)      save_bool("PostMatchScreenDetector");
+
+            //  MoveSelectCursorSlot — save with cursor index.
+            if (d_move && move_select.cursor_slot() >= 0){
+                std::string path = test_base + "MoveSelectCursorSlot/" +
+                    ts + "_" + std::to_string(move_select.cursor_slot()) + ".png";
+                if (frame.save(path)){
+                    env.console.log("[LabeledTest] " + path, COLOR_PURPLE);
+                }
+            }
+
+            //  MoveNameReader — save with 4 move slugs.
+            if (d_move && current_mode != BattleMode::DOUBLES){
+                auto moves = move_reader.read_all_moves(env.console, frame);
+                bool any_read = false;
+                for (size_t i = 0; i < 4; i++){
+                    if (!moves[i].empty()) any_read = true;
+                }
+                if (any_read){
+                    std::string slugs;
+                    for (size_t i = 0; i < 4; i++){
+                        if (i > 0) slugs += "_";
+                        slugs += moves[i].empty() ? "NONE" : moves[i];
+                    }
+                    std::string path = test_base + "MoveNameReader/" +
+                        ts + "_" + slugs + ".png";
+                    if (frame.save(path)){
+                        env.console.log("[LabeledTest] " + path, COLOR_PURPLE);
+                    }
+                }
+            }
+
+            //  SpeciesReader — save with opponent species slug.
+            if (d_move || d_action){
+                uint8_t slots = (current_mode == BattleMode::DOUBLES) ? 2 : 1;
+                for (uint8_t i = 0; i < slots; i++){
+                    std::string species = hud_reader.read_opponent_species(env.console, frame, i);
+                    if (!species.empty()){
+                        std::string path = test_base + "SpeciesReader/" +
+                            ts + "_" + species + ".png";
+                        if (frame.save(path)){
+                            env.console.log("[LabeledTest] " + path, COLOR_PURPLE);
+                        }
+                        break;  //  One image per frame is enough.
+                    }
+                }
+            }
+
+            //  OpponentHPReader — save with HP percentage.
+            if (d_move || d_action){
+                int hp = hud_reader.read_opponent_hp_pct(env.console, frame, 0);
+                if (hp >= 0){
+                    std::string path = test_base + "OpponentHPReader/" +
+                        ts + "_" + std::to_string(hp) + ".png";
+                    if (frame.save(path)){
+                        env.console.log("[LabeledTest] " + path, COLOR_PURPLE);
+                    }
                 }
             }
         }
