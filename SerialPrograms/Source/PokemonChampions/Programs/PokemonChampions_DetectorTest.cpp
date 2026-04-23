@@ -313,26 +313,26 @@ void DetectorTest::program(SingleSwitchProgramEnvironment& env, ProControllerCon
             }
 
             //  SpeciesReader — save with opponent species slug.
-            if (d_move || d_action){
-                uint8_t slots = (current_mode == BattleMode::DOUBLES) ? 2 : 1;
-                for (uint8_t i = 0; i < slots; i++){
-                    std::string species = hud_reader.read_opponent_species(env.console, frame, i);
-                    if (!species.empty()){
-                        std::string path = test_base + "SpeciesReader/" +
-                            ts + "_" + species + ".png";
-                        if (frame.save(path)){
-                            env.console.log("[LabeledTest] " + path, COLOR_PURPLE);
-                        }
-                        break;  //  One image per frame is enough.
+            //  Mode-aware: saves to _doubles/ subdir when in doubles.
+            if ((d_move || d_action) && current_mode != BattleMode::UNKNOWN){
+                std::string mode_suffix = (current_mode == BattleMode::DOUBLES) ? "/_doubles/" : "/";
+                std::string species = hud_reader.read_opponent_species(env.console, frame, 0);
+                if (!species.empty()){
+                    std::string path = test_base + "SpeciesReader" + mode_suffix +
+                        ts + "_" + species + ".png";
+                    if (frame.save(path)){
+                        env.console.log("[LabeledTest] " + path, COLOR_PURPLE);
                     }
                 }
             }
 
             //  OpponentHPReader — save with HP percentage.
-            if (d_move || d_action){
+            //  Mode-aware: saves to _doubles/ subdir when in doubles.
+            if ((d_move || d_action) && current_mode != BattleMode::UNKNOWN){
+                std::string mode_suffix = (current_mode == BattleMode::DOUBLES) ? "/_doubles/" : "/";
                 int hp = hud_reader.read_opponent_hp_pct(env.console, frame, 0);
                 if (hp >= 0){
-                    std::string path = test_base + "OpponentHPReader/" +
+                    std::string path = test_base + "OpponentHPReader" + mode_suffix +
                         ts + "_" + std::to_string(hp) + ".png";
                     if (frame.save(path)){
                         env.console.log("[LabeledTest] " + path, COLOR_PURPLE);
