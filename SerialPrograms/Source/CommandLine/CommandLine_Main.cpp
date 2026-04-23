@@ -30,8 +30,9 @@ using namespace PokemonAutomation::NintendoSwitch;
 
 static void print_usage(const char* argv0){
     std::cerr << "Usage:" << std::endl;
-    std::cerr << "  " << argv0 << " --test <path>     Run tests on a directory or file" << std::endl;
-    std::cerr << "  " << argv0 << " <port_name>       Test controller on a serial port" << std::endl;
+    std::cerr << "  " << argv0 << " --test <path>       Run tests (fail-fast) on a directory or file" << std::endl;
+    std::cerr << "  " << argv0 << " --regression <path> Run all tests and print accuracy report" << std::endl;
+    std::cerr << "  " << argv0 << " <port_name>         Test controller on a serial port" << std::endl;
 }
 
 static int run_controller_test(Logger& logger, const std::string& port_name){
@@ -85,7 +86,7 @@ int main(int argc, char* argv[]){
         return 1;
     }
 
-    //  --test mode: run the test framework on a given path.
+    //  --test mode: run the test framework on a given path (fail-fast).
     if (std::strcmp(argv[1], "--test") == 0){
         if (argc < 3){
             std::cerr << "Error: --test requires a path argument." << std::endl;
@@ -100,6 +101,25 @@ int main(int argc, char* argv[]){
             logger.log("All tests passed.", COLOR_GREEN);
         }else{
             logger.log("Tests failed.", COLOR_RED);
+        }
+        return ret;
+    }
+
+    //  --regression mode: run all tests, report accuracy per reader.
+    if (std::strcmp(argv[1], "--regression") == 0){
+        if (argc < 3){
+            std::cerr << "Error: --regression requires a path argument." << std::endl;
+            print_usage(argv[0]);
+            return 1;
+        }
+        const std::string test_path = argv[2];
+        logger.log("Running regression report on: " + test_path);
+        int ret = run_regression_report(test_path);
+        logger.log("================================================================================");
+        if (ret == 0){
+            logger.log("All tests passed.", COLOR_GREEN);
+        }else{
+            logger.log("Some tests failed — see report above.", COLOR_RED);
         }
         return ret;
     }

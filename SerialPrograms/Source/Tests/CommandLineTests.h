@@ -109,6 +109,12 @@ int run_command_line_tests();
 int run_command_line_tests(const std::string& path);
 
 
+// Regression report mode: runs ALL tests without stopping on failures and
+// prints a per-reader accuracy summary at the end.
+// Return 0 if all tests passed, 1 if any failed.
+int run_regression_report(const std::string& path);
+
+
 
 }
 #endif
