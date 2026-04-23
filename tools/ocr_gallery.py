@@ -112,7 +112,10 @@ READER_CROPS = {
     "TeamSelectDetector":       _bool_detector_boxes,
     "MovesMoreDetector":        _bool_detector_boxes,
     "TeamPreviewDetector":      _bool_detector_boxes,
-    "ActionMenuDetector":       _bool_detector_boxes,
+    "ActionMenuDetector":       lambda: [
+        {"name": "fight_glow", "box": [0.9062, 0.5694, 0.0260, 0.0185]},
+        {"name": "pokemon_glow", "box": [0.9062, 0.7981, 0.0260, 0.0213]},
+    ],
     "ResultScreenDetector":     _bool_detector_boxes,
     "PreparingForBattleDetector": _bool_detector_boxes,
     "PostMatchScreenDetector":  _bool_detector_boxes,
@@ -231,6 +234,58 @@ def load_regression_results(results_path):
     return {entry.get("file", ""): entry for entry in data}
 
 
+def run_regression_on_colepc(test_path="CommandLineTests\\PokemonChampions"):
+    """SSH to ColePC, run regression, parse text output into results dict."""
+    import subprocess
+
+    print("  Running regression on ColePC...", flush=True)
+    cmd = (
+        f'ssh colepc "cd C:\\Dev\\pokemon-champions && '
+        f'build\\Release\\SerialProgramsCommandLine.exe '
+        f'--regression {test_path} 2>&1"'
+    )
+    try:
+        result = subprocess.run(cmd, shell=True, capture_output=True, text=True, timeout=300)
+        output = result.stdout + result.stderr
+    except subprocess.TimeoutExpired:
+        print("  ERROR: regression timed out", flush=True)
+        return {}
+
+    # Parse output: track current reader, collect pass/fail per file
+    results = {}
+    current_reader = None
+
+    for line in output.split("\n"):
+        # "Testing ReaderName:"
+        if line.startswith("Testing ") and line.endswith(":"):
+            current_reader = line[8:-1].strip()
+            continue
+
+        # "FAIL  ReaderName  ←  filename.png"
+        if line.strip().startswith("FAIL"):
+            parts = line.strip().split("←")
+            if len(parts) == 2:
+                fname = parts[1].strip()
+                results[fname] = {"passed": False}
+            continue
+
+        # Track files that were tested (lines ending in .png)
+        stripped = line.strip()
+        if stripped.endswith(".png") or stripped.endswith(".jpg"):
+            fname = os.path.basename(stripped)
+            # Will be overwritten by FAIL if it fails; otherwise stays as passed
+            if fname not in results:
+                results[fname] = {"passed": True}
+
+    # Files in results without a FAIL entry are passes
+    # (already handled above)
+
+    passed = sum(1 for r in results.values() if r["passed"])
+    failed = sum(1 for r in results.values() if not r["passed"])
+    print(f"  Parsed {passed} passed, {failed} failed from ColePC output", flush=True)
+    return results
+
+
 # ─── HTML generation ───────────────────────────────────────────────────────
 
 CROP_SCALE = 3
@@ -340,8 +395,8 @@ def build_card_html(entry, crop_defs, reader_name, results):
             html += '</div>\n'
         html += '</div>\n'
 
-    # Thumbnail (for bool detectors or when no crops)
-    if not crop_defs:
+    # Thumbnail (always show for context)
+    if True:
         scale = min(480 / img.width, 270 / img.height, 1.0)
         tw = max(1, int(img.width * scale))
         th = max(1, int(img.height * scale))
@@ -434,6 +489,7 @@ def main():
     test_root = DEFAULT_TEST_ROOT
     reader_name = None
     results_path = None
+    run_regression = False
 
     i = 0
     positional = []
@@ -444,6 +500,9 @@ def main():
         elif args[i] == "--results" and i + 1 < len(args):
             results_path = args[i + 1]
             i += 2
+        elif args[i] == "--run":
+            run_regression = True
+            i += 1
         else:
             positional.append(args[i])
             i += 1
@@ -458,6 +517,15 @@ def main():
                 reader_name = dirname
             else:
                 test_root = path
+
+    if run_regression:
+        regression_results = run_regression_on_colepc()
+        # Save for reuse
+        results_cache = os.path.join(tempfile.gettempdir(), "ocr_regression_results.json")
+        with open(results_cache, "w") as f:
+            json.dump([{"file": k, **v} for k, v in regression_results.items()], f)
+        results_path = results_cache
+        print(f"  Results cached to {results_cache}", flush=True)
 
     print("Generating OCR gallery...", flush=True)
     html = build_html(test_root, reader_filter=reader_name, results_path=results_path)
