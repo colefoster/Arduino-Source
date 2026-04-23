@@ -113,7 +113,7 @@ READER_CROPS = {
     "MovesMoreDetector":        _bool_detector_boxes,
     "TeamPreviewDetector":      _bool_detector_boxes,
     "ActionMenuDetector":       lambda: [
-        {"name": "fight_glow", "box": [0.9062, 0.5694, 0.0260, 0.0185]},
+        {"name": "fight_glow", "box": [0.9062, 0.5694, 0.0260, 0.0213]},
         {"name": "pokemon_glow", "box": [0.9062, 0.7981, 0.0260, 0.0213]},
     ],
     "ResultScreenDetector":     _bool_detector_boxes,
