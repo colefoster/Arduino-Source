@@ -497,6 +497,24 @@ int test_pokemonChampions_OCRDump(const ImageViewRGB32& image){
         }
     }
 
+    //  Team preview (pre-battle "Select 4")
+    {
+        TeamPreviewDetector tp_detector;
+        cout << "=== Team Preview Detector ===" << endl;
+        cout << "  detected: " << tp_detector.detect(image) << endl;
+
+        TeamPreviewReader tp_reader(Language::English);
+        TeamPreviewResult tp = tp_reader.read(logger, image);
+        cout << "=== Team Preview Reader ===" << endl;
+        for (size_t i = 0; i < 6; i++){
+            cout << "  own " << i << ": species=\"" << tp.own[i].species
+                 << "\" item=\"" << tp.own[i].item << "\"" << endl;
+        }
+        for (size_t i = 0; i < 6; i++){
+            cout << "  opp " << i << ": species=\"" << tp.opp_species[i] << "\"" << endl;
+        }
+    }
+
     //  Battle log
     {
         BattleLogReader reader;
