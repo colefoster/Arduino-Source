@@ -39,10 +39,13 @@ static const std::vector<OCR::TextColorRange>& own_text_filters(){
         {0xff808080, 0xffffffff},
         {0xffa0a0a0, 0xffffffff},
         {0xffc0c0c0, 0xffffffff},
-        //  Dark text (highlighted lime-pill slot).
-        {0xff000000, 0xff404040},
-        {0xff000000, 0xff606060},
+        //  Dark text (highlighted lime-pill slot). The highlighted-slot
+        //  text is dark navy (~0,55,113), so the loose filter below is
+        //  critical -- it widens the B channel to 160 which standard
+        //  BLACK_TEXT_FILTERS ceilings don't.
+        {0xff000000, 0xff6080a0},   // R<=96 G<=128 B<=160 (dark-navy)
         {0xff000000, 0xff808080},
+        {0xff000000, 0xff606060},
     };
     return filters;
 }
