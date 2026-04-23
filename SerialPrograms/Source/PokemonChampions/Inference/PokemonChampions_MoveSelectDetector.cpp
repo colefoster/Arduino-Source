@@ -34,8 +34,9 @@ namespace NintendoSwitch{
 namespace PokemonChampions{
 
 
-//  Selected move pill — bright green on the cursored slot.
-static const FloatPixel SELECTED_MOVE_GREEN{0.30, 0.47, 0.23};
+//  Selected move pill — yellow-green highlight on the cursored slot.
+//  Measured from tightened pill strip (upper-left core of highlight).
+static const FloatPixel SELECTED_MOVE_GREEN{0.44, 0.45, 0.10};
 
 //  Unselected move pill background — purple-blue.
 //  Measured from live capture: avg RGB ~(135, 120, 215), ratio (0.28, 0.25, 0.46)
@@ -71,7 +72,7 @@ bool MoveSelectDetector::is_slot_selected(
     const ImageViewRGB32& screen, const ImageFloatBox& slot
 ) const{
     const ImageStats stats = image_stats(extract_box_reference(screen, slot));
-    return is_solid(stats, SELECTED_MOVE_GREEN, 0.22, 120);
+    return is_solid(stats, SELECTED_MOVE_GREEN, 0.18, 120);
 }
 
 bool MoveSelectDetector::detect(const ImageViewRGB32& screen){
