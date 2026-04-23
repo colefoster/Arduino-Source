@@ -38,7 +38,7 @@ ActionMenuDetector::ActionMenuDetector()
     //  circular button. Size chosen to stay *inside* the glow halo and NOT
     //  extend into the background (arena floor / locker wall).
     //  x 1740-1790, y 615-635 (FIGHT top glow in 1920x1080)
-    : m_fight_button  (0.9062, 0.5694, 0.0260, 0.0185)
+    : m_fight_button  (0.9062, 0.5694, 0.0260, 0.0213)
     //  x 1740-1790, y 862-885 (POKE top glow)
     , m_pokemon_button(0.9062, 0.7981, 0.0260, 0.0213)
 {}
