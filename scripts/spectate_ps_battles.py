@@ -43,7 +43,7 @@ INDEX_FILE = OUTPUT_DIR / "index.json"
 POLL_INTERVAL = 15
 
 # Max battles to spectate simultaneously (Showdown kicks at ~50 rooms)
-MAX_CONCURRENT = 10
+MAX_CONCURRENT = 30
 
 
 class BattleLog:
@@ -282,7 +282,7 @@ class ShowdownSpectator:
             print(f"  Joined {room_id} ({p1} vs {p2}, elo>={elo}) "
                   f"[{len(self.joined_rooms)} rooms]", flush=True)
 
-            await asyncio.sleep(1.0)  # rate limit joins — too fast gets kicked
+            await asyncio.sleep(0.5)  # rate limit joins — too fast gets kicked
 
     async def _save_battle(self, battle: BattleLog):
         """Save a completed battle log to disk."""

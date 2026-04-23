@@ -1081,21 +1081,18 @@ class MeasureMode:
         btn_frame = tk.Frame(self.root, bg="#222222")
         btn_frame.pack(fill="x")
 
-        btn_style = {
-            "font": ("Menlo", 11, "bold"),
-            "padx": 12, "pady": 6, "relief": "flat", "bd": 0,
-            "activebackground": "#444444",
-        }
-        tk.Button(btn_frame, text="< Prev (Backspace)", command=self.prev_box,
-                  bg="#3a3a3a", fg="#ffffff", **btn_style).pack(side="left", padx=4, pady=4)
-        tk.Button(btn_frame, text="Skip (Esc)", command=self.skip_box,
-                  bg="#5a4a2a", fg="#ffffff", **btn_style).pack(side="left", padx=4, pady=4)
-        tk.Button(btn_frame, text="Clear (Right-click)", command=self.clear_selection,
-                  bg="#3a3a3a", fg="#ffffff", **btn_style).pack(side="left", padx=4, pady=4)
-        tk.Button(btn_frame, text="Save + Quit (q)", command=self.quit,
-                  bg="#3a3a3a", fg="#ffffff", **btn_style).pack(side="right", padx=4, pady=4)
-        tk.Button(btn_frame, text="Confirm >  (Enter)", command=self.confirm_box,
-                  bg="#2a6a2a", fg="#ffffff", **btn_style).pack(side="right", padx=4, pady=4)
+        def _make_btn(parent, text, command, bg="#3a3a3a", side="left"):
+            lbl = tk.Label(parent, text=f"  {text}  ", font=("Menlo", 11, "bold"),
+                           bg=bg, fg="#ffffff", padx=12, pady=6, cursor="hand2")
+            lbl.pack(side=side, padx=4, pady=4)
+            lbl.bind("<Button-1>", lambda e: command())
+            return lbl
+
+        _make_btn(btn_frame, "< Prev (Backspace)", self.prev_box)
+        _make_btn(btn_frame, "Skip (Esc)", self.skip_box, bg="#5a4a2a")
+        _make_btn(btn_frame, "Clear (Right-click)", self.clear_selection)
+        _make_btn(btn_frame, "Save + Quit (q)", self.quit, side="right")
+        _make_btn(btn_frame, "Confirm >  (Enter)", self.confirm_box, bg="#2a6a2a", side="right")
 
         # Canvas
         self.canvas = tk.Canvas(self.root, bg="#111", highlightthickness=0)
