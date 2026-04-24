@@ -29,7 +29,7 @@ import time
 from pathlib import Path
 from typing import Optional
 
-from fastapi import FastAPI, UploadFile, File, Form, Query
+from fastapi import FastAPI, UploadFile, File, Form, Query, Request
 from fastapi.responses import HTMLResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
 
@@ -1043,6 +1043,120 @@ async def model_clear():
     """Clear the analysis cache."""
     _review_cache.clear()
     return {"ok": True}
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# TRAINING PROGRESS API
+# ═══════════════════════════════════════════════════════════════════════════
+
+TRAINING_DIR = BASE / "data" / "training_sessions"
+
+_training_sessions: dict[str, dict] = {}  # session_id -> {meta + epochs: [...]}
+
+
+def _load_training_sessions():
+    """Load persisted sessions from disk on startup."""
+    if not TRAINING_DIR.exists():
+        return
+    for f in TRAINING_DIR.glob("*.json"):
+        try:
+            data = json.loads(f.read_text())
+            _training_sessions[data["session_id"]] = data
+        except Exception:
+            pass
+
+
+def _save_session(session_id: str):
+    """Persist a session to disk."""
+    TRAINING_DIR.mkdir(parents=True, exist_ok=True)
+    data = _training_sessions.get(session_id)
+    if data:
+        (TRAINING_DIR / f"{session_id}.json").write_text(json.dumps(data))
+
+
+_load_training_sessions()
+
+
+@app.post("/api/training/report")
+async def training_report(request: Request):
+    """Receive epoch metrics from a training process."""
+    payload = await request.json()
+    sid = payload.get("session_id", "unknown")
+
+    if sid not in _training_sessions:
+        _training_sessions[sid] = {
+            "session_id": sid,
+            "machine": payload.get("machine", "?"),
+            "model_version": payload.get("model_version", "?"),
+            "config": payload.get("config", {}),
+            "started": payload.get("timestamp", time.time()),
+            "epochs": [],
+        }
+
+    session = _training_sessions[sid]
+    session["last_update"] = payload.get("timestamp", time.time())
+    session["epochs"].append({
+        "epoch": payload.get("epoch"),
+        "total_epochs": payload.get("total_epochs"),
+        "train_loss": payload.get("train_loss"),
+        "val_loss": payload.get("val_loss"),
+        "train_top1": payload.get("train_top1"),
+        "val_top1": payload.get("val_top1"),
+        "train_top3": payload.get("train_top3"),
+        "val_top3": payload.get("val_top3"),
+        "team_acc": payload.get("team_acc"),
+        "lead_acc": payload.get("lead_acc"),
+        "lr": payload.get("lr"),
+        "best_val_loss": payload.get("best_val_loss"),
+        "timestamp": payload.get("timestamp"),
+    })
+
+    _save_session(sid)
+    return {"ok": True}
+
+
+@app.get("/api/training/sessions")
+async def training_sessions():
+    """List all training sessions."""
+    now = time.time()
+    return [
+        {
+            "session_id": s["session_id"],
+            "machine": s.get("machine", "?"),
+            "model_version": s.get("model_version", "?"),
+            "config": s.get("config", {}),
+            "started": s.get("started"),
+            "last_update": s.get("last_update"),
+            "current_epoch": s["epochs"][-1]["epoch"] if s["epochs"] else 0,
+            "total_epochs": s["epochs"][-1]["total_epochs"] if s["epochs"] else 0,
+            "latest_val_loss": s["epochs"][-1]["val_loss"] if s["epochs"] else None,
+            "latest_val_top1": s["epochs"][-1]["val_top1"] if s["epochs"] else None,
+            "best_val_loss": s["epochs"][-1]["best_val_loss"] if s["epochs"] else None,
+            "active": (now - s.get("last_update", 0)) < 300,  # active if updated in last 5min
+            "num_epochs": len(s["epochs"]),
+        }
+        for s in sorted(_training_sessions.values(), key=lambda x: x.get("last_update", 0), reverse=True)
+    ]
+
+
+@app.get("/api/training/session/{session_id}")
+async def training_session(session_id: str):
+    """Get full epoch history for one session."""
+    if session_id in _training_sessions:
+        return _training_sessions[session_id]
+    return JSONResponse({"error": "Session not found"}, 404)
+
+
+@app.delete("/api/training/session/{session_id}")
+async def training_delete(session_id: str):
+    """Delete a training session."""
+    if session_id in _training_sessions:
+        del _training_sessions[session_id]
+        f = TRAINING_DIR / f"{session_id}.json"
+        if f.exists():
+            f.unlink()
+        return {"ok": True}
+    return JSONResponse({"error": "Session not found"}, 404)
 
 
 # ═══════════════════════════════════════════════════════════════════════════
