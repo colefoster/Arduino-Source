@@ -4,7 +4,10 @@ from __future__ import annotations
 
 import argparse
 import json
+import platform
 import time
+import urllib.request
+import urllib.error
 from pathlib import Path
 
 import torch
@@ -40,6 +43,21 @@ def _find_replay_dir() -> Path:
     return REPLAY_SEARCH_DIRS[0]
 
 
+def _report_to_dashboard(url: str, payload: dict):
+    """POST training metrics to the dashboard. Fire-and-forget."""
+    try:
+        data = json.dumps(payload).encode("utf-8")
+        req = urllib.request.Request(
+            f"{url}/api/training/report",
+            data=data,
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+        urllib.request.urlopen(req, timeout=5)
+    except Exception:
+        pass  # non-critical — don't interrupt training
+
+
 def top_k_accuracy(logits: torch.Tensor, targets: torch.Tensor, k: int) -> int:
     """Count how many targets are in the top-k predictions."""
     _, top_k_preds = logits.topk(k, dim=-1)
@@ -56,7 +74,10 @@ def train(
     patience: int = 10,
     run_id: str = "",
     replay_dir: str = "",
+    dashboard_url: str = "",
 ):
+    machine_name = platform.node() or "unknown"
+
     # Device selection
     if device_str == "auto":
         if torch.cuda.is_available():
@@ -203,6 +224,35 @@ def train(
             }, f)
             f.write("\n")
 
+        # Report to dashboard
+        if dashboard_url:
+            _report_to_dashboard(dashboard_url, {
+                "session_id": run_id,
+                "machine": machine_name,
+                "model_version": "v2",
+                "epoch": epoch,
+                "total_epochs": epochs,
+                "timestamp": time.time(),
+                "train_loss": round(m["loss"], 4),
+                "val_loss": round(v["loss"], 4),
+                "train_top1": round(m["top1"], 2),
+                "val_top1": round(v["top1"], 2),
+                "train_top3": round(m["top3"], 2),
+                "val_top3": round(v["top3"], 2),
+                "team_acc": round(v["team_acc"], 2) if v["team_acc"] is not None else None,
+                "lead_acc": round(v["lead_acc"], 2) if v["lead_acc"] is not None else None,
+                "lr": scheduler.get_last_lr()[0],
+                "best_val_loss": round(min(best_val_loss, v["loss"]), 4),
+                "config": {
+                    "batch_size": batch_size,
+                    "lr": lr,
+                    "min_rating": min_rating,
+                    "device": str(device),
+                    "params": model.count_parameters(),
+                    "dataset_size": len(dataset),
+                },
+            })
+
         # Save best + early stopping
         if v["loss"] < best_val_loss:
             best_val_loss = v["loss"]
@@ -333,6 +383,8 @@ def main():
     parser.add_argument("--patience", type=int, default=10)
     parser.add_argument("--run-id", type=str, default="")
     parser.add_argument("--replay-dir", type=str, default="")
+    parser.add_argument("--dashboard", type=str, default="https://champions.colefoster.ca",
+                        help="Dashboard URL for live training progress (empty to disable)")
     args = parser.parse_args()
 
     train(
@@ -345,6 +397,7 @@ def main():
         patience=args.patience,
         run_id=args.run_id,
         replay_dir=args.replay_dir,
+        dashboard_url=args.dashboard,
     )
 
 
