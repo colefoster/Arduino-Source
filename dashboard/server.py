@@ -699,8 +699,11 @@ def _ensure_model():
         return _model_state["error"] is None
     _model_state["loaded"] = True
 
-    if str(SRC_DIR) not in sys.path:
-        sys.path.insert(0, str(SRC_DIR))
+    # Add both src/ (for `from vgc_model...`) and project root (for pickled
+    # objects saved as `src.vgc_model...` on ColePC)
+    for p in [str(SRC_DIR), str(BASE)]:
+        if p not in sys.path:
+            sys.path.insert(0, p)
 
     try:
         import torch
