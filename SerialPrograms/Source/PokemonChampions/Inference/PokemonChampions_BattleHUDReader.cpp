@@ -98,7 +98,7 @@ static std::string raw_ocr_numbers(const ImageViewRGB32& crop){
             uint8_t brightness = r > g ? (r > b ? r : b) : (g > b ? g : b);
             //  Threshold: text pixels are bright (> 160), bg is darker.
             //  Invert: Tesseract prefers dark text on light bg.
-            uint32_t out = (brightness > 160) ? 0xFF000000 : 0xFFFFFFFF;
+            uint32_t out = (brightness > 200) ? 0xFF000000 : 0xFFFFFFFF;
 
             //  Fill the scaled pixel block.
             for (size_t sy = 0; sy < scale; sy++){
