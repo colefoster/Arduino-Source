@@ -449,6 +449,9 @@ void AutoLadder::select_next_move(SingleSwitchProgramEnvironment& env, ProContro
         slot = static_cast<uint8_t>(std::uniform_int_distribution<uint32_t>(0, 3)(rng));
         break;
     }
+    case MoveStrategy::AI:
+        //  Handled above (early return).
+        break;
     }
 
     //  Move Select menu opens with cursor on slot 0. Walk down to our target.
