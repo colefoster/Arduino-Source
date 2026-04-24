@@ -1,5 +1,12 @@
 # Model V2: Enriched Features + Player-POV Training
 
+**Status: DESIGN ONLY — nothing implemented yet.**
+
+This is a ground-up rebuild of the training pipeline and model architecture.
+The v1 model and weights are not reusable — the input representation is
+fundamentally different. Train from scratch on the same replay corpus with
+the new pipeline.
+
 ## Problem Statement
 
 The current model trains on spectator-POV battle logs where:
@@ -169,6 +176,22 @@ Raw replay JSON
     │
     └─► Training sample with confidence-annotated, property-rich features
 ```
+
+## Implementation Status
+
+| Component | Status | Notes |
+|-----------|--------|-------|
+| PS data fetch (pokedex, moves, items, abilities) | Not started | |
+| Feature tables (property vectors) | Not started | |
+| Item/ability hand-built taxonomies | Not started | |
+| Usage stats from replays | Not started | Ad-hoc analysis done, no saved output |
+| Player profiles | Not started | Ad-hoc analysis done, no saved output |
+| Enriched two-pass parser | Not started | |
+| Progressive revelation + confidence flags | Not started | |
+| Dataset encoding (explicit features) | Not started | |
+| Model architecture (expanded encoders) | Not started | |
+| Training script updates | Not started | |
+| `reconstruct_teams.py` | Exists | Measures coverage only, doesn't enrich data |
 
 ## Files to Create/Modify
 
