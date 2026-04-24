@@ -75,6 +75,10 @@ def train(
     run_id: str = "",
     replay_dir: str = "",
     dashboard_url: str = "",
+    dropout: float = 0.25,
+    n_layers: int = 4,
+    d_ff: int = 256,
+    n_heads: int = 4,
 ):
     machine_name = platform.node() or "unknown"
 
@@ -159,7 +163,12 @@ def train(
     )
 
     # Model
-    config = ModelConfigV2()
+    config = ModelConfigV2(
+        dropout=dropout,
+        n_layers=n_layers,
+        d_ff=d_ff,
+        n_heads=n_heads,
+    )
     model = VGCTransformerV2(vocabs, config).to(device)
     print(f"Model v2 parameters: {model.count_parameters():,}")
 
@@ -385,6 +394,10 @@ def main():
     parser.add_argument("--replay-dir", type=str, default="")
     parser.add_argument("--dashboard", type=str, default="https://champions.colefoster.ca",
                         help="Dashboard URL for live training progress (empty to disable)")
+    parser.add_argument("--dropout", type=float, default=0.25)
+    parser.add_argument("--n-layers", type=int, default=4)
+    parser.add_argument("--d-ff", type=int, default=256)
+    parser.add_argument("--n-heads", type=int, default=4)
     args = parser.parse_args()
 
     train(
@@ -398,6 +411,10 @@ def main():
         run_id=args.run_id,
         replay_dir=args.replay_dir,
         dashboard_url=args.dashboard,
+        dropout=args.dropout,
+        n_layers=args.n_layers,
+        d_ff=args.d_ff,
+        n_heads=args.n_heads,
     )
 
 
