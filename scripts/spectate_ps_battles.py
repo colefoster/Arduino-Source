@@ -17,6 +17,7 @@ import argparse
 import asyncio
 import json
 import random
+import signal
 import string
 import sys
 import time
@@ -43,7 +44,7 @@ INDEX_FILE = OUTPUT_DIR / "index.json"
 POLL_INTERVAL = 15
 
 # Max battles to spectate simultaneously (Showdown kicks at ~50 rooms)
-MAX_CONCURRENT = 40
+MAX_CONCURRENT = 45
 
 
 class BattleLog:
@@ -114,6 +115,7 @@ class ShowdownSpectator:
         self.known_rooms: set[str] = set()  # rooms we've already seen (don't re-join)
         self.index: dict = {}
         self.stats = {"joined": 0, "saved": 0, "failed": 0}
+        self._draining = False  # True = stop joining, wait for in-progress battles to finish
 
         # Load existing index
         if INDEX_FILE.exists():
@@ -124,13 +126,24 @@ class ShowdownSpectator:
         start = time.time()
         remaining = duration
 
+        # Install signal handlers for graceful shutdown
+        loop = asyncio.get_running_loop()
+        for sig in (signal.SIGTERM, signal.SIGINT):
+            loop.add_signal_handler(sig, self._start_drain)
+
         while True:
+            if self._draining and not self.joined_rooms:
+                break
+
             try:
                 await self._session(remaining)
             except asyncio.CancelledError:
                 break
             except Exception as e:
                 print(f"\n  Session error: {type(e).__name__}: {e}", flush=True)
+
+            if self._draining:
+                break
 
             # Check if we should stop
             if duration:
@@ -151,6 +164,15 @@ class ShowdownSpectator:
         print(f"  Battles joined: {self.stats['joined']}", flush=True)
         print(f"  Battles saved: {self.stats['saved']}", flush=True)
 
+    def _start_drain(self):
+        """Signal handler — stop joining new battles, drain in-progress ones."""
+        if self._draining:
+            # Second signal = hard exit
+            print(f"\n  Forced exit — {len(self.joined_rooms)} battles lost", flush=True)
+            sys.exit(1)
+        self._draining = True
+        print(f"\n  Draining {len(self.joined_rooms)} in-progress battles...", flush=True)
+
     async def _session(self, timeout: float | None = None):
         """Single websocket session."""
         async with websockets.connect(WS_URL, ping_interval=30, ping_timeout=60) as ws:
@@ -159,20 +181,37 @@ class ShowdownSpectator:
 
             handler = asyncio.create_task(self._message_handler())
             poller = asyncio.create_task(self._poll_loop())
+            drainer = asyncio.create_task(self._drain_watcher())
 
             try:
                 if timeout:
                     await asyncio.wait_for(
-                        asyncio.gather(handler, poller),
+                        asyncio.gather(handler, poller, drainer),
                         timeout=timeout,
                     )
                 else:
-                    await asyncio.gather(handler, poller)
+                    await asyncio.gather(handler, poller, drainer)
             except (asyncio.TimeoutError, asyncio.CancelledError):
                 pass
             finally:
                 handler.cancel()
                 poller.cancel()
+                drainer.cancel()
+
+    async def _drain_watcher(self):
+        """Wait for drain to complete, then stop the session."""
+        while True:
+            await asyncio.sleep(2)
+            if self._draining:
+                if not self.joined_rooms:
+                    print("  Drain complete — all battles saved", flush=True)
+                    raise asyncio.CancelledError
+                # Hard timeout: 90s after drain starts, give up
+                if not hasattr(self, "_drain_start"):
+                    self._drain_start = time.time()
+                elif time.time() - self._drain_start > 90:
+                    print(f"  Drain timeout — {len(self.joined_rooms)} battles lost", flush=True)
+                    raise asyncio.CancelledError
 
     async def _message_handler(self):
         """Process incoming WebSocket messages."""
@@ -231,6 +270,9 @@ class ShowdownSpectator:
         while not self.logged_in:
             await asyncio.sleep(0.5)
 
+        if self._draining:
+            return
+
         # ELO slices — each query returns up to 100 rooms at or above the threshold.
         # Higher slices surface battles hidden by the cap in the base query.
         elo_slices = [0, 1200, 1400]
@@ -248,10 +290,14 @@ class ShowdownSpectator:
             except Exception as e:
                 print(f"  [warn] Poll error: {e}", flush=True)
 
+            if self._draining:
+                return
             await asyncio.sleep(POLL_INTERVAL)
 
     async def _handle_roomlist(self, msg: str):
         """Parse roomlist response and join new battles."""
+        if self._draining:
+            return
         try:
             json_str = msg.split("|queryresponse|roomlist|", 1)[1]
             data = json.loads(json_str)
@@ -375,7 +421,7 @@ def main():
     try:
         asyncio.run(spectator.run(duration=args.duration))
     except KeyboardInterrupt:
-        print("\nInterrupted by user", flush=True)
+        pass  # signal handler manages graceful shutdown
     except Exception as e:
         print(f"\nError: {e}", flush=True)
 
