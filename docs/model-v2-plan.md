@@ -181,17 +181,19 @@ Raw replay JSON
 
 | Component | Status | Notes |
 |-----------|--------|-------|
-| PS data fetch (pokedex, moves, items, abilities) | Not started | |
-| Feature tables (property vectors) | Not started | |
-| Item/ability hand-built taxonomies | Not started | |
-| Usage stats from replays | Not started | Ad-hoc analysis done, no saved output |
-| Player profiles | Not started | Ad-hoc analysis done, no saved output |
-| Enriched two-pass parser | Not started | |
-| Progressive revelation + confidence flags | Not started | |
-| Dataset encoding (explicit features) | Not started | |
-| Model architecture (expanded encoders) | Not started | |
-| Training script updates | Not started | |
-| `reconstruct_teams.py` | Exists | Measures coverage only, doesn't enrich data |
+| PS data fetch (pokedex, moves, items, abilities) | Done | `scripts/fetch_ps_data.py` |
+| Feature tables (property vectors) | Done | `scripts/build_feature_tables.py`, `src/vgc_model/data/feature_tables.py` |
+| Item/ability hand-built taxonomies | Done | Built into `build_feature_tables.py` |
+| Usage stats (Pikalytics + replays) | Done | `scripts/build_usage_stats.py`, `src/vgc_model/data/usage_stats.py` |
+| Player profiles | Done | `scripts/build_player_profiles.py`, `src/vgc_model/data/player_profiles.py` |
+| Enriched two-pass parser | Done | `src/vgc_model/data/enriched_parser.py` |
+| Progressive revelation + confidence flags | Done | EnrichedPokemon dataclass with per-slot confidence |
+| Dataset encoding (explicit features) | Done | `src/vgc_model/data/enriched_dataset.py` |
+| Model architecture (expanded encoders) | Done | `src/vgc_model/model/vgc_model_v2.py` (822k params, +13% from v1) |
+| Training script | Done | `src/vgc_model/training/train_v2.py` |
+| Build data on ash (usage stats, player profiles, feature tables) | Not started | Run build scripts on ash |
+| Train v2 model | Not started | Run train_v2.py on ColePC (GPU) |
+| `reconstruct_teams.py` | Exists | Measures coverage only, superseded by enriched parser |
 
 ## Files to Create/Modify
 
