@@ -128,12 +128,13 @@ private:
     EnumDropdownOption<TeamStrategy> TEAM_STRATEGY;
     EnumDropdownOption<MoveStrategy> MOVE_STRATEGY;
     BooleanCheckBoxOption ALLOW_MEGA;
-    GoHomeWhenDoneOption GO_HOME_WHEN_DONE;
 
     //  AI-specific options (only used when MOVE_STRATEGY == AI).
     StringOption AI_SERVER_URL;
     BooleanCheckBoxOption AI_SCAN_TEAM_FROM_GAME;
     TextEditOption AI_TEAM_PASTE;
+
+    GoHomeWhenDoneOption GO_HOME_WHEN_DONE;
 
     EventNotificationOption NOTIFICATION_STATUS_UPDATE;
     EventNotificationOption NOTIFICATION_MATCH_FINISHED;
