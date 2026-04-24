@@ -12,7 +12,7 @@ Deploy on ash:
 from __future__ import annotations
 
 import json
-import subprocess
+import os
 import time
 from pathlib import Path
 
@@ -23,6 +23,7 @@ from fastapi.staticfiles import StaticFiles
 REPLAY_BASE = Path(__file__).resolve().parent.parent / "data" / "showdown_replays"
 SPECTATED_DIR = REPLAY_BASE / "spectated"
 DOWNLOADED_DIR = REPLAY_BASE / "downloaded"
+STATUS_FILE = SPECTATED_DIR / ".orchestrator_status.json"
 STATIC_DIR = Path(__file__).parent / "static"
 
 FORMATS = {
@@ -72,17 +73,24 @@ def _read_replay_meta(f: Path) -> dict | None:
         return None
 
 
-def _spectator_pids() -> list[int]:
+def _orchestrator_status() -> dict:
+    """Read the orchestrator status file and verify the process is alive."""
+    if not STATUS_FILE.exists():
+        return {"alive": False, "connections": 0, "rooms_in_use": 0, "capacity": 0}
     try:
-        result = subprocess.run(
-            ["pgrep", "-f", "spectate_ps_battles"],
-            capture_output=True, text=True, timeout=5,
-        )
-        if result.returncode == 0:
-            return [int(p) for p in result.stdout.strip().split("\n") if p]
+        data = json.loads(STATUS_FILE.read_text())
+        # Verify PID is still alive
+        try:
+            os.kill(data["pid"], 0)
+            data["alive"] = True
+        except OSError:
+            data["alive"] = False
+        # Check staleness — if status file is >30s old, consider dead
+        if STATUS_FILE.stat().st_mtime < time.time() - 30:
+            data["alive"] = False
+        return data
     except Exception:
-        pass
-    return []
+        return {"alive": False, "connections": 0, "rooms_in_use": 0, "capacity": 0}
 
 
 def _rating_buckets(ratings: list[int], step: int = 50) -> dict[str, int]:
@@ -101,7 +109,7 @@ def _rating_buckets(ratings: list[int], step: int = 50) -> dict[str, int]:
 async def status():
     """Overall spectator status — only reads spectated dir for live metrics."""
     now = time.time()
-    pids = _spectator_pids()
+    orch = _orchestrator_status()
 
     formats = {}
     total_replays = 0
@@ -137,9 +145,16 @@ async def status():
     last_save_ago = round(now - newest_save) if newest_save > 0 else -1
 
     return {
-        "instances": len(pids),
-        "pids": pids,
-        "alive": len(pids) > 0 and last_save_ago < 300,
+        "alive": orch.get("alive", False),
+        "connections": orch.get("connections", 0),
+        "total_connections": orch.get("total_connections", 0),
+        "rooms_in_use": orch.get("rooms_in_use", 0),
+        "capacity": orch.get("capacity", 0),
+        "pending": orch.get("pending", 0),
+        "draining": orch.get("draining", False),
+        "stats": orch.get("stats", {}),
+        "uptime_sec": orch.get("uptime_sec", 0),
+        "per_connection": orch.get("per_connection", []),
         "last_save_ago_sec": last_save_ago,
         "total_replays": total_replays,
         "formats": formats,
@@ -334,8 +349,9 @@ async def coverage():
 
             await ws.close()
 
-        pids = _spectator_pids()
-        capacity = len(pids) * 40
+        orch = _orchestrator_status()
+        capacity = orch.get("capacity", 0)
+        rooms_in_use = orch.get("rooms_in_use", 0)
 
         active_battles = {fmt: len(rids) for fmt, rids in all_rooms.items()}
         total_active = sum(active_battles.values())
@@ -345,7 +361,8 @@ async def coverage():
             "active_battles": active_battles,
             "total_active": total_active,
             "total_active_note": "100+ (PS caps roomlist at 100 per query)" if capped else None,
-            "instances": len(pids),
+            "connections": orch.get("connections", 0),
+            "rooms_in_use": rooms_in_use,
             "capacity": capacity,
             "elo_slices": elo_slices,
             "coverage_pct": round(

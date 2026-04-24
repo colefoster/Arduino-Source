@@ -100,7 +100,7 @@
             <div class="sub" id="status-sub"></div>
         </div>
         <div class="card">
-            <div class="label">Instances</div>
+            <div class="label">Connections</div>
             <div class="value" id="instances-val">--</div>
             <div class="sub" id="instances-sub"></div>
         </div>
@@ -272,10 +272,11 @@
             document.getElementById('status-sub').textContent =
                 d.last_save_ago_sec >= 0 ? `Last save: ${agoStr(d.last_save_ago_sec)}` : '';
 
-            // Instances
-            document.getElementById('instances-val').textContent = d.instances;
+            // Connections
+            document.getElementById('instances-val').textContent =
+                `${d.connections}/${d.total_connections}`;
             document.getElementById('instances-sub').textContent =
-                `${d.instances * 40} room capacity`;
+                `${d.rooms_in_use}/${d.capacity} rooms`;
 
             // Total
             document.getElementById('total-val').textContent = d.total_replays.toLocaleString();
@@ -329,7 +330,7 @@
             document.getElementById('cov-pct').textContent = `${pct}%`;
 
             document.getElementById('cov-label').textContent =
-                `${d.instances} instance${d.instances !== 1 ? 's' : ''} x 40 rooms = ${d.capacity} capacity`;
+                `${d.connections} conn${d.connections !== 1 ? 's' : ''} x 45 rooms = ${d.capacity} capacity (${d.rooms_in_use || 0} in use)`;
 
             // Per-format breakdown
             const fmtNames = {
