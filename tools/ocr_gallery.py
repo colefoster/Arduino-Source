@@ -486,6 +486,18 @@ def build_card_html(entry, crop_defs, reader_name, results):
 
             html += '<div class="crop-cell">\n'
             html += f'  <img src="{uri}" width="{disp_w}" height="{disp_h}" title="{cd["name"]}">\n'
+
+            # Binarized preview (same logic as C++ raw_ocr_numbers: max(R,G,B) > 160)
+            bw = Image.new("L", (cw, ch))
+            for py in range(ch):
+                for px in range(cw):
+                    r, g, b = crop_img.getpixel((px, py))[:3]
+                    brightness = max(r, g, b)
+                    bw.putpixel((px, py), 0 if brightness > 200 else 255)
+            bw_up = bw.resize((disp_w, disp_h), Image.NEAREST)
+            bw_uri = img_to_data_uri(bw_up)
+            html += f'  <img src="{bw_uri}" width="{disp_w}" height="{disp_h}" title="binarized" style="margin-left:4px;border:1px solid #555">\n'
+
             html += f'  <div class="crop-name">{cd["name"]}</div>\n'
 
             gt_vals = gt.get("values", [])
@@ -628,14 +640,18 @@ def main():
             else:
                 test_root = path
 
+    results_cache = os.path.join(tempfile.gettempdir(), "ocr_regression_results.json")
+
     if run_regression:
         regression_results = run_regression_on_colepc()
         # Save for reuse
-        results_cache = os.path.join(tempfile.gettempdir(), "ocr_regression_results.json")
         with open(results_cache, "w") as f:
             json.dump([{"file": k, **v} for k, v in regression_results.items()], f)
         results_path = results_cache
         print(f"  Results cached to {results_cache}", flush=True)
+    elif not results_path and os.path.exists(results_cache):
+        results_path = results_cache
+        print(f"  Using cached results from {results_cache}", flush=True)
 
     print("Generating OCR gallery...", flush=True)
     html = build_html(test_root, reader_filter=reader_name, results_path=results_path)
