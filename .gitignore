@@ -89,3 +89,7 @@ ref_frames/vod_extract/
 # Local-only: downloaded Showdown replay JSON (regenerable)
 data/showdown_replays/
 tools/.pokeapi_cache.json
+
+# Generated PS data & feature tables (regenerable via scripts/)
+data/ps_data/
+data/feature_tables/
