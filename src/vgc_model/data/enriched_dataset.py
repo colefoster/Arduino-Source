@@ -51,8 +51,8 @@ MAX_ACTIONS = 14
 BOOST_STATS = ["atk", "def", "spa", "spd", "spe", "evasion"]
 
 # Feature dimensions (must match FeatureTables output)
-SPECIES_FEAT_DIM = 45
-MOVE_FEAT_DIM = 48
+SPECIES_FEAT_DIM = 46
+MOVE_FEAT_DIM = 56
 ITEM_FEAT_DIM = 13
 ABILITY_FEAT_DIM = 16
 

@@ -25,8 +25,8 @@ class ModelConfigV2:
     status_dim: int = 8
 
     # Explicit feature dims (from FeatureTables)
-    species_feat_dim: int = 45
-    move_feat_dim: int = 48
+    species_feat_dim: int = 46
+    move_feat_dim: int = 56
     item_feat_dim: int = 13
     ability_feat_dim: int = 16
 
