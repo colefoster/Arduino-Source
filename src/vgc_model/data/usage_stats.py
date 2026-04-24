@@ -135,3 +135,14 @@ class UsageStats:
         if not entry:
             return {}
         return dict(entry.get("abilities", {}))
+
+    # -- Protocol adapters (satisfy enriched_parser.UsageStats Protocol) --
+
+    def top_moves(self, species: str, n: int = 4) -> list[str]:
+        return self.get_likely_moves(species, n)
+
+    def top_item(self, species: str) -> str:
+        return self.get_likely_item(species) or ""
+
+    def top_ability(self, species: str) -> str:
+        return self.get_likely_ability(species) or ""

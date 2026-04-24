@@ -142,3 +142,14 @@ class PlayerProfiles:
 
     def __repr__(self) -> str:
         return f"PlayerProfiles({len(self)} players, format={self._format!r})"
+
+    # -- Protocol adapters (satisfy enriched_parser.PlayerProfiles Protocol) --
+
+    def get_moves(self, player: str, species: str) -> list[str]:
+        return self.infer_moveset(player, species, []) or []
+
+    def get_item(self, player: str, species: str) -> str:
+        return self.infer_item(player, species) or ""
+
+    def get_ability(self, player: str, species: str) -> str:
+        return self.infer_ability(player, species) or ""
