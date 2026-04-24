@@ -28,9 +28,8 @@ PIKALYTICS_BASE = "https://www.pikalytics.com/ai/pokedex/championstournaments"
 _REPLAY_BASE = _MAIN_REPO / "data" / "showdown_replays"
 REPLAY_DIRS = [
     _REPLAY_BASE / "gen9championsvgc2026regma",
-    _REPLAY_BASE / "gen9championsvgc2026regma_1200plus",
-    _REPLAY_BASE / "gen9championsvgc2026regma_1300plus",
-    _REPLAY_BASE / "gen9championsvgc2026regma_1400plus",
+    _REPLAY_BASE / "spectated" / "gen9championsvgc2026regma",
+    _REPLAY_BASE / "downloaded" / "gen9championsvgc2026regma",
 ]
 OUTPUT_DIR = PROJECT_ROOT / "data" / "usage_stats"
 OUTPUT_FILE = OUTPUT_DIR / "gen9championsvgc2026regma.json"
