@@ -22,7 +22,9 @@ import io
 import json
 import math
 import os
+import random
 import shutil
+import sys
 import time
 from pathlib import Path
 from typing import Optional
@@ -670,6 +672,372 @@ async def upload_test_image(file: UploadFile = File(...), reader: str = Form(...
     dest_dir = TEST_IMAGES_DIR / reader
     dest_dir.mkdir(parents=True, exist_ok=True)
     (dest_dir / file.filename).write_bytes(await file.read())
+    return {"ok": True}
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# MODEL REVIEW API (lazy-loaded — torch only imported on first request)
+# ═══════════════════════════════════════════════════════════════════════════
+
+SRC_DIR = BASE / "src"
+VOCAB_DIR = BASE / "data" / "vocab"
+CHECKPOINT_PATH = BASE / "data" / "checkpoints" / "best.pt"
+VGC_FMT = "gen9championsvgc2026regma"
+MODEL_REPLAY_DIRS = [
+    REPLAY_BASE / VGC_FMT,
+    SPECTATED_DIR / VGC_FMT,
+    DOWNLOADED_DIR / VGC_FMT,
+]
+
+_model_state: dict = {"loaded": False, "error": None, "model": None, "vocabs": None, "device": None}
+_review_cache: dict[str, dict] = {}
+
+
+def _ensure_model():
+    """Lazy-load vocabs + model on first request."""
+    if _model_state["loaded"]:
+        return _model_state["error"] is None
+    _model_state["loaded"] = True
+
+    if str(SRC_DIR) not in sys.path:
+        sys.path.insert(0, str(SRC_DIR))
+
+    try:
+        import torch
+        from vgc_model.data.vocab import Vocabs
+        from vgc_model.model.vgc_model import VGCTransformer, ModelConfig
+
+        if not CHECKPOINT_PATH.exists():
+            _model_state["error"] = f"No checkpoint at {CHECKPOINT_PATH}"
+            return False
+
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        vocabs = Vocabs.load(VOCAB_DIR)
+        checkpoint = torch.load(CHECKPOINT_PATH, map_location=device, weights_only=False)
+        config = checkpoint.get("config", ModelConfig())
+        model = VGCTransformer(vocabs, config).to(device)
+        model.load_state_dict(checkpoint["model_state_dict"])
+        model.eval()
+
+        _model_state["model"] = model
+        _model_state["vocabs"] = vocabs
+        _model_state["device"] = device
+        _model_state["checkpoint_info"] = {
+            "val_top1": checkpoint.get("val_top1"),
+            "val_top3": checkpoint.get("val_top3"),
+            "epoch": checkpoint.get("epoch"),
+            "params": model.count_parameters(),
+        }
+        return True
+    except Exception as e:
+        _model_state["error"] = str(e)
+        return False
+
+
+def _analyze_replay(replay_path: Path) -> Optional[dict]:
+    """Parse a replay and run the model on each turn."""
+    import torch
+    import torch.nn.functional as F
+    from vgc_model.data.log_parser import parse_battle, Action
+    from vgc_model.data.dataset import MAX_ACTIONS, BOOST_STATS
+
+    model = _model_state["model"]
+    vocabs = _model_state["vocabs"]
+    device = _model_state["device"]
+
+    try:
+        data = json.loads(replay_path.read_text(errors="replace"))
+        log = data.get("log", "")
+        rating = data.get("rating", 0)
+    except Exception:
+        return None
+
+    result = parse_battle(log, rating)
+    if result is None:
+        return None
+
+    winner_samples = [s for s in result.samples if s.is_winner]
+    if not winner_samples:
+        return None
+
+    TARGET_NAMES = ["opp_a", "opp_b", "ally"]
+
+    def _encode_sample(sample, battle):
+        """Encode a TrainingSample into model input tensors."""
+        player = sample.player
+        state = sample.state
+        if player == "p1":
+            own_active, own_bench = state.p1_active, state.p1_bench
+            opp_active, opp_bench = state.p2_active, state.p2_bench
+            tw_own, tw_opp = state.field.tailwind_p1, state.field.tailwind_p2
+            sc_own = [int(state.field.light_screen_p1), int(state.field.reflect_p1), int(state.field.aurora_veil_p1)]
+            sc_opp = [int(state.field.light_screen_p2), int(state.field.reflect_p2), int(state.field.aurora_veil_p2)]
+        else:
+            own_active, own_bench = state.p2_active, state.p2_bench
+            opp_active, opp_bench = state.p1_active, state.p1_bench
+            tw_own, tw_opp = state.field.tailwind_p2, state.field.tailwind_p1
+            sc_own = [int(state.field.light_screen_p2), int(state.field.reflect_p2), int(state.field.aurora_veil_p2)]
+            sc_opp = [int(state.field.light_screen_p1), int(state.field.reflect_p1), int(state.field.aurora_veil_p1)]
+
+        slots = [None] * 8
+        for i, src in enumerate([own_active, own_bench, opp_active, opp_bench]):
+            for j, poke in enumerate(src[:2]):
+                slots[i * 2 + j] = poke
+
+        species_ids, hp_vals, status_ids, boosts = [], [], [], []
+        item_ids, ability_ids, mega_flags, alive_flags, move_ids = [], [], [], [], []
+        v = vocabs
+        for poke in slots:
+            if poke is None:
+                species_ids.append(0); hp_vals.append(0.0); status_ids.append(0)
+                boosts.append([0]*6); item_ids.append(0); ability_ids.append(0)
+                mega_flags.append(0); alive_flags.append(0); move_ids.append([0,0,0,0])
+            else:
+                species_ids.append(v.species[poke.species])
+                hp_vals.append(poke.hp)
+                status_ids.append(v.status[poke.status] if poke.status else 0)
+                boosts.append([poke.boosts.get(s, 0) for s in BOOST_STATS])
+                item_ids.append(v.items[poke.item] if poke.item else 0)
+                ability_ids.append(v.abilities[poke.ability] if poke.ability else 0)
+                mega_flags.append(int(poke.mega)); alive_flags.append(1)
+                ms = [v.moves[m] for m in poke.moves_known[:4]]
+                ms += [0] * (4 - len(ms))
+                move_ids.append(ms)
+
+        tp = battle.team_preview
+        own_team = tp.p1_team if player == "p1" else tp.p2_team
+        opp_team = tp.p2_team if player == "p1" else tp.p1_team
+        selected = (tp.p1_selected if player == "p1" else tp.p2_selected)[:4]
+        oti = [v.species[s] for s in own_team[:6]] + [0] * max(0, 6 - len(own_team))
+        opi = [v.species[s] for s in opp_team[:6]] + [0] * max(0, 6 - len(opp_team))
+        si = [v.species[s] for s in selected[:4]] + [0] * max(0, 4 - len(selected))
+
+        return {
+            "species_ids": torch.tensor([species_ids], dtype=torch.long),
+            "hp_values": torch.tensor([hp_vals], dtype=torch.float),
+            "status_ids": torch.tensor([status_ids], dtype=torch.long),
+            "boost_values": torch.tensor([boosts], dtype=torch.float),
+            "item_ids": torch.tensor([item_ids], dtype=torch.long),
+            "ability_ids": torch.tensor([ability_ids], dtype=torch.long),
+            "mega_flags": torch.tensor([mega_flags], dtype=torch.float),
+            "alive_flags": torch.tensor([alive_flags], dtype=torch.float),
+            "move_ids": torch.tensor([move_ids], dtype=torch.long),
+            "weather_id": torch.tensor([vocabs.weather[state.field.weather] if state.field.weather else 0], dtype=torch.long),
+            "terrain_id": torch.tensor([vocabs.terrain[state.field.terrain] if state.field.terrain else 0], dtype=torch.long),
+            "trick_room": torch.tensor([int(state.field.trick_room)], dtype=torch.float),
+            "tailwind_own": torch.tensor([int(tw_own)], dtype=torch.float),
+            "tailwind_opp": torch.tensor([int(tw_opp)], dtype=torch.float),
+            "screens_own": torch.tensor([sc_own], dtype=torch.float),
+            "screens_opp": torch.tensor([sc_opp], dtype=torch.float),
+            "turn": torch.tensor([min(state.turn, 30)], dtype=torch.float),
+            "action_mask_a": torch.tensor([[1]*MAX_ACTIONS], dtype=torch.bool),
+            "action_mask_b": torch.tensor([[1]*MAX_ACTIONS], dtype=torch.bool),
+            "own_team_ids": torch.tensor([oti[:6]], dtype=torch.long),
+            "opp_team_ids": torch.tensor([opi[:6]], dtype=torch.long),
+            "selected_ids": torch.tensor([si[:4]], dtype=torch.long),
+            "has_team_preview": torch.tensor([True], dtype=torch.bool),
+        }, own_active, own_bench, opp_active, opp_bench
+
+    def _decode_action(idx, own_active, own_bench, slot_idx):
+        if idx >= 12:
+            bi = idx - 12
+            return f"Switch → {own_bench[bi].species}" if bi < len(own_bench) else f"Switch → bench[{bi}]"
+        mi, ti = idx // 3, idx % 3
+        name = "?"
+        if slot_idx < len(own_active):
+            poke = own_active[slot_idx]
+            name = poke.moves_known[mi] if mi < len(poke.moves_known) else f"move[{mi}]"
+        return f"{name} → {TARGET_NAMES[ti]}"
+
+    def _encode_action(action, slot_idx, own_active, own_bench, player):
+        if action is None: return 0
+        if action.type == "switch":
+            for i, p in enumerate(own_bench):
+                base = lambda s: s.split("-Mega")[0] if "-Mega" in s else s
+                if p.species == action.switch_to or base(p.species) == base(action.switch_to):
+                    return 12 + min(i, 1)
+            return 12
+        if action.type == "move":
+            mi = 0
+            if slot_idx < len(own_active) and action.move in own_active[slot_idx].moves_known:
+                mi = own_active[slot_idx].moves_known.index(action.move)
+            ti = 0
+            if action.target:
+                tp, ts = action.target[:2], action.target[2]
+                ti = 2 if tp == player else (0 if ts == "a" else 1)
+            return min(mi, 3) * 3 + min(ti, 2)
+        return 0
+
+    def _describe(action):
+        if action is None: return "—"
+        if action.type == "switch": return f"Switch → {action.switch_to}"
+        if action.type == "move":
+            t = f" → {action.target}" if action.target else ""
+            m = " (Mega)" if action.mega else ""
+            return f"{action.move}{t}{m}"
+        return "?"
+
+    turns = []
+    match_a = match_b = total_a = total_b = 0
+
+    for sample in winner_samples:
+        player = sample.player
+        try:
+            batch, own_active, own_bench, opp_active, opp_bench = _encode_sample(sample, result)
+            batch_dev = {k: v.to(device) for k, v in batch.items()}
+            with torch.no_grad():
+                out = model(batch_dev)
+            probs_a = F.softmax(out["logits_a"][0], dim=-1).cpu()
+            probs_b = F.softmax(out["logits_b"][0], dim=-1).cpu()
+        except Exception:
+            continue
+
+        def top3(probs, slot_idx):
+            vals, idxs = probs.topk(min(3, len(probs)))
+            return [{"action": _decode_action(idx.item(), own_active, own_bench, slot_idx),
+                     "prob": round(val.item() * 100, 1), "idx": idx.item()}
+                    for val, idx in zip(vals, idxs)]
+
+        preds_a, preds_b = top3(probs_a, 0), top3(probs_b, 1)
+        act_a, act_b = sample.actions.slot_a, sample.actions.slot_b
+        aidx_a = _encode_action(act_a, 0, own_active, own_bench, player)
+        aidx_b = _encode_action(act_b, 1, own_active, own_bench, player)
+        ma = preds_a[0]["idx"] == aidx_a if preds_a else False
+        mb = preds_b[0]["idx"] == aidx_b if preds_b else False
+        if act_a is not None: total_a += 1; match_a += int(ma)
+        if act_b is not None: total_b += 1; match_b += int(mb)
+
+        state = sample.state
+        field_conds = []
+        if state.field.weather: field_conds.append(state.field.weather)
+        if state.field.terrain: field_conds.append(f"{state.field.terrain} Terrain")
+        if state.field.trick_room: field_conds.append("Trick Room")
+        tw_own = state.field.tailwind_p1 if player == "p1" else state.field.tailwind_p2
+        tw_opp = state.field.tailwind_p2 if player == "p1" else state.field.tailwind_p1
+        if tw_own: field_conds.append("Own Tailwind")
+        if tw_opp: field_conds.append("Opp Tailwind")
+
+        turns.append({
+            "turn": state.turn,
+            "own_active": [{"species": p.species, "hp": round(p.hp*100, 1), "status": p.status} for p in own_active],
+            "opp_active": [{"species": p.species, "hp": round(p.hp*100, 1), "status": p.status} for p in opp_active],
+            "own_bench": [{"species": p.species, "hp": round(p.hp*100, 1)} for p in own_bench],
+            "opp_bench": [{"species": p.species, "hp": round(p.hp*100, 1)} for p in opp_bench],
+            "field": field_conds,
+            "slot_a": {"actual": _describe(act_a), "actual_idx": aidx_a, "predictions": preds_a, "match": ma},
+            "slot_b": {"actual": _describe(act_b), "actual_idx": aidx_b, "predictions": preds_b, "match": mb},
+        })
+
+    total = total_a + total_b
+    matches = match_a + match_b
+    return {
+        "id": data.get("id", replay_path.stem),
+        "players": data.get("players", []),
+        "rating": rating,
+        "winner": result.winner,
+        "total_turns": len(turns),
+        "accuracy": round(matches / total * 100, 1) if total > 0 else 0,
+        "matches": matches,
+        "total_actions": total,
+        "turns": turns,
+    }
+
+
+@app.get("/api/model/status")
+async def model_status():
+    """Check if model is available and return checkpoint info."""
+    has_checkpoint = CHECKPOINT_PATH.exists()
+    has_vocabs = VOCAB_DIR.exists() and (VOCAB_DIR / "species.json").exists()
+    loaded = _model_state["loaded"] and _model_state["error"] is None
+    return {
+        "has_checkpoint": has_checkpoint,
+        "has_vocabs": has_vocabs,
+        "loaded": loaded,
+        "error": _model_state.get("error"),
+        "checkpoint_info": _model_state.get("checkpoint_info"),
+        "cached_replays": len(_review_cache),
+    }
+
+
+@app.get("/api/model/analyze")
+async def model_analyze(count: int = 20, min_rating: int = 0):
+    """Analyze random replays. Results are cached."""
+    if not _ensure_model():
+        return JSONResponse({"error": _model_state["error"]}, 500)
+
+    # Find replay files
+    replay_files = []
+    for d in MODEL_REPLAY_DIRS:
+        if d.exists():
+            replay_files.extend(f for f in d.glob("*.json") if f.name != "index.json")
+
+    if not replay_files:
+        return JSONResponse({"error": "No replay files found"}, 404)
+
+    # Filter by rating if requested
+    if min_rating > 0:
+        filtered = []
+        for f in replay_files:
+            try:
+                d = json.loads(f.read_text(errors="replace"))
+                if (d.get("rating") or 0) >= min_rating:
+                    filtered.append(f)
+            except Exception:
+                pass
+        replay_files = filtered
+
+    # Sample and analyze
+    sample_files = random.sample(replay_files, min(count, len(replay_files)))
+    new_results = 0
+    for f in sample_files:
+        rid = f.stem
+        if rid not in _review_cache:
+            result = _analyze_replay(f)
+            if result:
+                _review_cache[result["id"]] = result
+                new_results += 1
+
+    return {"analyzed": new_results, "total_cached": len(_review_cache)}
+
+
+@app.get("/api/model/replays")
+async def model_replays():
+    """List all cached replay analyses."""
+    return [
+        {"id": rid, "accuracy": r["accuracy"], "rating": r["rating"],
+         "players": r["players"], "total_turns": r["total_turns"], "winner": r["winner"]}
+        for rid, r in sorted(_review_cache.items(), key=lambda x: x[1]["rating"] or 0, reverse=True)
+    ]
+
+
+@app.get("/api/model/replay/{replay_id}")
+async def model_replay(replay_id: str):
+    """Get full turn-by-turn analysis for one replay."""
+    if replay_id in _review_cache:
+        return _review_cache[replay_id]
+    return JSONResponse({"error": "Replay not analyzed yet"}, 404)
+
+
+@app.get("/api/model/summary")
+async def model_summary():
+    """Aggregate accuracy stats across cached replays."""
+    if not _review_cache:
+        return {"total_replays": 0, "avg_accuracy": 0, "total_turns": 0, "total_matches": 0, "total_actions": 0}
+    total_matches = sum(r["matches"] for r in _review_cache.values())
+    total_actions = sum(r["total_actions"] for r in _review_cache.values())
+    return {
+        "total_replays": len(_review_cache),
+        "avg_accuracy": round(total_matches / total_actions * 100, 1) if total_actions > 0 else 0,
+        "total_turns": sum(r["total_turns"] for r in _review_cache.values()),
+        "total_matches": total_matches,
+        "total_actions": total_actions,
+    }
+
+
+@app.post("/api/model/clear")
+async def model_clear():
+    """Clear the analysis cache."""
+    _review_cache.clear()
     return {"ok": True}
 
 
