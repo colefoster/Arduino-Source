@@ -849,7 +849,7 @@ def _analyze_replay(replay_path: Path) -> Optional[dict]:
         name = "?"
         if slot_idx < len(own_active):
             poke = own_active[slot_idx]
-            name = poke.moves_known[mi] if mi < len(poke.moves_known) else f"move[{mi}]"
+            name = poke.moves_known[mi] if mi < len(poke.moves_known) else f"Move {mi+1}"
         return f"{name} → {TARGET_NAMES[ti]}"
 
     def _encode_action(action, slot_idx, own_active, own_bench, player):
@@ -861,15 +861,16 @@ def _analyze_replay(replay_path: Path) -> Optional[dict]:
                     return 12 + min(i, 1)
             return 12
         if action.type == "move":
-            mi = 0
             if slot_idx < len(own_active) and action.move in own_active[slot_idx].moves_known:
                 mi = own_active[slot_idx].moves_known.index(action.move)
+            else:
+                return -1  # move not in known list — can't encode, avoid false matches
             ti = 0
             if action.target:
                 tp, ts = action.target[:2], action.target[2]
                 ti = 2 if tp == player else (0 if ts == "a" else 1)
             return min(mi, 3) * 3 + min(ti, 2)
-        return 0
+        return -1
 
     def _describe(action):
         if action is None: return "—"
@@ -905,10 +906,10 @@ def _analyze_replay(replay_path: Path) -> Optional[dict]:
         act_a, act_b = sample.actions.slot_a, sample.actions.slot_b
         aidx_a = _encode_action(act_a, 0, own_active, own_bench, player)
         aidx_b = _encode_action(act_b, 1, own_active, own_bench, player)
-        ma = preds_a[0]["idx"] == aidx_a if preds_a else False
-        mb = preds_b[0]["idx"] == aidx_b if preds_b else False
-        if act_a is not None: total_a += 1; match_a += int(ma)
-        if act_b is not None: total_b += 1; match_b += int(mb)
+        ma = preds_a[0]["idx"] == aidx_a if (preds_a and aidx_a >= 0) else False
+        mb = preds_b[0]["idx"] == aidx_b if (preds_b and aidx_b >= 0) else False
+        if act_a is not None and aidx_a >= 0: total_a += 1; match_a += int(ma)
+        if act_b is not None and aidx_b >= 0: total_b += 1; match_b += int(mb)
 
         state = sample.state
         field_conds = []
