@@ -1,0 +1,170 @@
+======================================================================
+Champions VGC 2026 Reg M-A — Usage Statistics Summary
+======================================================================
+
+Total species: 306
+  From Pikalytics: 50
+  From replays:    256
+
+----------------------------------------------------------------------
+TOP PIKALYTICS SPECIES (by move count)
+----------------------------------------------------------------------
+
+  Aegislash
+    Moves: King's Shield, Shadow Sneak, Poltergeist, Iron Head
+    Item:  Spell Tag (59.6%)
+    Ability: Stance Change (100.0%)
+    Sample sets: 10
+
+  Aerodactyl
+    Moves: Rock Slide, Dual Wingbeat, Protect, Tailwind
+    Item:  Focus Sash (79.4%)
+    Ability: Unnerve (88.9%)
+    Sample sets: 10
+
+  Aggron
+    Moves: Heavy Slam, Protect, Body Press, Iron Defense
+    Item:  Aggronite (94.7%)
+    Ability: Sturdy (48.9%)
+    Sample sets: 2
+
+  Arcanine-Hisui
+    Moves: Flare Blitz, Rock Slide, Protect, Extreme Speed
+    Item:  Focus Sash (26.3%)
+    Ability: Intimidate (88.9%)
+    Sample sets: 9
+
+  Archaludon
+    Moves: Electro Shot, Flash Cannon, Protect, Draco Meteor
+    Item:  Leftovers (52.9%)
+    Ability: Stamina (72.2%)
+    Sample sets: 10
+
+  Basculegion
+    Moves: Last Respects, Wave Crash, Aqua Jet, Flip Turn
+    Item:  Choice Scarf (68.3%)
+    Ability: Adaptability (75.6%)
+    Sample sets: 10
+
+  Charizard
+    Moves: Protect, Heat Wave, Solar Beam, Weather Ball
+    Item:  Charizardite Y (92.3%)
+    Ability: Blaze (43.8%)
+    Sample sets: 10
+
+  Clefable
+    Moves: Follow Me, Moonblast, Protect, Helping Hand
+    Item:  Sitrus Berry (63.8%)
+    Ability: Unaware (81.7%)
+    Sample sets: 5
+
+  Corviknight
+    Moves: Brave Bird, Tailwind, Body Press, Roost
+    Item:  Leftovers (73.8%)
+    Ability: Mirror Armor (93.0%)
+    Sample sets: 10
+
+  Delphox
+    Moves: Heat Wave, Protect, Psychic, Substitute
+    Item:  Delphoxite (99.0%)
+    Ability: Blaze (67.0%)
+    Sample sets: 10
+
+----------------------------------------------------------------------
+TOP REPLAY-ONLY SPECIES (by appearance count)
+----------------------------------------------------------------------
+
+  Floette-Mega (seen 4988 times)
+    Moves: Dazzling Gleam, Protect, Moonblast, Calm Mind
+    Items: Floettite
+    Abilities: Fairy Aura, Speed Boost, Insomnia
+
+  Charizard-Mega-Y (seen 4286 times)
+    Moves: Heat Wave, Protect, Solar Beam, Weather Ball
+    Items: Charizardite Y
+    Abilities: No Guard, Plus
+
+  Froslass-Mega (seen 3194 times)
+    Moves: Blizzard, Protect, Aurora Veil, Shadow Ball
+    Items: Froslassite
+    Abilities: Plus
+
+  Gengar-Mega (seen 3132 times)
+    Moves: Protect, Shadow Ball, Perish Song, Sludge Bomb
+    Items: Gengarite
+    Abilities: Intimidate, No Guard, Moody
+
+  Tyranitar-Mega (seen 2208 times)
+    Moves: Rock Slide, Protect, Knock Off, Dragon Dance
+    Items: Tyranitarite
+
+  Delphox-Mega (seen 2176 times)
+    Moves: Heat Wave, Protect, Psychic, Substitute
+    Items: Delphoxite
+    Abilities: Intimidate, Competitive, Limber
+
+  Meganium-Mega (seen 2160 times)
+    Moves: Solar Beam, Weather Ball, Dazzling Gleam, Protect
+    Items: Meganiumite
+    Abilities: Intimidate, Insomnia, Water Bubble
+
+  Dragonite-Mega (seen 1668 times)
+    Moves: Hurricane, Protect, Draco Meteor, Dragon Pulse
+    Items: Dragoninite
+
+  Gardevoir-Mega (seen 1512 times)
+    Moves: Hyper Voice, Protect, Trick Room, Calm Mind
+    Items: Gardevoirite, Focus Sash
+
+  Starmie-Mega (seen 1317 times)
+    Moves: Liquidation, Protect, Skill Swap, Zen Headbutt
+    Items: Starminite
+    Abilities: Intimidate, Unnerve, Lightning Rod
+
+  Aggron-Mega (seen 1293 times)
+    Moves: Body Press, Iron Defense, Heavy Slam, Protect
+    Items: Aggronite
+    Abilities: No Guard, Insomnia
+
+  Sinistcha-Masterpiece (seen 1249 times)
+    Moves: Rage Powder, Matcha Gotcha, Trick Room, Life Dew
+    Items: Sitrus Berry, Occa Berry, Colbur Berry
+    Abilities: No Guard, Intimidate, Mold Breaker
+
+  Crabominable-Mega (seen 1211 times)
+    Moves: Ice Hammer, Drain Punch, Protect, Mach Punch
+    Items: Crabominite
+    Abilities: Insomnia
+
+  Blastoise-Mega (seen 1205 times)
+    Moves: Water Spout, Protect, Shell Smash, Dark Pulse
+    Items: Blastoisinite
+    Abilities: Water Bubble, Speed Boost, Water Absorb
+
+  Glimmora-Mega (seen 1201 times)
+    Moves: Power Gem, Spiky Shield, Sludge Bomb, Earth Power
+    Items: Glimmoranite
+
+  Maushold-Four (seen 1200 times)
+    Moves: Follow Me, Protect, Super Fang, Population Bomb
+    Items: Chople Berry, Focus Sash, Sitrus Berry
+    Abilities: No Guard, Intimidate
+
+  Scovillain-Mega (seen 1038 times)
+    Moves: Rage Powder, Protect, Leech Seed, Flamethrower
+    Items: Scovillainite
+    Abilities: Fairy Aura, Moody, Water Bubble
+
+  Kangaskhan-Mega (seen 1024 times)
+    Moves: Fake Out, Double-Edge, Sucker Punch, Drain Punch
+    Items: Kangaskhanite, Focus Sash
+
+  Orthworm (seen 1013 times)
+    Moves: Shed Tail, Body Press, Heavy Slam, Iron Defense
+    Items: Sitrus Berry, Occa Berry, Choice Scarf
+    Abilities: No Guard
+
+  Golurk-Mega (seen 919 times)
+    Moves: Headlong Rush, Poltergeist, Protect, Ice Punch
+    Items: Golurkite
+    Abilities: Unseen Fist, Intimidate
