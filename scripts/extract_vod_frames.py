@@ -315,12 +315,16 @@ def download_video(url, out_dir):
     sys.exit(1)
 
 
-def frame_generator(source, interval):
+def frame_generator(source, interval, start=0):
     """Yield (frame_number, PIL.Image) from a local video file."""
     fps_filter = f"fps=1/{interval}"
 
     ffmpeg_cmd = [
         "ffmpeg", "-hide_banner", "-loglevel", "error",
+    ]
+    if start > 0:
+        ffmpeg_cmd += ["-ss", str(start)]
+    ffmpeg_cmd += [
         "-i", source,
         "-vf", fps_filter,
         "-f", "image2pipe", "-vcodec", "mjpeg", "-q:v", "2",
@@ -334,7 +338,7 @@ def frame_generator(source, interval):
 
     # Read JPEG frames from stdout by scanning for SOI/EOI markers
     buf = b""
-    frame_num = 0
+    frame_num = int(start / interval)
     SOI = b"\xff\xd8"
     EOI = b"\xff\xd9"
 
@@ -379,6 +383,8 @@ def main():
                         help="Seconds between frame samples (default: 1.0)")
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT,
                         help="Base output directory")
+    parser.add_argument("--start", type=float, default=0,
+                        help="Start time in seconds (skip intro)")
     parser.add_argument("--max-frames", type=int, default=0,
                         help="Stop after N frames (0 = unlimited)")
     parser.add_argument("--run-ocr", action="store_true",
@@ -417,6 +423,8 @@ def main():
     print(f"Source: {args.source}")
     print(f"Video ID: {video_id}")
     print(f"Interval: {args.interval}s")
+    if args.start > 0:
+        print(f"Start: {args.start}s")
     print(f"Output: {out_dir}")
     print()
 
@@ -490,7 +498,7 @@ def main():
     print("Extracting frames...")
     t0 = time.time()
 
-    for frame_num, img in frame_generator(video_path, args.interval):
+    for frame_num, img in frame_generator(video_path, args.interval, args.start):
         if args.max_frames and frame_num >= args.max_frames:
             break
 
