@@ -764,6 +764,13 @@ def _analyze_replay(replay_path: Path) -> Optional[dict]:
         return None
 
     TARGET_NAMES = ["opp_a", "opp_b", "ally"]
+    SPREAD_MOVES = {
+        "Earthquake", "Rock Slide", "Heat Wave", "Blizzard", "Hyper Voice",
+        "Dazzling Gleam", "Icy Wind", "Eruption", "Water Spout", "Discharge",
+        "Sludge Wave", "Surf", "Muddy Water", "Lava Plume", "Electroweb",
+        "Struggle Bug", "Breaking Swipe", "Bulldoze", "Glacial Lance",
+        "Astral Barrage", "Matcha Gotcha", "Make It Rain",
+    }
 
     def _encode_sample(sample, battle):
         """Encode a TrainingSample into model input tensors."""
@@ -866,7 +873,7 @@ def _analyze_replay(replay_path: Path) -> Optional[dict]:
             else:
                 return -1  # move not in known list — can't encode, avoid false matches
             ti = 0
-            if action.target:
+            if action.move not in SPREAD_MOVES and action.target:
                 tp, ts = action.target[:2], action.target[2]
                 ti = 2 if tp == player else (0 if ts == "a" else 1)
             return min(mi, 3) * 3 + min(ti, 2)

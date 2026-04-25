@@ -518,8 +518,14 @@ class EnrichedDataset(Dataset):
                 if action.move in poke.moves_known:
                     move_idx = poke.moves_known.index(action.move)
 
+            # Spread moves (Earthquake, Rock Slide, Heat Wave, etc.) hit all
+            # targets — normalize to target_idx=0 so the model isn't penalized
+            # for picking a different target on a spread move.
+            move_feat = self.feature_tables.get_move_features(action.move)
+            is_spread = move_feat.get("target") in ("allAdjacentFoes", "allAdjacent")
+
             target_idx = 0
-            if action.target:
+            if not is_spread and action.target:
                 target_player = action.target[:2]
                 target_slot = action.target[2]
                 if target_player == player:
