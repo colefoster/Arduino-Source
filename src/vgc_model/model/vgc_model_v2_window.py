@@ -55,9 +55,9 @@ class VGCTransformerV2Window(nn.Module):
         # History window encoding: shared action embedding across all turns
         # 14 actions + 1 "no prior" sentinel
         self.prev_action_embed = nn.Embedding(config.num_actions + 1, 16)
-        # Per turn: 4 action embeds (4*16=64) + 3 binary flags = 67
-        # 3 turns: 67 * 3 = 201
-        per_turn_dim = 16 * 4 + 3  # 67
+        # Per turn: 4 action embeds (4*16=64) + 3 binary flags + 2 speed flags = 69
+        # 3 turns: 69 * 3 = 207
+        per_turn_dim = 16 * 4 + 3 + 2  # 69
         self.history_proj = nn.Linear(per_turn_dim * config.history_turns, config.d_model)
 
         # Joint slot cross-attention
@@ -136,17 +136,20 @@ class VGCTransformerV2Window(nn.Module):
         if "prev_actions_window" in batch and "prev_flags_window" in batch:
             # prev_actions_window: (B, 3, 4) action indices
             # prev_flags_window: (B, 3, 3) binary flags
+            # prev_speed_window: (B, 3, 2) speed order flags
             B = tokens.shape[0]
             actions = batch["prev_actions_window"]  # (B, 3, 4)
             flags = batch["prev_flags_window"]      # (B, 3, 3)
+            speed = batch.get("prev_speed_window",
+                              torch.full((B, self.config.history_turns, 2), 0.5, device=tokens.device))
 
             # Embed actions: (B, 3, 4) -> (B, 3, 4, 16)
             action_embs = self.prev_action_embed(actions)
             # Flatten to (B, 3, 64)
             action_flat = action_embs.reshape(B, self.config.history_turns, -1)
-            # Concat with flags: (B, 3, 67)
-            per_turn = torch.cat([action_flat, flags], dim=-1)
-            # Flatten all turns: (B, 201)
+            # Concat with flags + speed: (B, 3, 69)
+            per_turn = torch.cat([action_flat, flags, speed], dim=-1)
+            # Flatten all turns: (B, 207)
             history_flat = per_turn.reshape(B, -1)
             # Project to d_model
             history_token = self.history_proj(history_flat)  # (B, d_model)

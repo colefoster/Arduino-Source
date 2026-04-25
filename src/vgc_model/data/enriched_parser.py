@@ -80,6 +80,9 @@ class EnrichedSample:
     rating: int
     own_team_full: list[EnrichedPokemon]  # all own Pokemon with enriched data
     opp_team_preview: list[str]           # opponent's 6 species from team preview
+    # Move execution order: which slots moved first this turn (in log order)
+    # e.g. ["p2a", "p1a", "p2b", "p1b"] means p2a was fastest
+    move_order: list[str] = field(default_factory=list)
 
 
 # ---------------------------------------------------------------------------
@@ -239,6 +242,7 @@ class EnrichedBattleParser:
         current_turn = 0
         turn_actions: dict[str, dict[str, Action]] = {"p1": {}, "p2": {}}
         mega_this_turn: set[str] = set()
+        move_order_this_turn: list[str] = []  # slots in execution order, e.g. ["p2a", "p1a"]
 
         # Player info
         p1_name = ""
@@ -331,6 +335,9 @@ class EnrichedBattleParser:
                     type="move", move=move_name, target=target_slot,
                     mega=mega, slot=slot_suffix,
                 )
+
+                # Track move execution order
+                move_order_this_turn.append(slot)
 
                 # Track revelation
                 pkey = active_slots.get(slot)
@@ -494,11 +501,12 @@ class EnrichedBattleParser:
                     self._emit_samples(
                         samples, state, turn_actions, current_turn,
                         preview, full_knowledge, revealed,
-                        winner_player, active_slots,
+                        winner_player, active_slots, move_order_this_turn,
                     )
                 current_turn = new_turn
                 turn_actions = {"p1": {}, "p2": {}}
                 mega_this_turn = set()
+                move_order_this_turn = []
 
             elif cmd == "win" and len(parts) >= 3:
                 winner_name = parts[2]
@@ -517,7 +525,7 @@ class EnrichedBattleParser:
                     self._emit_samples(
                         samples, state, turn_actions, current_turn,
                         preview, full_knowledge, revealed,
-                        winner_player, active_slots,
+                        winner_player, active_slots, move_order_this_turn,
                     )
 
         # Retroactively set is_winner (winner_player only known at |win|)
@@ -596,6 +604,7 @@ class EnrichedBattleParser:
         revealed: dict[str, _FullKnowledge],
         winner_player: str,
         active_slots: dict[str, str],
+        move_order: list[str] = None,
     ):
         """Emit one EnrichedSample per player that acted this turn."""
         for pov_player in ("p1", "p2"):
@@ -629,6 +638,7 @@ class EnrichedBattleParser:
                 rating=self.rating,
                 own_team_full=own_team,
                 opp_team_preview=list(opp_preview),
+                move_order=list(move_order or []),
             ))
 
     def _build_own_team(
