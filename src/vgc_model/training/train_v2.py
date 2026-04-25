@@ -48,6 +48,10 @@ def _find_replay_dir() -> Path:
 def _report_to_dashboard(url: str, payload: dict):
     """POST training metrics to the dashboard. Fire-and-forget."""
     try:
+        import ssl
+        ctx = ssl.create_default_context()
+        ctx.check_hostname = False
+        ctx.verify_mode = ssl.CERT_NONE
         data = json.dumps(payload).encode("utf-8")
         req = urllib.request.Request(
             f"{url}/api/training/report",
@@ -55,7 +59,7 @@ def _report_to_dashboard(url: str, payload: dict):
             headers={"Content-Type": "application/json"},
             method="POST",
         )
-        urllib.request.urlopen(req, timeout=5)
+        urllib.request.urlopen(req, timeout=5, context=ctx)
     except Exception:
         pass  # non-critical — don't interrupt training
 
