@@ -1136,3 +1136,72 @@ class EnrichedDataset(Dataset):
         if "-Mega" in species:
             return species.split("-Mega")[0]
         return species
+
+
+class CachedDataset(Dataset):
+    """Dataset that loads pre-encoded tensors from a .pt cache file.
+
+    Created by scripts/preparse_dataset.py. Loads in seconds instead of
+    re-parsing 80k+ JSON files.
+    """
+
+    def __init__(self, cache_path: Path, augment: bool = True):
+        print(f"Loading cached dataset from {cache_path}...")
+        t0 = __import__("time").time()
+        data = torch.load(cache_path, map_location="cpu", weights_only=False)
+        self._samples: list[dict[str, torch.Tensor]] = data["samples"]
+        self.history_mode = data.get("history_mode", "single")
+        self.augment = augment
+
+        elapsed = __import__("time").time() - t0
+        print(f"Loaded {len(self._samples)} samples in {elapsed:.1f}s "
+              f"(history_mode={self.history_mode})")
+
+    def __len__(self) -> int:
+        return len(self._samples)
+
+    def __getitem__(self, idx: int) -> dict[str, torch.Tensor]:
+        tensors = self._samples[idx]
+        if self.augment and random.random() < 0.5:
+            tensors = self._swap_slots(tensors)
+        return tensors
+
+    @staticmethod
+    def _swap_slots(t: dict[str, torch.Tensor]) -> dict[str, torch.Tensor]:
+        """Swap slot A and B — same logic as EnrichedDataset._swap_slots."""
+        t = dict(t)
+        for key in ("species_ids", "hp_values", "status_ids", "item_ids",
+                     "ability_ids", "mega_flags", "alive_flags",
+                     "item_confidences", "ability_confidences"):
+            if key in t:
+                v = t[key].clone()
+                v[0], v[1] = t[key][1], t[key][0]
+                v[4], v[5] = t[key][5], t[key][4]
+                t[key] = v
+
+        for key in ("boost_values", "move_ids", "move_confidences",
+                     "species_features", "item_features", "ability_features",
+                     "move_features"):
+            if key in t:
+                v = t[key].clone()
+                v[0], v[1] = t[key][1], t[key][0]
+                v[4], v[5] = t[key][5], t[key][4]
+                t[key] = v
+
+        if "action_slot_a" in t:
+            t["action_slot_a"], t["action_slot_b"] = t["action_slot_b"].clone(), t["action_slot_a"].clone()
+        if "action_mask_a" in t:
+            t["action_mask_a"], t["action_mask_b"] = t["action_mask_b"].clone(), t["action_mask_a"].clone()
+
+        if "prev_actions" in t:
+            prev = t["prev_actions"].clone()
+            prev[0], prev[1] = t["prev_actions"][1], t["prev_actions"][0]
+            prev[2], prev[3] = t["prev_actions"][3], t["prev_actions"][2]
+            t["prev_actions"] = prev
+
+        if "prev_speed" in t:
+            ps = t["prev_speed"].clone()
+            ps[0], ps[1] = t["prev_speed"][1], t["prev_speed"][0]
+            t["prev_speed"] = ps
+
+        return t

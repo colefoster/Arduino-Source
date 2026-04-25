@@ -14,7 +14,7 @@ import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader, random_split
 
-from ..data.enriched_dataset import EnrichedDataset
+from ..data.enriched_dataset import EnrichedDataset, CachedDataset
 from ..data.feature_tables import FeatureTables
 from ..data.usage_stats import UsageStats
 from ..data.player_profiles import PlayerProfiles
@@ -77,6 +77,7 @@ def train(
     run_id: str = "",
     replay_dir: str = "",
     dashboard_url: str = "",
+    cache_path: str = "",
     dropout: float = 0.25,
     n_layers: int = 4,
     d_ff: int = 256,
@@ -132,21 +133,24 @@ def train(
     history_mode_map = {"v2": "single", "v2_window": "window", "v2_seq": "sequence"}
     history_mode = history_mode_map[model_variant]
 
-    # Load dataset
-    print(f"Loading enriched dataset (min_rating={min_rating}, history_mode={history_mode})...")
-    dataset = EnrichedDataset(
-        replay_dir=rdir,
-        vocabs=vocabs,
-        feature_tables=feature_tables,
-        usage_stats=usage_stats,
-        player_profiles=player_profiles,
-        min_rating=min_rating,
-        winner_only=True,
-        min_turns=3,
-        history_mode=history_mode,
-    )
-    print(f"Dataset: {len(dataset)} samples ({len(dataset.samples)} battle turns, "
-          f"{len(dataset.team_previews)} team previews)")
+    # Load dataset — from cache or parse from scratch
+    if cache_path and Path(cache_path).exists():
+        dataset = CachedDataset(Path(cache_path), augment=True)
+    else:
+        print(f"Loading enriched dataset (min_rating={min_rating}, history_mode={history_mode})...")
+        dataset = EnrichedDataset(
+            replay_dir=rdir,
+            vocabs=vocabs,
+            feature_tables=feature_tables,
+            usage_stats=usage_stats,
+            player_profiles=player_profiles,
+            min_rating=min_rating,
+            winner_only=True,
+            min_turns=3,
+            history_mode=history_mode,
+        )
+        print(f"Dataset: {len(dataset)} samples "
+              f"({len(dataset.samples)} battle turns, {len(dataset.team_previews)} team previews)")
 
     if len(dataset) == 0:
         print("ERROR: No samples loaded. Check replay directory and data files.")
@@ -408,6 +412,8 @@ def main():
     parser.add_argument("--patience", type=int, default=10)
     parser.add_argument("--run-id", type=str, default="")
     parser.add_argument("--replay-dir", type=str, default="")
+    parser.add_argument("--cache", type=str, default="",
+                        help="Path to pre-parsed .pt cache file (from preparse_dataset.py)")
     parser.add_argument("--dashboard", type=str, default="https://champions.colefoster.ca",
                         help="Dashboard URL for live training progress (empty to disable)")
     parser.add_argument("--dropout", type=float, default=0.25)
@@ -429,6 +435,7 @@ def main():
         patience=args.patience,
         run_id=args.run_id,
         replay_dir=args.replay_dir,
+        cache_path=args.cache,
         dashboard_url=args.dashboard,
         dropout=args.dropout,
         n_layers=args.n_layers,
