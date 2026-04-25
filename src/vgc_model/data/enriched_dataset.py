@@ -84,8 +84,8 @@ class EnrichedDataset(Dataset):
         self.replay_files: list[tuple[Path, int]] = []
         self._index_replays(replay_dir, min_rating)
 
-        # Pre-parse all replays
-        self.samples: list[tuple[EnrichedSample, TeamPreview]] = []
+        # Pre-parse all replays — each sample includes own + opponent prior turn samples
+        self.samples: list[tuple[EnrichedSample, TeamPreview, Optional[EnrichedSample], Optional[EnrichedSample]]] = []
         self.team_previews: list[tuple[TeamPreview, int, str]] = []  # (preview, rating, winner)
         self._load_all()
 
@@ -155,10 +155,27 @@ class EnrichedDataset(Dataset):
             except Exception:
                 continue
 
+            # Group samples by player and turn to link prior turn actions
+            # We track both players' previous samples so we can encode
+            # opponent actions from the prior turn (which are known — we saw them)
+            prev_own: dict[str, EnrichedSample] = {}   # player -> their last sample
+            prev_opp: dict[str, EnrichedSample] = {}   # player -> opponent's last sample
+            opp_of = {"p1": "p2", "p2": "p1"}
+
+            # First pass: index all samples by (player, turn) for opponent lookups
+            by_player_turn: dict[tuple[str, int], EnrichedSample] = {}
+            for sample in result:
+                by_player_turn[(sample.player, sample.state.turn)] = sample
+
             for sample in result:
                 if self.winner_only and not sample.is_winner:
                     continue
-                self.samples.append((sample, tp))
+                own_prev = prev_own.get(sample.player)
+                # Opponent's sample from the PREVIOUS turn (their actions are revealed)
+                opp_prev_turn = sample.state.turn - 1
+                opp_prev = by_player_turn.get((opp_of[sample.player], opp_prev_turn))
+                self.samples.append((sample, tp, own_prev, opp_prev))
+                prev_own[sample.player] = sample
 
             # Team preview sample (from winner's perspective)
             if (len(tp.p1_team) == 6 and len(tp.p2_team) == 6
@@ -170,8 +187,8 @@ class EnrichedDataset(Dataset):
 
     def __getitem__(self, idx: int) -> dict[str, torch.Tensor]:
         if idx < len(self.samples):
-            sample, tp = self.samples[idx]
-            tensors = self._encode_sample(sample, tp)
+            sample, tp, prev_own, prev_opp = self.samples[idx]
+            tensors = self._encode_sample(sample, tp, prev_own, prev_opp)
 
             if self.augment and random.random() < 0.5:
                 tensors = self._swap_slots(tensors)
@@ -188,6 +205,8 @@ class EnrichedDataset(Dataset):
 
     def _encode_sample(
         self, sample: EnrichedSample, tp: TeamPreview,
+        prev_own: Optional[EnrichedSample] = None,
+        prev_opp: Optional[EnrichedSample] = None,
     ) -> dict[str, torch.Tensor]:
         """Encode an EnrichedSample into tensor dict for model v2."""
         player = sample.player
@@ -430,6 +449,9 @@ class EnrichedDataset(Dataset):
             "selected_ids": torch.tensor(selected_ids, dtype=torch.long),
             "lead_labels": torch.tensor(lead_labels, dtype=torch.float),
             "has_team_preview": torch.tensor(True, dtype=torch.bool),
+            # Prior turn actions: [own_a, own_b, opp_a, opp_b]
+            # Index 14 = "no prior" (turn 1 or no previous sample)
+            "prev_actions": self._encode_prev_actions(prev_own, prev_opp, player),
             # Metadata
             "rating_weight": torch.tensor(get_rating_weight(sample.rating), dtype=torch.float),
         }
@@ -481,6 +503,7 @@ class EnrichedDataset(Dataset):
             "lead_labels": torch.tensor(
                 self._encode_lead_labels_from_tp(tp, player), dtype=torch.float),
             "has_team_preview": torch.tensor(True, dtype=torch.bool),
+            "prev_actions": torch.full((4,), MAX_ACTIONS, dtype=torch.long),  # no prior
             "rating_weight": torch.tensor(get_rating_weight(rating), dtype=torch.float),
         }
 
@@ -536,6 +559,46 @@ class EnrichedDataset(Dataset):
             return min(move_idx, 3) * 3 + min(target_idx, 2)
 
         return 0
+
+    def _encode_prev_actions(
+        self,
+        prev_own: Optional[EnrichedSample],
+        prev_opp: Optional[EnrichedSample],
+        player: str,
+    ) -> torch.Tensor:
+        """Encode previous turn's actions as [own_a, own_b, opp_a, opp_b].
+
+        Index 14 (MAX_ACTIONS) = no prior turn / unknown.
+        """
+        no_prior = MAX_ACTIONS  # sentinel for "no previous action"
+        result = [no_prior] * 4
+
+        # Own actions from previous turn
+        if prev_own is not None:
+            state = prev_own.state
+            if player == "p1":
+                own_active, own_bench = state.p1_active, state.p1_bench
+            else:
+                own_active, own_bench = state.p2_active, state.p2_bench
+            a = self._encode_action(prev_own.actions.slot_a, 0, own_active, own_bench, player)
+            b = self._encode_action(prev_own.actions.slot_b, 1, own_active, own_bench, player)
+            if a >= 0: result[0] = a
+            if b >= 0: result[1] = b
+
+        # Opponent actions from previous turn (revealed — we saw them happen)
+        if prev_opp is not None:
+            opp_player = prev_opp.player
+            state = prev_opp.state
+            if opp_player == "p1":
+                opp_active, opp_bench = state.p1_active, state.p1_bench
+            else:
+                opp_active, opp_bench = state.p2_active, state.p2_bench
+            a = self._encode_action(prev_opp.actions.slot_a, 0, opp_active, opp_bench, opp_player)
+            b = self._encode_action(prev_opp.actions.slot_b, 1, opp_active, opp_bench, opp_player)
+            if a >= 0: result[2] = a
+            if b >= 0: result[3] = b
+
+        return torch.tensor(result, dtype=torch.long)
 
     # ------------------------------------------------------------------
     # Team preview helpers
@@ -600,6 +663,12 @@ class EnrichedDataset(Dataset):
         # Swap action labels
         t["action_slot_a"], t["action_slot_b"] = t["action_slot_b"].clone(), t["action_slot_a"].clone()
         t["action_mask_a"], t["action_mask_b"] = t["action_mask_b"].clone(), t["action_mask_a"].clone()
+
+        # Swap prior own actions (indices 0,1) and prior opp actions (indices 2,3)
+        prev = t["prev_actions"].clone()
+        prev[0], prev[1] = t["prev_actions"][1], t["prev_actions"][0]
+        prev[2], prev[3] = t["prev_actions"][3], t["prev_actions"][2]
+        t["prev_actions"] = prev
 
         return t
 
