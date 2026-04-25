@@ -71,6 +71,7 @@ class EnrichedDataset(Dataset):
         winner_only: bool = True,
         min_turns: int = 3,
         augment: bool = True,
+        history_mode: str = "single",  # "single", "window", "sequence"
     ):
         self.vocabs = vocabs
         self.feature_tables = feature_tables
@@ -79,6 +80,7 @@ class EnrichedDataset(Dataset):
         self.winner_only = winner_only
         self.min_turns = min_turns
         self.augment = augment
+        self.history_mode = history_mode
 
         # Index replay files with ratings
         self.replay_files: list[tuple[Path, int]] = []
@@ -86,6 +88,9 @@ class EnrichedDataset(Dataset):
 
         # Pre-parse all replays — each sample includes own + opponent prior turn samples
         self.samples: list[tuple[EnrichedSample, TeamPreview, Optional[EnrichedSample], Optional[EnrichedSample]]] = []
+        # Extended history: list of prior (own, opp) sample pairs per sample
+        # For "window" mode: up to 3 pairs; for "sequence" mode: all pairs
+        self.samples_history: list[list[tuple[Optional[EnrichedSample], Optional[EnrichedSample]]]] = []
         self.team_previews: list[tuple[TeamPreview, int, str]] = []  # (preview, rating, winner)
         self._load_all()
 
@@ -158,8 +163,6 @@ class EnrichedDataset(Dataset):
             # Group samples by player and turn to link prior turn actions
             # We track both players' previous samples so we can encode
             # opponent actions from the prior turn (which are known — we saw them)
-            prev_own: dict[str, EnrichedSample] = {}   # player -> their last sample
-            prev_opp: dict[str, EnrichedSample] = {}   # player -> opponent's last sample
             opp_of = {"p1": "p2", "p2": "p1"}
 
             # First pass: index all samples by (player, turn) for opponent lookups
@@ -167,15 +170,41 @@ class EnrichedDataset(Dataset):
             for sample in result:
                 by_player_turn[(sample.player, sample.state.turn)] = sample
 
+            # Build per-player ordered sample lists for history chain
+            player_samples: dict[str, list[EnrichedSample]] = {"p1": [], "p2": []}
+            for sample in result:
+                player_samples[sample.player].append(sample)
+
             for sample in result:
                 if self.winner_only and not sample.is_winner:
                     continue
-                own_prev = prev_own.get(sample.player)
-                # Opponent's sample from the PREVIOUS turn (their actions are revealed)
-                opp_prev_turn = sample.state.turn - 1
-                opp_prev = by_player_turn.get((opp_of[sample.player], opp_prev_turn))
+
+                player = sample.player
+                opp_player = opp_of[player]
+                turn = sample.state.turn
+
+                # Find the index of this sample in the player's ordered list
+                own_history = player_samples[player]
+                # Current sample's position — all prior samples in own_history
+                # are those with turn < current turn
+                own_prior_samples = [s for s in own_history if s.state.turn < turn]
+
+                # Build the history chain: list of (own_prev, opp_prev) pairs
+                # ordered from oldest to newest
+                history_chain: list[tuple[Optional[EnrichedSample], Optional[EnrichedSample]]] = []
+                for prior_own in own_prior_samples:
+                    prior_turn = prior_own.state.turn
+                    # Opponent's sample from the same prior turn (their actions are revealed)
+                    prior_opp = by_player_turn.get((opp_player, prior_turn))
+                    history_chain.append((prior_own, prior_opp))
+
+                # Immediate prior (last in chain, or None)
+                own_prev = own_prior_samples[-1] if own_prior_samples else None
+                opp_prev_turn = turn - 1
+                opp_prev = by_player_turn.get((opp_player, opp_prev_turn))
+
                 self.samples.append((sample, tp, own_prev, opp_prev))
-                prev_own[sample.player] = sample
+                self.samples_history.append(history_chain)
 
             # Team preview sample (from winner's perspective)
             if (len(tp.p1_team) == 6 and len(tp.p2_team) == 6
@@ -188,7 +217,14 @@ class EnrichedDataset(Dataset):
     def __getitem__(self, idx: int) -> dict[str, torch.Tensor]:
         if idx < len(self.samples):
             sample, tp, prev_own, prev_opp = self.samples[idx]
+            history_chain = self.samples_history[idx]
             tensors = self._encode_sample(sample, tp, prev_own, prev_opp)
+
+            # Add extended history encoding based on mode
+            if self.history_mode == "window":
+                self._encode_history_window(tensors, sample, history_chain)
+            elif self.history_mode == "sequence":
+                self._encode_history_sequence(tensors, sample, history_chain)
 
             if self.augment and random.random() < 0.5:
                 tensors = self._swap_slots(tensors)
@@ -456,6 +492,325 @@ class EnrichedDataset(Dataset):
             "rating_weight": torch.tensor(get_rating_weight(sample.rating), dtype=torch.float),
         }
 
+    # ------------------------------------------------------------------
+    # Extended history encoding
+    # ------------------------------------------------------------------
+
+    def _get_active_species_ids(
+        self, sample: EnrichedSample,
+    ) -> list[int]:
+        """Get species IDs for the 4 active slots (own_a, own_b, opp_a, opp_b)."""
+        player = sample.player
+        if player == "p1":
+            own_active = sample.state.p1_active
+            opp_active = sample.state.p2_active
+        else:
+            own_active = sample.state.p2_active
+            opp_active = sample.state.p1_active
+
+        ids = []
+        for active_list in (own_active, opp_active):
+            for i in range(2):
+                if i < len(active_list):
+                    ids.append(self.vocabs.species[active_list[i].species])
+                else:
+                    ids.append(0)
+        return ids
+
+    def _get_active_hp(
+        self, sample: EnrichedSample,
+    ) -> list[float]:
+        """Get HP values for the 4 active slots (own_a, own_b, opp_a, opp_b)."""
+        player = sample.player
+        if player == "p1":
+            own_active = sample.state.p1_active
+            opp_active = sample.state.p2_active
+        else:
+            own_active = sample.state.p2_active
+            opp_active = sample.state.p1_active
+
+        hps = []
+        for active_list in (own_active, opp_active):
+            for i in range(2):
+                if i < len(active_list):
+                    hps.append(active_list[i].hp)
+                else:
+                    hps.append(0.0)
+        return hps
+
+    def _compute_flags(
+        self,
+        current: EnrichedSample,
+        prior: Optional[EnrichedSample],
+    ) -> list[float]:
+        """Compute [any_own_fainted, any_opp_fainted, any_switch] flags.
+
+        Compares active species between prior and current turn.
+        """
+        if prior is None:
+            return [0.0, 0.0, 0.0]
+
+        player = current.player
+        if player == "p1":
+            cur_own = current.state.p1_active
+            cur_opp = current.state.p2_active
+            prev_own = prior.state.p1_active
+            prev_opp = prior.state.p2_active
+        else:
+            cur_own = current.state.p2_active
+            cur_opp = current.state.p1_active
+            prev_own = prior.state.p2_active
+            prev_opp = prior.state.p1_active
+
+        # Check for own fainted: species in prior active but not in current, with HP=0
+        prev_own_species = {self._base_species(p.species) for p in prev_own}
+        cur_own_species = {self._base_species(p.species) for p in cur_own}
+        disappeared_own = prev_own_species - cur_own_species
+        any_own_fainted = 0.0
+        for p in prev_own:
+            if self._base_species(p.species) in disappeared_own and p.hp <= 0:
+                any_own_fainted = 1.0
+                break
+
+        # Check for opp fainted
+        prev_opp_species = {self._base_species(p.species) for p in prev_opp}
+        cur_opp_species = {self._base_species(p.species) for p in cur_opp}
+        disappeared_opp = prev_opp_species - cur_opp_species
+        any_opp_fainted = 0.0
+        for p in prev_opp:
+            if self._base_species(p.species) in disappeared_opp and p.hp <= 0:
+                any_opp_fainted = 1.0
+                break
+
+        # Any switch: any species changed in active slots
+        any_switch = 1.0 if (prev_own_species != cur_own_species or
+                             prev_opp_species != cur_opp_species) else 0.0
+
+        return [any_own_fainted, any_opp_fainted, any_switch]
+
+    def _compute_seq_flags(
+        self,
+        current_own: Optional[EnrichedSample],
+        prev_own: Optional[EnrichedSample],
+        current_opp: Optional[EnrichedSample],
+        prev_opp: Optional[EnrichedSample],
+        player: str,
+    ) -> list[float]:
+        """Compute [any_fainted, any_switch, field_changed] for sequence model."""
+        if current_own is None or prev_own is None:
+            return [0.0, 0.0, 0.0]
+
+        if player == "p1":
+            cur_own_a = current_own.state.p1_active
+            cur_opp_a = current_own.state.p2_active
+            prev_own_a = prev_own.state.p1_active
+            prev_opp_a = prev_own.state.p2_active
+        else:
+            cur_own_a = current_own.state.p2_active
+            cur_opp_a = current_own.state.p1_active
+            prev_own_a = prev_own.state.p2_active
+            prev_opp_a = prev_own.state.p1_active
+
+        # Any fainted
+        any_fainted = 0.0
+        for p in prev_own_a + prev_opp_a:
+            if p.hp <= 0:
+                any_fainted = 1.0
+                break
+
+        # Any switch
+        prev_species = {self._base_species(p.species) for p in prev_own_a + prev_opp_a}
+        cur_species = {self._base_species(p.species) for p in cur_own_a + cur_opp_a}
+        any_switch = 1.0 if prev_species != cur_species else 0.0
+
+        # Field changed
+        cur_field = current_own.state.field
+        prev_field = prev_own.state.field
+        field_changed = 0.0
+        if (cur_field.weather != prev_field.weather or
+                cur_field.terrain != prev_field.terrain or
+                cur_field.trick_room != prev_field.trick_room):
+            field_changed = 1.0
+
+        return [any_fainted, any_switch, field_changed]
+
+    def _encode_history_window(
+        self,
+        tensors: dict[str, torch.Tensor],
+        sample: EnrichedSample,
+        history_chain: list[tuple[Optional[EnrichedSample], Optional[EnrichedSample]]],
+    ):
+        """Add 3-turn window history to tensors dict."""
+        player = sample.player
+        HISTORY_TURNS = 3
+        NO_PRIOR = MAX_ACTIONS  # sentinel
+
+        # Take last 3 entries from history chain
+        recent = history_chain[-HISTORY_TURNS:]
+
+        actions_window = []  # (3, 4)
+        flags_window = []    # (3, 3)
+
+        for turn_idx in range(HISTORY_TURNS):
+            if turn_idx < len(recent):
+                prior_own, prior_opp = recent[turn_idx]
+                # Encode actions for this prior turn
+                action_indices = self._encode_prev_actions(prior_own, prior_opp, player).tolist()
+
+                # Compute flags by comparing this turn to the next one
+                # The "next" sample is either the next in chain or the current sample
+                if turn_idx + 1 < len(recent):
+                    next_own = recent[turn_idx + 1][0]
+                elif prior_own is not None:
+                    next_own = sample  # current sample is next after the last prior
+                else:
+                    next_own = None
+
+                # For flags: compare prior_own state to next_own state
+                if prior_own is not None and next_own is not None:
+                    flags = self._compute_flags_between(prior_own, next_own, player)
+                else:
+                    flags = [0.0, 0.0, 0.0]
+            else:
+                action_indices = [NO_PRIOR] * 4
+                flags = [0.0, 0.0, 0.0]
+
+            actions_window.append(action_indices)
+            flags_window.append(flags)
+
+        tensors["prev_actions_window"] = torch.tensor(actions_window, dtype=torch.long)   # (3, 4)
+        tensors["prev_flags_window"] = torch.tensor(flags_window, dtype=torch.float)      # (3, 3)
+
+    def _compute_flags_between(
+        self,
+        prior: EnrichedSample,
+        next_sample: EnrichedSample,
+        player: str,
+    ) -> list[float]:
+        """Compute [any_own_fainted, any_opp_fainted, any_switch] between two samples."""
+        if player == "p1":
+            prev_own = prior.state.p1_active
+            prev_opp = prior.state.p2_active
+            next_own = next_sample.state.p1_active
+            next_opp = next_sample.state.p2_active
+        else:
+            prev_own = prior.state.p2_active
+            prev_opp = prior.state.p1_active
+            next_own = next_sample.state.p2_active
+            next_opp = next_sample.state.p1_active
+
+        prev_own_sp = {self._base_species(p.species) for p in prev_own}
+        next_own_sp = {self._base_species(p.species) for p in next_own}
+        prev_opp_sp = {self._base_species(p.species) for p in prev_opp}
+        next_opp_sp = {self._base_species(p.species) for p in next_opp}
+
+        # Own fainted: disappeared and had HP=0
+        disappeared_own = prev_own_sp - next_own_sp
+        any_own_fainted = 0.0
+        for p in prev_own:
+            if self._base_species(p.species) in disappeared_own and p.hp <= 0:
+                any_own_fainted = 1.0
+                break
+
+        # Opp fainted
+        disappeared_opp = prev_opp_sp - next_opp_sp
+        any_opp_fainted = 0.0
+        for p in prev_opp:
+            if self._base_species(p.species) in disappeared_opp and p.hp <= 0:
+                any_opp_fainted = 1.0
+                break
+
+        any_switch = 1.0 if (prev_own_sp != next_own_sp or
+                             prev_opp_sp != next_opp_sp) else 0.0
+
+        return [any_own_fainted, any_opp_fainted, any_switch]
+
+    def _encode_history_sequence(
+        self,
+        tensors: dict[str, torch.Tensor],
+        sample: EnrichedSample,
+        history_chain: list[tuple[Optional[EnrichedSample], Optional[EnrichedSample]]],
+    ):
+        """Add full sequence history to tensors dict for LSTM model."""
+        player = sample.player
+        MAX_TURNS = 30
+        NO_PRIOR = MAX_ACTIONS
+
+        actual_len = min(len(history_chain), MAX_TURNS)
+
+        # Pre-allocate
+        seq_actions = torch.full((MAX_TURNS, 4), NO_PRIOR, dtype=torch.long)
+        seq_species = torch.zeros(MAX_TURNS, 4, dtype=torch.long)
+        seq_hp = torch.zeros(MAX_TURNS, 4, dtype=torch.float)
+        seq_flags = torch.zeros(MAX_TURNS, 3, dtype=torch.float)
+
+        # Take last MAX_TURNS entries
+        recent = history_chain[-MAX_TURNS:]
+
+        for i, (prior_own, prior_opp) in enumerate(recent):
+            # Actions
+            seq_actions[i] = self._encode_prev_actions(prior_own, prior_opp, player)
+
+            # Active species IDs and HP
+            if prior_own is not None:
+                if player == "p1":
+                    own_active = prior_own.state.p1_active
+                    opp_active = prior_own.state.p2_active
+                else:
+                    own_active = prior_own.state.p2_active
+                    opp_active = prior_own.state.p1_active
+
+                active_lists = [own_active, opp_active]
+                slot = 0
+                for active_list in active_lists:
+                    for j in range(2):
+                        if j < len(active_list):
+                            seq_species[i, slot] = self.vocabs.species[active_list[j].species]
+                            seq_hp[i, slot] = active_list[j].hp
+                        slot += 1
+
+            # Flags: compare this turn to the next
+            if i + 1 < len(recent):
+                next_own = recent[i + 1][0]
+            else:
+                next_own = sample  # current sample
+
+            if prior_own is not None and next_own is not None:
+                # [any_fainted, any_switch, field_changed]
+                if player == "p1":
+                    prev_all = prior_own.state.p1_active + prior_own.state.p2_active
+                    next_all = next_own.state.p1_active + next_own.state.p2_active
+                else:
+                    prev_all = prior_own.state.p2_active + prior_own.state.p1_active
+                    next_all = next_own.state.p2_active + next_own.state.p1_active
+
+                prev_sp = {self._base_species(p.species) for p in prev_all}
+                next_sp = {self._base_species(p.species) for p in next_all}
+
+                any_fainted = 0.0
+                for p in prev_all:
+                    if self._base_species(p.species) not in next_sp and p.hp <= 0:
+                        any_fainted = 1.0
+                        break
+
+                any_switch = 1.0 if prev_sp != next_sp else 0.0
+
+                field_changed = 0.0
+                cur_f = next_own.state.field
+                prev_f = prior_own.state.field
+                if (cur_f.weather != prev_f.weather or
+                        cur_f.terrain != prev_f.terrain or
+                        cur_f.trick_room != prev_f.trick_room):
+                    field_changed = 1.0
+
+                seq_flags[i] = torch.tensor([any_fainted, any_switch, field_changed])
+
+        tensors["prev_seq_actions"] = seq_actions      # (30, 4)
+        tensors["prev_seq_species"] = seq_species      # (30, 4)
+        tensors["prev_seq_hp"] = seq_hp                # (30, 4)
+        tensors["prev_seq_flags"] = seq_flags          # (30, 3)
+        tensors["prev_seq_len"] = torch.tensor(actual_len, dtype=torch.long)
+
     def _encode_team_preview(
         self, tp: TeamPreview, rating: int, winner: str,
     ) -> dict[str, torch.Tensor]:
@@ -505,7 +860,22 @@ class EnrichedDataset(Dataset):
             "has_team_preview": torch.tensor(True, dtype=torch.bool),
             "prev_actions": torch.full((4,), MAX_ACTIONS, dtype=torch.long),  # no prior
             "rating_weight": torch.tensor(get_rating_weight(rating), dtype=torch.float),
+            **self._team_preview_history_tensors(),
         }
+
+    def _team_preview_history_tensors(self) -> dict[str, torch.Tensor]:
+        """Return zeroed-out history tensors for team preview samples."""
+        result = {}
+        if self.history_mode == "window":
+            result["prev_actions_window"] = torch.full((3, 4), MAX_ACTIONS, dtype=torch.long)
+            result["prev_flags_window"] = torch.zeros(3, 3, dtype=torch.float)
+        elif self.history_mode == "sequence":
+            result["prev_seq_actions"] = torch.full((30, 4), MAX_ACTIONS, dtype=torch.long)
+            result["prev_seq_species"] = torch.zeros(30, 4, dtype=torch.long)
+            result["prev_seq_hp"] = torch.zeros(30, 4, dtype=torch.float)
+            result["prev_seq_flags"] = torch.zeros(30, 3, dtype=torch.float)
+            result["prev_seq_len"] = torch.tensor(0, dtype=torch.long)
+        return result
 
     # ------------------------------------------------------------------
     # Action encoding (same logic as v1)
@@ -669,6 +1039,42 @@ class EnrichedDataset(Dataset):
         prev[0], prev[1] = t["prev_actions"][1], t["prev_actions"][0]
         prev[2], prev[3] = t["prev_actions"][3], t["prev_actions"][2]
         t["prev_actions"] = prev
+
+        # Swap window history actions (indices 0↔1, 2↔3 per turn)
+        if "prev_actions_window" in t:
+            paw = t["prev_actions_window"].clone()  # (3, 4)
+            for turn in range(paw.shape[0]):
+                paw[turn, 0], paw[turn, 1] = t["prev_actions_window"][turn, 1].clone(), t["prev_actions_window"][turn, 0].clone()
+                paw[turn, 2], paw[turn, 3] = t["prev_actions_window"][turn, 3].clone(), t["prev_actions_window"][turn, 2].clone()
+            t["prev_actions_window"] = paw
+            # Flags don't need swapping — they're aggregate (any_own_fainted etc.)
+            # But own vs opp faint flags swap: index 0↔1
+            pfw = t["prev_flags_window"].clone()  # (3, 3)
+            for turn in range(pfw.shape[0]):
+                pfw[turn, 0], pfw[turn, 1] = t["prev_flags_window"][turn, 1].clone(), t["prev_flags_window"][turn, 0].clone()
+            t["prev_flags_window"] = pfw
+
+        # Swap sequence history actions (indices 0↔1, 2↔3 per turn)
+        if "prev_seq_actions" in t:
+            psa = t["prev_seq_actions"].clone()  # (max_turns, 4)
+            for turn in range(psa.shape[0]):
+                psa[turn, 0], psa[turn, 1] = t["prev_seq_actions"][turn, 1].clone(), t["prev_seq_actions"][turn, 0].clone()
+                psa[turn, 2], psa[turn, 3] = t["prev_seq_actions"][turn, 3].clone(), t["prev_seq_actions"][turn, 2].clone()
+            t["prev_seq_actions"] = psa
+
+            # Swap sequence species (own_a↔own_b = 0↔1, opp_a↔opp_b = 2↔3)
+            pss = t["prev_seq_species"].clone()
+            for turn in range(pss.shape[0]):
+                pss[turn, 0], pss[turn, 1] = t["prev_seq_species"][turn, 1].clone(), t["prev_seq_species"][turn, 0].clone()
+                pss[turn, 2], pss[turn, 3] = t["prev_seq_species"][turn, 3].clone(), t["prev_seq_species"][turn, 2].clone()
+            t["prev_seq_species"] = pss
+
+            # Swap sequence HP
+            psh = t["prev_seq_hp"].clone()
+            for turn in range(psh.shape[0]):
+                psh[turn, 0], psh[turn, 1] = t["prev_seq_hp"][turn, 1].clone(), t["prev_seq_hp"][turn, 0].clone()
+                psh[turn, 2], psh[turn, 3] = t["prev_seq_hp"][turn, 3].clone(), t["prev_seq_hp"][turn, 2].clone()
+            t["prev_seq_hp"] = psh
 
         return t
 

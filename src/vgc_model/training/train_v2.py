@@ -20,6 +20,8 @@ from ..data.usage_stats import UsageStats
 from ..data.player_profiles import PlayerProfiles
 from ..data.vocab import Vocabs
 from ..model.vgc_model_v2 import VGCTransformerV2, ModelConfigV2
+from ..model.vgc_model_v2_window import VGCTransformerV2Window, ModelConfigV2Window
+from ..model.vgc_model_v2_seq import VGCTransformerV2Seq, ModelConfigV2Seq
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent.parent
 DATA_DIR = PROJECT_ROOT / "data"
@@ -79,6 +81,7 @@ def train(
     n_layers: int = 4,
     d_ff: int = 256,
     n_heads: int = 4,
+    model_variant: str = "v2",
 ):
     machine_name = platform.node() or "unknown"
 
@@ -125,8 +128,12 @@ def train(
         rdir = _find_replay_dir()
     print(f"Replay directory: {rdir}")
 
+    # Map model variant to history mode
+    history_mode_map = {"v2": "single", "v2_window": "window", "v2_seq": "sequence"}
+    history_mode = history_mode_map[model_variant]
+
     # Load dataset
-    print(f"Loading enriched dataset (min_rating={min_rating})...")
+    print(f"Loading enriched dataset (min_rating={min_rating}, history_mode={history_mode})...")
     dataset = EnrichedDataset(
         replay_dir=rdir,
         vocabs=vocabs,
@@ -136,6 +143,7 @@ def train(
         min_rating=min_rating,
         winner_only=True,
         min_turns=3,
+        history_mode=history_mode,
     )
     print(f"Dataset: {len(dataset)} samples ({len(dataset.samples)} battle turns, "
           f"{len(dataset.team_previews)} team previews)")
@@ -163,14 +171,22 @@ def train(
     )
 
     # Model
-    config = ModelConfigV2(
-        dropout=dropout,
-        n_layers=n_layers,
-        d_ff=d_ff,
-        n_heads=n_heads,
-    )
-    model = VGCTransformerV2(vocabs, config).to(device)
-    print(f"Model v2 parameters: {model.count_parameters():,}")
+    if model_variant == "v2_window":
+        config = ModelConfigV2Window(
+            dropout=dropout, n_layers=n_layers, d_ff=d_ff, n_heads=n_heads,
+        )
+        model = VGCTransformerV2Window(vocabs, config).to(device)
+    elif model_variant == "v2_seq":
+        config = ModelConfigV2Seq(
+            dropout=dropout, n_layers=n_layers, d_ff=d_ff, n_heads=n_heads,
+        )
+        model = VGCTransformerV2Seq(vocabs, config).to(device)
+    else:
+        config = ModelConfigV2(
+            dropout=dropout, n_layers=n_layers, d_ff=d_ff, n_heads=n_heads,
+        )
+        model = VGCTransformerV2(vocabs, config).to(device)
+    print(f"Model {model_variant} parameters: {model.count_parameters():,}")
 
     # Optimizer
     optimizer = torch.optim.AdamW(model.parameters(), lr=lr, weight_decay=weight_decay)
@@ -182,7 +198,7 @@ def train(
 
     # JSONL training log
     if not run_id:
-        run_id = f"v2_run_{int(time.time())}"
+        run_id = f"{model_variant}_run_{int(time.time())}"
     training_log_path = CHECKPOINT_DIR / "training_log.jsonl"
 
     CHECKPOINT_DIR.mkdir(parents=True, exist_ok=True)
@@ -238,7 +254,7 @@ def train(
             _report_to_dashboard(dashboard_url, {
                 "session_id": run_id,
                 "machine": machine_name,
-                "model_version": "v2",
+                "model_version": model_variant,
                 "epoch": epoch,
                 "total_epochs": epochs,
                 "timestamp": time.time(),
@@ -398,6 +414,9 @@ def main():
     parser.add_argument("--n-layers", type=int, default=4)
     parser.add_argument("--d-ff", type=int, default=256)
     parser.add_argument("--n-heads", type=int, default=4)
+    parser.add_argument("--model", type=str, default="v2",
+                        choices=["v2", "v2_window", "v2_seq"],
+                        help="Model variant: v2 (default), v2_window (3-turn), v2_seq (LSTM)")
     args = parser.parse_args()
 
     train(
@@ -415,6 +434,7 @@ def main():
         n_layers=args.n_layers,
         d_ff=args.d_ff,
         n_heads=args.n_heads,
+        model_variant=args.model,
     )
 
 
