@@ -488,9 +488,43 @@ class EnrichedDataset(Dataset):
             # Prior turn actions: [own_a, own_b, opp_a, opp_b]
             # Index 14 = "no prior" (turn 1 or no previous sample)
             "prev_actions": self._encode_prev_actions(prev_own, prev_opp, player),
+            # Prior turn speed order: [own_a_went_first, own_b_went_first]
+            # 1.0 = moved before any opponent slot, 0.0 = didn't, 0.5 = unknown
+            "prev_speed": self._encode_speed_order(prev_own, player),
             # Metadata
             "rating_weight": torch.tensor(get_rating_weight(sample.rating), dtype=torch.float),
         }
+
+    @staticmethod
+    def _encode_speed_order(
+        prev_sample: Optional[EnrichedSample], player: str,
+    ) -> torch.Tensor:
+        """Encode whether own slots moved before opponent slots last turn.
+
+        Returns (2,) tensor: [own_a_went_first, own_b_went_first]
+        1.0 = moved before any opponent, 0.0 = moved after, 0.5 = unknown/no data.
+        """
+        if prev_sample is None or not prev_sample.move_order:
+            return torch.full((2,), 0.5, dtype=torch.float)
+
+        order = prev_sample.move_order  # e.g. ["p2a", "p1a", "p2b", "p1b"]
+        own_prefix = player      # "p1" or "p2"
+        opp_prefix = "p2" if player == "p1" else "p1"
+
+        def went_first(own_slot: str) -> float:
+            """Did own_slot move before any opp slot?"""
+            if own_slot not in order:
+                return 0.5  # didn't move (switch, fainted, etc.)
+            own_pos = order.index(own_slot)
+            opp_positions = [order.index(s) for s in order if s.startswith(opp_prefix)]
+            if not opp_positions:
+                return 0.5
+            return 1.0 if own_pos < min(opp_positions) else 0.0
+
+        return torch.tensor([
+            went_first(f"{own_prefix}a"),
+            went_first(f"{own_prefix}b"),
+        ], dtype=torch.float)
 
     # ------------------------------------------------------------------
     # Extended history encoding
@@ -678,8 +712,18 @@ class EnrichedDataset(Dataset):
             actions_window.append(action_indices)
             flags_window.append(flags)
 
+        # Speed order per prior turn
+        speed_window = []
+        for turn_idx in range(HISTORY_TURNS):
+            if turn_idx < len(recent):
+                prior_own = recent[turn_idx][0]
+                speed_window.append(self._encode_speed_order(prior_own, player).tolist())
+            else:
+                speed_window.append([0.5, 0.5])
+
         tensors["prev_actions_window"] = torch.tensor(actions_window, dtype=torch.long)   # (3, 4)
         tensors["prev_flags_window"] = torch.tensor(flags_window, dtype=torch.float)      # (3, 3)
+        tensors["prev_speed_window"] = torch.tensor(speed_window, dtype=torch.float)      # (3, 2)
 
     def _compute_flags_between(
         self,
@@ -805,10 +849,16 @@ class EnrichedDataset(Dataset):
 
                 seq_flags[i] = torch.tensor([any_fainted, any_switch, field_changed])
 
+        # Speed order per turn
+        seq_speed = torch.full((MAX_TURNS, 2), 0.5, dtype=torch.float)
+        for i, (prior_own, _) in enumerate(recent):
+            seq_speed[i] = self._encode_speed_order(prior_own, player)
+
         tensors["prev_seq_actions"] = seq_actions      # (30, 4)
         tensors["prev_seq_species"] = seq_species      # (30, 4)
         tensors["prev_seq_hp"] = seq_hp                # (30, 4)
         tensors["prev_seq_flags"] = seq_flags          # (30, 3)
+        tensors["prev_seq_speed"] = seq_speed           # (30, 2)
         tensors["prev_seq_len"] = torch.tensor(actual_len, dtype=torch.long)
 
     def _encode_team_preview(
@@ -859,6 +909,7 @@ class EnrichedDataset(Dataset):
                 self._encode_lead_labels_from_tp(tp, player), dtype=torch.float),
             "has_team_preview": torch.tensor(True, dtype=torch.bool),
             "prev_actions": torch.full((4,), MAX_ACTIONS, dtype=torch.long),  # no prior
+            "prev_speed": torch.full((2,), 0.5, dtype=torch.float),  # unknown
             "rating_weight": torch.tensor(get_rating_weight(rating), dtype=torch.float),
             **self._team_preview_history_tensors(),
         }

@@ -253,7 +253,7 @@ class VGCTransformerV2(nn.Module):
 
         # Prior turn encoding: 4 action embeddings (own_a, own_b, opp_a, opp_b)
         self.prev_action_embed = nn.Embedding(config.num_actions + 1, 16)  # +1 for "no prior"
-        self.prev_turn_proj = nn.Linear(16 * 4, config.d_model)
+        self.prev_turn_proj = nn.Linear(16 * 4 + 2, config.d_model)  # +2 for speed flags
 
         # Joint slot cross-attention: slots A and B see each other before action heads
         self.slot_cross_attn = nn.MultiheadAttention(
@@ -328,11 +328,14 @@ class VGCTransformerV2(nn.Module):
         # Attention mask (True = ignore)
         src_key_padding_mask = (alive_ext == 0)
 
-        # Inject prior turn context as an extra token if available
+        # Inject prior turn context + speed order into global token
         if "prev_actions" in batch:
             prev = batch["prev_actions"]  # (B, 4) — own_a, own_b, opp_a, opp_b
             prev_embs = self.prev_action_embed(prev)  # (B, 4, 16)
-            prev_token = self.prev_turn_proj(prev_embs.reshape(prev_embs.shape[0], -1))  # (B, d_model)
+            prev_flat = prev_embs.reshape(prev_embs.shape[0], -1)  # (B, 64)
+            speed = batch.get("prev_speed", torch.full((prev.shape[0], 2), 0.5, device=prev.device))
+            prev_input = torch.cat([prev_flat, speed], dim=-1)  # (B, 66)
+            prev_token = self.prev_turn_proj(prev_input)  # (B, d_model)
             tokens[:, 8] = tokens[:, 8] + prev_token  # add to global token
 
         # Transformer

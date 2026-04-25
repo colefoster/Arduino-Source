@@ -60,7 +60,7 @@ class VGCTransformerV2Seq(nn.Module):
         self.seq_action_embed = nn.Embedding(config.num_actions + 1, 16)  # +1 for sentinel
         self.seq_species_embed = nn.Embedding(len(vocabs.species), 16)    # small species embed
 
-        per_turn_input = 16 * 4 + 16 * 4 + 4 + 3  # 135
+        per_turn_input = 16 * 4 + 16 * 4 + 4 + 3 + 2  # 137 (+2 speed flags)
         self.per_turn_proj = nn.Linear(per_turn_input, 64)
         self.history_lstm = nn.LSTM(
             input_size=64,
@@ -118,8 +118,12 @@ class VGCTransformerV2Seq(nn.Module):
         action_flat = action_embs.reshape(B, T, -1)    # (B, T, 64)
         species_flat = species_embs.reshape(B, T, -1)   # (B, T, 64)
 
-        # Concat all features per turn: (B, T, 135)
-        per_turn = torch.cat([action_flat, species_flat, hp, flags], dim=-1)
+        # Speed flags (optional — may not be in batch for older data)
+        speed = batch.get("prev_seq_speed",
+                          torch.full((B, T, 2), 0.5, device=actions.device))  # (B, T, 2)
+
+        # Concat all features per turn: (B, T, 137)
+        per_turn = torch.cat([action_flat, species_flat, hp, flags, speed], dim=-1)
 
         # Project to LSTM input size: (B, T, 64)
         per_turn_proj = self.per_turn_proj(per_turn)
