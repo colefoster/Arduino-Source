@@ -218,6 +218,16 @@ def train(
     # Resume from checkpoint if provided
     if resume_path and Path(resume_path).exists():
         print(f"Resuming from {resume_path}...")
+        # Handle pickle path mismatches (vgc_model vs src.vgc_model)
+        import importlib
+        import sys as _sys
+        for mod_name in ["vgc_model", "vgc_model.model", "vgc_model.model.vgc_model_v2",
+                         "vgc_model.model.vgc_model_v2_seq", "vgc_model.model.vgc_model_v2_window"]:
+            src_name = f"src.{mod_name}"
+            if src_name in _sys.modules and mod_name not in _sys.modules:
+                _sys.modules[mod_name] = _sys.modules[src_name]
+            elif mod_name in _sys.modules and src_name not in _sys.modules:
+                _sys.modules[src_name] = _sys.modules[mod_name]
         ckpt = torch.load(resume_path, map_location=device, weights_only=False)
         model.load_state_dict(ckpt["model_state_dict"])
         if "optimizer_state_dict" in ckpt:
