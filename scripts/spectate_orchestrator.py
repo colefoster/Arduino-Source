@@ -128,6 +128,7 @@ class ManagedConnection:
         self.state = ConnState.DEAD
         self.logged_in = False
         self.joined_rooms: set[str] = set()
+        self.room_join_times: dict[str, float] = {}  # room_id -> join timestamp
         self.battles: dict[str, BattleLog] = {}
         self._join_lock = asyncio.Lock()
 
@@ -158,6 +159,7 @@ class ManagedConnection:
             self.state = ConnState.DEAD
             self.ws = None
             self.joined_rooms.clear()
+            self.room_join_times.clear()
             self.battles.clear()
             self.logged_in = False
 
@@ -210,6 +212,7 @@ class ManagedConnection:
             orchestrator.on_battle_finished(self, battle)
             del self.battles[room_id]
             self.joined_rooms.discard(room_id)
+            self.room_join_times.pop(room_id, None)
 
     async def _login(self):
         name = "Spec" + "".join(random.choices(string.digits, k=6))
@@ -221,6 +224,7 @@ class ManagedConnection:
             if self.ws and self.state == ConnState.READY:
                 await self.ws.send(f"|/join {room_id}")
                 self.joined_rooms.add(room_id)
+                self.room_join_times[room_id] = time.time()
                 await asyncio.sleep(JOIN_DELAY)
 
     async def leave_room(self, room_id: str):
@@ -230,6 +234,7 @@ class ManagedConnection:
             except Exception:
                 pass
         self.joined_rooms.discard(room_id)
+        self.room_join_times.pop(room_id, None)
 
 
 # ---------------------------------------------------------------------------
@@ -257,8 +262,9 @@ class Orchestrator:
         self._draining = False
         self._drain_start: float = 0
         self._start_time = time.time()
+        self._last_save_time = time.time()
         self.shutting_down = False
-        self.stats = {"joined": 0, "saved": 0, "failed": 0, "failovers": 0}
+        self.stats = {"joined": 0, "saved": 0, "failed": 0, "failovers": 0, "watchdog_resets": 0}
 
         # Load existing index
         if INDEX_FILE.exists():
@@ -293,6 +299,7 @@ class Orchestrator:
         tasks.append(asyncio.create_task(self._index_flush_loop()))
         tasks.append(asyncio.create_task(self._status_writer_loop()))
         tasks.append(asyncio.create_task(self._drain_watcher()))
+        tasks.append(asyncio.create_task(self._watchdog_loop()))
 
         try:
             if duration:
@@ -476,6 +483,7 @@ class Orchestrator:
         }
         self._index_dirty = True
         self.stats["saved"] += 1
+        self._last_save_time = time.time()
         print(f"  Saved {replay_id} (winner: {battle.winner}, rating: {battle.rating})", flush=True)
 
     # -- Connection failure --
@@ -513,6 +521,59 @@ class Orchestrator:
                 print(f"  Drain timeout — {total_rooms} battles lost", flush=True)
                 self.shutting_down = True
                 raise asyncio.CancelledError
+
+    # -- Watchdog --
+
+    WATCHDOG_INTERVAL = 120       # check every 2 minutes
+    SAVE_TIMEOUT = 1800           # 30 min without saves → reset connections
+    STALE_ROOM_TIMEOUT = 3600    # 60 min in a room → prune it (games never last this long)
+
+    async def _watchdog_loop(self):
+        """Detect stuck connections and stale rooms, force-reset when needed."""
+        while not self._draining:
+            await asyncio.sleep(self.WATCHDOG_INTERVAL)
+            if self._draining:
+                return
+
+            now = time.time()
+            since_last_save = now - self._last_save_time
+            total_rooms = sum(len(c.joined_rooms) for c in self.connections)
+
+            # Prune stale rooms (joined too long ago — battle is probably over
+            # but we missed the end message)
+            stale_pruned = 0
+            for conn in self.connections:
+                stale = [rid for rid, join_time in conn.room_join_times.items()
+                         if now - join_time > self.STALE_ROOM_TIMEOUT]
+                for rid in stale:
+                    conn.joined_rooms.discard(rid)
+                    conn.room_join_times.pop(rid, None)
+                    conn.battles.pop(rid, None)
+                    self.active_battles.pop(rid, None)
+                    stale_pruned += 1
+
+            if stale_pruned:
+                print(f"  [watchdog] Pruned {stale_pruned} stale rooms (>{self.STALE_ROOM_TIMEOUT}s old)", flush=True)
+
+            # If no saves for SAVE_TIMEOUT and we have rooms, force-reset all connections
+            if since_last_save > self.SAVE_TIMEOUT and total_rooms > 0:
+                self.stats["watchdog_resets"] += 1
+                print(f"  [watchdog] No saves for {since_last_save:.0f}s with {total_rooms} rooms — force-resetting connections", flush=True)
+                for conn in self.connections:
+                    old_rooms = list(conn.joined_rooms)
+                    conn.joined_rooms.clear()
+                    conn.room_join_times.clear()
+                    conn.battles.clear()
+                    for rid in old_rooms:
+                        self.active_battles.pop(rid, None)
+                    # Close the websocket to trigger reconnect
+                    if conn.ws:
+                        try:
+                            await conn.ws.close()
+                        except Exception:
+                            pass
+                self._last_save_time = now  # reset timer to avoid immediate re-trigger
+                print(f"  [watchdog] All connections reset — will reconnect automatically", flush=True)
 
     # -- Index flush --
 
