@@ -920,11 +920,13 @@ class EnrichedDataset(Dataset):
         if self.history_mode == "window":
             result["prev_actions_window"] = torch.full((3, 4), MAX_ACTIONS, dtype=torch.long)
             result["prev_flags_window"] = torch.zeros(3, 3, dtype=torch.float)
+            result["prev_speed_window"] = torch.full((3, 2), 0.5, dtype=torch.float)
         elif self.history_mode == "sequence":
             result["prev_seq_actions"] = torch.full((30, 4), MAX_ACTIONS, dtype=torch.long)
             result["prev_seq_species"] = torch.zeros(30, 4, dtype=torch.long)
             result["prev_seq_hp"] = torch.zeros(30, 4, dtype=torch.float)
             result["prev_seq_flags"] = torch.zeros(30, 3, dtype=torch.float)
+            result["prev_seq_speed"] = torch.full((30, 2), 0.5, dtype=torch.float)
             result["prev_seq_len"] = torch.tensor(0, dtype=torch.long)
         return result
 
