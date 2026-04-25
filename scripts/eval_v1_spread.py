@@ -126,7 +126,7 @@ def main():
     # We also need move names to check spread. The v1 dataset encodes moves
     # but we need the original sample data. We'll re-derive from the batch.
     # Since v1 uses move_ids, we need the reverse vocab mapping.
-    idx_to_move = {v: k for k, v in vocabs.moves._token_to_idx.items()}
+    idx_to_move = {v: k for k, v in vocabs.moves.token_to_idx.items()}
 
     with torch.no_grad():
         for batch in val_loader:
