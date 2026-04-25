@@ -87,6 +87,7 @@ def train(
     d_ff: int = 256,
     n_heads: int = 4,
     model_variant: str = "v2",
+    resume_path: str = "",
 ):
     machine_name = platform.node() or "unknown"
 
@@ -212,8 +213,26 @@ def train(
     CHECKPOINT_DIR.mkdir(parents=True, exist_ok=True)
     best_val_loss = float("inf")
     patience_counter = 0
+    start_epoch = 1
 
-    for epoch in range(1, epochs + 1):
+    # Resume from checkpoint if provided
+    if resume_path and Path(resume_path).exists():
+        print(f"Resuming from {resume_path}...")
+        ckpt = torch.load(resume_path, map_location=device, weights_only=False)
+        model.load_state_dict(ckpt["model_state_dict"])
+        if "optimizer_state_dict" in ckpt:
+            optimizer.load_state_dict(ckpt["optimizer_state_dict"])
+        if "scheduler_state_dict" in ckpt:
+            scheduler.load_state_dict(ckpt["scheduler_state_dict"])
+        else:
+            # Step scheduler forward to match resumed epoch
+            for _ in range(ckpt["epoch"]):
+                scheduler.step()
+        start_epoch = ckpt["epoch"] + 1
+        best_val_loss = ckpt.get("val_loss", float("inf"))
+        print(f"  Resumed at epoch {start_epoch}, best_val_loss={best_val_loss:.4f}")
+
+    for epoch in range(start_epoch, epochs + 1):
         # ---- Train ----
         model.train()
         metrics = _run_epoch(model, train_loader, device, action_criterion, team_criterion,
@@ -294,6 +313,7 @@ def train(
                 "epoch": epoch,
                 "model_state_dict": model.state_dict(),
                 "optimizer_state_dict": optimizer.state_dict(),
+                "scheduler_state_dict": scheduler.state_dict(),
                 "val_loss": v["loss"],
                 "val_top1": v["top1"],
                 "val_top3": v["top3"],
@@ -314,6 +334,7 @@ def train(
                 "epoch": epoch,
                 "model_state_dict": model.state_dict(),
                 "optimizer_state_dict": optimizer.state_dict(),
+                "scheduler_state_dict": scheduler.state_dict(),
                 "val_loss": v["loss"],
                 "config": config,
             }, CHECKPOINT_DIR / f"epoch_{epoch}.pt")
@@ -427,6 +448,8 @@ def main():
     parser.add_argument("--model", type=str, default="v2",
                         choices=["v2", "v2_window", "v2_seq"],
                         help="Model variant: v2 (default), v2_window (3-turn), v2_seq (LSTM)")
+    parser.add_argument("--resume", type=str, default="",
+                        help="Path to checkpoint to resume training from")
     args = parser.parse_args()
 
     train(
@@ -446,6 +469,7 @@ def main():
         d_ff=args.d_ff,
         n_heads=args.n_heads,
         model_variant=args.model,
+        resume_path=args.resume,
     )
 
 
