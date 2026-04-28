@@ -29,10 +29,10 @@ public:
     virtual bool detect(const ImageViewRGB32& screen) override;
 
 private:
-    //  Both "Standing By" pills render in a distinctive pink/magenta color.
-    //  Detecting both simultaneously is a strong signature for this screen.
-    ImageFloatBox m_left_standing_by;
-    ImageFloatBox m_right_standing_by;
+    //  6 boxes on the player's team card number badges (left column).
+    ImageFloatBox m_left_standing_by;   // kept for legacy overlay compat
+    ImageFloatBox m_right_standing_by;  // kept for legacy overlay compat
+    ImageFloatBox m_card_slots[6];
 };
 
 
