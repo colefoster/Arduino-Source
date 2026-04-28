@@ -110,13 +110,16 @@ def normalize_species(species: str) -> str:
 
 def parse_hp(hp_str: str) -> float:
     """Parse HP string like '85/100' or '0 fnt' -> float 0.0-1.0"""
-    if "fnt" in hp_str:
-        return 0.0
-    hp_str = hp_str.split()[0]  # strip status like "85/100 brn"
-    if "/" in hp_str:
-        cur, max_hp = hp_str.split("/")
-        return float(cur) / float(max_hp)
-    return float(hp_str) / 100.0
+    try:
+        if "fnt" in hp_str:
+            return 0.0
+        hp_str = hp_str.split()[0]  # strip status like "85/100 brn"
+        if "/" in hp_str:
+            cur, max_hp = hp_str.split("/")
+            return float(cur) / float(max_hp)
+        return float(hp_str) / 100.0
+    except (ValueError, ZeroDivisionError):
+        return 1.0  # default to full HP on malformed input
 
 
 def parse_status_from_hp(hp_str: str) -> str:
