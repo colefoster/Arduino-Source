@@ -97,15 +97,26 @@ class TeamSelectResponse(BaseModel):
     lead_scores: list[float]    # 4 scores (one per selected)
 
 
+class SearchResponse(BaseModel):
+    slot_a: ActionResult
+    slot_b: ActionResult
+    win_pct: float
+    opp_slot_a: Optional[ActionResult] = None
+    opp_slot_b: Optional[ActionResult] = None
+    n_rollouts: int = 0
+
+
 # ── Model loading ─────────────────────────────────────────────────
 
 _model: VGCTransformer | None = None
 _vocabs: Vocabs | None = None
 _device: torch.device = torch.device("cpu")
+_search_engine = None  # SearchEngine instance (loaded on demand)
 
 
-def load_model(checkpoint_path: str, vocab_dir: str):
-    global _model, _vocabs, _device
+def load_model(checkpoint_path: str, vocab_dir: str,
+               v2_checkpoint: str = "", winrate_checkpoint: str = ""):
+    global _model, _vocabs, _device, _search_engine
 
     _device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -113,7 +124,7 @@ def load_model(checkpoint_path: str, vocab_dir: str):
     _vocabs = Vocabs.load(Path(vocab_dir))
     _vocabs.freeze_all()
 
-    # Create model
+    # Create v1 model
     config = ModelConfig()
     _model = VGCTransformer(_vocabs, config)
 
@@ -130,6 +141,55 @@ def load_model(checkpoint_path: str, vocab_dir: str):
     param_count = _model.count_parameters()
     print(f"Model loaded: {param_count:,} parameters on {_device}")
     print(f"Vocabs: {len(_vocabs.species)} species, {len(_vocabs.moves)} moves")
+
+    # Load search engine (v2_seq action model + winrate model)
+    if v2_checkpoint and winrate_checkpoint:
+        _load_search_engine(v2_checkpoint, winrate_checkpoint)
+
+
+def _load_search_engine(v2_checkpoint: str, winrate_checkpoint: str):
+    global _search_engine
+
+    from .search import SearchEngine
+    from ..model.vgc_model_v2_seq import VGCTransformerV2Seq, ModelConfigV2Seq
+    from ..model.winrate_model import WinrateModel, WinrateModelConfig
+    from ..data.feature_tables import FeatureTables
+    from ..data.usage_stats import UsageStats
+
+    print("Loading search engine...")
+
+    ft = FeatureTables()
+    try:
+        us = UsageStats()
+    except Exception:
+        us = None
+        print("  Warning: usage stats not available")
+
+    # Load v2_seq action model
+    v2_ckpt = torch.load(v2_checkpoint, map_location=_device, weights_only=False)
+    v2_config = v2_ckpt.get("config", ModelConfigV2Seq())
+    action_model = VGCTransformerV2Seq(_vocabs, v2_config).to(_device)
+    action_model.load_state_dict(v2_ckpt["model_state_dict"])
+    action_model.eval()
+    print(f"  Action model (v2_seq): {action_model.count_parameters():,} params")
+
+    # Load winrate model
+    wr_ckpt = torch.load(winrate_checkpoint, map_location=_device, weights_only=False)
+    wr_config = wr_ckpt.get("config", WinrateModelConfig())
+    winrate_model = WinrateModel(_vocabs, wr_config).to(_device)
+    winrate_model.load_state_dict(wr_ckpt["model_state_dict"])
+    winrate_model.eval()
+    print(f"  Winrate model: {winrate_model.count_parameters():,} params")
+
+    _search_engine = SearchEngine(
+        action_model=action_model,
+        winrate_model=winrate_model,
+        vocabs=_vocabs,
+        feature_tables=ft,
+        usage_stats=us,
+        device=_device,
+    )
+    print("Search engine ready.")
 
 
 # ── Encoding ──────────────────────────────────────────────────────
@@ -318,21 +378,54 @@ def team_select(req: TeamSelectRequest):
     )
 
 
+@app.post("/search", response_model=SearchResponse)
+def search(req: PredictRequest):
+    """1-ply MCTS search using action model + battle sim + winrate model."""
+    if _search_engine is None:
+        raise HTTPException(status_code=503, detail="Search engine not loaded. "
+                            "Start with --v2-checkpoint and --winrate-checkpoint.")
+
+    result = _search_engine.search(req.model_dump(), n_rollouts=100)
+
+    return SearchResponse(
+        slot_a=ActionResult(action=result.action_a, probs=result.own_probs_a),
+        slot_b=ActionResult(action=result.action_b, probs=result.own_probs_b),
+        win_pct=result.win_pct,
+        opp_slot_a=ActionResult(
+            action=int(max(range(len(result.opp_probs_a)),
+                           key=lambda i: result.opp_probs_a[i])),
+            probs=result.opp_probs_a,
+        ) if result.opp_probs_a else None,
+        opp_slot_b=ActionResult(
+            action=int(max(range(len(result.opp_probs_b)),
+                           key=lambda i: result.opp_probs_b[i])),
+            probs=result.opp_probs_b,
+        ) if result.opp_probs_b else None,
+        n_rollouts=result.n_rollouts,
+    )
+
+
 # ── CLI entrypoint ────────────────────────────────────────────────
 
 def main():
     parser = argparse.ArgumentParser(description="VGC Inference Server")
     parser.add_argument("--checkpoint", type=str, default="data/checkpoints/best.pt",
-                        help="Path to model checkpoint")
+                        help="Path to v1 model checkpoint")
     parser.add_argument("--vocab-dir", type=str, default="data/vocab",
                         help="Path to vocabulary directory")
+    parser.add_argument("--v2-checkpoint", type=str, default="",
+                        help="Path to v2_seq action model (enables /search)")
+    parser.add_argument("--winrate-checkpoint", type=str, default="",
+                        help="Path to winrate model (enables /search)")
     parser.add_argument("--port", type=int, default=8265,
                         help="Port to listen on")
     parser.add_argument("--host", type=str, default="0.0.0.0",
                         help="Host to bind to")
     args = parser.parse_args()
 
-    load_model(args.checkpoint, args.vocab_dir)
+    load_model(args.checkpoint, args.vocab_dir,
+               v2_checkpoint=args.v2_checkpoint,
+               winrate_checkpoint=args.winrate_checkpoint)
 
     import uvicorn
     uvicorn.run(app, host=args.host, port=args.port)
