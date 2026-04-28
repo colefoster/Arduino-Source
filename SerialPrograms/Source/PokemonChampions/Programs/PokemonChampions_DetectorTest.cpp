@@ -34,6 +34,7 @@
 #include "PokemonChampions/Inference/PokemonChampions_BattleHUDReader.h"
 #include "PokemonChampions/Inference/PokemonChampions_BattleLogReader.h"
 #include "PokemonChampions/Inference/PokemonChampions_BattleModeDetector.h"
+#include "PokemonChampions/Inference/PokemonChampions_CommunicatingDetector.h"
 #include "PokemonChampions_DetectorTest.h"
 
 namespace PokemonAutomation{
@@ -108,6 +109,7 @@ void DetectorTest::program(SingleSwitchProgramEnvironment& env, ProControllerCon
     ResultScreenDetector     result_screen;
     PostMatchScreenDetector  post_match;
     BattleModeDetector       battle_mode_detector;
+    CommunicatingDetector    communicating;
 
     //  Create OCR readers.
     MoveNameReader   move_reader(Language::English);
@@ -122,6 +124,7 @@ void DetectorTest::program(SingleSwitchProgramEnvironment& env, ProControllerCon
     result_screen.make_overlays(overlay_set);
     post_match.make_overlays(overlay_set);
     battle_mode_detector.make_overlays(overlay_set);
+    communicating.make_overlays(overlay_set);
     move_reader.make_overlays(overlay_set);
     hud_reader.make_overlays(overlay_set);
     log_reader.make_overlays(overlay_set);
@@ -398,6 +401,23 @@ void DetectorTest::program(SingleSwitchProgramEnvironment& env, ProControllerCon
                         : "??");
                 }
                 env.console.log(pp_str, COLOR_BLUE);
+            }
+        }
+
+        //  ── Communicating... Detection ──────────────────────────────
+        //
+        //  When no UI menu is detected, check for "Communicating..." text
+        //  (appears center-screen while waiting for opponent).
+        if (!d_move && !d_action && !d_post && !d_result && !d_preparing){
+            if (communicating.detect(frame)){
+                if (screen == "UNKNOWN"){
+                    screen = "COMMUNICATING";
+                    detail = "waiting for opponent";
+                    Color color = COLOR_YELLOW;
+                    if (screen != last_screen){
+                        env.console.log("[Screen] COMMUNICATING (waiting for opponent)", color);
+                    }
+                }
             }
         }
 
