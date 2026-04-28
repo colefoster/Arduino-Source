@@ -516,11 +516,19 @@
     <!-- Setup screen -->
     <div id="labeler-setup" class="labeler-setup">
         <h1>Frame Labeler</h1>
-        <div class="subtitle">Label screenshots for OCR training data</div>
+        <div class="subtitle">Label screenshots for the C++ test suite</div>
         <div style="background:#161b22; border:1px solid #30363d; border-radius:8px; padding:24px; text-align:left;">
+            <!-- Reader-first selection -->
             <div class="form-group">
-                <label>Source Directory</label>
-                <select id="labeler-source-select"><option value="">Loading...</option></select>
+                <label>1. Pick Reader</label>
+                <select id="labeler-reader-select" style="width:100%; font-size:13px; padding:6px;">
+                    <option value="">-- Select Reader --</option>
+                </select>
+            </div>
+            <div id="labeler-reader-info" style="font-size:11px; color:#8b949e; margin:-8px 0 12px; padding:4px 8px;"></div>
+            <div class="form-group">
+                <label>2. Pick Source (frames to label from)</label>
+                <select id="labeler-source-select" style="width:100%; font-size:13px; padding:6px;"><option value="">-- Select source after reader --</option></select>
             </div>
             <div style="text-align:center; margin-top:20px;">
                 <button class="btn btn-primary btn-lg" id="labeler-start-btn">Start Labeling</button>
@@ -545,11 +553,13 @@
                         <button class="btn" id="labeler-prev-btn">&lt; Prev <kbd>&larr;</kbd></button>
                         <button class="btn" id="labeler-next-btn">Next &gt; <kbd>&rarr;</kbd></button>
                         <button class="btn" id="labeler-skip-btn">Skip <kbd>S</kbd></button>
-                        <button class="btn btn-primary" id="labeler-save-btn">Save <kbd>Enter</kbd></button>
+                        <button class="btn btn-primary" id="labeler-save-btn">Save+Next <kbd>Enter</kbd></button>
                     </div>
                     <div class="status-msg" id="labeler-status"></div>
                     <div style="display:flex; gap:6px;">
-                        <button class="btn btn-primary" id="labeler-export-btn">Export All</button>
+                        <button class="btn" style="background:#238636; color:#fff; font-size:10px;" id="labeler-quick-true-btn" title="Mark True + advance (T)">T+Next</button>
+                        <button class="btn" style="background:#da3633; color:#fff; font-size:10px;" id="labeler-quick-false-btn" title="Mark False + advance (F)">F+Next</button>
+                        <button class="btn btn-primary" id="labeler-export-btn">Export</button>
                         <button class="btn" id="labeler-back-btn">Back <kbd>Esc</kbd></button>
                     </div>
                 </div>
@@ -1274,9 +1284,18 @@ async function labelerInit() {
     try {
         const sources = await api('/api/labeler/sources');
         labelerState._sources = sources;
-        const srcSelect = document.getElementById('labeler-source-select');
-        srcSelect.innerHTML = '<option value="">-- Select Source --</option>' +
-            sources.map(s => `<option value="${s.path}">${s.parent}/${s.name} (${s.count})</option>`).join('');
+
+        // Build reader list from all known readers
+        const allReaders = new Set();
+        sources.forEach(s => (s.readers || []).forEach(r => allReaders.add(r)));
+        Object.keys(READER_TYPES_LOCAL).forEach(r => allReaders.add(r));
+        const readerSelect = document.getElementById('labeler-reader-select');
+        const sorted = [...allReaders].sort();
+        readerSelect.innerHTML = '<option value="">-- Select Reader --</option>' +
+            sorted.map(r => `<option value="${r}">${r}</option>`).join('');
+
+        // When reader changes, filter sources
+        readerSelect.addEventListener('change', () => labelerOnReaderChange());
     } catch (e) {
         console.error('labelerInit:', e);
     }
@@ -1288,29 +1307,106 @@ async function labelerInit() {
     document.getElementById('labeler-save-btn').addEventListener('click', () => labelerSaveAll(true));
     document.getElementById('labeler-export-btn').addEventListener('click', labelerExport);
     document.getElementById('labeler-back-btn').addEventListener('click', labelerBackToSetup);
+    document.getElementById('labeler-quick-true-btn').addEventListener('click', () => labelerQuickBool(true));
+    document.getElementById('labeler-quick-false-btn').addEventListener('click', () => labelerQuickBool(false));
+}
+
+// Reader types (local mirror for UI logic)
+const READER_TYPES_LOCAL = {
+    'MoveSelectDetector': 'bool', 'ActionMenuDetector': 'bool', 'PostMatchScreenDetector': 'bool',
+    'PreparingForBattleDetector': 'bool', 'TeamSelectDetector': 'bool', 'TeamPreviewDetector': 'bool',
+    'MainMenuDetector': 'bool', 'MovesMoreDetector': 'bool', 'CommunicatingDetector': 'bool',
+    'MoveNameReader': 'multi_text:4', 'SpeciesReader': 'text', 'SpeciesReader_Doubles': 'multi_text:2',
+    'OpponentHPReader': 'int:0:100', 'OpponentHPReader_Doubles': 'int:0:100',
+    'MoveSelectCursorSlot': 'int:0:3', 'BattleLogReader': 'event',
+    'TeamSelectReader': 'multi_text:6', 'TeamSummaryReader': 'multi_text:6', 'TeamPreviewReader': 'multi_text:6',
+};
+
+function labelerOnReaderChange() {
+    const reader = document.getElementById('labeler-reader-select').value;
+    const srcSelect = document.getElementById('labeler-source-select');
+    const info = document.getElementById('labeler-reader-info');
+
+    if (!reader) {
+        srcSelect.innerHTML = '<option value="">-- Select source after reader --</option>';
+        info.textContent = '';
+        return;
+    }
+
+    const type = READER_TYPES_LOCAL[reader] || 'unknown';
+    const isBool = type === 'bool';
+    info.innerHTML = `Type: <b>${type}</b>${isBool ? ' — use T/F/keyboard to label quickly' : ''}`;
+
+    // Filter sources that have this reader, plus "all screenshots" as a universal source
+    const sources = labelerState._sources || [];
+    const matching = sources.filter(s => (s.readers || []).includes(reader));
+
+    // Also show all sources (any frames might be relevant for any reader)
+    const others = sources.filter(s => !(s.readers || []).includes(reader));
+
+    let html = '<option value="">-- Select Source --</option>';
+    if (matching.length) {
+        html += '<optgroup label="Suggested (has this reader)">';
+        html += matching.map(s => `<option value="${s.path}">${s.parent}/${s.name} (${s.count})</option>`).join('');
+        html += '</optgroup>';
+    }
+    if (others.length) {
+        html += '<optgroup label="Other sources">';
+        html += others.map(s => `<option value="${s.path}">${s.parent}/${s.name} (${s.count})</option>`).join('');
+        html += '</optgroup>';
+    }
+    srcSelect.innerHTML = html;
+
+    // Auto-select if only one suggested source
+    if (matching.length === 1) srcSelect.value = matching[0].path;
 }
 
 async function labelerStart() {
     const source = document.getElementById('labeler-source-select').value;
     if (!source) { alert('Select a source folder.'); return; }
+    const selectedReader = document.getElementById('labeler-reader-select').value;
+    if (!selectedReader) { alert('Select a reader first.'); return; }
 
     const sourceInfo = labelerState._sources.find(s => s.path === source);
     if (!sourceInfo) { alert('Source not found.'); return; }
 
+    // Override source info to use the selected reader
+    const overrideInfo = {
+        ...sourceInfo,
+        readers: [selectedReader],
+        suggested_reader: selectedReader,
+        reader_infos: {
+            [selectedReader]: {
+                reader: selectedReader,
+                type: READER_TYPES_LOCAL[selectedReader] || 'unknown',
+                is_bool: READER_TYPES_LOCAL[selectedReader] === 'bool',
+                crops: CROP_DEFS_LOCAL[selectedReader] || [],
+            }
+        }
+    };
+
     labelerState.source = source;
-    labelerState.sourceInfo = sourceInfo;
+    labelerState.sourceInfo = overrideInfo;
+    labelerState.selectedReader = selectedReader;
     labelerState.frameLabels = {};
 
-    const primaryReader = sourceInfo.suggested_reader || sourceInfo.readers[0];
+    // Fetch crop defs for this reader if not cached
+    if (!CROP_DEFS_LOCAL[selectedReader]) {
+        try {
+            const cd = await api(`/api/gallery/crop_defs/${encodeURIComponent(selectedReader)}`);
+            if (cd && cd.crops) CROP_DEFS_LOCAL[selectedReader] = cd.crops;
+        } catch {}
+    }
+    overrideInfo.reader_infos[selectedReader].crops = CROP_DEFS_LOCAL[selectedReader] || [];
 
     try {
-        const resp = await api(`/api/labeler/images?source=${encodeURIComponent(source)}&reader=${encodeURIComponent(primaryReader)}`);
+        const resp = await api(`/api/labeler/images?source=${encodeURIComponent(source)}&reader=${encodeURIComponent(selectedReader)}`);
         labelerState.images = resp.images || resp;
         labelerState.index = 0;
 
         document.getElementById('labeler-setup').style.display = 'none';
         document.getElementById('labeler-active').style.display = '';
-        document.getElementById('labeler-reader-badge').textContent = sourceInfo.readers.join(' + ');
+        document.getElementById('labeler-reader-badge').textContent = selectedReader;
         buildMultiReaderControls();
         labelerShowFrame();
     } catch (e) {
@@ -1334,6 +1430,14 @@ function labelerNav(delta) {
 function labelerSkip() {
     labelerNav(1);
     labelerSetStatus('Skipped');
+}
+
+async function labelerQuickBool(val) {
+    const reader = labelerState.selectedReader;
+    if (!reader) return;
+    labelerState.frameLabels[reader] = val;
+    syncBoolButtons(reader);
+    await labelerSaveAll(true);
 }
 
 function labelerUpdateProgress() {
@@ -1649,14 +1753,11 @@ async function labelerSaveAll(autoAdvance = false) {
 }
 
 async function labelerExport() {
-    const readers = labelerState.sourceInfo?.readers || [];
-    let totalExported = 0;
+    const reader = labelerState.selectedReader || (labelerState.sourceInfo?.readers || [])[0];
+    if (!reader) { labelerSetStatus('No reader selected'); return; }
     try {
-        for (const reader of readers) {
-            const result = await apiPost('/api/labeler/export', { source: labelerState.source, reader });
-            totalExported += result.exported || 0;
-        }
-        labelerSetStatus(`Exported ${totalExported} files`);
+        const result = await apiPost('/api/labeler/export', { source: labelerState.source, reader });
+        labelerSetStatus(`Exported ${result.exported || 0} files to test_images/${reader}/`);
     } catch (e) {
         labelerSetStatus('Export failed: ' + e.message);
     }
@@ -1754,6 +1855,8 @@ document.addEventListener('keydown', e => {
     else if (e.key === 'ArrowRight') { e.preventDefault(); labelerNav(1); }
     else if (e.key === 'Enter') { e.preventDefault(); labelerSaveAll(true); }
     else if (e.key === 's' || e.key === 'S') { e.preventDefault(); labelerSkip(); }
+    else if (e.key === 't' || e.key === 'T') { e.preventDefault(); labelerQuickBool(true); }
+    else if (e.key === 'f' || e.key === 'F') { e.preventDefault(); labelerQuickBool(false); }
 });
 
 
