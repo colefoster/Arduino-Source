@@ -2277,7 +2277,7 @@ async function loadRecogResults() {
     const status = document.getElementById('recog-status');
     status.textContent = 'Loading regression results...';
     try {
-        recogData = await api('/regression/summary');
+        recogData = await api('/api/regression/summary');
         if (!recogData.timestamp) {
             status.innerHTML = 'No regression results found. Run <code>python3 tools/retest.py</code> locally, commit and push <code>tools/regression_results.json</code>.';
             return;
@@ -2343,7 +2343,7 @@ async function selectRecogReader(name) {
     }
 
     // Load full results to get per-file details
-    const full = await api('/regression/results');
+    const full = await api('/api/regression/results');
     const files = Object.entries(full.results || {}).filter(([f, res]) => res.reader === name);
 
     let html = `<div style="margin-bottom:8px; font-size:12px; color:#8b949e;">
@@ -2402,7 +2402,7 @@ async function loadTemplates() {
     const grid = document.getElementById('templates-grid');
     grid.innerHTML = '<div style="color:#8b949e;">Loading...</div>';
     try {
-        const data = await api('/templates/list');
+        const data = await api('/api/templates/list');
         grid.innerHTML = '';
         if (data.templates.length === 0) {
             grid.innerHTML = '<div style="color:#8b949e;">No digit templates found.</div>';
@@ -2427,7 +2427,7 @@ async function loadTemplates() {
 
 async function deleteTemplate(digit) {
     if (!confirm(`Delete template for digit ${digit}?`)) return;
-    await fetch(`${API}/templates/${digit}`, { method: 'DELETE' });
+    await fetch(`${API}/api/templates/${digit}`, { method: 'DELETE' });
     templatesInited = false;
     await templatesInit();
 }
