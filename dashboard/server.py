@@ -147,6 +147,11 @@ CROP_DEFS = {
             0.1565 + (i / 5.0) * (0.7389 - 0.1565),
             0.0969, 0.0389
         ]} for i in range(6)
+    ] + [
+        {"name": f"opp_sprite_{i}", "box": [
+            0.8380, 0.1509 + i * ((0.7407 - 0.1509) / 5.0),
+            0.0583, 0.0917
+        ]} for i in range(6)
     ],
     "ActionMenuDetector": [
         {"name": "fight_glow", "box": [0.9219, 0.5787, 0.0182, 0.0213]},
