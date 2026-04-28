@@ -1,18 +1,25 @@
 #!/usr/bin/env python3
 """
-OCR Gallery Server — interactive visual regression viewer with crop tuning.
+OCR Gallery Server — DEPRECATED.
 
-Local server with:
-  - Tabbed reader view (all readers or filtered)
-  - Live crop preview via Canvas (adjust x/y/w/h, instant update)
-  - Retest button: patches C++ source, rebuilds, runs regression, updates results
-  - Passing cards collapsed by default
+This tool has been replaced by:
+  - Dashboard at champions.colefoster.ca (Gallery, Labeler, Inspector, Recognition, Templates)
+  - tools/retest.py (CLI for cmake build + regression)
 
-Usage:
-  python3 tools/ocr_gallery_server.py                     (all readers)
-  python3 tools/ocr_gallery_server.py --reader OpponentHPReader_Doubles
-  python3 tools/ocr_gallery_server.py --run                (run regression on ColePC first)
+The dashboard is the canonical UI. Use retest.py for local C++ build loops.
+This file is kept temporarily for reference but will be removed.
 """
+
+import sys
+print("=" * 60)
+print("DEPRECATED: Use the dashboard at champions.colefoster.ca")
+print("  Gallery, Labeler, Inspector, Recognition, Templates")
+print()
+print("For C++ retest: python3 tools/retest.py [reader]")
+print("=" * 60)
+print()
+print("Starting anyway (will be removed in a future commit)...")
+print()
 
 import base64, io, json, os, re, subprocess, sys, webbrowser
 from http.server import HTTPServer, BaseHTTPRequestHandler
