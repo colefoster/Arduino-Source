@@ -19,6 +19,7 @@ Deploy:
 from __future__ import annotations
 
 import asyncio
+import functools
 import io
 import json
 import math
@@ -28,12 +29,37 @@ import shutil
 import subprocess
 import sys
 import time
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from typing import Optional
 
 from fastapi import FastAPI, UploadFile, File, Form, Query, Request
 from fastapi.responses import HTMLResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
+
+# ---------------------------------------------------------------------------
+# Thread pool + time-based cache for expensive blocking I/O
+# ---------------------------------------------------------------------------
+
+_executor = ThreadPoolExecutor(max_workers=4)
+_cache: dict[str, tuple[float, object]] = {}   # key -> (expires_at, value)
+CACHE_TTL = 30  # seconds
+
+
+def _cache_get(key: str) -> object | None:
+    entry = _cache.get(key)
+    if entry and entry[0] > time.time():
+        return entry[1]
+    return None
+
+
+def _cache_set(key: str, value: object, ttl: float = CACHE_TTL):
+    _cache[key] = (time.time() + ttl, value)
+
+
+async def _run_in_executor(fn, *args):
+    loop = asyncio.get_event_loop()
+    return await loop.run_in_executor(_executor, fn, *args)
 
 # ---------------------------------------------------------------------------
 # Paths
@@ -221,6 +247,17 @@ def _orchestrator_status() -> dict:
     except Exception:
         return {"alive": False, "connections": 0, "rooms_in_use": 0, "capacity": 0}
 
+async def _scan_dir_cached(base: Path, fmt_id: str) -> list[dict]:
+    """Return _scan_dir results, cached for CACHE_TTL seconds and run off the event loop."""
+    key = f"scan:{base}:{fmt_id}"
+    cached = _cache_get(key)
+    if cached is not None:
+        return cached
+    result = await _run_in_executor(_scan_dir, base, fmt_id)
+    _cache_set(key, result)
+    return result
+
+
 def _rating_buckets(ratings: list[int], step: int = 50) -> dict[str, int]:
     buckets: dict[str, int] = {}
     for r in ratings:
@@ -300,8 +337,8 @@ async def status():
     total_replays = 0
     newest_save = 0
     for fmt_id, label in FORMATS.items():
-        spec_files = _scan_dir(SPECTATED_DIR, fmt_id)
-        dl_files = _scan_dir(DOWNLOADED_DIR, fmt_id)
+        spec_files = await _scan_dir_cached(SPECTATED_DIR, fmt_id)
+        dl_files = await _scan_dir_cached(DOWNLOADED_DIR, fmt_id)
         last_1h = last_24h = 0
         for f in spec_files:
             age = now - f["mtime"]
@@ -329,7 +366,7 @@ async def collection():
     now = time.time()
     buckets = {fmt_id: [0]*48 for fmt_id in FORMATS}
     for fmt_id in FORMATS:
-        for f in _scan_dir(SPECTATED_DIR, fmt_id):
+        for f in await _scan_dir_cached(SPECTATED_DIR, fmt_id):
             age = now - f["mtime"]
             if age > 3600*48: continue
             idx = int(age / 3600)
@@ -340,8 +377,8 @@ async def collection():
         "series": {fid: {"label": FORMATS[fid], "data": c} for fid, c in buckets.items()},
     }
 
-@app.get("/api/ratings")
-async def ratings():
+def _compute_ratings() -> dict:
+    """Blocking: scan dirs + read replay metadata for rating distribution."""
     now = time.time()
     cutoff = now - 7*86400
     bins = list(range(900, 1800, 50))
@@ -359,8 +396,19 @@ async def ratings():
         "series": {fid: {"label": FORMATS[fid], "data": c} for fid, c in distributions.items()},
     }
 
-@app.get("/api/recent")
-async def recent(limit: int = 30):
+
+@app.get("/api/ratings")
+async def ratings():
+    key = "endpoint:ratings"
+    cached = _cache_get(key)
+    if cached is not None:
+        return cached
+    result = await _run_in_executor(_compute_ratings)
+    _cache_set(key, result, ttl=60)
+    return result
+
+def _compute_recent(limit: int = 30) -> list:
+    """Blocking: scan dirs + read metadata for recent replays."""
     now = time.time()
     all_files = []
     for fmt_id in FORMATS:
@@ -377,8 +425,19 @@ async def recent(limit: int = 30):
             results.append(meta)
     return results
 
-@app.get("/api/dataset")
-async def dataset():
+
+@app.get("/api/recent")
+async def recent(limit: int = 30):
+    key = f"endpoint:recent:{limit}"
+    cached = _cache_get(key)
+    if cached is not None:
+        return cached
+    result = await _run_in_executor(_compute_recent, limit)
+    _cache_set(key, result)
+    return result
+
+def _compute_dataset() -> dict:
+    """Blocking: scan all dirs + read metadata for dataset overview."""
     combined = {}
     for key, fmt_id in [("vgc", "gen9championsvgc2026regma"), ("bss", "gen9championsbssregma")]:
         dl_files = _scan_dir(DOWNLOADED_DIR, fmt_id)
@@ -406,6 +465,17 @@ async def dataset():
         "grand_downloaded": sum(c["downloaded"] for c in combined.values()),
         "grand_spectated": sum(c["spectated"] for c in combined.values()),
     }
+
+
+@app.get("/api/dataset")
+async def dataset():
+    key = "endpoint:dataset"
+    cached = _cache_get(key)
+    if cached is not None:
+        return cached
+    result = await _run_in_executor(_compute_dataset)
+    _cache_set(key, result, ttl=60)
+    return result
 
 @app.get("/api/coverage")
 async def coverage():
