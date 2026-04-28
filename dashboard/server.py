@@ -217,7 +217,7 @@ READER_TYPES.update({
     "CommunicatingDetector": "bool",
     "TeamSelectReader": "multi_text:6",
     "TeamSummaryReader": "multi_text:6",
-    "TeamPreviewReader": "multi_text:6",
+    "TeamPreviewReader": "multi_text:12",
 })
 
 
@@ -610,6 +610,48 @@ async def gallery_crops_custom(reader: str, filename: str, request: Request):
 async def gallery_crop_defs(reader: str):
     """Return current crop definitions for a reader."""
     return {"reader": reader, "crops": CROP_DEFS.get(reader, [])}
+
+
+@app.post("/api/teampreview/crops")
+async def teampreview_crops(request: Request):
+    """Extract crops from any labeler source frame using custom boxes."""
+    import base64
+    body = await request.json()
+    source = body.get("source", "")
+    filename = body.get("filename", "")
+    boxes = body.get("boxes", [])
+    src_dir = _resolve_source_dir(source)
+    if not src_dir:
+        return JSONResponse({"error": "source not found"}, 404)
+    img_path = src_dir / filename
+    if not img_path.exists():
+        return JSONResponse({"error": "not found"}, 404)
+    return [
+        {"name": b["name"], "box": b["box"],
+         "data": f"data:image/png;base64,{base64.b64encode(_extract_crop(img_path, b['box'])).decode()}"}
+        for b in boxes
+    ]
+
+
+@app.get("/api/teampreview/sprite/{slug}")
+async def teampreview_sprite(slug: str):
+    """Extract a single sprite from the atlas PNG."""
+    import base64
+    from PIL import Image
+    json_path = RESOURCES_DIR / "PokemonSprites.json"
+    atlas_path = RESOURCES_DIR / "PokemonSprites.png"
+    if not json_path.exists() or not atlas_path.exists():
+        return JSONResponse({"error": "sprite resources not found"}, 404)
+    meta = json.loads(json_path.read_text())
+    loc = meta.get("spriteLocations", {}).get(slug)
+    if not loc:
+        return JSONResponse({"error": f"sprite '{slug}' not found"}, 404)
+    h = meta.get("spriteHeight", 128)
+    atlas = Image.open(atlas_path)
+    sprite = atlas.crop((loc["left"], loc["top"], loc["left"] + h, loc["top"] + h))
+    buf = io.BytesIO()
+    sprite.save(buf, format="PNG")
+    return Response(content=buf.getvalue(), media_type="image/png")
 
 
 # ═══════════════════════════════════════════════════════════════════════════
