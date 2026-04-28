@@ -1,10 +1,12 @@
-"""Minimal VGC doubles battle simulator for 1-ply search.
+"""VGC doubles battle simulator for 1-ply search (v2).
 
 Simulates one turn of a doubles battle given both players' actions.
-Handles: speed/priority resolution, damage calc, Protect, switching,
-fainting. Uses feature_tables for game data.
+Handles: speed/priority, damage calc with items/abilities/auras,
+Protect, switching with Intimidate, Focus Sash, Sitrus Berry, resist
+berries, type-boosting items, Fairy/Dark Aura, ability immunities,
+weather setters, Choice Scarf, Pixilate-family, Adaptability.
 
-NOT a full battle engine — covers ~90% of common VGC turns.
+Tuned for the Champions VGC (Regulation M-A) format with Mega Evolution.
 Reference: Pokemon Showdown's sim/ directory for formulas.
 """
 
@@ -89,6 +91,48 @@ LEVEL = 50
 
 # Average random damage roll (0.85-1.0 range, avg = 0.925)
 AVG_ROLL = 0.925
+
+# ── Type-boosting items (1.2x to a specific type) ───────────────
+TYPE_BOOST_ITEMS: dict[str, str] = {
+    "Mystic Water": "Water", "Charcoal": "Fire", "Fairy Feather": "Fairy",
+    "Black Glasses": "Dark", "Spell Tag": "Ghost", "Sharp Beak": "Flying",
+    "Dragon Fang": "Dragon", "Magnet": "Electric", "Miracle Seed": "Grass",
+    "Poison Barb": "Poison", "Silk Scarf": "Normal", "Hard Stone": "Rock",
+    "Soft Sand": "Ground", "Never-Melt Ice": "Ice", "Twisted Spoon": "Psychic",
+    "Metal Coat": "Steel",
+}
+
+# ── Resist berries (halve SE damage of a specific type, one-time) ─
+RESIST_BERRIES: dict[str, str] = {
+    "Chople Berry": "Fighting", "Colbur Berry": "Dark", "Occa Berry": "Fire",
+    "Shuca Berry": "Ground", "Passho Berry": "Water", "Roseli Berry": "Fairy",
+    "Yache Berry": "Ice", "Charti Berry": "Rock", "Kebia Berry": "Poison",
+    "Kasib Berry": "Ghost", "Coba Berry": "Flying", "Rindo Berry": "Grass",
+    "Babiri Berry": "Steel", "Haban Berry": "Dragon", "Wacan Berry": "Electric",
+    "Payapa Berry": "Psychic", "Chilan Berry": "Normal",
+}
+
+# ── Ability-based type immunities ────────────────────────────────
+ABILITY_IMMUNITIES: dict[str, str] = {
+    "Levitate": "Ground", "Lightning Rod": "Electric", "Storm Drain": "Water",
+    "Water Absorb": "Water", "Volt Absorb": "Electric", "Sap Sipper": "Grass",
+    "Flash Fire": "Fire", "Motor Drive": "Electric", "Dry Skin": "Water",
+}
+
+# ── Weather-setting abilities ────────────────────────────────────
+WEATHER_ABILITIES: dict[str, str] = {
+    "Drizzle": "RainDance", "Drought": "SunnyDay",
+    "Sand Stream": "Sandstorm", "Snow Warning": "Snow",
+}
+
+# ── -ate abilities (Normal → Type + 1.2x) ───────────────────────
+ATE_ABILITIES: dict[str, str] = {
+    "Pixilate": "Fairy", "Aerilate": "Flying",
+    "Refrigerate": "Ice", "Galvanize": "Electric",
+}
+
+# ── Fake Out (priority +3, flinch) ──────────────────────────────
+FLINCH_PRIORITY_MOVES = {"Fake Out"}
 
 
 # ── Battle Simulator ─────────────────────────────────────────────
@@ -249,6 +293,14 @@ class BattleSim:
         if poke.status == "par":
             actual *= 0.5
 
+        # Choice Scarf
+        if poke.item == "Choice Scarf":
+            actual *= 1.5
+
+        # Unburden (after item consumption — assume active if no item)
+        if poke.ability == "Unburden" and not poke.item:
+            actual *= 2.0
+
         # Tailwind
         if tailwind:
             actual *= 2.0
@@ -262,16 +314,20 @@ class BattleSim:
         """Execute a move against target(s)."""
         move_data = self._get_move_data(spec.move_name)
         bp = move_data.get("base_power", 0)
-
-        # Status moves — skip damage (we don't simulate stat changes etc. in v1)
         category = move_data.get("category", "")
+
+        # Status moves — handle key ones, skip the rest
         if category == "Status" or bp == 0:
+            self._handle_status_move(state, side, user, spec)
             return
 
         # Find targets
         targets = self._resolve_targets(state, side, slot_idx, spec)
-
         is_spread = spec.target == "spread" and len(targets) > 1
+
+        # Collect all Pokemon on field for aura checks
+        all_pokemon = (state.own_active + state.own_bench +
+                       state.opp_active + state.opp_bench)
 
         for target in targets:
             if target.fainted:
@@ -279,13 +335,65 @@ class BattleSim:
             if id(target) in protecting:
                 continue
 
+            # Check ability immunity (unless user has Mold Breaker)
+            if user.ability != "Mold Breaker":
+                move_type = self._get_effective_move_type(user, move_data)
+                immune_type = ABILITY_IMMUNITIES.get(target.ability, "")
+                if immune_type and immune_type == move_type:
+                    continue
+
             # Calculate and apply damage
+            hp_before = target.hp_frac
             damage_frac = self._calc_damage(user, target, move_data, state.field,
-                                            side, is_spread)
+                                            side, is_spread, all_pokemon)
+
             target.hp_frac = max(0.0, target.hp_frac - damage_frac)
+
+            # Focus Sash: survive at 1 HP if was at full HP
+            if target.hp_frac <= 0 and hp_before >= 0.99 and target.item == "Focus Sash":
+                target.hp_frac = 0.01
+
+            # Check faint
             if target.hp_frac <= 0:
                 target.hp_frac = 0.0
                 target.fainted = True
+                continue
+
+            # Sitrus Berry: heal 25% when dropping below 50%
+            if (target.item == "Sitrus Berry"
+                    and hp_before >= 0.5 and target.hp_frac < 0.5):
+                target.hp_frac = min(1.0, target.hp_frac + 0.25)
+
+    def _handle_status_move(self, state: SimState, side: str,
+                            user: SimPokemon, spec: ActionSpec):
+        """Handle key status moves that affect board state."""
+        move = spec.move_name
+
+        if move == "Swords Dance":
+            user.boosts["atk"] = min(6, user.boosts.get("atk", 0) + 2)
+        elif move == "Nasty Plot":
+            user.boosts["spa"] = min(6, user.boosts.get("spa", 0) + 2)
+        elif move in ("Dragon Dance",):
+            user.boosts["atk"] = min(6, user.boosts.get("atk", 0) + 1)
+            user.boosts["spe"] = min(6, user.boosts.get("spe", 0) + 1)
+        elif move == "Calm Mind":
+            user.boosts["spa"] = min(6, user.boosts.get("spa", 0) + 1)
+            user.boosts["spd"] = min(6, user.boosts.get("spd", 0) + 1)
+        elif move == "Tailwind":
+            if side == "own":
+                state.field.tailwind_own = True
+            else:
+                state.field.tailwind_opp = True
+        elif move == "Trick Room":
+            state.field.trick_room = not state.field.trick_room
+
+    def _get_effective_move_type(self, user: SimPokemon, move_data: dict) -> str:
+        """Get the move's effective type after ability modifications."""
+        move_type = move_data.get("type", "")
+        # -ate abilities: Normal → new type
+        if move_type == "Normal" and user.ability in ATE_ABILITIES:
+            move_type = ATE_ABILITIES[user.ability]
+        return move_type
 
     def _resolve_targets(
         self, state: SimState, side: str, slot_idx: int, spec: ActionSpec,
@@ -320,11 +428,12 @@ class BattleSim:
     def _calc_damage(
         self, user: SimPokemon, target: SimPokemon,
         move_data: dict, field: SimField, user_side: str,
-        is_spread: bool,
+        is_spread: bool, all_pokemon: list[SimPokemon] = None,
     ) -> float:
         """Calculate damage as HP fraction lost by target.
 
-        Implements the Gen 5+ damage formula used in VGC.
+        Implements the Gen 5+ damage formula with Champions VGC modifiers:
+        items, abilities, auras, resist berries, -ate abilities.
         """
         bp = move_data.get("base_power", 0)
         if bp == 0:
@@ -332,6 +441,12 @@ class BattleSim:
 
         category = move_data.get("category", "Physical")
         move_type = move_data.get("type", "")
+
+        # -ate abilities: Normal moves become typed + 1.2x
+        ate_boost = 1.0
+        if move_type == "Normal" and user.ability in ATE_ABILITIES:
+            move_type = ATE_ABILITIES[user.ability]
+            ate_boost = 1.2
 
         # Attack and defense stats
         if category == "Physical":
@@ -350,6 +465,10 @@ class BattleSim:
         atk_stat = atk_base + 36
         def_stat = def_base + 36
 
+        # Huge Power / Pure Power: double attack
+        if user.ability in ("Huge Power", "Pure Power") and category == "Physical":
+            atk_stat *= 2.0
+
         # Apply boost multipliers
         atk_stat *= self._boost_mult(atk_boost)
         def_stat *= self._boost_mult(def_boost)
@@ -357,15 +476,19 @@ class BattleSim:
         # Core damage formula
         damage = ((2 * LEVEL / 5 + 2) * bp * atk_stat / def_stat) / 50 + 2
 
-        # Modifier chain
+        # ── Modifier chain ───────────────────────────────────────
         modifier = 1.0
 
         # STAB
         if move_type and move_type in (user.types[0], user.types[1]):
-            modifier *= 1.5
+            if user.ability == "Adaptability":
+                modifier *= 2.0
+            else:
+                modifier *= 1.5
 
         # Type effectiveness
-        modifier *= type_effectiveness(move_type, target.types[0], target.types[1])
+        eff = type_effectiveness(move_type, target.types[0], target.types[1])
+        modifier *= eff
 
         # Spread penalty
         if is_spread:
@@ -390,14 +513,12 @@ class BattleSim:
             modifier *= 1.3
         elif field.terrain == "Psychic" and move_type == "Psychic":
             modifier *= 1.3
-        # Misty halves Dragon
         elif field.terrain == "Misty" and move_type == "Dragon":
             modifier *= 0.5
 
         # Screens
         target_side = "opp" if user_side == "own" else "own"
         screens = field.screens_opp if target_side == "opp" else field.screens_own
-        # screens = [Light Screen, Reflect, Aurora Veil]
         if category == "Special" and (screens[0] or screens[2]):
             modifier *= 0.5
         elif category == "Physical" and (screens[1] or screens[2]):
@@ -407,6 +528,51 @@ class BattleSim:
         if user.status == "brn" and category == "Physical":
             modifier *= 0.5
 
+        # ── Item modifiers ───────────────────────────────────────
+
+        # Type-boosting items (1.2x)
+        boosted_type = TYPE_BOOST_ITEMS.get(user.item, "")
+        if boosted_type and boosted_type == move_type:
+            modifier *= 1.2
+
+        # Choice Band / Choice Specs
+        if user.item == "Choice Band" and category == "Physical":
+            modifier *= 1.5
+        elif user.item == "Choice Specs" and category == "Special":
+            modifier *= 1.5
+
+        # Life Orb (1.3x but 10% recoil — skip recoil for simplicity)
+        if user.item == "Life Orb":
+            modifier *= 1.3
+
+        # -ate ability boost
+        modifier *= ate_boost
+
+        # ── Ability modifiers ────────────────────────────────────
+
+        # Fairy Aura / Dark Aura (global — check ALL pokemon on field)
+        if all_pokemon and move_type in ("Fairy", "Dark"):
+            aura_name = "Fairy Aura" if move_type == "Fairy" else "Dark Aura"
+            has_aura = any(p.ability == aura_name for p in all_pokemon if p.alive)
+            if has_aura:
+                # Aura Break inverts, but extremely rare — skip
+                modifier *= 1.33
+
+        # Multiscale: halve damage when target is at full HP
+        if target.ability in ("Multiscale", "Shadow Shield") and target.hp_frac >= 0.99:
+            if user.ability != "Mold Breaker":
+                modifier *= 0.5
+
+        # Thick Fat: halve Fire and Ice damage
+        if target.ability == "Thick Fat" and move_type in ("Fire", "Ice"):
+            if user.ability != "Mold Breaker":
+                modifier *= 0.5
+
+        # ── Resist berries ───────────────────────────────────────
+        resist_type = RESIST_BERRIES.get(target.item, "")
+        if resist_type and resist_type == move_type and eff > 1.0:
+            modifier *= 0.5
+
         # Average random roll
         modifier *= AVG_ROLL
 
@@ -414,7 +580,6 @@ class BattleSim:
         damage *= modifier
 
         # Convert to HP fraction
-        # Target max HP: (2*base_hp + 31) * 50/100 + 50 + 10 = base_hp + 91
         target_max_hp = target.base_stats.get("hp", 80) + 91
         damage_frac = damage / target_max_hp
 
@@ -430,7 +595,10 @@ class BattleSim:
     def _execute_switch(
         self, state: SimState, side: str, slot_idx: int, bench_idx: int,
     ):
-        """Swap an active Pokemon with a bench Pokemon."""
+        """Swap an active Pokemon with a bench Pokemon.
+
+        Handles: boost reset, Intimidate, weather-setting abilities.
+        """
         active = state.own_active if side == "own" else state.opp_active
         bench = state.own_bench if side == "own" else state.opp_bench
 
@@ -441,9 +609,36 @@ class BattleSim:
 
         # Swap
         active[slot_idx], bench[bench_idx] = bench[bench_idx], active[slot_idx]
+        new_mon = active[slot_idx]
 
         # Reset boosts on the newly switched-in Pokemon
-        active[slot_idx].boosts = {"atk": 0, "def": 0, "spa": 0, "spd": 0, "spe": 0}
+        new_mon.boosts = {"atk": 0, "def": 0, "spa": 0, "spd": 0, "spe": 0}
+
+        # Intimidate: -1 atk to all opposing active Pokemon
+        if new_mon.ability == "Intimidate":
+            opp_active = state.opp_active if side == "own" else state.own_active
+            for opp in opp_active:
+                if opp.alive:
+                    # Defiant: +2 atk instead of -1
+                    if opp.ability == "Defiant":
+                        opp.boosts["atk"] = min(6, opp.boosts.get("atk", 0) + 2)
+                    # Competitive: +2 spa instead of -1
+                    elif opp.ability == "Competitive":
+                        opp.boosts["spa"] = min(6, opp.boosts.get("spa", 0) + 2)
+                    # Clear Body / White Smoke / etc. block it
+                    elif opp.ability in ("Clear Body", "White Smoke", "Full Metal Body",
+                                         "Hyper Cutter"):
+                        pass
+                    else:
+                        opp.boosts["atk"] = max(-6, opp.boosts.get("atk", 0) - 1)
+                    # White Herb: clear the stat drop
+                    if opp.item == "White Herb" and opp.boosts.get("atk", 0) < 0:
+                        opp.boosts["atk"] = 0
+
+        # Weather-setting abilities
+        weather = WEATHER_ABILITIES.get(new_mon.ability, "")
+        if weather:
+            state.field.weather = weather
 
 
 # ── State conversion ─────────────────────────────────────────────
