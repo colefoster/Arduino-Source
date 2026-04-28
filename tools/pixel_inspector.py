@@ -2,6 +2,11 @@
 """
 Pixel Inspector — interactive tool for tuning PokemonAutomation detectors.
 
+NOTE: The web-based Inspector at champions.colefoster.ca (Dashboard → Inspector tab)
+replaces this tool for most workflows. It has click-drag box drawing, crop preview,
+binarized preview, is_solid() tests, C++ code generation, and save-to-box_definitions.
+Use this tkinter version only if you need offline/local-only measurement.
+
 Opens a screenshot, lets you drag-select regions, and outputs:
   - ImageFloatBox coordinates (normalized 0.0-1.0)
   - image_stats() equivalent (average RGB, stddev per channel)

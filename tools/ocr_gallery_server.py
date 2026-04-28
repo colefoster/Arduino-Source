@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
 """
-OCR Gallery Server — interactive visual regression viewer with crop tuning.
+OCR Gallery Server — LOCAL dev tool for C++ build/test loop.
 
-Local server with:
-  - Tabbed reader view (all readers or filtered)
-  - Live crop preview via Canvas (adjust x/y/w/h, instant update)
-  - Retest button: patches C++ source, rebuilds, runs regression, updates results
-  - Passing cards collapsed by default
+This is the local counterpart to the dashboard at champions.colefoster.ca.
+Use the dashboard for: Inspector (box measurement), Labeler (frame annotation),
+Gallery (browse test images remotely).
+
+This tool is for LOCAL-ONLY workflows that need the C++ build toolchain:
+  - Retest: patch C++ source → cmake rebuild → run regression → see results
+  - Digit Template Manager: upload/delete HP digit templates
+  - Gallery view: card grid with crop preview (context for retest)
 
 Usage:
   python3 tools/ocr_gallery_server.py                     (all readers)
@@ -365,10 +368,17 @@ class Handler(BaseHTTPRequestHandler):
             self._serve_html()
         elif parsed.path == "/templates":
             self._serve_template_manager()
-        elif parsed.path == "/labeler":
-            self._serve_labeler()
-        elif parsed.path == "/inspector":
-            self._serve_inspector()
+        elif parsed.path in ("/labeler", "/inspector", "/sprites"):
+            # Redirect to dashboard — these tools are consolidated there
+            self.send_response(200)
+            self.send_header("Content-Type", "text/html")
+            self.end_headers()
+            self.wfile.write(b'<html><body style="background:#0d1117;color:#c9d1d9;font-family:monospace;padding:40px;">'
+                             b'<h2>Moved to Dashboard</h2>'
+                             b'<p>This tool has been consolidated into the dashboard at '
+                             b'<a href="https://champions.colefoster.ca" style="color:#58a6ff;">champions.colefoster.ca</a></p>'
+                             b'<p>Use the Inspector, Labeler, and Gallery tabs there.</p>'
+                             b'</body></html>')
         elif parsed.path.startswith("/img/"):
             self._serve_image(parsed.path[5:])
         elif parsed.path.startswith("/template/"):
@@ -395,10 +405,6 @@ class Handler(BaseHTTPRequestHandler):
 
         if parsed.path == "/api/template/save":
             self._handle_template_save(body)
-        elif parsed.path == "/api/label/save":
-            self._handle_label_save(body)
-        elif parsed.path == "/api/label/skip":
-            self._handle_label_skip(body)
         else:
             self.send_response(404)
             self.end_headers()
@@ -496,6 +502,12 @@ class Handler(BaseHTTPRequestHandler):
         self.send_header("Content-Type", "text/html")
         self.end_headers()
         self.wfile.write(build_labeler_page().encode())
+
+    def _serve_sprites(self):
+        self.send_response(200)
+        self.send_header("Content-Type", "text/html")
+        self.end_headers()
+        self.wfile.write(build_sprites_page().encode())
 
     def _serve_inspector(self):
         self.send_response(200)
@@ -698,6 +710,8 @@ h2 {{ color:#c9d1d9; font-size:16px; margin-bottom:8px; border-bottom:1px solid 
 <a href="/templates" style="color:#58a6ff;font-size:12px;">Digit Template Manager</a>
 <span style="color:#30363d;margin:0 8px;">|</span>
 <a href="/labeler" style="color:#58a6ff;font-size:12px;">Multi-Reader Labeler</a>
+<span style="color:#30363d;margin:0 8px;">|</span>
+<a href="/sprites" style="color:#58a6ff;font-size:12px;">Sprite Gallery</a>
 </p>
 <div class="nav" id="nav"></div>
 <div class="controls" style="margin-bottom:12px;display:flex;gap:24px;align-items:center;">
@@ -1725,6 +1739,249 @@ LABELER_READERS = [
      "crops": _team_summary_reader_boxes(),
      "help": "6 species slugs for team summary"},
 ]
+
+def build_sprites_page():
+    """Sprite/OCR recognition gallery — shows labeled frames with crop previews and regression results."""
+    # All readers that do species/text recognition (not bool detectors)
+    recognition_readers = [
+        "SpeciesReader_Doubles", "SpeciesReader", "MoveNameReader",
+        "TeamSelectReader", "TeamSummaryReader", "TeamPreviewReader",
+        "OpponentHPReader_Doubles", "OpponentHPReader",
+    ]
+
+    reader_data = []
+    for reader in recognition_readers:
+        rdir = os.path.join(TEST_ROOT, reader)
+        if not os.path.isdir(rdir):
+            continue
+        entries = load_reader_images(TEST_ROOT, reader)
+        if not entries:
+            continue
+        crops = READER_CROPS.get(reader, _bool_detector_boxes)()
+        images = []
+        for e in entries:
+            gt = e["ground_truth"]
+            res = RESULTS.get(e["filename"])
+            images.append({
+                "filename": e["filename"],
+                "path": f"{reader}/{e['filename']}",
+                "gt": gt,
+                "result": res,
+            })
+        reader_data.append({
+            "name": reader,
+            "crops": crops,
+            "images": images,
+        })
+
+    return f"""<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<title>Recognition Gallery</title>
+<style>
+* {{ margin:0; padding:0; box-sizing:border-box; }}
+body {{ background:#0d1117; color:#c9d1d9; font-family:'SF Mono','Menlo',monospace; font-size:13px; padding:16px; }}
+h1 {{ color:#58a6ff; font-size:18px; margin-bottom:4px; }}
+a {{ color:#58a6ff; }}
+.nav {{ font-size:12px; margin-bottom:12px; }}
+
+.reader-bar {{ display:flex; flex-wrap:wrap; gap:4px; margin-bottom:12px; }}
+.reader-btn {{ padding:4px 10px; background:#21262d; color:#8b949e; border:1px solid #30363d; border-radius:6px; font-size:11px; cursor:pointer; font-family:inherit; }}
+.reader-btn:hover {{ background:#30363d; color:#c9d1d9; }}
+.reader-btn.active {{ background:#1f6feb; color:#fff; border-color:#1f6feb; }}
+.reader-btn .count {{ font-size:9px; opacity:0.7; margin-left:3px; }}
+
+.btn {{ padding:5px 14px; border:1px solid #30363d; border-radius:6px; background:#21262d; color:#c9d1d9; cursor:pointer; font-size:12px; font-family:inherit; }}
+.btn:hover {{ background:#30363d; }}
+.btn-green {{ background:#238636; border-color:#238636; color:#fff; }}
+.btn-green:hover {{ background:#2ea043; }}
+.status {{ font-size:12px; color:#8b949e; margin-left:8px; }}
+
+.frame-card {{ background:#161b22; border:1px solid #30363d; border-radius:8px; padding:10px 12px; margin-bottom:8px; }}
+.frame-card.fail {{ border-color:#f85149; }}
+.card-row {{ display:flex; gap:12px; align-items:flex-start; }}
+.card-thumb {{ flex-shrink:0; }}
+.card-thumb img {{ width:280px; height:auto; border-radius:4px; border:1px solid #30363d; cursor:pointer; }}
+.card-thumb img.big {{ width:640px; }}
+.card-content {{ flex:1; min-width:0; }}
+.card-filename {{ color:#58a6ff; font-size:11px; font-weight:bold; margin-bottom:4px; }}
+
+.crop-grid {{ display:flex; gap:6px; flex-wrap:wrap; margin-bottom:6px; }}
+.crop-cell {{ text-align:center; background:#0d1117; border:1px solid #21262d; border-radius:4px; padding:4px; }}
+.crop-cell canvas {{ border:1px solid #30363d; border-radius:3px; image-rendering:pixelated; display:block; margin-bottom:2px; }}
+.crop-label {{ font-size:9px; color:#8b949e; }}
+
+.result-row {{ font-size:12px; margin-top:4px; }}
+.result-row .expected {{ color:#8b949e; }}
+.result-row .actual {{ font-weight:bold; }}
+.result-row .pass {{ color:#3fb950; }}
+.result-row .fail {{ color:#f85149; }}
+.badge {{ display:inline-block; padding:1px 6px; border-radius:3px; font-size:10px; font-weight:bold; }}
+.badge.pass {{ background:#238636; color:#fff; }}
+.badge.fail {{ background:#da3633; color:#fff; }}
+</style>
+</head><body>
+<h1>Recognition Gallery</h1>
+<div class="nav">
+    <a href="/">OCR Gallery</a>
+    <span style="color:#30363d;margin:0 6px;">|</span>
+    <a href="/labeler">Labeler</a>
+    <span style="color:#30363d;margin:0 6px;">|</span>
+    <a href="/inspector">Inspector</a>
+    <span style="color:#30363d;margin:0 6px;">|</span>
+    Species, moves, and HP recognition results.
+    <button class="btn btn-green" style="margin-left:12px;" onclick="runRegression()">Run Regression</button>
+    <span class="status" id="regressionStatus"></span>
+</div>
+
+<div class="reader-bar" id="readerBar"></div>
+<div id="content"></div>
+
+<script>
+const READERS = {json.dumps(reader_data, default=str)};
+let activeReader = 0;
+
+function init() {{
+    const bar = document.getElementById('readerBar');
+    READERS.forEach((r, ri) => {{
+        const btn = document.createElement('button');
+        btn.className = 'reader-btn' + (ri === 0 ? ' active' : '');
+        btn.dataset.ri = ri;
+        const passCount = r.images.filter(img => img.result && img.result.passed).length;
+        const failCount = r.images.filter(img => img.result && !img.result.passed).length;
+        const total = r.images.length;
+        btn.innerHTML = r.name + '<span class="count">' + total + '</span>';
+        btn.onclick = () => selectReader(ri);
+        bar.appendChild(btn);
+    }});
+    renderReader();
+}}
+
+function selectReader(ri) {{
+    activeReader = ri;
+    document.querySelectorAll('.reader-btn').forEach(b => {{
+        b.classList.toggle('active', parseInt(b.dataset.ri) === ri);
+    }});
+    renderReader();
+}}
+
+function renderReader() {{
+    const container = document.getElementById('content');
+    container.innerHTML = '';
+    const reader = READERS[activeReader];
+    if (!reader) return;
+
+    reader.images.forEach((img, ii) => {{
+        const res = img.result;
+        const passed = res ? res.passed : null;
+        const card = document.createElement('div');
+        card.className = 'frame-card' + (passed === false ? ' fail' : '');
+
+        const gt = img.gt;
+        let expectedStr = '';
+        if (gt.values) {{
+            expectedStr = gt.values.filter(v => v !== null).join(', ');
+        }}
+
+        let resultHtml = '';
+        if (res) {{
+            const badge = passed ? '<span class="badge pass">PASS</span>' : '<span class="badge fail">FAIL</span>';
+            resultHtml = '<div class="result-row">'
+                + badge + ' '
+                + '<span class="expected">expected: ' + expectedStr + '</span>'
+                + ' → <span class="actual ' + (passed ? 'pass' : 'fail') + '">' + (res.actual || '(none)') + '</span>'
+                + '</div>';
+        }} else {{
+            resultHtml = '<div class="result-row"><span class="expected">label: ' + expectedStr + '</span> <span style="color:#484f58;">(not tested — hit Run Regression)</span></div>';
+        }}
+
+        const fid = 'crops-' + activeReader + '-' + ii;
+        card.innerHTML = '<div class="card-row">'
+            + '<div class="card-thumb"><img src="/img/' + img.path + '" loading="lazy" onclick="this.classList.toggle(&quot;big&quot;)"></div>'
+            + '<div class="card-content">'
+            + '<div class="card-filename">' + img.filename + '</div>'
+            + resultHtml
+            + '<div class="crop-grid" id="' + fid + '"></div>'
+            + '</div></div>';
+        container.appendChild(card);
+
+        // Render crops
+        if (reader.crops && reader.crops.length > 0) {{
+            const imgEl = new Image();
+            imgEl.onload = () => {{
+                const cropContainer = document.getElementById(fid);
+                if (!cropContainer) return;
+                reader.crops.forEach(crop => {{
+                    const W = imgEl.naturalWidth, H = imgEl.naturalHeight;
+                    const box = crop.box;
+                    const cx = Math.round(box[0]*W), cy = Math.round(box[1]*H);
+                    const cw = Math.round(box[2]*W), ch = Math.round(box[3]*H);
+                    if (cw <= 0 || ch <= 0) return;
+                    const scale = Math.max(2, Math.min(4, 80 / Math.max(cw, ch)));
+                    const canvas = document.createElement('canvas');
+                    canvas.width = cw * scale; canvas.height = ch * scale;
+                    const ctx = canvas.getContext('2d');
+                    ctx.imageSmoothingEnabled = false;
+                    ctx.drawImage(imgEl, cx, cy, cw, ch, 0, 0, cw*scale, ch*scale);
+                    const cell = document.createElement('div');
+                    cell.className = 'crop-cell';
+                    cell.appendChild(canvas);
+                    const label = document.createElement('div');
+                    label.className = 'crop-label';
+                    label.textContent = crop.name;
+                    cell.appendChild(label);
+                    cropContainer.appendChild(cell);
+                }});
+            }};
+            imgEl.src = '/img/' + img.path;
+        }}
+    }});
+}}
+
+async function runRegression() {{
+    const status = document.getElementById('regressionStatus');
+    status.textContent = 'Building + running...';
+    const readers = READERS.map(r => r.name);
+    for (const reader of readers) {{
+        status.textContent = 'Testing ' + reader + '...';
+        try {{
+            const resp = await fetch('/api/retest?reader=' + encodeURIComponent(reader));
+            const data = await resp.json();
+            // Update results in READERS data
+            for (const r of READERS) {{
+                if (r.name !== reader) continue;
+                for (const img of r.images) {{
+                    if (data[img.filename]) {{
+                        img.result = data[img.filename];
+                    }}
+                }}
+            }}
+        }} catch(e) {{ console.error(e); }}
+    }}
+    // Count totals
+    let total = 0, passed = 0;
+    for (const r of READERS) {{
+        for (const img of r.images) {{
+            if (img.result) {{ total++; if (img.result.passed) passed++; }}
+        }}
+    }}
+    status.textContent = passed + '/' + total + ' passed';
+    // Update reader bar counts
+    document.querySelectorAll('.reader-btn').forEach(btn => {{
+        const ri = parseInt(btn.dataset.ri);
+        const r = READERS[ri];
+        const p = r.images.filter(i => i.result && i.result.passed).length;
+        const f = r.images.filter(i => i.result && !i.result.passed).length;
+        const t = r.images.length;
+        btn.innerHTML = r.name + '<span class="count">' + (f > 0 ? p + '/' + t : t) + '</span>';
+        if (f > 0) btn.style.borderColor = '#f85149';
+    }});
+    renderReader();
+}}
+
+init();
+</script>
+</body></html>"""
+
 
 def build_inspector_page():
     # Collect all test images grouped by reader
