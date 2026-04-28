@@ -665,55 +665,191 @@ def _save_labels(source: str, reader: str, labels: dict):
 # INSPECTOR API
 # ═══════════════════════════════════════════════════════════════════════════
 
-@app.post("/api/inspector/analyze")
-async def inspector_analyze(path: str = Form(...), x: float = Form(...),
-                             y: float = Form(...), w: float = Form(...), h: float = Form(...)):
-    from PIL import Image
-    full = _resolve_image_path(path)
-    if not full or not full.exists(): return JSONResponse({"error": "not found"}, 404)
-    img = Image.open(full).convert("RGB")
+BOX_DEFINITIONS_PATH = BASE / "tools" / "box_definitions.json"
+
+
+def _resolve_image_path(path: str) -> Optional[Path]:
+    """Resolve a relative image path against test_images/ and ref_frames/."""
+    for base in [TEST_IMAGES_DIR, REF_FRAMES_DIR]:
+        full = base / path
+        if full.exists():
+            return full
+    return None
+
+
+def _resolve_inspector_image(
+    path: str = "", source: str = "", filename: str = ""
+) -> Optional[Path]:
+    """Resolve an inspector image from either path or source+filename."""
+    if path:
+        return _resolve_image_path(path)
+    if source and filename:
+        # source is a ref_frames subdirectory, filename is the image name
+        full = REF_FRAMES_DIR / source / filename
+        if full.exists():
+            return full
+        # also try test_images/
+        full = TEST_IMAGES_DIR / source / filename
+        if full.exists():
+            return full
+    return None
+
+
+def _analyze_region(img, x: float, y: float, w: float, h: float) -> dict:
+    """Analyze a normalized box region on a PIL image.
+
+    Returns color stats, is_solid tests, C++ code, and crop data URIs.
+    """
+    import base64 as b64
+
     iw, ih = img.size
-    x0, y0 = max(0, int(x*iw)), max(0, int(y*ih))
-    x1, y1 = min(iw, x0+int(w*iw)), min(ih, y0+int(h*ih))
-    pixels = list(img.crop((x0, y0, x1, y1)).getdata())
+    x0, y0 = max(0, int(x * iw)), max(0, int(y * ih))
+    x1, y1 = min(iw, x0 + int(w * iw)), min(ih, y0 + int(h * ih))
+    pw, ph = x1 - x0, y1 - y0
+    if pw <= 0 or ph <= 0:
+        return {"error": "empty region"}
+
+    crop = img.crop((x0, y0, x1, y1))
+    pixels = list(crop.getdata())
     n = len(pixels)
-    if n == 0: return {"error": "empty region"}
+    if n == 0:
+        return {"error": "empty region"}
+
     sr = sg = sb = sqr = sqg = sqb = 0
     for r, g, b in pixels:
-        sr += r; sg += g; sb += b; sqr += r*r; sqg += g*g; sqb += b*b
-    avg = (sr/n, sg/n, sb/n)
+        sr += r; sg += g; sb += b
+        sqr += r * r; sqg += g * g; sqb += b * b
+    avg = (sr / n, sg / n, sb / n)
     if n > 1:
-        sd = tuple(math.sqrt(max(0, (sq - s*s/n)/(n-1))) for s, sq in [(sr,sqr),(sg,sqg),(sb,sqb)])
+        sd = tuple(
+            math.sqrt(max(0, (sq - s * s / n) / (n - 1)))
+            for s, sq in [(sr, sqr), (sg, sqg), (sb, sqb)]
+        )
     else:
         sd = (0, 0, 0)
-    s = sum(avg)
-    ratio = tuple(a/s for a in avg) if s > 0 else (0.333, 0.333, 0.333)
+    total = sum(avg)
+    ratio = tuple(a / total for a in avg) if total > 0 else (0.333, 0.333, 0.333)
+    sdsum = sum(sd)
+
+    # is_solid tests at standard thresholds
+    solid_tests = []
+    for max_dist, max_sd in [(0.10, 100), (0.15, 120), (0.18, 150), (0.25, 200)]:
+        # self-test: distance is 0 (comparing ratio to itself)
+        solid_tests.append({
+            "max_dist": max_dist, "max_stddev": max_sd,
+            "passes": sdsum <= max_sd,
+        })
+
+    # Crop preview (base64 PNG, upscaled for visibility)
+    scale = max(1, min(6, 180 // max(pw, ph, 1)))
+    from PIL import Image as PILImage
+    crop_scaled = crop.resize((pw * scale, ph * scale), PILImage.NEAREST)
+    buf = io.BytesIO()
+    crop_scaled.save(buf, "PNG")
+    crop_b64 = b64.b64encode(buf.getvalue()).decode()
+
+    # Binarized preview (white-text filter matching C++)
+    bw = PILImage.new("RGB", (pw, ph))
+    for py_idx in range(ph):
+        for px_idx in range(pw):
+            r, g, b = crop.getpixel((px_idx, py_idx))
+            mn = min(r, g, b)
+            mx = max(r, g, b)
+            is_white = mn > 180 and (mx - mn) < 50
+            val = (0, 0, 0) if is_white else (255, 255, 255)
+            bw.putpixel((px_idx, py_idx), val)
+    bw_scaled = bw.resize((pw * scale, ph * scale), PILImage.NEAREST)
+    buf2 = io.BytesIO()
+    bw_scaled.save(buf2, "PNG")
+    bw_b64 = b64.b64encode(buf2.getvalue()).decode()
+
+    cpp_box = f"ImageFloatBox({x:.4f}, {y:.4f}, {w:.4f}, {h:.4f})"
+    cpp_color = f"FloatPixel{{{ratio[0]:.2f}, {ratio[1]:.2f}, {ratio[2]:.2f}}}"
+
     return {
-        "box": {"x": x, "y": y, "w": w, "h": h},
-        "pixels": {"x0": x0, "y0": y0, "x1": x1, "y1": y1, "count": n},
-        "avg": {"r": round(avg[0],2), "g": round(avg[1],2), "b": round(avg[2],2)},
-        "stddev": {"r": round(sd[0],2), "g": round(sd[1],2), "b": round(sd[2],2)},
-        "stddev_sum": round(sum(sd), 2),
-        "ratio": {"r": round(ratio[0],4), "g": round(ratio[1],4), "b": round(ratio[2],4)},
-        "brightness": round(s/3, 2),
-        "cpp_box": f"ImageFloatBox({x:.4f}, {y:.4f}, {w:.4f}, {h:.4f})",
+        "box": [round(x, 4), round(y, 4), round(w, 4), round(h, 4)],
+        "pixels": {"x0": x0, "y0": y0, "w": pw, "h": ph, "count": n},
+        "avg_rgb": [round(avg[0], 1), round(avg[1], 1), round(avg[2], 1)],
+        "stddev_rgb": [round(sd[0], 1), round(sd[1], 1), round(sd[2], 1)],
+        "stddev_sum": round(sdsum, 1),
+        "color_ratio": [round(ratio[0], 4), round(ratio[1], 4), round(ratio[2], 4)],
+        "brightness": round(total / 3, 1),
+        "solid_tests": solid_tests,
+        "cpp_box": cpp_box,
+        "cpp_color": cpp_color,
+        "crop_b64": crop_b64,
+        "bw_b64": bw_b64,
     }
+
+
+@app.post("/api/inspector/analyze")
+async def inspector_analyze(
+    x: float = Form(...), y: float = Form(...),
+    w: float = Form(...), h: float = Form(...),
+    path: str = Form(""), source: str = Form(""), filename: str = Form(""),
+):
+    from PIL import Image
+    full = _resolve_inspector_image(path, source, filename)
+    if not full or not full.exists():
+        return JSONResponse({"error": "not found"}, 404)
+    img = Image.open(full).convert("RGB")
+    return _analyze_region(img, x, y, w, h)
+
 
 @app.get("/api/inspector/boxes")
 async def inspector_boxes():
     return CROP_DEFS
 
+
+@app.get("/api/inspector/box-definitions")
+async def inspector_box_definitions():
+    """Return saved box definitions from tools/box_definitions.json."""
+    if BOX_DEFINITIONS_PATH.exists():
+        return json.loads(BOX_DEFINITIONS_PATH.read_text())
+    return {"boxes": []}
+
+
+@app.post("/api/inspector/save-box")
+async def inspector_save_box(request: Request):
+    """Save a box definition to tools/box_definitions.json."""
+    body = await request.json()
+    name = body.get("name", "").strip()
+    if not name:
+        return JSONResponse({"error": "name required"}, 400)
+
+    defs = json.loads(BOX_DEFINITIONS_PATH.read_text()) if BOX_DEFINITIONS_PATH.exists() else {"boxes": []}
+    entry = {
+        "name": name,
+        "scene": body.get("scene", ""),
+        "screenshot": body.get("screenshot", ""),
+        "description": body.get("description", ""),
+        "status": "confirmed",
+        "box": body["box"],
+        "avg_rgb": body.get("avg_rgb", [0, 0, 0]),
+        "stddev_sum": body.get("stddev_sum", 0),
+        "color_ratio": body.get("color_ratio", [0.333, 0.333, 0.333]),
+    }
+    # Update existing or append
+    for i, existing in enumerate(defs["boxes"]):
+        if existing["name"] == name:
+            defs["boxes"][i] = entry
+            break
+    else:
+        defs["boxes"].append(entry)
+
+    BOX_DEFINITIONS_PATH.write_text(json.dumps(defs, indent=2))
+    return {"ok": True}
+
+
 @app.get("/api/inspector/image/{path:path}")
 async def inspector_image(path: str):
     full = _resolve_image_path(path)
-    if not full or not full.exists(): return JSONResponse({"error": "not found"}, 404)
-    return Response(content=full.read_bytes(), media_type="image/png" if full.suffix == ".png" else "image/jpeg")
-
-def _resolve_image_path(path: str) -> Optional[Path]:
-    for base in [TEST_IMAGES_DIR, REF_FRAMES_DIR]:
-        full = base / path
-        if full.exists(): return full
-    return None
+    if not full or not full.exists():
+        return JSONResponse({"error": "not found"}, 404)
+    return Response(
+        content=full.read_bytes(),
+        media_type="image/png" if full.suffix == ".png" else "image/jpeg",
+    )
 
 
 # ═══════════════════════════════════════════════════════════════════════════
