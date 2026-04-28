@@ -560,7 +560,10 @@ class PixelInspector:
         win_h = min(self.img_h, int(screen_h * 0.85))
         self.root.geometry(f"{win_w}x{win_h}")
 
-        self.root.after(100, self.fit_to_window)
+        # Force window to render (macOS Tk 8.5 grey-screen workaround)
+        self.root.update()
+        self.root.after(200, self.fit_to_window)
+        self.root.after(400, self.redraw)
         self.root.mainloop()
 
     def _load_current_image(self):
