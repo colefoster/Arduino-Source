@@ -260,6 +260,9 @@
             font-size: 10px; color: #8b949e; margin-top: 2px;
         }
 
+        .labeler-reader-section {
+            background: #161b22; border: 1px solid #30363d; border-radius: 6px; padding: 8px 10px;
+        }
         .labeler-controls {
             background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 12px;
             flex: 1;
@@ -457,6 +460,18 @@
         </div>
     </div>
 
+    <h2>Sync to ColePC</h2>
+    <div class="card" id="sync-card">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <div>
+                <div class="label">Replay Sync</div>
+                <div id="sync-status" style="font-size:12px; margin-top:4px; color:#8b949e;">Checking...</div>
+            </div>
+            <button class="btn btn-primary" id="sync-btn" onclick="triggerSync()" disabled>Sync Now</button>
+        </div>
+        <div id="sync-result" style="font-size:11px; color:#8b949e;"></div>
+    </div>
+
     <h2>Recent Saves</h2>
     <div class="feed" id="feed">
         <div style="color: #484f58; font-size: 12px;">Loading...</div>
@@ -501,10 +516,6 @@
                 <label>Source Directory</label>
                 <select id="labeler-source-select"><option value="">Loading...</option></select>
             </div>
-            <div class="form-group">
-                <label>Reader</label>
-                <select id="labeler-reader-select"><option value="">Loading...</option></select>
-            </div>
             <div style="text-align:center; margin-top:20px;">
                 <button class="btn btn-primary btn-lg" id="labeler-start-btn">Start Labeling</button>
             </div>
@@ -541,10 +552,7 @@
                 <div class="labeler-crops-section" id="labeler-crops">
                     <div class="section-title">Crop Previews</div>
                 </div>
-                <div class="labeler-controls" id="labeler-controls">
-                    <div class="section-title">Label</div>
-                    <div id="labeler-control-area"></div>
-                </div>
+                <div id="labeler-multi-controls"></div>
             </div>
         </div>
     </div>
@@ -765,10 +773,11 @@ function dashboardInit() {
         type: 'bar', data: { labels: [], datasets: [] }, options: stackedOpts,
     });
 
-    loadStatus(); loadCollection(); loadRatings(); loadRecent(); loadCoverage(); loadDataset();
+    loadStatus(); loadCollection(); loadRatings(); loadRecent(); loadCoverage(); loadDataset(); loadSyncStatus();
     dashboardIntervals.push(setInterval(() => { loadStatus(); loadRecent(); }, 30000));
     dashboardIntervals.push(setInterval(() => { loadCollection(); loadRatings(); loadDataset(); }, 120000));
     dashboardIntervals.push(setInterval(loadCoverage, 300000));
+    dashboardIntervals.push(setInterval(loadSyncStatus, 60000));
 }
 
 function agoStr(sec) {
@@ -956,6 +965,79 @@ async function loadDataset() {
 
 
 // ═══════════════════════════════════════════════════════════════
+// Sync
+// ═══════════════════════════════════════════════════════════════
+
+async function loadSyncStatus() {
+    try {
+        const d = await api('/api/sync/status');
+        const statusEl = document.getElementById('sync-status');
+        const btn = document.getElementById('sync-btn');
+        const resultEl = document.getElementById('sync-result');
+
+        if (d.running) {
+            statusEl.innerHTML = '<span class="dot yellow"></span>Syncing...';
+            btn.disabled = true;
+            btn.textContent = 'Syncing...';
+        } else if (d.colepc_reachable) {
+            statusEl.innerHTML = '<span class="dot green"></span>ColePC online';
+            btn.disabled = false;
+            btn.textContent = 'Sync Now';
+        } else {
+            statusEl.innerHTML = '<span class="dot red"></span>ColePC offline';
+            btn.disabled = true;
+            btn.textContent = 'Sync Now';
+        }
+
+        if (d.last_error) {
+            resultEl.innerHTML = `<span style="color:#f85149;">Last error: ${d.last_error}</span>`;
+        } else if (d.last_result) {
+            const r = d.last_result;
+            const ago = agoStr(Math.round(Date.now() / 1000 - r.timestamp));
+            const fmtDetails = Object.values(r.formats)
+                .map(f => `${f.format.replace('gen9champions', '').replace('regma', '')}: ${f.synced.toLocaleString()} new`)
+                .join(', ');
+            resultEl.innerHTML = `Last sync: ${r.total_synced.toLocaleString()} files pushed ${ago} (${fmtDetails})`;
+        }
+    } catch (e) { console.error('loadSyncStatus:', e); }
+}
+
+async function triggerSync() {
+    const btn = document.getElementById('sync-btn');
+    const statusEl = document.getElementById('sync-status');
+    const resultEl = document.getElementById('sync-result');
+
+    btn.disabled = true;
+    btn.textContent = 'Syncing...';
+    statusEl.innerHTML = '<span class="dot yellow"></span>Syncing...';
+    resultEl.innerHTML = 'Calculating delta and pushing new replays...';
+
+    try {
+        const resp = await fetch(`${API}/api/sync/trigger`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({}),
+        });
+        const d = await resp.json();
+        if (d.error) {
+            resultEl.innerHTML = `<span style="color:#f85149;">${d.error}</span>`;
+        } else {
+            const fmtDetails = Object.values(d.formats)
+                .map(f => `${f.format.replace('gen9champions', '').replace('regma', '')}: ${f.synced.toLocaleString()} new`)
+                .join(', ');
+            resultEl.innerHTML = `<span style="color:#3fb950;">Synced ${d.total_synced.toLocaleString()} files</span> (${fmtDetails})`;
+        }
+    } catch (e) {
+        resultEl.innerHTML = `<span style="color:#f85149;">Sync failed: ${e.message}</span>`;
+    }
+
+    btn.disabled = false;
+    btn.textContent = 'Sync Now';
+    loadSyncStatus();
+}
+
+
+// ═══════════════════════════════════════════════════════════════
 // Gallery
 // ═══════════════════════════════════════════════════════════════
 let galleryInited = false;
@@ -1008,18 +1090,28 @@ async function loadGalleryImages(reader) {
     grid.innerHTML = '<div style="color:#484f58; font-size:12px;">Loading...</div>';
     document.getElementById('gallery-filters').style.display = 'flex';
     try {
-        galleryImages = await api(`/api/gallery/images?reader=${encodeURIComponent(reader)}`);
+        const data = await api(`/api/gallery/reader/${encodeURIComponent(reader)}`);
+        galleryImages = data.images || [];
         renderGalleryGrid();
     } catch (e) {
         grid.innerHTML = '<div style="color:#f85149; font-size:12px;">Failed to load images</div>';
     }
 }
 
+function _gtLabel(img) {
+    const gt = img.ground_truth;
+    if (!gt) return '';
+    if (gt.type === 'bool') return gt.values[0] ? 'True' : 'False';
+    if (gt.type === 'words') return gt.values.join(' ');
+    if (gt.type === 'int') return String(gt.values[0]);
+    return gt.raw || '';
+}
+
 function renderGalleryGrid() {
     const grid = document.getElementById('gallery-grid');
     let filtered = galleryImages;
-    if (galleryFilter === 'true') filtered = galleryImages.filter(i => i.label === true || i.label === 'True');
-    if (galleryFilter === 'false') filtered = galleryImages.filter(i => i.label === false || i.label === 'False');
+    if (galleryFilter === 'true') filtered = galleryImages.filter(i => _gtLabel(i) === 'True');
+    if (galleryFilter === 'false') filtered = galleryImages.filter(i => _gtLabel(i) === 'False');
 
     if (!filtered.length) {
         grid.innerHTML = '<div style="color:#484f58; font-size:12px;">No images match filter</div>';
@@ -1027,14 +1119,14 @@ function renderGalleryGrid() {
     }
 
     grid.innerHTML = filtered.map(img => {
+        const label = _gtLabel(img);
         let badgeClass = 'badge-value';
-        let badgeText = String(img.label);
-        if (img.label === true || img.label === 'True') { badgeClass = 'badge-true'; badgeText = 'True'; }
-        else if (img.label === false || img.label === 'False') { badgeClass = 'badge-false'; badgeText = 'False'; }
+        if (label === 'True') badgeClass = 'badge-true';
+        else if (label === 'False') badgeClass = 'badge-false';
         return `<div class="gallery-card" data-filename="${img.filename}">
-            <img class="thumb" loading="lazy" src="${API}/api/gallery/thumb/${encodeURIComponent(gallerySelectedReader)}/${encodeURIComponent(img.filename)}" alt="${img.filename}">
+            <img class="thumb" loading="lazy" src="${API}/api/gallery/thumb/${img.path}" alt="${img.filename}">
             <div class="fname">${img.filename}</div>
-            <span class="truth-badge ${badgeClass}">${badgeText}</span>
+            <span class="truth-badge ${badgeClass}">${label}</span>
         </div>`;
     }).join('');
 
@@ -1059,7 +1151,7 @@ async function expandGalleryCard(filename) {
                 <button class="btn btn-primary" id="gallery-open-labeler-btn">Open in Labeler</button>
             </div>
         </div>
-        <img src="${API}/api/gallery/thumb/${encodeURIComponent(gallerySelectedReader)}/${encodeURIComponent(filename)}" alt="${filename}" style="max-width:100%;">
+        <img src="${API}/api/gallery/image/${img ? img.path : encodeURIComponent(gallerySelectedReader) + '/' + encodeURIComponent(filename)}" alt="${filename}" style="max-width:100%;">
         <div class="crops" id="gallery-expanded-crops">${cropsHtml}</div>
     </div>`;
     document.body.appendChild(overlay);
@@ -1075,7 +1167,7 @@ async function expandGalleryCard(filename) {
         if (Array.isArray(crops) && crops.length) {
             cropsEl.innerHTML = crops.map(c => `
                 <div class="crop-item">
-                    <img src="${c.url || c.data_url || ''}" alt="${c.name}" style="image-rendering:pixelated;">
+                    <img src="${c.data || c.url || c.data_url || ''}" alt="${c.name}" style="image-rendering:pixelated;">
                     <div class="crop-label">${c.name}</div>
                 </div>
             `).join('');
@@ -1094,12 +1186,10 @@ async function expandGalleryCard(filename) {
 let labelerInited = false;
 let labelerState = {
     source: null,
-    reader: null,
-    readerInfo: null,
+    sourceInfo: null,
     images: [],
     index: 0,
-    labels: {},         // filename -> label value
-    currentLabel: null,
+    frameLabels: {},    // reader -> value for current frame
 };
 
 // Completions cache
@@ -1110,16 +1200,11 @@ async function labelerInit() {
     labelerInited = true;
 
     try {
-        const [sources, readers] = await Promise.all([
-            api('/api/labeler/sources'),
-            api('/api/gallery/readers'),
-        ]);
+        const sources = await api('/api/labeler/sources');
+        labelerState._sources = sources;
         const srcSelect = document.getElementById('labeler-source-select');
         srcSelect.innerHTML = '<option value="">-- Select Source --</option>' +
-            sources.map(s => `<option value="${s}">${s}</option>`).join('');
-        const rdrSelect = document.getElementById('labeler-reader-select');
-        rdrSelect.innerHTML = '<option value="">-- Select Reader --</option>' +
-            readers.map(r => `<option value="${r.name}">${r.name}</option>`).join('');
+            sources.map(s => `<option value="${s.path}">${s.parent}/${s.name} (${s.count})</option>`).join('');
     } catch (e) {
         console.error('labelerInit:', e);
     }
@@ -1128,43 +1213,33 @@ async function labelerInit() {
     document.getElementById('labeler-prev-btn').addEventListener('click', () => labelerNav(-1));
     document.getElementById('labeler-next-btn').addEventListener('click', () => labelerNav(1));
     document.getElementById('labeler-skip-btn').addEventListener('click', labelerSkip);
-    document.getElementById('labeler-save-btn').addEventListener('click', labelerSave);
+    document.getElementById('labeler-save-btn').addEventListener('click', () => labelerSaveAll(true));
     document.getElementById('labeler-export-btn').addEventListener('click', labelerExport);
     document.getElementById('labeler-back-btn').addEventListener('click', labelerBackToSetup);
 }
 
 async function labelerStart() {
     const source = document.getElementById('labeler-source-select').value;
-    const reader = document.getElementById('labeler-reader-select').value;
-    if (!source || !reader) { alert('Select both source and reader.'); return; }
+    if (!source) { alert('Select a source folder.'); return; }
+
+    const sourceInfo = labelerState._sources.find(s => s.path === source);
+    if (!sourceInfo) { alert('Source not found.'); return; }
 
     labelerState.source = source;
-    labelerState.reader = reader;
-    labelerState.labels = {};
-    labelerState.currentLabel = null;
+    labelerState.sourceInfo = sourceInfo;
+    labelerState.frameLabels = {};
+
+    const primaryReader = sourceInfo.suggested_reader || sourceInfo.readers[0];
 
     try {
-        const [images, readerInfo] = await Promise.all([
-            api(`/api/labeler/images?source=${encodeURIComponent(source)}&reader=${encodeURIComponent(reader)}`),
-            api(`/api/labeler/reader_info/${encodeURIComponent(reader)}`),
-        ]);
-        labelerState.images = images;
-        labelerState.readerInfo = readerInfo;
+        const resp = await api(`/api/labeler/images?source=${encodeURIComponent(source)}&reader=${encodeURIComponent(primaryReader)}`);
+        labelerState.images = resp.images || resp;
         labelerState.index = 0;
-
-        // Pre-load existing labels
-        if (Array.isArray(images)) {
-            images.forEach(img => {
-                if (img.label !== undefined && img.label !== null) {
-                    labelerState.labels[img.filename] = img.label;
-                }
-            });
-        }
 
         document.getElementById('labeler-setup').style.display = 'none';
         document.getElementById('labeler-active').style.display = '';
-        document.getElementById('labeler-reader-badge').textContent = reader;
-        buildLabelControls();
+        document.getElementById('labeler-reader-badge').textContent = sourceInfo.readers.join(' + ');
+        buildMultiReaderControls();
         labelerShowFrame();
     } catch (e) {
         alert('Failed to load: ' + e.message);
@@ -1180,7 +1255,7 @@ function labelerNav(delta) {
     const newIdx = labelerState.index + delta;
     if (newIdx < 0 || newIdx >= labelerState.images.length) return;
     labelerState.index = newIdx;
-    labelerState.currentLabel = null;
+    labelerState.frameLabels = {};
     labelerShowFrame();
 }
 
@@ -1191,10 +1266,8 @@ function labelerSkip() {
 
 function labelerUpdateProgress() {
     const total = labelerState.images.length;
-    const labeled = Object.keys(labelerState.labels).length;
-    const pct = total ? Math.round(labeled / total * 100) : 0;
     document.getElementById('labeler-progress').textContent =
-        `[${labelerState.index + 1}/${total}] Labeled: ${labeled}/${total} (${pct}%)`;
+        `[${labelerState.index + 1}/${total}]`;
 }
 
 function labelerSetStatus(msg) {
@@ -1205,7 +1278,7 @@ function labelerSetStatus(msg) {
 
 const OVERLAY_COLORS = ['#58a6ff', '#3fb950', '#f85149', '#d29922', '#d2a8ff', '#f0883e', '#79c0ff', '#56d364'];
 
-function labelerShowFrame() {
+async function labelerShowFrame() {
     const img = labelerState.images[labelerState.index];
     if (!img) return;
 
@@ -1216,63 +1289,70 @@ function labelerShowFrame() {
     imgEl.src = `${API}/api/labeler/frame/${encodeURIComponent(labelerState.source)}/${encodeURIComponent(img.filename)}`;
     imgEl.style.display = '';
 
-    // Clear overlays — we'll draw them once the image loads
     const overlayContainer = document.getElementById('labeler-overlays');
     overlayContainer.innerHTML = '';
+    imgEl.onload = () => labelerDrawOverlays(imgEl, overlayContainer);
 
-    imgEl.onload = () => {
-        labelerDrawOverlays(imgEl, overlayContainer);
-    };
+    // Load crops for the primary reader
+    const primaryReader = labelerState.sourceInfo.suggested_reader || labelerState.sourceInfo.readers[0];
+    loadLabelerCrops(img.filename, primaryReader);
 
-    // Load crops
-    loadLabelerCrops(img.filename);
-
-    // Set current label from cache
-    const existing = labelerState.labels[img.filename];
-    labelerState.currentLabel = existing !== undefined ? existing : null;
-    syncLabelControlsToValue();
+    // Fetch existing labels for this frame
+    try {
+        const existing = await api(`/api/labeler/frame_labels?source=${encodeURIComponent(labelerState.source)}&filename=${encodeURIComponent(img.filename)}`);
+        labelerState.frameLabels = {};
+        for (const [reader, label] of Object.entries(existing)) {
+            labelerState.frameLabels[reader] = label?.value !== undefined ? label.value : label;
+        }
+    } catch {
+        labelerState.frameLabels = {};
+    }
+    syncAllControls();
 }
 
 function labelerDrawOverlays(imgEl, container) {
     container.innerHTML = '';
-    const boxes = labelerState.readerInfo?.boxes || [];
-    if (!boxes.length) return;
+    // Collect all crop boxes from all readers
+    const infos = labelerState.sourceInfo?.reader_infos || {};
+    const allBoxes = [];
+    for (const info of Object.values(infos)) {
+        if (info.crops) allBoxes.push(...info.crops);
+    }
+    if (!allBoxes.length) return;
 
-    // Get image element's rendered size and position within parent
     const wrap = document.getElementById('labeler-image-wrap');
     const wrapRect = wrap.getBoundingClientRect();
     const imgRect = imgEl.getBoundingClientRect();
-
-    // Offset of image within the wrapper
     const offsetX = imgRect.left - wrapRect.left;
     const offsetY = imgRect.top - wrapRect.top;
     const dispW = imgRect.width;
     const dispH = imgRect.height;
 
-    boxes.forEach((box, i) => {
+    allBoxes.forEach((box, i) => {
         const color = OVERLAY_COLORS[i % OVERLAY_COLORS.length];
+        const [bx, by, bw, bh] = box.box || [box.x, box.y, box.w, box.h];
         const div = document.createElement('div');
         div.className = 'crop-overlay';
         div.style.borderColor = color;
-        div.style.left = (offsetX + box.x * dispW) + 'px';
-        div.style.top = (offsetY + box.y * dispH) + 'px';
-        div.style.width = (box.w * dispW) + 'px';
-        div.style.height = (box.h * dispH) + 'px';
+        div.style.left = (offsetX + bx * dispW) + 'px';
+        div.style.top = (offsetY + by * dispH) + 'px';
+        div.style.width = (bw * dispW) + 'px';
+        div.style.height = (bh * dispH) + 'px';
         div.innerHTML = `<span class="crop-tag" style="background:${color}; color:#000;">${box.name || i}</span>`;
         container.appendChild(div);
     });
 }
 
-async function loadLabelerCrops(filename) {
+async function loadLabelerCrops(filename, reader) {
     const el = document.getElementById('labeler-crops');
     el.innerHTML = '<div class="section-title">Crop Previews</div><div style="color:#484f58; font-size:11px;">Loading...</div>';
     try {
-        const crops = await api(`/api/labeler/crops?source=${encodeURIComponent(labelerState.source)}&filename=${encodeURIComponent(filename)}&reader=${encodeURIComponent(labelerState.reader)}`);
+        const crops = await api(`/api/labeler/crops?source=${encodeURIComponent(labelerState.source)}&filename=${encodeURIComponent(filename)}&reader=${encodeURIComponent(reader)}`);
         let html = '<div class="section-title">Crop Previews</div>';
         if (Array.isArray(crops) && crops.length) {
             html += crops.map(c => `
                 <div class="crop-preview">
-                    <img src="${c.url || c.data_url || ''}" alt="${c.name}" style="image-rendering:pixelated;">
+                    <img src="${c.data || c.url || c.data_url || ''}" alt="${c.name}" style="image-rendering:pixelated;">
                     <div class="crop-name">${c.name}</div>
                 </div>
             `).join('');
@@ -1285,183 +1365,226 @@ async function loadLabelerCrops(filename) {
     }
 }
 
-function buildLabelControls() {
-    const area = document.getElementById('labeler-control-area');
-    const info = labelerState.readerInfo;
-    if (!info) { area.innerHTML = ''; return; }
+// Build the multi-reader control panel
+function buildMultiReaderControls() {
+    const container = document.getElementById('labeler-multi-controls');
+    const infos = labelerState.sourceInfo?.reader_infos || {};
+    const readers = labelerState.sourceInfo?.readers || [];
+    let html = '';
 
-    const type = info.type || 'bool';
+    for (const reader of readers) {
+        const info = infos[reader];
+        if (!info) continue;
+        const type = info.type || 'unknown';
+        const shortName = reader.replace('Detector', '').replace('Reader', '');
 
-    if (type === 'bool') {
-        area.innerHTML = `
-            <div class="bool-buttons">
-                <button class="btn btn-success btn-lg" id="lbl-true-btn">TRUE <kbd>T</kbd></button>
-                <button class="btn btn-danger btn-lg" id="lbl-false-btn">FALSE <kbd>F</kbd></button>
+        html += `<div class="labeler-reader-section" data-reader="${reader}">`;
+        html += `<div class="section-title" style="font-size:11px; margin-bottom:4px;">${shortName}</div>`;
+
+        if (type === 'bool') {
+            html += `<div style="display:flex; gap:4px;">
+                <button class="btn btn-sm lbl-bool-btn" data-reader="${reader}" data-val="true"
+                    style="flex:1; font-size:11px; padding:3px 6px;">T</button>
+                <button class="btn btn-sm lbl-bool-btn" data-reader="${reader}" data-val="false"
+                    style="flex:1; font-size:11px; padding:3px 6px;">F</button>
             </div>`;
-        area.querySelector('#lbl-true-btn').addEventListener('click', () => labelerSetAndSave(true));
-        area.querySelector('#lbl-false-btn').addEventListener('click', () => labelerSetAndSave(false));
-    } else if (type === 'event') {
-        const events = info.events || [];
-        area.innerHTML = `
-            <select id="lbl-event-select" style="width:100%; margin-bottom:8px;">
-                <option value="">-- Select Event --</option>
-                ${events.map((e, i) => `<option value="${e}">${i+1}. ${e}</option>`).join('')}
-            </select>
-            <div style="font-size:10px; color:#484f58;">Shortcuts: <kbd>1</kbd>-<kbd>${Math.min(events.length, 7)}</kbd></div>`;
-        area.querySelector('#lbl-event-select').addEventListener('change', e => {
-            labelerState.currentLabel = e.target.value || null;
-        });
-    } else if (type.startsWith('int:')) {
-        const parts = type.split(':');
-        const min = parseInt(parts[1]) || 0;
-        const max = parseInt(parts[2]) || 100;
-        const range = max - min;
-        if (range <= 10) {
-            let html = '<div class="radio-group">';
-            for (let v = min; v <= max; v++) {
-                html += `<button class="radio-btn" data-val="${v}">${v}</button>`;
+        } else if (type === 'event') {
+            const events = info.events || [];
+            html += `<select class="lbl-event-sel" data-reader="${reader}" style="width:100%; font-size:11px;">
+                <option value="">--</option>
+                ${events.map((ev, i) => `<option value="${ev}">${i+1}. ${ev}</option>`).join('')}
+            </select>`;
+        } else if (type.startsWith('int:')) {
+            const parts = type.split(':');
+            const min = parseInt(parts[1]) || 0;
+            const max = parseInt(parts[2]) || 100;
+            const range = max - min;
+            if (range <= 10) {
+                html += '<div style="display:flex; gap:2px; flex-wrap:wrap;">';
+                for (let v = min; v <= max; v++) {
+                    html += `<button class="btn btn-sm lbl-int-btn" data-reader="${reader}" data-val="${v}"
+                        style="min-width:24px; font-size:11px; padding:3px 4px;">${v}</button>`;
+                }
+                html += '</div>';
+            } else {
+                html += `<input type="number" class="lbl-int-input" data-reader="${reader}"
+                    min="${min}" max="${max}" style="width:100%; font-size:11px;" placeholder="${min}-${max}">`;
             }
-            html += '</div>';
-            if (range <= 3) html += `<div style="font-size:10px; color:#484f58; margin-top:6px;">Shortcuts: <kbd>${min}</kbd>-<kbd>${max}</kbd></div>`;
-            area.innerHTML = html;
-            area.querySelectorAll('.radio-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    if (range <= 3) {
-                        labelerSetAndSave(parseInt(btn.dataset.val));
-                    } else {
-                        labelerState.currentLabel = parseInt(btn.dataset.val);
-                        syncLabelControlsToValue();
-                    }
-                });
-            });
-        } else {
-            area.innerHTML = `<input type="number" id="lbl-int-input" min="${min}" max="${max}" style="width:100%;" placeholder="${min}-${max}">`;
-            area.querySelector('#lbl-int-input').addEventListener('change', e => {
-                labelerState.currentLabel = parseInt(e.target.value);
-            });
-        }
-    } else if (type === 'text') {
-        const acType = info.completions || 'species';
-        area.innerHTML = `
-            <div class="autocomplete-wrap">
-                <input type="text" id="lbl-text-input" style="width:100%;" placeholder="Type to search..." autocomplete="off">
-                <div class="autocomplete-dropdown" id="lbl-text-ac" style="display:none;"></div>
+        } else if (type === 'text') {
+            html += `<div class="autocomplete-wrap">
+                <input type="text" class="lbl-text-input" data-reader="${reader}"
+                    style="width:100%; font-size:11px;" placeholder="Type..." autocomplete="off">
+                <div class="autocomplete-dropdown lbl-ac-dd" data-reader="${reader}" style="display:none;"></div>
             </div>`;
-        setupAutocomplete('lbl-text-input', 'lbl-text-ac', acType, val => {
-            labelerState.currentLabel = val;
-        });
-    } else if (type.startsWith('multi_text:')) {
-        const n = parseInt(type.split(':')[1]) || 1;
-        const cropNames = (labelerState.readerInfo?.boxes || []).map(b => b.name);
-        const acType = info.completions || 'species';
-        let html = '';
-        for (let i = 0; i < n; i++) {
-            const label = cropNames[i] || `Slot ${i+1}`;
-            html += `
-                <div style="margin-bottom:8px;">
-                    <div style="font-size:10px; color:#8b949e; margin-bottom:2px;">${label}</div>
+        } else if (type.startsWith('multi_text:')) {
+            const n = parseInt(type.split(':')[1]) || 1;
+            const cropNames = (info.crops || []).map(c => c.name);
+            for (let i = 0; i < n; i++) {
+                const label = cropNames[i] || `Slot ${i+1}`;
+                html += `<div style="margin-bottom:4px;">
+                    <div style="font-size:9px; color:#8b949e;">${label}</div>
                     <div class="autocomplete-wrap">
-                        <input type="text" id="lbl-multi-${i}" class="lbl-multi-input" data-idx="${i}" style="width:100%;" placeholder="Type..." autocomplete="off">
-                        <div class="autocomplete-dropdown" id="lbl-multi-ac-${i}" style="display:none;"></div>
+                        <input type="text" class="lbl-multi-input" data-reader="${reader}" data-idx="${i}"
+                            style="width:100%; font-size:11px;" placeholder="Type..." autocomplete="off">
+                        <div class="autocomplete-dropdown lbl-multi-ac" data-reader="${reader}" data-idx="${i}" style="display:none;"></div>
                     </div>
                 </div>`;
+            }
         }
-        area.innerHTML = html;
-        for (let i = 0; i < n; i++) {
-            setupAutocomplete(`lbl-multi-${i}`, `lbl-multi-ac-${i}`, acType, () => {
-                const vals = [];
-                area.querySelectorAll('.lbl-multi-input').forEach(inp => vals.push(inp.value));
-                labelerState.currentLabel = JSON.stringify(vals);
-            });
-        }
-    } else {
-        area.innerHTML = `<input type="text" id="lbl-generic-input" style="width:100%;" placeholder="Enter label...">`;
-        area.querySelector('#lbl-generic-input').addEventListener('change', e => {
-            labelerState.currentLabel = e.target.value;
+
+        html += '</div>';
+    }
+
+    container.innerHTML = html;
+
+    // Wire up bool buttons
+    container.querySelectorAll('.lbl-bool-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const reader = btn.dataset.reader;
+            const val = btn.dataset.val === 'true';
+            labelerState.frameLabels[reader] = val;
+            syncBoolButtons(reader);
         });
-    }
+    });
+
+    // Wire up int buttons
+    container.querySelectorAll('.lbl-int-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const reader = btn.dataset.reader;
+            labelerState.frameLabels[reader] = parseInt(btn.dataset.val);
+            syncIntButtons(reader);
+        });
+    });
+
+    // Wire up int inputs
+    container.querySelectorAll('.lbl-int-input').forEach(inp => {
+        inp.addEventListener('change', () => {
+            labelerState.frameLabels[inp.dataset.reader] = parseInt(inp.value);
+        });
+    });
+
+    // Wire up event selects
+    container.querySelectorAll('.lbl-event-sel').forEach(sel => {
+        sel.addEventListener('change', () => {
+            if (sel.value) labelerState.frameLabels[sel.dataset.reader] = sel.value;
+        });
+    });
+
+    // Wire up text autocomplete
+    container.querySelectorAll('.lbl-text-input').forEach(inp => {
+        const reader = inp.dataset.reader;
+        const dd = container.querySelector(`.lbl-ac-dd[data-reader="${reader}"]`);
+        if (dd) setupAutocompleteEl(inp, dd, 'species', val => {
+            labelerState.frameLabels[reader] = val;
+        });
+    });
+
+    // Wire up multi-text autocomplete
+    container.querySelectorAll('.lbl-multi-input').forEach(inp => {
+        const reader = inp.dataset.reader;
+        const idx = inp.dataset.idx;
+        const dd = container.querySelector(`.lbl-multi-ac[data-reader="${reader}"][data-idx="${idx}"]`);
+        const acType = reader.includes('Move') ? 'moves' : 'species';
+        if (dd) setupAutocompleteEl(inp, dd, acType, () => {
+            const vals = [];
+            container.querySelectorAll(`.lbl-multi-input[data-reader="${reader}"]`).forEach(el => vals.push(el.value));
+            labelerState.frameLabels[reader] = vals;
+        });
+    });
 }
 
-function syncLabelControlsToValue() {
-    const val = labelerState.currentLabel;
-    const info = labelerState.readerInfo;
-    if (!info) return;
-    const type = info.type || 'bool';
+function syncBoolButtons(reader) {
+    const val = labelerState.frameLabels[reader];
+    document.querySelectorAll(`.lbl-bool-btn[data-reader="${reader}"]`).forEach(btn => {
+        const isTrue = btn.dataset.val === 'true';
+        btn.style.background = (val === true && isTrue) ? '#238636' : (val === false && !isTrue) ? '#da3633' : '';
+        btn.style.color = (val === isTrue && val !== undefined) ? '#fff' : '';
+    });
+}
 
-    if (type === 'bool') {
-        // No persistent UI state to sync for bool (instant save)
-    } else if (type === 'event') {
-        const sel = document.getElementById('lbl-event-select');
-        if (sel) sel.value = val || '';
-    } else if (type.startsWith('int:')) {
-        const parts = type.split(':');
-        const min = parseInt(parts[1]) || 0;
-        const max = parseInt(parts[2]) || 100;
-        const range = max - min;
-        if (range <= 10) {
-            document.querySelectorAll('#labeler-control-area .radio-btn').forEach(btn => {
-                btn.classList.toggle('selected', parseInt(btn.dataset.val) === val);
+function syncIntButtons(reader) {
+    const val = labelerState.frameLabels[reader];
+    document.querySelectorAll(`.lbl-int-btn[data-reader="${reader}"]`).forEach(btn => {
+        const active = parseInt(btn.dataset.val) === val;
+        btn.style.background = active ? '#58a6ff' : '';
+        btn.style.color = active ? '#000' : '';
+    });
+}
+
+function syncAllControls() {
+    const infos = labelerState.sourceInfo?.reader_infos || {};
+    for (const [reader, info] of Object.entries(infos)) {
+        const type = info.type || 'unknown';
+        const val = labelerState.frameLabels[reader];
+
+        if (type === 'bool') {
+            syncBoolButtons(reader);
+        } else if (type === 'event') {
+            const sel = document.querySelector(`.lbl-event-sel[data-reader="${reader}"]`);
+            if (sel) sel.value = val || '';
+        } else if (type.startsWith('int:')) {
+            const parts = type.split(':');
+            const range = (parseInt(parts[2]) || 100) - (parseInt(parts[1]) || 0);
+            if (range <= 10) {
+                syncIntButtons(reader);
+            } else {
+                const inp = document.querySelector(`.lbl-int-input[data-reader="${reader}"]`);
+                if (inp) inp.value = val !== undefined ? val : '';
+            }
+        } else if (type === 'text') {
+            const inp = document.querySelector(`.lbl-text-input[data-reader="${reader}"]`);
+            if (inp) inp.value = val || '';
+        } else if (type.startsWith('multi_text:')) {
+            const vals = Array.isArray(val) ? val : [];
+            document.querySelectorAll(`.lbl-multi-input[data-reader="${reader}"]`).forEach((inp, i) => {
+                inp.value = vals[i] || '';
             });
-        } else {
-            const inp = document.getElementById('lbl-int-input');
-            if (inp) inp.value = val !== null ? val : '';
-        }
-    } else if (type === 'text') {
-        const inp = document.getElementById('lbl-text-input');
-        if (inp) inp.value = val || '';
-    } else if (type.startsWith('multi_text:')) {
-        if (val) {
-            try {
-                const vals = JSON.parse(val);
-                document.querySelectorAll('.lbl-multi-input').forEach((inp, i) => {
-                    inp.value = vals[i] || '';
-                });
-            } catch {}
         }
     }
 }
 
-function labelerSetAndSave(value) {
-    labelerState.currentLabel = value;
-    labelerSave(true);
-}
-
-async function labelerSave(autoAdvance = false) {
+async function labelerSaveAll(autoAdvance = false) {
     const img = labelerState.images[labelerState.index];
     if (!img) return;
-    if (labelerState.currentLabel === null || labelerState.currentLabel === undefined) {
-        labelerSetStatus('No label set');
+
+    // Collect all set labels
+    const labels = {};
+    for (const [reader, val] of Object.entries(labelerState.frameLabels)) {
+        if (val === undefined || val === null || val === '') continue;
+        labels[reader] = val;
+    }
+
+    if (!Object.keys(labels).length) {
+        labelerSetStatus('No labels set');
         return;
     }
 
-    const labelJson = typeof labelerState.currentLabel === 'object'
-        ? JSON.stringify(labelerState.currentLabel)
-        : String(labelerState.currentLabel);
-
     try {
-        await apiPost('/api/labeler/label', {
-            source: labelerState.source,
-            filename: img.filename,
-            reader: labelerState.reader,
-            label_json: labelJson,
-        });
-        labelerState.labels[img.filename] = labelerState.currentLabel;
-        labelerSetStatus(`Saved: ${labelJson}`);
-        if (autoAdvance || true) {
-            labelerNav(1);
-        }
+        await fetch(`${API}/api/labeler/label_batch`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                source: labelerState.source,
+                filename: img.filename,
+                labels,
+            }),
+        }).then(r => r.json());
+        labelerSetStatus(`Saved ${Object.keys(labels).length} labels`);
+        if (autoAdvance) labelerNav(1);
     } catch (e) {
         labelerSetStatus('Save failed: ' + e.message);
     }
 }
 
 async function labelerExport() {
+    const readers = labelerState.sourceInfo?.readers || [];
+    let totalExported = 0;
     try {
-        const result = await apiPost('/api/labeler/export', {
-            source: labelerState.source,
-            reader: labelerState.reader,
-        });
-        labelerSetStatus(result.message || 'Exported!');
+        for (const reader of readers) {
+            const result = await apiPost('/api/labeler/export', { source: labelerState.source, reader });
+            totalExported += result.exported || 0;
+        }
+        labelerSetStatus(`Exported ${totalExported} files`);
     } catch (e) {
         labelerSetStatus('Export failed: ' + e.message);
     }
@@ -1479,11 +1602,7 @@ async function loadCompletions(type) {
     }
 }
 
-function setupAutocomplete(inputId, dropdownId, completionType, onChange) {
-    const input = document.getElementById(inputId);
-    const dropdown = document.getElementById(dropdownId);
-    if (!input || !dropdown) return;
-
+function setupAutocompleteEl(input, dropdown, completionType, onChange) {
     let items = [];
     let highlightIdx = 0;
 
@@ -1541,51 +1660,28 @@ function setupAutocomplete(inputId, dropdownId, completionType, onChange) {
     });
 }
 
+// Keep old function name for gallery compatibility
+function setupAutocomplete(inputId, dropdownId, completionType, onChange) {
+    const input = document.getElementById(inputId);
+    const dropdown = document.getElementById(dropdownId);
+    if (input && dropdown) setupAutocompleteEl(input, dropdown, completionType, onChange);
+}
+
 // Labeler keyboard shortcuts
 document.addEventListener('keydown', e => {
     if (currentView !== 'labeler') return;
     if (document.getElementById('labeler-active').style.display === 'none') return;
 
-    // Don't capture if typing in an input
     const tag = e.target.tagName;
     const isInput = tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT';
-    const type = labelerState.readerInfo?.type || 'bool';
 
-    if (e.key === 'Escape') {
-        labelerBackToSetup();
-        return;
-    }
-
+    if (e.key === 'Escape') { labelerBackToSetup(); return; }
     if (isInput) return;
 
     if (e.key === 'ArrowLeft') { e.preventDefault(); labelerNav(-1); }
     else if (e.key === 'ArrowRight') { e.preventDefault(); labelerNav(1); }
-    else if (e.key === 'Enter') { e.preventDefault(); labelerSave(); }
+    else if (e.key === 'Enter') { e.preventDefault(); labelerSaveAll(true); }
     else if (e.key === 's' || e.key === 'S') { e.preventDefault(); labelerSkip(); }
-    else if (type === 'bool' && (e.key === 't' || e.key === 'T')) { e.preventDefault(); labelerSetAndSave(true); }
-    else if (type === 'bool' && (e.key === 'f' || e.key === 'F')) { e.preventDefault(); labelerSetAndSave(false); }
-    else if (type === 'event') {
-        const num = parseInt(e.key);
-        const events = labelerState.readerInfo?.events || [];
-        if (num >= 1 && num <= Math.min(events.length, 7)) {
-            e.preventDefault();
-            labelerState.currentLabel = events[num - 1];
-            syncLabelControlsToValue();
-            labelerSave(true);
-        }
-    } else if (type.startsWith('int:')) {
-        const parts = type.split(':');
-        const min = parseInt(parts[1]) || 0;
-        const max = parseInt(parts[2]) || 100;
-        const range = max - min;
-        if (range <= 3) {
-            const num = parseInt(e.key);
-            if (!isNaN(num) && num >= min && num <= max) {
-                e.preventDefault();
-                labelerSetAndSave(num);
-            }
-        }
-    }
 });
 
 
@@ -1619,7 +1715,7 @@ async function inspectorInit() {
         const sources = await api('/api/labeler/sources');
         const sel = document.getElementById('inspector-source-select');
         sel.innerHTML = '<option value="">Select source...</option>' +
-            sources.map(s => `<option value="${s}">${s}</option>`).join('');
+            sources.map(s => `<option value="${s.path}">${s.parent}/${s.name} (${s.count})</option>`).join('');
     } catch {}
 
     // Load boxes

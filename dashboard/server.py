@@ -18,12 +18,14 @@ Deploy:
 
 from __future__ import annotations
 
+import asyncio
 import io
 import json
 import math
 import os
 import random
 import shutil
+import subprocess
 import sys
 import time
 from pathlib import Path
@@ -137,6 +139,29 @@ BATTLE_LOG_EVENTS = [
     "STATUS_INFLICTED", "WEATHER", "TERRAIN", "ABILITY_ACTIVATED",
     "ITEM_USED", "HEALED", "DAMAGED", "OTHER",
 ]
+
+FOLDER_TO_READER = {
+    "action_menu": "ActionMenuDetector",
+    "battle_log": "BattleLogReader",
+    "move_select": "MoveNameReader",
+    "post_match": "PostMatchScreenDetector",
+    "preparing": "PreparingForBattleDetector",
+    "team_select": "TeamSelectReader",
+    "team_preview": "TeamPreviewReader",
+    "team_summary": "TeamSummaryReader",
+}
+
+# Which readers to show together for each screen type
+FOLDER_READERS = {
+    "action_menu": ["ActionMenuDetector", "SpeciesReader", "OpponentHPReader"],
+    "move_select": ["MoveSelectDetector", "MoveNameReader", "MoveSelectCursorSlot", "SpeciesReader", "OpponentHPReader"],
+    "battle_log": ["BattleLogReader", "SpeciesReader"],
+    "post_match": ["PostMatchScreenDetector"],
+    "preparing": ["PreparingForBattleDetector"],
+    "team_select": ["TeamSelectReader"],
+    "team_preview": ["TeamPreviewReader", "TeamPreviewDetector"],
+    "team_summary": ["TeamSummaryReader"],
+}
 
 READER_TYPES = {}
 for _r in BOOL_DETECTORS:
@@ -494,9 +519,19 @@ async def labeler_sources():
         if not vod_dir.is_dir(): continue
         imgs = [f for f in vod_dir.iterdir() if f.is_file() and f.suffix.lower() in (".jpg", ".jpeg", ".png")]
         if imgs:
+            folder_name = vod_dir.name
+            readers = FOLDER_READERS.get(folder_name, [FOLDER_TO_READER.get(folder_name, "SpeciesReader")])
             sources.append({
                 "path": str(vod_dir.relative_to(REF_FRAMES_DIR)),
-                "name": vod_dir.name, "parent": vod_dir.parent.name, "count": len(imgs),
+                "name": folder_name, "parent": vod_dir.parent.name, "count": len(imgs),
+                "suggested_reader": FOLDER_TO_READER.get(folder_name),
+                "readers": readers,
+                "reader_infos": {
+                    r: {"reader": r, "type": READER_TYPES.get(r, "unknown"),
+                        "is_bool": r in BOOL_DETECTORS, "crops": CROP_DEFS.get(r, []),
+                        "events": BATTLE_LOG_EVENTS if r == "BattleLogReader" else None}
+                    for r in readers
+                },
             })
     return sources
 
@@ -539,9 +574,34 @@ async def labeler_crops(source: str, filename: str, reader: str):
 async def labeler_save_label(source: str = Form(...), filename: str = Form(...),
                               reader: str = Form(...), label_json: str = Form(...)):
     labels = _load_labels(source, reader)
-    labels[filename] = json.loads(label_json)
+    parsed = json.loads(label_json)
+    # Wrap bare values (bool, str, int) in a dict so .get("type") works downstream
+    if not isinstance(parsed, dict):
+        parsed = {"type": READER_TYPES.get(reader, "unknown"), "value": parsed}
+    labels[filename] = parsed
     _save_labels(source, reader, labels)
     return {"ok": True, "labeled": sum(1 for v in labels.values() if v.get("type") != "skip")}
+
+@app.post("/api/labeler/label_batch")
+async def labeler_save_label_batch(req: Request):
+    data = await req.json()
+    source, filename = data["source"], data["filename"]
+    for reader, value in data["labels"].items():
+        reader_labels = _load_labels(source, reader)
+        if not isinstance(value, dict):
+            value = {"type": READER_TYPES.get(reader, "unknown"), "value": value}
+        reader_labels[filename] = value
+        _save_labels(source, reader, reader_labels)
+    return {"ok": True}
+
+@app.get("/api/labeler/frame_labels")
+async def labeler_frame_labels(source: str, filename: str):
+    result = {}
+    for reader in READER_TYPES:
+        labels = _load_labels(source, reader)
+        if filename in labels:
+            result[reader] = labels[filename]
+    return result
 
 @app.post("/api/labeler/export")
 async def labeler_export(source: str = Form(...), reader: str = Form(...)):
@@ -1164,6 +1224,196 @@ async def training_delete(session_id: str):
             f.unlink()
         return {"ok": True}
     return JSONResponse({"error": "Session not found"}, 404)
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# REPLAY SYNC (ash → ColePC)
+# ═══════════════════════════════════════════════════════════════════════════
+
+COLEPC_HOST = "colepc"
+COLEPC_REPLAY_DIR = "C:/Dev/pokemon-champions/data/showdown_replays"
+
+_sync_state: dict = {
+    "running": False,
+    "last_run": None,
+    "last_result": None,
+    "last_error": None,
+    "formats_synced": {},
+}
+
+
+async def _run_sync_format(fmt_id: str, sources: list[Path]) -> dict:
+    """Sync one format's replays from ash to ColePC via tar+ssh."""
+    # Collect all local replay files for this format
+    local_files: list[Path] = []
+    for src_dir in sources:
+        fmt_dir = src_dir / fmt_id
+        if fmt_dir.exists():
+            local_files.extend(
+                f for f in fmt_dir.iterdir()
+                if f.suffix == ".json" and f.name != "index.json"
+            )
+
+    if not local_files:
+        return {"format": fmt_id, "local": 0, "remote": 0, "synced": 0, "skipped": True}
+
+    # Get list of what ColePC already has
+    remote_dir = f"{COLEPC_REPLAY_DIR}/{fmt_id}"
+    proc = await asyncio.create_subprocess_exec(
+        "ssh", COLEPC_HOST,
+        f'dir /b "{remote_dir}\\gen9*.json" 2>NUL',
+        stdout=asyncio.subprocess.PIPE,
+        stderr=asyncio.subprocess.PIPE,
+    )
+    stdout, _ = await proc.communicate()
+    remote_names = {line.strip() for line in stdout.decode(errors="replace").splitlines() if line.strip()}
+
+    # Delta
+    local_by_name = {f.name: f for f in local_files}
+    new_names = set(local_by_name.keys()) - remote_names
+
+    if not new_names:
+        return {"format": fmt_id, "local": len(local_files), "remote": len(remote_names), "synced": 0}
+
+    # Build tar of new files and pipe through ssh
+    # Work in batches to avoid argument list too long
+    BATCH = 5000
+    total_synced = 0
+    new_list = sorted(new_names)
+
+    for i in range(0, len(new_list), BATCH):
+        batch = new_list[i:i + BATCH]
+        # Write filelist to temp file
+        filelist_path = Path("/tmp") / f"sync_delta_{fmt_id}_{i}.txt"
+        filelist_path.write_text("\n".join(batch) + "\n")
+
+        # Collect source dirs that contain these files
+        # Create a staging area with symlinks for tar
+        staging = Path("/tmp") / f"sync_staging_{fmt_id}"
+        staging.mkdir(exist_ok=True)
+        for name in batch:
+            src = local_by_name[name]
+            link = staging / name
+            if not link.exists():
+                link.symlink_to(src)
+
+        # tar + ssh to ColePC
+        proc = await asyncio.create_subprocess_shell(
+            f'cd /tmp/sync_staging_{fmt_id} && '
+            f'tar cf - -T {filelist_path} | '
+            f'ssh {COLEPC_HOST} "cd {remote_dir} && tar xf -"',
+            stdout=asyncio.subprocess.PIPE,
+            stderr=asyncio.subprocess.PIPE,
+        )
+        _, stderr = await proc.communicate()
+
+        # Cleanup staging
+        for name in batch:
+            link = staging / name
+            if link.is_symlink():
+                link.unlink()
+        filelist_path.unlink(missing_ok=True)
+
+        if proc.returncode != 0:
+            raise RuntimeError(f"tar+ssh failed for {fmt_id} batch {i}: {stderr.decode(errors='replace')}")
+
+        total_synced += len(batch)
+
+    # Cleanup staging dir
+    staging = Path("/tmp") / f"sync_staging_{fmt_id}"
+    if staging.exists():
+        staging.rmdir()
+
+    return {
+        "format": fmt_id,
+        "local": len(local_files),
+        "remote": len(remote_names),
+        "synced": total_synced,
+    }
+
+
+@app.post("/api/sync/trigger")
+async def sync_trigger(request: Request):
+    """Trigger replay sync from ash to ColePC."""
+    if _sync_state["running"]:
+        return JSONResponse({"error": "Sync already in progress"}, 409)
+
+    body = await request.json() if request.headers.get("content-type") == "application/json" else {}
+    formats = body.get("formats", list(FORMATS.keys()))
+
+    _sync_state["running"] = True
+    _sync_state["last_error"] = None
+
+    try:
+        # Check ColePC is reachable
+        proc = await asyncio.create_subprocess_exec(
+            "ssh", "-o", "ConnectTimeout=5", "-o", "BatchMode=yes",
+            COLEPC_HOST, "echo ok",
+            stdout=asyncio.subprocess.PIPE,
+            stderr=asyncio.subprocess.PIPE,
+        )
+        stdout, stderr = await proc.communicate()
+        if proc.returncode != 0 or b"ok" not in stdout:
+            _sync_state["running"] = False
+            _sync_state["last_error"] = "ColePC unreachable"
+            return JSONResponse({"error": "ColePC unreachable — is it on?"}, 503)
+
+        # Ensure remote dirs exist
+        for fmt_id in formats:
+            remote_dir = f"{COLEPC_REPLAY_DIR}/{fmt_id}"
+            await asyncio.create_subprocess_exec(
+                "ssh", COLEPC_HOST, f'if not exist "{remote_dir}" mkdir "{remote_dir}"',
+                stdout=asyncio.subprocess.PIPE,
+                stderr=asyncio.subprocess.PIPE,
+            )
+
+        sources = [SPECTATED_DIR, DOWNLOADED_DIR]
+        results = {}
+        for fmt_id in formats:
+            results[fmt_id] = await _run_sync_format(fmt_id, sources)
+
+        total_synced = sum(r["synced"] for r in results.values())
+        _sync_state["last_run"] = time.time()
+        _sync_state["last_result"] = {
+            "timestamp": time.time(),
+            "formats": results,
+            "total_synced": total_synced,
+        }
+        _sync_state["formats_synced"] = results
+        return {"ok": True, "total_synced": total_synced, "formats": results}
+
+    except Exception as e:
+        _sync_state["last_error"] = str(e)
+        return JSONResponse({"error": str(e)}, 500)
+    finally:
+        _sync_state["running"] = False
+
+
+@app.get("/api/sync/status")
+async def sync_status():
+    """Get current sync status."""
+    # Quick check if ColePC is reachable (non-blocking, cached for 60s)
+    reachable = None
+    if not _sync_state["running"]:
+        try:
+            proc = await asyncio.create_subprocess_exec(
+                "ssh", "-o", "ConnectTimeout=3", "-o", "BatchMode=yes",
+                COLEPC_HOST, "echo ok",
+                stdout=asyncio.subprocess.PIPE,
+                stderr=asyncio.subprocess.PIPE,
+            )
+            stdout, _ = await proc.communicate()
+            reachable = b"ok" in stdout
+        except Exception:
+            reachable = False
+
+    return {
+        "running": _sync_state["running"],
+        "colepc_reachable": reachable,
+        "last_run": _sync_state["last_run"],
+        "last_result": _sync_state["last_result"],
+        "last_error": _sync_state["last_error"],
+    }
 
 
 # ═══════════════════════════════════════════════════════════════════════════
