@@ -41,7 +41,9 @@ int test_pokemonChampions_SpeciesReader_Doubles(const ImageViewRGB32& image, con
 
 //  Filename: <prefix>_<hp-pct>.png  (e.g. frame_75.png for 75%)
 int test_pokemonChampions_OpponentHPReader(const ImageViewRGB32& image, int target);
-int test_pokemonChampions_OpponentHPReader_Doubles(const ImageViewRGB32& image, int target);
+
+//  Filename: <prefix>_s<slot>_<hp-pct>.png  (e.g. frame_s0_75.png for slot 0, 75%)
+int test_pokemonChampions_OpponentHPReader_Doubles(const ImageViewRGB32& image, const std::vector<std::string>& words);
 
 //  Filename: <prefix>_<event-type>.png  (e.g. frame_MOVE_USED.png)
 int test_pokemonChampions_BattleLogReader(const ImageViewRGB32& image, const std::vector<std::string>& words);

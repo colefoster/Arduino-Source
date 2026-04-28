@@ -150,16 +150,26 @@ int test_pokemonChampions_SpeciesReader(const ImageViewRGB32& image, const std::
 }
 
 int test_pokemonChampions_SpeciesReader_Doubles(const ImageViewRGB32& image, const std::vector<std::string>& words){
-    if (words.empty()){
-        cerr << "Error: SpeciesReader_Doubles test needs a species slug in filename." << endl;
+    //  Filename convention: <prefix>_s<slot>_<species>.png
+    if (words.size() < 2){
+        cerr << "Error: SpeciesReader_Doubles needs _s<slot>_<species> in filename." << endl;
         return 1;
     }
 
+    const std::string& slot_str = words[words.size() - 2];  // "s0" or "s1"
     const std::string& expected = words.back();
+
+    uint8_t slot = 0;
+    if (slot_str == "s0") slot = 0;
+    else if (slot_str == "s1") slot = 1;
+    else {
+        cerr << "Error: expected s0 or s1, got: " << slot_str << endl;
+        return 1;
+    }
 
     auto& logger = global_logger_command_line();
     BattleHUDReader reader(Language::English, BattleMode::DOUBLES);
-    std::string result = reader.read_opponent_species(logger, image, 0);
+    std::string result = reader.read_opponent_species(logger, image, slot);
 
     TEST_RESULT_EQUAL(result, expected);
     return 0;
@@ -179,10 +189,28 @@ int test_pokemonChampions_OpponentHPReader(const ImageViewRGB32& image, int targ
     return 0;
 }
 
-int test_pokemonChampions_OpponentHPReader_Doubles(const ImageViewRGB32& image, int target){
+int test_pokemonChampions_OpponentHPReader_Doubles(
+    const ImageViewRGB32& image, const std::vector<std::string>& words
+){
+    //  Filename convention: <prefix>_s<slot>_<hp>.png
+    if (words.size() < 2) return 1;
+
+    const std::string& slot_str = words[words.size() - 2];  // "s0" or "s1"
+    const std::string& hp_str   = words[words.size() - 1];  // "21"
+
+    uint8_t slot = 0;
+    if (slot_str == "s0") slot = 0;
+    else if (slot_str == "s1") slot = 1;
+    else {
+        std::cout << "Error: expected s0 or s1, got: " << slot_str << std::endl;
+        return 1;
+    }
+
+    int target = std::stoi(hp_str);
+
     auto& logger = global_logger_command_line();
     BattleHUDReader reader(Language::English, BattleMode::DOUBLES);
-    int result = reader.read_opponent_hp_pct(logger, image, 0);
+    int result = reader.read_opponent_hp_pct(logger, image, slot);
 
     TEST_RESULT_EQUAL(result, target);
     return 0;
