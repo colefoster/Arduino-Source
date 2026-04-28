@@ -2829,22 +2829,13 @@ async function tpShowFrame() {
     imgEl.src = `${API}/api/labeler/frame/${encodeURIComponent(tpSource)}/${encodeURIComponent(img.filename)}`;
     imgEl.onload = () => tpDrawOverlays();
 
-    // Load crops
+    // Load crops from labeler source
     const allBoxes = [...TP_OWN_BOXES, ...TP_OPP_BOXES];
     try {
-        const crops = await fetch(`${API}/api/gallery/crops_custom/TeamPreviewReader/${encodeURIComponent(img.filename)}`, {
+        const cropsData = await fetch(`${API}/api/teampreview/crops`, {
             method:'POST', headers:{'Content-Type':'application/json'},
-            body: JSON.stringify({boxes: allBoxes})
-        }).then(r => r.ok ? r.json() : null);
-
-        // If that fails (frame not in test_images), try from labeler source
-        let cropsData = crops;
-        if (!cropsData) {
-            cropsData = await fetch(`${API}/api/teampreview/crops`, {
-                method:'POST', headers:{'Content-Type':'application/json'},
-                body: JSON.stringify({source: tpSource, filename: img.filename, boxes: allBoxes})
-            }).then(r => r.json());
-        }
+            body: JSON.stringify({source: tpSource, filename: img.filename, boxes: allBoxes})
+        }).then(r => r.json());
 
         if (Array.isArray(cropsData)) {
             tpRenderCrops(cropsData, img.filename);
