@@ -365,6 +365,8 @@
         <a class="nav-link" href="#/gallery" data-route="gallery">Gallery</a>
         <a class="nav-link" href="#/labeler" data-route="labeler">Labeler</a>
         <a class="nav-link" href="#/inspector" data-route="inspector">Inspector</a>
+        <a class="nav-link" href="#/recognition" data-route="recognition">Recognition</a>
+        <a class="nav-link" href="#/templates" data-route="templates">Templates</a>
         <a class="nav-link" href="#/model" data-route="model">Model Review</a>
         <a class="nav-link" href="#/training" data-route="training">Training</a>
     </div>
@@ -718,6 +720,26 @@
     </div>
 </div>
 
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- VIEW: Recognition                                          -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="view" id="view-recognition">
+    <h1>Recognition Results</h1>
+    <div class="subtitle">Species, moves, and HP reading results from the last regression run</div>
+    <div id="recog-status" style="padding:8px 12px; background:#161b22; border:1px solid #30363d; border-radius:8px; margin-bottom:12px; font-size:12px; color:#8b949e;"></div>
+    <div style="display:flex; gap:4px; flex-wrap:wrap; margin-bottom:12px;" id="recog-reader-bar"></div>
+    <div id="recog-content"></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- VIEW: Templates                                            -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="view" id="view-templates">
+    <h1>Digit Templates</h1>
+    <div class="subtitle">HP% digit templates (0-9) used for template-matching OCR</div>
+    <div id="templates-grid" style="display:flex; gap:16px; flex-wrap:wrap; margin-top:16px;"></div>
+</div>
+
 </div><!-- /main-wrap -->
 
 <script>
@@ -733,7 +755,7 @@ function apiPost(path, body) {
     return fetch(`${API}${path}`, { method: 'POST', body: fd }).then(r => r.json());
 }
 
-const views = ['dashboard', 'gallery', 'labeler', 'inspector', 'model', 'training'];
+const views = ['dashboard', 'gallery', 'labeler', 'inspector', 'recognition', 'templates', 'model', 'training'];
 let currentView = null;
 
 function route() {
@@ -757,6 +779,8 @@ function route() {
     if (view === 'gallery') galleryInit();
     if (view === 'labeler') labelerInit();
     if (view === 'inspector') inspectorInit();
+    if (view === 'recognition') recognitionInit();
+    if (view === 'templates') templatesInit();
     if (view === 'model') modelInit();
     if (view === 'training') trainingInit();
 }
@@ -2222,6 +2246,187 @@ document.addEventListener('keydown', e => {
         inspectorNavImage(1);
     }
 });
+
+
+// ═══════════════════════════════════════════════════════════════
+// Recognition Results
+// ═══════════════════════════════════════════════════════════════
+
+let recogInited = false;
+let recogData = null;
+let recogSelectedReader = null;
+
+// Recognition readers (non-bool readers that return values)
+const RECOG_READERS = [
+    'SpeciesReader_Doubles', 'SpeciesReader', 'MoveNameReader',
+    'TeamSelectReader', 'TeamSummaryReader', 'TeamPreviewReader',
+    'OpponentHPReader_Doubles', 'OpponentHPReader',
+];
+
+async function recognitionInit() {
+    if (recogInited) return;
+    recogInited = true;
+    await loadRecogResults();
+}
+
+async function loadRecogResults() {
+    const status = document.getElementById('recog-status');
+    status.textContent = 'Loading regression results...';
+    try {
+        recogData = await api('/regression/summary');
+        if (!recogData.timestamp) {
+            status.innerHTML = 'No regression results found. Run <code>python3 tools/retest.py</code> locally, commit and push <code>tools/regression_results.json</code>.';
+            return;
+        }
+        status.textContent = `Last run: ${recogData.timestamp}`;
+        renderRecogReaderBar();
+        if (RECOG_READERS.length > 0) {
+            const first = RECOG_READERS.find(r => recogData.readers[r]);
+            if (first) selectRecogReader(first);
+        }
+    } catch (e) {
+        status.textContent = 'Error loading results: ' + e.message;
+    }
+}
+
+function renderRecogReaderBar() {
+    const bar = document.getElementById('recog-reader-bar');
+    bar.innerHTML = '';
+    RECOG_READERS.forEach(name => {
+        const r = recogData.readers[name];
+        const btn = document.createElement('button');
+        btn.className = 'btn' + (name === recogSelectedReader ? ' btn-primary' : '');
+        btn.style.fontSize = '11px';
+        btn.style.padding = '4px 10px';
+        if (r) {
+            const total = r.passed + r.failed;
+            const label = r.failed > 0 ? `${r.passed}/${total}` : `${total}`;
+            btn.textContent = `${name} (${label})`;
+            if (r.failed > 0) btn.style.borderColor = '#f85149';
+        } else {
+            btn.textContent = `${name} (0)`;
+            btn.style.opacity = '0.4';
+        }
+        btn.onclick = () => selectRecogReader(name);
+        bar.appendChild(btn);
+    });
+
+    // Also show all other readers
+    Object.keys(recogData.readers).forEach(name => {
+        if (RECOG_READERS.includes(name)) return;
+        const r = recogData.readers[name];
+        const btn = document.createElement('button');
+        btn.className = 'btn' + (name === recogSelectedReader ? ' btn-primary' : '');
+        btn.style.fontSize = '11px';
+        btn.style.padding = '4px 10px';
+        const total = r.passed + r.failed;
+        const label = r.failed > 0 ? `${r.passed}/${total}` : `✓ ${total}`;
+        btn.textContent = `${name} (${label})`;
+        if (r.failed > 0) btn.style.borderColor = '#f85149';
+        btn.onclick = () => selectRecogReader(name);
+        bar.appendChild(btn);
+    });
+}
+
+async function selectRecogReader(name) {
+    recogSelectedReader = name;
+    renderRecogReaderBar();
+    const content = document.getElementById('recog-content');
+    const r = recogData.readers[name];
+    if (!r) {
+        content.innerHTML = '<div style="color:#8b949e; padding:20px;">No results for this reader.</div>';
+        return;
+    }
+
+    // Load full results to get per-file details
+    const full = await api('/regression/results');
+    const files = Object.entries(full.results || {}).filter(([f, res]) => res.reader === name);
+
+    let html = `<div style="margin-bottom:8px; font-size:12px; color:#8b949e;">
+        <span style="color:#3fb950; font-weight:bold;">${r.passed}</span> passed,
+        <span style="color:#f85149; font-weight:bold;">${r.failed}</span> failed,
+        ${r.passed + r.failed} total
+    </div>`;
+
+    // Show failures first
+    if (r.failures && r.failures.length > 0) {
+        html += '<h3 style="color:#f85149; margin:12px 0 8px; font-size:13px;">Failures</h3>';
+        r.failures.forEach(f => {
+            html += `<div style="background:#161b22; border:1px solid #f85149; border-radius:8px; padding:8px 12px; margin-bottom:6px; display:flex; gap:12px; align-items:center;">
+                <img src="/api/gallery/thumb/${name}/${f.filename}" style="width:200px; height:auto; border-radius:4px; border:1px solid #30363d; cursor:pointer;" onclick="this.style.width=this.style.width==='200px'?'500px':'200px'" onerror="this.style.display='none'">
+                <div>
+                    <div style="color:#58a6ff; font-size:11px; font-weight:bold;">${f.filename}</div>
+                    <div style="margin-top:4px;">
+                        <span style="color:#f85149; font-weight:bold;">Got: ${f.actual || '(empty)'}</span>
+                        <span style="color:#8b949e; margin-left:8px;">Expected: ${f.expected}</span>
+                    </div>
+                </div>
+            </div>`;
+        });
+    }
+
+    // Show passes (collapsed)
+    const passes = files.filter(([f, res]) => res.passed);
+    if (passes.length > 0) {
+        html += `<h3 style="color:#3fb950; margin:16px 0 8px; font-size:13px;">Passing (${passes.length})</h3>`;
+        html += '<div style="display:flex; flex-wrap:wrap; gap:4px;">';
+        passes.forEach(([fname, res]) => {
+            html += `<div style="background:#161b22; border:1px solid #30363d; border-radius:4px; padding:4px 8px; font-size:10px;">
+                <span style="color:#3fb950;">✓</span> ${res.actual || fname}
+            </div>`;
+        });
+        html += '</div>';
+    }
+
+    content.innerHTML = html;
+}
+
+
+// ═══════════════════════════════════════════════════════════════
+// Digit Templates
+// ═══════════════════════════════════════════════════════════════
+
+let templatesInited = false;
+
+async function templatesInit() {
+    if (templatesInited) return;
+    templatesInited = true;
+    await loadTemplates();
+}
+
+async function loadTemplates() {
+    const grid = document.getElementById('templates-grid');
+    grid.innerHTML = '<div style="color:#8b949e;">Loading...</div>';
+    try {
+        const data = await api('/templates/list');
+        grid.innerHTML = '';
+        if (data.templates.length === 0) {
+            grid.innerHTML = '<div style="color:#8b949e;">No digit templates found.</div>';
+            return;
+        }
+        data.templates.forEach(t => {
+            const card = document.createElement('div');
+            card.style.cssText = 'background:#161b22; border:1px solid #30363d; border-radius:8px; padding:12px; text-align:center; min-width:100px;';
+            card.innerHTML = `
+                <div style="font-size:24px; font-weight:bold; color:#58a6ff; margin-bottom:8px;">${t.digit}</div>
+                <img src="/api/templates/image/${t.digit}?t=${Date.now()}" style="image-rendering:pixelated; height:60px; border:1px solid #30363d; border-radius:4px; background:#fff;">
+                <div style="margin-top:8px;">
+                    <button class="btn" style="font-size:10px; padding:2px 8px; color:#f85149; border-color:#f85149;" onclick="deleteTemplate('${t.digit}')">Delete</button>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+    } catch (e) {
+        grid.innerHTML = '<div style="color:#f85149;">Error: ' + e.message + '</div>';
+    }
+}
+
+async function deleteTemplate(digit) {
+    if (!confirm(`Delete template for digit ${digit}?`)) return;
+    await fetch(`${API}/templates/${digit}`, { method: 'DELETE' });
+    templatesInited = false;
+    await templatesInit();
+}
 
 
 // ═══════════════════════════════════════════════════════════════
