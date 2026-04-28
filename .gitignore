@@ -93,3 +93,4 @@ tools/.pokeapi_cache.json
 # Generated PS data & feature tables (regenerable via scripts/)
 data/ps_data/
 data/feature_tables/
+.collab/
