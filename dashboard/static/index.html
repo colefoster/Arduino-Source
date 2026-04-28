@@ -569,31 +569,28 @@
 <!-- ═══════════════════════════════════════════════════════════ -->
 <div class="view" id="view-inspector">
     <div class="inspector-layout">
-        <div class="inspector-canvas-wrap" id="inspector-canvas-wrap">
-            <canvas id="inspector-canvas"></canvas>
-            <div style="position:absolute;bottom:6px;right:8px;background:#161b22cc;padding:2px 8px;border-radius:4px;font-size:11px;color:#484f58;pointer-events:none;" id="inspector-zoom-label">100%</div>
+        <div style="display:flex; flex-direction:column; flex:1; min-width:0;">
+            <div class="inspector-canvas-wrap" id="inspector-canvas-wrap" style="flex:1;">
+                <canvas id="inspector-canvas"></canvas>
+                <div style="position:absolute;bottom:6px;right:8px;background:#161b22cc;padding:2px 8px;border-radius:4px;font-size:11px;color:#484f58;pointer-events:none;" id="inspector-zoom-label">100%</div>
+            </div>
+            <!-- Image Ribbon -->
+            <div style="background:#161b22; border-top:1px solid #30363d; padding:6px 8px; display:flex; gap:6px; align-items:center;">
+                <select id="inspector-source-select" style="width:200px; flex-shrink:0; background:#0d1117; border:1px solid #30363d; border-radius:4px; padding:3px 6px; color:#c9d1d9; font-family:inherit; font-size:11px;">
+                    <option value="">Source...</option>
+                </select>
+                <div id="inspector-ribbon" style="display:flex; gap:4px; overflow-x:auto; flex:1; padding:2px 0;"></div>
+                <label class="btn" style="margin:0; font-size:11px; padding:3px 8px; flex-shrink:0;">
+                    Upload <input type="file" id="inspector-upload" accept="image/*" style="display:none;">
+                </label>
+            </div>
         </div>
         <div class="inspector-panel">
-            <!-- Image Source -->
-            <div class="inspector-section">
-                <div class="section-title">Image Source</div>
-                <div style="margin-bottom:8px;">
-                    <select id="inspector-source-select" style="width:100%; margin-bottom:6px;">
-                        <option value="">Select source...</option>
-                    </select>
-                    <select id="inspector-image-select" style="width:100%;">
-                        <option value="">Select image...</option>
-                    </select>
-                </div>
-                <div style="display:flex; gap:6px; align-items:center;">
-                    <button class="btn btn-primary" id="inspector-load-btn">Load</button>
-                    <button class="btn" id="inspector-prev-btn" title="Previous image">←</button>
-                    <button class="btn" id="inspector-next-btn" title="Next image">→</button>
-                    <label class="btn" style="margin:0;">
-                        Upload <input type="file" id="inspector-upload" accept="image/*" style="display:none;">
-                    </label>
-                </div>
-            </div>
+            <!-- Hidden selects for compat with existing JS -->
+            <select id="inspector-image-select" style="display:none;"></select>
+            <button id="inspector-load-btn" style="display:none;"></button>
+            <button id="inspector-prev-btn" style="display:none;"></button>
+            <button id="inspector-next-btn" style="display:none;"></button>
 
             <!-- Box Coordinates (editable) -->
             <div class="inspector-section">
@@ -1803,18 +1800,44 @@ async function inspectorInit() {
             Object.keys(boxes).map(r => `<option value="${r}">${r}</option>`).join('');
     } catch {}
 
-    // Source change -> load image list
+    // Source change -> populate thumbnail ribbon
     document.getElementById('inspector-source-select').addEventListener('change', async e => {
         const source = e.target.value;
+        const ribbon = document.getElementById('inspector-ribbon');
+        ribbon.innerHTML = '';
         if (!source) return;
         try {
-            const images = await api(`/api/labeler/images?source=${encodeURIComponent(source)}&reader=_`);
+            const data = await api(`/api/labeler/images?source=${encodeURIComponent(source)}&reader=_`);
+            const images = data.images || [];
+            // Also populate hidden select for nav compat
             const sel = document.getElementById('inspector-image-select');
-            sel.innerHTML = '<option value="">Select image...</option>' +
-                images.map(i => `<option value="${i.filename}">${i.filename}</option>`).join('');
-        } catch {}
+            sel.innerHTML = images.map(i => `<option value="${i.filename}">${i.filename}</option>`).join('');
+            inspectorState._ribbonSource = source;
+            inspectorState._ribbonImages = images;
+
+            images.forEach((img, idx) => {
+                const thumb = document.createElement('img');
+                thumb.src = `${API}/api/labeler/frame/${encodeURIComponent(source)}/${encodeURIComponent(img.filename)}?thumb=1`;
+                thumb.title = img.filename;
+                thumb.dataset.idx = idx;
+                thumb.style.cssText = 'height:56px; width:auto; border-radius:3px; border:2px solid #30363d; cursor:pointer; flex-shrink:0; transition:border-color 0.15s;';
+                thumb.addEventListener('click', () => {
+                    // Highlight selected
+                    ribbon.querySelectorAll('img').forEach(t => t.style.borderColor = '#30363d');
+                    thumb.style.borderColor = '#1f6feb';
+                    inspectorState._ribbonIdx = idx;
+                    inspectorLoadImage(`${API}/api/labeler/frame/${encodeURIComponent(source)}/${encodeURIComponent(img.filename)}`);
+                });
+                ribbon.appendChild(thumb);
+            });
+            // Auto-load first image
+            if (images.length > 0) {
+                ribbon.querySelector('img').click();
+            }
+        } catch(e) { console.error(e); }
     });
 
+    // Keep hidden load button for compat
     document.getElementById('inspector-load-btn').addEventListener('click', () => {
         const source = document.getElementById('inspector-source-select').value;
         const filename = document.getElementById('inspector-image-select').value;
@@ -2216,13 +2239,14 @@ async function inspectorSaveBox() {
 }
 
 function inspectorNavImage(delta) {
-    const sel = document.getElementById('inspector-image-select');
-    const opts = [...sel.options].filter(o => o.value);
-    const curIdx = opts.findIndex(o => o.value === sel.value);
+    const ribbon = document.getElementById('inspector-ribbon');
+    const thumbs = ribbon.querySelectorAll('img');
+    if (!thumbs.length) return;
+    const curIdx = inspectorState._ribbonIdx || 0;
     const newIdx = curIdx + delta;
-    if (newIdx >= 0 && newIdx < opts.length) {
-        sel.value = opts[newIdx].value;
-        document.getElementById('inspector-load-btn').click();
+    if (newIdx >= 0 && newIdx < thumbs.length) {
+        thumbs[newIdx].click();
+        thumbs[newIdx].scrollIntoView({ behavior: 'smooth', inline: 'center' });
     }
 }
 
