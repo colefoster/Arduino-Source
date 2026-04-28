@@ -53,8 +53,11 @@ def _opponent_hp_boxes():
     return [{"name": "opp_hp_pct", "box": [0.8963, 0.1098, 0.0498, 0.0524]}]
 
 def _opponent_hp_doubles_boxes():
-    """OpponentHPReader_Doubles: HP percentage for left opponent (slot 0)."""
-    return [{"name": "opp0_hp_pct", "box": [0.694, 0.116, 0.041, 0.038]}]
+    """OpponentHPReader_Doubles: HP percentage for both opponent slots."""
+    return [
+        {"name": "s0_hp_pct (left)", "box": [0.694, 0.116, 0.039, 0.034]},
+        {"name": "s1_hp_pct (right)", "box": [0.9125, 0.113, 0.028, 0.0426]},
+    ]
 
 def _species_reader_doubles_boxes():
     """SpeciesReader_Doubles: opponent species badges, doubles mode."""
@@ -156,12 +159,34 @@ def parse_ground_truth(filename, reader_name):
     if base.endswith("_False"):
         return {"type": "bool", "values": [False], "raw": base}
 
-    if reader_name in ("OpponentHPReader", "OpponentHPReader_Doubles", "MoveSelectCursorSlot"):
+    if reader_name in ("OpponentHPReader", "MoveSelectCursorSlot"):
         try:
             val = int(words[-1])
             return {"type": "int", "values": [val], "raw": base}
         except ValueError:
             pass
+
+    if reader_name == "OpponentHPReader_Doubles":
+        # Filename: <prefix>_s<slot>_<hp>.png
+        try:
+            hp = int(words[-1])
+            slot_str = words[-2]  # "s0" or "s1"
+            slot = int(slot_str[1]) if slot_str in ("s0", "s1") else 0
+            # values[0] = s0 expected, values[1] = s1 expected; use None for untested slot
+            values = [None, None]
+            values[slot] = hp
+            return {"type": "slot_int", "slot": slot, "values": values, "raw": base}
+        except (ValueError, IndexError):
+            pass
+
+    if reader_name == "SpeciesReader_Doubles":
+        # Filename: <prefix>_s<slot>_<species>.png
+        slot_str = words[-2] if len(words) >= 2 else ""
+        species = words[-1]
+        slot = int(slot_str[1]) if slot_str in ("s0", "s1") else 0
+        values = [None, None]
+        values[slot] = species
+        return {"type": "slot_words", "slot": slot, "values": values, "raw": base}
 
     if reader_name == "MoveNameReader":
         slugs = words[-4:] if len(words) >= 4 else words
@@ -367,6 +392,12 @@ def run_regression_on_colepc(test_path="CommandLineTests\\PokemonChampions", reb
             results[current_file]["detail"] = stripped.strip()
             continue
 
+        # BattleHUDReader raw OCR output on parse failure
+        m = re.search(r"failed to parse.*from '(.*)$", stripped)
+        if m and current_file:
+            results[current_file]["raw_ocr"] = m.group(1).rstrip("'")
+            continue
+
         # BattleLogReader raw text
         m = re.search(r'raw="(.+?)".*type=(\w+)', stripped)
         if m and current_file:
@@ -391,19 +422,27 @@ body {
     font-size: 13px; padding: 16px;
 }
 h1 { color: #58a6ff; margin-bottom: 8px; font-size: 20px; }
-.nav { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
-.nav a {
+.nav { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; position: sticky; top: 0; background: #0d1117; padding: 8px 0; z-index: 10; }
+.tab-btn {
     display: inline-block; padding: 4px 10px; background: #21262d; color: #8b949e;
-    text-decoration: none; border-radius: 6px; font-size: 12px; border: 1px solid #30363d;
+    border: 1px solid #30363d; border-radius: 6px; font-size: 12px; cursor: pointer;
+    font-family: inherit;
 }
-.nav a:hover { background: #30363d; color: #c9d1d9; }
-.nav a.active { background: #1f6feb; color: #fff; border-color: #1f6feb; }
+.tab-btn:hover { background: #30363d; color: #c9d1d9; }
+.tab-btn.active { background: #1f6feb; color: #fff; border-color: #1f6feb; }
+.tab-btn .tab-count { font-size: 10px; opacity: 0.7; margin-left: 4px; }
+.tab-btn .tab-fail { color: #f85149; font-weight: bold; }
+.section { display: none; }
+.section.active { display: block; }
 .stats { color: #8b949e; margin-bottom: 16px; font-size: 12px; }
 .card {
     background: #161b22; border: 1px solid #30363d; border-radius: 8px;
     padding: 12px; margin-bottom: 10px;
 }
 .card.fail { border-color: #f85149; }
+.card.pass { cursor: pointer; }
+.card.pass .card-body { display: none; }
+.card.pass.expanded .card-body { display: block; }
 .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
 .card-filename { color: #58a6ff; font-weight: bold; font-size: 12px; word-break: break-all; }
 .badge { padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; }
@@ -442,9 +481,10 @@ def build_card_html(entry, crop_defs, reader_name, results):
     else:
         passed = None
 
-    card_class = "card fail" if passed is False else "card"
+    card_class = "card fail" if passed is False else "card pass"
+    onclick = ' onclick="this.classList.toggle(\'expanded\')"' if passed is not False else ''
 
-    html = f'<div class="{card_class}">\n'
+    html = f'<div class="{card_class}"{onclick}>\n'
     html += '<div class="card-header">\n'
     html += f'  <span class="card-filename">{entry["filename"]}</span>\n'
 
@@ -458,6 +498,7 @@ def build_card_html(entry, crop_defs, reader_name, results):
         html += f'  <span class="badge {cls}">expect: {val}</span>\n'
 
     html += '</div>\n'
+    html += '<div class="card-body">\n'
 
     # Load image
     try:
@@ -472,6 +513,11 @@ def build_card_html(entry, crop_defs, reader_name, results):
         crops = extract_crops(img, crop_defs)
         html += '<div class="crops">\n'
         for i, (crop_img, cd) in enumerate(zip(crops, crop_defs)):
+            # For slot-based tests, skip the untested slot
+            gt_vals = gt.get("values", [])
+            if gt["type"] in ("slot_int", "slot_words") and i < len(gt_vals) and gt_vals[i] is None:
+                continue
+
             cw, ch = crop_img.size
             scale = CROP_SCALE
             while cw * scale > 400 or ch * scale > 200:
@@ -500,8 +546,18 @@ def build_card_html(entry, crop_defs, reader_name, results):
 
             html += f'  <div class="crop-name">{cd["name"]}</div>\n'
 
-            gt_vals = gt.get("values", [])
-            if gt["type"] == "words" and i < len(gt_vals):
+            if gt["type"] in ("slot_int", "slot_words") and i < len(gt_vals):
+                val = gt_vals[i]
+                html += f'  <div class="crop-label" style="color:#3fb950">expected: {val}</div>\n'
+                # Show actual result inline under the crop
+                if result:
+                    actual = result.get("actual", "?")
+                    cls = "pass" if result.get("passed") else "fail"
+                    html += f'  <div class="actual {cls}">actual: {actual}</div>\n'
+                    if result.get("raw_ocr") is not None and not result.get("passed"):
+                        raw = result["raw_ocr"] if result["raw_ocr"] else "(empty)"
+                        html += f'  <div class="actual fail">raw OCR: "{raw}"</div>\n'
+            elif gt["type"] == "words" and i < len(gt_vals):
                 val = gt_vals[i] if gt_vals[i] else "(none)"
                 html += f'  <div class="crop-label">{val}</div>\n'
 
@@ -518,7 +574,15 @@ def build_card_html(entry, crop_defs, reader_name, results):
         html += f'<div class="thumb"><img src="{uri}" width="{tw}" height="{th}"></div>\n'
 
     # Ground truth
-    if gt["type"] == "int":
+    if gt["type"] == "slot_int":
+        slot = gt["slot"]
+        val = gt["values"][slot]
+        html += f'<div class="expected">expected: slot {slot} = {val}%</div>\n'
+    elif gt["type"] == "slot_words":
+        slot = gt["slot"]
+        val = gt["values"][slot]
+        html += f'<div class="expected">expected: slot {slot} = {val}</div>\n'
+    elif gt["type"] == "int":
         html += f'<div class="expected">expected: {gt["values"][0]}</div>\n'
     elif gt["type"] == "words" and gt["values"]:
         labels = " | ".join(v if v else "(none)" for v in gt["values"])
@@ -539,7 +603,8 @@ def build_card_html(entry, crop_defs, reader_name, results):
             if result.get("detected_type"):
                 html += f'<div class="actual fail">detected: {result["detected_type"]}</div>\n'
 
-    html += '</div>\n'
+    html += '</div>\n'  # close card-body
+    html += '</div>\n'  # close card
     return html
 
 
@@ -559,32 +624,45 @@ def build_html(test_root, reader_filter=None, results_path=None):
             print(f"Reader '{reader_filter}' not found. Available: {', '.join(readers)}")
             sys.exit(1)
 
+    # Pre-compute per-reader stats
+    reader_data = []
+    for reader_name in readers:
+        entries = load_reader_images(test_root, reader_name)
+        n_pass = sum(1 for e in entries if results.get(e["filename"], {}).get("passed", None) is True)
+        n_fail = sum(1 for e in entries if results.get(e["filename"], {}).get("passed", None) is False)
+        reader_data.append((reader_name, entries, n_pass, n_fail))
+
+    total_images = sum(len(e) for _, e, _, _ in reader_data)
+
     html = '<!DOCTYPE html>\n<html><head><meta charset="utf-8">\n'
     html += '<title>OCR Gallery</title>\n'
     html += f'<style>{CSS}</style>\n'
     html += '</head><body>\n'
     html += '<h1>OCR Gallery — Pokemon Champions</h1>\n'
-
-    # Nav bar
-    html += '<div class="nav">\n'
-    for r in readers:
-        html += f'  <a href="#{r}">{r}</a>\n'
-    html += '</div>\n'
-
-    # Total stats
-    total_images = 0
-    for r in readers:
-        total_images += len(load_reader_images(test_root, r))
     html += f'<div class="stats">{len(readers)} readers, {total_images} test images</div>\n'
 
+    # Tab bar
+    html += '<div class="nav">\n'
+    for i, (rname, entries, n_pass, n_fail) in enumerate(reader_data):
+        active = ' active' if i == 0 else ''
+        fail_badge = f'<span class="tab-fail">{n_fail}✗</span>' if n_fail else ''
+        count = f'<span class="tab-count">{len(entries)}{" · " if fail_badge else ""}{fail_badge}</span>'
+        html += f'  <button class="tab-btn{active}" onclick="switchTab(\'{rname}\')">{rname}{count}</button>\n'
+    html += '</div>\n'
+
     # Reader sections
-    for reader_name in readers:
-        entries = load_reader_images(test_root, reader_name)
+    for i, (reader_name, entries, n_pass, n_fail) in enumerate(reader_data):
         crop_fn = READER_CROPS.get(reader_name, _bool_detector_boxes)
         crop_defs = crop_fn()
+        active = ' active' if i == 0 else ''
 
-        html += f'<div class="section" id="{reader_name}">\n'
-        html += f'<h2>{reader_name} — {len(entries)} images, {len(crop_defs)} crop regions</h2>\n'
+        html += f'<div class="section{active}" id="section-{reader_name}">\n'
+        html += f'<h2>{reader_name} — {len(entries)} images, {len(crop_defs)} crop regions'
+        if results:
+            html += f' · <span style="color:#3fb950">{n_pass} pass</span>'
+            if n_fail:
+                html += f' · <span style="color:#f85149">{n_fail} fail</span>'
+        html += '</h2>\n'
 
         if not entries:
             html += '<div style="color:#8b949e;padding:16px">No test images.</div>\n'
@@ -594,6 +672,20 @@ def build_html(test_root, reader_filter=None, results_path=None):
                 html += build_card_html(entry, crop_defs, reader_name, results)
 
         html += '</div>\n'
+
+    html += """
+<script>
+function switchTab(reader) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('section-' + reader).classList.add('active');
+    // Find and activate the matching button
+    document.querySelectorAll('.tab-btn').forEach(b => {
+        if (b.textContent.startsWith(reader)) b.classList.add('active');
+    });
+}
+</script>
+"""
 
     html += '</body></html>\n'
     return html
