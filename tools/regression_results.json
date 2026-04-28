@@ -1,0 +1,4212 @@
+{
+  "timestamp": "2026-04-28T17:34:53Z",
+  "total": 632,
+  "passed": 556,
+  "results": {
+    "20260423-150109770785_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260428-090132724942_True.png": {
+      "passed": true,
+      "reader": "ActionMenuDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132124108376_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "screenshot-20260427-132232206201_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-150434947219_True.png": {
+      "passed": true,
+      "reader": "ActionMenuDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183439332167_True.png": {
+      "passed": true,
+      "reader": "ActionMenuDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "victreebel_greninja_power-whip_sucker-punch_swords-dance_strength-sap_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "battle_log_poison_jab_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "post_match_screen_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-150105983053_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-145950387380_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183905504090_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-150354427178_True.png": {
+      "passed": true,
+      "reader": "ActionMenuDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183911434513_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183527988688_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-150020171749_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-184015691034_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "battle_log_thunder_wave_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "victreebel_poison_jab_MOVE_USED_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183815420151_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183829783539_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "teamreg_garchomp_venusaur_charizard_sneasler_kingambit_incineroar_False.png": {
+      "passed": true,
+      "reader": "TeamPreviewDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260427-132110967236_True.png": {
+      "passed": true,
+      "reader": "ActionMenuDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "movesmore_garchomp_venusaur_charizard_sneasler_kingambit_incineroar_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183445106930_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-150556766509_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183930291080_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "victreebel_vs_greninja_slot1_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-150356457412_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "main_menu_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-150128027036_True.png": {
+      "passed": true,
+      "reader": "ActionMenuDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-150522455166_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "action_menu_fight_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "mid_animation_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-150132024252_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "dialog_FAINTED_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260428-090024732453_True.png": {
+      "passed": true,
+      "reader": "ActionMenuDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183221946213_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "victreebel_kingambit_power-whip_sucker-punch_swords-dance_strength-sap_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "move_select_slot2_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-150004028106_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "screenshot-20260427-132040499741_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183340823259_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260428-090001840783_True.png": {
+      "passed": true,
+      "reader": "ActionMenuDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-150242947838_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183416008813_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183424800592_True.png": {
+      "passed": false,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "0",
+      "expected": "1"
+    },
+    "kingambit_thunder_wave_MOVE_USED_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183519860720_False.png": {
+      "passed": false,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "1",
+      "expected": "0"
+    },
+    "20260423-183825135068_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "preparing_for_battle_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183402213181_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183752637421_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "victreebel_greninja_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "victreebel_vs_kingambit_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "poke_ball_tier_rank4_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183534301105_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260427-132201855579_True.png": {
+      "passed": true,
+      "reader": "ActionMenuDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260428-090005728584_True.png": {
+      "passed": true,
+      "reader": "ActionMenuDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-150442604167_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "doubles_action_menu_rotom_sylveon_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183552945935_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "action_menu_fight_live_True.png": {
+      "passed": true,
+      "reader": "ActionMenuDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-150347231746_True.png": {
+      "passed": true,
+      "reader": "ActionMenuDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183737819287_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183222926856_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183410319938_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "battle_animation_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-150503460243_True.png": {
+      "passed": true,
+      "reader": "ActionMenuDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-150258802706_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-184025189666_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-150015112781_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "screenshot-20260427-132033944761_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "screenshot-20260427-132032676955_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-150452488072_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183358555351_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-150205152243_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "screenshot-20260427-132031441343_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260427-132210593850_True.png": {
+      "passed": true,
+      "reader": "ActionMenuDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-150141897965_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183937798016_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "victreebel_vs_greninja_slot0_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183555327020_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "doubles_action_menu_True.png": {
+      "passed": true,
+      "reader": "ActionMenuDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183537491308_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-150140368077_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-145958889700_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "post_match_screen_live_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "victreebel_greninja_low_hp_power-whip_sucker-punch_swords-dance_strength-sap_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "battle_log_drowsy_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "doubles_action_menu2_True.png": {
+      "passed": true,
+      "reader": "ActionMenuDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-150424940963_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183421609860_True.png": {
+      "passed": true,
+      "reader": "ActionMenuDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260428-090121554529_True.png": {
+      "passed": true,
+      "reader": "ActionMenuDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-150245612449_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260428-090301344731_True.png": {
+      "passed": true,
+      "reader": "ActionMenuDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "movesmore_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-150006265407_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "screenshot-20260427-132603218579_True.png": {
+      "passed": true,
+      "reader": "ActionMenuDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183333045399_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183259675247_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-150444474200_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183756280783_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260427-132458919151_True.png": {
+      "passed": true,
+      "reader": "ActionMenuDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132306028011_True.png": {
+      "passed": true,
+      "reader": "ActionMenuDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-150359121231_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "glimmora_taunt_OTHER_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "dragapult_dragon_darts_MOVE_USED_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-150429847772_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "teamreg_False.png": {
+      "passed": true,
+      "reader": "TeamPreviewDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "action_menu_pokemon_live_True.png": {
+      "passed": true,
+      "reader": "ActionMenuDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183407556810_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183741816926_True.png": {
+      "passed": true,
+      "reader": "ActionMenuDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183327738746_True.png": {
+      "passed": true,
+      "reader": "ActionMenuDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183308251312_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-150440133636_True.png": {
+      "passed": true,
+      "reader": "ActionMenuDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "movesmore_card_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183917790913_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "screenshot-20260427-132037081466_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183942518647_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183336832781_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "action_menu_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260427-132611147334_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183523639255_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-184010135406_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183733079703_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183432132782_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183330053152_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "doubles_kingambit_dragapult_True.png": {
+      "passed": true,
+      "reader": "ActionMenuDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-150530647500_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183348383848_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183749611704_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183311861404_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260428-090442837075_True.png": {
+      "passed": true,
+      "reader": "ActionMenuDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "screenshot-20260427-132030165558_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-150121863579_True.png": {
+      "passed": true,
+      "reader": "ActionMenuDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "screenshot-20260427-132035441948_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183452481985_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "preparing_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260428-090454851069_True.png": {
+      "passed": true,
+      "reader": "ActionMenuDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260428-085955805273_True.png": {
+      "passed": true,
+      "reader": "ActionMenuDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-150454443057_True.png": {
+      "passed": true,
+      "reader": "ActionMenuDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-145954186140_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "team_preview_session2_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183324524442_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-150129725676_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-150459402515_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183434932260_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183353861292_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "victreebel_greninja_lowHP_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "battle_dialog_fainted_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "post_match_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-150252130334_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260428-090600234812_True.png": {
+      "passed": true,
+      "reader": "ActionMenuDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183914694345_True.png": {
+      "passed": true,
+      "reader": "ActionMenuDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "dialog_SUPER_EFFECTIVE_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-150123581184_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183217025546_False.png": {
+      "passed": true,
+      "reader": "TeamPreviewDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "doubles_rotom_sylveon_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-150226929668_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "team_preview_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "hydreigon_taunt_MOVE_USED_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-150009579307_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260427-132314136162_True.png": {
+      "passed": true,
+      "reader": "ActionMenuDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183636310892_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260427-132709251444_True.png": {
+      "passed": true,
+      "reader": "ActionMenuDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183429305173_True.png": {
+      "passed": true,
+      "reader": "ActionMenuDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-150548385516_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "post_match_pokeball_tier_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "doubles_kingambit_glimmora_True.png": {
+      "passed": true,
+      "reader": "ActionMenuDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "doubles_move_select_glimmora_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "battle_dialog_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-150256754355_True.png": {
+      "passed": true,
+      "reader": "ActionMenuDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183210057938_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183622720279_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183505998294_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183952096591_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183620488130_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-150248328346_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "battle_log_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "preparing_live_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "battle_dialog_super_effective_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-150349250038_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183545906705_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183458158162_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-150240891066_True.png": {
+      "passed": true,
+      "reader": "ActionMenuDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183744870258_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183945188008_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-150553793727_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "move_select_slot1_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260427-132602291394_True.png": {
+      "passed": true,
+      "reader": "ActionMenuDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260428-090019691379_True.png": {
+      "passed": true,
+      "reader": "ActionMenuDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183343803522_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-150456793092_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "move_select_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183548953675_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260428-090540240302_True.png": {
+      "passed": true,
+      "reader": "ActionMenuDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183817427011_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "victreebel_poison_jab_MOVE_USED.png": {
+      "passed": true,
+      "reader": "BattleLogReader",
+      "segments": []
+    },
+    "glimmora_taunt_OTHER.png": {
+      "passed": true,
+      "reader": "BattleLogReader",
+      "segments": []
+    },
+    "kingambit_thunder_wave_MOVE_USED.png": {
+      "passed": true,
+      "reader": "BattleLogReader",
+      "segments": []
+    },
+    "dialog_SUPER_EFFECTIVE.png": {
+      "passed": true,
+      "reader": "BattleLogReader",
+      "segments": []
+    },
+    "hydreigon_taunt_MOVE_USED.png": {
+      "passed": true,
+      "reader": "BattleLogReader",
+      "segments": []
+    },
+    "dialog_FAINTED.png": {
+      "passed": true,
+      "reader": "BattleLogReader",
+      "segments": []
+    },
+    "dragapult_dragon_darts_MOVE_USED.png": {
+      "passed": true,
+      "reader": "BattleLogReader",
+      "segments": []
+    },
+    "action_menu_fight_live_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183327738746_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183439332167_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183421609860_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183424800592_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-150347231746_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-150440133636_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "doubles_action_menu2_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-150121863579_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-150354427178_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "doubles_kingambit_glimmora_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-150454443057_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "doubles_kingambit_dragapult_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183429305173_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-150256754355_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183741816926_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-150240891066_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "main_menu_True.png": {
+      "passed": true,
+      "reader": "MainMenuDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "screenshot-20260427-132603218579_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183914694345_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-150503460243_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "doubles_action_menu_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-150434947219_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "action_menu_pokemon_live_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-150128027036_False.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260427-132703444544_energy-ball_sludge-bomb_sleep-powder_protect.png": {
+      "passed": true,
+      "reader": "MoveNameReader",
+      "segments": []
+    },
+    "20260427-132506065092_heat-wave_weather-ball_solar-beam_protect.png": {
+      "passed": true,
+      "reader": "MoveNameReader",
+      "segments": []
+    },
+    "20260427-132706341459_energy-ball_sludge-bomb_sleep-powder_protect.png": {
+      "passed": true,
+      "reader": "MoveNameReader",
+      "segments": []
+    },
+    "20260427-132212516906_throat-chop_parting-shot_fake-out_flare-blitz.png": {
+      "passed": true,
+      "reader": "MoveNameReader",
+      "segments": []
+    },
+    "20260427-132216668463_throat-chop_parting-shot_fake-out_flare-blitz.png": {
+      "passed": true,
+      "reader": "MoveNameReader",
+      "segments": []
+    },
+    "20260427-132116660246_fake-out_close-combat_dire-claw_protect.png": {
+      "passed": true,
+      "reader": "MoveNameReader",
+      "segments": []
+    },
+    "20260427-132710729681_heat-wave_weather-ball_solar-beam_protect.png": {
+      "passed": true,
+      "reader": "MoveNameReader",
+      "segments": []
+    },
+    "20260427-132448249031_NONE_stockpile_NONE_NONE.png": {
+      "passed": true,
+      "reader": "MoveNameReader",
+      "segments": []
+    },
+    "20260427-132500213779_energy-ball_sludge-bomb_sleep-powder_protect.png": {
+      "passed": true,
+      "reader": "MoveNameReader",
+      "segments": []
+    },
+    "20260427-132203072042_fake-out_close-combat_dire-claw_protect.png": {
+      "passed": true,
+      "reader": "MoveNameReader",
+      "segments": []
+    },
+    "20260427-132309942119_fake-out_close-combat_dire-claw_protect.png": {
+      "passed": true,
+      "reader": "MoveNameReader",
+      "segments": []
+    },
+    "20260427-132307326181_fake-out_close-combat_dire-claw_protect.png": {
+      "passed": true,
+      "reader": "MoveNameReader",
+      "segments": []
+    },
+    "20260427-132607311130_energy-ball_sludge-bomb_sleep-powder_protect.png": {
+      "passed": true,
+      "reader": "MoveNameReader",
+      "segments": []
+    },
+    "20260427-132121208717_fake-out_close-combat_dire-claw_protect.png": {
+      "passed": true,
+      "reader": "MoveNameReader",
+      "segments": []
+    },
+    "20260427-132315345000_throat-chop_parting-shot_fake-out_flare-blitz.png": {
+      "passed": true,
+      "reader": "MoveNameReader",
+      "segments": []
+    },
+    "victreebel_greninja_low_hp_power-whip_sucker-punch_swords-dance_strength-sap.png": {
+      "passed": true,
+      "reader": "MoveNameReader",
+      "segments": []
+    },
+    "20260427-132613234570_heat-wave_weather-ball_solar-beam_protect.png": {
+      "passed": true,
+      "reader": "MoveNameReader",
+      "segments": []
+    },
+    "20260427-132205497623_fake-out_close-combat_dire-claw_protect.png": {
+      "passed": true,
+      "reader": "MoveNameReader",
+      "segments": []
+    },
+    "victreebel_greninja_power-whip_sucker-punch_swords-dance_strength-sap.png": {
+      "passed": true,
+      "reader": "MoveNameReader",
+      "segments": []
+    },
+    "20260427-132508656455_heat-wave_weather-ball_solar-beam_protect.png": {
+      "passed": true,
+      "reader": "MoveNameReader",
+      "segments": []
+    },
+    "20260427-132125840378_throat-chop_parting-shot_fake-out_flare-blitz.png": {
+      "passed": true,
+      "reader": "MoveNameReader",
+      "segments": []
+    },
+    "victreebel_kingambit_power-whip_sucker-punch_swords-dance_strength-sap.png": {
+      "passed": true,
+      "reader": "MoveNameReader",
+      "segments": []
+    },
+    "20260427-132514528548_heat-wave_weather-ball_solar-beam_protect.png": {
+      "passed": true,
+      "reader": "MoveNameReader",
+      "segments": []
+    },
+    "20260427-132307326181_2.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "2"
+    },
+    "20260423-150252130334_1.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183752637421_1.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132710729681_1.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183343803522_1.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": []
+    },
+    "20260427-132448249031_0.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": []
+    },
+    "20260423-183333045399_3.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "3"
+    },
+    "20260423-183458158162_1.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": []
+    },
+    "20260423-183505998294_1.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": []
+    },
+    "20260423-150359121231_1.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-150129725676_0.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260428-090129776313_3.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "3"
+    },
+    "20260427-132613234570_1.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132125840378_0.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-150248328346_0.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183340823259_2.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "2"
+    },
+    "20260427-132500213779_0.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183324524442_1.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": []
+    },
+    "20260427-132706341459_0.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260428-090135788993_1.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183917790913_3.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "3"
+    },
+    "20260423-183756280783_2.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "2"
+    },
+    "20260423-183434932260_2.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "2"
+    },
+    "20260427-132309942119_1.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-150456793092_1.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132315345000_0.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260427-132506065092_0.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-150132024252_2.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "2"
+    },
+    "20260423-150349250038_1.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260428-090602247537_3.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "3"
+    },
+    "20260423-150245612449_2.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "2"
+    },
+    "20260423-183548953675_3.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "3"
+    },
+    "20260428-090604557213_1.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-150356457412_2.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "2"
+    },
+    "20260427-132116660246_0.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260428-090304291552_1.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183336832781_0.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-150123581184_0.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260428-090027708724_0.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-150242947838_1.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260428-090015247426_3.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "3"
+    },
+    "20260423-183452481985_1.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": []
+    },
+    "20260423-183424800592_1.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": []
+    },
+    "20260427-132508656455_1.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-150459402515_3.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "3"
+    },
+    "victreebel_greninja_lowHP_1.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183410319938_1.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": []
+    },
+    "20260423-183348383848_3.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": []
+    },
+    "20260423-183744870258_1.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260428-090124664956_2.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "2"
+    },
+    "20260423-183402213181_1.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": []
+    },
+    "20260423-183330053152_0.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183911434513_1.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132205497623_2.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "2"
+    },
+    "20260423-145958889700_0.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": []
+    },
+    "20260427-132443993079_1.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": []
+    },
+    "20260427-132140821662_0.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": []
+    },
+    "20260423-183905504090_3.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "3"
+    },
+    "20260427-132607311130_0.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260427-132212516906_0.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183545906705_0.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260428-090008551568_0.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260427-132514528548_1.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132703444544_1.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260428-090542669809_1.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183534301105_1.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": []
+    },
+    "20260423-183555327020_2.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "2"
+    },
+    "20260427-132203072042_0.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260428-090457295695_1.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "1"
+    },
+    "victreebel_greninja_0.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-183432132782_3.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "3"
+    },
+    "20260423-183353861292_1.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": []
+    },
+    "20260427-132216668463_1.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183527988688_1.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": []
+    },
+    "20260428-090451579888_2.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "2"
+    },
+    "20260423-183416008813_1.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": []
+    },
+    "20260423-150258802706_3.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": [],
+      "actual": "3"
+    },
+    "20260423-150004028106_3.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": []
+    },
+    "20260423-183523639255_1.png": {
+      "passed": true,
+      "reader": "MoveSelectCursorSlot",
+      "segments": []
+    },
+    "20260427-132607311130_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "move_select_slot2_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183534301105_True.png": {
+      "passed": false,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "0",
+      "expected": "1"
+    },
+    "victreebel_greninja_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-150258802706_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-150456793092_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183340823259_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183336832781_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132116660246_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132448249031_True.png": {
+      "passed": false,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "0",
+      "expected": "1"
+    },
+    "20260423-183505998294_True.png": {
+      "passed": false,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "0",
+      "expected": "1"
+    },
+    "20260427-132710729681_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132140821662_True.png": {
+      "passed": false,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "0",
+      "expected": "1"
+    },
+    "20260423-183222926856_True.png": {
+      "passed": false,
+      "reader": "PreparingForBattleDetector",
+      "segments": [],
+      "actual": "0",
+      "expected": "1"
+    },
+    "20260423-183458158162_True.png": {
+      "passed": false,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "0",
+      "expected": "1"
+    },
+    "20260423-183911434513_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183548953675_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183527988688_True.png": {
+      "passed": false,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "0",
+      "expected": "1"
+    },
+    "20260428-090451579888_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "victreebel_kingambit_power-whip_sucker-punch_swords-dance_strength-sap_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132706341459_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132205497623_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132500213779_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183756280783_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132613234570_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183555327020_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183324524442_True.png": {
+      "passed": false,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "0",
+      "expected": "1"
+    },
+    "20260423-150359121231_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-150349250038_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260428-090027708724_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132506065092_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183432132782_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183905504090_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183452481985_True.png": {
+      "passed": false,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "0",
+      "expected": "1"
+    },
+    "20260423-183333045399_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-150248328346_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183545906705_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260428-090135788993_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "victreebel_greninja_power-whip_sucker-punch_swords-dance_strength-sap_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-150242947838_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260428-090008551568_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183221946213_True.png": {
+      "passed": false,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "0",
+      "expected": "1"
+    },
+    "20260427-132315345000_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260428-090304291552_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183353861292_True.png": {
+      "passed": false,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "0",
+      "expected": "1"
+    },
+    "20260423-150356457412_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183737819287_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183330053152_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260428-090457295695_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "move_select_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183416008813_True.png": {
+      "passed": false,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "0",
+      "expected": "1"
+    },
+    "20260427-132307326181_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132203072042_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183917790913_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132322261924_True.png": {
+      "passed": false,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "0",
+      "expected": "1"
+    },
+    "20260423-150459402515_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260428-090129776313_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "victreebel_vs_greninja_slot0_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "victreebel_vs_greninja_slot1_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-150129725676_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-150123581184_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132212516906_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183434932260_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "victreebel_greninja_low_hp_power-whip_sucker-punch_swords-dance_strength-sap_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "victreebel_greninja_lowHP_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132309942119_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183552945935_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183343803522_True.png": {
+      "passed": false,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "0",
+      "expected": "1"
+    },
+    "20260427-132514528548_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260428-090542669809_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183217025546_True.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "move_select_slot1_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-145958889700_True.png": {
+      "passed": false,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "0",
+      "expected": "1"
+    },
+    "20260423-183348383848_True.png": {
+      "passed": false,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "0",
+      "expected": "1"
+    },
+    "20260423-183410319938_True.png": {
+      "passed": false,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "0",
+      "expected": "1"
+    },
+    "20260423-150004028106_True.png": {
+      "passed": false,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "0",
+      "expected": "1"
+    },
+    "20260428-090015247426_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-150252130334_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132703444544_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132443993079_True.png": {
+      "passed": false,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "0",
+      "expected": "1"
+    },
+    "20260427-132125840378_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-150245612449_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183749611704_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132508656455_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260428-090604557213_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260428-090011695747_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183752637421_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132121208717_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183402213181_True.png": {
+      "passed": false,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "0",
+      "expected": "1"
+    },
+    "20260423-183744870258_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132216668463_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-145954186140_True.png": {
+      "passed": false,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "0",
+      "expected": "1"
+    },
+    "victreebel_vs_kingambit_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-150020171749_True.png": {
+      "passed": false,
+      "reader": "PreparingForBattleDetector",
+      "segments": [],
+      "actual": "0",
+      "expected": "1"
+    },
+    "20260423-183523639255_True.png": {
+      "passed": false,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "0",
+      "expected": "1"
+    },
+    "20260428-090307844434_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-150132024252_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260428-090602247537_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260428-090124664956_True.png": {
+      "passed": true,
+      "reader": "MoveSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "movesmore_True.png": {
+      "passed": true,
+      "reader": "MovesMoreDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "movesmore_card_True.png": {
+      "passed": true,
+      "reader": "MovesMoreDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "movesmore_garchomp_venusaur_charizard_sneasler_kingambit_incineroar_True.png": {
+      "passed": true,
+      "reader": "MovesMoreDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "movesmore_card.png": {
+      "passed": true,
+      "reader": "OCRDump",
+      "segments": [],
+      "no_digits": true
+    },
+    "doubles_action_menu_rotom_sylveon.png": {
+      "passed": true,
+      "reader": "OCRDump",
+      "segments": [
+        {
+          "w": 69,
+          "h": 63,
+          "scores": {
+            "0": 0.745,
+            "1": 0.397,
+            "2": 0.562,
+            "3": 0.527,
+            "4": 0.537,
+            "5": 0.653,
+            "6": 0.652,
+            "7": 0.451,
+            "8": 0.643,
+            "9": 0.641
+          }
+        },
+        {
+          "w": 84,
+          "h": 93,
+          "scores": {
+            "0": 0.888,
+            "1": 0.518,
+            "2": 0.7,
+            "3": 0.696,
+            "4": 0.629,
+            "5": 0.739,
+            "6": 0.763,
+            "7": 0.515,
+            "8": 0.791,
+            "9": 0.826
+          }
+        },
+        {
+          "w": 114,
+          "h": 93,
+          "scores": {
+            "0": 0.509,
+            "1": 0.618,
+            "2": 0.506,
+            "3": 0.513,
+            "4": 0.404,
+            "5": 0.506,
+            "6": 0.55,
+            "7": 0.575,
+            "8": 0.457,
+            "9": 0.473
+          }
+        }
+      ]
+    },
+    "teamreg.png": {
+      "passed": true,
+      "reader": "OCRDump",
+      "segments": [
+        {
+          "w": 39,
+          "h": 72,
+          "scores": {
+            "0": 0.512,
+            "1": 0.398,
+            "2": 0.454,
+            "3": 0.471,
+            "4": 0.549,
+            "5": 0.57,
+            "6": 0.574,
+            "7": 0.305,
+            "8": 0.552,
+            "9": 0.51
+          }
+        }
+      ]
+    },
+    "team_preview.png": {
+      "passed": true,
+      "reader": "OCRDump",
+      "segments": [
+        {
+          "w": 90,
+          "h": 171,
+          "scores": {
+            "0": 0.485,
+            "1": 0.553,
+            "2": 0.551,
+            "3": 0.556,
+            "4": 0.541,
+            "5": 0.488,
+            "6": 0.471,
+            "7": 0.669,
+            "8": 0.45,
+            "9": 0.493
+          }
+        }
+      ],
+      "no_digits": true
+    },
+    "doubles_move_select_glimmora.png": {
+      "passed": true,
+      "reader": "OCRDump",
+      "segments": [
+        {
+          "w": 69,
+          "h": 60,
+          "scores": {
+            "0": 0.575,
+            "1": 0.612,
+            "2": 0.686,
+            "3": 0.716,
+            "4": 0.734,
+            "5": 0.584,
+            "6": 0.612,
+            "7": 0.63,
+            "8": 0.685,
+            "9": 0.599
+          }
+        },
+        {
+          "w": 117,
+          "h": 93,
+          "scores": {
+            "0": 0.52,
+            "1": 0.622,
+            "2": 0.502,
+            "3": 0.445,
+            "4": 0.588,
+            "5": 0.51,
+            "6": 0.5,
+            "7": 0.56,
+            "8": 0.483,
+            "9": 0.456
+          }
+        }
+      ]
+    },
+    "post_match_pokeball_tier.png": {
+      "passed": true,
+      "reader": "OCRDump",
+      "segments": [],
+      "no_digits": true
+    },
+    "20260423-150503460243_21.png": {
+      "passed": false,
+      "reader": "OpponentHPReader",
+      "segments": [],
+      "no_digits": true,
+      "actual": "-1",
+      "expected": "21"
+    },
+    "20260423-150434947219_21.png": {
+      "passed": false,
+      "reader": "OpponentHPReader",
+      "segments": [],
+      "no_digits": true,
+      "actual": "-1",
+      "expected": "21"
+    },
+    "20260423-150440133636_21.png": {
+      "passed": false,
+      "reader": "OpponentHPReader",
+      "segments": [],
+      "no_digits": true,
+      "actual": "-1",
+      "expected": "21"
+    },
+    "20260423-150454443057_21.png": {
+      "passed": false,
+      "reader": "OpponentHPReader",
+      "segments": [
+        {
+          "w": 57,
+          "h": 33,
+          "scores": {
+            "0": 0.46,
+            "1": 0.562,
+            "2": 0.529,
+            "3": 0.53,
+            "4": 0.453,
+            "5": 0.462,
+            "6": 0.442,
+            "7": 0.676,
+            "8": 0.418,
+            "9": 0.468
+          }
+        }
+      ],
+      "actual": "-1",
+      "expected": "21"
+    },
+    "20260423-183905504090_s0_s1_100.png": {
+      "passed": false,
+      "reader": "OpponentHPReader_Doubles",
+      "segments": [
+        {
+          "w": 69,
+          "h": 63,
+          "scores": {
+            "0": 0.745,
+            "1": 0.397,
+            "2": 0.562,
+            "3": 0.527,
+            "4": 0.537,
+            "5": 0.653,
+            "6": 0.652,
+            "7": 0.451,
+            "8": 0.643,
+            "9": 0.641
+          }
+        }
+      ],
+      "actual": "-1",
+      "expected": "100"
+    },
+    "20260423-183353861292_s0_s0_50.png": {
+      "passed": false,
+      "reader": "OpponentHPReader_Doubles",
+      "segments": [
+        {
+          "w": 72,
+          "h": 63,
+          "scores": {
+            "0": 0.618,
+            "1": 0.541,
+            "2": 0.561,
+            "3": 0.54,
+            "4": 0.668,
+            "5": 0.555,
+            "6": 0.579,
+            "7": 0.557,
+            "8": 0.605,
+            "9": 0.602
+          }
+        }
+      ],
+      "actual": "-1",
+      "expected": "50"
+    },
+    "20260423-183333045399_s0_s0_100.png": {
+      "passed": false,
+      "reader": "OpponentHPReader_Doubles",
+      "segments": [
+        {
+          "w": 84,
+          "h": 63,
+          "scores": {
+            "0": 0.62,
+            "1": 0.573,
+            "2": 0.597,
+            "3": 0.532,
+            "4": 0.569,
+            "5": 0.633,
+            "6": 0.527,
+            "7": 0.606,
+            "8": 0.604,
+            "9": 0.628
+          }
+        }
+      ],
+      "actual": "-1",
+      "expected": "100"
+    },
+    "20260423-183421609860_s0_s1_61.png": {
+      "passed": false,
+      "reader": "OpponentHPReader_Doubles",
+      "segments": [
+        {
+          "w": 48,
+          "h": 60,
+          "scores": {
+            "0": 0.567,
+            "1": 0.751,
+            "2": 0.604,
+            "3": 0.639,
+            "4": 0.696,
+            "5": 0.572,
+            "6": 0.604,
+            "7": 0.513,
+            "8": 0.601,
+            "9": 0.625
+          }
+        }
+      ],
+      "actual": "-1",
+      "expected": "61"
+    },
+    "20260423-183333045399_s0_s1_100.png": {
+      "passed": false,
+      "reader": "OpponentHPReader_Doubles",
+      "segments": [
+        {
+          "w": 69,
+          "h": 63,
+          "scores": {
+            "0": 0.745,
+            "1": 0.397,
+            "2": 0.562,
+            "3": 0.527,
+            "4": 0.537,
+            "5": 0.653,
+            "6": 0.652,
+            "7": 0.451,
+            "8": 0.643,
+            "9": 0.641
+          }
+        }
+      ],
+      "actual": "-1",
+      "expected": "100"
+    },
+    "20260423-183905504090_s0_s0_2.png": {
+      "passed": false,
+      "reader": "OpponentHPReader_Doubles",
+      "segments": [
+        {
+          "w": 69,
+          "h": 63,
+          "scores": {
+            "0": 0.771,
+            "1": 0.621,
+            "2": 0.626,
+            "3": 0.68,
+            "4": 0.57,
+            "5": 0.636,
+            "6": 0.634,
+            "7": 0.48,
+            "8": 0.634,
+            "9": 0.742
+          }
+        }
+      ],
+      "actual": "-1",
+      "expected": "2"
+    },
+    "20260423-183421609860_s0_s0_50.png": {
+      "passed": false,
+      "reader": "OpponentHPReader_Doubles",
+      "segments": [
+        {
+          "w": 72,
+          "h": 63,
+          "scores": {
+            "0": 0.618,
+            "1": 0.541,
+            "2": 0.561,
+            "3": 0.54,
+            "4": 0.668,
+            "5": 0.555,
+            "6": 0.579,
+            "7": 0.557,
+            "8": 0.605,
+            "9": 0.602
+          }
+        }
+      ],
+      "actual": "-1",
+      "expected": "50"
+    },
+    "screenshot-20260427-132603218579_s1_100.png": {
+      "passed": false,
+      "reader": "OpponentHPReader_Doubles",
+      "segments": [
+        {
+          "w": 69,
+          "h": 63,
+          "scores": {
+            "0": 0.745,
+            "1": 0.397,
+            "2": 0.562,
+            "3": 0.527,
+            "4": 0.537,
+            "5": 0.653,
+            "6": 0.652,
+            "7": 0.451,
+            "8": 0.643,
+            "9": 0.641
+          }
+        }
+      ],
+      "actual": "-1",
+      "expected": "100"
+    },
+    "20260423-183458158162_s0_s0_0.png": {
+      "passed": false,
+      "reader": "OpponentHPReader_Doubles",
+      "segments": [
+        {
+          "w": 39,
+          "h": 63,
+          "scores": {
+            "0": 0.511,
+            "1": 0.752,
+            "2": 0.699,
+            "3": 0.658,
+            "4": 0.661,
+            "5": 0.496,
+            "6": 0.521,
+            "7": 0.661,
+            "8": 0.622,
+            "9": 0.568
+          }
+        }
+      ],
+      "actual": "-1",
+      "expected": "0"
+    },
+    "20260423-183737819287_s0_s1_7.png": {
+      "passed": false,
+      "reader": "OpponentHPReader_Doubles",
+      "segments": [
+        {
+          "w": 66,
+          "h": 60,
+          "scores": {
+            "0": 0.441,
+            "1": 0.79,
+            "2": 0.657,
+            "3": 0.601,
+            "4": 0.475,
+            "5": 0.474,
+            "6": 0.467,
+            "7": 0.778,
+            "8": 0.511,
+            "9": 0.513
+          }
+        }
+      ],
+      "actual": "-1",
+      "expected": "7"
+    },
+    "20260423-183353861292_s0_s1_90.png": {
+      "passed": false,
+      "reader": "OpponentHPReader_Doubles",
+      "segments": [
+        {
+          "w": 69,
+          "h": 63,
+          "scores": {
+            "0": 0.746,
+            "1": 0.396,
+            "2": 0.564,
+            "3": 0.527,
+            "4": 0.538,
+            "5": 0.655,
+            "6": 0.652,
+            "7": 0.452,
+            "8": 0.644,
+            "9": 0.642
+          }
+        }
+      ],
+      "actual": "-1",
+      "expected": "90"
+    },
+    "screenshot-20260427-132603218579_s0_38.png": {
+      "passed": false,
+      "reader": "OpponentHPReader_Doubles",
+      "segments": [
+        {
+          "w": 60,
+          "h": 63,
+          "scores": {
+            "0": 0.593,
+            "1": 0.631,
+            "2": 0.7,
+            "3": 0.609,
+            "4": 0.61,
+            "5": 0.488,
+            "6": 0.501,
+            "7": 0.53,
+            "8": 0.557,
+            "9": 0.609
+          }
+        }
+      ],
+      "actual": "-1",
+      "expected": "38"
+    },
+    "20260423-150434947219_s0_s0_21.png": {
+      "passed": false,
+      "reader": "OpponentHPReader_Doubles",
+      "segments": [
+        {
+          "w": 69,
+          "h": 63,
+          "scores": {
+            "0": 0.759,
+            "1": 0.623,
+            "2": 0.631,
+            "3": 0.683,
+            "4": 0.567,
+            "5": 0.623,
+            "6": 0.624,
+            "7": 0.493,
+            "8": 0.627,
+            "9": 0.736
+          }
+        }
+      ],
+      "actual": "-1",
+      "expected": "21"
+    },
+    "20260423-183737819287_s0_s0_64.png": {
+      "passed": false,
+      "reader": "OpponentHPReader_Doubles",
+      "segments": [
+        {
+          "w": 78,
+          "h": 63,
+          "scores": {
+            "0": 0.664,
+            "1": 0.593,
+            "2": 0.638,
+            "3": 0.6,
+            "4": 0.659,
+            "5": 0.557,
+            "6": 0.585,
+            "7": 0.572,
+            "8": 0.65,
+            "9": 0.641
+          }
+        }
+      ],
+      "actual": "-1",
+      "expected": "64"
+    },
+    "20260423-183458158162_s0_s1_47.png": {
+      "passed": false,
+      "reader": "OpponentHPReader_Doubles",
+      "segments": [
+        {
+          "w": 66,
+          "h": 60,
+          "scores": {
+            "0": 0.438,
+            "1": 0.793,
+            "2": 0.655,
+            "3": 0.598,
+            "4": 0.478,
+            "5": 0.471,
+            "6": 0.465,
+            "7": 0.775,
+            "8": 0.508,
+            "9": 0.511
+          }
+        }
+      ],
+      "actual": "-1",
+      "expected": "47"
+    },
+    "20260428-090450085626_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260428-090549081009_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260428-090046340312_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260428-090651148388_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132643962199_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-150530647500_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132542561808_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132238995943_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260428-090432157620_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132635711773_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183519860720_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260428-090558996249_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-150444474200_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132255902459_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-150424940963_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132250779631_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260428-090618642853_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260428-090043709891_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183622720279_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132152783905_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132341796578_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260428-090323013357_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132659981548_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260428-090411597097_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132656550807_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260428-090635794609_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-150452488072_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260428-090629121202_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132242107594_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132227777134_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132533956946_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132215593802_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183445106930_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "post_match_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183636310892_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132719539666_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "post_match_pokeball_tier_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183942518647_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132208830153_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-184025189666_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-150205152243_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132726772684_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132729827382_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183407556810_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183930291080_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183945188008_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-150548385516_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-150556766509_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-150226929668_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "post_match_screen_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260428-090546804023_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183825135068_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260428-090644412669_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260428-090202884659_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132337793888_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132737492703_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260428-090056507732_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260428-090058092033_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132136463248_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260428-090416099474_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132403133064_True.png": {
+      "passed": false,
+      "reader": "PreparingForBattleDetector",
+      "segments": [],
+      "actual": "0",
+      "expected": "1"
+    },
+    "20260423-183733079703_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260428-090714823631_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-184010135406_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260428-090429474135_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260428-090353043711_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-150553793727_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260428-090713695566_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183829783539_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132220802836_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260428-090342455700_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132647547931_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132130027058_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260428-090610263316_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132233735560_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-150522455166_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260428-090622302973_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-184015691034_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132321016736_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "poke_ball_tier_rank4_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132143915754_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260428-090358838082_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183537491308_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "post_match_screen_live_True.png": {
+      "passed": true,
+      "reader": "PostMatchScreenDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-150006265407_True.png": {
+      "passed": false,
+      "reader": "PreparingForBattleDetector",
+      "segments": [],
+      "actual": "0",
+      "expected": "1"
+    },
+    "20260423-150109770785_True.png": {
+      "passed": false,
+      "reader": "PreparingForBattleDetector",
+      "segments": [],
+      "actual": "0",
+      "expected": "1"
+    },
+    "20260423-183952096591_True.png": {
+      "passed": false,
+      "reader": "PreparingForBattleDetector",
+      "segments": [],
+      "actual": "0",
+      "expected": "1"
+    },
+    "20260423-183815420151_True.png": {
+      "passed": false,
+      "reader": "PreparingForBattleDetector",
+      "segments": [],
+      "actual": "0",
+      "expected": "1"
+    },
+    "20260423-183308251312_True.png": {
+      "passed": false,
+      "reader": "PreparingForBattleDetector",
+      "segments": [],
+      "actual": "0",
+      "expected": "1"
+    },
+    "20260427-132325042627_True.png": {
+      "passed": false,
+      "reader": "PreparingForBattleDetector",
+      "segments": [],
+      "actual": "0",
+      "expected": "1"
+    },
+    "preparing_for_battle_True.png": {
+      "passed": true,
+      "reader": "PreparingForBattleDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183620488130_True.png": {
+      "passed": false,
+      "reader": "PreparingForBattleDetector",
+      "segments": [],
+      "actual": "0",
+      "expected": "1"
+    },
+    "20260423-183937798016_True.png": {
+      "passed": false,
+      "reader": "PreparingForBattleDetector",
+      "segments": [],
+      "actual": "0",
+      "expected": "1"
+    },
+    "20260423-183259675247_True.png": {
+      "passed": true,
+      "reader": "PreparingForBattleDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "preparing_live_True.png": {
+      "passed": true,
+      "reader": "PreparingForBattleDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-150009579307_True.png": {
+      "passed": false,
+      "reader": "PreparingForBattleDetector",
+      "segments": [],
+      "actual": "0",
+      "expected": "1"
+    },
+    "20260427-132525152373_True.png": {
+      "passed": false,
+      "reader": "PreparingForBattleDetector",
+      "segments": [],
+      "actual": "0",
+      "expected": "1"
+    },
+    "20260423-150141897965_True.png": {
+      "passed": false,
+      "reader": "PreparingForBattleDetector",
+      "segments": [],
+      "actual": "0",
+      "expected": "1"
+    },
+    "20260423-183358555351_True.png": {
+      "passed": false,
+      "reader": "PreparingForBattleDetector",
+      "segments": [],
+      "actual": "0",
+      "expected": "1"
+    },
+    "20260427-132057920832_True.png": {
+      "passed": false,
+      "reader": "PreparingForBattleDetector",
+      "segments": [],
+      "actual": "0",
+      "expected": "1"
+    },
+    "20260423-150442604167_True.png": {
+      "passed": false,
+      "reader": "PreparingForBattleDetector",
+      "segments": [],
+      "actual": "0",
+      "expected": "1"
+    },
+    "20260423-183210057938_True.png": {
+      "passed": false,
+      "reader": "PreparingForBattleDetector",
+      "segments": [],
+      "actual": "0",
+      "expected": "1"
+    },
+    "20260423-150140368077_True.png": {
+      "passed": false,
+      "reader": "PreparingForBattleDetector",
+      "segments": [],
+      "actual": "0",
+      "expected": "1"
+    },
+    "20260428-085929315196_True.png": {
+      "passed": true,
+      "reader": "PreparingForBattleDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-183311861404_True.png": {
+      "passed": false,
+      "reader": "PreparingForBattleDetector",
+      "segments": [],
+      "actual": "0",
+      "expected": "1"
+    },
+    "20260423-150015112781_True.png": {
+      "passed": false,
+      "reader": "PreparingForBattleDetector",
+      "segments": [],
+      "actual": "0",
+      "expected": "1"
+    },
+    "20260423-183817427011_True.png": {
+      "passed": false,
+      "reader": "PreparingForBattleDetector",
+      "segments": [],
+      "actual": "0",
+      "expected": "1"
+    },
+    "20260423-150105983053_True.png": {
+      "passed": false,
+      "reader": "PreparingForBattleDetector",
+      "segments": [],
+      "actual": "0",
+      "expected": "1"
+    },
+    "20260423-145950387380_True.png": {
+      "passed": false,
+      "reader": "PreparingForBattleDetector",
+      "segments": [],
+      "actual": "0",
+      "expected": "1"
+    },
+    "20260423-150429847772_True.png": {
+      "passed": false,
+      "reader": "PreparingForBattleDetector",
+      "segments": [],
+      "actual": "0",
+      "expected": "1"
+    },
+    "preparing_True.png": {
+      "passed": true,
+      "reader": "PreparingForBattleDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260427-132356391485_True.png": {
+      "passed": false,
+      "reader": "PreparingForBattleDetector",
+      "segments": [],
+      "actual": "0",
+      "expected": "1"
+    },
+    "20260427-132106901219_False.png": {
+      "passed": false,
+      "reader": "ResultScreenDetector",
+      "segments": [],
+      "actual": "1",
+      "expected": "0"
+    },
+    "20260427-132109029814_False.png": {
+      "passed": false,
+      "reader": "ResultScreenDetector",
+      "segments": [],
+      "actual": "1",
+      "expected": "0"
+    },
+    "screenshot-20260428-090634039115_True.png": {
+      "passed": false,
+      "reader": "ResultScreenDetector",
+      "segments": [],
+      "actual": "0",
+      "expected": "1"
+    },
+    "20260427-132147621467_False.png": {
+      "passed": false,
+      "reader": "ResultScreenDetector",
+      "segments": [],
+      "actual": "1",
+      "expected": "0"
+    },
+    "20260427-132159977362_False.png": {
+      "passed": false,
+      "reader": "ResultScreenDetector",
+      "segments": [],
+      "actual": "1",
+      "expected": "0"
+    },
+    "screenshot-20260428-090635865666_True.png": {
+      "passed": false,
+      "reader": "ResultScreenDetector",
+      "segments": [],
+      "actual": "0",
+      "expected": "1"
+    },
+    "screenshot-20260428-090632105241_True.png": {
+      "passed": false,
+      "reader": "ResultScreenDetector",
+      "segments": [],
+      "actual": "0",
+      "expected": "1"
+    },
+    "20260427-132157285571_False.png": {
+      "passed": false,
+      "reader": "ResultScreenDetector",
+      "segments": [],
+      "actual": "1",
+      "expected": "0"
+    },
+    "20260423-150258802706_s0_sylveon.png": {
+      "passed": true,
+      "reader": "SpeciesReader_Doubles",
+      "segments": [],
+      "actual": "sylveon"
+    },
+    "20260423-150359121231_s0_sylveon.png": {
+      "passed": true,
+      "reader": "SpeciesReader_Doubles",
+      "segments": [],
+      "actual": "sylveon"
+    },
+    "20260423-150123581184_s0_gengar.png": {
+      "passed": true,
+      "reader": "SpeciesReader_Doubles",
+      "segments": [],
+      "actual": "gengar"
+    },
+    "20260423-150248328346_s0_sylveon.png": {
+      "passed": true,
+      "reader": "SpeciesReader_Doubles",
+      "segments": [],
+      "actual": "sylveon"
+    },
+    "20260423-150456793092_s0_sylveon.png": {
+      "passed": true,
+      "reader": "SpeciesReader_Doubles",
+      "segments": [],
+      "actual": "sylveon"
+    },
+    "20260423-150240891066_s1_hydreigon.png": {
+      "passed": true,
+      "reader": "SpeciesReader_Doubles",
+      "segments": [],
+      "actual": "hydreigon"
+    },
+    "20260423-150121863579_s1_palafin.png": {
+      "passed": true,
+      "reader": "SpeciesReader_Doubles",
+      "segments": [],
+      "actual": "palafin"
+    },
+    "20260423-150434947219_s0_sylveon.png": {
+      "passed": true,
+      "reader": "SpeciesReader_Doubles",
+      "segments": [],
+      "actual": "sylveon"
+    },
+    "20260423-150240891066_s0_sylveon.png": {
+      "passed": true,
+      "reader": "SpeciesReader_Doubles",
+      "segments": [],
+      "actual": "sylveon"
+    },
+    "20260423-150454443057_s0_sylveon.png": {
+      "passed": true,
+      "reader": "SpeciesReader_Doubles",
+      "segments": [],
+      "actual": "sylveon"
+    },
+    "20260423-150503460243_s0_sylveon.png": {
+      "passed": true,
+      "reader": "SpeciesReader_Doubles",
+      "segments": [],
+      "actual": "sylveon"
+    },
+    "20260423-150347231746_s0_sylveon.png": {
+      "passed": true,
+      "reader": "SpeciesReader_Doubles",
+      "segments": [],
+      "actual": "sylveon"
+    },
+    "20260423-150242947838_s0_sylveon.png": {
+      "passed": true,
+      "reader": "SpeciesReader_Doubles",
+      "segments": [],
+      "actual": "sylveon"
+    },
+    "20260423-150256754355_s0_sylveon.png": {
+      "passed": true,
+      "reader": "SpeciesReader_Doubles",
+      "segments": [],
+      "actual": "sylveon"
+    },
+    "20260423-150349250038_s0_sylveon.png": {
+      "passed": true,
+      "reader": "SpeciesReader_Doubles",
+      "segments": [],
+      "actual": "sylveon"
+    },
+    "20260423-150354427178_s0_sylveon.png": {
+      "passed": true,
+      "reader": "SpeciesReader_Doubles",
+      "segments": [],
+      "actual": "sylveon"
+    },
+    "20260423-150121863579_s0_gengar.png": {
+      "passed": true,
+      "reader": "SpeciesReader_Doubles",
+      "segments": [],
+      "actual": "gengar"
+    },
+    "20260423-150132024252_s0_gengar.png": {
+      "passed": true,
+      "reader": "SpeciesReader_Doubles",
+      "segments": [],
+      "actual": "gengar"
+    },
+    "20260423-150252130334_s0_sylveon.png": {
+      "passed": true,
+      "reader": "SpeciesReader_Doubles",
+      "segments": [],
+      "actual": "sylveon"
+    },
+    "20260423-150440133636_s0_sylveon.png": {
+      "passed": true,
+      "reader": "SpeciesReader_Doubles",
+      "segments": [],
+      "actual": "sylveon"
+    },
+    "20260423-150128027036_s0_gengar.png": {
+      "passed": true,
+      "reader": "SpeciesReader_Doubles",
+      "segments": [],
+      "actual": "gengar"
+    },
+    "20260423-150129725676_s0_gengar.png": {
+      "passed": true,
+      "reader": "SpeciesReader_Doubles",
+      "segments": [],
+      "actual": "gengar"
+    },
+    "20260423-150459402515_s0_sylveon.png": {
+      "passed": true,
+      "reader": "SpeciesReader_Doubles",
+      "segments": [],
+      "actual": "sylveon"
+    },
+    "20260423-150245612449_s0_sylveon.png": {
+      "passed": true,
+      "reader": "SpeciesReader_Doubles",
+      "segments": [],
+      "actual": "sylveon"
+    },
+    "20260423-150356457412_s0_sylveon.png": {
+      "passed": true,
+      "reader": "SpeciesReader_Doubles",
+      "segments": [],
+      "actual": "sylveon"
+    },
+    "20260423-150226929668_True_False.png": {
+      "passed": true,
+      "reader": "TeamPreviewDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-150258802706_3_False.png": {
+      "passed": true,
+      "reader": "TeamPreviewDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-150205152243_True_False.png": {
+      "passed": true,
+      "reader": "TeamPreviewDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "screenshot-20260427-132040499741_True.png": {
+      "passed": true,
+      "reader": "TeamPreviewDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-150252130334_True_False.png": {
+      "passed": true,
+      "reader": "TeamPreviewDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "20260423-150121863579_True_False.png": {
+      "passed": true,
+      "reader": "TeamPreviewDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "screenshot-20260427-132032676955_True.png": {
+      "passed": true,
+      "reader": "TeamPreviewDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-150248328346_0_False.png": {
+      "passed": true,
+      "reader": "TeamPreviewDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "team_preview_session2_True.png": {
+      "passed": true,
+      "reader": "TeamPreviewDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-150349250038_True_False.png": {
+      "passed": true,
+      "reader": "TeamPreviewDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "screenshot-20260427-132033944761_True.png": {
+      "passed": true,
+      "reader": "TeamPreviewDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "screenshot-20260428-085846793167_True.png": {
+      "passed": true,
+      "reader": "TeamPreviewDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "screenshot-20260427-132037081466_True.png": {
+      "passed": true,
+      "reader": "TeamPreviewDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "team_preview_True.png": {
+      "passed": true,
+      "reader": "TeamPreviewDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "20260423-150349250038_1_False.png": {
+      "passed": true,
+      "reader": "TeamPreviewDetector",
+      "segments": [],
+      "actual": "0"
+    },
+    "screenshot-20260428-085848019159_True.png": {
+      "passed": true,
+      "reader": "TeamPreviewDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "screenshot-20260428-085849040043_True.png": {
+      "passed": true,
+      "reader": "TeamPreviewDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "screenshot-20260428-085835937078_True.png": {
+      "passed": true,
+      "reader": "TeamPreviewDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "screenshot-20260428-085853255736_True.png": {
+      "passed": true,
+      "reader": "TeamPreviewDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "screenshot-20260427-132031441343_True.png": {
+      "passed": true,
+      "reader": "TeamPreviewDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "screenshot-20260427-132030165558_True.png": {
+      "passed": true,
+      "reader": "TeamPreviewDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "screenshot-20260428-085850234904_True.png": {
+      "passed": true,
+      "reader": "TeamPreviewDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "screenshot-20260428-085851580713_True.png": {
+      "passed": true,
+      "reader": "TeamPreviewDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "screenshot-20260427-132035441948_True.png": {
+      "passed": true,
+      "reader": "TeamPreviewDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "teamreg_garchomp_venusaur_charizard_sneasler_kingambit_incineroar_True.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "teamreg_True.png": {
+      "passed": true,
+      "reader": "TeamSelectDetector",
+      "segments": [],
+      "actual": "1"
+    },
+    "teamreg_garchomp_venusaur_charizard_sneasler_kingambit_incineroar.png": {
+      "passed": true,
+      "reader": "TeamSelectReader",
+      "segments": []
+    },
+    "movesmore_garchomp_venusaur_charizard_sneasler_kingambit_incineroar.png": {
+      "passed": true,
+      "reader": "TeamSummaryReader",
+      "segments": []
+    }
+  }
+}

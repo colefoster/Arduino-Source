@@ -1633,6 +1633,100 @@ async def sync_status():
 
 
 # ═══════════════════════════════════════════════════════════════════════════
+# REGRESSION RESULTS
+# ═══════════════════════════════════════════════════════════════════════════
+
+REGRESSION_RESULTS_PATH = BASE / "tools" / "regression_results.json"
+
+
+@app.get("/api/regression/results")
+async def regression_results():
+    """Return the last regression run results (from tools/retest.py)."""
+    if not REGRESSION_RESULTS_PATH.exists():
+        return {"timestamp": None, "total": 0, "passed": 0, "results": {}}
+    try:
+        data = json.loads(REGRESSION_RESULTS_PATH.read_text())
+        return data
+    except Exception as e:
+        return JSONResponse({"error": str(e)}, status_code=500)
+
+
+@app.get("/api/regression/summary")
+async def regression_summary():
+    """Summarized regression results grouped by reader."""
+    if not REGRESSION_RESULTS_PATH.exists():
+        return {"timestamp": None, "readers": {}}
+    try:
+        data = json.loads(REGRESSION_RESULTS_PATH.read_text())
+        by_reader: dict[str, dict] = {}
+        for fname, r in data.get("results", {}).items():
+            rdr = r.get("reader", "unknown")
+            if rdr not in by_reader:
+                by_reader[rdr] = {"passed": 0, "failed": 0, "failures": []}
+            if r.get("passed"):
+                by_reader[rdr]["passed"] += 1
+            else:
+                by_reader[rdr]["failed"] += 1
+                by_reader[rdr]["failures"].append({
+                    "filename": fname,
+                    "actual": r.get("actual", ""),
+                    "expected": r.get("expected", ""),
+                })
+        return {"timestamp": data.get("timestamp"), "readers": by_reader}
+    except Exception as e:
+        return JSONResponse({"error": str(e)}, status_code=500)
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# DIGIT TEMPLATES
+# ═══════════════════════════════════════════════════════════════════════════
+
+DIGIT_TEMPLATES_DIR = RESOURCES_DIR / "DigitTemplates"
+
+
+@app.get("/api/templates/list")
+async def templates_list():
+    """List all digit templates (0-9)."""
+    templates = []
+    if DIGIT_TEMPLATES_DIR.exists():
+        for f in sorted(DIGIT_TEMPLATES_DIR.iterdir()):
+            if f.suffix == ".png":
+                templates.append({"digit": f.stem, "filename": f.name})
+    return {"templates": templates}
+
+
+@app.get("/api/templates/image/{digit}")
+async def templates_image(digit: str):
+    """Serve a digit template PNG."""
+    path = DIGIT_TEMPLATES_DIR / f"{digit}.png"
+    if not path.exists():
+        return JSONResponse({"error": "not found"}, status_code=404)
+    return Response(content=path.read_bytes(), media_type="image/png",
+                    headers={"Cache-Control": "no-cache"})
+
+
+@app.post("/api/templates/save")
+async def templates_save(digit: str = Form(...), png_base64: str = Form(...)):
+    """Save a digit template PNG."""
+    import base64
+    DIGIT_TEMPLATES_DIR.mkdir(parents=True, exist_ok=True)
+    data = base64.b64decode(png_base64)
+    path = DIGIT_TEMPLATES_DIR / f"{digit}.png"
+    path.write_bytes(data)
+    return {"ok": True, "digit": digit}
+
+
+@app.delete("/api/templates/{digit}")
+async def templates_delete(digit: str):
+    """Delete a digit template."""
+    path = DIGIT_TEMPLATES_DIR / f"{digit}.png"
+    if path.exists():
+        path.unlink()
+        return {"ok": True}
+    return JSONResponse({"error": "not found"}, status_code=404)
+
+
+# ═══════════════════════════════════════════════════════════════════════════
 # SPA SHELL
 # ═══════════════════════════════════════════════════════════════════════════
 
