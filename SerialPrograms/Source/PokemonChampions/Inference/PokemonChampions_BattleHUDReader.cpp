@@ -23,11 +23,15 @@
  *
  */
 
+#include <array>
+#include <memory>
 #include <regex>
 #include <vector>
+#include "CommonFramework/Globals.h"
 #include "CommonFramework/ImageTypes/ImageRGB32.h"
 #include "CommonFramework/ImageTypes/ImageViewRGB32.h"
 #include "CommonFramework/ImageTools/ImageBoxes.h"
+#include "CommonTools/ImageMatch/ExactImageMatcher.h"
 #include "CommonTools/OCR/OCR_RawOCR.h"
 #include "CommonTools/OCR/OCR_Routines.h"
 #include "PokemonChampions_BattleHUDReader.h"
@@ -94,11 +98,14 @@ static std::string raw_ocr_numbers(const ImageViewRGB32& crop){
             uint8_t g = (pixel >> 8) & 0xFF;
             uint8_t b = (pixel >> 16) & 0xFF;
 
-            //  Brightness = max channel. HP numbers are the brightest part.
-            uint8_t brightness = r > g ? (r > b ? r : b) : (g > b ? g : b);
-            //  Threshold: text pixels are bright (> 160), bg is darker.
-            //  Invert: Tesseract prefers dark text on light bg.
-            uint32_t out = (brightness > 200) ? 0xFF000000 : 0xFFFFFFFF;
+            //  White-only filter: HP% text is white, so all channels must be
+            //  bright AND close to each other (low saturation).
+            //  This rejects colored glows (yellow/green HP bar) that the old
+            //  max-brightness filter would pick up as noise.
+            uint8_t mn = r < g ? (r < b ? r : b) : (g < b ? g : b);
+            uint8_t mx = r > g ? (r > b ? r : b) : (g > b ? g : b);
+            bool is_white = (mn > 180) && (mx - mn < 50);
+            uint32_t out = is_white ? 0xFF000000 : 0xFFFFFFFF;
 
             //  Fill the scaled pixel block.
             for (size_t sy = 0; sy < scale; sy++){
@@ -141,7 +148,12 @@ static std::vector<int> extract_numbers(const std::string& text){
 static std::string digits_only(const std::string& text){
     std::string out;
     for (char c : text){
-        if ((c >= '0' && c <= '9') || c == '/'){
+        //  Tesseract commonly misreads '0' as 'O'/'o', '9' as 'a'.
+        if (c == 'O' || c == 'o'){
+            out += '0';
+        }else if (c == 'a'){
+            out += '9';
+        }else if ((c >= '0' && c <= '9') || c == '/'){
             out += c;
         }
     }
@@ -181,16 +193,379 @@ static std::pair<int, int> parse_fraction(const std::string& text){
 
 static int parse_percentage(const std::string& text){
     std::string clean = digits_only(text);
+
+    //  In percentage context, '/' is never a fraction separator —
+    //  it's always a misread '7' (similar glyph shape).
+    for (char& c : clean){
+        if (c == '/') c = '7';
+    }
+
+    //  "00" can only come from "100" with the leading '1' clipped.
+    //  A fainted pokemon has no HP badge, so 0% never shows as "00".
+    if (clean == "00") return 100;
+
     auto nums = extract_numbers(clean);
     for (int n : nums){
         if (n >= 0 && n <= 100) return n;
+        //  Common OCR misreads of "100":
+        //  "700" — Tesseract reads '1' as '7' with surrounding noise
+        if (n == 700) return 100;
+        //  Trailing noise: "217" is "21" + junk, "2171" is "21" + more junk.
+        //  Progressively strip trailing digits.
+        for (int t = n / 10; t > 0; t /= 10){
+            if (t >= 0 && t <= 100) return t;
+        }
     }
     //  Fallback to original text.
     nums = extract_numbers(text);
     for (int n : nums){
         if (n >= 0 && n <= 100) return n;
+        if (n == 700) return 100;
+        for (int t = n / 10; t > 0; t /= 10){
+            if (t >= 0 && t <= 100) return t;
+        }
     }
     return -1;
+}
+
+
+// ─── Digit Template Matching ────────────────────────────────────
+//
+//  Replaces Tesseract OCR for opponent HP% reading.
+//  Pipeline: crop → 3x upscale → binarize → segment → template match.
+
+//  Binarize a crop to black text on white background.
+//  Same logic as raw_ocr_numbers() but returns the image instead of OCR text.
+static ImageRGB32 binarize_crop(const ImageViewRGB32& crop){
+    size_t w = crop.width();
+    size_t h = crop.height();
+    size_t scale = 3;
+    ImageRGB32 bw(w * scale, h * scale);
+
+    for (size_t y = 0; y < h; y++){
+        for (size_t x = 0; x < w; x++){
+            uint32_t pixel = crop.pixel(x, y);
+            uint8_t r = (pixel >> 0) & 0xFF;
+            uint8_t g = (pixel >> 8) & 0xFF;
+            uint8_t b = (pixel >> 16) & 0xFF;
+
+            uint8_t mn = r < g ? (r < b ? r : b) : (g < b ? g : b);
+            uint8_t mx = r > g ? (r > b ? r : b) : (g > b ? g : b);
+            bool is_white = (mn > 180) && (mx - mn < 50);
+            //  Text pixels → black (0xFF000000), background → white (0xFFFFFFFF)
+            uint32_t out = is_white ? 0xFF000000 : 0xFFFFFFFF;
+
+            for (size_t sy = 0; sy < scale; sy++){
+                for (size_t sx = 0; sx < scale; sx++){
+                    bw.pixel(x * scale + sx, y * scale + sy) = out;
+                }
+            }
+        }
+    }
+    return bw;
+}
+
+//  Check if a pixel is foreground (black text = 0xFF000000).
+static bool is_fg(uint32_t pixel){
+    return (pixel & 0x00FFFFFF) == 0;
+}
+
+//  Segment a binarized image into individual digit crops via column projection.
+//  Uses valley detection: finds the deepest valleys in column sums to split digits.
+//  Returns sub-images left-to-right.
+static std::vector<ImageRGB32> segment_digits(const ImageRGB32& bw){
+    size_t w = bw.width();
+    size_t h = bw.height();
+
+    //  Column projection: count foreground pixels per column.
+    std::vector<size_t> col_sums(w, 0);
+    for (size_t x = 0; x < w; x++){
+        for (size_t y = 0; y < h; y++){
+            if (is_fg(bw.pixel(x, y))) col_sums[x]++;
+        }
+    }
+
+    //  Find content bounds (first/last nonzero column).
+    size_t first_col = w, last_col = 0;
+    for (size_t x = 0; x < w; x++){
+        if (col_sums[x] > 0){
+            if (first_col == w) first_col = x;
+            last_col = x;
+        }
+    }
+    if (first_col >= last_col) return {};
+
+    size_t content_w = last_col - first_col + 1;
+
+    //  Find vertical content bounds.
+    size_t first_row = h, last_row = 0;
+    for (size_t y = 0; y < h; y++){
+        for (size_t x = first_col; x <= last_col; x++){
+            if (is_fg(bw.pixel(x, y))){
+                if (first_row == h) first_row = y;
+                last_row = y;
+                break;
+            }
+        }
+    }
+    if (first_row >= last_row) return {};
+
+    size_t content_h = last_row - first_row + 1;
+
+    //  Estimate digit count from aspect ratio.
+    //  Each digit is roughly 0.8-1.0x as wide as it is tall.
+    //  Content width / height gives approximate digit count.
+    double aspect = (double)content_w / (double)content_h;
+    int n_digits;
+    if (aspect < 0.5){
+        return {};  //  Too narrow to be a digit.
+    }else if (aspect < 1.2){
+        n_digits = 1;
+    }else if (aspect < 2.2){
+        n_digits = 2;
+    }else{
+        n_digits = 3;
+    }
+
+    //  For single digit, just crop to content bounds.
+    if (n_digits == 1){
+        ImageRGB32 digit(content_w, content_h);
+        for (size_t y = 0; y < content_h; y++){
+            for (size_t x = 0; x < content_w; x++){
+                digit.pixel(x, y) = bw.pixel(first_col + x, first_row + y);
+            }
+        }
+        std::vector<ImageRGB32> result;
+        result.push_back(std::move(digit));
+        return result;
+    }
+
+    //  For multiple digits, find valleys (local minima in column sums).
+    //  Work within the content region only.
+    std::vector<size_t> content_cols(content_w);
+    for (size_t i = 0; i < content_w; i++){
+        content_cols[i] = col_sums[first_col + i];
+    }
+
+    //  Find all local minima (use a window to avoid noise).
+    size_t window = content_w / (n_digits * 2);
+    if (window < 2) window = 2;
+
+    //  For each potential split zone, find the column with minimum sum.
+    std::vector<size_t> splits;
+    for (int d = 1; d < n_digits; d++){
+        //  Expected split position: d * content_w / n_digits
+        size_t expected = d * content_w / n_digits;
+        size_t search_lo = expected > window ? expected - window : 0;
+        size_t search_hi = expected + window < content_w ? expected + window : content_w - 1;
+
+        size_t best_col = expected;
+        size_t best_val = SIZE_MAX;
+        for (size_t x = search_lo; x <= search_hi; x++){
+            if (content_cols[x] < best_val){
+                best_val = content_cols[x];
+                best_col = x;
+            }
+        }
+        splits.push_back(best_col);
+    }
+
+    //  Build digit crops from split points.
+    std::vector<size_t> boundaries = {0};
+    for (size_t s : splits) boundaries.push_back(s);
+    boundaries.push_back(content_w);
+
+    std::vector<ImageRGB32> digits;
+    for (size_t i = 0; i < boundaries.size() - 1; i++){
+        size_t sx = boundaries[i];
+        size_t ex = boundaries[i + 1];
+        if (ex <= sx) continue;
+
+        //  Trim to tight horizontal bounds within this strip.
+        size_t trim_left = ex, trim_right = sx;
+        for (size_t x = sx; x < ex; x++){
+            if (content_cols[x] > 0){
+                if (x < trim_left) trim_left = x;
+                trim_right = x;
+            }
+        }
+        if (trim_left > trim_right) continue;
+
+        size_t dw = trim_right - trim_left + 1;
+        ImageRGB32 digit(dw, content_h);
+        for (size_t y = 0; y < content_h; y++){
+            for (size_t x = 0; x < dw; x++){
+                digit.pixel(x, y) = bw.pixel(first_col + trim_left + x, first_row + y);
+            }
+        }
+        digits.push_back(std::move(digit));
+    }
+
+    return digits;
+}
+
+//  Lazy-loaded digit templates (0-9) using ExactImageMatcher.
+struct HPDigitTemplates{
+    std::array<std::unique_ptr<ImageMatch::ExactImageMatcher>, 10> matchers;
+    bool any_loaded = false;
+
+    HPDigitTemplates(){
+        std::string dir = RESOURCE_PATH() + "PokemonChampions/DigitTemplates/";
+        for (int d = 0; d < 10; d++){
+            std::string path = dir + std::to_string(d) + ".png";
+            try{
+                ImageRGB32 img(path);
+                if (img.width() > 0){
+                    matchers[d] = std::make_unique<ImageMatch::ExactImageMatcher>(
+                        std::move(img)
+                    );
+                    any_loaded = true;
+                }
+            }catch (...){
+                //  Template missing — slot stays nullptr.
+            }
+        }
+    }
+
+    static const HPDigitTemplates& get(){
+        static HPDigitTemplates instance;
+        return instance;
+    }
+};
+
+//  Compute pixel agreement between two binarized images.
+//  Scales the input to match the template size, then counts matching pixels.
+//  Returns fraction of matching pixels (0.0 to 1.0).
+static double pixel_agreement(const ImageRGB32& input, const ImageRGB32& tmpl){
+    //  Scale input to template dimensions.
+    ImageRGB32 scaled = input.scale_to(tmpl.width(), tmpl.height());
+    size_t w = tmpl.width();
+    size_t h = tmpl.height();
+    size_t match = 0;
+    size_t total = w * h;
+
+    for (size_t y = 0; y < h; y++){
+        for (size_t x = 0; x < w; x++){
+            bool input_fg = is_fg(scaled.pixel(x, y));
+            bool tmpl_fg = is_fg(tmpl.pixel(x, y));
+            if (input_fg == tmpl_fg) match++;
+        }
+    }
+
+    return (double)match / (double)total;
+}
+
+//  Match a single digit segment against all templates.
+//  Returns the digit (0-9) or -1 if no match.
+static int match_digit(const ImageRGB32& segment, double min_agreement = 0.80){
+    const HPDigitTemplates& templates = HPDigitTemplates::get();
+    if (!templates.any_loaded) return -1;
+
+    double best_score = 0.0;
+    int best_digit = -1;
+
+    for (int d = 0; d < 10; d++){
+        if (!templates.matchers[d]) continue;
+        double score = pixel_agreement(segment, templates.matchers[d]->image_template());
+        if (score > best_score){
+            best_score = score;
+            best_digit = d;
+        }
+    }
+
+    if (best_score < min_agreement) return -1;
+    return best_digit;
+}
+
+//  Read HP% from a crop using template matching.
+//  Returns 0-100 on success, -1 on failure.
+static int read_hp_pct_template(
+    Logger& logger, const ImageViewRGB32& crop, uint8_t slot
+){
+    if (crop.width() == 0 || crop.height() == 0) return -1;
+
+    //  Step 1: Binarize.
+    ImageRGB32 bw = binarize_crop(crop);
+
+    //  Step 2: Segment into individual digits.
+    std::vector<ImageRGB32> segments = segment_digits(bw);
+    if (segments.empty()){
+        logger.log(
+            "BattleHUDReader: opponent HP% slot " + std::to_string(slot) +
+            " template: no digits found", COLOR_RED
+        );
+        return -1;
+    }
+    if (segments.size() > 3){
+        segments.resize(3);  //  Cap at 3 digits (max "100").
+    }
+
+    //  Step 3: Match each segment.
+    std::string match_detail;
+    std::string result_str;
+    const HPDigitTemplates& templates = HPDigitTemplates::get();
+
+    for (size_t i = 0; i < segments.size(); i++){
+        //  Log all scores for debugging.
+        std::string scores_str;
+        double best_score = 0.0;
+        int best_digit = -1;
+        for (int d = 0; d < 10; d++){
+            if (!templates.matchers[d]) continue;
+            double score = pixel_agreement(segments[i], templates.matchers[d]->image_template());
+            if (!scores_str.empty()) scores_str += " ";
+            scores_str += std::to_string(d) + ":" +
+                std::to_string(score).substr(0, 5);
+            if (score > best_score){
+                best_score = score;
+                best_digit = d;
+            }
+        }
+        logger.log(
+            "BattleHUDReader: segment[" + std::to_string(i) +
+            "] " + std::to_string(segments[i].width()) + "x" +
+            std::to_string(segments[i].height()) +
+            " scores: " + scores_str
+        );
+
+        if (best_score < 0.80 || best_digit < 0){
+            logger.log(
+                "BattleHUDReader: opponent HP% slot " + std::to_string(slot) +
+                " template: segment " + std::to_string(i) + " no match (best=" +
+                std::to_string(best_score).substr(0, 5) + ")", COLOR_RED
+            );
+            return -1;
+        }
+        result_str += std::to_string(best_digit);
+        if (!match_detail.empty()) match_detail += ",";
+        match_detail += std::to_string(best_digit);
+    }
+
+    //  Step 4: Parse and validate.
+    int value = std::stoi(result_str);
+
+    //  "00" must be "100": a fainted Pokemon (0%) shows no badge at all,
+    //  so the only way to read two zeros is if the narrow "1" was merged
+    //  into the first "0" during segmentation.
+    if (result_str == "00"){
+        value = 100;
+        match_detail = "1,0,0 (00->100)";
+    }
+
+    if (value < 0 || value > 100){
+        logger.log(
+            "BattleHUDReader: opponent HP% slot " + std::to_string(slot) +
+            " template: digits=[" + match_detail + "] -> " +
+            std::to_string(value) + " (out of range)", COLOR_RED
+        );
+        return -1;
+    }
+
+    logger.log(
+        "BattleHUDReader: opponent HP% slot " + std::to_string(slot) +
+        " template: digits=[" + match_detail + "] -> " + std::to_string(value)
+    );
+    return value;
 }
 
 
@@ -237,8 +612,8 @@ void BattleHUDReader::init_doubles_boxes(){
     //  Measured with pixel_inspector on live capture frame_00116.
     m_opponent_name_boxes[0] = ImageFloatBox(0.6172, 0.0454, 0.1219, 0.0417);
     m_opponent_name_boxes[1] = ImageFloatBox(0.8286, 0.0481, 0.1151, 0.0417);
-    m_opponent_hp_boxes[0]   = ImageFloatBox(0.694, 0.116, 0.041, 0.038);
-    m_opponent_hp_boxes[1]   = ImageFloatBox(0.8984, 0.1130, 0.0563, 0.0426);
+    m_opponent_hp_boxes[0]   = ImageFloatBox(0.707, 0.116, 0.027, 0.034);
+    m_opponent_hp_boxes[1]   = ImageFloatBox(0.9125, 0.119, 0.0295, 0.0306);
 
     m_own_hp_boxes[0] = ImageFloatBox(0.1313, 0.9324, 0.0766, 0.0407);
     m_own_hp_boxes[1] = ImageFloatBox(0.3365, 0.9315, 0.0786, 0.0463);
@@ -314,14 +689,7 @@ int BattleHUDReader::read_opponent_hp_pct(
 ) const{
     if (slot >= 2 || m_opponent_hp_boxes[slot].width == 0) return -1;
     ImageViewRGB32 cropped = extract_box_reference(screen, m_opponent_hp_boxes[slot]);
-    std::string text = raw_ocr_numbers(cropped);
-    int pct = parse_percentage(text);
-    if (pct < 0 || pct > 100){
-        logger.log("BattleHUDReader: failed to parse opponent HP% slot " +
-                   std::to_string(slot) + " from '" + text + "'", COLOR_RED);
-        return -1;
-    }
-    return pct;
+    return read_hp_pct_template(logger, cropped, slot);
 }
 
 std::pair<int, int> BattleHUDReader::read_own_hp(
