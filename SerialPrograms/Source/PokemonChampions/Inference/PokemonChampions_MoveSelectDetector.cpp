@@ -39,8 +39,8 @@ namespace PokemonChampions{
 static const FloatPixel SELECTED_MOVE_GREEN{0.44, 0.45, 0.10};
 
 //  Unselected move pill background — purple-blue.
-//  Measured from live capture: avg RGB ~(135, 120, 215), ratio (0.28, 0.25, 0.46)
-static const FloatPixel UNSELECTED_PILL_PURPLE{0.28, 0.25, 0.46};
+//  Measured across singles+doubles captures: ratio ~(0.274, 0.238, 0.488)
+static const FloatPixel UNSELECTED_PILL_PURPLE{0.274, 0.238, 0.488};
 
 
 MoveSelectDetector::MoveSelectDetector(){
@@ -87,7 +87,7 @@ bool MoveSelectDetector::detect(const ImageViewRGB32& screen){
         const ImageStats stats = image_stats(extract_box_reference(screen, m_slots[i]));
         if (is_solid(stats, SELECTED_MOVE_GREEN, 0.18, 120)){
             green_slot = i;
-        }else if (is_solid(stats, UNSELECTED_PILL_PURPLE, 0.15, 150)){
+        }else if (is_solid(stats, UNSELECTED_PILL_PURPLE, 0.05, 150)){
             purple_count++;
         }
     }
