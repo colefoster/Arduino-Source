@@ -593,36 +593,73 @@ async def gallery_crops(reader: str, filename: str):
 @app.get("/api/labeler/sources")
 async def labeler_sources():
     sources = []
-    if not REF_FRAMES_DIR.exists():
-        return sources
-    for vod_dir in sorted(REF_FRAMES_DIR.rglob("*")):
-        if not vod_dir.is_dir(): continue
-        imgs = [f for f in vod_dir.iterdir() if f.is_file() and f.suffix.lower() in (".jpg", ".jpeg", ".png")]
-        if imgs:
-            folder_name = vod_dir.name
-            readers = FOLDER_READERS.get(folder_name, [FOLDER_TO_READER.get(folder_name, "SpeciesReader")])
-            sources.append({
-                "path": str(vod_dir.relative_to(REF_FRAMES_DIR)),
-                "name": folder_name, "parent": vod_dir.parent.name, "count": len(imgs),
-                "suggested_reader": FOLDER_TO_READER.get(folder_name),
-                "readers": readers,
-                "reader_infos": {
-                    r: {"reader": r, "type": READER_TYPES.get(r, "unknown"),
-                        "is_bool": r in BOOL_DETECTORS, "crops": CROP_DEFS.get(r, []),
-                        "events": BATTLE_LOG_EVENTS if r == "BattleLogReader" else None}
-                    for r in readers
-                },
-            })
+
+    # ref_frames subdirectories (VOD extracts)
+    if REF_FRAMES_DIR.exists():
+        for vod_dir in sorted(REF_FRAMES_DIR.rglob("*")):
+            if not vod_dir.is_dir(): continue
+            imgs = [f for f in vod_dir.iterdir() if f.is_file() and f.suffix.lower() in (".jpg", ".jpeg", ".png")]
+            if imgs:
+                folder_name = vod_dir.name
+                readers = FOLDER_READERS.get(folder_name, [FOLDER_TO_READER.get(folder_name, "SpeciesReader")])
+                sources.append({
+                    "path": str(vod_dir.relative_to(REF_FRAMES_DIR)),
+                    "name": folder_name, "parent": vod_dir.parent.name, "count": len(imgs),
+                    "suggested_reader": FOLDER_TO_READER.get(folder_name),
+                    "readers": readers,
+                    "reader_infos": {
+                        r: {"reader": r, "type": READER_TYPES.get(r, "unknown"),
+                            "is_bool": r in BOOL_DETECTORS, "crops": CROP_DEFS.get(r, []),
+                            "events": BATTLE_LOG_EVENTS if r == "BattleLogReader" else None}
+                        for r in readers
+                    },
+                })
+
+    # test_images subdirectories (labeled test frames from CommandLineTests)
+    if TEST_IMAGES_DIR.exists():
+        for reader_dir in sorted(TEST_IMAGES_DIR.iterdir()):
+            if not reader_dir.is_dir(): continue
+            imgs = [f for f in reader_dir.iterdir()
+                    if f.is_file() and f.suffix.lower() in (".jpg", ".jpeg", ".png")
+                    and not f.name.startswith("_")]
+            if imgs:
+                reader_name = reader_dir.name
+                sources.append({
+                    "path": f"__test__/{reader_name}",
+                    "name": reader_name, "parent": "test_images", "count": len(imgs),
+                    "suggested_reader": reader_name,
+                    "readers": [reader_name],
+                    "reader_infos": {
+                        reader_name: {"reader": reader_name,
+                                      "type": READER_TYPES.get(reader_name, "unknown"),
+                                      "is_bool": reader_name in BOOL_DETECTORS,
+                                      "crops": CROP_DEFS.get(reader_name, []),
+                                      "events": BATTLE_LOG_EVENTS if reader_name == "BattleLogReader" else None}
+                    },
+                })
+
     return sources
+
+def _resolve_source_dir(source: str) -> Optional[Path]:
+    """Resolve a source path to a directory (ref_frames or test_images)."""
+    if source.startswith("__test__/"):
+        reader = source[len("__test__/"):]
+        d = TEST_IMAGES_DIR / reader
+        return d if d.exists() else None
+    d = REF_FRAMES_DIR / source
+    return d if d.exists() else None
+
 
 @app.get("/api/labeler/images")
 async def labeler_images(source: str, reader: str):
-    src_dir = REF_FRAMES_DIR / source
-    if not src_dir.exists(): return JSONResponse({"error": "source not found"}, 404)
+    src_dir = _resolve_source_dir(source)
+    if not src_dir:
+        return JSONResponse({"error": "source not found"}, 404)
     labels = _load_labels(source, reader)
     images = []
     for f in sorted(src_dir.iterdir()):
         if f.suffix.lower() not in (".jpg", ".jpeg", ".png"): continue
+        if f.name.startswith("_"): continue
         label = labels.get(f.name)
         images.append({
             "filename": f.name, "labeled": label is not None,
@@ -633,8 +670,13 @@ async def labeler_images(source: str, reader: str):
 
 @app.get("/api/labeler/frame/{path:path}")
 async def labeler_frame(path: str, thumb: bool = False):
-    full = REF_FRAMES_DIR / path
-    if not full.exists(): return JSONResponse({"error": "not found"}, 404)
+    # Try ref_frames first, then test_images (for __test__/ paths)
+    if path.startswith("__test__/"):
+        full = TEST_IMAGES_DIR / path[len("__test__/"):]
+    else:
+        full = REF_FRAMES_DIR / path
+    if not full.exists():
+        return JSONResponse({"error": "not found"}, 404)
     if thumb:
         return Response(content=_make_thumbnail(full, 960, 540), media_type="image/jpeg")
     return Response(content=full.read_bytes(), media_type="image/png" if full.suffix == ".png" else "image/jpeg")
@@ -642,8 +684,12 @@ async def labeler_frame(path: str, thumb: bool = False):
 @app.get("/api/labeler/crops")
 async def labeler_crops(source: str, filename: str, reader: str):
     import base64
-    img_path = REF_FRAMES_DIR / source / filename
-    if not img_path.exists(): return JSONResponse({"error": "not found"}, 404)
+    src_dir = _resolve_source_dir(source)
+    if not src_dir:
+        return JSONResponse({"error": "source not found"}, 404)
+    img_path = src_dir / filename
+    if not img_path.exists():
+        return JSONResponse({"error": "not found"}, 404)
     return [
         {"name": cd["name"], "box": cd["box"],
          "data": f"data:image/png;base64,{base64.b64encode(_extract_crop(img_path, cd['box'])).decode()}"}
