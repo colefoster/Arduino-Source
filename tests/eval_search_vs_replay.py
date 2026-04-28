@@ -38,9 +38,12 @@ V2_CHECKPOINT = PROJECT_ROOT / "data" / "checkpoints_v2" / "best.pt"
 WINRATE_CHECKPOINT = PROJECT_ROOT / "data" / "checkpoints_winrate" / "best.pt"
 
 
-def _action_to_index(action, slot_idx, own_active, own_bench, player):
+def _action_to_index(action, slot_idx, own_active, own_bench, player,
+                     full_knowledge=None):
     """Convert a log_parser Action to a flat action index (0-13).
 
+    Uses full_knowledge (from _pass1_extract) to know the full moveset,
+    not just progressively revealed moves_known.
     Returns -1 if the action can't be encoded.
     """
     if action is None:
@@ -55,10 +58,25 @@ def _action_to_index(action, slot_idx, own_active, own_bench, player):
         if slot_idx >= len(own_active):
             return -1
         poke = own_active[slot_idx]
-        if action.move in poke.moves_known:
-            mi = poke.moves_known.index(action.move)
+
+        # Build full moveset: start with moves_known, add from full_knowledge
+        moves = list(poke.moves_known)
+        if full_knowledge:
+            base_sp = _base_species(poke.species)
+            key = f"{player}|{base_sp}"
+            fk = full_knowledge.get(key)
+            if fk:
+                for m in fk.moves:
+                    if m not in moves:
+                        moves.append(m)
+
+        if action.move in moves:
+            mi = moves.index(action.move)
         else:
             return -1
+        if mi >= 4:
+            return -1  # Can only encode first 4 moves
+
         # Target encoding: spread moves always target 0
         SPREAD_MOVES = {
             "Earthquake", "Rock Slide", "Heat Wave", "Blizzard", "Hyper Voice",
@@ -231,9 +249,11 @@ def evaluate(n_games=100, min_rating=1400, n_rollouts=50):
             own_active = state.p1_active if player == "p1" else state.p2_active
             own_bench = state.p1_bench if player == "p1" else state.p2_bench
 
-            # Encode ground truth actions
-            gt_a = _action_to_index(sample.actions.slot_a, 0, own_active, own_bench, player)
-            gt_b = _action_to_index(sample.actions.slot_b, 1, own_active, own_bench, player)
+            # Encode ground truth actions (using full knowledge for moveset)
+            gt_a = _action_to_index(sample.actions.slot_a, 0, own_active, own_bench, player,
+                                    full_knowledge)
+            gt_b = _action_to_index(sample.actions.slot_b, 1, own_active, own_bench, player,
+                                    full_knowledge)
 
             if gt_a < 0 and gt_b < 0:
                 continue
