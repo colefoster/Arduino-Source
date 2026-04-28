@@ -104,11 +104,19 @@ CROP_DEFS = {
         {"name": "opp_hp_pct", "box": [0.8963, 0.1098, 0.0498, 0.0524]},
     ],
     "OpponentHPReader_Doubles": [
-        {"name": "opp0_hp_pct", "box": [0.694, 0.116, 0.041, 0.038]},
+        {"name": "opp0_hp_pct", "box": [0.705, 0.118, 0.040, 0.022]},
+        {"name": "opp1_hp_pct", "box": [0.928, 0.118, 0.040, 0.022]},
     ],
     "SpeciesReader_Doubles": [
         {"name": "opp0_species", "box": [0.6172, 0.0454, 0.1219, 0.0417]},
         {"name": "opp1_species", "box": [0.8286, 0.0481, 0.1151, 0.0417]},
+    ],
+    "OwnHPReader_Doubles": [
+        {"name": "own0_hp", "box": [0.035, 0.920, 0.100, 0.050]},
+        {"name": "own1_hp", "box": [0.225, 0.920, 0.100, 0.050]},
+    ],
+    "CommunicatingDetector": [
+        {"name": "communicating_text", "box": [0.380, 0.450, 0.240, 0.050]},
     ],
     "MoveSelectCursorSlot": [
         {"name": f"pill_{i}", "box": [0.7292, y, 0.0101, 0.0139]}
@@ -156,7 +164,7 @@ CROP_DEFS = {
 BOOL_DETECTORS = {
     "MoveSelectDetector", "ActionMenuDetector", "PostMatchScreenDetector",
     "PreparingForBattleDetector", "TeamSelectDetector", "TeamPreviewDetector",
-    "MainMenuDetector", "MovesMoreDetector",
+    "MainMenuDetector", "MovesMoreDetector", "CommunicatingDetector",
 }
 
 BATTLE_LOG_EVENTS = [
@@ -198,8 +206,10 @@ READER_TYPES.update({
     "SpeciesReader_Doubles": "multi_text:2",
     "OpponentHPReader": "int:0:100",
     "OpponentHPReader_Doubles": "int:0:100",
+    "OwnHPReader_Doubles": "multi_text:2",
     "MoveSelectCursorSlot": "int:0:3",
     "BattleLogReader": "event",
+    "CommunicatingDetector": "bool",
     "TeamSelectReader": "multi_text:6",
     "TeamSummaryReader": "multi_text:6",
     "TeamPreviewReader": "multi_text:6",

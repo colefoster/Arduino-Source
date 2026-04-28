@@ -609,14 +609,19 @@ void BattleHUDReader::init_doubles_boxes(){
     //
     //  NOTE: These are estimated — update with pixel inspector for precision.
 
-    //  Measured with pixel_inspector on live capture frame_00116.
+    //  Measured with pixel_inspector on multiple doubles frames.
+    //  Opponent species badges: pink pills in the top area.
     m_opponent_name_boxes[0] = ImageFloatBox(0.6172, 0.0454, 0.1219, 0.0417);
     m_opponent_name_boxes[1] = ImageFloatBox(0.8286, 0.0481, 0.1151, 0.0417);
-    m_opponent_hp_boxes[0]   = ImageFloatBox(0.707, 0.116, 0.027, 0.034);
-    m_opponent_hp_boxes[1]   = ImageFloatBox(0.9125, 0.119, 0.0295, 0.0306);
 
-    m_own_hp_boxes[0] = ImageFloatBox(0.1313, 0.9324, 0.0766, 0.0407);
-    m_own_hp_boxes[1] = ImageFloatBox(0.3365, 0.9315, 0.0786, 0.0463);
+    //  HP% digits: white text below species badges.
+    //  Widened from original 27-29px to capture full digit cluster.
+    m_opponent_hp_boxes[0]   = ImageFloatBox(0.705, 0.118, 0.040, 0.022);
+    m_opponent_hp_boxes[1]   = ImageFloatBox(0.928, 0.118, 0.040, 0.022);
+
+    //  Own HP bars: bottom-left, fraction format (e.g. "152/202").
+    m_own_hp_boxes[0] = ImageFloatBox(0.035, 0.920, 0.100, 0.050);
+    m_own_hp_boxes[1] = ImageFloatBox(0.225, 0.920, 0.100, 0.050);
 
     //  No PP boxes on the doubles action menu screen.
     //  (Moves are shown after pressing FIGHT, in a different layout.)
