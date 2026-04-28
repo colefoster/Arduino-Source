@@ -2366,47 +2366,86 @@ async function selectRecogReader(name) {
         return;
     }
 
-    // Load full results to get per-file details
-    const full = await api('/api/regression/results');
-    const files = Object.entries(full.results || {}).filter(([f, res]) => res.reader === name);
+    content.innerHTML = '<div style="color:#8b949e;">Loading frames + crops...</div>';
 
+    // Load full results + reader image list
+    const [full, readerData] = await Promise.all([
+        api('/api/regression/results'),
+        api(`/api/gallery/reader/${encodeURIComponent(name)}`).catch(() => null),
+    ]);
+
+    const results = full.results || {};
+    const images = readerData ? readerData.images || [] : [];
+
+    // Build cards for each frame
     let html = `<div style="margin-bottom:8px; font-size:12px; color:#8b949e;">
         <span style="color:#3fb950; font-weight:bold;">${r.passed}</span> passed,
         <span style="color:#f85149; font-weight:bold;">${r.failed}</span> failed,
         ${r.passed + r.failed} total
     </div>`;
 
-    // Show failures first
-    if (r.failures && r.failures.length > 0) {
-        html += '<h3 style="color:#f85149; margin:12px 0 8px; font-size:13px;">Failures</h3>';
-        r.failures.forEach(f => {
-            html += `<div style="background:#161b22; border:1px solid #f85149; border-radius:8px; padding:8px 12px; margin-bottom:6px; display:flex; gap:12px; align-items:center;">
-                <img src="/api/gallery/thumb/${name}/${f.filename}" style="width:200px; height:auto; border-radius:4px; border:1px solid #30363d; cursor:pointer;" onclick="this.style.width=this.style.width==='200px'?'500px':'200px'" onerror="this.style.display='none'">
-                <div>
-                    <div style="color:#58a6ff; font-size:11px; font-weight:bold;">${f.filename}</div>
-                    <div style="margin-top:4px;">
-                        <span style="color:#f85149; font-weight:bold;">Got: ${f.actual || '(empty)'}</span>
-                        <span style="color:#8b949e; margin-left:8px;">Expected: ${f.expected}</span>
+    // Sort: failures first, then passes
+    const sorted = images.slice().sort((a, b) => {
+        const ra = results[a.filename], rb = results[b.filename];
+        const fa = ra && !ra.passed ? 0 : 1;
+        const fb = rb && !rb.passed ? 0 : 1;
+        return fa - fb;
+    });
+
+    sorted.forEach(img => {
+        const res = results[img.filename];
+        const passed = res ? res.passed : null;
+        const borderColor = passed === false ? '#f85149' : passed === true ? '#238636' : '#30363d';
+        const badge = passed === true ? '<span style="color:#3fb950;font-weight:bold;">PASS</span>'
+                     : passed === false ? '<span style="color:#f85149;font-weight:bold;">FAIL</span>'
+                     : '<span style="color:#484f58;">—</span>';
+
+        const gt = img.ground_truth || {};
+        const expected = (gt.values || []).filter(v => v !== null).join(', ');
+        const actual = res ? (res.actual || '(empty)') : '—';
+
+        html += `<div style="background:#161b22; border:1px solid ${borderColor}; border-radius:8px; padding:10px 12px; margin-bottom:6px;">
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+                <img src="/api/gallery/thumb/${encodeURIComponent(name)}/${encodeURIComponent(img.filename)}"
+                     style="width:220px; height:auto; border-radius:4px; border:1px solid #30363d; cursor:pointer; flex-shrink:0;"
+                     onclick="this.style.width=this.style.width==='220px'?'500px':'220px'"
+                     onerror="this.style.display='none'">
+                <div style="flex:1; min-width:0;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                        <span style="color:#58a6ff; font-size:11px; font-weight:bold;">${img.filename}</span>
+                        ${badge}
+                    </div>
+                    <div style="font-size:12px; margin-bottom:8px;">
+                        <span style="color:#8b949e;">Expected:</span> <b>${expected}</b>
+                        <span style="color:#8b949e; margin-left:12px;">Got:</span>
+                        <b style="color:${passed === false ? '#f85149' : '#3fb950'};">${actual}</b>
+                    </div>
+                    <div style="display:flex; gap:6px; flex-wrap:wrap;" id="recog-crops-${img.filename.replace(/[^a-zA-Z0-9]/g, '_')}">
                     </div>
                 </div>
-            </div>`;
-        });
-    }
-
-    // Show passes (collapsed)
-    const passes = files.filter(([f, res]) => res.passed);
-    if (passes.length > 0) {
-        html += `<h3 style="color:#3fb950; margin:16px 0 8px; font-size:13px;">Passing (${passes.length})</h3>`;
-        html += '<div style="display:flex; flex-wrap:wrap; gap:4px;">';
-        passes.forEach(([fname, res]) => {
-            html += `<div style="background:#161b22; border:1px solid #30363d; border-radius:4px; padding:4px 8px; font-size:10px;">
-                <span style="color:#3fb950;">✓</span> ${res.actual || fname}
-            </div>`;
-        });
-        html += '</div>';
-    }
+            </div>
+        </div>`;
+    });
 
     content.innerHTML = html;
+
+    // Load crops for each frame (async, non-blocking)
+    for (const img of sorted) {
+        const cropId = 'recog-crops-' + img.filename.replace(/[^a-zA-Z0-9]/g, '_');
+        const el = document.getElementById(cropId);
+        if (!el) continue;
+        try {
+            const crops = await fetch(`${API}/api/gallery/crops/${encodeURIComponent(name)}/${encodeURIComponent(img.filename)}`).then(r => r.json());
+            if (!Array.isArray(crops)) continue;
+            crops.forEach(crop => {
+                const cell = document.createElement('div');
+                cell.style.cssText = 'text-align:center; background:#0d1117; border:1px solid #21262d; border-radius:4px; padding:4px;';
+                cell.innerHTML = `<img src="${crop.data}" style="max-height:60px; image-rendering:pixelated; border:1px solid #30363d; border-radius:3px; display:block; margin:0 auto 3px;">
+                    <div style="font-size:9px; color:#8b949e;">${crop.name}</div>`;
+                el.appendChild(cell);
+            });
+        } catch {}
+    }
 }
 
 
