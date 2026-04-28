@@ -48,18 +48,14 @@ def _find_replay_dir() -> Path:
 def _report_to_dashboard(url: str, payload: dict):
     """POST training metrics to the dashboard. Fire-and-forget."""
     try:
-        import ssl
-        ctx = ssl.create_default_context()
-        ctx.check_hostname = False
-        ctx.verify_mode = ssl.CERT_NONE
         data = json.dumps(payload).encode("utf-8")
         req = urllib.request.Request(
             f"{url}/api/training/report",
             data=data,
-            headers={"Content-Type": "application/json"},
+            headers={"Content-Type": "application/json", "User-Agent": "vgc-trainer/1.0"},
             method="POST",
         )
-        urllib.request.urlopen(req, timeout=5, context=ctx)
+        urllib.request.urlopen(req, timeout=5)
     except Exception:
         pass  # non-critical — don't interrupt training
 
@@ -449,7 +445,7 @@ def main():
     parser.add_argument("--replay-dir", type=str, default="")
     parser.add_argument("--cache", type=str, default="",
                         help="Path to pre-parsed .pt cache file (from preparse_dataset.py)")
-    parser.add_argument("--dashboard", type=str, default="https://champions.colefoster.ca",
+    parser.add_argument("--dashboard", type=str, default="http://100.113.157.128:8421",
                         help="Dashboard URL for live training progress (empty to disable)")
     parser.add_argument("--dropout", type=float, default=0.25)
     parser.add_argument("--n-layers", type=int, default=4)
