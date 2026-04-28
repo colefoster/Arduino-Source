@@ -586,6 +586,27 @@ async def gallery_crops(reader: str, filename: str):
     ]
 
 
+@app.post("/api/gallery/crops_custom/{reader}/{filename}")
+async def gallery_crops_custom(reader: str, filename: str, request: Request):
+    """Return crops using custom box coordinates (for live adjustment)."""
+    import base64
+    img_path = TEST_IMAGES_DIR / reader / filename
+    if not img_path.exists(): return JSONResponse({"error": "not found"}, 404)
+    body = await request.json()
+    boxes = body.get("boxes", [])  # [{name, box: [x, y, w, h]}, ...]
+    return [
+        {"name": b["name"], "box": b["box"],
+         "data": f"data:image/png;base64,{base64.b64encode(_extract_crop(img_path, b['box'])).decode()}"}
+        for b in boxes
+    ]
+
+
+@app.get("/api/gallery/crop_defs/{reader}")
+async def gallery_crop_defs(reader: str):
+    """Return current crop definitions for a reader."""
+    return {"reader": reader, "crops": CROP_DEFS.get(reader, [])}
+
+
 # ═══════════════════════════════════════════════════════════════════════════
 # LABELER API
 # ═══════════════════════════════════════════════════════════════════════════
