@@ -1331,7 +1331,7 @@ async function loadGalleryScreenImages(screen) {
 
         let buttons = '';
         if (!hasReaders && unlabeledCount > 0) {
-            // No readers — offer bulk confirm
+            // No readers - offer bulk confirm
             buttons += `<button class="btn btn-primary" id="bulk-confirm-btn" style="font-size:11px; padding:3px 10px;">Confirm All ${unlabeledCount} (no labels needed)</button>`;
         }
         if (hasReaders && unlabeledCount > 0) {
@@ -1420,7 +1420,7 @@ async function loadGalleryScreenImages(screen) {
             renderGalleryGrid();
         });
 
-        // Verify detectors — batch debug all images via single ColePC request
+        // Verify detectors - batch debug all images via single ColePC request
         document.getElementById('verify-detectors-btn').addEventListener('click', async () => {
             const btn = document.getElementById('verify-detectors-btn');
             const screenInfo = galleryScreens.find(s => s.name === gallerySelectedScreen);
@@ -1457,7 +1457,7 @@ async function loadGalleryScreenImages(screen) {
                 }
                 btn.textContent = failures > 0 ? `${failures} failures (red border)` : 'All passed!';
             } catch (e) {
-                btn.textContent = 'Error — ColePC reachable?';
+                btn.textContent = 'Error - ColePC reachable?';
                 console.error('verify batch:', e);
             }
             btn.disabled = false;
@@ -1513,7 +1513,7 @@ async function loadGalleryScreenImages(screen) {
             });
         }
 
-        // Start labeling — open first unlabeled image
+        // Start labeling - open first unlabeled image
         const startBtn = document.getElementById('start-labeling-btn');
         if (startBtn) {
             startBtn.addEventListener('click', () => {
@@ -1788,7 +1788,7 @@ async function expandGalleryCard(filename) {
         }
     } catch (e) { console.error('loadCrops:', e); }
 
-    // "Move to..." dropdown — populate with all screens + inbox + delete
+    // "Move to..." dropdown - populate with all screens + inbox + delete
     const moveTo = overlay.querySelector('#gallery-move-to');
     const screenList = galleryScreens.filter(s => s.name !== screen);
     moveTo.innerHTML = '<option value="">Move to...</option>'
@@ -2018,7 +2018,7 @@ async function buildLabelForm(overlay, screen, filename, img) {
     saveBtn.addEventListener('click', () => saveAndAdvance(false));
 
     // Ctrl/Cmd+Enter: save and advance to next unlabeled
-    // (wired in keyHandler above, triggers saveBtn.click — override to use advance mode)
+    // (wired in keyHandler above, triggers saveBtn.click - override to use advance mode)
     saveBtn._saveAndAdvance = saveAndAdvance;
 
     // Override the Ctrl+Enter in keyHandler to use save+advance
@@ -2203,7 +2203,7 @@ function labelerOnReaderChange() {
 
     const type = READER_TYPES_LOCAL[reader] || 'unknown';
     const isBool = type === 'bool';
-    info.innerHTML = `Type: <b>${type}</b>${isBool ? ' — use T/F/keyboard to label quickly' : ''}`;
+    info.innerHTML = `Type: <b>${type}</b>${isBool ? ' - use T/F/keyboard to label quickly' : ''}`;
 
     // Filter sources that have this reader, plus "all screenshots" as a universal source
     const sources = labelerState._sources || [];
@@ -3083,7 +3083,7 @@ function inspectorOnBoxInput() {
 // Debounced box input handler
 let _inspectorBoxInputTimer = null;
 document.querySelectorAll('#inspector-box-x, #inspector-box-y, #inspector-box-w, #inspector-box-h').forEach(el => {
-    // Wait for DOM — attach in inspectorInit instead
+    // Wait for DOM - attach in inspectorInit instead
 });
 
 function inspectorAttachBoxInputs() {
@@ -3758,7 +3758,7 @@ async function tpSave() {
     });
 
     const labels = tpLabels[filename];
-    // Save as multi_text:12 — own[0-5] then opp[0-5]
+    // Save as multi_text:12 - own[0-5] then opp[0-5]
     const values = [...labels.own, ...labels.opp];
     try {
         await fetch(`${API}/api/labeler/label_batch`, {
@@ -4302,8 +4302,8 @@ async function validationInit() {
                 for (const err of s.errors) {
                     html += `<div style="padding:2px 0; color:#f85149;">`;
                     html += `<span style="color:#8b949e;">${s.screen}/</span>${err.filename}`;
-                    if (err.missing_readers) html += ` — missing: ${err.missing_readers.join(', ')}`;
-                    if (err.error) html += ` — ${err.reader}.${err.field}: ${err.error}`;
+                    if (err.missing_readers) html += ` - missing: ${err.missing_readers.join(', ')}`;
+                    if (err.error) html += ` - ${err.reader}.${err.field}: ${err.error}`;
                     html += `</div>`;
                 }
             }
