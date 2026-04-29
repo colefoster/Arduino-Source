@@ -1189,6 +1189,7 @@ let galleryImages = [];
 let galleryFilter = 'all';
 
 let galleryScreens = [];
+let _regressionFailures = {};
 let gallerySelectedScreen = null;
 let galleryScreenImages = [];
 
@@ -1231,8 +1232,6 @@ async function galleryInit() {
     });
 }
 
-let _regressionFailures = {};  // screen -> failure count from last regression
-
 function renderGallerySidebar() {
     const sidebar = document.getElementById('gallery-sidebar');
     // Group: screens with images, then empty screens, then overlays
@@ -1251,7 +1250,7 @@ function renderGallerySidebar() {
                 <span>${s.name}${failBadge}</span>
                 <span class="count-badge">${s.count}${s.labeled ? `<span style="color:#3fb950;">/${s.labeled}</span>` : ''}</span>
             </div>
-        `).join('');
+        `; }).join('');
     }
     if (empty.length) {
         html += '<div style="color:#8b949e; font-size:10px; text-transform:uppercase; margin:8px 0 4px;">Empty</div>';
