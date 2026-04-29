@@ -1,0 +1,220 @@
+{
+  "all_screen_dirs": [
+    "team_select",
+    "searching_for_battle",
+    "team_preview_selecting",
+    "team_preview_locked_in",
+    "action_menu_singles",
+    "move_select_singles",
+    "pokemon_switch_singles",
+    "action_menu_doubles",
+    "move_select_doubles",
+    "pokemon_switch_doubles",
+    "communicating",
+    "result_screen",
+    "post_match",
+    "main_menu",
+    "moves_and_more"
+  ],
+  "overlay_dirs": [
+    "_overlays/battle_log"
+  ],
+  "detectors": {
+    "TeamSelectDetector": [
+      "team_select"
+    ],
+    "TeamPreviewDetector": [
+      "team_preview_selecting",
+      "team_preview_locked_in"
+    ],
+    "PreparingForBattleDetector": [
+      "team_preview_locked_in"
+    ],
+    "ActionMenuDetector": [
+      "action_menu_singles",
+      "action_menu_doubles"
+    ],
+    "MoveSelectDetector": [
+      "move_select_singles",
+      "move_select_doubles"
+    ],
+    "ResultScreenDetector": [
+      "result_screen"
+    ],
+    "PostMatchScreenDetector": [
+      "post_match"
+    ],
+    "MainMenuDetector": [
+      "main_menu"
+    ],
+    "MovesMoreDetector": [
+      "moves_and_more"
+    ]
+  },
+  "readers": {
+    "TeamSelectReader": {
+      "screens": {
+        "team_select": {
+          "species": {
+            "type": "array",
+            "items": "string",
+            "length": 6
+          }
+        }
+      }
+    },
+    "TeamPreviewReader": {
+      "screens": {
+        "team_preview_selecting": {
+          "own_species": {
+            "type": "array",
+            "items": "string",
+            "length": 6
+          },
+          "opponent_species": {
+            "type": "array",
+            "items": "string",
+            "length": 6
+          }
+        },
+        "team_preview_locked_in": {
+          "own_species": {
+            "type": "array",
+            "items": "string",
+            "length": 6
+          },
+          "opponent_species": {
+            "type": "array",
+            "items": "string",
+            "length": 6
+          }
+        }
+      }
+    },
+    "BattleHUDReader": {
+      "screens": {
+        "action_menu_singles": {
+          "opponent_species": {
+            "type": "string"
+          },
+          "opponent_hp_pct": {
+            "type": "int"
+          },
+          "own_hp": {
+            "type": "string"
+          }
+        },
+        "move_select_singles": {
+          "opponent_species": {
+            "type": "string"
+          },
+          "opponent_hp_pct": {
+            "type": "int"
+          },
+          "own_hp": {
+            "type": "string"
+          }
+        },
+        "action_menu_doubles": {
+          "opponent_species": {
+            "type": "array",
+            "items": "string",
+            "length": 2
+          },
+          "opponent_hp_pct": {
+            "type": "array",
+            "items": "int",
+            "length": 2
+          },
+          "own_hp": {
+            "type": "array",
+            "items": "string",
+            "length": 2
+          }
+        },
+        "move_select_doubles": {
+          "opponent_species": {
+            "type": "array",
+            "items": "string",
+            "length": 2
+          },
+          "opponent_hp_pct": {
+            "type": "array",
+            "items": "int",
+            "length": 2
+          },
+          "own_hp": {
+            "type": "array",
+            "items": "string",
+            "length": 2
+          }
+        }
+      }
+    },
+    "MoveNameReader": {
+      "screens": {
+        "move_select_singles": {
+          "moves": {
+            "type": "array",
+            "items": "string",
+            "length": 4
+          }
+        },
+        "move_select_doubles": {
+          "moves": {
+            "type": "array",
+            "items": "string",
+            "length": 4
+          }
+        }
+      }
+    },
+    "MoveSelectCursorSlot": {
+      "screens": {
+        "move_select_singles": {
+          "slot": {
+            "type": "int",
+            "min": 0,
+            "max": 3
+          }
+        },
+        "move_select_doubles": {
+          "slot": {
+            "type": "int",
+            "min": 0,
+            "max": 3
+          }
+        }
+      }
+    },
+    "ResultReader": {
+      "screens": {
+        "result_screen": {
+          "won": {
+            "type": "bool"
+          }
+        }
+      }
+    },
+    "TeamSummaryReader": {
+      "screens": {
+        "moves_and_more": {
+          "species": {
+            "type": "array",
+            "items": "string",
+            "length": 6
+          }
+        }
+      }
+    },
+    "BattleLogReader": {
+      "screens": {
+        "_overlays/battle_log": {
+          "event_type": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

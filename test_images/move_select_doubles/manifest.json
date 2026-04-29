@@ -1,0 +1,318 @@
+{
+  "20260423-150121863579.png": {
+    "SpeciesReader": {
+      "opponent_species": "gengar"
+    },
+    "SpeciesReader_Doubles": {
+      "opponent_species": "palafin",
+      "slot": 1
+    }
+  },
+  "20260423-150123581184.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 0
+    },
+    "SpeciesReader": {
+      "opponent_species": "gengar"
+    },
+    "SpeciesReader_Doubles": {
+      "opponent_species": "gengar",
+      "slot": 0
+    }
+  },
+  "20260423-150128027036.png": {
+    "SpeciesReader": {
+      "opponent_species": "gengar"
+    },
+    "SpeciesReader_Doubles": {
+      "opponent_species": "gengar",
+      "slot": 0
+    }
+  },
+  "20260423-150129725676.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 0
+    },
+    "SpeciesReader": {
+      "opponent_species": "gengar"
+    },
+    "SpeciesReader_Doubles": {
+      "opponent_species": "gengar",
+      "slot": 0
+    }
+  },
+  "20260423-150132024252.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 2
+    },
+    "SpeciesReader": {
+      "opponent_species": "gengar"
+    },
+    "SpeciesReader_Doubles": {
+      "opponent_species": "gengar",
+      "slot": 0
+    }
+  },
+  "20260423-150240891066.png": {
+    "SpeciesReader": {
+      "opponent_species": "sylveon"
+    },
+    "SpeciesReader_Doubles": {
+      "opponent_species": "hydreigon",
+      "slot": 1
+    }
+  },
+  "20260423-150242947838.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 1
+    },
+    "SpeciesReader": {
+      "opponent_species": "sylveon"
+    },
+    "SpeciesReader_Doubles": {
+      "opponent_species": "sylveon",
+      "slot": 0
+    }
+  },
+  "20260423-150245612449.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 2
+    },
+    "SpeciesReader": {
+      "opponent_species": "sylveon"
+    },
+    "SpeciesReader_Doubles": {
+      "opponent_species": "sylveon",
+      "slot": 0
+    }
+  },
+  "20260423-150248328346.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 0
+    },
+    "SpeciesReader": {
+      "opponent_species": "sylveon"
+    },
+    "SpeciesReader_Doubles": {
+      "opponent_species": "sylveon",
+      "slot": 0
+    }
+  },
+  "20260423-150252130334.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 1
+    },
+    "SpeciesReader": {
+      "opponent_species": "sylveon"
+    },
+    "SpeciesReader_Doubles": {
+      "opponent_species": "sylveon",
+      "slot": 0
+    }
+  },
+  "20260423-150256754355.png": {
+    "SpeciesReader": {
+      "opponent_species": "sylveon"
+    },
+    "SpeciesReader_Doubles": {
+      "opponent_species": "sylveon",
+      "slot": 0
+    }
+  },
+  "20260423-150258802706.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 3
+    },
+    "SpeciesReader": {
+      "opponent_species": "sylveon"
+    },
+    "SpeciesReader_Doubles": {
+      "opponent_species": "sylveon",
+      "slot": 0
+    }
+  },
+  "20260423-150347231746.png": {
+    "SpeciesReader": {
+      "opponent_species": "sylveon"
+    },
+    "SpeciesReader_Doubles": {
+      "opponent_species": "sylveon",
+      "slot": 0
+    }
+  },
+  "20260423-150349250038.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 1
+    },
+    "SpeciesReader": {
+      "opponent_species": "sylveon"
+    },
+    "SpeciesReader_Doubles": {
+      "opponent_species": "sylveon",
+      "slot": 0
+    }
+  },
+  "20260423-150354427178.png": {
+    "SpeciesReader": {
+      "opponent_species": "sylveon"
+    },
+    "SpeciesReader_Doubles": {
+      "opponent_species": "sylveon",
+      "slot": 0
+    }
+  },
+  "20260423-150356457412.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 2
+    },
+    "SpeciesReader": {
+      "opponent_species": "sylveon"
+    },
+    "SpeciesReader_Doubles": {
+      "opponent_species": "sylveon",
+      "slot": 0
+    }
+  },
+  "20260423-150359121231.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 1
+    },
+    "SpeciesReader": {
+      "opponent_species": "sylveon"
+    },
+    "SpeciesReader_Doubles": {
+      "opponent_species": "sylveon",
+      "slot": 0
+    }
+  },
+  "20260423-150434947219.png": {
+    "OpponentHPReader": {
+      "opponent_hp_pct": 21
+    },
+    "OpponentHPReader_Doubles": {
+      "opponent_hp_pct": 21,
+      "slot": 0
+    },
+    "SpeciesReader": {
+      "opponent_species": "sylveon"
+    },
+    "SpeciesReader_Doubles": {
+      "opponent_species": "sylveon",
+      "slot": 0
+    }
+  },
+  "20260423-150440133636.png": {
+    "OpponentHPReader": {
+      "opponent_hp_pct": 21
+    },
+    "SpeciesReader": {
+      "opponent_species": "sylveon"
+    },
+    "SpeciesReader_Doubles": {
+      "opponent_species": "sylveon",
+      "slot": 0
+    }
+  },
+  "20260423-150454443057.png": {
+    "OpponentHPReader": {
+      "opponent_hp_pct": 21
+    },
+    "SpeciesReader": {
+      "opponent_species": "sylveon"
+    },
+    "SpeciesReader_Doubles": {
+      "opponent_species": "sylveon",
+      "slot": 0
+    }
+  },
+  "20260423-150456793092.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 1
+    },
+    "SpeciesReader": {
+      "opponent_species": "sylveon"
+    },
+    "SpeciesReader_Doubles": {
+      "opponent_species": "sylveon",
+      "slot": 0
+    }
+  },
+  "20260423-150459402515.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 3
+    },
+    "SpeciesReader": {
+      "opponent_species": "sylveon"
+    },
+    "SpeciesReader_Doubles": {
+      "opponent_species": "sylveon",
+      "slot": 0
+    }
+  },
+  "20260423-150503460243.png": {
+    "OpponentHPReader": {
+      "opponent_hp_pct": 21
+    },
+    "SpeciesReader": {
+      "opponent_species": "sylveon"
+    },
+    "SpeciesReader_Doubles": {
+      "opponent_species": "sylveon",
+      "slot": 0
+    }
+  },
+  "20260423-183333045399.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 3
+    },
+    "OpponentHPReader_Doubles": {
+      "opponent_hp_pct": 100,
+      "slot": 1
+    }
+  },
+  "20260423-183353861292.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 1
+    },
+    "OpponentHPReader_Doubles": {
+      "opponent_hp_pct": 90,
+      "slot": 1
+    }
+  },
+  "20260423-183421609860.png": {
+    "OpponentHPReader_Doubles": {
+      "opponent_hp_pct": 61,
+      "slot": 1
+    }
+  },
+  "20260423-183458158162.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 1
+    },
+    "OpponentHPReader_Doubles": {
+      "opponent_hp_pct": 47,
+      "slot": 1
+    }
+  },
+  "20260423-183737819287.png": {
+    "OpponentHPReader_Doubles": {
+      "opponent_hp_pct": 7,
+      "slot": 1
+    }
+  },
+  "20260423-183905504090.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 3
+    },
+    "OpponentHPReader_Doubles": {
+      "opponent_hp_pct": 100,
+      "slot": 1
+    }
+  },
+  "screenshot-20260427-132603218579.png": {
+    "OpponentHPReader_Doubles": {
+      "opponent_hp_pct": 100,
+      "slot": 1
+    }
+  }
+}

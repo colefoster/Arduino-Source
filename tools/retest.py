@@ -23,6 +23,7 @@ import time
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BUILD_DIR = os.path.join(REPO, "build_mac")
 TEST_ROOT = os.path.join(REPO, "CommandLineTests", "PokemonChampions")
+TEST_IMAGES = os.path.join(REPO, "test_images")
 RESULTS_PATH = os.path.join(REPO, "tools", "regression_results.json")
 
 
@@ -179,12 +180,78 @@ def list_readers():
             print(f"  {d}: {count} frames")
 
 
+def run_manifest_regression():
+    """Run manifest-based regression using test_images/ structure."""
+    # Generate test_registry.json from screens.yaml first
+    gen_script = os.path.join(REPO, "tools", "generate_test_registry.py")
+    print("Generating test_registry.json...", flush=True)
+    result = subprocess.run([sys.executable, gen_script], capture_output=True, text=True)
+    if result.returncode != 0:
+        print(f"Failed to generate registry: {result.stderr}")
+        return {}
+
+    exe = os.path.join(BUILD_DIR, "SerialProgramsCommandLine")
+    test_dir = os.path.join("..", "test_images")
+    print("Running manifest regression...", flush=True)
+    t0 = time.time()
+    result = subprocess.run(
+        [exe, "--manifest-regression", test_dir],
+        stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+        text=True, timeout=600, cwd=BUILD_DIR,
+    )
+    elapsed = time.time() - t0
+    print(result.stdout)
+    print(f"Completed in {elapsed:.1f}s")
+
+    # Parse results from output (same format as before)
+    results = {}
+    current_file = None
+    current_reader = None
+
+    for line in result.stdout.split("\n"):
+        stripped = line.strip()
+
+        # Detect test from manifest runner output: "  screen_dir/filename (reader)"
+        m = re.match(r'\s+(\S+/\S+\.png)\s*(?:\((\w+)\))?', stripped)
+        if m:
+            current_file = m.group(1)
+            if m.group(2):
+                current_reader = m.group(2)
+            results[current_file] = {"passed": True, "reader": current_reader, "segments": []}
+
+        # Failure
+        m = re.search(r'result is (.+?) but should be (.+?)\.', stripped)
+        if m and current_file:
+            results[current_file]["passed"] = False
+            results[current_file]["actual"] = m.group(1)
+            results[current_file]["expected"] = m.group(2)
+
+        # Success
+        m = re.match(r'OK: actual=(.+)', stripped)
+        if m and current_file:
+            results[current_file]["actual"] = m.group(1)
+
+        # Reader name from "Testing reader: X on Y"
+        m = re.match(r'Testing reader: (\w+)', stripped)
+        if m:
+            current_reader = m.group(1)
+
+        # Detector name from "Testing detector: X"
+        m = re.match(r'Testing detector: (\w+)', stripped)
+        if m:
+            current_reader = m.group(1)
+
+    return results
+
+
 def main():
     parser = argparse.ArgumentParser(description="Build C++ and run regression tests")
     parser.add_argument("reader", nargs="?", help="Reader name (default: all)")
     parser.add_argument("--no-build", action="store_true", help="Skip cmake build")
     parser.add_argument("--list", action="store_true", help="List available readers")
     parser.add_argument("--jobs", "-j", type=int, help="Build parallelism")
+    parser.add_argument("--manifest", action="store_true", help="Use new manifest-based test runner")
+    parser.add_argument("--legacy", action="store_true", help="Force old filename-based test runner")
     args = parser.parse_args()
 
     if args.list:
@@ -195,8 +262,16 @@ def main():
         if not build(args.jobs):
             sys.exit(1)
 
-    results = run_regression(args.reader)
-    save_results(results)
+    # Default to manifest mode if test_images/ exists, unless --legacy
+    use_manifest = args.manifest or (os.path.exists(TEST_IMAGES) and not args.legacy)
+
+    if use_manifest:
+        results = run_manifest_regression()
+    else:
+        results = run_regression(args.reader)
+
+    if results:
+        save_results(results)
 
 
 if __name__ == "__main__":

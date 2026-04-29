@@ -22,6 +22,18 @@
 #include "Common/Cpp/Color.h"
 #include "CommonFramework/Logging/Logger.h"
 #include "Tests/CommandLineTests.h"
+#include "Tests/ManifestTestRunner.h"
+
+//  OCR suggest mode — reader includes
+#include "CommonFramework/ImageTypes/ImageRGB32.h"
+#include "CommonFramework/Language.h"
+#include "PokemonChampions/Inference/PokemonChampions_MoveNameReader.h"
+#include "PokemonChampions/Inference/PokemonChampions_MoveSelectDetector.h"
+#include "PokemonChampions/Inference/PokemonChampions_BattleHUDReader.h"
+#include "PokemonChampions/Inference/PokemonChampions_BattleLogReader.h"
+#include "PokemonChampions/Inference/PokemonChampions_TeamSelectReader.h"
+#include "PokemonChampions/Inference/PokemonChampions_TeamSummaryReader.h"
+#include "PokemonChampions/Inference/PokemonChampions_TeamPreviewReader.h"
 #include "Integrations/PybindSwitchController.h"
 #include "NintendoSwitch/Controllers/NintendoSwitch_ControllerButtons.h"
 
@@ -30,9 +42,12 @@ using namespace PokemonAutomation::NintendoSwitch;
 
 static void print_usage(const char* argv0){
     std::cerr << "Usage:" << std::endl;
-    std::cerr << "  " << argv0 << " --test <path>       Run tests (fail-fast) on a directory or file" << std::endl;
-    std::cerr << "  " << argv0 << " --regression <path> Run all tests and print accuracy report" << std::endl;
-    std::cerr << "  " << argv0 << " <port_name>         Test controller on a serial port" << std::endl;
+    std::cerr << "  " << argv0 << " --test <path>            Run tests (fail-fast) on a directory or file" << std::endl;
+    std::cerr << "  " << argv0 << " --regression <path>      Run all tests and print accuracy report" << std::endl;
+    std::cerr << "  " << argv0 << " --manifest-test <dir>    Run manifest-based tests (fail-fast) on test_images/ dir" << std::endl;
+    std::cerr << "  " << argv0 << " --manifest-regression <dir>  Run manifest-based regression report" << std::endl;
+    std::cerr << "  " << argv0 << " --ocr-suggest <reader> <image>  Run one reader on one image, output JSON" << std::endl;
+    std::cerr << "  " << argv0 << " <port_name>              Test controller on a serial port" << std::endl;
 }
 
 static int run_controller_test(Logger& logger, const std::string& port_name){
@@ -122,6 +137,133 @@ int main(int argc, char* argv[]){
             logger.log("Some tests failed — see report above.", COLOR_RED);
         }
         return ret;
+    }
+
+    //  --manifest-test mode: screen-based tests from test_images/ (fail-fast).
+    if (std::strcmp(argv[1], "--manifest-test") == 0){
+        if (argc < 3){
+            std::cerr << "Error: --manifest-test requires a test_images/ directory." << std::endl;
+            print_usage(argv[0]);
+            return 1;
+        }
+        const std::string dir = argv[2];
+        logger.log("Running manifest tests on: " + dir);
+        int ret = run_manifest_tests(dir, "test");
+        logger.log("================================================================================");
+        if (ret == 0){
+            logger.log("All tests passed.", COLOR_GREEN);
+        }else{
+            logger.log("Tests failed.", COLOR_RED);
+        }
+        return ret;
+    }
+
+    //  --manifest-regression mode: screen-based regression report.
+    if (std::strcmp(argv[1], "--manifest-regression") == 0){
+        if (argc < 3){
+            std::cerr << "Error: --manifest-regression requires a test_images/ directory." << std::endl;
+            print_usage(argv[0]);
+            return 1;
+        }
+        const std::string dir = argv[2];
+        logger.log("Running manifest regression on: " + dir);
+        int ret = run_manifest_tests(dir, "regression");
+        logger.log("================================================================================");
+        if (ret == 0){
+            logger.log("All tests passed.", COLOR_GREEN);
+        }else{
+            logger.log("Some tests failed — see report above.", COLOR_RED);
+        }
+        return ret;
+    }
+
+    //  --ocr-suggest mode: run one reader on one image, output JSON.
+    if (std::strcmp(argv[1], "--ocr-suggest") == 0){
+        if (argc < 4){
+            std::cerr << "Error: --ocr-suggest requires <reader> and <image> arguments." << std::endl;
+            print_usage(argv[0]);
+            return 1;
+        }
+        const std::string reader_name = argv[2];
+        const std::string image_path = argv[3];
+        logger.log("OCR suggest: reader=" + reader_name + " image=" + image_path);
+
+        try{
+            ImageRGB32 image(image_path);
+            auto& log = global_logger_command_line();
+
+            //  Run the appropriate reader and output JSON to stdout.
+            //  Each reader outputs its fields as a JSON object.
+            if (reader_name == "MoveNameReader"){
+                NintendoSwitch::PokemonChampions::MoveNameReader reader(Language::English);
+                auto moves = reader.read_all_moves(log, image);
+                std::cout << "{\"moves\":[";
+                for (size_t i = 0; i < 4; i++){
+                    if (i > 0) std::cout << ",";
+                    std::cout << "\"" << moves[i] << "\"";
+                }
+                std::cout << "]}" << std::endl;
+            }
+            else if (reader_name == "MoveSelectCursorSlot"){
+                NintendoSwitch::PokemonChampions::MoveSelectDetector det;
+                det.detect(image);
+                std::cout << "{\"slot\":" << det.cursor_slot() << "}" << std::endl;
+            }
+            else if (reader_name == "BattleHUDReader" || reader_name == "SpeciesReader"){
+                NintendoSwitch::PokemonChampions::BattleHUDReader reader(Language::English);
+                std::string species = reader.read_opponent_species(log, image, 0);
+                int hp = reader.read_opponent_hp_pct(log, image, 0);
+                std::cout << "{\"opponent_species\":\"" << species << "\",\"opponent_hp_pct\":" << hp << "}" << std::endl;
+            }
+            else if (reader_name == "BattleLogReader"){
+                NintendoSwitch::PokemonChampions::BattleLogReader reader;
+                auto event = reader.read_event(log, image);
+                std::cout << "{\"event_type\":\"" << event.raw_text << "\"}" << std::endl;
+            }
+            else if (reader_name == "TeamSelectReader"){
+                NintendoSwitch::PokemonChampions::TeamSelectReader reader(Language::English);
+                auto slots = reader.read_all_slots(log, image);
+                std::cout << "{\"species\":[";
+                for (size_t i = 0; i < 6; i++){
+                    if (i > 0) std::cout << ",";
+                    std::cout << "\"" << slots[i].species << "\"";
+                }
+                std::cout << "]}" << std::endl;
+            }
+            else if (reader_name == "TeamSummaryReader"){
+                NintendoSwitch::PokemonChampions::TeamSummaryReader reader(Language::English);
+                auto team = reader.read_team(log, image);
+                std::cout << "{\"species\":[";
+                for (size_t i = 0; i < 6; i++){
+                    if (i > 0) std::cout << ",";
+                    std::cout << "\"" << team[i].species << "\"";
+                }
+                std::cout << "]}" << std::endl;
+            }
+            else if (reader_name == "TeamPreviewReader"){
+                NintendoSwitch::PokemonChampions::TeamPreviewReader reader(Language::English);
+                auto result = reader.read(log, image);
+                std::cout << "{\"own_species\":[";
+                for (size_t i = 0; i < 6; i++){
+                    if (i > 0) std::cout << ",";
+                    std::cout << "\"" << result.own[i].species << "\"";
+                }
+                std::cout << "],\"opponent_species\":[";
+                for (size_t i = 0; i < 6; i++){
+                    if (i > 0) std::cout << ",";
+                    std::cout << "\"" << result.opp_species[i] << "\"";
+                }
+                std::cout << "]}" << std::endl;
+            }
+            else{
+                std::cerr << "Unknown reader: " << reader_name << std::endl;
+                return 1;
+            }
+        }catch (const std::exception& e){
+            std::cerr << "Error: " << e.what() << std::endl;
+            return 1;
+        }
+        return 0;
     }
 
     //  Legacy mode: controller test.
