@@ -1,4 +1,9 @@
 {
+  "action_menu.png": {
+    "BattleLogReader": {
+      "event_type": "STATUS_INFLICTED"
+    }
+  },
   "battle_dialog.png": {
     "BattleLogReader": {
       "event_type": "FAINTED"
@@ -17,6 +22,26 @@
   "battle_log_thunder_wave.png": {
     "BattleLogReader": {
       "event_type": "MOVE_USED"
+    }
+  },
+  "dragapult_dragon_darts_MOVE_USED.png": {
+    "BattleLogReader": {
+      "event_type": "MOVE_USED"
+    }
+  },
+  "glimmora_taunt_OTHER.png": {
+    "BattleLogReader": {
+      "event_type": "OTHER"
+    }
+  },
+  "hydreigon_taunt_MOVE_USED.png": {
+    "BattleLogReader": {
+      "event_type": "MOVE_USED"
+    }
+  },
+  "screenshot-20260427-132232206201.png": {
+    "BattleLogReader": {
+      "event_type": "SWITCH_IN"
     }
   }
 }

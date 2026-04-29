@@ -227,3 +227,15 @@ overlays:
         fields:
           event_type:
             type: string
+
+  ability_item:
+    description: "Ability activation or item notification popup during battle."
+    readers:
+      AbilityItemReader:
+        fields:
+          pokemon:
+            type: string
+          name:
+            type: string
+          kind:
+            type: string
