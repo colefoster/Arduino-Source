@@ -301,9 +301,11 @@ class JobHandler(BaseHTTPRequestHandler):
 
             result = subprocess.run(
                 [str(exe), "--detector-debug", tmp.name],
-                capture_output=True, text=True, timeout=30,
-                cwd=str(BUILD_DIR),
+                stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                timeout=30, cwd=str(BUILD_DIR),
             )
+            result.stdout = result.stdout.decode("utf-8", errors="replace")
+            result.stderr = result.stderr.decode("utf-8", errors="replace")
 
             if result.returncode != 0:
                 self._send_json({"error": "debug failed", "stderr": result.stderr[-500:]}, 500)
