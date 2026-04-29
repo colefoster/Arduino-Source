@@ -19,7 +19,7 @@
 #include "PokemonChampions/Inference/PokemonChampions_MainMenuDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_TeamSelectDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_TeamPreviewDetector.h"
-#include "PokemonChampions/Inference/PokemonChampions_MovesMoreDetector.h"
+#include "PokemonChampions/Inference/PokemonChampions_TeamSummaryReader.h"  // contains MovesMoreDetector
 
 #include <iostream>
 #include <sstream>
