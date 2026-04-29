@@ -217,7 +217,7 @@ def train(
     # MTL weighting (Kendall homoscedastic uncertainty) or fixed 0.3 fallback
     mtl = MTLUncertainty().to(device) if mtl_kendall else None
     if mtl is not None:
-        print("MTL: Kendall homoscedastic uncertainty weighting (learned log-σ per task)")
+        print("MTL: Kendall homoscedastic uncertainty weighting (learned log-sigma per task)")
 
     # Optimizer
     opt_params = list(model.parameters())
