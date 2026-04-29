@@ -1,0 +1,229 @@
+# Screen states for Pokemon Champions VGC
+# Source of truth for detection, reading, testing, and state machine.
+#
+# Every screen directory in test_images/ maps 1:1 to an entry here.
+# Detectors return bool (true on registered screens, false on all others).
+# Readers extract structured data; field schemas define manifest shape.
+
+screens:
+
+  # ── Pre-battle ──────────────────────────────────────────────
+
+  team_select:
+    description: "Registering team of 6 before queueing for ranked."
+    transitions_to: [searching_for_battle]
+    detectors: [TeamSelectDetector]
+    readers:
+      TeamSelectReader:
+        fields:
+          species:
+            type: array
+            items: string
+            length: 6
+
+  searching_for_battle:
+    description: "Animation/transition after pressing Begin Matchmaking."
+    transitions_to: [team_preview_selecting]
+    detectors: []
+    readers: {}
+
+  team_preview_selecting:
+    description: "Choosing which 4 mons to bring. Opponent team visible. No Standing By pills."
+    transitions_to: [team_preview_locked_in, communicating]
+    detectors: [TeamPreviewDetector]
+    readers:
+      TeamPreviewReader:
+        fields:
+          own_species:
+            type: array
+            items: string
+            length: 6
+          opponent_species:
+            type: array
+            items: string
+            length: 6
+
+  team_preview_locked_in:
+    description: "All selections made, Standing By pills visible on both sides."
+    transitions_to: [communicating]
+    detectors: [TeamPreviewDetector, PreparingForBattleDetector]
+    readers:
+      TeamPreviewReader:
+        fields:
+          own_species:
+            type: array
+            items: string
+            length: 6
+          opponent_species:
+            type: array
+            items: string
+            length: 6
+
+  # ── In-battle (singles) ────────────────────────────────────
+
+  action_menu_singles:
+    description: "FIGHT / POKEMON buttons visible in singles battle."
+    transitions_to: [move_select_singles, pokemon_switch_singles, communicating]
+    detectors: [ActionMenuDetector]
+    readers:
+      BattleHUDReader:
+        fields:
+          opponent_species:
+            type: string
+          opponent_hp_pct:
+            type: int
+          own_hp:
+            type: string
+
+  move_select_singles:
+    description: "4-move panel active in singles. PP visible. Mega evo toggle possible."
+    transitions_to: [communicating]
+    detectors: [MoveSelectDetector]
+    readers:
+      MoveNameReader:
+        fields:
+          moves:
+            type: array
+            items: string
+            length: 4
+      MoveSelectCursorSlot:
+        fields:
+          slot:
+            type: int
+            min: 0
+            max: 3
+      BattleHUDReader:
+        fields:
+          opponent_species:
+            type: string
+          opponent_hp_pct:
+            type: int
+          own_hp:
+            type: string
+
+  pokemon_switch_singles:
+    description: "Choosing which mon to switch to in singles (voluntary or forced)."
+    transitions_to: [communicating]
+    detectors: []
+    readers: {}
+
+  # ── In-battle (doubles) ────────────────────────────────────
+
+  action_menu_doubles:
+    description: "FIGHT / POKEMON buttons visible in doubles battle."
+    transitions_to: [move_select_doubles, pokemon_switch_doubles, communicating]
+    detectors: [ActionMenuDetector]
+    readers:
+      BattleHUDReader:
+        fields:
+          opponent_species:
+            type: array
+            items: string
+            length: 2
+          opponent_hp_pct:
+            type: array
+            items: int
+            length: 2
+          own_hp:
+            type: array
+            items: string
+            length: 2
+
+  move_select_doubles:
+    description: "4-move panel active in doubles. PP visible. Mega evo toggle possible."
+    transitions_to: [communicating]
+    detectors: [MoveSelectDetector]
+    readers:
+      MoveNameReader:
+        fields:
+          moves:
+            type: array
+            items: string
+            length: 4
+      MoveSelectCursorSlot:
+        fields:
+          slot:
+            type: int
+            min: 0
+            max: 3
+      BattleHUDReader:
+        fields:
+          opponent_species:
+            type: array
+            items: string
+            length: 2
+          opponent_hp_pct:
+            type: array
+            items: int
+            length: 2
+          own_hp:
+            type: array
+            items: string
+            length: 2
+
+  pokemon_switch_doubles:
+    description: "Choosing which mon to switch to in doubles (voluntary or forced)."
+    transitions_to: [communicating]
+    detectors: []
+    readers: {}
+
+  # ── Shared battle states ───────────────────────────────────
+
+  communicating:
+    description: "Communicating... text visible, waiting for opponent's turn submission."
+    transitions_to:
+      - action_menu_singles
+      - action_menu_doubles
+      - pokemon_switch_singles
+      - pokemon_switch_doubles
+      - result_screen
+    detectors: []
+    readers: {}
+
+  result_screen:
+    description: "Battle ended. WON! or LOST displayed."
+    transitions_to: [post_match]
+    detectors: [ResultScreenDetector]
+    readers:
+      ResultReader:
+        fields:
+          won:
+            type: bool
+
+  post_match:
+    description: "Quit Battling / Edit Team / Continue Battling buttons."
+    transitions_to: [team_select, searching_for_battle]
+    detectors: [PostMatchScreenDetector]
+    readers: {}
+
+  # ── Non-battle (menu) ──────────────────────────────────────
+
+  main_menu:
+    description: "Game main menu with Battle, Box, Train, etc."
+    transitions_to: [team_select]
+    detectors: [MainMenuDetector]
+    readers: {}
+
+  moves_and_more:
+    description: "Moves & More 2x3 grid showing team summary."
+    transitions_to: [team_select]
+    detectors: [MovesMoreDetector]
+    readers:
+      TeamSummaryReader:
+        fields:
+          species:
+            type: array
+            items: string
+            length: 6
+
+# ── Overlays (not screens in the state machine) ─────────────
+
+overlays:
+
+  battle_log:
+    description: "Text bar overlay during battle. Can appear over any in-battle screen."
+    readers:
+      BattleLogReader:
+        fields:
+          event_type:
+            type: string

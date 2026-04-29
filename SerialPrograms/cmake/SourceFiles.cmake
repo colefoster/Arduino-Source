@@ -2818,6 +2818,8 @@ file(GLOB LIBRARY_SOURCES
     Source/StaticRegistrationQt.cpp
     Source/Tests/CommandLineTests.cpp
     Source/Tests/CommandLineTests.h
+    Source/Tests/ManifestTestRunner.cpp
+    Source/Tests/ManifestTestRunner.h
     Source/Tests/CommonFramework_Tests.cpp
     Source/Tests/CommonFramework_Tests.h
     Source/Tests/Kernels_Tests.cpp

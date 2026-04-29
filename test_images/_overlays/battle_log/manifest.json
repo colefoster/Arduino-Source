@@ -1,0 +1,22 @@
+{
+  "battle_dialog.png": {
+    "BattleLogReader": {
+      "event_type": "FAINTED"
+    }
+  },
+  "battle_dialog_super_effective.png": {
+    "BattleLogReader": {
+      "event_type": "SUPER_EFFECTIVE"
+    }
+  },
+  "battle_log.png": {
+    "BattleLogReader": {
+      "event_type": "MOVE_USED"
+    }
+  },
+  "battle_log_thunder_wave.png": {
+    "BattleLogReader": {
+      "event_type": "MOVE_USED"
+    }
+  }
+}

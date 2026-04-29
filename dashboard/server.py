@@ -612,6 +612,225 @@ async def gallery_crop_defs(reader: str):
     return {"reader": reader, "crops": CROP_DEFS.get(reader, [])}
 
 
+# ═══════════════════════════════════════════════════════════════════════════
+# SCREEN-BASED GALLERY API (new manifest-driven structure)
+# ═══════════════════════════════════════════════════════════════════════════
+
+SCREENS_YAML_PATH = TEST_IMAGES_DIR / "screens.yaml"
+
+def _load_screens_yaml():
+    """Load and cache screens.yaml."""
+    key = "screens_yaml"
+    cached = _cache_get(key)
+    if cached is not None:
+        return cached
+    if not SCREENS_YAML_PATH.exists():
+        return {}
+    try:
+        import yaml
+        with open(SCREENS_YAML_PATH) as f:
+            data = yaml.safe_load(f)
+        _cache_set(key, data, ttl=300)  # cache 5 min
+        return data
+    except Exception:
+        return {}
+
+
+def _load_manifest(screen_dir: Path) -> dict:
+    """Load manifest.json from a screen directory."""
+    manifest_path = screen_dir / "manifest.json"
+    if not manifest_path.exists():
+        return {}
+    try:
+        return json.loads(manifest_path.read_text())
+    except Exception:
+        return {}
+
+
+@app.get("/api/gallery/screens")
+async def gallery_screens():
+    """List all screen directories with image counts and registered detectors/readers."""
+    config = _load_screens_yaml()
+    screens = config.get("screens", {})
+    overlays = config.get("overlays", {})
+    result = []
+
+    # Regular screens
+    for name, defn in screens.items():
+        screen_dir = TEST_IMAGES_DIR / name
+        count = sum(1 for f in screen_dir.glob("*.png")) if screen_dir.exists() else 0
+        manifest = _load_manifest(screen_dir)
+        labeled = sum(1 for v in manifest.values() if v)
+        result.append({
+            "name": name,
+            "description": defn.get("description", ""),
+            "count": count,
+            "labeled": labeled,
+            "detectors": defn.get("detectors", []),
+            "readers": list(defn.get("readers", {}).keys()),
+            "transitions_to": defn.get("transitions_to", []),
+            "type": "screen",
+        })
+
+    # Overlays
+    for name, defn in overlays.items():
+        overlay_dir = TEST_IMAGES_DIR / "_overlays" / name
+        count = sum(1 for f in overlay_dir.glob("*.png")) if overlay_dir.exists() else 0
+        manifest = _load_manifest(overlay_dir)
+        labeled = sum(1 for v in manifest.values() if v)
+        result.append({
+            "name": f"_overlays/{name}",
+            "description": defn.get("description", ""),
+            "count": count,
+            "labeled": labeled,
+            "detectors": [],
+            "readers": list(defn.get("readers", {}).keys()),
+            "transitions_to": [],
+            "type": "overlay",
+        })
+
+    return result
+
+
+@app.get("/api/gallery/screen/{name:path}")
+async def gallery_screen(name: str):
+    """List all images in a screen directory with their manifest labels."""
+    screen_dir = TEST_IMAGES_DIR / name
+    if not screen_dir.exists():
+        return JSONResponse({"error": "screen not found"}, 404)
+
+    manifest = _load_manifest(screen_dir)
+
+    # Get reader info from screens.yaml
+    config = _load_screens_yaml()
+    screens = config.get("screens", {})
+    overlays = config.get("overlays", {})
+
+    screen_def = screens.get(name) or overlays.get(name.replace("_overlays/", "")) or {}
+    readers = screen_def.get("readers", {})
+
+    # Determine all crop defs for readers registered on this screen
+    screen_crops = {}
+    for reader_name in readers:
+        if reader_name in CROP_DEFS:
+            screen_crops[reader_name] = CROP_DEFS[reader_name]
+
+    images = []
+    for f in sorted(screen_dir.glob("*.png")):
+        if f.name.startswith("_"):
+            continue
+        labels = manifest.get(f.name, {})
+        # Determine label completeness
+        expected_readers = set(readers.keys())
+        labeled_readers = set(labels.keys())
+        status = "complete" if expected_readers <= labeled_readers else (
+            "partial" if labeled_readers else "unlabeled"
+        )
+        images.append({
+            "filename": f.name,
+            "path": str(f.relative_to(TEST_IMAGES_DIR)),
+            "labels": labels,
+            "status": status,
+        })
+
+    return {
+        "screen": name,
+        "description": screen_def.get("description", ""),
+        "count": len(images),
+        "readers": {rname: rdef for rname, rdef in readers.items()},
+        "crops": screen_crops,
+        "images": images,
+    }
+
+
+@app.get("/api/gallery/screen_crops/{screen:path}/{filename}")
+async def gallery_screen_crops(screen: str, filename: str):
+    """Return crops for all readers registered on a screen."""
+    import base64
+    img_path = TEST_IMAGES_DIR / screen / filename
+    if not img_path.exists():
+        return JSONResponse({"error": "not found"}, 404)
+
+    config = _load_screens_yaml()
+    screens_cfg = config.get("screens", {})
+    overlays_cfg = config.get("overlays", {})
+    screen_def = screens_cfg.get(screen) or overlays_cfg.get(screen.replace("_overlays/", "")) or {}
+    readers = screen_def.get("readers", {})
+
+    result = []
+    for reader_name in readers:
+        for cd in CROP_DEFS.get(reader_name, []):
+            result.append({
+                "reader": reader_name,
+                "name": cd["name"],
+                "box": cd["box"],
+                "data": f"data:image/png;base64,{base64.b64encode(_extract_crop(img_path, cd['box'])).decode()}",
+            })
+    return result
+
+
+@app.get("/api/gallery/manifest/{screen:path}")
+async def gallery_manifest(screen: str):
+    """Return the full manifest.json for a screen."""
+    screen_dir = TEST_IMAGES_DIR / screen
+    return _load_manifest(screen_dir)
+
+
+@app.put("/api/gallery/manifest/{screen:path}/{filename}")
+async def gallery_manifest_update(screen: str, filename: str, request: Request):
+    """Update manifest labels for a single image."""
+    screen_dir = TEST_IMAGES_DIR / screen
+    manifest_path = screen_dir / "manifest.json"
+    img_path = screen_dir / filename
+    if not img_path.exists():
+        return JSONResponse({"error": "image not found"}, 404)
+
+    body = await request.json()
+    manifest = _load_manifest(screen_dir)
+    manifest[filename] = body
+    manifest_path.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n")
+    return {"ok": True, "filename": filename}
+
+
+# ── Inbox API ──
+
+INBOX_DIR = TEST_IMAGES_DIR / "_inbox"
+
+
+@app.get("/api/gallery/inbox")
+async def gallery_inbox():
+    """List all images in the inbox (unsorted)."""
+    if not INBOX_DIR.exists():
+        return {"count": 0, "images": []}
+    images = []
+    for f in sorted(INBOX_DIR.glob("*.png")):
+        images.append({"filename": f.name, "path": f"_inbox/{f.name}"})
+    return {"count": len(images), "images": images}
+
+
+@app.post("/api/gallery/inbox/assign")
+async def gallery_inbox_assign(request: Request):
+    """Move image(s) from inbox to a screen directory."""
+    body = await request.json()
+    filenames = body.get("filenames", [])
+    screen = body.get("screen", "")
+
+    screen_dir = TEST_IMAGES_DIR / screen
+    if not screen_dir.exists():
+        return JSONResponse({"error": f"screen '{screen}' not found"}, 404)
+
+    moved = []
+    for fname in filenames:
+        src = INBOX_DIR / fname
+        if not src.exists():
+            continue
+        dest = screen_dir / fname
+        shutil.move(str(src), str(dest))
+        moved.append(fname)
+
+    return {"ok": True, "moved": len(moved), "filenames": moved}
+
+
 @app.post("/api/teampreview/crops")
 async def teampreview_crops(request: Request):
     """Extract crops from any labeler source frame using custom boxes."""
@@ -1554,6 +1773,182 @@ async def training_delete(session_id: str):
             f.unlink()
         return {"ok": True}
     return JSONResponse({"error": "Session not found"}, 404)
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# OCR SUGGESTION (proxy to ColePC job runner)
+# ═══════════════════════════════════════════════════════════════════════════
+
+COLEPC_JOB_RUNNER = "http://colepc:8422"
+
+
+@app.post("/api/ocr/suggest")
+async def ocr_suggest(request: Request):
+    """Proxy OCR suggestion request to ColePC job runner.
+
+    Body: { "screen": "move_select_singles", "filename": "20260423-145958889700.png", "reader": "MoveNameReader" }
+    Reads the image from test_images, base64-encodes it, sends to ColePC.
+    """
+    import base64
+    import urllib.request
+    import urllib.error
+
+    body = await request.json()
+    screen = body.get("screen", "")
+    filename = body.get("filename", "")
+    reader = body.get("reader", "")
+
+    if not screen or not filename or not reader:
+        return JSONResponse({"error": "screen, filename, and reader required"}, 400)
+
+    img_path = TEST_IMAGES_DIR / screen / filename
+    if not img_path.exists():
+        return JSONResponse({"error": "image not found"}, 404)
+
+    img_b64 = base64.b64encode(img_path.read_bytes()).decode()
+
+    payload = json.dumps({
+        "image_base64": img_b64,
+        "reader": reader,
+        "screen": screen,
+    }).encode()
+
+    try:
+        req = urllib.request.Request(
+            f"{COLEPC_JOB_RUNNER}/ocr-suggest",
+            data=payload,
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            result = json.loads(resp.read())
+            return result
+    except urllib.error.URLError as e:
+        return JSONResponse({"error": f"ColePC unreachable: {e}"}, 502)
+    except Exception as e:
+        return JSONResponse({"error": str(e)}, 500)
+
+
+@app.post("/api/ocr/suggest-bulk")
+async def ocr_suggest_bulk(request: Request):
+    """Run OCR suggestions for all unlabeled images in a screen directory."""
+    import base64
+    import urllib.request
+    import urllib.error
+
+    body = await request.json()
+    screen = body.get("screen", "")
+    reader = body.get("reader", "")
+
+    if not screen or not reader:
+        return JSONResponse({"error": "screen and reader required"}, 400)
+
+    screen_dir = TEST_IMAGES_DIR / screen
+    if not screen_dir.exists():
+        return JSONResponse({"error": "screen not found"}, 404)
+
+    manifest = _load_manifest(screen_dir)
+    results = {}
+    errors = []
+
+    for f in sorted(screen_dir.glob("*.png")):
+        if f.name.startswith("_"):
+            continue
+        # Skip already-labeled images (for this reader)
+        existing = manifest.get(f.name, {})
+        if reader in existing:
+            continue
+
+        img_b64 = base64.b64encode(f.read_bytes()).decode()
+        payload = json.dumps({
+            "image_base64": img_b64,
+            "reader": reader,
+            "screen": screen,
+        }).encode()
+
+        try:
+            req = urllib.request.Request(
+                f"{COLEPC_JOB_RUNNER}/ocr-suggest",
+                data=payload,
+                headers={"Content-Type": "application/json"},
+                method="POST",
+            )
+            with urllib.request.urlopen(req, timeout=30) as resp:
+                result = json.loads(resp.read())
+                if result.get("ok"):
+                    results[f.name] = result.get("result", {})
+        except Exception as e:
+            errors.append({"filename": f.name, "error": str(e)})
+
+    return {"ok": True, "suggested": len(results), "results": results, "errors": errors}
+
+
+# ── Validation API ──
+
+@app.get("/api/validation/summary")
+async def validation_summary():
+    """Per-screen completion stats and schema validation."""
+    config = _load_screens_yaml()
+    screens = config.get("screens", {})
+    overlays = config.get("overlays", {})
+
+    result = []
+    for name, defn in {**screens, **{f"_overlays/{k}": v for k, v in overlays.items()}}.items():
+        screen_dir = TEST_IMAGES_DIR / name
+        if not screen_dir.exists():
+            continue
+
+        readers = defn.get("readers", {})
+        images = list(screen_dir.glob("*.png"))
+        images = [f for f in images if not f.name.startswith("_")]
+        manifest = _load_manifest(screen_dir)
+
+        total = len(images)
+        labeled = 0
+        partial = 0
+        unlabeled = 0
+        errors = []
+
+        for f in images:
+            entry = manifest.get(f.name, {})
+            if not entry:
+                unlabeled += 1
+                continue
+            # Check completeness
+            expected_readers = set(readers.keys())
+            present_readers = set(entry.keys())
+            if expected_readers <= present_readers:
+                labeled += 1
+            else:
+                partial += 1
+                missing = expected_readers - present_readers
+                errors.append({"filename": f.name, "missing_readers": list(missing)})
+
+            # Type validation
+            for rname, rdef in readers.items():
+                if rname not in entry:
+                    continue
+                fields = rdef.get("fields", {})
+                for fname, fdef in fields.items():
+                    val = entry[rname].get(fname)
+                    if val is None:
+                        continue
+                    if fdef.get("type") == "array":
+                        if not isinstance(val, list):
+                            errors.append({"filename": f.name, "reader": rname, "field": fname, "error": "expected array"})
+                        elif fdef.get("length") and len(val) != fdef["length"]:
+                            errors.append({"filename": f.name, "reader": rname, "field": fname, "error": f"expected length {fdef['length']}, got {len(val)}"})
+
+        result.append({
+            "screen": name,
+            "total": total,
+            "labeled": labeled,
+            "partial": partial,
+            "unlabeled": unlabeled,
+            "errors": errors[:20],  # cap to avoid huge responses
+        })
+
+    return result
 
 
 # ═══════════════════════════════════════════════════════════════════════════

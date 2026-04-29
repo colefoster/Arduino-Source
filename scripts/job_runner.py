@@ -29,6 +29,7 @@ from pathlib import Path
 
 WORK_DIR = Path(r"C:\Dev\pokemon-champions")
 LOG_DIR = WORK_DIR / "data" / "job_logs"
+BUILD_DIR = WORK_DIR / "build"
 PORT = 8422
 
 # State
@@ -69,6 +70,8 @@ class JobHandler(BaseHTTPRequestHandler):
             self._handle_run()
         elif self.path == "/kill":
             self._handle_kill()
+        elif self.path == "/ocr-suggest":
+            self._handle_ocr_suggest()
         else:
             self._send_json({"error": "not found"}, 404)
 
@@ -176,6 +179,82 @@ class JobHandler(BaseHTTPRequestHandler):
                 self._send_json({"ok": True, "killed": _current.get("job_id")})
             except Exception as e:
                 self._send_json({"error": str(e)}, 500)
+
+    def _handle_ocr_suggest(self):
+        """Run C++ OCR reader on a single image, return suggested labels.
+
+        Synchronous — runs the reader and returns immediately.
+        Does NOT queue as a job (fast, sub-second operation).
+
+        Body: { "image_base64": "<base64 png>", "reader": "MoveNameReader", "screen": "move_select_singles" }
+        Response: { "ok": true, "reader": "...", "result": { ... } }
+        """
+        import base64
+        import tempfile
+
+        body = self._read_body()
+        image_b64 = body.get("image_base64", "")
+        reader = body.get("reader", "")
+        screen = body.get("screen", "")
+
+        if not image_b64 or not reader:
+            self._send_json({"error": "image_base64 and reader required"}, 400)
+            return
+
+        # Decode image to temp file
+        try:
+            img_data = base64.b64decode(image_b64)
+        except Exception as e:
+            self._send_json({"error": f"invalid base64: {e}"}, 400)
+            return
+
+        # Write to temp file
+        tmp = tempfile.NamedTemporaryFile(suffix=".png", delete=False, dir=str(WORK_DIR / "data"))
+        try:
+            tmp.write(img_data)
+            tmp.close()
+
+            # Run C++ OCR in --ocr-suggest mode
+            exe = BUILD_DIR / "SerialProgramsCommandLine.exe"
+            if not exe.exists():
+                # Try without .exe (for non-Windows)
+                exe = BUILD_DIR / "SerialProgramsCommandLine"
+            if not exe.exists():
+                self._send_json({"error": f"executable not found: {exe}"}, 500)
+                return
+
+            result = subprocess.run(
+                [str(exe), "--ocr-suggest", reader, tmp.name],
+                capture_output=True, text=True, timeout=30,
+                cwd=str(BUILD_DIR),
+            )
+
+            if result.returncode != 0:
+                self._send_json({
+                    "error": "OCR failed",
+                    "stderr": result.stderr[-500:] if result.stderr else "",
+                    "stdout": result.stdout[-500:] if result.stdout else "",
+                }, 500)
+                return
+
+            # Parse JSON output from C++
+            try:
+                ocr_result = json.loads(result.stdout)
+            except json.JSONDecodeError:
+                # Fall back to returning raw output
+                ocr_result = {"raw": result.stdout.strip()}
+
+            self._send_json({"ok": True, "reader": reader, "screen": screen, "result": ocr_result})
+
+        except subprocess.TimeoutExpired:
+            self._send_json({"error": "OCR timed out"}, 500)
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+        finally:
+            try:
+                os.unlink(tmp.name)
+            except OSError:
+                pass
 
 
 def _monitor_job(proc: subprocess.Popen, log_fh, job_id: str):

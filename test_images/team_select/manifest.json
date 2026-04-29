@@ -1,0 +1,14 @@
+{
+  "teamreg.png": {
+    "TeamSelectReader": {
+      "species": [
+        "garchomp",
+        "venusaur",
+        "charizard",
+        "sneasler",
+        "kingambit",
+        "incineroar"
+      ]
+    }
+  }
+}

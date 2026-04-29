@@ -374,6 +374,7 @@
         <a class="nav-link" href="#/templates" data-route="templates">Templates</a>
         <a class="nav-link" href="#/model" data-route="model">Model Review</a>
         <a class="nav-link" href="#/training" data-route="training">Training</a>
+        <a class="nav-link" href="#/validation" data-route="validation">Validation</a>
     </div>
 </nav>
 
@@ -797,6 +798,17 @@
     <div id="templates-grid" style="display:flex; gap:16px; flex-wrap:wrap; margin-top:16px;"></div>
 </div>
 
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- VIEW: Validation                                           -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="view" id="view-validation">
+    <h1>Label Validation</h1>
+    <div class="subtitle">Per-screen label completeness and schema validation</div>
+    <div id="validation-content" style="margin-top:16px;">
+        <div style="color:#484f58; font-size:12px;">Loading...</div>
+    </div>
+</div>
+
 </div><!-- /main-wrap -->
 
 <script>
@@ -812,7 +824,7 @@ function apiPost(path, body) {
     return fetch(`${API}${path}`, { method: 'POST', body: fd }).then(r => r.json());
 }
 
-const views = ['dashboard', 'gallery', 'labeler', 'inspector', 'recognition', 'teampreview', 'templates', 'model', 'training'];
+const views = ['dashboard', 'gallery', 'labeler', 'inspector', 'recognition', 'teampreview', 'templates', 'model', 'training', 'validation'];
 let currentView = null;
 
 function route() {
@@ -841,6 +853,7 @@ function route() {
     if (view === 'templates') templatesInit();
     if (view === 'model') modelInit();
     if (view === 'training') trainingInit();
+    if (view === 'validation') validationInit();
 }
 
 window.addEventListener('hashchange', route);
@@ -1175,15 +1188,20 @@ let gallerySelectedReader = null;
 let galleryImages = [];
 let galleryFilter = 'all';
 
+let galleryScreens = [];
+let gallerySelectedScreen = null;
+let galleryScreenImages = [];
+
 async function galleryInit() {
     if (galleryInited) return;
     galleryInited = true;
 
     try {
-        galleryReaders = await api('/api/gallery/readers');
+        // Use new screen-based API
+        galleryScreens = await api('/api/gallery/screens');
         renderGallerySidebar();
     } catch (e) {
-        document.getElementById('gallery-sidebar').innerHTML = '<div style="color:#f85149; font-size:12px;">Failed to load readers</div>';
+        document.getElementById('gallery-sidebar').innerHTML = '<div style="color:#f85149; font-size:12px;">Failed to load screens</div>';
     }
 
     // Filter buttons
@@ -1199,35 +1217,189 @@ async function galleryInit() {
 
 function renderGallerySidebar() {
     const sidebar = document.getElementById('gallery-sidebar');
-    sidebar.innerHTML = galleryReaders.map(r => `
-        <div class="reader-pill${gallerySelectedReader === r.name ? ' active' : ''}" data-reader="${r.name}">
-            <span>${r.name}</span>
-            <span class="count-badge">${r.count}</span>
-        </div>
-    `).join('');
+    // Group: screens with images, then empty screens, then overlays
+    const withImages = galleryScreens.filter(s => s.count > 0 && s.type === 'screen');
+    const empty = galleryScreens.filter(s => s.count === 0 && s.type === 'screen');
+    const overlays = galleryScreens.filter(s => s.type === 'overlay');
+
+    let html = '';
+    if (withImages.length) {
+        html += '<div style="color:#8b949e; font-size:10px; text-transform:uppercase; margin-bottom:4px;">Screens</div>';
+        html += withImages.map(s => `
+            <div class="reader-pill${gallerySelectedScreen === s.name ? ' active' : ''}" data-screen="${s.name}">
+                <span>${s.name}</span>
+                <span class="count-badge">${s.count}${s.labeled ? `<span style="color:#3fb950;">/${s.labeled}</span>` : ''}</span>
+            </div>
+        `).join('');
+    }
+    if (empty.length) {
+        html += '<div style="color:#8b949e; font-size:10px; text-transform:uppercase; margin:8px 0 4px;">Empty</div>';
+        html += empty.map(s => `
+            <div class="reader-pill${gallerySelectedScreen === s.name ? ' active' : ''}" data-screen="${s.name}" style="opacity:0.5;">
+                <span>${s.name}</span>
+                <span class="count-badge">0</span>
+            </div>
+        `).join('');
+    }
+    if (overlays.length) {
+        html += '<div style="color:#8b949e; font-size:10px; text-transform:uppercase; margin:8px 0 4px;">Overlays</div>';
+        html += overlays.map(s => `
+            <div class="reader-pill${gallerySelectedScreen === s.name ? ' active' : ''}" data-screen="${s.name}">
+                <span>${s.name.replace('_overlays/', '')}</span>
+                <span class="count-badge">${s.count}</span>
+            </div>
+        `).join('');
+    }
+
+    // Inbox link
+    html += '<div style="color:#8b949e; font-size:10px; text-transform:uppercase; margin:8px 0 4px;">Inbox</div>';
+    html += `<div class="reader-pill${gallerySelectedScreen === '_inbox' ? ' active' : ''}" data-screen="_inbox" style="border-color:#d29922;">
+        <span>Unsorted</span>
+        <span class="count-badge" id="inbox-count">...</span>
+    </div>`;
+
+    sidebar.innerHTML = html;
+
+    // Load inbox count
+    api('/api/gallery/inbox').then(d => {
+        const badge = document.getElementById('inbox-count');
+        if (badge) badge.textContent = d.count || 0;
+    }).catch(() => {});
+
     sidebar.querySelectorAll('.reader-pill').forEach(pill => {
         pill.addEventListener('click', () => {
-            gallerySelectedReader = pill.dataset.reader;
+            gallerySelectedScreen = pill.dataset.screen;
             renderGallerySidebar();
-            loadGalleryImages(gallerySelectedReader);
+            if (gallerySelectedScreen === '_inbox') {
+                loadGalleryInbox();
+            } else {
+                loadGalleryScreenImages(gallerySelectedScreen);
+            }
         });
     });
 }
 
-async function loadGalleryImages(reader) {
+async function loadGalleryScreenImages(screen) {
     const grid = document.getElementById('gallery-grid');
     grid.innerHTML = '<div style="color:#484f58; font-size:12px;">Loading...</div>';
     document.getElementById('gallery-filters').style.display = 'flex';
+    // Update filter buttons for screen mode
+    document.querySelectorAll('.gallery-filter-btn').forEach(b => {
+        if (b.dataset.filter === 'true') b.textContent = 'Labeled';
+        if (b.dataset.filter === 'false') b.textContent = 'Unlabeled';
+    });
     try {
-        const data = await api(`/api/gallery/reader/${encodeURIComponent(reader)}`);
-        galleryImages = data.images || [];
+        const data = await api(`/api/gallery/screen/${encodeURIComponent(screen)}`);
+        galleryScreenImages = data.images || [];
+        galleryImages = galleryScreenImages;  // for backward compat
+        gallerySelectedReader = screen;  // for crop loading
         renderGalleryGrid();
+        // Show screen info
+        if (data.description) {
+            const descEl = document.createElement('div');
+            descEl.style.cssText = 'font-size:11px; color:#8b949e; margin-bottom:8px; padding:6px 8px; background:#161b22; border-radius:4px;';
+            let info = data.description;
+            if (data.readers && Object.keys(data.readers).length) {
+                info += ` | Readers: ${Object.keys(data.readers).join(', ')}`;
+            }
+            descEl.textContent = info;
+            grid.insertBefore(descEl, grid.firstChild);
+        }
     } catch (e) {
         grid.innerHTML = '<div style="color:#f85149; font-size:12px;">Failed to load images</div>';
     }
 }
 
+async function loadGalleryInbox() {
+    const grid = document.getElementById('gallery-grid');
+    grid.innerHTML = '<div style="color:#484f58; font-size:12px;">Loading inbox...</div>';
+    document.getElementById('gallery-filters').style.display = 'none';
+    try {
+        const data = await api('/api/gallery/inbox');
+        if (!data.images || !data.images.length) {
+            grid.innerHTML = '<div style="color:#484f58; font-size:12px;">Inbox is empty</div>';
+            return;
+        }
+        // Show assign UI
+        const screenOptions = galleryScreens.filter(s => s.type === 'screen').map(s => `<option value="${s.name}">${s.name}</option>`).join('');
+        grid.innerHTML = `
+            <div style="margin-bottom:12px; display:flex; gap:8px; align-items:center;">
+                <button class="btn" id="inbox-select-all">Select All</button>
+                <select id="inbox-screen-select" style="font-size:12px; padding:4px 8px;">
+                    <option value="">-- Assign to screen --</option>
+                    ${screenOptions}
+                </select>
+                <button class="btn btn-primary" id="inbox-assign-btn" disabled>Assign Selected</button>
+                <span id="inbox-selected-count" style="font-size:11px; color:#8b949e;">0 selected</span>
+            </div>
+            <div class="gallery-grid" id="inbox-grid">${data.images.map(img => `
+                <div class="gallery-card inbox-card" data-filename="${img.filename}" style="cursor:pointer; position:relative;">
+                    <input type="checkbox" class="inbox-check" style="position:absolute; top:4px; left:4px; z-index:1;">
+                    <img class="thumb" loading="lazy" src="${API}/api/gallery/thumb/${img.path}" alt="${img.filename}">
+                    <div class="fname">${img.filename}</div>
+                </div>
+            `).join('')}</div>
+        `;
+        // Wire up inbox interactions
+        const checks = grid.querySelectorAll('.inbox-check');
+        const countEl = document.getElementById('inbox-selected-count');
+        const assignBtn = document.getElementById('inbox-assign-btn');
+        const updateCount = () => {
+            const n = grid.querySelectorAll('.inbox-check:checked').length;
+            countEl.textContent = `${n} selected`;
+            assignBtn.disabled = n === 0 || !document.getElementById('inbox-screen-select').value;
+        };
+        checks.forEach(cb => cb.addEventListener('change', updateCount));
+        document.getElementById('inbox-screen-select').addEventListener('change', updateCount);
+        document.getElementById('inbox-select-all').addEventListener('click', () => {
+            const allChecked = [...checks].every(c => c.checked);
+            checks.forEach(c => { c.checked = !allChecked; });
+            updateCount();
+        });
+        // Click card to toggle
+        grid.querySelectorAll('.inbox-card').forEach(card => {
+            card.addEventListener('click', e => {
+                if (e.target.type === 'checkbox') return;
+                const cb = card.querySelector('.inbox-check');
+                cb.checked = !cb.checked;
+                updateCount();
+            });
+        });
+        // Assign button
+        assignBtn.addEventListener('click', async () => {
+            const screen = document.getElementById('inbox-screen-select').value;
+            if (!screen) return;
+            const filenames = [...grid.querySelectorAll('.inbox-check:checked')].map(
+                cb => cb.closest('.inbox-card').dataset.filename
+            );
+            if (!filenames.length) return;
+            assignBtn.disabled = true;
+            assignBtn.textContent = 'Assigning...';
+            try {
+                const resp = await fetch(`${API}/api/gallery/inbox/assign`, {
+                    method: 'POST', headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({filenames, screen})
+                }).then(r => r.json());
+                assignBtn.textContent = `Moved ${resp.moved}!`;
+                // Refresh
+                setTimeout(() => { galleryInited = false; galleryInit(); }, 800);
+            } catch (e) {
+                assignBtn.textContent = 'Error!';
+            }
+        });
+    } catch (e) {
+        grid.innerHTML = '<div style="color:#f85149; font-size:12px;">Failed to load inbox</div>';
+    }
+}
+
 function _gtLabel(img) {
+    // New manifest-based labels
+    if (img.status) {
+        if (img.status === 'complete') return 'Labeled';
+        if (img.status === 'partial') return 'Partial';
+        if (img.status === 'unlabeled') return 'Unlabeled';
+    }
+    // Legacy filename-based labels
     const gt = img.ground_truth;
     if (!gt) return '';
     if (gt.type === 'bool') return gt.values[0] ? 'True' : 'False';
@@ -1239,8 +1411,8 @@ function _gtLabel(img) {
 function renderGalleryGrid() {
     const grid = document.getElementById('gallery-grid');
     let filtered = galleryImages;
-    if (galleryFilter === 'true') filtered = galleryImages.filter(i => _gtLabel(i) === 'True');
-    if (galleryFilter === 'false') filtered = galleryImages.filter(i => _gtLabel(i) === 'False');
+    if (galleryFilter === 'true') filtered = galleryImages.filter(i => (i.status || '') !== 'unlabeled' && _gtLabel(i) !== 'Unlabeled');
+    if (galleryFilter === 'false') filtered = galleryImages.filter(i => i.status === 'unlabeled' || _gtLabel(i) === 'Unlabeled');
 
     if (!filtered.length) {
         grid.innerHTML = '<div style="color:#484f58; font-size:12px;">No images match filter</div>';
@@ -1250,8 +1422,9 @@ function renderGalleryGrid() {
     grid.innerHTML = filtered.map(img => {
         const label = _gtLabel(img);
         let badgeClass = 'badge-value';
-        if (label === 'True') badgeClass = 'badge-true';
-        else if (label === 'False') badgeClass = 'badge-false';
+        if (label === 'True' || label === 'Labeled') badgeClass = 'badge-true';
+        else if (label === 'False' || label === 'Unlabeled') badgeClass = 'badge-false';
+        else if (label === 'Partial') badgeClass = 'badge-value';
         return `<div class="gallery-card" data-filename="${img.filename}">
             <img class="thumb" loading="lazy" src="${API}/api/gallery/thumb/${img.path}" alt="${img.filename}">
             <div class="fname">${img.filename}</div>
@@ -1264,47 +1437,253 @@ function renderGalleryGrid() {
     });
 }
 
+// Cache screen reader schema for label forms
+let _screenReaderSchema = null;
+
 async function expandGalleryCard(filename) {
     const overlay = document.createElement('div');
     overlay.className = 'gallery-expanded-overlay';
     overlay.addEventListener('click', e => { if (e.target === overlay) overlay.remove(); });
 
     const img = galleryImages.find(i => i.filename === filename);
-    let cropsHtml = '<div style="color:#484f58; font-size:12px;">Loading crops...</div>';
+    const screen = gallerySelectedScreen || gallerySelectedReader;
+    const imgPath = img ? img.path : `${encodeURIComponent(screen)}/${encodeURIComponent(filename)}`;
 
     overlay.innerHTML = `<div class="gallery-expanded">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
             <div style="font-size:14px; color:#58a6ff; font-weight:bold;">${filename}</div>
             <div style="display:flex; gap:8px;">
+                <span id="gallery-save-status" style="font-size:11px; color:#8b949e; line-height:28px;"></span>
+                <button class="btn btn-primary" id="gallery-save-labels-btn" style="display:none;">Save Labels</button>
+                <button class="btn" id="gallery-nav-prev" title="Previous">&#9664;</button>
+                <button class="btn" id="gallery-nav-next" title="Next">&#9654;</button>
                 <button class="btn" onclick="this.closest('.gallery-expanded-overlay').remove()">Close</button>
-                <button class="btn btn-primary" id="gallery-open-labeler-btn">Open in Labeler</button>
             </div>
         </div>
-        <img src="${API}/api/gallery/image/${img ? img.path : encodeURIComponent(gallerySelectedReader) + '/' + encodeURIComponent(filename)}" alt="${filename}" style="max-width:100%;">
-        <div class="crops" id="gallery-expanded-crops">${cropsHtml}</div>
+        <div style="display:flex; gap:16px; flex-wrap:wrap;">
+            <div style="flex:1; min-width:400px;">
+                <img src="${API}/api/gallery/image/${imgPath}" alt="${filename}" style="max-width:100%;">
+                <div class="crops" id="gallery-expanded-crops" style="margin-top:8px;"><div style="color:#484f58; font-size:12px;">Loading crops...</div></div>
+            </div>
+            <div style="flex:0 0 340px;" id="gallery-label-form">
+                <div style="color:#484f58; font-size:12px;">Loading schema...</div>
+            </div>
+        </div>
     </div>`;
     document.body.appendChild(overlay);
 
-    overlay.querySelector('#gallery-open-labeler-btn').addEventListener('click', () => {
-        overlay.remove();
-        location.hash = '#/labeler';
+    // Nav buttons
+    const imgIdx = galleryImages.findIndex(i => i.filename === filename);
+    overlay.querySelector('#gallery-nav-prev').addEventListener('click', () => {
+        if (imgIdx > 0) { overlay.remove(); expandGalleryCard(galleryImages[imgIdx - 1].filename); }
+    });
+    overlay.querySelector('#gallery-nav-next').addEventListener('click', () => {
+        if (imgIdx < galleryImages.length - 1) { overlay.remove(); expandGalleryCard(galleryImages[imgIdx + 1].filename); }
     });
 
+    // Keyboard nav
+    const keyHandler = (e) => {
+        if (e.key === 'Escape') { overlay.remove(); document.removeEventListener('keydown', keyHandler); }
+        if (e.key === 'ArrowLeft' && imgIdx > 0) { overlay.remove(); document.removeEventListener('keydown', keyHandler); expandGalleryCard(galleryImages[imgIdx - 1].filename); }
+        if (e.key === 'ArrowRight' && imgIdx < galleryImages.length - 1) { overlay.remove(); document.removeEventListener('keydown', keyHandler); expandGalleryCard(galleryImages[imgIdx + 1].filename); }
+    };
+    document.addEventListener('keydown', keyHandler);
+    // Clean up on overlay removal
+    const obs = new MutationObserver(() => { if (!document.body.contains(overlay)) { document.removeEventListener('keydown', keyHandler); obs.disconnect(); } });
+    obs.observe(document.body, {childList: true});
+
+    // Load crops
     try {
-        const crops = await api(`/api/gallery/crops/${encodeURIComponent(gallerySelectedReader)}/${encodeURIComponent(filename)}`);
+        const crops = await api(`/api/gallery/screen_crops/${encodeURIComponent(screen)}/${encodeURIComponent(filename)}`);
         const cropsEl = overlay.querySelector('#gallery-expanded-crops');
         if (Array.isArray(crops) && crops.length) {
             cropsEl.innerHTML = crops.map(c => `
                 <div class="crop-item">
-                    <img src="${c.data || c.url || c.data_url || ''}" alt="${c.name}" style="image-rendering:pixelated;">
-                    <div class="crop-label">${c.name}</div>
+                    <img src="${c.data || ''}" alt="${c.name}" style="image-rendering:pixelated;">
+                    <div class="crop-label">${c.reader}: ${c.name}</div>
                 </div>
             `).join('');
         } else {
-            cropsEl.innerHTML = '<div style="color:#484f58; font-size:12px;">No crops available</div>';
+            cropsEl.innerHTML = '<div style="color:#484f58; font-size:12px;">No crops defined</div>';
         }
+    } catch (e) { console.error('loadCrops:', e); }
+
+    // Build label form from screen schema
+    await buildLabelForm(overlay, screen, filename, img);
+}
+
+async function buildLabelForm(overlay, screen, filename, img) {
+    const formEl = overlay.querySelector('#gallery-label-form');
+    const saveBtn = overlay.querySelector('#gallery-save-labels-btn');
+    const statusEl = overlay.querySelector('#gallery-save-status');
+
+    // Get screen info (with reader schemas)
+    let screenData;
+    try {
+        screenData = await api(`/api/gallery/screen/${encodeURIComponent(screen)}`);
     } catch (e) {
-        console.error('loadCrops:', e);
+        formEl.innerHTML = '<div style="color:#f85149; font-size:12px;">Failed to load schema</div>';
+        return;
+    }
+
+    const readers = screenData.readers || {};
+    if (!Object.keys(readers).length) {
+        formEl.innerHTML = '<div style="color:#484f58; font-size:12px;">No readers registered for this screen</div>';
+        return;
+    }
+
+    const existingLabels = (img && img.labels) || {};
+
+    let html = '<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">'
+        + '<span style="font-size:11px; color:#8b949e; text-transform:uppercase;">Reader Labels</span>'
+        + '<button class="btn" id="gallery-auto-suggest-all" style="font-size:10px; padding:2px 8px;">Auto-Suggest All</button>'
+        + '</div>';
+
+    for (const [readerName, readerDef] of Object.entries(readers)) {
+        const fields = readerDef.fields || {};
+        const existing = existingLabels[readerName] || {};
+        html += `<div style="background:#161b22; border:1px solid #30363d; border-radius:6px; padding:10px; margin-bottom:8px;">`;
+        html += `<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+            <span style="font-size:12px; color:#58a6ff; font-weight:bold;">${readerName}</span>
+            <button class="btn suggest-reader-btn" data-reader="${readerName}" style="font-size:9px; padding:1px 6px;">Suggest</button>
+        </div>`;
+
+        for (const [fieldName, fieldDef] of Object.entries(fields)) {
+            const val = existing[fieldName];
+            html += `<div style="margin-bottom:6px;">`;
+            html += `<label style="font-size:11px; color:#8b949e; display:block; margin-bottom:2px;">${fieldName}</label>`;
+
+            if (fieldDef.type === 'array') {
+                const len = fieldDef.length || 1;
+                const items = fieldDef.items || 'string';
+                for (let i = 0; i < len; i++) {
+                    const arrVal = Array.isArray(val) && val[i] != null ? val[i] : '';
+                    const inputType = items === 'int' ? 'number' : 'text';
+                    html += `<input type="${inputType}" class="manifest-input" data-reader="${readerName}" data-field="${fieldName}" data-index="${i}"
+                        value="${arrVal}" placeholder="${fieldName}[${i}]"
+                        style="width:100%; font-size:12px; padding:3px 6px; margin-bottom:2px; background:#0d1117; border:1px solid #30363d; color:#c9d1d9; border-radius:3px;">`;
+                }
+            } else if (fieldDef.type === 'int') {
+                html += `<input type="number" class="manifest-input" data-reader="${readerName}" data-field="${fieldName}"
+                    value="${val != null ? val : ''}" placeholder="${fieldName}"
+                    ${fieldDef.min != null ? `min="${fieldDef.min}"` : ''} ${fieldDef.max != null ? `max="${fieldDef.max}"` : ''}
+                    style="width:100%; font-size:12px; padding:3px 6px; background:#0d1117; border:1px solid #30363d; color:#c9d1d9; border-radius:3px;">`;
+            } else if (fieldDef.type === 'bool') {
+                html += `<select class="manifest-input" data-reader="${readerName}" data-field="${fieldName}"
+                    style="width:100%; font-size:12px; padding:3px 6px; background:#0d1117; border:1px solid #30363d; color:#c9d1d9; border-radius:3px;">
+                    <option value="" ${val == null ? 'selected' : ''}>--</option>
+                    <option value="true" ${val === true ? 'selected' : ''}>true</option>
+                    <option value="false" ${val === false ? 'selected' : ''}>false</option>
+                </select>`;
+            } else {
+                // string
+                html += `<input type="text" class="manifest-input" data-reader="${readerName}" data-field="${fieldName}"
+                    value="${val != null ? val : ''}" placeholder="${fieldName}"
+                    style="width:100%; font-size:12px; padding:3px 6px; background:#0d1117; border:1px solid #30363d; color:#c9d1d9; border-radius:3px;">`;
+            }
+            html += `</div>`;
+        }
+        html += `</div>`;
+    }
+
+    formEl.innerHTML = html;
+    saveBtn.style.display = 'inline-block';
+
+    saveBtn.addEventListener('click', async () => {
+        // Collect values from form
+        const labels = {};
+        formEl.querySelectorAll('.manifest-input').forEach(input => {
+            const reader = input.dataset.reader;
+            const field = input.dataset.field;
+            const index = input.dataset.index;
+
+            if (!labels[reader]) labels[reader] = {};
+
+            let val = input.value.trim();
+            if (val === '') { val = null; }
+            else if (input.type === 'number') { val = parseInt(val, 10); }
+            else if (input.tagName === 'SELECT') { val = val === 'true' ? true : val === 'false' ? false : null; }
+
+            if (index != null) {
+                // Array field
+                if (!labels[reader][field]) labels[reader][field] = [];
+                labels[reader][field][parseInt(index)] = val;
+            } else {
+                labels[reader][field] = val;
+            }
+        });
+
+        saveBtn.disabled = true;
+        saveBtn.textContent = 'Saving...';
+        try {
+            await fetch(`${API}/api/gallery/manifest/${encodeURIComponent(screen)}/${encodeURIComponent(filename)}`, {
+                method: 'PUT',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(labels),
+            });
+            statusEl.textContent = 'Saved!';
+            statusEl.style.color = '#3fb950';
+            saveBtn.textContent = 'Save Labels';
+            saveBtn.disabled = false;
+            // Update the image status in our local cache
+            if (img) {
+                img.labels = labels;
+                img.status = Object.keys(labels).length ? 'complete' : 'unlabeled';
+            }
+            setTimeout(() => { statusEl.textContent = ''; }, 2000);
+        } catch (e) {
+            statusEl.textContent = 'Error!';
+            statusEl.style.color = '#f85149';
+            saveBtn.textContent = 'Save Labels';
+            saveBtn.disabled = false;
+        }
+    });
+
+    // Per-reader suggest buttons
+    formEl.querySelectorAll('.suggest-reader-btn').forEach(btn => {
+        btn.addEventListener('click', async () => {
+            const reader = btn.dataset.reader;
+            btn.textContent = '...';
+            btn.disabled = true;
+            try {
+                const resp = await fetch(`${API}/api/ocr/suggest`, {
+                    method: 'POST', headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({screen, filename, reader}),
+                }).then(r => r.json());
+                if (resp.ok && resp.result) {
+                    // Fill form fields with suggestions (highlighted)
+                    const result = resp.result;
+                    for (const [field, val] of Object.entries(result)) {
+                        if (Array.isArray(val)) {
+                            val.forEach((v, i) => {
+                                const input = formEl.querySelector(`.manifest-input[data-reader="${reader}"][data-field="${field}"][data-index="${i}"]`);
+                                if (input && !input.value) { input.value = v || ''; input.style.borderColor = '#d29922'; }
+                            });
+                        } else {
+                            const input = formEl.querySelector(`.manifest-input[data-reader="${reader}"][data-field="${field}"]`);
+                            if (input && !input.value) { input.value = val || ''; input.style.borderColor = '#d29922'; }
+                        }
+                    }
+                    btn.textContent = 'Done';
+                    statusEl.textContent = 'OCR suggestion applied (yellow = suggested)';
+                    statusEl.style.color = '#d29922';
+                } else {
+                    btn.textContent = 'Failed';
+                }
+            } catch (e) {
+                btn.textContent = 'Error';
+                console.error('suggest:', e);
+            }
+            setTimeout(() => { btn.textContent = 'Suggest'; btn.disabled = false; }, 2000);
+        });
+    });
+
+    // "Auto-Suggest All" button
+    const suggestAllBtn = formEl.parentElement.querySelector('#gallery-auto-suggest-all');
+    if (suggestAllBtn) {
+        suggestAllBtn.addEventListener('click', () => {
+            formEl.querySelectorAll('.suggest-reader-btn').forEach(btn => btn.click());
+        });
     }
 }
 
@@ -3367,6 +3746,91 @@ async function trainingShowDetail(sessionId) {
                 ]
             }, options: { ...baseOpts, scales: { x: axisOpts, y: { ...axisOpts, type: 'logarithmic' } } }
         });
+    }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// Validation
+// ═══════════════════════════════════════════════════════════════
+let validationInited = false;
+
+async function validationInit() {
+    if (validationInited) return;
+    validationInited = true;
+
+    const content = document.getElementById('validation-content');
+    content.innerHTML = '<div style="color:#484f58; font-size:12px;">Loading validation data...</div>';
+
+    try {
+        const data = await api('/api/validation/summary');
+        if (!data || !data.length) {
+            content.innerHTML = '<div style="color:#484f58; font-size:12px;">No screens found</div>';
+            return;
+        }
+
+        let html = '<table style="width:100%; border-collapse:collapse; font-size:12px;">';
+        html += '<thead><tr style="border-bottom:1px solid #30363d; color:#8b949e;">';
+        html += '<th style="text-align:left; padding:6px;">Screen</th>';
+        html += '<th style="text-align:right; padding:6px;">Total</th>';
+        html += '<th style="text-align:right; padding:6px;">Labeled</th>';
+        html += '<th style="text-align:right; padding:6px;">Partial</th>';
+        html += '<th style="text-align:right; padding:6px;">Unlabeled</th>';
+        html += '<th style="text-align:right; padding:6px;">Issues</th>';
+        html += '<th style="text-align:left; padding:6px;">Progress</th>';
+        html += '</tr></thead><tbody>';
+
+        let grandTotal = 0, grandLabeled = 0, grandPartial = 0, grandUnlabeled = 0, grandErrors = 0;
+
+        for (const s of data) {
+            const pct = s.total > 0 ? Math.round((s.labeled / s.total) * 100) : 0;
+            const barColor = pct === 100 ? '#3fb950' : pct > 50 ? '#d29922' : '#f85149';
+            grandTotal += s.total; grandLabeled += s.labeled; grandPartial += s.partial;
+            grandUnlabeled += s.unlabeled; grandErrors += s.errors.length;
+
+            html += `<tr style="border-bottom:1px solid #21262d;">`;
+            html += `<td style="padding:6px;"><a href="#/gallery" onclick="setTimeout(()=>{gallerySelectedScreen='${s.screen}';loadGalleryScreenImages('${s.screen}');renderGallerySidebar();},100)" style="color:#58a6ff; cursor:pointer;">${s.screen}</a></td>`;
+            html += `<td style="text-align:right; padding:6px;">${s.total}</td>`;
+            html += `<td style="text-align:right; padding:6px; color:#3fb950;">${s.labeled}</td>`;
+            html += `<td style="text-align:right; padding:6px; color:#d29922;">${s.partial}</td>`;
+            html += `<td style="text-align:right; padding:6px; color:#f85149;">${s.unlabeled}</td>`;
+            html += `<td style="text-align:right; padding:6px; color:${s.errors.length ? '#f85149' : '#8b949e'};">${s.errors.length}</td>`;
+            html += `<td style="padding:6px;"><div style="background:#21262d; border-radius:3px; height:12px; width:120px; overflow:hidden;">`;
+            html += `<div style="background:${barColor}; height:100%; width:${pct}%;"></div></div></td>`;
+            html += `</tr>`;
+        }
+
+        // Grand total row
+        const grandPct = grandTotal > 0 ? Math.round((grandLabeled / grandTotal) * 100) : 0;
+        html += `<tr style="border-top:2px solid #30363d; font-weight:bold;">`;
+        html += `<td style="padding:6px;">TOTAL</td>`;
+        html += `<td style="text-align:right; padding:6px;">${grandTotal}</td>`;
+        html += `<td style="text-align:right; padding:6px; color:#3fb950;">${grandLabeled}</td>`;
+        html += `<td style="text-align:right; padding:6px; color:#d29922;">${grandPartial}</td>`;
+        html += `<td style="text-align:right; padding:6px; color:#f85149;">${grandUnlabeled}</td>`;
+        html += `<td style="text-align:right; padding:6px;">${grandErrors}</td>`;
+        html += `<td style="padding:6px;">${grandPct}%</td>`;
+        html += `</tr>`;
+        html += '</tbody></table>';
+
+        // Show errors if any
+        if (grandErrors > 0) {
+            html += '<h2 style="margin-top:24px; font-size:14px;">Issues</h2>';
+            html += '<div style="font-size:11px; max-height:300px; overflow-y:auto;">';
+            for (const s of data) {
+                for (const err of s.errors) {
+                    html += `<div style="padding:2px 0; color:#f85149;">`;
+                    html += `<span style="color:#8b949e;">${s.screen}/</span>${err.filename}`;
+                    if (err.missing_readers) html += ` — missing: ${err.missing_readers.join(', ')}`;
+                    if (err.error) html += ` — ${err.reader}.${err.field}: ${err.error}`;
+                    html += `</div>`;
+                }
+            }
+            html += '</div>';
+        }
+
+        content.innerHTML = html;
+    } catch (e) {
+        content.innerHTML = '<div style="color:#f85149; font-size:12px;">Failed to load validation data</div>';
     }
 }
 

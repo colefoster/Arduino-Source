@@ -1,0 +1,500 @@
+{
+  "20260423-145958889700.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 0
+    }
+  },
+  "20260423-150004028106.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 3
+    }
+  },
+  "20260423-183324524442.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 1
+    }
+  },
+  "20260423-183330053152.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 0
+    }
+  },
+  "20260423-183336832781.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 0
+    }
+  },
+  "20260423-183340823259.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 2
+    }
+  },
+  "20260423-183343803522.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 1
+    }
+  },
+  "20260423-183348383848.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 3
+    }
+  },
+  "20260423-183402213181.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 1
+    }
+  },
+  "20260423-183410319938.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 1
+    }
+  },
+  "20260423-183416008813.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 1
+    }
+  },
+  "20260423-183424800592.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 1
+    }
+  },
+  "20260423-183432132782.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 3
+    }
+  },
+  "20260423-183434932260.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 2
+    }
+  },
+  "20260423-183452481985.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 1
+    }
+  },
+  "20260423-183505998294.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 1
+    }
+  },
+  "20260423-183523639255.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 1
+    }
+  },
+  "20260423-183527988688.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 1
+    }
+  },
+  "20260423-183534301105.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 1
+    }
+  },
+  "20260423-183545906705.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 0
+    }
+  },
+  "20260423-183548953675.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 3
+    }
+  },
+  "20260423-183555327020.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 2
+    }
+  },
+  "20260423-183744870258.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 1
+    }
+  },
+  "20260423-183752637421.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 1
+    }
+  },
+  "20260423-183756280783.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 2
+    }
+  },
+  "20260423-183911434513.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 1
+    }
+  },
+  "20260423-183917790913.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 3
+    }
+  },
+  "20260427-132116660246.png": {
+    "MoveNameReader": {
+      "moves": [
+        "fake-out",
+        "close-combat",
+        "dire-claw",
+        "protect"
+      ]
+    },
+    "MoveSelectCursorSlot": {
+      "slot": 0
+    }
+  },
+  "20260427-132121208717.png": {
+    "MoveNameReader": {
+      "moves": [
+        "fake-out",
+        "close-combat",
+        "dire-claw",
+        "protect"
+      ]
+    }
+  },
+  "20260427-132125840378.png": {
+    "MoveNameReader": {
+      "moves": [
+        "throat-chop",
+        "parting-shot",
+        "fake-out",
+        "flare-blitz"
+      ]
+    },
+    "MoveSelectCursorSlot": {
+      "slot": 0
+    }
+  },
+  "20260427-132140821662.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 0
+    }
+  },
+  "20260427-132203072042.png": {
+    "MoveNameReader": {
+      "moves": [
+        "fake-out",
+        "close-combat",
+        "dire-claw",
+        "protect"
+      ]
+    },
+    "MoveSelectCursorSlot": {
+      "slot": 0
+    }
+  },
+  "20260427-132205497623.png": {
+    "MoveNameReader": {
+      "moves": [
+        "fake-out",
+        "close-combat",
+        "dire-claw",
+        "protect"
+      ]
+    },
+    "MoveSelectCursorSlot": {
+      "slot": 2
+    }
+  },
+  "20260427-132212516906.png": {
+    "MoveNameReader": {
+      "moves": [
+        "throat-chop",
+        "parting-shot",
+        "fake-out",
+        "flare-blitz"
+      ]
+    },
+    "MoveSelectCursorSlot": {
+      "slot": 0
+    }
+  },
+  "20260427-132216668463.png": {
+    "MoveNameReader": {
+      "moves": [
+        "throat-chop",
+        "parting-shot",
+        "fake-out",
+        "flare-blitz"
+      ]
+    },
+    "MoveSelectCursorSlot": {
+      "slot": 1
+    }
+  },
+  "20260427-132307326181.png": {
+    "MoveNameReader": {
+      "moves": [
+        "fake-out",
+        "close-combat",
+        "dire-claw",
+        "protect"
+      ]
+    },
+    "MoveSelectCursorSlot": {
+      "slot": 2
+    }
+  },
+  "20260427-132309942119.png": {
+    "MoveNameReader": {
+      "moves": [
+        "fake-out",
+        "close-combat",
+        "dire-claw",
+        "protect"
+      ]
+    },
+    "MoveSelectCursorSlot": {
+      "slot": 1
+    }
+  },
+  "20260427-132315345000.png": {
+    "MoveNameReader": {
+      "moves": [
+        "throat-chop",
+        "parting-shot",
+        "fake-out",
+        "flare-blitz"
+      ]
+    },
+    "MoveSelectCursorSlot": {
+      "slot": 0
+    }
+  },
+  "20260427-132443993079.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 1
+    }
+  },
+  "20260427-132448249031.png": {
+    "MoveNameReader": {
+      "moves": [
+        null,
+        "stockpile",
+        null,
+        null
+      ]
+    },
+    "MoveSelectCursorSlot": {
+      "slot": 0
+    }
+  },
+  "20260427-132500213779.png": {
+    "MoveNameReader": {
+      "moves": [
+        "energy-ball",
+        "sludge-bomb",
+        "sleep-powder",
+        "protect"
+      ]
+    },
+    "MoveSelectCursorSlot": {
+      "slot": 0
+    }
+  },
+  "20260427-132506065092.png": {
+    "MoveNameReader": {
+      "moves": [
+        "heat-wave",
+        "weather-ball",
+        "solar-beam",
+        "protect"
+      ]
+    },
+    "MoveSelectCursorSlot": {
+      "slot": 0
+    }
+  },
+  "20260427-132508656455.png": {
+    "MoveNameReader": {
+      "moves": [
+        "heat-wave",
+        "weather-ball",
+        "solar-beam",
+        "protect"
+      ]
+    },
+    "MoveSelectCursorSlot": {
+      "slot": 1
+    }
+  },
+  "20260427-132514528548.png": {
+    "MoveNameReader": {
+      "moves": [
+        "heat-wave",
+        "weather-ball",
+        "solar-beam",
+        "protect"
+      ]
+    },
+    "MoveSelectCursorSlot": {
+      "slot": 1
+    }
+  },
+  "20260427-132607311130.png": {
+    "MoveNameReader": {
+      "moves": [
+        "energy-ball",
+        "sludge-bomb",
+        "sleep-powder",
+        "protect"
+      ]
+    },
+    "MoveSelectCursorSlot": {
+      "slot": 0
+    }
+  },
+  "20260427-132613234570.png": {
+    "MoveNameReader": {
+      "moves": [
+        "heat-wave",
+        "weather-ball",
+        "solar-beam",
+        "protect"
+      ]
+    },
+    "MoveSelectCursorSlot": {
+      "slot": 1
+    }
+  },
+  "20260427-132703444544.png": {
+    "MoveNameReader": {
+      "moves": [
+        "energy-ball",
+        "sludge-bomb",
+        "sleep-powder",
+        "protect"
+      ]
+    },
+    "MoveSelectCursorSlot": {
+      "slot": 1
+    }
+  },
+  "20260427-132706341459.png": {
+    "MoveNameReader": {
+      "moves": [
+        "energy-ball",
+        "sludge-bomb",
+        "sleep-powder",
+        "protect"
+      ]
+    },
+    "MoveSelectCursorSlot": {
+      "slot": 0
+    }
+  },
+  "20260427-132710729681.png": {
+    "MoveNameReader": {
+      "moves": [
+        "heat-wave",
+        "weather-ball",
+        "solar-beam",
+        "protect"
+      ]
+    },
+    "MoveSelectCursorSlot": {
+      "slot": 1
+    }
+  },
+  "20260428-090008551568.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 0
+    }
+  },
+  "20260428-090015247426.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 3
+    }
+  },
+  "20260428-090027708724.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 0
+    }
+  },
+  "20260428-090124664956.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 2
+    }
+  },
+  "20260428-090129776313.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 3
+    }
+  },
+  "20260428-090135788993.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 1
+    }
+  },
+  "20260428-090304291552.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 1
+    }
+  },
+  "20260428-090451579888.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 2
+    }
+  },
+  "20260428-090457295695.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 1
+    }
+  },
+  "20260428-090542669809.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 1
+    }
+  },
+  "20260428-090602247537.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 3
+    }
+  },
+  "20260428-090604557213.png": {
+    "MoveSelectCursorSlot": {
+      "slot": 1
+    }
+  },
+  "move_select.png": {
+    "MoveNameReader": {
+      "moves": [
+        "power-whip",
+        "sucker-punch",
+        "swords-dance",
+        "strength-sap"
+      ]
+    },
+    "MoveSelectCursorSlot": {
+      "slot": 0
+    }
+  },
+  "move_select_slot2.png": {
+    "MoveNameReader": {
+      "moves": [
+        "power-whip",
+        "sucker-punch",
+        "swords-dance",
+        "strength-sap"
+      ]
+    },
+    "MoveSelectCursorSlot": {
+      "slot": 1
+    }
+  },
+  "victreebel_kingambit_power-whip_sucker-punch_swords-dance_strength-sap.png": {
+    "MoveNameReader": {
+      "moves": [
+        "power-whip",
+        "sucker-punch",
+        "swords-dance",
+        "strength-sap"
+      ]
+    }
+  }
+}
