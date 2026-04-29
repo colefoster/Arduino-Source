@@ -97,9 +97,10 @@ def main():
 
     result = subprocess.run(
         [str(EXE), "--manifest-regression", str(TEST_IMAGES)],
-        capture_output=True, text=True, timeout=600,
-        cwd=str(BUILD_DIR),
+        stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+        timeout=600, cwd=str(BUILD_DIR),
     )
+    result.stdout = result.stdout.decode("utf-8", errors="replace")
 
     # Parse: for each screen, which detectors SHOULD fire True?
     # A "positive failure" = detector expected True but got False
