@@ -3871,7 +3871,7 @@ async function trainingRefresh() {
                 <span>Loss: ${s.latest_val_loss != null ? s.latest_val_loss.toFixed(4) : '--'}</span>
                 <span>Best: ${s.best_val_loss != null ? s.best_val_loss.toFixed(4) : '--'}</span>
             </div>
-            ${cfg.params ? `<div style="font-size:9px; color:#484f58; margin-top:4px;">${(cfg.params).toLocaleString()} params · ${cfg.dataset_size ? cfg.dataset_size.toLocaleString() + ' samples' : ''} · ${cfg.device || ''}</div>` : ''}
+            ${cfg.params ? `<div style="font-size:9px; color:#484f58; margin-top:4px;">${(cfg.params).toLocaleString()} params · ${cfg.dataset_size ? cfg.dataset_size.toLocaleString() + ' samples' : ''}${cfg.min_rating ? ' · ELO\u2265' + cfg.min_rating : ''} · ${cfg.device || ''}</div>` : ''}
         </div>`;
     }).join('')}</div>`;
 
