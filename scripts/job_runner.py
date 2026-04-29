@@ -29,7 +29,7 @@ from pathlib import Path
 
 WORK_DIR = Path(r"C:\Dev\pokemon-champions")
 LOG_DIR = WORK_DIR / "data" / "job_logs"
-BUILD_DIR = WORK_DIR / "build"
+BUILD_DIR = WORK_DIR / "build" / "Release"
 PORT = 8422
 
 # State
