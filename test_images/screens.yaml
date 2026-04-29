@@ -59,25 +59,30 @@ screens:
             items: string
             length: 6
 
-  # ── In-battle (singles) ────────────────────────────────────
+  # ── In-battle ──────────────────────────────────────────────
+  # Singles and doubles share directories. Readers handle 1 or 2
+  # mons on each side (doubles with 1 remaining looks like singles).
 
-  action_menu_singles:
-    description: "FIGHT / POKEMON buttons visible in singles battle."
-    transitions_to: [move_select_singles, pokemon_switch_singles, communicating]
+  action_menu:
+    description: "FIGHT / POKEMON buttons visible. Singles or doubles."
+    transitions_to: [move_select, pokemon_switch, communicating]
     detectors: [ActionMenuDetector]
     readers:
       BattleHUDReader:
         fields:
           opponent_species:
-            type: string
+            type: array
+            items: string
           opponent_hp_pct:
-            type: int
+            type: array
+            items: int
           own_hp:
-            type: string
+            type: array
+            items: string
 
-  move_select_singles:
-    description: "4-move panel active in singles. PP visible. Mega evo toggle possible."
-    transitions_to: [communicating]
+  move_select:
+    description: "4-move panel active. PP visible. Mega evo toggle possible. Singles or doubles."
+    transitions_to: [target_select, communicating]
     detectors: [MoveSelectDetector]
     readers:
       MoveNameReader:
@@ -95,42 +100,17 @@ screens:
       BattleHUDReader:
         fields:
           opponent_species:
-            type: string
-          opponent_hp_pct:
-            type: int
-          own_hp:
-            type: string
-
-  pokemon_switch_singles:
-    description: "Choosing which mon to switch to in singles (voluntary or forced)."
-    transitions_to: [communicating]
-    detectors: []
-    readers: {}
-
-  # ── In-battle (doubles) ────────────────────────────────────
-
-  action_menu_doubles:
-    description: "FIGHT / POKEMON buttons visible in doubles battle."
-    transitions_to: [move_select_doubles, pokemon_switch_doubles, communicating]
-    detectors: [ActionMenuDetector]
-    readers:
-      BattleHUDReader:
-        fields:
-          opponent_species:
             type: array
             items: string
-            length: 2
           opponent_hp_pct:
             type: array
             items: int
-            length: 2
           own_hp:
             type: array
             items: string
-            length: 2
 
-  target_select_doubles:
-    description: "Target selection modal after picking a move in doubles. Shows all 4 mons with HP, effectiveness, and selected move name."
+  target_select:
+    description: "Target selection modal after picking a move in doubles. Shows mons with HP, effectiveness, and selected move name."
     transitions_to: [communicating]
     detectors: []
     readers:
@@ -141,52 +121,17 @@ screens:
           targets:
             type: array
             items: string
-            length: 4
           target_hp:
             type: array
             items: string
-            length: 4
           effectiveness:
             type: array
             items: string
-            length: 4
           selected_target:
             type: int
 
-  move_select_doubles:
-    description: "4-move panel active in doubles. PP visible. Mega evo toggle possible."
-    transitions_to: [target_select_doubles, communicating]
-    detectors: [MoveSelectDetector]
-    readers:
-      MoveNameReader:
-        fields:
-          moves:
-            type: array
-            items: string
-            length: 4
-      MoveSelectCursorSlot:
-        fields:
-          slot:
-            type: int
-            min: 0
-            max: 3
-      BattleHUDReader:
-        fields:
-          opponent_species:
-            type: array
-            items: string
-            length: 2
-          opponent_hp_pct:
-            type: array
-            items: int
-            length: 2
-          own_hp:
-            type: array
-            items: string
-            length: 2
-
-  pokemon_switch_doubles:
-    description: "Choosing which mon to switch to in doubles (voluntary or forced)."
+  pokemon_switch:
+    description: "Choosing which mon to switch to (voluntary or forced). Singles or doubles."
     transitions_to: [communicating]
     detectors: []
     readers: {}
@@ -196,10 +141,8 @@ screens:
   communicating:
     description: "Communicating... text visible, waiting for opponent's turn submission."
     transitions_to:
-      - action_menu_singles
-      - action_menu_doubles
-      - pokemon_switch_singles
-      - pokemon_switch_doubles
+      - action_menu
+      - pokemon_switch
       - result_screen
     detectors: []
     readers: {}
