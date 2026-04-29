@@ -4,13 +4,10 @@
     "searching_for_battle",
     "team_preview_selecting",
     "team_preview_locked_in",
-    "action_menu_singles",
-    "move_select_singles",
-    "pokemon_switch_singles",
-    "action_menu_doubles",
-    "target_select_doubles",
-    "move_select_doubles",
-    "pokemon_switch_doubles",
+    "action_menu",
+    "move_select",
+    "target_select",
+    "pokemon_switch",
     "communicating",
     "result_screen",
     "post_match",
@@ -33,12 +30,10 @@
       "team_preview_locked_in"
     ],
     "ActionMenuDetector": [
-      "action_menu_singles",
-      "action_menu_doubles"
+      "action_menu"
     ],
     "MoveSelectDetector": [
-      "move_select_singles",
-      "move_select_doubles"
+      "move_select"
     ],
     "ResultScreenDetector": [
       "result_screen"
@@ -95,74 +90,39 @@
     },
     "BattleHUDReader": {
       "screens": {
-        "action_menu_singles": {
+        "action_menu": {
           "opponent_species": {
-            "type": "string"
+            "type": "array",
+            "items": "string"
           },
           "opponent_hp_pct": {
-            "type": "int"
+            "type": "array",
+            "items": "int"
           },
           "own_hp": {
-            "type": "string"
+            "type": "array",
+            "items": "string"
           }
         },
-        "move_select_singles": {
-          "opponent_species": {
-            "type": "string"
-          },
-          "opponent_hp_pct": {
-            "type": "int"
-          },
-          "own_hp": {
-            "type": "string"
-          }
-        },
-        "action_menu_doubles": {
+        "move_select": {
           "opponent_species": {
             "type": "array",
-            "items": "string",
-            "length": 2
+            "items": "string"
           },
           "opponent_hp_pct": {
             "type": "array",
-            "items": "int",
-            "length": 2
+            "items": "int"
           },
           "own_hp": {
             "type": "array",
-            "items": "string",
-            "length": 2
-          }
-        },
-        "move_select_doubles": {
-          "opponent_species": {
-            "type": "array",
-            "items": "string",
-            "length": 2
-          },
-          "opponent_hp_pct": {
-            "type": "array",
-            "items": "int",
-            "length": 2
-          },
-          "own_hp": {
-            "type": "array",
-            "items": "string",
-            "length": 2
+            "items": "string"
           }
         }
       }
     },
     "MoveNameReader": {
       "screens": {
-        "move_select_singles": {
-          "moves": {
-            "type": "array",
-            "items": "string",
-            "length": 4
-          }
-        },
-        "move_select_doubles": {
+        "move_select": {
           "moves": {
             "type": "array",
             "items": "string",
@@ -173,14 +133,7 @@
     },
     "MoveSelectCursorSlot": {
       "screens": {
-        "move_select_singles": {
-          "slot": {
-            "type": "int",
-            "min": 0,
-            "max": 3
-          }
-        },
-        "move_select_doubles": {
+        "move_select": {
           "slot": {
             "type": "int",
             "min": 0,
@@ -191,24 +144,21 @@
     },
     "TargetSelectReader": {
       "screens": {
-        "target_select_doubles": {
+        "target_select": {
           "move": {
             "type": "string"
           },
           "targets": {
             "type": "array",
-            "items": "string",
-            "length": 4
+            "items": "string"
           },
           "target_hp": {
             "type": "array",
-            "items": "string",
-            "length": 4
+            "items": "string"
           },
           "effectiveness": {
             "type": "array",
-            "items": "string",
-            "length": 4
+            "items": "string"
           },
           "selected_target": {
             "type": "int"
