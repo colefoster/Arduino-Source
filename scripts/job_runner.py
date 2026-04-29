@@ -74,6 +74,8 @@ class JobHandler(BaseHTTPRequestHandler):
             self._handle_ocr_suggest()
         elif self.path == "/detector-debug":
             self._handle_detector_debug()
+        elif self.path == "/detector-debug-batch":
+            self._handle_detector_debug_batch()
         else:
             self._send_json({"error": "not found"}, 404)
 
@@ -342,6 +344,78 @@ class JobHandler(BaseHTTPRequestHandler):
                 os.unlink(tmp.name)
             except OSError:
                 pass
+
+
+    def _handle_detector_debug_batch(self):
+        """Run detectors on all images in a screen directory at once.
+
+        Body: { "screen_dir": "C:\\Dev\\pokemon-champions\\test_images\\post_match" }
+              OR { "screen": "post_match" }  (resolved relative to test_images/)
+        Response: { "ok": true, "results": { "filename.png": { detectors: [...] } } }
+
+        Runs one C++ invocation per image but in a tight loop without HTTP overhead.
+        """
+        import re
+
+        body = self._read_body()
+        screen = body.get("screen", "")
+        screen_dir = body.get("screen_dir", "")
+
+        if not screen_dir and screen:
+            screen_dir = str(WORK_DIR / "test_images" / screen)
+
+        if not screen_dir:
+            self._send_json({"error": "screen or screen_dir required"}, 400)
+            return
+
+        screen_path = Path(screen_dir)
+        if not screen_path.exists():
+            self._send_json({"error": f"directory not found: {screen_dir}"}, 404)
+            return
+
+        exe = BUILD_DIR / "SerialProgramsCommandLine.exe"
+        if not exe.exists():
+            exe = BUILD_DIR / "SerialProgramsCommandLine"
+        if not exe.exists():
+            self._send_json({"error": f"executable not found: {exe}"}, 500)
+            return
+
+        images = sorted(f for f in screen_path.iterdir() if f.suffix.lower() == ".png" and not f.name.startswith("_"))
+        results = {}
+
+        for img_path in images:
+            try:
+                result = subprocess.run(
+                    [str(exe), "--detector-debug", str(img_path)],
+                    stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                    timeout=15, cwd=str(BUILD_DIR),
+                )
+                stdout = result.stdout.decode("utf-8", errors="replace")
+
+                parsed = None
+                for line in stdout.strip().split("\n"):
+                    line = line.strip()
+                    if line.startswith("{"):
+                        fixed = re.sub(r'\\(?!["\\/bfnrtu])', r'\\\\', line)
+                        try:
+                            parsed = json.loads(fixed)
+                            break
+                        except json.JSONDecodeError:
+                            continue
+
+                if parsed and "detectors" in parsed:
+                    results[img_path.name] = {
+                        "detectors": parsed["detectors"],
+                    }
+                else:
+                    results[img_path.name] = {"error": "parse failed"}
+
+            except subprocess.TimeoutExpired:
+                results[img_path.name] = {"error": "timeout"}
+            except Exception as e:
+                results[img_path.name] = {"error": str(e)}
+
+        self._send_json({"ok": True, "count": len(results), "results": results})
 
 
 def _monitor_job(proc: subprocess.Popen, log_fh, job_id: str):
