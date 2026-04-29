@@ -1528,6 +1528,7 @@ async function expandGalleryCard(filename) {
             <div style="display:flex; gap:8px;">
                 <span id="gallery-save-status" style="font-size:11px; color:#8b949e; line-height:28px;"></span>
                 <button class="btn btn-primary" id="gallery-save-labels-btn" style="display:none;">Save Labels</button>
+                <button class="btn" id="gallery-debug-detectors" style="font-size:10px; padding:2px 8px;" title="Run all detectors on this image">Debug Detectors</button>
                 <button class="btn" id="gallery-nav-prev" title="Previous">&#9664;</button>
                 <button class="btn" id="gallery-nav-next" title="Next">&#9654;</button>
                 <button class="btn" onclick="this.closest('.gallery-expanded-overlay').remove()">Close</button>
@@ -1607,6 +1608,59 @@ async function expandGalleryCard(filename) {
             cropsEl.innerHTML = '<div style="color:#484f58; font-size:12px;">No crops defined</div>';
         }
     } catch (e) { console.error('loadCrops:', e); }
+
+    // Debug detectors button
+    overlay.querySelector('#gallery-debug-detectors').addEventListener('click', async function() {
+        const btn = this;
+        btn.disabled = true;
+        btn.textContent = 'Running...';
+        try {
+            const resp = await fetch(`${API}/api/detector/debug`, {
+                method: 'POST', headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({screen, filename})
+            }).then(r => r.json());
+
+            if (resp.ok && resp.result) {
+                const r = resp.result;
+                let html = '<div style="margin-top:12px; font-size:11px; border:1px solid #30363d; border-radius:6px; padding:8px; background:#0d1117;">';
+                html += '<div style="color:#8b949e; text-transform:uppercase; margin-bottom:6px; font-size:10px;">Detector Results</div>';
+                // Detector pass/fail
+                for (const d of (r.detectors || [])) {
+                    const color = d.detected ? '#3fb950' : '#f85149';
+                    html += `<div style="color:${color}; margin-bottom:2px;">${d.detected ? '✓' : '✗'} ${d.name}</div>`;
+                }
+                // Region color stats
+                if (r.regions && r.regions.length) {
+                    html += '<div style="color:#8b949e; text-transform:uppercase; margin-top:8px; margin-bottom:4px; font-size:10px;">Region Color Stats</div>';
+                    html += '<table style="font-size:10px; color:#c9d1d9; border-collapse:collapse; width:100%;">';
+                    html += '<tr style="color:#8b949e;"><th style="text-align:left; padding:2px 4px;">Region</th><th>Avg RGB</th><th>StdDev</th></tr>';
+                    for (const reg of r.regions) {
+                        const avg = reg.avg ? reg.avg.map(v => Math.round(v * 255)).join(', ') : '?';
+                        const sd = reg.stddev != null ? reg.stddev.toFixed(2) : '?';
+                        const bgColor = reg.avg ? `rgb(${reg.avg.map(v => Math.round(v * 255)).join(',')})` : '#000';
+                        html += `<tr><td style="padding:2px 4px;">${reg.name}</td>`;
+                        html += `<td style="padding:2px 4px; text-align:center;"><span style="display:inline-block; width:12px; height:12px; background:${bgColor}; border:1px solid #30363d; border-radius:2px; vertical-align:middle; margin-right:4px;"></span>${avg}</td>`;
+                        html += `<td style="padding:2px 4px; text-align:center;">${sd}</td></tr>`;
+                    }
+                    html += '</table>';
+                }
+                html += '</div>';
+
+                // Insert after crops
+                const cropsEl = overlay.querySelector('#gallery-expanded-crops');
+                cropsEl.insertAdjacentHTML('afterend', html);
+                btn.textContent = 'Debug Detectors';
+                btn.disabled = false;
+            } else {
+                btn.textContent = resp.error || 'Failed';
+                setTimeout(() => { btn.textContent = 'Debug Detectors'; btn.disabled = false; }, 3000);
+            }
+        } catch (e) {
+            btn.textContent = 'Error';
+            console.error('detector debug:', e);
+            setTimeout(() => { btn.textContent = 'Debug Detectors'; btn.disabled = false; }, 3000);
+        }
+    });
 
     // Build label form from screen schema
     await buildLabelForm(overlay, screen, filename, img);

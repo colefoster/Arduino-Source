@@ -2818,6 +2818,8 @@ file(GLOB LIBRARY_SOURCES
     Source/StaticRegistrationQt.cpp
     Source/Tests/CommandLineTests.cpp
     Source/Tests/CommandLineTests.h
+    Source/Tests/DetectorDebug.cpp
+    Source/Tests/DetectorDebug.h
     Source/Tests/ManifestTestRunner.cpp
     Source/Tests/ManifestTestRunner.h
     Source/Tests/OcrSuggest.cpp
