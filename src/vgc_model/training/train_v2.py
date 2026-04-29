@@ -66,6 +66,25 @@ def top_k_accuracy(logits: torch.Tensor, targets: torch.Tensor, k: int) -> int:
     return (top_k_preds == targets.unsqueeze(-1)).any(dim=-1).sum().item()
 
 
+class MTLUncertainty(nn.Module):
+    """Kendall, Gal & Cipolla 2018 — homoscedastic uncertainty MTL weighting.
+
+    Replaces hand-tuned task weights with learnable log-σ per task. For each
+    task: L_total = (1/2σ²) * L_task + log σ. Implemented with log_sigma to
+    keep σ > 0 and improve stability.
+    """
+
+    def __init__(self):
+        super().__init__()
+        self.log_sigma_action = nn.Parameter(torch.zeros(1))
+        self.log_sigma_team = nn.Parameter(torch.zeros(1))
+        self.log_sigma_lead = nn.Parameter(torch.zeros(1))
+
+    def weight(self, log_sigma: torch.Tensor, loss: torch.Tensor) -> torch.Tensor:
+        precision = torch.exp(-2.0 * log_sigma)
+        return precision * loss + log_sigma.squeeze()
+
+
 def train(
     epochs: int = 80,
     batch_size: int = 128,
@@ -84,6 +103,8 @@ def train(
     n_heads: int = 4,
     model_variant: str = "v2",
     resume_path: str = "",
+    winner_only: bool = False,
+    mtl_kendall: bool = True,
 ):
     machine_name = platform.node() or "unknown"
 
@@ -146,7 +167,7 @@ def train(
             usage_stats=usage_stats,
             player_profiles=player_profiles,
             min_rating=min_rating,
-            winner_only=True,
+            winner_only=winner_only,
             min_turns=3,
             history_mode=history_mode,
         )
@@ -193,8 +214,16 @@ def train(
         model = VGCTransformerV2(vocabs, config).to(device)
     print(f"Model {model_variant} parameters: {model.count_parameters():,}")
 
+    # MTL weighting (Kendall homoscedastic uncertainty) or fixed 0.3 fallback
+    mtl = MTLUncertainty().to(device) if mtl_kendall else None
+    if mtl is not None:
+        print("MTL: Kendall homoscedastic uncertainty weighting (learned log-σ per task)")
+
     # Optimizer
-    optimizer = torch.optim.AdamW(model.parameters(), lr=lr, weight_decay=weight_decay)
+    opt_params = list(model.parameters())
+    if mtl is not None:
+        opt_params += list(mtl.parameters())
+    optimizer = torch.optim.AdamW(opt_params, lr=lr, weight_decay=weight_decay)
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=epochs)
 
     # Losses
@@ -241,14 +270,19 @@ def train(
     for epoch in range(start_epoch, epochs + 1):
         # ---- Train ----
         model.train()
+        if mtl is not None:
+            mtl.train()
         metrics = _run_epoch(model, train_loader, device, action_criterion, team_criterion,
-                             optimizer=optimizer)
+                             optimizer=optimizer, mtl=mtl)
         scheduler.step()
 
         # ---- Validate ----
         model.eval()
+        if mtl is not None:
+            mtl.eval()
         with torch.no_grad():
-            val_metrics = _run_epoch(model, val_loader, device, action_criterion, team_criterion)
+            val_metrics = _run_epoch(model, val_loader, device, action_criterion, team_criterion,
+                                     mtl=mtl)
 
         # Print
         m, v = metrics, val_metrics
@@ -308,6 +342,9 @@ def train(
                     "device": str(device),
                     "params": model.count_parameters(),
                     "dataset_size": len(dataset),
+                    "winner_only": winner_only,
+                    "history_mode": history_mode,
+                    "mtl": "kendall" if mtl is not None else "fixed_0.3",
                 },
             })
 
@@ -320,6 +357,7 @@ def train(
                 "model_state_dict": model.state_dict(),
                 "optimizer_state_dict": optimizer.state_dict(),
                 "scheduler_state_dict": scheduler.state_dict(),
+                "mtl_state_dict": mtl.state_dict() if mtl is not None else None,
                 "val_loss": v["loss"],
                 "val_top1": v["top1"],
                 "val_top3": v["top3"],
@@ -349,10 +387,16 @@ def train(
 
 
 def _run_epoch(
-    model, loader, device, action_criterion, team_criterion, optimizer=None
+    model, loader, device, action_criterion, team_criterion, optimizer=None, mtl=None
 ) -> dict:
-    """Run one epoch (train or eval). Returns metrics dict."""
-    total_loss = 0.0
+    """Run one epoch (train or eval). Returns metrics dict.
+
+    `mtl` (optional MTLUncertainty): if provided, total backprop loss uses
+    Kendall homoscedastic uncertainty weighting across action/team/lead.
+    Reported `loss` is always the rating-weighted action loss alone — comparable
+    across runs regardless of MTL scheme.
+    """
+    total_action_loss = 0.0  # rating-weighted action loss only (for reporting)
     total_correct_top1 = 0
     total_correct_top3 = 0
     total_actions = 0
@@ -368,11 +412,17 @@ def _run_epoch(
         logits_a = out["logits_a"]
         logits_b = out["logits_b"]
 
-        # Action loss
+        # Action loss (rating-weighted)
         loss_a = action_criterion(logits_a, batch["action_slot_a"])
         loss_b = action_criterion(logits_b, batch["action_slot_b"])
         weights = batch["rating_weight"]
-        loss = (weights * (loss_a + loss_b)).mean()
+        action_loss = (weights * (loss_a + loss_b)).mean()
+
+        # Build total backprop loss
+        if mtl is not None:
+            total_loss = mtl.weight(mtl.log_sigma_action, action_loss)
+        else:
+            total_loss = action_loss
 
         # Team selection loss
         if "team_logits" in out:
@@ -381,7 +431,10 @@ def _run_epoch(
                 team_logits = out["team_logits"][tp_mask]
                 team_labels = batch["team_select_labels"][tp_mask]
                 team_loss = team_criterion(team_logits, team_labels).mean()
-                loss = loss + 0.3 * team_loss
+                if mtl is not None:
+                    total_loss = total_loss + mtl.weight(mtl.log_sigma_team, team_loss)
+                else:
+                    total_loss = total_loss + 0.3 * team_loss
 
                 team_preds = team_logits.topk(4, dim=-1).indices
                 team_truth = team_labels.bool()
@@ -398,7 +451,10 @@ def _run_epoch(
                 lead_logits = out["lead_logits"][tp_mask]
                 lead_labels = batch["lead_labels"][tp_mask]
                 lead_loss = team_criterion(lead_logits, lead_labels).mean()
-                loss = loss + 0.3 * lead_loss
+                if mtl is not None:
+                    total_loss = total_loss + mtl.weight(mtl.log_sigma_lead, lead_loss)
+                else:
+                    total_loss = total_loss + 0.3 * lead_loss
 
                 lead_preds = lead_logits.topk(2, dim=-1).indices
                 lead_truth = lead_labels.bool()
@@ -410,12 +466,12 @@ def _run_epoch(
 
         if optimizer:
             optimizer.zero_grad()
-            loss.backward()
+            total_loss.backward()
             torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
             optimizer.step()
 
         n = len(batch["species_ids"])
-        total_loss += loss.item() * n
+        total_action_loss += action_loss.item() * n
 
         total_correct_top1 += (logits_a.argmax(-1) == batch["action_slot_a"]).sum().item()
         total_correct_top1 += (logits_b.argmax(-1) == batch["action_slot_b"]).sum().item()
@@ -424,7 +480,7 @@ def _run_epoch(
         total_actions += n * 2
 
     return {
-        "loss": total_loss / (total_actions // 2) if total_actions else 0,
+        "loss": total_action_loss / (total_actions // 2) if total_actions else 0,
         "top1": total_correct_top1 / total_actions * 100 if total_actions else 0,
         "top3": total_correct_top3 / total_actions * 100 if total_actions else 0,
         "team_acc": total_team_correct / total_team_samples * 100 if total_team_samples else None,
@@ -454,6 +510,10 @@ def main():
     parser.add_argument("--model", type=str, default="v2",
                         choices=["v2", "v2_window", "v2_seq"],
                         help="Model variant: v2 (default), v2_window (3-turn), v2_seq (LSTM)")
+    parser.add_argument("--winner-only", action="store_true",
+                        help="Filter dataset to winning-side actions only (default: include both players)")
+    parser.add_argument("--no-mtl", action="store_true",
+                        help="Disable Kendall MTL uncertainty weighting; use fixed 0.3 aux weights instead")
     parser.add_argument("--resume", type=str, default="",
                         help="Path to checkpoint to resume training from")
     args = parser.parse_args()
@@ -476,6 +536,8 @@ def main():
         n_heads=args.n_heads,
         model_variant=args.model,
         resume_path=args.resume,
+        winner_only=args.winner_only,
+        mtl_kendall=not args.no_mtl,
     )
 
 
