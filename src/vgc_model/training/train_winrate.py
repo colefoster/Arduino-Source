@@ -20,6 +20,7 @@ from ..data.usage_stats import UsageStats
 from ..data.player_profiles import PlayerProfiles
 from ..data.vocab import Vocabs
 from ..model.winrate_model import WinrateModel, WinrateModelConfig
+from ..model.winrate_model_seq import WinrateModelSeq, WinrateModelSeqConfig
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent.parent
 DATA_DIR = PROJECT_ROOT / "data"
@@ -68,6 +69,8 @@ def train(
     dropout: float = 0.25,
     n_layers: int = 4,
     label_smoothing: float = 0.05,
+    model_variant: str = "winrate_seq",
+    turn_weight: bool = False,
 ):
     machine_name = platform.node() or "unknown"
 
@@ -108,7 +111,8 @@ def train(
     print(f"Replay directory: {rdir}")
 
     # Load dataset
-    print(f"Loading winrate dataset (min_rating={min_rating})...")
+    history_mode = "sequence" if model_variant == "winrate_seq" else "single"
+    print(f"Loading winrate dataset (min_rating={min_rating}, history_mode={history_mode})...")
     dataset = WinrateDataset(
         replay_dir=rdir,
         vocabs=vocabs,
@@ -116,6 +120,7 @@ def train(
         usage_stats=usage_stats,
         player_profiles=player_profiles,
         min_rating=min_rating,
+        history_mode=history_mode,
     )
 
     if len(dataset) == 0:
@@ -141,9 +146,15 @@ def train(
     )
 
     # Model
-    config = WinrateModelConfig(dropout=dropout, n_layers=n_layers)
-    model = WinrateModel(vocabs, config).to(device)
-    print(f"Winrate model parameters: {model.count_parameters():,}")
+    if model_variant == "winrate_seq":
+        config = WinrateModelSeqConfig(dropout=dropout, n_layers=n_layers)
+        model = WinrateModelSeq(vocabs, config).to(device)
+    else:
+        config = WinrateModelConfig(dropout=dropout, n_layers=n_layers)
+        model = WinrateModel(vocabs, config).to(device)
+    print(f"Winrate model ({model_variant}) parameters: {model.count_parameters():,}")
+    if turn_weight:
+        print("Turn weighting enabled: per-sample loss multiplied by 1/sqrt(turn+1)")
 
     # Optimizer
     optimizer = torch.optim.AdamW(model.parameters(), lr=lr, weight_decay=weight_decay)
@@ -166,6 +177,7 @@ def train(
         train_metrics = _run_epoch(
             model, train_loader, device, criterion,
             label_smoothing=label_smoothing, optimizer=optimizer,
+            turn_weight=turn_weight,
         )
         scheduler.step()
 
@@ -175,6 +187,7 @@ def train(
             val_metrics = _run_epoch(
                 model, val_loader, device, criterion,
                 label_smoothing=label_smoothing,
+                turn_weight=turn_weight,
             )
 
         m, v = train_metrics, val_metrics
@@ -182,7 +195,7 @@ def train(
             f"Epoch {epoch:3d}/{epochs} | "
             f"Train loss: {m['loss']:.4f} acc: {m['accuracy']:.1f}% | "
             f"Val loss: {v['loss']:.4f} acc: {v['accuracy']:.1f}% | "
-            f"Cal: win={v['cal_win']:.3f} loss={v['cal_loss']:.3f} | "
+            f"Cal: win={v['cal_win']:.3f} loss={v['cal_loss']:.3f} ECE={v['ece']:.3f} | "
             f"LR: {scheduler.get_last_lr()[0]:.2e}"
         )
         print(line, flush=True)
@@ -197,6 +210,7 @@ def train(
             "val_acc": round(v["accuracy"], 2),
             "cal_win": round(v["cal_win"], 4),
             "cal_loss": round(v["cal_loss"], 4),
+            "ece": round(v["ece"], 4),
             "lr": scheduler.get_last_lr()[0],
             "best_val_loss": round(min(best_val_loss, v["loss"]), 4),
         }
@@ -209,7 +223,7 @@ def train(
             _report_to_dashboard(dashboard_url, {
                 "session_id": run_id,
                 "machine": machine_name,
-                "model_version": "winrate",
+                "model_version": model_variant,
                 "epoch": epoch,
                 "total_epochs": epochs,
                 "timestamp": time.time(),
@@ -227,6 +241,9 @@ def train(
                     "params": model.count_parameters(),
                     "dataset_size": len(dataset),
                     "label_smoothing": label_smoothing,
+                    "model_variant": model_variant,
+                    "history_mode": history_mode,
+                    "turn_weight": turn_weight,
                 },
             })
 
@@ -265,29 +282,40 @@ def train(
 
 def _run_epoch(
     model, loader, device, criterion, label_smoothing=0.05, optimizer=None,
+    turn_weight: bool = False,
 ) -> dict:
     total_loss = 0.0
     total_correct = 0
     total_samples = 0
-    # Calibration: track mean predicted prob for wins vs losses
     sum_pred_win = 0.0
     count_win = 0
     sum_pred_loss = 0.0
     count_loss = 0
+
+    # Reliability buckets for ECE: 10 equal-width bins over [0,1]
+    n_bins = 10
+    bin_conf_sum = [0.0] * n_bins   # sum of predicted probs in bin
+    bin_acc_sum = [0.0] * n_bins    # sum of correct predictions in bin
+    bin_count = [0] * n_bins
 
     for batch in loader:
         batch = {k: v.to(device) for k, v in batch.items()}
         B = batch["species_ids"].shape[0]
 
         out = model(batch)
-        logits = out["win_logit"]  # (B,)
-        labels = batch["win_label"]  # (B,)
+        logits = out["win_logit"]
+        labels = batch["win_label"]
 
-        # Apply label smoothing
         smoothed = labels * (1 - label_smoothing) + (1 - labels) * label_smoothing
 
-        # Weighted loss
         weights = batch["rating_weight"]
+        if turn_weight:
+            # Downweight late-game turns where the outcome is more obvious; turn
+            # comes in as float (1..30 cap). 1/sqrt(turn+1) gives turn 1: 0.71,
+            # turn 5: 0.41, turn 20: 0.22.
+            tw = 1.0 / torch.sqrt(batch["turn"] + 1.0)
+            weights = weights * tw
+
         loss = (criterion(logits, smoothed) * weights).mean()
 
         if optimizer:
@@ -299,12 +327,12 @@ def _run_epoch(
         total_loss += loss.item() * B
         total_samples += B
 
-        # Accuracy
-        preds = (logits > 0).float()
-        total_correct += (preds == labels).sum().item()
-
-        # Calibration
         probs = torch.sigmoid(logits).detach()
+        preds = (logits > 0).float()
+        correct = (preds == labels).float()
+        total_correct += correct.sum().item()
+
+        # Per-class predicted-prob means
         win_mask = labels == 1.0
         loss_mask = labels == 0.0
         sum_pred_win += probs[win_mask].sum().item()
@@ -312,11 +340,32 @@ def _run_epoch(
         sum_pred_loss += probs[loss_mask].sum().item()
         count_loss += loss_mask.sum().item()
 
+        # ECE bucketing — confidence = max(p, 1-p), accuracy uses hard label.
+        # Note: for binary, ECE on raw p and on confidence are equivalent.
+        probs_cpu = probs.cpu().numpy()
+        correct_cpu = correct.cpu().numpy()
+        for i in range(B):
+            p = float(probs_cpu[i])
+            b = min(int(p * n_bins), n_bins - 1)
+            bin_conf_sum[b] += p
+            bin_acc_sum[b] += float(correct_cpu[i])
+            bin_count[b] += 1
+
+    # Expected Calibration Error: weighted |conf - acc| per bin
+    ece = 0.0
+    if total_samples:
+        for b in range(n_bins):
+            if bin_count[b]:
+                conf = bin_conf_sum[b] / bin_count[b]
+                acc = bin_acc_sum[b] / bin_count[b]
+                ece += (bin_count[b] / total_samples) * abs(conf - acc)
+
     return {
         "loss": total_loss / total_samples if total_samples else 0,
         "accuracy": total_correct / total_samples * 100 if total_samples else 0,
         "cal_win": sum_pred_win / count_win if count_win else 0,
         "cal_loss": sum_pred_loss / count_loss if count_loss else 0,
+        "ece": ece,
     }
 
 
@@ -336,6 +385,11 @@ def main():
     parser.add_argument("--dropout", type=float, default=0.25)
     parser.add_argument("--n-layers", type=int, default=4)
     parser.add_argument("--label-smoothing", type=float, default=0.05)
+    parser.add_argument("--model", type=str, default="winrate_seq",
+                        choices=["winrate", "winrate_seq"],
+                        help="Model variant: winrate (stateless, default historical) or winrate_seq (LSTM history, new)")
+    parser.add_argument("--turn-weight", action="store_true",
+                        help="Downweight late-game turns by 1/sqrt(turn+1) so easy late positions don't dominate the loss")
     args = parser.parse_args()
 
     train(
@@ -352,6 +406,8 @@ def main():
         dropout=args.dropout,
         n_layers=args.n_layers,
         label_smoothing=args.label_smoothing,
+        model_variant=args.model,
+        turn_weight=args.turn_weight,
     )
 
 
