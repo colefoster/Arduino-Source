@@ -312,12 +312,18 @@ class JobHandler(BaseHTTPRequestHandler):
                 return
 
             # Parse JSON from stdout (skip log lines)
+            # Note: C++ may output unescaped Windows paths (C:\Dev\...)
+            # so we fix backslashes before parsing
             debug_result = None
             for line in result.stdout.strip().split("\n"):
                 line = line.strip()
                 if line.startswith("{"):
+                    # Escape unescaped backslashes in the JSON string
+                    # (replace single \ not followed by valid escape chars)
+                    import re
+                    fixed = re.sub(r'\\(?!["\\/bfnrtu])', r'\\\\', line)
                     try:
-                        debug_result = json.loads(line)
+                        debug_result = json.loads(fixed)
                         break
                     except json.JSONDecodeError:
                         continue
