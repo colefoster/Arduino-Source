@@ -792,6 +792,49 @@ async def gallery_manifest_update(screen: str, filename: str, request: Request):
     return {"ok": True, "filename": filename}
 
 
+@app.post("/api/gallery/manifest/{screen:path}/bulk-confirm")
+async def gallery_manifest_bulk_confirm(screen: str):
+    """Mark all unlabeled images in a reader-less screen as confirmed (empty labels)."""
+    screen_dir = TEST_IMAGES_DIR / screen
+    if not screen_dir.exists():
+        return JSONResponse({"error": "screen not found"}, 404)
+    manifest = _load_manifest(screen_dir)
+    count = 0
+    for f in sorted(screen_dir.glob("*.png")):
+        if f.name.startswith("_"):
+            continue
+        if f.name not in manifest:
+            manifest[f.name] = {}
+            count += 1
+    manifest_path = screen_dir / "manifest.json"
+    manifest_path.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n")
+    return {"ok": True, "confirmed": count}
+
+
+@app.post("/api/gallery/manifest/{screen:path}/bulk-update")
+async def gallery_manifest_bulk_update(screen: str, request: Request):
+    """Merge labels for multiple images at once.
+
+    Body: { "labels": { "filename.png": { "ReaderName": { "field": "val" } } } }
+    """
+    screen_dir = TEST_IMAGES_DIR / screen
+    if not screen_dir.exists():
+        return JSONResponse({"error": "screen not found"}, 404)
+    body = await request.json()
+    new_labels = body.get("labels", {})
+    manifest = _load_manifest(screen_dir)
+    updated = 0
+    for fname, readers in new_labels.items():
+        if fname not in manifest:
+            manifest[fname] = {}
+        for reader_name, fields in readers.items():
+            manifest[fname][reader_name] = fields
+        updated += 1
+    manifest_path = screen_dir / "manifest.json"
+    manifest_path.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n")
+    return {"ok": True, "updated": updated}
+
+
 # ── Inbox API ──
 
 INBOX_DIR = TEST_IMAGES_DIR / "_inbox"

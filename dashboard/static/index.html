@@ -1279,31 +1279,104 @@ function renderGallerySidebar() {
     });
 }
 
+// Store current screen data for use by label form
+let _currentScreenData = null;
+
 async function loadGalleryScreenImages(screen) {
     const grid = document.getElementById('gallery-grid');
     grid.innerHTML = '<div style="color:#484f58; font-size:12px;">Loading...</div>';
     document.getElementById('gallery-filters').style.display = 'flex';
-    // Update filter buttons for screen mode
     document.querySelectorAll('.gallery-filter-btn').forEach(b => {
         if (b.dataset.filter === 'true') b.textContent = 'Labeled';
         if (b.dataset.filter === 'false') b.textContent = 'Unlabeled';
     });
     try {
         const data = await api(`/api/gallery/screen/${encodeURIComponent(screen)}`);
+        _currentScreenData = data;
         galleryScreenImages = data.images || [];
-        galleryImages = galleryScreenImages;  // for backward compat
-        gallerySelectedReader = screen;  // for crop loading
+        galleryImages = galleryScreenImages;
+        gallerySelectedReader = screen;
         renderGalleryGrid();
-        // Show screen info
-        if (data.description) {
-            const descEl = document.createElement('div');
-            descEl.style.cssText = 'font-size:11px; color:#8b949e; margin-bottom:8px; padding:6px 8px; background:#161b22; border-radius:4px;';
-            let info = data.description;
-            if (data.readers && Object.keys(data.readers).length) {
-                info += ` | Readers: ${Object.keys(data.readers).join(', ')}`;
-            }
-            descEl.textContent = info;
-            grid.insertBefore(descEl, grid.firstChild);
+
+        // Toolbar: info + action buttons
+        const hasReaders = data.readers && Object.keys(data.readers).length > 0;
+        const unlabeledCount = galleryImages.filter(i => i.status === 'unlabeled').length;
+        const toolbar = document.createElement('div');
+        toolbar.style.cssText = 'font-size:11px; color:#8b949e; margin-bottom:8px; padding:6px 8px; background:#161b22; border-radius:4px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;';
+
+        let info = data.description || '';
+        if (hasReaders) info += ` | Readers: ${Object.keys(data.readers).join(', ')}`;
+        info += ` | ${unlabeledCount} unlabeled`;
+
+        let buttons = '';
+        if (!hasReaders && unlabeledCount > 0) {
+            // No readers — offer bulk confirm
+            buttons += `<button class="btn btn-primary" id="bulk-confirm-btn" style="font-size:11px; padding:3px 10px;">Confirm All ${unlabeledCount} (no labels needed)</button>`;
+        }
+        if (hasReaders && unlabeledCount > 0) {
+            buttons += `<button class="btn" id="bulk-ocr-btn" style="font-size:11px; padding:3px 10px;">Bulk OCR Suggest (${unlabeledCount} unlabeled)</button>`;
+            buttons += `<button class="btn" id="start-labeling-btn" style="font-size:11px; padding:3px 10px;">Start Labeling Unlabeled</button>`;
+        }
+
+        toolbar.innerHTML = `<span>${info}</span><div style="display:flex; gap:6px;">${buttons}</div>`;
+        grid.insertBefore(toolbar, grid.firstChild);
+
+        // Bulk confirm handler
+        const confirmBtn = document.getElementById('bulk-confirm-btn');
+        if (confirmBtn) {
+            confirmBtn.addEventListener('click', async () => {
+                confirmBtn.disabled = true;
+                confirmBtn.textContent = 'Confirming...';
+                try {
+                    const resp = await fetch(`${API}/api/gallery/manifest/${encodeURIComponent(screen)}/bulk-confirm`, {method:'POST'}).then(r=>r.json());
+                    confirmBtn.textContent = `Done! ${resp.confirmed} confirmed`;
+                    setTimeout(() => loadGalleryScreenImages(screen), 800);
+                } catch (e) { confirmBtn.textContent = 'Error'; }
+            });
+        }
+
+        // Bulk OCR suggest handler
+        const ocrBtn = document.getElementById('bulk-ocr-btn');
+        if (ocrBtn) {
+            ocrBtn.addEventListener('click', async () => {
+                ocrBtn.disabled = true;
+                const readers = Object.keys(data.readers);
+                let totalSuggested = 0;
+                for (const reader of readers) {
+                    ocrBtn.textContent = `Running ${reader}...`;
+                    try {
+                        const resp = await fetch(`${API}/api/ocr/suggest-bulk`, {
+                            method:'POST', headers:{'Content-Type':'application/json'},
+                            body: JSON.stringify({screen, reader, auto_save: true})
+                        }).then(r=>r.json());
+                        if (resp.results) {
+                            // Bulk-update the manifest
+                            const labels = {};
+                            for (const [fname, fields] of Object.entries(resp.results)) {
+                                labels[fname] = {[reader]: fields};
+                            }
+                            if (Object.keys(labels).length) {
+                                await fetch(`${API}/api/gallery/manifest/${encodeURIComponent(screen)}/bulk-update`, {
+                                    method:'POST', headers:{'Content-Type':'application/json'},
+                                    body: JSON.stringify({labels})
+                                });
+                                totalSuggested += Object.keys(labels).length;
+                            }
+                        }
+                    } catch (e) { console.error('bulk ocr:', e); }
+                }
+                ocrBtn.textContent = `Done! ${totalSuggested} suggested`;
+                setTimeout(() => loadGalleryScreenImages(screen), 800);
+            });
+        }
+
+        // Start labeling — open first unlabeled image
+        const startBtn = document.getElementById('start-labeling-btn');
+        if (startBtn) {
+            startBtn.addEventListener('click', () => {
+                const first = galleryImages.find(i => i.status === 'unlabeled');
+                if (first) expandGalleryCard(first.filename);
+            });
         }
     } catch (e) {
         grid.innerHTML = '<div style="color:#f85149; font-size:12px;">Failed to load images</div>';
@@ -1481,14 +1554,41 @@ async function expandGalleryCard(filename) {
         if (imgIdx < galleryImages.length - 1) { overlay.remove(); expandGalleryCard(galleryImages[imgIdx + 1].filename); }
     });
 
+    // Helper: find next/prev unlabeled
+    const nextUnlabeled = (from, dir) => {
+        for (let i = from + dir; i >= 0 && i < galleryImages.length; i += dir) {
+            if (galleryImages[i].status === 'unlabeled' || galleryImages[i].status === 'partial') return i;
+        }
+        return -1;
+    };
+
     // Keyboard nav
     const keyHandler = (e) => {
+        // Don't intercept when typing in inputs
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA') {
+            // Ctrl/Cmd+Enter: save + advance even from input
+            if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                e.preventDefault();
+                const saveBtn = overlay.querySelector('#gallery-save-labels-btn');
+                if (saveBtn && !saveBtn.disabled) saveBtn.click();
+            }
+            return;
+        }
         if (e.key === 'Escape') { overlay.remove(); document.removeEventListener('keydown', keyHandler); }
+        // Arrow nav
         if (e.key === 'ArrowLeft' && imgIdx > 0) { overlay.remove(); document.removeEventListener('keydown', keyHandler); expandGalleryCard(galleryImages[imgIdx - 1].filename); }
         if (e.key === 'ArrowRight' && imgIdx < galleryImages.length - 1) { overlay.remove(); document.removeEventListener('keydown', keyHandler); expandGalleryCard(galleryImages[imgIdx + 1].filename); }
+        // Ctrl+Arrow: skip to next/prev unlabeled
+        if ((e.ctrlKey || e.metaKey) && e.key === 'ArrowRight') { e.preventDefault(); const n = nextUnlabeled(imgIdx, 1); if (n >= 0) { overlay.remove(); document.removeEventListener('keydown', keyHandler); expandGalleryCard(galleryImages[n].filename); } }
+        if ((e.ctrlKey || e.metaKey) && e.key === 'ArrowLeft') { e.preventDefault(); const n = nextUnlabeled(imgIdx, -1); if (n >= 0) { overlay.remove(); document.removeEventListener('keydown', keyHandler); expandGalleryCard(galleryImages[n].filename); } }
+        // Ctrl/Cmd+Enter: save + advance
+        if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+            e.preventDefault();
+            const saveBtn = overlay.querySelector('#gallery-save-labels-btn');
+            if (saveBtn && !saveBtn.disabled) saveBtn.click();
+        }
     };
     document.addEventListener('keydown', keyHandler);
-    // Clean up on overlay removal
     const obs = new MutationObserver(() => { if (!document.body.contains(overlay)) { document.removeEventListener('keydown', keyHandler); obs.disconnect(); } });
     obs.observe(document.body, {childList: true});
 
@@ -1536,6 +1636,7 @@ async function buildLabelForm(overlay, screen, filename, img) {
 
     let html = '<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">'
         + '<span style="font-size:11px; color:#8b949e; text-transform:uppercase;">Reader Labels</span>'
+        + '<button class="btn" id="gallery-copy-prev" style="font-size:10px; padding:2px 8px;">Copy Prev</button>'
         + '<button class="btn" id="gallery-auto-suggest-all" style="font-size:10px; padding:2px 8px;">Auto-Suggest All</button>'
         + '</div>';
 
@@ -1589,30 +1690,31 @@ async function buildLabelForm(overlay, screen, filename, img) {
     formEl.innerHTML = html;
     saveBtn.style.display = 'inline-block';
 
-    saveBtn.addEventListener('click', async () => {
-        // Collect values from form
+    // Collect form values into a labels object
+    function collectLabels() {
         const labels = {};
         formEl.querySelectorAll('.manifest-input').forEach(input => {
             const reader = input.dataset.reader;
             const field = input.dataset.field;
             const index = input.dataset.index;
-
             if (!labels[reader]) labels[reader] = {};
-
             let val = input.value.trim();
             if (val === '') { val = null; }
             else if (input.type === 'number') { val = parseInt(val, 10); }
             else if (input.tagName === 'SELECT') { val = val === 'true' ? true : val === 'false' ? false : null; }
-
             if (index != null) {
-                // Array field
                 if (!labels[reader][field]) labels[reader][field] = [];
                 labels[reader][field][parseInt(index)] = val;
             } else {
                 labels[reader][field] = val;
             }
         });
+        return labels;
+    }
 
+    // Save and optionally advance to next image
+    async function saveAndAdvance(advance = false) {
+        const labels = collectLabels();
         saveBtn.disabled = true;
         saveBtn.textContent = 'Saving...';
         try {
@@ -1621,15 +1723,24 @@ async function buildLabelForm(overlay, screen, filename, img) {
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(labels),
             });
-            statusEl.textContent = 'Saved!';
-            statusEl.style.color = '#3fb950';
-            saveBtn.textContent = 'Save Labels';
-            saveBtn.disabled = false;
-            // Update the image status in our local cache
             if (img) {
                 img.labels = labels;
                 img.status = Object.keys(labels).length ? 'complete' : 'unlabeled';
             }
+            if (advance) {
+                // Find next unlabeled, or just next image
+                const nextIdx = galleryImages.findIndex((im, i) => i > imgIdx && (im.status === 'unlabeled' || im.status === 'partial'));
+                const target = nextIdx >= 0 ? nextIdx : (imgIdx < galleryImages.length - 1 ? imgIdx + 1 : -1);
+                if (target >= 0) {
+                    overlay.remove();
+                    expandGalleryCard(galleryImages[target].filename);
+                    return;
+                }
+            }
+            statusEl.textContent = 'Saved!';
+            statusEl.style.color = '#3fb950';
+            saveBtn.textContent = 'Save Labels';
+            saveBtn.disabled = false;
             setTimeout(() => { statusEl.textContent = ''; }, 2000);
         } catch (e) {
             statusEl.textContent = 'Error!';
@@ -1637,7 +1748,33 @@ async function buildLabelForm(overlay, screen, filename, img) {
             saveBtn.textContent = 'Save Labels';
             saveBtn.disabled = false;
         }
-    });
+    }
+
+    saveBtn.addEventListener('click', () => saveAndAdvance(false));
+
+    // Ctrl/Cmd+Enter: save and advance to next unlabeled
+    // (wired in keyHandler above, triggers saveBtn.click — override to use advance mode)
+    saveBtn._saveAndAdvance = saveAndAdvance;
+
+    // Override the Ctrl+Enter in keyHandler to use save+advance
+    const origSaveBtnClick = saveBtn.onclick;
+    overlay.querySelector('#gallery-save-labels-btn').addEventListener('dblclick', () => saveAndAdvance(true));
+    // Add a separate "Save & Next" button
+    const saveNextBtn = document.createElement('button');
+    saveNextBtn.className = 'btn btn-primary';
+    saveNextBtn.textContent = 'Save & Next (Ctrl+Enter)';
+    saveNextBtn.style.cssText = 'font-size:11px;';
+    saveNextBtn.addEventListener('click', () => saveAndAdvance(true));
+    saveBtn.parentElement.insertBefore(saveNextBtn, saveBtn.nextSibling);
+
+    // Rewire Ctrl+Enter in the keyboard handler
+    const overlayKeyOverride = (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+            e.preventDefault(); e.stopPropagation();
+            saveAndAdvance(true);
+        }
+    };
+    overlay.addEventListener('keydown', overlayKeyOverride, true);
 
     // Per-reader suggest buttons
     formEl.querySelectorAll('.suggest-reader-btn').forEach(btn => {
@@ -1684,6 +1821,46 @@ async function buildLabelForm(overlay, screen, filename, img) {
         suggestAllBtn.addEventListener('click', () => {
             formEl.querySelectorAll('.suggest-reader-btn').forEach(btn => btn.click());
         });
+    }
+
+    // "Copy from Previous" button
+    const copyPrevBtn = formEl.parentElement.querySelector('#gallery-copy-prev');
+    if (copyPrevBtn) {
+        if (imgIdx > 0 && galleryImages[imgIdx - 1].labels) {
+            copyPrevBtn.addEventListener('click', () => {
+                const prevLabels = galleryImages[imgIdx - 1].labels;
+                for (const [reader, fields] of Object.entries(prevLabels)) {
+                    for (const [field, val] of Object.entries(fields)) {
+                        if (Array.isArray(val)) {
+                            val.forEach((v, i) => {
+                                const input = formEl.querySelector(`.manifest-input[data-reader="${reader}"][data-field="${field}"][data-index="${i}"]`);
+                                if (input && !input.value) { input.value = v || ''; input.style.borderColor = '#58a6ff'; }
+                            });
+                        } else {
+                            const input = formEl.querySelector(`.manifest-input[data-reader="${reader}"][data-field="${field}"]`);
+                            if (input && !input.value) {
+                                if (input.tagName === 'SELECT') {
+                                    input.value = String(val);
+                                } else {
+                                    input.value = val != null ? val : '';
+                                }
+                                input.style.borderColor = '#58a6ff';
+                            }
+                        }
+                    }
+                }
+                statusEl.textContent = 'Copied from previous (blue = copied)';
+                statusEl.style.color = '#58a6ff';
+            });
+        } else {
+            copyPrevBtn.disabled = true;
+            copyPrevBtn.style.opacity = '0.4';
+        }
+    }
+
+    // Auto-suggest on open if unlabeled
+    if (img && img.status === 'unlabeled' && localStorage.getItem('autoSuggestOnOpen') !== 'false') {
+        setTimeout(() => { if (suggestAllBtn) suggestAllBtn.click(); }, 300);
     }
 }
 
