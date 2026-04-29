@@ -25,6 +25,7 @@ import json
 import math
 import os
 import random
+import re
 import shutil
 import subprocess
 import sys
@@ -2379,9 +2380,29 @@ async def templates_delete(digit: str):
 # SPA SHELL
 # ═══════════════════════════════════════════════════════════════════════════
 
+_INCLUDE_RE = re.compile(r"\{\{include\s+([^\s}]+)\s*\}\}")
+
+
+def _render_index() -> str:
+    index_path = STATIC_DIR / "index.html"
+    if not index_path.exists():
+        return "<h1>Dashboard not deployed yet</h1>"
+    html = index_path.read_text()
+
+    def _sub(m):
+        rel = m.group(1)
+        target = STATIC_DIR / rel
+        try:
+            target.resolve().relative_to(STATIC_DIR.resolve())
+        except ValueError:
+            return f"<!-- include rejected: {rel} -->"
+        if not target.exists():
+            return f"<!-- include missing: {rel} -->"
+        return target.read_text()
+
+    return _INCLUDE_RE.sub(_sub, html)
+
+
 @app.get("/", response_class=HTMLResponse)
 async def index():
-    index_path = STATIC_DIR / "index.html"
-    if index_path.exists():
-        return HTMLResponse(index_path.read_text())
-    return HTMLResponse("<h1>Dashboard not deployed yet</h1>")
+    return HTMLResponse(_render_index())

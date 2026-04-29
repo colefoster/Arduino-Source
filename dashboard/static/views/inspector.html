@@ -1,0 +1,90 @@
+<div class="view" id="view-inspector">
+    <div class="inspector-layout">
+        <div style="display:flex; flex-direction:column; flex:1; min-width:0;">
+            <div class="inspector-canvas-wrap" id="inspector-canvas-wrap" style="flex:1;">
+                <canvas id="inspector-canvas"></canvas>
+                <div style="position:absolute;bottom:6px;right:8px;background:#161b22cc;padding:2px 8px;border-radius:4px;font-size:11px;color:#484f58;pointer-events:none;" id="inspector-zoom-label">100%</div>
+            </div>
+            <!-- Image Ribbon -->
+            <div style="background:#161b22; border-top:1px solid #30363d; padding:6px 8px; display:flex; gap:6px; align-items:center;">
+                <select id="inspector-source-select" style="width:200px; flex-shrink:0; background:#0d1117; border:1px solid #30363d; border-radius:4px; padding:3px 6px; color:#c9d1d9; font-family:inherit; font-size:11px;">
+                    <option value="">Source...</option>
+                </select>
+                <div id="inspector-ribbon" style="display:flex; gap:4px; overflow-x:auto; flex:1; padding:2px 0;"></div>
+                <label class="btn" style="margin:0; font-size:11px; padding:3px 8px; flex-shrink:0;">
+                    Upload <input type="file" id="inspector-upload" accept="image/*" style="display:none;">
+                </label>
+            </div>
+        </div>
+        <div class="inspector-panel">
+            <!-- Hidden selects for compat with existing JS -->
+            <select id="inspector-image-select" style="display:none;"></select>
+            <button id="inspector-load-btn" style="display:none;"></button>
+            <button id="inspector-prev-btn" style="display:none;"></button>
+            <button id="inspector-next-btn" style="display:none;"></button>
+
+            <!-- Box Coordinates (editable) -->
+            <div class="inspector-section">
+                <div class="section-title">Box Coordinates</div>
+                <div style="display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:4px; margin-bottom:6px;">
+                    <div style="text-align:center;"><label style="font-size:10px;color:#484f58;">x</label><input id="inspector-box-x" type="number" step="0.0001" value="0" style="width:100%;padding:3px;background:#0d1117;border:1px solid #30363d;border-radius:3px;color:#c9d1d9;font-size:12px;text-align:center;font-family:inherit;"></div>
+                    <div style="text-align:center;"><label style="font-size:10px;color:#484f58;">y</label><input id="inspector-box-y" type="number" step="0.0001" value="0" style="width:100%;padding:3px;background:#0d1117;border:1px solid #30363d;border-radius:3px;color:#c9d1d9;font-size:12px;text-align:center;font-family:inherit;"></div>
+                    <div style="text-align:center;"><label style="font-size:10px;color:#484f58;">w</label><input id="inspector-box-w" type="number" step="0.0001" value="0" style="width:100%;padding:3px;background:#0d1117;border:1px solid #30363d;border-radius:3px;color:#c9d1d9;font-size:12px;text-align:center;font-family:inherit;"></div>
+                    <div style="text-align:center;"><label style="font-size:10px;color:#484f58;">h</label><input id="inspector-box-h" type="number" step="0.0001" value="0" style="width:100%;padding:3px;background:#0d1117;border:1px solid #30363d;border-radius:3px;color:#c9d1d9;font-size:12px;text-align:center;font-family:inherit;"></div>
+                </div>
+                <div id="inspector-selection-info" style="font-size:11px; color:#484f58;">
+                    Click and drag to select. Right-click to clear.
+                </div>
+            </div>
+
+            <!-- Crop + Binarized Preview -->
+            <div class="inspector-section" id="inspector-crop-section" style="display:none;">
+                <div class="section-title">Crop Preview</div>
+                <div style="display:flex; gap:8px; align-items:flex-start;">
+                    <div style="text-align:center;"><img id="inspector-crop-img" style="max-width:150px;max-height:80px;image-rendering:pixelated;border:1px solid #30363d;border-radius:3px;"><div style="font-size:9px;color:#484f58;">raw</div></div>
+                    <div style="text-align:center;"><img id="inspector-bw-img" style="max-width:150px;max-height:80px;image-rendering:pixelated;border:1px solid #30363d;border-radius:3px;"><div style="font-size:9px;color:#484f58;">binarized</div></div>
+                </div>
+            </div>
+
+            <!-- Color Stats -->
+            <div class="inspector-section" id="inspector-results" style="display:none;">
+                <div class="section-title">Color Stats</div>
+                <div id="inspector-results-body"></div>
+            </div>
+
+            <!-- is_solid Tests -->
+            <div class="inspector-section" id="inspector-solid-section" style="display:none;">
+                <div class="section-title">is_solid() Tests</div>
+                <div id="inspector-solid-body"></div>
+            </div>
+
+            <!-- C++ Code -->
+            <div class="inspector-section" id="inspector-cpp-section" style="display:none;">
+                <div class="section-title">C++ Code</div>
+                <div id="inspector-cpp-body" style="background:#0d1117;border:1px solid #30363d;border-radius:4px;padding:8px;font-size:11px;white-space:pre-wrap;cursor:pointer;position:relative;" onclick="navigator.clipboard.writeText(this.textContent);this.style.borderColor='#3fb950';setTimeout(()=>this.style.borderColor='#30363d',600);">
+                </div>
+            </div>
+
+            <!-- Save Box -->
+            <div class="inspector-section" id="inspector-save-section" style="display:none;">
+                <div class="section-title">Save Box</div>
+                <input id="inspector-save-name" placeholder="name (e.g. battle_hud/opp_ability_0)" style="width:100%;padding:4px 6px;background:#0d1117;border:1px solid #30363d;border-radius:3px;color:#c9d1d9;font-size:12px;font-family:inherit;margin-bottom:4px;">
+                <input id="inspector-save-scene" placeholder="scene (e.g. Doubles move select)" style="width:100%;padding:4px 6px;background:#0d1117;border:1px solid #30363d;border-radius:3px;color:#c9d1d9;font-size:12px;font-family:inherit;margin-bottom:4px;">
+                <input id="inspector-save-desc" placeholder="description" style="width:100%;padding:4px 6px;background:#0d1117;border:1px solid #30363d;border-radius:3px;color:#c9d1d9;font-size:12px;font-family:inherit;margin-bottom:6px;">
+                <div style="display:flex;gap:6px;align-items:center;">
+                    <button class="btn btn-primary" onclick="inspectorSaveBox()">Save</button>
+                    <span id="inspector-save-status" style="font-size:11px;color:#3fb950;"></span>
+                </div>
+            </div>
+
+            <!-- Detector Overlays -->
+            <div class="inspector-section">
+                <div class="section-title">Detector Overlays</div>
+                <select id="inspector-boxes-select" style="width:100%;">
+                    <option value="">None</option>
+                </select>
+                <div style="font-size:10px; color:#484f58; margin-top:4px;"><kbd>A</kbd> toggle overlays · <kbd>R</kbd> reset zoom · <kbd>←</kbd><kbd>→</kbd> prev/next image</div>
+            </div>
+        </div>
+    </div>
+</div>

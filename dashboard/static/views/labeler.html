@@ -1,0 +1,61 @@
+<div class="view" id="view-labeler">
+    <!-- Setup screen -->
+    <div id="labeler-setup" class="labeler-setup">
+        <h1>Frame Labeler</h1>
+        <div class="subtitle">Label screenshots for the C++ test suite</div>
+        <div style="background:#161b22; border:1px solid #30363d; border-radius:8px; padding:24px; text-align:left;">
+            <!-- Reader-first selection -->
+            <div class="form-group">
+                <label>1. Pick Reader</label>
+                <select id="labeler-reader-select" style="width:100%; font-size:13px; padding:6px;">
+                    <option value="">-- Select Reader --</option>
+                </select>
+            </div>
+            <div id="labeler-reader-info" style="font-size:11px; color:#8b949e; margin:-8px 0 12px; padding:4px 8px;"></div>
+            <div class="form-group">
+                <label>2. Pick Source (frames to label from)</label>
+                <select id="labeler-source-select" style="width:100%; font-size:13px; padding:6px;"><option value="">-- Select source after reader --</option></select>
+            </div>
+            <div style="text-align:center; margin-top:20px;">
+                <button class="btn btn-primary btn-lg" id="labeler-start-btn">Start Labeling</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Labeling view -->
+    <div id="labeler-active" style="display:none;">
+        <div class="labeler-view">
+            <div class="labeler-main">
+                <div class="labeler-topbar">
+                    <span class="progress" id="labeler-progress">[0/0] Labeled: 0/0 (0%)</span>
+                    <span class="reader-badge" id="labeler-reader-badge">--</span>
+                </div>
+                <div class="labeler-image-wrap" id="labeler-image-wrap">
+                    <img id="labeler-image" src="" alt="Frame" style="display:none;">
+                    <div id="labeler-overlays"></div>
+                </div>
+                <div class="labeler-bottombar">
+                    <div class="nav-btns">
+                        <button class="btn" id="labeler-prev-btn">&lt; Prev <kbd>&larr;</kbd></button>
+                        <button class="btn" id="labeler-next-btn">Next &gt; <kbd>&rarr;</kbd></button>
+                        <button class="btn" id="labeler-skip-btn">Skip <kbd>S</kbd></button>
+                        <button class="btn btn-primary" id="labeler-save-btn">Save+Next <kbd>Enter</kbd></button>
+                    </div>
+                    <div class="status-msg" id="labeler-status"></div>
+                    <div style="display:flex; gap:6px;">
+                        <button class="btn" style="background:#238636; color:#fff; font-size:10px;" id="labeler-quick-true-btn" title="Mark True + advance (T)">T+Next</button>
+                        <button class="btn" style="background:#da3633; color:#fff; font-size:10px;" id="labeler-quick-false-btn" title="Mark False + advance (F)">F+Next</button>
+                        <button class="btn btn-primary" id="labeler-export-btn">Export</button>
+                        <button class="btn" id="labeler-back-btn">Back <kbd>Esc</kbd></button>
+                    </div>
+                </div>
+            </div>
+            <div class="labeler-panel">
+                <div class="labeler-crops-section" id="labeler-crops">
+                    <div class="section-title">Crop Previews</div>
+                </div>
+                <div id="labeler-multi-controls"></div>
+            </div>
+        </div>
+    </div>
+</div>
