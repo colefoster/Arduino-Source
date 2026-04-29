@@ -237,11 +237,17 @@ class JobHandler(BaseHTTPRequestHandler):
                 }, 500)
                 return
 
-            # Parse JSON output from C++
-            try:
-                ocr_result = json.loads(result.stdout)
-            except json.JSONDecodeError:
-                # Fall back to returning raw output
+            # Parse JSON output from C++ (may have log lines before the JSON)
+            ocr_result = None
+            for line in result.stdout.strip().split("\n"):
+                line = line.strip()
+                if line.startswith("{"):
+                    try:
+                        ocr_result = json.loads(line)
+                        break
+                    except json.JSONDecodeError:
+                        continue
+            if ocr_result is None:
                 ocr_result = {"raw": result.stdout.strip()}
 
             self._send_json({"ok": True, "reader": reader, "screen": screen, "result": ocr_result})
