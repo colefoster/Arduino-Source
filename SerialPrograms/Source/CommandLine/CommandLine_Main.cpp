@@ -24,6 +24,7 @@
 #include "Tests/CommandLineTests.h"
 #include "Tests/ManifestTestRunner.h"
 #include "Tests/OcrSuggest.h"
+#include "Tests/DetectorDebug.h"
 #include "Integrations/PybindSwitchController.h"
 #include "NintendoSwitch/Controllers/NintendoSwitch_ControllerButtons.h"
 
@@ -165,6 +166,16 @@ int main(int argc, char* argv[]){
             logger.log("Some tests failed — see report above.", COLOR_RED);
         }
         return ret;
+    }
+
+    //  --detector-debug mode: run all detectors on one image with verbose output.
+    if (std::strcmp(argv[1], "--detector-debug") == 0){
+        if (argc < 3){
+            std::cerr << "Error: --detector-debug requires an image path." << std::endl;
+            print_usage(argv[0]);
+            return 1;
+        }
+        return run_detector_debug(argv[2]);
     }
 
     //  --ocr-suggest mode: run one reader on one image, output JSON.

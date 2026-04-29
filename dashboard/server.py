@@ -1872,6 +1872,42 @@ async def ocr_suggest(request: Request):
         return JSONResponse({"error": str(e)}, 500)
 
 
+@app.post("/api/detector/debug")
+async def detector_debug(request: Request):
+    """Run all detectors on an image via ColePC, return debug info."""
+    import base64
+    import urllib.request
+    import urllib.error
+
+    body = await request.json()
+    screen = body.get("screen", "")
+    filename = body.get("filename", "")
+
+    if not screen or not filename:
+        return JSONResponse({"error": "screen and filename required"}, 400)
+
+    img_path = TEST_IMAGES_DIR / screen / filename
+    if not img_path.exists():
+        return JSONResponse({"error": "image not found"}, 404)
+
+    img_b64 = base64.b64encode(img_path.read_bytes()).decode()
+    payload = json.dumps({"image_base64": img_b64}).encode()
+
+    try:
+        req = urllib.request.Request(
+            f"{COLEPC_JOB_RUNNER}/detector-debug",
+            data=payload,
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            return json.loads(resp.read())
+    except urllib.error.URLError as e:
+        return JSONResponse({"error": f"ColePC unreachable: {e}"}, 502)
+    except Exception as e:
+        return JSONResponse({"error": str(e)}, 500)
+
+
 @app.post("/api/ocr/suggest-bulk")
 async def ocr_suggest_bulk(request: Request):
     """Run OCR suggestions for all unlabeled images in a screen directory."""

@@ -72,6 +72,8 @@ class JobHandler(BaseHTTPRequestHandler):
             self._handle_kill()
         elif self.path == "/ocr-suggest":
             self._handle_ocr_suggest()
+        elif self.path == "/detector-debug":
+            self._handle_detector_debug()
         else:
             self._send_json({"error": "not found"}, 404)
 
@@ -254,6 +256,77 @@ class JobHandler(BaseHTTPRequestHandler):
 
         except subprocess.TimeoutExpired:
             self._send_json({"error": "OCR timed out"}, 500)
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+        finally:
+            try:
+                os.unlink(tmp.name)
+            except OSError:
+                pass
+
+
+    def _handle_detector_debug(self):
+        """Run all detectors on a single image with verbose debug output.
+
+        Body: { "image_base64": "<base64 png>" }
+        Response: { "ok": true, "result": { detectors: [...], regions: [...] } }
+        """
+        import base64
+        import tempfile
+
+        body = self._read_body()
+        image_b64 = body.get("image_base64", "")
+
+        if not image_b64:
+            self._send_json({"error": "image_base64 required"}, 400)
+            return
+
+        try:
+            img_data = base64.b64decode(image_b64)
+        except Exception as e:
+            self._send_json({"error": f"invalid base64: {e}"}, 400)
+            return
+
+        tmp = tempfile.NamedTemporaryFile(suffix=".png", delete=False, dir=str(WORK_DIR / "data"))
+        try:
+            tmp.write(img_data)
+            tmp.close()
+
+            exe = BUILD_DIR / "SerialProgramsCommandLine.exe"
+            if not exe.exists():
+                exe = BUILD_DIR / "SerialProgramsCommandLine"
+            if not exe.exists():
+                self._send_json({"error": f"executable not found: {exe}"}, 500)
+                return
+
+            result = subprocess.run(
+                [str(exe), "--detector-debug", tmp.name],
+                capture_output=True, text=True, timeout=30,
+                cwd=str(BUILD_DIR),
+            )
+
+            if result.returncode != 0:
+                self._send_json({"error": "debug failed", "stderr": result.stderr[-500:]}, 500)
+                return
+
+            # Parse JSON from stdout (skip log lines)
+            debug_result = None
+            for line in result.stdout.strip().split("\n"):
+                line = line.strip()
+                if line.startswith("{"):
+                    try:
+                        debug_result = json.loads(line)
+                        break
+                    except json.JSONDecodeError:
+                        continue
+
+            if debug_result is None:
+                debug_result = {"raw": result.stdout.strip()}
+
+            self._send_json({"ok": True, "result": debug_result})
+
+        except subprocess.TimeoutExpired:
+            self._send_json({"error": "timed out"}, 500)
         except Exception as e:
             self._send_json({"error": str(e)}, 500)
         finally:
