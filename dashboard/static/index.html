@@ -1993,16 +1993,35 @@ async function buildLabelForm(overlay, screen, filename, img) {
             if (img) {
                 img.labels = labels;
                 img.status = Object.keys(labels).length ? 'complete' : 'unlabeled';
+                img._visited = true;
             }
             if (advance) {
-                // Find next unlabeled, or just next image
-                const nextIdx = galleryImages.findIndex((im, i) => i > imgIdx && (im.status === 'unlabeled' || im.status === 'partial'));
-                const target = nextIdx >= 0 ? nextIdx : (imgIdx < galleryImages.length - 1 ? imgIdx + 1 : -1);
+                // Find current position fresh (may have shifted from moves/deletes)
+                const currentIdx = galleryImages.findIndex(im => im.filename === filename);
+                // Find next unlabeled/partial that we haven't visited
+                let target = -1;
+                for (let i = currentIdx + 1; i < galleryImages.length; i++) {
+                    const im = galleryImages[i];
+                    if (!im._visited && (im.status === 'unlabeled' || im.status === 'partial')) { target = i; break; }
+                }
+                // If nothing forward, wrap from start
+                if (target < 0) {
+                    for (let i = 0; i < currentIdx; i++) {
+                        const im = galleryImages[i];
+                        if (!im._visited && (im.status === 'unlabeled' || im.status === 'partial')) { target = i; break; }
+                    }
+                }
                 if (target >= 0) {
                     overlay.remove();
                     expandGalleryCard(galleryImages[target].filename);
                     return;
                 }
+                // All done
+                statusEl.textContent = 'All images labeled!';
+                statusEl.style.color = '#3fb950';
+                saveBtn.textContent = 'Save Labels';
+                saveBtn.disabled = false;
+                return;
             }
             statusEl.textContent = 'Saved!';
             statusEl.style.color = '#3fb950';
