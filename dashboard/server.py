@@ -1942,6 +1942,33 @@ async def detector_debug(request: Request):
         return JSONResponse({"error": str(e)}, 500)
 
 
+@app.post("/api/detector/debug-batch")
+async def detector_debug_batch(request: Request):
+    """Run detectors on all images in a screen via ColePC batch endpoint."""
+    import urllib.request
+    import urllib.error
+
+    body = await request.json()
+    screen = body.get("screen", "")
+    if not screen:
+        return JSONResponse({"error": "screen required"}, 400)
+
+    payload = json.dumps({"screen": screen}).encode()
+    try:
+        req = urllib.request.Request(
+            f"{COLEPC_JOB_RUNNER}/detector-debug-batch",
+            data=payload,
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+        with urllib.request.urlopen(req, timeout=300) as resp:
+            return json.loads(resp.read())
+    except urllib.error.URLError as e:
+        return JSONResponse({"error": f"ColePC unreachable: {e}"}, 502)
+    except Exception as e:
+        return JSONResponse({"error": str(e)}, 500)
+
+
 @app.post("/api/ocr/suggest-bulk")
 async def ocr_suggest_bulk(request: Request):
     """Run OCR suggestions for all unlabeled images in a screen directory."""
