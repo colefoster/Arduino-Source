@@ -1,0 +1,3525 @@
+// ═══════════════════════════════════════════════════════════════
+// App core: routing, API helper
+// ═══════════════════════════════════════════════════════════════
+const API = window.location.origin;
+
+function api(path) { return fetch(`${API}${path}`).then(r => r.json()); }
+function apiPost(path, body) {
+    const fd = new FormData();
+    for (const [k, v] of Object.entries(body)) fd.append(k, v);
+    return fetch(`${API}${path}`, { method: 'POST', body: fd }).then(r => r.json());
+}
+
+const views = ['dashboard', 'gallery', 'labeler', 'inspector', 'recognition', 'teampreview', 'templates', 'model', 'training', 'validation'];
+let currentView = null;
+
+function route() {
+    const hash = location.hash.replace('#/', '') || 'dashboard';
+    const view = views.includes(hash) ? hash : 'dashboard';
+    if (view === currentView) return;
+    currentView = view;
+
+    // Toggle views
+    views.forEach(v => {
+        document.getElementById(`view-${v}`).classList.toggle('active', v === view);
+    });
+
+    // Toggle nav
+    document.querySelectorAll('.nav-link').forEach(el => {
+        el.classList.toggle('active', el.dataset.route === view);
+    });
+
+    // Init view if needed
+    if (view === 'dashboard') dashboardInit();
+    if (view === 'gallery') galleryInit();
+    if (view === 'labeler') labelerInit();
+    if (view === 'inspector') inspectorInit();
+    if (view === 'recognition') recognitionInit();
+    if (view === 'teampreview') teamPreviewInit();
+    if (view === 'templates') templatesInit();
+    if (view === 'model') modelInit();
+    if (view === 'training') trainingInit();
+    if (view === 'validation') validationInit();
+}
+
+window.addEventListener('hashchange', route);
+window.addEventListener('load', route);
+
+
+// ═══════════════════════════════════════════════════════════════
+// Dashboard
+// ═══════════════════════════════════════════════════════════════
+const chartOpts = {
+    responsive: true,
+    maintainAspectRatio: true,
+    animation: false,
+    plugins: { legend: { labels: { color: '#8b949e', font: { size: 10, family: 'SF Mono, Fira Code, Consolas, monospace' } } } },
+    scales: {
+        x: { ticks: { color: '#484f58', font: { size: 10 } }, grid: { color: '#21262d' } },
+        y: { ticks: { color: '#484f58', font: { size: 10 } }, grid: { color: '#21262d' }, beginAtZero: true },
+    },
+};
+const VGC_COLOR = '#58a6ff';
+const BSS_COLOR = '#d2a8ff';
+
+let rateChart, cumulativeChart, ratingVgcChart, ratingBssChart, datasetVgcChart, datasetBssChart;
+let dashboardInited = false;
+let dashboardIntervals = [];
+
+function dashboardInit() {
+    if (dashboardInited) return;
+    dashboardInited = true;
+
+    rateChart = new Chart(document.getElementById('rate-chart'), {
+        type: 'bar', data: { labels: [], datasets: [] },
+        options: {
+            ...chartOpts,
+            plugins: { ...chartOpts.plugins, legend: { display: true, labels: chartOpts.plugins.legend.labels } },
+            scales: { ...chartOpts.scales, x: { ...chartOpts.scales.x, stacked: true }, y: { ...chartOpts.scales.y, stacked: true } },
+        },
+    });
+    cumulativeChart = new Chart(document.getElementById('cumulative-chart'), {
+        type: 'line', data: { labels: [], datasets: [] }, options: chartOpts,
+    });
+    ratingVgcChart = new Chart(document.getElementById('rating-vgc-chart'), {
+        type: 'bar', data: { labels: [], datasets: [] },
+        options: { ...chartOpts, plugins: { ...chartOpts.plugins, legend: { display: false } } },
+    });
+    ratingBssChart = new Chart(document.getElementById('rating-bss-chart'), {
+        type: 'bar', data: { labels: [], datasets: [] },
+        options: { ...chartOpts, plugins: { ...chartOpts.plugins, legend: { display: false } } },
+    });
+    const stackedOpts = {
+        ...chartOpts,
+        plugins: { ...chartOpts.plugins, legend: { display: true, labels: chartOpts.plugins.legend.labels } },
+        scales: { ...chartOpts.scales, x: { ...chartOpts.scales.x, stacked: true }, y: { ...chartOpts.scales.y, stacked: true } },
+    };
+    datasetVgcChart = new Chart(document.getElementById('dataset-vgc-chart'), {
+        type: 'bar', data: { labels: [], datasets: [] }, options: stackedOpts,
+    });
+    datasetBssChart = new Chart(document.getElementById('dataset-bss-chart'), {
+        type: 'bar', data: { labels: [], datasets: [] }, options: stackedOpts,
+    });
+
+    loadStatus(); loadCollection(); loadRatings(); loadRecent(); loadCoverage(); loadDataset(); loadSyncStatus();
+    dashboardIntervals.push(setInterval(() => { loadStatus(); loadRecent(); }, 30000));
+    dashboardIntervals.push(setInterval(() => { loadCollection(); loadRatings(); loadDataset(); }, 120000));
+    dashboardIntervals.push(setInterval(loadCoverage, 300000));
+    dashboardIntervals.push(setInterval(loadSyncStatus, 60000));
+}
+
+function agoStr(sec) {
+    if (sec < 60) return `${sec}s ago`;
+    if (sec < 3600) return `${Math.round(sec / 60)}m ago`;
+    return `${Math.round(sec / 3600)}h ago`;
+}
+
+async function loadStatus() {
+    try {
+        const d = await api('/api/status');
+        const el = document.getElementById('status-val');
+        if (d.alive) {
+            el.innerHTML = `<span class="dot green"></span>Active`;
+            el.style.color = '#3fb950';
+        } else {
+            el.innerHTML = `<span class="dot red"></span>Down`;
+            el.style.color = '#f85149';
+        }
+        document.getElementById('status-sub').textContent = d.last_save_ago_sec >= 0 ? `Last save: ${agoStr(d.last_save_ago_sec)}` : '';
+        document.getElementById('instances-val').textContent = `${d.connections}/${d.total_connections}`;
+        document.getElementById('instances-sub').textContent = `${d.rooms_in_use}/${d.capacity} rooms`;
+        document.getElementById('total-val').textContent = d.total_replays.toLocaleString();
+        const fmts = d.formats || {};
+        const parts = Object.values(fmts).map(f => `${f.label}: ${f.total.toLocaleString()} (${f.downloaded.toLocaleString()} dl + ${f.spectated.toLocaleString()} spec)`);
+        document.getElementById('total-sub').textContent = parts.join(' | ');
+        const totalLastHour = Object.values(fmts).reduce((a, f) => a + (f.last_1h || 0), 0);
+        document.getElementById('rate-val').textContent = totalLastHour.toLocaleString();
+        const totalLast24h = Object.values(fmts).reduce((a, f) => a + (f.last_24h || 0), 0);
+        document.getElementById('rate-sub').textContent = `${totalLast24h.toLocaleString()} in 24h`;
+        const breakdown = document.getElementById('format-breakdown');
+        breakdown.innerHTML = Object.entries(fmts).map(([id, f]) => `
+            <div class="format-pill">
+                <div class="fmt-label">${f.label}</div>
+                <div class="fmt-value">${f.total.toLocaleString()}</div>
+                <div class="fmt-sub">${f.downloaded.toLocaleString()} dl + ${f.spectated.toLocaleString()} spec | ${f.last_1h}/hr live</div>
+            </div>
+        `).join('');
+        document.getElementById('last-updated').textContent = `Updated: ${new Date().toLocaleTimeString()}`;
+    } catch (e) { console.error('loadStatus:', e); }
+}
+
+async function loadCoverage() {
+    try {
+        const d = await api('/api/coverage');
+        if (d.error) {
+            document.getElementById('coverage-val').textContent = '?';
+            document.getElementById('coverage-sub').textContent = d.error;
+            return;
+        }
+        const pct = d.coverage_pct || 0;
+        document.getElementById('coverage-val').textContent = `${pct}%`;
+        document.getElementById('coverage-sub').textContent = `${d.capacity} slots / ${d.total_active}${d.total_active_note ? '+' : ''} active`;
+        const barColor = pct >= 80 ? '#3fb950' : pct >= 50 ? '#d29922' : '#f85149';
+        document.getElementById('cov-bar').style.width = `${Math.min(pct, 100)}%`;
+        document.getElementById('cov-bar').style.background = barColor;
+        document.getElementById('cov-pct').textContent = `${pct}%`;
+        document.getElementById('cov-label').textContent = `${d.connections} conn${d.connections !== 1 ? 's' : ''} x 45 rooms = ${d.capacity} capacity (${d.rooms_in_use || 0} in use)`;
+        const fmtNames = { gen9championsvgc2026regma: 'VGC', gen9championsbssregma: 'BSS' };
+        const covBreakdown = document.getElementById('cov-breakdown');
+        covBreakdown.innerHTML = Object.entries(d.active_battles || {}).map(([fmt, count]) => {
+            const label = fmtNames[fmt] || fmt;
+            const capped = count >= 100;
+            return `<div style="background:#21262d; border-radius:4px; padding:6px 12px; font-size:12px;">
+                <span style="color:#8b949e;">${label}:</span>
+                <strong>${count}${capped ? '+' : ''}</strong> active
+                ${capped ? '<span style="color:#d29922; font-size:10px;"> (PS 100 cap)</span>' : ''}
+            </div>`;
+        }).join('');
+        const slices = d.elo_slices || [];
+        const note = document.getElementById('cov-note');
+        if (slices.length > 1) {
+            note.textContent = `Querying ${slices.length} ELO slices (${slices.join(', ')}) to discover battles past PS 100-room cap. High-rated battles prioritized.`;
+        }
+        document.getElementById('cov-detail').textContent = Object.entries(d.active_battles || {})
+            .map(([fmt, count]) => `${fmtNames[fmt] || fmt}: ${count}${count >= 100 ? '+' : ''}`)
+            .join(' | ');
+    } catch (e) { console.error('loadCoverage:', e); }
+}
+
+async function loadCollection() {
+    try {
+        const d = await api('/api/collection');
+        const labels = d.labels.slice().reverse();
+        const vgcData = (d.series.gen9championsvgc2026regma?.data || []).slice().reverse();
+        const bssData = (d.series.gen9championsbssregma?.data || []).slice().reverse();
+        const last24Labels = labels.slice(-24);
+        const last24Vgc = vgcData.slice(-24);
+        const last24Bss = bssData.slice(-24);
+        rateChart.data.labels = last24Labels;
+        rateChart.data.datasets = [
+            { label: 'VGC', data: last24Vgc, backgroundColor: VGC_COLOR + '99', borderColor: VGC_COLOR, borderWidth: 1 },
+            { label: 'BSS', data: last24Bss, backgroundColor: BSS_COLOR + '99', borderColor: BSS_COLOR, borderWidth: 1 },
+        ];
+        rateChart.update();
+        let cumVgc = 0, cumBss = 0;
+        const cumVgcData = vgcData.map(v => cumVgc += v);
+        const cumBssData = bssData.map(v => cumBss += v);
+        cumulativeChart.data.labels = labels;
+        cumulativeChart.data.datasets = [
+            { label: 'VGC', data: cumVgcData, borderColor: VGC_COLOR, backgroundColor: VGC_COLOR + '22', fill: true, pointRadius: 0, borderWidth: 2 },
+            { label: 'BSS', data: cumBssData, borderColor: BSS_COLOR, backgroundColor: BSS_COLOR + '22', fill: true, pointRadius: 0, borderWidth: 2 },
+        ];
+        cumulativeChart.update();
+    } catch (e) { console.error('loadCollection:', e); }
+}
+
+async function loadRatings() {
+    try {
+        const d = await api('/api/ratings');
+        const vgcData = d.series.gen9championsvgc2026regma?.data || [];
+        const bssData = d.series.gen9championsbssregma?.data || [];
+        ratingVgcChart.data.labels = d.bins;
+        ratingVgcChart.data.datasets = [{ label: 'VGC', data: vgcData, backgroundColor: VGC_COLOR + '88', borderColor: VGC_COLOR, borderWidth: 1 }];
+        ratingVgcChart.update();
+        ratingBssChart.data.labels = d.bins;
+        ratingBssChart.data.datasets = [{ label: 'BSS', data: bssData, backgroundColor: BSS_COLOR + '88', borderColor: BSS_COLOR, borderWidth: 1 }];
+        ratingBssChart.update();
+    } catch (e) { console.error('loadRatings:', e); }
+}
+
+async function loadRecent() {
+    try {
+        const items = await api('/api/recent?limit=40');
+        const feed = document.getElementById('feed');
+        if (!items.length) { feed.innerHTML = '<div style="color:#484f58; font-size:12px;">No recent saves</div>'; return; }
+        feed.innerHTML = items.map(r => {
+            const players = r.players || [];
+            const p1 = players[0] || '?';
+            const p2 = players[1] || '?';
+            const fmtLabel = r.format_label || '?';
+            return `<div class="feed-item">
+                <span class="players"><span class="fmt">${fmtLabel}</span>${p1} vs ${p2}</span>
+                <span class="meta"><span class="rating">${r.rating || '?'}</span> &middot; ${agoStr(r.ago_sec)}</span>
+            </div>`;
+        }).join('');
+    } catch (e) { console.error('loadRecent:', e); }
+}
+
+async function loadDataset() {
+    try {
+        const d = await api('/api/dataset');
+        const combined = d.combined || {};
+        const cards = document.getElementById('dataset-cards');
+        const DL_COLOR = '#f0883e';
+        const SP_COLOR = '#3fb950';
+        let html = '';
+        for (const [key, data] of Object.entries(combined)) {
+            const label = key.toUpperCase();
+            html += `<div class="card">
+                <div class="label">${label} Total</div>
+                <div class="value">${(data.total || 0).toLocaleString()}</div>
+                <div class="sub">
+                    <span style="color:${DL_COLOR}">${(data.downloaded || 0).toLocaleString()} downloaded</span> +
+                    <span style="color:${SP_COLOR}">${(data.spectated || 0).toLocaleString()} spectated</span>
+                </div>
+                <div class="sub">${(data.rated || 0).toLocaleString()} with ratings</div>
+            </div>`;
+        }
+        const grandTotal = Object.values(combined).reduce((a, c) => a + (c.total || 0), 0);
+        const grandDl = Object.values(combined).reduce((a, c) => a + (c.downloaded || 0), 0);
+        const grandSp = Object.values(combined).reduce((a, c) => a + (c.spectated || 0), 0);
+        html += `<div class="card">
+            <div class="label">Grand Total</div>
+            <div class="value">${grandTotal.toLocaleString()}</div>
+            <div class="sub"><span style="color:${DL_COLOR}">${grandDl.toLocaleString()}</span> + <span style="color:${SP_COLOR}">${grandSp.toLocaleString()}</span></div>
+        </div>`;
+        cards.innerHTML = html;
+
+        function renderDatasetChart(chart, buckets) {
+            const labels = Object.keys(buckets).map(b => `${b}-${parseInt(b)+49}`);
+            const dlData = Object.values(buckets).map(b => b.downloaded || 0);
+            const spData = Object.values(buckets).map(b => b.spectated || 0);
+            chart.data.labels = labels;
+            chart.data.datasets = [
+                { label: 'Downloaded', data: dlData, backgroundColor: DL_COLOR + '99', borderColor: DL_COLOR, borderWidth: 1 },
+                { label: 'Spectated', data: spData, backgroundColor: SP_COLOR + '99', borderColor: SP_COLOR, borderWidth: 1 },
+            ];
+            chart.update();
+        }
+        if (combined.vgc?.rating_buckets) renderDatasetChart(datasetVgcChart, combined.vgc.rating_buckets);
+        if (combined.bss?.rating_buckets) renderDatasetChart(datasetBssChart, combined.bss.rating_buckets);
+    } catch (e) { console.error('loadDataset:', e); }
+}
+
+
+// ═══════════════════════════════════════════════════════════════
+// Sync
+// ═══════════════════════════════════════════════════════════════
+
+async function loadSyncStatus() {
+    try {
+        const d = await api('/api/sync/status');
+        const statusEl = document.getElementById('sync-status');
+        const btn = document.getElementById('sync-btn');
+        const resultEl = document.getElementById('sync-result');
+
+        if (d.running) {
+            statusEl.innerHTML = '<span class="dot yellow"></span>Syncing...';
+            btn.disabled = true;
+            btn.textContent = 'Syncing...';
+        } else if (d.colepc_reachable) {
+            statusEl.innerHTML = '<span class="dot green"></span>ColePC online';
+            btn.disabled = false;
+            btn.textContent = 'Sync Now';
+        } else {
+            statusEl.innerHTML = '<span class="dot red"></span>ColePC offline';
+            btn.disabled = true;
+            btn.textContent = 'Sync Now';
+        }
+
+        if (d.last_error) {
+            resultEl.innerHTML = `<span style="color:#f85149;">Last error: ${d.last_error}</span>`;
+        } else if (d.last_result) {
+            const r = d.last_result;
+            const ago = agoStr(Math.round(Date.now() / 1000 - r.timestamp));
+            const fmtDetails = Object.values(r.formats)
+                .map(f => `${f.format.replace('gen9champions', '').replace('regma', '')}: ${f.synced.toLocaleString()} new`)
+                .join(', ');
+            resultEl.innerHTML = `Last sync: ${r.total_synced.toLocaleString()} files pushed ${ago} (${fmtDetails})`;
+        }
+    } catch (e) { console.error('loadSyncStatus:', e); }
+}
+
+async function triggerSync() {
+    const btn = document.getElementById('sync-btn');
+    const statusEl = document.getElementById('sync-status');
+    const resultEl = document.getElementById('sync-result');
+
+    btn.disabled = true;
+    btn.textContent = 'Syncing...';
+    statusEl.innerHTML = '<span class="dot yellow"></span>Syncing...';
+    resultEl.innerHTML = 'Calculating delta and pushing new replays...';
+
+    try {
+        const resp = await fetch(`${API}/api/sync/trigger`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({}),
+        });
+        const d = await resp.json();
+        if (d.error) {
+            resultEl.innerHTML = `<span style="color:#f85149;">${d.error}</span>`;
+        } else {
+            const fmtDetails = Object.values(d.formats)
+                .map(f => `${f.format.replace('gen9champions', '').replace('regma', '')}: ${f.synced.toLocaleString()} new`)
+                .join(', ');
+            resultEl.innerHTML = `<span style="color:#3fb950;">Synced ${d.total_synced.toLocaleString()} files</span> (${fmtDetails})`;
+        }
+    } catch (e) {
+        resultEl.innerHTML = `<span style="color:#f85149;">Sync failed: ${e.message}</span>`;
+    }
+
+    btn.disabled = false;
+    btn.textContent = 'Sync Now';
+    loadSyncStatus();
+}
+
+
+// ═══════════════════════════════════════════════════════════════
+// Gallery
+// ═══════════════════════════════════════════════════════════════
+let galleryInited = false;
+let galleryReaders = [];
+let gallerySelectedReader = null;
+let galleryImages = [];
+let galleryFilter = 'all';
+
+let galleryScreens = [];
+let _regressionFailures = {};
+let gallerySelectedScreen = null;
+let galleryScreenImages = [];
+
+async function galleryInit() {
+    if (galleryInited) return;
+    galleryInited = true;
+
+    try {
+        // Use new screen-based API
+        galleryScreens = await api('/api/gallery/screens');
+        // Load regression failures to annotate sidebar
+        try {
+            const reg = await api('/api/regression/summary');
+            if (reg && reg.readers) {
+                // Map detector failures to screens via screens.yaml registration
+                _regressionFailures = {};
+                for (const s of galleryScreens) {
+                    let screenFails = 0;
+                    for (const det of (s.detectors || [])) {
+                        const r = reg.readers[det];
+                        if (r && r.failed > 0) screenFails += r.failed;
+                    }
+                    if (screenFails > 0) _regressionFailures[s.name] = screenFails;
+                }
+            }
+        } catch (e) { /* regression data optional */ }
+        renderGallerySidebar();
+    } catch (e) {
+        document.getElementById('gallery-sidebar').innerHTML = '<div style="color:#f85149; font-size:12px;">Failed to load screens</div>';
+    }
+
+    // Filter buttons
+    document.querySelectorAll('.gallery-filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            galleryFilter = btn.dataset.filter;
+            document.querySelectorAll('.gallery-filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderGalleryGrid();
+        });
+    });
+}
+
+function renderGallerySidebar() {
+    const sidebar = document.getElementById('gallery-sidebar');
+    // Group: screens with images, then empty screens, then overlays
+    const withImages = galleryScreens.filter(s => s.count > 0 && s.type === 'screen');
+    const empty = galleryScreens.filter(s => s.count === 0 && s.type === 'screen');
+    const overlays = galleryScreens.filter(s => s.type === 'overlay');
+
+    let html = '';
+    if (withImages.length) {
+        html += '<div style="color:#8b949e; font-size:10px; text-transform:uppercase; margin-bottom:4px;">Screens</div>';
+        html += withImages.map(s => {
+            const fails = _regressionFailures[s.name] || 0;
+            const failBadge = fails > 0 ? '<span style="color:#f85149; font-size:9px; margin-left:4px;" title="' + fails + ' detector failures">&#9888;' + fails + '</span>' : '';
+            const labeledBadge = s.labeled ? '<span style="color:#3fb950;">/' + s.labeled + '</span>' : '';
+            const active = gallerySelectedScreen === s.name ? ' active' : '';
+            return '<div class="reader-pill' + active + '" data-screen="' + s.name + '">'
+                + '<span>' + s.name + failBadge + '</span>'
+                + '<span class="count-badge">' + s.count + labeledBadge + '</span>'
+                + '</div>';
+        }).join('');
+    }
+    if (empty.length) {
+        html += '<div style="color:#8b949e; font-size:10px; text-transform:uppercase; margin:8px 0 4px;">Empty</div>';
+        html += empty.map(s => `
+            <div class="reader-pill${gallerySelectedScreen === s.name ? ' active' : ''}" data-screen="${s.name}" style="opacity:0.5;">
+                <span>${s.name}</span>
+                <span class="count-badge">0</span>
+            </div>
+        `).join('');
+    }
+    if (overlays.length) {
+        html += '<div style="color:#8b949e; font-size:10px; text-transform:uppercase; margin:8px 0 4px;">Overlays</div>';
+        html += overlays.map(s => `
+            <div class="reader-pill${gallerySelectedScreen === s.name ? ' active' : ''}" data-screen="${s.name}">
+                <span>${s.name.replace('_overlays/', '')}</span>
+                <span class="count-badge">${s.count}</span>
+            </div>
+        `).join('');
+    }
+
+    // Inbox link
+    html += '<div style="color:#8b949e; font-size:10px; text-transform:uppercase; margin:8px 0 4px;">Inbox</div>';
+    html += `<div class="reader-pill${gallerySelectedScreen === '_inbox' ? ' active' : ''}" data-screen="_inbox" style="border-color:#d29922;">
+        <span>Unsorted</span>
+        <span class="count-badge" id="inbox-count">...</span>
+    </div>`;
+
+    sidebar.innerHTML = html;
+
+    // Load inbox count
+    api('/api/gallery/inbox').then(d => {
+        const badge = document.getElementById('inbox-count');
+        if (badge) badge.textContent = d.count || 0;
+    }).catch(() => {});
+
+    sidebar.querySelectorAll('.reader-pill').forEach(pill => {
+        pill.addEventListener('click', () => {
+            gallerySelectedScreen = pill.dataset.screen;
+            renderGallerySidebar();
+            if (gallerySelectedScreen === '_inbox') {
+                loadGalleryInbox();
+            } else {
+                loadGalleryScreenImages(gallerySelectedScreen);
+            }
+        });
+    });
+}
+
+// Store current screen data for use by label form
+let _currentScreenData = null;
+
+async function loadGalleryScreenImages(screen) {
+    const grid = document.getElementById('gallery-grid');
+    grid.innerHTML = '<div style="color:#484f58; font-size:12px;">Loading...</div>';
+    document.getElementById('gallery-filters').style.display = 'flex';
+    document.querySelectorAll('.gallery-filter-btn').forEach(b => {
+        if (b.dataset.filter === 'true') b.textContent = 'Labeled';
+        if (b.dataset.filter === 'false') b.textContent = 'Unlabeled';
+    });
+    try {
+        const data = await api(`/api/gallery/screen/${encodeURIComponent(screen)}`);
+        _currentScreenData = data;
+        galleryScreenImages = data.images || [];
+        galleryImages = galleryScreenImages;
+        gallerySelectedReader = screen;
+        renderGalleryGrid();
+
+        // Toolbar: info + action buttons
+        const hasReaders = data.readers && Object.keys(data.readers).length > 0;
+        const unlabeledCount = galleryImages.filter(i => i.status === 'unlabeled').length;
+        const toolbar = document.createElement('div');
+        toolbar.style.cssText = 'font-size:11px; color:#8b949e; margin-bottom:8px; padding:6px 8px; background:#161b22; border-radius:4px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;';
+
+        let info = data.description || '';
+        if (hasReaders) info += ` | Readers: ${Object.keys(data.readers).join(', ')}`;
+        info += ` | ${unlabeledCount} unlabeled`;
+
+        let buttons = '';
+        if (!hasReaders && unlabeledCount > 0) {
+            // No readers - offer bulk confirm
+            buttons += `<button class="btn btn-primary" id="bulk-confirm-btn" style="font-size:11px; padding:3px 10px;">Confirm All ${unlabeledCount} (no labels needed)</button>`;
+        }
+        if (hasReaders && unlabeledCount > 0) {
+            buttons += `<button class="btn" id="bulk-ocr-btn" style="font-size:11px; padding:3px 10px;">Bulk OCR Suggest (${unlabeledCount} unlabeled)</button>`;
+            buttons += `<button class="btn" id="start-labeling-btn" style="font-size:11px; padding:3px 10px;">Start Labeling Unlabeled</button>`;
+        }
+
+        // Always show these tools
+        buttons += `<button class="btn" id="bulk-select-toggle" style="font-size:11px; padding:3px 10px;">Select Mode</button>`;
+        buttons += `<button class="btn" id="verify-detectors-btn" style="font-size:11px; padding:3px 10px;">Verify Detectors</button>`;
+
+        toolbar.innerHTML = `<span>${info}</span><div style="display:flex; gap:6px; flex-wrap:wrap;">${buttons}</div>`;
+        grid.insertBefore(toolbar, grid.firstChild);
+
+        // Bulk select mode toggle
+        document.getElementById('bulk-select-toggle').addEventListener('click', () => {
+            _bulkSelectMode = !_bulkSelectMode;
+            _bulkSelected.clear();
+            document.getElementById('bulk-select-toggle').textContent = _bulkSelectMode ? 'Exit Select Mode' : 'Select Mode';
+            // Add/remove bulk action bar
+            let bar = document.getElementById('bulk-action-bar');
+            if (_bulkSelectMode && !bar) {
+                bar = document.createElement('div');
+                bar.id = 'bulk-action-bar';
+                bar.style.cssText = 'display:flex; gap:8px; align-items:center; padding:6px 8px; background:#161b22; border:1px solid #30363d; border-radius:4px; margin-bottom:8px; font-size:11px;';
+                const screenOpts = galleryScreens.filter(s => s.name !== gallerySelectedScreen).map(s => `<option value="${s.name}">${s.name}</option>`).join('');
+                bar.innerHTML = `
+                    <button class="btn" id="bulk-select-all" style="font-size:10px; padding:2px 8px;">Select All</button>
+                    <button class="btn" id="bulk-select-flagged" style="font-size:10px; padding:2px 8px;">Select Flagged</button>
+                    <span id="bulk-count" style="color:#8b949e;">0 selected</span>
+                    <select id="bulk-target" style="font-size:10px; padding:2px 4px; background:#0d1117; color:#c9d1d9; border:1px solid #30363d; border-radius:3px;">
+                        <option value="_inbox">_inbox</option>
+                        <option value="_other">_other (animations/misc)</option>
+                        ${screenOpts}
+                    </select>
+                    <button class="btn" id="bulk-move-btn" disabled style="font-size:10px; padding:2px 8px;">Move Selected</button>
+                    <button class="btn" id="bulk-delete-btn" disabled style="font-size:10px; padding:2px 8px; color:#f85149;">Delete Selected</button>
+                `;
+                grid.insertBefore(bar, grid.children[1]); // after toolbar
+                document.getElementById('bulk-select-all').addEventListener('click', () => {
+                    const all = _bulkSelected.size === galleryImages.length;
+                    _bulkSelected.clear();
+                    if (!all) galleryImages.forEach(i => _bulkSelected.add(i.filename));
+                    renderGalleryGrid();
+                    _updateBulkBar();
+                });
+                document.getElementById('bulk-select-flagged').addEventListener('click', () => {
+                    _bulkSelected.clear();
+                    galleryImages.filter(i => i._detectorFail).forEach(i => _bulkSelected.add(i.filename));
+                    renderGalleryGrid();
+                    _updateBulkBar();
+                });
+                document.getElementById('bulk-move-btn').addEventListener('click', async () => {
+                    const target = document.getElementById('bulk-target').value;
+                    const fnames = [..._bulkSelected];
+                    if (!fnames.length) return;
+                    const btn = document.getElementById('bulk-move-btn');
+                    btn.disabled = true; btn.textContent = `Moving ${fnames.length}...`;
+                    for (const fname of fnames) {
+                        await fetch(`${API}/api/gallery/image-move`, {
+                            method:'POST', headers:{'Content-Type':'application/json'},
+                            body: JSON.stringify({screen: gallerySelectedScreen, filename: fname, target})
+                        });
+                    }
+                    _bulkSelected.clear();
+                    _bulkSelectMode = false;
+                    loadGalleryScreenImages(gallerySelectedScreen);
+                });
+                document.getElementById('bulk-delete-btn').addEventListener('click', async () => {
+                    const fnames = [..._bulkSelected];
+                    if (!fnames.length || !confirm(`Delete ${fnames.length} images?`)) return;
+                    const btn = document.getElementById('bulk-delete-btn');
+                    btn.disabled = true; btn.textContent = `Deleting...`;
+                    for (const fname of fnames) {
+                        await fetch(`${API}/api/gallery/image-move`, {
+                            method:'POST', headers:{'Content-Type':'application/json'},
+                            body: JSON.stringify({screen: gallerySelectedScreen, filename: fname, target: '__delete'})
+                        });
+                    }
+                    _bulkSelected.clear();
+                    _bulkSelectMode = false;
+                    loadGalleryScreenImages(gallerySelectedScreen);
+                });
+            } else if (!_bulkSelectMode && bar) {
+                bar.remove();
+            }
+            renderGalleryGrid();
+        });
+
+        // Verify detectors - batch debug all images via single ColePC request
+        document.getElementById('verify-detectors-btn').addEventListener('click', async () => {
+            const btn = document.getElementById('verify-detectors-btn');
+            const screenInfo = galleryScreens.find(s => s.name === gallerySelectedScreen);
+            const registered = screenInfo ? (screenInfo.detectors || []) : [];
+
+            if (registered.length === 0) {
+                btn.textContent = 'No detectors registered';
+                setTimeout(() => { btn.textContent = 'Verify Detectors'; }, 2000);
+                return;
+            }
+
+            btn.disabled = true;
+            btn.textContent = `Verifying ${galleryImages.length} images...`;
+
+            try {
+                const resp = await fetch(`${API}/api/detector/debug-batch`, {
+                    method:'POST', headers:{'Content-Type':'application/json'},
+                    body: JSON.stringify({screen: gallerySelectedScreen})
+                }).then(r => r.json());
+
+                let failures = 0;
+                if (resp.ok && resp.results) {
+                    for (const img of galleryImages) {
+                        const r = resp.results[img.filename];
+                        if (r && r.detectors) {
+                            const anyTrue = r.detectors.some(d => registered.includes(d.name) && d.detected);
+                            img._detectorFail = !anyTrue;
+                            if (!anyTrue) failures++;
+                        } else if (r && r.error) {
+                            img._detectorFail = true;
+                            failures++;
+                        }
+                    }
+                }
+                btn.textContent = failures > 0 ? `${failures} failures (red border)` : 'All passed!';
+            } catch (e) {
+                btn.textContent = 'Error - ColePC reachable?';
+                console.error('verify batch:', e);
+            }
+            btn.disabled = false;
+            renderGalleryGrid();
+        });
+
+        // Bulk confirm handler
+        const confirmBtn = document.getElementById('bulk-confirm-btn');
+        if (confirmBtn) {
+            confirmBtn.addEventListener('click', async () => {
+                confirmBtn.disabled = true;
+                confirmBtn.textContent = 'Confirming...';
+                try {
+                    const resp = await fetch(`${API}/api/gallery/manifest/${encodeURIComponent(screen)}/bulk-confirm`, {method:'POST'}).then(r=>r.json());
+                    confirmBtn.textContent = `Done! ${resp.confirmed} confirmed`;
+                    setTimeout(() => loadGalleryScreenImages(screen), 800);
+                } catch (e) { confirmBtn.textContent = 'Error'; }
+            });
+        }
+
+        // Bulk OCR suggest handler
+        const ocrBtn = document.getElementById('bulk-ocr-btn');
+        if (ocrBtn) {
+            ocrBtn.addEventListener('click', async () => {
+                ocrBtn.disabled = true;
+                const readers = Object.keys(data.readers);
+                let totalSuggested = 0;
+                for (const reader of readers) {
+                    ocrBtn.textContent = `Running ${reader}...`;
+                    try {
+                        const resp = await fetch(`${API}/api/ocr/suggest-bulk`, {
+                            method:'POST', headers:{'Content-Type':'application/json'},
+                            body: JSON.stringify({screen, reader, auto_save: true})
+                        }).then(r=>r.json());
+                        if (resp.results) {
+                            // Bulk-update the manifest
+                            const labels = {};
+                            for (const [fname, fields] of Object.entries(resp.results)) {
+                                labels[fname] = {[reader]: fields};
+                            }
+                            if (Object.keys(labels).length) {
+                                await fetch(`${API}/api/gallery/manifest/${encodeURIComponent(screen)}/bulk-update`, {
+                                    method:'POST', headers:{'Content-Type':'application/json'},
+                                    body: JSON.stringify({labels})
+                                });
+                                totalSuggested += Object.keys(labels).length;
+                            }
+                        }
+                    } catch (e) { console.error('bulk ocr:', e); }
+                }
+                ocrBtn.textContent = `Done! ${totalSuggested} suggested`;
+                setTimeout(() => loadGalleryScreenImages(screen), 800);
+            });
+        }
+
+        // Start labeling - open first unlabeled image
+        const startBtn = document.getElementById('start-labeling-btn');
+        if (startBtn) {
+            startBtn.addEventListener('click', () => {
+                const first = galleryImages.find(i => i.status === 'unlabeled');
+                if (first) expandGalleryCard(first.filename);
+            });
+        }
+    } catch (e) {
+        grid.innerHTML = '<div style="color:#f85149; font-size:12px;">Failed to load images</div>';
+    }
+}
+
+async function loadGalleryInbox() {
+    const grid = document.getElementById('gallery-grid');
+    grid.innerHTML = '<div style="color:#484f58; font-size:12px;">Loading inbox...</div>';
+    document.getElementById('gallery-filters').style.display = 'none';
+    try {
+        const data = await api('/api/gallery/inbox');
+        if (!data.images || !data.images.length) {
+            grid.innerHTML = '<div style="color:#484f58; font-size:12px;">Inbox is empty</div>';
+            return;
+        }
+        // Show assign UI
+        const screenOptions = galleryScreens.filter(s => s.type === 'screen').map(s => `<option value="${s.name}">${s.name}</option>`).join('');
+        grid.innerHTML = `
+            <div style="margin-bottom:12px; display:flex; gap:8px; align-items:center;">
+                <button class="btn" id="inbox-select-all">Select All</button>
+                <select id="inbox-screen-select" style="font-size:12px; padding:4px 8px;">
+                    <option value="">-- Assign to screen --</option>
+                    ${screenOptions}
+                </select>
+                <button class="btn btn-primary" id="inbox-assign-btn" disabled>Assign Selected</button>
+                <span id="inbox-selected-count" style="font-size:11px; color:#8b949e;">0 selected</span>
+            </div>
+            <div class="gallery-grid" id="inbox-grid">${data.images.map(img => `
+                <div class="gallery-card inbox-card" data-filename="${img.filename}" style="cursor:pointer; position:relative;">
+                    <input type="checkbox" class="inbox-check" style="position:absolute; top:4px; left:4px; z-index:1;">
+                    <img class="thumb" loading="lazy" src="${API}/api/gallery/thumb/${img.path}" alt="${img.filename}">
+                    <div class="fname">${img.filename}</div>
+                </div>
+            `).join('')}</div>
+        `;
+        // Wire up inbox interactions
+        const checks = grid.querySelectorAll('.inbox-check');
+        const countEl = document.getElementById('inbox-selected-count');
+        const assignBtn = document.getElementById('inbox-assign-btn');
+        const updateCount = () => {
+            const n = grid.querySelectorAll('.inbox-check:checked').length;
+            countEl.textContent = `${n} selected`;
+            assignBtn.disabled = n === 0 || !document.getElementById('inbox-screen-select').value;
+        };
+        checks.forEach(cb => cb.addEventListener('change', updateCount));
+        document.getElementById('inbox-screen-select').addEventListener('change', updateCount);
+        document.getElementById('inbox-select-all').addEventListener('click', () => {
+            const allChecked = [...checks].every(c => c.checked);
+            checks.forEach(c => { c.checked = !allChecked; });
+            updateCount();
+        });
+        // Click card to toggle
+        grid.querySelectorAll('.inbox-card').forEach(card => {
+            card.addEventListener('click', e => {
+                if (e.target.type === 'checkbox') return;
+                const cb = card.querySelector('.inbox-check');
+                cb.checked = !cb.checked;
+                updateCount();
+            });
+        });
+        // Assign button
+        assignBtn.addEventListener('click', async () => {
+            const screen = document.getElementById('inbox-screen-select').value;
+            if (!screen) return;
+            const filenames = [...grid.querySelectorAll('.inbox-check:checked')].map(
+                cb => cb.closest('.inbox-card').dataset.filename
+            );
+            if (!filenames.length) return;
+            assignBtn.disabled = true;
+            assignBtn.textContent = 'Assigning...';
+            try {
+                const resp = await fetch(`${API}/api/gallery/inbox/assign`, {
+                    method: 'POST', headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({filenames, screen})
+                }).then(r => r.json());
+                assignBtn.textContent = `Moved ${resp.moved}!`;
+                // Refresh
+                setTimeout(() => { galleryInited = false; galleryInit(); }, 800);
+            } catch (e) {
+                assignBtn.textContent = 'Error!';
+            }
+        });
+    } catch (e) {
+        grid.innerHTML = '<div style="color:#f85149; font-size:12px;">Failed to load inbox</div>';
+    }
+}
+
+function _gtLabel(img) {
+    // New manifest-based labels
+    if (img.status) {
+        if (img.status === 'complete') return 'Labeled';
+        if (img.status === 'partial') return 'Partial';
+        if (img.status === 'unlabeled') return 'Unlabeled';
+    }
+    // Legacy filename-based labels
+    const gt = img.ground_truth;
+    if (!gt) return '';
+    if (gt.type === 'bool') return gt.values[0] ? 'True' : 'False';
+    if (gt.type === 'words') return gt.values.join(' ');
+    if (gt.type === 'int') return String(gt.values[0]);
+    return gt.raw || '';
+}
+
+let _bulkSelectMode = false;
+let _bulkSelected = new Set();
+
+function renderGalleryGrid() {
+    const grid = document.getElementById('gallery-grid');
+    let filtered = galleryImages;
+    if (galleryFilter === 'true') filtered = galleryImages.filter(i => (i.status || '') !== 'unlabeled' && _gtLabel(i) !== 'Unlabeled');
+    if (galleryFilter === 'false') filtered = galleryImages.filter(i => i.status === 'unlabeled' || _gtLabel(i) === 'Unlabeled');
+
+    if (!filtered.length) {
+        grid.innerHTML = '<div style="color:#484f58; font-size:12px;">No images match filter</div>';
+        return;
+    }
+
+    grid.innerHTML = filtered.map(img => {
+        const label = _gtLabel(img);
+        let badgeClass = 'badge-value';
+        if (label === 'True' || label === 'Labeled') badgeClass = 'badge-true';
+        else if (label === 'False' || label === 'Unlabeled') badgeClass = 'badge-false';
+        else if (label === 'Partial') badgeClass = 'badge-value';
+        const checked = _bulkSelected.has(img.filename) ? 'checked' : '';
+        const flagged = img._detectorFail ? ' style="border:2px solid #f85149;"' : '';
+        return `<div class="gallery-card" data-filename="${img.filename}"${flagged}>
+            ${_bulkSelectMode ? `<input type="checkbox" class="bulk-check" ${checked} style="position:absolute; top:4px; left:4px; z-index:1;">` : ''}
+            <img class="thumb" loading="lazy" src="${API}/api/gallery/thumb/${img.path}" alt="${img.filename}">
+            <div class="fname">${img.filename}</div>
+            <span class="truth-badge ${badgeClass}">${label}</span>
+            ${img._detectorFail ? '<span style="position:absolute; top:4px; right:4px; background:#f85149; color:#fff; font-size:9px; padding:1px 4px; border-radius:3px;">FAIL</span>' : ''}
+        </div>`;
+    }).join('');
+
+    grid.querySelectorAll('.gallery-card').forEach(card => {
+        card.addEventListener('click', (e) => {
+            if (_bulkSelectMode) {
+                if (e.target.type === 'checkbox') return; // let checkbox handle itself
+                const cb = card.querySelector('.bulk-check');
+                if (cb) { cb.checked = !cb.checked; }
+                const fname = card.dataset.filename;
+                if (cb && cb.checked) _bulkSelected.add(fname); else _bulkSelected.delete(fname);
+                _updateBulkBar();
+                return;
+            }
+            expandGalleryCard(card.dataset.filename);
+        });
+        const cb = card.querySelector('.bulk-check');
+        if (cb) cb.addEventListener('change', () => {
+            const fname = card.dataset.filename;
+            if (cb.checked) _bulkSelected.add(fname); else _bulkSelected.delete(fname);
+            _updateBulkBar();
+        });
+    });
+}
+
+function _updateBulkBar() {
+    const bar = document.getElementById('bulk-action-bar');
+    if (!bar) return;
+    const count = _bulkSelected.size;
+    bar.querySelector('#bulk-count').textContent = `${count} selected`;
+    bar.querySelector('#bulk-move-btn').disabled = count === 0;
+    bar.querySelector('#bulk-delete-btn').disabled = count === 0;
+}
+
+// Cache screen reader schema for label forms
+let _screenReaderSchema = null;
+
+async function expandGalleryCard(filename) {
+    const overlay = document.createElement('div');
+    overlay.className = 'gallery-expanded-overlay';
+    overlay.addEventListener('click', e => { if (e.target === overlay) overlay.remove(); });
+
+    const img = galleryImages.find(i => i.filename === filename);
+    const screen = gallerySelectedScreen || gallerySelectedReader;
+    const imgPath = img ? img.path : `${encodeURIComponent(screen)}/${encodeURIComponent(filename)}`;
+
+    overlay.innerHTML = `<div class="gallery-expanded">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+            <div style="font-size:14px; color:#58a6ff; font-weight:bold;">${filename}</div>
+            <div style="display:flex; gap:8px;">
+                <span id="gallery-save-status" style="font-size:11px; color:#8b949e; line-height:28px;"></span>
+                <button class="btn btn-primary" id="gallery-save-labels-btn" style="display:none;">Save Labels</button>
+                <button class="btn" id="gallery-debug-detectors" style="font-size:10px; padding:2px 8px;" title="Run all detectors on this image">Debug Detectors</button>
+                <select id="gallery-move-to" style="font-size:10px; padding:2px 4px; background:#161b22; color:#c9d1d9; border:1px solid #30363d; border-radius:3px;">
+                    <option value="">Move to...</option>
+                </select>
+                <button class="btn" id="gallery-nav-prev" title="Previous">&#9664;</button>
+                <button class="btn" id="gallery-nav-next" title="Next">&#9654;</button>
+                <button class="btn" onclick="this.closest('.gallery-expanded-overlay').remove()">Close</button>
+            </div>
+        </div>
+        <div style="display:flex; gap:16px; flex-wrap:wrap;">
+            <div style="flex:1; min-width:400px;">
+                <img src="${API}/api/gallery/image/${imgPath}" alt="${filename}" style="max-width:100%;">
+                <div class="crops" id="gallery-expanded-crops" style="margin-top:8px;"><div style="color:#484f58; font-size:12px;">Loading crops...</div></div>
+            </div>
+            <div style="flex:0 0 340px;" id="gallery-label-form">
+                <div style="color:#484f58; font-size:12px;">Loading schema...</div>
+            </div>
+        </div>
+    </div>`;
+    document.body.appendChild(overlay);
+
+    // Nav buttons
+    const imgIdx = galleryImages.findIndex(i => i.filename === filename);
+    overlay.querySelector('#gallery-nav-prev').addEventListener('click', () => {
+        if (imgIdx > 0) { overlay.remove(); expandGalleryCard(galleryImages[imgIdx - 1].filename); }
+    });
+    overlay.querySelector('#gallery-nav-next').addEventListener('click', () => {
+        if (imgIdx < galleryImages.length - 1) { overlay.remove(); expandGalleryCard(galleryImages[imgIdx + 1].filename); }
+    });
+
+    // Helper: find next/prev unlabeled
+    const nextUnlabeled = (from, dir) => {
+        for (let i = from + dir; i >= 0 && i < galleryImages.length; i += dir) {
+            if (galleryImages[i].status === 'unlabeled' || galleryImages[i].status === 'partial') return i;
+        }
+        return -1;
+    };
+
+    // Keyboard nav
+    const keyHandler = (e) => {
+        // Don't intercept when typing in inputs
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA') {
+            // Ctrl/Cmd+Enter: save + advance even from input
+            if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                e.preventDefault();
+                const saveBtn = overlay.querySelector('#gallery-save-labels-btn');
+                if (saveBtn && !saveBtn.disabled) saveBtn.click();
+            }
+            return;
+        }
+        if (e.key === 'Escape') { overlay.remove(); document.removeEventListener('keydown', keyHandler); }
+        // Arrow nav
+        if (e.key === 'ArrowLeft' && imgIdx > 0) { overlay.remove(); document.removeEventListener('keydown', keyHandler); expandGalleryCard(galleryImages[imgIdx - 1].filename); }
+        if (e.key === 'ArrowRight' && imgIdx < galleryImages.length - 1) { overlay.remove(); document.removeEventListener('keydown', keyHandler); expandGalleryCard(galleryImages[imgIdx + 1].filename); }
+        // Ctrl+Arrow: skip to next/prev unlabeled
+        if ((e.ctrlKey || e.metaKey) && e.key === 'ArrowRight') { e.preventDefault(); const n = nextUnlabeled(imgIdx, 1); if (n >= 0) { overlay.remove(); document.removeEventListener('keydown', keyHandler); expandGalleryCard(galleryImages[n].filename); } }
+        if ((e.ctrlKey || e.metaKey) && e.key === 'ArrowLeft') { e.preventDefault(); const n = nextUnlabeled(imgIdx, -1); if (n >= 0) { overlay.remove(); document.removeEventListener('keydown', keyHandler); expandGalleryCard(galleryImages[n].filename); } }
+        // Ctrl/Cmd+Enter: save + advance
+        if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+            e.preventDefault();
+            const saveBtn = overlay.querySelector('#gallery-save-labels-btn');
+            if (saveBtn && !saveBtn.disabled) saveBtn.click();
+        }
+    };
+    document.addEventListener('keydown', keyHandler);
+    const obs = new MutationObserver(() => { if (!document.body.contains(overlay)) { document.removeEventListener('keydown', keyHandler); obs.disconnect(); } });
+    obs.observe(document.body, {childList: true});
+
+    // Load crops
+    try {
+        const crops = await api(`/api/gallery/screen_crops/${encodeURIComponent(screen)}/${encodeURIComponent(filename)}`);
+        const cropsEl = overlay.querySelector('#gallery-expanded-crops');
+        if (Array.isArray(crops) && crops.length) {
+            cropsEl.innerHTML = crops.map(c => `
+                <div class="crop-item">
+                    <img src="${c.data || ''}" alt="${c.name}" style="image-rendering:pixelated;">
+                    <div class="crop-label">${c.reader}: ${c.name}</div>
+                </div>
+            `).join('');
+        } else {
+            cropsEl.innerHTML = '<div style="color:#484f58; font-size:12px;">No crops defined</div>';
+        }
+    } catch (e) { console.error('loadCrops:', e); }
+
+    // "Move to..." dropdown - populate with all screens + inbox + delete
+    const moveTo = overlay.querySelector('#gallery-move-to');
+    const screenList = galleryScreens.filter(s => s.name !== screen);
+    moveTo.innerHTML = '<option value="">Move to...</option>'
+        + screenList.map(s => `<option value="${s.name}">${s.name}</option>`).join('')
+        + '<option value="_inbox">_inbox</option>'
+        + '<option value="_other">_other (animations/misc)</option>'
+        + '<option value="__delete" style="color:#f85149;">Delete image</option>';
+    moveTo.addEventListener('change', async () => {
+        const target = moveTo.value;
+        if (!target) return;
+        if (target === '__delete') {
+            if (!confirm(`Delete ${filename}?`)) { moveTo.value = ''; return; }
+            await fetch(`${API}/api/gallery/image-move`, {
+                method: 'POST', headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({screen, filename, target: '__delete'})
+            });
+        } else {
+            await fetch(`${API}/api/gallery/image-move`, {
+                method: 'POST', headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({screen, filename, target})
+            });
+        }
+        // Remove from local array and advance
+        const idx = galleryImages.findIndex(i => i.filename === filename);
+        if (idx >= 0) galleryImages.splice(idx, 1);
+        overlay.remove();
+        if (galleryImages.length > 0) {
+            const next = Math.min(idx, galleryImages.length - 1);
+            expandGalleryCard(galleryImages[next].filename);
+        }
+    });
+
+    // Debug detectors button
+    overlay.querySelector('#gallery-debug-detectors').addEventListener('click', async function() {
+        const btn = this;
+        btn.disabled = true;
+        btn.textContent = 'Running...';
+        try {
+            const resp = await fetch(`${API}/api/detector/debug`, {
+                method: 'POST', headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({screen, filename})
+            }).then(r => r.json());
+
+            if (resp.ok && resp.result) {
+                const r = resp.result;
+                let html = '<div style="margin-top:12px; font-size:11px; border:1px solid #30363d; border-radius:6px; padding:8px; background:#0d1117;">';
+                html += '<div style="color:#8b949e; text-transform:uppercase; margin-bottom:6px; font-size:10px;">Detector Results</div>';
+                // Detector pass/fail
+                for (const d of (r.detectors || [])) {
+                    const color = d.detected ? '#3fb950' : '#f85149';
+                    html += `<div style="color:${color}; margin-bottom:2px;">${d.detected ? '✓' : '✗'} ${d.name}</div>`;
+                }
+                // Region color stats
+                if (r.regions && r.regions.length) {
+                    html += '<div style="color:#8b949e; text-transform:uppercase; margin-top:8px; margin-bottom:4px; font-size:10px;">Region Color Stats</div>';
+                    html += '<table style="font-size:10px; color:#c9d1d9; border-collapse:collapse; width:100%;">';
+                    html += '<tr style="color:#8b949e;"><th style="text-align:left; padding:2px 4px;">Region</th><th>Avg RGB</th><th>StdDev</th></tr>';
+                    for (const reg of r.regions) {
+                        const avg = reg.avg ? reg.avg.map(v => Math.round(v * 255)).join(', ') : '?';
+                        const sd = reg.stddev != null ? reg.stddev.toFixed(2) : '?';
+                        const bgColor = reg.avg ? `rgb(${reg.avg.map(v => Math.round(v * 255)).join(',')})` : '#000';
+                        html += `<tr><td style="padding:2px 4px;">${reg.name}</td>`;
+                        html += `<td style="padding:2px 4px; text-align:center;"><span style="display:inline-block; width:12px; height:12px; background:${bgColor}; border:1px solid #30363d; border-radius:2px; vertical-align:middle; margin-right:4px;"></span>${avg}</td>`;
+                        html += `<td style="padding:2px 4px; text-align:center;">${sd}</td></tr>`;
+                    }
+                    html += '</table>';
+                }
+                html += '</div>';
+
+                // Insert after crops
+                const cropsEl = overlay.querySelector('#gallery-expanded-crops');
+                cropsEl.insertAdjacentHTML('afterend', html);
+                btn.textContent = 'Debug Detectors';
+                btn.disabled = false;
+            } else {
+                btn.textContent = resp.error || 'Failed';
+                setTimeout(() => { btn.textContent = 'Debug Detectors'; btn.disabled = false; }, 3000);
+            }
+        } catch (e) {
+            btn.textContent = 'Error';
+            console.error('detector debug:', e);
+            setTimeout(() => { btn.textContent = 'Debug Detectors'; btn.disabled = false; }, 3000);
+        }
+    });
+
+    // Build label form from screen schema
+    await buildLabelForm(overlay, screen, filename, img);
+}
+
+async function buildLabelForm(overlay, screen, filename, img) {
+    const formEl = overlay.querySelector('#gallery-label-form');
+    const saveBtn = overlay.querySelector('#gallery-save-labels-btn');
+    const statusEl = overlay.querySelector('#gallery-save-status');
+
+    // Get screen info (with reader schemas)
+    let screenData;
+    try {
+        screenData = await api(`/api/gallery/screen/${encodeURIComponent(screen)}`);
+    } catch (e) {
+        formEl.innerHTML = '<div style="color:#f85149; font-size:12px;">Failed to load schema</div>';
+        return;
+    }
+
+    const readers = screenData.readers || {};
+    if (!Object.keys(readers).length) {
+        formEl.innerHTML = '<div style="color:#484f58; font-size:12px;">No readers registered for this screen</div>';
+        return;
+    }
+
+    const existingLabels = (img && img.labels) || {};
+
+    let html = '<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">'
+        + '<span style="font-size:11px; color:#8b949e; text-transform:uppercase;">Reader Labels</span>'
+        + '<button class="btn" id="gallery-copy-prev" style="font-size:10px; padding:2px 8px;">Copy Prev</button>'
+        + '<button class="btn" id="gallery-auto-suggest-all" style="font-size:10px; padding:2px 8px;">Auto-Suggest All</button>'
+        + '</div>';
+
+    for (const [readerName, readerDef] of Object.entries(readers)) {
+        const fields = readerDef.fields || {};
+        const existing = existingLabels[readerName] || {};
+        html += `<div style="background:#161b22; border:1px solid #30363d; border-radius:6px; padding:10px; margin-bottom:8px;">`;
+        html += `<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+            <span style="font-size:12px; color:#58a6ff; font-weight:bold;">${readerName}</span>
+            <button class="btn suggest-reader-btn" data-reader="${readerName}" style="font-size:9px; padding:1px 6px;">Suggest</button>
+        </div>`;
+
+        for (const [fieldName, fieldDef] of Object.entries(fields)) {
+            const val = existing[fieldName];
+            html += `<div style="margin-bottom:6px;">`;
+            html += `<label style="font-size:11px; color:#8b949e; display:block; margin-bottom:2px;">${fieldName}</label>`;
+
+            if (fieldDef.type === 'array') {
+                const len = fieldDef.length || 1;
+                const items = fieldDef.items || 'string';
+                for (let i = 0; i < len; i++) {
+                    const arrVal = Array.isArray(val) && val[i] != null ? val[i] : '';
+                    const inputType = items === 'int' ? 'number' : 'text';
+                    html += `<input type="${inputType}" class="manifest-input" data-reader="${readerName}" data-field="${fieldName}" data-index="${i}"
+                        value="${arrVal}" placeholder="${fieldName}[${i}]"
+                        style="width:100%; font-size:12px; padding:3px 6px; margin-bottom:2px; background:#0d1117; border:1px solid #30363d; color:#c9d1d9; border-radius:3px;">`;
+                }
+            } else if (fieldDef.type === 'int') {
+                html += `<input type="number" class="manifest-input" data-reader="${readerName}" data-field="${fieldName}"
+                    value="${val != null ? val : ''}" placeholder="${fieldName}"
+                    ${fieldDef.min != null ? `min="${fieldDef.min}"` : ''} ${fieldDef.max != null ? `max="${fieldDef.max}"` : ''}
+                    style="width:100%; font-size:12px; padding:3px 6px; background:#0d1117; border:1px solid #30363d; color:#c9d1d9; border-radius:3px;">`;
+            } else if (fieldDef.type === 'bool') {
+                html += `<select class="manifest-input" data-reader="${readerName}" data-field="${fieldName}"
+                    style="width:100%; font-size:12px; padding:3px 6px; background:#0d1117; border:1px solid #30363d; color:#c9d1d9; border-radius:3px;">
+                    <option value="" ${val == null ? 'selected' : ''}>--</option>
+                    <option value="true" ${val === true ? 'selected' : ''}>true</option>
+                    <option value="false" ${val === false ? 'selected' : ''}>false</option>
+                </select>`;
+            } else {
+                // string
+                html += `<input type="text" class="manifest-input" data-reader="${readerName}" data-field="${fieldName}"
+                    value="${val != null ? val : ''}" placeholder="${fieldName}"
+                    style="width:100%; font-size:12px; padding:3px 6px; background:#0d1117; border:1px solid #30363d; color:#c9d1d9; border-radius:3px;">`;
+            }
+            html += `</div>`;
+        }
+        html += `</div>`;
+    }
+
+    formEl.innerHTML = html;
+    saveBtn.style.display = 'inline-block';
+
+    // Collect form values into a labels object
+    function collectLabels() {
+        const labels = {};
+        formEl.querySelectorAll('.manifest-input').forEach(input => {
+            const reader = input.dataset.reader;
+            const field = input.dataset.field;
+            const index = input.dataset.index;
+            if (!labels[reader]) labels[reader] = {};
+            let val = input.value.trim();
+            if (val === '') { val = null; }
+            else if (input.type === 'number') { val = parseInt(val, 10); }
+            else if (input.tagName === 'SELECT') { val = val === 'true' ? true : val === 'false' ? false : null; }
+            if (index != null) {
+                if (!labels[reader][field]) labels[reader][field] = [];
+                labels[reader][field][parseInt(index)] = val;
+            } else {
+                labels[reader][field] = val;
+            }
+        });
+        return labels;
+    }
+
+    // Save and optionally advance to next image
+    async function saveAndAdvance(advance = false) {
+        const labels = collectLabels();
+        saveBtn.disabled = true;
+        saveBtn.textContent = 'Saving...';
+        try {
+            await fetch(`${API}/api/gallery/manifest/${encodeURIComponent(screen)}/${encodeURIComponent(filename)}`, {
+                method: 'PUT',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(labels),
+            });
+            if (img) {
+                img.labels = labels;
+                img.status = Object.keys(labels).length ? 'complete' : 'unlabeled';
+                img._visited = true;
+            }
+            if (advance) {
+                // Find current position fresh (may have shifted from moves/deletes)
+                const currentIdx = galleryImages.findIndex(im => im.filename === filename);
+                // Find next unlabeled/partial that we haven't visited
+                let target = -1;
+                for (let i = currentIdx + 1; i < galleryImages.length; i++) {
+                    const im = galleryImages[i];
+                    if (!im._visited && (im.status === 'unlabeled' || im.status === 'partial')) { target = i; break; }
+                }
+                // If nothing forward, wrap from start
+                if (target < 0) {
+                    for (let i = 0; i < currentIdx; i++) {
+                        const im = galleryImages[i];
+                        if (!im._visited && (im.status === 'unlabeled' || im.status === 'partial')) { target = i; break; }
+                    }
+                }
+                if (target >= 0) {
+                    overlay.remove();
+                    expandGalleryCard(galleryImages[target].filename);
+                    return;
+                }
+                // All done
+                statusEl.textContent = 'All images labeled!';
+                statusEl.style.color = '#3fb950';
+                saveBtn.textContent = 'Save Labels';
+                saveBtn.disabled = false;
+                return;
+            }
+            statusEl.textContent = 'Saved!';
+            statusEl.style.color = '#3fb950';
+            saveBtn.textContent = 'Save Labels';
+            saveBtn.disabled = false;
+            setTimeout(() => { statusEl.textContent = ''; }, 2000);
+        } catch (e) {
+            statusEl.textContent = 'Error!';
+            statusEl.style.color = '#f85149';
+            saveBtn.textContent = 'Save Labels';
+            saveBtn.disabled = false;
+        }
+    }
+
+    saveBtn.addEventListener('click', () => saveAndAdvance(false));
+
+    // Ctrl/Cmd+Enter: save and advance to next unlabeled
+    // (wired in keyHandler above, triggers saveBtn.click - override to use advance mode)
+    saveBtn._saveAndAdvance = saveAndAdvance;
+
+    // Override the Ctrl+Enter in keyHandler to use save+advance
+    const origSaveBtnClick = saveBtn.onclick;
+    overlay.querySelector('#gallery-save-labels-btn').addEventListener('dblclick', () => saveAndAdvance(true));
+    // Add a separate "Save & Next" button
+    const saveNextBtn = document.createElement('button');
+    saveNextBtn.className = 'btn btn-primary';
+    saveNextBtn.textContent = 'Save & Next (Ctrl+Enter)';
+    saveNextBtn.style.cssText = 'font-size:11px;';
+    saveNextBtn.addEventListener('click', () => saveAndAdvance(true));
+    saveBtn.parentElement.insertBefore(saveNextBtn, saveBtn.nextSibling);
+
+    // Rewire Ctrl+Enter in the keyboard handler
+    const overlayKeyOverride = (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+            e.preventDefault(); e.stopPropagation();
+            saveAndAdvance(true);
+        }
+    };
+    overlay.addEventListener('keydown', overlayKeyOverride, true);
+
+    // Per-reader suggest buttons
+    formEl.querySelectorAll('.suggest-reader-btn').forEach(btn => {
+        btn.addEventListener('click', async () => {
+            const reader = btn.dataset.reader;
+            btn.textContent = '...';
+            btn.disabled = true;
+            try {
+                const resp = await fetch(`${API}/api/ocr/suggest`, {
+                    method: 'POST', headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({screen, filename, reader}),
+                }).then(r => r.json());
+                if (resp.ok && resp.result) {
+                    // Fill form fields with suggestions (highlighted)
+                    const result = resp.result;
+                    for (const [field, val] of Object.entries(result)) {
+                        if (Array.isArray(val)) {
+                            val.forEach((v, i) => {
+                                const input = formEl.querySelector(`.manifest-input[data-reader="${reader}"][data-field="${field}"][data-index="${i}"]`);
+                                if (input && !input.value) { input.value = v || ''; input.style.borderColor = '#d29922'; }
+                            });
+                        } else {
+                            const input = formEl.querySelector(`.manifest-input[data-reader="${reader}"][data-field="${field}"]`);
+                            if (input && !input.value) { input.value = val || ''; input.style.borderColor = '#d29922'; }
+                        }
+                    }
+                    btn.textContent = 'Done';
+                    statusEl.textContent = 'OCR suggestion applied (yellow = suggested)';
+                    statusEl.style.color = '#d29922';
+                } else {
+                    btn.textContent = 'Failed';
+                }
+            } catch (e) {
+                btn.textContent = 'Error';
+                console.error('suggest:', e);
+            }
+            setTimeout(() => { btn.textContent = 'Suggest'; btn.disabled = false; }, 2000);
+        });
+    });
+
+    // "Auto-Suggest All" button
+    const suggestAllBtn = formEl.querySelector('#gallery-auto-suggest-all');
+    if (suggestAllBtn) {
+        suggestAllBtn.addEventListener('click', () => {
+            formEl.querySelectorAll('.suggest-reader-btn').forEach(btn => btn.click());
+        });
+    }
+
+    // "Copy from Previous" button
+    const copyPrevBtn = formEl.querySelector('#gallery-copy-prev');
+    if (copyPrevBtn) {
+        if (imgIdx > 0 && galleryImages[imgIdx - 1].labels) {
+            copyPrevBtn.addEventListener('click', () => {
+                const prevLabels = galleryImages[imgIdx - 1].labels;
+                for (const [reader, fields] of Object.entries(prevLabels)) {
+                    for (const [field, val] of Object.entries(fields)) {
+                        if (Array.isArray(val)) {
+                            val.forEach((v, i) => {
+                                const input = formEl.querySelector(`.manifest-input[data-reader="${reader}"][data-field="${field}"][data-index="${i}"]`);
+                                if (input && !input.value) { input.value = v || ''; input.style.borderColor = '#58a6ff'; }
+                            });
+                        } else {
+                            const input = formEl.querySelector(`.manifest-input[data-reader="${reader}"][data-field="${field}"]`);
+                            if (input && !input.value) {
+                                if (input.tagName === 'SELECT') {
+                                    input.value = String(val);
+                                } else {
+                                    input.value = val != null ? val : '';
+                                }
+                                input.style.borderColor = '#58a6ff';
+                            }
+                        }
+                    }
+                }
+                statusEl.textContent = 'Copied from previous (blue = copied)';
+                statusEl.style.color = '#58a6ff';
+            });
+        } else {
+            copyPrevBtn.disabled = true;
+            copyPrevBtn.style.opacity = '0.4';
+        }
+    }
+
+    // Auto-suggest on open if unlabeled
+    if (img && img.status === 'unlabeled' && localStorage.getItem('autoSuggestOnOpen') !== 'false') {
+        setTimeout(() => { if (suggestAllBtn) suggestAllBtn.click(); }, 300);
+    }
+}
+
+
+// ═══════════════════════════════════════════════════════════════
+// Labeler
+// ═══════════════════════════════════════════════════════════════
+let labelerInited = false;
+let labelerState = {
+    source: null,
+    sourceInfo: null,
+    images: [],
+    index: 0,
+    frameLabels: {},    // reader -> value for current frame
+};
+
+// Completions cache
+let completionsCache = { species: null, moves: null };
+
+async function labelerInit() {
+    if (labelerInited) return;
+    labelerInited = true;
+
+    try {
+        const sources = await api('/api/labeler/sources');
+        labelerState._sources = sources;
+
+        // Build reader list from all known readers
+        const allReaders = new Set();
+        sources.forEach(s => (s.readers || []).forEach(r => allReaders.add(r)));
+        Object.keys(READER_TYPES_LOCAL).forEach(r => allReaders.add(r));
+        const readerSelect = document.getElementById('labeler-reader-select');
+        const sorted = [...allReaders].sort();
+        readerSelect.innerHTML = '<option value="">-- Select Reader --</option>' +
+            sorted.map(r => `<option value="${r}">${r}</option>`).join('');
+
+        // When reader changes, filter sources
+        readerSelect.addEventListener('change', () => labelerOnReaderChange());
+    } catch (e) {
+        console.error('labelerInit:', e);
+    }
+
+    document.getElementById('labeler-start-btn').addEventListener('click', labelerStart);
+    document.getElementById('labeler-prev-btn').addEventListener('click', () => labelerNav(-1));
+    document.getElementById('labeler-next-btn').addEventListener('click', () => labelerNav(1));
+    document.getElementById('labeler-skip-btn').addEventListener('click', labelerSkip);
+    document.getElementById('labeler-save-btn').addEventListener('click', () => labelerSaveAll(true));
+    document.getElementById('labeler-export-btn').addEventListener('click', labelerExport);
+    document.getElementById('labeler-back-btn').addEventListener('click', labelerBackToSetup);
+    document.getElementById('labeler-quick-true-btn').addEventListener('click', () => labelerQuickBool(true));
+    document.getElementById('labeler-quick-false-btn').addEventListener('click', () => labelerQuickBool(false));
+}
+
+// Reader types (local mirror for UI logic)
+const READER_TYPES_LOCAL = {
+    'MoveSelectDetector': 'bool', 'ActionMenuDetector': 'bool', 'PostMatchScreenDetector': 'bool',
+    'PreparingForBattleDetector': 'bool', 'TeamSelectDetector': 'bool', 'TeamPreviewDetector': 'bool',
+    'MainMenuDetector': 'bool', 'MovesMoreDetector': 'bool', 'CommunicatingDetector': 'bool',
+    'MoveNameReader': 'multi_text:4', 'SpeciesReader': 'text', 'SpeciesReader_Doubles': 'multi_text:2',
+    'OpponentHPReader': 'int:0:100', 'OpponentHPReader_Doubles': 'int:0:100',
+    'MoveSelectCursorSlot': 'int:0:3', 'BattleLogReader': 'event',
+    'TeamSelectReader': 'multi_text:6', 'TeamSummaryReader': 'multi_text:6', 'TeamPreviewReader': 'multi_text:6',
+};
+
+function labelerOnReaderChange() {
+    const reader = document.getElementById('labeler-reader-select').value;
+    const srcSelect = document.getElementById('labeler-source-select');
+    const info = document.getElementById('labeler-reader-info');
+
+    if (!reader) {
+        srcSelect.innerHTML = '<option value="">-- Select source after reader --</option>';
+        info.textContent = '';
+        return;
+    }
+
+    const type = READER_TYPES_LOCAL[reader] || 'unknown';
+    const isBool = type === 'bool';
+    info.innerHTML = `Type: <b>${type}</b>${isBool ? ' - use T/F/keyboard to label quickly' : ''}`;
+
+    // Filter sources that have this reader, plus "all screenshots" as a universal source
+    const sources = labelerState._sources || [];
+    const matching = sources.filter(s => (s.readers || []).includes(reader));
+
+    // Also show all sources (any frames might be relevant for any reader)
+    const others = sources.filter(s => !(s.readers || []).includes(reader));
+
+    let html = '<option value="">-- Select Source --</option>';
+    if (matching.length) {
+        html += '<optgroup label="Suggested (has this reader)">';
+        html += matching.map(s => `<option value="${s.path}">${s.parent}/${s.name} (${s.count})</option>`).join('');
+        html += '</optgroup>';
+    }
+    if (others.length) {
+        html += '<optgroup label="Other sources">';
+        html += others.map(s => `<option value="${s.path}">${s.parent}/${s.name} (${s.count})</option>`).join('');
+        html += '</optgroup>';
+    }
+    srcSelect.innerHTML = html;
+
+    // Auto-select if only one suggested source
+    if (matching.length === 1) srcSelect.value = matching[0].path;
+}
+
+async function labelerStart() {
+    const source = document.getElementById('labeler-source-select').value;
+    if (!source) { alert('Select a source folder.'); return; }
+    const selectedReader = document.getElementById('labeler-reader-select').value;
+    if (!selectedReader) { alert('Select a reader first.'); return; }
+
+    const sourceInfo = labelerState._sources.find(s => s.path === source);
+    if (!sourceInfo) { alert('Source not found.'); return; }
+
+    // Override source info to use the selected reader
+    const overrideInfo = {
+        ...sourceInfo,
+        readers: [selectedReader],
+        suggested_reader: selectedReader,
+        reader_infos: {
+            [selectedReader]: {
+                reader: selectedReader,
+                type: READER_TYPES_LOCAL[selectedReader] || 'unknown',
+                is_bool: READER_TYPES_LOCAL[selectedReader] === 'bool',
+                crops: CROP_DEFS_LOCAL[selectedReader] || [],
+            }
+        }
+    };
+
+    labelerState.source = source;
+    labelerState.sourceInfo = overrideInfo;
+    labelerState.selectedReader = selectedReader;
+    labelerState.frameLabels = {};
+
+    // Fetch crop defs for this reader if not cached
+    if (!CROP_DEFS_LOCAL[selectedReader]) {
+        try {
+            const cd = await api(`/api/gallery/crop_defs/${encodeURIComponent(selectedReader)}`);
+            if (cd && cd.crops) CROP_DEFS_LOCAL[selectedReader] = cd.crops;
+        } catch {}
+    }
+    overrideInfo.reader_infos[selectedReader].crops = CROP_DEFS_LOCAL[selectedReader] || [];
+
+    try {
+        const resp = await api(`/api/labeler/images?source=${encodeURIComponent(source)}&reader=${encodeURIComponent(selectedReader)}`);
+        labelerState.images = resp.images || resp;
+        labelerState.index = 0;
+
+        document.getElementById('labeler-setup').style.display = 'none';
+        document.getElementById('labeler-active').style.display = '';
+        document.getElementById('labeler-reader-badge').textContent = selectedReader;
+        buildMultiReaderControls();
+        labelerShowFrame();
+    } catch (e) {
+        alert('Failed to load: ' + e.message);
+    }
+}
+
+function labelerBackToSetup() {
+    document.getElementById('labeler-setup').style.display = '';
+    document.getElementById('labeler-active').style.display = 'none';
+}
+
+function labelerNav(delta) {
+    const newIdx = labelerState.index + delta;
+    if (newIdx < 0 || newIdx >= labelerState.images.length) return;
+    labelerState.index = newIdx;
+    labelerState.frameLabels = {};
+    labelerShowFrame();
+}
+
+function labelerSkip() {
+    labelerNav(1);
+    labelerSetStatus('Skipped');
+}
+
+async function labelerQuickBool(val) {
+    const reader = labelerState.selectedReader;
+    if (!reader) return;
+    labelerState.frameLabels[reader] = val;
+    syncBoolButtons(reader);
+    await labelerSaveAll(true);
+}
+
+function labelerUpdateProgress() {
+    const total = labelerState.images.length;
+    document.getElementById('labeler-progress').textContent =
+        `[${labelerState.index + 1}/${total}]`;
+}
+
+function labelerSetStatus(msg) {
+    const el = document.getElementById('labeler-status');
+    el.textContent = msg;
+    setTimeout(() => { if (el.textContent === msg) el.textContent = ''; }, 3000);
+}
+
+const OVERLAY_COLORS = ['#58a6ff', '#3fb950', '#f85149', '#d29922', '#d2a8ff', '#f0883e', '#79c0ff', '#56d364'];
+
+async function labelerShowFrame() {
+    const img = labelerState.images[labelerState.index];
+    if (!img) return;
+
+    labelerUpdateProgress();
+
+    // Load image
+    const imgEl = document.getElementById('labeler-image');
+    imgEl.src = `${API}/api/labeler/frame/${encodeURIComponent(labelerState.source)}/${encodeURIComponent(img.filename)}`;
+    imgEl.style.display = '';
+
+    const overlayContainer = document.getElementById('labeler-overlays');
+    overlayContainer.innerHTML = '';
+    imgEl.onload = () => labelerDrawOverlays(imgEl, overlayContainer);
+
+    // Load crops for the primary reader
+    const primaryReader = labelerState.sourceInfo.suggested_reader || labelerState.sourceInfo.readers[0];
+    loadLabelerCrops(img.filename, primaryReader);
+
+    // Fetch existing labels for this frame
+    try {
+        const existing = await api(`/api/labeler/frame_labels?source=${encodeURIComponent(labelerState.source)}&filename=${encodeURIComponent(img.filename)}`);
+        labelerState.frameLabels = {};
+        for (const [reader, label] of Object.entries(existing)) {
+            labelerState.frameLabels[reader] = label?.value !== undefined ? label.value : label;
+        }
+    } catch {
+        labelerState.frameLabels = {};
+    }
+    syncAllControls();
+}
+
+function labelerDrawOverlays(imgEl, container) {
+    container.innerHTML = '';
+    // Collect all crop boxes from all readers
+    const infos = labelerState.sourceInfo?.reader_infos || {};
+    const allBoxes = [];
+    for (const info of Object.values(infos)) {
+        if (info.crops) allBoxes.push(...info.crops);
+    }
+    if (!allBoxes.length) return;
+
+    const wrap = document.getElementById('labeler-image-wrap');
+    const wrapRect = wrap.getBoundingClientRect();
+    const imgRect = imgEl.getBoundingClientRect();
+    const offsetX = imgRect.left - wrapRect.left;
+    const offsetY = imgRect.top - wrapRect.top;
+    const dispW = imgRect.width;
+    const dispH = imgRect.height;
+
+    allBoxes.forEach((box, i) => {
+        const color = OVERLAY_COLORS[i % OVERLAY_COLORS.length];
+        const [bx, by, bw, bh] = box.box || [box.x, box.y, box.w, box.h];
+        const div = document.createElement('div');
+        div.className = 'crop-overlay';
+        div.style.borderColor = color;
+        div.style.left = (offsetX + bx * dispW) + 'px';
+        div.style.top = (offsetY + by * dispH) + 'px';
+        div.style.width = (bw * dispW) + 'px';
+        div.style.height = (bh * dispH) + 'px';
+        div.innerHTML = `<span class="crop-tag" style="background:${color}; color:#000;">${box.name || i}</span>`;
+        container.appendChild(div);
+    });
+}
+
+async function loadLabelerCrops(filename, reader) {
+    const el = document.getElementById('labeler-crops');
+    el.innerHTML = '<div class="section-title">Crop Previews</div><div style="color:#484f58; font-size:11px;">Loading...</div>';
+    try {
+        const crops = await api(`/api/labeler/crops?source=${encodeURIComponent(labelerState.source)}&filename=${encodeURIComponent(filename)}&reader=${encodeURIComponent(reader)}`);
+        let html = '<div class="section-title">Crop Previews</div>';
+        if (Array.isArray(crops) && crops.length) {
+            html += crops.map(c => `
+                <div class="crop-preview">
+                    <img src="${c.data || c.url || c.data_url || ''}" alt="${c.name}" style="image-rendering:pixelated;">
+                    <div class="crop-name">${c.name}</div>
+                </div>
+            `).join('');
+        } else {
+            html += '<div style="color:#484f58; font-size:11px;">No crops</div>';
+        }
+        el.innerHTML = html;
+    } catch (e) {
+        el.innerHTML = '<div class="section-title">Crop Previews</div><div style="color:#f85149; font-size:11px;">Failed</div>';
+    }
+}
+
+// Build the multi-reader control panel
+function buildMultiReaderControls() {
+    const container = document.getElementById('labeler-multi-controls');
+    const infos = labelerState.sourceInfo?.reader_infos || {};
+    const readers = labelerState.sourceInfo?.readers || [];
+    let html = '';
+
+    for (const reader of readers) {
+        const info = infos[reader];
+        if (!info) continue;
+        const type = info.type || 'unknown';
+        const shortName = reader.replace('Detector', '').replace('Reader', '');
+
+        html += `<div class="labeler-reader-section" data-reader="${reader}">`;
+        html += `<div class="section-title" style="font-size:11px; margin-bottom:4px;">${shortName}</div>`;
+
+        if (type === 'bool') {
+            html += `<div style="display:flex; gap:4px;">
+                <button class="btn btn-sm lbl-bool-btn" data-reader="${reader}" data-val="true"
+                    style="flex:1; font-size:11px; padding:3px 6px;">T</button>
+                <button class="btn btn-sm lbl-bool-btn" data-reader="${reader}" data-val="false"
+                    style="flex:1; font-size:11px; padding:3px 6px;">F</button>
+            </div>`;
+        } else if (type === 'event') {
+            const events = info.events || [];
+            html += `<select class="lbl-event-sel" data-reader="${reader}" style="width:100%; font-size:11px;">
+                <option value="">--</option>
+                ${events.map((ev, i) => `<option value="${ev}">${i+1}. ${ev}</option>`).join('')}
+            </select>`;
+        } else if (type.startsWith('int:')) {
+            const parts = type.split(':');
+            const min = parseInt(parts[1]) || 0;
+            const max = parseInt(parts[2]) || 100;
+            const range = max - min;
+            if (range <= 10) {
+                html += '<div style="display:flex; gap:2px; flex-wrap:wrap;">';
+                for (let v = min; v <= max; v++) {
+                    html += `<button class="btn btn-sm lbl-int-btn" data-reader="${reader}" data-val="${v}"
+                        style="min-width:24px; font-size:11px; padding:3px 4px;">${v}</button>`;
+                }
+                html += '</div>';
+            } else {
+                html += `<input type="number" class="lbl-int-input" data-reader="${reader}"
+                    min="${min}" max="${max}" style="width:100%; font-size:11px;" placeholder="${min}-${max}">`;
+            }
+        } else if (type === 'text') {
+            html += `<div class="autocomplete-wrap">
+                <input type="text" class="lbl-text-input" data-reader="${reader}"
+                    style="width:100%; font-size:11px;" placeholder="Type..." autocomplete="off">
+                <div class="autocomplete-dropdown lbl-ac-dd" data-reader="${reader}" style="display:none;"></div>
+            </div>`;
+        } else if (type.startsWith('multi_text:')) {
+            const n = parseInt(type.split(':')[1]) || 1;
+            const cropNames = (info.crops || []).map(c => c.name);
+            for (let i = 0; i < n; i++) {
+                const label = cropNames[i] || `Slot ${i+1}`;
+                html += `<div style="margin-bottom:4px;">
+                    <div style="font-size:9px; color:#8b949e;">${label}</div>
+                    <div class="autocomplete-wrap">
+                        <input type="text" class="lbl-multi-input" data-reader="${reader}" data-idx="${i}"
+                            style="width:100%; font-size:11px;" placeholder="Type..." autocomplete="off">
+                        <div class="autocomplete-dropdown lbl-multi-ac" data-reader="${reader}" data-idx="${i}" style="display:none;"></div>
+                    </div>
+                </div>`;
+            }
+        }
+
+        html += '</div>';
+    }
+
+    container.innerHTML = html;
+
+    // Wire up bool buttons
+    container.querySelectorAll('.lbl-bool-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const reader = btn.dataset.reader;
+            const val = btn.dataset.val === 'true';
+            labelerState.frameLabels[reader] = val;
+            syncBoolButtons(reader);
+        });
+    });
+
+    // Wire up int buttons
+    container.querySelectorAll('.lbl-int-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const reader = btn.dataset.reader;
+            labelerState.frameLabels[reader] = parseInt(btn.dataset.val);
+            syncIntButtons(reader);
+        });
+    });
+
+    // Wire up int inputs
+    container.querySelectorAll('.lbl-int-input').forEach(inp => {
+        inp.addEventListener('change', () => {
+            labelerState.frameLabels[inp.dataset.reader] = parseInt(inp.value);
+        });
+    });
+
+    // Wire up event selects
+    container.querySelectorAll('.lbl-event-sel').forEach(sel => {
+        sel.addEventListener('change', () => {
+            if (sel.value) labelerState.frameLabels[sel.dataset.reader] = sel.value;
+        });
+    });
+
+    // Wire up text autocomplete
+    container.querySelectorAll('.lbl-text-input').forEach(inp => {
+        const reader = inp.dataset.reader;
+        const dd = container.querySelector(`.lbl-ac-dd[data-reader="${reader}"]`);
+        if (dd) setupAutocompleteEl(inp, dd, 'species', val => {
+            labelerState.frameLabels[reader] = val;
+        });
+    });
+
+    // Wire up multi-text autocomplete
+    container.querySelectorAll('.lbl-multi-input').forEach(inp => {
+        const reader = inp.dataset.reader;
+        const idx = inp.dataset.idx;
+        const dd = container.querySelector(`.lbl-multi-ac[data-reader="${reader}"][data-idx="${idx}"]`);
+        const acType = reader.includes('Move') ? 'moves' : 'species';
+        if (dd) setupAutocompleteEl(inp, dd, acType, () => {
+            const vals = [];
+            container.querySelectorAll(`.lbl-multi-input[data-reader="${reader}"]`).forEach(el => vals.push(el.value));
+            labelerState.frameLabels[reader] = vals;
+        });
+    });
+}
+
+function syncBoolButtons(reader) {
+    const val = labelerState.frameLabels[reader];
+    document.querySelectorAll(`.lbl-bool-btn[data-reader="${reader}"]`).forEach(btn => {
+        const isTrue = btn.dataset.val === 'true';
+        btn.style.background = (val === true && isTrue) ? '#238636' : (val === false && !isTrue) ? '#da3633' : '';
+        btn.style.color = (val === isTrue && val !== undefined) ? '#fff' : '';
+    });
+}
+
+function syncIntButtons(reader) {
+    const val = labelerState.frameLabels[reader];
+    document.querySelectorAll(`.lbl-int-btn[data-reader="${reader}"]`).forEach(btn => {
+        const active = parseInt(btn.dataset.val) === val;
+        btn.style.background = active ? '#58a6ff' : '';
+        btn.style.color = active ? '#000' : '';
+    });
+}
+
+function syncAllControls() {
+    const infos = labelerState.sourceInfo?.reader_infos || {};
+    for (const [reader, info] of Object.entries(infos)) {
+        const type = info.type || 'unknown';
+        const val = labelerState.frameLabels[reader];
+
+        if (type === 'bool') {
+            syncBoolButtons(reader);
+        } else if (type === 'event') {
+            const sel = document.querySelector(`.lbl-event-sel[data-reader="${reader}"]`);
+            if (sel) sel.value = val || '';
+        } else if (type.startsWith('int:')) {
+            const parts = type.split(':');
+            const range = (parseInt(parts[2]) || 100) - (parseInt(parts[1]) || 0);
+            if (range <= 10) {
+                syncIntButtons(reader);
+            } else {
+                const inp = document.querySelector(`.lbl-int-input[data-reader="${reader}"]`);
+                if (inp) inp.value = val !== undefined ? val : '';
+            }
+        } else if (type === 'text') {
+            const inp = document.querySelector(`.lbl-text-input[data-reader="${reader}"]`);
+            if (inp) inp.value = val || '';
+        } else if (type.startsWith('multi_text:')) {
+            const vals = Array.isArray(val) ? val : [];
+            document.querySelectorAll(`.lbl-multi-input[data-reader="${reader}"]`).forEach((inp, i) => {
+                inp.value = vals[i] || '';
+            });
+        }
+    }
+}
+
+async function labelerSaveAll(autoAdvance = false) {
+    const img = labelerState.images[labelerState.index];
+    if (!img) return;
+
+    // Collect all set labels
+    const labels = {};
+    for (const [reader, val] of Object.entries(labelerState.frameLabels)) {
+        if (val === undefined || val === null || val === '') continue;
+        labels[reader] = val;
+    }
+
+    if (!Object.keys(labels).length) {
+        labelerSetStatus('No labels set');
+        return;
+    }
+
+    try {
+        await fetch(`${API}/api/labeler/label_batch`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                source: labelerState.source,
+                filename: img.filename,
+                labels,
+            }),
+        }).then(r => r.json());
+        labelerSetStatus(`Saved ${Object.keys(labels).length} labels`);
+        if (autoAdvance) labelerNav(1);
+    } catch (e) {
+        labelerSetStatus('Save failed: ' + e.message);
+    }
+}
+
+async function labelerExport() {
+    const reader = labelerState.selectedReader || (labelerState.sourceInfo?.readers || [])[0];
+    if (!reader) { labelerSetStatus('No reader selected'); return; }
+    try {
+        const result = await apiPost('/api/labeler/export', { source: labelerState.source, reader });
+        labelerSetStatus(`Exported ${result.exported || 0} files to test_images/${reader}/`);
+    } catch (e) {
+        labelerSetStatus('Export failed: ' + e.message);
+    }
+}
+
+// Autocomplete helper
+async function loadCompletions(type) {
+    if (completionsCache[type]) return completionsCache[type];
+    try {
+        const data = await api(`/api/labeler/completions/${type}`);
+        completionsCache[type] = Array.isArray(data) ? data : [];
+        return completionsCache[type];
+    } catch {
+        return [];
+    }
+}
+
+function setupAutocompleteEl(input, dropdown, completionType, onChange) {
+    let items = [];
+    let highlightIdx = 0;
+
+    loadCompletions(completionType).then(data => { items = data; });
+
+    function render(filtered) {
+        if (!filtered.length) { dropdown.style.display = 'none'; return; }
+        dropdown.style.display = '';
+        dropdown.innerHTML = filtered.slice(0, 50).map((item, i) =>
+            `<div class="ac-item${i === highlightIdx ? ' highlighted' : ''}" data-val="${item}">${item}</div>`
+        ).join('');
+        dropdown.querySelectorAll('.ac-item').forEach(el => {
+            el.addEventListener('mousedown', e => {
+                e.preventDefault();
+                input.value = el.dataset.val;
+                dropdown.style.display = 'none';
+                onChange(el.dataset.val);
+            });
+        });
+    }
+
+    input.addEventListener('input', () => {
+        const q = input.value.toLowerCase();
+        if (!q) { dropdown.style.display = 'none'; return; }
+        const filtered = items.filter(i => i.toLowerCase().includes(q));
+        highlightIdx = 0;
+        render(filtered);
+        onChange(input.value);
+    });
+
+    input.addEventListener('keydown', e => {
+        const visible = dropdown.style.display !== 'none';
+        const acItems = dropdown.querySelectorAll('.ac-item');
+        if (e.key === 'ArrowDown' && visible) {
+            e.preventDefault();
+            highlightIdx = Math.min(highlightIdx + 1, acItems.length - 1);
+            acItems.forEach((el, i) => el.classList.toggle('highlighted', i === highlightIdx));
+        } else if (e.key === 'ArrowUp' && visible) {
+            e.preventDefault();
+            highlightIdx = Math.max(highlightIdx - 1, 0);
+            acItems.forEach((el, i) => el.classList.toggle('highlighted', i === highlightIdx));
+        } else if ((e.key === 'Tab' || e.key === 'Enter') && visible && acItems.length) {
+            e.preventDefault();
+            const sel = acItems[highlightIdx];
+            if (sel) {
+                input.value = sel.dataset.val;
+                dropdown.style.display = 'none';
+                onChange(sel.dataset.val);
+            }
+        }
+    });
+
+    input.addEventListener('blur', () => {
+        setTimeout(() => { dropdown.style.display = 'none'; }, 150);
+    });
+}
+
+// Keep old function name for gallery compatibility
+function setupAutocomplete(inputId, dropdownId, completionType, onChange) {
+    const input = document.getElementById(inputId);
+    const dropdown = document.getElementById(dropdownId);
+    if (input && dropdown) setupAutocompleteEl(input, dropdown, completionType, onChange);
+}
+
+// Labeler keyboard shortcuts
+document.addEventListener('keydown', e => {
+    if (currentView !== 'labeler') return;
+    if (document.getElementById('labeler-active').style.display === 'none') return;
+
+    const tag = e.target.tagName;
+    const isInput = tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT';
+
+    if (e.key === 'Escape') { labelerBackToSetup(); return; }
+    if (isInput) return;
+
+    if (e.key === 'ArrowLeft') { e.preventDefault(); labelerNav(-1); }
+    else if (e.key === 'ArrowRight') { e.preventDefault(); labelerNav(1); }
+    else if (e.key === 'Enter') { e.preventDefault(); labelerSaveAll(true); }
+    else if (e.key === 's' || e.key === 'S') { e.preventDefault(); labelerSkip(); }
+    else if (e.key === 't' || e.key === 'T') { e.preventDefault(); labelerQuickBool(true); }
+    else if (e.key === 'f' || e.key === 'F') { e.preventDefault(); labelerQuickBool(false); }
+});
+
+
+// ═══════════════════════════════════════════════════════════════
+// Inspector
+// ═══════════════════════════════════════════════════════════════
+let inspectorInited = false;
+let inspectorState = {
+    image: null,        // HTMLImageElement
+    scale: 1,
+    panX: 0,
+    panY: 0,
+    dragging: false,
+    dragStart: null,
+    selecting: false,
+    selStart: null,
+    selEnd: null,
+    selection: null,    // {x, y, w, h} in image normalized coords
+    lastAnalysis: null, // last server analysis result
+    boxes: {},          // reader -> [{name, x, y, w, h}]
+    selectedBoxReader: '',
+    showOverlays: true,
+    isPanning: false,
+};
+
+async function inspectorInit() {
+    if (inspectorInited) return;
+    inspectorInited = true;
+
+    // Load sources
+    try {
+        const sources = await api('/api/labeler/sources');
+        const sel = document.getElementById('inspector-source-select');
+        sel.innerHTML = '<option value="">Select source...</option>' +
+            sources.map(s => `<option value="${s.path}">${s.parent}/${s.name} (${s.count})</option>`).join('');
+    } catch {}
+
+    // Load boxes
+    try {
+        const boxes = await api('/api/inspector/boxes');
+        inspectorState.boxes = boxes;
+        const sel = document.getElementById('inspector-boxes-select');
+        sel.innerHTML = '<option value="">None</option>' +
+            Object.keys(boxes).map(r => `<option value="${r}">${r}</option>`).join('');
+    } catch {}
+
+    // Source change -> populate thumbnail ribbon
+    document.getElementById('inspector-source-select').addEventListener('change', async e => {
+        const source = e.target.value;
+        const ribbon = document.getElementById('inspector-ribbon');
+        ribbon.innerHTML = '';
+        if (!source) return;
+        try {
+            const data = await api(`/api/labeler/images?source=${encodeURIComponent(source)}&reader=_`);
+            const images = data.images || [];
+            // Also populate hidden select for nav compat
+            const sel = document.getElementById('inspector-image-select');
+            sel.innerHTML = images.map(i => `<option value="${i.filename}">${i.filename}</option>`).join('');
+            inspectorState._ribbonSource = source;
+            inspectorState._ribbonImages = images;
+
+            images.forEach((img, idx) => {
+                const thumb = document.createElement('img');
+                thumb.src = `${API}/api/labeler/frame/${encodeURIComponent(source)}/${encodeURIComponent(img.filename)}?thumb=1`;
+                thumb.title = img.filename;
+                thumb.dataset.idx = idx;
+                thumb.style.cssText = 'height:56px; width:auto; border-radius:3px; border:2px solid #30363d; cursor:pointer; flex-shrink:0; transition:border-color 0.15s;';
+                thumb.addEventListener('click', () => {
+                    // Highlight selected
+                    ribbon.querySelectorAll('img').forEach(t => t.style.borderColor = '#30363d');
+                    thumb.style.borderColor = '#1f6feb';
+                    inspectorState._ribbonIdx = idx;
+                    inspectorLoadImage(`${API}/api/labeler/frame/${encodeURIComponent(source)}/${encodeURIComponent(img.filename)}`);
+                });
+                ribbon.appendChild(thumb);
+            });
+            // Auto-load first image
+            if (images.length > 0) {
+                ribbon.querySelector('img').click();
+            }
+        } catch(e) { console.error(e); }
+    });
+
+    // Keep hidden load button for compat
+    document.getElementById('inspector-load-btn').addEventListener('click', () => {
+        const source = document.getElementById('inspector-source-select').value;
+        const filename = document.getElementById('inspector-image-select').value;
+        if (source && filename) {
+            inspectorLoadImage(`${API}/api/labeler/frame/${encodeURIComponent(source)}/${encodeURIComponent(filename)}`);
+        }
+    });
+
+    document.getElementById('inspector-upload').addEventListener('change', e => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const url = URL.createObjectURL(file);
+        inspectorLoadImage(url);
+    });
+
+    document.getElementById('inspector-boxes-select').addEventListener('change', e => {
+        inspectorState.selectedBoxReader = e.target.value;
+        inspectorRender();
+    });
+
+    // Prev/next image buttons
+    document.getElementById('inspector-prev-btn').addEventListener('click', () => inspectorNavImage(-1));
+    document.getElementById('inspector-next-btn').addEventListener('click', () => inspectorNavImage(1));
+
+    // Editable box coordinate inputs
+    inspectorAttachBoxInputs();
+
+    // Canvas setup
+    const canvasWrap = document.getElementById('inspector-canvas-wrap');
+    const canvas = document.getElementById('inspector-canvas');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+        canvas.width = canvasWrap.clientWidth;
+        canvas.height = canvasWrap.clientHeight;
+        inspectorRender();
+    }
+    new ResizeObserver(resizeCanvas).observe(canvasWrap);
+
+    // Right-click to clear selection
+    canvas.addEventListener('contextmenu', e => e.preventDefault());
+
+    // Mouse events
+    canvas.addEventListener('mousedown', e => {
+        e.preventDefault();
+        const rect = canvas.getBoundingClientRect();
+        const cx = e.clientX - rect.left;
+        const cy = e.clientY - rect.top;
+
+        if (e.button === 2) {
+            // Right-click: clear selection
+            inspectorState.selection = null;
+            inspectorState.selecting = false;
+            inspectorState.lastAnalysis = null;
+            ['inspector-box-x','inspector-box-y','inspector-box-w','inspector-box-h'].forEach(id =>
+                document.getElementById(id).value = '0');
+            document.getElementById('inspector-selection-info').textContent = 'Click and drag to select. Right-click to clear.';
+            ['inspector-results','inspector-crop-section','inspector-solid-section','inspector-cpp-section','inspector-save-section'].forEach(id =>
+                document.getElementById(id).style.display = 'none');
+            inspectorRender();
+            return;
+        }
+
+        if (e.button === 1 || (e.button === 0 && e.altKey)) {
+            // Pan
+            inspectorState.isPanning = true;
+            inspectorState.dragStart = { x: cx, y: cy, panX: inspectorState.panX, panY: inspectorState.panY };
+        } else if (e.button === 0) {
+            // Selection
+            inspectorState.selecting = true;
+            inspectorState.selStart = { x: cx, y: cy };
+            inspectorState.selEnd = { x: cx, y: cy };
+            inspectorState.selection = null;
+        }
+    });
+
+    canvas.addEventListener('mousemove', e => {
+        const rect = canvas.getBoundingClientRect();
+        const cx = e.clientX - rect.left;
+        const cy = e.clientY - rect.top;
+
+        if (inspectorState.isPanning && inspectorState.dragStart) {
+            inspectorState.panX = inspectorState.dragStart.panX + (cx - inspectorState.dragStart.x);
+            inspectorState.panY = inspectorState.dragStart.panY + (cy - inspectorState.dragStart.y);
+            inspectorRender();
+        } else if (inspectorState.selecting) {
+            inspectorState.selEnd = { x: cx, y: cy };
+            inspectorRender();
+        }
+    });
+
+    canvas.addEventListener('mouseup', e => {
+        if (inspectorState.isPanning) {
+            inspectorState.isPanning = false;
+            inspectorState.dragStart = null;
+            return;
+        }
+        if (inspectorState.selecting) {
+            inspectorState.selecting = false;
+            const rect = canvas.getBoundingClientRect();
+            const cx = e.clientX - rect.left;
+            const cy = e.clientY - rect.top;
+            inspectorState.selEnd = { x: cx, y: cy };
+            inspectorFinalizeSelection();
+            inspectorRender();
+        }
+    });
+
+    // Zoom
+    canvas.addEventListener('wheel', e => {
+        e.preventDefault();
+        const rect = canvas.getBoundingClientRect();
+        const mx = e.clientX - rect.left;
+        const my = e.clientY - rect.top;
+        const delta = e.deltaY > 0 ? 0.9 : 1.1;
+        const newScale = Math.max(0.1, Math.min(20, inspectorState.scale * delta));
+
+        // Zoom around mouse
+        inspectorState.panX = mx - (mx - inspectorState.panX) * (newScale / inspectorState.scale);
+        inspectorState.panY = my - (my - inspectorState.panY) * (newScale / inspectorState.scale);
+        inspectorState.scale = newScale;
+        document.getElementById('inspector-zoom-label').textContent = Math.round(newScale * 100) + '%';
+        inspectorRender();
+    }, { passive: false });
+
+    // Prevent context menu on canvas
+    canvas.addEventListener('contextmenu', e => e.preventDefault());
+}
+
+function inspectorLoadImage(url) {
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => {
+        inspectorState.image = img;
+        inspectorState.scale = 1;
+        inspectorState.panX = 0;
+        inspectorState.panY = 0;
+        inspectorState.selection = null;
+        inspectorState.selecting = false;
+
+        // Fit image
+        const canvas = document.getElementById('inspector-canvas');
+        const fitScale = Math.min(canvas.width / img.width, canvas.height / img.height) * 0.95;
+        inspectorState.scale = fitScale;
+        inspectorState.panX = (canvas.width - img.width * fitScale) / 2;
+        inspectorState.panY = (canvas.height - img.height * fitScale) / 2;
+
+        document.getElementById('inspector-results').style.display = 'none';
+        document.getElementById('inspector-selection-info').textContent = 'Click and drag on the image to select a region.';
+        inspectorRender();
+    };
+    img.src = url;
+}
+
+function inspectorRender() {
+    const canvas = document.getElementById('inspector-canvas');
+    const ctx = canvas.getContext('2d');
+    const s = inspectorState;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    if (!s.image) {
+        ctx.fillStyle = '#484f58';
+        ctx.font = '14px SF Mono, Fira Code, Consolas, monospace';
+        ctx.textAlign = 'center';
+        ctx.fillText('Load or upload an image to begin', canvas.width / 2, canvas.height / 2);
+        return;
+    }
+
+    ctx.save();
+    ctx.translate(s.panX, s.panY);
+    ctx.scale(s.scale, s.scale);
+
+    // Draw image
+    ctx.drawImage(s.image, 0, 0);
+
+    // Draw detector overlays
+    if (s.showOverlays && s.selectedBoxReader && s.boxes[s.selectedBoxReader]) {
+        const readerBoxes = s.boxes[s.selectedBoxReader];
+        readerBoxes.forEach((box, i) => {
+            const color = OVERLAY_COLORS[i % OVERLAY_COLORS.length];
+            const bx = box.x * s.image.width;
+            const by = box.y * s.image.height;
+            const bw = box.w * s.image.width;
+            const bh = box.h * s.image.height;
+
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 2 / s.scale;
+            ctx.strokeRect(bx, by, bw, bh);
+
+            ctx.fillStyle = color;
+            ctx.font = `${Math.max(10, 12 / s.scale)}px SF Mono, Fira Code, Consolas, monospace`;
+            ctx.fillText(box.name || `box${i}`, bx, by - 3 / s.scale);
+        });
+    }
+
+    // Draw current selection in image space
+    if (s.selection) {
+        const sx = s.selection.x * s.image.width;
+        const sy = s.selection.y * s.image.height;
+        const sw = s.selection.w * s.image.width;
+        const sh = s.selection.h * s.image.height;
+        ctx.strokeStyle = '#58a6ff';
+        ctx.lineWidth = 2 / s.scale;
+        ctx.setLineDash([6 / s.scale, 4 / s.scale]);
+        ctx.strokeRect(sx, sy, sw, sh);
+        ctx.setLineDash([]);
+    }
+
+    ctx.restore();
+
+    // Draw selection rectangle while dragging (in canvas space)
+    if (s.selecting && s.selStart && s.selEnd) {
+        const x = Math.min(s.selStart.x, s.selEnd.x);
+        const y = Math.min(s.selStart.y, s.selEnd.y);
+        const w = Math.abs(s.selEnd.x - s.selStart.x);
+        const h = Math.abs(s.selEnd.y - s.selStart.y);
+        ctx.strokeStyle = '#58a6ff';
+        ctx.lineWidth = 1.5;
+        ctx.setLineDash([6, 4]);
+        ctx.strokeRect(x, y, w, h);
+        ctx.setLineDash([]);
+        ctx.fillStyle = 'rgba(88, 166, 255, 0.1)';
+        ctx.fillRect(x, y, w, h);
+    }
+}
+
+function inspectorFinalizeSelection() {
+    const s = inspectorState;
+    if (!s.image || !s.selStart || !s.selEnd) return;
+
+    // Convert canvas coords to image coords
+    const x1 = (Math.min(s.selStart.x, s.selEnd.x) - s.panX) / s.scale;
+    const y1 = (Math.min(s.selStart.y, s.selEnd.y) - s.panY) / s.scale;
+    const x2 = (Math.max(s.selStart.x, s.selEnd.x) - s.panX) / s.scale;
+    const y2 = (Math.max(s.selStart.y, s.selEnd.y) - s.panY) / s.scale;
+
+    // Clamp to image
+    const ix = Math.max(0, x1) / s.image.width;
+    const iy = Math.max(0, y1) / s.image.height;
+    const iw = Math.min(x2, s.image.width) / s.image.width - ix;
+    const ih = Math.min(y2, s.image.height) / s.image.height - iy;
+
+    if (iw < 0.001 || ih < 0.001) return;
+
+    s.selection = { x: ix, y: iy, w: iw, h: ih };
+    inspectorUpdateBoxInputs();
+    inspectorAnalyze(s.selection);
+}
+
+function inspectorUpdateBoxInputs() {
+    const s = inspectorState.selection;
+    if (!s) return;
+    document.getElementById('inspector-box-x').value = s.x.toFixed(4);
+    document.getElementById('inspector-box-y').value = s.y.toFixed(4);
+    document.getElementById('inspector-box-w').value = s.w.toFixed(4);
+    document.getElementById('inspector-box-h').value = s.h.toFixed(4);
+}
+
+function inspectorOnBoxInput() {
+    const x = parseFloat(document.getElementById('inspector-box-x').value) || 0;
+    const y = parseFloat(document.getElementById('inspector-box-y').value) || 0;
+    const w = parseFloat(document.getElementById('inspector-box-w').value) || 0;
+    const h = parseFloat(document.getElementById('inspector-box-h').value) || 0;
+    if (w > 0.001 && h > 0.001) {
+        inspectorState.selection = { x, y, w, h };
+        inspectorRender();
+        inspectorAnalyze(inspectorState.selection);
+    }
+}
+
+// Debounced box input handler
+let _inspectorBoxInputTimer = null;
+document.querySelectorAll('#inspector-box-x, #inspector-box-y, #inspector-box-w, #inspector-box-h').forEach(el => {
+    // Wait for DOM - attach in inspectorInit instead
+});
+
+function inspectorAttachBoxInputs() {
+    ['inspector-box-x','inspector-box-y','inspector-box-w','inspector-box-h'].forEach(id => {
+        document.getElementById(id).addEventListener('input', () => {
+            clearTimeout(_inspectorBoxInputTimer);
+            _inspectorBoxInputTimer = setTimeout(inspectorOnBoxInput, 300);
+        });
+    });
+}
+
+async function inspectorAnalyze(box) {
+    if (!inspectorState.image) return;
+    try {
+        const source = document.getElementById('inspector-source-select').value;
+        const filename = document.getElementById('inspector-image-select').value;
+
+        const result = await apiPost('/api/inspector/analyze', {
+            source: source || '',
+            filename: filename || '',
+            x: box.x.toString(),
+            y: box.y.toString(),
+            w: box.w.toString(),
+            h: box.h.toString(),
+        });
+
+        if (result.error) { console.error(result.error); return; }
+        inspectorState.lastAnalysis = result;
+
+        // Update selection info
+        const px = result.pixels;
+        document.getElementById('inspector-selection-info').innerHTML =
+            `<span style="color:#c9d1d9;">${px.w}×${px.h}px</span> · ${px.count} pixels`;
+
+        // Crop previews
+        const cropSection = document.getElementById('inspector-crop-section');
+        cropSection.style.display = '';
+        document.getElementById('inspector-crop-img').src = 'data:image/png;base64,' + result.crop_b64;
+        document.getElementById('inspector-bw-img').src = 'data:image/png;base64,' + result.bw_b64;
+
+        // Color stats
+        const resEl = document.getElementById('inspector-results');
+        resEl.style.display = '';
+        const body = document.getElementById('inspector-results-body');
+        const [ar, ag, ab] = result.avg_rgb;
+        const [sr, sg, sb] = result.stddev_rgb;
+        const [rr, rg, rb] = result.color_ratio;
+        body.innerHTML = `
+            <div class="result-row">
+                <span class="rl">Avg RGB</span>
+                <span class="rv"><span class="color-swatch" style="background:rgb(${Math.round(ar)},${Math.round(ag)},${Math.round(ab)})"></span>(${ar}, ${ag}, ${ab})</span>
+            </div>
+            <div class="result-row">
+                <span class="rl">Stddev</span>
+                <span class="rv">(${sr}, ${sg}, ${sb})</span>
+            </div>
+            <div class="result-row">
+                <span class="rl">Stddev sum</span>
+                <span class="rv">${result.stddev_sum}</span>
+            </div>
+            <div class="result-row">
+                <span class="rl">Color ratio</span>
+                <span class="rv">(${rr}, ${rg}, ${rb})</span>
+            </div>
+            <div class="result-row">
+                <span class="rl">Brightness</span>
+                <span class="rv">${result.brightness}</span>
+            </div>
+        `;
+
+        // is_solid tests
+        const solidSection = document.getElementById('inspector-solid-section');
+        solidSection.style.display = '';
+        const solidBody = document.getElementById('inspector-solid-body');
+        solidBody.innerHTML = result.solid_tests.map(t => `
+            <div class="result-row">
+                <span class="rl" style="font-size:11px;">dist=${t.max_dist}, sdsum=${t.max_stddev}</span>
+                <span class="rv" style="color:${t.passes ? '#3fb950' : '#f85149'}">${t.passes ? 'PASS' : 'FAIL'}</span>
+            </div>
+        `).join('');
+
+        // C++ code
+        const cppSection = document.getElementById('inspector-cpp-section');
+        cppSection.style.display = '';
+        document.getElementById('inspector-cpp-body').textContent =
+            result.cpp_box + '\n' + result.cpp_color;
+
+        // Show save section
+        document.getElementById('inspector-save-section').style.display = '';
+
+    } catch (e) {
+        console.error('inspectorAnalyze:', e);
+    }
+}
+
+async function inspectorSaveBox() {
+    const a = inspectorState.lastAnalysis;
+    if (!a) return;
+    const name = document.getElementById('inspector-save-name').value.trim();
+    if (!name) { alert('Enter a box name'); return; }
+    try {
+        const resp = await fetch(`${API}/api/inspector/save-box`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                name,
+                scene: document.getElementById('inspector-save-scene').value.trim(),
+                description: document.getElementById('inspector-save-desc').value.trim(),
+                screenshot: document.getElementById('inspector-source-select').value + '/' +
+                            document.getElementById('inspector-image-select').value,
+                box: a.box,
+                avg_rgb: a.avg_rgb,
+                stddev_sum: a.stddev_sum,
+                color_ratio: a.color_ratio,
+            }),
+        });
+        const data = await resp.json();
+        if (data.ok) {
+            const st = document.getElementById('inspector-save-status');
+            st.textContent = 'Saved!';
+            setTimeout(() => st.textContent = '', 2000);
+        }
+    } catch (e) { console.error(e); }
+}
+
+function inspectorNavImage(delta) {
+    const ribbon = document.getElementById('inspector-ribbon');
+    const thumbs = ribbon.querySelectorAll('img');
+    if (!thumbs.length) return;
+    const curIdx = inspectorState._ribbonIdx || 0;
+    const newIdx = curIdx + delta;
+    if (newIdx >= 0 && newIdx < thumbs.length) {
+        thumbs[newIdx].click();
+        thumbs[newIdx].scrollIntoView({ behavior: 'smooth', inline: 'center' });
+    }
+}
+
+// Inspector keyboard shortcuts
+document.addEventListener('keydown', e => {
+    if (currentView !== 'inspector') return;
+    const tag = e.target.tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+
+    if (e.key === 'a' || e.key === 'A') {
+        inspectorState.showOverlays = !inspectorState.showOverlays;
+        inspectorRender();
+    } else if (e.key === 'r' || e.key === 'R') {
+        if (inspectorState.image) {
+            const canvas = document.getElementById('inspector-canvas');
+            const fitScale = Math.min(canvas.width / inspectorState.image.width, canvas.height / inspectorState.image.height) * 0.95;
+            inspectorState.scale = fitScale;
+            inspectorState.panX = (canvas.width - inspectorState.image.width * fitScale) / 2;
+            inspectorState.panY = (canvas.height - inspectorState.image.height * fitScale) / 2;
+            inspectorRender();
+        }
+    } else if (e.key === 'ArrowLeft') {
+        inspectorNavImage(-1);
+    } else if (e.key === 'ArrowRight') {
+        inspectorNavImage(1);
+    }
+});
+
+
+// ═══════════════════════════════════════════════════════════════
+// Recognition Results
+// ═══════════════════════════════════════════════════════════════
+
+let recogInited = false;
+let recogData = null;
+let recogSelectedReader = null;
+let recogPage = 0;
+const RECOG_PAGE_SIZE = 20;
+let recogSorted = [];
+let recogBoxOverrides = {}; // reader -> [{name, box: [x,y,w,h]}, ...]
+
+// Recognition readers (non-bool readers that return values)
+const RECOG_READERS = [
+    'SpeciesReader_Doubles', 'SpeciesReader', 'MoveNameReader',
+    'TeamSelectReader', 'TeamSummaryReader', 'TeamPreviewReader',
+    'OpponentHPReader_Doubles', 'OpponentHPReader',
+];
+
+async function recognitionInit() {
+    if (recogInited) return;
+    recogInited = true;
+    await loadRecogResults();
+}
+
+async function loadRecogResults() {
+    const status = document.getElementById('recog-status');
+    status.textContent = 'Loading regression results...';
+    try {
+        recogData = await api('/api/regression/summary');
+        if (!recogData.timestamp) {
+            status.innerHTML = 'No regression results found. Run <code>python3 tools/retest.py</code> locally, commit and push <code>tools/regression_results.json</code>.';
+            return;
+        }
+        status.textContent = `Last run: ${recogData.timestamp}`;
+        renderRecogReaderBar();
+        if (RECOG_READERS.length > 0) {
+            const first = RECOG_READERS.find(r => recogData.readers[r]);
+            if (first) selectRecogReader(first);
+        }
+    } catch (e) {
+        status.textContent = 'Error loading results: ' + e.message;
+    }
+}
+
+function renderRecogReaderBar() {
+    const bar = document.getElementById('recog-reader-bar');
+    bar.innerHTML = '';
+    RECOG_READERS.forEach(name => {
+        const r = recogData.readers[name];
+        const btn = document.createElement('button');
+        btn.className = 'btn' + (name === recogSelectedReader ? ' btn-primary' : '');
+        btn.style.fontSize = '11px';
+        btn.style.padding = '4px 10px';
+        if (r) {
+            const total = r.passed + r.failed;
+            const label = r.failed > 0 ? `${r.passed}/${total}` : `${total}`;
+            btn.textContent = `${name} (${label})`;
+            if (r.failed > 0) btn.style.borderColor = '#f85149';
+        } else {
+            btn.textContent = `${name} (0)`;
+            btn.style.opacity = '0.4';
+        }
+        btn.onclick = () => selectRecogReader(name);
+        bar.appendChild(btn);
+    });
+
+    // Also show all other readers
+    Object.keys(recogData.readers).forEach(name => {
+        if (RECOG_READERS.includes(name)) return;
+        const r = recogData.readers[name];
+        const btn = document.createElement('button');
+        btn.className = 'btn' + (name === recogSelectedReader ? ' btn-primary' : '');
+        btn.style.fontSize = '11px';
+        btn.style.padding = '4px 10px';
+        const total = r.passed + r.failed;
+        const label = r.failed > 0 ? `${r.passed}/${total}` : `✓ ${total}`;
+        btn.textContent = `${name} (${label})`;
+        if (r.failed > 0) btn.style.borderColor = '#f85149';
+        btn.onclick = () => selectRecogReader(name);
+        bar.appendChild(btn);
+    });
+}
+
+async function selectRecogReader(name) {
+    recogSelectedReader = name;
+    recogPage = 0;
+    renderRecogReaderBar();
+    const content = document.getElementById('recog-content');
+    const r = recogData.readers[name];
+    if (!r) {
+        content.innerHTML = '<div style="color:#8b949e; padding:20px;">No results for this reader.</div>';
+        return;
+    }
+
+    content.innerHTML = '<div style="color:#8b949e;">Loading frames...</div>';
+
+    // Load full results + reader image list + crop defs
+    const [full, readerData, cropDefs] = await Promise.all([
+        api('/api/regression/results'),
+        api(`/api/gallery/reader/${encodeURIComponent(name)}`).catch(() => null),
+        api(`/api/gallery/crop_defs/${encodeURIComponent(name)}`).catch(() => null),
+    ]);
+
+    // Cache crop defs locally
+    if (cropDefs && cropDefs.crops) {
+        CROP_DEFS_LOCAL[name] = cropDefs.crops;
+    }
+    _recogResults = full.results || {};
+
+    const results = _recogResults;
+    const images = readerData ? readerData.images || [] : [];
+
+    // Sort: failures first, then passes
+    recogSorted = images.slice().sort((a, b) => {
+        const ra = results[a.filename], rb = results[b.filename];
+        const fa = ra && !ra.passed ? 0 : 1;
+        const fb = rb && !rb.passed ? 0 : 1;
+        return fa - fb;
+    });
+
+    recogRenderPage(name, r, results);
+}
+
+function recogRenderPage(name, r, results) {
+    const content = document.getElementById('recog-content');
+    const totalPages = Math.ceil(recogSorted.length / RECOG_PAGE_SIZE);
+    const pageItems = recogSorted.slice(recogPage * RECOG_PAGE_SIZE, (recogPage + 1) * RECOG_PAGE_SIZE);
+
+    // Box editor panel
+    const crops = recogBoxOverrides[name] || CROP_DEFS_LOCAL[name] || [];
+    let boxHtml = '';
+    if (crops.length > 0) {
+        boxHtml = `<div style="background:#161b22; border:1px solid #30363d; border-radius:8px; padding:10px 12px; margin-bottom:12px;">
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:8px;">
+                <span style="font-size:11px; color:#58a6ff; font-weight:bold;">Crop Boxes</span>
+                <button class="btn" style="font-size:10px; padding:2px 8px;" onclick="recogResetBoxes('${name}')">Reset</button>
+                <button class="btn btn-primary" style="font-size:10px; padding:2px 8px;" onclick="recogRefreshCrops('${name}')">Refresh Crops</button>
+                <span style="font-size:10px; color:#8b949e;" id="recog-box-status"></span>
+            </div>
+            <div style="display:flex; gap:12px; flex-wrap:wrap;">`;
+        crops.forEach((c, idx) => {
+            boxHtml += `<div style="background:#0d1117; border:1px solid #21262d; border-radius:4px; padding:6px 8px;">
+                <div style="font-size:10px; color:#8b949e; margin-bottom:4px;">${c.name}</div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:3px;">
+                    <label style="font-size:9px; color:#484f58;">x <input type="number" step="0.001" min="0" max="1" value="${c.box[0].toFixed(4)}" style="width:62px; font-size:10px; background:#161b22; border:1px solid #30363d; color:#c9d1d9; border-radius:3px; padding:1px 4px;" data-reader="${name}" data-idx="${idx}" data-dim="0" onchange="recogBoxChanged(this)"></label>
+                    <label style="font-size:9px; color:#484f58;">y <input type="number" step="0.001" min="0" max="1" value="${c.box[1].toFixed(4)}" style="width:62px; font-size:10px; background:#161b22; border:1px solid #30363d; color:#c9d1d9; border-radius:3px; padding:1px 4px;" data-reader="${name}" data-idx="${idx}" data-dim="1" onchange="recogBoxChanged(this)"></label>
+                    <label style="font-size:9px; color:#484f58;">w <input type="number" step="0.001" min="0" max="1" value="${c.box[2].toFixed(4)}" style="width:62px; font-size:10px; background:#161b22; border:1px solid #30363d; color:#c9d1d9; border-radius:3px; padding:1px 4px;" data-reader="${name}" data-idx="${idx}" data-dim="2" onchange="recogBoxChanged(this)"></label>
+                    <label style="font-size:9px; color:#484f58;">h <input type="number" step="0.001" min="0" max="1" value="${c.box[3].toFixed(4)}" style="width:62px; font-size:10px; background:#161b22; border:1px solid #30363d; color:#c9d1d9; border-radius:3px; padding:1px 4px;" data-reader="${name}" data-idx="${idx}" data-dim="3" onchange="recogBoxChanged(this)"></label>
+                </div>
+            </div>`;
+        });
+        boxHtml += `</div>
+            <div style="margin-top:8px; font-size:10px; color:#484f58;">C++ code: <code id="recog-cpp-snippet" style="color:#c9d1d9; user-select:all;"></code></div>
+        </div>`;
+    }
+
+    // Summary + pagination header
+    let html = `${boxHtml}
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+        <div style="font-size:12px; color:#8b949e;">
+            <span style="color:#3fb950; font-weight:bold;">${r.passed}</span> passed,
+            <span style="color:#f85149; font-weight:bold;">${r.failed}</span> failed,
+            ${r.passed + r.failed} total
+        </div>
+        <div style="display:flex; gap:6px; align-items:center;">
+            <button class="btn" style="font-size:11px; padding:3px 8px;" onclick="recogPageNav(-1)" ${recogPage === 0 ? 'disabled style="opacity:0.3;font-size:11px;padding:3px 8px;"' : ''}>Prev</button>
+            <span style="font-size:11px; color:#8b949e;">Page ${recogPage + 1}/${totalPages}</span>
+            <button class="btn" style="font-size:11px; padding:3px 8px;" onclick="recogPageNav(1)" ${recogPage >= totalPages - 1 ? 'disabled style="opacity:0.3;font-size:11px;padding:3px 8px;"' : ''}>Next</button>
+        </div>
+    </div>`;
+
+    // Frame cards
+    pageItems.forEach(img => {
+        const res = results[img.filename];
+        const passed = res ? res.passed : null;
+        const borderColor = passed === false ? '#f85149' : passed === true ? '#238636' : '#30363d';
+        const badge = passed === true ? '<span style="color:#3fb950;font-weight:bold;">PASS</span>'
+                     : passed === false ? '<span style="color:#f85149;font-weight:bold;">FAIL</span>'
+                     : '<span style="color:#484f58;">—</span>';
+
+        const gt = img.ground_truth || {};
+        const expected = (gt.values || []).filter(v => v !== null).join(', ');
+        const actual = res ? (res.actual || '(empty)') : '—';
+
+        html += `<div style="background:#161b22; border:1px solid ${borderColor}; border-radius:8px; padding:10px 12px; margin-bottom:6px;">
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+                <img src="/api/gallery/thumb/${encodeURIComponent(name)}/${encodeURIComponent(img.filename)}"
+                     style="width:220px; height:auto; border-radius:4px; border:1px solid #30363d; cursor:pointer; flex-shrink:0;"
+                     onclick="this.style.width=this.style.width==='220px'?'500px':'220px'"
+                     onerror="this.style.display='none'">
+                <div style="flex:1; min-width:0;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                        <span style="color:#58a6ff; font-size:11px; font-weight:bold;">${img.filename}</span>
+                        ${badge}
+                    </div>
+                    <div style="font-size:12px; margin-bottom:8px;">
+                        <span style="color:#8b949e;">Expected:</span> <b>${expected}</b>
+                        <span style="color:#8b949e; margin-left:12px;">Got:</span>
+                        <b style="color:${passed === false ? '#f85149' : '#3fb950'};">${actual}</b>
+                    </div>
+                    <div style="display:flex; gap:6px; flex-wrap:wrap;" id="recog-crops-${img.filename.replace(/[^a-zA-Z0-9]/g, '_')}">
+                    </div>
+                </div>
+            </div>
+        </div>`;
+    });
+
+    content.innerHTML = html;
+
+    // Update C++ snippet
+    recogUpdateSnippet(name);
+
+    // Load crops for visible page items
+    recogLoadPageCrops(name, pageItems);
+}
+
+async function recogLoadPageCrops(name, pageItems) {
+    const boxes = recogBoxOverrides[name] || CROP_DEFS_LOCAL[name] || null;
+    for (const img of pageItems) {
+        const cropId = 'recog-crops-' + img.filename.replace(/[^a-zA-Z0-9]/g, '_');
+        const el = document.getElementById(cropId);
+        if (!el) continue;
+        try {
+            let crops;
+            if (boxes) {
+                const resp = await fetch(`${API}/api/gallery/crops_custom/${encodeURIComponent(name)}/${encodeURIComponent(img.filename)}`, {
+                    method: 'POST', headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({boxes})
+                });
+                crops = await resp.json();
+            } else {
+                crops = await fetch(`${API}/api/gallery/crops/${encodeURIComponent(name)}/${encodeURIComponent(img.filename)}`).then(r => r.json());
+            }
+            if (!Array.isArray(crops)) continue;
+            el.innerHTML = '';
+            crops.forEach(crop => {
+                const cell = document.createElement('div');
+                cell.style.cssText = 'text-align:center; background:#0d1117; border:1px solid #21262d; border-radius:4px; padding:4px;';
+                cell.innerHTML = `<img src="${crop.data}" style="max-height:60px; image-rendering:pixelated; border:1px solid #30363d; border-radius:3px; display:block; margin:0 auto 3px;">
+                    <div style="font-size:9px; color:#8b949e;">${crop.name}</div>`;
+                el.appendChild(cell);
+            });
+        } catch {}
+    }
+}
+
+// Page navigation
+let _recogResults = null;
+async function recogPageNav(delta) {
+    recogPage += delta;
+    if (recogPage < 0) recogPage = 0;
+    const totalPages = Math.ceil(recogSorted.length / RECOG_PAGE_SIZE);
+    if (recogPage >= totalPages) recogPage = totalPages - 1;
+    // Re-fetch results if needed
+    if (!_recogResults) _recogResults = (await api('/api/regression/results')).results || {};
+    const r = recogData.readers[recogSelectedReader];
+    recogRenderPage(recogSelectedReader, r, _recogResults);
+}
+
+// Box editing
+const CROP_DEFS_LOCAL = {};
+function recogBoxChanged(input) {
+    const reader = input.dataset.reader;
+    const idx = parseInt(input.dataset.idx);
+    const dim = parseInt(input.dataset.dim);
+    const val = parseFloat(input.value);
+    if (isNaN(val)) return;
+
+    if (!recogBoxOverrides[reader]) {
+        const orig = CROP_DEFS_LOCAL[reader] || [];
+        recogBoxOverrides[reader] = orig.map(c => ({name: c.name, box: [...c.box]}));
+    }
+    recogBoxOverrides[reader][idx].box[dim] = val;
+    recogUpdateSnippet(reader);
+    document.getElementById('recog-box-status').textContent = 'Modified (click Refresh Crops to preview)';
+}
+
+function recogResetBoxes(reader) {
+    delete recogBoxOverrides[reader];
+    document.getElementById('recog-box-status').textContent = '';
+    // Re-render
+    recogPageNav(0);
+}
+
+async function recogRefreshCrops(reader) {
+    document.getElementById('recog-box-status').textContent = 'Refreshing...';
+    const pageItems = recogSorted.slice(recogPage * RECOG_PAGE_SIZE, (recogPage + 1) * RECOG_PAGE_SIZE);
+    await recogLoadPageCrops(reader, pageItems);
+    document.getElementById('recog-box-status').textContent = 'Updated';
+}
+
+function recogUpdateSnippet(reader) {
+    const el = document.getElementById('recog-cpp-snippet');
+    if (!el) return;
+    const boxes = recogBoxOverrides[reader] || CROP_DEFS_LOCAL[reader] || [];
+    const code = boxes.map(c =>
+        `ImageFloatBox(${c.box[0].toFixed(4)}, ${c.box[1].toFixed(4)}, ${c.box[2].toFixed(4)}, ${c.box[3].toFixed(4)})`
+    ).join(', ');
+    el.textContent = code;
+}
+
+
+// ═══════════════════════════════════════════════════════════════
+// Team Preview
+// ═══════════════════════════════════════════════════════════════
+
+let tpInited = false;
+let tpImages = [];
+let tpIndex = 0;
+let tpSource = '';
+let tpSpeciesList = [];
+let tpLabels = {}; // filename -> {own: [6], opp: [6]}
+
+const TP_OWN_BOXES = Array.from({length:6}, (_, i) => ({
+    name: `own_${i}`,
+    box: [0.0760 + (i/5)*(0.0724-0.0760), 0.1565 + (i/5)*(0.7389-0.1565), 0.0969, 0.0389]
+}));
+const TP_OPP_BOXES = Array.from({length:6}, (_, i) => ({
+    name: `opp_sprite_${i}`,
+    box: [0.8380, 0.1509 + i*((0.7407-0.1509)/5), 0.0583, 0.0917]
+}));
+
+async function teamPreviewInit() {
+    if (tpInited) return;
+    tpInited = true;
+
+    // Load species completions
+    try { tpSpeciesList = await api('/api/labeler/completions/species'); } catch {}
+
+    // Load sources
+    const sources = await api('/api/labeler/sources');
+    const sel = document.getElementById('tp-source');
+    let html = '<option value="">-- Pick source with team preview frames --</option>';
+    sources.forEach(s => {
+        html += `<option value="${s.path}">${s.parent}/${s.name} (${s.count})</option>`;
+    });
+    sel.innerHTML = html;
+    sel.addEventListener('change', tpLoadSource);
+
+    document.getElementById('tp-save-btn').addEventListener('click', tpSave);
+    document.getElementById('tp-export-btn').addEventListener('click', tpExport);
+
+    // Keyboard nav
+    document.addEventListener('keydown', e => {
+        if (currentView !== 'teampreview') return;
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return;
+        if (e.key === 'ArrowLeft') { tpNav(-1); e.preventDefault(); }
+        else if (e.key === 'ArrowRight') { tpNav(1); e.preventDefault(); }
+        else if (e.key === 'Enter') { tpSave(); e.preventDefault(); }
+    });
+}
+
+async function tpLoadSource() {
+    const source = document.getElementById('tp-source').value;
+    if (!source) return;
+    tpSource = source;
+
+    const resp = await api(`/api/labeler/images?source=${encodeURIComponent(source)}&reader=TeamPreviewReader`);
+    tpImages = resp.images || resp;
+    tpIndex = 0;
+    document.getElementById('tp-count').textContent = `${tpImages.length} frames`;
+
+    // Build ribbon
+    const ribbon = document.getElementById('tp-ribbon');
+    ribbon.innerHTML = '';
+    tpImages.forEach((img, idx) => {
+        const thumb = document.createElement('img');
+        thumb.src = `${API}/api/labeler/frame/${encodeURIComponent(source)}/${encodeURIComponent(img.filename)}?thumb=1`;
+        thumb.style.cssText = 'height:60px; border-radius:3px; cursor:pointer; border:2px solid transparent; flex-shrink:0;';
+        thumb.dataset.idx = idx;
+        thumb.onclick = () => { tpIndex = idx; tpShowFrame(); };
+        ribbon.appendChild(thumb);
+    });
+
+    if (tpImages.length > 0) tpShowFrame();
+}
+
+function tpNav(delta) {
+    const newIdx = tpIndex + delta;
+    if (newIdx < 0 || newIdx >= tpImages.length) return;
+    tpIndex = newIdx;
+    tpShowFrame();
+}
+
+async function tpShowFrame() {
+    const img = tpImages[tpIndex];
+    if (!img) return;
+
+    document.getElementById('tp-content').style.display = '';
+    document.getElementById('tp-filename').textContent = `${img.filename} [${tpIndex+1}/${tpImages.length}]`;
+
+    // Highlight ribbon
+    document.querySelectorAll('#tp-ribbon img').forEach((el, i) => {
+        el.style.borderColor = i === tpIndex ? '#58a6ff' : 'transparent';
+        if (i === tpIndex) el.scrollIntoView({behavior:'smooth', block:'nearest', inline:'center'});
+    });
+
+    // Load full image
+    const imgEl = document.getElementById('tp-image');
+    imgEl.src = `${API}/api/labeler/frame/${encodeURIComponent(tpSource)}/${encodeURIComponent(img.filename)}`;
+    imgEl.onload = () => tpDrawOverlays();
+
+    // Load crops from labeler source
+    const allBoxes = [...TP_OWN_BOXES, ...TP_OPP_BOXES];
+    try {
+        const cropsData = await fetch(`${API}/api/teampreview/crops`, {
+            method:'POST', headers:{'Content-Type':'application/json'},
+            body: JSON.stringify({source: tpSource, filename: img.filename, boxes: allBoxes})
+        }).then(r => r.json());
+
+        if (Array.isArray(cropsData)) {
+            tpRenderCrops(cropsData, img.filename);
+        }
+    } catch (e) {
+        console.error('crops failed', e);
+    }
+}
+
+function tpDrawOverlays() {
+    const container = document.getElementById('tp-overlays');
+    container.innerHTML = '';
+    const imgEl = document.getElementById('tp-image');
+    const w = imgEl.clientWidth, h = imgEl.clientHeight;
+    if (!w || !h) return;
+
+    const colors = {own: '#58a6ff', opp: '#d2a8ff'};
+    TP_OWN_BOXES.forEach((box, i) => {
+        const div = document.createElement('div');
+        div.style.cssText = `position:absolute; border:1.5px solid ${colors.own}; border-radius:2px;`;
+        div.style.left = (box.box[0]*w)+'px'; div.style.top = (box.box[1]*h)+'px';
+        div.style.width = (box.box[2]*w)+'px'; div.style.height = (box.box[3]*h)+'px';
+        container.appendChild(div);
+    });
+    TP_OPP_BOXES.forEach((box, i) => {
+        const div = document.createElement('div');
+        div.style.cssText = `position:absolute; border:1.5px solid ${colors.opp}; border-radius:2px;`;
+        div.style.left = (box.box[0]*w)+'px'; div.style.top = (box.box[1]*h)+'px';
+        div.style.width = (box.box[2]*w)+'px'; div.style.height = (box.box[3]*h)+'px';
+        container.appendChild(div);
+    });
+}
+
+function tpRenderCrops(crops, filename) {
+    const ownEl = document.getElementById('tp-own-crops');
+    const oppEl = document.getElementById('tp-opp-crops');
+    const existing = tpLabels[filename] || {own: Array(6).fill(''), opp: Array(6).fill('')};
+    tpLabels[filename] = existing;
+
+    // Own crops (first 6)
+    ownEl.innerHTML = '';
+    for (let i = 0; i < 6; i++) {
+        const crop = crops[i];
+        const div = document.createElement('div');
+        div.style.cssText = 'background:#0d1117; border:1px solid #21262d; border-radius:4px; padding:4px; text-align:center;';
+        div.innerHTML = `
+            ${crop ? `<img src="${crop.data}" style="max-height:28px; image-rendering:pixelated; display:block; margin:0 auto 3px; border:1px solid #30363d; border-radius:2px;">` : ''}
+            <input type="text" value="${existing.own[i]}" data-side="own" data-idx="${i}"
+                style="width:100%; font-size:10px; padding:2px 4px; background:#161b22; border:1px solid #30363d; color:#c9d1d9; border-radius:3px;"
+                placeholder="species..." list="tp-species-list">
+        `;
+        ownEl.appendChild(div);
+    }
+
+    // Opp crops (last 6)
+    oppEl.innerHTML = '';
+    for (let i = 0; i < 6; i++) {
+        const crop = crops[6 + i];
+        const div = document.createElement('div');
+        div.style.cssText = 'background:#0d1117; border:1px solid #21262d; border-radius:4px; padding:4px; text-align:center;';
+        div.innerHTML = `
+            ${crop ? `<img src="${crop.data}" style="max-height:50px; image-rendering:pixelated; display:block; margin:0 auto 3px; border:1px solid #30363d; border-radius:2px;">` : ''}
+            <input type="text" value="${existing.opp[i]}" data-side="opp" data-idx="${i}"
+                style="width:100%; font-size:10px; padding:2px 4px; background:#161b22; border:1px solid #30363d; color:#c9d1d9; border-radius:3px;"
+                placeholder="species..." list="tp-species-list">
+        `;
+        oppEl.appendChild(div);
+    }
+
+    // Wire up inputs
+    document.querySelectorAll('#tp-own-crops input, #tp-opp-crops input').forEach(inp => {
+        inp.addEventListener('change', () => {
+            const side = inp.dataset.side;
+            const idx = parseInt(inp.dataset.idx);
+            tpLabels[filename][side][idx] = inp.value;
+        });
+    });
+
+    // Add datalist if not present
+    if (!document.getElementById('tp-species-list')) {
+        const dl = document.createElement('datalist');
+        dl.id = 'tp-species-list';
+        tpSpeciesList.forEach(s => { const o = document.createElement('option'); o.value = s; dl.appendChild(o); });
+        document.body.appendChild(dl);
+    }
+}
+
+async function tpSave() {
+    const img = tpImages[tpIndex];
+    if (!img) return;
+    const filename = img.filename;
+
+    // Read current input values
+    document.querySelectorAll('#tp-own-crops input, #tp-opp-crops input').forEach(inp => {
+        const side = inp.dataset.side;
+        const idx = parseInt(inp.dataset.idx);
+        if (!tpLabels[filename]) tpLabels[filename] = {own: Array(6).fill(''), opp: Array(6).fill('')};
+        tpLabels[filename][side][idx] = inp.value;
+    });
+
+    const labels = tpLabels[filename];
+    // Save as multi_text:12 - own[0-5] then opp[0-5]
+    const values = [...labels.own, ...labels.opp];
+    try {
+        await fetch(`${API}/api/labeler/label_batch`, {
+            method:'POST', headers:{'Content-Type':'application/json'},
+            body: JSON.stringify({
+                source: tpSource,
+                filename,
+                labels: { TeamPreviewReader: values }
+            })
+        });
+        document.getElementById('tp-status').textContent = `Saved labels for ${filename}`;
+        // Advance
+        if (tpIndex < tpImages.length - 1) { tpIndex++; tpShowFrame(); }
+    } catch (e) {
+        document.getElementById('tp-status').textContent = 'Save failed: ' + e.message;
+    }
+}
+
+async function tpExport() {
+    try {
+        const result = await apiPost('/api/labeler/export', { source: tpSource, reader: 'TeamPreviewReader' });
+        document.getElementById('tp-status').textContent = `Exported ${result.exported || 0} frames`;
+    } catch (e) {
+        document.getElementById('tp-status').textContent = 'Export failed: ' + e.message;
+    }
+}
+
+
+// ═══════════════════════════════════════════════════════════════
+// Digit Templates
+// ═══════════════════════════════════════════════════════════════
+
+let templatesInited = false;
+
+async function templatesInit() {
+    if (templatesInited) return;
+    templatesInited = true;
+    await loadTemplates();
+}
+
+async function loadTemplates() {
+    const grid = document.getElementById('templates-grid');
+    grid.innerHTML = '<div style="color:#8b949e;">Loading...</div>';
+    try {
+        const data = await api('/api/templates/list');
+        grid.innerHTML = '';
+        if (data.templates.length === 0) {
+            grid.innerHTML = '<div style="color:#8b949e;">No digit templates found.</div>';
+            return;
+        }
+        data.templates.forEach(t => {
+            const card = document.createElement('div');
+            card.style.cssText = 'background:#161b22; border:1px solid #30363d; border-radius:8px; padding:12px; text-align:center; min-width:100px;';
+            card.innerHTML = `
+                <div style="font-size:24px; font-weight:bold; color:#58a6ff; margin-bottom:8px;">${t.digit}</div>
+                <img src="/api/templates/image/${t.digit}?t=${Date.now()}" style="image-rendering:pixelated; height:60px; border:1px solid #30363d; border-radius:4px; background:#fff;">
+                <div style="margin-top:8px;">
+                    <button class="btn" style="font-size:10px; padding:2px 8px; color:#f85149; border-color:#f85149;" onclick="deleteTemplate('${t.digit}')">Delete</button>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+    } catch (e) {
+        grid.innerHTML = '<div style="color:#f85149;">Error: ' + e.message + '</div>';
+    }
+}
+
+async function deleteTemplate(digit) {
+    if (!confirm(`Delete template for digit ${digit}?`)) return;
+    await fetch(`${API}/api/templates/${digit}`, { method: 'DELETE' });
+    templatesInited = false;
+    await templatesInit();
+}
+
+
+// ═══════════════════════════════════════════════════════════════
+// Model Review
+// ═══════════════════════════════════════════════════════════════
+let modelInited = false;
+
+async function modelInit() {
+    if (modelInited) return;
+    modelInited = true;
+
+    // Check model status
+    const status = await api('/api/model/status');
+    const msgEl = document.getElementById('model-status-msg');
+    if (!status.has_checkpoint) {
+        msgEl.style.display = 'block';
+        msgEl.innerHTML = '<span style="color:#f85149;">No model checkpoint found.</span> Train a model first: <code>python -m vgc_model.training.train</code>';
+        return;
+    }
+    if (!status.has_vocabs) {
+        msgEl.style.display = 'block';
+        msgEl.innerHTML = '<span style="color:#f85149;">No vocabulary files found.</span> Build vocabs first: <code>python scripts/build_vocab.py</code>';
+        return;
+    }
+    if (status.loaded && status.checkpoint_info) {
+        const ci = status.checkpoint_info;
+        msgEl.style.display = 'block';
+        msgEl.style.borderColor = '#238636';
+        msgEl.innerHTML = `<span style="color:#3fb950;">Model loaded</span> &mdash; ${(ci.params||0).toLocaleString()} params` +
+            (ci.val_top1 != null ? `, val top-1: ${ci.val_top1.toFixed(1)}%` : '') +
+            (ci.val_top3 != null ? `, val top-3: ${ci.val_top3.toFixed(1)}%` : '') +
+            (ci.epoch != null ? `, epoch ${ci.epoch}` : '');
+    }
+
+    // If cache already populated, load it
+    if (status.cached_replays > 0) {
+        await modelRefreshList();
+        await modelRefreshSummary();
+    }
+
+    // Wire buttons
+    document.getElementById('model-analyze-btn').addEventListener('click', modelRunAnalysis);
+    document.getElementById('model-clear-btn').addEventListener('click', async () => {
+        await apiPost('/api/model/clear', {});
+        _review_cache_local = {};
+        document.getElementById('model-replay-list').innerHTML = '';
+        document.getElementById('model-replay-detail').innerHTML = '';
+        await modelRefreshSummary();
+    });
+}
+
+async function modelRunAnalysis() {
+    const btn = document.getElementById('model-analyze-btn');
+    const loading = document.getElementById('model-loading');
+    const minRating = parseInt(document.getElementById('model-min-rating').value) || 0;
+    const count = parseInt(document.getElementById('model-count').value) || 20;
+
+    btn.disabled = true;
+    loading.style.display = 'inline';
+    loading.textContent = `Analyzing ${count} replays...`;
+
+    try {
+        const result = await api(`/api/model/analyze?count=${count}&min_rating=${minRating}`);
+        if (result.error) {
+            const msgEl = document.getElementById('model-status-msg');
+            msgEl.style.display = 'block';
+            msgEl.innerHTML = `<span style="color:#f85149;">Error: ${result.error}</span>`;
+        } else {
+            loading.textContent = `Done! ${result.analyzed} new, ${result.total_cached} total`;
+            await modelRefreshList();
+            await modelRefreshSummary();
+        }
+    } catch (e) {
+        loading.textContent = `Error: ${e.message}`;
+    }
+    btn.disabled = false;
+    setTimeout(() => { loading.style.display = 'none'; }, 3000);
+}
+
+async function modelRefreshSummary() {
+    const s = await api('/api/model/summary');
+    document.getElementById('model-replays-val').textContent = s.total_replays || '--';
+    document.getElementById('model-acc-val').textContent = s.avg_accuracy ? s.avg_accuracy + '%' : '--';
+    document.getElementById('model-acc-val').style.color = s.avg_accuracy >= 40 ? '#3fb950' : s.avg_accuracy >= 25 ? '#d29922' : '#f85149';
+    document.getElementById('model-turns-val').textContent = s.total_turns || '--';
+    document.getElementById('model-correct-val').textContent = s.total_actions ? `${s.total_matches} / ${s.total_actions}` : '--';
+}
+
+async function modelRefreshList() {
+    const replays = await api('/api/model/replays');
+    const list = document.getElementById('model-replay-list');
+    if (!replays.length) {
+        list.innerHTML = '<div style="padding:12px; color:#484f58; font-size:12px;">No replays analyzed yet</div>';
+        return;
+    }
+    list.innerHTML = replays.map(r => {
+        const accColor = r.accuracy >= 50 ? '#3fb950' : r.accuracy >= 30 ? '#d29922' : '#f85149';
+        return `<div class="model-replay-item" data-id="${r.id}" style="padding:8px 12px; border-bottom:1px solid #21262d; cursor:pointer; font-size:12px;">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span style="color:#c9d1d9;">${(r.players||[]).join(' vs ')}</span>
+                <span style="color:${accColor}; font-weight:600;">${r.accuracy}%</span>
+            </div>
+            <div style="color:#484f58; font-size:10px; margin-top:2px;">
+                ${r.rating ? `Rating: ${r.rating}` : 'Unrated'} &middot; ${r.total_turns} turns &middot; Winner: ${r.winner}
+            </div>
+        </div>`;
+    }).join('');
+
+    list.querySelectorAll('.model-replay-item').forEach(el => {
+        el.addEventListener('click', () => modelShowReplay(el.dataset.id));
+        el.addEventListener('mouseenter', () => el.style.background = '#21262d');
+        el.addEventListener('mouseleave', () => el.style.background = '');
+    });
+}
+
+async function modelShowReplay(id) {
+    const detail = document.getElementById('model-replay-detail');
+    detail.innerHTML = '<div style="color:#484f58; padding:12px;">Loading...</div>';
+
+    // Highlight selected
+    document.querySelectorAll('.model-replay-item').forEach(el => {
+        el.style.background = el.dataset.id === id ? '#1f6feb22' : '';
+        el.style.borderLeft = el.dataset.id === id ? '3px solid #1f6feb' : '';
+    });
+
+    const data = await api(`/api/model/replay/${id}`);
+    if (data.error) {
+        detail.innerHTML = `<div style="color:#f85149; padding:12px;">${data.error}</div>`;
+        return;
+    }
+
+    const header = `<div style="background:#161b22; border:1px solid #30363d; border-radius:8px; padding:12px 16px; margin-bottom:12px;">
+        <div style="font-size:14px; font-weight:600; color:#c9d1d9;">${(data.players||[]).join(' vs ')}</div>
+        <div style="font-size:11px; color:#8b949e; margin-top:4px;">
+            ${data.rating ? `Rating: <span style="color:#58a6ff;">${data.rating}</span>` : 'Unrated'}
+            &middot; Winner: <span style="color:#3fb950;">${data.winner}</span>
+            &middot; Accuracy: <span style="color:${data.accuracy >= 50 ? '#3fb950' : data.accuracy >= 30 ? '#d29922' : '#f85149'}; font-weight:600;">${data.accuracy}%</span>
+            &middot; ${data.matches}/${data.total_actions} correct
+        </div>
+    </div>`;
+
+    const turnCards = data.turns.map(t => {
+        const ownPokes = (t.own_active||[]).map(p =>
+            `<span style="color:#c9d1d9;">${p.species}</span> <span style="color:${p.hp > 50 ? '#3fb950' : p.hp > 25 ? '#d29922' : '#f85149'};">${p.hp}%</span>${p.status ? ` <span style="color:#bc8cff; font-size:10px;">${p.status}</span>` : ''}`
+        ).join(' &middot; ');
+        const oppPokes = (t.opp_active||[]).map(p =>
+            `<span style="color:#c9d1d9;">${p.species}</span> <span style="color:${p.hp > 50 ? '#3fb950' : p.hp > 25 ? '#d29922' : '#f85149'};">${p.hp}%</span>${p.status ? ` <span style="color:#bc8cff; font-size:10px;">${p.status}</span>` : ''}`
+        ).join(' &middot; ');
+
+        const bench = (t.own_bench||[]).map(p => p.species).join(', ');
+        const field = (t.field||[]).length ? `<div style="margin-top:4px;"><span style="color:#d29922; font-size:10px;">${t.field.join(' | ')}</span></div>` : '';
+
+        function slotHtml(slot, label) {
+            if (!slot) return '';
+            const match = slot.match;
+            const border = match ? '#238636' : '#da3633';
+            const badge = match
+                ? '<span style="background:#238636; color:#fff; font-size:9px; padding:1px 5px; border-radius:3px; margin-left:6px;">MATCH</span>'
+                : '<span style="background:#da3633; color:#fff; font-size:9px; padding:1px 5px; border-radius:3px; margin-left:6px;">MISS</span>';
+
+            const preds = (slot.predictions||[]).map((p, i) => {
+                const isMatch = p.idx === slot.actual_idx;
+                return `<div style="display:flex; align-items:center; gap:8px; margin-top:3px;">
+                    <span style="color:#484f58; font-size:10px; width:14px;">#${i+1}</span>
+                    <div style="flex:1; background:#21262d; border-radius:3px; height:16px; position:relative; overflow:hidden;">
+                        <div style="background:${isMatch ? '#238636' : '#30363d'}; height:100%; width:${Math.max(p.prob, 2)}%; border-radius:3px;"></div>
+                        <span style="position:absolute; left:6px; top:0; line-height:16px; font-size:10px; color:${isMatch ? '#fff' : '#c9d1d9'};">${p.action}</span>
+                        <span style="position:absolute; right:6px; top:0; line-height:16px; font-size:10px; color:#8b949e;">${p.prob}%</span>
+                    </div>
+                </div>`;
+            }).join('');
+
+            return `<div style="flex:1; min-width:0;">
+                <div style="font-size:10px; color:#8b949e; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:4px;">${label}${badge}</div>
+                <div style="font-size:12px; color:#c9d1d9; margin-bottom:6px;">Actual: <span style="color:#58a6ff;">${slot.actual}</span></div>
+                <div style="font-size:11px; color:#8b949e; margin-bottom:2px;">Predictions:</div>
+                ${preds}
+            </div>`;
+        }
+
+        return `<div style="background:#161b22; border:1px solid #30363d; border-radius:8px; padding:12px 16px; margin-bottom:8px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <span style="font-size:13px; font-weight:600; color:#c9d1d9;">Turn ${t.turn}</span>
+                <span style="font-size:10px; color:#484f58;">${t.slot_a?.match && t.slot_b?.match ? '2/2' : t.slot_a?.match || t.slot_b?.match ? '1/2' : '0/2'} correct</span>
+            </div>
+            <div style="font-size:11px; margin-bottom:4px;">
+                <span style="color:#8b949e;">Own:</span> ${ownPokes}
+                ${bench ? `<span style="color:#484f58; margin-left:8px;">Bench: ${bench}</span>` : ''}
+            </div>
+            <div style="font-size:11px; margin-bottom:4px;">
+                <span style="color:#8b949e;">Opp:</span> ${oppPokes}
+            </div>
+            ${field}
+            <div style="display:flex; gap:16px; margin-top:10px; border-top:1px solid #21262d; padding-top:10px;">
+                ${slotHtml(t.slot_a, 'Slot A')}
+                ${slotHtml(t.slot_b, 'Slot B')}
+            </div>
+        </div>`;
+    }).join('');
+
+    detail.innerHTML = header + turnCards;
+}
+
+
+// ═══════════════════════════════════════════════════════════════
+// Training Progress
+// ═══════════════════════════════════════════════════════════════
+let trainingInited = false;
+let trainingCharts = {};
+let trainingRefreshTimer = null;
+let trainingSelectedSession = null;
+
+async function trainingInit() {
+    if (trainingInited) { trainingRefresh(); return; }
+    trainingInited = true;
+    await trainingRefresh();
+    trainingRefreshTimer = setInterval(trainingRefresh, 15000);
+}
+
+function trainingGroupOf(modelVersion) {
+    const m = (modelVersion || '').toLowerCase();
+    if (m.startsWith('v2') || m === 'action') return { key: 'action', label: 'Action Model' };
+    if (m.startsWith('winrate') || m.startsWith('win_')) return { key: 'winrate', label: 'Win Probability' };
+    if (m.startsWith('lead')) return { key: 'lead', label: 'Lead Advisor' };
+    return { key: 'other', label: 'Other' };
+}
+
+const TRAINING_GROUP_ORDER = ['action', 'winrate', 'lead', 'other'];
+
+function trainingRenderCard(s) {
+    const active = s.active;
+    const pct = s.total_epochs ? Math.round(s.current_epoch / s.total_epochs * 100) : 0;
+    const dotClass = active ? 'green' : 'yellow';
+    const cfg = s.config || {};
+    return `<div class="card" style="cursor:pointer; min-width:220px; max-width:300px; border-color:${trainingSelectedSession === s.session_id ? '#1f6feb' : '#30363d'};" onclick="trainingSelect('${s.session_id}')">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+            <span style="font-size:12px; font-weight:600; color:#c9d1d9;"><span class="dot ${dotClass}"></span>${s.machine}</span>
+            <span style="font-size:10px; color:#484f58;">${s.model_version}</span>
+        </div>
+        <div style="font-size:10px; color:#8b949e; margin-bottom:6px;">${s.session_id}</div>
+        <div style="background:#21262d; border-radius:3px; height:6px; margin-bottom:6px; overflow:hidden;">
+            <div style="background:${active ? '#3fb950' : '#d29922'}; height:100%; width:${pct}%; transition:width 0.3s;"></div>
+        </div>
+        <div style="display:flex; justify-content:space-between; font-size:11px;">
+            <span style="color:#8b949e;">Epoch ${s.current_epoch}/${s.total_epochs}</span>
+            <span style="color:#58a6ff;">${s.latest_val_top1 != null ? s.latest_val_top1 + '%' : '--'}</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; font-size:10px; color:#484f58; margin-top:2px;">
+            <span>Loss: ${s.latest_val_loss != null ? s.latest_val_loss.toFixed(4) : '--'}</span>
+            <span>Best: ${s.best_val_loss != null ? s.best_val_loss.toFixed(4) : '--'}</span>
+        </div>
+        ${cfg.params ? `<div style="font-size:9px; color:#484f58; margin-top:4px;">${(cfg.params).toLocaleString()} params · ${cfg.dataset_size ? cfg.dataset_size.toLocaleString() + ' samples' : ''}${cfg.min_rating ? ' · ELO\u2265' + cfg.min_rating : ''} · ${cfg.device || ''}</div>` : ''}
+    </div>`;
+}
+
+async function trainingRefresh() {
+    const sessions = await api('/api/training/sessions');
+    const container = document.getElementById('training-sessions');
+
+    if (!sessions.length) {
+        container.innerHTML = '<div style="padding:16px; background:#161b22; border:1px solid #30363d; border-radius:8px; color:#484f58;">No training sessions yet. Start training with <code>--dashboard https://champions.colefoster.ca</code></div>';
+        return;
+    }
+
+    // Group by model type
+    const groups = {};
+    for (const s of sessions) {
+        const g = trainingGroupOf(s.model_version);
+        if (!groups[g.key]) groups[g.key] = { label: g.label, sessions: [] };
+        groups[g.key].sessions.push(s);
+    }
+
+    const groupHtml = TRAINING_GROUP_ORDER
+        .filter(k => groups[k])
+        .map(k => {
+            const g = groups[k];
+            const activeCount = g.sessions.filter(s => s.active).length;
+            const badge = activeCount
+                ? `<span style="font-size:10px; color:#3fb950; margin-left:8px;">${activeCount} active</span>`
+                : '';
+            return `<div style="margin-bottom:20px;">
+                <div style="display:flex; align-items:baseline; gap:8px; margin-bottom:8px; padding-bottom:4px; border-bottom:1px solid #21262d;">
+                    <span style="font-size:13px; font-weight:600; color:#c9d1d9;">${g.label}</span>
+                    <span style="font-size:10px; color:#484f58;">${g.sessions.length} session${g.sessions.length === 1 ? '' : 's'}</span>
+                    ${badge}
+                </div>
+                <div style="display:flex; gap:12px; flex-wrap:wrap;">
+                    ${g.sessions.map(trainingRenderCard).join('')}
+                </div>
+            </div>`;
+        }).join('');
+
+    container.innerHTML = groupHtml;
+
+    if (trainingSelectedSession) {
+        await trainingShowDetail(trainingSelectedSession);
+    } else if (sessions.length) {
+        await trainingSelect(sessions[0].session_id);
+    }
+}
+
+async function trainingSelect(sessionId) {
+    trainingSelectedSession = sessionId;
+    // Re-render cards to update border
+    await trainingRefresh();
+}
+
+async function trainingShowDetail(sessionId) {
+    const data = await api(`/api/training/session/${sessionId}`);
+    if (data.error) return;
+
+    const detail = document.getElementById('training-detail');
+    const epochs = data.epochs || [];
+    if (!epochs.length) {
+        detail.innerHTML = '<div style="color:#484f58; padding:12px;">No epochs recorded yet.</div>';
+        return;
+    }
+
+    const chartId1 = 'training-loss-chart';
+    const chartId2 = 'training-acc-chart';
+
+    detail.innerHTML = `
+        <div class="grid-2">
+            <div class="chart-box">
+                <div class="chart-title">Loss</div>
+                <canvas id="${chartId1}"></canvas>
+            </div>
+            <div class="chart-box">
+                <div class="chart-title">Accuracy (Top-1 / Top-3)</div>
+                <canvas id="${chartId2}"></canvas>
+            </div>
+        </div>
+        ${epochs[epochs.length-1].team_acc != null ? `<div class="grid-2">
+            <div class="chart-box">
+                <div class="chart-title">Team & Lead Selection Accuracy</div>
+                <canvas id="training-team-chart"></canvas>
+            </div>
+            <div class="chart-box">
+                <div class="chart-title">Learning Rate</div>
+                <canvas id="training-lr-chart"></canvas>
+            </div>
+        </div>` : ''}
+    `;
+
+    const labels = epochs.map(e => e.epoch);
+    const axisOpts = { ticks: { color: '#484f58', font: { size: 10 } }, grid: { color: '#21262d' } };
+    const baseOpts = { responsive: true, animation: false, plugins: { legend: { labels: { color: '#8b949e', font: { size: 10 } } } }, scales: { x: axisOpts, y: axisOpts } };
+
+    // Destroy old charts
+    Object.values(trainingCharts).forEach(c => c.destroy());
+    trainingCharts = {};
+
+    // Loss chart
+    trainingCharts.loss = new Chart(document.getElementById(chartId1), {
+        type: 'line', data: {
+            labels,
+            datasets: [
+                { label: 'Train Loss', data: epochs.map(e => e.train_loss), borderColor: '#58a6ff', borderWidth: 1.5, pointRadius: 0, fill: false },
+                { label: 'Val Loss', data: epochs.map(e => e.val_loss), borderColor: '#f85149', borderWidth: 1.5, pointRadius: 0, fill: false },
+                { label: 'Best Val', data: epochs.map(e => e.best_val_loss), borderColor: '#3fb950', borderWidth: 1, borderDash: [4,4], pointRadius: 0, fill: false },
+            ]
+        }, options: baseOpts
+    });
+
+    // Accuracy chart
+    trainingCharts.acc = new Chart(document.getElementById(chartId2), {
+        type: 'line', data: {
+            labels,
+            datasets: [
+                { label: 'Train Top-1', data: epochs.map(e => e.train_top1), borderColor: '#58a6ff', borderWidth: 1.5, pointRadius: 0, fill: false },
+                { label: 'Val Top-1', data: epochs.map(e => e.val_top1), borderColor: '#f85149', borderWidth: 1.5, pointRadius: 0, fill: false },
+                { label: 'Val Top-3', data: epochs.map(e => e.val_top3), borderColor: '#d29922', borderWidth: 1.5, pointRadius: 0, fill: false },
+            ]
+        }, options: baseOpts
+    });
+
+    // Team/Lead chart
+    if (document.getElementById('training-team-chart')) {
+        trainingCharts.team = new Chart(document.getElementById('training-team-chart'), {
+            type: 'line', data: {
+                labels,
+                datasets: [
+                    { label: 'Team Select', data: epochs.map(e => e.team_acc), borderColor: '#bc8cff', borderWidth: 1.5, pointRadius: 0, fill: false },
+                    { label: 'Lead Select', data: epochs.map(e => e.lead_acc), borderColor: '#3fb950', borderWidth: 1.5, pointRadius: 0, fill: false },
+                ]
+            }, options: baseOpts
+        });
+
+        trainingCharts.lr = new Chart(document.getElementById('training-lr-chart'), {
+            type: 'line', data: {
+                labels,
+                datasets: [
+                    { label: 'Learning Rate', data: epochs.map(e => e.lr), borderColor: '#8b949e', borderWidth: 1.5, pointRadius: 0, fill: false },
+                ]
+            }, options: { ...baseOpts, scales: { x: axisOpts, y: { ...axisOpts, type: 'logarithmic' } } }
+        });
+    }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// Validation
+// ═══════════════════════════════════════════════════════════════
+let validationInited = false;
+
+async function validationInit() {
+    if (validationInited) return;
+    validationInited = true;
+
+    const content = document.getElementById('validation-content');
+    content.innerHTML = '<div style="color:#484f58; font-size:12px;">Loading validation data...</div>';
+
+    try {
+        const data = await api('/api/validation/summary');
+        if (!data || !data.length) {
+            content.innerHTML = '<div style="color:#484f58; font-size:12px;">No screens found</div>';
+            return;
+        }
+
+        let html = '<table style="width:100%; border-collapse:collapse; font-size:12px;">';
+        html += '<thead><tr style="border-bottom:1px solid #30363d; color:#8b949e;">';
+        html += '<th style="text-align:left; padding:6px;">Screen</th>';
+        html += '<th style="text-align:right; padding:6px;">Total</th>';
+        html += '<th style="text-align:right; padding:6px;">Labeled</th>';
+        html += '<th style="text-align:right; padding:6px;">Partial</th>';
+        html += '<th style="text-align:right; padding:6px;">Unlabeled</th>';
+        html += '<th style="text-align:right; padding:6px;">Issues</th>';
+        html += '<th style="text-align:left; padding:6px;">Progress</th>';
+        html += '</tr></thead><tbody>';
+
+        let grandTotal = 0, grandLabeled = 0, grandPartial = 0, grandUnlabeled = 0, grandErrors = 0;
+
+        for (const s of data) {
+            const pct = s.total > 0 ? Math.round((s.labeled / s.total) * 100) : 0;
+            const barColor = pct === 100 ? '#3fb950' : pct > 50 ? '#d29922' : '#f85149';
+            grandTotal += s.total; grandLabeled += s.labeled; grandPartial += s.partial;
+            grandUnlabeled += s.unlabeled; grandErrors += s.errors.length;
+
+            html += `<tr style="border-bottom:1px solid #21262d;">`;
+            html += `<td style="padding:6px;"><a href="#/gallery" onclick="setTimeout(()=>{gallerySelectedScreen='${s.screen}';loadGalleryScreenImages('${s.screen}');renderGallerySidebar();},100)" style="color:#58a6ff; cursor:pointer;">${s.screen}</a></td>`;
+            html += `<td style="text-align:right; padding:6px;">${s.total}</td>`;
+            html += `<td style="text-align:right; padding:6px; color:#3fb950;">${s.labeled}</td>`;
+            html += `<td style="text-align:right; padding:6px; color:#d29922;">${s.partial}</td>`;
+            html += `<td style="text-align:right; padding:6px; color:#f85149;">${s.unlabeled}</td>`;
+            html += `<td style="text-align:right; padding:6px; color:${s.errors.length ? '#f85149' : '#8b949e'};">${s.errors.length}</td>`;
+            html += `<td style="padding:6px;"><div style="background:#21262d; border-radius:3px; height:12px; width:120px; overflow:hidden;">`;
+            html += `<div style="background:${barColor}; height:100%; width:${pct}%;"></div></div></td>`;
+            html += `</tr>`;
+        }
+
+        // Grand total row
+        const grandPct = grandTotal > 0 ? Math.round((grandLabeled / grandTotal) * 100) : 0;
+        html += `<tr style="border-top:2px solid #30363d; font-weight:bold;">`;
+        html += `<td style="padding:6px;">TOTAL</td>`;
+        html += `<td style="text-align:right; padding:6px;">${grandTotal}</td>`;
+        html += `<td style="text-align:right; padding:6px; color:#3fb950;">${grandLabeled}</td>`;
+        html += `<td style="text-align:right; padding:6px; color:#d29922;">${grandPartial}</td>`;
+        html += `<td style="text-align:right; padding:6px; color:#f85149;">${grandUnlabeled}</td>`;
+        html += `<td style="text-align:right; padding:6px;">${grandErrors}</td>`;
+        html += `<td style="padding:6px;">${grandPct}%</td>`;
+        html += `</tr>`;
+        html += '</tbody></table>';
+
+        // Show errors if any
+        if (grandErrors > 0) {
+            html += '<h2 style="margin-top:24px; font-size:14px;">Issues</h2>';
+            html += '<div style="font-size:11px; max-height:300px; overflow-y:auto;">';
+            for (const s of data) {
+                for (const err of s.errors) {
+                    html += `<div style="padding:2px 0; color:#f85149;">`;
+                    html += `<span style="color:#8b949e;">${s.screen}/</span>${err.filename}`;
+                    if (err.missing_readers) html += ` - missing: ${err.missing_readers.join(', ')}`;
+                    if (err.error) html += ` - ${err.reader}.${err.field}: ${err.error}`;
+                    html += `</div>`;
+                }
+            }
+            html += '</div>';
+        }
+
+        content.innerHTML = html;
+    } catch (e) {
+        content.innerHTML = '<div style="color:#f85149; font-size:12px;">Failed to load validation data</div>';
+    }
+}
+

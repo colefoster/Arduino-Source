@@ -1,0 +1,47 @@
+<div class="view" id="view-model">
+    <h1>Model Review</h1>
+    <div class="subtitle">Turn-by-turn prediction analysis against real replays (winner POV)</div>
+
+    <div id="model-status-msg" style="padding:12px; background:#161b22; border:1px solid #30363d; border-radius:8px; margin-bottom:16px; display:none;"></div>
+
+    <div class="status-bar" id="model-summary">
+        <div class="card">
+            <div class="label">Replays</div>
+            <div class="value" id="model-replays-val">--</div>
+        </div>
+        <div class="card">
+            <div class="label">Top-1 Accuracy</div>
+            <div class="value" id="model-acc-val">--</div>
+        </div>
+        <div class="card">
+            <div class="label">Turns Analyzed</div>
+            <div class="value" id="model-turns-val">--</div>
+        </div>
+        <div class="card">
+            <div class="label">Correct / Total</div>
+            <div class="value" id="model-correct-val">--</div>
+        </div>
+    </div>
+
+    <div style="display:flex; gap:12px; align-items:center; margin-bottom:16px; flex-wrap:wrap;">
+        <button class="btn btn-primary" id="model-analyze-btn">Analyze 20 Replays</button>
+        <label style="font-size:12px; color:#8b949e;">Min rating:
+            <input type="number" id="model-min-rating" value="1200" style="width:70px; background:#161b22; border:1px solid #30363d; border-radius:4px; padding:4px 8px; color:#c9d1d9; font-family:inherit;">
+        </label>
+        <label style="font-size:12px; color:#8b949e;">Count:
+            <input type="number" id="model-count" value="20" style="width:60px; background:#161b22; border:1px solid #30363d; border-radius:4px; padding:4px 8px; color:#c9d1d9; font-family:inherit;">
+        </label>
+        <button class="btn" id="model-clear-btn" style="font-size:11px;">Clear Cache</button>
+        <span id="model-loading" style="color:#d29922; font-size:12px; display:none;">Analyzing...</span>
+    </div>
+
+    <div style="display:flex; gap:16px; align-items:flex-start;">
+        <div style="min-width:280px; max-width:320px;">
+            <div class="section-title" style="font-size:11px; color:#8b949e; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:8px;">Replays</div>
+            <div id="model-replay-list" style="background:#161b22; border:1px solid #30363d; border-radius:8px; max-height:600px; overflow-y:auto;"></div>
+        </div>
+        <div style="flex:1; min-width:0;">
+            <div id="model-replay-detail"></div>
+        </div>
+    </div>
+</div>

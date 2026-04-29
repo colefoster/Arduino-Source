@@ -1,0 +1,103 @@
+<div class="view" id="view-dashboard">
+    <h1>Champions Spectator</h1>
+    <div class="subtitle">Live Pokemon Showdown battle collection for VGC model training</div>
+
+    <div class="status-bar">
+        <div class="card">
+            <div class="label">Status</div>
+            <div class="value" id="status-val">--</div>
+            <div class="sub" id="status-sub"></div>
+        </div>
+        <div class="card">
+            <div class="label">Connections</div>
+            <div class="value" id="instances-val">--</div>
+            <div class="sub" id="instances-sub"></div>
+        </div>
+        <div class="card">
+            <div class="label">Total Replays</div>
+            <div class="value" id="total-val">--</div>
+            <div class="sub" id="total-sub"></div>
+        </div>
+        <div class="card">
+            <div class="label">Last Hour</div>
+            <div class="value" id="rate-val">--</div>
+            <div class="sub" id="rate-sub"></div>
+        </div>
+        <div class="card">
+            <div class="label">Coverage</div>
+            <div class="value" id="coverage-val">--</div>
+            <div class="sub" id="coverage-sub"></div>
+        </div>
+    </div>
+
+    <div id="format-breakdown" class="format-breakdown"></div>
+
+    <h2>Battle Coverage</h2>
+    <div class="card">
+        <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:4px;">
+            <span id="cov-label">Checking...</span>
+            <span id="cov-detail" style="color:#8b949e;"></span>
+        </div>
+        <div class="coverage-bar-wrap">
+            <div class="coverage-bar-fill" id="cov-bar" style="width:0%; background:#58a6ff;"></div>
+            <div class="coverage-bar-label" id="cov-pct"></div>
+        </div>
+        <div id="cov-breakdown" style="margin-top:10px; display:flex; gap:12px; flex-wrap:wrap;"></div>
+        <div id="cov-note" style="margin-top:6px; font-size:10px; color:#484f58;"></div>
+    </div>
+
+    <h2>Collection Rate</h2>
+    <div class="grid-2">
+        <div class="chart-box">
+            <div class="chart-title">Replays per Hour (last 48h)</div>
+            <canvas id="rate-chart"></canvas>
+        </div>
+        <div class="chart-box">
+            <div class="chart-title">Cumulative Collection</div>
+            <canvas id="cumulative-chart"></canvas>
+        </div>
+    </div>
+
+    <h2>Full Dataset</h2>
+    <div class="status-bar" id="dataset-cards"></div>
+    <div class="grid-2">
+        <div class="chart-box">
+            <div class="chart-title">VGC Ratings — Downloaded vs Spectated</div>
+            <canvas id="dataset-vgc-chart"></canvas>
+        </div>
+        <div class="chart-box">
+            <div class="chart-title">BSS Ratings — Downloaded vs Spectated</div>
+            <canvas id="dataset-bss-chart"></canvas>
+        </div>
+    </div>
+
+    <h2>Spectated Ratings (last 7 days)</h2>
+    <div class="grid-2">
+        <div class="chart-box">
+            <div class="chart-title">VGC 2026</div>
+            <canvas id="rating-vgc-chart"></canvas>
+        </div>
+        <div class="chart-box">
+            <div class="chart-title">BSS</div>
+            <canvas id="rating-bss-chart"></canvas>
+        </div>
+    </div>
+
+    <h2>Sync to ColePC</h2>
+    <div class="card" id="sync-card">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <div>
+                <div class="label">Replay Sync</div>
+                <div id="sync-status" style="font-size:12px; margin-top:4px; color:#8b949e;">Checking...</div>
+            </div>
+            <button class="btn btn-primary" id="sync-btn" onclick="triggerSync()" disabled>Sync Now</button>
+        </div>
+        <div id="sync-result" style="font-size:11px; color:#8b949e;"></div>
+    </div>
+
+    <h2>Recent Saves</h2>
+    <div class="feed" id="feed">
+        <div style="color: #484f58; font-size: 12px;">Loading...</div>
+    </div>
+    <div class="updated" id="last-updated"></div>
+</div>
