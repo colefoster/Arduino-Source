@@ -1816,7 +1816,7 @@ async function buildLabelForm(overlay, screen, filename, img) {
     });
 
     // "Auto-Suggest All" button
-    const suggestAllBtn = formEl.parentElement.querySelector('#gallery-auto-suggest-all');
+    const suggestAllBtn = formEl.querySelector('#gallery-auto-suggest-all');
     if (suggestAllBtn) {
         suggestAllBtn.addEventListener('click', () => {
             formEl.querySelectorAll('.suggest-reader-btn').forEach(btn => btn.click());
@@ -1824,7 +1824,7 @@ async function buildLabelForm(overlay, screen, filename, img) {
     }
 
     // "Copy from Previous" button
-    const copyPrevBtn = formEl.parentElement.querySelector('#gallery-copy-prev');
+    const copyPrevBtn = formEl.querySelector('#gallery-copy-prev');
     if (copyPrevBtn) {
         if (imgIdx > 0 && galleryImages[imgIdx - 1].labels) {
             copyPrevBtn.addEventListener('click', () => {
