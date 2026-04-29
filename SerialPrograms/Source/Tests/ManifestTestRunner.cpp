@@ -32,7 +32,8 @@ using std::endl;
 
 namespace PokemonAutomation{
 
-using namespace NintendoSwitch::PokemonChampions;
+// PokemonChampions test functions are in PokemonAutomation namespace already
+// (no sub-namespace needed — the test functions are declared in PokemonChampions_Tests.h)
 
 
 // ═══════════════════════════════════════════════════════════════════════
