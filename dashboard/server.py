@@ -851,6 +851,40 @@ async def gallery_inbox():
     return {"count": len(images), "images": images}
 
 
+@app.post("/api/gallery/image-move")
+async def gallery_image_move(request: Request):
+    """Move an image from one screen to another, to inbox, or delete it."""
+    body = await request.json()
+    screen = body.get("screen", "")
+    filename = body.get("filename", "")
+    target = body.get("target", "")
+
+    if not screen or not filename or not target:
+        return JSONResponse({"error": "screen, filename, and target required"}, 400)
+
+    src = TEST_IMAGES_DIR / screen / filename
+    if not src.exists():
+        return JSONResponse({"error": "image not found"}, 404)
+
+    # Remove from source manifest
+    src_dir = TEST_IMAGES_DIR / screen
+    manifest = _load_manifest(src_dir)
+    manifest.pop(filename, None)
+    (src_dir / "manifest.json").write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n")
+
+    if target == "__delete":
+        src.unlink()
+        return {"ok": True, "action": "deleted", "filename": filename}
+
+    target_dir = TEST_IMAGES_DIR / target
+    if not target_dir.exists():
+        return JSONResponse({"error": f"target '{target}' not found"}, 404)
+
+    dest = target_dir / filename
+    shutil.move(str(src), str(dest))
+    return {"ok": True, "action": "moved", "filename": filename, "target": target}
+
+
 @app.post("/api/gallery/inbox/assign")
 async def gallery_inbox_assign(request: Request):
     """Move image(s) from inbox to a screen directory."""
