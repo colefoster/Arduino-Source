@@ -1529,6 +1529,9 @@ async function expandGalleryCard(filename) {
                 <span id="gallery-save-status" style="font-size:11px; color:#8b949e; line-height:28px;"></span>
                 <button class="btn btn-primary" id="gallery-save-labels-btn" style="display:none;">Save Labels</button>
                 <button class="btn" id="gallery-debug-detectors" style="font-size:10px; padding:2px 8px;" title="Run all detectors on this image">Debug Detectors</button>
+                <select id="gallery-move-to" style="font-size:10px; padding:2px 4px; background:#161b22; color:#c9d1d9; border:1px solid #30363d; border-radius:3px;">
+                    <option value="">Move to...</option>
+                </select>
                 <button class="btn" id="gallery-nav-prev" title="Previous">&#9664;</button>
                 <button class="btn" id="gallery-nav-next" title="Next">&#9654;</button>
                 <button class="btn" onclick="this.closest('.gallery-expanded-overlay').remove()">Close</button>
@@ -1608,6 +1611,38 @@ async function expandGalleryCard(filename) {
             cropsEl.innerHTML = '<div style="color:#484f58; font-size:12px;">No crops defined</div>';
         }
     } catch (e) { console.error('loadCrops:', e); }
+
+    // "Move to..." dropdown — populate with all screens + inbox + delete
+    const moveTo = overlay.querySelector('#gallery-move-to');
+    const screenList = galleryScreens.filter(s => s.name !== screen);
+    moveTo.innerHTML = '<option value="">Move to...</option>'
+        + screenList.map(s => `<option value="${s.name}">${s.name}</option>`).join('')
+        + '<option value="_inbox">_inbox</option>'
+        + '<option value="__delete" style="color:#f85149;">Delete image</option>';
+    moveTo.addEventListener('change', async () => {
+        const target = moveTo.value;
+        if (!target) return;
+        if (target === '__delete') {
+            if (!confirm(`Delete ${filename}?`)) { moveTo.value = ''; return; }
+            await fetch(`${API}/api/gallery/image-move`, {
+                method: 'POST', headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({screen, filename, target: '__delete'})
+            });
+        } else {
+            await fetch(`${API}/api/gallery/image-move`, {
+                method: 'POST', headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({screen, filename, target})
+            });
+        }
+        // Remove from local array and advance
+        const idx = galleryImages.findIndex(i => i.filename === filename);
+        if (idx >= 0) galleryImages.splice(idx, 1);
+        overlay.remove();
+        if (galleryImages.length > 0) {
+            const next = Math.min(idx, galleryImages.length - 1);
+            expandGalleryCard(galleryImages[next].filename);
+        }
+    });
 
     // Debug detectors button
     overlay.querySelector('#gallery-debug-detectors').addEventListener('click', async function() {
