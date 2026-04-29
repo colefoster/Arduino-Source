@@ -1318,8 +1318,117 @@ async function loadGalleryScreenImages(screen) {
             buttons += `<button class="btn" id="start-labeling-btn" style="font-size:11px; padding:3px 10px;">Start Labeling Unlabeled</button>`;
         }
 
-        toolbar.innerHTML = `<span>${info}</span><div style="display:flex; gap:6px;">${buttons}</div>`;
+        // Always show these tools
+        buttons += `<button class="btn" id="bulk-select-toggle" style="font-size:11px; padding:3px 10px;">Select Mode</button>`;
+        buttons += `<button class="btn" id="verify-detectors-btn" style="font-size:11px; padding:3px 10px;">Verify Detectors</button>`;
+
+        toolbar.innerHTML = `<span>${info}</span><div style="display:flex; gap:6px; flex-wrap:wrap;">${buttons}</div>`;
         grid.insertBefore(toolbar, grid.firstChild);
+
+        // Bulk select mode toggle
+        document.getElementById('bulk-select-toggle').addEventListener('click', () => {
+            _bulkSelectMode = !_bulkSelectMode;
+            _bulkSelected.clear();
+            document.getElementById('bulk-select-toggle').textContent = _bulkSelectMode ? 'Exit Select Mode' : 'Select Mode';
+            // Add/remove bulk action bar
+            let bar = document.getElementById('bulk-action-bar');
+            if (_bulkSelectMode && !bar) {
+                bar = document.createElement('div');
+                bar.id = 'bulk-action-bar';
+                bar.style.cssText = 'display:flex; gap:8px; align-items:center; padding:6px 8px; background:#161b22; border:1px solid #30363d; border-radius:4px; margin-bottom:8px; font-size:11px;';
+                const screenOpts = galleryScreens.filter(s => s.name !== gallerySelectedScreen).map(s => `<option value="${s.name}">${s.name}</option>`).join('');
+                bar.innerHTML = `
+                    <button class="btn" id="bulk-select-all" style="font-size:10px; padding:2px 8px;">Select All</button>
+                    <button class="btn" id="bulk-select-flagged" style="font-size:10px; padding:2px 8px;">Select Flagged</button>
+                    <span id="bulk-count" style="color:#8b949e;">0 selected</span>
+                    <select id="bulk-target" style="font-size:10px; padding:2px 4px; background:#0d1117; color:#c9d1d9; border:1px solid #30363d; border-radius:3px;">
+                        <option value="_inbox">_inbox</option>
+                        ${screenOpts}
+                    </select>
+                    <button class="btn" id="bulk-move-btn" disabled style="font-size:10px; padding:2px 8px;">Move Selected</button>
+                    <button class="btn" id="bulk-delete-btn" disabled style="font-size:10px; padding:2px 8px; color:#f85149;">Delete Selected</button>
+                `;
+                grid.insertBefore(bar, grid.children[1]); // after toolbar
+                document.getElementById('bulk-select-all').addEventListener('click', () => {
+                    const all = _bulkSelected.size === galleryImages.length;
+                    _bulkSelected.clear();
+                    if (!all) galleryImages.forEach(i => _bulkSelected.add(i.filename));
+                    renderGalleryGrid();
+                    _updateBulkBar();
+                });
+                document.getElementById('bulk-select-flagged').addEventListener('click', () => {
+                    _bulkSelected.clear();
+                    galleryImages.filter(i => i._detectorFail).forEach(i => _bulkSelected.add(i.filename));
+                    renderGalleryGrid();
+                    _updateBulkBar();
+                });
+                document.getElementById('bulk-move-btn').addEventListener('click', async () => {
+                    const target = document.getElementById('bulk-target').value;
+                    const fnames = [..._bulkSelected];
+                    if (!fnames.length) return;
+                    const btn = document.getElementById('bulk-move-btn');
+                    btn.disabled = true; btn.textContent = `Moving ${fnames.length}...`;
+                    for (const fname of fnames) {
+                        await fetch(`${API}/api/gallery/image-move`, {
+                            method:'POST', headers:{'Content-Type':'application/json'},
+                            body: JSON.stringify({screen: gallerySelectedScreen, filename: fname, target})
+                        });
+                    }
+                    _bulkSelected.clear();
+                    _bulkSelectMode = false;
+                    loadGalleryScreenImages(gallerySelectedScreen);
+                });
+                document.getElementById('bulk-delete-btn').addEventListener('click', async () => {
+                    const fnames = [..._bulkSelected];
+                    if (!fnames.length || !confirm(`Delete ${fnames.length} images?`)) return;
+                    const btn = document.getElementById('bulk-delete-btn');
+                    btn.disabled = true; btn.textContent = `Deleting...`;
+                    for (const fname of fnames) {
+                        await fetch(`${API}/api/gallery/image-move`, {
+                            method:'POST', headers:{'Content-Type':'application/json'},
+                            body: JSON.stringify({screen: gallerySelectedScreen, filename: fname, target: '__delete'})
+                        });
+                    }
+                    _bulkSelected.clear();
+                    _bulkSelectMode = false;
+                    loadGalleryScreenImages(gallerySelectedScreen);
+                });
+            } else if (!_bulkSelectMode && bar) {
+                bar.remove();
+            }
+            renderGalleryGrid();
+        });
+
+        // Verify detectors — batch debug all images, flag failures
+        document.getElementById('verify-detectors-btn').addEventListener('click', async () => {
+            const btn = document.getElementById('verify-detectors-btn');
+            btn.disabled = true;
+            const total = galleryImages.length;
+            let done = 0, failures = 0;
+            for (const img of galleryImages) {
+                done++;
+                btn.textContent = `Verifying ${done}/${total}...`;
+                try {
+                    const resp = await fetch(`${API}/api/detector/debug`, {
+                        method:'POST', headers:{'Content-Type':'application/json'},
+                        body: JSON.stringify({screen: gallerySelectedScreen, filename: img.filename})
+                    }).then(r => r.json());
+                    if (resp.ok && resp.result && resp.result.detectors) {
+                        // Check if any registered detector for this screen returned true
+                        const screenInfo = galleryScreens.find(s => s.name === gallerySelectedScreen);
+                        const registered = screenInfo ? screenInfo.detectors : [];
+                        if (registered.length > 0) {
+                            const anyTrue = resp.result.detectors.some(d => registered.includes(d.name) && d.detected);
+                            img._detectorFail = !anyTrue;
+                            if (!anyTrue) failures++;
+                        }
+                    }
+                } catch (e) { console.error('verify:', e); }
+            }
+            btn.textContent = failures > 0 ? `${failures} failures (red border)` : 'All passed!';
+            btn.disabled = false;
+            renderGalleryGrid();
+        });
 
         // Bulk confirm handler
         const confirmBtn = document.getElementById('bulk-confirm-btn');
@@ -1481,6 +1590,9 @@ function _gtLabel(img) {
     return gt.raw || '';
 }
 
+let _bulkSelectMode = false;
+let _bulkSelected = new Set();
+
 function renderGalleryGrid() {
     const grid = document.getElementById('gallery-grid');
     let filtered = galleryImages;
@@ -1498,16 +1610,46 @@ function renderGalleryGrid() {
         if (label === 'True' || label === 'Labeled') badgeClass = 'badge-true';
         else if (label === 'False' || label === 'Unlabeled') badgeClass = 'badge-false';
         else if (label === 'Partial') badgeClass = 'badge-value';
-        return `<div class="gallery-card" data-filename="${img.filename}">
+        const checked = _bulkSelected.has(img.filename) ? 'checked' : '';
+        const flagged = img._detectorFail ? ' style="border:2px solid #f85149;"' : '';
+        return `<div class="gallery-card" data-filename="${img.filename}"${flagged}>
+            ${_bulkSelectMode ? `<input type="checkbox" class="bulk-check" ${checked} style="position:absolute; top:4px; left:4px; z-index:1;">` : ''}
             <img class="thumb" loading="lazy" src="${API}/api/gallery/thumb/${img.path}" alt="${img.filename}">
             <div class="fname">${img.filename}</div>
             <span class="truth-badge ${badgeClass}">${label}</span>
+            ${img._detectorFail ? '<span style="position:absolute; top:4px; right:4px; background:#f85149; color:#fff; font-size:9px; padding:1px 4px; border-radius:3px;">FAIL</span>' : ''}
         </div>`;
     }).join('');
 
     grid.querySelectorAll('.gallery-card').forEach(card => {
-        card.addEventListener('click', () => expandGalleryCard(card.dataset.filename));
+        card.addEventListener('click', (e) => {
+            if (_bulkSelectMode) {
+                if (e.target.type === 'checkbox') return; // let checkbox handle itself
+                const cb = card.querySelector('.bulk-check');
+                if (cb) { cb.checked = !cb.checked; }
+                const fname = card.dataset.filename;
+                if (cb && cb.checked) _bulkSelected.add(fname); else _bulkSelected.delete(fname);
+                _updateBulkBar();
+                return;
+            }
+            expandGalleryCard(card.dataset.filename);
+        });
+        const cb = card.querySelector('.bulk-check');
+        if (cb) cb.addEventListener('change', () => {
+            const fname = card.dataset.filename;
+            if (cb.checked) _bulkSelected.add(fname); else _bulkSelected.delete(fname);
+            _updateBulkBar();
+        });
     });
+}
+
+function _updateBulkBar() {
+    const bar = document.getElementById('bulk-action-bar');
+    if (!bar) return;
+    const count = _bulkSelected.size;
+    bar.querySelector('#bulk-count').textContent = `${count} selected`;
+    bar.querySelector('#bulk-move-btn').disabled = count === 0;
+    bar.querySelector('#bulk-delete-btn').disabled = count === 0;
 }
 
 // Cache screen reader schema for label forms
