@@ -129,9 +129,33 @@ screens:
             items: string
             length: 2
 
+  target_select_doubles:
+    description: "Target selection modal after picking a move in doubles. Shows all 4 mons with HP, effectiveness, and selected move name."
+    transitions_to: [communicating]
+    detectors: []
+    readers:
+      TargetSelectReader:
+        fields:
+          move:
+            type: string
+          targets:
+            type: array
+            items: string
+            length: 4
+          target_hp:
+            type: array
+            items: string
+            length: 4
+          effectiveness:
+            type: array
+            items: string
+            length: 4
+          selected_target:
+            type: int
+
   move_select_doubles:
     description: "4-move panel active in doubles. PP visible. Mega evo toggle possible."
-    transitions_to: [communicating]
+    transitions_to: [target_select_doubles, communicating]
     detectors: [MoveSelectDetector]
     readers:
       MoveNameReader:

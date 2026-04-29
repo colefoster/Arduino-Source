@@ -8,6 +8,7 @@
     "move_select_singles",
     "pokemon_switch_singles",
     "action_menu_doubles",
+    "target_select_doubles",
     "move_select_doubles",
     "pokemon_switch_doubles",
     "communicating",
@@ -184,6 +185,33 @@
             "type": "int",
             "min": 0,
             "max": 3
+          }
+        }
+      }
+    },
+    "TargetSelectReader": {
+      "screens": {
+        "target_select_doubles": {
+          "move": {
+            "type": "string"
+          },
+          "targets": {
+            "type": "array",
+            "items": "string",
+            "length": 4
+          },
+          "target_hp": {
+            "type": "array",
+            "items": "string",
+            "length": 4
+          },
+          "effectiveness": {
+            "type": "array",
+            "items": "string",
+            "length": 4
+          },
+          "selected_target": {
+            "type": "int"
           }
         }
       }
