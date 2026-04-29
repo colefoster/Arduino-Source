@@ -1364,6 +1364,7 @@ async function loadGalleryScreenImages(screen) {
                     <span id="bulk-count" style="color:#8b949e;">0 selected</span>
                     <select id="bulk-target" style="font-size:10px; padding:2px 4px; background:#0d1117; color:#c9d1d9; border:1px solid #30363d; border-radius:3px;">
                         <option value="_inbox">_inbox</option>
+                        <option value="_other">_other (animations/misc)</option>
                         ${screenOpts}
                     </select>
                     <button class="btn" id="bulk-move-btn" disabled style="font-size:10px; padding:2px 8px;">Move Selected</button>
@@ -1794,6 +1795,7 @@ async function expandGalleryCard(filename) {
     moveTo.innerHTML = '<option value="">Move to...</option>'
         + screenList.map(s => `<option value="${s.name}">${s.name}</option>`).join('')
         + '<option value="_inbox">_inbox</option>'
+        + '<option value="_other">_other (animations/misc)</option>'
         + '<option value="__delete" style="color:#f85149;">Delete image</option>';
     moveTo.addEventListener('change', async () => {
         const target = moveTo.value;
