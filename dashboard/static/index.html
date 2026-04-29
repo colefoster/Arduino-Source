@@ -1244,13 +1244,14 @@ function renderGallerySidebar() {
         html += '<div style="color:#8b949e; font-size:10px; text-transform:uppercase; margin-bottom:4px;">Screens</div>';
         html += withImages.map(s => {
             const fails = _regressionFailures[s.name] || 0;
-            const failBadge = fails > 0 ? `<span style="color:#f85149; font-size:9px; margin-left:4px;" title="${fails} detector failures">&#9888;${fails}</span>` : '';
-            return `
-            <div class="reader-pill${gallerySelectedScreen === s.name ? ' active' : ''}" data-screen="${s.name}">
-                <span>${s.name}${failBadge}</span>
-                <span class="count-badge">${s.count}${s.labeled ? `<span style="color:#3fb950;">/${s.labeled}</span>` : ''}</span>
-            </div>
-        `; }).join('');
+            const failBadge = fails > 0 ? '<span style="color:#f85149; font-size:9px; margin-left:4px;" title="' + fails + ' detector failures">&#9888;' + fails + '</span>' : '';
+            const labeledBadge = s.labeled ? '<span style="color:#3fb950;">/' + s.labeled + '</span>' : '';
+            const active = gallerySelectedScreen === s.name ? ' active' : '';
+            return '<div class="reader-pill' + active + '" data-screen="' + s.name + '">'
+                + '<span>' + s.name + failBadge + '</span>'
+                + '<span class="count-badge">' + s.count + labeledBadge + '</span>'
+                + '</div>';
+        }).join('');
     }
     if (empty.length) {
         html += '<div style="color:#8b949e; font-size:10px; text-transform:uppercase; margin:8px 0 4px;">Empty</div>';
