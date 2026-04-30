@@ -96,29 +96,53 @@
         "action_menu": {
           "opponent_species": {
             "type": "array",
-            "items": "string"
+            "items": "string",
+            "length": 2,
+            "description": "Slot 0 (left), slot 1 (right). Singles: leave slot 1 blank."
           },
           "opponent_hp_pct": {
             "type": "array",
-            "items": "int"
+            "items": "int",
+            "length": 2,
+            "description": "Slot 0 (left), slot 1 (right). Singles: leave slot 1 blank."
+          },
+          "own_species": {
+            "type": "array",
+            "items": "string",
+            "length": 2,
+            "description": "Slot 0 (left), slot 1 (right). Singles: leave slot 1 blank."
           },
           "own_hp": {
             "type": "array",
-            "items": "string"
+            "items": "string",
+            "length": 2,
+            "description": "Slot 0 (left), slot 1 (right). Singles: leave slot 1 blank."
           }
         },
         "move_select": {
           "opponent_species": {
             "type": "array",
-            "items": "string"
+            "items": "string",
+            "length": 2,
+            "description": "Slot 0 (left), slot 1 (right). Singles: leave slot 1 blank."
           },
           "opponent_hp_pct": {
             "type": "array",
-            "items": "int"
+            "items": "int",
+            "length": 2,
+            "description": "Slot 0 (left), slot 1 (right). Singles: leave slot 1 blank."
+          },
+          "own_species": {
+            "type": "array",
+            "items": "string",
+            "length": 2,
+            "description": "Slot 0 (left), slot 1 (right). Singles: leave slot 1 blank."
           },
           "own_hp": {
             "type": "array",
-            "items": "string"
+            "items": "string",
+            "length": 2,
+            "description": "Slot 0 (left), slot 1 (right). Singles: leave slot 1 blank."
           }
         }
       }

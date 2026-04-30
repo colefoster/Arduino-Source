@@ -54,10 +54,25 @@ int run_ocr_suggest(const std::string& reader_name, const std::string& image_pat
             std::cout << "{\"slot\":" << det.active_slot() << "}" << std::endl;
         }
         else if (reader_name == "BattleHUDReader" || reader_name == "SpeciesReader"){
-            BattleHUDReader reader(Language::English);
-            std::string species = reader.read_opponent_species(log, image, 0);
-            int hp = reader.read_opponent_hp_pct(log, image, 0);
-            std::cout << "{\"opponent_species\":\"" << species << "\",\"opponent_hp_pct\":" << hp << "}" << std::endl;
+            //  Always probe both slots in doubles mode; for singles images the
+            //  slot-1 boxes will read empty/garbage and the user can clear them.
+            BattleHUDReader reader(Language::English, BattleMode::DOUBLES);
+            std::string opp0 = reader.read_opponent_species(log, image, 0);
+            std::string opp1 = reader.read_opponent_species(log, image, 1);
+            int hp0 = reader.read_opponent_hp_pct(log, image, 0);
+            int hp1 = reader.read_opponent_hp_pct(log, image, 1);
+            auto own0 = reader.read_own_hp(log, image, 0);
+            auto own1 = reader.read_own_hp(log, image, 1);
+            auto fmt_hp = [](std::pair<int,int> p) -> std::string{
+                if (p.first < 0) return "";
+                return std::to_string(p.first) + "/" + std::to_string(p.second);
+            };
+            std::cout << "{"
+                << "\"opponent_species\":[\"" << opp0 << "\",\"" << opp1 << "\"],"
+                << "\"opponent_hp_pct\":[" << hp0 << "," << hp1 << "],"
+                << "\"own_hp\":[\"" << fmt_hp(own0) << "\",\"" << fmt_hp(own1) << "\"],"
+                << "\"own_species\":[\"\",\"\"]"
+                << "}" << std::endl;
         }
         else if (reader_name == "BattleLogReader"){
             BattleLogReader reader;

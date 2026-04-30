@@ -73,12 +73,23 @@ screens:
           opponent_species:
             type: array
             items: string
+            length: 2
+            description: "Slot 0 (left), slot 1 (right). Singles: leave slot 1 blank."
           opponent_hp_pct:
             type: array
             items: int
+            length: 2
+            description: "Slot 0 (left), slot 1 (right). Singles: leave slot 1 blank."
+          own_species:
+            type: array
+            items: string
+            length: 2
+            description: "Slot 0 (left), slot 1 (right). Singles: leave slot 1 blank."
           own_hp:
             type: array
             items: string
+            length: 2
+            description: "Slot 0 (left), slot 1 (right). Singles: leave slot 1 blank."
 
   move_select:
     description: "4-move panel active. PP visible. Mega evo toggle possible. Singles or doubles."
@@ -109,12 +120,23 @@ screens:
           opponent_species:
             type: array
             items: string
+            length: 2
+            description: "Slot 0 (left), slot 1 (right). Singles: leave slot 1 blank."
           opponent_hp_pct:
             type: array
             items: int
+            length: 2
+            description: "Slot 0 (left), slot 1 (right). Singles: leave slot 1 blank."
+          own_species:
+            type: array
+            items: string
+            length: 2
+            description: "Slot 0 (left), slot 1 (right). Singles: leave slot 1 blank."
           own_hp:
             type: array
             items: string
+            length: 2
+            description: "Slot 0 (left), slot 1 (right). Singles: leave slot 1 blank."
 
   target_select:
     description: "Target selection modal after picking a move in doubles. Shows mons with HP, effectiveness, and selected move name."
