@@ -137,13 +137,19 @@ def train(
     )
     print(f"Train: {len(train_dataset)}, Val: {len(val_dataset)}")
 
+    # Pin memory + multi-worker dataloading. Without workers the encoder runs
+    # in the main thread per __getitem__ and starves the GPU (saw <15% util on
+    # 1.1M-sample dataset). persistent_workers avoids re-spawning every epoch.
+    nw = 0 if device.type == "cpu" else 4
     train_loader = DataLoader(
         train_dataset, batch_size=batch_size, shuffle=True,
-        num_workers=0, pin_memory=(device.type != "cpu"),
+        num_workers=nw, pin_memory=(device.type != "cpu"),
+        persistent_workers=(nw > 0),
     )
     val_loader = DataLoader(
         val_dataset, batch_size=batch_size, shuffle=False,
-        num_workers=0, pin_memory=(device.type != "cpu"),
+        num_workers=nw, pin_memory=(device.type != "cpu"),
+        persistent_workers=(nw > 0),
     )
 
     # Model
