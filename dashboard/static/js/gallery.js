@@ -211,30 +211,28 @@ async function loadGalleryScreenImages(screen) {
                     if (!fnames.length) return;
                     const btn = document.getElementById('bulk-move-btn');
                     btn.disabled = true; btn.textContent = `Moving ${fnames.length}...`;
-                    for (const fname of fnames) {
-                        await fetch(`${API}/api/gallery/image-move`, {
-                            method:'POST', headers:{'Content-Type':'application/json'},
-                            body: JSON.stringify({screen: gallerySelectedScreen, filename: fname, target})
-                        });
-                    }
+                    await Promise.all(fnames.map(fname => fetch(`${API}/api/gallery/image-move`, {
+                        method:'POST', headers:{'Content-Type':'application/json'},
+                        body: JSON.stringify({screen: gallerySelectedScreen, filename: fname, target})
+                    })));
                     _bulkSelected.clear();
                     _bulkSelectMode = false;
-                    loadGalleryScreenImages(gallerySelectedScreen);
+                    await loadGalleryScreenImages(gallerySelectedScreen);
+                    refreshAllScreenCounts();
                 });
                 document.getElementById('bulk-delete-btn').addEventListener('click', async () => {
                     const fnames = [..._bulkSelected];
                     if (!fnames.length || !confirm(`Delete ${fnames.length} images?`)) return;
                     const btn = document.getElementById('bulk-delete-btn');
                     btn.disabled = true; btn.textContent = `Deleting...`;
-                    for (const fname of fnames) {
-                        await fetch(`${API}/api/gallery/image-move`, {
-                            method:'POST', headers:{'Content-Type':'application/json'},
-                            body: JSON.stringify({screen: gallerySelectedScreen, filename: fname, target: '__delete'})
-                        });
-                    }
+                    await Promise.all(fnames.map(fname => fetch(`${API}/api/gallery/image-move`, {
+                        method:'POST', headers:{'Content-Type':'application/json'},
+                        body: JSON.stringify({screen: gallerySelectedScreen, filename: fname, target: '__delete'})
+                    })));
                     _bulkSelected.clear();
                     _bulkSelectMode = false;
-                    loadGalleryScreenImages(gallerySelectedScreen);
+                    await loadGalleryScreenImages(gallerySelectedScreen);
+                    refreshAllScreenCounts();
                 });
             } else if (!_bulkSelectMode && bar) {
                 bar.remove();
@@ -295,7 +293,7 @@ async function loadGalleryScreenImages(screen) {
                 try {
                     const resp = await fetch(`${API}/api/gallery/manifest/${encodeURIComponent(screen)}/bulk-confirm`, {method:'POST'}).then(r=>r.json());
                     confirmBtn.textContent = `Done! ${resp.confirmed} confirmed`;
-                    setTimeout(() => loadGalleryScreenImages(screen), 800);
+                    setTimeout(async () => { await loadGalleryScreenImages(screen); refreshAllScreenCounts(); }, 800);
                 } catch (e) { confirmBtn.textContent = 'Error'; }
             });
         }
@@ -331,7 +329,7 @@ async function loadGalleryScreenImages(screen) {
                     } catch (e) { console.error('bulk ocr:', e); }
                 }
                 ocrBtn.textContent = `Done! ${totalSuggested} suggested`;
-                setTimeout(() => loadGalleryScreenImages(screen), 800);
+                setTimeout(async () => { await loadGalleryScreenImages(screen); refreshAllScreenCounts(); }, 800);
             });
         }
 
@@ -449,7 +447,23 @@ function _gtLabel(img) {
 let _bulkSelectMode = false;
 let _bulkSelected = new Set();
 
-// Recompute the current screen's count/labeled from in-memory images and refresh the sidebar.
+// Re-fetch all screen counts from the API and re-render the sidebar.
+// Call this after any move/delete/save so both source and destination counts update.
+async function refreshAllScreenCounts() {
+    try {
+        const fresh = await api('/api/gallery/screens');
+        // Preserve the order/identity but pull fresh counts/labeled from the API.
+        const byName = {};
+        for (const s of fresh) byName[s.name] = s;
+        for (const s of galleryScreens) {
+            const f = byName[s.name];
+            if (f) { s.count = f.count; s.labeled = f.labeled; }
+        }
+        renderGallerySidebar();
+    } catch (e) { console.error('refreshAllScreenCounts:', e); }
+}
+
+// Optimistic local-only update for the current screen between API calls.
 function refreshCurrentScreenCounts() {
     if (!gallerySelectedScreen) return;
     const s = galleryScreens.find(x => x.name === gallerySelectedScreen);
@@ -656,7 +670,8 @@ async function expandGalleryCard(filename) {
         // Remove from local array and advance
         const idx = galleryImages.findIndex(i => i.filename === filename);
         if (idx >= 0) galleryImages.splice(idx, 1);
-        refreshCurrentScreenCounts();
+        refreshCurrentScreenCounts();   // immediate (source)
+        refreshAllScreenCounts();       // authoritative (source + dest)
         overlay.remove();
         if (galleryImages.length > 0) {
             const next = Math.min(idx, galleryImages.length - 1);
@@ -838,6 +853,7 @@ async function buildLabelForm(overlay, screen, filename, img) {
                 img._visited = true;
             }
             refreshCurrentScreenCounts();
+            refreshAllScreenCounts();
             if (advance) {
                 // Find current position fresh (may have shifted from moves/deletes)
                 const currentIdx = galleryImages.findIndex(im => im.filename === filename);

@@ -10,8 +10,8 @@ screens:
   # ── Pre-battle ──────────────────────────────────────────────
 
   team_select:
-    description: "Registering team of 6 before queueing for ranked."
-    transitions_to: [searching_for_battle]
+    description: "Registering team of 6 (selecting which mons make up Team 1, etc.)."
+    transitions_to: [pre_match]
     detectors: [TeamSelectDetector]
     readers:
       TeamSelectReader:
@@ -150,16 +150,34 @@ screens:
 
   post_match:
     description: "Quit Battling / Edit Team / Continue Battling buttons."
-    transitions_to: [team_select, searching_for_battle]
+    transitions_to: [pre_match]
     detectors: [PostMatchScreenDetector]
     readers: {}
 
   # ── Non-battle (menu) ──────────────────────────────────────
 
   main_menu:
-    description: "Game main menu with Battle, Box, Train, etc."
-    transitions_to: [team_select]
+    description: "Game home screen with Battle / Box / Train / Recruit / Shop tiles."
+    transitions_to: [battle_mode_menu]
     detectors: [MainMenuDetector]
+    readers: {}
+
+  battle_mode_menu:
+    description: "Battle mode list: Ranked Battles / Casual Battles / Private Battles / Online Competitions / Battle Data."
+    transitions_to: [ranked_format_select, main_menu]
+    detectors: []
+    readers: {}
+
+  ranked_format_select:
+    description: "Choose between Single Battle and Double Battle for ranked."
+    transitions_to: [pre_match, battle_mode_menu]
+    detectors: []
+    readers: {}
+
+  pre_match:
+    description: "Pre-match staging screen: selected team displayed with Begin Matchmaking and Change Team buttons."
+    transitions_to: [team_select, searching_for_battle, ranked_format_select]
+    detectors: []
     readers: {}
 
   moves_and_more:

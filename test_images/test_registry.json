@@ -11,6 +11,9 @@
     "result_screen",
     "post_match",
     "main_menu",
+    "battle_mode_menu",
+    "ranked_format_select",
+    "pre_match",
     "moves_and_more"
   ],
   "overlay_dirs": [
