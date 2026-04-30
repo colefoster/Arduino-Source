@@ -11,6 +11,7 @@
 #include "CommonFramework/Language.h"
 #include "CommonFramework/Logging/Logger.h"
 
+#include "PokemonChampions/Inference/PokemonChampions_ActiveHUDSlotDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_MoveNameReader.h"
 #include "PokemonChampions/Inference/PokemonChampions_MoveSelectDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_BattleHUDReader.h"
@@ -46,6 +47,11 @@ int run_ocr_suggest(const std::string& reader_name, const std::string& image_pat
             MoveSelectDetector det;
             det.detect(image);
             std::cout << "{\"slot\":" << det.cursor_slot() << "}" << std::endl;
+        }
+        else if (reader_name == "ActiveHUDSlot"){
+            ActiveHUDSlotDetector det;
+            det.detect(image);
+            std::cout << "{\"slot\":" << det.active_slot() << "}" << std::endl;
         }
         else if (reader_name == "BattleHUDReader" || reader_name == "SpeciesReader"){
             BattleHUDReader reader(Language::English);

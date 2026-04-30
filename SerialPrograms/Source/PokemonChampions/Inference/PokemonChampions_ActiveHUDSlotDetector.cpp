@@ -15,8 +15,8 @@ namespace PokemonChampions{
 
 
 //  Lime green outline that appears on the active HUD pill's top edge.
-//  Measured RGB (173, 255, 0) across multiple doubles captures.
-static const FloatPixel ACTIVE_LIME{0.678, 1.000, 0.000};
+//  Measured RGB ~(167, 255, 0); normalized to sum=1: 167/422, 255/422, 0.
+static const FloatPixel ACTIVE_LIME{0.396, 0.604, 0.000};
 
 
 ActiveHUDSlotDetector::ActiveHUDSlotDetector()
