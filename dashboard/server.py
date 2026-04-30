@@ -2108,6 +2108,51 @@ _sync_state: dict = {
 }
 
 
+async def _run_sync_index() -> dict:
+    """Merge spectated + downloaded index.json and push to ColePC.
+
+    Without this, ColePC has only the older downloaded/index.json and silently
+    drops every replay whose rating it doesn't know about — gating training on
+    a stale subset of the 1200+ corpus.
+    """
+    spec_path = SPECTATED_DIR / "index.json"
+    dl_path = DOWNLOADED_DIR / "index.json"
+    if not spec_path.exists() and not dl_path.exists():
+        return {"skipped": True, "reason": "no source index files"}
+
+    merged: dict = {}
+    if dl_path.exists():
+        merged.update(json.loads(dl_path.read_text()))
+    if spec_path.exists():
+        merged.update(json.loads(spec_path.read_text()))  # spectated wins on conflict
+
+    # Normalize: replace None ratings with 0 so consumers don't crash
+    for v in merged.values():
+        if v.get("rating") is None:
+            v["rating"] = 0
+
+    out_path = Path("/tmp/merged_replay_index.json")
+    out_path.write_text(json.dumps(merged))
+
+    # SCP to the parent of the replay dir on ColePC (matches EnrichedDataset's lookup)
+    remote_dest = f"{COLEPC_REPLAY_DIR}/index.json".replace("/", "\\")
+    proc = await asyncio.create_subprocess_exec(
+        "scp", "-q", str(out_path), f"{COLEPC_HOST}:{remote_dest}",
+        stdout=asyncio.subprocess.PIPE,
+        stderr=asyncio.subprocess.PIPE,
+    )
+    _, stderr = await proc.communicate()
+    if proc.returncode != 0:
+        return {"ok": False, "error": stderr.decode(errors="replace")}
+
+    return {
+        "ok": True,
+        "entries": len(merged),
+        "rated_1200_plus": sum(1 for v in merged.values() if (v.get("rating") or 0) >= 1200),
+        "size_bytes": out_path.stat().st_size,
+    }
+
+
 async def _run_sync_format(fmt_id: str, sources: list[Path]) -> dict:
     """Sync one format's replays from ash to ColePC via tar+ssh."""
     # Collect all local replay files for this format
@@ -2238,15 +2283,20 @@ async def sync_trigger(request: Request):
         for fmt_id in formats:
             results[fmt_id] = await _run_sync_format(fmt_id, sources)
 
+        # Push merged rating index to ColePC so the new replays are actually
+        # visible to min_rating filters during training.
+        index_result = await _run_sync_index()
+
         total_synced = sum(r["synced"] for r in results.values())
         _sync_state["last_run"] = time.time()
         _sync_state["last_result"] = {
             "timestamp": time.time(),
             "formats": results,
             "total_synced": total_synced,
+            "index": index_result,
         }
         _sync_state["formats_synced"] = results
-        return {"ok": True, "total_synced": total_synced, "formats": results}
+        return {"ok": True, "total_synced": total_synced, "formats": results, "index": index_result}
 
     except Exception as e:
         _sync_state["last_error"] = str(e)
