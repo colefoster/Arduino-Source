@@ -117,16 +117,21 @@ def _worker_init():
 
 
 def _worker_process_batch(args):
-    """Encode one batch of replays. Runs in a worker process.
+    """Encode one batch of replays and write a shard to disk.
+
+    Workers write shards themselves to avoid pickling 50–100 MB of tensors
+    across multiprocessing IPC (which goes through /dev/shm and OOMs the
+    container). Returns only metadata.
 
     Args:
         replay_files: list of (Path, int) -- replays + ratings
         history_mode: "single" | "window" | "sequence"
         winner_only: bool
+        shard_path: Path -- where to write this shard's .pt file
 
-    Returns: (samples, replay_ids) where samples is a list of tensor-dicts.
+    Returns: dict {"shard_path": str, "replay_ids": [str], "num_samples": int}
     """
-    replay_files, history_mode, winner_only = args
+    replay_files, history_mode, winner_only, shard_path = args
 
     from vgc_model.data.enriched_dataset import EnrichedDataset
 
@@ -173,7 +178,23 @@ def _worker_process_batch(args):
             encoded.append(d)
 
     replay_ids = [f.stem for f, _ in replay_files]
-    return encoded, replay_ids
+
+    # Write shard to disk in this worker — avoids pickling tensors back across IPC.
+    shard_path = Path(shard_path)
+    shard_path.parent.mkdir(parents=True, exist_ok=True)
+    tmp = shard_path.with_suffix(".pt.tmp")
+    torch.save({
+        "samples": encoded,
+        "replay_ids": replay_ids,
+        "history_mode": history_mode,
+    }, tmp)
+    tmp.replace(shard_path)
+
+    return {
+        "shard_path": str(shard_path),
+        "replay_ids": replay_ids,
+        "num_samples": len(encoded),
+    }
 
 
 # ---------------------------------------------------------------------------
@@ -241,42 +262,48 @@ def main():
     t_total = time.time()
     new_samples = 0
 
+    # Allocate shard paths up front so workers can write directly. Use a
+    # high-water-mark scheme based on the manifest's current shard count to
+    # avoid colliding with shards from earlier preparse runs.
+    base_idx = len(manifest.shards)
+    tasks = []
+    for i, batch in enumerate(batches):
+        shard_filename = f"shard_{base_idx + i:04d}.pt"
+        shard_path = cache_dir / shard_filename
+        tasks.append((batch, args.history, args.winner_only, str(shard_path)))
+
     if args.workers > 0:
-        # Parallel: each worker handles one batch at a time. Workers init their
-        # own resources once; main writes shards as results come back so the cache
-        # is usable mid-flight if the run is interrupted.
+        # Parallel: each worker writes its own shard directly to disk and
+        # returns only the metadata, so we never push 50-100MB of tensors
+        # across IPC (which would blow up /dev/shm).
         with mp.Pool(processes=args.workers, initializer=_worker_init) as pool:
-            tasks = [(batch, args.history, args.winner_only) for batch in batches]
-            for i, (samples, replay_ids) in enumerate(
-                pool.imap_unordered(_worker_process_batch, tasks)
-            ):
-                t0 = time.time()
-                fname = write_shard(cache_dir, samples, replay_ids, args.history)
-                manifest.add_shard(fname, replay_ids, len(samples))
-                new_samples += len(samples)
+            for i, result in enumerate(pool.imap_unordered(_worker_process_batch, tasks)):
+                fname = Path(result["shard_path"]).name
+                manifest.add_shard(fname, result["replay_ids"], result["num_samples"])
+                new_samples += result["num_samples"]
                 wallclock_pct = 100 * (i + 1) / len(batches)
                 elapsed = time.time() - t_total
                 rate = new_samples / max(elapsed, 1)
                 print(
                     f"[{i + 1:>3}/{len(batches)}  {wallclock_pct:5.1f}%]  "
-                    f"shard={fname}  samples={len(samples):>5}  "
-                    f"replays={len(replay_ids):>5}  "
+                    f"shard={fname}  samples={result['num_samples']:>5}  "
+                    f"replays={len(result['replay_ids']):>5}  "
                     f"total={new_samples:>7}  "
-                    f"rate={rate:>5.0f} samples/s  "
-                    f"write={time.time() - t0:.1f}s"
+                    f"rate={rate:>5.0f} samples/s"
                 )
     else:
         # Serial fallback (no multiprocessing) — useful for debugging
         _worker_init()
-        for i, batch in enumerate(batches):
+        for i, task in enumerate(tasks):
             t0 = time.time()
-            samples, replay_ids = _worker_process_batch((batch, args.history, args.winner_only))
-            fname = write_shard(cache_dir, samples, replay_ids, args.history)
-            manifest.add_shard(fname, replay_ids, len(samples))
-            new_samples += len(samples)
+            result = _worker_process_batch(task)
+            fname = Path(result["shard_path"]).name
+            manifest.add_shard(fname, result["replay_ids"], result["num_samples"])
+            new_samples += result["num_samples"]
             print(
                 f"[{i + 1:>3}/{len(batches)}]  shard={fname}  "
-                f"samples={len(samples):>5}  replays={len(replay_ids):>5}  "
+                f"samples={result['num_samples']:>5}  "
+                f"replays={len(result['replay_ids']):>5}  "
                 f"elapsed={time.time() - t0:.1f}s"
             )
             gc.collect()
