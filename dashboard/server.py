@@ -70,6 +70,9 @@ BASE = Path(__file__).resolve().parent.parent
 REPLAY_BASE = BASE / "data" / "showdown_replays"
 SPECTATED_DIR = REPLAY_BASE / "spectated"
 DOWNLOADED_DIR = REPLAY_BASE / "downloaded"
+# New hour-bucketed replay layout (Phase 1 of pipeline redesign).
+# replays/<format>/YYYY-MM-DD/HH/<id>.json — written by spectator, synced to unraid.
+BUCKETED_REPLAY_DIR = BASE / "data" / "replays"
 STATUS_FILE = SPECTATED_DIR / ".orchestrator_status.json"
 STATIC_DIR = Path(__file__).parent / "static"
 
@@ -2177,7 +2180,7 @@ async def validation_summary():
 SYNC_HOST = os.environ.get("SYNC_HOST", "unraid")
 SYNC_REPLAY_DIR = os.environ.get(
     "SYNC_REPLAY_DIR",
-    "/mnt/user/data/pokemon-champions/data/showdown_replays",
+    "/mnt/user/data/pokemon-champions/data/replays",
 )
 
 _sync_state: dict = {
@@ -2190,119 +2193,62 @@ _sync_state: dict = {
 
 
 async def _run_sync_index() -> dict:
-    """Merge spectated + downloaded index.json and push to ColePC.
+    """Index sync is obsolete with the bucketed layout.
 
-    Without this, ColePC has only the older downloaded/index.json and silently
-    drops every replay whose rating it doesn't know about — gating training on
-    a stale subset of the 1200+ corpus.
+    The legacy preparse pipeline relied on a flat index.json mapping replay_id
+    -> rating to filter at training time. Layer 1 parquet (Phase 3) records
+    rating per row, so the index isn't needed downstream.
     """
-    spec_path = SPECTATED_DIR / "index.json"
-    dl_path = DOWNLOADED_DIR / "index.json"
-    if not spec_path.exists() and not dl_path.exists():
-        return {"skipped": True, "reason": "no source index files"}
-
-    merged: dict = {}
-    if dl_path.exists():
-        merged.update(json.loads(dl_path.read_text()))
-    if spec_path.exists():
-        merged.update(json.loads(spec_path.read_text()))  # spectated wins on conflict
-
-    # Normalize: replace None ratings with 0 so consumers don't crash
-    for v in merged.values():
-        if v.get("rating") is None:
-            v["rating"] = 0
-
-    out_path = Path("/tmp/merged_replay_index.json")
-    out_path.write_text(json.dumps(merged))
-
-    # SCP to the parent of the replay dir on the sync host (matches the
-    # dataset/preparse lookup at <replay_dir>.parent / "index.json").
-    remote_dest = f"{SYNC_REPLAY_DIR}/index.json"
-    proc = await asyncio.create_subprocess_exec(
-        "scp", "-q", str(out_path), f"{SYNC_HOST}:{remote_dest}",
-        stdout=asyncio.subprocess.PIPE,
-        stderr=asyncio.subprocess.PIPE,
-    )
-    _, stderr = await proc.communicate()
-    if proc.returncode != 0:
-        return {"ok": False, "error": stderr.decode(errors="replace")}
-
-    return {
-        "ok": True,
-        "entries": len(merged),
-        "rated_1200_plus": sum(1 for v in merged.values() if (v.get("rating") or 0) >= 1200),
-        "size_bytes": out_path.stat().st_size,
-    }
+    return {"skipped": True, "reason": "obsolete with bucketed layout"}
 
 
 async def _run_sync_format(fmt_id: str, sources: list[Path]) -> dict:
-    """Sync one format's replays from ash to the configured remote via rsync.
+    """Sync one format's bucketed replays from ash to the configured remote.
 
-    Replaces the previous tar+ssh approach which depended on `ssh remote ls`
-    of a 470k-file directory (~3 min on btrfs/fuse, often timed out). rsync
-    handles delta detection natively via its own protocol — no remote listing
-    required. --ignore-existing skips files already on the remote without
-    checksumming, which is what we want here (replay JSONs are immutable).
+    Source layout: data/replays/<fmt>/YYYY-MM-DD/HH/<id>.json (bucketed).
+    rsync -a recurses the date/hour subtree natively. --ignore-existing skips
+    files already on the remote without checksumming (replay JSONs are
+    immutable, so no checksum needed).
     """
+    src_dir = BUCKETED_REPLAY_DIR / fmt_id
+    if not src_dir.exists():
+        return {"format": fmt_id, "local": 0, "synced": 0, "skipped": True}
+
     remote_dir = f"{SYNC_REPLAY_DIR}/{fmt_id}"
-
-    # Pre-check: are any local source dirs even present?
-    src_dirs = [src / fmt_id for src in sources if (src / fmt_id).exists()]
-    if not src_dirs:
-        return {"format": fmt_id, "local": 0, "synced_phases": 0, "skipped": True}
-
-    # Make sure the remote dir exists; rsync won't auto-mkdir intermediate dirs
-    # the way `--mkpath` does on newer rsync, but a single ssh mkdir is cheap.
     proc = await asyncio.create_subprocess_exec(
         "ssh", SYNC_HOST, f'mkdir -p "{remote_dir}"',
         stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE,
     )
     await proc.communicate()
 
-    # Run rsync once per source dir, into the same destination. --ignore-existing
-    # short-circuits files that already exist on the remote (no per-file remote
-    # stat or checksum). --info=stats2 gives us a single line we can grep for
-    # the number of files actually transferred.
-    total_local = 0
+    proc = await asyncio.create_subprocess_exec(
+        "rsync",
+        "-a",
+        "--ignore-existing",
+        "--info=stats2",
+        f"{src_dir.as_posix()}/",
+        f"{SYNC_HOST}:{remote_dir}/",
+        stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE,
+    )
+    stdout, stderr = await proc.communicate()
+    if proc.returncode != 0:
+        raise RuntimeError(
+            f"rsync {src_dir} -> {SYNC_HOST}:{remote_dir} failed: "
+            f"{stderr.decode(errors='replace')[-500:]}"
+        )
+
     transferred = 0
     last_stats = ""
-    for src in src_dirs:
-        # Count local files for the report (cheap — ~1s for 440k files).
-        local_count = sum(
-            1 for f in src.iterdir()
-            if f.suffix == ".json" and f.name != "index.json"
-        )
-        total_local += local_count
-
-        proc = await asyncio.create_subprocess_exec(
-            "rsync",
-            "-a",
-            "--ignore-existing",
-            "--exclude=index.json",
-            "--info=stats2",
-            f"{src.as_posix()}/",
-            f"{SYNC_HOST}:{remote_dir}/",
-            stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE,
-        )
-        stdout, stderr = await proc.communicate()
-        if proc.returncode != 0:
-            raise RuntimeError(
-                f"rsync {src} -> {SYNC_HOST}:{remote_dir} failed: "
-                f"{stderr.decode(errors='replace')[-500:]}"
-            )
-
-        # Parse "Number of regular files transferred: N" out of --info=stats2.
-        for line in stdout.decode(errors="replace").splitlines():
-            if "regular files transferred" in line.lower():
-                try:
-                    transferred += int(line.rsplit(":", 1)[1].strip().replace(",", ""))
-                except (ValueError, IndexError):
-                    pass
-                last_stats = line.strip()
+    for line in stdout.decode(errors="replace").splitlines():
+        if "regular files transferred" in line.lower():
+            try:
+                transferred += int(line.rsplit(":", 1)[1].strip().replace(",", ""))
+            except (ValueError, IndexError):
+                pass
+            last_stats = line.strip()
 
     return {
         "format": fmt_id,
-        "local": total_local,
         "synced": transferred,
         "stats": last_stats,
     }
@@ -2343,13 +2289,10 @@ async def sync_trigger(request: Request):
                 stderr=asyncio.subprocess.PIPE,
             )
 
-        sources = [SPECTATED_DIR, DOWNLOADED_DIR]
         results = {}
         for fmt_id in formats:
-            results[fmt_id] = await _run_sync_format(fmt_id, sources)
+            results[fmt_id] = await _run_sync_format(fmt_id, [])
 
-        # Push merged rating index to ColePC so the new replays are actually
-        # visible to min_rating filters during training.
         index_result = await _run_sync_index()
 
         total_synced = sum(r["synced"] for r in results.values())
