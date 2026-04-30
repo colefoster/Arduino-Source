@@ -80,6 +80,11 @@ static int test_manifest_MoveSelectCursorSlot(const ImageViewRGB32& image, const
     return test_pokemonChampions_MoveSelectCursorSlot(image, slot);
 }
 
+static int test_manifest_ActiveHUDSlot(const ImageViewRGB32& image, const json& entry){
+    int slot = entry.at("slot").get<int>();
+    return test_pokemonChampions_ActiveHUDSlot(image, slot);
+}
+
 static int test_manifest_SpeciesReader(const ImageViewRGB32& image, const json& entry){
     // The manifest stores under BattleHUDReader with opponent_species field.
     // For singles, it's a string. Build words = ["prefix", "species"]
@@ -165,6 +170,7 @@ static int test_manifest_TeamPreviewReader(const ImageViewRGB32& image, const js
 static const std::map<std::string, ReaderTestFn> READER_FUNCTIONS = {
     {"MoveNameReader",       test_manifest_MoveNameReader},
     {"MoveSelectCursorSlot", test_manifest_MoveSelectCursorSlot},
+    {"ActiveHUDSlot",        test_manifest_ActiveHUDSlot},
     {"BattleLogReader",      test_manifest_BattleLogReader},
     {"TeamSelectReader",     test_manifest_TeamSelectReader},
     {"TeamSummaryReader",    test_manifest_TeamSummaryReader},
