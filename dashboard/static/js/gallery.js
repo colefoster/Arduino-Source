@@ -58,37 +58,34 @@ function renderGallerySidebar() {
     const empty = galleryScreens.filter(s => s.count === 0 && s.type === 'screen');
     const overlays = galleryScreens.filter(s => s.type === 'overlay');
 
+    const pillFor = (s, displayName) => {
+        const fails = _regressionFailures[s.name] || 0;
+        const labeled = s.labeled || 0;
+        const total = s.count || 0;
+        const allLabeled = total > 0 && labeled === total;
+        const countColor = total === 0 ? '#484f58' : (allLabeled ? '#3fb950' : '#c9d1d9');
+        const tip = `${labeled}/${total} labeled` + (fails > 0 ? ` \u00b7 ${fails} detector failures` : '');
+        const failBadge = fails > 0 ? '<span style="color:#f85149; font-size:9px; margin-left:4px;" title="' + fails + ' detector failures">&#9888;' + fails + '</span>' : '';
+        const active = gallerySelectedScreen === s.name ? ' active' : '';
+        const opacity = total === 0 ? ' style="opacity:0.5;"' : '';
+        return '<div class="reader-pill' + active + '" data-screen="' + s.name + '" title="' + tip + '"' + opacity + '>'
+            + '<span>' + displayName + failBadge + '</span>'
+            + '<span class="count-badge" style="color:' + countColor + ';">' + labeled + '/' + total + '</span>'
+            + '</div>';
+    };
+
     let html = '';
     if (withImages.length) {
-        html += '<div style="color:#8b949e; font-size:10px; text-transform:uppercase; margin-bottom:4px;">Screens</div>';
-        html += withImages.map(s => {
-            const fails = _regressionFailures[s.name] || 0;
-            const failBadge = fails > 0 ? '<span style="color:#f85149; font-size:9px; margin-left:4px;" title="' + fails + ' detector failures">&#9888;' + fails + '</span>' : '';
-            const labeledBadge = s.labeled ? '<span style="color:#3fb950;">/' + s.labeled + '</span>' : '';
-            const active = gallerySelectedScreen === s.name ? ' active' : '';
-            return '<div class="reader-pill' + active + '" data-screen="' + s.name + '">'
-                + '<span>' + s.name + failBadge + '</span>'
-                + '<span class="count-badge">' + s.count + labeledBadge + '</span>'
-                + '</div>';
-        }).join('');
+        html += '<div style="color:#8b949e; font-size:10px; text-transform:uppercase; margin-bottom:4px;">Screens (labeled/total)</div>';
+        html += withImages.map(s => pillFor(s, s.name)).join('');
     }
     if (empty.length) {
         html += '<div style="color:#8b949e; font-size:10px; text-transform:uppercase; margin:8px 0 4px;">Empty</div>';
-        html += empty.map(s => `
-            <div class="reader-pill${gallerySelectedScreen === s.name ? ' active' : ''}" data-screen="${s.name}" style="opacity:0.5;">
-                <span>${s.name}</span>
-                <span class="count-badge">0</span>
-            </div>
-        `).join('');
+        html += empty.map(s => pillFor(s, s.name)).join('');
     }
     if (overlays.length) {
         html += '<div style="color:#8b949e; font-size:10px; text-transform:uppercase; margin:8px 0 4px;">Overlays</div>';
-        html += overlays.map(s => `
-            <div class="reader-pill${gallerySelectedScreen === s.name ? ' active' : ''}" data-screen="${s.name}">
-                <span>${s.name.replace('_overlays/', '')}</span>
-                <span class="count-badge">${s.count}</span>
-            </div>
-        `).join('');
+        html += overlays.map(s => pillFor(s, s.name.replace('_overlays/', ''))).join('');
     }
 
     // Inbox link
@@ -136,6 +133,11 @@ async function loadGalleryScreenImages(screen) {
         galleryScreenImages = data.images || [];
         galleryImages = galleryScreenImages;
         gallerySelectedReader = screen;
+        refreshCurrentScreenCounts();
+        // Reset grid layout: toolbar slot, bulk slot, cards container (renderGalleryGrid targets #gallery-cards).
+        // Override parent display so slots stack vertically; cards container gets the grid layout.
+        grid.style.display = 'block';
+        grid.innerHTML = '<div id="gallery-toolbar-slot"></div><div id="gallery-bulk-slot"></div><div id="gallery-cards" style="display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:12px;"></div>';
         renderGalleryGrid();
 
         // Toolbar: info + action buttons
@@ -163,7 +165,7 @@ async function loadGalleryScreenImages(screen) {
         buttons += `<button class="btn" id="verify-detectors-btn" style="font-size:11px; padding:3px 10px;">Verify Detectors</button>`;
 
         toolbar.innerHTML = `<span>${info}</span><div style="display:flex; gap:6px; flex-wrap:wrap;">${buttons}</div>`;
-        grid.insertBefore(toolbar, grid.firstChild);
+        document.getElementById('gallery-toolbar-slot').appendChild(toolbar);
 
         // Bulk select mode toggle
         document.getElementById('bulk-select-toggle').addEventListener('click', () => {
@@ -189,7 +191,7 @@ async function loadGalleryScreenImages(screen) {
                     <button class="btn" id="bulk-move-btn" disabled style="font-size:10px; padding:2px 8px;">Move Selected</button>
                     <button class="btn" id="bulk-delete-btn" disabled style="font-size:10px; padding:2px 8px; color:#f85149;">Delete Selected</button>
                 `;
-                grid.insertBefore(bar, grid.children[1]); // after toolbar
+                document.getElementById('gallery-bulk-slot').appendChild(bar);
                 document.getElementById('bulk-select-all').addEventListener('click', () => {
                     const all = _bulkSelected.size === galleryImages.length;
                     _bulkSelected.clear();
@@ -447,8 +449,19 @@ function _gtLabel(img) {
 let _bulkSelectMode = false;
 let _bulkSelected = new Set();
 
+// Recompute the current screen's count/labeled from in-memory images and refresh the sidebar.
+function refreshCurrentScreenCounts() {
+    if (!gallerySelectedScreen) return;
+    const s = galleryScreens.find(x => x.name === gallerySelectedScreen);
+    if (!s) return;
+    s.count = galleryImages.length;
+    s.labeled = galleryImages.filter(i => i.status && i.status !== 'unlabeled').length;
+    renderGallerySidebar();
+}
+
 function renderGalleryGrid() {
-    const grid = document.getElementById('gallery-grid');
+    // Target the cards container if present, otherwise the whole grid (e.g. inbox view).
+    const grid = document.getElementById('gallery-cards') || document.getElementById('gallery-grid');
     let filtered = galleryImages;
     if (galleryFilter === 'true') filtered = galleryImages.filter(i => (i.status || '') !== 'unlabeled' && _gtLabel(i) !== 'Unlabeled');
     if (galleryFilter === 'false') filtered = galleryImages.filter(i => i.status === 'unlabeled' || _gtLabel(i) === 'Unlabeled');
@@ -634,6 +647,7 @@ async function expandGalleryCard(filename) {
         // Remove from local array and advance
         const idx = galleryImages.findIndex(i => i.filename === filename);
         if (idx >= 0) galleryImages.splice(idx, 1);
+        refreshCurrentScreenCounts();
         overlay.remove();
         if (galleryImages.length > 0) {
             const next = Math.min(idx, galleryImages.length - 1);
@@ -814,6 +828,7 @@ async function buildLabelForm(overlay, screen, filename, img) {
                 img.status = Object.keys(labels).length ? 'complete' : 'unlabeled';
                 img._visited = true;
             }
+            refreshCurrentScreenCounts();
             if (advance) {
                 // Find current position fresh (may have shifted from moves/deletes)
                 const currentIdx = galleryImages.findIndex(im => im.filename === filename);

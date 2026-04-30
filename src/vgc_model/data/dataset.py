@@ -106,7 +106,7 @@ class VGCDataset(Dataset):
         index_file = replay_dir.parent / "index.json"
         ratings = {}
         if index_file.exists():
-            index = json.loads(index_file.read_text())
+            index = json.loads(index_file.read_text(encoding="utf-8"))
             for replay_id, meta in index.items():
                 r = meta.get("rating", 0)
                 if r:
@@ -127,7 +127,7 @@ class VGCDataset(Dataset):
         """Parse all replays and collect training samples."""
         for filepath, rating in self.replay_files:
             try:
-                data = json.loads(filepath.read_text())
+                data = json.loads(filepath.read_text(encoding="utf-8"))
                 log = data.get("log", "")
                 result = parse_battle(log, rating)
             except Exception:

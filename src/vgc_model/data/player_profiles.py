@@ -40,13 +40,13 @@ class PlayerProfiles:
         index_path = data_dir / f"{format_name}_index.json"
         if index_path.exists():
             self._sharded = True
-            self._shard_index = json.loads(index_path.read_text())
+            self._shard_index = json.loads(index_path.read_text(encoding="utf-8"))
             return
 
         # Single file
         single_path = data_dir / f"{format_name}.json"
         if single_path.exists():
-            self._profiles = json.loads(single_path.read_text())
+            self._profiles = json.loads(single_path.read_text(encoding="utf-8"))
 
     def _ensure_shard_loaded(self, letter: str):
         """Lazily load a shard file when needed."""
@@ -60,7 +60,7 @@ class PlayerProfiles:
 
         shard_path = self._data_dir / shard_info["file"]
         if shard_path.exists():
-            shard_data = json.loads(shard_path.read_text())
+            shard_data = json.loads(shard_path.read_text(encoding="utf-8"))
             self._profiles.update(shard_data)
 
     def get_profile(self, player_name: str) -> dict | None:
