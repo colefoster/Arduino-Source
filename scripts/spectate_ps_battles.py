@@ -21,6 +21,7 @@ import signal
 import string
 import sys
 import time
+from datetime import datetime, timezone
 from pathlib import Path
 
 # Force UTF-8 output on Windows
@@ -37,7 +38,8 @@ FORMATS = [
     "gen9championsbssregma",
 ]
 
-OUTPUT_DIR = Path(__file__).resolve().parent.parent / "data" / "showdown_replays" / "spectated"
+OUTPUT_DIR = Path(__file__).resolve().parent.parent / "data" / "replays"
+# Index lives at the format-root (one per format), not inside an hour bucket.
 INDEX_FILE = OUTPUT_DIR / "index.json"
 
 # How often to poll for new battles (seconds)
@@ -347,22 +349,33 @@ class ShowdownSpectator:
             await asyncio.sleep(0.5)  # rate limit joins — too fast gets kicked
 
     async def _save_battle(self, battle: BattleLog):
-        """Save a completed battle log to disk."""
-        # Determine format directory from room_id
-        fmt_dir = None
-        for fmt in self.formats:
-            if fmt in battle.room_id:
-                fmt_dir = OUTPUT_DIR / fmt
+        """Save a completed battle log to disk in hour-bucketed layout.
+
+        Layout: data/replays/<format>/YYYY-MM-DD/HH/<replay_id>.json
+        Bucket key is the spectate-time (now), which is within seconds of the
+        replay's actual end. UTC.
+        """
+        # Determine format from room_id
+        fmt = None
+        for f in self.formats:
+            if f in battle.room_id:
+                fmt = f
                 break
+        if fmt is None:
+            fmt = "unknown"
 
-        if fmt_dir is None:
-            fmt_dir = OUTPUT_DIR / "unknown"
-
-        fmt_dir.mkdir(parents=True, exist_ok=True)
+        upload_ts = int(time.time())
+        bucket_dt = datetime.fromtimestamp(upload_ts, tz=timezone.utc)
+        bucket_dir = (
+            OUTPUT_DIR / fmt
+            / bucket_dt.strftime("%Y-%m-%d")
+            / bucket_dt.strftime("%H")
+        )
+        bucket_dir.mkdir(parents=True, exist_ok=True)
 
         # Use room_id as filename (strip "battle-" prefix)
         replay_id = battle.room_id.replace("battle-", "")
-        out_file = fmt_dir / f"{replay_id}.json"
+        out_file = bucket_dir / f"{replay_id}.json"
 
         if out_file.exists():
             return
@@ -373,7 +386,7 @@ class ShowdownSpectator:
             "format": battle.format_id,
             "players": [battle.players.get("p1", ""), battle.players.get("p2", "")],
             "log": battle.log_text,
-            "uploadtime": int(time.time()),
+            "uploadtime": upload_ts,
             "rating": battle.rating,
             "source": "spectated",
         }
