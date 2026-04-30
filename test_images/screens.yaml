@@ -29,7 +29,7 @@ screens:
 
   team_preview_selecting:
     description: "Choosing which 4 mons to bring. Opponent team visible. No Standing By pills."
-    transitions_to: [team_preview_locked_in, communicating]
+    transitions_to: [team_preview_locked_in]
     detectors: [TeamPreviewDetector]
     readers:
       TeamPreviewReader:
@@ -45,7 +45,7 @@ screens:
 
   team_preview_locked_in:
     description: "All selections made, Standing By pills visible on both sides."
-    transitions_to: [communicating]
+    transitions_to: [action_menu]
     detectors: [TeamPreviewDetector, PreparingForBattleDetector]
     readers:
       TeamPreviewReader:
@@ -65,7 +65,7 @@ screens:
 
   action_menu:
     description: "FIGHT / POKEMON buttons visible. Singles or doubles."
-    transitions_to: [move_select, pokemon_switch, communicating]
+    transitions_to: [move_select, pokemon_switch]
     detectors: [ActionMenuDetector]
     readers:
       BattleHUDReader:
@@ -82,7 +82,7 @@ screens:
 
   move_select:
     description: "4-move panel active. PP visible. Mega evo toggle possible. Singles or doubles."
-    transitions_to: [target_select, communicating]
+    transitions_to: [target_select, action_menu]
     detectors: [MoveSelectDetector]
     readers:
       MoveNameReader:
@@ -111,7 +111,7 @@ screens:
 
   target_select:
     description: "Target selection modal after picking a move in doubles. Shows mons with HP, effectiveness, and selected move name."
-    transitions_to: [communicating]
+    transitions_to: [action_menu]
     detectors: []
     readers:
       TargetSelectReader:
@@ -132,20 +132,11 @@ screens:
 
   pokemon_switch:
     description: "Choosing which mon to switch to (voluntary or forced). Singles or doubles."
-    transitions_to: [communicating]
+    transitions_to: [action_menu]
     detectors: []
     readers: {}
 
   # ── Shared battle states ───────────────────────────────────
-
-  communicating:
-    description: "Communicating... text visible, waiting for opponent's turn submission."
-    transitions_to:
-      - action_menu
-      - pokemon_switch
-      - result_screen
-    detectors: []
-    readers: {}
 
   result_screen:
     description: "Battle ended. WON! or LOST displayed."
@@ -186,6 +177,10 @@ screens:
 # ── Overlays (not screens in the state machine) ─────────────
 
 overlays:
+
+  communicating:
+    description: "Communicating... text visible, waiting for opponent's turn submission. Appears over in-battle screens (typically after move_select)."
+    readers: {}
 
   battle_log:
     description: "Text bar overlay during battle. Can appear over any in-battle screen."
