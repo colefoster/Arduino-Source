@@ -2,6 +2,8 @@
 
 This is the source code for all the main Arduino programs.
 
+> **Pokemon Champions fork:** for project goals, system topology, data flow, and operational notes specific to this fork, see [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md). Plans live in [`plans/`](plans/README.md).
+
 [<img src="https://canary.discordapp.com/api/guilds/695809740428673034/widget.png?style=banner2">](https://discord.gg/cQ4gWxN)
 
 
