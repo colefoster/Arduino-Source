@@ -1,1 +1,188 @@
-{}
+{
+  "20260423-183327738746.png": {
+    "BattleHUDReader": {
+      "opponent_hp_pct": -1,
+      "opponent_species": "tyranitar"
+    }
+  },
+  "20260423-183429305173.png": {
+    "BattleHUDReader": {
+      "opponent_hp_pct": -1,
+      "opponent_species": "tyranitar"
+    }
+  },
+  "20260423-183439332167.png": {
+    "BattleHUDReader": {
+      "opponent_hp_pct": -1,
+      "opponent_species": "tyranitar"
+    }
+  },
+  "20260423-183741816926.png": {
+    "BattleHUDReader": {
+      "opponent_hp_pct": -1,
+      "opponent_species": "tyranitar"
+    }
+  },
+  "20260423-183914694345.png": {
+    "BattleHUDReader": {
+      "opponent_hp_pct": -1,
+      "opponent_species": "gengar"
+    }
+  },
+  "20260427-132110967236.png": {
+    "BattleHUDReader": {
+      "opponent_hp_pct": -1,
+      "opponent_species": "garchomp"
+    }
+  },
+  "20260427-132124108376.png": {
+    "BattleHUDReader": {
+      "opponent_hp_pct": -1,
+      "opponent_species": "garchomp"
+    }
+  },
+  "20260427-132201855579.png": {
+    "BattleHUDReader": {
+      "opponent_hp_pct": -1,
+      "opponent_species": "garchomp"
+    }
+  },
+  "20260427-132210593850.png": {
+    "BattleHUDReader": {
+      "opponent_hp_pct": -1,
+      "opponent_species": "garchomp"
+    }
+  },
+  "20260427-132306028011.png": {
+    "BattleHUDReader": {
+      "opponent_hp_pct": -1,
+      "opponent_species": "garchomp"
+    }
+  },
+  "20260427-132314136162.png": {
+    "BattleHUDReader": {
+      "opponent_hp_pct": -1,
+      "opponent_species": "garchomp"
+    }
+  },
+  "20260427-132458919151.png": {
+    "BattleHUDReader": {
+      "opponent_hp_pct": -1,
+      "opponent_species": "garchomp"
+    }
+  },
+  "20260427-132602291394.png": {
+    "BattleHUDReader": {
+      "opponent_hp_pct": -1,
+      "opponent_species": "gengar"
+    }
+  },
+  "20260427-132611147334.png": {
+    "BattleHUDReader": {
+      "opponent_hp_pct": -1,
+      "opponent_species": "gengar"
+    }
+  },
+  "20260427-132709251444.png": {
+    "BattleHUDReader": {
+      "opponent_hp_pct": -1,
+      "opponent_species": "gengar"
+    }
+  },
+  "20260428-085955805273.png": {
+    "BattleHUDReader": {
+      "opponent_hp_pct": -1,
+      "opponent_species": "excadrill"
+    }
+  },
+  "20260428-090001840783.png": {
+    "BattleHUDReader": {
+      "opponent_hp_pct": -1,
+      "opponent_species": "excadrill"
+    }
+  },
+  "20260428-090005728584.png": {
+    "BattleHUDReader": {
+      "opponent_hp_pct": -1,
+      "opponent_species": "excadrill"
+    }
+  },
+  "20260428-090019691379.png": {
+    "BattleHUDReader": {
+      "opponent_hp_pct": -1,
+      "opponent_species": "excadrill"
+    }
+  },
+  "20260428-090024732453.png": {
+    "BattleHUDReader": {
+      "opponent_hp_pct": -1,
+      "opponent_species": "excadrill"
+    }
+  },
+  "20260428-090121554529.png": {
+    "BattleHUDReader": {
+      "opponent_hp_pct": -1,
+      "opponent_species": "excadrill"
+    }
+  },
+  "20260428-090132724942.png": {
+    "BattleHUDReader": {
+      "opponent_hp_pct": -1,
+      "opponent_species": "excadrill"
+    }
+  },
+  "20260428-090301344731.png": {
+    "BattleHUDReader": {
+      "opponent_hp_pct": -1,
+      "opponent_species": "excadrill"
+    }
+  },
+  "20260428-090442837075.png": {
+    "BattleHUDReader": {
+      "opponent_hp_pct": -1,
+      "opponent_species": "dragonite"
+    }
+  },
+  "20260428-090454851069.png": {
+    "BattleHUDReader": {
+      "opponent_hp_pct": -1,
+      "opponent_species": "dragonite"
+    }
+  },
+  "20260428-090540240302.png": {
+    "BattleHUDReader": {
+      "opponent_hp_pct": -1,
+      "opponent_species": "dragonite"
+    }
+  },
+  "20260428-090600234812.png": {
+    "BattleHUDReader": {
+      "opponent_hp_pct": -1,
+      "opponent_species": "dragonite"
+    }
+  },
+  "action_menu_fight_live.png": {
+    "BattleHUDReader": {
+      "opponent_hp_pct": -1,
+      "opponent_species": "charizard"
+    }
+  },
+  "action_menu_pokemon_live.png": {
+    "BattleHUDReader": {
+      "opponent_hp_pct": -1,
+      "opponent_species": "charizard"
+    }
+  },
+  "doubles_action_menu.png": {
+    "BattleHUDReader": {
+      "opponent_hp_pct": -1,
+      "opponent_species": "hydreigon"
+    }
+  },
+  "doubles_action_menu2.png": {
+    "BattleHUDReader": {
+      "opponent_hp_pct": -1,
+      "opponent_species": "hydreigon"
+    }
+  }
+}
