@@ -127,6 +127,10 @@ CROP_DEFS = {
         {"name": f"pill_{i}", "box": [0.7292, y, 0.0101, 0.0139]}
         for i, y in enumerate([0.5116, 0.6338, 0.7542, 0.8746])
     ],
+    "ActiveHUDSlot": [
+        {"name": "slot0_top", "box": [0.0527, 0.8530, 0.1728, 0.0030]},
+        {"name": "slot1_top", "box": [0.2628, 0.8530, 0.1728, 0.0030]},
+    ],
     "BattleLogReader": [
         {"name": "text_bar", "box": [0.104, 0.741, 0.729, 0.046]},
     ],

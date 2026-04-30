@@ -51,6 +51,10 @@ int test_pokemonChampions_BattleLogReader(const ImageViewRGB32& image, const std
 //  Filename: <prefix>_<cursor-slot>.png  (e.g. frame_2.png for slot 2)
 int test_pokemonChampions_MoveSelectCursorSlot(const ImageViewRGB32& image, int target);
 
+//  Doubles: which own HUD pill is highlighted (0 = left, 1 = right).
+//  Target -1 means "expect no active outline" (singles or transition state).
+int test_pokemonChampions_ActiveHUDSlot(const ImageViewRGB32& image, int target);
+
 //  ── Team Scanner ──────────────────────────────────────────────────
 
 //  Filename: standard bool-target convention.

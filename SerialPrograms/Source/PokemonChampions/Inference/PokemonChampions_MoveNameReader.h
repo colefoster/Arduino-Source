@@ -48,6 +48,16 @@ private:
 };
 
 
+//  Bundles the four read move names with the doubles "active slot"
+//  context (which own mon the moves belong to). active_slot is 0 or 1
+//  in doubles, or -1 for singles / when no lime-green active outline
+//  is detected on either HUD pill.
+struct MoveSelectionRead{
+    int active_slot = -1;
+    std::array<std::string, 4> moves{};
+};
+
+
 //  Reads all four move names from a move-select screen capture.
 class MoveNameReader{
 public:
@@ -60,6 +70,13 @@ public:
 
     //  Read all four move slots. Returns slugs; empty string for any failed read.
     std::array<std::string, 4> read_all_moves(Logger& logger, const ImageViewRGB32& screen) const;
+
+    //  Doubles helper: returns which own HUD pill is highlighted (0 or 1),
+    //  or -1 if no active outline is detected.
+    int read_active_slot(Logger& logger, const ImageViewRGB32& screen) const;
+
+    //  Read moves + active slot in one pass. In singles, active_slot will be -1.
+    MoveSelectionRead read_all(Logger& logger, const ImageViewRGB32& screen) const;
 
 private:
     Language m_language;

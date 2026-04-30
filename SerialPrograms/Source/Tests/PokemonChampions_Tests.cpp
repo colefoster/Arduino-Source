@@ -16,6 +16,7 @@
 
 //  Screen detectors
 #include "PokemonChampions/Inference/PokemonChampions_MoveSelectDetector.h"
+#include "PokemonChampions/Inference/PokemonChampions_ActiveHUDSlotDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_ActionMenuDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_BattleEndDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_PreparingForBattleDetector.h"
@@ -315,6 +316,21 @@ int test_pokemonChampions_MoveSelectCursorSlot(const ImageViewRGB32& image, int 
     }
 
     int result = detector.cursor_slot();
+    TEST_RESULT_EQUAL(result, target);
+    return 0;
+}
+
+
+// ─── ActiveHUDSlot ──────────────────────────────────────────────────
+//
+//  Tests that ActiveHUDSlotDetector correctly identifies which own HUD
+//  pill carries the lime-green active outline (doubles only).
+//  target = 0 (left), 1 (right), or -1 (no active outline).
+
+int test_pokemonChampions_ActiveHUDSlot(const ImageViewRGB32& image, int target){
+    ActiveHUDSlotDetector detector;
+    detector.detect(image);
+    int result = detector.active_slot();
     TEST_RESULT_EQUAL(result, target);
     return 0;
 }

@@ -145,6 +145,18 @@
         }
       }
     },
+    "ActiveHUDSlot": {
+      "screens": {
+        "move_select": {
+          "slot": {
+            "type": "int",
+            "min": -1,
+            "max": 1,
+            "description": "Doubles only: which own HUD pill is highlighted (0=left, 1=right). -1 = singles or no active outline."
+          }
+        }
+      }
+    },
     "TargetSelectReader": {
       "screens": {
         "target_select": {

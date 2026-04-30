@@ -27,6 +27,7 @@
 #include "CommonFramework/ImageTypes/ImageViewRGB32.h"
 #include "CommonFramework/ImageTools/ImageBoxes.h"
 #include "CommonTools/OCR/OCR_Routines.h"
+#include "PokemonChampions_ActiveHUDSlotDetector.h"
 #include "PokemonChampions_MoveNameReader.h"
 
 namespace PokemonAutomation{
@@ -118,6 +119,23 @@ std::array<std::string, 4> MoveNameReader::read_all_moves(
         moves[i] = read_move(logger, screen, i);
     }
     return moves;
+}
+
+int MoveNameReader::read_active_slot(
+    Logger& /*logger*/, const ImageViewRGB32& screen
+) const{
+    ActiveHUDSlotDetector detector;
+    detector.detect(screen);
+    return detector.active_slot();
+}
+
+MoveSelectionRead MoveNameReader::read_all(
+    Logger& logger, const ImageViewRGB32& screen
+) const{
+    MoveSelectionRead result;
+    result.moves = read_all_moves(logger, screen);
+    result.active_slot = read_active_slot(logger, screen);
+    return result;
 }
 
 
