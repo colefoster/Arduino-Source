@@ -76,6 +76,8 @@ class JobHandler(BaseHTTPRequestHandler):
             self._handle_detector_debug()
         elif self.path == "/detector-debug-batch":
             self._handle_detector_debug_batch()
+        elif self.path == "/ocr-crop":
+            self._handle_ocr_crop()
         else:
             self._send_json({"error": "not found"}, 404)
 
@@ -265,6 +267,76 @@ class JobHandler(BaseHTTPRequestHandler):
                 os.unlink(tmp.name)
             except OSError:
                 pass
+
+
+    def _handle_ocr_crop(self):
+        """Run number-tuned OCR on an arbitrary box of one image.
+
+        Body: { "image_base64": "<base64>", "x": float, "y": float, "w": float, "h": float }
+        Response: { "ok": true, "result": {"raw": "...", "current": int, "max": int} }
+        """
+        import base64
+        import tempfile
+
+        body = self._read_body()
+        image_b64 = body.get("image_base64", "")
+        try:
+            x = float(body.get("x", 0))
+            y = float(body.get("y", 0))
+            w = float(body.get("w", 0))
+            h = float(body.get("h", 0))
+        except (TypeError, ValueError):
+            self._send_json({"error": "x,y,w,h must be numbers"}, 400)
+            return
+
+        if not image_b64 or w <= 0 or h <= 0:
+            self._send_json({"error": "image_base64 and positive w,h required"}, 400)
+            return
+
+        try:
+            img_data = base64.b64decode(image_b64)
+        except Exception as e:
+            self._send_json({"error": f"invalid base64: {e}"}, 400)
+            return
+
+        tmp = tempfile.NamedTemporaryFile(suffix=".png", delete=False, dir=str(WORK_DIR / "data"))
+        try:
+            tmp.write(img_data); tmp.close()
+
+            exe = BUILD_DIR / "SerialProgramsCommandLine.exe"
+            if not exe.exists():
+                exe = BUILD_DIR / "SerialProgramsCommandLine"
+            if not exe.exists():
+                self._send_json({"error": f"executable not found: {exe}"}, 500)
+                return
+
+            result = subprocess.run(
+                [str(exe), "--ocr-crop", tmp.name, str(x), str(y), str(w), str(h)],
+                capture_output=True, text=True, timeout=15,
+                cwd=str(BUILD_DIR),
+            )
+            if result.returncode != 0:
+                self._send_json({"error": "OCR failed", "stderr": result.stderr[-500:]}, 500)
+                return
+
+            ocr_result = None
+            for line in result.stdout.strip().split("\n"):
+                line = line.strip()
+                if line.startswith("{"):
+                    try:
+                        ocr_result = json.loads(line); break
+                    except json.JSONDecodeError:
+                        continue
+            if ocr_result is None:
+                ocr_result = {"raw": result.stdout.strip()}
+            self._send_json({"ok": True, "result": ocr_result})
+        except subprocess.TimeoutExpired:
+            self._send_json({"error": "OCR timed out"}, 500)
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+        finally:
+            try: os.unlink(tmp.name)
+            except OSError: pass
 
 
     def _handle_detector_debug(self):

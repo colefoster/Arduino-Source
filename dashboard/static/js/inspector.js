@@ -100,9 +100,51 @@ async function inspectorInit() {
         inspectorLoadImage(url);
     });
 
-    document.getElementById('inspector-boxes-select').addEventListener('change', e => {
+    // Sub-select for picking which box of the chosen reader to load into x/y/w/h.
+    // Built lazily next to the overlays select.
+    const overlaysSel = document.getElementById('inspector-boxes-select');
+    let boxIndexSel = document.getElementById('inspector-box-index');
+    if (!boxIndexSel) {
+        boxIndexSel = document.createElement('select');
+        boxIndexSel.id = 'inspector-box-index';
+        boxIndexSel.style.cssText = 'width:100%;margin-top:4px;display:none;';
+        overlaysSel.parentElement.insertBefore(boxIndexSel, overlaysSel.nextSibling);
+    }
+
+    function applyBoxToInputs(box) {
+        if (!box) return;
+        const arr = Array.isArray(box.box) ? box.box : [box.x, box.y, box.w, box.h];
+        const [x, y, w, h] = arr;
+        document.getElementById('inspector-box-x').value = (+x).toFixed(4);
+        document.getElementById('inspector-box-y').value = (+y).toFixed(4);
+        document.getElementById('inspector-box-w').value = (+w).toFixed(4);
+        document.getElementById('inspector-box-h').value = (+h).toFixed(4);
+        inspectorOnBoxInput();
+    }
+
+    overlaysSel.addEventListener('change', e => {
         inspectorState.selectedBoxReader = e.target.value;
+        const reader = e.target.value;
+        const boxes = (reader && inspectorState.boxes[reader]) || [];
+
+        // Rebuild box-index sub-select.
+        if (boxes.length > 0) {
+            boxIndexSel.innerHTML = boxes.map((b, i) =>
+                `<option value="${i}">${b.name || 'box ' + i}</option>`
+            ).join('');
+            boxIndexSel.style.display = boxes.length > 1 ? 'block' : 'none';
+            applyBoxToInputs(boxes[0]);
+        } else {
+            boxIndexSel.innerHTML = '';
+            boxIndexSel.style.display = 'none';
+        }
         inspectorRender();
+    });
+
+    boxIndexSel.addEventListener('change', e => {
+        const idx = parseInt(e.target.value, 10);
+        const boxes = inspectorState.boxes[inspectorState.selectedBoxReader] || [];
+        if (boxes[idx]) applyBoxToInputs(boxes[idx]);
     });
 
     // Prev/next image buttons
@@ -111,6 +153,9 @@ async function inspectorInit() {
 
     // Editable box coordinate inputs
     inspectorAttachBoxInputs();
+
+    // Test OCR button
+    document.getElementById('inspector-ocr-btn').addEventListener('click', inspectorTestOcr);
 
     // Canvas setup
     const canvasWrap = document.getElementById('inspector-canvas-wrap');
@@ -142,7 +187,7 @@ async function inspectorInit() {
             ['inspector-box-x','inspector-box-y','inspector-box-w','inspector-box-h'].forEach(id =>
                 document.getElementById(id).value = '0');
             document.getElementById('inspector-selection-info').textContent = 'Click and drag to select. Right-click to clear.';
-            ['inspector-results','inspector-crop-section','inspector-solid-section','inspector-cpp-section','inspector-save-section'].forEach(id =>
+            ['inspector-results','inspector-crop-section','inspector-solid-section','inspector-cpp-section','inspector-save-section','inspector-ocr-section'].forEach(id =>
                 document.getElementById(id).style.display = 'none');
             inspectorRender();
             return;
@@ -453,9 +498,66 @@ async function inspectorAnalyze(box) {
         // Show save section
         document.getElementById('inspector-save-section').style.display = '';
 
+        // Show OCR section (button-driven, doesn't auto-run).
+        document.getElementById('inspector-ocr-section').style.display = '';
+        document.getElementById('inspector-ocr-result').style.display = 'none';
+
     } catch (e) {
         console.error('inspectorAnalyze:', e);
     }
+}
+
+async function inspectorTestOcr() {
+    const sel = inspectorState.selection;
+    const img = inspectorState.image;
+    const status = document.getElementById('inspector-ocr-status');
+    const resultEl = document.getElementById('inspector-ocr-result');
+    const btn = document.getElementById('inspector-ocr-btn');
+    if (!sel || !img) { status.textContent = 'No selection'; return; }
+
+    btn.disabled = true; status.textContent = 'Running...'; resultEl.style.display = 'none';
+
+    // Extract image to base64 from a temporary canvas (works for any source).
+    let imageBase64;
+    try {
+        const tmp = document.createElement('canvas');
+        tmp.width = img.width; tmp.height = img.height;
+        tmp.getContext('2d').drawImage(img, 0, 0);
+        imageBase64 = tmp.toDataURL('image/png').split(',')[1];
+    } catch (e) {
+        status.textContent = 'Canvas tainted (CORS) — reload image';
+        btn.disabled = false;
+        return;
+    }
+
+    try {
+        const resp = await fetch(`${API}/api/inspector/ocr-crop`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                image_base64: imageBase64,
+                x: sel.x, y: sel.y, w: sel.w, h: sel.h,
+            }),
+        }).then(r => r.json());
+
+        if (!resp.ok) {
+            status.textContent = resp.error || 'OCR error';
+        } else {
+            status.textContent = '';
+            const r = resp.result || {};
+            const cur = r.current, max = r.max;
+            const parsed = (cur != null && cur >= 0)
+                ? (max >= 0 ? `${cur}/${max}` : `${cur}`)
+                : '<failed to parse>';
+            resultEl.innerHTML =
+                `<div><span style="color:#8b949e;">raw:</span> <code>${(r.raw || '').replace(/[<&]/g, c => ({'<':'&lt;','&':'&amp;'}[c]))}</code></div>` +
+                `<div style="margin-top:4px;"><span style="color:#8b949e;">parsed:</span> <code>${parsed}</code></div>`;
+            resultEl.style.display = '';
+        }
+    } catch (e) {
+        status.textContent = 'Error: ' + e.message;
+    }
+    btn.disabled = false;
 }
 
 async function inspectorSaveBox() {

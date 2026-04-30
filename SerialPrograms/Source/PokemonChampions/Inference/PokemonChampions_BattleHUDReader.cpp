@@ -81,7 +81,8 @@ static std::string raw_ocr_line(const ImageViewRGB32& crop){
 //  OCR a crop region after converting to high-contrast black-on-white.
 //  For HP numbers: the text is bright (white/green/yellow) on dark bg.
 //  Threshold the brightness channel, invert, then upscale for Tesseract.
-static std::string raw_ocr_numbers(const ImageViewRGB32& crop){
+//  Public — also used by --ocr-crop debug mode to exercise an arbitrary box.
+std::string raw_ocr_numbers(const ImageViewRGB32& crop){
     if (crop.width() == 0 || crop.height() == 0) return "";
 
     //  Create a high-contrast version: any pixel with max(R,G,B) > threshold
@@ -160,7 +161,7 @@ static std::string digits_only(const std::string& text){
     return out;
 }
 
-static std::pair<int, int> parse_fraction(const std::string& text){
+std::pair<int, int> parse_fraction(const std::string& text){
     //  First strip to digits + slash only.
     std::string clean = digits_only(text);
 

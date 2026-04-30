@@ -32,6 +32,15 @@ namespace NintendoSwitch{
 namespace PokemonChampions{
 
 
+//  Run number-tuned OCR on an arbitrary crop. White-text filter, 3x upscale,
+//  inverted-binary preprocessing. Returns the raw Tesseract output (digits and
+//  noise). Used by HP/PP readers and the --ocr-crop debug entry.
+std::string raw_ocr_numbers(const ImageViewRGB32& crop);
+
+//  Parse "current/max" from raw OCR text. Returns {-1, -1} on failure.
+std::pair<int, int> parse_fraction(const std::string& text);
+
+
 //  Singleton dictionary matcher for Pokemon species names (Champions roster).
 class SpeciesNameOCR : public OCR::SmallDictionaryMatcher{
     static constexpr double MAX_LOG10P = -1.40;
