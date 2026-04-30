@@ -549,7 +549,8 @@ async function expandGalleryCard(filename) {
         <div style="display:flex; gap:16px; flex-wrap:wrap;">
             <div style="flex:1; min-width:400px;">
                 <img src="${API}/api/gallery/image/${imgPath}" alt="${filename}" style="max-width:100%;">
-                <div class="crops" id="gallery-expanded-crops" style="margin-top:8px;"><div style="color:#484f58; font-size:12px;">Loading crops...</div></div>
+                <div style="margin-top:8px;"><button class="btn" id="gallery-load-crops" style="font-size:10px; padding:2px 8px;">Show Crops</button></div>
+                <div class="crops" id="gallery-expanded-crops" style="margin-top:8px;"></div>
             </div>
             <div style="flex:0 0 340px;" id="gallery-label-form">
                 <div style="color:#484f58; font-size:12px;">Loading schema...</div>
@@ -605,21 +606,29 @@ async function expandGalleryCard(filename) {
     const obs = new MutationObserver(() => { if (!document.body.contains(overlay)) { document.removeEventListener('keydown', keyHandler); obs.disconnect(); } });
     obs.observe(document.body, {childList: true});
 
-    // Load crops
-    try {
-        const crops = await api(`/api/gallery/screen_crops/${encodeURIComponent(screen)}/${encodeURIComponent(filename)}`);
+    // Crops load on demand (Show Crops button) so move-heavy workflows aren't slowed.
+    overlay.querySelector('#gallery-load-crops').addEventListener('click', async function() {
+        const btn = this;
+        btn.disabled = true; btn.textContent = 'Loading...';
         const cropsEl = overlay.querySelector('#gallery-expanded-crops');
-        if (Array.isArray(crops) && crops.length) {
-            cropsEl.innerHTML = crops.map(c => `
-                <div class="crop-item">
-                    <img src="${c.data || ''}" alt="${c.name}" style="image-rendering:pixelated;">
-                    <div class="crop-label">${c.reader}: ${c.name}</div>
-                </div>
-            `).join('');
-        } else {
-            cropsEl.innerHTML = '<div style="color:#484f58; font-size:12px;">No crops defined</div>';
+        try {
+            const crops = await api(`/api/gallery/screen_crops/${encodeURIComponent(screen)}/${encodeURIComponent(filename)}`);
+            if (Array.isArray(crops) && crops.length) {
+                cropsEl.innerHTML = crops.map(c => `
+                    <div class="crop-item">
+                        <img src="${c.data || ''}" alt="${c.name}" style="image-rendering:pixelated;">
+                        <div class="crop-label">${c.reader}: ${c.name}</div>
+                    </div>
+                `).join('');
+            } else {
+                cropsEl.innerHTML = '<div style="color:#484f58; font-size:12px;">No crops defined</div>';
+            }
+            btn.style.display = 'none';
+        } catch (e) {
+            console.error('loadCrops:', e);
+            btn.disabled = false; btn.textContent = 'Show Crops';
         }
-    } catch (e) { console.error('loadCrops:', e); }
+    });
 
     // "Move to..." dropdown - populate with all screens + inbox + delete
     const moveTo = overlay.querySelector('#gallery-move-to');

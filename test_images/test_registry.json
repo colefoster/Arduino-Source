@@ -8,13 +8,13 @@
     "move_select",
     "target_select",
     "pokemon_switch",
-    "communicating",
     "result_screen",
     "post_match",
     "main_menu",
     "moves_and_more"
   ],
   "overlay_dirs": [
+    "_overlays/communicating",
     "_overlays/battle_log",
     "_overlays/ability_item"
   ],
