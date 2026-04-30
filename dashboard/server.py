@@ -2182,92 +2182,75 @@ async def _run_sync_index() -> dict:
 
 
 async def _run_sync_format(fmt_id: str, sources: list[Path]) -> dict:
-    """Sync one format's replays from ash to the configured remote (unraid by default) via tar+ssh."""
-    # Collect all local replay files for this format
-    local_files: list[Path] = []
-    for src_dir in sources:
-        fmt_dir = src_dir / fmt_id
-        if fmt_dir.exists():
-            local_files.extend(
-                f for f in fmt_dir.iterdir()
-                if f.suffix == ".json" and f.name != "index.json"
+    """Sync one format's replays from ash to the configured remote via rsync.
+
+    Replaces the previous tar+ssh approach which depended on `ssh remote ls`
+    of a 470k-file directory (~3 min on btrfs/fuse, often timed out). rsync
+    handles delta detection natively via its own protocol — no remote listing
+    required. --ignore-existing skips files already on the remote without
+    checksumming, which is what we want here (replay JSONs are immutable).
+    """
+    remote_dir = f"{SYNC_REPLAY_DIR}/{fmt_id}"
+
+    # Pre-check: are any local source dirs even present?
+    src_dirs = [src / fmt_id for src in sources if (src / fmt_id).exists()]
+    if not src_dirs:
+        return {"format": fmt_id, "local": 0, "synced_phases": 0, "skipped": True}
+
+    # Make sure the remote dir exists; rsync won't auto-mkdir intermediate dirs
+    # the way `--mkpath` does on newer rsync, but a single ssh mkdir is cheap.
+    proc = await asyncio.create_subprocess_exec(
+        "ssh", SYNC_HOST, f'mkdir -p "{remote_dir}"',
+        stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE,
+    )
+    await proc.communicate()
+
+    # Run rsync once per source dir, into the same destination. --ignore-existing
+    # short-circuits files that already exist on the remote (no per-file remote
+    # stat or checksum). --info=stats2 gives us a single line we can grep for
+    # the number of files actually transferred.
+    total_local = 0
+    transferred = 0
+    last_stats = ""
+    for src in src_dirs:
+        # Count local files for the report (cheap — ~1s for 440k files).
+        local_count = sum(
+            1 for f in src.iterdir()
+            if f.suffix == ".json" and f.name != "index.json"
+        )
+        total_local += local_count
+
+        proc = await asyncio.create_subprocess_exec(
+            "rsync",
+            "-a",
+            "--ignore-existing",
+            "--exclude=index.json",
+            "--info=stats2",
+            f"{src.as_posix()}/",
+            f"{SYNC_HOST}:{remote_dir}/",
+            stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE,
+        )
+        stdout, stderr = await proc.communicate()
+        if proc.returncode != 0:
+            raise RuntimeError(
+                f"rsync {src} -> {SYNC_HOST}:{remote_dir} failed: "
+                f"{stderr.decode(errors='replace')[-500:]}"
             )
 
-    if not local_files:
-        return {"format": fmt_id, "local": 0, "remote": 0, "synced": 0, "skipped": True}
-
-    # Get list of what the remote already has (Linux: ls in fmt dir)
-    remote_dir = f"{SYNC_REPLAY_DIR}/{fmt_id}"
-    proc = await asyncio.create_subprocess_exec(
-        "ssh", SYNC_HOST,
-        f'ls "{remote_dir}" 2>/dev/null | grep "^gen9.*\\.json$"',
-        stdout=asyncio.subprocess.PIPE,
-        stderr=asyncio.subprocess.PIPE,
-    )
-    stdout, _ = await proc.communicate()
-    remote_names = {line.strip() for line in stdout.decode(errors="replace").splitlines() if line.strip()}
-
-    # Delta
-    local_by_name = {f.name: f for f in local_files}
-    new_names = set(local_by_name.keys()) - remote_names
-
-    if not new_names:
-        return {"format": fmt_id, "local": len(local_files), "remote": len(remote_names), "synced": 0}
-
-    # Build tar of new files and pipe through ssh
-    # Work in batches to avoid argument list too long
-    BATCH = 5000
-    total_synced = 0
-    new_list = sorted(new_names)
-
-    for i in range(0, len(new_list), BATCH):
-        batch = new_list[i:i + BATCH]
-        # Write filelist to temp file
-        filelist_path = Path("/tmp") / f"sync_delta_{fmt_id}_{i}.txt"
-        filelist_path.write_text("\n".join(batch) + "\n")
-
-        # Collect source dirs that contain these files
-        # Create a staging area with symlinks for tar
-        staging = Path("/tmp") / f"sync_staging_{fmt_id}"
-        staging.mkdir(exist_ok=True)
-        for name in batch:
-            src = local_by_name[name]
-            link = staging / name
-            if not link.exists():
-                link.symlink_to(src)
-
-        # tar + ssh to remote (Linux extraction, no per-file argv blowup)
-        proc = await asyncio.create_subprocess_shell(
-            f'cd /tmp/sync_staging_{fmt_id} && '
-            f'tar cf - -T {filelist_path} | '
-            f'ssh {SYNC_HOST} "mkdir -p {remote_dir} && cd {remote_dir} && tar xf -"',
-            stdout=asyncio.subprocess.PIPE,
-            stderr=asyncio.subprocess.PIPE,
-        )
-        _, stderr = await proc.communicate()
-
-        # Cleanup staging
-        for name in batch:
-            link = staging / name
-            if link.is_symlink():
-                link.unlink()
-        filelist_path.unlink(missing_ok=True)
-
-        if proc.returncode != 0:
-            raise RuntimeError(f"tar+ssh failed for {fmt_id} batch {i}: {stderr.decode(errors='replace')}")
-
-        total_synced += len(batch)
-
-    # Cleanup staging dir
-    staging = Path("/tmp") / f"sync_staging_{fmt_id}"
-    if staging.exists():
-        staging.rmdir()
+        # Parse "Number of regular files transferred: N" out of --info=stats2.
+        for line in stdout.decode(errors="replace").splitlines():
+            if "regular files transferred" in line.lower():
+                try:
+                    transferred += int(line.rsplit(":", 1)[1].strip().replace(",", ""))
+                except (ValueError, IndexError):
+                    pass
+                last_stats = line.strip()
 
     return {
         "format": fmt_id,
-        "local": len(local_files),
-        "remote": len(remote_names),
-        "synced": total_synced,
+        "local": total_local,
+        "synced": transferred,
+        "stats": last_stats,
     }
 
 
