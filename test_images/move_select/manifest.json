@@ -1,24 +1,13 @@
 {
-  "20260423-145958889700.png": {
-    "MoveSelectCursorSlot": {
-      "slot": 0
-    }
-  },
-  "20260423-150004028106.png": {
-    "MoveSelectCursorSlot": {
-      "slot": 3
-    }
-  },
-  "20260423-150121863579.png": {
-    "SpeciesReader": {
-      "opponent_species": "gengar"
-    },
-    "SpeciesReader_Doubles": {
-      "opponent_species": "palafin",
-      "slot": 1
-    }
-  },
   "20260423-150123581184.png": {
+    "MoveNameReader": {
+      "moves": [
+        "throat-chop",
+        "parting-shot",
+        "fake-out",
+        "flare-blitz"
+      ]
+    },
     "MoveSelectCursorSlot": {
       "slot": 0
     },
@@ -31,6 +20,17 @@
     }
   },
   "20260423-150128027036.png": {
+    "MoveNameReader": {
+      "moves": [
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    "MoveSelectCursorSlot": {
+      "slot": -1
+    },
     "SpeciesReader": {
       "opponent_species": "gengar"
     },
@@ -40,6 +40,14 @@
     }
   },
   "20260423-150129725676.png": {
+    "MoveNameReader": {
+      "moves": [
+        "heat-wave",
+        "weather-ball",
+        "solar-beam",
+        "protect"
+      ]
+    },
     "MoveSelectCursorSlot": {
       "slot": 0
     },
@@ -52,6 +60,14 @@
     }
   },
   "20260423-150132024252.png": {
+    "MoveNameReader": {
+      "moves": [
+        "heat-wave",
+        "weather-ball",
+        "solar-beam",
+        "protect"
+      ]
+    },
     "MoveSelectCursorSlot": {
       "slot": 2
     },
@@ -64,6 +80,17 @@
     }
   },
   "20260423-150240891066.png": {
+    "MoveNameReader": {
+      "moves": [
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    "MoveSelectCursorSlot": {
+      "slot": -1
+    },
     "SpeciesReader": {
       "opponent_species": "sylveon"
     },
@@ -73,6 +100,14 @@
     }
   },
   "20260423-150242947838.png": {
+    "MoveNameReader": {
+      "moves": [
+        "throat-chop",
+        "parting-shot",
+        "fake-out",
+        "flare-blitz"
+      ]
+    },
     "MoveSelectCursorSlot": {
       "slot": 1
     },
@@ -85,6 +120,14 @@
     }
   },
   "20260423-150245612449.png": {
+    "MoveNameReader": {
+      "moves": [
+        "throat-chop",
+        "parting-shot",
+        "fake-out",
+        "flare-blitz"
+      ]
+    },
     "MoveSelectCursorSlot": {
       "slot": 2
     },
@@ -97,6 +140,14 @@
     }
   },
   "20260423-150248328346.png": {
+    "MoveNameReader": {
+      "moves": [
+        "throat-chop",
+        "parting-shot",
+        "fake-out",
+        "flare-blitz"
+      ]
+    },
     "MoveSelectCursorSlot": {
       "slot": 0
     },
@@ -109,6 +160,14 @@
     }
   },
   "20260423-150252130334.png": {
+    "MoveNameReader": {
+      "moves": [
+        "throat-chop",
+        "parting-shot",
+        "fake-out",
+        "flare-blitz"
+      ]
+    },
     "MoveSelectCursorSlot": {
       "slot": 1
     },
@@ -121,6 +180,17 @@
     }
   },
   "20260423-150256754355.png": {
+    "MoveNameReader": {
+      "moves": [
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    "MoveSelectCursorSlot": {
+      "slot": -1
+    },
     "SpeciesReader": {
       "opponent_species": "sylveon"
     },
@@ -142,6 +212,17 @@
     }
   },
   "20260423-150347231746.png": {
+    "MoveNameReader": {
+      "moves": [
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    "MoveSelectCursorSlot": {
+      "slot": -1
+    },
     "SpeciesReader": {
       "opponent_species": "sylveon"
     },
@@ -151,6 +232,14 @@
     }
   },
   "20260423-150349250038.png": {
+    "MoveNameReader": {
+      "moves": [
+        "fake-out",
+        "close-combat",
+        "dire-claw",
+        "protect"
+      ]
+    },
     "MoveSelectCursorSlot": {
       "slot": 1
     },
@@ -163,6 +252,17 @@
     }
   },
   "20260423-150354427178.png": {
+    "MoveNameReader": {
+      "moves": [
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    "MoveSelectCursorSlot": {
+      "slot": -1
+    },
     "SpeciesReader": {
       "opponent_species": "sylveon"
     },
@@ -172,6 +272,14 @@
     }
   },
   "20260423-150356457412.png": {
+    "MoveNameReader": {
+      "moves": [
+        "heat-wave",
+        "weather-ball",
+        "solar-beam",
+        "protect"
+      ]
+    },
     "MoveSelectCursorSlot": {
       "slot": 2
     },
@@ -184,6 +292,14 @@
     }
   },
   "20260423-150359121231.png": {
+    "MoveNameReader": {
+      "moves": [
+        "heat-wave",
+        "weather-ball",
+        "solar-beam",
+        "protect"
+      ]
+    },
     "MoveSelectCursorSlot": {
       "slot": 1
     },
@@ -196,6 +312,17 @@
     }
   },
   "20260423-150434947219.png": {
+    "MoveNameReader": {
+      "moves": [
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    "MoveSelectCursorSlot": {
+      "slot": -1
+    },
     "OpponentHPReader": {
       "opponent_hp_pct": 21
     },
@@ -212,6 +339,9 @@
     }
   },
   "20260423-150440133636.png": {
+    "MoveSelectCursorSlot": {
+      "slot": -1
+    },
     "OpponentHPReader": {
       "opponent_hp_pct": 21
     },
@@ -224,6 +354,17 @@
     }
   },
   "20260423-150454443057.png": {
+    "MoveNameReader": {
+      "moves": [
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    "MoveSelectCursorSlot": {
+      "slot": -1
+    },
     "OpponentHPReader": {
       "opponent_hp_pct": 21
     },
@@ -236,6 +377,14 @@
     }
   },
   "20260423-150456793092.png": {
+    "MoveNameReader": {
+      "moves": [
+        "fake-out",
+        "close-combat",
+        "dire-claw",
+        "protect"
+      ]
+    },
     "MoveSelectCursorSlot": {
       "slot": 1
     },
@@ -248,6 +397,14 @@
     }
   },
   "20260423-150459402515.png": {
+    "MoveNameReader": {
+      "moves": [
+        "fake-out",
+        "close-combat",
+        "dire-claw",
+        "protect"
+      ]
+    },
     "MoveSelectCursorSlot": {
       "slot": 3
     },
@@ -260,6 +417,17 @@
     }
   },
   "20260423-150503460243.png": {
+    "MoveNameReader": {
+      "moves": [
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    "MoveSelectCursorSlot": {
+      "slot": -1
+    },
     "OpponentHPReader": {
       "opponent_hp_pct": 21
     },
@@ -271,17 +439,28 @@
       "slot": 0
     }
   },
-  "20260423-183324524442.png": {
-    "MoveSelectCursorSlot": {
-      "slot": 1
-    }
-  },
   "20260423-183330053152.png": {
+    "MoveNameReader": {
+      "moves": [
+        "energy-ball",
+        "shadow-ball",
+        "stun-spore",
+        "scald"
+      ]
+    },
     "MoveSelectCursorSlot": {
       "slot": 0
     }
   },
   "20260423-183333045399.png": {
+    "MoveNameReader": {
+      "moves": [
+        "energy-ball",
+        "shadow-ball",
+        "stun-spore",
+        "scald"
+      ]
+    },
     "MoveSelectCursorSlot": {
       "slot": 3
     },
@@ -291,26 +470,66 @@
     }
   },
   "20260423-183336832781.png": {
+    "MoveNameReader": {
+      "moves": [
+        "shadow-ball",
+        "sludge-wave",
+        "icy-wind",
+        "destiny-bond"
+      ]
+    },
     "MoveSelectCursorSlot": {
       "slot": 0
     }
   },
   "20260423-183340823259.png": {
+    "MoveNameReader": {
+      "moves": [
+        "shadow-ball",
+        "sludge-wave",
+        "icy-wind",
+        "destiny-bond"
+      ]
+    },
     "MoveSelectCursorSlot": {
       "slot": 2
     }
   },
   "20260423-183343803522.png": {
+    "MoveNameReader": {
+      "moves": [
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
     "MoveSelectCursorSlot": {
       "slot": 1
     }
   },
   "20260423-183348383848.png": {
+    "MoveNameReader": {
+      "moves": [
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
     "MoveSelectCursorSlot": {
       "slot": 3
     }
   },
   "20260423-183353861292.png": {
+    "MoveNameReader": {
+      "moves": [
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
     "MoveSelectCursorSlot": {
       "slot": 1
     },
@@ -325,42 +544,109 @@
     }
   },
   "20260423-183410319938.png": {
+    "MoveNameReader": {
+      "moves": [
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
     "MoveSelectCursorSlot": {
       "slot": 1
     }
   },
   "20260423-183416008813.png": {
+    "MoveNameReader": {
+      "moves": [
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
     "MoveSelectCursorSlot": {
       "slot": 1
     }
   },
   "20260423-183421609860.png": {
+    "MoveNameReader": {
+      "moves": [
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    "MoveSelectCursorSlot": {
+      "slot": -1
+    },
     "OpponentHPReader_Doubles": {
       "opponent_hp_pct": 61,
       "slot": 1
     }
   },
   "20260423-183424800592.png": {
+    "MoveNameReader": {
+      "moves": [
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
     "MoveSelectCursorSlot": {
       "slot": 1
     }
   },
   "20260423-183432132782.png": {
+    "MoveNameReader": {
+      "moves": [
+        "energy-ball",
+        "shadow-ball",
+        "stun-spore",
+        "scald"
+      ]
+    },
     "MoveSelectCursorSlot": {
       "slot": 3
     }
   },
   "20260423-183434932260.png": {
+    "MoveNameReader": {
+      "moves": [
+        "energy-ball",
+        "shadow-ball",
+        "stun-spore",
+        "scald"
+      ]
+    },
     "MoveSelectCursorSlot": {
       "slot": 2
     }
   },
   "20260423-183452481985.png": {
+    "MoveNameReader": {
+      "moves": [
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
     "MoveSelectCursorSlot": {
       "slot": 1
     }
   },
   "20260423-183458158162.png": {
+    "MoveNameReader": {
+      "moves": [
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
     "MoveSelectCursorSlot": {
       "slot": 1
     },
@@ -370,62 +656,187 @@
     }
   },
   "20260423-183505998294.png": {
+    "MoveNameReader": {
+      "moves": [
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
     "MoveSelectCursorSlot": {
       "slot": 1
     }
   },
   "20260423-183523639255.png": {
+    "MoveNameReader": {
+      "moves": [
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
     "MoveSelectCursorSlot": {
       "slot": 1
     }
   },
   "20260423-183527988688.png": {
+    "MoveNameReader": {
+      "moves": [
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
     "MoveSelectCursorSlot": {
       "slot": 1
     }
   },
   "20260423-183534301105.png": {
+    "MoveNameReader": {
+      "moves": [
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
     "MoveSelectCursorSlot": {
       "slot": 1
     }
   },
   "20260423-183545906705.png": {
+    "MoveNameReader": {
+      "moves": [
+        "energy-ball",
+        "shadow-ball",
+        "stun-spore",
+        "scald"
+      ]
+    },
     "MoveSelectCursorSlot": {
       "slot": 0
     }
   },
   "20260423-183548953675.png": {
+    "MoveNameReader": {
+      "moves": [
+        "energy-ball",
+        "shadow-ball",
+        "stun-spore",
+        "scald"
+      ]
+    },
     "MoveSelectCursorSlot": {
       "slot": 3
     }
   },
+  "20260423-183552945935.png": {
+    "MoveNameReader": {
+      "moves": [
+        "shadow-ball",
+        "sludge-wave",
+        "icy-wind",
+        "destiny-bond"
+      ]
+    },
+    "MoveSelectCursorSlot": {
+      "slot": -1
+    }
+  },
   "20260423-183555327020.png": {
+    "MoveNameReader": {
+      "moves": [
+        "shadow-ball",
+        "sludge-wave",
+        "icy-wind",
+        "destiny-bond"
+      ]
+    },
     "MoveSelectCursorSlot": {
       "slot": 2
     }
   },
   "20260423-183737819287.png": {
+    "MoveNameReader": {
+      "moves": [
+        "stone-edge",
+        "iron-head",
+        "metal-burst",
+        "stealth-rock"
+      ]
+    },
+    "MoveSelectCursorSlot": {
+      "slot": -1
+    },
     "OpponentHPReader_Doubles": {
       "opponent_hp_pct": 7,
       "slot": 1
     }
   },
   "20260423-183744870258.png": {
+    "MoveNameReader": {
+      "moves": [
+        "stone-edge",
+        "iron-head",
+        "metal-burst",
+        "stealth-rock"
+      ]
+    },
     "MoveSelectCursorSlot": {
       "slot": 1
     }
   },
+  "20260423-183749611704.png": {
+    "MoveNameReader": {
+      "moves": [
+        "poison-jab",
+        "u-turn",
+        "drill-run",
+        "knock-off"
+      ]
+    },
+    "MoveSelectCursorSlot": {
+      "slot": -1
+    }
+  },
   "20260423-183752637421.png": {
+    "MoveNameReader": {
+      "moves": [
+        "poison-jab",
+        "u-turn",
+        "drill-run",
+        "knock-off"
+      ]
+    },
     "MoveSelectCursorSlot": {
       "slot": 1
     }
   },
   "20260423-183756280783.png": {
+    "MoveNameReader": {
+      "moves": [
+        "poison-jab",
+        "u-turn",
+        "drill-run",
+        "knock-off"
+      ]
+    },
     "MoveSelectCursorSlot": {
       "slot": 2
     }
   },
   "20260423-183905504090.png": {
+    "MoveNameReader": {
+      "moves": [
+        "stone-edge",
+        "iron-head",
+        "",
+        ""
+      ]
+    },
     "MoveSelectCursorSlot": {
       "slot": 3
     },
@@ -435,11 +846,27 @@
     }
   },
   "20260423-183911434513.png": {
+    "MoveNameReader": {
+      "moves": [
+        "stone-edge",
+        "iron-head",
+        "metal-burst",
+        "stealth-rock"
+      ]
+    },
     "MoveSelectCursorSlot": {
       "slot": 1
     }
   },
   "20260423-183917790913.png": {
+    "MoveNameReader": {
+      "moves": [
+        "poison-jab",
+        "u-turn",
+        "drill-run",
+        "knock-off"
+      ]
+    },
     "MoveSelectCursorSlot": {
       "slot": 3
     }
@@ -465,6 +892,9 @@
         "dire-claw",
         "protect"
       ]
+    },
+    "MoveSelectCursorSlot": {
+      "slot": -1
     }
   },
   "20260427-132125840378.png": {
@@ -481,6 +911,14 @@
     }
   },
   "20260427-132140821662.png": {
+    "MoveNameReader": {
+      "moves": [
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
     "MoveSelectCursorSlot": {
       "slot": 0
     }
@@ -570,24 +1008,6 @@
         "parting-shot",
         "fake-out",
         "flare-blitz"
-      ]
-    },
-    "MoveSelectCursorSlot": {
-      "slot": 0
-    }
-  },
-  "20260427-132443993079.png": {
-    "MoveSelectCursorSlot": {
-      "slot": 1
-    }
-  },
-  "20260427-132448249031.png": {
-    "MoveNameReader": {
-      "moves": [
-        null,
-        "stockpile",
-        null,
-        null
       ]
     },
     "MoveSelectCursorSlot": {
@@ -712,63 +1132,198 @@
     }
   },
   "20260428-090008551568.png": {
+    "MoveNameReader": {
+      "moves": [
+        "moonblast",
+        "dazzling-gleam",
+        "calm-mind",
+        "light-of-ruin"
+      ]
+    },
     "MoveSelectCursorSlot": {
       "slot": 0
     }
   },
+  "20260428-090011695747.png": {
+    "MoveNameReader": {
+      "moves": [
+        "moonblast",
+        "dazzling-gleam",
+        "calm-mind",
+        "light-of-ruin"
+      ]
+    },
+    "MoveSelectCursorSlot": {
+      "slot": -1
+    }
+  },
   "20260428-090015247426.png": {
+    "MoveNameReader": {
+      "moves": [
+        "moonblast",
+        "dazzling-gleam",
+        "calm-mind",
+        "light-of-ruin"
+      ]
+    },
     "MoveSelectCursorSlot": {
       "slot": 3
     }
   },
   "20260428-090027708724.png": {
+    "MoveNameReader": {
+      "moves": [
+        "dragon-darts",
+        "u-turn",
+        "dragon-dance",
+        "phantom-force"
+      ]
+    },
     "MoveSelectCursorSlot": {
       "slot": 0
     }
   },
   "20260428-090124664956.png": {
+    "MoveNameReader": {
+      "moves": [
+        "moonblast",
+        "dazzling-gleam",
+        "calm-mind",
+        "light-of-ruin"
+      ]
+    },
     "MoveSelectCursorSlot": {
       "slot": 2
     }
   },
   "20260428-090129776313.png": {
+    "MoveNameReader": {
+      "moves": [
+        "moonblast",
+        "dazzling-gleam",
+        "calm-mind",
+        "light-of-ruin"
+      ]
+    },
     "MoveSelectCursorSlot": {
       "slot": 3
     }
   },
   "20260428-090135788993.png": {
+    "MoveNameReader": {
+      "moves": [
+        "dragon-darts",
+        "u-turn",
+        "dragon-dance",
+        "phantom-force"
+      ]
+    },
     "MoveSelectCursorSlot": {
       "slot": 1
     }
   },
   "20260428-090304291552.png": {
+    "MoveNameReader": {
+      "moves": [
+        "solar-beam",
+        "dazzling-gleam",
+        "leaf-storm",
+        "protect"
+      ]
+    },
     "MoveSelectCursorSlot": {
       "slot": 1
     }
   },
+  "20260428-090307844434.png": {
+    "MoveNameReader": {
+      "moves": [
+        "heat-wave",
+        "psychic",
+        "nasty-plot",
+        "protect"
+      ]
+    },
+    "MoveSelectCursorSlot": {
+      "slot": -1
+    }
+  },
   "20260428-090451579888.png": {
+    "MoveNameReader": {
+      "moves": [
+        "solar-beam",
+        "dazzling-gleam",
+        "leaf-storm",
+        "protect"
+      ]
+    },
     "MoveSelectCursorSlot": {
       "slot": 2
     }
   },
   "20260428-090457295695.png": {
+    "MoveNameReader": {
+      "moves": [
+        "heat-wave",
+        "psychic",
+        "nasty-plot",
+        "protect"
+      ]
+    },
     "MoveSelectCursorSlot": {
       "slot": 1
     }
   },
   "20260428-090542669809.png": {
+    "MoveNameReader": {
+      "moves": [
+        "solar-beam",
+        "dazzling-gleam",
+        "leaf-storm",
+        "protect"
+      ]
+    },
     "MoveSelectCursorSlot": {
       "slot": 1
     }
   },
   "20260428-090602247537.png": {
+    "MoveNameReader": {
+      "moves": [
+        "solar-beam",
+        "dazzling-gleam",
+        "leaf-storm",
+        "protect"
+      ]
+    },
     "MoveSelectCursorSlot": {
       "slot": 3
     }
   },
   "20260428-090604557213.png": {
+    "MoveNameReader": {
+      "moves": [
+        "solar-beam",
+        "dazzling-gleam",
+        "leaf-storm",
+        "protect"
+      ]
+    },
     "MoveSelectCursorSlot": {
       "slot": 1
+    }
+  },
+  "doubles_move_select_glimmora.png": {
+    "MoveNameReader": {
+      "moves": [
+        "rock-slide",
+        "power-gem",
+        "",
+        ""
+      ]
+    },
+    "MoveSelectCursorSlot": {
+      "slot": -1
     }
   },
   "move_select.png": {
@@ -798,6 +1353,17 @@
     }
   },
   "screenshot-20260427-132603218579.png": {
+    "MoveNameReader": {
+      "moves": [
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    "MoveSelectCursorSlot": {
+      "slot": -1
+    },
     "OpponentHPReader_Doubles": {
       "opponent_hp_pct": 100,
       "slot": 1
@@ -811,6 +1377,9 @@
         "swords-dance",
         "strength-sap"
       ]
+    },
+    "MoveSelectCursorSlot": {
+      "slot": -1
     }
   }
 }

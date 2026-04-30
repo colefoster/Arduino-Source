@@ -1,4 +1,16 @@
 {
+  "20260423-183217025546.png": {
+    "TeamSelectReader": {
+      "species": [
+        "charizard",
+        "sneasler",
+        "milotic",
+        "garchomp",
+        "incineroar",
+        "venusaur"
+      ]
+    }
+  },
   "teamreg.png": {
     "TeamSelectReader": {
       "species": [
