@@ -72,6 +72,7 @@ def train(
     model_variant: str = "winrate_seq",
     turn_weight: bool = False,
     resume_path: str = "",
+    cache_path: str = "",
 ):
     machine_name = platform.node() or "unknown"
 
@@ -111,18 +112,29 @@ def train(
     rdir = Path(replay_dir) if replay_dir else _find_replay_dir()
     print(f"Replay directory: {rdir}")
 
-    # Load dataset
+    # Load dataset — from sharded cache or parse from scratch
     history_mode = "sequence" if model_variant == "winrate_seq" else "single"
-    print(f"Loading winrate dataset (min_rating={min_rating}, history_mode={history_mode})...")
-    dataset = WinrateDataset(
-        replay_dir=rdir,
-        vocabs=vocabs,
-        feature_tables=feature_tables,
-        usage_stats=usage_stats,
-        player_profiles=player_profiles,
-        min_rating=min_rating,
-        history_mode=history_mode,
-    )
+    if cache_path and Path(cache_path).exists() and Path(cache_path).is_dir():
+        from ..data.sharded_cache import ShardedCachedDataset
+        print(f"Loading sharded winrate cache from {cache_path}...")
+        full = ShardedCachedDataset(Path(cache_path), augment=True)
+        # Winrate task uses battle samples only — filter out team_previews (turn==0).
+        battle_indices = [
+            i for i, s in enumerate(full._samples) if float(s["turn"].item()) > 0
+        ]
+        print(f"  → {len(battle_indices)} battle samples (excluded {len(full) - len(battle_indices)} team-preview samples)")
+        dataset = torch.utils.data.Subset(full, battle_indices)
+    else:
+        print(f"Loading winrate dataset (min_rating={min_rating}, history_mode={history_mode})...")
+        dataset = WinrateDataset(
+            replay_dir=rdir,
+            vocabs=vocabs,
+            feature_tables=feature_tables,
+            usage_stats=usage_stats,
+            player_profiles=player_profiles,
+            min_rating=min_rating,
+            history_mode=history_mode,
+        )
 
     if len(dataset) == 0:
         print("ERROR: No samples loaded.")
@@ -413,6 +425,9 @@ def main():
                         help="Downweight late-game turns by 1/sqrt(turn+1) so easy late positions don't dominate the loss")
     parser.add_argument("--resume", type=str, default="",
                         help="Path to checkpoint to resume training from")
+    parser.add_argument("--cache", type=str, default="",
+                        help="Sharded dataset cache directory (from preparse_dataset.py). "
+                             "Skips dataset construction; battle samples are auto-filtered.")
     args = parser.parse_args()
 
     train(
@@ -432,6 +447,7 @@ def main():
         model_variant=args.model,
         turn_weight=args.turn_weight,
         resume_path=args.resume,
+        cache_path=args.cache,
     )
 
 

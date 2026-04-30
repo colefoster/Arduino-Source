@@ -157,7 +157,12 @@ def train(
 
     # Load dataset — from cache or parse from scratch
     if cache_path and Path(cache_path).exists():
-        dataset = CachedDataset(Path(cache_path), augment=True)
+        cp = Path(cache_path)
+        if cp.is_dir():
+            from ..data.sharded_cache import ShardedCachedDataset
+            dataset = ShardedCachedDataset(cp, augment=True)
+        else:
+            dataset = CachedDataset(cp, augment=True)
     else:
         print(f"Loading enriched dataset (min_rating={min_rating}, history_mode={history_mode})...")
         dataset = EnrichedDataset(
@@ -500,7 +505,8 @@ def main():
     parser.add_argument("--run-id", type=str, default="")
     parser.add_argument("--replay-dir", type=str, default="")
     parser.add_argument("--cache", type=str, default="",
-                        help="Path to pre-parsed .pt cache file (from preparse_dataset.py)")
+                        help="Pre-parsed dataset: either a directory (sharded cache from "
+                             "preparse_dataset.py) or a legacy single .pt file")
     parser.add_argument("--dashboard", type=str, default="http://100.113.157.128:8421",
                         help="Dashboard URL for live training progress (empty to disable)")
     parser.add_argument("--dropout", type=float, default=0.25)
