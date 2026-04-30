@@ -144,13 +144,6 @@ def train(
     except Exception as e:
         print(f"Player profiles not available: {e}")
 
-    # Find replay directory
-    if replay_dir:
-        rdir = Path(replay_dir)
-    else:
-        rdir = _find_replay_dir()
-    print(f"Replay directory: {rdir}")
-
     # Map model variant to history mode
     history_mode_map = {"v2": "single", "v2_window": "window", "v2_seq": "sequence"}
     history_mode = history_mode_map[model_variant]
@@ -164,6 +157,14 @@ def train(
         else:
             dataset = CachedDataset(cp, augment=True)
     else:
+        # Find replay directory only when we actually need to parse from scratch.
+        # _find_replay_dir() does any(d.glob("*.json")) which can hang for
+        # minutes on a 470k-file dir over shfs.
+        if replay_dir:
+            rdir = Path(replay_dir)
+        else:
+            rdir = _find_replay_dir()
+        print(f"Replay directory: {rdir}")
         print(f"Loading enriched dataset (min_rating={min_rating}, history_mode={history_mode})...")
         dataset = EnrichedDataset(
             replay_dir=rdir,
