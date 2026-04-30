@@ -939,11 +939,12 @@ async function buildLabelForm(overlay, screen, filename, img) {
                         if (Array.isArray(val)) {
                             val.forEach((v, i) => {
                                 const input = formEl.querySelector(`.manifest-input[data-reader="${reader}"][data-field="${field}"][data-index="${i}"]`);
-                                if (input && !input.value) { input.value = v || ''; input.style.borderColor = '#d29922'; }
+                                // Use null-check so int 0 / bool false aren't dropped by `||`.
+                                if (input && !input.value) { input.value = v != null ? v : ''; input.style.borderColor = '#d29922'; }
                             });
                         } else {
                             const input = formEl.querySelector(`.manifest-input[data-reader="${reader}"][data-field="${field}"]`);
-                            if (input && !input.value) { input.value = val || ''; input.style.borderColor = '#d29922'; }
+                            if (input && !input.value) { input.value = val != null ? val : ''; input.style.borderColor = '#d29922'; }
                         }
                     }
                     btn.textContent = 'Done';
