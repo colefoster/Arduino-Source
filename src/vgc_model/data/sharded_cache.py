@@ -229,15 +229,6 @@ class ShardedCachedDataset(Dataset):
             tensors = self._swap_slots(tensors)
         return tensors
 
-    def __len__(self) -> int:
-        return len(self._samples)
-
-    def __getitem__(self, idx: int) -> dict[str, torch.Tensor]:
-        tensors = self._samples[idx]
-        if self.augment and random.random() < 0.5:
-            tensors = self._swap_slots(tensors)
-        return tensors
-
     @staticmethod
     def _swap_slots(t: dict[str, torch.Tensor]) -> dict[str, torch.Tensor]:
         """Slot A/B swap — same logic as EnrichedDataset._swap_slots.
