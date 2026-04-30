@@ -103,7 +103,7 @@ class EnrichedDataset(Dataset):
             replay_dir / "index.json",
         ]:
             if index_candidate.exists():
-                index = json.loads(index_candidate.read_text())
+                index = json.loads(index_candidate.read_text(encoding="utf-8"))
                 for replay_id, meta in index.items():
                     r = meta.get("rating", 0)
                     if r:
@@ -122,7 +122,7 @@ class EnrichedDataset(Dataset):
         """Parse all replays with the enriched parser."""
         for filepath, rating in self.replay_files:
             try:
-                data = json.loads(filepath.read_text())
+                data = json.loads(filepath.read_text(encoding="utf-8"))
                 log = data.get("log", "")
                 if not log:
                     continue

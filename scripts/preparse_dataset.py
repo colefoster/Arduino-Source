@@ -50,7 +50,7 @@ def find_replay_files(min_rating: int) -> list[tuple[Path, int]]:
         for idx_path in [d / "index.json", d.parent / "index.json"]:
             if idx_path.exists():
                 try:
-                    idx = json.loads(idx_path.read_text())
+                    idx = json.loads(idx_path.read_text(encoding="utf-8"))
                     for rid, meta in idx.items():
                         r = meta.get("rating", 0)
                         if r:
