@@ -259,11 +259,14 @@ function inspectorRender() {
     if (s.showOverlays && s.selectedBoxReader && s.boxes[s.selectedBoxReader]) {
         const readerBoxes = s.boxes[s.selectedBoxReader];
         readerBoxes.forEach((box, i) => {
+            // Server returns { name, box: [x, y, w, h] }. Tolerate both shapes.
+            const arr = Array.isArray(box.box) ? box.box : [box.x, box.y, box.w, box.h];
+            const [nx, ny, nw, nh] = arr;
             const color = OVERLAY_COLORS[i % OVERLAY_COLORS.length];
-            const bx = box.x * s.image.width;
-            const by = box.y * s.image.height;
-            const bw = box.w * s.image.width;
-            const bh = box.h * s.image.height;
+            const bx = nx * s.image.width;
+            const by = ny * s.image.height;
+            const bw = nw * s.image.width;
+            const bh = nh * s.image.height;
 
             ctx.strokeStyle = color;
             ctx.lineWidth = 2 / s.scale;
