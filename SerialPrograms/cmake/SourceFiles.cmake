@@ -1304,6 +1304,8 @@ file(GLOB LIBRARY_SOURCES
     Source/Pokemon/Resources/Pokemon_PokemonSlugs.h
     Source/PokemonChampions/Inference/PokemonChampions_ActionMenuDetector.cpp
     Source/PokemonChampions/Inference/PokemonChampions_ActionMenuDetector.h
+    Source/PokemonChampions/Inference/PokemonChampions_ActiveHUDSlotDetector.cpp
+    Source/PokemonChampions/Inference/PokemonChampions_ActiveHUDSlotDetector.h
     Source/PokemonChampions/Inference/PokemonChampions_BattleEndDetector.cpp
     Source/PokemonChampions/Inference/PokemonChampions_BattleEndDetector.h
     Source/PokemonChampions/Inference/PokemonChampions_BattleHUDReader.cpp
