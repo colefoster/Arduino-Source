@@ -29,7 +29,13 @@ async function inspectorInit() {
         const sources = await api('/api/labeler/sources');
         const sel = document.getElementById('inspector-source-select');
         sel.innerHTML = '<option value="">Select source...</option>' +
-            sources.map(s => `<option value="${s.path}">${s.parent}/${s.name} (${s.count})</option>`).join('');
+            sources.map(s => {
+                // Strip a leading "test_images/" prefix from the parent label
+                // so the dropdown reads "move_select" instead of "test_images/move_select".
+                const parent = (s.parent || '').replace(/^test_images\/?/, '');
+                const label = parent ? `${parent}/${s.name}` : s.name;
+                return `<option value="${s.path}">${label} (${s.count})</option>`;
+            }).join('');
     } catch {}
 
     // Load boxes
