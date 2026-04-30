@@ -105,6 +105,7 @@ def train(
     resume_path: str = "",
     winner_only: bool = False,
     mtl_kendall: bool = True,
+    num_workers: int = 0,
 ):
     machine_name = platform.node() or "unknown"
 
@@ -206,20 +207,24 @@ def train(
         )
         train_loader = DataLoader(
             dataset, batch_size=batch_size, sampler=train_sampler,
-            num_workers=0, pin_memory=(device.type != "cpu"),
+            num_workers=num_workers, pin_memory=(device.type != "cpu"),
+            persistent_workers=(num_workers > 0),
         )
         val_loader = DataLoader(
             dataset, batch_size=batch_size, sampler=val_sampler,
-            num_workers=0, pin_memory=(device.type != "cpu"),
+            num_workers=num_workers, pin_memory=(device.type != "cpu"),
+            persistent_workers=(num_workers > 0),
         )
     else:
         train_loader = DataLoader(
             train_dataset, batch_size=batch_size, shuffle=True,
-            num_workers=0, pin_memory=(device.type != "cpu"),
+            num_workers=num_workers, pin_memory=(device.type != "cpu"),
+            persistent_workers=(num_workers > 0),
         )
         val_loader = DataLoader(
             val_dataset, batch_size=batch_size, shuffle=False,
-            num_workers=0, pin_memory=(device.type != "cpu"),
+            num_workers=num_workers, pin_memory=(device.type != "cpu"),
+            persistent_workers=(num_workers > 0),
         )
 
     # Model
@@ -549,6 +554,8 @@ def main():
                         help="Disable Kendall MTL uncertainty weighting; use fixed 0.3 aux weights instead")
     parser.add_argument("--resume", type=str, default="",
                         help="Path to checkpoint to resume training from")
+    parser.add_argument("--num-workers", type=int, default=0,
+                        help="DataLoader workers (Linux fork-safe; >0 enables prefetch).")
     args = parser.parse_args()
 
     train(
@@ -571,6 +578,7 @@ def main():
         resume_path=args.resume,
         winner_only=args.winner_only,
         mtl_kendall=not args.no_mtl,
+        num_workers=args.num_workers,
     )
 
 
