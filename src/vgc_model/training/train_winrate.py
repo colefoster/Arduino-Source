@@ -71,6 +71,7 @@ def train(
     label_smoothing: float = 0.05,
     model_variant: str = "winrate_seq",
     turn_weight: bool = False,
+    resume_path: str = "",
 ):
     machine_name = platform.node() or "unknown"
 
@@ -170,8 +171,25 @@ def train(
 
     best_val_loss = float("inf")
     patience_counter = 0
+    start_epoch = 1
 
-    for epoch in range(1, epochs + 1):
+    # Resume from checkpoint if requested
+    if resume_path and Path(resume_path).exists():
+        print(f"Resuming from {resume_path}...")
+        ckpt = torch.load(resume_path, map_location=device, weights_only=False)
+        model.load_state_dict(ckpt["model_state_dict"])
+        if "optimizer_state_dict" in ckpt:
+            optimizer.load_state_dict(ckpt["optimizer_state_dict"])
+        if "scheduler_state_dict" in ckpt:
+            scheduler.load_state_dict(ckpt["scheduler_state_dict"])
+        else:
+            for _ in range(ckpt["epoch"]):
+                scheduler.step()
+        start_epoch = ckpt["epoch"] + 1
+        best_val_loss = ckpt.get("val_loss", float("inf"))
+        print(f"  Resumed at epoch {start_epoch}, best_val_loss={best_val_loss:.4f}")
+
+    for epoch in range(start_epoch, epochs + 1):
         # Train
         model.train()
         train_metrics = _run_epoch(
@@ -390,6 +408,8 @@ def main():
                         help="Model variant: winrate (stateless, default historical) or winrate_seq (LSTM history, new)")
     parser.add_argument("--turn-weight", action="store_true",
                         help="Downweight late-game turns by 1/sqrt(turn+1) so easy late positions don't dominate the loss")
+    parser.add_argument("--resume", type=str, default="",
+                        help="Path to checkpoint to resume training from")
     args = parser.parse_args()
 
     train(
@@ -408,6 +428,7 @@ def main():
         label_smoothing=args.label_smoothing,
         model_variant=args.model,
         turn_weight=args.turn_weight,
+        resume_path=args.resume,
     )
 
 
