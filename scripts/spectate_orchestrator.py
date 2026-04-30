@@ -25,6 +25,7 @@ import string
 import sys
 import time
 from dataclasses import dataclass, field
+from datetime import datetime, timezone
 from pathlib import Path
 
 # Force UTF-8 output on Windows
@@ -41,7 +42,9 @@ FORMATS = [
     "gen9championsbssregma",
 ]
 
-OUTPUT_DIR = Path(__file__).resolve().parent.parent / "data" / "showdown_replays" / "spectated"
+# Hour-bucketed replay layout (Phase 1 of pipeline redesign).
+# data/replays/<format>/YYYY-MM-DD/HH/<replay_id>.json
+OUTPUT_DIR = Path(__file__).resolve().parent.parent / "data" / "replays"
 INDEX_FILE = OUTPUT_DIR / "index.json"
 STATUS_FILE = OUTPUT_DIR / ".orchestrator_status.json"
 
@@ -446,18 +449,32 @@ class Orchestrator:
             asyncio.create_task(conn.leave_room(battle.room_id))
 
     def _save_battle(self, battle: BattleLog):
-        """Save a completed battle to disk."""
-        fmt_dir = None
-        for fmt in self.formats:
-            if fmt in battle.room_id:
-                fmt_dir = OUTPUT_DIR / fmt
+        """Save a completed battle to disk in hour-bucketed layout.
+
+        Layout: data/replays/<format>/YYYY-MM-DD/HH/<replay_id>.json (UTC).
+        Bucket key is the spectate-time, within seconds of the replay's actual
+        end. Out-of-order saves into stale buckets are fine — Layer 1's parse
+        cron is idempotent.
+        """
+        fmt = None
+        for f in self.formats:
+            if f in battle.room_id:
+                fmt = f
                 break
-        if fmt_dir is None:
-            fmt_dir = OUTPUT_DIR / "unknown"
-        fmt_dir.mkdir(parents=True, exist_ok=True)
+        if fmt is None:
+            fmt = "unknown"
+
+        upload_ts = int(time.time())
+        bucket_dt = datetime.fromtimestamp(upload_ts, tz=timezone.utc)
+        bucket_dir = (
+            OUTPUT_DIR / fmt
+            / bucket_dt.strftime("%Y-%m-%d")
+            / bucket_dt.strftime("%H")
+        )
+        bucket_dir.mkdir(parents=True, exist_ok=True)
 
         replay_id = battle.room_id.replace("battle-", "")
-        out_file = fmt_dir / f"{replay_id}.json"
+        out_file = bucket_dir / f"{replay_id}.json"
 
         if out_file.exists():
             return
@@ -467,7 +484,7 @@ class Orchestrator:
             "format": battle.format_id,
             "players": [battle.players.get("p1", ""), battle.players.get("p2", "")],
             "log": battle.log_text,
-            "uploadtime": int(time.time()),
+            "uploadtime": upload_ts,
             "rating": battle.rating,
             "source": "spectated",
         }
