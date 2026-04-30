@@ -192,14 +192,34 @@ def train(
     )
     print(f"Train: {len(train_dataset)}, Val: {len(val_dataset)}")
 
-    train_loader = DataLoader(
-        train_dataset, batch_size=batch_size, shuffle=True,
-        num_workers=0, pin_memory=(device.type != "cpu"),
-    )
-    val_loader = DataLoader(
-        val_dataset, batch_size=batch_size, shuffle=False,
-        num_workers=0, pin_memory=(device.type != "cpu"),
-    )
+    # When the underlying dataset is the lazy ShardedCachedDataset, use a
+    # shard-local sampler so each shard loads at most once per epoch.
+    # Otherwise (in-memory dataset), default DataLoader shuffling is fine.
+    from ..data.sharded_cache import ShardedCachedDataset, ShardLocalSubsetSampler
+    if isinstance(dataset, ShardedCachedDataset):
+        train_sampler = ShardLocalSubsetSampler(
+            dataset, list(train_dataset.indices), shuffle=True, seed=42,
+        )
+        val_sampler = ShardLocalSubsetSampler(
+            dataset, list(val_dataset.indices), shuffle=False, seed=42,
+        )
+        train_loader = DataLoader(
+            dataset, batch_size=batch_size, sampler=train_sampler,
+            num_workers=0, pin_memory=(device.type != "cpu"),
+        )
+        val_loader = DataLoader(
+            dataset, batch_size=batch_size, sampler=val_sampler,
+            num_workers=0, pin_memory=(device.type != "cpu"),
+        )
+    else:
+        train_loader = DataLoader(
+            train_dataset, batch_size=batch_size, shuffle=True,
+            num_workers=0, pin_memory=(device.type != "cpu"),
+        )
+        val_loader = DataLoader(
+            val_dataset, batch_size=batch_size, shuffle=False,
+            num_workers=0, pin_memory=(device.type != "cpu"),
+        )
 
     # Model
     if model_variant == "v2_window":
@@ -273,6 +293,12 @@ def train(
         print(f"  Resumed at epoch {start_epoch}, best_val_loss={best_val_loss:.4f}")
 
     for epoch in range(start_epoch, epochs + 1):
+        # Re-randomize shard order each epoch (only relevant for sharded cache)
+        for loader in (train_loader, val_loader):
+            sampler = getattr(loader, "sampler", None)
+            if hasattr(sampler, "set_epoch"):
+                sampler.set_epoch(epoch)
+
         # ---- Train ----
         model.train()
         if mtl is not None:

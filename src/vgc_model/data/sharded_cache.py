@@ -132,11 +132,18 @@ def write_shard(
 
 
 class ShardedCachedDataset(Dataset):
-    """Dataset that loads samples from a sharded cache directory.
+    """Dataset that lazily loads samples from a sharded cache directory.
 
-    Concatenates all shards into a flat sample list. Eager-loads on
-    construction (each shard is one torch.load); use ``lazy=True`` to keep
-    file handles open and load shards on first access (not yet implemented).
+    Holds at most ONE shard in memory at a time — random access within the
+    current shard is O(1), accessing a different shard triggers a load. For a
+    51 GB cache on 31 GB RAM, the eager-load design (concat everything into
+    a single list) page-faulted the whole machine; this lazy variant keeps
+    the working set bounded to one shard (~1.6 GB).
+
+    For training, use ``ShardLocalSampler`` (defined below) to traverse all
+    samples in one shard before moving to the next — gives random sample
+    order within shards + random shard order, which preserves most of the
+    regularization benefit of full shuffle without thrashing.
     """
 
     def __init__(self, cache_dir: Path, augment: bool = True):
@@ -151,22 +158,76 @@ class ShardedCachedDataset(Dataset):
         if not manifest.shards:
             raise RuntimeError(f"Cache at {cache_dir} has no shards")
 
-        self._samples: list[dict[str, torch.Tensor]] = []
-        t0 = time.time()
+        # Build a flat-index → (shard_idx, local_idx) map. Cheap: 2M ints.
+        self._shard_files: list[Path] = []
+        self._shard_starts: list[int] = []  # flat-index where each shard begins
+        cumulative = 0
         for shard in manifest.shards:
             sf = cache_dir / shard["file"]
             if not sf.exists():
                 raise FileNotFoundError(
                     f"Shard listed in manifest but missing on disk: {sf}"
                 )
-            data = torch.load(sf, map_location="cpu", weights_only=False)
-            self._samples.extend(data["samples"])
-        elapsed = time.time() - t0
+            self._shard_files.append(sf)
+            self._shard_starts.append(cumulative)
+            cumulative += shard["num_samples"]
+        self._total = cumulative
+
+        # Currently-loaded shard
+        self._loaded_shard_idx: int = -1
+        self._loaded_samples: list[dict[str, torch.Tensor]] | None = None
+
         print(
-            f"Loaded sharded cache from {cache_dir}: "
-            f"{len(self._samples)} samples across {len(manifest.shards)} shards "
-            f"in {elapsed:.1f}s"
+            f"Sharded cache at {cache_dir}: "
+            f"{self._total} samples across {len(self._shard_files)} shards (lazy)"
         )
+
+    @property
+    def num_shards(self) -> int:
+        return len(self._shard_files)
+
+    def shard_size(self, shard_idx: int) -> int:
+        """Number of samples in the given shard."""
+        if shard_idx == len(self._shard_files) - 1:
+            return self._total - self._shard_starts[shard_idx]
+        return self._shard_starts[shard_idx + 1] - self._shard_starts[shard_idx]
+
+    def shard_global_range(self, shard_idx: int) -> tuple[int, int]:
+        """(start, end) flat indices for samples in the given shard."""
+        start = self._shard_starts[shard_idx]
+        end = start + self.shard_size(shard_idx)
+        return start, end
+
+    def _ensure_shard(self, shard_idx: int):
+        if self._loaded_shard_idx == shard_idx:
+            return
+        # Drop the previous shard before loading the next so we don't briefly
+        # hold both in memory.
+        self._loaded_samples = None
+        data = torch.load(
+            self._shard_files[shard_idx], map_location="cpu", weights_only=False,
+        )
+        self._loaded_samples = data["samples"]
+        self._loaded_shard_idx = shard_idx
+
+    def _locate(self, idx: int) -> tuple[int, int]:
+        """Map flat idx → (shard_idx, local_idx). Binary search."""
+        # bisect_right gives the index of the first start > idx; subtract 1.
+        import bisect
+        shard_idx = bisect.bisect_right(self._shard_starts, idx) - 1
+        local = idx - self._shard_starts[shard_idx]
+        return shard_idx, local
+
+    def __len__(self) -> int:
+        return self._total
+
+    def __getitem__(self, idx: int) -> dict[str, torch.Tensor]:
+        shard_idx, local = self._locate(idx)
+        self._ensure_shard(shard_idx)
+        tensors = self._loaded_samples[local]
+        if self.augment and random.random() < 0.5:
+            tensors = self._swap_slots(tensors)
+        return tensors
 
     def __len__(self) -> int:
         return len(self._samples)
@@ -250,3 +311,96 @@ def find_uncovered_replays(
     """Return only the replays whose ID is not yet in any shard."""
     covered = manifest.covered_replay_ids()
     return [(f, r) for f, r in replay_files if f.stem not in covered]
+
+
+class ShardLocalSampler:
+    """Sampler that traverses all samples in one shard before moving to the next.
+
+    With a lazy ``ShardedCachedDataset`` (one shard in RAM at a time), random
+    access via DataLoader(shuffle=True) would load N shards per batch and
+    thrash. This sampler preserves randomness in two ways:
+
+      - shard order is shuffled per epoch
+      - within each shard, sample order is shuffled per epoch
+
+    Net effect: the DataLoader sees an effectively random sequence, but the
+    dataset only loads each shard once per epoch.
+
+    Use as: ``DataLoader(dataset, batch_size=N, sampler=ShardLocalSampler(dataset))``.
+    Do NOT pass ``shuffle=True`` — the sampler handles that.
+    """
+
+    def __init__(
+        self,
+        dataset: "ShardedCachedDataset",
+        shuffle: bool = True,
+        seed: int = 42,
+    ):
+        self.dataset = dataset
+        self.shuffle = shuffle
+        self.seed = seed
+        self.epoch = 0
+
+    def set_epoch(self, epoch: int):
+        self.epoch = epoch
+
+    def __iter__(self):
+        rng = random.Random(self.seed + self.epoch)
+        shard_order = list(range(self.dataset.num_shards))
+        if self.shuffle:
+            rng.shuffle(shard_order)
+        for shard_idx in shard_order:
+            start, end = self.dataset.shard_global_range(shard_idx)
+            indices = list(range(start, end))
+            if self.shuffle:
+                rng.shuffle(indices)
+            yield from indices
+
+    def __len__(self) -> int:
+        return len(self.dataset)
+
+
+class ShardLocalSubsetSampler:
+    """Like ShardLocalSampler but restricted to a subset of flat indices.
+
+    Used after ``random_split``-style splits, where the val (or train) subset
+    is an arbitrary list of flat indices. We bucket those indices by shard,
+    then visit shards in random order, yielding only the in-subset indices
+    from each shard before moving on.
+    """
+
+    def __init__(
+        self,
+        dataset: "ShardedCachedDataset",
+        indices: list[int],
+        shuffle: bool = True,
+        seed: int = 42,
+    ):
+        self.dataset = dataset
+        self.shuffle = shuffle
+        self.seed = seed
+        self.epoch = 0
+
+        # Bucket indices by shard
+        self._buckets: dict[int, list[int]] = {}
+        for idx in indices:
+            shard_idx, _ = dataset._locate(idx)
+            self._buckets.setdefault(shard_idx, []).append(idx)
+        self._total = len(indices)
+
+    def set_epoch(self, epoch: int):
+        self.epoch = epoch
+
+    def __iter__(self):
+        rng = random.Random(self.seed + self.epoch)
+        shard_order = list(self._buckets.keys())
+        if self.shuffle:
+            rng.shuffle(shard_order)
+        for shard_idx in shard_order:
+            indices = list(self._buckets[shard_idx])
+            if self.shuffle:
+                rng.shuffle(indices)
+            yield from indices
+
+    def __len__(self) -> int:
+        return self._total
