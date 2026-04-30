@@ -1954,6 +1954,56 @@ async def detector_debug(request: Request):
         return JSONResponse({"error": str(e)}, 500)
 
 
+@app.post("/api/inspector/ocr-crop")
+async def inspector_ocr_crop(request: Request):
+    """Run number-tuned OCR on an arbitrary box of an image.
+
+    Used by the Inspector "Test OCR" button to iterate on box coords without
+    rebuilding. Body must include either {source, filename} or {image_base64}
+    plus the box coords {x, y, w, h} (normalized floats).
+    """
+    import base64
+    import urllib.request
+    import urllib.error
+
+    body = await request.json()
+    img_b64 = body.get("image_base64")
+    if not img_b64:
+        # Resolve from labeler source paths.
+        source = body.get("source", "").strip("/")
+        filename = body.get("filename", "")
+        if not source or not filename:
+            return JSONResponse({"error": "image_base64 OR (source+filename) required"}, 400)
+        # Source paths are relative to the project root (BASE).
+        img_path = (BASE / source / filename).resolve()
+        try:
+            img_path.relative_to(BASE.resolve())
+        except ValueError:
+            return JSONResponse({"error": "source path outside project"}, 400)
+        if not img_path.exists():
+            return JSONResponse({"error": f"image not found: {img_path}"}, 404)
+        img_b64 = base64.b64encode(img_path.read_bytes()).decode()
+
+    payload = json.dumps({
+        "image_base64": img_b64,
+        "x": body.get("x"), "y": body.get("y"),
+        "w": body.get("w"), "h": body.get("h"),
+    }).encode()
+    try:
+        req = urllib.request.Request(
+            f"{COLEPC_JOB_RUNNER}/ocr-crop",
+            data=payload,
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            return json.loads(resp.read())
+    except urllib.error.URLError as e:
+        return JSONResponse({"error": f"ColePC unreachable: {e}"}, 502)
+    except Exception as e:
+        return JSONResponse({"error": str(e)}, 500)
+
+
 @app.post("/api/detector/debug-batch")
 async def detector_debug_batch(request: Request):
     """Run detectors on all images in a screen via ColePC batch endpoint."""

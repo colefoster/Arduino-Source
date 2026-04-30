@@ -25,6 +25,9 @@
 #include "Tests/ManifestTestRunner.h"
 #include "Tests/OcrSuggest.h"
 #include "Tests/DetectorDebug.h"
+#include "CommonFramework/ImageTypes/ImageRGB32.h"
+#include "CommonFramework/ImageTools/ImageBoxes.h"
+#include "PokemonChampions/Inference/PokemonChampions_BattleHUDReader.h"
 #include "Integrations/PybindSwitchController.h"
 #include "NintendoSwitch/Controllers/NintendoSwitch_ControllerButtons.h"
 
@@ -186,6 +189,42 @@ int main(int argc, char* argv[]){
             return 1;
         }
         return run_ocr_suggest(argv[2], argv[3]);
+    }
+
+    //  --ocr-crop mode: run number-tuned OCR on an arbitrary box of one image.
+    //  Used by the Inspector tab's "Test OCR" button to iterate on box coords.
+    //  Args: <image> <x> <y> <w> <h>  (floats, normalized to image size)
+    if (std::strcmp(argv[1], "--ocr-crop") == 0){
+        if (argc < 7){
+            std::cerr << "Error: --ocr-crop requires <image> <x> <y> <w> <h>." << std::endl;
+            print_usage(argv[0]);
+            return 1;
+        }
+        try{
+            ImageRGB32 image(argv[2]);
+            double x = std::stod(argv[3]);
+            double y = std::stod(argv[4]);
+            double w = std::stod(argv[5]);
+            double h = std::stod(argv[6]);
+            ImageFloatBox box(x, y, w, h);
+            ImageViewRGB32 cropped = extract_box_reference(image, box);
+            std::string raw = NintendoSwitch::PokemonChampions::raw_ocr_numbers(cropped);
+            auto frac = NintendoSwitch::PokemonChampions::parse_fraction(raw);
+            //  Escape the few JSON-hostile chars in raw OCR output.
+            std::string esc;
+            for (char c : raw){
+                if (c == '"' || c == '\\') { esc += '\\'; esc += c; }
+                else if (c == '\n' || c == '\r' || c == '\t') esc += ' ';
+                else esc += c;
+            }
+            std::cout << "{\"raw\":\"" << esc << "\","
+                      << "\"current\":" << frac.first << ","
+                      << "\"max\":" << frac.second << "}" << std::endl;
+            return 0;
+        }catch (const std::exception& e){
+            std::cerr << "Error: " << e.what() << std::endl;
+            return 1;
+        }
     }
 
     //  Legacy mode: controller test.
