@@ -512,19 +512,6 @@
       "slot": 1
     }
   },
-  "20260423-183410319938.png": {
-    "MoveNameReader": {
-      "moves": [
-        "",
-        "",
-        "",
-        ""
-      ]
-    },
-    "MoveSelectCursorSlot": {
-      "slot": 1
-    }
-  },
   "20260423-183421609860.png": {
     "MoveNameReader": {
       "moves": [
@@ -579,19 +566,6 @@
     },
     "MoveSelectCursorSlot": {
       "slot": 2
-    }
-  },
-  "20260423-183452481985.png": {
-    "MoveNameReader": {
-      "moves": [
-        "",
-        "",
-        "",
-        ""
-      ]
-    },
-    "MoveSelectCursorSlot": {
-      "slot": 1
     }
   },
   "20260423-183458158162.png": {
@@ -808,19 +782,6 @@
         "parting-shot",
         "fake-out",
         "flare-blitz"
-      ]
-    },
-    "MoveSelectCursorSlot": {
-      "slot": 0
-    }
-  },
-  "20260427-132140821662.png": {
-    "MoveNameReader": {
-      "moves": [
-        "",
-        "",
-        "",
-        ""
       ]
     },
     "MoveSelectCursorSlot": {
