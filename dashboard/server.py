@@ -286,6 +286,11 @@ def _rating_buckets(ratings: list[int], step: int = 50) -> dict[str, int]:
 # IMAGE HELPERS
 # ═══════════════════════════════════════════════════════════════════════════
 
+def _is_real_image(name: str) -> bool:
+    """True for actual image files (not macOS dot-files like ._foo.png or special _foo)."""
+    return not (name.startswith("_") or name.startswith("."))
+
+
 def _make_thumbnail(img_path: Path, max_w: int = 480, max_h: int = 270) -> bytes:
     from PIL import Image
     img = Image.open(img_path).convert("RGB")
@@ -543,7 +548,7 @@ async def gallery_readers():
     readers = []
     for d in sorted(TEST_IMAGES_DIR.iterdir()):
         if d.is_dir() and not d.name.startswith("_"):
-            count = sum(1 for f in d.rglob("*") if f.suffix.lower() in (".png", ".jpg", ".jpeg"))
+            count = sum(1 for f in d.rglob("*") if f.suffix.lower() in (".png", ".jpg", ".jpeg") and _is_real_image(f.name))
             readers.append({
                 "name": d.name, "count": count,
                 "crop_count": len(CROP_DEFS.get(d.name, [])),
@@ -559,7 +564,7 @@ async def gallery_reader(name: str):
         return JSONResponse({"error": "reader not found"}, 404)
     images = []
     for f in sorted(reader_dir.rglob("*")):
-        if f.suffix.lower() not in (".png", ".jpg", ".jpeg") or f.name.startswith("_"):
+        if f.suffix.lower() not in (".png", ".jpg", ".jpeg") or not _is_real_image(f.name):
             continue
         images.append({
             "filename": f.name,
@@ -659,7 +664,7 @@ async def gallery_screens():
     # Regular screens
     for name, defn in screens.items():
         screen_dir = TEST_IMAGES_DIR / name
-        count = sum(1 for f in screen_dir.glob("*.png")) if screen_dir.exists() else 0
+        count = sum(1 for f in screen_dir.glob("*.png") if _is_real_image(f.name)) if screen_dir.exists() else 0
         manifest = _load_manifest(screen_dir)
         labeled = sum(1 for v in manifest.values() if v)
         result.append({
@@ -676,7 +681,7 @@ async def gallery_screens():
     # Overlays
     for name, defn in overlays.items():
         overlay_dir = TEST_IMAGES_DIR / "_overlays" / name
-        count = sum(1 for f in overlay_dir.glob("*.png")) if overlay_dir.exists() else 0
+        count = sum(1 for f in overlay_dir.glob("*.png") if _is_real_image(f.name)) if overlay_dir.exists() else 0
         manifest = _load_manifest(overlay_dir)
         labeled = sum(1 for v in manifest.values() if v)
         result.append({
@@ -718,7 +723,7 @@ async def gallery_screen(name: str):
 
     images = []
     for f in sorted(screen_dir.glob("*.png")):
-        if f.name.startswith("_"):
+        if not _is_real_image(f.name):
             continue
         labels = manifest.get(f.name, {})
         # Determine label completeness
@@ -802,7 +807,7 @@ async def gallery_manifest_bulk_confirm(screen: str):
     manifest = _load_manifest(screen_dir)
     count = 0
     for f in sorted(screen_dir.glob("*.png")):
-        if f.name.startswith("_"):
+        if not _is_real_image(f.name):
             continue
         if f.name not in manifest:
             manifest[f.name] = {}
@@ -848,6 +853,8 @@ async def gallery_inbox():
         return {"count": 0, "images": []}
     images = []
     for f in sorted(INBOX_DIR.glob("*.png")):
+        if not _is_real_image(f.name):
+            continue
         images.append({"filename": f.name, "path": f"_inbox/{f.name}"})
     return {"count": len(images), "images": images}
 
@@ -986,7 +993,7 @@ async def labeler_sources():
             if not reader_dir.is_dir(): continue
             imgs = [f for f in reader_dir.iterdir()
                     if f.is_file() and f.suffix.lower() in (".jpg", ".jpeg", ".png")
-                    and not f.name.startswith("_")]
+                    and _is_real_image(f.name)]
             if imgs:
                 reader_name = reader_dir.name
                 sources.append({
@@ -1024,7 +1031,7 @@ async def labeler_images(source: str, reader: str):
     images = []
     for f in sorted(src_dir.iterdir()):
         if f.suffix.lower() not in (".jpg", ".jpeg", ".png"): continue
-        if f.name.startswith("_"): continue
+        if not _is_real_image(f.name): continue
         label = labels.get(f.name)
         images.append({
             "filename": f.name, "labeled": label is not None,
@@ -1989,37 +1996,50 @@ async def ocr_suggest_bulk(request: Request):
         return JSONResponse({"error": "screen not found"}, 404)
 
     manifest = _load_manifest(screen_dir)
-    results = {}
-    errors = []
 
+    # Build the work list: unlabeled-for-this-reader, real images only.
+    targets = []
     for f in sorted(screen_dir.glob("*.png")):
-        if f.name.startswith("_"):
+        if f.name.startswith("_") or f.name.startswith("."):
             continue
-        # Skip already-labeled images (for this reader)
-        existing = manifest.get(f.name, {})
-        if reader in existing:
+        if reader in manifest.get(f.name, {}):
             continue
+        targets.append(f)
 
-        img_b64 = base64.b64encode(f.read_bytes()).decode()
-        payload = json.dumps({
-            "image_base64": img_b64,
-            "reader": reader,
-            "screen": screen,
-        }).encode()
-
+    def _suggest_one(path: Path):
         try:
+            img_b64 = base64.b64encode(path.read_bytes()).decode()
+            payload = json.dumps({
+                "image_base64": img_b64,
+                "reader": reader,
+                "screen": screen,
+            }).encode()
             req = urllib.request.Request(
                 f"{COLEPC_JOB_RUNNER}/ocr-suggest",
                 data=payload,
                 headers={"Content-Type": "application/json"},
                 method="POST",
             )
-            with urllib.request.urlopen(req, timeout=30) as resp:
+            with urllib.request.urlopen(req, timeout=60) as resp:
                 result = json.loads(resp.read())
-                if result.get("ok"):
-                    results[f.name] = result.get("result", {})
+            if result.get("ok"):
+                return path.name, result.get("result", {}), None
+            return path.name, None, result.get("error", "unknown")
         except Exception as e:
-            errors.append({"filename": f.name, "error": str(e)})
+            return path.name, None, str(e)
+
+    # Run in parallel — ColePC's C++ OCR binary is single-threaded per call,
+    # but multiple concurrent subprocesses share the GPU/CPU well up to ~8.
+    results = {}
+    errors = []
+    loop = asyncio.get_running_loop()
+    with ThreadPoolExecutor(max_workers=8) as pool:
+        tasks = [loop.run_in_executor(pool, _suggest_one, f) for f in targets]
+        for fname, result, err in await asyncio.gather(*tasks):
+            if result is not None:
+                results[fname] = result
+            elif err is not None:
+                errors.append({"filename": fname, "error": err})
 
     return {"ok": True, "suggested": len(results), "results": results, "errors": errors}
 
@@ -2040,8 +2060,7 @@ async def validation_summary():
             continue
 
         readers = defn.get("readers", {})
-        images = list(screen_dir.glob("*.png"))
-        images = [f for f in images if not f.name.startswith("_")]
+        images = [f for f in screen_dir.glob("*.png") if _is_real_image(f.name)]
         manifest = _load_manifest(screen_dir)
 
         total = len(images)
@@ -2093,11 +2112,19 @@ async def validation_summary():
 
 
 # ═══════════════════════════════════════════════════════════════════════════
-# REPLAY SYNC (ash → ColePC)
+# REPLAY SYNC (ash → unraid container volume)
 # ═══════════════════════════════════════════════════════════════════════════
+#
+# Sync target switched from ColePC (Windows) to unraid (Linux container volume)
+# to make the unraid pokemon-champions-gpu container the canonical training
+# rig. The unraid host has the workspace at /mnt/user/data/pokemon-champions
+# which is mounted into the container as /workspace.
 
-COLEPC_HOST = "colepc"
-COLEPC_REPLAY_DIR = "C:/Dev/pokemon-champions/data/showdown_replays"
+SYNC_HOST = os.environ.get("SYNC_HOST", "unraid")
+SYNC_REPLAY_DIR = os.environ.get(
+    "SYNC_REPLAY_DIR",
+    "/mnt/user/data/pokemon-champions/data/showdown_replays",
+)
 
 _sync_state: dict = {
     "running": False,
@@ -2134,10 +2161,11 @@ async def _run_sync_index() -> dict:
     out_path = Path("/tmp/merged_replay_index.json")
     out_path.write_text(json.dumps(merged))
 
-    # SCP to the parent of the replay dir on ColePC (matches EnrichedDataset's lookup)
-    remote_dest = f"{COLEPC_REPLAY_DIR}/index.json".replace("/", "\\")
+    # SCP to the parent of the replay dir on the sync host (matches the
+    # dataset/preparse lookup at <replay_dir>.parent / "index.json").
+    remote_dest = f"{SYNC_REPLAY_DIR}/index.json"
     proc = await asyncio.create_subprocess_exec(
-        "scp", "-q", str(out_path), f"{COLEPC_HOST}:{remote_dest}",
+        "scp", "-q", str(out_path), f"{SYNC_HOST}:{remote_dest}",
         stdout=asyncio.subprocess.PIPE,
         stderr=asyncio.subprocess.PIPE,
     )
@@ -2154,7 +2182,7 @@ async def _run_sync_index() -> dict:
 
 
 async def _run_sync_format(fmt_id: str, sources: list[Path]) -> dict:
-    """Sync one format's replays from ash to ColePC via tar+ssh."""
+    """Sync one format's replays from ash to the configured remote (unraid by default) via tar+ssh."""
     # Collect all local replay files for this format
     local_files: list[Path] = []
     for src_dir in sources:
@@ -2168,11 +2196,11 @@ async def _run_sync_format(fmt_id: str, sources: list[Path]) -> dict:
     if not local_files:
         return {"format": fmt_id, "local": 0, "remote": 0, "synced": 0, "skipped": True}
 
-    # Get list of what ColePC already has
-    remote_dir = f"{COLEPC_REPLAY_DIR}/{fmt_id}"
+    # Get list of what the remote already has (Linux: ls in fmt dir)
+    remote_dir = f"{SYNC_REPLAY_DIR}/{fmt_id}"
     proc = await asyncio.create_subprocess_exec(
-        "ssh", COLEPC_HOST,
-        f'dir /b "{remote_dir}\\gen9*.json" 2>NUL',
+        "ssh", SYNC_HOST,
+        f'ls "{remote_dir}" 2>/dev/null | grep "^gen9.*\\.json$"',
         stdout=asyncio.subprocess.PIPE,
         stderr=asyncio.subprocess.PIPE,
     )
@@ -2208,11 +2236,11 @@ async def _run_sync_format(fmt_id: str, sources: list[Path]) -> dict:
             if not link.exists():
                 link.symlink_to(src)
 
-        # tar + ssh to ColePC
+        # tar + ssh to remote (Linux extraction, no per-file argv blowup)
         proc = await asyncio.create_subprocess_shell(
             f'cd /tmp/sync_staging_{fmt_id} && '
             f'tar cf - -T {filelist_path} | '
-            f'ssh {COLEPC_HOST} "cd {remote_dir} && tar xf -"',
+            f'ssh {SYNC_HOST} "mkdir -p {remote_dir} && cd {remote_dir} && tar xf -"',
             stdout=asyncio.subprocess.PIPE,
             stderr=asyncio.subprocess.PIPE,
         )
@@ -2256,24 +2284,24 @@ async def sync_trigger(request: Request):
     _sync_state["last_error"] = None
 
     try:
-        # Check ColePC is reachable
+        # Check sync host is reachable
         proc = await asyncio.create_subprocess_exec(
             "ssh", "-o", "ConnectTimeout=5", "-o", "BatchMode=yes",
-            COLEPC_HOST, "echo ok",
+            SYNC_HOST, "echo ok",
             stdout=asyncio.subprocess.PIPE,
             stderr=asyncio.subprocess.PIPE,
         )
         stdout, stderr = await proc.communicate()
         if proc.returncode != 0 or b"ok" not in stdout:
             _sync_state["running"] = False
-            _sync_state["last_error"] = "ColePC unreachable"
-            return JSONResponse({"error": "ColePC unreachable — is it on?"}, 503)
+            _sync_state["last_error"] = f"{SYNC_HOST} unreachable"
+            return JSONResponse({"error": f"{SYNC_HOST} unreachable — is it on?"}, 503)
 
-        # Ensure remote dirs exist
+        # Ensure remote dirs exist (Linux mkdir -p)
         for fmt_id in formats:
-            remote_dir = f"{COLEPC_REPLAY_DIR}/{fmt_id}"
+            remote_dir = f"{SYNC_REPLAY_DIR}/{fmt_id}"
             await asyncio.create_subprocess_exec(
-                "ssh", COLEPC_HOST, f'if not exist "{remote_dir}" mkdir "{remote_dir}"',
+                "ssh", SYNC_HOST, f'mkdir -p "{remote_dir}"',
                 stdout=asyncio.subprocess.PIPE,
                 stderr=asyncio.subprocess.PIPE,
             )
@@ -2308,13 +2336,13 @@ async def sync_trigger(request: Request):
 @app.get("/api/sync/status")
 async def sync_status():
     """Get current sync status."""
-    # Quick check if ColePC is reachable (non-blocking, cached for 60s)
+    # Quick check if sync host is reachable (non-blocking, cached for 60s)
     reachable = None
     if not _sync_state["running"]:
         try:
             proc = await asyncio.create_subprocess_exec(
                 "ssh", "-o", "ConnectTimeout=3", "-o", "BatchMode=yes",
-                COLEPC_HOST, "echo ok",
+                SYNC_HOST, "echo ok",
                 stdout=asyncio.subprocess.PIPE,
                 stderr=asyncio.subprocess.PIPE,
             )
@@ -2325,7 +2353,8 @@ async def sync_status():
 
     return {
         "running": _sync_state["running"],
-        "colepc_reachable": reachable,
+        "sync_host_reachable": reachable,
+        "sync_host": SYNC_HOST,
         "last_run": _sync_state["last_run"],
         "last_result": _sync_state["last_result"],
         "last_error": _sync_state["last_error"],
