@@ -495,32 +495,6 @@
       "slot": 2
     }
   },
-  "20260423-183343803522.png": {
-    "MoveNameReader": {
-      "moves": [
-        "",
-        "",
-        "",
-        ""
-      ]
-    },
-    "MoveSelectCursorSlot": {
-      "slot": 1
-    }
-  },
-  "20260423-183348383848.png": {
-    "MoveNameReader": {
-      "moves": [
-        "",
-        "",
-        "",
-        ""
-      ]
-    },
-    "MoveSelectCursorSlot": {
-      "slot": 3
-    }
-  },
   "20260423-183353861292.png": {
     "MoveNameReader": {
       "moves": [
@@ -538,25 +512,7 @@
       "slot": 1
     }
   },
-  "20260423-183402213181.png": {
-    "MoveSelectCursorSlot": {
-      "slot": 1
-    }
-  },
   "20260423-183410319938.png": {
-    "MoveNameReader": {
-      "moves": [
-        "",
-        "",
-        "",
-        ""
-      ]
-    },
-    "MoveSelectCursorSlot": {
-      "slot": 1
-    }
-  },
-  "20260423-183416008813.png": {
     "MoveNameReader": {
       "moves": [
         "",
@@ -652,58 +608,6 @@
     },
     "OpponentHPReader_Doubles": {
       "opponent_hp_pct": 47,
-      "slot": 1
-    }
-  },
-  "20260423-183505998294.png": {
-    "MoveNameReader": {
-      "moves": [
-        "",
-        "",
-        "",
-        ""
-      ]
-    },
-    "MoveSelectCursorSlot": {
-      "slot": 1
-    }
-  },
-  "20260423-183523639255.png": {
-    "MoveNameReader": {
-      "moves": [
-        "",
-        "",
-        "",
-        ""
-      ]
-    },
-    "MoveSelectCursorSlot": {
-      "slot": 1
-    }
-  },
-  "20260423-183527988688.png": {
-    "MoveNameReader": {
-      "moves": [
-        "",
-        "",
-        "",
-        ""
-      ]
-    },
-    "MoveSelectCursorSlot": {
-      "slot": 1
-    }
-  },
-  "20260423-183534301105.png": {
-    "MoveNameReader": {
-      "moves": [
-        "",
-        "",
-        "",
-        ""
-      ]
-    },
-    "MoveSelectCursorSlot": {
       "slot": 1
     }
   },
