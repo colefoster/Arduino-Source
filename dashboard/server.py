@@ -1006,14 +1006,17 @@ async def sprites_list():
 
 
 @app.get("/api/sprites/examples")
-async def sprites_examples():
-    """Return a few labeled team-preview frames with the actual opp-sprite
-    crops (base64 PNG) alongside the reference sprite slug for each slot."""
+async def sprites_examples(limit: int = 100):
+    """Return labeled team-preview frames with the actual opp-sprite crops
+    (base64 PNG) alongside the reference sprite slug for each slot.
+
+    Mirrors C++ TeamPreviewReader's locked-in opp coords so the crop the
+    user sees here is exactly what the matcher consumed.
+    """
     import base64
-    OPP_BOXES = [
-        [0.8380, 0.1509 + i * ((0.7407 - 0.1509) / 5.0), 0.0583, 0.0917]
-        for i in range(6)
-    ]
+    OPP_X, OPP_Y0, OPP_Y5, OPP_W, OPP_H = 0.7181, 0.1482, 0.7310, 0.0664, 0.1009
+    step = (OPP_Y5 - OPP_Y0) / 5.0
+    OPP_BOXES = [[OPP_X, OPP_Y0 + i * step, OPP_W, OPP_H] for i in range(6)]
     examples = []
     candidates = [
         TEST_IMAGES_DIR / "team_preview_locked_in",
@@ -1029,8 +1032,7 @@ async def sprites_examples():
             if not isinstance(tp, dict):
                 continue
             opp = tp.get("opponent_species") or []
-            cleaned = [s for s in opp if s]
-            if len(cleaned) < 3:
+            if not any(opp):
                 continue
             img_path = screen_dir / fname
             if not img_path.exists():
@@ -1047,9 +1049,9 @@ async def sprites_examples():
                 "filename": fname,
                 "slots": slots,
             })
-            if len(examples) >= 4:
-                return {"ok": True, "examples": examples}
-    return {"ok": True, "examples": examples}
+            if len(examples) >= limit:
+                return {"ok": True, "examples": examples, "truncated": True}
+    return {"ok": True, "examples": examples, "truncated": False}
 
 
 @app.get("/api/teampreview/sprite/{slug}")
