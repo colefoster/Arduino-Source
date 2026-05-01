@@ -169,6 +169,7 @@
             box-shadow: 0 0 0 2px #58a6ff inset;
         }
         .gallery-card.selected .thumb { opacity: 0.85; }
+        tr.mismatch-row.focused { background: #0d2a4d; box-shadow: inset 2px 0 0 #58a6ff; }
         .gallery-card .select-badge {
             position: absolute; top: 6px; left: 6px;
             width: 22px; height: 22px; border-radius: 50%;
