@@ -53,7 +53,7 @@ int run_ocr_suggest(const std::string& reader_name, const std::string& image_pat
             det.detect(image);
             std::cout << "{\"slot\":" << det.active_slot() << "}" << std::endl;
         }
-        else if (reader_name == "BattleHUDReader" || reader_name == "SpeciesReader"){
+        else if (reader_name == "BattleHUDReader"){
             //  Always probe both slots in doubles mode; for singles images the
             //  slot-1 boxes will read empty/garbage and the user can clear them.
             BattleHUDReader reader(Language::English, BattleMode::DOUBLES);

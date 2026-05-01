@@ -101,36 +101,23 @@ CROP_DEFS = {
         {"name": f"move_{i}", "box": [0.776, y, 0.120, 0.031]}
         for i, y in enumerate([0.536, 0.655, 0.775, 0.894])
     ],
-    "SpeciesReader": [
-        {"name": "opp_species", "box": [0.830, 0.052, 0.087, 0.032]},
-    ],
-    "OpponentHPReader": [
-        {"name": "opp_hp_pct", "box": [0.9002, 0.1176, 0.0420, 0.0349]},
-    ],
-    "OpponentHPReader_Doubles": [
-        {"name": "opp0_hp_pct", "box": [0.6932, 0.1174, 0.0429, 0.0354]},
-        {"name": "opp1_hp_pct", "box": [0.9002, 0.1176, 0.0420, 0.0349]},
-    ],
-    "SpeciesReader_Doubles": [
-        {"name": "opp0_species", "box": [0.6172, 0.0454, 0.1219, 0.0417]},
-        {"name": "opp1_species", "box": [0.8286, 0.0481, 0.1151, 0.0417]},
-    ],
-    "OwnHPReader": [
-        {"name": "own_hp_current", "box": [0.1304, 0.9338, 0.0448, 0.0362]},
-        {"name": "own_hp_max",     "box": [0.1746, 0.9464, 0.0335, 0.0229]},
-    ],
-    "OwnHPReader_Doubles": [
-        {"name": "own0_hp_current", "box": [0.1304, 0.9338, 0.0448, 0.0362]},
-        {"name": "own0_hp_max",     "box": [0.1746, 0.9464, 0.0335, 0.0229]},
-        {"name": "own1_hp_current", "box": [0.3363, 0.9342, 0.0450, 0.0361]},
-        {"name": "own1_hp_max",     "box": [0.3800, 0.9473, 0.0340, 0.0215]},
-    ],
-    "OwnSpeciesReader": [
-        {"name": "own_species", "box": [0.040, 0.892, 0.135, 0.034]},
-    ],
-    "OwnSpeciesReader_Doubles": [
-        {"name": "own0_species", "box": [0.040, 0.892, 0.135, 0.034]},
-        {"name": "own1_species", "box": [0.245, 0.892, 0.135, 0.034]},
+    #  Unified BattleHUDReader: opponent (top) + own (bottom) species + HP,
+    #  both slots. Mirrors the C++ box layout in
+    #  PokemonChampions_BattleHUDReader.cpp (singles uses slot-0 boxes;
+    #  doubles uses both). Singles-only HP% sits at the same screen
+    #  position as doubles slot 1 — the singles slot 0 box matches.
+    "BattleHUDReader": [
+        {"name": "opp0_species_singles", "box": [0.830, 0.052, 0.087, 0.032]},
+        {"name": "opp0_species_doubles", "box": [0.6172, 0.0454, 0.1219, 0.0417]},
+        {"name": "opp1_species_doubles", "box": [0.8286, 0.0481, 0.1151, 0.0417]},
+        {"name": "opp0_hp_pct_doubles",  "box": [0.6932, 0.1174, 0.0429, 0.0354]},
+        {"name": "opp1_hp_pct",          "box": [0.9002, 0.1176, 0.0420, 0.0349]},
+        {"name": "own0_species",         "box": [0.040, 0.892, 0.135, 0.034]},
+        {"name": "own1_species_doubles", "box": [0.245, 0.892, 0.135, 0.034]},
+        {"name": "own0_hp_current",      "box": [0.1304, 0.9338, 0.0448, 0.0362]},
+        {"name": "own0_hp_max",          "box": [0.1746, 0.9464, 0.0335, 0.0229]},
+        {"name": "own1_hp_current_doubles", "box": [0.3363, 0.9342, 0.0450, 0.0361]},
+        {"name": "own1_hp_max_doubles",     "box": [0.3800, 0.9473, 0.0340, 0.0215]},
     ],
     "CommunicatingDetector": [
         {"name": "communicating_text", "box": [0.380, 0.450, 0.240, 0.050]},
@@ -213,9 +200,9 @@ FOLDER_TO_READER = {
 
 # Which readers to show together for each screen type
 FOLDER_READERS = {
-    "action_menu": ["ActionMenuDetector", "SpeciesReader", "SpeciesReader_Doubles", "OpponentHPReader", "OpponentHPReader_Doubles", "OwnHPReader", "OwnHPReader_Doubles", "OwnSpeciesReader", "OwnSpeciesReader_Doubles"],
-    "move_select": ["MoveSelectDetector", "MoveNameReader", "MoveSelectCursorSlot", "SpeciesReader", "SpeciesReader_Doubles", "OpponentHPReader", "OpponentHPReader_Doubles", "OwnHPReader", "OwnHPReader_Doubles", "OwnSpeciesReader", "OwnSpeciesReader_Doubles"],
-    "battle_log": ["BattleLogReader", "SpeciesReader"],
+    "action_menu": ["ActionMenuDetector", "BattleHUDReader"],
+    "move_select": ["MoveSelectDetector", "MoveNameReader", "MoveSelectCursorSlot", "BattleHUDReader"],
+    "battle_log": ["BattleLogReader", "BattleHUDReader"],
     "post_match": ["PostMatchScreenDetector"],
     "preparing": ["PreparingForBattleDetector"],
     "team_select": ["TeamSelectReader"],
@@ -228,14 +215,7 @@ for _r in BOOL_DETECTORS:
     READER_TYPES[_r] = "bool"
 READER_TYPES.update({
     "MoveNameReader": "multi_text:4",
-    "SpeciesReader": "text",
-    "SpeciesReader_Doubles": "multi_text:2",
-    "OpponentHPReader": "int:0:100",
-    "OpponentHPReader_Doubles": "int:0:100",
-    "OwnHPReader": "multi_text:2",
-    "OwnHPReader_Doubles": "multi_text:2",
-    "OwnSpeciesReader": "text",
-    "OwnSpeciesReader_Doubles": "multi_text:2",
+    "BattleHUDReader": "battle_hud",
     "MoveSelectCursorSlot": "int:0:3",
     "BattleLogReader": "event",
     "CommunicatingDetector": "bool",
@@ -345,7 +325,7 @@ def _parse_ground_truth(filename: str, reader_name: str) -> dict:
         return {"type": "bool", "values": [True], "raw": base}
     if base.endswith("_False"):
         return {"type": "bool", "values": [False], "raw": base}
-    if reader_name in ("OpponentHPReader", "OpponentHPReader_Doubles", "MoveSelectCursorSlot"):
+    if reader_name == "MoveSelectCursorSlot":
         try:
             return {"type": "int", "values": [int(words[-1])], "raw": base}
         except ValueError:
@@ -356,8 +336,8 @@ def _parse_ground_truth(filename: str, reader_name: str) -> dict:
     if reader_name in ("TeamSelectReader", "TeamSummaryReader", "TeamPreviewReader"):
         slugs = words[-6:] if len(words) >= 6 else words
         return {"type": "words", "values": [("" if s == "NONE" else s) for s in slugs], "raw": base}
-    if reader_name in ("SpeciesReader", "SpeciesReader_Doubles"):
-        return {"type": "words", "values": [words[-1]], "raw": base}
+    if reader_name == "BattleHUDReader":
+        return {"type": "battle_hud", "values": [], "raw": base}
     if reader_name == "BattleLogReader":
         type_words = []
         for w in words:
@@ -996,7 +976,7 @@ async def labeler_sources():
             imgs = [f for f in vod_dir.iterdir() if f.is_file() and f.suffix.lower() in (".jpg", ".jpeg", ".png")]
             if imgs:
                 folder_name = vod_dir.name
-                readers = FOLDER_READERS.get(folder_name, [FOLDER_TO_READER.get(folder_name, "SpeciesReader")])
+                readers = FOLDER_READERS.get(folder_name, [FOLDER_TO_READER.get(folder_name, "BattleHUDReader")])
                 sources.append({
                     "path": str(vod_dir.relative_to(REF_FRAMES_DIR)),
                     "name": folder_name, "parent": vod_dir.parent.name, "count": len(imgs),

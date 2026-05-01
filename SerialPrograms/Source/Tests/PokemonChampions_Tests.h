@@ -35,19 +35,10 @@ int test_pokemonChampions_MainMenuDetector(const ImageViewRGB32& image, bool tar
 //  Each move is a slug (e.g. "fake-out"). Use "NONE" for unreadable slots.
 int test_pokemonChampions_MoveNameReader(const ImageViewRGB32& image, const std::vector<std::string>& words);
 
-//  Filename: <prefix>_<species-slug>.png
-int test_pokemonChampions_SpeciesReader(const ImageViewRGB32& image, const std::vector<std::string>& words);
-int test_pokemonChampions_SpeciesReader_Doubles(const ImageViewRGB32& image, const std::vector<std::string>& words);
-
-//  Own-side species name (bottom-left HUD bar).
-int test_pokemonChampions_OwnSpeciesReader(const ImageViewRGB32& image, const std::vector<std::string>& words);
-int test_pokemonChampions_OwnSpeciesReader_Doubles(const ImageViewRGB32& image, const std::vector<std::string>& words);
-
-//  Filename: <prefix>_<hp-pct>.png  (e.g. frame_75.png for 75%)
-int test_pokemonChampions_OpponentHPReader(const ImageViewRGB32& image, int target);
-
-//  Filename: <prefix>_s<slot>_<hp-pct>.png  (e.g. frame_s0_75.png for slot 0, 75%)
-int test_pokemonChampions_OpponentHPReader_Doubles(const ImageViewRGB32& image, const std::vector<std::string>& words);
+//  BattleHUDReader fields (opponent_species, opponent_hp_pct, own_species,
+//  own_hp_current, own_hp_max) are exercised directly by the manifest
+//  runner against the unified BattleHUDReader class — no per-field test
+//  wrappers needed.
 
 //  Filename: <prefix>_<event-type>.png  (e.g. frame_MOVE_USED.png)
 int test_pokemonChampions_BattleLogReader(const ImageViewRGB32& image, const std::vector<std::string>& words);
