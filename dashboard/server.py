@@ -968,6 +968,54 @@ async def teampreview_crops(request: Request):
     ]
 
 
+@app.get("/api/sprites/list")
+async def sprites_list():
+    """Return the list of sprite slugs in the Pokemon Champions atlas."""
+    json_path = RESOURCES_DIR / "PokemonSprites.json"
+    if not json_path.exists():
+        return JSONResponse({"error": "sprite resources not found"}, 404)
+    meta = json.loads(json_path.read_text())
+    locs = meta.get("spriteLocations", {})
+    return {
+        "ok": True,
+        "count": len(locs),
+        "sprite_size": [meta.get("spriteWidth", 128), meta.get("spriteHeight", 128)],
+        "names": sorted(locs.keys()),
+    }
+
+
+@app.get("/api/sprites/examples")
+async def sprites_examples():
+    """Return a few labeled team-preview frames whose opponent species are
+    suitable for showing 'reference vs game frame' side-by-side."""
+    examples = []
+    candidates = [
+        TEST_IMAGES_DIR / "team_preview_locked_in",
+        TEST_IMAGES_DIR / "team_preview_selecting",
+    ]
+    for screen_dir in candidates:
+        if not screen_dir.exists():
+            continue
+        screen_name = screen_dir.name
+        manifest = _load_manifest(screen_dir)
+        for fname, labels in manifest.items():
+            tp = labels.get("TeamPreviewReader")
+            if not isinstance(tp, dict):
+                continue
+            opp = tp.get("opponent_species") or []
+            cleaned = [s for s in opp if s]
+            if len(cleaned) < 3:
+                continue
+            examples.append({
+                "screen": screen_name,
+                "filename": fname,
+                "opponent_species": opp,
+            })
+            if len(examples) >= 6:
+                return {"ok": True, "examples": examples}
+    return {"ok": True, "examples": examples}
+
+
 @app.get("/api/teampreview/sprite/{slug}")
 async def teampreview_sprite(slug: str):
     """Extract a single sprite from the atlas PNG."""
