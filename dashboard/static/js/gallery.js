@@ -527,13 +527,15 @@ function renderGalleryGrid() {
         if (!_galleryExtended) return '';
         const labels = img.labels || {};
         const rows = [];
+        const ORDS = ['first','second','third','fourth','fifth','sixth'];
         const fmtVal = (v) => {
             if (v == null || v === '') return '<span class="v-empty">—</span>';
             if (Array.isArray(v)) {
-                const cells = v.map(x => {
-                    if (x === '' || x == null) return '<span class="v-empty">—</span>';
-                    if (x === -1) return '<span class="v-bad">-1</span>';
-                    return `<span class="v">${String(x)}</span>`;
+                const cells = v.map((x, i) => {
+                    const ord = ORDS[i] || (i + 1);
+                    if (x === '' || x == null) return `<span class="v-empty">${ord}: —</span>`;
+                    if (x === -1) return `<span class="v-bad">${ord}: -1</span>`;
+                    return `<span class="v">${ord}: ${String(x)}</span>`;
                 });
                 return cells.join(', ');
             }
@@ -922,9 +924,12 @@ async function buildLabelForm(overlay, screen, filename, img) {
                     const arrVal = Array.isArray(val) && val[i] != null ? val[i] : '';
                     const inputType = items === 'int' ? 'number' : 'text';
                     const ord = ORDINALS[i] || (i + 1);
+                    html += `<div style="display:flex; align-items:center; gap:6px; margin-bottom:2px;">`;
+                    html += `<span style="font-size:10px; color:#6e7681; min-width:48px;">${ord}</span>`;
                     html += `<input type="${inputType}" class="manifest-input" data-reader="${readerName}" data-field="${fieldName}" data-index="${i}"
                         value="${arrVal}" placeholder="${labelText} (${ord})"
-                        style="width:100%; font-size:12px; padding:3px 6px; margin-bottom:2px; background:#0d1117; border:1px solid #30363d; color:#c9d1d9; border-radius:3px;">`;
+                        style="flex:1; font-size:12px; padding:3px 6px; background:#0d1117; border:1px solid #30363d; color:#c9d1d9; border-radius:3px;">`;
+                    html += `</div>`;
                 }
             } else if (fieldDef.type === 'int') {
                 html += `<input type="number" class="manifest-input" data-reader="${readerName}" data-field="${fieldName}"
