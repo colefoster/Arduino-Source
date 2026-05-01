@@ -23,29 +23,23 @@ let inspectorState = {
 async function inspectorJumpTo(source, filename) {
     const sourceSel = document.getElementById('inspector-source-select');
     if (!sourceSel) return;
+    //  Set the dropdown so subsequent thumb clicks resolve correctly.
     if (sourceSel.value !== source) {
         sourceSel.value = source;
         sourceSel.dispatchEvent(new Event('change'));
-        //  Wait for ribbon to populate.
-        await new Promise(r => setTimeout(r, 150));
     }
-    const ribbon = document.getElementById('inspector-ribbon');
-    if (!ribbon) return;
-    const target = ribbon.querySelector(`img[title="${filename}"]`);
-    if (target) {
-        target.click();
-    } else {
-        //  Fallback: load by URL even if ribbon hasn't mounted yet.
-        inspectorLoadImage(`${API}/api/labeler/frame/${encodeURIComponent(source)}/${encodeURIComponent(filename)}`);
-    }
+    //  Load the image directly — don't wait for the ribbon's async
+    //  fetch to settle, the user wants the frame visible immediately.
+    inspectorLoadImage(`${API}/api/labeler/frame/${encodeURIComponent(source)}/${encodeURIComponent(filename)}`);
 }
 
 async function inspectorInit() {
     const params = window.routeParams || {};
     const wantSource = params.source;
     const wantFile = params.filename;
+    const doJump = wantSource && wantFile;
     if (inspectorInited) {
-        if (wantSource && wantFile) await inspectorJumpTo(wantSource, wantFile);
+        if (doJump) await inspectorJumpTo(wantSource, wantFile);
         return;
     }
     inspectorInited = true;
@@ -276,6 +270,9 @@ async function inspectorInit() {
 
     // Prevent context menu on canvas
     canvas.addEventListener('contextmenu', e => e.preventDefault());
+
+    //  If we landed here via #/inspector?source=...&filename=..., jump now.
+    if (doJump) await inspectorJumpTo(wantSource, wantFile);
 }
 
 const INSPECTOR_RIBBON_PAGE_SIZE = 10;
