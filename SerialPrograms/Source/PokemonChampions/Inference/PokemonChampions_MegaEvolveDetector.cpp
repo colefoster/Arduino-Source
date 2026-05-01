@@ -19,6 +19,7 @@
 #include "Common/Cpp/Color.h"
 #include "CommonFramework/ImageTypes/ImageViewRGB32.h"
 #include "CommonFramework/VideoPipeline/VideoOverlay.h"
+#include "PokemonChampions_MoveSelectDetector.h"
 #include "PokemonChampions_MegaEvolveDetector.h"
 
 namespace PokemonAutomation{
@@ -57,6 +58,11 @@ static double white_pixel_fraction(const ImageViewRGB32& crop){
 }
 
 bool MegaEvolveDetector::detect(const ImageViewRGB32& screen){
+    //  Gate on move-select screen — the pill region happens to be white
+    //  on some menus too, so this prevents false positives elsewhere.
+    MoveSelectDetector move_select;
+    if (!move_select.detect(screen)) return false;
+
     ImageViewRGB32 crop = extract_box_reference(screen, m_toggle_region);
 
     //  White-pixel-fraction is sufficient on its own. Empirically: visible
