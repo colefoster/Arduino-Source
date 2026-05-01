@@ -35,7 +35,7 @@ from pathlib import Path
 from typing import Optional
 
 from fastapi import FastAPI, UploadFile, File, Form, Query, Request
-from fastapi.responses import HTMLResponse, JSONResponse, Response
+from fastapi.responses import HTMLResponse, JSONResponse, Response, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 
 # ---------------------------------------------------------------------------
@@ -2479,6 +2479,119 @@ async def mismatches_swap_slots(request: Request):
         mtime = img_path.stat().st_mtime
         _MISMATCH_CACHE.pop((screen, filename, reader, mtime), None)
     return {"ok": True, "fields_swapped": swapped}
+
+
+@app.get("/api/mismatches/stream")
+async def mismatches_stream(screen: Optional[str] = None, reader: Optional[str] = None):
+    """Same scan as /api/mismatches but streams progress as NDJSON.
+
+    Each newline-delimited message is one of:
+      {"type":"start","total":N}
+      {"type":"row", ...row}
+      {"type":"progress","done":i,"total":N}
+      {"type":"done","scanned":N,"rows":M}
+    """
+    config = _load_screens_yaml()
+    screens = config.get("screens", {})
+    overlays = {f"_overlays/{k}": v for k, v in config.get("overlays", {}).items()}
+    all_screens = {**screens, **overlays}
+
+    targets = []
+    for name in all_screens.keys():
+        if screen and name != screen:
+            continue
+        screen_dir = TEST_IMAGES_DIR / name
+        if not screen_dir.exists():
+            continue
+        manifest = _load_manifest(screen_dir)
+        for fname, labels in manifest.items():
+            for rname, fields in (labels or {}).items():
+                if rname not in _SUGGEST_READERS:
+                    continue
+                if reader and rname != reader:
+                    continue
+                if not isinstance(fields, dict):
+                    continue
+                targets.append((name, fname, rname, fields))
+
+    #  Reuse helpers from /api/mismatches.
+    def _crop_box_local(reader_, field, slot):
+        if reader_ != "BattleHUDReader":
+            return None
+        if slot is None or not isinstance(slot, int):
+            return None
+        defs = CROP_DEFS.get(reader_, [])
+        side = None; suffix = None
+        if field == "opponent_species": side, suffix = "opp", "species"
+        elif field == "opponent_hp_pct": side, suffix = "opp", "hp_pct"
+        elif field == "own_species":     side, suffix = "own", "species"
+        elif field == "own_hp_current":  side, suffix = "own", "hp_current"
+        elif field == "own_hp_max":      side, suffix = "own", "hp_max"
+        if side is None: return None
+        target = f"{side}{slot}_{suffix}"
+        for d in defs:
+            if d["name"] == target: return d["box"]
+        return None
+
+    def _process_one(t):
+        import base64
+        s, fname, rname, fields = t
+        result, err = _suggest_via_runner(s, fname, rname)
+        if err is not None or result is None:
+            return []
+        img_path = TEST_IMAGES_DIR / s / fname
+        rows = []
+        for field, expected_val in fields.items():
+            got_val = result.get(field)
+            if got_val is None:
+                continue
+            if isinstance(expected_val, list) and isinstance(got_val, list):
+                for i in range(min(len(expected_val), len(got_val))):
+                    e = expected_val[i]; g = got_val[i]
+                    if _is_absent(e):
+                        continue
+                    if _coerce_pair(e, g)[0] != _coerce_pair(e, g)[1]:
+                        box = _crop_box_local(rname, field, i)
+                        crop_data = None
+                        if box and img_path.exists():
+                            try:
+                                crop_data = "data:image/png;base64," + base64.b64encode(_extract_crop(img_path, box)).decode()
+                            except Exception:
+                                pass
+                        rows.append({
+                            "screen": s, "filename": fname, "reader": rname,
+                            "field": field, "slot": i, "expected": e, "got": g,
+                            "crop": crop_data,
+                        })
+            else:
+                if _is_absent(expected_val):
+                    continue
+                if _coerce_pair(expected_val, got_val)[0] != _coerce_pair(expected_val, got_val)[1]:
+                    rows.append({
+                        "screen": s, "filename": fname, "reader": rname,
+                        "field": field, "slot": None,
+                        "expected": expected_val, "got": got_val, "crop": None,
+                    })
+        return rows
+
+    async def gen():
+        loop = asyncio.get_running_loop()
+        total = len(targets)
+        yield json.dumps({"type": "start", "total": total}) + "\n"
+        row_count = 0
+        with ThreadPoolExecutor(max_workers=8) as pool:
+            futures = [loop.run_in_executor(pool, _process_one, t) for t in targets]
+            done = 0
+            for fut in asyncio.as_completed(futures):
+                batch = await fut
+                done += 1
+                for r in batch:
+                    yield json.dumps({"type": "row", **r}) + "\n"
+                    row_count += 1
+                yield json.dumps({"type": "progress", "done": done, "total": total}) + "\n"
+        yield json.dumps({"type": "done", "scanned": total, "rows": row_count}) + "\n"
+
+    return StreamingResponse(gen(), media_type="application/x-ndjson")
 
 
 @app.post("/api/mismatches/accept")
