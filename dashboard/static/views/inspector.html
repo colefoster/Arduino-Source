@@ -68,11 +68,13 @@
             <!-- Test OCR -->
             <div class="inspector-section" id="inspector-ocr-section" style="display:none;">
                 <div class="section-title">Test OCR (numbers)</div>
-                <div style="display:flex;gap:6px;align-items:center;margin-bottom:6px;">
+                <div style="display:flex;gap:6px;align-items:center;margin-bottom:6px;flex-wrap:wrap;">
                     <button class="btn btn-primary" id="inspector-ocr-btn" style="font-size:11px;padding:3px 10px;">Run on selection</button>
+                    <button class="btn" id="inspector-ocr-sweep-btn" style="font-size:11px;padding:3px 10px;">Run on all in source</button>
                     <span id="inspector-ocr-status" style="font-size:11px;color:#8b949e;"></span>
                 </div>
                 <div id="inspector-ocr-result" style="font-size:11px;color:#c9d1d9;background:#0d1117;border:1px solid #30363d;border-radius:4px;padding:6px 8px;display:none;"></div>
+                <div id="inspector-ocr-sweep" style="margin-top:8px;display:none;max-height:400px;overflow-y:auto;"></div>
             </div>
 
             <!-- Save Box -->
