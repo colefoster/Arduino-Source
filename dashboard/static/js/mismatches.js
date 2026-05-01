@@ -66,23 +66,82 @@ async function mismatchesScan() {
 
     btn.disabled = true;
     btn.textContent = 'Scanning...';
-    status.textContent = 'Running readers across labeled images (cached after first run)...';
     content.innerHTML = '';
+    mismatchesRows = [];
     acceptAllBtn.style.display = 'none';
+    mismatchesFocusIdx = -1;
+
+    //  Progress shell with a live bar; rows append as they stream in.
+    content.innerHTML = `
+        <div style="margin-bottom:10px;">
+            <div style="height:6px; background:#21262d; border-radius:3px; overflow:hidden;">
+                <div id="mismatches-progress-bar" style="height:100%; width:0%; background:#58a6ff; transition:width 0.15s;"></div>
+            </div>
+        </div>
+        <table style="width:100%; border-collapse:collapse; font-size:12px;">
+            <thead><tr style="border-bottom:1px solid #30363d; color:#8b949e;">
+                <th style="text-align:left; padding:6px; width:140px;">Frame</th>
+                <th style="text-align:left; padding:6px; width:120px;">Field crop</th>
+                <th style="text-align:left; padding:6px;">Screen / file</th>
+                <th style="text-align:left; padding:6px;">Reader.field[slot]</th>
+                <th style="text-align:left; padding:6px;">Expected</th>
+                <th style="text-align:left; padding:6px;">Got</th>
+                <th style="text-align:left; padding:6px;">Actions</th>
+            </tr></thead>
+            <tbody id="mismatches-tbody"></tbody>
+        </table>
+    `;
+    const tbody = document.getElementById('mismatches-tbody');
+    const bar = document.getElementById('mismatches-progress-bar');
 
     const params = new URLSearchParams();
     if (screen) params.set('screen', screen);
     if (reader) params.set('reader', reader);
 
     try {
-        const data = await api(`/api/mismatches?${params}`);
-        mismatchesRows = data.rows || [];
-        status.textContent = `${mismatchesRows.length} mismatches across ${data.scanned} labeled (reader, image) pairs`;
-        renderMismatchesTable();
-        if (mismatchesRows.length) {
-            acceptAllBtn.style.display = '';
-            acceptAllBtn.textContent = `Accept all visible (${mismatchesRows.length})`;
-            focusRow(0);
+        const resp = await fetch(`${API}/api/mismatches/stream?${params}`);
+        if (!resp.ok || !resp.body) throw new Error(`HTTP ${resp.status}`);
+        const reader_ = resp.body.getReader();
+        const decoder = new TextDecoder();
+        let buf = '';
+        let total = 0;
+        while (true) {
+            const { value, done } = await reader_.read();
+            if (done) break;
+            buf += decoder.decode(value, { stream: true });
+            let nl;
+            while ((nl = buf.indexOf('\n')) >= 0) {
+                const line = buf.slice(0, nl).trim();
+                buf = buf.slice(nl + 1);
+                if (!line) continue;
+                let msg;
+                try { msg = JSON.parse(line); } catch { continue; }
+                if (msg.type === 'start') {
+                    total = msg.total;
+                    status.textContent = `Scanning ${total} (reader, image) pairs...`;
+                } else if (msg.type === 'progress') {
+                    const pct = total ? Math.round(100 * msg.done / total) : 0;
+                    if (bar) bar.style.width = pct + '%';
+                    status.textContent = `${msg.done}/${total} scanned · ${mismatchesRows.length} mismatches`;
+                } else if (msg.type === 'row') {
+                    delete msg.type;
+                    const idx = mismatchesRows.length;
+                    mismatchesRows.push(msg);
+                    appendMismatchRow(tbody, msg, idx);
+                    if (mismatchesFocusIdx < 0) focusRow(idx);
+                } else if (msg.type === 'done') {
+                    if (bar) bar.style.width = '100%';
+                    status.textContent = `${mismatchesRows.length} mismatches across ${msg.scanned} labeled (reader, image) pairs`;
+                    if (mismatchesRows.length) {
+                        acceptAllBtn.style.display = '';
+                        acceptAllBtn.textContent = `Accept all visible (${mismatchesRows.length})`;
+                    }
+                }
+            }
+        }
+        if (!mismatchesRows.length) {
+            tbody.parentElement.style.display = 'none';
+            content.insertAdjacentHTML('beforeend', '<div style="color:#3fb950; font-size:12px;">No mismatches.</div>');
         }
     } catch (e) {
         status.textContent = 'Scan failed: ' + e;
@@ -92,80 +151,55 @@ async function mismatchesScan() {
     }
 }
 
-function renderMismatchesTable() {
-    const content = document.getElementById('mismatches-content');
-    if (!mismatchesRows.length) {
-        content.innerHTML = '<div style="color:#3fb950; font-size:12px;">No mismatches.</div>';
-        return;
-    }
-
-    let html = '<table style="width:100%; border-collapse:collapse; font-size:12px;">';
-    html += '<thead><tr style="border-bottom:1px solid #30363d; color:#8b949e;">';
-    html += '<th style="text-align:left; padding:6px; width:140px;">Frame</th>';
-    html += '<th style="text-align:left; padding:6px; width:120px;">Field crop</th>';
-    html += '<th style="text-align:left; padding:6px;">Screen / file</th>';
-    html += '<th style="text-align:left; padding:6px;">Reader.field[slot]</th>';
-    html += '<th style="text-align:left; padding:6px;">Expected</th>';
-    html += '<th style="text-align:left; padding:6px;">Got</th>';
-    html += '<th style="text-align:left; padding:6px;">Actions</th>';
-    html += '</tr></thead><tbody>';
-
+function appendMismatchRow(tbody, r, idx) {
     const ORDINALS = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth'];
     const displayField = (f) => f.startsWith('own_') ? 'my_' + f.slice(4) : f;
-    mismatchesRows.forEach((r, idx) => {
-        const slotStr = r.slot != null ? ` (${ORDINALS[r.slot] || (r.slot + 1)})` : '';
-        const fieldKey = `${r.reader}.${displayField(r.field)}${slotStr}`;
-        const filePath = `${r.screen}/${r.filename}`;
-        const exp = r.expected === '' ? '∅' : String(r.expected);
-        const got = r.got === '' ? '∅' : String(r.got);
-        const thumbUrl = `${API}/api/gallery/thumb/${encodeURIComponent(r.screen)}/${encodeURIComponent(r.filename)}`;
-        const fullUrl = `${API}/api/gallery/image/${encodeURIComponent(r.screen)}/${encodeURIComponent(r.filename)}`;
-        const cropCell = r.crop
-            ? `<img src="${r.crop}" style="max-width:120px; max-height:80px; image-rendering:pixelated; border:1px solid #30363d; border-radius:3px; background:#0d1117;">`
-            : '<span style="color:#484f58; font-size:10px;">—</span>';
-        html += `<tr class="mismatch-row" data-idx="${idx}" style="border-bottom:1px solid #21262d;">`;
-        html += `<td style="padding:6px;"><img src="${thumbUrl}" data-full="${fullUrl}" class="mismatch-thumb" style="width:128px; height:auto; border:1px solid #30363d; border-radius:3px; cursor:zoom-in; display:block;" loading="lazy"></td>`;
-        html += `<td style="padding:6px;">${cropCell}</td>`;
-        html += `<td style="padding:6px; color:#c9d1d9; word-break:break-all;">${filePath}</td>`;
-        html += `<td style="padding:6px; color:#8b949e;">${fieldKey}</td>`;
-        html += `<td style="padding:6px; color:#f85149; font-family:monospace;">${exp}</td>`;
-        html += `<td style="padding:6px; color:#3fb950; font-family:monospace;">${got}</td>`;
-        html += `<td style="padding:6px; white-space:nowrap;">`;
-        html += `<button class="btn mismatch-accept-btn" data-idx="${idx}" style="font-size:10px; padding:2px 8px; margin-right:4px;">Accept got</button>`;
-        const showSwap = r.slot != null;
-        if (showSwap) html += `<button class="btn mismatch-swap-btn" data-idx="${idx}" style="font-size:10px; padding:2px 8px; margin-right:4px;">Swap 0↔1</button>`;
-        html += `<button class="btn mismatch-inspector-btn" data-idx="${idx}" style="font-size:10px; padding:2px 8px;">Inspector</button>`;
-        html += `</td></tr>`;
+    const slotStr = r.slot != null ? ` (${ORDINALS[r.slot] || (r.slot + 1)})` : '';
+    const fieldKey = `${r.reader}.${displayField(r.field)}${slotStr}`;
+    const filePath = `${r.screen}/${r.filename}`;
+    const exp = r.expected === '' ? '∅' : String(r.expected);
+    const got = r.got === '' ? '∅' : String(r.got);
+    const thumbUrl = `${API}/api/gallery/thumb/${encodeURIComponent(r.screen)}/${encodeURIComponent(r.filename)}`;
+    const fullUrl = `${API}/api/gallery/image/${encodeURIComponent(r.screen)}/${encodeURIComponent(r.filename)}`;
+    const cropCell = r.crop
+        ? `<img src="${r.crop}" style="max-width:120px; max-height:80px; image-rendering:pixelated; border:1px solid #30363d; border-radius:3px; background:#0d1117;">`
+        : '<span style="color:#484f58; font-size:10px;">—</span>';
+    const tr = document.createElement('tr');
+    tr.className = 'mismatch-row';
+    tr.dataset.idx = idx;
+    tr.style.borderBottom = '1px solid #21262d';
+    const showSwap = r.slot != null;
+    tr.innerHTML = `
+        <td style="padding:6px;"><img src="${thumbUrl}" data-full="${fullUrl}" class="mismatch-thumb" style="width:128px; height:auto; border:1px solid #30363d; border-radius:3px; cursor:zoom-in; display:block;" loading="lazy"></td>
+        <td style="padding:6px;">${cropCell}</td>
+        <td style="padding:6px; color:#c9d1d9; word-break:break-all;">${filePath}</td>
+        <td style="padding:6px; color:#8b949e;">${fieldKey}</td>
+        <td style="padding:6px; color:#f85149; font-family:monospace;">${exp}</td>
+        <td style="padding:6px; color:#3fb950; font-family:monospace;">${got}</td>
+        <td style="padding:6px; white-space:nowrap;">
+            <button class="btn mismatch-accept-btn" data-idx="${idx}" style="font-size:10px; padding:2px 8px; margin-right:4px;">Accept got</button>
+            ${showSwap ? `<button class="btn mismatch-swap-btn" data-idx="${idx}" style="font-size:10px; padding:2px 8px; margin-right:4px;">Swap 0↔1</button>` : ''}
+            <button class="btn mismatch-inspector-btn" data-idx="${idx}" style="font-size:10px; padding:2px 8px;">Inspector</button>
+        </td>
+    `;
+    tbody.appendChild(tr);
+    tr.addEventListener('click', e => {
+        if (e.target.closest('button') || e.target.closest('img.mismatch-thumb')) return;
+        focusRow(idx);
     });
-    html += '</tbody></table>';
-    content.innerHTML = html;
-
-    content.querySelectorAll('tr.mismatch-row').forEach(tr => {
-        tr.addEventListener('click', e => {
-            //  Don't focus when clicking buttons / images.
-            if (e.target.closest('button') || e.target.closest('img.mismatch-thumb')) return;
-            focusRow(parseInt(tr.dataset.idx));
-        });
+    tr.querySelector('.mismatch-thumb').addEventListener('click', () => {
+        const overlay = document.createElement('div');
+        overlay.style.cssText = 'position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:9999; display:flex; align-items:center; justify-content:center; cursor:zoom-out;';
+        overlay.innerHTML = `<img src="${fullUrl}" style="max-width:95vw; max-height:95vh;">`;
+        overlay.addEventListener('click', () => overlay.remove());
+        document.body.appendChild(overlay);
     });
-    content.querySelectorAll('.mismatch-thumb').forEach(img => {
-        img.addEventListener('click', () => {
-            const overlay = document.createElement('div');
-            overlay.style.cssText = 'position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:9999; display:flex; align-items:center; justify-content:center; cursor:zoom-out;';
-            overlay.innerHTML = `<img src="${img.dataset.full}" style="max-width:95vw; max-height:95vh;">`;
-            overlay.addEventListener('click', () => overlay.remove());
-            document.body.appendChild(overlay);
-        });
-    });
-    content.querySelectorAll('.mismatch-accept-btn').forEach(btn => {
-        btn.addEventListener('click', () => acceptMismatch(parseInt(btn.dataset.idx)));
-    });
-    content.querySelectorAll('.mismatch-swap-btn').forEach(btn => {
-        btn.addEventListener('click', () => swapMismatchSlots(parseInt(btn.dataset.idx)));
-    });
-    content.querySelectorAll('.mismatch-inspector-btn').forEach(btn => {
-        btn.addEventListener('click', () => openInspectorFor(parseInt(btn.dataset.idx)));
-    });
+    tr.querySelector('.mismatch-accept-btn').addEventListener('click', () => acceptMismatch(idx));
+    const swapBtn = tr.querySelector('.mismatch-swap-btn');
+    if (swapBtn) swapBtn.addEventListener('click', () => swapMismatchSlots(idx));
+    tr.querySelector('.mismatch-inspector-btn').addEventListener('click', () => openInspectorFor(idx));
 }
+
 
 function openInspectorFor(idx) {
     const r = mismatchesRows[idx];
