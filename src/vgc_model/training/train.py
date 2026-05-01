@@ -230,6 +230,8 @@ def main():
     ap.add_argument("--mtl-switch", type=float, default=0.5)
     ap.add_argument("--epoch-limit", type=int, default=None,
                     help="Stop training after N epochs.")
+    ap.add_argument("--use-history", action="store_true",
+                    help="Enable LSTM-over-prior-turns history token (Phase 7).")
     args = ap.parse_args()
 
     logging.basicConfig(
@@ -293,6 +295,7 @@ def main():
         n_status=len(vocabs.status),
         n_weather=len(vocabs.weather), n_terrain=len(vocabs.terrain),
         d_model=args.d_model, n_layers=args.n_layers,
+        use_history=args.use_history,
     ).to(device)
     n_params = sum(p.numel() for p in model.parameters())
     print(f"model params: {n_params:,}")

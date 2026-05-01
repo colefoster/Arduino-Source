@@ -30,6 +30,13 @@ NO_OP_TYPE = 0
 MOVE_TYPE = 1
 SWITCH_TYPE = 2
 
+# Sequence-history (Phase 7): per-sample look-back window. Each prior turn
+# contributes (4,)-shaped vectors for active species, hp, action types, and
+# action moves — slot order [own_a, own_b, opp_a, opp_b]. Padded zeros at the
+# left when the actual history is shorter than HISTORY_K.
+HISTORY_K = 8
+HISTORY_SLOTS = 4
+
 EncodeMode = Literal["meta-on", "meta-off"]
 
 
@@ -193,6 +200,93 @@ def _encode_one_decision_raw(
     }
 
 
+def _active_pair(revealed: list[dict]) -> tuple[Optional[dict], Optional[dict]]:
+    """Pull the two active slots out of a revealed list. (a, b)."""
+    a = b = None
+    for slot in revealed:
+        idx = slot.get("active_slot", -1)
+        if idx == 0 and a is None:
+            a = slot
+        elif idx == 1 and b is None:
+            b = slot
+    return a, b
+
+
+def _summarize_turn(turn: dict, pov: str, vocabs: Vocabs) -> dict:
+    """Build the (4,)-vector summary of one turn for a given POV.
+
+    Slot order: ``[own_a, own_b, opp_a, opp_b]``. Returned as plain Python
+    ints/floats so the rolling history can be cheap.
+    """
+    if pov == "p1":
+        own_revealed = turn["p1_revealed"]
+        opp_revealed = turn["p2_revealed"]
+        own_a_action = turn["p1_action_a"]
+        own_b_action = turn["p1_action_b"]
+        opp_a_action = turn["p2_action_a"]
+        opp_b_action = turn["p2_action_b"]
+    else:
+        own_revealed = turn["p2_revealed"]
+        opp_revealed = turn["p1_revealed"]
+        own_a_action = turn["p2_action_a"]
+        own_b_action = turn["p2_action_b"]
+        opp_a_action = turn["p1_action_a"]
+        opp_b_action = turn["p1_action_b"]
+
+    own_a, own_b = _active_pair(own_revealed)
+    opp_a, opp_b = _active_pair(opp_revealed)
+
+    def _spec_id(slot):
+        return vocabs.species[slot["species"]] if slot else PAD_IDX
+
+    def _hp(slot):
+        return float(slot["hp_frac"]) if slot else 0.0
+
+    def _act_type(action):
+        t = action.get("type", "noop")
+        if t == "move":
+            return MOVE_TYPE
+        if t == "switch":
+            return SWITCH_TYPE
+        return NO_OP_TYPE
+
+    def _act_move(action):
+        return vocabs.moves[action.get("move", "")] if action.get("move") else PAD_IDX
+
+    return {
+        "active_species": [_spec_id(own_a), _spec_id(own_b), _spec_id(opp_a), _spec_id(opp_b)],
+        "active_hp": [_hp(own_a), _hp(own_b), _hp(opp_a), _hp(opp_b)],
+        "action_types": [_act_type(own_a_action), _act_type(own_b_action),
+                          _act_type(opp_a_action), _act_type(opp_b_action)],
+        "action_moves": [_act_move(own_a_action), _act_move(own_b_action),
+                         _act_move(opp_a_action), _act_move(opp_b_action)],
+    }
+
+
+def _build_prev_seq(history: list[dict]) -> dict:
+    """Pull the last K turns (left-padded zeros) into per-column lists.
+
+    ``history`` is the rolling list of summaries appended *before* this sample
+    (so it does not include the current turn). Returns four (K, 4) lists.
+    """
+    window = history[-HISTORY_K:]
+    pad_count = HISTORY_K - len(window)
+    pad = [0] * HISTORY_SLOTS
+    pad_f = [0.0] * HISTORY_SLOTS
+
+    spec_rows: list = [list(pad) for _ in range(pad_count)] + [w["active_species"] for w in window]
+    hp_rows: list = [list(pad_f) for _ in range(pad_count)] + [w["active_hp"] for w in window]
+    type_rows: list = [list(pad) for _ in range(pad_count)] + [w["action_types"] for w in window]
+    move_rows: list = [list(pad) for _ in range(pad_count)] + [w["action_moves"] for w in window]
+
+    return {
+        "prev_seq_active_species": spec_rows,
+        "prev_seq_active_hp": hp_rows,
+        "prev_seq_action_types": type_rows,
+        "prev_seq_action_moves": move_rows,
+    }
+
+
 @dataclass
 class RawSample:
     """One per-decision sample (Python primitives only) plus metadata."""
@@ -226,9 +320,14 @@ class Encoder:
         rating = max(int(row.get("p1_rating") or 0), int(row.get("p2_rating") or 0))
         winner = row.get("winner", "")
 
+        # Per-POV rolling history of prior turns. Each entry holds the
+        # 4 slot-order summary vectors for one prior turn.
+        history: dict[str, list[dict]] = {"p1": [], "p2": []}
+
         for turn in turns:
             for pov in ("p1", "p2"):
                 fields = _encode_one_decision_raw(turn, pov, self.vocabs, self.mode)
+                fields.update(_build_prev_seq(history[pov]))
                 yield RawSample(
                     fields=fields,
                     replay_id=replay_id,
@@ -238,3 +337,9 @@ class Encoder:
                     is_winner=(pov == winner),
                     turn_num=int(turn.get("turn_num", 0)),
                 )
+
+            # After both POVs have emitted samples for this turn, append the
+            # turn's summary to each POV's history (reflecting their own/opp
+            # frame of reference).
+            for pov in ("p1", "p2"):
+                history[pov].append(_summarize_turn(turn, pov, self.vocabs))

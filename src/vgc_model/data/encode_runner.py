@@ -54,6 +54,12 @@ _COLUMN_SPECS: list[tuple[str, np.dtype, tuple]] = [
     ("action_b_switch_id", np.int32,   ()),
     ("action_b_target",    np.int8,    ()),
     ("action_b_mega",      np.int8,    ()),
+    # Sequence history (Phase 7). Last 8 turns × 4 slots
+    # ([own_a, own_b, opp_a, opp_b]).
+    ("prev_seq_active_species", np.int32,   (8, 4)),
+    ("prev_seq_active_hp",      np.float32, (8, 4)),
+    ("prev_seq_action_types",   np.int8,    (8, 4)),
+    ("prev_seq_action_moves",   np.int32,   (8, 4)),
 ]
 
 

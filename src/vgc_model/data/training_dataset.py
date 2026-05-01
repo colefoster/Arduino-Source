@@ -35,6 +35,8 @@ SAMPLE_COLUMNS = (
     "action_a_target", "action_a_mega",
     "action_b_type", "action_b_move_id", "action_b_switch_id",
     "action_b_target", "action_b_mega",
+    "prev_seq_active_species", "prev_seq_active_hp",
+    "prev_seq_action_types", "prev_seq_action_moves",
 )
 
 
@@ -147,6 +149,10 @@ class TrainingDataset(Dataset):
         cols = shard["_columns"]
         sample = {}
         for k in SAMPLE_COLUMNS:
+            if k not in cols:
+                # Older shard schemas (pre-history) lack ``prev_seq_*`` etc.
+                # Skip — the model handles missing optional columns.
+                continue
             arr = cols[k][row_idx]
             t = torch.as_tensor(arr)
             # Embedding layers + cross-entropy require long; everything stored
