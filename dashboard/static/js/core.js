@@ -30,6 +30,10 @@ function route() {
     const forceInit = view === 'inspector' && Object.keys(window.routeParams).length > 0;
     if (sameView && !forceInit) return;
 
+    //  Close any leftover full-screen overlays (gallery card modal, etc.)
+    //  when navigating to a different view via hash.
+    document.querySelectorAll('.gallery-expanded-overlay').forEach(el => el.remove());
+
     // Toggle views
     views.forEach(v => {
         document.getElementById(`view-${v}`).classList.toggle('active', v === view);
