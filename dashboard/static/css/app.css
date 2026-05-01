@@ -184,18 +184,19 @@
             width: 100%; border-radius: 4px; background: #0d1117;
             image-rendering: pixelated; display: block;
         }
-        /* Extended view: full-width cards with overlay boxes drawn on the thumb. */
-        .gallery-cards.extended {
+        /* Extended view: full-width cards (image left, labels right). */
+        #gallery-cards.extended {
             grid-template-columns: 1fr !important;
             gap: 16px !important;
         }
-        .gallery-cards.extended .gallery-card {
+        #gallery-cards.extended .gallery-card {
             display: grid;
             grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
             gap: 16px;
             align-items: start;
         }
-        .gallery-cards.extended .gallery-card .thumb-wrap { grid-row: span 3; }
+        #gallery-cards.extended .gallery-card .thumb-wrap { grid-row: 1 / span 4; }
+        #gallery-cards.extended .gallery-card .label-summary { grid-template-columns: max-content 1fr; gap: 4px 10px; font-size: 11px; }
         .gallery-card .thumb-wrap { position: relative; }
         .gallery-card .crop-box {
             position: absolute; border: 1.5px solid; pointer-events: none;

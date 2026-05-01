@@ -13,11 +13,22 @@ function apiPost(path, body) {
 const views = ['dashboard', 'gallery', 'labeler', 'inspector', 'recognition', 'teampreview', 'templates', 'model', 'training', 'validation'];
 let currentView = null;
 
+window.routeParams = {};
+
 function route() {
-    const hash = location.hash.replace('#/', '') || 'dashboard';
-    const view = views.includes(hash) ? hash : 'dashboard';
-    if (view === currentView) return;
+    const raw = location.hash.replace('#/', '') || 'dashboard';
+    const [name, query] = raw.split('?');
+    const view = views.includes(name) ? name : 'dashboard';
+    window.routeParams = {};
+    if (query) {
+        for (const [k, v] of new URLSearchParams(query)) window.routeParams[k] = v;
+    }
+    const sameView = view === currentView;
     currentView = view;
+    //  Always re-init inspector when params present so Open-in-Inspector
+    //  jumps to the requested frame even on re-entry.
+    const forceInit = view === 'inspector' && Object.keys(window.routeParams).length > 0;
+    if (sameView && !forceInit) return;
 
     // Toggle views
     views.forEach(v => {
