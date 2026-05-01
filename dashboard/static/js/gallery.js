@@ -908,10 +908,13 @@ async function buildLabelForm(overlay, screen, filename, img) {
             ${suggestBtn}
         </div>`;
 
+        const ORDINALS = ['first','second','third','fourth','fifth','sixth'];
+        const displayField = (f) => f.startsWith('own_') ? 'my_' + f.slice(4) : f;
         for (const [fieldName, fieldDef] of Object.entries(fields)) {
             const val = existing[fieldName];
+            const labelText = displayField(fieldName);
             html += `<div style="margin-bottom:6px;">`;
-            html += `<label style="font-size:11px; color:#8b949e; display:block; margin-bottom:2px;">${fieldName}</label>`;
+            html += `<label style="font-size:11px; color:#8b949e; display:block; margin-bottom:2px;">${labelText}</label>`;
 
             //  Hide the field label for synthetic _self detector entries —
             //  the reader header already names the detector.
@@ -925,13 +928,14 @@ async function buildLabelForm(overlay, screen, filename, img) {
                 for (let i = 0; i < len; i++) {
                     const arrVal = Array.isArray(val) && val[i] != null ? val[i] : '';
                     const inputType = items === 'int' ? 'number' : 'text';
+                    const ord = ORDINALS[i] || (i + 1);
                     html += `<input type="${inputType}" class="manifest-input" data-reader="${readerName}" data-field="${fieldName}" data-index="${i}"
-                        value="${arrVal}" placeholder="${fieldName}[${i}]"
+                        value="${arrVal}" placeholder="${labelText} (${ord})"
                         style="width:100%; font-size:12px; padding:3px 6px; margin-bottom:2px; background:#0d1117; border:1px solid #30363d; color:#c9d1d9; border-radius:3px;">`;
                 }
             } else if (fieldDef.type === 'int') {
                 html += `<input type="number" class="manifest-input" data-reader="${readerName}" data-field="${fieldName}"
-                    value="${val != null ? val : ''}" placeholder="${fieldName}"
+                    value="${val != null ? val : ''}" placeholder="${labelText}"
                     ${fieldDef.min != null ? `min="${fieldDef.min}"` : ''} ${fieldDef.max != null ? `max="${fieldDef.max}"` : ''}
                     style="width:100%; font-size:12px; padding:3px 6px; background:#0d1117; border:1px solid #30363d; color:#c9d1d9; border-radius:3px;">`;
             } else if (fieldDef.type === 'bool') {
@@ -944,7 +948,7 @@ async function buildLabelForm(overlay, screen, filename, img) {
             } else {
                 // string
                 html += `<input type="text" class="manifest-input" data-reader="${readerName}" data-field="${fieldName}"
-                    value="${val != null ? val : ''}" placeholder="${fieldName}"
+                    value="${val != null ? val : ''}" placeholder="${labelText}"
                     style="width:100%; font-size:12px; padding:3px 6px; background:#0d1117; border:1px solid #30363d; color:#c9d1d9; border-radius:3px;">`;
             }
             html += `</div>`;

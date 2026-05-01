@@ -68,9 +68,11 @@ function renderMismatchesTable() {
     html += '<th style="text-align:left; padding:6px;">Actions</th>';
     html += '</tr></thead><tbody>';
 
+    const ORDINALS = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth'];
+    const displayField = (f) => f.startsWith('own_') ? 'my_' + f.slice(4) : f;
     mismatchesRows.forEach((r, idx) => {
-        const slotStr = r.slot != null ? `[${r.slot}]` : '';
-        const fieldKey = `${r.reader}.${r.field}${slotStr}`;
+        const slotStr = r.slot != null ? ` (${ORDINALS[r.slot] || (r.slot + 1)})` : '';
+        const fieldKey = `${r.reader}.${displayField(r.field)}${slotStr}`;
         const filePath = `${r.screen}/${r.filename}`;
         const exp = r.expected === '' ? '∅' : String(r.expected);
         const got = r.got === '' ? '∅' : String(r.got);
