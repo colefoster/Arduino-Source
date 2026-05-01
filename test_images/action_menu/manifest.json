@@ -1,4 +1,28 @@
 {
+  "20260423-150121863579.png": {
+    "BattleHUDReader": {
+      "opponent_hp_pct": [
+        100,
+        100
+      ],
+      "opponent_species": [
+        "gengar",
+        "palafin"
+      ],
+      "own_hp_current": [
+        202,
+        159
+      ],
+      "own_hp_max": [
+        202,
+        158
+      ],
+      "own_species": [
+        "incineroar",
+        "charizard"
+      ]
+    }
+  },
   "20260423-150128027036.png": {
     "BattleHUDReader": {
       "opponent_hp_pct": [
@@ -151,7 +175,7 @@
     "BattleHUDReader": {
       "opponent_species": [
         "sylveon",
-        ""
+        null
       ],
       "own_hp_current": [
         27,
@@ -225,13 +249,25 @@
   },
   "20260423-183424800592.png": {
     "BattleHUDReader": {
+      "opponent_hp_pct": [
+        50,
+        61
+      ],
       "opponent_species": [
-        "",
-        "whimsicott"
+        "whimsicott",
+        "tyranitar"
+      ],
+      "own_hp_current": [
+        137,
+        129
+      ],
+      "own_hp_max": [
+        146,
+        137
       ],
       "own_species": [
         "sinistcha",
-        ""
+        "gengar"
       ]
     }
   },
@@ -285,13 +321,25 @@
   },
   "20260427-132110967236.png": {
     "BattleHUDReader": {
+      "opponent_hp_pct": [
+        100,
+        100
+      ],
       "opponent_species": [
-        "",
+        "gengar",
         "garchomp"
+      ],
+      "own_hp_current": [
+        157,
+        202
+      ],
+      "own_hp_max": [
+        157,
+        202
       ],
       "own_species": [
         "sneasler",
-        ""
+        "incineroar"
       ]
     }
   },
