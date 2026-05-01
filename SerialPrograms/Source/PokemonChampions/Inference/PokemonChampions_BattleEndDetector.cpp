@@ -23,11 +23,12 @@ namespace NintendoSwitch{
 namespace PokemonChampions{
 
 
-//  Blue player nameplate below a winner. RGB approx (45, 70, 180)
-//  -> ratio (0.15, 0.24, 0.61). Winner always gets blue.
-static const FloatPixel WINNER_BLUE_NAMEPLATE{0.15, 0.24, 0.61};
-//  Red nameplate under a loser. RGB approx (200, 40, 60) -> ratio (0.67, 0.13, 0.20)
-static const FloatPixel LOSER_RED_NAMEPLATE{0.67, 0.13, 0.20};
+//  Winner nameplate is gold/yellow. RGB approx (220, 180, 60)
+//  -> ratio (0.48, 0.39, 0.13).
+static const FloatPixel WINNER_GOLD_NAMEPLATE{0.48, 0.39, 0.13};
+//  Loser nameplate is silver/gray. RGB approx (170, 175, 180) — near-neutral
+//  -> ratio (0.32, 0.33, 0.34). is_solid tolerance handles the small spread.
+static const FloatPixel LOSER_SILVER_NAMEPLATE{0.33, 0.33, 0.34};
 
 
 ResultScreenDetector::ResultScreenDetector()
@@ -51,17 +52,17 @@ bool ResultScreenDetector::detect(const ImageViewRGB32& screen){
     const ImageStats left  = image_stats(extract_box_reference(screen, m_left_won_glow));
     const ImageStats right = image_stats(extract_box_reference(screen, m_right_lost_glow));
 
-    const bool left_blue  = is_solid(left,  WINNER_BLUE_NAMEPLATE, 0.18, 80);
-    const bool left_red   = is_solid(left,  LOSER_RED_NAMEPLATE,   0.18, 80);
-    const bool right_blue = is_solid(right, WINNER_BLUE_NAMEPLATE, 0.18, 80);
-    const bool right_red  = is_solid(right, LOSER_RED_NAMEPLATE,   0.18, 80);
+    const bool left_gold  = is_solid(left,  WINNER_GOLD_NAMEPLATE, 0.18, 80);
+    const bool left_silver   = is_solid(left,  LOSER_SILVER_NAMEPLATE,   0.18, 80);
+    const bool right_gold = is_solid(right, WINNER_GOLD_NAMEPLATE, 0.18, 80);
+    const bool right_silver  = is_solid(right, LOSER_SILVER_NAMEPLATE,   0.18, 80);
 
     //  Valid result screen: one side blue (winner), the other side red (loser).
-    if (left_blue && right_red){
+    if (left_gold && right_silver){
         m_won = true;
         return true;
     }
-    if (left_red && right_blue){
+    if (left_silver && right_gold){
         m_won = false;
         return true;
     }

@@ -725,9 +725,61 @@ std::pair<int, int> BattleHUDReader::read_own_hp(
         return v;
     };
 
+    //  Replace the highest leading "7" with "1" — Tesseract commonly mis-reads
+    //  "1" as "7" (the serif on the digit looks like a 7's hook). Returns the
+    //  candidate value, or -1 if there's no leading 7 to swap.
+    auto try_swap_leading_7_to_1 = [](int v) -> int {
+        if (v <= 0) return -1;
+        std::string s = std::to_string(v);
+        if (s[0] != '7') return -1;
+        s[0] = '1';
+        return std::stoi(s);
+    };
+
     int cur = read_one(m_own_hp_current_boxes[slot]);
     int max_ = read_one(m_own_hp_max_boxes[slot]);
     if (cur < 0 && max_ < 0) return {-1, -1};
+
+    //  Domain constraints (per the game): HP never exceeds 699, and current
+    //  HP can never exceed max HP. When either rule is violated, try the
+    //  cheap "leading 7 was actually 1" fix on whichever side is too big.
+    auto in_range = [](int v){ return v >= 0 && v <= 699; };
+
+    if (cur > 699){
+        int fixed = try_swap_leading_7_to_1(cur);
+        if (in_range(fixed)){
+            logger.log("BattleHUDReader: own HP cur " + std::to_string(cur) +
+                       " > 699 → swap leading 7→1 → " + std::to_string(fixed));
+            cur = fixed;
+        }
+    }
+    if (max_ > 699){
+        int fixed = try_swap_leading_7_to_1(max_);
+        if (in_range(fixed)){
+            logger.log("BattleHUDReader: own HP max " + std::to_string(max_) +
+                       " > 699 → swap leading 7→1 → " + std::to_string(fixed));
+            max_ = fixed;
+        }
+    }
+    if (cur > 0 && max_ > 0 && cur > max_){
+        //  Try fixing cur first (more common: low HP digits OCR'd noisily).
+        int fixed_cur = try_swap_leading_7_to_1(cur);
+        if (in_range(fixed_cur) && fixed_cur <= max_){
+            logger.log("BattleHUDReader: cur " + std::to_string(cur) +
+                       " > max " + std::to_string(max_) +
+                       " → swap leading 7→1 on cur → " + std::to_string(fixed_cur));
+            cur = fixed_cur;
+        }else{
+            int fixed_max = try_swap_leading_7_to_1(max_);
+            if (in_range(fixed_max) && fixed_max >= cur){
+                logger.log("BattleHUDReader: cur " + std::to_string(cur) +
+                           " > max " + std::to_string(max_) +
+                           " → swap leading 7→1 on max → " + std::to_string(fixed_max));
+                max_ = fixed_max;
+            }
+        }
+    }
+
     if (cur < 0 || max_ < 0){
         logger.log(
             "BattleHUDReader: partial own HP read slot " + std::to_string(slot) +

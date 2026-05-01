@@ -147,6 +147,16 @@ screens:
             items: int
             length: 2
             description: "Max HP per slot. Slot 0 (left/center), slot 1 (right). Singles uses slot 1 only."
+          move_pp_current:
+            type: array
+            items: int
+            length: 4
+            description: "Current PP per move slot 0..3 (top→bottom). Move-select screen only; -1 elsewhere."
+          move_pp_max:
+            type: array
+            items: int
+            length: 4
+            description: "Max PP per move slot 0..3 (top→bottom). Move-select screen only; -1 elsewhere."
 
   target_select:
     description: "Target selection modal after picking a move in doubles. Shows mons with HP, effectiveness, and selected move name."
