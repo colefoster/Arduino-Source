@@ -725,11 +725,20 @@ async def gallery_screen(name: str):
     screen_def = screens.get(name) or overlays.get(name.replace("_overlays/", "")) or {}
     readers = dict(screen_def.get("readers", {}))
 
-    #  Surface registered detectors as synthetic single-bool readers so the
-    #  gallery card modal renders them as labelable per-image fields. Manifest
-    #  stores the value under {detector_name: true|false}.
+    #  Surface per-image detectors as synthetic single-bool readers so the
+    #  gallery card modal renders them as labelable per-image fields.
+    #  Skip detectors registered as screen-level positives in test_registry
+    #  (those are always-true on this screen — no per-image label needed).
+    try:
+        registry = json.loads((TEST_IMAGES_DIR / "test_registry.json").read_text())
+        screen_level_dets = {
+            d for d, screens_list in (registry.get("detectors") or {}).items()
+            if name in screens_list
+        }
+    except Exception:
+        screen_level_dets = set()
     for det in screen_def.get("detectors", []):
-        if det in readers:
+        if det in readers or det in screen_level_dets:
             continue
         readers[det] = {"is_detector": True, "fields": {"_self": {"type": "bool", "description": "Detector should fire on this image."}}}
 
