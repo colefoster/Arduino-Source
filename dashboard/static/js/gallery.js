@@ -303,7 +303,11 @@ async function loadGalleryScreenImages(screen) {
         if (ocrBtn) {
             ocrBtn.addEventListener('click', async () => {
                 ocrBtn.disabled = true;
-                const readers = Object.keys(data.readers);
+                //  Skip synthetic detector entries — OcrSuggest doesn't
+                //  know how to bulk-fill bool detectors.
+                const readers = Object.entries(data.readers)
+                    .filter(([_, def]) => !def.is_detector)
+                    .map(([name]) => name);
                 let totalSuggested = 0;
                 for (const reader of readers) {
                     ocrBtn.textContent = `Running ${reader}...`;
