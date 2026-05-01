@@ -162,6 +162,16 @@ CROP_DEFS = {
             0.0583, 0.0917
         ]} for i in range(6)
     ],
+    #  Separate overlay for the "selecting" screen-state — opponent sprites
+    #  shift inward once mons are chosen, so the locked-in coords don't fit.
+    #  Tune in inspector, save with name "tp_selecting/opp_sprite_<i>" — these
+    #  starter coords are duplicates of the locked-in set as a baseline.
+    "TeamPreviewReader_selecting": [
+        {"name": f"opp_sprite_{i}", "box": [
+            0.8380, 0.1509 + i * ((0.7407 - 0.1509) / 5.0),
+            0.0583, 0.0917
+        ]} for i in range(6)
+    ],
     "ActionMenuDetector": [
         {"name": "fight_glow", "box": [0.9219, 0.5787, 0.0182, 0.0213]},
         {"name": "pokemon_glow", "box": [0.8932, 0.7907, 0.0182, 0.0213]},
