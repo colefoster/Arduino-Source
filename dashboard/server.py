@@ -676,7 +676,10 @@ async def gallery_screens():
         screen_dir = TEST_IMAGES_DIR / name
         count = sum(1 for f in screen_dir.glob("*.png") if _is_real_image(f.name)) if screen_dir.exists() else 0
         manifest = _load_manifest(screen_dir)
-        labeled = sum(1 for v in manifest.values() if v)
+        #  "labeled" counts only entries with all expected readers present —
+        #  partials are treated as unlabeled so the sidebar surfaces work-to-do.
+        expected = set(defn.get("readers", {}).keys()) | set(defn.get("detectors", []))
+        labeled = sum(1 for v in manifest.values() if v and expected.issubset(set(v.keys())))
         result.append({
             "name": name,
             "description": defn.get("description", ""),
@@ -693,7 +696,8 @@ async def gallery_screens():
         overlay_dir = TEST_IMAGES_DIR / "_overlays" / name
         count = sum(1 for f in overlay_dir.glob("*.png") if _is_real_image(f.name)) if overlay_dir.exists() else 0
         manifest = _load_manifest(overlay_dir)
-        labeled = sum(1 for v in manifest.values() if v)
+        expected = set(defn.get("readers", {}).keys())
+        labeled = sum(1 for v in manifest.values() if v and expected.issubset(set(v.keys())))
         result.append({
             "name": f"_overlays/{name}",
             "description": defn.get("description", ""),
