@@ -492,6 +492,26 @@ static int read_hp_pct_template(
         segments.resize(3);  //  Cap at 3 digits (max "100").
     }
 
+    //  "100" rescue: when the segmenter picks 2 digits but the second one
+    //  is much wider than the first, the inner valley between two zeros
+    //  was missed. The only HP% with three digits is 100, so if segment[0]
+    //  matches "1" confidently and segment[1] is ≥1.6x wider, return 100.
+    if (segments.size() == 2 && segments[1].width() >= segments[0].width() * 16 / 10){
+        const HPDigitTemplates& templates = HPDigitTemplates::get();
+        if (templates.matchers[1]){
+            double s1 = pixel_agreement(segments[0], templates.matchers[1]->image_template());
+            if (s1 >= 0.80){
+                logger.log(
+                    "BattleHUDReader: opponent HP% slot " + std::to_string(slot) +
+                    " template: 100-rescue (seg0=1@" + std::to_string(s1).substr(0,5) +
+                    ", seg1 width " + std::to_string(segments[1].width()) +
+                    " vs " + std::to_string(segments[0].width()) + ")"
+                );
+                return 100;
+            }
+        }
+    }
+
     //  Step 3: Match each segment.
     std::string match_detail;
     std::string result_str;
