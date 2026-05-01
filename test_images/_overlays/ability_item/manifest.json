@@ -1,23 +1,23 @@
 {
   "20260427-132106901219.png": {
     "AbilityItemReader": {
-      "pokemon": "incineroar",
+      "kind": "ability",
       "name": "intimidate",
-      "kind": "ability"
+      "pokemon": "incineroar"
     }
   },
   "20260427-132147621467.png": {
     "AbilityItemReader": {
-      "pokemon": "garchomp",
+      "kind": "ability",
       "name": "rough-skin",
-      "kind": "ability"
+      "pokemon": "garchomp"
     }
   },
   "20260427-132157285571.png": {
     "AbilityItemReader": {
-      "pokemon": "garchomp",
+      "kind": "item",
       "name": "leftovers",
-      "kind": "item"
+      "pokemon": "garchomp"
     }
   }
 }
