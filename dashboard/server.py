@@ -106,18 +106,19 @@ CROP_DEFS = {
     #  PokemonChampions_BattleHUDReader.cpp (singles uses slot-0 boxes;
     #  doubles uses both). Singles-only HP% sits at the same screen
     #  position as doubles slot 1 — the singles slot 0 box matches.
+    #  Singles reuses the slot-1 (far right) opponent boxes and the slot-0
+    #  own boxes — no separate singles entries needed.
     "BattleHUDReader": [
-        {"name": "opp0_species_singles", "box": [0.830, 0.052, 0.087, 0.032]},
-        {"name": "opp0_species_doubles", "box": [0.6172, 0.0454, 0.1219, 0.0417]},
-        {"name": "opp1_species_doubles", "box": [0.8286, 0.0481, 0.1151, 0.0417]},
-        {"name": "opp0_hp_pct_doubles",  "box": [0.6932, 0.1174, 0.0429, 0.0354]},
-        {"name": "opp1_hp_pct",          "box": [0.9002, 0.1176, 0.0420, 0.0349]},
-        {"name": "own0_species",         "box": [0.040, 0.892, 0.135, 0.034]},
-        {"name": "own1_species_doubles", "box": [0.245, 0.892, 0.135, 0.034]},
-        {"name": "own0_hp_current",      "box": [0.1304, 0.9338, 0.0448, 0.0362]},
-        {"name": "own0_hp_max",          "box": [0.1746, 0.9464, 0.0335, 0.0229]},
-        {"name": "own1_hp_current_doubles", "box": [0.3363, 0.9342, 0.0450, 0.0361]},
-        {"name": "own1_hp_max_doubles",     "box": [0.3800, 0.9473, 0.0340, 0.0215]},
+        {"name": "opp0_species",    "box": [0.6172, 0.0454, 0.1219, 0.0417]},
+        {"name": "opp1_species",    "box": [0.8286, 0.0481, 0.1151, 0.0417]},
+        {"name": "opp0_hp_pct",     "box": [0.6932, 0.1174, 0.0429, 0.0354]},
+        {"name": "opp1_hp_pct",     "box": [0.9002, 0.1176, 0.0420, 0.0349]},
+        {"name": "own0_species",    "box": [0.040, 0.892, 0.135, 0.034]},
+        {"name": "own1_species",    "box": [0.245, 0.892, 0.135, 0.034]},
+        {"name": "own0_hp_current", "box": [0.1304, 0.9338, 0.0448, 0.0362]},
+        {"name": "own0_hp_max",     "box": [0.1746, 0.9464, 0.0335, 0.0229]},
+        {"name": "own1_hp_current", "box": [0.3363, 0.9342, 0.0450, 0.0361]},
+        {"name": "own1_hp_max",     "box": [0.3800, 0.9473, 0.0340, 0.0215]},
     ],
     "CommunicatingDetector": [
         {"name": "communicating_text", "box": [0.380, 0.450, 0.240, 0.050]},
