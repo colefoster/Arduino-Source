@@ -567,9 +567,9 @@ void BattleHUDReader::init_singles_boxes(){
     //  Singles: 1 opponent top-right, 1 own bottom-left.
     //  Measured from ref_frames/1/frame_00080.jpg
 
-    m_opponent_name_boxes[0] = ImageFloatBox(0.830, 0.052, 0.087, 0.032);
-    //  Singles opponent HP% sits at the same screen position as doubles slot 1
-    //  (right side). Tuned via inspector against doubles_move_select frames.
+    //  Singles opponent badge + HP sit at the same screen position as
+    //  doubles slot 1 (far right). Reuse those tuned coords.
+    m_opponent_name_boxes[0] = ImageFloatBox(0.8286, 0.0481, 0.1151, 0.0417);
     m_opponent_hp_boxes[0]   = ImageFloatBox(0.9002, 0.1176, 0.0420, 0.0349);
     m_opponent_name_boxes[1] = ImageFloatBox(0, 0, 0, 0);  // unused
     m_opponent_hp_boxes[1]   = ImageFloatBox(0, 0, 0, 0);
