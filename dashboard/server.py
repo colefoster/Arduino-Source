@@ -150,22 +150,33 @@ CROP_DEFS = {
             (0.1391, 0.6731), (0.5552, 0.6731),
         ])
     ],
+    #  Locked-in screen: sprites are inward (post-selection layout).
+    #  Anchors saved in inspector; rest extrapolated linearly.
     "TeamPreviewReader": [
+        #  Own species text labels (used by the OCR side of TeamPreviewReader).
         {"name": f"own_{i}", "box": [
             0.0760 + (i / 5.0) * (0.0724 - 0.0760),
             0.1565 + (i / 5.0) * (0.7389 - 0.1565),
             0.0969, 0.0389
         ]} for i in range(6)
     ] + [
+        #  Opp sprite cells — locked-in (inward) positions.
         {"name": f"opp_sprite_{i}", "box": [
-            0.8380, 0.1509 + i * ((0.7407 - 0.1509) / 5.0),
-            0.0583, 0.0917
+            0.7224, 0.1509 + i * ((0.7409 - 0.1509) / 5.0),
+            0.0590, 0.0953
+        ]} for i in range(6)
+    ] + [
+        #  Own sprite cells — locked-in (inward) positions. Not yet read by
+        #  the C++ side (own uses species text OCR), kept here for visibility
+        #  and as a forward base if we add own-sprite matching.
+        {"name": f"own_sprite_{i}", "box": [
+            0.1850, 0.1517 + i * ((0.7287 - 0.1517) / 5.0),
+            0.0570, 0.0970
         ]} for i in range(6)
     ],
-    #  Separate overlay for the "selecting" screen-state — opponent sprites
-    #  shift inward once mons are chosen, so the locked-in coords don't fit.
-    #  Tune in inspector, save with name "tp_selecting/opp_sprite_<i>" — these
-    #  starter coords are duplicates of the locked-in set as a baseline.
+    #  Selecting screen: sprites are outward (pre-confirmation layout).
+    #  Tune in inspector; will plumb through a screen-state branch in C++ once
+    #  you've dialed them in.
     "TeamPreviewReader_selecting": [
         {"name": f"opp_sprite_{i}", "box": [
             0.8380, 0.1509 + i * ((0.7407 - 0.1509) / 5.0),
