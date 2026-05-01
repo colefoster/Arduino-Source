@@ -1,13 +1,13 @@
 """Bucket-level orchestrator for Layer 2 encoding.
 
-Reads parsed parquet rows from one hour-bucket and produces an encoded shard
-``encoded/<format>/<encoding_version>/<mode>/YYYY-MM-DD/HH.pt``. Idempotent —
-if the shard exists and is newer than its parsed parquet, the bucket is
-skipped. ``--force`` re-encodes everything.
+Reads parsed parquet rows for one hour-bucket, runs ``Encoder`` per row, and
+stacks the resulting raw samples into per-column numpy arrays — written as a
+single ``.pt`` shard. The stacked layout is essential for fast loading: at
+training time we ``torch.from_numpy`` once per column and slice into samples,
+instead of paying ``torch.tensor()`` overhead per element.
 
-Encoding versions are explicit in the output path so a feature change is a
-new versioned dir, never an in-place rewrite. Old versions stay until manually
-pruned.
+Idempotent — skips buckets whose ``.pt`` is newer than the parsed parquet.
+``--force`` overrides.
 """
 from __future__ import annotations
 
@@ -18,14 +18,75 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Iterable, Optional
 
+import numpy as np
 import pyarrow.parquet as pq
 import torch
 
-from .encoder import EncodeMode, Encoder, EncodedSample
+from .encoder import EncodeMode, Encoder, RawSample
 from .vocab import Vocabs
 
 
 log = logging.getLogger(__name__)
+
+# Per-column dtype + shape spec — drives numpy stacking.
+# (column_name, dtype, sample_shape) — N is prepended automatically.
+_COLUMN_SPECS: list[tuple[str, np.dtype, tuple]] = [
+    ("species_ids",        np.int32,   (8,)),
+    ("hp_values",          np.float32, (8,)),
+    ("status_ids",         np.int32,   (8,)),
+    ("alive_flags",        np.int8,    (8,)),
+    ("item_ids",           np.int32,   (8,)),
+    ("item_confidences",   np.float32, (8,)),
+    ("ability_ids",        np.int32,   (8,)),
+    ("ability_confidences",np.float32, (8,)),
+    ("move_ids",           np.int32,   (8, 4)),
+    ("move_confidences",   np.float32, (8, 4)),
+    ("weather_id",         np.int32,   ()),
+    ("terrain_id",         np.int32,   ()),
+    ("trick_room",         np.int8,    ()),
+    ("action_a_type",      np.int8,    ()),
+    ("action_a_move_id",   np.int32,   ()),
+    ("action_a_switch_id", np.int32,   ()),
+    ("action_a_target",    np.int8,    ()),
+    ("action_a_mega",      np.int8,    ()),
+    ("action_b_type",      np.int8,    ()),
+    ("action_b_move_id",   np.int32,   ()),
+    ("action_b_switch_id", np.int32,   ()),
+    ("action_b_target",    np.int8,    ()),
+    ("action_b_mega",      np.int8,    ()),
+]
+
+
+def _stack_samples(samples: list[RawSample]) -> dict:
+    """Convert a list of RawSamples into per-column numpy arrays + metadata.
+
+    Returns a dict suitable for ``torch.save``. Column shapes have N (sample
+    count) prepended; metadata is kept as parallel arrays for fast filtering.
+    """
+    n = len(samples)
+    out: dict = {}
+    for name, dtype, shape in _COLUMN_SPECS:
+        out[name] = np.empty((n,) + shape, dtype=dtype)
+    # Metadata in column form (cheap to filter).
+    out["_meta_replay_id"] = np.array(
+        [s.replay_id for s in samples], dtype=object,
+    )
+    out["_meta_bucket_hour"] = np.array(
+        [s.bucket_hour for s in samples], dtype=object,
+    )
+    out["_meta_rating"] = np.array([s.rating for s in samples], dtype=np.int32)
+    out["_meta_pov_player"] = np.array(
+        [s.pov_player for s in samples], dtype=object,
+    )
+    out["_meta_is_winner"] = np.array(
+        [s.is_winner for s in samples], dtype=np.bool_,
+    )
+    out["_meta_turn_num"] = np.array([s.turn_num for s in samples], dtype=np.int32)
+
+    for i, s in enumerate(samples):
+        for name, _dtype, _shape in _COLUMN_SPECS:
+            out[name][i] = s.fields[name]
+    return out
 
 
 def is_shard_fresh(out_pt: Path, source_parquet: Path) -> bool:
@@ -41,7 +102,6 @@ def encode_one_bucket(
     *,
     force: bool = False,
 ) -> dict:
-    """Encode one parsed parquet → one .pt shard. Returns stats dict."""
     started = time.time()
     if not parsed_parquet.exists():
         return {"samples": 0, "fresh": False, "skipped_empty": True, "took_sec": 0.0}
@@ -54,41 +114,34 @@ def encode_one_bucket(
     if n_rows == 0:
         out_pt.parent.mkdir(parents=True, exist_ok=True)
         torch.save({
-            "samples": [],
-            "metadata": [],
-            "schema_version": 1,
+            "schema_version": 2,
+            "mode": encoder.mode,
+            "n_samples": 0,
+            "columns": {},
         }, out_pt)
         return {"samples": 0, "fresh": False, "skipped_empty": True, "took_sec": 0.0}
 
     columns = table.column_names
-    samples_list = []
-    metadata_list = []
-
+    samples: list[RawSample] = []
     for row_idx in range(n_rows):
         row = {col: table.column(col)[row_idx].as_py() for col in columns}
         for sample in encoder.encode_row(row):
-            samples_list.append(sample.tensors)
-            metadata_list.append({
-                "replay_id": sample.replay_id,
-                "bucket_hour": sample.bucket_hour,
-                "rating": sample.rating,
-                "pov_player": sample.pov_player,
-                "is_winner": sample.is_winner,
-                "turn_num": sample.turn_num,
-            })
+            samples.append(sample)
+
+    stacked = _stack_samples(samples)
 
     out_pt.parent.mkdir(parents=True, exist_ok=True)
     tmp = out_pt.with_suffix(out_pt.suffix + ".tmp")
     torch.save({
-        "samples": samples_list,
-        "metadata": metadata_list,
-        "schema_version": 1,
+        "schema_version": 2,
         "mode": encoder.mode,
+        "n_samples": len(samples),
+        "columns": stacked,
     }, tmp)
     tmp.replace(out_pt)
 
     return {
-        "samples": len(samples_list),
+        "samples": len(samples),
         "fresh": False,
         "skipped_empty": False,
         "took_sec": round(time.time() - started, 2),
@@ -96,7 +149,6 @@ def encode_one_bucket(
 
 
 def iter_parsed_buckets(parsed_root: Path, fmt: str) -> Iterable[Path]:
-    """Yield every ``parsed/<fmt>/YYYY-MM-DD/HH.parquet`` in date+hour order."""
     fmt_root = parsed_root / fmt
     if not fmt_root.exists():
         return
@@ -115,9 +167,8 @@ def encoded_path_for(
     mode: EncodeMode,
     parsed_parquet: Path,
 ) -> Path:
-    """Map ``parsed/<fmt>/YYYY-MM-DD/HH.parquet`` to the matching encoded ``.pt``."""
     day = parsed_parquet.parent.name
-    hour = parsed_parquet.stem  # "HH"
+    hour = parsed_parquet.stem
     return encoded_root / fmt / encoding_version / mode / day / f"{hour}.pt"
 
 
@@ -157,17 +208,6 @@ def bootstrap_vocabs(
     *,
     max_buckets: Optional[int] = None,
 ) -> Vocabs:
-    """Walk parsed parquets and build vocabularies.
-
-    Builds species/moves/abilities/items/weather/terrain/status from any string
-    that appears anywhere in the parsed data. Idempotent in the sense that
-    re-running on the same parsed data produces the same vocab (modulo dict
-    iteration order, which is insertion-ordered in CPython).
-
-    A more principled future implementation might use the Pikalytics species
-    list + a curated move/item/ability list. For now this gives us a complete
-    vocab covering everything that actually appears in our replays.
-    """
     vocabs = Vocabs()
     counts = defaultdict(int)
 

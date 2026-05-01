@@ -1,20 +1,21 @@
 """Unit tests for `Encoder` (Layer 2).
 
-Tests both modes against a small in-memory ParsedReplay built from a real
-replay JSON. Asserts on tensor shapes, dtypes, and the meta-on vs meta-off
-divergence.
+Tests both modes against a real ParsedReplay. Asserts on per-column shapes,
+dtypes after stacking, and the meta-on/off divergence.
 """
 from __future__ import annotations
 
 import json
 from pathlib import Path
 
+import numpy as np
 import pytest
 import torch
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
-from src.vgc_model.data.encoder import Encoder, PAD_IDX
+from src.vgc_model.data.encoder import Encoder, PAD_IDX, RawSample
+from src.vgc_model.data.encode_runner import _stack_samples
 from src.vgc_model.data.replay_parser import ReplayParser
 from src.vgc_model.data.stats_source import PikalyticsStatsSource
 from src.vgc_model.data.vocab import Vocabs
@@ -30,7 +31,6 @@ def stats_source():
 
 @pytest.fixture(scope="module")
 def parsed_replay(stats_source):
-    """Parse one real replay into a ParsedReplay -> row dict."""
     root = PROJECT_ROOT / "data" / "replays" / "gen9championsvgc2026regma"
     if not root.exists():
         pytest.skip("No bucketed replays available")
@@ -52,7 +52,6 @@ def parsed_replay(stats_source):
 
 @pytest.fixture(scope="module")
 def row(parsed_replay):
-    """Convert ParsedReplay to the row dict shape Encoder.encode_row expects."""
     from dataclasses import asdict
     return {
         "replay_id": parsed_replay.replay_id,
@@ -67,8 +66,6 @@ def row(parsed_replay):
 
 @pytest.fixture(scope="module")
 def vocabs(parsed_replay):
-    """Build a tiny vocab from this one replay's content."""
-    from dataclasses import asdict
     v = Vocabs()
     v.weather.add("none"); v.terrain.add("none"); v.status.add("ok")
     for t in parsed_replay.turns:
@@ -93,68 +90,80 @@ def vocabs(parsed_replay):
     return v
 
 
-def test_meta_on_produces_correct_shapes(vocabs, row):
+def test_raw_sample_has_per_column_lists(vocabs, row):
     e = Encoder(vocabs, mode="meta-on")
     sample = next(iter(e.encode_row(row)))
-    t = sample.tensors
-    assert t["species_ids"].shape == (8,)
-    assert t["species_ids"].dtype == torch.long
-    assert t["hp_values"].shape == (8,)
-    assert t["hp_values"].dtype == torch.float32
-    assert t["move_ids"].shape == (8, 4)
-    assert t["move_confidences"].shape == (8, 4)
+    assert isinstance(sample, RawSample)
+    assert isinstance(sample.fields["species_ids"], list)
+    assert len(sample.fields["species_ids"]) == 8
+    assert len(sample.fields["move_ids"]) == 8
+    assert len(sample.fields["move_ids"][0]) == 4
 
 
 def test_meta_off_zeros_unrevealed_slots(vocabs, row):
-    """Across all samples in a replay, meta-off must constrain confidences to {0, 1};
-    meta-on must produce at least one fractional confidence somewhere."""
+    """Across all samples, meta-off must constrain confidences to {0, 1};
+    meta-on must produce at least one fractional confidence."""
     e_on = Encoder(vocabs, mode="meta-on")
     e_off = Encoder(vocabs, mode="meta-off")
-
-    fields = ("item_confidences", "ability_confidences", "move_confidences")
 
     found_diff = False
     for on_sample, off_sample in zip(e_on.encode_row(row), e_off.encode_row(row)):
-        for k in fields:
-            off_confs = off_sample.tensors[k]
-            assert torch.all((off_confs == 0.0) | (off_confs == 1.0)), (
-                f"meta-off must yield only 0/1 confidences in {k}; got {off_confs}"
-            )
-            on_confs = on_sample.tensors[k]
-            if not torch.allclose(on_confs, off_confs):
+        for k in ("item_confidences", "ability_confidences"):
+            on_v = np.asarray(on_sample.fields[k])
+            off_v = np.asarray(off_sample.fields[k])
+            assert np.all((off_v == 0.0) | (off_v == 1.0))
+            if not np.allclose(on_v, off_v):
                 found_diff = True
-    assert found_diff, "expected meta-on to differ from meta-off on at least one slot"
+        # move_confidences is 8x4
+        on_m = np.asarray(on_sample.fields["move_confidences"])
+        off_m = np.asarray(off_sample.fields["move_confidences"])
+        assert np.all((off_m == 0.0) | (off_m == 1.0))
+        if not np.allclose(on_m, off_m):
+            found_diff = True
+    assert found_diff
 
 
-def test_meta_off_preserves_revealed_slots(vocabs, row):
-    """Revealed-source slots must be identical between modes."""
+def test_revealed_slots_match_in_both_modes(vocabs, row):
     e_on = Encoder(vocabs, mode="meta-on")
     e_off = Encoder(vocabs, mode="meta-off")
-    on_sample = next(iter(e_on.encode_row(row)))
-    off_sample = next(iter(e_off.encode_row(row)))
-
-    on_conf = on_sample.tensors["item_confidences"]
-    off_conf = off_sample.tensors["item_confidences"]
-    # Slots where on=1.0 (revealed) must also be 1.0 in off.
-    revealed_mask = (on_conf == 1.0)
-    if revealed_mask.any():
-        assert torch.all(off_conf[revealed_mask] == 1.0)
-
-
-def test_action_labels_are_long_tensors(vocabs, row):
-    e = Encoder(vocabs, mode="meta-on")
-    sample = next(iter(e.encode_row(row)))
-    for k in ("action_a_type", "action_a_move_id", "action_b_type", "action_b_target"):
-        assert sample.tensors[k].dtype == torch.long
-        # Scalar tensors
-        assert sample.tensors[k].shape == ()
+    for on_s, off_s in zip(e_on.encode_row(row), e_off.encode_row(row)):
+        on_c = np.asarray(on_s.fields["item_confidences"])
+        off_c = np.asarray(off_s.fields["item_confidences"])
+        revealed_mask = on_c == 1.0
+        if revealed_mask.any():
+            assert np.all(off_c[revealed_mask] == 1.0)
 
 
 def test_encode_row_yields_two_per_turn(vocabs, row):
-    """Each turn should produce one sample per player POV."""
     e = Encoder(vocabs, mode="meta-on")
     samples = list(e.encode_row(row))
     turns = json.loads(row["turns_json"])
     assert len(samples) == 2 * len(turns)
     povs = {s.pov_player for s in samples}
     assert povs == {"p1", "p2"}
+
+
+def test_stacked_columns_have_correct_shapes(vocabs, row):
+    """End-to-end: encoder + stacker produce arrays the trainer expects."""
+    e = Encoder(vocabs, mode="meta-on")
+    samples = list(e.encode_row(row))
+    stacked = _stack_samples(samples)
+
+    n = len(samples)
+    assert stacked["species_ids"].shape == (n, 8)
+    assert stacked["species_ids"].dtype == np.int32
+    assert stacked["hp_values"].shape == (n, 8)
+    assert stacked["hp_values"].dtype == np.float32
+    assert stacked["move_ids"].shape == (n, 8, 4)
+    assert stacked["move_confidences"].shape == (n, 8, 4)
+    assert stacked["action_a_type"].shape == (n,)
+    assert stacked["_meta_rating"].shape == (n,)
+
+
+def test_stacked_metadata_matches_samples(vocabs, row):
+    e = Encoder(vocabs, mode="meta-on")
+    samples = list(e.encode_row(row))
+    stacked = _stack_samples(samples)
+    assert stacked["_meta_replay_id"][0] == samples[0].replay_id
+    assert stacked["_meta_pov_player"][0] == samples[0].pov_player
+    assert int(stacked["_meta_turn_num"][0]) == samples[0].turn_num
