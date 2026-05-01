@@ -583,8 +583,13 @@ void BattleHUDReader::init_singles_boxes(){
     m_opponent_name_boxes[1] = ImageFloatBox(0, 0, 0, 0);  // unused
     m_opponent_hp_boxes[1]   = ImageFloatBox(0, 0, 0, 0);
 
-    m_own_hp_boxes[0] = ImageFloatBox(0.133, 0.944, 0.078, 0.042);
-    m_own_hp_boxes[1] = ImageFloatBox(0, 0, 0, 0);  // unused
+    //  Singles own HP appears at the same position as doubles slot 0 —
+    //  see init_doubles_boxes for tuned coords. Initial split point at
+    //  the slash; each half gets ~45% of the combined width.
+    m_own_hp_current_boxes[0] = ImageFloatBox(0.133, 0.944, 0.034, 0.042);
+    m_own_hp_max_boxes[0]     = ImageFloatBox(0.171, 0.944, 0.040, 0.042);
+    m_own_hp_current_boxes[1] = ImageFloatBox(0, 0, 0, 0);  // unused
+    m_own_hp_max_boxes[1]     = ImageFloatBox(0, 0, 0, 0);
 
     //  PP boxes — right edge of each move pill.
     const double PP_X      = 0.927;
@@ -623,9 +628,13 @@ void BattleHUDReader::init_doubles_boxes(){
     m_opponent_hp_boxes[0]   = ImageFloatBox(0.6932, 0.1174, 0.0429, 0.0354);
     m_opponent_hp_boxes[1]   = ImageFloatBox(0.9002, 0.1176, 0.0420, 0.0349);
 
-    //  Own HP bars: bottom-left, fraction format (e.g. "152/202").
-    m_own_hp_boxes[0] = ImageFloatBox(0.035, 0.920, 0.100, 0.050);
-    m_own_hp_boxes[1] = ImageFloatBox(0.225, 0.920, 0.100, 0.050);
+    //  Own HP bars: bottom-left, fraction format (e.g. "152/202") split
+    //  into separate current and max digit regions. Initial split point
+    //  is the slash; tune each half independently in the inspector.
+    m_own_hp_current_boxes[0] = ImageFloatBox(0.035, 0.920, 0.045, 0.050);
+    m_own_hp_max_boxes[0]     = ImageFloatBox(0.085, 0.920, 0.050, 0.050);
+    m_own_hp_current_boxes[1] = ImageFloatBox(0.225, 0.920, 0.045, 0.050);
+    m_own_hp_max_boxes[1]     = ImageFloatBox(0.275, 0.920, 0.050, 0.050);
 
     //  No PP boxes on the doubles action menu screen.
     //  (Moves are shown after pressing FIGHT, in a different layout.)
@@ -667,8 +676,11 @@ void BattleHUDReader::make_overlays(VideoOverlaySet& items) const{
         if (m_opponent_hp_boxes[i].width > 0){
             items.add(COLOR_MAGENTA, m_opponent_hp_boxes[i]);
         }
-        if (m_own_hp_boxes[i].width > 0){
-            items.add(COLOR_BLUE, m_own_hp_boxes[i]);
+        if (m_own_hp_current_boxes[i].width > 0){
+            items.add(COLOR_BLUE, m_own_hp_current_boxes[i]);
+        }
+        if (m_own_hp_max_boxes[i].width > 0){
+            items.add(COLOR_BLUE, m_own_hp_max_boxes[i]);
         }
     }
     if (m_mode != BattleMode::DOUBLES){
@@ -704,15 +716,28 @@ int BattleHUDReader::read_opponent_hp_pct(
 std::pair<int, int> BattleHUDReader::read_own_hp(
     Logger& logger, const ImageViewRGB32& screen, uint8_t slot
 ) const{
-    if (slot >= 2 || m_own_hp_boxes[slot].width == 0) return {-1, -1};
-    ImageViewRGB32 cropped = extract_box_reference(screen, m_own_hp_boxes[slot]);
-    std::string text = raw_ocr_numbers(cropped);
-    auto hp = parse_fraction(text);
-    if (hp.first < 0){
-        logger.log("BattleHUDReader: failed to parse own HP slot " +
-                   std::to_string(slot) + " from '" + text + "'", COLOR_RED);
+    if (slot >= 2) return {-1, -1};
+
+    //  Each box reads one number; parse_fraction on a single number returns
+    //  {N, -1}, so .first is the integer (or -1 on failure).
+    auto read_one = [&](const ImageFloatBox& box) -> int {
+        if (box.width == 0) return -1;
+        ImageViewRGB32 cropped = extract_box_reference(screen, box);
+        std::string text = raw_ocr_numbers(cropped);
+        return parse_fraction(text).first;
+    };
+
+    int cur = read_one(m_own_hp_current_boxes[slot]);
+    int max_ = read_one(m_own_hp_max_boxes[slot]);
+    if (cur < 0 && max_ < 0) return {-1, -1};
+    if (cur < 0 || max_ < 0){
+        logger.log(
+            "BattleHUDReader: partial own HP read slot " + std::to_string(slot) +
+            " (current=" + std::to_string(cur) + ", max=" + std::to_string(max_) + ")",
+            COLOR_RED
+        );
     }
-    return hp;
+    return {cur, max_};
 }
 
 std::pair<int, int> BattleHUDReader::read_move_pp(
