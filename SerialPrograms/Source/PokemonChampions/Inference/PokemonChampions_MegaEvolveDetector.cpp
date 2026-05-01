@@ -16,12 +16,9 @@
  *
  */
 
-#include <cctype>
-#include <string>
 #include "Common/Cpp/Color.h"
 #include "CommonFramework/ImageTypes/ImageViewRGB32.h"
 #include "CommonFramework/VideoPipeline/VideoOverlay.h"
-#include "PokemonChampions_BattleHUDReader.h"   //  raw_ocr_numbers
 #include "PokemonChampions_MegaEvolveDetector.h"
 
 namespace PokemonAutomation{
@@ -30,7 +27,7 @@ namespace PokemonChampions{
 
 
 MegaEvolveDetector::MegaEvolveDetector()
-    : m_toggle_region(0.5987, 0.9123, 0.0169, 0.0203)
+    : m_toggle_region(0.5975, 0.9210, 0.0181, 0.0213)
 {}
 
 void MegaEvolveDetector::make_overlays(VideoOverlaySet& items) const{
@@ -62,19 +59,11 @@ static double white_pixel_fraction(const ImageViewRGB32& crop){
 bool MegaEvolveDetector::detect(const ImageViewRGB32& screen){
     ImageViewRGB32 crop = extract_box_reference(screen, m_toggle_region);
 
-    //  Stage 1: cheap white-fraction filter.
-    //  The pill is mostly white background with a small dark "R" carved
-    //  out — empirically the white fraction sits well above 0.40 when
-    //  visible, near 0 otherwise.
-    if (white_pixel_fraction(crop) < 0.30) return false;
-
-    //  Stage 2: OCR must read "R" (raw_ocr_numbers binarizes white
-    //  pixels to black, leaving the "R" carved out cleanly).
-    std::string text = raw_ocr_numbers(crop);
-    for (char c : text){
-        if (c == 'R' || c == 'r') return true;
-    }
-    return false;
+    //  White-pixel-fraction is sufficient on its own. Empirically: visible
+    //  pill ≥0.70, absent ≈0.00 — a wide separation. The earlier OCR step
+    //  was unreliable because the binarized "R" comes out as white-on-black
+    //  (a hole in the pill blob), which Tesseract mis-recognizes as "n".
+    return white_pixel_fraction(crop) >= 0.50;
 }
 
 
