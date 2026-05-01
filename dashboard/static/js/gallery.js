@@ -793,8 +793,9 @@ async function buildLabelForm(overlay, screen, filename, img) {
             : (existingLabels[readerName] || {});
         const tagColor = isDetector ? '#d29922' : '#58a6ff';
         const tag = isDetector ? ' <span style="font-size:9px; color:#8b949e;">(detector)</span>' : '';
-        const suggestBtn = isDetector ? '' :
-            `<button class="btn suggest-reader-btn" data-reader="${readerName}" style="font-size:9px; padding:1px 6px;">Suggest</button>`;
+        const suggestBtn = isDetector
+            ? `<button class="btn suggest-detector-btn" data-detector="${readerName}" style="font-size:9px; padding:1px 6px;">Suggest</button>`
+            : `<button class="btn suggest-reader-btn" data-reader="${readerName}" style="font-size:9px; padding:1px 6px;">Suggest</button>`;
         html += `<div style="background:#161b22; border:1px solid #30363d; border-radius:6px; padding:10px; margin-bottom:8px;">`;
         html += `<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
             <span style="font-size:12px; color:${tagColor}; font-weight:bold;">${readerName}${tag}</span>
@@ -1001,11 +1002,45 @@ async function buildLabelForm(overlay, screen, filename, img) {
         });
     });
 
+    // Per-detector Suggest: run all detectors via dev runner, fill the
+    // dropdown for this detector with the result.
+    formEl.querySelectorAll('.suggest-detector-btn').forEach(btn => {
+        btn.addEventListener('click', async () => {
+            const det = btn.dataset.detector;
+            btn.disabled = true; btn.textContent = '...';
+            try {
+                const resp = await fetch(`${API}/api/detector/debug`, {
+                    method:'POST', headers:{'Content-Type':'application/json'},
+                    body: JSON.stringify({screen, filename})
+                }).then(r => r.json());
+                const detEntry = (resp.detectors || []).find(d => d.name === det);
+                if (!detEntry) {
+                    btn.textContent = 'Not in dev-runner';
+                    statusEl.textContent = `${det} not exposed by detector-debug — rebuild SerialProgramsCommandLine`;
+                    statusEl.style.color = '#f85149';
+                } else {
+                    const select = formEl.querySelector(`.manifest-input[data-reader="${det}"][data-field="_self"]`);
+                    if (select) {
+                        select.value = detEntry.detected ? 'true' : 'false';
+                        select.style.borderColor = '#d29922';
+                    }
+                    btn.textContent = detEntry.detected ? 'true' : 'false';
+                    statusEl.textContent = `${det} suggested ${detEntry.detected} (yellow = suggested)`;
+                    statusEl.style.color = '#d29922';
+                }
+            } catch (e) {
+                btn.textContent = 'Error';
+                console.error('suggest detector:', e);
+            }
+            setTimeout(() => { btn.textContent = 'Suggest'; btn.disabled = false; }, 2500);
+        });
+    });
+
     // "Auto-Suggest All" button
     const suggestAllBtn = formEl.querySelector('#gallery-auto-suggest-all');
     if (suggestAllBtn) {
         suggestAllBtn.addEventListener('click', () => {
-            formEl.querySelectorAll('.suggest-reader-btn').forEach(btn => btn.click());
+            formEl.querySelectorAll('.suggest-reader-btn, .suggest-detector-btn').forEach(btn => btn.click());
         });
     }
 

@@ -20,6 +20,7 @@
 #include "PokemonChampions/Inference/PokemonChampions_TeamSelectDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_TeamPreviewDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_TeamSummaryReader.h"  // contains MovesMoreDetector
+#include "PokemonChampions/Inference/PokemonChampions_MegaEvolveDetector.h"
 
 #include <iostream>
 #include <sstream>
@@ -82,6 +83,7 @@ int run_detector_debug(const std::string& image_path){
         ADD_DETECTOR("TeamSelectDetector", TeamSelectDetector)
         ADD_DETECTOR("TeamPreviewDetector", TeamPreviewDetector)
         ADD_DETECTOR("MovesMoreDetector", MovesMoreDetector)
+        ADD_DETECTOR("MegaEvolveDetector", MegaEvolveDetector)
 
         #undef ADD_DETECTOR
 
