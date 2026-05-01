@@ -726,7 +726,23 @@ int BattleHUDReader::read_opponent_hp_pct(
 ) const{
     if (slot >= 2 || m_opponent_hp_boxes[slot].width == 0) return -1;
     ImageViewRGB32 cropped = extract_box_reference(screen, m_opponent_hp_boxes[slot]);
-    return read_hp_pct_template(logger, cropped, slot);
+    int v = read_hp_pct_template(logger, cropped, slot);
+    if (v >= 0) return v;
+
+    //  Tesseract fallback for cases the template matcher rejects (typically
+    //  "100" where the narrow "1" doesn't segment cleanly, or low-contrast
+    //  digits that fall under the 0.80 agreement threshold). raw_ocr_numbers
+    //  is the same path the inspector "Test OCR" uses.
+    std::string text = raw_ocr_numbers(cropped);
+    int parsed = parse_percentage(text);
+    if (parsed >= 0){
+        logger.log(
+            "BattleHUDReader: opponent HP% slot " + std::to_string(slot) +
+            " template failed, tesseract -> " + std::to_string(parsed) +
+            " (raw='" + text + "')"
+        );
+    }
+    return parsed;
 }
 
 std::pair<int, int> BattleHUDReader::read_own_hp(
