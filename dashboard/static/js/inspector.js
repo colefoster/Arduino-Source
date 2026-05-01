@@ -856,13 +856,29 @@ async function inspectorSaveBox() {
                 color_ratio: a.color_ratio,
             }),
         });
+        const st = document.getElementById('inspector-save-status');
+        if (!resp.ok) {
+            const text = await resp.text();
+            st.style.color = '#f85149';
+            st.textContent = `${resp.status} ${resp.statusText} — ${text.slice(0, 80)}`;
+            console.error('save-box failed:', resp.status, text);
+            return;
+        }
         const data = await resp.json();
         if (data.ok) {
-            const st = document.getElementById('inspector-save-status');
+            st.style.color = '#3fb950';
             st.textContent = 'Saved!';
-            setTimeout(() => st.textContent = '', 2000);
+            setTimeout(() => { st.textContent = ''; st.style.color = ''; }, 2000);
+        } else {
+            st.style.color = '#f85149';
+            st.textContent = data.error || 'Save failed';
         }
-    } catch (e) { console.error(e); }
+    } catch (e) {
+        const st = document.getElementById('inspector-save-status');
+        st.style.color = '#f85149';
+        st.textContent = 'Network error: ' + e.message;
+        console.error(e);
+    }
 }
 
 function inspectorNavImage(delta) {
