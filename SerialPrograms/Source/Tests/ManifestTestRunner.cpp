@@ -452,28 +452,6 @@ int run_manifest_tests(const std::string& test_images_dir, const std::string& mo
                 if (!labels.contains("BattleHUDReader")) continue;
                 const auto& hud = labels["BattleHUDReader"];
 
-                //  Mode is explicit in the manifest ("singles" or "doubles").
-                //  Fall back to inferring from any populated slot 1.
-                bool doubles = false;
-                if (hud.contains("mode") && hud["mode"].is_string()){
-                    doubles = (hud["mode"].get<std::string>() == "doubles");
-                }else{
-                    for (const std::string& f : {"opponent_species", "own_species"}){
-                        if (hud.contains(f) && hud[f].is_array() && hud[f].size() > 1
-                            && hud[f][1].is_string() && !hud[f][1].get<std::string>().empty()){
-                            doubles = true; break;
-                        }
-                    }
-                    if (!doubles){
-                        for (const std::string& f : {"opponent_hp_pct", "own_hp_current", "own_hp_max"}){
-                            if (hud.contains(f) && hud[f].is_array() && hud[f].size() > 1
-                                && hud[f][1].is_number_integer() && hud[f][1].get<int>() >= 0){
-                                doubles = true; break;
-                            }
-                        }
-                    }
-                }
-
                 std::string file_path = full_dir + "/" + fname;
                 ImageRGB32 image;
                 try{ image = ImageRGB32(file_path); }catch (const std::exception& e){
@@ -481,16 +459,14 @@ int run_manifest_tests(const std::string& test_images_dir, const std::string& mo
                     continue;
                 }
 
-                BattleHUDReader reader(
-                    Language::English,
-                    doubles ? BattleMode::DOUBLES : BattleMode::SINGLES
-                );
-                uint8_t slot_count = doubles ? 2 : 1;
+                //  Unified reader — both slots always probed; slot 0 is
+                //  doubles-only and the str_slot/int_slot guards skip
+                //  unlabeled slots so singles entries don't false-fail.
+                BattleHUDReader reader(Language::English);
 
-                cout << "  " << screen << "/" << fname
-                     << " (" << (doubles ? "doubles" : "singles") << ")" << endl;
+                cout << "  " << screen << "/" << fname << endl;
 
-                for (uint8_t slot = 0; slot < slot_count; slot++){
+                for (uint8_t slot = 0; slot < 2; slot++){
                     std::string trace = screen + "/" + fname + " s" + std::to_string(slot);
 
                     std::string sp_expected;

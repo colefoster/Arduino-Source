@@ -177,7 +177,8 @@ void DetectorTest::program(SingleSwitchProgramEnvironment& env, ProControllerCon
             BattleMode detected_mode = battle_mode_detector.read_mode(env.console, frame);
             if (detected_mode != BattleMode::UNKNOWN && detected_mode != current_mode){
                 current_mode = detected_mode;
-                hud_reader.set_mode(current_mode);
+                //  BattleHUDReader is mode-agnostic now; mode tracking
+                //  is still useful for the rest of the bot logic.
                 env.console.log(
                     "[Mode] Detected: " + std::string(battle_mode_str(current_mode)),
                     COLOR_BLUE

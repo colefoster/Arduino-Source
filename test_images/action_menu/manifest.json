@@ -1,7 +1,6 @@
 {
   "20260423-150128027036.png": {
     "BattleHUDReader": {
-      "mode": "doubles",
       "opponent_hp_pct": [
         100,
         100
@@ -26,7 +25,6 @@
   },
   "20260423-150240891066.png": {
     "BattleHUDReader": {
-      "mode": "doubles",
       "opponent_hp_pct": [
         100,
         100
@@ -51,7 +49,6 @@
   },
   "20260423-150256754355.png": {
     "BattleHUDReader": {
-      "mode": "doubles",
       "opponent_hp_pct": [
         -1,
         100
@@ -76,7 +73,6 @@
   },
   "20260423-150347231746.png": {
     "BattleHUDReader": {
-      "mode": "doubles",
       "opponent_hp_pct": [
         -1,
         100
@@ -101,7 +97,6 @@
   },
   "20260423-150354427178.png": {
     "BattleHUDReader": {
-      "mode": "doubles",
       "opponent_hp_pct": [
         -1,
         100
@@ -126,7 +121,6 @@
   },
   "20260423-150434947219.png": {
     "BattleHUDReader": {
-      "mode": "doubles",
       "opponent_hp_pct": [
         21,
         -1
@@ -151,7 +145,6 @@
   },
   "20260423-150440133636.png": {
     "BattleHUDReader": {
-      "mode": "doubles",
       "opponent_hp_pct": [
         21,
         -1
@@ -176,7 +169,6 @@
   },
   "20260423-150454443057.png": {
     "BattleHUDReader": {
-      "mode": "doubles",
       "opponent_hp_pct": [
         21,
         -1
@@ -201,7 +193,6 @@
   },
   "20260423-150503460243.png": {
     "BattleHUDReader": {
-      "mode": "doubles",
       "opponent_hp_pct": [
         21,
         -1
@@ -226,14 +217,13 @@
   },
   "20260423-183327738746.png": {
     "BattleHUDReader": {
-      "mode": "singles",
       "opponent_hp_pct": [
-        100,
-        -1
+        -1,
+        100
       ],
       "opponent_species": [
-        "tyranitar",
-        ""
+        "",
+        "tyranitar"
       ],
       "own_hp_current": [
         146,
@@ -251,7 +241,6 @@
   },
   "20260423-183421609860.png": {
     "BattleHUDReader": {
-      "mode": "doubles",
       "opponent_hp_pct": [
         50,
         61
@@ -276,14 +265,13 @@
   },
   "20260423-183424800592.png": {
     "BattleHUDReader": {
-      "mode": "singles",
       "opponent_hp_pct": [
-        50,
-        -1
+        -1,
+        50
       ],
       "opponent_species": [
-        "whimsicott",
-        ""
+        "",
+        "whimsicott"
       ],
       "own_hp_current": [
         137,
@@ -301,14 +289,13 @@
   },
   "20260423-183429305173.png": {
     "BattleHUDReader": {
-      "mode": "singles",
       "opponent_hp_pct": [
-        50,
-        -1
+        -1,
+        50
       ],
       "opponent_species": [
-        "tyranitar",
-        ""
+        "",
+        "tyranitar"
       ],
       "own_hp_current": [
         137,
@@ -326,14 +313,13 @@
   },
   "20260423-183439332167.png": {
     "BattleHUDReader": {
-      "mode": "singles",
       "opponent_hp_pct": [
-        50,
-        -1
+        -1,
+        50
       ],
       "opponent_species": [
-        "tyranitar",
-        ""
+        "",
+        "tyranitar"
       ],
       "own_hp_current": [
         137,
@@ -351,14 +337,13 @@
   },
   "20260423-183741816926.png": {
     "BattleHUDReader": {
-      "mode": "singles",
       "opponent_hp_pct": [
-        64,
-        -1
+        -1,
+        64
       ],
       "opponent_species": [
-        "tyranitar",
-        ""
+        "",
+        "tyranitar"
       ],
       "own_hp_current": [
         177,
@@ -376,14 +361,13 @@
   },
   "20260423-183914694345.png": {
     "BattleHUDReader": {
-      "mode": "singles",
       "opponent_hp_pct": [
-        2,
-        -1
+        -1,
+        2
       ],
       "opponent_species": [
-        "gengar",
-        ""
+        "",
+        "gengar"
       ],
       "own_hp_current": [
         132,
@@ -401,14 +385,13 @@
   },
   "20260427-132110967236.png": {
     "BattleHUDReader": {
-      "mode": "singles",
       "opponent_hp_pct": [
-        100,
-        -1
+        -1,
+        100
       ],
       "opponent_species": [
-        "garchomp",
-        ""
+        "",
+        "garchomp"
       ],
       "own_hp_current": [
         157,
@@ -426,14 +409,13 @@
   },
   "20260427-132124108376.png": {
     "BattleHUDReader": {
-      "mode": "singles",
       "opponent_hp_pct": [
-        100,
-        -1
+        -1,
+        100
       ],
       "opponent_species": [
-        "garchomp",
-        ""
+        "",
+        "garchomp"
       ],
       "own_hp_current": [
         157,
@@ -451,14 +433,13 @@
   },
   "20260427-132201855579.png": {
     "BattleHUDReader": {
-      "mode": "singles",
       "opponent_hp_pct": [
-        38,
-        -1
+        -1,
+        38
       ],
       "opponent_species": [
-        "garchomp",
-        ""
+        "",
+        "garchomp"
       ],
       "own_hp_current": [
         7138,
@@ -476,14 +457,13 @@
   },
   "20260427-132210593850.png": {
     "BattleHUDReader": {
-      "mode": "singles",
       "opponent_hp_pct": [
-        38,
-        -1
+        -1,
+        38
       ],
       "opponent_species": [
-        "garchomp",
-        ""
+        "",
+        "garchomp"
       ],
       "own_hp_current": [
         7138,
@@ -501,14 +481,13 @@
   },
   "20260427-132306028011.png": {
     "BattleHUDReader": {
-      "mode": "singles",
       "opponent_hp_pct": [
-        8,
-        -1
+        -1,
+        8
       ],
       "opponent_species": [
-        "garchomp",
-        ""
+        "",
+        "garchomp"
       ],
       "own_hp_current": [
         7138,
@@ -526,14 +505,13 @@
   },
   "20260427-132314136162.png": {
     "BattleHUDReader": {
-      "mode": "singles",
       "opponent_hp_pct": [
-        8,
-        -1
+        -1,
+        8
       ],
       "opponent_species": [
-        "garchomp",
-        ""
+        "",
+        "garchomp"
       ],
       "own_hp_current": [
         7138,
@@ -551,14 +529,13 @@
   },
   "20260427-132458919151.png": {
     "BattleHUDReader": {
-      "mode": "singles",
       "opponent_hp_pct": [
-        38,
-        -1
+        -1,
+        38
       ],
       "opponent_species": [
-        "garchomp",
-        ""
+        "",
+        "garchomp"
       ],
       "own_hp_current": [
         157,
@@ -576,14 +553,13 @@
   },
   "20260427-132602291394.png": {
     "BattleHUDReader": {
-      "mode": "singles",
       "opponent_hp_pct": [
-        38,
-        -1
+        -1,
+        38
       ],
       "opponent_species": [
-        "gengar",
-        ""
+        "",
+        "gengar"
       ],
       "own_hp_current": [
         82,
@@ -601,14 +577,13 @@
   },
   "20260427-132611147334.png": {
     "BattleHUDReader": {
-      "mode": "singles",
       "opponent_hp_pct": [
-        38,
-        -1
+        -1,
+        38
       ],
       "opponent_species": [
-        "gengar",
-        ""
+        "",
+        "gengar"
       ],
       "own_hp_current": [
         82,
@@ -626,14 +601,13 @@
   },
   "20260427-132709251444.png": {
     "BattleHUDReader": {
-      "mode": "singles",
       "opponent_hp_pct": [
-        7,
-        -1
+        -1,
+        7
       ],
       "opponent_species": [
-        "gengar",
-        ""
+        "",
+        "gengar"
       ],
       "own_hp_current": [
         710,
@@ -651,14 +625,13 @@
   },
   "20260428-085955805273.png": {
     "BattleHUDReader": {
-      "mode": "singles",
       "opponent_hp_pct": [
-        100,
-        -1
+        -1,
+        100
       ],
       "opponent_species": [
-        "excadrill",
-        ""
+        "",
+        "excadrill"
       ],
       "own_hp_current": [
         7187,
@@ -676,14 +649,13 @@
   },
   "20260428-090001840783.png": {
     "BattleHUDReader": {
-      "mode": "singles",
       "opponent_hp_pct": [
-        100,
-        -1
+        -1,
+        100
       ],
       "opponent_species": [
-        "excadrill",
-        ""
+        "",
+        "excadrill"
       ],
       "own_hp_current": [
         7187,
@@ -701,14 +673,13 @@
   },
   "20260428-090005728584.png": {
     "BattleHUDReader": {
-      "mode": "singles",
       "opponent_hp_pct": [
-        100,
-        -1
+        -1,
+        100
       ],
       "opponent_species": [
-        "excadrill",
-        ""
+        "",
+        "excadrill"
       ],
       "own_hp_current": [
         7187,
@@ -726,14 +697,13 @@
   },
   "20260428-090019691379.png": {
     "BattleHUDReader": {
-      "mode": "singles",
       "opponent_hp_pct": [
-        100,
-        -1
+        -1,
+        100
       ],
       "opponent_species": [
-        "excadrill",
-        ""
+        "",
+        "excadrill"
       ],
       "own_hp_current": [
         7187,
@@ -751,14 +721,13 @@
   },
   "20260428-090024732453.png": {
     "BattleHUDReader": {
-      "mode": "singles",
       "opponent_hp_pct": [
-        100,
-        -1
+        -1,
+        100
       ],
       "opponent_species": [
-        "excadrill",
-        ""
+        "",
+        "excadrill"
       ],
       "own_hp_current": [
         7187,
@@ -776,14 +745,13 @@
   },
   "20260428-090121554529.png": {
     "BattleHUDReader": {
-      "mode": "singles",
       "opponent_hp_pct": [
-        92,
-        -1
+        -1,
+        92
       ],
       "opponent_species": [
-        "excadrill",
-        ""
+        "",
+        "excadrill"
       ],
       "own_hp_current": [
         124,
@@ -801,14 +769,13 @@
   },
   "20260428-090132724942.png": {
     "BattleHUDReader": {
-      "mode": "singles",
       "opponent_hp_pct": [
-        92,
-        -1
+        -1,
+        92
       ],
       "opponent_species": [
-        "excadrill",
-        ""
+        "",
+        "excadrill"
       ],
       "own_hp_current": [
         124,
@@ -826,14 +793,13 @@
   },
   "20260428-090301344731.png": {
     "BattleHUDReader": {
-      "mode": "singles",
       "opponent_hp_pct": [
-        100,
-        -1
+        -1,
+        100
       ],
       "opponent_species": [
-        "excadrill",
-        ""
+        "",
+        "excadrill"
       ],
       "own_hp_current": [
         164,
@@ -851,14 +817,13 @@
   },
   "20260428-090442837075.png": {
     "BattleHUDReader": {
-      "mode": "singles",
       "opponent_hp_pct": [
-        100,
-        -1
+        -1,
+        100
       ],
       "opponent_species": [
-        "dragonite",
-        ""
+        "",
+        "dragonite"
       ],
       "own_hp_current": [
         7153,
@@ -876,14 +841,13 @@
   },
   "20260428-090454851069.png": {
     "BattleHUDReader": {
-      "mode": "singles",
       "opponent_hp_pct": [
-        100,
-        -1
+        -1,
+        100
       ],
       "opponent_species": [
-        "dragonite",
-        ""
+        "",
+        "dragonite"
       ],
       "own_hp_current": [
         153,
@@ -901,14 +865,13 @@
   },
   "20260428-090540240302.png": {
     "BattleHUDReader": {
-      "mode": "singles",
       "opponent_hp_pct": [
-        16,
-        -1
+        -1,
+        16
       ],
       "opponent_species": [
-        "dragonite",
-        ""
+        "",
+        "dragonite"
       ],
       "own_hp_current": [
         142,
@@ -926,14 +889,13 @@
   },
   "20260428-090600234812.png": {
     "BattleHUDReader": {
-      "mode": "singles",
       "opponent_hp_pct": [
-        16,
-        -1
+        -1,
+        16
       ],
       "opponent_species": [
-        "dragonite",
-        ""
+        "",
+        "dragonite"
       ],
       "own_hp_current": [
         142,
@@ -951,14 +913,13 @@
   },
   "action_menu_fight_live.png": {
     "BattleHUDReader": {
-      "mode": "singles",
       "opponent_hp_pct": [
-        100,
-        -1
+        -1,
+        100
       ],
       "opponent_species": [
-        "charizard",
-        ""
+        "",
+        "charizard"
       ],
       "own_hp_current": [
         207,
@@ -976,14 +937,13 @@
   },
   "action_menu_pokemon_live.png": {
     "BattleHUDReader": {
-      "mode": "singles",
       "opponent_hp_pct": [
-        100,
-        -1
+        -1,
+        100
       ],
       "opponent_species": [
-        "charizard",
-        ""
+        "",
+        "charizard"
       ],
       "own_hp_current": [
         207,
@@ -1001,14 +961,13 @@
   },
   "doubles_action_menu.png": {
     "BattleHUDReader": {
-      "mode": "singles",
       "opponent_hp_pct": [
-        64,
-        -1
+        -1,
+        64
       ],
       "opponent_species": [
-        "hydreigon",
-        ""
+        "",
+        "hydreigon"
       ],
       "own_hp_current": [
         175,
@@ -1026,14 +985,13 @@
   },
   "doubles_action_menu2.png": {
     "BattleHUDReader": {
-      "mode": "singles",
       "opponent_hp_pct": [
-        100,
-        -1
+        -1,
+        100
       ],
       "opponent_species": [
-        "hydreigon",
-        ""
+        "",
+        "hydreigon"
       ],
       "own_hp_current": [
         175,
@@ -1051,7 +1009,6 @@
   },
   "screenshot-20260427-132603218579.png": {
     "BattleHUDReader": {
-      "mode": "doubles",
       "opponent_hp_pct": [
         38,
         100

@@ -667,7 +667,7 @@ void AutoLadder::select_move_ai(SingleSwitchProgramEnvironment& env, ProControll
     //  1. Take a snapshot and run HUD OCR.
     VideoSnapshot snapshot = env.console.video().snapshot();
     if (snapshot){
-        BattleHUDReader hud_reader(Language::English, m_state_tracker.mode());
+        BattleHUDReader hud_reader(Language::English);
         BattleHUDState hud = hud_reader.read_all(env.console, snapshot);
         m_state_tracker.update_from_hud(hud);
     }
