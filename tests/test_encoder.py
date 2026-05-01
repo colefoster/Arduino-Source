@@ -106,19 +106,24 @@ def test_meta_on_produces_correct_shapes(vocabs, row):
 
 
 def test_meta_off_zeros_unrevealed_slots(vocabs, row):
+    """Across all samples in a replay, meta-off must constrain confidences to {0, 1};
+    meta-on must produce at least one fractional confidence somewhere."""
     e_on = Encoder(vocabs, mode="meta-on")
     e_off = Encoder(vocabs, mode="meta-off")
-    on_sample = next(iter(e_on.encode_row(row)))
-    off_sample = next(iter(e_off.encode_row(row)))
 
-    # In meta-off, every confidence is either 0.0 (meta-source) or 1.0 (revealed).
-    # In meta-on, meta-source confidences are arbitrary 0..1.
-    on_confs = on_sample.tensors["item_confidences"]
-    off_confs = off_sample.tensors["item_confidences"]
-    assert torch.all((off_confs == 0.0) | (off_confs == 1.0))
-    # The two should differ on at least one slot — Aegislash etc. usually have
-    # a meta-guessed item with prob != 0/1.
-    assert not torch.allclose(on_confs, off_confs)
+    fields = ("item_confidences", "ability_confidences", "move_confidences")
+
+    found_diff = False
+    for on_sample, off_sample in zip(e_on.encode_row(row), e_off.encode_row(row)):
+        for k in fields:
+            off_confs = off_sample.tensors[k]
+            assert torch.all((off_confs == 0.0) | (off_confs == 1.0)), (
+                f"meta-off must yield only 0/1 confidences in {k}; got {off_confs}"
+            )
+            on_confs = on_sample.tensors[k]
+            if not torch.allclose(on_confs, off_confs):
+                found_diff = True
+    assert found_diff, "expected meta-on to differ from meta-off on at least one slot"
 
 
 def test_meta_off_preserves_revealed_slots(vocabs, row):
