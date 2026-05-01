@@ -30,12 +30,12 @@ STR_FIELDS = ("opponent_species", "own_species")
 INT_FIELDS = ("opponent_hp_pct", "own_hp_current", "own_hp_max")
 
 
-def ocr(image_path: Path) -> dict | None:
+def ocr(image_path: Path, mode: str = "") -> dict | None:
     try:
-        r = subprocess.run(
-            [str(CLI), "--ocr-suggest", "BattleHUDReader", str(image_path)],
-            capture_output=True, text=True, timeout=30,
-        )
+        cmd = [str(CLI), "--ocr-suggest", "BattleHUDReader", str(image_path)]
+        if mode:
+            cmd.append(mode)
+        r = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
         for line in r.stdout.splitlines():
             line = line.strip()
             if line.startswith("{") and line.endswith("}"):
@@ -105,7 +105,7 @@ def main():
                 failed += 1
                 continue
 
-            res = ocr(img)
+            res = ocr(img, mode)
             if not res:
                 failed += 1
                 continue

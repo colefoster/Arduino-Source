@@ -1651,11 +1651,11 @@
     "BattleHUDReader": {
       "mode": "singles",
       "opponent_hp_pct": [
-        -1,
+        7,
         -1
       ],
       "opponent_species": [
-        "",
+        "gengar",
         ""
       ],
       "own_hp_current": [
@@ -1687,11 +1687,11 @@
     "BattleHUDReader": {
       "mode": "singles",
       "opponent_hp_pct": [
-        -1,
+        7,
         -1
       ],
       "opponent_species": [
-        "",
+        "gengar",
         ""
       ],
       "own_hp_current": [
@@ -1723,11 +1723,11 @@
     "BattleHUDReader": {
       "mode": "singles",
       "opponent_hp_pct": [
-        -1,
+        7,
         -1
       ],
       "opponent_species": [
-        "",
+        "gengar",
         ""
       ],
       "own_hp_current": [
@@ -2083,11 +2083,11 @@
     "BattleHUDReader": {
       "mode": "singles",
       "opponent_hp_pct": [
-        -1,
+        100,
         -1
       ],
       "opponent_species": [
-        "",
+        "dragonite",
         ""
       ],
       "own_hp_current": [
@@ -2119,7 +2119,7 @@
     "BattleHUDReader": {
       "mode": "singles",
       "opponent_hp_pct": [
-        -1,
+        100,
         -1
       ],
       "opponent_species": [
@@ -2227,7 +2227,7 @@
     "BattleHUDReader": {
       "mode": "singles",
       "opponent_hp_pct": [
-        -1,
+        16,
         -1
       ],
       "opponent_species": [
@@ -2299,11 +2299,11 @@
     "BattleHUDReader": {
       "mode": "singles",
       "opponent_hp_pct": [
-        -1,
+        100,
         -1
       ],
       "opponent_species": [
-        "",
+        "greninja",
         ""
       ],
       "own_hp_current": [
@@ -2339,7 +2339,7 @@
         -1
       ],
       "opponent_species": [
-        "",
+        "greninja",
         ""
       ],
       "own_hp_current": [
@@ -2371,11 +2371,11 @@
     "BattleHUDReader": {
       "mode": "singles",
       "opponent_hp_pct": [
-        -1,
+        100,
         -1
       ],
       "opponent_species": [
-        "",
+        "kingambit",
         ""
       ],
       "own_hp_current": [

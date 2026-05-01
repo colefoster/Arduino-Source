@@ -28,7 +28,8 @@ namespace PokemonAutomation{
 using namespace NintendoSwitch::PokemonChampions;
 
 
-int run_ocr_suggest(const std::string& reader_name, const std::string& image_path){
+int run_ocr_suggest(const std::string& reader_name, const std::string& image_path,
+                    const std::string& mode){
     try{
         ImageRGB32 image(image_path);
         auto& log = global_logger_command_line();
@@ -54,17 +55,20 @@ int run_ocr_suggest(const std::string& reader_name, const std::string& image_pat
             std::cout << "{\"slot\":" << det.active_slot() << "}" << std::endl;
         }
         else if (reader_name == "BattleHUDReader"){
-            //  Always probe both slots in doubles mode; for singles images the
-            //  slot-1 boxes will read empty/garbage and the user can clear them.
-            BattleHUDReader reader(Language::English, BattleMode::DOUBLES);
+            //  Match the runtime detector exactly: SINGLES uses slot-0 boxes
+            //  positioned for the lone opponent (right side); DOUBLES uses
+            //  both slot 0 (center) and slot 1 (right). For singles, slot 1
+            //  is left blank/-1 instead of probing for garbage.
+            BattleMode bmode = (mode == "singles") ? BattleMode::SINGLES : BattleMode::DOUBLES;
+            BattleHUDReader reader(Language::English, bmode);
             std::string opp0 = reader.read_opponent_species(log, image, 0);
-            std::string opp1 = reader.read_opponent_species(log, image, 1);
+            std::string opp1 = (bmode == BattleMode::DOUBLES) ? reader.read_opponent_species(log, image, 1) : std::string();
             std::string own_sp0 = reader.read_own_species(log, image, 0);
-            std::string own_sp1 = reader.read_own_species(log, image, 1);
+            std::string own_sp1 = (bmode == BattleMode::DOUBLES) ? reader.read_own_species(log, image, 1) : std::string();
             int hp0 = reader.read_opponent_hp_pct(log, image, 0);
-            int hp1 = reader.read_opponent_hp_pct(log, image, 1);
+            int hp1 = (bmode == BattleMode::DOUBLES) ? reader.read_opponent_hp_pct(log, image, 1) : -1;
             auto own0 = reader.read_own_hp(log, image, 0);
-            auto own1 = reader.read_own_hp(log, image, 1);
+            auto own1 = (bmode == BattleMode::DOUBLES) ? reader.read_own_hp(log, image, 1) : std::pair<int,int>{-1, -1};
             std::cout << "{"
                 << "\"opponent_species\":[\"" << opp0 << "\",\"" << opp1 << "\"],"
                 << "\"opponent_hp_pct\":[" << hp0 << "," << hp1 << "],"

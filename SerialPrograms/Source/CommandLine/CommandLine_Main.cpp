@@ -188,7 +188,8 @@ int main(int argc, char* argv[]){
             print_usage(argv[0]);
             return 1;
         }
-        return run_ocr_suggest(argv[2], argv[3]);
+        std::string mode = (argc >= 5) ? argv[4] : "";
+        return run_ocr_suggest(argv[2], argv[3], mode);
     }
 
     //  --ocr-crop mode: run number-tuned OCR on an arbitrary box of one image.

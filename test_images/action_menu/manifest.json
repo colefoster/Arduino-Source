@@ -628,7 +628,7 @@
     "BattleHUDReader": {
       "mode": "singles",
       "opponent_hp_pct": [
-        -1,
+        7,
         -1
       ],
       "opponent_species": [
@@ -853,7 +853,7 @@
     "BattleHUDReader": {
       "mode": "singles",
       "opponent_hp_pct": [
-        -1,
+        100,
         -1
       ],
       "opponent_species": [
@@ -878,7 +878,7 @@
     "BattleHUDReader": {
       "mode": "singles",
       "opponent_hp_pct": [
-        -1,
+        100,
         -1
       ],
       "opponent_species": [
@@ -903,7 +903,7 @@
     "BattleHUDReader": {
       "mode": "singles",
       "opponent_hp_pct": [
-        -1,
+        16,
         -1
       ],
       "opponent_species": [
@@ -928,7 +928,7 @@
     "BattleHUDReader": {
       "mode": "singles",
       "opponent_hp_pct": [
-        -1,
+        16,
         -1
       ],
       "opponent_species": [
@@ -953,7 +953,7 @@
     "BattleHUDReader": {
       "mode": "singles",
       "opponent_hp_pct": [
-        -1,
+        100,
         -1
       ],
       "opponent_species": [
@@ -978,7 +978,7 @@
     "BattleHUDReader": {
       "mode": "singles",
       "opponent_hp_pct": [
-        -1,
+        100,
         -1
       ],
       "opponent_species": [
