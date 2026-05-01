@@ -16,6 +16,8 @@ import json
 import logging
 import platform
 import time
+import urllib.error
+import urllib.request
 from pathlib import Path
 from typing import Optional
 
@@ -33,6 +35,26 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent.parent
 
 # Number of distinct target slots in the action labels: -2..1 mapped to 0..3.
 N_TARGETS = 4
+
+
+def _post_dashboard(url: str, payload: dict) -> None:
+    """Best-effort POST to the dashboard's /api/training/report endpoint.
+
+    Failure (network down, dashboard restarting) must never break the run, so
+    every error is swallowed and logged at WARN.
+    """
+    if not url:
+        return
+    data = json.dumps(payload).encode("utf-8")
+    req = urllib.request.Request(
+        url, data=data, method="POST",
+        headers={"Content-Type": "application/json"},
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            resp.read()
+    except (urllib.error.URLError, OSError, TimeoutError) as e:
+        logging.warning(f"dashboard report failed: {e}")
 
 
 def _shift_target(t: torch.Tensor) -> torch.Tensor:
@@ -232,6 +254,10 @@ def main():
                     help="Stop training after N epochs.")
     ap.add_argument("--use-history", action="store_true",
                     help="Enable LSTM-over-prior-turns history token (Phase 7).")
+    ap.add_argument(
+        "--dashboard", default="https://champions.colefoster.ca/api/training/report",
+        help="Dashboard /api/training/report URL. Empty string disables reporting.",
+    )
     args = ap.parse_args()
 
     logging.basicConfig(
@@ -337,6 +363,33 @@ def main():
         with open(log_path, "a") as f:
             f.write(json.dumps(line) + "\n")
         print(json.dumps(line))
+
+        # Dashboard reporter (best-effort; never blocks training).
+        _post_dashboard(args.dashboard, {
+            "session_id": run_id,
+            "machine": platform.node() or "unknown",
+            "model_version": f"action-{args.version}-{args.mode}{'-history' if args.use_history else ''}",
+            "config": {
+                "version": args.version, "mode": args.mode,
+                "min_rating": args.min_rating, "since": args.since,
+                "batch_size": args.batch_size, "lr": args.lr,
+                "d_model": args.d_model, "n_layers": args.n_layers,
+                "use_history": args.use_history,
+                "epochs": target_epochs,
+            },
+            "epoch": epoch,
+            "total_epochs": target_epochs,
+            "train_loss": float(train_metrics["loss"]),
+            "val_loss": float(val_metrics["loss"]),
+            # Dashboard frontend uses train_top1/val_top1 as percent values.
+            # We report type-acc as top-1 and full-action-acc as top-3.
+            "train_top1": round(train_metrics["type_a_acc"] * 100, 2),
+            "val_top1": round(val_metrics["type_a_acc"] * 100, 2),
+            "val_top3": round(val_metrics["full_a_acc"] * 100, 2),
+            "lr": args.lr,
+            "best_val_loss": min(best_val_loss, val_metrics["loss"]),
+            "timestamp": time.time(),
+        })
 
         if val_metrics["loss"] < best_val_loss:
             best_val_loss = val_metrics["loss"]
