@@ -723,7 +723,15 @@ async def gallery_screen(name: str):
     overlays = config.get("overlays", {})
 
     screen_def = screens.get(name) or overlays.get(name.replace("_overlays/", "")) or {}
-    readers = screen_def.get("readers", {})
+    readers = dict(screen_def.get("readers", {}))
+
+    #  Surface registered detectors as synthetic single-bool readers so the
+    #  gallery card modal renders them as labelable per-image fields. Manifest
+    #  stores the value under {detector_name: true|false}.
+    for det in screen_def.get("detectors", []):
+        if det in readers:
+            continue
+        readers[det] = {"is_detector": True, "fields": {"_self": {"type": "bool", "description": "Detector should fire on this image."}}}
 
     # Determine all crop defs for readers registered on this screen
     screen_crops = {}

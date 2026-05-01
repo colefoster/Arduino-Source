@@ -491,10 +491,13 @@ function renderGalleryGrid() {
         if (label === 'True' || label === 'Labeled') badgeClass = 'badge-true';
         else if (label === 'False' || label === 'Unlabeled') badgeClass = 'badge-false';
         else if (label === 'Partial') badgeClass = 'badge-value';
-        const checked = _bulkSelected.has(img.filename) ? 'checked' : '';
+        const isSelected = _bulkSelected.has(img.filename);
         const flagged = img._detectorFail ? ' style="border:2px solid #f85149;"' : '';
-        return `<div class="gallery-card" data-filename="${img.filename}"${flagged}>
-            ${_bulkSelectMode ? `<input type="checkbox" class="bulk-check" ${checked} style="position:absolute; top:4px; left:4px; z-index:1;">` : ''}
+        const cardClasses = ['gallery-card'];
+        if (_bulkSelectMode) cardClasses.push('selectable');
+        if (isSelected) cardClasses.push('selected');
+        return `<div class="${cardClasses.join(' ')}" data-filename="${img.filename}"${flagged}>
+            ${_bulkSelectMode ? `<div class="select-badge">${isSelected ? '✓' : ''}</div>` : ''}
             <img class="thumb" loading="lazy" src="${API}/api/gallery/thumb/${img.path}" alt="${img.filename}">
             <div class="fname">${img.filename}</div>
             <span class="truth-badge ${badgeClass}">${label}</span>
@@ -504,25 +507,36 @@ function renderGalleryGrid() {
 
     grid.querySelectorAll('.gallery-card').forEach(card => {
         card.addEventListener('click', (e) => {
+            const fname = card.dataset.filename;
             if (_bulkSelectMode) {
-                if (e.target.type === 'checkbox') return; // let checkbox handle itself
-                const cb = card.querySelector('.bulk-check');
-                if (cb) { cb.checked = !cb.checked; }
-                const fname = card.dataset.filename;
-                if (cb && cb.checked) _bulkSelected.add(fname); else _bulkSelected.delete(fname);
+                // Shift-click range select
+                if (e.shiftKey && _lastBulkAnchor) {
+                    const visible = filtered.map(i => i.filename);
+                    const a = visible.indexOf(_lastBulkAnchor);
+                    const b = visible.indexOf(fname);
+                    if (a >= 0 && b >= 0) {
+                        const [lo, hi] = a < b ? [a, b] : [b, a];
+                        for (let i = lo; i <= hi; i++) _bulkSelected.add(visible[i]);
+                        renderGalleryGrid();
+                        _updateBulkBar();
+                        return;
+                    }
+                }
+                if (_bulkSelected.has(fname)) _bulkSelected.delete(fname);
+                else _bulkSelected.add(fname);
+                _lastBulkAnchor = fname;
+                card.classList.toggle('selected');
+                const badge = card.querySelector('.select-badge');
+                if (badge) badge.textContent = card.classList.contains('selected') ? '✓' : '';
                 _updateBulkBar();
                 return;
             }
-            expandGalleryCard(card.dataset.filename);
-        });
-        const cb = card.querySelector('.bulk-check');
-        if (cb) cb.addEventListener('change', () => {
-            const fname = card.dataset.filename;
-            if (cb.checked) _bulkSelected.add(fname); else _bulkSelected.delete(fname);
-            _updateBulkBar();
+            expandGalleryCard(fname);
         });
     });
 }
+
+let _lastBulkAnchor = null;
 
 function _updateBulkBar() {
     const bar = document.getElementById('bulk-action-bar');
@@ -766,17 +780,33 @@ async function buildLabelForm(overlay, screen, filename, img) {
 
     for (const [readerName, readerDef] of Object.entries(readers)) {
         const fields = readerDef.fields || {};
-        const existing = existingLabels[readerName] || {};
+        const isDetector = !!readerDef.is_detector;
+        //  Detectors store {detectorName: true|false} flat; readers store
+        //  {readerName: {field: value}}. Treat the synthetic _self field as
+        //  the top-level value for detector entries.
+        const existing = isDetector
+            ? {_self: existingLabels[readerName]}
+            : (existingLabels[readerName] || {});
+        const tagColor = isDetector ? '#d29922' : '#58a6ff';
+        const tag = isDetector ? ' <span style="font-size:9px; color:#8b949e;">(detector)</span>' : '';
+        const suggestBtn = isDetector ? '' :
+            `<button class="btn suggest-reader-btn" data-reader="${readerName}" style="font-size:9px; padding:1px 6px;">Suggest</button>`;
         html += `<div style="background:#161b22; border:1px solid #30363d; border-radius:6px; padding:10px; margin-bottom:8px;">`;
         html += `<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-            <span style="font-size:12px; color:#58a6ff; font-weight:bold;">${readerName}</span>
-            <button class="btn suggest-reader-btn" data-reader="${readerName}" style="font-size:9px; padding:1px 6px;">Suggest</button>
+            <span style="font-size:12px; color:${tagColor}; font-weight:bold;">${readerName}${tag}</span>
+            ${suggestBtn}
         </div>`;
 
         for (const [fieldName, fieldDef] of Object.entries(fields)) {
             const val = existing[fieldName];
             html += `<div style="margin-bottom:6px;">`;
             html += `<label style="font-size:11px; color:#8b949e; display:block; margin-bottom:2px;">${fieldName}</label>`;
+
+            //  Hide the field label for synthetic _self detector entries —
+            //  the reader header already names the detector.
+            if (fieldName === '_self') {
+                html = html.replace(/<label[^>]*>_self<\/label>/, '');
+            }
 
             if (fieldDef.type === 'array') {
                 const len = fieldDef.length || 1;
@@ -821,11 +851,17 @@ async function buildLabelForm(overlay, screen, filename, img) {
             const reader = input.dataset.reader;
             const field = input.dataset.field;
             const index = input.dataset.index;
-            if (!labels[reader]) labels[reader] = {};
             let val = input.value.trim();
             if (val === '') { val = null; }
             else if (input.type === 'number') { val = parseInt(val, 10); }
             else if (input.tagName === 'SELECT') { val = val === 'true' ? true : val === 'false' ? false : null; }
+            //  _self is a synthetic field used for bool detectors — store
+            //  the value directly under the reader/detector name.
+            if (field === '_self') {
+                if (val !== null) labels[reader] = val;
+                return;
+            }
+            if (!labels[reader]) labels[reader] = {};
             if (index != null) {
                 if (!labels[reader][field]) labels[reader][field] = [];
                 labels[reader][field][parseInt(index)] = val;
