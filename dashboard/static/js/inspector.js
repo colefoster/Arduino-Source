@@ -28,8 +28,10 @@ async function inspectorJumpTo(source, filename) {
         sourceSel.value = source;
         sourceSel.dispatchEvent(new Event('change'));
     }
-    //  Load the image directly — don't wait for the ribbon's async
-    //  fetch to settle, the user wants the frame visible immediately.
+    //  Suppress the ribbon's auto-load-first-image so it doesn't clobber
+    //  our jump target when its async fetch resolves.
+    inspectorState._ribbonAutoLoaded = true;
+    inspectorState._ribbonJumpTarget = filename;
     inspectorLoadImage(`${API}/api/labeler/frame/${encodeURIComponent(source)}/${encodeURIComponent(filename)}`);
 }
 
@@ -81,7 +83,17 @@ async function inspectorInit() {
             inspectorState._ribbonSource = source;
             inspectorState._ribbonImages = images;
             inspectorState._ribbonPage = 0;
-            inspectorState._ribbonAutoLoaded = false;
+            //  If a jump target is set (we navigated in via Open in Inspector),
+            //  the jump target's page should be shown and auto-load suppressed.
+            const jump = inspectorState._ribbonJumpTarget;
+            if (jump) {
+                const idx = images.findIndex(i => i.filename === jump);
+                if (idx >= 0) inspectorState._ribbonPage = Math.floor(idx / INSPECTOR_RIBBON_PAGE_SIZE);
+                inspectorState._ribbonAutoLoaded = true;
+                inspectorState._ribbonJumpTarget = null;
+            } else {
+                inspectorState._ribbonAutoLoaded = false;
+            }
             inspectorRenderRibbon();
         } catch(e) { console.error(e); }
     });
