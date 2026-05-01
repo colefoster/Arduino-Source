@@ -130,8 +130,12 @@ private:
     std::array<ImageFloatBox, 2> m_opponent_name_boxes;
     std::array<ImageFloatBox, 2> m_opponent_hp_boxes;
 
-    //  Up to 2 own Pokemon HP boxes.
-    std::array<ImageFloatBox, 2> m_own_hp_boxes;
+    //  Up to 2 own Pokemon HP boxes — split into separate current/max
+    //  digit regions per slot. The slash glyph between them is OCR-hostile
+    //  (often misread as 7/1/I), so reading each number independently and
+    //  combining gives much cleaner output.
+    std::array<ImageFloatBox, 2> m_own_hp_current_boxes;
+    std::array<ImageFloatBox, 2> m_own_hp_max_boxes;
 
     //  PP boxes (singles only, 4 slots).
     std::array<ImageFloatBox, 4> m_pp_boxes;
