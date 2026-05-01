@@ -2130,6 +2130,208 @@ async def ocr_suggest_bulk(request: Request):
     return {"ok": True, "suggested": len(results), "results": results, "errors": errors}
 
 
+# ── Mismatches API ──
+#
+# Compare labeled ground-truth (manifest.json) against current reader output
+# across all labeled screens. Surfaces "label says X, reader returned Y" rows
+# so the user can either fix the label (Accept got) or fix the reader/box
+# (open in inspector).
+
+#  In-memory cache: (screen, filename, reader, mtime) -> result dict
+_MISMATCH_CACHE: dict = {}
+
+#  Readers we know how to run via OcrSuggest. Anything else is skipped.
+_SUGGEST_READERS = {
+    "BattleHUDReader",
+    "MoveNameReader",
+    "BattleLogReader",
+    "TeamSelectReader",
+    "TeamSummaryReader",
+    "TeamPreviewReader",
+}
+
+
+def _suggest_via_runner(screen: str, filename: str, reader: str):
+    """Synchronous helper: ask the dev runner for one reader's output on one image.
+    Returns (result_dict | None, error_str | None)."""
+    import base64
+    import urllib.request
+    import urllib.error
+    img_path = TEST_IMAGES_DIR / screen / filename
+    if not img_path.exists():
+        return None, "image not found"
+    mtime = img_path.stat().st_mtime
+    key = (screen, filename, reader, mtime)
+    if key in _MISMATCH_CACHE:
+        return _MISMATCH_CACHE[key], None
+    try:
+        img_b64 = base64.b64encode(img_path.read_bytes()).decode()
+        payload = json.dumps({
+            "image_base64": img_b64,
+            "reader": reader,
+            "screen": screen,
+        }).encode()
+        req = urllib.request.Request(
+            f"{DEV_RUNNER}/ocr-suggest",
+            data=payload,
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+        with urllib.request.urlopen(req, timeout=60) as resp:
+            envelope = json.loads(resp.read())
+        if not envelope.get("ok"):
+            return None, envelope.get("error", "unknown")
+        result = envelope.get("result", {}) or {}
+        _MISMATCH_CACHE[key] = result
+        return result, None
+    except urllib.error.URLError as e:
+        return None, f"dev runner unreachable: {e}"
+    except Exception as e:
+        return None, str(e)
+
+
+def _is_absent(v) -> bool:
+    """Treat empty string and -1 as the universal "no label" sentinel."""
+    return v == "" or v == -1 or v is None
+
+
+def _coerce_pair(expected, got):
+    """Normalize values for comparison. Strings are case-folded; ints stay ints."""
+    if isinstance(expected, str) and isinstance(got, str):
+        return expected.strip().lower(), got.strip().lower()
+    return expected, got
+
+
+@app.get("/api/mismatches")
+async def mismatches(screen: Optional[str] = None, reader: Optional[str] = None):
+    """Find label-vs-reader disagreements across all labeled images.
+
+    Query params:
+      screen: optional filter (e.g. "move_select").
+      reader: optional filter (e.g. "BattleHUDReader").
+    """
+    config = _load_screens_yaml()
+    screens = config.get("screens", {})
+    overlays = {f"_overlays/{k}": v for k, v in config.get("overlays", {}).items()}
+    all_screens = {**screens, **overlays}
+
+    targets = []
+    for name in all_screens.keys():
+        if screen and name != screen:
+            continue
+        screen_dir = TEST_IMAGES_DIR / name
+        if not screen_dir.exists():
+            continue
+        manifest = _load_manifest(screen_dir)
+        for fname, labels in manifest.items():
+            for rname, fields in (labels or {}).items():
+                if rname not in _SUGGEST_READERS:
+                    continue
+                if reader and rname != reader:
+                    continue
+                if not isinstance(fields, dict):
+                    continue
+                targets.append((name, fname, rname, fields))
+
+    def _process_one(t):
+        s, fname, rname, fields = t
+        result, err = _suggest_via_runner(s, fname, rname)
+        if err is not None or result is None:
+            return []
+        rows = []
+        for field, expected_val in fields.items():
+            got_val = result.get(field)
+            if got_val is None:
+                continue
+            if isinstance(expected_val, list) and isinstance(got_val, list):
+                for i in range(min(len(expected_val), len(got_val))):
+                    e = expected_val[i]
+                    g = got_val[i]
+                    if _is_absent(e):
+                        continue
+                    e_cmp, g_cmp = _coerce_pair(e, g)
+                    if e_cmp != g_cmp:
+                        rows.append({
+                            "screen": s,
+                            "filename": fname,
+                            "reader": rname,
+                            "field": field,
+                            "slot": i,
+                            "expected": e,
+                            "got": g,
+                        })
+            else:
+                if _is_absent(expected_val):
+                    continue
+                e_cmp, g_cmp = _coerce_pair(expected_val, got_val)
+                if e_cmp != g_cmp:
+                    rows.append({
+                        "screen": s,
+                        "filename": fname,
+                        "reader": rname,
+                        "field": field,
+                        "slot": None,
+                        "expected": expected_val,
+                        "got": got_val,
+                    })
+        return rows
+
+    rows = []
+    loop = asyncio.get_running_loop()
+    with ThreadPoolExecutor(max_workers=8) as pool:
+        tasks = [loop.run_in_executor(pool, _process_one, t) for t in targets]
+        for batch in await asyncio.gather(*tasks):
+            rows.extend(batch)
+
+    rows.sort(key=lambda r: (r["screen"], r["filename"], r["reader"], r["field"], r["slot"] or 0))
+    return {"ok": True, "rows": rows, "scanned": len(targets)}
+
+
+@app.post("/api/mismatches/accept")
+async def mismatches_accept(request: Request):
+    """Patch a single field/slot in a manifest to accept the reader's output.
+
+    Body: { screen, filename, reader, field, slot|null, value }
+    """
+    body = await request.json()
+    screen = body.get("screen")
+    filename = body.get("filename")
+    reader = body.get("reader")
+    field = body.get("field")
+    slot = body.get("slot")
+    value = body.get("value")
+
+    if not all([screen, filename, reader, field]):
+        return JSONResponse({"error": "screen, filename, reader, field required"}, 400)
+
+    screen_dir = TEST_IMAGES_DIR / screen
+    manifest_path = screen_dir / "manifest.json"
+    if not manifest_path.exists():
+        return JSONResponse({"error": "manifest not found"}, 404)
+
+    manifest = _load_manifest(screen_dir)
+    entry = manifest.setdefault(filename, {}).setdefault(reader, {})
+    current = entry.get(field)
+
+    if slot is None:
+        entry[field] = value
+    else:
+        if not isinstance(current, list):
+            current = ["", ""] if isinstance(value, str) else [-1, -1]
+        if slot >= len(current):
+            return JSONResponse({"error": "slot out of range"}, 400)
+        current[slot] = value
+        entry[field] = current
+
+    manifest_path.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n")
+    #  Bust the cache for this image so the row doesn't re-appear.
+    img_path = screen_dir / filename
+    if img_path.exists():
+        mtime = img_path.stat().st_mtime
+        _MISMATCH_CACHE.pop((screen, filename, reader, mtime), None)
+    return {"ok": True}
+
+
 # ── Validation API ──
 
 @app.get("/api/validation/summary")

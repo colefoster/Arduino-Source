@@ -1,0 +1,21 @@
+<div class="view" id="view-mismatches">
+    <h1>Mismatches</h1>
+    <div class="subtitle">Label vs reader disagreements. Accept &rarr; trust the reader (fix label). Inspector &rarr; tune the box.</div>
+    <div style="display:flex; gap:8px; align-items:center; margin:12px 0;">
+        <select id="mismatches-screen" style="background:#161b22; color:#c9d1d9; border:1px solid #30363d; padding:4px 8px; font-family:inherit; font-size:12px;">
+            <option value="">All screens</option>
+        </select>
+        <select id="mismatches-reader" style="background:#161b22; color:#c9d1d9; border:1px solid #30363d; padding:4px 8px; font-family:inherit; font-size:12px;">
+            <option value="">All readers</option>
+            <option value="BattleHUDReader">BattleHUDReader</option>
+            <option value="MoveNameReader">MoveNameReader</option>
+            <option value="TeamPreviewReader">TeamPreviewReader</option>
+            <option value="TeamSelectReader">TeamSelectReader</option>
+            <option value="TeamSummaryReader">TeamSummaryReader</option>
+            <option value="BattleLogReader">BattleLogReader</option>
+        </select>
+        <button class="btn btn-primary" id="mismatches-scan">Scan</button>
+        <span id="mismatches-status" style="color:#8b949e; font-size:11px;"></span>
+    </div>
+    <div id="mismatches-content"></div>
+</div>
