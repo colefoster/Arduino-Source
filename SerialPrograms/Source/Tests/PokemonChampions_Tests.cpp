@@ -177,6 +177,53 @@ int test_pokemonChampions_SpeciesReader_Doubles(const ImageViewRGB32& image, con
 }
 
 
+// ─── Own SpeciesReader ──────────────────────────────────────────────
+//
+//  Reads the species name in the bottom-left HUD bar.
+//  Singles uses slot 0; doubles uses slot 0/1.
+
+int test_pokemonChampions_OwnSpeciesReader(const ImageViewRGB32& image, const std::vector<std::string>& words){
+    if (words.empty()){
+        cerr << "Error: OwnSpeciesReader test needs a species slug." << endl;
+        return 1;
+    }
+
+    const std::string& expected = words.back();
+
+    auto& logger = global_logger_command_line();
+    BattleHUDReader reader(Language::English);
+    std::string result = reader.read_own_species(logger, image, 0);
+
+    TEST_RESULT_EQUAL(result, expected);
+    return 0;
+}
+
+int test_pokemonChampions_OwnSpeciesReader_Doubles(const ImageViewRGB32& image, const std::vector<std::string>& words){
+    if (words.size() < 2){
+        cerr << "Error: OwnSpeciesReader_Doubles needs _s<slot>_<species>." << endl;
+        return 1;
+    }
+
+    const std::string& slot_str = words[words.size() - 2];
+    const std::string& expected = words.back();
+
+    uint8_t slot = 0;
+    if (slot_str == "s0") slot = 0;
+    else if (slot_str == "s1") slot = 1;
+    else {
+        cerr << "Error: expected s0 or s1, got: " << slot_str << endl;
+        return 1;
+    }
+
+    auto& logger = global_logger_command_line();
+    BattleHUDReader reader(Language::English, BattleMode::DOUBLES);
+    std::string result = reader.read_own_species(logger, image, slot);
+
+    TEST_RESULT_EQUAL(result, expected);
+    return 0;
+}
+
+
 // ─── Opponent HP Reader ─────────────────────────────────────────────
 //
 //  Filename convention: <prefix>_<hp-pct>.png  (e.g. frame_75.png)

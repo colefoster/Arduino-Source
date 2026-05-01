@@ -581,6 +581,11 @@ void BattleHUDReader::init_singles_boxes(){
     m_own_hp_current_boxes[1] = ImageFloatBox(0, 0, 0, 0);  // unused
     m_own_hp_max_boxes[1]     = ImageFloatBox(0, 0, 0, 0);
 
+    //  Own species name sits in the bar above the HP digits. Initial
+    //  estimate — tune via inspector.
+    m_own_name_boxes[0] = ImageFloatBox(0.040, 0.892, 0.135, 0.034);
+    m_own_name_boxes[1] = ImageFloatBox(0, 0, 0, 0);  // unused
+
     //  PP boxes — right edge of each move pill.
     const double PP_X      = 0.927;
     const double PP_WIDTH  = 0.057;
@@ -626,6 +631,11 @@ void BattleHUDReader::init_doubles_boxes(){
     m_own_hp_max_boxes[0]     = ImageFloatBox(0.1746, 0.9464, 0.0335, 0.0229);
     m_own_hp_current_boxes[1] = ImageFloatBox(0.3363, 0.9342, 0.0450, 0.0361);
     m_own_hp_max_boxes[1]     = ImageFloatBox(0.3800, 0.9473, 0.0340, 0.0215);
+
+    //  Own species name sits in the bar above the HP digits. Initial
+    //  estimates derived from the HP-bar offsets — tune via inspector.
+    m_own_name_boxes[0] = ImageFloatBox(0.040, 0.892, 0.135, 0.034);
+    m_own_name_boxes[1] = ImageFloatBox(0.245, 0.892, 0.135, 0.034);
 
     //  No PP boxes on the doubles action menu screen.
     //  (Moves are shown after pressing FIGHT, in a different layout.)
@@ -673,6 +683,9 @@ void BattleHUDReader::make_overlays(VideoOverlaySet& items) const{
         if (m_own_hp_max_boxes[i].width > 0){
             items.add(COLOR_BLUE, m_own_hp_max_boxes[i]);
         }
+        if (m_own_name_boxes[i].width > 0){
+            items.add(COLOR_CYAN, m_own_name_boxes[i]);
+        }
     }
     if (m_mode != BattleMode::DOUBLES){
         for (const ImageFloatBox& box : m_pp_boxes){
@@ -689,6 +702,18 @@ std::string BattleHUDReader::read_opponent_species(
 ) const{
     if (slot >= 2 || m_opponent_name_boxes[slot].width == 0) return "";
     ImageViewRGB32 cropped = extract_box_reference(screen, m_opponent_name_boxes[slot]);
+    OCR::StringMatchResult result = SpeciesNameOCR::instance().read_substring(
+        logger, m_language, cropped, OCR::WHITE_TEXT_FILTERS()
+    );
+    if (result.results.empty()) return "";
+    return result.results.begin()->second.token;
+}
+
+std::string BattleHUDReader::read_own_species(
+    Logger& logger, const ImageViewRGB32& screen, uint8_t slot
+) const{
+    if (slot >= 2 || m_own_name_boxes[slot].width == 0) return "";
+    ImageViewRGB32 cropped = extract_box_reference(screen, m_own_name_boxes[slot]);
     OCR::StringMatchResult result = SpeciesNameOCR::instance().read_substring(
         logger, m_language, cropped, OCR::WHITE_TEXT_FILTERS()
     );
@@ -757,6 +782,7 @@ BattleHUDState BattleHUDReader::read_all(
         state.opponents[i].species = read_opponent_species(logger, screen, i);
         state.opponents[i].hp_pct  = read_opponent_hp_pct(logger, screen, i);
 
+        state.own[i].species    = read_own_species(logger, screen, i);
         auto own_hp = read_own_hp(logger, screen, i);
         state.own[i].hp_current = own_hp.first;
         state.own[i].hp_max     = own_hp.second;

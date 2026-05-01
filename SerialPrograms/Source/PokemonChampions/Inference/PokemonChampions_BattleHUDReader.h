@@ -107,6 +107,9 @@ public:
     //  Read opponent species name from badge (slot 0 or 1).
     std::string read_opponent_species(Logger& logger, const ImageViewRGB32& screen, uint8_t slot = 0) const;
 
+    //  Read own species name from the bottom-left HUD bar (slot 0 or 1).
+    std::string read_own_species(Logger& logger, const ImageViewRGB32& screen, uint8_t slot = 0) const;
+
     //  Read opponent HP% (slot 0 or 1). Returns 0-100 or -1.
     int read_opponent_hp_pct(Logger& logger, const ImageViewRGB32& screen, uint8_t slot = 0) const;
 
@@ -129,6 +132,10 @@ private:
     //  Up to 2 opponent name badges and HP% boxes.
     std::array<ImageFloatBox, 2> m_opponent_name_boxes;
     std::array<ImageFloatBox, 2> m_opponent_hp_boxes;
+
+    //  Up to 2 own Pokemon species name boxes (above the HP digits in the
+    //  bottom-left HUD bar).
+    std::array<ImageFloatBox, 2> m_own_name_boxes;
 
     //  Up to 2 own Pokemon HP boxes — split into separate current/max
     //  digit regions per slot. The slash glyph between them is OCR-hostile
