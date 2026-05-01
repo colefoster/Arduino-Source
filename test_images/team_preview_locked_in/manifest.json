@@ -2,12 +2,12 @@
   "20260423-183259675247.png": {
     "TeamPreviewReader": {
       "opponent_species": [
-        "",
-        "",
-        "floette-mega",
-        "tauros-paldea-combat",
-        "salazzle",
-        "kleavor"
+        "tyranitar",
+        "gengar",
+        "whimsicott",
+        "dragonite",
+        "aggron",
+        "sylveon"
       ],
       "own_species": [
         "",
@@ -22,12 +22,12 @@
   "20260428-085929315196.png": {
     "TeamPreviewReader": {
       "opponent_species": [
-        "reuniclus",
-        "vanilluxe",
-        "salazzle",
-        "tauros-paldea-combat",
-        "floette-mega",
-        ""
+        "excadrill",
+        "charizard",
+        "hippowdon",
+        "dragonite",
+        "primarina",
+        "scizor"
       ],
       "own_species": [
         "",
@@ -42,12 +42,12 @@
   "preparing.png": {
     "TeamPreviewReader": {
       "opponent_species": [
-        "",
-        "delphox",
-        "tauros-paldea-blaze",
-        "tauros-paldea-combat",
-        "garchomp",
-        "salazzle"
+        "greninja",
+        "volcarona",
+        "lopunny",
+        "aegislash",
+        "rotom-wash",
+        "hippowdon"
       ],
       "own_species": [
         "",
@@ -62,12 +62,12 @@
   "preparing_live.png": {
     "TeamPreviewReader": {
       "opponent_species": [
-        "floette-mega",
-        "victreebel-mega",
+        "charizard",
+        "greninja",
+        "steelix",
         "",
-        "vanilluxe",
-        "",
-        "azumarill"
+        "gengar",
+        "drampa"
       ],
       "own_species": [
         "",
