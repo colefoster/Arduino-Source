@@ -173,12 +173,18 @@ CROP_DEFS = {
     "TeamPreviewDetector": [
         {"name": "title_text", "box": [0.3604, 0.2037, 0.1375, 0.0389]},
     ],
+    "MegaEvolveDetector": [
+        #  Placeholder — retune via inspector against move_select frames
+        #  with vs. without the toggle visible.
+        {"name": "toggle_region", "box": [0.850, 0.420, 0.060, 0.060]},
+    ],
 }
 
 BOOL_DETECTORS = {
     "MoveSelectDetector", "ActionMenuDetector", "PostMatchScreenDetector",
     "PreparingForBattleDetector", "TeamSelectDetector", "TeamPreviewDetector",
     "MainMenuDetector", "MovesMoreDetector", "CommunicatingDetector",
+    "MegaEvolveDetector",
 }
 
 BATTLE_LOG_EVENTS = [
@@ -202,7 +208,7 @@ FOLDER_TO_READER = {
 # Which readers to show together for each screen type
 FOLDER_READERS = {
     "action_menu": ["ActionMenuDetector", "BattleHUDReader"],
-    "move_select": ["MoveSelectDetector", "MoveNameReader", "MoveSelectCursorSlot", "BattleHUDReader"],
+    "move_select": ["MoveSelectDetector", "MegaEvolveDetector", "MoveNameReader", "MoveSelectCursorSlot", "BattleHUDReader"],
     "battle_log": ["BattleLogReader", "BattleHUDReader"],
     "post_match": ["PostMatchScreenDetector"],
     "preparing": ["PreparingForBattleDetector"],

@@ -316,6 +316,7 @@ const std::map<std::string, TestFunction> TEST_MAP = {
     {"PokemonChampions_ResultScreenDetector", std::bind(image_bool_detector_helper, test_pokemonChampions_ResultScreenDetector, _1)},
     {"PokemonChampions_PreparingForBattleDetector", std::bind(image_bool_detector_helper, test_pokemonChampions_PreparingForBattleDetector, _1)},
     {"PokemonChampions_PostMatchScreenDetector", std::bind(image_bool_detector_helper, test_pokemonChampions_PostMatchScreenDetector, _1)},
+    {"PokemonChampions_MegaEvolveDetector", std::bind(image_bool_detector_helper, test_pokemonChampions_MegaEvolveDetector, _1)},
     {"PokemonChampions_MainMenuDetector", std::bind(image_bool_detector_helper, test_pokemonChampions_MainMenuDetector, _1)},
     //  PokemonChampions — OCR Readers
     {"PokemonChampions_MoveNameReader", std::bind(image_words_detector_helper, test_pokemonChampions_MoveNameReader, _1)},

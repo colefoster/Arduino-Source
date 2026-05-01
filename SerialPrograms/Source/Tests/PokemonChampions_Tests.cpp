@@ -15,6 +15,7 @@
 #include "CommonFramework/ImageTools/ImageBoxes.h"
 
 //  Screen detectors
+#include "PokemonChampions/Inference/PokemonChampions_MegaEvolveDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_MoveSelectDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_ActiveHUDSlotDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_ActionMenuDetector.h"
@@ -78,6 +79,13 @@ int test_pokemonChampions_PreparingForBattleDetector(const ImageViewRGB32& image
 
 int test_pokemonChampions_PostMatchScreenDetector(const ImageViewRGB32& image, bool target){
     PostMatchScreenDetector detector;
+    bool result = detector.detect(image);
+    TEST_RESULT_EQUAL(result, target);
+    return 0;
+}
+
+int test_pokemonChampions_MegaEvolveDetector(const ImageViewRGB32& image, bool target){
+    MegaEvolveDetector detector;
     bool result = detector.detect(image);
     TEST_RESULT_EQUAL(result, target);
     return 0;
