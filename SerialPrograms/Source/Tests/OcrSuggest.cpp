@@ -63,14 +63,11 @@ int run_ocr_suggest(const std::string& reader_name, const std::string& image_pat
             int hp1 = reader.read_opponent_hp_pct(log, image, 1);
             auto own0 = reader.read_own_hp(log, image, 0);
             auto own1 = reader.read_own_hp(log, image, 1);
-            auto fmt_hp = [](std::pair<int,int> p) -> std::string{
-                if (p.first < 0) return "";
-                return std::to_string(p.first) + "/" + std::to_string(p.second);
-            };
             std::cout << "{"
                 << "\"opponent_species\":[\"" << opp0 << "\",\"" << opp1 << "\"],"
                 << "\"opponent_hp_pct\":[" << hp0 << "," << hp1 << "],"
-                << "\"own_hp\":[\"" << fmt_hp(own0) << "\",\"" << fmt_hp(own1) << "\"],"
+                << "\"own_hp_current\":[" << own0.first << "," << own1.first << "],"
+                << "\"own_hp_max\":[" << own0.second << "," << own1.second << "],"
                 << "\"own_species\":[\"\",\"\"]"
                 << "}" << std::endl;
         }
