@@ -25,10 +25,12 @@ echo "==> git push"
 git push
 
 echo "==> remote: git pull --rebase --autostash + restart"
+#  Tree is cole-owned so the dashboard service (User=cole) can write
+#  manifests + move images. Git runs as cole too.
 ssh ash 'set -e
 cd /opt/pokemon-champions
-sudo -u www-data git fetch origin main
-sudo -u www-data git rebase --autostash origin/main
+sudo -u cole git fetch origin main
+sudo -u cole git rebase --autostash origin/main
 sudo systemctl restart pokemon-champions-dashboard
 sleep 1
 systemctl is-active pokemon-champions-dashboard'
