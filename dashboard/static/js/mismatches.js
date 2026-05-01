@@ -60,6 +60,7 @@ function renderMismatchesTable() {
 
     let html = '<table style="width:100%; border-collapse:collapse; font-size:12px;">';
     html += '<thead><tr style="border-bottom:1px solid #30363d; color:#8b949e;">';
+    html += '<th style="text-align:left; padding:6px; width:140px;">Frame</th>';
     html += '<th style="text-align:left; padding:6px;">Screen / file</th>';
     html += '<th style="text-align:left; padding:6px;">Reader.field[slot]</th>';
     html += '<th style="text-align:left; padding:6px;">Expected</th>';
@@ -73,18 +74,32 @@ function renderMismatchesTable() {
         const filePath = `${r.screen}/${r.filename}`;
         const exp = r.expected === '' ? '∅' : String(r.expected);
         const got = r.got === '' ? '∅' : String(r.got);
+        const thumbUrl = `${API}/api/gallery/thumb/${encodeURIComponent(r.screen)}/${encodeURIComponent(r.filename)}`;
+        const fullUrl = `${API}/api/gallery/image/${encodeURIComponent(r.screen)}/${encodeURIComponent(r.filename)}`;
         html += `<tr data-idx="${idx}" style="border-bottom:1px solid #21262d;">`;
-        html += `<td style="padding:6px; color:#c9d1d9;">${filePath}</td>`;
+        html += `<td style="padding:6px;"><img src="${thumbUrl}" data-full="${fullUrl}" class="mismatch-thumb" style="width:128px; height:auto; border:1px solid #30363d; border-radius:3px; cursor:zoom-in; display:block;" loading="lazy"></td>`;
+        html += `<td style="padding:6px; color:#c9d1d9; word-break:break-all;">${filePath}</td>`;
         html += `<td style="padding:6px; color:#8b949e;">${fieldKey}</td>`;
         html += `<td style="padding:6px; color:#f85149; font-family:monospace;">${exp}</td>`;
         html += `<td style="padding:6px; color:#3fb950; font-family:monospace;">${got}</td>`;
-        html += `<td style="padding:6px;">`;
+        html += `<td style="padding:6px; white-space:nowrap;">`;
         html += `<button class="btn mismatch-accept-btn" data-idx="${idx}" style="font-size:10px; padding:2px 8px; margin-right:4px;">Accept got</button>`;
         html += `<button class="btn mismatch-inspector-btn" data-idx="${idx}" style="font-size:10px; padding:2px 8px;">Inspector</button>`;
         html += `</td></tr>`;
     });
     html += '</tbody></table>';
     content.innerHTML = html;
+
+    //  Click thumb -> full-size overlay.
+    content.querySelectorAll('.mismatch-thumb').forEach(img => {
+        img.addEventListener('click', () => {
+            const overlay = document.createElement('div');
+            overlay.style.cssText = 'position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:9999; display:flex; align-items:center; justify-content:center; cursor:zoom-out;';
+            overlay.innerHTML = `<img src="${img.dataset.full}" style="max-width:95vw; max-height:95vh;">`;
+            overlay.addEventListener('click', () => overlay.remove());
+            document.body.appendChild(overlay);
+        });
+    });
 
     content.querySelectorAll('.mismatch-accept-btn').forEach(btn => {
         btn.addEventListener('click', () => acceptMismatch(parseInt(btn.dataset.idx)));
