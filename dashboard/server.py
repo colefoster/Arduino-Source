@@ -115,11 +115,22 @@ CROP_DEFS = {
         {"name": "opp0_species", "box": [0.6172, 0.0454, 0.1219, 0.0417]},
         {"name": "opp1_species", "box": [0.8286, 0.0481, 0.1151, 0.0417]},
     ],
+    "OwnHPReader": [
+        {"name": "own_hp_current", "box": [0.1304, 0.9338, 0.0448, 0.0362]},
+        {"name": "own_hp_max",     "box": [0.1746, 0.9464, 0.0335, 0.0229]},
+    ],
     "OwnHPReader_Doubles": [
         {"name": "own0_hp_current", "box": [0.1304, 0.9338, 0.0448, 0.0362]},
         {"name": "own0_hp_max",     "box": [0.1746, 0.9464, 0.0335, 0.0229]},
         {"name": "own1_hp_current", "box": [0.3363, 0.9342, 0.0450, 0.0361]},
         {"name": "own1_hp_max",     "box": [0.3800, 0.9473, 0.0340, 0.0215]},
+    ],
+    "OwnSpeciesReader": [
+        {"name": "own_species", "box": [0.040, 0.892, 0.135, 0.034]},
+    ],
+    "OwnSpeciesReader_Doubles": [
+        {"name": "own0_species", "box": [0.040, 0.892, 0.135, 0.034]},
+        {"name": "own1_species", "box": [0.245, 0.892, 0.135, 0.034]},
     ],
     "CommunicatingDetector": [
         {"name": "communicating_text", "box": [0.380, 0.450, 0.240, 0.050]},
@@ -202,8 +213,8 @@ FOLDER_TO_READER = {
 
 # Which readers to show together for each screen type
 FOLDER_READERS = {
-    "action_menu": ["ActionMenuDetector", "SpeciesReader", "OpponentHPReader"],
-    "move_select": ["MoveSelectDetector", "MoveNameReader", "MoveSelectCursorSlot", "SpeciesReader", "OpponentHPReader"],
+    "action_menu": ["ActionMenuDetector", "SpeciesReader", "SpeciesReader_Doubles", "OpponentHPReader", "OpponentHPReader_Doubles", "OwnHPReader", "OwnHPReader_Doubles", "OwnSpeciesReader", "OwnSpeciesReader_Doubles"],
+    "move_select": ["MoveSelectDetector", "MoveNameReader", "MoveSelectCursorSlot", "SpeciesReader", "SpeciesReader_Doubles", "OpponentHPReader", "OpponentHPReader_Doubles", "OwnHPReader", "OwnHPReader_Doubles", "OwnSpeciesReader", "OwnSpeciesReader_Doubles"],
     "battle_log": ["BattleLogReader", "SpeciesReader"],
     "post_match": ["PostMatchScreenDetector"],
     "preparing": ["PreparingForBattleDetector"],
@@ -221,7 +232,10 @@ READER_TYPES.update({
     "SpeciesReader_Doubles": "multi_text:2",
     "OpponentHPReader": "int:0:100",
     "OpponentHPReader_Doubles": "int:0:100",
+    "OwnHPReader": "multi_text:2",
     "OwnHPReader_Doubles": "multi_text:2",
+    "OwnSpeciesReader": "text",
+    "OwnSpeciesReader_Doubles": "multi_text:2",
     "MoveSelectCursorSlot": "int:0:3",
     "BattleLogReader": "event",
     "CommunicatingDetector": "bool",
