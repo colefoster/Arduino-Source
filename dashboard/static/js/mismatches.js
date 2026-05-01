@@ -114,11 +114,9 @@ function renderMismatchesTable() {
     content.querySelectorAll('.mismatch-inspector-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             const r = mismatchesRows[parseInt(btn.dataset.idx)];
-            //  Inspector source path is "test_images/<screen>" for screen dirs;
-            //  overlays are already prefixed with "_overlays/" by the API.
-            const source = r.screen.startsWith('_overlays/')
-                ? `test_images/${r.screen}`
-                : `test_images/${r.screen}`;
+            //  Inspector source paths use the "__test__/<dir>" alias for
+            //  test_images/* directories — see /api/labeler/sources.
+            const source = `__test__/${r.screen}`;
             location.hash = `#/inspector?source=${encodeURIComponent(source)}&filename=${encodeURIComponent(r.filename)}`;
         });
     });
