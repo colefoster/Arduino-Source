@@ -715,7 +715,14 @@ std::pair<int, int> BattleHUDReader::read_own_hp(
         if (box.width == 0) return -1;
         ImageViewRGB32 cropped = extract_box_reference(screen, box);
         std::string text = raw_ocr_numbers(cropped);
-        return parse_fraction(text).first;
+        int v = parse_fraction(text).first;
+        //  HP can't exceed 999 — strip leading OCR noise digits.
+        //  Common case: serif on a "1" reads as "7" → "159" becomes "7159".
+        while (v > 999){
+            std::string s = std::to_string(v);
+            v = std::stoi(s.substr(1));
+        }
+        return v;
     };
 
     int cur = read_one(m_own_hp_current_boxes[slot]);
