@@ -56,7 +56,10 @@ private:
     Language m_language;
     std::array<ImageFloatBox, 6> m_own_species_boxes;
     std::array<ImageFloatBox, 6> m_own_item_boxes;
-    std::array<ImageFloatBox, 6> m_opp_sprite_boxes;
+    //  Two opp layouts: outward "selecting" pills, inward "locked-in" pills.
+    //  read() picks based on PreparingForBattleDetector firing.
+    std::array<ImageFloatBox, 6> m_opp_sprite_boxes;            //  locked-in
+    std::array<ImageFloatBox, 6> m_opp_sprite_boxes_selecting;  //  pre-confirm
 };
 
 
