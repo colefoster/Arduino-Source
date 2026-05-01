@@ -75,14 +75,15 @@ TeamPreviewReader::TeamPreviewReader(Language language)
     const double OWN_IT_W  = 0.0823;
     const double OWN_IT_H  = 0.0333;
 
-    //  --- Opp sprite boxes ---
-    //  opp_sprite_0 at (0.8380, 0.1509, 0.0578, 0.0917)
-    //  opp_sprite_5 at (0.8411, 0.7407, 0.0583, 0.0880)
-    const double OPP_X = 0.8380;
-    const double OPP_W = 0.0583;
-    const double OPP_H = 0.0917;
-    const double OPP_Y0 = 0.1509;
-    const double OPP_Y5 = 0.7407;
+    //  --- Opp sprite boxes (locked-in screen) ---
+    //  Wider boxes that include enough pink-pill border for the sprite
+    //  matcher's auto-crop to estimate background color correctly.
+    //  Anchors saved at slot 0/1/5 in inspector; rest interpolated.
+    const double OPP_X = 0.7181;
+    const double OPP_W = 0.0664;
+    const double OPP_H = 0.1009;
+    const double OPP_Y0 = 0.1482;
+    const double OPP_Y5 = 0.7310;
     const double OPP_STEP = (OPP_Y5 - OPP_Y0) / 5.0;
 
     for (uint8_t i = 0; i < 6; i++){
