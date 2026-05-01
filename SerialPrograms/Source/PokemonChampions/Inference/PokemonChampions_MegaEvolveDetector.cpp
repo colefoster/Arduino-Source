@@ -30,7 +30,7 @@ namespace PokemonChampions{
 
 
 MegaEvolveDetector::MegaEvolveDetector()
-    : m_toggle_region(0.5968, 0.9198, 0.0194, 0.0325)
+    : m_toggle_region(0.5987, 0.9123, 0.0169, 0.0203)
 {}
 
 void MegaEvolveDetector::make_overlays(VideoOverlaySet& items) const{
