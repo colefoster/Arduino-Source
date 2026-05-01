@@ -116,10 +116,10 @@ CROP_DEFS = {
         {"name": "opp1_species", "box": [0.8286, 0.0481, 0.1151, 0.0417]},
     ],
     "OwnHPReader_Doubles": [
-        {"name": "own0_hp_current", "box": [0.035, 0.920, 0.045, 0.050]},
-        {"name": "own0_hp_max",     "box": [0.085, 0.920, 0.050, 0.050]},
-        {"name": "own1_hp_current", "box": [0.225, 0.920, 0.045, 0.050]},
-        {"name": "own1_hp_max",     "box": [0.275, 0.920, 0.050, 0.050]},
+        {"name": "own0_hp_current", "box": [0.1304, 0.9338, 0.0448, 0.0362]},
+        {"name": "own0_hp_max",     "box": [0.1746, 0.9464, 0.0335, 0.0229]},
+        {"name": "own1_hp_current", "box": [0.3363, 0.9342, 0.0450, 0.0361]},
+        {"name": "own1_hp_max",     "box": [0.3800, 0.9473, 0.0340, 0.0215]},
     ],
     "CommunicatingDetector": [
         {"name": "communicating_text", "box": [0.380, 0.450, 0.240, 0.050]},
