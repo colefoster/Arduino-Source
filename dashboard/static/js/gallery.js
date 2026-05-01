@@ -1013,7 +1013,10 @@ async function buildLabelForm(overlay, screen, filename, img) {
                     method:'POST', headers:{'Content-Type':'application/json'},
                     body: JSON.stringify({screen, filename})
                 }).then(r => r.json());
-                const detEntry = (resp.detectors || []).find(d => d.name === det);
+                //  /api/detector/debug proxies the dev-runner envelope:
+                //  { ok: true, result: { detectors: [...] } }
+                const detectors = (resp.result && resp.result.detectors) || resp.detectors || [];
+                const detEntry = detectors.find(d => d.name === det);
                 if (!detEntry) {
                     btn.textContent = 'Not in dev-runner';
                     statusEl.textContent = `${det} not exposed by detector-debug — rebuild SerialProgramsCommandLine`;
