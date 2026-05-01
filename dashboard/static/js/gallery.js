@@ -493,8 +493,9 @@ function renderGalleryGrid() {
     // Target the cards container if present, otherwise the whole grid (e.g. inbox view).
     const grid = document.getElementById('gallery-cards') || document.getElementById('gallery-grid');
     let filtered = galleryImages;
-    if (galleryFilter === 'true') filtered = galleryImages.filter(i => (i.status || '') !== 'unlabeled' && _gtLabel(i) !== 'Unlabeled');
+    if (galleryFilter === 'true') filtered = galleryImages.filter(i => (i.status || '') !== 'unlabeled' && (i.status || '') !== 'partial' && _gtLabel(i) !== 'Unlabeled' && _gtLabel(i) !== 'Partial');
     if (galleryFilter === 'false') filtered = galleryImages.filter(i => i.status === 'unlabeled' || _gtLabel(i) === 'Unlabeled');
+    if (galleryFilter === 'partial') filtered = galleryImages.filter(i => i.status === 'partial' || _gtLabel(i) === 'Partial');
 
     if (!filtered.length) {
         grid.innerHTML = '<div style="color:#484f58; font-size:12px;">No images match filter</div>';
