@@ -136,8 +136,9 @@ async function inspectorInit() {
     // Editable box coordinate inputs
     inspectorAttachBoxInputs();
 
-    // Test OCR button
+    // Test OCR buttons
     document.getElementById('inspector-ocr-btn').addEventListener('click', inspectorTestOcr);
+    document.getElementById('inspector-ocr-sweep-btn').addEventListener('click', inspectorOcrSweep);
 
     // Canvas setup
     const canvasWrap = document.getElementById('inspector-canvas-wrap');
@@ -609,6 +610,101 @@ async function inspectorTestOcr() {
     } catch (e) {
         status.textContent = 'Error: ' + e.message;
     }
+    btn.disabled = false;
+}
+
+async function inspectorOcrSweep() {
+    const sel = inspectorState.selection;
+    const source = inspectorState._ribbonSource;
+    const images = inspectorState._ribbonImages || [];
+    const status = document.getElementById('inspector-ocr-status');
+    const sweepEl = document.getElementById('inspector-ocr-sweep');
+    const btn = document.getElementById('inspector-ocr-sweep-btn');
+
+    if (!sel) { status.textContent = 'No selection — draw a box first'; return; }
+    if (!source || !images.length) { status.textContent = 'No source loaded'; return; }
+
+    btn.disabled = true;
+    sweepEl.style.display = '';
+    sweepEl.innerHTML = '<div style="color:#8b949e;font-size:11px;padding:6px;">Running OCR on ' + images.length + ' images...</div>';
+
+    // Pool with limited concurrency to avoid hammering ColePC.
+    const CONCURRENCY = 6;
+    const results = new Array(images.length);
+    let completed = 0;
+
+    async function runOne(i) {
+        const fn = images[i].filename;
+        try {
+            const resp = await fetch(`${API}/api/inspector/ocr-crop`, {
+                method: 'POST', headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    source, filename: fn,
+                    x: sel.x, y: sel.y, w: sel.w, h: sel.h,
+                }),
+            }).then(r => r.json());
+            results[i] = resp.ok ? resp.result : { raw: '', error: resp.error || 'failed' };
+        } catch (e) {
+            results[i] = { raw: '', error: e.message };
+        }
+        completed++;
+        status.textContent = `${completed}/${images.length}`;
+    }
+
+    // Simple worker pool.
+    let next = 0;
+    async function worker() {
+        while (next < images.length) {
+            const i = next++;
+            await runOne(i);
+        }
+    }
+    await Promise.all(Array.from({length: CONCURRENCY}, worker));
+
+    // Aggregate counts.
+    const tally = {};
+    for (const r of results) {
+        const key = (r && (r.current >= 0 ? `${r.current}` : (r.raw || '<empty>'))) || '<error>';
+        tally[key] = (tally[key] || 0) + 1;
+    }
+    const tallyEntries = Object.entries(tally).sort((a, b) => b[1] - a[1]);
+
+    // Render table.
+    const escape = s => String(s).replace(/[<&]/g, c => ({'<':'&lt;','&':'&amp;'}[c]));
+    let html = '<div style="font-size:11px;color:#8b949e;margin-bottom:6px;">Tally: '
+        + tallyEntries.map(([v, n]) => `<code>${escape(v)}</code>×${n}`).join(' &middot; ')
+        + '</div>';
+    html += '<table style="width:100%;font-size:11px;border-collapse:collapse;">';
+    html += '<thead><tr style="color:#8b949e;border-bottom:1px solid #30363d;">'
+        + '<th style="text-align:left;padding:3px 4px;">image</th>'
+        + '<th style="text-align:left;padding:3px 4px;">raw</th>'
+        + '<th style="text-align:left;padding:3px 4px;">parsed</th>'
+        + '</tr></thead><tbody>';
+    images.forEach((img, i) => {
+        const r = results[i] || {};
+        const raw = r.raw != null ? r.raw : '';
+        const parsed = (r.current != null && r.current >= 0)
+            ? (r.max >= 0 ? `${r.current}/${r.max}` : `${r.current}`)
+            : '';
+        const isErr = r.error;
+        html += `<tr data-fname="${img.filename}" style="cursor:pointer;border-bottom:1px solid #21262d;${isErr?'color:#f85149;':''}">`
+            + `<td style="padding:3px 4px;color:#58a6ff;">${img.filename.length > 30 ? img.filename.slice(0,30) + '…' : img.filename}</td>`
+            + `<td style="padding:3px 4px;"><code>${escape(raw)}</code></td>`
+            + `<td style="padding:3px 4px;"><code>${escape(parsed)}</code></td>`
+            + `</tr>`;
+    });
+    html += '</tbody></table>';
+    sweepEl.innerHTML = html;
+
+    // Click row to load that image (so user can compare visually + tweak).
+    sweepEl.querySelectorAll('tr[data-fname]').forEach(tr => {
+        tr.addEventListener('click', () => {
+            const fn = tr.dataset.fname;
+            inspectorLoadImage(`${API}/api/labeler/frame/${encodeURIComponent(source)}/${encodeURIComponent(fn)}`);
+        });
+    });
+
+    status.textContent = `Done. ${completed}/${images.length}`;
     btn.disabled = false;
 }
 
