@@ -2348,11 +2348,43 @@ async def mismatches(screen: Optional[str] = None, reader: Optional[str] = None)
                     continue
                 targets.append((name, fname, rname, fields))
 
+    #  Map (reader, field, slot|None) -> CROP_DEFS box name. Used to attach
+    #  the relevant pixel region to each mismatch row so the user can verify
+    #  in-place without opening the Inspector.
+    def _crop_box(reader: str, field: str, slot):
+        if reader != "BattleHUDReader":
+            return None
+        if slot is None or not isinstance(slot, int):
+            return None
+        defs = CROP_DEFS.get(reader, [])
+        #  BattleHUDReader uses names like "opp0_hp_pct", "own1_species".
+        side = None
+        suffix = None
+        if field == "opponent_species":
+            side, suffix = "opp", "species"
+        elif field == "opponent_hp_pct":
+            side, suffix = "opp", "hp_pct"
+        elif field == "own_species":
+            side, suffix = "own", "species"
+        elif field == "own_hp_current":
+            side, suffix = "own", "hp_current"
+        elif field == "own_hp_max":
+            side, suffix = "own", "hp_max"
+        if side is None:
+            return None
+        target = f"{side}{slot}_{suffix}"
+        for d in defs:
+            if d["name"] == target:
+                return d["box"]
+        return None
+
     def _process_one(t):
+        import base64
         s, fname, rname, fields = t
         result, err = _suggest_via_runner(s, fname, rname)
         if err is not None or result is None:
             return []
+        img_path = TEST_IMAGES_DIR / s / fname
         rows = []
         for field, expected_val in fields.items():
             got_val = result.get(field)
@@ -2366,6 +2398,13 @@ async def mismatches(screen: Optional[str] = None, reader: Optional[str] = None)
                         continue
                     e_cmp, g_cmp = _coerce_pair(e, g)
                     if e_cmp != g_cmp:
+                        box = _crop_box(rname, field, i)
+                        crop_data = None
+                        if box and img_path.exists():
+                            try:
+                                crop_data = "data:image/png;base64," + base64.b64encode(_extract_crop(img_path, box)).decode()
+                            except Exception:
+                                pass
                         rows.append({
                             "screen": s,
                             "filename": fname,
@@ -2374,6 +2413,7 @@ async def mismatches(screen: Optional[str] = None, reader: Optional[str] = None)
                             "slot": i,
                             "expected": e,
                             "got": g,
+                            "crop": crop_data,
                         })
             else:
                 if _is_absent(expected_val):

@@ -3,12 +3,12 @@
 // ═══════════════════════════════════════════════════════════════
 let mismatchesInited = false;
 let mismatchesRows = [];
+let mismatchesFocusIdx = -1;
 
 async function mismatchesInit() {
     if (mismatchesInited) return;
     mismatchesInited = true;
 
-    //  Populate screen filter from gallery's known screens.
     try {
         const screens = await api('/api/gallery/screens');
         const sel = document.getElementById('mismatches-screen');
@@ -20,6 +20,40 @@ async function mismatchesInit() {
     } catch (e) { console.error(e); }
 
     document.getElementById('mismatches-scan').addEventListener('click', mismatchesScan);
+    document.getElementById('mismatches-accept-all').addEventListener('click', acceptAllVisible);
+
+    //  Keyboard navigation — only fires while the Mismatches view is active
+    //  and no input/select has focus.
+    document.addEventListener('keydown', e => {
+        if (currentView !== 'mismatches') return;
+        const tag = (e.target && e.target.tagName || '').toLowerCase();
+        if (tag === 'input' || tag === 'select' || tag === 'textarea') return;
+        if (e.metaKey || e.ctrlKey || e.altKey) return;
+        const live = liveRowIndices();
+        if (!live.length) return;
+        const cur = live.indexOf(mismatchesFocusIdx);
+        if (e.key === 'j') { e.preventDefault(); focusRow(live[Math.min(live.length - 1, cur + 1)] ?? live[0]); }
+        else if (e.key === 'k') { e.preventDefault(); focusRow(live[Math.max(0, cur - 1)] ?? live[0]); }
+        else if (e.key === 'a' && mismatchesFocusIdx >= 0) { e.preventDefault(); acceptMismatch(mismatchesFocusIdx); }
+        else if (e.key === 's' && mismatchesFocusIdx >= 0) { e.preventDefault(); swapMismatchSlots(mismatchesFocusIdx); }
+        else if (e.key === 'i' && mismatchesFocusIdx >= 0) { e.preventDefault(); openInspectorFor(mismatchesFocusIdx); }
+    });
+}
+
+function liveRowIndices() {
+    const out = [];
+    mismatchesRows.forEach((r, i) => { if (r) out.push(i); });
+    return out;
+}
+
+function focusRow(idx) {
+    document.querySelectorAll('tr.mismatch-row').forEach(tr => tr.classList.remove('focused'));
+    const tr = document.querySelector(`tr[data-idx="${idx}"]`);
+    if (tr) {
+        tr.classList.add('focused');
+        tr.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    }
+    mismatchesFocusIdx = idx;
 }
 
 async function mismatchesScan() {
@@ -28,11 +62,13 @@ async function mismatchesScan() {
     const status = document.getElementById('mismatches-status');
     const content = document.getElementById('mismatches-content');
     const btn = document.getElementById('mismatches-scan');
+    const acceptAllBtn = document.getElementById('mismatches-accept-all');
 
     btn.disabled = true;
     btn.textContent = 'Scanning...';
     status.textContent = 'Running readers across labeled images (cached after first run)...';
     content.innerHTML = '';
+    acceptAllBtn.style.display = 'none';
 
     const params = new URLSearchParams();
     if (screen) params.set('screen', screen);
@@ -43,6 +79,11 @@ async function mismatchesScan() {
         mismatchesRows = data.rows || [];
         status.textContent = `${mismatchesRows.length} mismatches across ${data.scanned} labeled (reader, image) pairs`;
         renderMismatchesTable();
+        if (mismatchesRows.length) {
+            acceptAllBtn.style.display = '';
+            acceptAllBtn.textContent = `Accept all visible (${mismatchesRows.length})`;
+            focusRow(0);
+        }
     } catch (e) {
         status.textContent = 'Scan failed: ' + e;
     } finally {
@@ -61,6 +102,7 @@ function renderMismatchesTable() {
     let html = '<table style="width:100%; border-collapse:collapse; font-size:12px;">';
     html += '<thead><tr style="border-bottom:1px solid #30363d; color:#8b949e;">';
     html += '<th style="text-align:left; padding:6px; width:140px;">Frame</th>';
+    html += '<th style="text-align:left; padding:6px; width:120px;">Field crop</th>';
     html += '<th style="text-align:left; padding:6px;">Screen / file</th>';
     html += '<th style="text-align:left; padding:6px;">Reader.field[slot]</th>';
     html += '<th style="text-align:left; padding:6px;">Expected</th>';
@@ -78,8 +120,12 @@ function renderMismatchesTable() {
         const got = r.got === '' ? '∅' : String(r.got);
         const thumbUrl = `${API}/api/gallery/thumb/${encodeURIComponent(r.screen)}/${encodeURIComponent(r.filename)}`;
         const fullUrl = `${API}/api/gallery/image/${encodeURIComponent(r.screen)}/${encodeURIComponent(r.filename)}`;
-        html += `<tr data-idx="${idx}" style="border-bottom:1px solid #21262d;">`;
+        const cropCell = r.crop
+            ? `<img src="${r.crop}" style="max-width:120px; max-height:80px; image-rendering:pixelated; border:1px solid #30363d; border-radius:3px; background:#0d1117;">`
+            : '<span style="color:#484f58; font-size:10px;">—</span>';
+        html += `<tr class="mismatch-row" data-idx="${idx}" style="border-bottom:1px solid #21262d;">`;
         html += `<td style="padding:6px;"><img src="${thumbUrl}" data-full="${fullUrl}" class="mismatch-thumb" style="width:128px; height:auto; border:1px solid #30363d; border-radius:3px; cursor:zoom-in; display:block;" loading="lazy"></td>`;
+        html += `<td style="padding:6px;">${cropCell}</td>`;
         html += `<td style="padding:6px; color:#c9d1d9; word-break:break-all;">${filePath}</td>`;
         html += `<td style="padding:6px; color:#8b949e;">${fieldKey}</td>`;
         html += `<td style="padding:6px; color:#f85149; font-family:monospace;">${exp}</td>`;
@@ -94,7 +140,13 @@ function renderMismatchesTable() {
     html += '</tbody></table>';
     content.innerHTML = html;
 
-    //  Click thumb -> full-size overlay.
+    content.querySelectorAll('tr.mismatch-row').forEach(tr => {
+        tr.addEventListener('click', e => {
+            //  Don't focus when clicking buttons / images.
+            if (e.target.closest('button') || e.target.closest('img.mismatch-thumb')) return;
+            focusRow(parseInt(tr.dataset.idx));
+        });
+    });
     content.querySelectorAll('.mismatch-thumb').forEach(img => {
         img.addEventListener('click', () => {
             const overlay = document.createElement('div');
@@ -104,7 +156,6 @@ function renderMismatchesTable() {
             document.body.appendChild(overlay);
         });
     });
-
     content.querySelectorAll('.mismatch-accept-btn').forEach(btn => {
         btn.addEventListener('click', () => acceptMismatch(parseInt(btn.dataset.idx)));
     });
@@ -112,14 +163,37 @@ function renderMismatchesTable() {
         btn.addEventListener('click', () => swapMismatchSlots(parseInt(btn.dataset.idx)));
     });
     content.querySelectorAll('.mismatch-inspector-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const r = mismatchesRows[parseInt(btn.dataset.idx)];
-            //  Inspector source paths use the "__test__/<dir>" alias for
-            //  test_images/* directories — see /api/labeler/sources.
-            const source = `__test__/${r.screen}`;
-            location.hash = `#/inspector?source=${encodeURIComponent(source)}&filename=${encodeURIComponent(r.filename)}`;
-        });
+        btn.addEventListener('click', () => openInspectorFor(parseInt(btn.dataset.idx)));
     });
+}
+
+function openInspectorFor(idx) {
+    const r = mismatchesRows[idx];
+    if (!r) return;
+    const source = `__test__/${r.screen}`;
+    location.hash = `#/inspector?source=${encodeURIComponent(source)}&filename=${encodeURIComponent(r.filename)}`;
+}
+
+function advanceFocusAfter(idx) {
+    const live = liveRowIndices();
+    if (!live.length) {
+        mismatchesFocusIdx = -1;
+        return;
+    }
+    //  Pick the next live row after `idx`, wrapping if necessary.
+    const next = live.find(i => i > idx) ?? live[0];
+    focusRow(next);
+}
+
+function markRowDone(idx, label) {
+    const tr = document.querySelector(`tr[data-idx="${idx}"]`);
+    if (!tr) return;
+    tr.style.opacity = '0.4';
+    tr.querySelectorAll('button').forEach(b => b.disabled = true);
+    tr.querySelectorAll('td').forEach(td => td.style.color = '#8b949e');
+    const lastCell = tr.lastElementChild;
+    if (lastCell) lastCell.innerHTML = `<span style="color:#3fb950; font-size:10px;">${label}</span>`;
+    mismatchesRows[idx] = null;
 }
 
 async function swapMismatchSlots(idx) {
@@ -133,20 +207,13 @@ async function swapMismatchSlots(idx) {
             body: JSON.stringify({screen: r.screen, filename: r.filename, reader: r.reader}),
         }).then(r => r.json());
         if (resp.ok) {
-            //  Mark every row matching the same screen/file/reader as resolved —
-            //  the next scan will recompute, but for now they're stale.
+            //  Mark every row matching the same screen/file/reader as resolved.
             mismatchesRows.forEach((row, i) => {
                 if (row && row.screen === r.screen && row.filename === r.filename && row.reader === r.reader) {
-                    const tr = document.querySelector(`tr[data-idx="${i}"]`);
-                    if (tr) {
-                        tr.style.opacity = '0.4';
-                        tr.querySelectorAll('button').forEach(b => b.disabled = true);
-                        const lastCell = tr.lastElementChild;
-                        if (lastCell) lastCell.innerHTML = '<span style="color:#3fb950; font-size:10px;">swapped — re-scan</span>';
-                    }
-                    mismatchesRows[i] = null;
+                    markRowDone(i, 'swapped — re-scan');
                 }
             });
+            advanceFocusAfter(idx);
         } else {
             alert('Swap failed: ' + (resp.error || 'unknown'));
         }
@@ -158,7 +225,6 @@ async function swapMismatchSlots(idx) {
 async function acceptMismatch(idx) {
     const r = mismatchesRows[idx];
     if (!r) return;
-    const row = document.querySelector(`tr[data-idx="${idx}"]`);
     try {
         const resp = await fetch(`${API}/api/mismatches/accept`, {
             method: 'POST',
@@ -173,19 +239,43 @@ async function acceptMismatch(idx) {
             }),
         }).then(r => r.json());
         if (resp.ok) {
-            //  Remove the row from the list and DOM.
-            mismatchesRows[idx] = null;
-            if (row) {
-                row.style.opacity = '0.4';
-                row.querySelectorAll('button').forEach(b => b.disabled = true);
-                row.querySelectorAll('td').forEach(td => td.style.color = '#8b949e');
-                const lastCell = row.lastElementChild;
-                if (lastCell) lastCell.innerHTML = '<span style="color:#3fb950; font-size:10px;">accepted</span>';
-            }
+            markRowDone(idx, 'accepted');
+            advanceFocusAfter(idx);
         } else {
             alert('Accept failed: ' + (resp.error || 'unknown'));
         }
     } catch (e) {
         alert('Accept failed: ' + e);
     }
+}
+
+async function acceptAllVisible() {
+    const live = liveRowIndices();
+    if (!live.length) return;
+    if (!confirm(`Accept "got" value on ${live.length} rows?\nThis writes each reader output back to manifest as the new ground truth.`)) return;
+    const btn = document.getElementById('mismatches-accept-all');
+    btn.disabled = true;
+    let done = 0;
+    for (const idx of live) {
+        const r = mismatchesRows[idx];
+        if (!r) continue;
+        try {
+            const resp = await fetch(`${API}/api/mismatches/accept`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    screen: r.screen, filename: r.filename, reader: r.reader,
+                    field: r.field, slot: r.slot, value: r.got,
+                }),
+            }).then(r => r.json());
+            if (resp.ok) {
+                markRowDone(idx, 'accepted');
+                done++;
+                btn.textContent = `Accepting... ${done}/${live.length}`;
+            }
+        } catch (e) { console.error(e); }
+    }
+    btn.textContent = `Accepted ${done}`;
+    btn.disabled = false;
+    setTimeout(() => { btn.style.display = 'none'; }, 1500);
 }
