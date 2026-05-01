@@ -140,6 +140,10 @@ async function inspectorInit() {
     document.getElementById('inspector-ocr-btn').addEventListener('click', inspectorTestOcr);
     document.getElementById('inspector-ocr-sweep-btn').addEventListener('click', inspectorOcrSweep);
 
+    // Retest button (hits Mac-local dev runner directly)
+    const retestBtn = document.getElementById('inspector-retest-btn');
+    if (retestBtn) retestBtn.addEventListener('click', inspectorRetest);
+
     // Canvas setup
     const canvasWrap = document.getElementById('inspector-canvas-wrap');
     const canvas = document.getElementById('inspector-canvas');
@@ -202,6 +206,12 @@ async function inspectorInit() {
             inspectorState.selEnd = { x: cx, y: cy };
             inspectorRender();
         }
+
+        inspectorUpdatePixelReadout(cx, cy);
+    });
+
+    canvas.addEventListener('mouseleave', () => {
+        document.getElementById('inspector-pixel-readout').innerHTML = '&nbsp;';
     });
 
     canvas.addEventListener('mouseup', e => {
@@ -308,11 +318,62 @@ function inspectorRenderRibbon() {
     }
 }
 
+// Cached pixel data for the loaded image — populated on load so the
+// per-pixel readout doesn't have to draw the image to a canvas on every
+// mousemove. Cleared whenever a new image loads.
+let _inspectorPixelCache = null;
+
+function _buildPixelCache(img) {
+    try {
+        const c = document.createElement('canvas');
+        c.width = img.naturalWidth || img.width;
+        c.height = img.naturalHeight || img.height;
+        c.getContext('2d').drawImage(img, 0, 0);
+        const data = c.getContext('2d').getImageData(0, 0, c.width, c.height);
+        return { width: c.width, height: c.height, data: data.data };
+    } catch (e) {
+        // Tainted canvas (CORS) — skip; readout will be coords-only.
+        return null;
+    }
+}
+
+function inspectorUpdatePixelReadout(canvasX, canvasY) {
+    const el = document.getElementById('inspector-pixel-readout');
+    if (!el) return;
+    const s = inspectorState;
+    if (!s.image) { el.innerHTML = '&nbsp;'; return; }
+    // Convert canvas coords -> image coords using current scale/pan.
+    const ix = Math.floor((canvasX - s.panX) / s.scale);
+    const iy = Math.floor((canvasY - s.panY) / s.scale);
+    const W = s.image.naturalWidth || s.image.width;
+    const H = s.image.naturalHeight || s.image.height;
+    if (ix < 0 || iy < 0 || ix >= W || iy >= H) { el.innerHTML = '&nbsp;'; return; }
+
+    const nx = (ix / W).toFixed(4);
+    const ny = (iy / H).toFixed(4);
+
+    let rgbStr = '';
+    let swatch = '';
+    if (_inspectorPixelCache) {
+        const idx = (iy * _inspectorPixelCache.width + ix) * 4;
+        const d = _inspectorPixelCache.data;
+        const r = d[idx], g = d[idx+1], b = d[idx+2];
+        const sum = r + g + b;
+        const ratio = sum > 0
+            ? `(${(r/sum).toFixed(3)}, ${(g/sum).toFixed(3)}, ${(b/sum).toFixed(3)})`
+            : '(0, 0, 0)';
+        rgbStr = ` &middot; rgb(${r},${g},${b}) &middot; ratio ${ratio}`;
+        swatch = `<span style="display:inline-block;width:10px;height:10px;background:rgb(${r},${g},${b});border:1px solid #30363d;vertical-align:middle;margin-right:6px;"></span>`;
+    }
+    el.innerHTML = `${swatch}px(${ix}, ${iy}) &middot; norm(${nx}, ${ny})${rgbStr}`;
+}
+
 function inspectorLoadImage(url) {
     const img = new Image();
     img.crossOrigin = 'anonymous';
     img.onload = () => {
         inspectorState.image = img;
+        _inspectorPixelCache = _buildPixelCache(img);
         inspectorState.scale = 1;
         inspectorState.panX = 0;
         inspectorState.panY = 0;
@@ -705,6 +766,72 @@ async function inspectorOcrSweep() {
     });
 
     status.textContent = `Done. ${completed}/${images.length}`;
+    btn.disabled = false;
+}
+
+async function inspectorRetest() {
+    const btn = document.getElementById('inspector-retest-btn');
+    const status = document.getElementById('inspector-retest-status');
+    const result = document.getElementById('inspector-retest-result');
+    btn.disabled = true; status.textContent = 'Building + running regression...'; result.style.display = 'none';
+
+    let resp;
+    try {
+        const r = await fetch('http://localhost:9876/retest', {
+            method: 'POST', headers: {'Content-Type': 'application/json'},
+            body: '{}',
+        });
+        resp = await r.json();
+    } catch (e) {
+        status.innerHTML = '<span style="color:#f85149;">runner not reachable — start: <code>python3 tools/mac_dev_runner.py</code></span>';
+        btn.disabled = false;
+        return;
+    }
+
+    if (!resp.ok) {
+        status.innerHTML = `<span style="color:#f85149;">${resp.stage} failed</span>`;
+        result.style.display = '';
+        result.innerHTML = `<pre style="background:#0d1117;border:1px solid #30363d;border-radius:4px;padding:8px;font-size:10px;color:#f85149;white-space:pre-wrap;max-height:400px;overflow-y:auto;">${(resp.log || '').replace(/[<&]/g, c => ({'<':'&lt;','&':'&amp;'}[c]))}</pre>`;
+        btn.disabled = false;
+        return;
+    }
+
+    const r = resp.result || {};
+    const overall = r.overall;
+    let html = '';
+    if (overall) {
+        const pct = (100 * overall.passed / overall.total).toFixed(1);
+        html += `<div style="margin-bottom:6px;font-size:12px;"><strong>Overall:</strong> ${overall.passed}/${overall.total} (${pct}%)</div>`;
+    }
+    html += '<table style="width:100%;font-size:11px;border-collapse:collapse;margin-bottom:8px;">';
+    html += '<thead><tr style="color:#8b949e;border-bottom:1px solid #30363d;">'
+        + '<th style="text-align:left;padding:3px 4px;">detector</th>'
+        + '<th style="text-align:right;padding:3px 4px;">pass/total</th>'
+        + '<th style="text-align:right;padding:3px 4px;">%</th>'
+        + '</tr></thead><tbody>';
+    for (const d of (r.detectors || [])) {
+        const color = d.pct >= 99 ? '#3fb950' : d.pct >= 90 ? '#d29922' : '#f85149';
+        html += `<tr style="border-bottom:1px solid #21262d;">`
+            + `<td style="padding:3px 4px;">${d.name}</td>`
+            + `<td style="padding:3px 4px;text-align:right;">${d.passed}/${d.total}</td>`
+            + `<td style="padding:3px 4px;text-align:right;color:${color};">${d.pct.toFixed(1)}%</td>`
+            + `</tr>`;
+    }
+    html += '</tbody></table>';
+
+    if ((r.failures || []).length) {
+        html += '<details><summary style="cursor:pointer;color:#8b949e;font-size:11px;">'
+            + `Failures (${r.failures.length})</summary>`;
+        html += '<div style="font-size:10px;font-family:SF Mono,monospace;background:#0d1117;border:1px solid #30363d;border-radius:4px;padding:6px;max-height:300px;overflow-y:auto;margin-top:4px;">';
+        for (const f of r.failures) {
+            html += `<div style="color:#f85149;">FAIL ${f.detector} <span style="color:#8b949e;">←</span> ${f.image}</div>`;
+        }
+        html += '</div></details>';
+    }
+
+    result.style.display = '';
+    result.innerHTML = html;
+    status.innerHTML = '<span style="color:#3fb950;">Done</span>';
     btn.disabled = false;
 }
 

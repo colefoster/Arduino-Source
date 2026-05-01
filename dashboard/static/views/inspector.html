@@ -4,6 +4,7 @@
             <div class="inspector-canvas-wrap" id="inspector-canvas-wrap" style="flex:1;">
                 <canvas id="inspector-canvas"></canvas>
                 <div style="position:absolute;bottom:6px;right:8px;background:#161b22cc;padding:2px 8px;border-radius:4px;font-size:11px;color:#484f58;pointer-events:none;" id="inspector-zoom-label">100%</div>
+                <div style="position:absolute;bottom:6px;left:8px;background:#161b22cc;padding:2px 8px;border-radius:4px;font-size:11px;color:#c9d1d9;pointer-events:none;font-family:SF Mono, Fira Code, Consolas, monospace;" id="inspector-pixel-readout">&nbsp;</div>
             </div>
             <!-- Image Ribbon -->
             <div style="background:#161b22; border-top:1px solid #30363d; padding:6px 8px; display:flex; gap:6px; align-items:center;">
@@ -87,6 +88,19 @@
                     <button class="btn btn-primary" onclick="inspectorSaveBox()">Save</button>
                     <span id="inspector-save-status" style="font-size:11px;color:#3fb950;"></span>
                 </div>
+            </div>
+
+            <!-- Local Retest -->
+            <div class="inspector-section">
+                <div class="section-title">Retest (local Mac)</div>
+                <div style="display:flex;gap:6px;align-items:center;margin-bottom:6px;flex-wrap:wrap;">
+                    <button class="btn btn-primary" id="inspector-retest-btn" style="font-size:11px;padding:3px 10px;">Rebuild + Regression</button>
+                    <span id="inspector-retest-status" style="font-size:11px;color:#8b949e;"></span>
+                </div>
+                <div style="font-size:10px;color:#484f58;margin-bottom:6px;">
+                    Requires <code>python3 tools/mac_dev_runner.py</code> running locally.
+                </div>
+                <div id="inspector-retest-result" style="font-size:11px;color:#c9d1d9;display:none;"></div>
             </div>
 
             <!-- Detector Overlays -->
