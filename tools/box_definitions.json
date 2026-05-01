@@ -888,6 +888,150 @@
         0.3138,
         0.3472
       ]
+    },
+    {
+      "name": "own0_current",
+      "scene": "",
+      "screenshot": "__test__/move_select/20260423-150123581184.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.1304,
+        0.9338,
+        0.0448,
+        0.0362
+      ],
+      "avg_rgb": [
+        114.4,
+        134,
+        133.5
+      ],
+      "stddev_sum": 330.5,
+      "color_ratio": [
+        0.2996,
+        0.3509,
+        0.3495
+      ]
+    },
+    {
+      "name": "own0_maxhp_withslash",
+      "scene": "",
+      "screenshot": "__test__/move_select/20260423-150123581184.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.1746,
+        0.9464,
+        0.0335,
+        0.0229
+      ],
+      "avg_rgb": [
+        115.2,
+        117.7,
+        129
+      ],
+      "stddev_sum": 322.7,
+      "color_ratio": [
+        0.3183,
+        0.3252,
+        0.3566
+      ]
+    },
+    {
+      "name": "own1_current",
+      "scene": "",
+      "screenshot": "__test__/move_select/20260423-150123581184.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.3363,
+        0.9342,
+        0.045,
+        0.0361
+      ],
+      "avg_rgb": [
+        112.7,
+        132.7,
+        122.8
+      ],
+      "stddev_sum": 327.5,
+      "color_ratio": [
+        0.3062,
+        0.3603,
+        0.3335
+      ]
+    },
+    {
+      "name": "own1_max_with_slash",
+      "scene": "",
+      "screenshot": "__test__/move_select/20260423-150123581184.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.38,
+        0.9473,
+        0.034,
+        0.0215
+      ],
+      "avg_rgb": [
+        102.2,
+        103.9,
+        122.2
+      ],
+      "stddev_sum": 317.9,
+      "color_ratio": [
+        0.3114,
+        0.3164,
+        0.3723
+      ]
+    },
+    {
+      "name": "own_0_species",
+      "scene": "",
+      "screenshot": "__test__/move_select/20260423-150123581184.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.0814,
+        0.8705,
+        0.0918,
+        0.0272
+      ],
+      "avg_rgb": [
+        142.1,
+        136.9,
+        247.3
+      ],
+      "stddev_sum": 140.9,
+      "color_ratio": [
+        0.27,
+        0.2602,
+        0.4699
+      ]
+    },
+    {
+      "name": "own_1_species",
+      "scene": "",
+      "screenshot": "__test__/move_select/20260423-150123581184.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.2901,
+        0.8705,
+        0.0835,
+        0.0267
+      ],
+      "avg_rgb": [
+        150.1,
+        144.7,
+        248.9
+      ],
+      "stddev_sum": 140.5,
+      "color_ratio": [
+        0.2761,
+        0.2661,
+        0.4578
+      ]
     }
   ]
 }
