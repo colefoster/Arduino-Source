@@ -1873,18 +1873,18 @@ async def training_delete(session_id: str):
 
 
 # ═══════════════════════════════════════════════════════════════════════════
-# OCR SUGGESTION (proxy to ColePC job runner)
+# OCR SUGGESTION (proxy to local Mac dev runner — tools/mac_dev_runner.py)
 # ═══════════════════════════════════════════════════════════════════════════
 
-COLEPC_JOB_RUNNER = "http://colepc:8422"
+DEV_RUNNER = os.environ.get("DEV_RUNNER", "http://localhost:9876")
 
 
 @app.post("/api/ocr/suggest")
 async def ocr_suggest(request: Request):
-    """Proxy OCR suggestion request to ColePC job runner.
+    """Proxy OCR suggestion request to the local Mac dev runner.
 
     Body: { "screen": "move_select_singles", "filename": "20260423-145958889700.png", "reader": "MoveNameReader" }
-    Reads the image from test_images, base64-encodes it, sends to ColePC.
+    Reads the image from test_images, base64-encodes it, sends to the dev runner.
     """
     import base64
     import urllib.request
@@ -1912,7 +1912,7 @@ async def ocr_suggest(request: Request):
 
     try:
         req = urllib.request.Request(
-            f"{COLEPC_JOB_RUNNER}/ocr-suggest",
+            f"{DEV_RUNNER}/ocr-suggest",
             data=payload,
             headers={"Content-Type": "application/json"},
             method="POST",
@@ -1921,14 +1921,14 @@ async def ocr_suggest(request: Request):
             result = json.loads(resp.read())
             return result
     except urllib.error.URLError as e:
-        return JSONResponse({"error": f"ColePC unreachable: {e}"}, 502)
+        return JSONResponse({"error": f"dev runner unreachable: {e}"}, 502)
     except Exception as e:
         return JSONResponse({"error": str(e)}, 500)
 
 
 @app.post("/api/detector/debug")
 async def detector_debug(request: Request):
-    """Run all detectors on an image via ColePC, return debug info."""
+    """Run all detectors on an image via the dev runner, return debug info."""
     import base64
     import urllib.request
     import urllib.error
@@ -1949,7 +1949,7 @@ async def detector_debug(request: Request):
 
     try:
         req = urllib.request.Request(
-            f"{COLEPC_JOB_RUNNER}/detector-debug",
+            f"{DEV_RUNNER}/detector-debug",
             data=payload,
             headers={"Content-Type": "application/json"},
             method="POST",
@@ -1957,7 +1957,7 @@ async def detector_debug(request: Request):
         with urllib.request.urlopen(req, timeout=30) as resp:
             return json.loads(resp.read())
     except urllib.error.URLError as e:
-        return JSONResponse({"error": f"ColePC unreachable: {e}"}, 502)
+        return JSONResponse({"error": f"dev runner unreachable: {e}"}, 502)
     except Exception as e:
         return JSONResponse({"error": str(e)}, 500)
 
@@ -1999,7 +1999,7 @@ async def inspector_ocr_crop(request: Request):
     }).encode()
     try:
         req = urllib.request.Request(
-            f"{COLEPC_JOB_RUNNER}/ocr-crop",
+            f"{DEV_RUNNER}/ocr-crop",
             data=payload,
             headers={"Content-Type": "application/json"},
             method="POST",
@@ -2007,14 +2007,14 @@ async def inspector_ocr_crop(request: Request):
         with urllib.request.urlopen(req, timeout=30) as resp:
             return json.loads(resp.read())
     except urllib.error.URLError as e:
-        return JSONResponse({"error": f"ColePC unreachable: {e}"}, 502)
+        return JSONResponse({"error": f"dev runner unreachable: {e}"}, 502)
     except Exception as e:
         return JSONResponse({"error": str(e)}, 500)
 
 
 @app.post("/api/detector/debug-batch")
 async def detector_debug_batch(request: Request):
-    """Run detectors on all images in a screen via ColePC batch endpoint."""
+    """Run detectors on all images in a screen via the dev runner batch endpoint."""
     import urllib.request
     import urllib.error
 
@@ -2026,7 +2026,7 @@ async def detector_debug_batch(request: Request):
     payload = json.dumps({"screen": screen}).encode()
     try:
         req = urllib.request.Request(
-            f"{COLEPC_JOB_RUNNER}/detector-debug-batch",
+            f"{DEV_RUNNER}/detector-debug-batch",
             data=payload,
             headers={"Content-Type": "application/json"},
             method="POST",
@@ -2034,7 +2034,7 @@ async def detector_debug_batch(request: Request):
         with urllib.request.urlopen(req, timeout=300) as resp:
             return json.loads(resp.read())
     except urllib.error.URLError as e:
-        return JSONResponse({"error": f"ColePC unreachable: {e}"}, 502)
+        return JSONResponse({"error": f"dev runner unreachable: {e}"}, 502)
     except Exception as e:
         return JSONResponse({"error": str(e)}, 500)
 
@@ -2077,7 +2077,7 @@ async def ocr_suggest_bulk(request: Request):
                 "screen": screen,
             }).encode()
             req = urllib.request.Request(
-                f"{COLEPC_JOB_RUNNER}/ocr-suggest",
+                f"{DEV_RUNNER}/ocr-suggest",
                 data=payload,
                 headers={"Content-Type": "application/json"},
                 method="POST",
@@ -2090,8 +2090,8 @@ async def ocr_suggest_bulk(request: Request):
         except Exception as e:
             return path.name, None, str(e)
 
-    # Run in parallel — ColePC's C++ OCR binary is single-threaded per call,
-    # but multiple concurrent subprocesses share the GPU/CPU well up to ~8.
+    # Run in parallel — the C++ OCR binary is single-threaded per call,
+    # but multiple concurrent subprocesses share the CPU well up to ~8.
     results = {}
     errors = []
     loop = asyncio.get_running_loop()
