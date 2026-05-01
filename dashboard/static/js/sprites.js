@@ -60,18 +60,17 @@ function renderSpriteExamples(examples) {
         return;
     }
     root.innerHTML = examples.map(ex => {
-        const opp = ex.opponent_species || [];
-        const sprites = opp.map(name => name
-            ? `<div style="text-align:center;">
-                 <img src="${API}/api/teampreview/sprite/${encodeURIComponent(name)}"
-                      style="width:64px; height:64px; image-rendering:pixelated; display:block;">
-                 <div style="font-size:9px; color:#8b949e; margin-top:2px;">${name}</div>
-               </div>`
-            : `<div style="text-align:center; opacity:0.3;">
-                 <div style="width:64px; height:64px; background:#21262d; border:1px dashed #30363d;"></div>
-                 <div style="font-size:9px; color:#484f58; margin-top:2px;">empty</div>
-               </div>`
-        ).join('');
+        const slotPairs = (ex.slots || []).map((s, i) => {
+            const cropImg = `<img src="${s.crop}" style="width:64px; height:64px; object-fit:contain; image-rendering:pixelated; display:block; background:#0d1117; border:1px solid #30363d; border-radius:3px;">`;
+            const refImg = s.species
+                ? `<img src="${API}/api/teampreview/sprite/${encodeURIComponent(s.species)}" style="width:64px; height:64px; image-rendering:pixelated; display:block; background:#0d1117; border:1px solid #30363d; border-radius:3px;">`
+                : `<div style="width:64px; height:64px; background:#21262d; border:1px dashed #30363d; border-radius:3px;"></div>`;
+            const arrow = `<div style="color:#484f58; font-size:14px; align-self:center;">&rarr;</div>`;
+            return `<div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
+                <div style="display:flex; gap:6px; align-items:center;">${cropImg}${arrow}${refImg}</div>
+                <div style="font-size:9px; color:${s.species ? '#8b949e' : '#484f58'};">${i+1}: ${s.species || '—'}</div>
+            </div>`;
+        }).join('');
         const frameUrl = `${API}/api/gallery/thumb/${encodeURIComponent(ex.screen)}/${encodeURIComponent(ex.filename)}`;
         return `<div style="background:#161b22; border:1px solid #30363d; border-radius:6px; padding:10px; margin-bottom:10px; display:grid; grid-template-columns:280px 1fr; gap:14px; align-items:center;">
             <div>
@@ -79,8 +78,8 @@ function renderSpriteExamples(examples) {
                 <img src="${frameUrl}" style="width:100%; border-radius:3px; border:1px solid #30363d;">
             </div>
             <div>
-                <div style="font-size:11px; color:#8b949e; margin-bottom:6px;">Matched opponent sprites:</div>
-                <div style="display:flex; gap:8px; flex-wrap:wrap;">${sprites}</div>
+                <div style="font-size:11px; color:#8b949e; margin-bottom:6px;">Game crop &rarr; matched reference:</div>
+                <div style="display:flex; gap:14px; flex-wrap:wrap;">${slotPairs}</div>
             </div>
         </div>`;
     }).join('');
