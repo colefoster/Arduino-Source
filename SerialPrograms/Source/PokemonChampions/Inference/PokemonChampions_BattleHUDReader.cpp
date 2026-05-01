@@ -149,12 +149,7 @@ static std::vector<int> extract_numbers(const std::string& text){
 static std::string digits_only(const std::string& text){
     std::string out;
     for (char c : text){
-        //  Tesseract commonly misreads '0' as 'O'/'o', '9' as 'a'.
-        if (c == 'O' || c == 'o'){
-            out += '0';
-        }else if (c == 'a'){
-            out += '9';
-        }else if ((c >= '0' && c <= '9') || c == '/'){
+        if ((c >= '0' && c <= '9') || c == '/'){
             out += c;
         }
     }
@@ -200,10 +195,6 @@ static int parse_percentage(const std::string& text){
     for (char& c : clean){
         if (c == '/') c = '7';
     }
-
-    //  "00" can only come from "100" with the leading '1' clipped.
-    //  A fainted pokemon has no HP badge, so 0% never shows as "00".
-    if (clean == "00") return 100;
 
     auto nums = extract_numbers(clean);
     for (int n : nums){
