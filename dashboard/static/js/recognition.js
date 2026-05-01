@@ -12,9 +12,8 @@ let recogBoxOverrides = {}; // reader -> [{name, box: [x,y,w,h]}, ...]
 
 // Recognition readers (non-bool readers that return values)
 const RECOG_READERS = [
-    'SpeciesReader_Doubles', 'SpeciesReader', 'MoveNameReader',
+    'BattleHUDReader', 'MoveNameReader',
     'TeamSelectReader', 'TeamSummaryReader', 'TeamPreviewReader',
-    'OpponentHPReader_Doubles', 'OpponentHPReader',
 ];
 
 async function recognitionInit() {

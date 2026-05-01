@@ -87,37 +87,6 @@ static int test_manifest_ActiveHUDSlot(const ImageViewRGB32& image, const json& 
     return test_pokemonChampions_ActiveHUDSlot(image, slot);
 }
 
-static int test_manifest_SpeciesReader(const ImageViewRGB32& image, const json& entry){
-    // The manifest stores under BattleHUDReader with opponent_species field.
-    // For singles, it's a string. Build words = ["prefix", "species"]
-    std::string species = entry.at("opponent_species").get<std::string>();
-    std::vector<std::string> words = {"manifest", species};
-    return test_pokemonChampions_SpeciesReader(image, words);
-}
-
-static int test_manifest_SpeciesReader_Doubles(const ImageViewRGB32& image, const json& entry){
-    // Doubles stores per-slot. Entry has "slot" and "opponent_species".
-    int slot = entry.at("slot").get<int>();
-    std::string species = entry.at("opponent_species").get<std::string>();
-    std::string slot_str = "s" + std::to_string(slot);
-    std::vector<std::string> words = {"manifest", slot_str, species};
-    return test_pokemonChampions_SpeciesReader_Doubles(image, words);
-}
-
-static int test_manifest_OpponentHPReader(const ImageViewRGB32& image, const json& entry){
-    int hp = entry.at("opponent_hp_pct").get<int>();
-    return test_pokemonChampions_OpponentHPReader(image, hp);
-}
-
-static int test_manifest_OpponentHPReader_Doubles(const ImageViewRGB32& image, const json& entry){
-    int slot = entry.at("slot").get<int>();
-    int hp = entry.at("opponent_hp_pct").get<int>();
-    std::string slot_str = "s" + std::to_string(slot);
-    std::string hp_str = std::to_string(hp);
-    std::vector<std::string> words = {"manifest", slot_str, hp_str};
-    return test_pokemonChampions_OpponentHPReader_Doubles(image, words);
-}
-
 static int test_manifest_BattleLogReader(const ImageViewRGB32& image, const json& entry){
     std::string event_type = entry.at("event_type").get<std::string>();
     // Split by _ and pass as words

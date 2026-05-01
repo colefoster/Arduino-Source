@@ -52,8 +52,7 @@ const READER_TYPES_LOCAL = {
     'MoveSelectDetector': 'bool', 'ActionMenuDetector': 'bool', 'PostMatchScreenDetector': 'bool',
     'PreparingForBattleDetector': 'bool', 'TeamSelectDetector': 'bool', 'TeamPreviewDetector': 'bool',
     'MainMenuDetector': 'bool', 'MovesMoreDetector': 'bool', 'CommunicatingDetector': 'bool',
-    'MoveNameReader': 'multi_text:4', 'SpeciesReader': 'text', 'SpeciesReader_Doubles': 'multi_text:2',
-    'OpponentHPReader': 'int:0:100', 'OpponentHPReader_Doubles': 'int:0:100',
+    'MoveNameReader': 'multi_text:4', 'BattleHUDReader': 'battle_hud',
     'MoveSelectCursorSlot': 'int:0:3', 'BattleLogReader': 'event',
     'TeamSelectReader': 'multi_text:6', 'TeamSummaryReader': 'multi_text:6', 'TeamPreviewReader': 'multi_text:6',
 };
