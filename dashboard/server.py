@@ -1185,15 +1185,24 @@ def _resolve_image_path(path: str) -> Optional[Path]:
 def _resolve_inspector_image(
     path: str = "", source: str = "", filename: str = ""
 ) -> Optional[Path]:
-    """Resolve an inspector image from either path or source+filename."""
+    """Resolve an inspector image from either path or source+filename.
+
+    Sources from the labeler API use a "__test__/<screen>" prefix to point
+    inside test_images/. Delegate to _resolve_source_dir so the same logic
+    handles both ref_frames/ and test_images/ shapes.
+    """
     if path:
         return _resolve_image_path(path)
     if source and filename:
-        # source is a ref_frames subdirectory, filename is the image name
+        src_dir = _resolve_source_dir(source)
+        if src_dir:
+            full = src_dir / filename
+            if full.exists():
+                return full
+        # Legacy fallbacks (raw ref_frames/test_images paths without prefix).
         full = REF_FRAMES_DIR / source / filename
         if full.exists():
             return full
-        # also try test_images/
         full = TEST_IMAGES_DIR / source / filename
         if full.exists():
             return full
