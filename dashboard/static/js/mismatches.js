@@ -84,6 +84,8 @@ function renderMismatchesTable() {
         html += `<td style="padding:6px; color:#3fb950; font-family:monospace;">${got}</td>`;
         html += `<td style="padding:6px; white-space:nowrap;">`;
         html += `<button class="btn mismatch-accept-btn" data-idx="${idx}" style="font-size:10px; padding:2px 8px; margin-right:4px;">Accept got</button>`;
+        const showSwap = r.slot != null;
+        if (showSwap) html += `<button class="btn mismatch-swap-btn" data-idx="${idx}" style="font-size:10px; padding:2px 8px; margin-right:4px;">Swap 0↔1</button>`;
         html += `<button class="btn mismatch-inspector-btn" data-idx="${idx}" style="font-size:10px; padding:2px 8px;">Inspector</button>`;
         html += `</td></tr>`;
     });
@@ -104,6 +106,9 @@ function renderMismatchesTable() {
     content.querySelectorAll('.mismatch-accept-btn').forEach(btn => {
         btn.addEventListener('click', () => acceptMismatch(parseInt(btn.dataset.idx)));
     });
+    content.querySelectorAll('.mismatch-swap-btn').forEach(btn => {
+        btn.addEventListener('click', () => swapMismatchSlots(parseInt(btn.dataset.idx)));
+    });
     content.querySelectorAll('.mismatch-inspector-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             const r = mismatchesRows[parseInt(btn.dataset.idx)];
@@ -115,6 +120,39 @@ function renderMismatchesTable() {
             location.hash = `#/inspector?source=${encodeURIComponent(source)}&filename=${encodeURIComponent(r.filename)}`;
         });
     });
+}
+
+async function swapMismatchSlots(idx) {
+    const r = mismatchesRows[idx];
+    if (!r) return;
+    if (!confirm(`Swap slot 0 ↔ 1 for ${r.reader} on ${r.filename}?\nAll length-2 array fields on this image will be reversed.`)) return;
+    try {
+        const resp = await fetch(`${API}/api/mismatches/swap-slots`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({screen: r.screen, filename: r.filename, reader: r.reader}),
+        }).then(r => r.json());
+        if (resp.ok) {
+            //  Mark every row matching the same screen/file/reader as resolved —
+            //  the next scan will recompute, but for now they're stale.
+            mismatchesRows.forEach((row, i) => {
+                if (row && row.screen === r.screen && row.filename === r.filename && row.reader === r.reader) {
+                    const tr = document.querySelector(`tr[data-idx="${i}"]`);
+                    if (tr) {
+                        tr.style.opacity = '0.4';
+                        tr.querySelectorAll('button').forEach(b => b.disabled = true);
+                        const lastCell = tr.lastElementChild;
+                        if (lastCell) lastCell.innerHTML = '<span style="color:#3fb950; font-size:10px;">swapped — re-scan</span>';
+                    }
+                    mismatchesRows[i] = null;
+                }
+            });
+        } else {
+            alert('Swap failed: ' + (resp.error || 'unknown'));
+        }
+    } catch (e) {
+        alert('Swap failed: ' + e);
+    }
 }
 
 async function acceptMismatch(idx) {

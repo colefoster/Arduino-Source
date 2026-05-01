@@ -2287,6 +2287,45 @@ async def mismatches(screen: Optional[str] = None, reader: Optional[str] = None)
     return {"ok": True, "rows": rows, "scanned": len(targets)}
 
 
+@app.post("/api/mismatches/swap-slots")
+async def mismatches_swap_slots(request: Request):
+    """Swap slot 0 ↔ slot 1 for every length-2 array field of one reader on one image.
+
+    Body: { screen, filename, reader }
+    Useful when ground-truth was hand-typed with slots transposed (e.g. left/right
+    confusion in doubles).
+    """
+    body = await request.json()
+    screen = body.get("screen")
+    filename = body.get("filename")
+    reader = body.get("reader")
+    if not all([screen, filename, reader]):
+        return JSONResponse({"error": "screen, filename, reader required"}, 400)
+
+    screen_dir = TEST_IMAGES_DIR / screen
+    manifest_path = screen_dir / "manifest.json"
+    if not manifest_path.exists():
+        return JSONResponse({"error": "manifest not found"}, 404)
+
+    manifest = _load_manifest(screen_dir)
+    entry = manifest.get(filename, {}).get(reader)
+    if not isinstance(entry, dict):
+        return JSONResponse({"error": "no labels for that reader on that image"}, 404)
+
+    swapped = 0
+    for field, val in entry.items():
+        if isinstance(val, list) and len(val) == 2:
+            val[0], val[1] = val[1], val[0]
+            swapped += 1
+
+    manifest_path.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n")
+    img_path = screen_dir / filename
+    if img_path.exists():
+        mtime = img_path.stat().st_mtime
+        _MISMATCH_CACHE.pop((screen, filename, reader, mtime), None)
+    return {"ok": True, "fields_swapped": swapped}
+
+
 @app.post("/api/mismatches/accept")
 async def mismatches_accept(request: Request):
     """Patch a single field/slot in a manifest to accept the reader's output.
