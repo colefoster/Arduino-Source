@@ -118,6 +118,7 @@ function renderGallerySidebar() {
 
 // Store current screen data for use by label form
 let _currentScreenData = null;
+let _galleryExtended = false;
 
 async function loadGalleryScreenImages(screen) {
     const grid = document.getElementById('gallery-grid');
@@ -161,11 +162,22 @@ async function loadGalleryScreenImages(screen) {
         }
 
         // Always show these tools
+        buttons += `<button class="btn" id="extended-toggle" style="font-size:11px; padding:3px 10px;">${_galleryExtended ? 'Compact View' : 'Extended View'}</button>`;
         buttons += `<button class="btn" id="bulk-select-toggle" style="font-size:11px; padding:3px 10px;">Select Mode</button>`;
         buttons += `<button class="btn" id="verify-detectors-btn" style="font-size:11px; padding:3px 10px;">Verify Detectors</button>`;
 
         toolbar.innerHTML = `<span>${info}</span><div style="display:flex; gap:6px; flex-wrap:wrap;">${buttons}</div>`;
         document.getElementById('gallery-toolbar-slot').appendChild(toolbar);
+
+        // Extended view toggle
+        const extBtn = document.getElementById('extended-toggle');
+        if (extBtn) {
+            extBtn.addEventListener('click', () => {
+                _galleryExtended = !_galleryExtended;
+                extBtn.textContent = _galleryExtended ? 'Compact View' : 'Extended View';
+                renderGalleryGrid();
+            });
+        }
 
         // Bulk select mode toggle
         document.getElementById('bulk-select-toggle').addEventListener('click', () => {
@@ -489,6 +501,67 @@ function renderGalleryGrid() {
         return;
     }
 
+    grid.classList.toggle('extended', _galleryExtended);
+    const crops = (_currentScreenData && _currentScreenData.crops) || {};
+    //  Stable color per reader so the same overlay color appears across cards.
+    const READER_COLORS = ['#58a6ff','#3fb950','#f85149','#d29922','#d2a8ff','#f0883e','#79c0ff','#56d364'];
+    const colorFor = (readerName) => {
+        let h = 0;
+        for (const c of readerName) h = ((h << 5) - h + c.charCodeAt(0)) | 0;
+        return READER_COLORS[Math.abs(h) % READER_COLORS.length];
+    };
+
+    function renderOverlays(img) {
+        if (!_galleryExtended) return '';
+        const parts = [];
+        for (const [reader, boxes] of Object.entries(crops)) {
+            const color = colorFor(reader);
+            for (const b of boxes) {
+                const [x, y, w, h] = b.box;
+                const left = (x * 100).toFixed(2);
+                const top  = (y * 100).toFixed(2);
+                const wid  = (w * 100).toFixed(2);
+                const hgt  = (h * 100).toFixed(2);
+                parts.push(`<div class="crop-box" style="left:${left}%;top:${top}%;width:${wid}%;height:${hgt}%;border-color:${color};"></div>`);
+                parts.push(`<div class="crop-label" style="left:${left}%;top:${top}%;color:${color};">${b.name}</div>`);
+            }
+        }
+        return parts.join('');
+    }
+
+    function renderLabelSummary(img) {
+        if (!_galleryExtended) return '';
+        const labels = img.labels || {};
+        const rows = [];
+        const fmtVal = (v) => {
+            if (v == null || v === '') return '<span class="v-empty">—</span>';
+            if (Array.isArray(v)) {
+                const cells = v.map(x => {
+                    if (x === '' || x == null) return '<span class="v-empty">—</span>';
+                    if (x === -1) return '<span class="v-bad">-1</span>';
+                    return `<span class="v">${String(x)}</span>`;
+                });
+                return cells.join(', ');
+            }
+            if (v === -1) return '<span class="v-bad">-1</span>';
+            if (v === true) return '<span class="v">true</span>';
+            if (v === false) return '<span class="v">false</span>';
+            return `<span class="v">${String(v)}</span>`;
+        };
+        for (const [reader, val] of Object.entries(labels)) {
+            if (val == null || typeof val !== 'object' || Array.isArray(val)) {
+                //  Bool detector or scalar
+                rows.push(`<span class="k">${reader}</span><span>${fmtVal(val)}</span>`);
+                continue;
+            }
+            for (const [field, fieldVal] of Object.entries(val)) {
+                rows.push(`<span class="k">${reader}.${field}</span><span>${fmtVal(fieldVal)}</span>`);
+            }
+        }
+        if (!rows.length) return '<div class="label-summary"><span class="v-empty">No labels yet</span></div>';
+        return `<div class="label-summary">${rows.join('')}</div>`;
+    }
+
     grid.innerHTML = filtered.map(img => {
         const label = _gtLabel(img);
         let badgeClass = 'badge-value';
@@ -502,9 +575,13 @@ function renderGalleryGrid() {
         if (isSelected) cardClasses.push('selected');
         return `<div class="${cardClasses.join(' ')}" data-filename="${img.filename}"${flagged}>
             ${_bulkSelectMode ? `<div class="select-badge">${isSelected ? '✓' : ''}</div>` : ''}
-            <img class="thumb" loading="lazy" src="${API}/api/gallery/thumb/${img.path}" alt="${img.filename}">
+            <div class="thumb-wrap">
+                <img class="thumb" loading="lazy" src="${API}/api/gallery/thumb/${img.path}" alt="${img.filename}">
+                ${renderOverlays(img)}
+            </div>
             <div class="fname">${img.filename}</div>
             <span class="truth-badge ${badgeClass}">${label}</span>
+            ${renderLabelSummary(img)}
             ${img._detectorFail ? '<span style="position:absolute; top:4px; right:4px; background:#f85149; color:#fff; font-size:9px; padding:1px 4px; border-radius:3px;">FAIL</span>' : ''}
         </div>`;
     }).join('');
