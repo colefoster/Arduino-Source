@@ -174,9 +174,9 @@ CROP_DEFS = {
         {"name": "title_text", "box": [0.3604, 0.2037, 0.1375, 0.0389]},
     ],
     "MegaEvolveDetector": [
-        #  Placeholder — retune via inspector against move_select frames
-        #  with vs. without the toggle visible.
-        {"name": "toggle_region", "box": [0.850, 0.420, 0.060, 0.060]},
+        #  Tuned via inspector. Pill with black "R" — detector requires
+        #  white-pixel fraction >= 0.30 AND OCR reads "R".
+        {"name": "toggle_region", "box": [0.5968, 0.9198, 0.0194, 0.0325]},
     ],
 }
 
