@@ -28,7 +28,7 @@
     "BattleHUDReader": {
       "mode": "doubles",
       "opponent_hp_pct": [
-        -1,
+        100,
         100
       ],
       "opponent_species": [
@@ -378,7 +378,7 @@
     "BattleHUDReader": {
       "mode": "singles",
       "opponent_hp_pct": [
-        -1,
+        2,
         -1
       ],
       "opponent_species": [
@@ -578,7 +578,7 @@
     "BattleHUDReader": {
       "mode": "singles",
       "opponent_hp_pct": [
-        -1,
+        38,
         -1
       ],
       "opponent_species": [
