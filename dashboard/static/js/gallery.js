@@ -646,6 +646,7 @@ async function expandGalleryCard(filename) {
             <div style="display:flex; gap:8px;">
                 <span id="gallery-save-status" style="font-size:11px; color:#8b949e; line-height:28px;"></span>
                 <button class="btn btn-primary" id="gallery-save-labels-btn" style="display:none;">Save Labels</button>
+                <button class="btn" id="gallery-open-inspector" style="font-size:10px; padding:2px 8px;" title="Open this frame in the Inspector for box tuning">Open in Inspector</button>
                 <button class="btn" id="gallery-debug-detectors" style="font-size:10px; padding:2px 8px;" title="Run all detectors on this image">Debug Detectors</button>
                 <select id="gallery-move-to" style="font-size:10px; padding:2px 4px; background:#161b22; color:#c9d1d9; border:1px solid #30363d; border-radius:3px;">
                     <option value="">Move to...</option>
@@ -772,6 +773,17 @@ async function expandGalleryCard(filename) {
             const next = Math.min(idx, galleryImages.length - 1);
             expandGalleryCard(galleryImages[next].filename);
         }
+    });
+
+    // Open in Inspector — switches view, pre-loads source + frame.
+    overlay.querySelector('#gallery-open-inspector').addEventListener('click', () => {
+        //  Inspector source-select uses the __test__/<screen> path emitted
+        //  by /api/labeler/sources for test_images entries.
+        const params = new URLSearchParams({
+            source: `__test__/${screen}`,
+            filename,
+        });
+        location.hash = `#/inspector?${params.toString()}`;
     });
 
     // Debug detectors button

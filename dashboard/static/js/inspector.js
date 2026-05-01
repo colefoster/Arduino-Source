@@ -20,8 +20,34 @@ let inspectorState = {
     isPanning: false,
 };
 
+async function inspectorJumpTo(source, filename) {
+    const sourceSel = document.getElementById('inspector-source-select');
+    if (!sourceSel) return;
+    if (sourceSel.value !== source) {
+        sourceSel.value = source;
+        sourceSel.dispatchEvent(new Event('change'));
+        //  Wait for ribbon to populate.
+        await new Promise(r => setTimeout(r, 150));
+    }
+    const ribbon = document.getElementById('inspector-ribbon');
+    if (!ribbon) return;
+    const target = ribbon.querySelector(`img[title="${filename}"]`);
+    if (target) {
+        target.click();
+    } else {
+        //  Fallback: load by URL even if ribbon hasn't mounted yet.
+        inspectorLoadImage(`${API}/api/labeler/frame/${encodeURIComponent(source)}/${encodeURIComponent(filename)}`);
+    }
+}
+
 async function inspectorInit() {
-    if (inspectorInited) return;
+    const params = window.routeParams || {};
+    const wantSource = params.source;
+    const wantFile = params.filename;
+    if (inspectorInited) {
+        if (wantSource && wantFile) await inspectorJumpTo(wantSource, wantFile);
+        return;
+    }
     inspectorInited = true;
 
     // Load sources
