@@ -23,6 +23,7 @@ class ImageViewRGB32;
 //  ── Screen Detectors (bool) ────────────────────────────────────────
 
 int test_pokemonChampions_MoveSelectDetector(const ImageViewRGB32& image, bool target);
+int test_pokemonChampions_MegaEvolveDetector(const ImageViewRGB32& image, bool target);
 int test_pokemonChampions_ActionMenuDetector(const ImageViewRGB32& image, bool target);
 int test_pokemonChampions_ResultScreenDetector(const ImageViewRGB32& image, bool target);
 int test_pokemonChampions_PreparingForBattleDetector(const ImageViewRGB32& image, bool target);

@@ -103,7 +103,7 @@ screens:
   move_select:
     description: "4-move panel active. PP visible. Mega evo toggle possible. Singles or doubles."
     transitions_to: [target_select, action_menu]
-    detectors: [MoveSelectDetector]
+    detectors: [MoveSelectDetector, MegaEvolveDetector]
     readers:
       MoveNameReader:
         fields:
