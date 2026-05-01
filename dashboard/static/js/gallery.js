@@ -1094,8 +1094,6 @@ async function buildLabelForm(overlay, screen, filename, img) {
                         }
                     }
                     btn.textContent = 'Done';
-                    statusEl.textContent = 'OCR suggestion applied (yellow = suggested)';
-                    statusEl.style.color = '#d29922';
                 } else {
                     btn.textContent = 'Failed';
                 }
@@ -1133,8 +1131,6 @@ async function buildLabelForm(overlay, screen, filename, img) {
                         select.style.borderColor = '#d29922';
                     }
                     btn.textContent = detEntry.detected ? 'true' : 'false';
-                    statusEl.textContent = `${det} suggested ${detEntry.detected} (yellow = suggested)`;
-                    statusEl.style.color = '#d29922';
                 }
             } catch (e) {
                 btn.textContent = 'Error';
