@@ -581,9 +581,9 @@ void BattleHUDReader::init_singles_boxes(){
     m_own_hp_current_boxes[1] = ImageFloatBox(0, 0, 0, 0);  // unused
     m_own_hp_max_boxes[1]     = ImageFloatBox(0, 0, 0, 0);
 
-    //  Own species name sits in the bar above the HP digits. Initial
-    //  estimate — tune via inspector.
-    m_own_name_boxes[0] = ImageFloatBox(0.040, 0.892, 0.135, 0.034);
+    //  Own species name sits in the bar above the HP digits.
+    //  Tuned via inspector against move_select frames.
+    m_own_name_boxes[0] = ImageFloatBox(0.0814, 0.8705, 0.0918, 0.0272);
     m_own_name_boxes[1] = ImageFloatBox(0, 0, 0, 0);  // unused
 
     //  PP boxes — right edge of each move pill.
@@ -632,10 +632,10 @@ void BattleHUDReader::init_doubles_boxes(){
     m_own_hp_current_boxes[1] = ImageFloatBox(0.3363, 0.9342, 0.0450, 0.0361);
     m_own_hp_max_boxes[1]     = ImageFloatBox(0.3800, 0.9473, 0.0340, 0.0215);
 
-    //  Own species name sits in the bar above the HP digits. Initial
-    //  estimates derived from the HP-bar offsets — tune via inspector.
-    m_own_name_boxes[0] = ImageFloatBox(0.040, 0.892, 0.135, 0.034);
-    m_own_name_boxes[1] = ImageFloatBox(0.245, 0.892, 0.135, 0.034);
+    //  Own species name sits in the bar above the HP digits.
+    //  Tuned via inspector against move_select doubles frames.
+    m_own_name_boxes[0] = ImageFloatBox(0.0814, 0.8705, 0.0918, 0.0272);
+    m_own_name_boxes[1] = ImageFloatBox(0.2901, 0.8705, 0.0835, 0.0267);
 
     //  No PP boxes on the doubles action menu screen.
     //  (Moves are shown after pressing FIGHT, in a different layout.)
