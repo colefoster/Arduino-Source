@@ -573,6 +573,9 @@ function renderGalleryGrid() {
         const cardClasses = ['gallery-card'];
         if (_bulkSelectMode) cardClasses.push('selectable');
         if (isSelected) cardClasses.push('selected');
+        const inspectBtn = _galleryExtended
+            ? `<button class="btn card-open-inspector" data-filename="${img.filename}" style="font-size:10px; padding:3px 8px; margin-top:4px;">Open in Inspector</button>`
+            : '';
         return `<div class="${cardClasses.join(' ')}" data-filename="${img.filename}"${flagged}>
             ${_bulkSelectMode ? `<div class="select-badge">${isSelected ? '✓' : ''}</div>` : ''}
             <div class="thumb-wrap">
@@ -582,9 +585,22 @@ function renderGalleryGrid() {
             <div class="fname">${img.filename}</div>
             <span class="truth-badge ${badgeClass}">${label}</span>
             ${renderLabelSummary(img)}
+            ${inspectBtn}
             ${img._detectorFail ? '<span style="position:absolute; top:4px; right:4px; background:#f85149; color:#fff; font-size:9px; padding:1px 4px; border-radius:3px;">FAIL</span>' : ''}
         </div>`;
     }).join('');
+
+    //  Per-card "Open in Inspector" — stop bubbling so the card click
+    //  (which expands the modal) doesn't also fire.
+    grid.querySelectorAll('.card-open-inspector').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const fname = btn.dataset.filename;
+            const screen = gallerySelectedScreen || gallerySelectedReader;
+            const params = new URLSearchParams({source: `__test__/${screen}`, filename: fname});
+            location.hash = `#/inspector?${params.toString()}`;
+        });
+    });
 
     grid.querySelectorAll('.gallery-card').forEach(card => {
         card.addEventListener('click', (e) => {
