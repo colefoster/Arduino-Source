@@ -819,10 +819,33 @@ async def gallery_manifest_update(screen: str, filename: str, request: Request):
         return JSONResponse({"error": "image not found"}, 404)
 
     body = await request.json()
+    _autoset_battlehud_mode(body)
     manifest = _load_manifest(screen_dir)
     manifest[filename] = body
     manifest_path.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n")
     return {"ok": True, "filename": filename}
+
+
+def _autoset_battlehud_mode(labels: dict) -> None:
+    """Infer BattleHUDReader.mode from slot data — preserves any value that
+    was already present, otherwise sets 'doubles' if any slot 1 is populated,
+    'singles' otherwise. Mutates labels in place."""
+    hud = labels.get("BattleHUDReader") if isinstance(labels, dict) else None
+    if not isinstance(hud, dict):
+        return
+    if hud.get("mode") in ("singles", "doubles"):
+        return
+    doubles = False
+    for f in ("opponent_species", "own_species"):
+        v = hud.get(f)
+        if isinstance(v, list) and len(v) > 1 and isinstance(v[1], str) and v[1]:
+            doubles = True; break
+    if not doubles:
+        for f in ("opponent_hp_pct", "own_hp_current", "own_hp_max"):
+            v = hud.get(f)
+            if isinstance(v, list) and len(v) > 1 and isinstance(v[1], (int, float)) and v[1] >= 0:
+                doubles = True; break
+    hud["mode"] = "doubles" if doubles else "singles"
 
 
 @app.post("/api/gallery/manifest/{screen:path}/bulk-confirm")
@@ -862,6 +885,7 @@ async def gallery_manifest_bulk_update(screen: str, request: Request):
             manifest[fname] = {}
         for reader_name, fields in readers.items():
             manifest[fname][reader_name] = fields
+        _autoset_battlehud_mode(manifest[fname])
         updated += 1
     manifest_path = screen_dir / "manifest.json"
     manifest_path.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n")
