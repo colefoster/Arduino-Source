@@ -21,6 +21,7 @@
 #include "PokemonChampions_BattleHUDReader.h"      //  SpeciesNameOCR
 #include "PokemonChampions_ItemNameReader.h"        //  ItemNameOCR
 #include "PokemonChampions_SpriteMatcher.h"
+#include "PokemonChampions_PreparingForBattleDetector.h"
 
 namespace PokemonAutomation{
 namespace NintendoSwitch{
@@ -86,6 +87,16 @@ TeamPreviewReader::TeamPreviewReader(Language language)
     const double OPP_Y5 = 0.7310;
     const double OPP_STEP = (OPP_Y5 - OPP_Y0) / 5.0;
 
+    //  --- Opp sprite boxes (selecting screen) ---
+    //  Sprites sit further outward before the team is locked in. Anchors
+    //  saved at slot 0/1/5 in inspector (selecting1/selecting/selecting5).
+    const double OPP_SEL_X = 0.8390;
+    const double OPP_SEL_W = 0.0604;
+    const double OPP_SEL_H = 0.0986;
+    const double OPP_SEL_Y0 = 0.1473;
+    const double OPP_SEL_Y5 = 0.7317;
+    const double OPP_SEL_STEP = (OPP_SEL_Y5 - OPP_SEL_Y0) / 5.0;
+
     for (uint8_t i = 0; i < 6; i++){
         double t = i / 5.0;   //  0..1 over the 6 slots
         double sp_x = OWN_SP_X0 + t * (OWN_SP_X5 - OWN_SP_X0);
@@ -96,6 +107,8 @@ TeamPreviewReader::TeamPreviewReader(Language language)
         m_own_item_boxes[i]    = ImageFloatBox(it_x, it_y, OWN_IT_W, OWN_IT_H);
         m_opp_sprite_boxes[i]  = ImageFloatBox(
             OPP_X, OPP_Y0 + i * OPP_STEP, OPP_W, OPP_H);
+        m_opp_sprite_boxes_selecting[i] = ImageFloatBox(
+            OPP_SEL_X, OPP_SEL_Y0 + i * OPP_SEL_STEP, OPP_SEL_W, OPP_SEL_H);
     }
 }
 
@@ -146,11 +159,19 @@ TeamPreviewResult TeamPreviewReader::read(
     }
 
     //  --- OPP SIDE: sprite match ---
+    //  PreparingForBattleDetector fires when "Standing By" pills are visible
+    //  -> locked-in screen (sprites pulled inward). Otherwise -> selecting
+    //  screen (sprites at the outward default position).
+    PreparingForBattleDetector prep;
+    const bool locked_in = prep.detect(screen);
+    const auto& opp_boxes = locked_in ? m_opp_sprite_boxes : m_opp_sprite_boxes_selecting;
+    logger.log(std::string("TeamPreview: opp layout = ") + (locked_in ? "locked-in" : "selecting"));
+
     const PokemonSpriteMatcher& matcher = PokemonSpriteMatcher::instance();
     for (uint8_t i = 0; i < 6; i++){
         //  CroppedImageDictionaryMatcher::match takes (ImageViewRGB32, alpha_spread).
         //  We pre-extract the sprite region; matcher auto-crops the pill away.
-        ImageViewRGB32 sprite_crop = extract_box_reference(screen, m_opp_sprite_boxes[i]);
+        ImageViewRGB32 sprite_crop = extract_box_reference(screen, opp_boxes[i]);
         ImageMatch::ImageMatchResult match = matcher.match(sprite_crop, /* alpha_spread */ 0.05);
         if (match.results.empty()){
             logger.log("TeamPreview: opp slot " + std::to_string(i) + " sprite match: no result", COLOR_RED);

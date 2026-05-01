@@ -179,8 +179,8 @@ CROP_DEFS = {
     #  you've dialed them in.
     "TeamPreviewReader_selecting": [
         {"name": f"opp_sprite_{i}", "box": [
-            0.8380, 0.1509 + i * ((0.7407 - 0.1509) / 5.0),
-            0.0583, 0.0917
+            0.8390, 0.1473 + i * ((0.7317 - 0.1473) / 5.0),
+            0.0604, 0.0986
         ]} for i in range(6)
     ],
     "ActionMenuDetector": [
@@ -1014,9 +1014,12 @@ async def sprites_examples(limit: int = 100):
     user sees here is exactly what the matcher consumed.
     """
     import base64
-    OPP_X, OPP_Y0, OPP_Y5, OPP_W, OPP_H = 0.7181, 0.1482, 0.7310, 0.0664, 0.1009
-    step = (OPP_Y5 - OPP_Y0) / 5.0
-    OPP_BOXES = [[OPP_X, OPP_Y0 + i * step, OPP_W, OPP_H] for i in range(6)]
+    OPP_LOCKED = (0.7181, 0.1482, 0.7310, 0.0664, 0.1009)
+    OPP_SELECT = (0.8390, 0.1473, 0.7317, 0.0604, 0.0986)
+    def opp_boxes(coords):
+        x, y0, y5, w, h = coords
+        step = (y5 - y0) / 5.0
+        return [[x, y0 + i * step, w, h] for i in range(6)]
 
     #  Own species text labels (the C++ reader OCRs these). Linear interp
     #  matches PokemonChampions_TeamPreviewReader.cpp.
@@ -1050,9 +1053,10 @@ async def sprites_examples(limit: int = 100):
             img_path = screen_dir / fname
             if not img_path.exists():
                 continue
+            boxes = opp_boxes(OPP_LOCKED if "locked_in" in screen_name else OPP_SELECT)
             opp_slots = []
             for i in range(6):
-                crop_b64 = base64.b64encode(_extract_crop(img_path, OPP_BOXES[i])).decode()
+                crop_b64 = base64.b64encode(_extract_crop(img_path, boxes[i])).decode()
                 opp_slots.append({
                     "species": (opp[i] if i < len(opp) else "") or "",
                     "crop": f"data:image/png;base64,{crop_b64}",
