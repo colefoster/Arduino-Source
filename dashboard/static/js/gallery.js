@@ -36,6 +36,17 @@ async function galleryInit() {
             }
         } catch (e) { /* regression data optional */ }
         renderGallerySidebar();
+        //  Auto-select the screen with the most images on first load.
+        if (!gallerySelectedScreen) {
+            const top = galleryScreens
+                .filter(s => s.type === 'screen' && s.count > 0)
+                .sort((a, b) => (b.count || 0) - (a.count || 0))[0];
+            if (top) {
+                gallerySelectedScreen = top.name;
+                renderGallerySidebar();
+                loadGalleryScreenImages(top.name);
+            }
+        }
     } catch (e) {
         document.getElementById('gallery-sidebar').innerHTML = '<div style="color:#f85149; font-size:12px;">Failed to load screens</div>';
     }
@@ -54,9 +65,10 @@ async function galleryInit() {
 function renderGallerySidebar() {
     const sidebar = document.getElementById('gallery-sidebar');
     // Group: screens with images, then empty screens, then overlays
-    const withImages = galleryScreens.filter(s => s.count > 0 && s.type === 'screen');
+    const byCountDesc = (a, b) => (b.count || 0) - (a.count || 0);
+    const withImages = galleryScreens.filter(s => s.count > 0 && s.type === 'screen').sort(byCountDesc);
     const empty = galleryScreens.filter(s => s.count === 0 && s.type === 'screen');
-    const overlays = galleryScreens.filter(s => s.type === 'overlay');
+    const overlays = galleryScreens.filter(s => s.type === 'overlay').sort(byCountDesc);
 
     const pillFor = (s, displayName) => {
         const fails = _regressionFailures[s.name] || 0;
