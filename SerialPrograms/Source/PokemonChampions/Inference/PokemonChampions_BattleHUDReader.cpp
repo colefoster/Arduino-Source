@@ -583,11 +583,10 @@ void BattleHUDReader::init_singles_boxes(){
     m_opponent_name_boxes[1] = ImageFloatBox(0, 0, 0, 0);  // unused
     m_opponent_hp_boxes[1]   = ImageFloatBox(0, 0, 0, 0);
 
-    //  Singles own HP appears at the same position as doubles slot 0 —
-    //  see init_doubles_boxes for tuned coords. Initial split point at
-    //  the slash; each half gets ~45% of the combined width.
-    m_own_hp_current_boxes[0] = ImageFloatBox(0.133, 0.944, 0.034, 0.042);
-    m_own_hp_max_boxes[0]     = ImageFloatBox(0.171, 0.944, 0.040, 0.042);
+    //  Singles own HP sits at the same position as doubles slot 0 —
+    //  reuse those tuned coords (see init_doubles_boxes).
+    m_own_hp_current_boxes[0] = ImageFloatBox(0.1304, 0.9338, 0.0448, 0.0362);
+    m_own_hp_max_boxes[0]     = ImageFloatBox(0.1746, 0.9464, 0.0335, 0.0229);
     m_own_hp_current_boxes[1] = ImageFloatBox(0, 0, 0, 0);  // unused
     m_own_hp_max_boxes[1]     = ImageFloatBox(0, 0, 0, 0);
 
@@ -628,13 +627,14 @@ void BattleHUDReader::init_doubles_boxes(){
     m_opponent_hp_boxes[0]   = ImageFloatBox(0.6932, 0.1174, 0.0429, 0.0354);
     m_opponent_hp_boxes[1]   = ImageFloatBox(0.9002, 0.1176, 0.0420, 0.0349);
 
-    //  Own HP bars: bottom-left, fraction format (e.g. "152/202") split
-    //  into separate current and max digit regions. Initial split point
-    //  is the slash; tune each half independently in the inspector.
-    m_own_hp_current_boxes[0] = ImageFloatBox(0.035, 0.920, 0.045, 0.050);
-    m_own_hp_max_boxes[0]     = ImageFloatBox(0.085, 0.920, 0.050, 0.050);
-    m_own_hp_current_boxes[1] = ImageFloatBox(0.225, 0.920, 0.045, 0.050);
-    m_own_hp_max_boxes[1]     = ImageFloatBox(0.275, 0.920, 0.050, 0.050);
+    //  Own HP bars: bottom-left, "current/max" split into independent
+    //  digit regions. Tuned via inspector saves on doubles frames; max
+    //  boxes intentionally include the slash glyph (parse takes the first
+    //  integer found, so the slash is harmless noise).
+    m_own_hp_current_boxes[0] = ImageFloatBox(0.1304, 0.9338, 0.0448, 0.0362);
+    m_own_hp_max_boxes[0]     = ImageFloatBox(0.1746, 0.9464, 0.0335, 0.0229);
+    m_own_hp_current_boxes[1] = ImageFloatBox(0.3363, 0.9342, 0.0450, 0.0361);
+    m_own_hp_max_boxes[1]     = ImageFloatBox(0.3800, 0.9473, 0.0340, 0.0215);
 
     //  No PP boxes on the doubles action menu screen.
     //  (Moves are shown after pressing FIGHT, in a different layout.)
