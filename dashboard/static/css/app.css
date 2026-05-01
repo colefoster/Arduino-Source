@@ -162,10 +162,49 @@
             padding: 10px; cursor: pointer; transition: border-color 0.15s;
         }
         .gallery-card:hover { border-color: #58a6ff; }
+        .gallery-card { position: relative; }
+        .gallery-card.selectable { cursor: pointer; user-select: none; }
+        .gallery-card.selected {
+            border-color: #58a6ff; background: #0d2a4d;
+            box-shadow: 0 0 0 2px #58a6ff inset;
+        }
+        .gallery-card.selected .thumb { opacity: 0.85; }
+        .gallery-card .select-badge {
+            position: absolute; top: 6px; left: 6px;
+            width: 22px; height: 22px; border-radius: 50%;
+            background: rgba(13,17,23,0.85); border: 2px solid #8b949e;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 13px; font-weight: bold; color: transparent;
+            z-index: 2; pointer-events: none; transition: all 0.1s;
+        }
+        .gallery-card.selected .select-badge {
+            background: #58a6ff; border-color: #58a6ff; color: #fff;
+        }
         .gallery-card .thumb {
             width: 100%; border-radius: 4px; background: #0d1117;
             image-rendering: pixelated; display: block;
         }
+        /* Extended view: bigger cards with overlay boxes drawn on the thumb. */
+        .gallery-cards.extended { grid-template-columns: repeat(auto-fill, minmax(420px, 1fr)) !important; }
+        .gallery-card .thumb-wrap { position: relative; }
+        .gallery-card .crop-box {
+            position: absolute; border: 1.5px solid; pointer-events: none;
+            box-sizing: border-box;
+        }
+        .gallery-card .crop-label {
+            position: absolute; font-size: 9px; line-height: 1; padding: 1px 3px;
+            border-radius: 2px; background: rgba(13,17,23,0.9); color: #c9d1d9;
+            white-space: nowrap; pointer-events: none;
+            transform: translateY(-100%);
+        }
+        .gallery-card .label-summary {
+            margin-top: 6px; font-size: 10px; color: #8b949e;
+            display: grid; grid-template-columns: auto 1fr; gap: 2px 8px;
+        }
+        .gallery-card .label-summary .k { color: #6e7681; }
+        .gallery-card .label-summary .v { color: #c9d1d9; word-break: break-all; }
+        .gallery-card .label-summary .v-empty { color: #6e7681; font-style: italic; }
+        .gallery-card .label-summary .v-bad { color: #f85149; }
         .gallery-card .fname { font-size: 10px; color: #58a6ff; margin-top: 6px; word-break: break-all; }
         .gallery-card .truth-badge {
             display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 10px;
