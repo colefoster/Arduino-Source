@@ -602,9 +602,9 @@ void BattleHUDReader::init_boxes(){
     //  digit regions. The slash between them is OCR-hostile, so reading
     //  each number separately and recombining is cleaner.
     m_own_hp_current_boxes[0] = ImageFloatBox(0.1304, 0.9338, 0.0448, 0.0362);
-    m_own_hp_max_boxes[0]     = ImageFloatBox(0.1746, 0.9464, 0.0335, 0.0229);
+    m_own_hp_max_boxes[0]     = ImageFloatBox(0.1829, 0.9477, 0.0258, 0.0205);
     m_own_hp_current_boxes[1] = ImageFloatBox(0.3363, 0.9342, 0.0450, 0.0361);
-    m_own_hp_max_boxes[1]     = ImageFloatBox(0.3800, 0.9473, 0.0340, 0.0215);
+    m_own_hp_max_boxes[1]     = ImageFloatBox(0.3892, 0.9474, 0.0249, 0.0227);
 
     //  Own species name (in the bar above the HP digits).
     m_own_name_boxes[0] = ImageFloatBox(0.0814, 0.8705, 0.0918, 0.0272);
