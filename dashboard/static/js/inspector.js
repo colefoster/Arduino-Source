@@ -47,7 +47,7 @@ async function inspectorInit() {
             Object.keys(boxes).map(r => `<option value="${r}">${r}</option>`).join('');
     } catch {}
 
-    // Source change -> populate thumbnail ribbon
+    // Source change -> populate thumbnail ribbon (paginated, 10 per page)
     document.getElementById('inspector-source-select').addEventListener('change', async e => {
         const source = e.target.value;
         const ribbon = document.getElementById('inspector-ribbon');
@@ -56,31 +56,13 @@ async function inspectorInit() {
         try {
             const data = await api(`/api/labeler/images?source=${encodeURIComponent(source)}&reader=_`);
             const images = data.images || [];
-            // Also populate hidden select for nav compat
             const sel = document.getElementById('inspector-image-select');
             sel.innerHTML = images.map(i => `<option value="${i.filename}">${i.filename}</option>`).join('');
             inspectorState._ribbonSource = source;
             inspectorState._ribbonImages = images;
-
-            images.forEach((img, idx) => {
-                const thumb = document.createElement('img');
-                thumb.src = `${API}/api/labeler/frame/${encodeURIComponent(source)}/${encodeURIComponent(img.filename)}?thumb=1`;
-                thumb.title = img.filename;
-                thumb.dataset.idx = idx;
-                thumb.style.cssText = 'height:56px; width:auto; border-radius:3px; border:2px solid #30363d; cursor:pointer; flex-shrink:0; transition:border-color 0.15s;';
-                thumb.addEventListener('click', () => {
-                    // Highlight selected
-                    ribbon.querySelectorAll('img').forEach(t => t.style.borderColor = '#30363d');
-                    thumb.style.borderColor = '#1f6feb';
-                    inspectorState._ribbonIdx = idx;
-                    inspectorLoadImage(`${API}/api/labeler/frame/${encodeURIComponent(source)}/${encodeURIComponent(img.filename)}`);
-                });
-                ribbon.appendChild(thumb);
-            });
-            // Auto-load first image
-            if (images.length > 0) {
-                ribbon.querySelector('img').click();
-            }
+            inspectorState._ribbonPage = 0;
+            inspectorState._ribbonAutoLoaded = false;
+            inspectorRenderRibbon();
         } catch(e) { console.error(e); }
     });
 
@@ -259,6 +241,72 @@ async function inspectorInit() {
     canvas.addEventListener('contextmenu', e => e.preventDefault());
 }
 
+const INSPECTOR_RIBBON_PAGE_SIZE = 10;
+
+function inspectorRenderRibbon() {
+    const ribbon = document.getElementById('inspector-ribbon');
+    const source = inspectorState._ribbonSource || '';
+    const images = inspectorState._ribbonImages || [];
+    const page = inspectorState._ribbonPage || 0;
+    const pageSize = INSPECTOR_RIBBON_PAGE_SIZE;
+    const totalPages = Math.max(1, Math.ceil(images.length / pageSize));
+    const clampedPage = Math.min(Math.max(0, page), totalPages - 1);
+    inspectorState._ribbonPage = clampedPage;
+
+    ribbon.innerHTML = '';
+    if (!images.length) return;
+
+    const start = clampedPage * pageSize;
+    const slice = images.slice(start, start + pageSize);
+
+    const mkPagerBtn = (label, disabled, onClick) => {
+        const b = document.createElement('button');
+        b.textContent = label;
+        b.disabled = disabled;
+        b.style.cssText = 'flex-shrink:0; height:56px; min-width:32px; padding:0 8px; background:#161b22; color:#c9d1d9; border:1px solid #30363d; border-radius:3px; cursor:pointer; font-family:inherit; font-size:11px;' + (disabled ? 'opacity:0.4; cursor:not-allowed;' : '');
+        b.addEventListener('click', onClick);
+        return b;
+    };
+
+    ribbon.appendChild(mkPagerBtn('\u25C0', clampedPage === 0, () => {
+        inspectorState._ribbonPage = clampedPage - 1;
+        inspectorRenderRibbon();
+    }));
+
+    slice.forEach((img, sliceIdx) => {
+        const idx = start + sliceIdx;
+        const thumb = document.createElement('img');
+        thumb.src = `${API}/api/labeler/frame/${encodeURIComponent(source)}/${encodeURIComponent(img.filename)}?thumb=1`;
+        thumb.title = img.filename;
+        thumb.dataset.idx = idx;
+        thumb.style.cssText = 'height:56px; width:auto; border-radius:3px; border:2px solid #30363d; cursor:pointer; flex-shrink:0; transition:border-color 0.15s;';
+        thumb.addEventListener('click', () => {
+            ribbon.querySelectorAll('img').forEach(t => t.style.borderColor = '#30363d');
+            thumb.style.borderColor = '#1f6feb';
+            inspectorState._ribbonIdx = idx;
+            inspectorLoadImage(`${API}/api/labeler/frame/${encodeURIComponent(source)}/${encodeURIComponent(img.filename)}`);
+        });
+        ribbon.appendChild(thumb);
+    });
+
+    const pageInfo = document.createElement('span');
+    pageInfo.textContent = `${start + 1}\u2013${Math.min(start + pageSize, images.length)} of ${images.length}`;
+    pageInfo.style.cssText = 'flex-shrink:0; align-self:center; color:#8b949e; font-size:11px; padding:0 6px;';
+    ribbon.appendChild(pageInfo);
+
+    ribbon.appendChild(mkPagerBtn('\u25B6', clampedPage >= totalPages - 1, () => {
+        inspectorState._ribbonPage = clampedPage + 1;
+        inspectorRenderRibbon();
+    }));
+
+    // Auto-load the first image of the current page on initial render only.
+    if (!inspectorState._ribbonAutoLoaded) {
+        inspectorState._ribbonAutoLoaded = true;
+        const firstThumb = ribbon.querySelector('img');
+        if (firstThumb) firstThumb.click();
+    }
+}
+
 function inspectorLoadImage(url) {
     const img = new Image();
     img.crossOrigin = 'anonymous';
@@ -400,6 +448,10 @@ function inspectorOnBoxInput() {
     if (w > 0.001 && h > 0.001) {
         inspectorState.selection = { x, y, w, h };
         inspectorRender();
+        // Show Test OCR as soon as there's a valid selection — the button
+        // itself handles "no image loaded" with an error message.
+        document.getElementById('inspector-ocr-section').style.display = '';
+        document.getElementById('inspector-ocr-result').style.display = 'none';
         inspectorAnalyze(inspectorState.selection);
     }
 }
@@ -591,14 +643,31 @@ async function inspectorSaveBox() {
 }
 
 function inspectorNavImage(delta) {
-    const ribbon = document.getElementById('inspector-ribbon');
-    const thumbs = ribbon.querySelectorAll('img');
-    if (!thumbs.length) return;
-    const curIdx = inspectorState._ribbonIdx || 0;
-    const newIdx = curIdx + delta;
-    if (newIdx >= 0 && newIdx < thumbs.length) {
-        thumbs[newIdx].click();
-        thumbs[newIdx].scrollIntoView({ behavior: 'smooth', inline: 'center' });
+    // Walk the global image list, hopping pages if needed.
+    const images = inspectorState._ribbonImages || [];
+    if (!images.length) return;
+    const source = inspectorState._ribbonSource || '';
+    const curIdx = inspectorState._ribbonIdx ?? 0;
+    const newIdx = Math.min(images.length - 1, Math.max(0, curIdx + delta));
+    if (newIdx === curIdx) return;
+
+    const targetPage = Math.floor(newIdx / INSPECTOR_RIBBON_PAGE_SIZE);
+    if (targetPage !== inspectorState._ribbonPage) {
+        inspectorState._ribbonPage = targetPage;
+        inspectorState._ribbonAutoLoaded = true;  // suppress auto-load; we click manually below
+        inspectorRenderRibbon();
+    }
+    inspectorState._ribbonIdx = newIdx;
+
+    const thumbs = document.getElementById('inspector-ribbon').querySelectorAll('img');
+    const sliceOffset = newIdx % INSPECTOR_RIBBON_PAGE_SIZE;
+    const thumb = thumbs[sliceOffset];
+    if (thumb) {
+        thumbs.forEach(t => t.style.borderColor = '#30363d');
+        thumb.style.borderColor = '#1f6feb';
+        thumb.scrollIntoView({ behavior: 'smooth', inline: 'center' });
+        const fname = images[newIdx].filename;
+        inspectorLoadImage(`${API}/api/labeler/frame/${encodeURIComponent(source)}/${encodeURIComponent(fname)}`);
     }
 }
 
