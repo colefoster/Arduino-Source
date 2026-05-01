@@ -880,6 +880,9 @@ async function buildLabelForm(overlay, screen, filename, img) {
         </div>`;
 
         for (const [fieldName, fieldDef] of Object.entries(fields)) {
+            //  BattleHUDReader.mode is auto-derived from slot data; don't
+            //  surface it as a manual field in the form.
+            if (readerName === 'BattleHUDReader' && fieldName === 'mode') continue;
             const val = existing[fieldName];
             html += `<div style="margin-bottom:6px;">`;
             html += `<label style="font-size:11px; color:#8b949e; display:block; margin-bottom:2px;">${fieldName}</label>`;
