@@ -986,8 +986,13 @@ async def sprites_list():
 
 @app.get("/api/sprites/examples")
 async def sprites_examples():
-    """Return a few labeled team-preview frames whose opponent species are
-    suitable for showing 'reference vs game frame' side-by-side."""
+    """Return a few labeled team-preview frames with the actual opp-sprite
+    crops (base64 PNG) alongside the reference sprite slug for each slot."""
+    import base64
+    OPP_BOXES = [
+        [0.8380, 0.1509 + i * ((0.7407 - 0.1509) / 5.0), 0.0583, 0.0917]
+        for i in range(6)
+    ]
     examples = []
     candidates = [
         TEST_IMAGES_DIR / "team_preview_locked_in",
@@ -1006,12 +1011,22 @@ async def sprites_examples():
             cleaned = [s for s in opp if s]
             if len(cleaned) < 3:
                 continue
+            img_path = screen_dir / fname
+            if not img_path.exists():
+                continue
+            slots = []
+            for i in range(min(6, len(opp))):
+                crop_b64 = base64.b64encode(_extract_crop(img_path, OPP_BOXES[i])).decode()
+                slots.append({
+                    "species": opp[i] or "",
+                    "crop": f"data:image/png;base64,{crop_b64}",
+                })
             examples.append({
                 "screen": screen_name,
                 "filename": fname,
-                "opponent_species": opp,
+                "slots": slots,
             })
-            if len(examples) >= 6:
+            if len(examples) >= 4:
                 return {"ok": True, "examples": examples}
     return {"ok": True, "examples": examples}
 
