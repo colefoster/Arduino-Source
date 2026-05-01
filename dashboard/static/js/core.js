@@ -10,7 +10,7 @@ function apiPost(path, body) {
     return fetch(`${API}${path}`, { method: 'POST', body: fd }).then(r => r.json());
 }
 
-const views = ['dashboard', 'gallery', 'labeler', 'inspector', 'recognition', 'teampreview', 'templates', 'model', 'training', 'validation'];
+const views = ['dashboard', 'gallery', 'labeler', 'inspector', 'recognition', 'teampreview', 'templates', 'model', 'training', 'validation', 'mismatches'];
 let currentView = null;
 
 window.routeParams = {};
@@ -55,6 +55,7 @@ function route() {
     if (view === 'model') modelInit();
     if (view === 'training') trainingInit();
     if (view === 'validation') validationInit();
+    if (view === 'mismatches') mismatchesInit();
 }
 
 window.addEventListener('hashchange', route);
