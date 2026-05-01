@@ -1017,6 +1017,18 @@ async def sprites_examples(limit: int = 100):
     OPP_X, OPP_Y0, OPP_Y5, OPP_W, OPP_H = 0.7181, 0.1482, 0.7310, 0.0664, 0.1009
     step = (OPP_Y5 - OPP_Y0) / 5.0
     OPP_BOXES = [[OPP_X, OPP_Y0 + i * step, OPP_W, OPP_H] for i in range(6)]
+
+    #  Own species text labels (the C++ reader OCRs these). Linear interp
+    #  matches PokemonChampions_TeamPreviewReader.cpp.
+    OWN_X0, OWN_X5 = 0.0760, 0.0724
+    OWN_Y0, OWN_Y5 = 0.1565, 0.7389
+    OWN_W, OWN_H = 0.0969, 0.0389
+    OWN_BOXES = [
+        [OWN_X0 + (i/5.0)*(OWN_X5 - OWN_X0),
+         OWN_Y0 + (i/5.0)*(OWN_Y5 - OWN_Y0),
+         OWN_W, OWN_H]
+        for i in range(6)
+    ]
     examples = []
     candidates = [
         TEST_IMAGES_DIR / "team_preview_locked_in",
@@ -1032,22 +1044,31 @@ async def sprites_examples(limit: int = 100):
             if not isinstance(tp, dict):
                 continue
             opp = tp.get("opponent_species") or []
-            if not any(opp):
+            own = tp.get("own_species") or []
+            if not any(opp) and not any(own):
                 continue
             img_path = screen_dir / fname
             if not img_path.exists():
                 continue
-            slots = []
-            for i in range(min(6, len(opp))):
+            opp_slots = []
+            for i in range(6):
                 crop_b64 = base64.b64encode(_extract_crop(img_path, OPP_BOXES[i])).decode()
-                slots.append({
-                    "species": opp[i] or "",
+                opp_slots.append({
+                    "species": (opp[i] if i < len(opp) else "") or "",
+                    "crop": f"data:image/png;base64,{crop_b64}",
+                })
+            own_slots = []
+            for i in range(6):
+                crop_b64 = base64.b64encode(_extract_crop(img_path, OWN_BOXES[i])).decode()
+                own_slots.append({
+                    "species": (own[i] if i < len(own) else "") or "",
                     "crop": f"data:image/png;base64,{crop_b64}",
                 })
             examples.append({
                 "screen": screen_name,
                 "filename": fname,
-                "slots": slots,
+                "opp_slots": opp_slots,
+                "own_slots": own_slots,
             })
             if len(examples) >= limit:
                 return {"ok": True, "examples": examples, "truncated": True}
