@@ -27,7 +27,7 @@ namespace PokemonChampions{
 BattleLogReader::BattleLogReader()
     //  Bottom-center text bar region.
     //  x: 200-1600 / 1920, y: 801-850 / 1080
-    : m_text_bar(0.104, 0.741, 0.729, 0.046)
+    : m_text_bar(0.1532, 0.741, 0.704, 0.046)
 {}
 
 void BattleLogReader::make_overlays(VideoOverlaySet& items) const{
