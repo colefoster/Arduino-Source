@@ -11,12 +11,28 @@
     "MoveSelectCursorSlot": {
       "slot": 0
     },
-    "SpeciesReader": {
-      "opponent_species": "gengar"
-    },
-    "SpeciesReader_Doubles": {
-      "opponent_species": "gengar",
-      "slot": 0
+    "BattleHUDReader": {
+      "mode": "doubles",
+      "opponent_species": [
+        "gengar",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260423-150128027036.png": {
@@ -31,12 +47,28 @@
     "MoveSelectCursorSlot": {
       "slot": -1
     },
-    "SpeciesReader": {
-      "opponent_species": "gengar"
-    },
-    "SpeciesReader_Doubles": {
-      "opponent_species": "gengar",
-      "slot": 0
+    "BattleHUDReader": {
+      "mode": "doubles",
+      "opponent_species": [
+        "gengar",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260423-150129725676.png": {
@@ -51,12 +83,28 @@
     "MoveSelectCursorSlot": {
       "slot": 0
     },
-    "SpeciesReader": {
-      "opponent_species": "gengar"
-    },
-    "SpeciesReader_Doubles": {
-      "opponent_species": "gengar",
-      "slot": 0
+    "BattleHUDReader": {
+      "mode": "doubles",
+      "opponent_species": [
+        "gengar",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260423-150132024252.png": {
@@ -71,12 +119,28 @@
     "MoveSelectCursorSlot": {
       "slot": 2
     },
-    "SpeciesReader": {
-      "opponent_species": "gengar"
-    },
-    "SpeciesReader_Doubles": {
-      "opponent_species": "gengar",
-      "slot": 0
+    "BattleHUDReader": {
+      "mode": "doubles",
+      "opponent_species": [
+        "gengar",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260423-150240891066.png": {
@@ -91,12 +155,28 @@
     "MoveSelectCursorSlot": {
       "slot": -1
     },
-    "SpeciesReader": {
-      "opponent_species": "sylveon"
-    },
-    "SpeciesReader_Doubles": {
-      "opponent_species": "hydreigon",
-      "slot": 1
+    "BattleHUDReader": {
+      "mode": "doubles",
+      "opponent_species": [
+        "sylveon",
+        "hydreigon"
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260423-150242947838.png": {
@@ -111,12 +191,28 @@
     "MoveSelectCursorSlot": {
       "slot": 1
     },
-    "SpeciesReader": {
-      "opponent_species": "sylveon"
-    },
-    "SpeciesReader_Doubles": {
-      "opponent_species": "sylveon",
-      "slot": 0
+    "BattleHUDReader": {
+      "mode": "doubles",
+      "opponent_species": [
+        "sylveon",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260423-150245612449.png": {
@@ -131,12 +227,28 @@
     "MoveSelectCursorSlot": {
       "slot": 2
     },
-    "SpeciesReader": {
-      "opponent_species": "sylveon"
-    },
-    "SpeciesReader_Doubles": {
-      "opponent_species": "sylveon",
-      "slot": 0
+    "BattleHUDReader": {
+      "mode": "doubles",
+      "opponent_species": [
+        "sylveon",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260423-150248328346.png": {
@@ -151,12 +263,28 @@
     "MoveSelectCursorSlot": {
       "slot": 0
     },
-    "SpeciesReader": {
-      "opponent_species": "sylveon"
-    },
-    "SpeciesReader_Doubles": {
-      "opponent_species": "sylveon",
-      "slot": 0
+    "BattleHUDReader": {
+      "mode": "doubles",
+      "opponent_species": [
+        "sylveon",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260423-150252130334.png": {
@@ -171,12 +299,28 @@
     "MoveSelectCursorSlot": {
       "slot": 1
     },
-    "SpeciesReader": {
-      "opponent_species": "sylveon"
-    },
-    "SpeciesReader_Doubles": {
-      "opponent_species": "sylveon",
-      "slot": 0
+    "BattleHUDReader": {
+      "mode": "doubles",
+      "opponent_species": [
+        "sylveon",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260423-150256754355.png": {
@@ -191,24 +335,56 @@
     "MoveSelectCursorSlot": {
       "slot": -1
     },
-    "SpeciesReader": {
-      "opponent_species": "sylveon"
-    },
-    "SpeciesReader_Doubles": {
-      "opponent_species": "sylveon",
-      "slot": 0
+    "BattleHUDReader": {
+      "mode": "doubles",
+      "opponent_species": [
+        "sylveon",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260423-150258802706.png": {
     "MoveSelectCursorSlot": {
       "slot": 3
     },
-    "SpeciesReader": {
-      "opponent_species": "sylveon"
-    },
-    "SpeciesReader_Doubles": {
-      "opponent_species": "sylveon",
-      "slot": 0
+    "BattleHUDReader": {
+      "mode": "doubles",
+      "opponent_species": [
+        "sylveon",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260423-150347231746.png": {
@@ -223,12 +399,28 @@
     "MoveSelectCursorSlot": {
       "slot": -1
     },
-    "SpeciesReader": {
-      "opponent_species": "sylveon"
-    },
-    "SpeciesReader_Doubles": {
-      "opponent_species": "sylveon",
-      "slot": 0
+    "BattleHUDReader": {
+      "mode": "doubles",
+      "opponent_species": [
+        "sylveon",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260423-150349250038.png": {
@@ -243,12 +435,28 @@
     "MoveSelectCursorSlot": {
       "slot": 1
     },
-    "SpeciesReader": {
-      "opponent_species": "sylveon"
-    },
-    "SpeciesReader_Doubles": {
-      "opponent_species": "sylveon",
-      "slot": 0
+    "BattleHUDReader": {
+      "mode": "doubles",
+      "opponent_species": [
+        "sylveon",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260423-150354427178.png": {
@@ -263,12 +471,28 @@
     "MoveSelectCursorSlot": {
       "slot": -1
     },
-    "SpeciesReader": {
-      "opponent_species": "sylveon"
-    },
-    "SpeciesReader_Doubles": {
-      "opponent_species": "sylveon",
-      "slot": 0
+    "BattleHUDReader": {
+      "mode": "doubles",
+      "opponent_species": [
+        "sylveon",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260423-150356457412.png": {
@@ -283,12 +507,28 @@
     "MoveSelectCursorSlot": {
       "slot": 2
     },
-    "SpeciesReader": {
-      "opponent_species": "sylveon"
-    },
-    "SpeciesReader_Doubles": {
-      "opponent_species": "sylveon",
-      "slot": 0
+    "BattleHUDReader": {
+      "mode": "doubles",
+      "opponent_species": [
+        "sylveon",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260423-150359121231.png": {
@@ -303,12 +543,28 @@
     "MoveSelectCursorSlot": {
       "slot": 1
     },
-    "SpeciesReader": {
-      "opponent_species": "sylveon"
-    },
-    "SpeciesReader_Doubles": {
-      "opponent_species": "sylveon",
-      "slot": 0
+    "BattleHUDReader": {
+      "mode": "doubles",
+      "opponent_species": [
+        "sylveon",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260423-150434947219.png": {
@@ -323,34 +579,56 @@
     "MoveSelectCursorSlot": {
       "slot": -1
     },
-    "OpponentHPReader": {
-      "opponent_hp_pct": 21
-    },
-    "OpponentHPReader_Doubles": {
-      "opponent_hp_pct": 21,
-      "slot": 0
-    },
-    "SpeciesReader": {
-      "opponent_species": "sylveon"
-    },
-    "SpeciesReader_Doubles": {
-      "opponent_species": "sylveon",
-      "slot": 0
+    "BattleHUDReader": {
+      "mode": "doubles",
+      "opponent_species": [
+        "sylveon",
+        ""
+      ],
+      "opponent_hp_pct": [
+        21,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260423-150440133636.png": {
     "MoveSelectCursorSlot": {
       "slot": -1
     },
-    "OpponentHPReader": {
-      "opponent_hp_pct": 21
-    },
-    "SpeciesReader": {
-      "opponent_species": "sylveon"
-    },
-    "SpeciesReader_Doubles": {
-      "opponent_species": "sylveon",
-      "slot": 0
+    "BattleHUDReader": {
+      "mode": "doubles",
+      "opponent_species": [
+        "sylveon",
+        ""
+      ],
+      "opponent_hp_pct": [
+        21,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260423-150454443057.png": {
@@ -365,15 +643,28 @@
     "MoveSelectCursorSlot": {
       "slot": -1
     },
-    "OpponentHPReader": {
-      "opponent_hp_pct": 21
-    },
-    "SpeciesReader": {
-      "opponent_species": "sylveon"
-    },
-    "SpeciesReader_Doubles": {
-      "opponent_species": "sylveon",
-      "slot": 0
+    "BattleHUDReader": {
+      "mode": "doubles",
+      "opponent_species": [
+        "sylveon",
+        ""
+      ],
+      "opponent_hp_pct": [
+        21,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260423-150456793092.png": {
@@ -388,12 +679,28 @@
     "MoveSelectCursorSlot": {
       "slot": 1
     },
-    "SpeciesReader": {
-      "opponent_species": "sylveon"
-    },
-    "SpeciesReader_Doubles": {
-      "opponent_species": "sylveon",
-      "slot": 0
+    "BattleHUDReader": {
+      "mode": "doubles",
+      "opponent_species": [
+        "sylveon",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260423-150459402515.png": {
@@ -408,12 +715,28 @@
     "MoveSelectCursorSlot": {
       "slot": 3
     },
-    "SpeciesReader": {
-      "opponent_species": "sylveon"
-    },
-    "SpeciesReader_Doubles": {
-      "opponent_species": "sylveon",
-      "slot": 0
+    "BattleHUDReader": {
+      "mode": "doubles",
+      "opponent_species": [
+        "sylveon",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260423-150503460243.png": {
@@ -428,15 +751,28 @@
     "MoveSelectCursorSlot": {
       "slot": -1
     },
-    "OpponentHPReader": {
-      "opponent_hp_pct": 21
-    },
-    "SpeciesReader": {
-      "opponent_species": "sylveon"
-    },
-    "SpeciesReader_Doubles": {
-      "opponent_species": "sylveon",
-      "slot": 0
+    "BattleHUDReader": {
+      "mode": "doubles",
+      "opponent_species": [
+        "sylveon",
+        ""
+      ],
+      "opponent_hp_pct": [
+        21,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260423-183330053152.png": {
@@ -450,6 +786,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": 0
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260423-183333045399.png": {
@@ -464,9 +823,28 @@
     "MoveSelectCursorSlot": {
       "slot": 3
     },
-    "OpponentHPReader_Doubles": {
-      "opponent_hp_pct": 100,
-      "slot": 1
+    "BattleHUDReader": {
+      "mode": "doubles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        100
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260423-183336832781.png": {
@@ -480,6 +858,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": 0
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260423-183340823259.png": {
@@ -493,6 +894,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": 2
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260423-183353861292.png": {
@@ -507,9 +931,28 @@
     "MoveSelectCursorSlot": {
       "slot": 1
     },
-    "OpponentHPReader_Doubles": {
-      "opponent_hp_pct": 90,
-      "slot": 1
+    "BattleHUDReader": {
+      "mode": "doubles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        90
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260423-183421609860.png": {
@@ -524,9 +967,28 @@
     "MoveSelectCursorSlot": {
       "slot": -1
     },
-    "OpponentHPReader_Doubles": {
-      "opponent_hp_pct": 61,
-      "slot": 1
+    "BattleHUDReader": {
+      "mode": "doubles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        61
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260423-183424800592.png": {
@@ -540,6 +1002,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": 1
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260423-183432132782.png": {
@@ -553,6 +1038,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": 3
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260423-183434932260.png": {
@@ -566,6 +1074,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": 2
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260423-183458158162.png": {
@@ -580,9 +1111,28 @@
     "MoveSelectCursorSlot": {
       "slot": 1
     },
-    "OpponentHPReader_Doubles": {
-      "opponent_hp_pct": 47,
-      "slot": 1
+    "BattleHUDReader": {
+      "mode": "doubles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        47
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260423-183545906705.png": {
@@ -596,6 +1146,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": 0
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260423-183548953675.png": {
@@ -609,6 +1182,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": 3
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260423-183552945935.png": {
@@ -622,6 +1218,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": -1
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260423-183555327020.png": {
@@ -635,6 +1254,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": 2
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260423-183737819287.png": {
@@ -649,9 +1291,28 @@
     "MoveSelectCursorSlot": {
       "slot": -1
     },
-    "OpponentHPReader_Doubles": {
-      "opponent_hp_pct": 7,
-      "slot": 1
+    "BattleHUDReader": {
+      "mode": "doubles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        7
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260423-183744870258.png": {
@@ -665,6 +1326,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": 1
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260423-183749611704.png": {
@@ -678,6 +1362,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": -1
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260423-183752637421.png": {
@@ -691,6 +1398,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": 1
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260423-183756280783.png": {
@@ -704,6 +1434,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": 2
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260423-183905504090.png": {
@@ -718,9 +1471,28 @@
     "MoveSelectCursorSlot": {
       "slot": 3
     },
-    "OpponentHPReader_Doubles": {
-      "opponent_hp_pct": 100,
-      "slot": 1
+    "BattleHUDReader": {
+      "mode": "doubles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        100
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260423-183911434513.png": {
@@ -734,6 +1506,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": 1
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260423-183917790913.png": {
@@ -747,6 +1542,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": 3
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260427-132116660246.png": {
@@ -760,6 +1578,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": 0
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260427-132121208717.png": {
@@ -773,6 +1614,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": -1
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260427-132125840378.png": {
@@ -786,6 +1650,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": 0
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260427-132203072042.png": {
@@ -799,6 +1686,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": 0
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260427-132205497623.png": {
@@ -812,6 +1722,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": 2
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260427-132212516906.png": {
@@ -825,6 +1758,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": 0
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260427-132216668463.png": {
@@ -838,6 +1794,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": 1
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260427-132307326181.png": {
@@ -851,6 +1830,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": 2
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260427-132309942119.png": {
@@ -864,6 +1866,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": 1
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260427-132315345000.png": {
@@ -877,6 +1902,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": 0
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260427-132500213779.png": {
@@ -890,6 +1938,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": 0
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260427-132506065092.png": {
@@ -903,6 +1974,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": 0
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260427-132508656455.png": {
@@ -916,6 +2010,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": 1
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260427-132514528548.png": {
@@ -929,6 +2046,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": 1
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260427-132607311130.png": {
@@ -942,6 +2082,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": 0
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260427-132613234570.png": {
@@ -955,6 +2118,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": 1
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260427-132703444544.png": {
@@ -968,6 +2154,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": 1
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260427-132706341459.png": {
@@ -981,6 +2190,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": 0
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260427-132710729681.png": {
@@ -994,6 +2226,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": 1
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260428-090008551568.png": {
@@ -1007,6 +2262,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": 0
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260428-090011695747.png": {
@@ -1020,6 +2298,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": -1
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260428-090015247426.png": {
@@ -1033,6 +2334,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": 3
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260428-090027708724.png": {
@@ -1046,6 +2370,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": 0
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260428-090124664956.png": {
@@ -1059,6 +2406,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": 2
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260428-090129776313.png": {
@@ -1072,6 +2442,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": 3
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260428-090135788993.png": {
@@ -1085,6 +2478,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": 1
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260428-090304291552.png": {
@@ -1098,6 +2514,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": 1
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260428-090307844434.png": {
@@ -1111,6 +2550,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": -1
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260428-090451579888.png": {
@@ -1124,6 +2586,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": 2
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260428-090457295695.png": {
@@ -1137,6 +2622,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": 1
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260428-090542669809.png": {
@@ -1150,6 +2658,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": 1
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260428-090602247537.png": {
@@ -1163,6 +2694,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": 3
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "20260428-090604557213.png": {
@@ -1176,6 +2730,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": 1
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "doubles_move_select_glimmora.png": {
@@ -1189,6 +2766,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": -1
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "move_select.png": {
@@ -1202,6 +2802,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": 0
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "move_select_slot2.png": {
@@ -1215,6 +2838,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": 1
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "screenshot-20260427-132603218579.png": {
@@ -1229,9 +2875,28 @@
     "MoveSelectCursorSlot": {
       "slot": -1
     },
-    "OpponentHPReader_Doubles": {
-      "opponent_hp_pct": 100,
-      "slot": 1
+    "BattleHUDReader": {
+      "mode": "doubles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        100
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   },
   "victreebel_kingambit_power-whip_sucker-punch_swords-dance_strength-sap.png": {
@@ -1245,6 +2910,29 @@
     },
     "MoveSelectCursorSlot": {
       "slot": -1
+    },
+    "BattleHUDReader": {
+      "mode": "singles",
+      "opponent_species": [
+        "",
+        ""
+      ],
+      "opponent_hp_pct": [
+        -1,
+        -1
+      ],
+      "own_species": [
+        "",
+        ""
+      ],
+      "own_hp_current": [
+        -1,
+        -1
+      ],
+      "own_hp_max": [
+        -1,
+        -1
+      ]
     }
   }
 }

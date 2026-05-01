@@ -70,6 +70,10 @@ screens:
     readers:
       BattleHUDReader:
         fields:
+          mode:
+            type: enum
+            values: [singles, doubles]
+            description: "Battle mode for this image. Determines slot count + box layout."
           opponent_species:
             type: array
             items: string
@@ -122,6 +126,10 @@ screens:
             description: "Doubles only: which own HUD pill is highlighted (0=left, 1=right). -1 = singles or no active outline."
       BattleHUDReader:
         fields:
+          mode:
+            type: enum
+            values: [singles, doubles]
+            description: "Battle mode for this image. Determines slot count + box layout."
           opponent_species:
             type: array
             items: string
