@@ -255,8 +255,9 @@ def main():
     ap.add_argument("--use-history", action="store_true",
                     help="Enable LSTM-over-prior-turns history token (Phase 7).")
     ap.add_argument(
-        "--dashboard", default="https://champions.colefoster.ca/api/training/report",
-        help="Dashboard /api/training/report URL. Empty string disables reporting.",
+        "--dashboard", default="http://100.113.157.128:8420/api/training/report",
+        help="Dashboard /api/training/report URL. Empty string disables reporting. "
+             "Default uses ash's Tailscale IP — public 443 endpoint is gated by Cloudflare.",
     )
     args = ap.parse_args()
 
