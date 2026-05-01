@@ -215,11 +215,15 @@ void BattleStateTracker::set_opp_species_preview(uint8_t slot, const std::string
 // ─── Updates ─────────────────────────────────────────────────────
 
 void BattleStateTracker::update_from_hud(const BattleHUDState& hud){
-    uint8_t slots = hud.slot_count();
+    //  HUD always exposes both slots; slot 0 is empty for singles. The
+    //  tracker keeps its own slot-0-first internal indexing, so we
+    //  remap: in singles, read HUD slot 1 (the lone visible mon) but
+    //  write to tracker slot 0.
+    uint8_t slots = (m_mode == BattleMode::DOUBLES) ? 2 : 1;
 
     for (uint8_t i = 0; i < slots; i++){
-        //  Opponent: species + HP%.
-        const auto& opp = hud.opponents[i];
+        uint8_t hud_slot = (m_mode == BattleMode::DOUBLES) ? i : 1;
+        const auto& opp = hud.opponents[hud_slot];
         if (!opp.species.empty()){
             uint8_t idx = find_or_add_opponent(opp.species);
             m_opp_active[i] = idx;
@@ -228,8 +232,7 @@ void BattleStateTracker::update_from_hud(const BattleHUDState& hud){
             }
         }
 
-        //  Own: HP current/max → normalized.
-        const auto& own = hud.own[i];
+        const auto& own = hud.own[hud_slot];
         if (own.hp_current >= 0 && own.hp_max > 0){
             m_own_team[m_own_active[i]].hp = static_cast<float>(own.hp_current) / own.hp_max;
         }

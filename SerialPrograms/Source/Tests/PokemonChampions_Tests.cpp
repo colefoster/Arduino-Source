@@ -413,42 +413,26 @@ int test_pokemonChampions_OCRDump(const ImageViewRGB32& image){
         }
     }
 
-    //  HUD (singles)
+    //  HUD (unified — slot 0 = left/center, slot 1 = right; singles
+    //  populates slot 1 only).
     {
-        BattleHUDReader reader(Language::English, BattleMode::SINGLES);
-        cout << "=== Battle HUD (Singles) ===" << endl;
-
-        std::string species = reader.read_opponent_species(logger, image, 0);
-        cout << "  opponent species: \"" << species << "\"" << endl;
-
-        int hp_pct = reader.read_opponent_hp_pct(logger, image, 0);
-        cout << "  opponent HP%: " << hp_pct << endl;
-
-        auto own_hp = reader.read_own_hp(logger, image, 0);
-        cout << "  own HP: " << own_hp.first << "/" << own_hp.second << endl;
-
-        for (uint8_t i = 0; i < 4; i++){
-            auto pp = reader.read_move_pp(logger, image, i);
-            cout << "  PP slot " << (int)i << ": " << pp.first << "/" << pp.second << endl;
-        }
-    }
-
-    //  HUD (doubles)
-    {
-        BattleHUDReader reader(Language::English, BattleMode::DOUBLES);
-        cout << "=== Battle HUD (Doubles) ===" << endl;
-
+        BattleHUDReader reader(Language::English);
+        cout << "=== Battle HUD ===" << endl;
         for (uint8_t slot = 0; slot < 2; slot++){
             std::string species = reader.read_opponent_species(logger, image, slot);
             cout << "  opp " << (int)slot << " species: \"" << species << "\"" << endl;
-
             int hp_pct = reader.read_opponent_hp_pct(logger, image, slot);
             cout << "  opp " << (int)slot << " HP%: " << hp_pct << endl;
         }
-
         for (uint8_t slot = 0; slot < 2; slot++){
+            std::string own_sp = reader.read_own_species(logger, image, slot);
+            cout << "  own " << (int)slot << " species: \"" << own_sp << "\"" << endl;
             auto own_hp = reader.read_own_hp(logger, image, slot);
             cout << "  own " << (int)slot << " HP: " << own_hp.first << "/" << own_hp.second << endl;
+        }
+        for (uint8_t i = 0; i < 4; i++){
+            auto pp = reader.read_move_pp(logger, image, i);
+            cout << "  PP slot " << (int)i << ": " << pp.first << "/" << pp.second << endl;
         }
     }
 

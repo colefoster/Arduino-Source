@@ -2,17 +2,16 @@
  *
  *  From: https://github.com/PokemonAutomation/
  *
- *  Reads numeric and text elements from the battle HUD. Mode-aware:
+ *  Reads numeric and text elements from the battle HUD using a single
+ *  unified two-slot layout. Slot 0 = left/center, slot 1 = right.
  *
- *  SINGLES (BSS):
- *    Top-right:    1 opponent species badge + HP%
- *    Bottom-left:  1 own Pokemon name + HP (current/max)
- *    Right panel:  4 move pills with PP counts
+ *    Doubles: slot 0 + slot 1 both populated.
+ *    Singles: only slot 1 (right side, where the lone opp + own bar
+ *             visually appear); slot 0 is empty/unreadable.
  *
- *  DOUBLES (VGC):
- *    Top-right:    2 opponent species badges + HP%
- *    Bottom-left:  2 own Pokemon names + HP (current/max)
- *    Bottom-right: FIGHT / POKEMON circle buttons (no move pills on action screen)
+ *  This dropped the prior singles-vs-doubles box switching — coords
+ *  for slot 1 are exactly where the singles "lone opp" sits, so callers
+ *  read both slots and ignore empty results.
  *
  */
 
@@ -25,7 +24,6 @@
 #include "CommonFramework/ImageTools/ImageBoxes.h"
 #include "CommonFramework/VideoPipeline/VideoOverlayScopes.h"
 #include "CommonTools/OCR/OCR_SmallDictionaryMatcher.h"
-#include "PokemonChampions_BattleModeDetector.h"
 
 namespace PokemonAutomation{
 namespace NintendoSwitch{
@@ -71,36 +69,24 @@ struct HUDPokemonInfo{
 };
 
 struct BattleHUDState{
-    BattleMode mode = BattleMode::UNKNOWN;
-
-    //  Opponent slots (1 for singles, 2 for doubles).
+    //  Two slots — slot 1 (right) is always populated when there's any
+    //  active opp/own; slot 0 is doubles-only.
     std::array<HUDPokemonInfo, 2> opponents;
-
-    //  Own slots (1 for singles, 2 for doubles).
     std::array<HUDPokemonInfo, 2> own;
 
-    //  Per-move PP (4 slots, singles only — doubles shows moves after selecting FIGHT).
+    //  Per-move PP (4 slots — singles only shows the move panel; doubles
+    //  reaches it after selecting FIGHT).
     struct MovePP{
         int current = -1;
         int max     = -1;
     };
     std::array<MovePP, 4> move_pp;
-
-    //  How many active slots for the current mode.
-    uint8_t slot_count() const{
-        return (mode == BattleMode::DOUBLES) ? 2 : 1;
-    }
 };
 
 
 class BattleHUDReader{
 public:
-    BattleHUDReader(Language language = Language::English,
-                    BattleMode mode = BattleMode::SINGLES);
-
-    //  Change mode at runtime (updates which boxes are active).
-    void set_mode(BattleMode mode);
-    BattleMode mode() const{ return m_mode; }
+    explicit BattleHUDReader(Language language = Language::English);
 
     void make_overlays(VideoOverlaySet& items) const;
 
@@ -123,11 +109,9 @@ public:
     BattleHUDState read_all(Logger& logger, const ImageViewRGB32& screen) const;
 
 private:
-    void init_singles_boxes();
-    void init_doubles_boxes();
+    void init_boxes();
 
     Language m_language;
-    BattleMode m_mode;
 
     //  Up to 2 opponent name badges and HP% boxes.
     std::array<ImageFloatBox, 2> m_opponent_name_boxes;

@@ -563,30 +563,35 @@ static int read_hp_pct_template(
 
 // ─── Box initialization ─────────────────────────────────────────
 
-void BattleHUDReader::init_singles_boxes(){
-    //  Singles: 1 opponent top-right, 1 own bottom-left.
-    //  Measured from ref_frames/1/frame_00080.jpg
+void BattleHUDReader::init_boxes(){
+    //  Single layout — slot 0 = left/center, slot 1 = right.
+    //  Doubles populates both; singles populates only slot 1 (the lone
+    //  opp + lone own bar visually live on the right side of the HUD).
+    //
+    //  Measured with the inspector against doubles frames at 1920x1080.
 
-    //  Singles opponent badge + HP sit at the same screen position as
-    //  doubles slot 1 (far right). Reuse those tuned coords.
-    m_opponent_name_boxes[0] = ImageFloatBox(0.8286, 0.0481, 0.1151, 0.0417);
-    m_opponent_hp_boxes[0]   = ImageFloatBox(0.9002, 0.1176, 0.0420, 0.0349);
-    m_opponent_name_boxes[1] = ImageFloatBox(0, 0, 0, 0);  // unused
-    m_opponent_hp_boxes[1]   = ImageFloatBox(0, 0, 0, 0);
+    //  Opponent species badges (pink pills, top of screen).
+    m_opponent_name_boxes[0] = ImageFloatBox(0.6172, 0.0454, 0.1219, 0.0417);
+    m_opponent_name_boxes[1] = ImageFloatBox(0.8286, 0.0481, 0.1151, 0.0417);
 
-    //  Singles own HP sits at the same position as doubles slot 0 —
-    //  reuse those tuned coords (see init_doubles_boxes).
+    //  Opponent HP% digits (white text below species badges).
+    m_opponent_hp_boxes[0]   = ImageFloatBox(0.6932, 0.1174, 0.0429, 0.0354);
+    m_opponent_hp_boxes[1]   = ImageFloatBox(0.9002, 0.1176, 0.0420, 0.0349);
+
+    //  Own HP bars (bottom-left), "current / max" split into independent
+    //  digit regions. The slash between them is OCR-hostile, so reading
+    //  each number separately and recombining is cleaner.
     m_own_hp_current_boxes[0] = ImageFloatBox(0.1304, 0.9338, 0.0448, 0.0362);
     m_own_hp_max_boxes[0]     = ImageFloatBox(0.1746, 0.9464, 0.0335, 0.0229);
-    m_own_hp_current_boxes[1] = ImageFloatBox(0, 0, 0, 0);  // unused
-    m_own_hp_max_boxes[1]     = ImageFloatBox(0, 0, 0, 0);
+    m_own_hp_current_boxes[1] = ImageFloatBox(0.3363, 0.9342, 0.0450, 0.0361);
+    m_own_hp_max_boxes[1]     = ImageFloatBox(0.3800, 0.9473, 0.0340, 0.0215);
 
-    //  Own species name sits in the bar above the HP digits.
-    //  Tuned via inspector against move_select frames.
+    //  Own species name (in the bar above the HP digits).
     m_own_name_boxes[0] = ImageFloatBox(0.0814, 0.8705, 0.0918, 0.0272);
-    m_own_name_boxes[1] = ImageFloatBox(0, 0, 0, 0);  // unused
+    m_own_name_boxes[1] = ImageFloatBox(0.2901, 0.8705, 0.0835, 0.0267);
 
-    //  PP boxes — right edge of each move pill.
+    //  PP boxes — right edge of each move pill (visible on the move
+    //  select screen, not the action menu).
     const double PP_X      = 0.927;
     const double PP_WIDTH  = 0.057;
     const double PP_HEIGHT = 0.051;
@@ -596,81 +601,17 @@ void BattleHUDReader::init_singles_boxes(){
     }
 }
 
-void BattleHUDReader::init_doubles_boxes(){
-    //  Doubles: 2 opponents top-center/right, 2 own bottom-left.
-    //  Measured from live capture frame_00116 (1920x1080).
-    //
-    //  Opponent badges: pink pills in the top area.
-    //    Opp 1 "Hawlucha":  name ~x=850-1020, y=52-80   (after sprite)
-    //    Opp 2 "Hydreigon": name ~x=1120-1310, y=52-80
-    //    Opp 1 HP%:         x=900-980,  y=82-110
-    //    Opp 2 HP%:         x=1170-1250, y=82-110
-    //
-    //  Own bars: blue gradient bars at bottom-left.
-    //    Own 1 "Kingambit":  HP x=75-230,  y=968-1008
-    //    Own 2 "Glimmora":   HP x=320-480, y=968-1008
-    //
-    //  NOTE: These are estimated — update with pixel inspector for precision.
-
-    //  Measured with pixel_inspector on multiple doubles frames.
-    //  Opponent species badges: pink pills in the top area.
-    m_opponent_name_boxes[0] = ImageFloatBox(0.6172, 0.0454, 0.1219, 0.0417);
-    m_opponent_name_boxes[1] = ImageFloatBox(0.8286, 0.0481, 0.1151, 0.0417);
-
-    //  HP% digits: white text below species badges.
-    //  Tuned via inspector "Test OCR" against multiple doubles frames.
-    //  Singles re-uses slot 1's coords (HP appears right-aligned in singles).
-    m_opponent_hp_boxes[0]   = ImageFloatBox(0.6932, 0.1174, 0.0429, 0.0354);
-    m_opponent_hp_boxes[1]   = ImageFloatBox(0.9002, 0.1176, 0.0420, 0.0349);
-
-    //  Own HP bars: bottom-left, "current/max" split into independent
-    //  digit regions. Tuned via inspector saves on doubles frames; max
-    //  boxes intentionally include the slash glyph (parse takes the first
-    //  integer found, so the slash is harmless noise).
-    m_own_hp_current_boxes[0] = ImageFloatBox(0.1304, 0.9338, 0.0448, 0.0362);
-    m_own_hp_max_boxes[0]     = ImageFloatBox(0.1746, 0.9464, 0.0335, 0.0229);
-    m_own_hp_current_boxes[1] = ImageFloatBox(0.3363, 0.9342, 0.0450, 0.0361);
-    m_own_hp_max_boxes[1]     = ImageFloatBox(0.3800, 0.9473, 0.0340, 0.0215);
-
-    //  Own species name sits in the bar above the HP digits.
-    //  Tuned via inspector against move_select doubles frames.
-    m_own_name_boxes[0] = ImageFloatBox(0.0814, 0.8705, 0.0918, 0.0272);
-    m_own_name_boxes[1] = ImageFloatBox(0.2901, 0.8705, 0.0835, 0.0267);
-
-    //  No PP boxes on the doubles action menu screen.
-    //  (Moves are shown after pressing FIGHT, in a different layout.)
-    for (size_t i = 0; i < 4; i++){
-        m_pp_boxes[i] = ImageFloatBox(0, 0, 0, 0);
-    }
-}
-
 
 // ─── BattleHUDReader ─────────────────────────────────────────────
 
-BattleHUDReader::BattleHUDReader(Language language, BattleMode mode)
+BattleHUDReader::BattleHUDReader(Language language)
     : m_language(language)
-    , m_mode(mode)
 {
-    if (mode == BattleMode::DOUBLES){
-        init_doubles_boxes();
-    }else{
-        init_singles_boxes();
-    }
-}
-
-void BattleHUDReader::set_mode(BattleMode mode){
-    if (mode == m_mode) return;
-    m_mode = mode;
-    if (mode == BattleMode::DOUBLES){
-        init_doubles_boxes();
-    }else{
-        init_singles_boxes();
-    }
+    init_boxes();
 }
 
 void BattleHUDReader::make_overlays(VideoOverlaySet& items) const{
-    uint8_t slots = (m_mode == BattleMode::DOUBLES) ? 2 : 1;
-    for (uint8_t i = 0; i < slots; i++){
+    for (uint8_t i = 0; i < 2; i++){
         if (m_opponent_name_boxes[i].width > 0){
             items.add(COLOR_MAGENTA, m_opponent_name_boxes[i]);
         }
@@ -687,11 +628,9 @@ void BattleHUDReader::make_overlays(VideoOverlaySet& items) const{
             items.add(COLOR_CYAN, m_own_name_boxes[i]);
         }
     }
-    if (m_mode != BattleMode::DOUBLES){
-        for (const ImageFloatBox& box : m_pp_boxes){
-            if (box.width > 0){
-                items.add(COLOR_YELLOW, box);
-            }
+    for (const ImageFloatBox& box : m_pp_boxes){
+        if (box.width > 0){
+            items.add(COLOR_YELLOW, box);
         }
     }
 }
@@ -790,11 +729,8 @@ BattleHUDState BattleHUDReader::read_all(
     Logger& logger, const ImageViewRGB32& screen
 ) const{
     BattleHUDState state;
-    state.mode = m_mode;
 
-    uint8_t slots = state.slot_count();
-
-    for (uint8_t i = 0; i < slots; i++){
+    for (uint8_t i = 0; i < 2; i++){
         state.opponents[i].species = read_opponent_species(logger, screen, i);
         state.opponents[i].hp_pct  = read_opponent_hp_pct(logger, screen, i);
 
@@ -804,13 +740,12 @@ BattleHUDState BattleHUDReader::read_all(
         state.own[i].hp_max     = own_hp.second;
     }
 
-    //  PP only in singles.
-    if (m_mode != BattleMode::DOUBLES){
-        for (uint8_t i = 0; i < 4; i++){
-            auto pp = read_move_pp(logger, screen, i);
-            state.move_pp[i].current = pp.first;
-            state.move_pp[i].max     = pp.second;
-        }
+    //  PP boxes are present on the move-select screen regardless of mode;
+    //  callers can ignore the result if they don't expect them.
+    for (uint8_t i = 0; i < 4; i++){
+        auto pp = read_move_pp(logger, screen, i);
+        state.move_pp[i].current = pp.first;
+        state.move_pp[i].max     = pp.second;
     }
 
     return state;

@@ -30,12 +30,12 @@ STR_FIELDS = ("opponent_species", "own_species")
 INT_FIELDS = ("opponent_hp_pct", "own_hp_current", "own_hp_max")
 
 
-def ocr(image_path: Path, mode: str = "") -> dict | None:
+def ocr(image_path: Path) -> dict | None:
     try:
-        cmd = [str(CLI), "--ocr-suggest", "BattleHUDReader", str(image_path)]
-        if mode:
-            cmd.append(mode)
-        r = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+        r = subprocess.run(
+            [str(CLI), "--ocr-suggest", "BattleHUDReader", str(image_path)],
+            capture_output=True, text=True, timeout=30,
+        )
         for line in r.stdout.splitlines():
             line = line.strip()
             if line.startswith("{") and line.endswith("}"):
@@ -45,7 +45,7 @@ def ocr(image_path: Path, mode: str = "") -> dict | None:
     return None
 
 
-def merge_str_pair(existing, suggested, *, write_slot1: bool):
+def merge_str_pair(existing, suggested):
     """Fill empty slots in existing str array of length 2 from suggested."""
     cur = list(existing) if isinstance(existing, list) else ["", ""]
     while len(cur) < 2:
@@ -54,14 +54,13 @@ def merge_str_pair(existing, suggested, *, write_slot1: bool):
     while len(sug) < 2:
         sug.append("")
     out = list(cur)
-    if not out[0] and sug[0]:
-        out[0] = sug[0]
-    if write_slot1 and not out[1] and sug[1]:
-        out[1] = sug[1]
+    for i in (0, 1):
+        if not out[i] and sug[i]:
+            out[i] = sug[i]
     return out
 
 
-def merge_int_pair(existing, suggested, *, write_slot1: bool):
+def merge_int_pair(existing, suggested):
     """Fill -1 slots in existing int array of length 2 from suggested (>= 0)."""
     cur = list(existing) if isinstance(existing, list) else [-1, -1]
     while len(cur) < 2:
@@ -70,10 +69,9 @@ def merge_int_pair(existing, suggested, *, write_slot1: bool):
     while len(sug) < 2:
         sug.append(-1)
     out = list(cur)
-    if (out[0] is None or out[0] < 0) and isinstance(sug[0], int) and sug[0] >= 0:
-        out[0] = sug[0]
-    if write_slot1 and (out[1] is None or out[1] < 0) and isinstance(sug[1], int) and sug[1] >= 0:
-        out[1] = sug[1]
+    for i in (0, 1):
+        if (out[i] is None or out[i] < 0) and isinstance(sug[i], int) and sug[i] >= 0:
+            out[i] = sug[i]
     return out
 
 
@@ -98,23 +96,21 @@ def main():
             hud = labels.get("BattleHUDReader")
             if not isinstance(hud, dict):
                 continue
-            mode = hud.get("mode", "singles")
-            doubles = (mode == "doubles")
             img = screen_dir / fname
             if not img.exists():
                 failed += 1
                 continue
 
-            res = ocr(img, mode)
+            res = ocr(img)
             if not res:
                 failed += 1
                 continue
 
             new_hud = dict(hud)
             for f in STR_FIELDS:
-                new_hud[f] = merge_str_pair(hud.get(f), res.get(f), write_slot1=doubles)
+                new_hud[f] = merge_str_pair(hud.get(f), res.get(f))
             for f in INT_FIELDS:
-                new_hud[f] = merge_int_pair(hud.get(f), res.get(f), write_slot1=doubles)
+                new_hud[f] = merge_int_pair(hud.get(f), res.get(f))
 
             if new_hud == hud:
                 unchanged += 1
@@ -125,7 +121,7 @@ def main():
             for f in STR_FIELDS + INT_FIELDS:
                 if new_hud[f] != hud.get(f):
                     diffs.append(f"{f}:{hud.get(f)}>>{new_hud[f]}")
-            print(f"  {screen_dir.name}/{fname}  ({mode})  " + "  ".join(diffs))
+            print(f"  {screen_dir.name}/{fname}  " + "  ".join(diffs))
 
             labels["BattleHUDReader"] = new_hud
             changed += 1
