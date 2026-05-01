@@ -90,9 +90,28 @@ def _run_epoch(
     started = time.time()
     total_loss = 0.0
     total_n = 0
-    type_a_hits = 0
-    type_b_hits = 0
     n_batches = 0
+
+    # Per-head tally: (slot, head) -> {hits, n}
+    # Conditional heads (move/target/switch) only count when the type matches.
+    counters = {
+        "type_a":   [0, 0],  # [hits, n]
+        "type_b":   [0, 0],
+        "move_a":   [0, 0],
+        "move_b":   [0, 0],
+        "target_a": [0, 0],
+        "target_b": [0, 0],
+        "switch_a": [0, 0],
+        "switch_b": [0, 0],
+        "full_a":   [0, 0],  # type correct AND its conditional field correct
+        "full_b":   [0, 0],
+    }
+
+    def _bump(name: str, hits: torch.Tensor, n: int) -> None:
+        if n == 0:
+            return
+        counters[name][0] += int(hits.sum())
+        counters[name][1] += n
 
     for batch in loader:
         batch = {k: v.to(device, non_blocking=True) for k, v in batch.items()}
@@ -112,18 +131,77 @@ def _run_epoch(
         bs = batch["species_ids"].size(0)
         total_loss += float(loss) * bs
         total_n += bs
-        type_a_hits += int((out["type_a"].argmax(-1) == batch["action_a_type"]).sum())
-        type_b_hits += int((out["type_b"].argmax(-1) == batch["action_b_type"]).sum())
         n_batches += 1
 
-    return {
+        # Type accuracy (full batch)
+        type_a_pred = out["type_a"].argmax(-1)
+        type_b_pred = out["type_b"].argmax(-1)
+        type_a_correct = type_a_pred == batch["action_a_type"]
+        type_b_correct = type_b_pred == batch["action_b_type"]
+        _bump("type_a", type_a_correct, bs)
+        _bump("type_b", type_b_correct, bs)
+
+        # Conditional masks
+        a_is_move = batch["action_a_type"] == 1
+        a_is_switch = batch["action_a_type"] == 2
+        b_is_move = batch["action_b_type"] == 1
+        b_is_switch = batch["action_b_type"] == 2
+
+        # move-id accuracy where ground truth is a move
+        if a_is_move.any():
+            move_pred = out["move_a"][a_is_move].argmax(-1)
+            move_truth = batch["action_a_move_id"][a_is_move]
+            _bump("move_a", move_pred == move_truth, int(a_is_move.sum()))
+        if b_is_move.any():
+            move_pred = out["move_b"][b_is_move].argmax(-1)
+            move_truth = batch["action_b_move_id"][b_is_move]
+            _bump("move_b", move_pred == move_truth, int(b_is_move.sum()))
+
+        # target accuracy where ground truth is a move (targets shifted -2..1 -> 0..3)
+        if a_is_move.any():
+            tgt_pred = out["target_a"][a_is_move].argmax(-1)
+            tgt_truth = (batch["action_a_target"][a_is_move] + 2).clamp_(0, 3)
+            _bump("target_a", tgt_pred == tgt_truth, int(a_is_move.sum()))
+        if b_is_move.any():
+            tgt_pred = out["target_b"][b_is_move].argmax(-1)
+            tgt_truth = (batch["action_b_target"][b_is_move] + 2).clamp_(0, 3)
+            _bump("target_b", tgt_pred == tgt_truth, int(b_is_move.sum()))
+
+        # switch-target accuracy where ground truth is a switch
+        if a_is_switch.any():
+            sw_pred = out["switch_a"][a_is_switch].argmax(-1)
+            sw_truth = batch["action_a_switch_id"][a_is_switch]
+            _bump("switch_a", sw_pred == sw_truth, int(a_is_switch.sum()))
+        if b_is_switch.any():
+            sw_pred = out["switch_b"][b_is_switch].argmax(-1)
+            sw_truth = batch["action_b_switch_id"][b_is_switch]
+            _bump("switch_b", sw_pred == sw_truth, int(b_is_switch.sum()))
+
+        # "Full action correct": type correct AND, given type, the conditional field correct.
+        # For type==noop, only the type needs to match.
+        # For type==move, type AND move AND target (we ignore mega for now).
+        # For type==switch, type AND switch_id.
+        full_a = type_a_correct.clone()
+        full_a[a_is_move] &= (out["move_a"][a_is_move].argmax(-1) == batch["action_a_move_id"][a_is_move])
+        full_a[a_is_move] &= (out["target_a"][a_is_move].argmax(-1) == ((batch["action_a_target"][a_is_move] + 2).clamp_(0, 3)))
+        full_a[a_is_switch] &= (out["switch_a"][a_is_switch].argmax(-1) == batch["action_a_switch_id"][a_is_switch])
+        full_b = type_b_correct.clone()
+        full_b[b_is_move] &= (out["move_b"][b_is_move].argmax(-1) == batch["action_b_move_id"][b_is_move])
+        full_b[b_is_move] &= (out["target_b"][b_is_move].argmax(-1) == ((batch["action_b_target"][b_is_move] + 2).clamp_(0, 3)))
+        full_b[b_is_switch] &= (out["switch_b"][b_is_switch].argmax(-1) == batch["action_b_switch_id"][b_is_switch])
+        _bump("full_a", full_a, bs)
+        _bump("full_b", full_b, bs)
+
+    metrics: dict = {
         "loss": total_loss / max(total_n, 1),
-        "type_a_acc": type_a_hits / max(total_n, 1),
-        "type_b_acc": type_b_hits / max(total_n, 1),
         "samples": total_n,
         "batches": n_batches,
         "took_sec": round(time.time() - started, 2),
     }
+    for name, (hits, n) in counters.items():
+        metrics[f"{name}_acc"] = (hits / n) if n > 0 else 0.0
+        metrics[f"{name}_n"] = n
+    return metrics
 
 
 def main():
@@ -244,6 +322,11 @@ def main():
             "val_loss": round(val_metrics["loss"], 4),
             "train_type_a_acc": round(train_metrics["type_a_acc"], 4),
             "val_type_a_acc": round(val_metrics["type_a_acc"], 4),
+            "val_move_a_acc": round(val_metrics["move_a_acc"], 4),
+            "val_target_a_acc": round(val_metrics["target_a_acc"], 4),
+            "val_switch_a_acc": round(val_metrics["switch_a_acc"], 4),
+            "val_full_a_acc": round(val_metrics["full_a_acc"], 4),
+            "val_full_b_acc": round(val_metrics["full_b_acc"], 4),
             "train_took_sec": train_metrics["took_sec"],
             "val_took_sec": val_metrics["took_sec"],
             "samples": train_metrics["samples"],
