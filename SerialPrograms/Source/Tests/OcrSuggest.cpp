@@ -59,6 +59,8 @@ int run_ocr_suggest(const std::string& reader_name, const std::string& image_pat
             BattleHUDReader reader(Language::English, BattleMode::DOUBLES);
             std::string opp0 = reader.read_opponent_species(log, image, 0);
             std::string opp1 = reader.read_opponent_species(log, image, 1);
+            std::string own_sp0 = reader.read_own_species(log, image, 0);
+            std::string own_sp1 = reader.read_own_species(log, image, 1);
             int hp0 = reader.read_opponent_hp_pct(log, image, 0);
             int hp1 = reader.read_opponent_hp_pct(log, image, 1);
             auto own0 = reader.read_own_hp(log, image, 0);
@@ -68,7 +70,7 @@ int run_ocr_suggest(const std::string& reader_name, const std::string& image_pat
                 << "\"opponent_hp_pct\":[" << hp0 << "," << hp1 << "],"
                 << "\"own_hp_current\":[" << own0.first << "," << own1.first << "],"
                 << "\"own_hp_max\":[" << own0.second << "," << own1.second << "],"
-                << "\"own_species\":[\"\",\"\"]"
+                << "\"own_species\":[\"" << own_sp0 << "\",\"" << own_sp1 << "\"]"
                 << "}" << std::endl;
         }
         else if (reader_name == "BattleLogReader"){

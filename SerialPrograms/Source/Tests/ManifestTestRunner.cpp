@@ -492,6 +492,98 @@ int run_manifest_tests(const std::string& test_images_dir, const std::string& mo
         }
     }
 
+    // Singles OwnSpeciesReader
+    {
+        TestStats& stats = all_stats["OwnSpeciesReader"];
+        stats.name = "OwnSpeciesReader";
+
+        for (const std::string& screen : {"move_select_singles", "action_menu_singles"}){
+            std::string full_dir = test_images_dir + "/" + screen;
+            std::string manifest_path = full_dir + "/manifest.json";
+            json manifest;
+            try{ manifest = load_json_file(manifest_path); }catch(...){ continue; }
+
+            for (const auto& [fname, labels] : manifest.items()){
+                if (!labels.contains("BattleHUDReader")) continue;
+                const auto& hud = labels["BattleHUDReader"];
+                if (!hud.contains("own_species")) continue;
+
+                //  own_species can be array (per-slot) or scalar string.
+                std::string expected;
+                if (hud["own_species"].is_array()){
+                    if (hud["own_species"].empty()) continue;
+                    const auto& v = hud["own_species"][0];
+                    if (!v.is_string() || v.get<std::string>().empty()) continue;
+                    expected = v.get<std::string>();
+                }else if (hud["own_species"].is_string()){
+                    expected = hud["own_species"].get<std::string>();
+                    if (expected.empty()) continue;
+                }else{
+                    continue;
+                }
+
+                std::string file_path = full_dir + "/" + fname;
+                cout << "  " << screen << "/" << fname << " (OwnSpeciesReader)" << endl;
+
+                int ret = 0;
+                try{
+                    ImageRGB32 image(file_path);
+                    std::vector<std::string> words = {"manifest", expected};
+                    ret = test_pokemonChampions_OwnSpeciesReader(image, words);
+                }catch(const std::exception& e){
+                    cerr << "  Exception: " << e.what() << endl;
+                    ret = 1;
+                }
+                if (ret > 0){ stats.failed++; stats.failures.push_back(screen + "/" + fname); if (!regression) return 1; }
+                else if (ret == 0){ stats.passed++; }
+                else{ stats.skipped++; }
+            }
+        }
+    }
+
+    // Doubles OwnSpeciesReader (per-slot from own_species array)
+    {
+        TestStats& stats = all_stats["OwnSpeciesReader_Doubles"];
+        stats.name = "OwnSpeciesReader_Doubles";
+
+        for (const std::string& screen : {"move_select_doubles", "action_menu_doubles"}){
+            std::string full_dir = test_images_dir + "/" + screen;
+            std::string manifest_path = full_dir + "/manifest.json";
+            json manifest;
+            try{ manifest = load_json_file(manifest_path); }catch(...){ continue; }
+
+            for (const auto& [fname, labels] : manifest.items()){
+                if (!labels.contains("BattleHUDReader")) continue;
+                const auto& hud = labels["BattleHUDReader"];
+                if (!hud.contains("own_species") || !hud["own_species"].is_array()) continue;
+
+                std::string file_path = full_dir + "/" + fname;
+                for (size_t slot = 0; slot < hud["own_species"].size() && slot < 2; slot++){
+                    const auto& v = hud["own_species"][slot];
+                    if (!v.is_string()) continue;
+                    std::string expected = v.get<std::string>();
+                    if (expected.empty()) continue;
+
+                    cout << "  " << screen << "/" << fname << " s" << slot << " (OwnSpeciesReader_Doubles)" << endl;
+
+                    int ret = 0;
+                    try{
+                        ImageRGB32 image(file_path);
+                        std::string slot_str = "s" + std::to_string(slot);
+                        std::vector<std::string> words = {"manifest", slot_str, expected};
+                        ret = test_pokemonChampions_OwnSpeciesReader_Doubles(image, words);
+                    }catch(const std::exception& e){
+                        cerr << "  Exception: " << e.what() << endl;
+                        ret = 1;
+                    }
+                    if (ret > 0){ stats.failed++; stats.failures.push_back(screen + "/" + fname + " s" + std::to_string(slot)); if (!regression) return 1; }
+                    else if (ret == 0){ stats.passed++; }
+                    else{ stats.skipped++; }
+                }
+            }
+        }
+    }
+
     // Singles OpponentHPReader
     {
         TestStats& stats = all_stats["OpponentHPReader"];

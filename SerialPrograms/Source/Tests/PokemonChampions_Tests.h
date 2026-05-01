@@ -39,6 +39,10 @@ int test_pokemonChampions_MoveNameReader(const ImageViewRGB32& image, const std:
 int test_pokemonChampions_SpeciesReader(const ImageViewRGB32& image, const std::vector<std::string>& words);
 int test_pokemonChampions_SpeciesReader_Doubles(const ImageViewRGB32& image, const std::vector<std::string>& words);
 
+//  Own-side species name (bottom-left HUD bar).
+int test_pokemonChampions_OwnSpeciesReader(const ImageViewRGB32& image, const std::vector<std::string>& words);
+int test_pokemonChampions_OwnSpeciesReader_Doubles(const ImageViewRGB32& image, const std::vector<std::string>& words);
+
 //  Filename: <prefix>_<hp-pct>.png  (e.g. frame_75.png for 75%)
 int test_pokemonChampions_OpponentHPReader(const ImageViewRGB32& image, int target);
 
