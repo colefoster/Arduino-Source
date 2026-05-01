@@ -427,7 +427,7 @@ int run_manifest_tests(const std::string& test_images_dir, const std::string& mo
         TestStats& stats = all_stats["SpeciesReader"];
         stats.name = "SpeciesReader";
 
-        for (const std::string& screen : {"move_select_singles", "action_menu_singles"}){
+        for (const std::string& screen : {"move_select", "action_menu"}){
             std::string full_dir = test_images_dir + "/" + screen;
             std::string manifest_path = full_dir + "/manifest.json";
             json manifest;
@@ -462,7 +462,7 @@ int run_manifest_tests(const std::string& test_images_dir, const std::string& mo
         TestStats& stats = all_stats["SpeciesReader_Doubles"];
         stats.name = "SpeciesReader_Doubles";
 
-        for (const std::string& screen : {"move_select_doubles", "action_menu_doubles"}){
+        for (const std::string& screen : {"move_select", "action_menu"}){
             std::string full_dir = test_images_dir + "/" + screen;
             std::string manifest_path = full_dir + "/manifest.json";
             json manifest;
@@ -497,7 +497,7 @@ int run_manifest_tests(const std::string& test_images_dir, const std::string& mo
         TestStats& stats = all_stats["OwnSpeciesReader"];
         stats.name = "OwnSpeciesReader";
 
-        for (const std::string& screen : {"move_select_singles", "action_menu_singles"}){
+        for (const std::string& screen : {"move_select", "action_menu"}){
             std::string full_dir = test_images_dir + "/" + screen;
             std::string manifest_path = full_dir + "/manifest.json";
             json manifest;
@@ -546,7 +546,7 @@ int run_manifest_tests(const std::string& test_images_dir, const std::string& mo
         TestStats& stats = all_stats["OwnSpeciesReader_Doubles"];
         stats.name = "OwnSpeciesReader_Doubles";
 
-        for (const std::string& screen : {"move_select_doubles", "action_menu_doubles"}){
+        for (const std::string& screen : {"move_select", "action_menu"}){
             std::string full_dir = test_images_dir + "/" + screen;
             std::string manifest_path = full_dir + "/manifest.json";
             json manifest;
@@ -589,7 +589,7 @@ int run_manifest_tests(const std::string& test_images_dir, const std::string& mo
         TestStats& stats = all_stats["OpponentHPReader"];
         stats.name = "OpponentHPReader";
 
-        for (const std::string& screen : {"move_select_singles", "action_menu_singles"}){
+        for (const std::string& screen : {"move_select", "action_menu"}){
             std::string full_dir = test_images_dir + "/" + screen;
             std::string manifest_path = full_dir + "/manifest.json";
             json manifest;
@@ -623,7 +623,7 @@ int run_manifest_tests(const std::string& test_images_dir, const std::string& mo
         TestStats& stats = all_stats["OpponentHPReader_Doubles"];
         stats.name = "OpponentHPReader_Doubles";
 
-        for (const std::string& screen : {"move_select_doubles", "action_menu_doubles"}){
+        for (const std::string& screen : {"move_select", "action_menu"}){
             std::string full_dir = test_images_dir + "/" + screen;
             std::string manifest_path = full_dir + "/manifest.json";
             json manifest;
