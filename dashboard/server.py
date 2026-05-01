@@ -105,11 +105,11 @@ CROP_DEFS = {
         {"name": "opp_species", "box": [0.830, 0.052, 0.087, 0.032]},
     ],
     "OpponentHPReader": [
-        {"name": "opp_hp_pct", "box": [0.8963, 0.1098, 0.0498, 0.0524]},
+        {"name": "opp_hp_pct", "box": [0.9002, 0.1176, 0.0420, 0.0349]},
     ],
     "OpponentHPReader_Doubles": [
-        {"name": "opp0_hp_pct", "box": [0.705, 0.118, 0.040, 0.022]},
-        {"name": "opp1_hp_pct", "box": [0.928, 0.118, 0.040, 0.022]},
+        {"name": "opp0_hp_pct", "box": [0.6932, 0.1174, 0.0429, 0.0354]},
+        {"name": "opp1_hp_pct", "box": [0.9002, 0.1176, 0.0420, 0.0349]},
     ],
     "SpeciesReader_Doubles": [
         {"name": "opp0_species", "box": [0.6172, 0.0454, 0.1219, 0.0417]},

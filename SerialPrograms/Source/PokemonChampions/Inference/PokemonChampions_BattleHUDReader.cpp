@@ -577,7 +577,9 @@ void BattleHUDReader::init_singles_boxes(){
     //  Measured from ref_frames/1/frame_00080.jpg
 
     m_opponent_name_boxes[0] = ImageFloatBox(0.830, 0.052, 0.087, 0.032);
-    m_opponent_hp_boxes[0]   = ImageFloatBox(0.8963, 0.1098, 0.0498, 0.0524);
+    //  Singles opponent HP% sits at the same screen position as doubles slot 1
+    //  (right side). Tuned via inspector against doubles_move_select frames.
+    m_opponent_hp_boxes[0]   = ImageFloatBox(0.9002, 0.1176, 0.0420, 0.0349);
     m_opponent_name_boxes[1] = ImageFloatBox(0, 0, 0, 0);  // unused
     m_opponent_hp_boxes[1]   = ImageFloatBox(0, 0, 0, 0);
 
@@ -616,9 +618,10 @@ void BattleHUDReader::init_doubles_boxes(){
     m_opponent_name_boxes[1] = ImageFloatBox(0.8286, 0.0481, 0.1151, 0.0417);
 
     //  HP% digits: white text below species badges.
-    //  Widened from original 27-29px to capture full digit cluster.
-    m_opponent_hp_boxes[0]   = ImageFloatBox(0.705, 0.118, 0.040, 0.022);
-    m_opponent_hp_boxes[1]   = ImageFloatBox(0.928, 0.118, 0.040, 0.022);
+    //  Tuned via inspector "Test OCR" against multiple doubles frames.
+    //  Singles re-uses slot 1's coords (HP appears right-aligned in singles).
+    m_opponent_hp_boxes[0]   = ImageFloatBox(0.6932, 0.1174, 0.0429, 0.0354);
+    m_opponent_hp_boxes[1]   = ImageFloatBox(0.9002, 0.1176, 0.0420, 0.0349);
 
     //  Own HP bars: bottom-left, fraction format (e.g. "152/202").
     m_own_hp_boxes[0] = ImageFloatBox(0.035, 0.920, 0.100, 0.050);
