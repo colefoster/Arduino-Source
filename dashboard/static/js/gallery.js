@@ -8,7 +8,6 @@ let galleryImages = [];
 let galleryFilter = 'all';
 
 let galleryScreens = [];
-let _regressionFailures = {};
 let gallerySelectedScreen = null;
 let galleryScreenImages = [];
 
@@ -19,22 +18,6 @@ async function galleryInit() {
     try {
         // Use new screen-based API
         galleryScreens = await api('/api/gallery/screens');
-        // Load regression failures to annotate sidebar
-        try {
-            const reg = await api('/api/regression/summary');
-            if (reg && reg.readers) {
-                // Map detector failures to screens via screens.yaml registration
-                _regressionFailures = {};
-                for (const s of galleryScreens) {
-                    let screenFails = 0;
-                    for (const det of (s.detectors || [])) {
-                        const r = reg.readers[det];
-                        if (r && r.failed > 0) screenFails += r.failed;
-                    }
-                    if (screenFails > 0) _regressionFailures[s.name] = screenFails;
-                }
-            }
-        } catch (e) { /* regression data optional */ }
         renderGallerySidebar();
         //  Auto-select the screen with the most images on first load.
         if (!gallerySelectedScreen) {
@@ -71,17 +54,15 @@ function renderGallerySidebar() {
     const overlays = galleryScreens.filter(s => s.type === 'overlay').sort(byCountDesc);
 
     const pillFor = (s, displayName) => {
-        const fails = _regressionFailures[s.name] || 0;
         const labeled = s.labeled || 0;
         const total = s.count || 0;
         const allLabeled = total > 0 && labeled === total;
         const countColor = total === 0 ? '#484f58' : (allLabeled ? '#3fb950' : '#c9d1d9');
-        const tip = `${labeled}/${total} labeled` + (fails > 0 ? ` \u00b7 ${fails} detector failures` : '');
-        const failBadge = fails > 0 ? '<span style="color:#f85149; font-size:9px; margin-left:4px;" title="' + fails + ' detector failures">&#9888;' + fails + '</span>' : '';
+        const tip = `${labeled}/${total} labeled`;
         const active = gallerySelectedScreen === s.name ? ' active' : '';
         const opacity = total === 0 ? ' style="opacity:0.5;"' : '';
         return '<div class="reader-pill' + active + '" data-screen="' + s.name + '" title="' + tip + '"' + opacity + '>'
-            + '<span>' + displayName + failBadge + '</span>'
+            + '<span>' + displayName + '</span>'
             + '<span class="count-badge" style="color:' + countColor + ';">' + labeled + '/' + total + '</span>'
             + '</div>';
     };
