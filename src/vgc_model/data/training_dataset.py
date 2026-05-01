@@ -148,7 +148,12 @@ class TrainingDataset(Dataset):
         sample = {}
         for k in SAMPLE_COLUMNS:
             arr = cols[k][row_idx]
-            sample[k] = torch.as_tensor(arr)
+            t = torch.as_tensor(arr)
+            # Embedding layers + cross-entropy require long; everything stored
+            # int8/int32 needs to be promoted. Floats stay floats.
+            if t.dtype in (torch.int8, torch.int32, torch.int16):
+                t = t.long()
+            sample[k] = t
         # Carry rating + winner label for any aux objective the trainer wants.
         sample["rating"] = torch.tensor(
             int(cols["_meta_rating"][row_idx]), dtype=torch.long,
