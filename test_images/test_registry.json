@@ -112,11 +112,17 @@
             "length": 2,
             "description": "Slot 0 (left), slot 1 (right). Singles: leave slot 1 blank."
           },
-          "own_hp": {
+          "own_hp_current": {
             "type": "array",
-            "items": "string",
+            "items": "int",
             "length": 2,
-            "description": "Slot 0 (left), slot 1 (right). Singles: leave slot 1 blank."
+            "description": "Current HP per slot. Slot 0 (left), slot 1 (right). Singles: leave slot 1 blank."
+          },
+          "own_hp_max": {
+            "type": "array",
+            "items": "int",
+            "length": 2,
+            "description": "Max HP per slot. Slot 0 (left), slot 1 (right). Singles: leave slot 1 blank."
           }
         },
         "move_select": {
@@ -138,11 +144,17 @@
             "length": 2,
             "description": "Slot 0 (left), slot 1 (right). Singles: leave slot 1 blank."
           },
-          "own_hp": {
+          "own_hp_current": {
             "type": "array",
-            "items": "string",
+            "items": "int",
             "length": 2,
-            "description": "Slot 0 (left), slot 1 (right). Singles: leave slot 1 blank."
+            "description": "Current HP per slot. Slot 0 (left), slot 1 (right). Singles: leave slot 1 blank."
+          },
+          "own_hp_max": {
+            "type": "array",
+            "items": "int",
+            "length": 2,
+            "description": "Max HP per slot. Slot 0 (left), slot 1 (right). Singles: leave slot 1 blank."
           }
         }
       }
