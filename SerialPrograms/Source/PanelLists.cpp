@@ -49,29 +49,12 @@ ProgramSelect::ProgramSelect(QWidget& parent, PanelHolder& holder)
     layout->addWidget(m_dropdown);
 
 
+    //  Stripped panel list: only the games + utilities Cole actively uses.
+    //  Restore the full list (other Pokemon games, Zelda, ML, etc.) by checking
+    //  out an earlier revision of this file from before the SV trade-bot work.
     add(std::make_unique<NintendoSwitch::PanelListFactory>());
-    add(std::make_unique<NintendoSwitch::PokemonHome::PanelListFactory>());
-    add(std::make_unique<NintendoSwitch::PokemonLGPE::PanelListFactory>());
-    add(std::make_unique<NintendoSwitch::PokemonSwSh::PanelListFactory>());
-    add(std::make_unique<NintendoSwitch::PokemonBDSP::PanelListFactory>());
-    add(std::make_unique<NintendoSwitch::PokemonLA::PanelListFactory>());
     add(std::make_unique<NintendoSwitch::PokemonSV::PanelListFactory>());
-
-    add(std::make_unique<NintendoSwitch::PokemonLZA::PanelListFactory>());
-    add(std::make_unique<NintendoSwitch::PokemonFRLG::PanelListFactory>());
-    if (IS_BETA_VERSION || PreloadSettings::instance().DEVELOPER_MODE){
-        add(std::make_unique<NintendoSwitch::PokemonPokopia::PanelListFactory>());
-    }
     add(std::make_unique<NintendoSwitch::PokemonChampions::PanelListFactory>());
-    if (PreloadSettings::instance().DEVELOPER_MODE){
-        add(std::make_unique<NintendoSwitch::PokemonRSE::PanelListFactory>());
-    }
-
-    add(std::make_unique<NintendoSwitch::ZeldaTotK::PanelListFactory>());
-
-    if (PreloadSettings::instance().DEVELOPER_MODE){
-        add(std::make_unique<ML::PanelListFactory>());
-    }
 
 
     //  Load the 1st list by default.

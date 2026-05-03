@@ -2428,6 +2428,12 @@ file(GLOB LIBRARY_SOURCES
     Source/PokemonSV/Programs/TeraRaids/PokemonSV_TeraSelfFarmer.h
     Source/PokemonSV/Programs/TestPrograms/PokemonSV_SoundListener.cpp
     Source/PokemonSV/Programs/TestPrograms/PokemonSV_SoundListener.h
+    Source/PokemonSV/Programs/Trading/PokemonSV_DiscordTradeBot.cpp
+    Source/PokemonSV/Programs/Trading/PokemonSV_DiscordTradeBot.h
+    Source/PokemonSV/Programs/Trading/PokemonSV_DiscordTradeBotProgram.cpp
+    Source/PokemonSV/Programs/Trading/PokemonSV_DiscordTradeBotProgram.h
+    Source/PokemonSV/Programs/Trading/PokemonSV_DiscordTradeBridge.cpp
+    Source/PokemonSV/Programs/Trading/PokemonSV_DiscordTradeBridge.h
     Source/PokemonSV/Programs/Trading/PokemonSV_SelfBoxTrade.cpp
     Source/PokemonSV/Programs/Trading/PokemonSV_SelfBoxTrade.h
     Source/PokemonSV/Programs/Trading/PokemonSV_TradeRoutines.cpp

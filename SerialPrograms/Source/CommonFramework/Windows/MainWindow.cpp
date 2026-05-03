@@ -369,7 +369,8 @@ void MainWindow::load_panel(
 
     //  Make new widget.
     try{
-        check_new_version();
+        //  Worktree sv-home-trade-bot: skip update check.
+        //  check_new_version();
         m_current_panel_widget = panel->make_widget(*this, *this);
 //        cout << "load_panel() = " << m_current_panel_widget << endl;
         m_current_panel_descriptor = std::move(descriptor);

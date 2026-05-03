@@ -162,7 +162,8 @@ int run_program(int argc, char *argv[]){
         return 1;
     }
 
-    check_new_version(logger);
+    //  Worktree sv-home-trade-bot: skip update check.
+    //  check_new_version(logger);
 
     set_working_directory();
 
