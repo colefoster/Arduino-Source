@@ -18,6 +18,7 @@
 #include "Programs/Boxes/PokemonSV_MassRelease.h"
 #include "Programs/Boxes/PokemonSV_MassAttachItems.h"
 
+#include "Programs/Trading/PokemonSV_DiscordTradeBotProgram.h"
 #include "Programs/Trading/PokemonSV_SelfBoxTrade.h"
 #include "Programs/Sandwiches/PokemonSV_SandwichMaker.h"
 
@@ -85,6 +86,12 @@ std::vector<PanelEntry> PanelListFactory::make_panels() const{
     ret.emplace_back("---- Settings ----");
     ret.emplace_back(make_settings<GameSettings_Descriptor, GameSettingsPanel>());
 
+    //  Worktree sv-home-trade-bot: only Discord Trade Bot is registered.
+    //  Restore the full SV panel list when shipping.
+    ret.emplace_back("---- Trading ----");
+    ret.emplace_back(make_single_switch_program<DiscordTradeBotProgram_Descriptor, DiscordTradeBotProgram>());
+
+#if 0
     ret.emplace_back("---- General ----");
     ret.emplace_back(make_single_switch_program<MassPurchase_Descriptor, MassPurchase>());
     ret.emplace_back(make_single_switch_program<ClothingBuyer_Descriptor, ClothingBuyer>());
@@ -172,6 +179,7 @@ std::vector<PanelEntry> PanelListFactory::make_panels() const{
         add_panels(ret);
     }
 #endif
+#endif  //  end of worktree #if 0
 
     return ret;
 }
