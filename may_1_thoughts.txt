@@ -1,0 +1,27 @@
+
+
+result screen 
+    won vs lost is actually
+    gold/yellow vs silver
+    I can adjust boxes if needed (we are always on the left and opponent is always on the right  im 90% sure)
+
+
+
+
+we need to add more massaging of the numbers, 1s are commonly being read as 7s
+This can easily be fixed in some cases based on the following (assuemed) facts:
+    neither hp values will ever be more than 699
+    current hp will never ever be more than max hp
+
+    an even more drastic measure is reading our hp bar color and using that to reign in the hp value... that assumes we have an accurate max hp though.
+
+
+I'd also prefer visually detecting pp and max pp on moves instead of tracking them in a db / somewhere and recording them throughout a match
+
+We also want to parse game time and turn time, just for niche cases or situations or troubleshooting/reporting
+
+we should also add reader / detectors for the pokeballs that represent how many pokemon on each team are still alive. 
+
+Looking at this, I'm wondering how much it makes sense to break up battlehud reader.. these are like 8 more things to parse, not even including parsing our own pokemon sprites which we will want to do because the 'species name' is actually the nickname in cases where the mon has a nickname
+
+
