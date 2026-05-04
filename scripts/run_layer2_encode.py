@@ -71,6 +71,8 @@ def main():
     ap.add_argument("--force", action="store_true")
     ap.add_argument("--limit", type=int, default=None)
     ap.add_argument("--quiet", action="store_true")
+    ap.add_argument("--history-k", type=int, default=8,
+                    help="Per-sample history window size baked into shards.")
     args = ap.parse_args()
 
     logging.basicConfig(
@@ -85,7 +87,7 @@ def main():
     overall_start = time.time()
     grand = {"buckets": 0, "fresh": 0, "samples": 0}
     for mode in args.modes:
-        encoder = Encoder(vocabs, mode=mode)  # type: ignore[arg-type]
+        encoder = Encoder(vocabs, mode=mode, history_k=args.history_k)  # type: ignore[arg-type]
         result = run_all_encoding(
             parsed_root=args.parsed_root,
             encoded_root=args.encoded_root,

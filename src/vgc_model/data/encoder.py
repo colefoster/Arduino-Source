@@ -34,7 +34,7 @@ SWITCH_TYPE = 2
 # contributes (4,)-shaped vectors for active species, hp, action types, and
 # action moves — slot order [own_a, own_b, opp_a, opp_b]. Padded zeros at the
 # left when the actual history is shorter than HISTORY_K.
-HISTORY_K = 8
+HISTORY_K = 8  # default; encoder accepts override per instance
 HISTORY_SLOTS = 4
 
 EncodeMode = Literal["meta-on", "meta-off"]
@@ -263,14 +263,14 @@ def _summarize_turn(turn: dict, pov: str, vocabs: Vocabs) -> dict:
     }
 
 
-def _build_prev_seq(history: list[dict]) -> dict:
+def _build_prev_seq(history: list[dict], history_k: int = HISTORY_K) -> dict:
     """Pull the last K turns (left-padded zeros) into per-column lists.
 
     ``history`` is the rolling list of summaries appended *before* this sample
     (so it does not include the current turn). Returns four (K, 4) lists.
     """
-    window = history[-HISTORY_K:]
-    pad_count = HISTORY_K - len(window)
+    window = history[-history_k:]
+    pad_count = history_k - len(window)
     pad = [0] * HISTORY_SLOTS
     pad_f = [0.0] * HISTORY_SLOTS
 
@@ -307,11 +307,12 @@ class Encoder:
     runner stacks them into numpy arrays per shard.
     """
 
-    def __init__(self, vocabs: Vocabs, mode: EncodeMode):
+    def __init__(self, vocabs: Vocabs, mode: EncodeMode, history_k: int = HISTORY_K):
         if mode not in ("meta-on", "meta-off"):
             raise ValueError(f"unknown mode: {mode}")
         self.vocabs = vocabs
         self.mode: EncodeMode = mode
+        self.history_k = history_k
 
     def encode_row(self, row: dict) -> Iterator[RawSample]:
         turns = json.loads(row["turns_json"])
@@ -327,7 +328,7 @@ class Encoder:
         for turn in turns:
             for pov in ("p1", "p2"):
                 fields = _encode_one_decision_raw(turn, pov, self.vocabs, self.mode)
-                fields.update(_build_prev_seq(history[pov]))
+                fields.update(_build_prev_seq(history[pov], self.history_k))
                 yield RawSample(
                     fields=fields,
                     replay_id=replay_id,

@@ -1,408 +1,263 @@
 #!/usr/bin/env python3
 """Build per-species usage statistics for Champions VGC format.
 
-Two data sources, used in priority order:
-  1. Pikalytics tournament data (top 50 species) — team-sheet-derived percentages
-  2. Local replay corpus (fallback for rare species) — raw counts from battle logs
+Source: Smogon chaos JSON (https://www.smogon.com/stats/{month}/chaos/).
+Replaces the legacy Pikalytics scrape — Smogon publishes the official ladder
+stats for `gen9championsvgc2026regma` every month, with full per-species
+distributions (moves, items, abilities, tera, spreads, teammates, checks).
 
-Output:
-  data/usage_stats/gen9championsvgc2026regma.json
-  data/usage_stats/summary.txt
+Output: see data/usage_stats/SCHEMA.md
 """
 
+from __future__ import annotations
+
 import argparse
+import datetime as _dt
+import gzip
+import io
 import json
 import os
-import re
 import sys
-import time
-from collections import defaultdict
+from collections import OrderedDict
 from pathlib import Path
-from urllib.request import urlopen, Request
 from urllib.error import HTTPError, URLError
+from urllib.request import Request, urlopen
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-# In a git worktree, data/ may not exist — resolve to the main repo
 _MAIN_REPO = Path(os.environ.get("REPO_ROOT", PROJECT_ROOT))
-PIKALYTICS_BASE = "https://www.pikalytics.com/ai/pokedex/championstournaments"
-_REPLAY_BASE = _MAIN_REPO / "data" / "showdown_replays"
-REPLAY_DIRS = [
-    _REPLAY_BASE / "gen9championsvgc2026regma",
-    _REPLAY_BASE / "spectated" / "gen9championsvgc2026regma",
-    _REPLAY_BASE / "downloaded" / "gen9championsvgc2026regma",
-]
+
+FORMAT_ID = "gen9championsvgc2026regma"
+DEFAULT_CUT = 1500
+ALL_CUTS = [0, 1500, 1630, 1760]
+
 OUTPUT_DIR = PROJECT_ROOT / "data" / "usage_stats"
-OUTPUT_FILE = OUTPUT_DIR / "gen9championsvgc2026regma.json"
+CUTS_DIR = OUTPUT_DIR / "cuts"
+DEFAULT_OUT = OUTPUT_DIR / f"{FORMAT_ID}.json"
+DEFAULT_META = OUTPUT_DIR / f"{FORMAT_ID}.meta.json"
 SUMMARY_FILE = OUTPUT_DIR / "summary.txt"
 
-RATE_LIMIT_SECS = 1.0
+PS_DATA_DIR = _MAIN_REPO / "data" / "ps_data"
+MOVES_FILE = PS_DATA_DIR / "moves.json"
+ITEMS_FILE = PS_DATA_DIR / "items.json"
+ABILITIES_FILE = PS_DATA_DIR / "abilities.json"
+
+# Spreads: keep top N with pct >= threshold to bound file size.
+SPREADS_MAX = 30
+SPREADS_MIN_PCT = 0.5
+
+# User-Agent matters: Smogon's nginx returns 405 to default urllib UA.
+# Accept-Encoding: gzip is also required.
+HTTP_HEADERS = {
+    "User-Agent": "pokemon-champions-usage-stats/2.0",
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip",
+}
 
 
 # ---------------------------------------------------------------------------
-# Pikalytics fetching
+# id -> display name maps (built from ps_data)
 # ---------------------------------------------------------------------------
 
-def fetch_url(url: str) -> str:
-    """Fetch URL content as string with a polite User-Agent."""
-    req = Request(url, headers={"User-Agent": "pokemon-champions-usage-stats/1.0"})
-    with urlopen(req, timeout=30) as resp:
-        return resp.read().decode("utf-8")
+def _load_name_map(path: Path) -> dict[str, str]:
+    """Load ps_data/{moves,items,abilities}.json and return id -> display name."""
+    with open(path) as f:
+        d = json.load(f)
+    out = {}
+    for key, entry in d.items():
+        name = entry.get("name") if isinstance(entry, dict) else None
+        if name:
+            out[key] = name
+    return out
 
 
-def parse_pikalytics_index(markdown: str) -> list[str]:
-    """Extract species names from the Pikalytics index page markdown."""
-    species = []
-    # Match rows like: | 1 | **Incineroar** | 51.19% | ...
-    for m in re.finditer(r'\|\s*\d+\s*\|\s*\*\*(.+?)\*\*\s*\|', markdown):
-        name = m.group(1).strip()
-        if name not in species:
-            species.append(name)
-    return species
-
-
-def parse_bullet_list(text: str, section_header: str) -> dict[str, float]:
-    """Parse a markdown section with bullet items like '- **Name**: 99.05%'."""
-    result = {}
-    pattern = re.compile(
-        r'^##\s+' + re.escape(section_header) + r'\s*$',
-        re.MULTILINE
+def _load_ps_maps() -> tuple[dict[str, str], dict[str, str], dict[str, str]]:
+    return (
+        _load_name_map(MOVES_FILE),
+        _load_name_map(ITEMS_FILE),
+        _load_name_map(ABILITIES_FILE),
     )
-    match = pattern.search(text)
-    if not match:
-        return result
-
-    # Get text from this section header to the next ## header
-    start = match.end()
-    next_section = re.search(r'^##\s+', text[start:], re.MULTILINE)
-    section_text = text[start:start + next_section.start()] if next_section else text[start:]
-
-    for item in re.finditer(r'-\s+\*\*(.+?)\*\*:\s*([\d.]+)%', section_text):
-        name = item.group(1).strip()
-        pct = float(item.group(2))
-        result[name] = pct
-    return result
 
 
-def parse_teammates(text: str) -> dict[str, float]:
-    """Parse Common Teammates section."""
-    return parse_bullet_list(text, "Common Teammates")
+def _humanize(name_id: str, name_map: dict[str, str]) -> str:
+    """Convert chaos-JSON id (e.g. 'closecombat') to display name ('Close Combat').
+
+    Falls back to the raw id if not found (rare items like new DLC moves not yet
+    in ps_data — caller can decide whether to include or skip).
+    """
+    return name_map.get(name_id, name_id)
 
 
-def parse_featured_teams(text: str) -> list[dict]:
-    """Parse Featured Teams section into sample sets."""
-    sets = []
-    # Split on team headers like "### Team 1 by ..."
-    team_blocks = re.split(r'###\s+Team\s+\d+\s+by\s+', text)
-    for block in team_blocks[1:]:  # skip text before first team
-        sample = {}
-        # Ability
-        ability_m = re.search(r'\*\*Ability\*\*:\s*(.+)', block)
-        if ability_m:
-            sample["ability"] = ability_m.group(1).strip()
-        # Item
-        item_m = re.search(r'\*\*Item\*\*:\s*(.+)', block)
-        if item_m:
-            sample["item"] = item_m.group(1).strip()
-        # Moves — "**Moves**: Move1, Move2, Move3, Move4"
-        moves_m = re.search(r'\*\*Moves\*\*:\s*(.+)', block)
-        if moves_m:
-            moves = [m.strip() for m in moves_m.group(1).split(",")]
-            sample["moves"] = moves
+# ---------------------------------------------------------------------------
+# Smogon fetch
+# ---------------------------------------------------------------------------
 
-        if sample.get("moves"):
-            sets.append(sample)
-    return sets
+def fetch_chaos(month: str, cut: int) -> dict:
+    """Download and parse the chaos JSON for one (month, cut)."""
+    url = f"https://www.smogon.com/stats/{month}/chaos/{FORMAT_ID}-{cut}.json"
+    req = Request(url, headers=HTTP_HEADERS)
+    with urlopen(req, timeout=60) as resp:
+        raw = resp.read()
+        if resp.headers.get("Content-Encoding") == "gzip":
+            raw = gzip.decompress(raw)
+    return json.loads(raw.decode("utf-8"))
 
 
-def fetch_species_data(species: str) -> dict:
-    """Fetch and parse a single species page from Pikalytics."""
-    url = f"{PIKALYTICS_BASE}/{species}"
-    md = fetch_url(url)
+def latest_available_month() -> str:
+    """Smogon publishes month N around the 1st of month N+1.
 
-    data = {
-        "source": "pikalytics",
-        "moves": parse_bullet_list(md, "Common Moves"),
-        "items": parse_bullet_list(md, "Common Items"),
-        "abilities": parse_bullet_list(md, "Common Abilities"),
-        "teammates": parse_teammates(md),
-        "sample_sets": parse_featured_teams(md),
+    We optimistically try last month first; the caller can fall back further.
+    """
+    today = _dt.date.today()
+    first = today.replace(day=1)
+    last_month = first - _dt.timedelta(days=1)
+    return f"{last_month.year:04d}-{last_month.month:02d}"
+
+
+# ---------------------------------------------------------------------------
+# Normalization
+# ---------------------------------------------------------------------------
+
+def _to_pct(weighted: dict[str, float]) -> dict[str, float]:
+    """Normalize a chaos-JSON weighted-count dict to percentages summing to ~100."""
+    total = sum(v for v in weighted.values() if v > 0)
+    if total <= 0:
+        return {}
+    return {k: round(v / total * 100, 4) for k, v in weighted.items() if v > 0}
+
+
+def _humanize_pct_dict(
+    weighted: dict[str, float], name_map: dict[str, str]
+) -> dict[str, float]:
+    """Normalize + map ids to display names + sort desc."""
+    pct = _to_pct(weighted)
+    renamed: dict[str, float] = {}
+    for key, val in pct.items():
+        display = _humanize(key, name_map)
+        # Two ids could collide post-display (rare); sum if so.
+        renamed[display] = renamed.get(display, 0.0) + val
+    return dict(sorted(renamed.items(), key=lambda x: -x[1]))
+
+
+def _normalize_spreads(weighted: dict[str, float]) -> list[dict]:
+    """Convert chaos 'Nature:HP/Atk/Def/SpA/SpD/Spe' weights to a sorted list."""
+    pct = _to_pct(weighted)
+    rows: list[dict] = []
+    for spread, p in sorted(pct.items(), key=lambda x: -x[1]):
+        if p < SPREADS_MIN_PCT:
+            break
+        if ":" not in spread:
+            continue
+        nature, evs = spread.split(":", 1)
+        rows.append({"nature": nature, "evs": evs, "pct": p})
+        if len(rows) >= SPREADS_MAX:
+            break
+    return rows
+
+
+def _normalize_teammates(weighted: dict[str, float]) -> dict[str, float]:
+    """Teammate names are already PS display names (e.g. 'Rotom-Wash')."""
+    pct = _to_pct(weighted)
+    return dict(sorted(pct.items(), key=lambda x: -x[1]))
+
+
+def _normalize_checks(checks: dict) -> dict[str, float]:
+    """chaos `Checks and Counters` values are [n, score, stddev] — keep `score`."""
+    out: dict[str, float] = {}
+    for name, val in checks.items():
+        if isinstance(val, (list, tuple)) and len(val) >= 2:
+            out[name] = round(float(val[1]), 4)
+        elif isinstance(val, (int, float)):
+            out[name] = round(float(val), 4)
+    return dict(sorted(out.items(), key=lambda x: -x[1]))
+
+
+def transform_species(
+    raw: dict,
+    moves_map: dict[str, str],
+    items_map: dict[str, str],
+    abilities_map: dict[str, str],
+) -> dict:
+    """Transform one chaos-JSON species entry into our schema."""
+    out = OrderedDict()
+    out["source"] = "smogon"
+    out["usage_pct"] = round(raw.get("usage", 0.0) * 100, 4)
+    out["raw_count"] = int(raw.get("Raw count", 0))
+    vc = raw.get("Viability Ceiling")
+    if isinstance(vc, list):
+        out["viability_ceiling"] = vc
+
+    out["moves"] = _humanize_pct_dict(raw.get("Moves", {}), moves_map)
+    out["items"] = _humanize_pct_dict(raw.get("Items", {}), items_map)
+    out["abilities"] = _humanize_pct_dict(raw.get("Abilities", {}), abilities_map)
+    out["spreads"] = _normalize_spreads(raw.get("Spreads", {}))
+    out["teammates"] = _normalize_teammates(raw.get("Teammates", {}))
+
+    cc = raw.get("Checks and Counters") or {}
+    if cc:
+        out["checks_and_counters"] = _normalize_checks(cc)
+
+    return out
+
+
+def transform_all(chaos: dict) -> tuple[dict, dict]:
+    """Return (species_data, meta) tuples in schema-compliant shape."""
+    moves_map, items_map, abilities_map = _load_ps_maps()
+
+    species_out: dict[str, dict] = {}
+    for name, entry in chaos.get("data", {}).items():
+        if not isinstance(entry, dict):
+            continue
+        if entry.get("usage", 0.0) <= 0:
+            continue
+        species_out[name] = transform_species(
+            entry, moves_map, items_map, abilities_map
+        )
+
+    species_out = dict(
+        sorted(species_out.items(), key=lambda x: -x[1].get("usage_pct", 0.0))
+    )
+
+    info = chaos.get("info", {})
+    meta = {
+        "format": info.get("metagame", FORMAT_ID),
+        "cutoff": info.get("cutoff"),
+        "battles": info.get("number of battles"),
+        "source": "smogon-chaos",
+        "fetched_at": _dt.datetime.now(_dt.timezone.utc).isoformat(timespec="seconds"),
+        "species_count": len(species_out),
     }
-
-    # Spreads — Pikalytics may or may not have them
-    spreads = parse_spreads(md)
-    if spreads:
-        data["spreads"] = spreads
-
-    return data
-
-
-def parse_spreads(text: str) -> list[dict]:
-    """Parse EV spread data if available. Currently Pikalytics doesn't provide this."""
-    # Placeholder — Pikalytics says "No EV spread or nature data available"
-    return []
-
-
-def fetch_all_pikalytics(species_list: list[str], verbose: bool = True) -> dict:
-    """Fetch data for all Pikalytics species with rate limiting."""
-    results = {}
-    total = len(species_list)
-    for i, species in enumerate(species_list):
-        if verbose:
-            print(f"  [{i+1}/{total}] Fetching {species}...", end=" ", flush=True)
-        try:
-            data = fetch_species_data(species)
-            results[species] = data
-            if verbose:
-                print(f"OK ({len(data['moves'])} moves, {len(data['items'])} items)")
-        except (HTTPError, URLError) as e:
-            if verbose:
-                print(f"FAILED: {e}")
-        if i < total - 1:
-            time.sleep(RATE_LIMIT_SECS)
-    return results
+    return species_out, meta
 
 
 # ---------------------------------------------------------------------------
-# Replay corpus parsing (fallback)
+# Summary
 # ---------------------------------------------------------------------------
 
-def normalize_species(raw: str) -> str:
-    """Normalize species name from PS log format.
-
-    e.g. 'Rotom-Wash, L50, F' -> 'Rotom-Wash'
-         'Kangaskhan-Mega, L50, F' -> 'Kangaskhan-Mega'
-    """
-    # Strip everything after the first comma
-    name = raw.split(",")[0].strip()
-    return name
-
-
-def parse_replay_log(log: str) -> dict[str, dict]:
-    """Parse a PS battle log and extract per-species usage data.
-
-    Returns {species: {"moves": set, "items": set, "abilities": set}}
-    """
-    species_data = defaultdict(lambda: {"moves": set(), "items": set(), "abilities": set()})
-
-    # Map slot identifiers (e.g. "p1a: Incineroar") to species
-    slot_to_species = {}
-
-    for line in log.split("\n"):
-        parts = line.split("|")
-        if len(parts) < 3:
-            continue
-
-        cmd = parts[1].strip()
-
-        if cmd == "poke":
-            # |poke|p1|Incineroar, L50, F|
-            if len(parts) >= 4:
-                species = normalize_species(parts[3])
-                # Don't map slot yet — that happens on switch
-        elif cmd == "switch" or cmd == "drag":
-            # |switch|p1a: Incineroar|Incineroar, L50, F|100/100
-            if len(parts) >= 4:
-                slot = parts[2].strip()
-                species = normalize_species(parts[3])
-                slot_to_species[slot] = species
-        elif cmd == "detailschange":
-            # |detailschange|p2b: Kangaskhan|Kangaskhan-Mega, L50, F
-            # Update slot mapping to mega form
-            if len(parts) >= 4:
-                slot = parts[2].strip()
-                species = normalize_species(parts[3])
-                slot_to_species[slot] = species
-        elif cmd == "move":
-            # |move|p1a: Incineroar|Fake Out|p2b: Kangaskhan
-            if len(parts) >= 4:
-                slot = parts[2].strip()
-                move = parts[3].strip()
-                species = slot_to_species.get(slot)
-                if species:
-                    species_data[species]["moves"].add(move)
-        elif cmd == "-ability":
-            # |-ability|p1a: Incineroar|Intimidate|...
-            if len(parts) >= 4:
-                slot = parts[2].strip()
-                ability = parts[3].strip()
-                species = slot_to_species.get(slot)
-                if species:
-                    species_data[species]["abilities"].add(ability)
-        elif cmd in ("-item", "-enditem"):
-            # |-item|p1a: Incineroar|Sitrus Berry|...
-            # |-enditem|p1b: Whimsicott|Focus Sash|...
-            if len(parts) >= 4:
-                slot = parts[2].strip()
-                item = parts[3].strip()
-                # Filter out items that are just move effects
-                if item and not item.startswith("["):
-                    species = slot_to_species.get(slot)
-                    if species:
-                        species_data[species]["items"].add(item)
-        elif cmd == "-mega":
-            # |-mega|p2b: Kangaskhan|Kangaskhan|Kangaskhanite
-            if len(parts) >= 5:
-                slot = parts[2].strip()
-                stone = parts[4].strip()
-                species = slot_to_species.get(slot)
-                if species:
-                    species_data[species]["items"].add(stone)
-
-    return dict(species_data)
-
-
-def scan_replays(replay_dirs: list[Path], verbose: bool = True) -> dict:
-    """Scan all replay JSONs and aggregate per-species usage counts.
-
-    Returns {species: {"source": "replays", "count": N,
-                       "moves": {move: count}, "items": {item: count},
-                       "abilities": {ability: count}}}
-    """
-    species_moves = defaultdict(lambda: defaultdict(int))
-    species_items = defaultdict(lambda: defaultdict(int))
-    species_abilities = defaultdict(lambda: defaultdict(int))
-    species_count = defaultdict(int)
-
-    total_replays = 0
-    seen_files = set()
-
-    for replay_dir in replay_dirs:
-        if not replay_dir.exists():
-            if verbose:
-                print(f"  Skipping {replay_dir} (not found)")
-            continue
-        files = list(replay_dir.glob("*.json"))
-        if verbose:
-            print(f"  Scanning {replay_dir.name}: {len(files)} files")
-        for f in files:
-            # Deduplicate across ELO-sliced dirs (same replay may appear in multiple)
-            replay_id = f.stem
-            if replay_id in seen_files:
-                continue
-            seen_files.add(replay_id)
-
-            try:
-                with open(f) as fh:
-                    data = json.load(fh)
-                log = data.get("log", "")
-                if not log:
-                    continue
-                parsed = parse_replay_log(log)
-                total_replays += 1
-                for species, info in parsed.items():
-                    species_count[species] += 1
-                    for move in info["moves"]:
-                        species_moves[species][move] += 1
-                    for item in info["items"]:
-                        species_items[species][item] += 1
-                    for ability in info["abilities"]:
-                        species_abilities[species][ability] += 1
-            except (json.JSONDecodeError, KeyError):
-                continue
-
-    if verbose:
-        print(f"  Parsed {total_replays} unique replays, found {len(species_count)} species")
-
-    results = {}
-    for species in species_count:
-        results[species] = {
-            "source": "replays",
-            "count": species_count[species],
-            "moves": dict(sorted(species_moves[species].items(), key=lambda x: -x[1])),
-            "items": dict(sorted(species_items[species].items(), key=lambda x: -x[1])),
-            "abilities": dict(sorted(species_abilities[species].items(), key=lambda x: -x[1])),
-        }
-    return results
-
-
-# ---------------------------------------------------------------------------
-# Merge & output
-# ---------------------------------------------------------------------------
-
-def normalize_for_lookup(name: str) -> str:
-    """Normalize a species name for matching across sources.
-
-    Strips mega suffixes, lowercases, etc.
-    """
-    return name.lower().replace(" ", "").replace("-", "")
-
-
-def merge_sources(pikalytics: dict, replays: dict) -> dict:
-    """Merge Pikalytics (primary) and replay (fallback) data.
-
-    Pikalytics species take priority. Replay data fills in uncovered species.
-    For Pikalytics species that also appear in replays with mega forms,
-    the mega forms get their own replay-sourced entries.
-    """
-    merged = dict(pikalytics)
-
-    # Build a set of normalized Pikalytics species names for dedup
-    pikalytics_normalized = set()
-    for name in pikalytics:
-        pikalytics_normalized.add(normalize_for_lookup(name))
-
-    for species, data in replays.items():
-        norm = normalize_for_lookup(species)
-        if norm not in pikalytics_normalized:
-            merged[species] = data
-
-    # Sort by source (pikalytics first) then alphabetically
-    def sort_key(item):
-        name, data = item
-        return (0 if data["source"] == "pikalytics" else 1, name.lower())
-
-    return dict(sorted(merged.items(), key=sort_key))
-
-
-def generate_summary(stats: dict) -> str:
-    """Generate a human-readable summary report."""
+def generate_summary(stats: dict, meta: dict) -> str:
     lines = []
     lines.append("=" * 70)
-    lines.append("Champions VGC 2026 Reg M-A — Usage Statistics Summary")
+    lines.append("Champions VGC 2026 Reg M-A — Usage Statistics (Smogon)")
     lines.append("=" * 70)
+    lines.append(f"Format:        {meta.get('format')}")
+    lines.append(f"Month/cutoff:  {meta.get('cutoff')}")
+    lines.append(f"Battles:       {meta.get('battles'):,}")
+    lines.append(f"Species seen:  {meta.get('species_count')}")
+    lines.append(f"Fetched at:    {meta.get('fetched_at')}")
     lines.append("")
-
-    pikalytics_species = [s for s, d in stats.items() if d["source"] == "pikalytics"]
-    replay_species = [s for s, d in stats.items() if d["source"] == "replays"]
-
-    lines.append(f"Total species: {len(stats)}")
-    lines.append(f"  From Pikalytics: {len(pikalytics_species)}")
-    lines.append(f"  From replays:    {len(replay_species)}")
-    lines.append("")
-
-    # Top Pikalytics species
     lines.append("-" * 70)
-    lines.append("TOP PIKALYTICS SPECIES (by move count)")
+    lines.append("TOP 20 BY USAGE")
     lines.append("-" * 70)
-    for species in pikalytics_species[:10]:
-        data = stats[species]
-        top_moves = list(data["moves"].keys())[:4]
-        top_item = next(iter(data["items"]), "???")
-        top_ability = next(iter(data["abilities"]), "???")
-        lines.append(f"\n  {species}")
-        lines.append(f"    Moves: {', '.join(top_moves)}")
-        lines.append(f"    Item:  {top_item} ({data['items'].get(top_item, 0):.1f}%)")
-        lines.append(f"    Ability: {top_ability} ({data['abilities'].get(top_ability, 0):.1f}%)")
-        if data.get("sample_sets"):
-            lines.append(f"    Sample sets: {len(data['sample_sets'])}")
-
-    # Top replay-only species
-    if replay_species:
-        lines.append("")
-        lines.append("-" * 70)
-        lines.append("TOP REPLAY-ONLY SPECIES (by appearance count)")
-        lines.append("-" * 70)
-        sorted_replay = sorted(replay_species, key=lambda s: stats[s]["count"], reverse=True)
-        for species in sorted_replay[:20]:
-            data = stats[species]
-            top_moves = list(data["moves"].keys())[:4]
-            lines.append(f"\n  {species} (seen {data['count']} times)")
-            lines.append(f"    Moves: {', '.join(top_moves)}")
-            if data["items"]:
-                lines.append(f"    Items: {', '.join(list(data['items'].keys())[:3])}")
-            if data["abilities"]:
-                lines.append(f"    Abilities: {', '.join(list(data['abilities'].keys())[:3])}")
-
+    for i, (name, data) in enumerate(list(stats.items())[:20], 1):
+        top_move = next(iter(data.get("moves") or {}), "—")
+        top_item = next(iter(data.get("items") or {}), "—")
+        top_ability = next(iter(data.get("abilities") or {}), "—")
+        lines.append(
+            f"{i:>2}. {name:<22} "
+            f"usage={data.get('usage_pct', 0):>5.2f}%  "
+            f"item={top_item:<18} "
+            f"ability={top_ability:<14} "
+            f"top-move={top_move}"
+        )
     lines.append("")
     return "\n".join(lines)
 
@@ -411,59 +266,97 @@ def generate_summary(stats: dict) -> str:
 # Main
 # ---------------------------------------------------------------------------
 
+def write_cut(month: str, cut: int, verbose: bool = True) -> tuple[dict, dict]:
+    if verbose:
+        print(f"  Fetching {month} cut {cut}...", end=" ", flush=True)
+    try:
+        chaos = fetch_chaos(month, cut)
+    except (HTTPError, URLError) as e:
+        if verbose:
+            print(f"FAILED: {e}")
+        raise
+    species, meta = transform_all(chaos)
+    if verbose:
+        print(f"OK ({len(species)} species, {meta['battles']:,} battles)")
+
+    CUTS_DIR.mkdir(parents=True, exist_ok=True)
+    out_path = CUTS_DIR / f"{FORMAT_ID}_cut{cut}.json"
+    meta_path = CUTS_DIR / f"{FORMAT_ID}_cut{cut}.meta.json"
+    with open(out_path, "w") as f:
+        json.dump(species, f, indent=2)
+    with open(meta_path, "w") as f:
+        json.dump(meta, f, indent=2)
+    return species, meta
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--pikalytics-only", action="store_true",
-                        help="Only fetch Pikalytics data, skip replay scanning")
-    parser.add_argument("--replays-only", action="store_true",
-                        help="Only scan replays, skip Pikalytics fetching")
-    parser.add_argument("--quiet", action="store_true")
+    parser.add_argument(
+        "--month", default=None,
+        help="YYYY-MM (default: latest fully-published month)"
+    )
+    parser.add_argument(
+        "--cut", type=int, default=DEFAULT_CUT,
+        help=f"ELO cut to write as the default flat file (default {DEFAULT_CUT})"
+    )
+    parser.add_argument(
+        "--all-cuts", action="store_true",
+        help="Also fetch/write 0, 1500, 1630, 1760 to cuts/"
+    )
+    parser.add_argument(
+        "--quiet", action="store_true"
+    )
     args = parser.parse_args()
-
     verbose = not args.quiet
+
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-    pikalytics_data = {}
-    replay_data = {}
+    month = args.month or latest_available_month()
+    if verbose:
+        print(f"Source: Smogon chaos JSON for {FORMAT_ID}, month {month}")
 
-    # --- Source 1: Pikalytics ---
-    if not args.replays_only:
-        if verbose:
-            print("Fetching Pikalytics index...")
+    cuts_to_fetch = ALL_CUTS if args.all_cuts else [args.cut]
+    if args.cut not in cuts_to_fetch:
+        cuts_to_fetch.append(args.cut)
+
+    default_species: dict | None = None
+    default_meta: dict | None = None
+
+    for cut in cuts_to_fetch:
         try:
-            index_md = fetch_url(PIKALYTICS_BASE)
-            species_list = parse_pikalytics_index(index_md)
-            if verbose:
-                print(f"Found {len(species_list)} species on Pikalytics")
-            pikalytics_data = fetch_all_pikalytics(species_list, verbose=verbose)
+            species, meta = write_cut(month, cut, verbose=verbose)
         except (HTTPError, URLError) as e:
-            print(f"ERROR: Could not fetch Pikalytics index: {e}", file=sys.stderr)
-            if not args.pikalytics_only:
-                print("Falling back to replay-only mode", file=sys.stderr)
+            print(
+                f"ERROR fetching cut {cut} for {month}: {e}\n"
+                f"  Try --month with an earlier YYYY-MM if month not yet published.",
+                file=sys.stderr,
+            )
+            if cut == args.cut:
+                sys.exit(2)
+            continue
+        if cut == args.cut:
+            default_species = species
+            default_meta = meta
 
-    # --- Source 2: Replay corpus ---
-    if not args.pikalytics_only:
-        if verbose:
-            print("\nScanning replay corpus...")
-        replay_data = scan_replays(REPLAY_DIRS, verbose=verbose)
+    if default_species is None or default_meta is None:
+        print("ERROR: requested default cut was not fetched", file=sys.stderr)
+        sys.exit(2)
 
-    # --- Merge ---
+    with open(DEFAULT_OUT, "w") as f:
+        json.dump(default_species, f, indent=2)
+    with open(DEFAULT_META, "w") as f:
+        json.dump(default_meta, f, indent=2)
     if verbose:
-        print("\nMerging sources...")
-    merged = merge_sources(pikalytics_data, replay_data)
+        print(f"Wrote {DEFAULT_OUT} ({len(default_species)} species)")
+        print(f"Wrote {DEFAULT_META}")
 
-    # --- Write output ---
-    with open(OUTPUT_FILE, "w") as f:
-        json.dump(merged, f, indent=2)
-    if verbose:
-        print(f"Wrote {OUTPUT_FILE} ({len(merged)} species)")
-
-    summary = generate_summary(merged)
+    summary = generate_summary(default_species, default_meta)
     with open(SUMMARY_FILE, "w") as f:
         f.write(summary)
     if verbose:
         print(f"Wrote {SUMMARY_FILE}")
-        print("\n" + summary)
+        print()
+        print(summary)
 
 
 if __name__ == "__main__":

@@ -25,6 +25,7 @@ import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader, random_split
 
+from ..data.feature_tables import FeatureTables
 from ..data.training_dataset import TrainingDataset
 from ..data.vocab import Vocabs
 from ..model.action_model import ActionModel
@@ -155,6 +156,17 @@ def _run_epoch(
         total_n += bs
         n_batches += 1
 
+        # If the model emitted legality masks (use_features), apply them at
+        # argmax time so accuracy reflects "best legal action" rather than
+        # "best logit including illegal targets". Loss must stay on unmasked
+        # logits — see action_model.forward for why.
+        def _masked_argmax(name: str) -> torch.Tensor:
+            mask = out.get(name + "_mask")
+            if mask is None:
+                return out[name].argmax(-1)
+            neg_inf = torch.finfo(out[name].dtype).min
+            return out[name].masked_fill(~mask, neg_inf).argmax(-1)
+
         # Type accuracy (full batch)
         type_a_pred = out["type_a"].argmax(-1)
         type_b_pred = out["type_b"].argmax(-1)
@@ -170,12 +182,16 @@ def _run_epoch(
         b_is_switch = batch["action_b_type"] == 2
 
         # move-id accuracy where ground truth is a move
+        move_a_argmax = _masked_argmax("move_a")
+        move_b_argmax = _masked_argmax("move_b")
+        switch_a_argmax = _masked_argmax("switch_a")
+        switch_b_argmax = _masked_argmax("switch_b")
         if a_is_move.any():
-            move_pred = out["move_a"][a_is_move].argmax(-1)
+            move_pred = move_a_argmax[a_is_move]
             move_truth = batch["action_a_move_id"][a_is_move]
             _bump("move_a", move_pred == move_truth, int(a_is_move.sum()))
         if b_is_move.any():
-            move_pred = out["move_b"][b_is_move].argmax(-1)
+            move_pred = move_b_argmax[b_is_move]
             move_truth = batch["action_b_move_id"][b_is_move]
             _bump("move_b", move_pred == move_truth, int(b_is_move.sum()))
 
@@ -191,11 +207,11 @@ def _run_epoch(
 
         # switch-target accuracy where ground truth is a switch
         if a_is_switch.any():
-            sw_pred = out["switch_a"][a_is_switch].argmax(-1)
+            sw_pred = switch_a_argmax[a_is_switch]
             sw_truth = batch["action_a_switch_id"][a_is_switch]
             _bump("switch_a", sw_pred == sw_truth, int(a_is_switch.sum()))
         if b_is_switch.any():
-            sw_pred = out["switch_b"][b_is_switch].argmax(-1)
+            sw_pred = switch_b_argmax[b_is_switch]
             sw_truth = batch["action_b_switch_id"][b_is_switch]
             _bump("switch_b", sw_pred == sw_truth, int(b_is_switch.sum()))
 
@@ -204,13 +220,13 @@ def _run_epoch(
         # For type==move, type AND move AND target (we ignore mega for now).
         # For type==switch, type AND switch_id.
         full_a = type_a_correct.clone()
-        full_a[a_is_move] &= (out["move_a"][a_is_move].argmax(-1) == batch["action_a_move_id"][a_is_move])
+        full_a[a_is_move] &= (move_a_argmax[a_is_move] == batch["action_a_move_id"][a_is_move])
         full_a[a_is_move] &= (out["target_a"][a_is_move].argmax(-1) == ((batch["action_a_target"][a_is_move] + 2).clamp_(0, 3)))
-        full_a[a_is_switch] &= (out["switch_a"][a_is_switch].argmax(-1) == batch["action_a_switch_id"][a_is_switch])
+        full_a[a_is_switch] &= (switch_a_argmax[a_is_switch] == batch["action_a_switch_id"][a_is_switch])
         full_b = type_b_correct.clone()
-        full_b[b_is_move] &= (out["move_b"][b_is_move].argmax(-1) == batch["action_b_move_id"][b_is_move])
+        full_b[b_is_move] &= (move_b_argmax[b_is_move] == batch["action_b_move_id"][b_is_move])
         full_b[b_is_move] &= (out["target_b"][b_is_move].argmax(-1) == ((batch["action_b_target"][b_is_move] + 2).clamp_(0, 3)))
-        full_b[b_is_switch] &= (out["switch_b"][b_is_switch].argmax(-1) == batch["action_b_switch_id"][b_is_switch])
+        full_b[b_is_switch] &= (switch_b_argmax[b_is_switch] == batch["action_b_switch_id"][b_is_switch])
         _bump("full_a", full_a, bs)
         _bump("full_b", full_b, bs)
 
@@ -237,7 +253,7 @@ def main():
     ap.add_argument("--min-rating", type=int, default=0)
     ap.add_argument("--since", type=str, default=None, help="YYYY-MM-DD")
     ap.add_argument("--until", type=str, default=None, help="YYYY-MM-DD")
-    ap.add_argument("--epochs", type=int, default=20)
+    ap.add_argument("--epochs", type=int, default=90)
     ap.add_argument("--batch-size", type=int, default=256)
     ap.add_argument("--lr", type=float, default=3e-4)
     ap.add_argument("--weight-decay", type=float, default=1e-2)
@@ -254,6 +270,20 @@ def main():
                     help="Stop training after N epochs.")
     ap.add_argument("--use-history", action="store_true",
                     help="Enable LSTM-over-prior-turns history token (Phase 7).")
+    ap.add_argument("--seq-history", action="store_true",
+                    help="Per-turn history tokens attached to the main "
+                         "transformer (replaces --use-history's LSTM).")
+    ap.add_argument("--history-k", type=int, default=8,
+                    help="History window size; must match the value baked "
+                         "into the encoded shards.")
+    ap.add_argument("--use-features", action="store_true",
+                    help="Inject species/move features from FeatureTables "
+                         "(encoding Tier 1).")
+    ap.add_argument("--mask-actions", action="store_true",
+                    help="Mask illegal moves/switches at argmax (only valid "
+                         "under meta-on; with meta-off the revealed-move list "
+                         "doesn't include never-before-used moves so masking "
+                         "deflates accuracy on the very decisions that matter).")
     ap.add_argument(
         "--dashboard", default="http://100.113.157.128:8420/api/training/report",
         help="Dashboard /api/training/report URL. Empty string disables reporting. "
@@ -316,6 +346,7 @@ def main():
         persistent_workers=args.num_workers > 0,
     )
 
+    feature_tables = FeatureTables() if args.use_features else None
     model = ActionModel(
         n_species=len(vocabs.species), n_moves=len(vocabs.moves),
         n_items=len(vocabs.items), n_abilities=len(vocabs.abilities),
@@ -323,6 +354,12 @@ def main():
         n_weather=len(vocabs.weather), n_terrain=len(vocabs.terrain),
         d_model=args.d_model, n_layers=args.n_layers,
         use_history=args.use_history,
+        seq_history=args.seq_history,
+        history_k=args.history_k,
+        use_features=args.use_features,
+        mask_actions=args.mask_actions,
+        feature_tables=feature_tables,
+        vocabs=vocabs if args.use_features else None,
     ).to(device)
     n_params = sum(p.numel() for p in model.parameters())
     print(f"model params: {n_params:,}")
@@ -369,13 +406,15 @@ def main():
         _post_dashboard(args.dashboard, {
             "session_id": run_id,
             "machine": platform.node() or "unknown",
-            "model_version": f"action-{args.version}-{args.mode}{'-history' if args.use_history else ''}",
+            "model_version": f"action-{args.version}-{args.mode}{'-history' if args.use_history else ''}{'-seqhist' if args.seq_history else ''}{'-feat' if args.use_features else ''}",
             "config": {
                 "version": args.version, "mode": args.mode,
                 "min_rating": args.min_rating, "since": args.since,
                 "batch_size": args.batch_size, "lr": args.lr,
                 "d_model": args.d_model, "n_layers": args.n_layers,
                 "use_history": args.use_history,
+                "seq_history": args.seq_history,
+                "use_features": args.use_features,
                 "epochs": target_epochs,
             },
             "epoch": epoch,

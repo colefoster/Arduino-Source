@@ -30,7 +30,8 @@ log = logging.getLogger(__name__)
 
 # Per-column dtype + shape spec — drives numpy stacking.
 # (column_name, dtype, sample_shape) — N is prepended automatically.
-_COLUMN_SPECS: list[tuple[str, np.dtype, tuple]] = [
+# prev_seq_* shapes depend on encoder.history_k; built per-shard.
+_STATIC_COLUMN_SPECS: list[tuple[str, np.dtype, tuple]] = [
     ("species_ids",        np.int32,   (8,)),
     ("hp_values",          np.float32, (8,)),
     ("status_ids",         np.int32,   (8,)),
@@ -54,16 +55,19 @@ _COLUMN_SPECS: list[tuple[str, np.dtype, tuple]] = [
     ("action_b_switch_id", np.int32,   ()),
     ("action_b_target",    np.int8,    ()),
     ("action_b_mega",      np.int8,    ()),
-    # Sequence history (Phase 7). Last 8 turns × 4 slots
-    # ([own_a, own_b, opp_a, opp_b]).
-    ("prev_seq_active_species", np.int32,   (8, 4)),
-    ("prev_seq_active_hp",      np.float32, (8, 4)),
-    ("prev_seq_action_types",   np.int8,    (8, 4)),
-    ("prev_seq_action_moves",   np.int32,   (8, 4)),
 ]
 
 
-def _stack_samples(samples: list[RawSample]) -> dict:
+def _column_specs(history_k: int) -> list[tuple[str, np.dtype, tuple]]:
+    return _STATIC_COLUMN_SPECS + [
+        ("prev_seq_active_species", np.int32,   (history_k, 4)),
+        ("prev_seq_active_hp",      np.float32, (history_k, 4)),
+        ("prev_seq_action_types",   np.int8,    (history_k, 4)),
+        ("prev_seq_action_moves",   np.int32,   (history_k, 4)),
+    ]
+
+
+def _stack_samples(samples: list[RawSample], history_k: int) -> dict:
     """Convert a list of RawSamples into per-column numpy arrays + metadata.
 
     Returns a dict suitable for ``torch.save``. Column shapes have N (sample
@@ -71,7 +75,8 @@ def _stack_samples(samples: list[RawSample]) -> dict:
     """
     n = len(samples)
     out: dict = {}
-    for name, dtype, shape in _COLUMN_SPECS:
+    specs = _column_specs(history_k)
+    for name, dtype, shape in specs:
         out[name] = np.empty((n,) + shape, dtype=dtype)
     # Metadata in column form (cheap to filter).
     out["_meta_replay_id"] = np.array(
@@ -90,7 +95,7 @@ def _stack_samples(samples: list[RawSample]) -> dict:
     out["_meta_turn_num"] = np.array([s.turn_num for s in samples], dtype=np.int32)
 
     for i, s in enumerate(samples):
-        for name, _dtype, _shape in _COLUMN_SPECS:
+        for name, _dtype, _shape in specs:
             out[name][i] = s.fields[name]
     return out
 
@@ -134,7 +139,7 @@ def encode_one_bucket(
         for sample in encoder.encode_row(row):
             samples.append(sample)
 
-    stacked = _stack_samples(samples)
+    stacked = _stack_samples(samples, encoder.history_k)
 
     out_pt.parent.mkdir(parents=True, exist_ok=True)
     tmp = out_pt.with_suffix(out_pt.suffix + ".tmp")
