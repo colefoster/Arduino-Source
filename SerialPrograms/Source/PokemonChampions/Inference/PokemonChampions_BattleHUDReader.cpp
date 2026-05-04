@@ -601,10 +601,9 @@ void BattleHUDReader::init_boxes(){
     //  Own HP bars (bottom-left), "current / max" split into independent
     //  digit regions. The slash between them is OCR-hostile, so reading
     //  each number separately and recombining is cleaner.
-    m_own_hp_current_boxes[0] = ImageFloatBox(0.1304, 0.9338, 0.0448, 0.0362);
-    m_own_hp_max_boxes[0]     = ImageFloatBox(0.1829, 0.9477, 0.0258, 0.0205);
-    m_own_hp_current_boxes[1] = ImageFloatBox(0.3363, 0.9342, 0.0450, 0.0361);
-    m_own_hp_max_boxes[1]     = ImageFloatBox(0.3892, 0.9474, 0.0249, 0.0227);
+    //  Combined "X/Y" boxes saved by user via Inspector (own_1_both, own_2_both).
+    m_own_hp_boxes[0] = ImageFloatBox(0.1303, 0.9340, 0.0768, 0.0346);
+    m_own_hp_boxes[1] = ImageFloatBox(0.3381, 0.9343, 0.0757, 0.0357);
 
     //  Own species name (in the bar above the HP digits).
     m_own_name_boxes[0] = ImageFloatBox(0.0814, 0.8705, 0.0918, 0.0272);
@@ -638,11 +637,8 @@ void BattleHUDReader::make_overlays(VideoOverlaySet& items) const{
         if (m_opponent_hp_boxes[i].width > 0){
             items.add(COLOR_MAGENTA, m_opponent_hp_boxes[i]);
         }
-        if (m_own_hp_current_boxes[i].width > 0){
-            items.add(COLOR_BLUE, m_own_hp_current_boxes[i]);
-        }
-        if (m_own_hp_max_boxes[i].width > 0){
-            items.add(COLOR_BLUE, m_own_hp_max_boxes[i]);
+        if (m_own_hp_boxes[i].width > 0){
+            items.add(COLOR_BLUE, m_own_hp_boxes[i]);
         }
         if (m_own_name_boxes[i].width > 0){
             items.add(COLOR_CYAN, m_own_name_boxes[i]);
@@ -704,30 +700,72 @@ int BattleHUDReader::read_opponent_hp_pct(
     return parsed;
 }
 
-std::pair<int, int> BattleHUDReader::read_own_hp(
+BattleHUDReader::OwnHpReadout BattleHUDReader::read_own_hp_with_raw(
     Logger& logger, const ImageViewRGB32& screen, uint8_t slot
 ) const{
-    if (slot >= 2) return {-1, -1};
+    if (slot >= 2 || m_own_hp_boxes[slot].width == 0) return {-1, -1, -1, -1};
 
-    //  Each box reads one number; parse_fraction on a single number returns
-    //  {N, -1}, so .first is the integer (or -1 on failure).
-    auto read_one = [&](const ImageFloatBox& box) -> int {
-        if (box.width == 0) return -1;
-        ImageViewRGB32 cropped = extract_box_reference(screen, box);
-        std::string text = raw_ocr_numbers(cropped);
-        int v = parse_fraction(text).first;
-        //  HP can't exceed 999 — strip leading OCR noise digits.
-        //  Common case: serif on a "1" reads as "7" → "159" becomes "7159".
+    //  Single combined "X/Y" crop. Tesseract sees the slash in context with
+    //  flanking digits and parse_fraction splits it cleanly via the
+    //  \d+/\d+ regex. Compare to the old per-side reads, where an isolated
+    //  "/202" had the slash glyph absorbed into the leading digit.
+    ImageViewRGB32 cropped = extract_box_reference(screen, m_own_hp_boxes[slot]);
+    std::string text = raw_ocr_numbers(cropped);
+
+    //  Map Tesseract digit-confusables back to digits before parsing.
+    //  Tesseract regularly emits non-digit glyphs in place of digits when the
+    //  font is stylized — e.g. "152/202" reads as "152 /20>" (closing 2 -> >).
+    //  digits_only would just drop those, losing a digit silently.
+    //
+    //  Caveat: a stylized digit can ALSO get over-segmented into "<digit><junk>"
+    //  (e.g. "8" reads as "8E"). Mapping the junk back to a digit there
+    //  injects a phantom digit. Rule: if the confusable sits BETWEEN two
+    //  digits, drop it (segmentation noise); otherwise map it (real misread).
+    auto digit_for = [](char c) -> char {
+        switch (c){
+            case 'O': case 'o': case 'D': case 'Q': case '(': case ')': return '0';
+            case 'I': case 'l': case '|': case '!':                     return '1';
+            case 'Z': case '>': case '?':                               return '2';
+            case 'B': case 'E':                                         return '8';
+            case 'S': case '$':                                         return '5';
+            case 'g': case 'q':                                         return '9';
+            default: return 0;
+        }
+    };
+    auto is_digit = [](char c){ return c >= '0' && c <= '9'; };
+    std::string mapped;
+    mapped.reserve(text.size());
+    for (size_t i = 0; i < text.size(); i++){
+        char c = text[i];
+        char dig = digit_for(c);
+        if (dig == 0){
+            mapped += c;
+            continue;
+        }
+        char prev = (i > 0) ? text[i - 1] : 0;
+        char next = (i + 1 < text.size()) ? text[i + 1] : 0;
+        if (is_digit(prev) && is_digit(next)){
+            //  Sandwiched between digits: segmentation noise, drop.
+            continue;
+        }
+        mapped += dig;
+    }
+    auto parsed = parse_fraction(mapped);
+    int cur = parsed.first;
+    int max_ = parsed.second;
+
+    //  HP can't exceed 999 — strip leading OCR noise digits on either side.
+    auto strip_leading = [](int& v){
         while (v > 999){
             std::string s = std::to_string(v);
             v = std::stoi(s.substr(1));
         }
-        return v;
     };
+    strip_leading(cur);
+    strip_leading(max_);
 
-    //  Replace the highest leading "7" with "1" — Tesseract commonly mis-reads
-    //  "1" as "7" (the serif on the digit looks like a 7's hook). Returns the
-    //  candidate value, or -1 if there's no leading 7 to swap.
+    //  Replace a leading "7" with "1" — Tesseract commonly mis-reads "1" as
+    //  "7" (the serif looks like a 7's hook).
     auto try_swap_leading_7_to_1 = [](int v) -> int {
         if (v <= 0) return -1;
         std::string s = std::to_string(v);
@@ -736,9 +774,9 @@ std::pair<int, int> BattleHUDReader::read_own_hp(
         return std::stoi(s);
     };
 
-    int cur = read_one(m_own_hp_current_boxes[slot]);
-    int max_ = read_one(m_own_hp_max_boxes[slot]);
-    if (cur < 0 && max_ < 0) return {-1, -1};
+    const int cur_raw = cur;
+    const int max_raw = max_;
+    if (cur < 0 && max_ < 0) return {-1, -1, cur_raw, max_raw};
 
     //  Domain constraints (per the game): HP never exceeds 699, and current
     //  HP can never exceed max HP. When either rule is violated, try the
@@ -787,7 +825,14 @@ std::pair<int, int> BattleHUDReader::read_own_hp(
             COLOR_RED
         );
     }
-    return {cur, max_};
+    return {cur, max_, cur_raw, max_raw};
+}
+
+std::pair<int, int> BattleHUDReader::read_own_hp(
+    Logger& logger, const ImageViewRGB32& screen, uint8_t slot
+) const{
+    OwnHpReadout r = read_own_hp_with_raw(logger, screen, slot);
+    return {r.cur, r.max};
 }
 
 std::pair<int, int> BattleHUDReader::read_move_pp(

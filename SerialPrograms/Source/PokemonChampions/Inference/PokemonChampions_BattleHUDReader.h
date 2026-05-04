@@ -102,6 +102,16 @@ public:
     //  Read own HP current/max (slot 0 or 1). Returns {current, max} or {-1, -1}.
     std::pair<int, int> read_own_hp(Logger& logger, const ImageViewRGB32& screen, uint8_t slot = 0) const;
 
+    //  Same as read_own_hp but also returns the raw (pre-fixup) parsed values,
+    //  so callers can compare what OCR gave vs what the post-processing decided.
+    struct OwnHpReadout {
+        int cur;
+        int max;
+        int cur_raw;
+        int max_raw;
+    };
+    OwnHpReadout read_own_hp_with_raw(Logger& logger, const ImageViewRGB32& screen, uint8_t slot = 0) const;
+
     //  Read PP for a move slot (0-3). Singles only.
     std::pair<int, int> read_move_pp(Logger& logger, const ImageViewRGB32& screen, uint8_t slot) const;
 
@@ -122,11 +132,11 @@ private:
     std::array<ImageFloatBox, 2> m_own_name_boxes;
 
     //  Up to 2 own Pokemon HP boxes — split into separate current/max
-    //  digit regions per slot. The slash glyph between them is OCR-hostile
-    //  (often misread as 7/1/I), so reading each number independently and
-    //  combining gives much cleaner output.
-    std::array<ImageFloatBox, 2> m_own_hp_current_boxes;
-    std::array<ImageFloatBox, 2> m_own_hp_max_boxes;
+    //  Combined "X/Y" box per slot. With both numbers and the slash in one
+    //  read, Tesseract sees the slash in proper context and parse_fraction
+    //  splits cleanly. Reading the max in isolation made the slash glyph
+    //  bleed into the leading digit (e.g. "/202" -> "207").
+    std::array<ImageFloatBox, 2> m_own_hp_boxes;
 
     //  PP boxes (singles only, 4 slots).
     std::array<ImageFloatBox, 4> m_pp_boxes;

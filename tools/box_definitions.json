@@ -1056,6 +1056,294 @@
         0.333,
         0.333
       ]
+    },
+    {
+      "name": "own_specoes_icon_1",
+      "scene": "",
+      "screenshot": "__test__/action_menu/20260423-150121863579.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.2301,
+        0.884,
+        0.0576,
+        0.0753
+      ],
+      "avg_rgb": [
+        113.9,
+        93.3,
+        159.2
+      ],
+      "stddev_sum": 209.1,
+      "color_ratio": [
+        0.3108,
+        0.2546,
+        0.4346
+      ]
+    },
+    {
+      "name": "own_specoes_icon_0",
+      "scene": "",
+      "screenshot": "__test__/action_menu/20260423-150121863579.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.0249,
+        0.8763,
+        0.0556,
+        0.0803
+      ],
+      "avg_rgb": [
+        159.4,
+        130.4,
+        182.4
+      ],
+      "stddev_sum": 198.9,
+      "color_ratio": [
+        0.3376,
+        0.2761,
+        0.3863
+      ]
+    },
+    {
+      "name": "no mon_5",
+      "scene": "",
+      "screenshot": "__test__/action_menu/20260423-150121863579.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.122,
+        0.8147,
+        0.0106,
+        0.0163
+      ],
+      "avg_rgb": [
+        13.8,
+        14.2,
+        15.8
+      ],
+      "stddev_sum": 89.3,
+      "color_ratio": [
+        0.3149,
+        0.3244,
+        0.3607
+      ]
+    },
+    {
+      "name": "alive_mon_3",
+      "scene": "",
+      "screenshot": "__test__/action_menu/20260423-150121863579.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.0943,
+        0.8151,
+        0.0092,
+        0.0146
+      ],
+      "avg_rgb": [
+        99.6,
+        177.3,
+        52.7
+      ],
+      "stddev_sum": 180.1,
+      "color_ratio": [
+        0.3023,
+        0.5379,
+        0.1598
+      ]
+    },
+    {
+      "name": "alive_mon_0",
+      "scene": "",
+      "screenshot": "__test__/action_menu/20260423-150121863579.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.0518,
+        0.8155,
+        0.0085,
+        0.0155
+      ],
+      "avg_rgb": [
+        106.5,
+        183.3,
+        56.5
+      ],
+      "stddev_sum": 177.8,
+      "color_ratio": [
+        0.3075,
+        0.5293,
+        0.1632
+      ]
+    },
+    {
+      "name": "alive_mon_0_opp",
+      "scene": "",
+      "screenshot": "__test__/action_menu/20260423-150121863579.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.8665,
+        0.1664,
+        0.011,
+        0.0125
+      ],
+      "avg_rgb": [
+        116,
+        192.8,
+        71.2
+      ],
+      "stddev_sum": 161.1,
+      "color_ratio": [
+        0.3052,
+        0.5073,
+        0.1875
+      ]
+    },
+    {
+      "name": "alive_mon_3_opp",
+      "scene": "",
+      "screenshot": "__test__/action_menu/20260423-150121863579.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.9097,
+        0.1677,
+        0.0099,
+        0.0109
+      ],
+      "avg_rgb": [
+        109.3,
+        191.4,
+        65.9
+      ],
+      "stddev_sum": 167.5,
+      "color_ratio": [
+        0.2981,
+        0.5221,
+        0.1798
+      ]
+    },
+    {
+      "name": "alive_mon_1_opp",
+      "scene": "",
+      "screenshot": "__test__/action_menu/20260423-150121863579.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.8813,
+        0.1677,
+        0.0106,
+        0.0113
+      ],
+      "avg_rgb": [
+        114.6,
+        194.6,
+        67.9
+      ],
+      "stddev_sum": 167.2,
+      "color_ratio": [
+        0.3039,
+        0.5161,
+        0.18
+      ]
+    },
+    {
+      "name": "empty_last_slot",
+      "scene": "",
+      "screenshot": "__test__/action_menu/20260423-150121863579.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.9381,
+        0.1664,
+        0.0101,
+        0.0117
+      ],
+      "avg_rgb": [
+        20.6,
+        50.2,
+        61.2
+      ],
+      "stddev_sum": 73.2,
+      "color_ratio": [
+        0.1561,
+        0.3802,
+        0.4637
+      ]
+    },
+    {
+      "name": "empty_second_last_slot",
+      "scene": "",
+      "screenshot": "__test__/action_menu/20260423-150121863579.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.9245,
+        0.1669,
+        0.0092,
+        0.0109
+      ],
+      "avg_rgb": [
+        26.1,
+        42.6,
+        55.9
+      ],
+      "stddev_sum": 90.7,
+      "color_ratio": [
+        0.2096,
+        0.3419,
+        0.4485
+      ]
+    },
+    {
+      "name": "own_1_both",
+      "scene": "",
+      "screenshot": "__test__/move_select/20260423-150123581184.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.1303,
+        0.934,
+        0.0768,
+        0.0346
+      ],
+      "avg_rgb": [
+        127.6,
+        154.6,
+        115.4
+      ],
+      "stddev_sum": 325.8,
+      "color_ratio": [
+        0.321,
+        0.3888,
+        0.2903
+      ]
+    },
+    {
+      "name": "own_2_both",
+      "scene": "",
+      "screenshot": "__test__/move_select/20260423-150123581184.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.3381,
+        0.9343,
+        0.0757,
+        0.0357
+      ],
+      "avg_rgb": [
+        118.7,
+        139.6,
+        107.8
+      ],
+      "stddev_sum": 324.7,
+      "color_ratio": [
+        0.3242,
+        0.3813,
+        0.2945
+      ]
     }
   ]
 }

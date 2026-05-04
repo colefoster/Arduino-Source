@@ -19,6 +19,7 @@
 #include "PokemonChampions/Inference/PokemonChampions_TeamSelectReader.h"
 #include "PokemonChampions/Inference/PokemonChampions_TeamSummaryReader.h"
 #include "PokemonChampions/Inference/PokemonChampions_TeamPreviewReader.h"
+#include "PokemonChampions/Inference/PokemonChampions_PokeballAliveDetector.h"
 
 #include <array>
 #include <iostream>
@@ -64,8 +65,8 @@ int run_ocr_suggest(const std::string& reader_name, const std::string& image_pat
             std::string own_sp1 = reader.read_own_species(log, image, 1);
             int hp0 = reader.read_opponent_hp_pct(log, image, 0);
             int hp1 = reader.read_opponent_hp_pct(log, image, 1);
-            auto own0 = reader.read_own_hp(log, image, 0);
-            auto own1 = reader.read_own_hp(log, image, 1);
+            auto own0 = reader.read_own_hp_with_raw(log, image, 0);
+            auto own1 = reader.read_own_hp_with_raw(log, image, 1);
             //  PP boxes only render on the move-select screen; on other
             //  screens these reads return {-1,-1} and are ignored downstream.
             std::array<std::pair<int,int>, 4> pp;
@@ -73,8 +74,10 @@ int run_ocr_suggest(const std::string& reader_name, const std::string& image_pat
             std::cout << "{"
                 << "\"opponent_species\":[\"" << opp0 << "\",\"" << opp1 << "\"],"
                 << "\"opponent_hp_pct\":[" << hp0 << "," << hp1 << "],"
-                << "\"own_hp_current\":[" << own0.first << "," << own1.first << "],"
-                << "\"own_hp_max\":[" << own0.second << "," << own1.second << "],"
+                << "\"own_hp_current\":[" << own0.cur << "," << own1.cur << "],"
+                << "\"own_hp_max\":[" << own0.max << "," << own1.max << "],"
+                << "\"own_hp_current_raw\":[" << own0.cur_raw << "," << own1.cur_raw << "],"
+                << "\"own_hp_max_raw\":[" << own0.max_raw << "," << own1.max_raw << "],"
                 << "\"own_species\":[\"" << own_sp0 << "\",\"" << own_sp1 << "\"],"
                 << "\"move_pp_current\":["
                     << pp[0].first << "," << pp[1].first << ","
@@ -123,6 +126,23 @@ int run_ocr_suggest(const std::string& reader_name, const std::string& image_pat
                 std::cout << "\"" << result.opp_species[i] << "\"";
             }
             std::cout << "]}" << std::endl;
+        }
+        else if (reader_name == "PokeballAliveDetector"){
+            PokeballAliveDetector det;
+            PokeballAliveResult r = det.read(image);
+            std::cout << "{\"own\":[";
+            for (size_t i = 0; i < 6; i++){
+                if (i > 0) std::cout << ",";
+                std::cout << "\"" << pokeball_state_name(r.own[i]) << "\"";
+            }
+            std::cout << "],\"opp\":[";
+            for (size_t i = 0; i < 6; i++){
+                if (i > 0) std::cout << ",";
+                std::cout << "\"" << pokeball_state_name(r.opp[i]) << "\"";
+            }
+            std::cout << "],\"own_alive\":" << (int)r.own_alive_count()
+                      << ",\"opp_alive\":" << (int)r.opp_alive_count()
+                      << "}" << std::endl;
         }
         else{
             std::cerr << "Unknown reader: " << reader_name << std::endl;
