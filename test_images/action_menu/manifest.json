@@ -15,11 +15,15 @@
       ],
       "own_hp_max": [
         202,
-        158
+        159
       ],
       "own_species": [
         "incineroar",
         "charizard"
+      ],
+      "own_species_shiny": [
+        true,
+        true
       ]
     }
   },
@@ -35,7 +39,7 @@
       ],
       "own_hp_current": [
         202,
-        7159
+        159
       ],
       "own_hp_max": [
         202,
@@ -44,6 +48,10 @@
       "own_species": [
         "incineroar",
         "charizard"
+      ],
+      "own_species_shiny": [
+        true,
+        true
       ]
     }
   },
@@ -68,6 +76,10 @@
       "own_species": [
         "incineroar",
         "charizard"
+      ],
+      "own_species_shiny": [
+        true,
+        true
       ]
     }
   },
@@ -88,6 +100,10 @@
       "own_species": [
         "incineroar",
         "charizard"
+      ],
+      "own_species_shiny": [
+        true,
+        true
       ]
     }
   },
@@ -108,6 +124,10 @@
       "own_species": [
         "sneasler",
         "charizard"
+      ],
+      "own_species_shiny": [
+        true,
+        true
       ]
     }
   },
@@ -128,6 +148,10 @@
       "own_species": [
         "sneasler",
         "charizard"
+      ],
+      "own_species_shiny": [
+        true,
+        true
       ]
     }
   },
@@ -148,6 +172,10 @@
       "own_species": [
         "sneasler",
         "charizard"
+      ],
+      "own_species_shiny": [
+        true,
+        true
       ]
     }
   },
@@ -168,6 +196,10 @@
       "own_species": [
         "sneasler",
         "charizard"
+      ],
+      "own_species_shiny": [
+        true,
+        true
       ]
     }
   },
@@ -188,6 +220,10 @@
       "own_species": [
         "sneasler",
         "charizard"
+      ],
+      "own_species_shiny": [
+        true,
+        true
       ]
     }
   },
@@ -208,6 +244,10 @@
       "own_species": [
         "sneasler",
         "charizard"
+      ],
+      "own_species_shiny": [
+        true,
+        true
       ]
     }
   },
@@ -220,6 +260,10 @@
       "own_species": [
         "sinistcha",
         ""
+      ],
+      "own_species_shiny": [
+        false,
+        false
       ]
     }
   },
@@ -244,6 +288,10 @@
       "own_species": [
         "sinistcha",
         "gengar"
+      ],
+      "own_species_shiny": [
+        false,
+        false
       ]
     }
   },
@@ -268,6 +316,10 @@
       "own_species": [
         "sinistcha",
         "gengar"
+      ],
+      "own_species_shiny": [
+        false,
+        false
       ]
     }
   },
@@ -280,6 +332,10 @@
       "own_species": [
         "sinistcha",
         ""
+      ],
+      "own_species_shiny": [
+        false,
+        false
       ]
     }
   },
@@ -292,6 +348,10 @@
       "own_species": [
         "sinistcha",
         ""
+      ],
+      "own_species_shiny": [
+        false,
+        false
       ]
     }
   },
@@ -304,6 +364,10 @@
       "own_species": [
         "aggron",
         ""
+      ],
+      "own_species_shiny": [
+        false,
+        false
       ]
     }
   },
@@ -316,6 +380,10 @@
       "own_species": [
         "aggron",
         ""
+      ],
+      "own_species_shiny": [
+        false,
+        false
       ]
     }
   },
@@ -340,6 +408,10 @@
       "own_species": [
         "sneasler",
         "incineroar"
+      ],
+      "own_species_shiny": [
+        true,
+        true
       ]
     }
   },
@@ -352,6 +424,10 @@
       "own_species": [
         "sneasler",
         ""
+      ],
+      "own_species_shiny": [
+        true,
+        false
       ]
     }
   },
@@ -364,6 +440,10 @@
       "own_species": [
         "sneasler",
         ""
+      ],
+      "own_species_shiny": [
+        true,
+        false
       ]
     }
   },
@@ -376,6 +456,10 @@
       "own_species": [
         "sneasler",
         ""
+      ],
+      "own_species_shiny": [
+        true,
+        false
       ]
     }
   },
@@ -388,6 +472,10 @@
       "own_species": [
         "sneasler",
         ""
+      ],
+      "own_species_shiny": [
+        true,
+        false
       ]
     }
   },
@@ -400,6 +488,10 @@
       "own_species": [
         "sneasler",
         ""
+      ],
+      "own_species_shiny": [
+        true,
+        false
       ]
     }
   },
@@ -412,6 +504,10 @@
       "own_species": [
         "venusaur",
         ""
+      ],
+      "own_species_shiny": [
+        true,
+        false
       ]
     }
   },
@@ -424,6 +520,10 @@
       "own_species": [
         "venusaur",
         ""
+      ],
+      "own_species_shiny": [
+        true,
+        false
       ]
     }
   },
@@ -436,6 +536,10 @@
       "own_species": [
         "venusaur",
         ""
+      ],
+      "own_species_shiny": [
+        true,
+        false
       ]
     }
   },
@@ -448,6 +552,10 @@
       "own_species": [
         "venusaur",
         ""
+      ],
+      "own_species_shiny": [
+        true,
+        false
       ]
     }
   },
@@ -460,6 +568,10 @@
       "own_species": [
         "floette",
         ""
+      ],
+      "own_species_shiny": [
+        false,
+        false
       ]
     }
   },
@@ -472,6 +584,10 @@
       "own_species": [
         "floette",
         ""
+      ],
+      "own_species_shiny": [
+        false,
+        false
       ]
     }
   },
@@ -484,6 +600,10 @@
       "own_species": [
         "floette",
         ""
+      ],
+      "own_species_shiny": [
+        false,
+        false
       ]
     }
   },
@@ -496,6 +616,10 @@
       "own_species": [
         "floette",
         ""
+      ],
+      "own_species_shiny": [
+        false,
+        false
       ]
     }
   },
@@ -508,6 +632,10 @@
       "own_species": [
         "floette",
         ""
+      ],
+      "own_species_shiny": [
+        false,
+        false
       ]
     }
   },
@@ -520,6 +648,10 @@
       "own_species": [
         "floette",
         ""
+      ],
+      "own_species_shiny": [
+        false,
+        false
       ]
     }
   },
@@ -532,6 +664,10 @@
       "own_species": [
         "floette",
         ""
+      ],
+      "own_species_shiny": [
+        false,
+        false
       ]
     }
   },
@@ -544,6 +680,10 @@
       "own_species": [
         "meganium",
         ""
+      ],
+      "own_species_shiny": [
+        true,
+        false
       ]
     }
   },
@@ -556,6 +696,10 @@
       "own_species": [
         "meganium",
         ""
+      ],
+      "own_species_shiny": [
+        true,
+        false
       ]
     }
   },
@@ -568,6 +712,10 @@
       "own_species": [
         "meganium",
         ""
+      ],
+      "own_species_shiny": [
+        true,
+        false
       ]
     }
   },
@@ -580,6 +728,10 @@
       "own_species": [
         "meganium",
         ""
+      ],
+      "own_species_shiny": [
+        true,
+        false
       ]
     }
   },
@@ -592,6 +744,10 @@
       "own_species": [
         "meganium",
         ""
+      ],
+      "own_species_shiny": [
+        true,
+        false
       ]
     }
   },
@@ -604,6 +760,10 @@
       "own_species": [
         "palafin",
         ""
+      ],
+      "own_species_shiny": [
+        false,
+        false
       ]
     }
   },
@@ -616,6 +776,10 @@
       "own_species": [
         "palafin",
         ""
+      ],
+      "own_species_shiny": [
+        false,
+        false
       ]
     }
   },
@@ -628,6 +792,10 @@
       "own_species": [
         "kingambit",
         ""
+      ],
+      "own_species_shiny": [
+        false,
+        false
       ]
     }
   },
@@ -640,6 +808,10 @@
       "own_species": [
         "kingambit",
         ""
+      ],
+      "own_species_shiny": [
+        false,
+        false
       ]
     }
   },
@@ -664,6 +836,10 @@
       "own_species": [
         "venusaur",
         "charizard"
+      ],
+      "own_species_shiny": [
+        true,
+        true
       ]
     }
   }

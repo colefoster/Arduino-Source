@@ -16,6 +16,14 @@
         "garchomp",
         "incineroar",
         "venusaur"
+      ],
+      "own_species_shiny": [
+        true,
+        true,
+        false,
+        true,
+        true,
+        true
       ]
     }
   },
@@ -36,6 +44,14 @@
         "garchomp",
         "incineroar",
         "venusaur"
+      ],
+      "own_species_shiny": [
+        true,
+        true,
+        false,
+        true,
+        true,
+        true
       ]
     }
   },
@@ -56,6 +72,14 @@
         "garchomp",
         "incineroar",
         "venusaur"
+      ],
+      "own_species_shiny": [
+        true,
+        true,
+        false,
+        true,
+        true,
+        true
       ]
     }
   },
@@ -76,6 +100,14 @@
         "garchomp",
         "incineroar",
         "venusaur"
+      ],
+      "own_species_shiny": [
+        true,
+        true,
+        false,
+        true,
+        true,
+        true
       ]
     }
   },
@@ -96,6 +128,14 @@
         "garchomp",
         "incineroar",
         "venusaur"
+      ],
+      "own_species_shiny": [
+        true,
+        true,
+        false,
+        true,
+        true,
+        true
       ]
     }
   },
@@ -116,6 +156,14 @@
         "garchomp",
         "incineroar",
         "venusaur"
+      ],
+      "own_species_shiny": [
+        true,
+        true,
+        false,
+        true,
+        true,
+        true
       ]
     }
   },
@@ -136,6 +184,14 @@
         "garchomp",
         "incineroar",
         "venusaur"
+      ],
+      "own_species_shiny": [
+        true,
+        true,
+        false,
+        true,
+        true,
+        true
       ]
     }
   },
@@ -156,6 +212,14 @@
         "aggron",
         "dragapult",
         "incineroar"
+      ],
+      "own_species_shiny": [
+        true,
+        true,
+        false,
+        false,
+        false,
+        true
       ]
     }
   },
@@ -176,6 +240,14 @@
         "aggron",
         "dragapult",
         "incineroar"
+      ],
+      "own_species_shiny": [
+        true,
+        true,
+        false,
+        false,
+        false,
+        true
       ]
     }
   },
@@ -196,6 +268,14 @@
         "aggron",
         "dragapult",
         "incineroar"
+      ],
+      "own_species_shiny": [
+        true,
+        true,
+        false,
+        false,
+        false,
+        true
       ]
     }
   },
@@ -216,6 +296,14 @@
         "aggron",
         "dragapult",
         "incineroar"
+      ],
+      "own_species_shiny": [
+        true,
+        true,
+        false,
+        false,
+        false,
+        true
       ]
     }
   },
@@ -236,6 +324,14 @@
         "aggron",
         "dragapult",
         "incineroar"
+      ],
+      "own_species_shiny": [
+        true,
+        true,
+        false,
+        false,
+        false,
+        true
       ]
     }
   },
@@ -256,6 +352,14 @@
         "aggron",
         "dragapult",
         "incineroar"
+      ],
+      "own_species_shiny": [
+        true,
+        true,
+        false,
+        false,
+        false,
+        true
       ]
     }
   },
@@ -276,6 +380,14 @@
         "aggron",
         "dragapult",
         "incineroar"
+      ],
+      "own_species_shiny": [
+        true,
+        true,
+        false,
+        false,
+        false,
+        true
       ]
     }
   },
@@ -296,6 +408,14 @@
         "sylveon",
         "dragapult",
         "kingambit"
+      ],
+      "own_species_shiny": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
       ]
     }
   },
@@ -316,6 +436,14 @@
         "sylveon",
         "dragapult",
         ""
+      ],
+      "own_species_shiny": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
       ]
     }
   }

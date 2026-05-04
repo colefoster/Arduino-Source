@@ -16,6 +16,14 @@
         "",
         "",
         ""
+      ],
+      "own_species_shiny": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
       ]
     }
   },
@@ -36,6 +44,14 @@
         "",
         "",
         ""
+      ],
+      "own_species_shiny": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
       ]
     }
   },
@@ -56,6 +72,14 @@
         "",
         "",
         ""
+      ],
+      "own_species_shiny": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
       ]
     }
   },
@@ -76,6 +100,14 @@
         "",
         "",
         ""
+      ],
+      "own_species_shiny": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
       ]
     }
   }
