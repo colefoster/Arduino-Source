@@ -100,3 +100,6 @@ tools/.pokeapi_cache.json
 data/ps_data/
 data/feature_tables/
 .collab/
+
+# Claude Code session state
+.claude/

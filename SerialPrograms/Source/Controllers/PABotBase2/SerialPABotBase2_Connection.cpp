@@ -115,7 +115,9 @@ bool SerialPABotBase2_Connection::open_serial_port(){
 }
 bool SerialPABotBase2_Connection::connect_to_device(){
     const uint32_t BAUD_RATES[] = {
+#ifndef __APPLE__
         921600,
+#endif
         115200,
     };
     std::string str;
