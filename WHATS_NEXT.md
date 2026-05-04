@@ -25,7 +25,6 @@ Update protocol: edit in place, no dates on items in Now/Next/Backlog. Add to **
 
 - **Break up `BattleHUDReader`?** It's drifting toward 8+ sub-readers (HP, PP, status, Tera, item, ability, sprite, pokeballs). Open design Q -- when does fan-out beat a single fat reader?
 - **Detector tuning grind** (current state, 2026-05-02 evening):
-  - MainMenuDetector: 203/213 (95.3%) -- 10 fails (remaining are visual-twin screens with bright yellow at the same coords; would need a 3rd anchor to push higher)
   - PostMatchScreenDetector: 211/213 (99.1%) -- 2 fails (action_menu attack animation + 1 communicating overlay both have bright green at the Continue position)
   - BattleHUDReader.opponent_species: 138/138 (100%) -- all 41 prior fails were mislabels; OCR was correct (canonical species, language-agnostic)
   - BattleHUDReader.own_hp_current: 66/66 (100%)
@@ -39,6 +38,7 @@ Update protocol: edit in place, no dates on items in Now/Next/Backlog. Add to **
 ## Recently shipped
 *Last ~2 weeks. Trim aggressively -- this is for context, not history.*
 
+- 2026-05-04 -- MainMenuDetector 95.3% -> 100%. Remaining 10 FPs were action_menu / move_select / battle_log / battle_mode_menu frames where genuine yellow pixels (move tiles, status icons) happened to land on the 3x3 button-glow sample regions. Tightened `is_solid` ratio tolerance 0.15 -> 0.05 (kills 6 off-color FPs) and added a third "menu chrome" sample at (0.30, 0.45) — the TV/character backdrop reads bright cyan-blue (b≈254) on the menu and warm/dim (b<150) on every battle FP. Also added detectors to the dashboard Mismatches view (new `Detectors` optgroup) and switched mac_dev_runner from single-threaded `HTTPServer` to `ThreadingHTTPServer` so 200+ parallel scans don't queue head-of-line and trigger Cloudflare 524.
 - 2026-05-04 -- BattleHUDReader.own_hp_current/max 90.9%/95.5% -> 100%/100%. Switched from two per-side crops (cur, max) to one combined "X/Y" crop per slot — Tesseract sees the slash in proper digit context. Added a digit-confusable pre-pass mapping common Tesseract misreads (`>` → `2`, `B`/`E` → `8`, `O` → `0`, etc.) before parse_fraction; the pre-pass drops confusables that are sandwiched between two digits (segmentation noise like "8E4") instead of mapping them. Mismatches view now shows `(raw: X)` next to `got` so you can see pre/post fixup at a glance.
 - 2026-05-03 -- TeamPreviewDetector 98.1% -> 100%. All 4 fails were on `team_preview_locked_in` frames; the detector OCRs "Select 4 Pokemon..." which only appears on the selecting screen. Fixed by dropping `team_preview_locked_in` from the detector's registry entry (PreparingForBattleDetector already covers that screen).
 - 2026-05-03 -- BattleHUDReader.opponent_species 70.3% -> 100%. All 41 fails were mislabels; OCR had been right. Mismatches view now supports `field=` filter + URL prepopulation (`#/mismatches?reader=...&field=...&auto=1`) for fast triage. Confirmed live that opp species cards are canonical (not nicknames) and language-agnostic -- saved to memory.

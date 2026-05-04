@@ -189,7 +189,11 @@ function appendMismatchRow(tbody, r, idx) {
     tr.className = 'mismatch-row';
     tr.dataset.idx = idx;
     tr.style.borderBottom = '1px solid #21262d';
-    const showSwap = r.slot != null;
+    const isDetector = r.field === '_self';
+    const showSwap = !isDetector && r.slot != null;
+    const acceptBtn = isDetector
+        ? `<span style="color:#6e7681; font-size:10px; margin-right:4px;">detector — fix in code</span>`
+        : `<button class="btn mismatch-accept-btn" data-idx="${idx}" style="font-size:10px; padding:2px 8px; margin-right:4px;">Accept got</button>`;
     tr.innerHTML = `
         <td style="padding:6px;"><img src="${thumbUrl}" data-full="${fullUrl}" class="mismatch-thumb" style="width:128px; height:auto; border:1px solid #30363d; border-radius:3px; cursor:zoom-in; display:block;" loading="lazy"></td>
         <td style="padding:6px;">${cropCell}</td>
@@ -198,7 +202,7 @@ function appendMismatchRow(tbody, r, idx) {
         <td style="padding:6px; color:#f85149; font-family:monospace;">${exp}</td>
         <td style="padding:6px; color:#3fb950; font-family:monospace;">${got}</td>
         <td style="padding:6px; white-space:nowrap;">
-            <button class="btn mismatch-accept-btn" data-idx="${idx}" style="font-size:10px; padding:2px 8px; margin-right:4px;">Accept got</button>
+            ${acceptBtn}
             ${showSwap ? `<button class="btn mismatch-swap-btn" data-idx="${idx}" style="font-size:10px; padding:2px 8px; margin-right:4px;">Swap 0↔1</button>` : ''}
             <button class="btn mismatch-inspector-btn" data-idx="${idx}" style="font-size:10px; padding:2px 8px;">Inspector</button>
         </td>
@@ -215,7 +219,8 @@ function appendMismatchRow(tbody, r, idx) {
         overlay.addEventListener('click', () => overlay.remove());
         document.body.appendChild(overlay);
     });
-    tr.querySelector('.mismatch-accept-btn').addEventListener('click', () => acceptMismatch(idx));
+    const acceptBtnEl = tr.querySelector('.mismatch-accept-btn');
+    if (acceptBtnEl) acceptBtnEl.addEventListener('click', () => acceptMismatch(idx));
     const swapBtn = tr.querySelector('.mismatch-swap-btn');
     if (swapBtn) swapBtn.addEventListener('click', () => swapMismatchSlots(idx));
     tr.querySelector('.mismatch-inspector-btn').addEventListener('click', () => openInspectorFor(idx));
@@ -280,6 +285,7 @@ async function swapMismatchSlots(idx) {
 async function acceptMismatch(idx) {
     const r = mismatchesRows[idx];
     if (!r) return;
+    if (r.field === '_self') return;  //  detector — no manifest field to write
     try {
         const resp = await fetch(`${API}/api/mismatches/accept`, {
             method: 'POST',
@@ -314,6 +320,7 @@ async function acceptAllVisible() {
     for (const idx of live) {
         const r = mismatchesRows[idx];
         if (!r) continue;
+        if (r.field === '_self') continue;  //  detector rows: nothing to accept
         try {
             const resp = await fetch(`${API}/api/mismatches/accept`, {
                 method: 'POST',

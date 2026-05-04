@@ -7,12 +7,25 @@
         </select>
         <select id="mismatches-reader" style="background:#161b22; color:#c9d1d9; border:1px solid #30363d; padding:4px 8px; font-family:inherit; font-size:12px;">
             <option value="">All readers</option>
-            <option value="BattleHUDReader">BattleHUDReader</option>
-            <option value="MoveNameReader">MoveNameReader</option>
-            <option value="TeamPreviewReader">TeamPreviewReader</option>
-            <option value="TeamSelectReader">TeamSelectReader</option>
-            <option value="TeamSummaryReader">TeamSummaryReader</option>
-            <option value="BattleLogReader">BattleLogReader</option>
+            <optgroup label="Readers">
+                <option value="BattleHUDReader">BattleHUDReader</option>
+                <option value="MoveNameReader">MoveNameReader</option>
+                <option value="TeamPreviewReader">TeamPreviewReader</option>
+                <option value="TeamSelectReader">TeamSelectReader</option>
+                <option value="TeamSummaryReader">TeamSummaryReader</option>
+                <option value="BattleLogReader">BattleLogReader</option>
+            </optgroup>
+            <optgroup label="Detectors">
+                <option value="MoveSelectDetector">MoveSelectDetector</option>
+                <option value="ActionMenuDetector">ActionMenuDetector</option>
+                <option value="ResultScreenDetector">ResultScreenDetector</option>
+                <option value="PreparingForBattleDetector">PreparingForBattleDetector</option>
+                <option value="PostMatchScreenDetector">PostMatchScreenDetector</option>
+                <option value="MainMenuDetector">MainMenuDetector</option>
+                <option value="TeamSelectDetector">TeamSelectDetector</option>
+                <option value="TeamPreviewDetector">TeamPreviewDetector</option>
+                <option value="MovesMoreDetector">MovesMoreDetector</option>
+            </optgroup>
         </select>
         <input id="mismatches-field" placeholder="Field filter (e.g. opponent_species)" style="background:#161b22; color:#c9d1d9; border:1px solid #30363d; padding:4px 8px; font-family:inherit; font-size:12px; width:240px;">
         <button class="btn btn-primary" id="mismatches-scan">Scan</button>

@@ -27,7 +27,7 @@ import re
 import subprocess
 import sys
 import tempfile
-from http.server import HTTPServer, BaseHTTPRequestHandler
+from http.server import ThreadingHTTPServer, BaseHTTPRequestHandler
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
@@ -413,7 +413,7 @@ def main():
     print("  /detector-debug         -> run all detectors on one image")
     print("  /detector-debug-batch   -> run all detectors on every image in a screen")
     print("  /health                 -> sanity check")
-    HTTPServer(("0.0.0.0", PORT), Handler).serve_forever()
+    ThreadingHTTPServer(("0.0.0.0", PORT), Handler).serve_forever()
 
 
 if __name__ == "__main__":

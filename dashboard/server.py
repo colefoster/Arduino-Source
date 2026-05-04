@@ -2857,6 +2857,61 @@ def _suggest_via_runner(screen: str, filename: str, reader: str):
         return None, str(e)
 
 
+#  Cache: (screen, filename, mtime) -> {detector_name: bool}.
+#  One detector-debug call covers all detectors for an image, so we cache the
+#  full dict and let detector mismatch scans pick out the relevant key.
+_DETECTOR_RESULT_CACHE: dict = {}
+
+
+def _load_detector_registry() -> dict:
+    """Return {detector_name: set_of_positive_screens}. Empty set ⇒ unknown
+    detector; treat all screens as negative."""
+    try:
+        registry = json.loads((TEST_IMAGES_DIR / "test_registry.json").read_text())
+    except Exception:
+        return {}
+    out = {}
+    for name, screens_list in (registry.get("detectors") or {}).items():
+        out[name] = set(screens_list or [])
+    return out
+
+
+def _detectors_via_runner(screen: str, filename: str):
+    """Run all detectors on one image. Returns ({detector_name: bool} | None,
+    error_str | None)."""
+    import base64
+    import urllib.request
+    import urllib.error
+    img_path = TEST_IMAGES_DIR / screen / filename
+    if not img_path.exists():
+        return None, "image not found"
+    mtime = img_path.stat().st_mtime
+    key = (screen, filename, mtime)
+    if key in _DETECTOR_RESULT_CACHE:
+        return _DETECTOR_RESULT_CACHE[key], None
+    try:
+        img_b64 = base64.b64encode(img_path.read_bytes()).decode()
+        payload = json.dumps({"image_base64": img_b64}).encode()
+        req = urllib.request.Request(
+            f"{DEV_RUNNER}/detector-debug",
+            data=payload,
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+        with urllib.request.urlopen(req, timeout=60) as resp:
+            envelope = json.loads(resp.read())
+        if not envelope.get("ok"):
+            return None, envelope.get("error", "unknown")
+        result = envelope.get("result", {}) or {}
+        flat = {d.get("name"): bool(d.get("detected")) for d in result.get("detectors", []) if d.get("name")}
+        _DETECTOR_RESULT_CACHE[key] = flat
+        return flat, None
+    except urllib.error.URLError as e:
+        return None, f"dev runner unreachable: {e}"
+    except Exception as e:
+        return None, str(e)
+
+
 def _is_absent(v) -> bool:
     """Treat empty string and -1 as the universal "no label" sentinel."""
     return v == "" or v == -1 or v is None
@@ -2882,23 +2937,42 @@ async def mismatches(screen: Optional[str] = None, reader: Optional[str] = None)
     overlays = {f"_overlays/{k}": v for k, v in config.get("overlays", {}).items()}
     all_screens = {**screens, **overlays}
 
+    detector_registry = _load_detector_registry()
+    is_detector = bool(reader) and reader in detector_registry
+
     targets = []
-    for name in all_screens.keys():
-        if screen and name != screen:
-            continue
-        screen_dir = TEST_IMAGES_DIR / name
-        if not screen_dir.exists():
-            continue
-        manifest = _load_manifest(screen_dir)
-        for fname, labels in manifest.items():
-            for rname, fields in (labels or {}).items():
-                if rname not in _SUGGEST_READERS:
+    if is_detector:
+        positives = detector_registry.get(reader, set())
+        for name in all_screens.keys():
+            if screen and name != screen:
+                continue
+            screen_dir = TEST_IMAGES_DIR / name
+            if not screen_dir.exists():
+                continue
+            expected = name in positives
+            for img_path in sorted(screen_dir.iterdir()):
+                if not img_path.is_file():
                     continue
-                if reader and rname != reader:
+                if img_path.suffix.lower() not in {".png", ".jpg", ".jpeg"}:
                     continue
-                if not isinstance(fields, dict):
-                    continue
-                targets.append((name, fname, rname, fields))
+                targets.append((name, img_path.name, "_DETECTOR_", {"expected": expected, "name": reader}))
+    else:
+        for name in all_screens.keys():
+            if screen and name != screen:
+                continue
+            screen_dir = TEST_IMAGES_DIR / name
+            if not screen_dir.exists():
+                continue
+            manifest = _load_manifest(screen_dir)
+            for fname, labels in manifest.items():
+                for rname, fields in (labels or {}).items():
+                    if rname not in _SUGGEST_READERS:
+                        continue
+                    if reader and rname != reader:
+                        continue
+                    if not isinstance(fields, dict):
+                        continue
+                    targets.append((name, fname, rname, fields))
 
     #  Map (reader, field, slot|None) -> CROP_DEFS box name. Used to attach
     #  the relevant pixel region to each mismatch row so the user can verify
@@ -2933,6 +3007,22 @@ async def mismatches(screen: Optional[str] = None, reader: Optional[str] = None)
     def _process_one(t):
         import base64
         s, fname, rname, fields = t
+        if rname == "_DETECTOR_":
+            det_name = fields["name"]
+            expected = fields["expected"]
+            flat, err = _detectors_via_runner(s, fname)
+            if err is not None or flat is None:
+                return []
+            got = flat.get(det_name)
+            if got is None:
+                return []
+            if got == expected:
+                return []
+            return [{
+                "screen": s, "filename": fname, "reader": det_name,
+                "field": "_self", "slot": None,
+                "expected": expected, "got": got, "crop": None,
+            }]
         result, err = _suggest_via_runner(s, fname, rname)
         if err is not None or result is None:
             return []
@@ -3048,23 +3138,42 @@ async def mismatches_stream(screen: Optional[str] = None, reader: Optional[str] 
     overlays = {f"_overlays/{k}": v for k, v in config.get("overlays", {}).items()}
     all_screens = {**screens, **overlays}
 
+    detector_registry = _load_detector_registry()
+    is_detector = bool(reader) and reader in detector_registry
+
     targets = []
-    for name in all_screens.keys():
-        if screen and name != screen:
-            continue
-        screen_dir = TEST_IMAGES_DIR / name
-        if not screen_dir.exists():
-            continue
-        manifest = _load_manifest(screen_dir)
-        for fname, labels in manifest.items():
-            for rname, fields in (labels or {}).items():
-                if rname not in _SUGGEST_READERS:
+    if is_detector:
+        positives = detector_registry.get(reader, set())
+        for name in all_screens.keys():
+            if screen and name != screen:
+                continue
+            screen_dir = TEST_IMAGES_DIR / name
+            if not screen_dir.exists():
+                continue
+            expected = name in positives
+            for img_path in sorted(screen_dir.iterdir()):
+                if not img_path.is_file():
                     continue
-                if reader and rname != reader:
+                if img_path.suffix.lower() not in {".png", ".jpg", ".jpeg"}:
                     continue
-                if not isinstance(fields, dict):
-                    continue
-                targets.append((name, fname, rname, fields))
+                targets.append((name, img_path.name, "_DETECTOR_", {"expected": expected, "name": reader}))
+    else:
+        for name in all_screens.keys():
+            if screen and name != screen:
+                continue
+            screen_dir = TEST_IMAGES_DIR / name
+            if not screen_dir.exists():
+                continue
+            manifest = _load_manifest(screen_dir)
+            for fname, labels in manifest.items():
+                for rname, fields in (labels or {}).items():
+                    if rname not in _SUGGEST_READERS:
+                        continue
+                    if reader and rname != reader:
+                        continue
+                    if not isinstance(fields, dict):
+                        continue
+                    targets.append((name, fname, rname, fields))
 
     #  Reuse helpers from /api/mismatches.
     def _crop_box_local(reader_, field, slot):
@@ -3088,6 +3197,22 @@ async def mismatches_stream(screen: Optional[str] = None, reader: Optional[str] 
     def _process_one(t):
         import base64
         s, fname, rname, fields = t
+        if rname == "_DETECTOR_":
+            det_name = fields["name"]
+            expected = fields["expected"]
+            flat, err = _detectors_via_runner(s, fname)
+            if err is not None or flat is None:
+                return []
+            got = flat.get(det_name)
+            if got is None:
+                return []
+            if got == expected:
+                return []
+            return [{
+                "screen": s, "filename": fname, "reader": det_name,
+                "field": "_self", "slot": None,
+                "expected": expected, "got": got, "crop": None,
+            }]
         result, err = _suggest_via_runner(s, fname, rname)
         if err is not None or result is None:
             return []
