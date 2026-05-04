@@ -84,7 +84,13 @@ bool MovesMoreDetector::detect(const ImageViewRGB32& screen){
     //  Single cheap color check: is the card background the expected purple?
     //  If yes, we're on a purple card grid (Moves & More is the only such
     //  screen in the menu flow we care about).
+    //
+    //  Brightness floor: real card-bg purple reads avg ~ (96, 80, 223),
+    //  channel-sum ~ 400. Dim near-black pixels in battle scenes
+    //  (action_menu / _overlays/communicating) read ratio-identical purple
+    //  but with channel-sum < 100. Reject those.
     const ImageStats stats = image_stats(extract_box_reference(screen, m_card_bg));
+    if (stats.average.r + stats.average.g + stats.average.b < 200.0) return false;
     return is_solid(stats, CARD_BG_PURPLE, 0.10, 50);
 }
 
