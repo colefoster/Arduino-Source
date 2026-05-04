@@ -148,6 +148,10 @@ class Handler(BaseHTTPRequestHandler):
             self._handle_detector_debug()
         elif path == "/detector-debug-batch":
             self._handle_detector_debug_batch()
+        elif path == "/sprite-match":
+            self._handle_sprite_match()
+        elif path == "/sprite-match-debug":
+            self._handle_sprite_match_debug()
         else:
             self._send({"error": "not found"}, 404)
 
@@ -267,6 +271,102 @@ class Handler(BaseHTTPRequestHandler):
             if tmp_path:
                 try: os.unlink(tmp_path)
                 except OSError: pass
+
+    def _handle_sprite_match(self):
+        body = self._read_body()
+        image_b64 = body.get("image_base64", "")
+        try:
+            x = float(body.get("x", 0)); y = float(body.get("y", 0))
+            w = float(body.get("w", 0)); h = float(body.get("h", 0))
+            top_n = int(body.get("top_n", 5))
+        except (TypeError, ValueError):
+            self._send({"error": "x,y,w,h,top_n must be numbers"}, 400)
+            return
+        if not image_b64 or w <= 0 or h <= 0:
+            self._send({"error": "image_base64 and positive w,h required"}, 400)
+            return
+        if not EXE.exists():
+            self._send({"error": f"executable not found: {EXE}"}, 500)
+            return
+
+        tmp_path = None
+        try:
+            tmp_path = _decode_to_tempfile(image_b64)
+            result = subprocess.run(
+                [str(EXE), "--sprite-match", tmp_path,
+                 str(x), str(y), str(w), str(h), str(top_n)],
+                capture_output=True, text=True, timeout=15, cwd=str(BUILD),
+            )
+            if result.returncode != 0:
+                self._send({"error": "sprite-match failed", "stderr": (result.stderr or "")[-500:]}, 500)
+                return
+            parsed = _parse_first_json_line(result.stdout) or {"raw": result.stdout.strip()}
+            self._send({"ok": True, "result": parsed})
+        except subprocess.TimeoutExpired:
+            self._send({"error": "sprite-match timed out"}, 500)
+        except Exception as e:
+            self._send({"error": str(e)}, 500)
+        finally:
+            if tmp_path:
+                try: os.unlink(tmp_path)
+                except OSError: pass
+
+    def _handle_sprite_match_debug(self):
+        body = self._read_body()
+        image_b64 = body.get("image_base64", "")
+        try:
+            x = float(body.get("x", 0)); y = float(body.get("y", 0))
+            w = float(body.get("w", 0)); h = float(body.get("h", 0))
+            top_n = int(body.get("top_n", 5))
+        except (TypeError, ValueError):
+            self._send({"error": "x,y,w,h,top_n must be numbers"}, 400)
+            return
+        if not image_b64 or w <= 0 or h <= 0:
+            self._send({"error": "image_base64 and positive w,h required"}, 400)
+            return
+        if not EXE.exists():
+            self._send({"error": f"executable not found: {EXE}"}, 500)
+            return
+
+        #  bg is a list of [r, g, b, dist] color groups. Pixels within
+        #  any group's dist get repainted white before matching.
+        bg = body.get("bg") or []
+
+        in_path = out_path = None
+        try:
+            in_path = _decode_to_tempfile(image_b64)
+            with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as f:
+                out_path = f.name
+            cmd = [str(EXE), "--sprite-match-debug", in_path,
+                   str(x), str(y), str(w), str(h), out_path, str(top_n)]
+            if isinstance(bg, list):
+                for c in bg:
+                    if isinstance(c, list) and len(c) >= 4:
+                        cmd.extend([str(int(c[0])), str(int(c[1])),
+                                    str(int(c[2])), str(float(c[3]))])
+            result = subprocess.run(
+                cmd,
+                capture_output=True, text=True, timeout=15, cwd=str(BUILD),
+            )
+            if result.returncode != 0:
+                self._send({"error": "sprite-match-debug failed", "stderr": (result.stderr or "")[-500:]}, 500)
+                return
+            parsed = _parse_first_json_line(result.stdout) or {}
+            auto_crop_b64 = ""
+            if parsed.get("auto_crop_saved") and os.path.exists(out_path):
+                with open(out_path, "rb") as f:
+                    auto_crop_b64 = base64.b64encode(f.read()).decode()
+            parsed["auto_crop_b64"] = auto_crop_b64
+            self._send({"ok": True, "result": parsed})
+        except subprocess.TimeoutExpired:
+            self._send({"error": "sprite-match-debug timed out"}, 500)
+        except Exception as e:
+            self._send({"error": str(e)}, 500)
+        finally:
+            for p in (in_path, out_path):
+                if p:
+                    try: os.unlink(p)
+                    except OSError: pass
 
     def _handle_detector_debug_batch(self):
         body = self._read_body()
