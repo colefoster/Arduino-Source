@@ -26,8 +26,7 @@
       "team_select"
     ],
     "TeamPreviewDetector": [
-      "team_preview_selecting",
-      "team_preview_locked_in"
+      "team_preview_selecting"
     ],
     "PreparingForBattleDetector": [
       "team_preview_locked_in"
