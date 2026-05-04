@@ -129,43 +129,48 @@ TeamPreviewResult TeamPreviewReader::read(
 ) const{
     TeamPreviewResult result;
 
-    //  --- OWN SIDE: OCR species + item ---
-    for (uint8_t i = 0; i < 6; i++){
-        //  Species
-        {
-            ImageViewRGB32 cropped = extract_box_reference(screen, m_own_species_boxes[i]);
-            OCR::StringMatchResult r = SpeciesNameOCR::instance().read_substring(
-                logger, m_language, cropped, own_text_filters()
-            );
-            if (!r.results.empty()){
-                result.own[i].species = r.results.begin()->second.token;
+    //  Layout switch.
+    //  PreparingForBattleDetector fires when "Standing By" pills are visible
+    //  -> locked-in screen (own column shows species ICON + item ICON only,
+    //  no text; opp sprites pulled inward). Otherwise -> selecting screen
+    //  (own column shows species TEXT + item TEXT; opp sprites outward).
+    PreparingForBattleDetector prep;
+    const bool locked_in = prep.detect(screen);
+    logger.log(std::string("TeamPreview: layout = ") + (locked_in ? "locked-in" : "selecting"));
+
+    //  --- OWN SIDE: OCR species + item (selecting screen only) ---
+    //  Locked-in screen has no own text -- icon matching is a separate path
+    //  (not yet implemented).
+    if (!locked_in){
+        for (uint8_t i = 0; i < 6; i++){
+            {
+                ImageViewRGB32 cropped = extract_box_reference(screen, m_own_species_boxes[i]);
+                OCR::StringMatchResult r = SpeciesNameOCR::instance().read_substring(
+                    logger, m_language, cropped, own_text_filters()
+                );
+                if (!r.results.empty()){
+                    result.own[i].species = r.results.begin()->second.token;
+                }
             }
-        }
-        //  Item
-        {
-            ImageViewRGB32 cropped = extract_box_reference(screen, m_own_item_boxes[i]);
-            OCR::StringMatchResult r = ItemNameOCR::instance().read_substring(
-                logger, m_language, cropped, own_text_filters()
-            );
-            if (!r.results.empty()){
-                result.own[i].item = r.results.begin()->second.token;
+            {
+                ImageViewRGB32 cropped = extract_box_reference(screen, m_own_item_boxes[i]);
+                OCR::StringMatchResult r = ItemNameOCR::instance().read_substring(
+                    logger, m_language, cropped, own_text_filters()
+                );
+                if (!r.results.empty()){
+                    result.own[i].item = r.results.begin()->second.token;
+                }
             }
+            logger.log(
+                "TeamPreview: own slot " + std::to_string(i) +
+                " species=\"" + result.own[i].species +
+                "\" item=\"" + result.own[i].item + "\""
+            );
         }
-        logger.log(
-            "TeamPreview: own slot " + std::to_string(i) +
-            " species=\"" + result.own[i].species +
-            "\" item=\"" + result.own[i].item + "\""
-        );
     }
 
     //  --- OPP SIDE: sprite match ---
-    //  PreparingForBattleDetector fires when "Standing By" pills are visible
-    //  -> locked-in screen (sprites pulled inward). Otherwise -> selecting
-    //  screen (sprites at the outward default position).
-    PreparingForBattleDetector prep;
-    const bool locked_in = prep.detect(screen);
     const auto& opp_boxes = locked_in ? m_opp_sprite_boxes : m_opp_sprite_boxes_selecting;
-    logger.log(std::string("TeamPreview: opp layout = ") + (locked_in ? "locked-in" : "selecting"));
 
     const PokemonSpriteMatcher& matcher = PokemonSpriteMatcher::instance();
     for (uint8_t i = 0; i < 6; i++){

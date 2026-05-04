@@ -6,21 +6,31 @@ let mismatchesRows = [];
 let mismatchesFocusIdx = -1;
 
 async function mismatchesInit() {
-    if (mismatchesInited) return;
-    mismatchesInited = true;
+    if (!mismatchesInited) {
+        mismatchesInited = true;
 
-    try {
-        const screens = await api('/api/gallery/screens');
-        const sel = document.getElementById('mismatches-screen');
-        const opts = screens
-            .filter(s => s.count > 0)
-            .map(s => `<option value="${s.name}">${s.name} (${s.count})</option>`)
-            .join('');
-        sel.insertAdjacentHTML('beforeend', opts);
-    } catch (e) { console.error(e); }
+        try {
+            const screens = await api('/api/gallery/screens');
+            const sel = document.getElementById('mismatches-screen');
+            const opts = screens
+                .filter(s => s.count > 0)
+                .map(s => `<option value="${s.name}">${s.name} (${s.count})</option>`)
+                .join('');
+            sel.insertAdjacentHTML('beforeend', opts);
+        } catch (e) { console.error(e); }
 
-    document.getElementById('mismatches-scan').addEventListener('click', mismatchesScan);
-    document.getElementById('mismatches-accept-all').addEventListener('click', acceptAllVisible);
+        document.getElementById('mismatches-scan').addEventListener('click', mismatchesScan);
+        document.getElementById('mismatches-accept-all').addEventListener('click', acceptAllVisible);
+    }
+
+    //  Prepopulate from URL params and optionally auto-scan.
+    const p = window.routeParams || {};
+    if (p.screen) document.getElementById('mismatches-screen').value = p.screen;
+    if (p.reader) document.getElementById('mismatches-reader').value = p.reader;
+    if (p.field) document.getElementById('mismatches-field').value = p.field;
+    if (p.auto === '1' && (p.screen || p.reader || p.field)) {
+        mismatchesScan();
+    }
 
     //  Keyboard navigation — only fires while the Mismatches view is active
     //  and no input/select has focus.
@@ -125,6 +135,10 @@ async function mismatchesScan() {
                     status.textContent = `${msg.done}/${total} scanned · ${mismatchesRows.length} mismatches`;
                 } else if (msg.type === 'row') {
                     delete msg.type;
+                    const fieldFilter = (document.getElementById('mismatches-field').value || '').trim().toLowerCase();
+                    if (fieldFilter && !(msg.field || '').toLowerCase().includes(fieldFilter)) {
+                        continue;
+                    }
                     const idx = mismatchesRows.length;
                     mismatchesRows.push(msg);
                     appendMismatchRow(tbody, msg, idx);
@@ -158,7 +172,14 @@ function appendMismatchRow(tbody, r, idx) {
     const fieldKey = `${r.reader}.${displayField(r.field)}${slotStr}`;
     const filePath = `${r.screen}/${r.filename}`;
     const exp = r.expected === '' ? '∅' : String(r.expected);
-    const got = r.got === '' ? '∅' : String(r.got);
+    const gotStr = r.got === '' ? '∅' : String(r.got);
+    const hasRaw = r.raw !== undefined && r.raw !== null;
+    const rawDiffers = hasRaw && String(r.raw) !== String(r.got);
+    let got = gotStr;
+    if (hasRaw) {
+        const rawColor = rawDiffers ? '#d29922' : '#6e7681';
+        got = `${gotStr} <span style="color:${rawColor}; font-size:10px;">(raw: ${r.raw})</span>`;
+    }
     const thumbUrl = `${API}/api/gallery/thumb/${encodeURIComponent(r.screen)}/${encodeURIComponent(r.filename)}`;
     const fullUrl = `${API}/api/gallery/image/${encodeURIComponent(r.screen)}/${encodeURIComponent(r.filename)}`;
     const cropCell = r.crop

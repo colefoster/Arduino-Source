@@ -115,10 +115,8 @@ CROP_DEFS = {
         {"name": "opp1_hp_pct",     "box": [0.9002, 0.1176, 0.0420, 0.0349]},
         {"name": "own0_species",    "box": [0.0814, 0.8705, 0.0918, 0.0272]},
         {"name": "own1_species",    "box": [0.2901, 0.8705, 0.0835, 0.0267]},
-        {"name": "own0_hp_current", "box": [0.1304, 0.9338, 0.0448, 0.0362]},
-        {"name": "own0_hp_max",     "box": [0.1746, 0.9464, 0.0335, 0.0229]},
-        {"name": "own1_hp_current", "box": [0.3363, 0.9342, 0.0450, 0.0361]},
-        {"name": "own1_hp_max",     "box": [0.3800, 0.9473, 0.0340, 0.0215]},
+        {"name": "own0_hp",         "box": [0.1303, 0.9340, 0.0768, 0.0346]},
+        {"name": "own1_hp",         "box": [0.3381, 0.9343, 0.0757, 0.0357]},
     ],
     "CommunicatingDetector": [
         {"name": "communicating_text", "box": [0.380, 0.450, 0.240, 0.050]},
@@ -199,6 +197,26 @@ CROP_DEFS = {
         #  white-pixel fraction >= 0.30 AND OCR reads "R".
         {"name": "toggle_region", "box": [0.5968, 0.9198, 0.0194, 0.0325]},
     ],
+    #  Pokeball alive/fainted indicators. Extrapolated linearly from
+    #  inspector-saved anchors:
+    #    own_0 + own_3
+    #    opp_0 + opp_1 + opp_3
+    #  Own row: bottom-left at y~0.815, opp row: top-right at y~0.167.
+    #  Alive = green/yellow ball, fainted = grey ball, empty = small grey dot.
+    "PokeballAliveDetector": [
+        {"name": "own_0", "box": [0.0518, 0.8155, 0.0085, 0.0155]},
+        {"name": "own_1", "box": [0.0660, 0.8154, 0.0087, 0.0152]},
+        {"name": "own_2", "box": [0.0801, 0.8152, 0.0090, 0.0149]},
+        {"name": "own_3", "box": [0.0943, 0.8151, 0.0092, 0.0146]},
+        {"name": "own_4", "box": [0.1085, 0.8150, 0.0094, 0.0143]},
+        {"name": "own_5", "box": [0.1226, 0.8148, 0.0097, 0.0140]},
+        {"name": "opp_0", "box": [0.8665, 0.1664, 0.0110, 0.0125]},
+        {"name": "opp_1", "box": [0.8809, 0.1677, 0.0106, 0.0113]},
+        {"name": "opp_2", "box": [0.8953, 0.1677, 0.0103, 0.0111]},
+        {"name": "opp_3", "box": [0.9097, 0.1677, 0.0099, 0.0109]},
+        {"name": "opp_4", "box": [0.9241, 0.1677, 0.0099, 0.0109]},
+        {"name": "opp_5", "box": [0.9385, 0.1677, 0.0099, 0.0109]},
+    ],
 }
 
 BOOL_DETECTORS = {
@@ -228,9 +246,9 @@ FOLDER_TO_READER = {
 
 # Which readers to show together for each screen type
 FOLDER_READERS = {
-    "action_menu": ["ActionMenuDetector", "BattleHUDReader"],
-    "move_select": ["MoveSelectDetector", "MegaEvolveDetector", "MoveNameReader", "MoveSelectCursorSlot", "BattleHUDReader"],
-    "battle_log": ["BattleLogReader", "BattleHUDReader"],
+    "action_menu": ["ActionMenuDetector", "BattleHUDReader", "PokeballAliveDetector"],
+    "move_select": ["MoveSelectDetector", "MegaEvolveDetector", "MoveNameReader", "MoveSelectCursorSlot", "BattleHUDReader", "PokeballAliveDetector"],
+    "battle_log": ["BattleLogReader", "BattleHUDReader", "PokeballAliveDetector"],
     "post_match": ["PostMatchScreenDetector"],
     "preparing": ["PreparingForBattleDetector"],
     "team_select": ["TeamSelectReader"],
@@ -250,6 +268,9 @@ READER_TYPES.update({
     "TeamSelectReader": "multi_text:6",
     "TeamSummaryReader": "multi_text:6",
     "TeamPreviewReader": "multi_text:12",
+    #  Per-slot state: "alive" (green/yellow), "fainted" (grey ball),
+    #  or "empty" (small grey dot). 12 slots total: own 0..5, opp 0..5.
+    "PokeballAliveDetector": "multi_state:12:alive,fainted,empty",
 })
 
 
@@ -991,17 +1012,23 @@ async def teampreview_crops(request: Request):
 
 @app.get("/api/sprites/list")
 async def sprites_list():
-    """Return the list of sprite slugs in the Pokemon Champions atlas."""
+    """Return the list of sprite slugs in the Pokemon Champions atlas.
+    Includes "-shiny" variants if the shiny atlas is present."""
     json_path = RESOURCES_DIR / "PokemonSprites.json"
     if not json_path.exists():
         return JSONResponse({"error": "sprite resources not found"}, 404)
     meta = json.loads(json_path.read_text())
     locs = meta.get("spriteLocations", {})
+    names = list(locs.keys())
+    shiny_path = RESOURCES_DIR / "PokemonSpritesShiny.json"
+    if shiny_path.exists():
+        shiny_meta = json.loads(shiny_path.read_text())
+        names.extend(s + "-shiny" for s in shiny_meta.get("spriteLocations", {}).keys())
     return {
         "ok": True,
-        "count": len(locs),
+        "count": len(names),
         "sprite_size": [meta.get("spriteWidth", 128), meta.get("spriteHeight", 128)],
-        "names": sorted(locs.keys()),
+        "names": sorted(names),
     }
 
 
@@ -1014,6 +1041,17 @@ async def sprites_examples(limit: int = 100):
     user sees here is exactly what the matcher consumed.
     """
     import base64
+    from PIL import Image
+    def _crop_b64(img, box, scale=4):
+        w, h = img.size
+        x0, y0 = max(0, int(box[0]*w)), max(0, int(box[1]*h))
+        x1, y1 = min(w, x0+int(box[2]*w)), min(h, y0+int(box[3]*h))
+        cr = img.crop((x0, y0, x1, y1))
+        cw, ch = cr.size
+        up = cr.resize((min(cw*scale, 480), min(ch*scale, 240)), Image.NEAREST)
+        buf = io.BytesIO()
+        up.save(buf, format="PNG")
+        return base64.b64encode(buf.getvalue()).decode()
     OPP_LOCKED = (0.7181, 0.1482, 0.7310, 0.0664, 0.1009)
     OPP_SELECT = (0.8390, 0.1473, 0.7317, 0.0604, 0.0986)
     def opp_boxes(coords):
@@ -1053,21 +1091,20 @@ async def sprites_examples(limit: int = 100):
             img_path = screen_dir / fname
             if not img_path.exists():
                 continue
-            boxes = opp_boxes(OPP_LOCKED if "locked_in" in screen_name else OPP_SELECT)
-            opp_slots = []
-            for i in range(6):
-                crop_b64 = base64.b64encode(_extract_crop(img_path, boxes[i])).decode()
-                opp_slots.append({
-                    "species": (opp[i] if i < len(opp) else "") or "",
-                    "crop": f"data:image/png;base64,{crop_b64}",
-                })
-            own_slots = []
-            for i in range(6):
-                crop_b64 = base64.b64encode(_extract_crop(img_path, OWN_BOXES[i])).decode()
-                own_slots.append({
-                    "species": (own[i] if i < len(own) else "") or "",
-                    "crop": f"data:image/png;base64,{crop_b64}",
-                })
+            is_locked_in = "locked_in" in screen_name
+            boxes = opp_boxes(OPP_LOCKED if is_locked_in else OPP_SELECT)
+            img = Image.open(img_path).convert("RGB")
+            opp_slots = [{
+                "species": (opp[i] if i < len(opp) else "") or "",
+                "crop": f"data:image/png;base64,{_crop_b64(img, boxes[i])}",
+            } for i in range(6)]
+            #  Locked-in screen: own column is icon-only (no text). Selecting
+            #  screen: own column is species TEXT + item TEXT. Only render
+            #  the My-side text-OCR panel for selecting frames.
+            own_slots = [] if is_locked_in else [{
+                "species": (own[i] if i < len(own) else "") or "",
+                "crop": f"data:image/png;base64,{_crop_b64(img, OWN_BOXES[i])}",
+            } for i in range(6)]
             examples.append({
                 "screen": screen_name,
                 "filename": fname,
@@ -1079,17 +1116,342 @@ async def sprites_examples(limit: int = 100):
     return {"ok": True, "examples": examples, "truncated": False}
 
 
+@app.get("/api/sprites/battlehud_examples")
+async def sprites_battlehud_examples(limit: int = 50, aggregate: bool = True):
+    """For labeled action_menu frames, crop slot 0 + slot 1 own-species
+    icons (boxes saved as own_specoes_icon_0/1) and run sprite-match against
+    the atlas. Returns crop b64 + ground truth + top-N matches per slot.
+
+    aggregate=true (default): one entry per unique (slot, ground_truth)
+    species, picking the first frame each. Cuts subprocess calls from ~2*N
+    to ~unique-species. Pass aggregate=false for the per-frame view.
+    """
+    import base64, urllib.request, urllib.error
+    from PIL import Image
+
+    SLOT_BOXES = {
+        0: [0.0249, 0.8763, 0.0556, 0.0803],  # own_specoes_icon_0
+        1: [0.2301, 0.8840, 0.0576, 0.0753],  # own_specoes_icon_1
+    }
+    #  Ask matcher for ALL candidates so the team-atlas filter has every
+    #  slug to choose from (atlas is 544 entries: 272 normal + 272 shiny).
+    #  Filter happens after matcher returns; we render top 3 of survivors.
+    TOP_N = 600
+    RENDER_TOP_N = 3
+
+    def _crop_b64(img, box, scale=4):
+        w, h = img.size
+        x0, y0 = max(0, int(box[0]*w)), max(0, int(box[1]*h))
+        x1, y1 = min(w, x0+int(box[2]*w)), min(h, y0+int(box[3]*h))
+        cr = img.crop((x0, y0, x1, y1))
+        cw, ch = cr.size
+        up = cr.resize((min(cw*scale, 480), min(ch*scale, 320)), Image.NEAREST)
+        buf = io.BytesIO()
+        up.save(buf, format="PNG")
+        return base64.b64encode(buf.getvalue()).decode()
+
+    def _sprite_match(img_b64: str, box: list) -> dict:
+        payload = json.dumps({
+            "image_base64": img_b64,
+            "x": box[0], "y": box[1], "w": box[2], "h": box[3],
+            "top_n": TOP_N,
+        }).encode()
+        try:
+            req = urllib.request.Request(
+                f"{DEV_RUNNER}/sprite-match", data=payload,
+                headers={"Content-Type": "application/json"}, method="POST",
+            )
+            with urllib.request.urlopen(req, timeout=15) as resp:
+                d = json.loads(resp.read())
+                return d.get("result", {}).get("matches", [])
+        except (urllib.error.URLError, urllib.error.HTTPError):
+            return []
+        except Exception:
+            return []
+
+    screen_dir = TEST_IMAGES_DIR / "action_menu"
+    if not screen_dir.exists():
+        return {"ok": True, "examples": []}
+
+    def _strip_shiny(slug: str) -> str:
+        return slug[:-len("-shiny")] if slug.endswith("-shiny") else slug
+
+    manifest = _load_manifest(screen_dir)
+
+    #  Bg paint colors. Each = [r, g, b, dist]. Pixels within dist of any
+    #  color get repainted white before matching.
+    BG_COLORS = [
+        [160, 140, 255, 50],   # pill purple
+        [180, 255,   0, 80],   # active-turn lime green outline
+    ]
+
+    #  Team-atlas filter. The matcher runs against all 544 atlas entries,
+    #  but we only accept results from this set -- "the cole team and the
+    #  obvious opponents that show up in labeled frames". This collapses
+    #  spurious lookalikes (altaria-mega-shiny dominating Sneasler, etc.)
+    #  by removing them from the candidate pool entirely.
+    #
+    #  Includes: own team's normal + shiny + mega forms (where applicable),
+    #  plus the species that actually appear as opponents in labeled
+    #  action_menu frames.
+    OWN_TEAM = [
+        "charizard", "charizard-mega-x", "charizard-mega-y",
+        "venusaur", "venusaur-mega",
+        "garchomp", "garchomp-mega",
+        "sneasler",
+        "incineroar",
+        "meganium",
+        "delphox",
+        "basculegion",
+        "archaludon",
+    ]
+    TEAM_ALLOWED = set()
+    for slug in OWN_TEAM:
+        TEAM_ALLOWED.add(slug)
+        TEAM_ALLOWED.add(slug + "-shiny")
+
+    def _sprite_match_debug(img_b64: str, box: list) -> dict:
+        """Returns {matches, auto_crop_b64} or {} on failure.
+        Matches are filtered to TEAM_ALLOWED then trimmed to RENDER_TOP_N."""
+        payload = json.dumps({
+            "image_base64": img_b64,
+            "x": box[0], "y": box[1], "w": box[2], "h": box[3],
+            "top_n": TOP_N,
+            "bg": BG_COLORS,
+        }).encode()
+        try:
+            req = urllib.request.Request(
+                f"{DEV_RUNNER}/sprite-match-debug", data=payload,
+                headers={"Content-Type": "application/json"}, method="POST",
+            )
+            with urllib.request.urlopen(req, timeout=15) as resp:
+                d = json.loads(resp.read())
+                result = d.get("result") or {}
+                all_matches = result.get("matches") or []
+                #  Team-atlas filter: keep only matches whose slug (base or
+                #  shiny variant) is in TEAM_ALLOWED. Preserve sort order
+                #  (already alpha-ascending from matcher).
+                filtered = [m for m in all_matches if m.get("slug") in TEAM_ALLOWED]
+                result["matches"] = filtered[:RENDER_TOP_N]
+                result["matches_unfiltered_count"] = len(all_matches)
+                return result
+        except Exception:
+            return {}
+
+    def _is_correct(matches: list, gt: str, gt_shiny: bool) -> bool:
+        if not matches or not gt:
+            return False
+        top = matches[0].get("slug", "")
+        if _strip_shiny(top) != gt:
+            return False
+        is_shiny = top.endswith("-shiny")
+        return is_shiny == gt_shiny
+
+    if aggregate:
+        #  Group frames by (slot, gt). Pick first frame per group, run
+        #  sprite-match-debug once (returns matches + auto-cropped preview).
+        seen: dict[tuple[int, str], dict] = {}
+        order: list[tuple[int, str]] = []
+        for fname, labels in manifest.items():
+            bh = labels.get("BattleHUDReader")
+            if not isinstance(bh, dict):
+                continue
+            own = bh.get("own_species") or []
+            shiny = bh.get("own_species_shiny") or []
+            if not any(own):
+                continue
+            img_path = screen_dir / fname
+            if not img_path.exists():
+                continue
+            for slot_idx in SLOT_BOXES:
+                gt = (own[slot_idx] if slot_idx < len(own) else "") or ""
+                if not gt:
+                    continue
+                gt_shiny = bool(shiny[slot_idx]) if slot_idx < len(shiny) else False
+                key = (slot_idx, gt, gt_shiny)
+                if key in seen:
+                    continue
+                seen[key] = {"filename": fname, "img_path": img_path,
+                             "gt_shiny": gt_shiny}
+                order.append(key)
+
+        rows = []
+        img_cache = {}
+        for (slot_idx, gt, gt_shiny) in order[:limit]:
+            entry = seen[(slot_idx, gt, gt_shiny)]
+            img_path = entry["img_path"]
+            if img_path not in img_cache:
+                img_cache[img_path] = (
+                    Image.open(img_path).convert("RGB"),
+                    base64.b64encode(img_path.read_bytes()).decode(),
+                )
+            img, img_b64 = img_cache[img_path]
+            box = SLOT_BOXES[slot_idx]
+            dbg = _sprite_match_debug(img_b64, box)
+            matches = dbg.get("matches", [])
+            auto_crop = dbg.get("auto_crop_b64") or ""
+            rows.append({
+                "slot": slot_idx,
+                "ground_truth": gt,
+                "ground_truth_shiny": gt_shiny,
+                "filename": entry["filename"],
+                "crop": f"data:image/png;base64,{_crop_b64(img, box)}",
+                "auto_crop": f"data:image/png;base64,{auto_crop}" if auto_crop else "",
+                "matches": matches,
+                "top_correct": _is_correct(matches, gt, gt_shiny),
+            })
+        return {"ok": True, "aggregated": True, "rows": rows, "count": len(rows)}
+
+    #  Per-frame mode (legacy / detailed view).
+    examples = []
+    for fname, labels in manifest.items():
+        bh = labels.get("BattleHUDReader")
+        if not isinstance(bh, dict):
+            continue
+        own = bh.get("own_species") or []
+        if not any(own):
+            continue
+        img_path = screen_dir / fname
+        if not img_path.exists():
+            continue
+        img = Image.open(img_path).convert("RGB")
+        img_b64 = base64.b64encode(img_path.read_bytes()).decode()
+
+        slots = []
+        for slot_idx, box in SLOT_BOXES.items():
+            matches = _sprite_match(img_b64, box)
+            gt = (own[slot_idx] if slot_idx < len(own) else "") or ""
+            slots.append({
+                "slot": slot_idx,
+                "ground_truth": gt,
+                "crop": f"data:image/png;base64,{_crop_b64(img, box)}",
+                "matches": matches,
+                "top_correct": bool(matches and _strip_shiny(matches[0].get("slug","")) == gt),
+            })
+        examples.append({"filename": fname, "slots": slots})
+        if len(examples) >= limit:
+            break
+    return {"ok": True, "aggregated": False, "examples": examples, "count": len(examples)}
+
+
+#  Pokeball detector boxes: mirrors PokemonChampions_PokeballAliveDetector.cpp.
+#  Keep these in sync with the C++ side (which is the production path).
+POKEBALL_OWN_BOXES = [
+    [0.0518, 0.8155, 0.0085, 0.0155],
+    [0.0660, 0.8154, 0.0087, 0.0152],
+    [0.0801, 0.8152, 0.0090, 0.0149],
+    [0.0943, 0.8151, 0.0092, 0.0146],
+    [0.1085, 0.8150, 0.0094, 0.0143],
+    [0.1226, 0.8148, 0.0097, 0.0140],
+]
+POKEBALL_OPP_BOXES = [
+    [0.8665, 0.1664, 0.0110, 0.0125],
+    [0.8809, 0.1677, 0.0106, 0.0113],
+    [0.8953, 0.1677, 0.0103, 0.0111],
+    [0.9097, 0.1677, 0.0099, 0.0109],
+    [0.9241, 0.1677, 0.0099, 0.0109],
+    [0.9385, 0.1677, 0.0099, 0.0109],
+]
+
+
+def _classify_pokeball_state(arr) -> str:
+    """Mean-green threshold classifier. Mirrors the C++ classify(). Pure
+    Python so the dashboard can scan hundreds of frames without paying
+    the dev-runner round-trip per frame.
+    """
+    if arr.size == 0:
+        return "empty"
+    mean_g = float(arr[:, :, 1].mean())
+    if mean_g >= 150.0:
+        return "alive"
+    if mean_g >= 67.0:
+        return "fainted"
+    return "empty"
+
+
+@app.get("/api/pokeballs/scan")
+async def pokeballs_scan(offset: int = 0, limit: int = 50):
+    """Run PokeballAliveDetector on a page of frames from action_menu /
+    move_select / battle_log and return per-frame state + thumbnail URLs.
+
+    Implementation: pure-Python mirror of the C++ classifier (mean green
+    > 150 = alive, > 67 = fainted, else empty). The C++ path is the
+    production source of truth; this dashboard scan reimplements it for
+    speed (no subprocess / Tailscale round-trip per frame).
+    """
+    import numpy as np
+    from PIL import Image
+
+    def _classify_frame(img_path: Path) -> dict:
+        try:
+            img = np.asarray(Image.open(img_path).convert("RGB"))
+        except Exception as e:
+            return {"error": str(e), "own": [], "opp": []}
+        H, W, _ = img.shape
+
+        def crop_state(box):
+            x, y, w, h = box
+            x0, y0 = max(0, int(x*W)), max(0, int(y*H))
+            x1, y1 = min(W, x0 + int(w*W)), min(H, y0 + int(h*H))
+            return _classify_pokeball_state(img[y0:y1, x0:x1])
+
+        own = [crop_state(b) for b in POKEBALL_OWN_BOXES]
+        opp = [crop_state(b) for b in POKEBALL_OPP_BOXES]
+        return {
+            "own": own,
+            "opp": opp,
+            "own_alive": sum(1 for s in own if s == "alive"),
+            "opp_alive": sum(1 for s in opp if s == "alive"),
+        }
+
+    all_frames = []
+    for screen in ("action_menu", "move_select", "battle_log"):
+        screen_dir = TEST_IMAGES_DIR / screen
+        if not screen_dir.exists():
+            continue
+        for img_path in sorted(screen_dir.glob("*.png")):
+            if img_path.name.startswith("_"):
+                continue
+            all_frames.append((screen, img_path))
+
+    total = len(all_frames)
+    page = all_frames[offset : offset + limit]
+
+    results = []
+    for screen, img_path in page:
+        r = _classify_frame(img_path)
+        results.append({
+            "screen": screen,
+            "filename": img_path.name,
+            **r,
+        })
+    return {
+        "ok": True,
+        "offset": offset,
+        "limit": limit,
+        "total": total,
+        "count": len(results),
+        "frames": results,
+    }
+
+
 @app.get("/api/teampreview/sprite/{slug}")
 async def teampreview_sprite(slug: str):
-    """Extract a single sprite from the atlas PNG."""
-    import base64
+    """Extract a single sprite from the atlas PNG. A "-shiny" suffix
+    redirects to the shiny atlas (PokemonSpritesShiny.{png,json})."""
     from PIL import Image
-    json_path = RESOURCES_DIR / "PokemonSprites.json"
-    atlas_path = RESOURCES_DIR / "PokemonSprites.png"
+    if slug.endswith("-shiny"):
+        base = slug[:-len("-shiny")]
+        json_path = RESOURCES_DIR / "PokemonSpritesShiny.json"
+        atlas_path = RESOURCES_DIR / "PokemonSpritesShiny.png"
+    else:
+        base = slug
+        json_path = RESOURCES_DIR / "PokemonSprites.json"
+        atlas_path = RESOURCES_DIR / "PokemonSprites.png"
     if not json_path.exists() or not atlas_path.exists():
         return JSONResponse({"error": "sprite resources not found"}, 404)
     meta = json.loads(json_path.read_text())
-    loc = meta.get("spriteLocations", {}).get(slug)
+    loc = meta.get("spriteLocations", {}).get(base)
     if not loc:
         return JSONResponse({"error": f"sprite '{slug}' not found"}, 404)
     h = meta.get("spriteHeight", 128)
@@ -1133,6 +1495,8 @@ async def labeler_sources():
     if TEST_IMAGES_DIR.exists():
         for reader_dir in sorted(TEST_IMAGES_DIR.iterdir()):
             if not reader_dir.is_dir(): continue
+            # _overlays/ holds overlay screens nested one level deeper; handle below.
+            if reader_dir.name == "_overlays": continue
             imgs = [f for f in reader_dir.iterdir()
                     if f.is_file() and f.suffix.lower() in (".jpg", ".jpeg", ".png")
                     and _is_real_image(f.name)]
@@ -1151,6 +1515,34 @@ async def labeler_sources():
                                       "events": BATTLE_LOG_EVENTS if reader_name == "BattleLogReader" else None}
                     },
                 })
+
+    # _overlays/<name> — overlay screens (battle_log, ability_item, communicating, ...)
+    overlays_dir = TEST_IMAGES_DIR / "_overlays"
+    if overlays_dir.exists():
+        overlays_cfg = (_load_screens_yaml() or {}).get("overlays", {}) or {}
+        for ov_dir in sorted(overlays_dir.iterdir()):
+            if not ov_dir.is_dir(): continue
+            imgs = [f for f in ov_dir.iterdir()
+                    if f.is_file() and f.suffix.lower() in (".jpg", ".jpeg", ".png")
+                    and _is_real_image(f.name)]
+            if not imgs: continue
+            ov_name = ov_dir.name
+            ov_def = overlays_cfg.get(ov_name, {}) or {}
+            readers = list((ov_def.get("readers") or {}).keys())
+            sources.append({
+                "path": f"__test__/_overlays/{ov_name}",
+                "name": ov_name, "parent": "test_images/_overlays", "count": len(imgs),
+                "suggested_reader": readers[0] if readers else None,
+                "readers": readers,
+                "reader_infos": {
+                    r: {"reader": r,
+                        "type": READER_TYPES.get(r, "unknown"),
+                        "is_bool": r in BOOL_DETECTORS,
+                        "crops": CROP_DEFS.get(r, []),
+                        "events": BATTLE_LOG_EVENTS if r == "BattleLogReader" else None}
+                    for r in readers
+                },
+            })
 
     return sources
 
@@ -2012,6 +2404,166 @@ async def training_delete(session_id: str):
 
 
 # ═══════════════════════════════════════════════════════════════════════════
+# PAST TRAINING RUNS (jsonl logs on unraid container volume)
+# ═══════════════════════════════════════════════════════════════════════════
+#
+# Action-model training writes per-epoch metrics to
+#   /mnt/user/data/pokemon-champions/data/checkpoints/<run_id>.jsonl
+# on the unraid host (mounted into the GPU container as /workspace/data/...).
+# These are the historical record of completed runs — the live
+# /api/training/sessions endpoint only knows about runs that reported via
+# --dashboard, which the action-model trainer doesn't.
+
+RUNS_HOST = os.environ.get("RUNS_HOST", "unraid")
+RUNS_DIR = os.environ.get(
+    "RUNS_DIR",
+    "/mnt/user/data/pokemon-champions/data/checkpoints",
+)
+
+# cache: name -> (mtime, parsed_rows)
+_runs_cache: dict[str, tuple[float, list[dict]]] = {}
+_runs_listing: dict = {"ts": 0.0, "data": []}
+
+
+async def _ssh_run(cmd: str) -> str:
+    proc = await asyncio.create_subprocess_exec(
+        "ssh", RUNS_HOST, cmd,
+        stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE,
+    )
+    stdout, stderr = await proc.communicate()
+    if proc.returncode != 0:
+        raise RuntimeError(f"ssh {RUNS_HOST}: {stderr.decode(errors='replace')[-300:]}")
+    return stdout.decode(errors="replace")
+
+
+async def _fetch_run(name: str, mtime: float) -> list[dict]:
+    cached = _runs_cache.get(name)
+    if cached and cached[0] == mtime:
+        return cached[1]
+    raw = await _ssh_run(f'cat "{RUNS_DIR}/{name}.jsonl"')
+    rows: list[dict] = []
+    for line in raw.splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        try:
+            rows.append(json.loads(line))
+        except json.JSONDecodeError:
+            continue
+    _runs_cache[name] = (mtime, rows)
+    return rows
+
+
+@app.get("/api/runs/list")
+async def runs_list():
+    """List past training runs from the unraid checkpoint dir.
+
+    Returns one entry per .jsonl with mtime, num_epochs, and the
+    first/last row so the UI can show a summary without fetching
+    full epoch histories.
+    """
+    now = time.time()
+    if now - _runs_listing["ts"] < 15:
+        return _runs_listing["data"]
+
+    listing = await _ssh_run(
+        f'ls -la --time-style=+%s "{RUNS_DIR}"/*.jsonl 2>/dev/null || true'
+    )
+    files: list[tuple[str, float, int]] = []
+    for line in listing.splitlines():
+        parts = line.split()
+        if len(parts) < 7 or not parts[-1].endswith(".jsonl"):
+            continue
+        try:
+            size = int(parts[4])
+            mtime = float(parts[5])
+            path = parts[-1]
+        except (ValueError, IndexError):
+            continue
+        name = Path(path).stem
+        files.append((name, mtime, size))
+
+    out = []
+    for name, mtime, size in files:
+        try:
+            rows = await _fetch_run(name, mtime)
+        except RuntimeError:
+            rows = []
+        first = rows[0] if rows else {}
+        last = rows[-1] if rows else {}
+        out.append({
+            "name": name,
+            "mtime": mtime,
+            "size": size,
+            "num_epochs": len(rows),
+            "first_epoch": first,
+            "last_epoch": last,
+        })
+
+    out.sort(key=lambda r: r["mtime"], reverse=True)
+    _runs_listing["ts"] = now
+    _runs_listing["data"] = out
+    return out
+
+
+@app.get("/api/runs/get")
+async def runs_get(names: str = Query(..., description="comma-separated run names")):
+    """Return full per-epoch rows for one or more runs."""
+    listing = await runs_list()
+    by_name = {r["name"]: r for r in listing}
+    out = {}
+    for name in names.split(","):
+        name = name.strip()
+        if not name or name not in by_name:
+            continue
+        rows = await _fetch_run(name, by_name[name]["mtime"])
+        out[name] = rows
+    return out
+
+
+# ── per-run notes (research log; lives on ash next to the dashboard) ──────
+
+RUN_NOTES_PATH = BASE / "data" / "run_notes.json"
+
+
+def _load_run_notes() -> dict:
+    if not RUN_NOTES_PATH.exists():
+        return {}
+    try:
+        return json.loads(RUN_NOTES_PATH.read_text())
+    except json.JSONDecodeError:
+        return {}
+
+
+def _save_run_notes(notes: dict) -> None:
+    RUN_NOTES_PATH.parent.mkdir(parents=True, exist_ok=True)
+    RUN_NOTES_PATH.write_text(json.dumps(notes, indent=2))
+
+
+@app.get("/api/runs/notes")
+async def runs_notes_get():
+    return _load_run_notes()
+
+
+@app.post("/api/runs/notes")
+async def runs_notes_set(request: Request):
+    """Body: {name, hypothesis, changes, result, freeform}. All fields optional."""
+    body = await request.json()
+    name = (body.get("name") or "").strip()
+    if not name:
+        return JSONResponse({"error": "name required"}, 400)
+    notes = _load_run_notes()
+    entry = notes.get(name, {})
+    for field in ("hypothesis", "changes", "result", "freeform"):
+        if field in body:
+            entry[field] = (body[field] or "").strip()
+    entry["updated"] = time.time()
+    notes[name] = entry
+    _save_run_notes(notes)
+    return {"ok": True, "name": name, "notes": entry}
+
+
+# ═══════════════════════════════════════════════════════════════════════════
 # OCR SUGGESTION (proxy to local Mac dev runner — tools/mac_dev_runner.py)
 # ═══════════════════════════════════════════════════════════════════════════
 
@@ -2367,9 +2919,9 @@ async def mismatches(screen: Optional[str] = None, reader: Optional[str] = None)
         elif field == "own_species":
             side, suffix = "own", "species"
         elif field == "own_hp_current":
-            side, suffix = "own", "hp_current"
+            side, suffix = "own", "hp"
         elif field == "own_hp_max":
-            side, suffix = "own", "hp_max"
+            side, suffix = "own", "hp"
         if side is None:
             return None
         target = f"{side}{slot}_{suffix}"
@@ -2525,8 +3077,8 @@ async def mismatches_stream(screen: Optional[str] = None, reader: Optional[str] 
         if field == "opponent_species": side, suffix = "opp", "species"
         elif field == "opponent_hp_pct": side, suffix = "opp", "hp_pct"
         elif field == "own_species":     side, suffix = "own", "species"
-        elif field == "own_hp_current":  side, suffix = "own", "hp_current"
-        elif field == "own_hp_max":      side, suffix = "own", "hp_max"
+        elif field == "own_hp_current": side, suffix = "own", "hp"
+        elif field == "own_hp_max":     side, suffix = "own", "hp"
         if side is None: return None
         target = f"{side}{slot}_{suffix}"
         for d in defs:
@@ -2558,9 +3110,12 @@ async def mismatches_stream(screen: Optional[str] = None, reader: Optional[str] 
                                 crop_data = "data:image/png;base64," + base64.b64encode(_extract_crop(img_path, box)).decode()
                             except Exception:
                                 pass
+                        raw_list = result.get(field + "_raw")
+                        raw_val = raw_list[i] if isinstance(raw_list, list) and i < len(raw_list) else None
                         rows.append({
                             "screen": s, "filename": fname, "reader": rname,
                             "field": field, "slot": i, "expected": e, "got": g,
+                            "raw": raw_val,
                             "crop": crop_data,
                         })
             else:

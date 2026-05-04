@@ -5,4 +5,37 @@
     <div id="training-sessions"></div>
 
     <div id="training-detail" style="margin-top:16px;"></div>
+
+    <h2 style="margin-top:32px; font-size:18px; color:#c9d1d9; border-top:1px solid #30363d; padding-top:20px;">Compare Past Runs</h2>
+    <div class="subtitle">Per-epoch logs from <code>/workspace/data/checkpoints/*.jsonl</code> on unraid</div>
+
+    <div id="compare-toolbar" style="display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin:12px 0;">
+        <div>
+            <label style="font-size:11px; color:#8b949e;">Metric</label>
+            <select id="compare-metric" style="background:#0d1117; color:#c9d1d9; border:1px solid #30363d; padding:4px 6px; font-size:12px;"></select>
+        </div>
+        <div>
+            <label style="font-size:11px; color:#8b949e;">X-axis</label>
+            <select id="compare-xaxis" style="background:#0d1117; color:#c9d1d9; border:1px solid #30363d; padding:4px 6px; font-size:12px;">
+                <option value="epoch">Epoch</option>
+                <option value="samples">Samples seen</option>
+                <option value="wallclock">Wall-clock (min)</option>
+            </select>
+        </div>
+        <button class="btn" onclick="compareSelectAll(true)">All</button>
+        <button class="btn" onclick="compareSelectAll(false)">None</button>
+        <button class="btn" onclick="compareRefresh()">Refresh</button>
+        <span id="compare-status" style="font-size:11px; color:#484f58;"></span>
+    </div>
+
+    <div style="display:grid; grid-template-columns: 360px 1fr; gap:16px; align-items:start;">
+        <div id="compare-runs" style="display:flex; flex-direction:column; gap:6px;"></div>
+        <div>
+            <div class="chart-box" style="height:420px;">
+                <div class="chart-title" id="compare-chart-title">Metric vs. epoch</div>
+                <canvas id="compare-chart"></canvas>
+            </div>
+            <div id="compare-table" style="margin-top:16px;"></div>
+        </div>
+    </div>
 </div>

@@ -396,3 +396,41 @@
             background: #21262d; border: 1px solid #30363d; border-radius: 3px;
             padding: 1px 5px; font-size: 10px; font-family: inherit; color: #8b949e;
         }
+
+        /* ── Loading indicators ── */
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.55; }
+            50%      { opacity: 0.9; }
+        }
+        .spinner {
+            display: inline-block; width: 12px; height: 12px;
+            border: 2px solid #30363d; border-top-color: #58a6ff;
+            border-radius: 50%; animation: spin 0.7s linear infinite;
+            vertical-align: -2px;
+        }
+        .spinner-lg {
+            width: 24px; height: 24px; border-width: 3px;
+        }
+        .loading-row {
+            display: flex; align-items: center; gap: 8px;
+            color: #8b949e; font-size: 12px; padding: 12px;
+        }
+        .skeleton {
+            background: linear-gradient(90deg, #161b22 25%, #21262d 50%, #161b22 75%);
+            background-size: 200% 100%; animation: pulse 1.4s ease-in-out infinite;
+            border-radius: 4px;
+        }
+        .skeleton-card {
+            min-width: 220px; max-width: 300px; height: 100px;
+            border: 1px solid #21262d; border-radius: 6px;
+        }
+        .skeleton-line {
+            height: 12px; margin-bottom: 6px;
+        }
+        .skeleton-chart {
+            height: 200px; border: 1px solid #21262d;
+        }
+        .refreshing-tick {
+            font-size: 10px; color: #484f58; margin-left: 6px;
+        }
