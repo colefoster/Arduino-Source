@@ -49,12 +49,17 @@ void PostMatchScreenDetector::make_overlays(VideoOverlaySet& items) const{
     }
 }
 
+//  Real selected pill is bright green/yellow. Continue-selected reads
+//  r+g ~= 400; Quit-selected (more saturated yellow tint mid-animation)
+//  drops to ~310. Dim FPs at the same ratio max out around r+g ~= 220.
+//  Floor at 280 cleanly separates them.
+static constexpr double MIN_GREEN_BRIGHTNESS = 280.0;
+
 bool PostMatchScreenDetector::detect(const ImageViewRGB32& screen){
     for (int i = 0; i < 3; i++){
         const ImageStats stats = image_stats(extract_box_reference(screen, m_buttons[i]));
-        //  The green pill is nearly saturated in R+G with B ~ 0, so tight
-        //  tolerance is fine and actually helps reject false positives on
-        //  the blue arena floor that shows through between buttons.
+        if (stats.average.r + stats.average.g < MIN_GREEN_BRIGHTNESS) continue;
+        //  Tight ratio tolerance: pill is nearly pure (R+G saturated, B ~ 0).
         if (is_solid(stats, SELECTED_GREEN_PILL, 0.18, 100)){
             m_cursored = static_cast<PostMatchButton>(i);
             return true;

@@ -42,13 +42,24 @@ void MainMenuDetector::make_overlays(VideoOverlaySet& items) const{
     items.add(COLOR_CYAN, m_box_button);
 }
 
+//  is_solid alone (ratio-based) accepts dim brownish-yellow pixels at the
+//  same ratio as bright menu-yellow. Real selected yellow is ~RGB(240, 250, 20),
+//  so r+g >= 400 cleanly rejects all the dim FPs (which max out at r+g ~ 200
+//  in measured action_menu / move_select / overlay frames).
+static constexpr double MIN_YELLOW_BRIGHTNESS = 400.0;
+
+static bool is_bright_yellow(const ImageStats& stats){
+    if (stats.average.r + stats.average.g < MIN_YELLOW_BRIGHTNESS) return false;
+    return is_solid(stats, SELECTED_YELLOW, 0.15, 100);
+}
+
 bool MainMenuDetector::is_battle_selected(const ImageViewRGB32& screen) const{
     const ImageStats stats = image_stats(extract_box_reference(screen, m_battle_button));
-    return is_solid(stats, SELECTED_YELLOW, 0.15, 100);
+    return is_bright_yellow(stats);
 }
 bool MainMenuDetector::is_box_selected(const ImageViewRGB32& screen) const{
     const ImageStats stats = image_stats(extract_box_reference(screen, m_box_button));
-    return is_solid(stats, SELECTED_YELLOW, 0.15, 100);
+    return is_bright_yellow(stats);
 }
 
 bool MainMenuDetector::detect(const ImageViewRGB32& screen){

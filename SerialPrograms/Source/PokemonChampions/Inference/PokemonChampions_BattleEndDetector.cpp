@@ -23,12 +23,12 @@ namespace NintendoSwitch{
 namespace PokemonChampions{
 
 
-//  Winner nameplate is gold/yellow. RGB approx (220, 180, 60)
-//  -> ratio (0.48, 0.39, 0.13).
-static const FloatPixel WINNER_GOLD_NAMEPLATE{0.48, 0.39, 0.13};
-//  Loser nameplate is silver/gray. RGB approx (170, 175, 180) — near-neutral
-//  -> ratio (0.32, 0.33, 0.34). is_solid tolerance handles the small spread.
-static const FloatPixel LOSER_SILVER_NAMEPLATE{0.33, 0.33, 0.34};
+//  Winner nameplate is solid blue. RGB approx (58, 78, 220) -> ratio
+//  (0.16, 0.22, 0.62). Strong B dominance.
+static const FloatPixel WINNER_BLUE_NAMEPLATE{0.16, 0.22, 0.62};
+//  Loser nameplate is solid red. RGB approx (185, 22, 62) -> ratio
+//  (0.69, 0.08, 0.23). Strong R dominance.
+static const FloatPixel LOSER_RED_NAMEPLATE{0.69, 0.08, 0.23};
 
 
 ResultScreenDetector::ResultScreenDetector()
@@ -52,17 +52,22 @@ bool ResultScreenDetector::detect(const ImageViewRGB32& screen){
     const ImageStats left  = image_stats(extract_box_reference(screen, m_left_won_glow));
     const ImageStats right = image_stats(extract_box_reference(screen, m_right_lost_glow));
 
-    const bool left_gold  = is_solid(left,  WINNER_GOLD_NAMEPLATE, 0.18, 80);
-    const bool left_silver   = is_solid(left,  LOSER_SILVER_NAMEPLATE,   0.18, 80);
-    const bool right_gold = is_solid(right, WINNER_GOLD_NAMEPLATE, 0.18, 80);
-    const bool right_silver  = is_solid(right, LOSER_SILVER_NAMEPLATE,   0.18, 80);
+    //  stddev_max=200 absorbs the white-text-on-color spread within the
+    //  nameplate (text bumps right-red stddev sum up to ~167 in measured
+    //  frames). The 0.15 ratio tolerance still rejects all non-result
+    //  frames (dark transitions, light HUD overlays, etc.).
+    const bool left_blue  = is_solid(left,  WINNER_BLUE_NAMEPLATE, 0.15, 200);
+    const bool left_red   = is_solid(left,  LOSER_RED_NAMEPLATE,   0.15, 200);
+    const bool right_blue = is_solid(right, WINNER_BLUE_NAMEPLATE, 0.15, 200);
+    const bool right_red  = is_solid(right, LOSER_RED_NAMEPLATE,   0.15, 200);
 
-    //  Valid result screen: one side blue (winner), the other side red (loser).
-    if (left_gold && right_silver){
+    //  Valid result screen: one side blue nameplate (winner), other red (loser).
+    //  Player is always on the left, so left-blue = won, left-red = lost.
+    if (left_blue && right_red){
         m_won = true;
         return true;
     }
-    if (left_silver && right_gold){
+    if (left_red && right_blue){
         m_won = false;
         return true;
     }
