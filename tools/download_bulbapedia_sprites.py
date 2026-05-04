@@ -22,10 +22,17 @@ import cloudscraper
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 REPO_ROOT = os.path.dirname(SCRIPT_DIR)
-OUT_DIR = os.path.join(REPO_ROOT, "data", "sprite_reference")
 
 API_URL = "https://archives.bulbagarden.net/w/api.php"
-CATEGORY = "Category:Champions menu sprites"
+
+#  Pass --shiny to grab the shiny variants instead of the default normal set.
+SHINY_CATEGORY = "Category:Champions Shiny menu sprites"
+SHINY_OUT_DIR = os.path.join(REPO_ROOT, "data", "sprite_reference_shiny")
+NORMAL_CATEGORY = "Category:Champions menu sprites"
+NORMAL_OUT_DIR = os.path.join(REPO_ROOT, "data", "sprite_reference")
+
+OUT_DIR = NORMAL_OUT_DIR
+CATEGORY = NORMAL_CATEGORY
 
 
 def make_scraper():
@@ -90,6 +97,7 @@ def download(scraper, item, out_path):
 
 
 def main():
+    global OUT_DIR, CATEGORY
     limit = None
     list_only = False
     args = sys.argv[1:]
@@ -97,6 +105,9 @@ def main():
     while i < len(args):
         if args[i] == '--list':
             list_only = True
+        elif args[i] == '--shiny':
+            OUT_DIR = SHINY_OUT_DIR
+            CATEGORY = SHINY_CATEGORY
         elif args[i] == '--limit' and i + 1 < len(args):
             limit = int(args[i + 1])
             i += 1

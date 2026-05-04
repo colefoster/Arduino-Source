@@ -30,13 +30,26 @@ import os
 from PIL import Image
 
 
+import sys
+
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 REPO_ROOT  = os.path.dirname(SCRIPT_DIR)
-SPRITE_DIR = os.path.join(REPO_ROOT, "data", "sprite_reference")
+
+NORMAL_SPRITE_DIR = os.path.join(REPO_ROOT, "data", "sprite_reference")
+SHINY_SPRITE_DIR  = os.path.join(REPO_ROOT, "data", "sprite_reference_shiny")
+OUT_DIR_BASE      = os.path.join(REPO_ROOT, "Resources", "PokemonChampions")
+
+#  Choose which set we're building. Pass --shiny to flip these to the shiny
+#  source dir + shiny output filenames. The slug map for shiny lives in the
+#  shiny sprite dir alongside its files (same format as the normal one).
+SHINY = "--shiny" in sys.argv[1:]
+SPRITE_DIR = SHINY_SPRITE_DIR if SHINY else NORMAL_SPRITE_DIR
 MAP_PATH   = os.path.join(SPRITE_DIR, "sprite_slug_map.json")
-OUT_DIR    = os.path.join(REPO_ROOT, "Resources", "PokemonChampions")
-OUT_PNG    = os.path.join(OUT_DIR, "PokemonSprites.png")
-OUT_JSON   = os.path.join(OUT_DIR, "PokemonSprites.json")
+OUT_PNG    = os.path.join(OUT_DIR_BASE,
+    "PokemonSpritesShiny.png" if SHINY else "PokemonSprites.png")
+OUT_JSON   = os.path.join(OUT_DIR_BASE,
+    "PokemonSpritesShiny.json" if SHINY else "PokemonSprites.json")
+OUT_DIR    = OUT_DIR_BASE
 
 
 SPRITE_W = 128

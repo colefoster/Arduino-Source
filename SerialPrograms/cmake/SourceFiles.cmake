@@ -1332,6 +1332,8 @@ file(GLOB LIBRARY_SOURCES
     Source/PokemonChampions/Inference/PokemonChampions_TeamPreviewDetector.h
     Source/PokemonChampions/Inference/PokemonChampions_TeamPreviewReader.cpp
     Source/PokemonChampions/Inference/PokemonChampions_TeamPreviewReader.h
+    Source/PokemonChampions/Inference/PokemonChampions_PokeballAliveDetector.cpp
+    Source/PokemonChampions/Inference/PokemonChampions_PokeballAliveDetector.h
     Source/PokemonChampions/Resources/PokemonChampions_PokemonSprites.cpp
     Source/PokemonChampions/Resources/PokemonChampions_PokemonSprites.h
     Source/PokemonChampions/Inference/PokemonChampions_ItemNameReader.cpp
@@ -2834,6 +2836,8 @@ file(GLOB LIBRARY_SOURCES
     Source/Tests/ManifestTestRunner.h
     Source/Tests/OcrSuggest.cpp
     Source/Tests/OcrSuggest.h
+    Source/Tests/SpriteMatch.cpp
+    Source/Tests/SpriteMatch.h
     Source/Tests/CommonFramework_Tests.cpp
     Source/Tests/CommonFramework_Tests.h
     Source/Tests/Kernels_Tests.cpp

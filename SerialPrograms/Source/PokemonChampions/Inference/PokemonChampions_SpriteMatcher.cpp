@@ -28,6 +28,24 @@ PokemonSpriteMatcher::PokemonSpriteMatcher(double min_euclidean_distance)
     for (const auto& item : ALL_POKEMON_SPRITES()){
         add(item.first, item.second.icon.copy());
     }
+    //  Shiny variants are loaded with a "-shiny" slug suffix so callers
+    //  that don't care can ignore it, while callers that need to know
+    //  whether the match was a shiny can check for the suffix. Suffix is
+    //  stripped via base_slug() above for downstream consumers.
+    for (const auto& item : ALL_POKEMON_SPRITES_SHINY()){
+        add(item.first + "-shiny", item.second.icon.copy());
+    }
+}
+
+
+std::string PokemonSpriteMatcher::base_slug(const std::string& slug){
+    static const std::string SUFFIX = "-shiny";
+    if (slug.size() > SUFFIX.size() &&
+        slug.compare(slug.size() - SUFFIX.size(), SUFFIX.size(), SUFFIX) == 0)
+    {
+        return slug.substr(0, slug.size() - SUFFIX.size());
+    }
+    return slug;
 }
 
 

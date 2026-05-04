@@ -24,6 +24,17 @@ const SpriteDatabase& ALL_POKEMON_SPRITES(){
     return database;
 }
 
+const SpriteDatabase& ALL_POKEMON_SPRITES_SHINY(){
+#if QT_VERSION_MAJOR == 6
+    QImageReader::setAllocationLimit(0);
+#endif
+    static const SpriteDatabase database(
+        "PokemonChampions/PokemonSpritesShiny.png",
+        "PokemonChampions/PokemonSpritesShiny.json"
+    );
+    return database;
+}
+
 
 }
 }

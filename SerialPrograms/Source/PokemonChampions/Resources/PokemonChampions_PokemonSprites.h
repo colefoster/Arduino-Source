@@ -20,6 +20,10 @@ namespace PokemonChampions{
 
 
 const SpriteDatabase& ALL_POKEMON_SPRITES();
+//  Shiny variants of the same atlas. Loaded lazily; if the resource files
+//  are missing, returns an empty database so the matcher can fall back to
+//  normal-only matching without crashing.
+const SpriteDatabase& ALL_POKEMON_SPRITES_SHINY();
 
 
 }

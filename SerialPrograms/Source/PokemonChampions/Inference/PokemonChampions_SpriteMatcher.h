@@ -18,6 +18,7 @@
 #ifndef PokemonAutomation_PokemonChampions_SpriteMatcher_H
 #define PokemonAutomation_PokemonChampions_SpriteMatcher_H
 
+#include <string>
 #include "CommonTools/ImageMatch/CroppedImageDictionaryMatcher.h"
 
 namespace PokemonAutomation{
@@ -31,6 +32,17 @@ public:
     //  from the measured border color are treated as background and
     //  trimmed during auto-crop.
     static const PokemonSpriteMatcher& instance();
+
+    //  Strip a "-shiny" suffix if present, otherwise return the slug
+    //  unchanged. Lets callers ignore the shiny tag.
+    static std::string base_slug(const std::string& slug);
+
+    //  Expose the auto-cropped candidate(s) the matcher would compare
+    //  against the atlas. Used by --sprite-match-debug to show what the
+    //  C++ side actually sees after pill-bg removal.
+    std::vector<ImageViewRGB32> debug_crop_candidates(const ImageViewRGB32& image) const{
+        return get_crop_candidates(image);
+    }
 
 private:
     PokemonSpriteMatcher(double min_euclidean_distance = 100);

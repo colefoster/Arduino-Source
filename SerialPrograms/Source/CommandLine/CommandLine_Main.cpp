@@ -25,6 +25,7 @@
 #include "Tests/ManifestTestRunner.h"
 #include "Tests/OcrSuggest.h"
 #include "Tests/DetectorDebug.h"
+#include "Tests/SpriteMatch.h"
 #include "CommonFramework/ImageTypes/ImageRGB32.h"
 #include "CommonFramework/ImageTools/ImageBoxes.h"
 #include "PokemonChampions/Inference/PokemonChampions_BattleHUDReader.h"
@@ -189,6 +190,63 @@ int main(int argc, char* argv[]){
             return 1;
         }
         return run_ocr_suggest(argv[2], argv[3]);
+    }
+
+    //  --sprite-match mode: run the Pokemon sprite matcher on an arbitrary
+    //  box and print the top-N matches as JSON.
+    //  Args: <image> <x> <y> <w> <h> [top_n]
+    if (std::strcmp(argv[1], "--sprite-match") == 0){
+        if (argc < 7){
+            std::cerr << "Error: --sprite-match requires <image> <x> <y> <w> <h> [top_n]." << std::endl;
+            print_usage(argv[0]);
+            return 1;
+        }
+        try{
+            double x = std::stod(argv[3]);
+            double y = std::stod(argv[4]);
+            double w = std::stod(argv[5]);
+            double h = std::stod(argv[6]);
+            int top_n = (argc >= 8) ? std::stoi(argv[7]) : 5;
+            return run_sprite_match(argv[2], x, y, w, h, top_n);
+        }catch (const std::exception& e){
+            std::cerr << "Error: " << e.what() << std::endl;
+            return 1;
+        }
+    }
+
+    //  --sprite-match-debug: same as --sprite-match, plus saves the
+    //  auto-cropped candidate (post pill-bg removal) to <out_png>.
+    //  Args: <image> <x> <y> <w> <h> <out_png> [top_n] [bg_r bg_g bg_b bg_dist]...
+    //  Multiple bg color groups (4 ints each) can be passed; pixels
+    //  within bg_dist of any color get painted white.
+    if (std::strcmp(argv[1], "--sprite-match-debug") == 0){
+        if (argc < 8){
+            std::cerr << "Error: --sprite-match-debug requires <image> <x> <y> <w> <h> <out_png> [top_n] [bg_r bg_g bg_b bg_dist]..." << std::endl;
+            print_usage(argv[0]);
+            return 1;
+        }
+        try{
+            double x = std::stod(argv[3]);
+            double y = std::stod(argv[4]);
+            double w = std::stod(argv[5]);
+            double h = std::stod(argv[6]);
+            int top_n = (argc >= 9) ? std::stoi(argv[8]) : 5;
+            std::vector<BgColor> bgs;
+            //  Each bg color is 4 trailing args: r g b dist.
+            int rest = argc - 9;  // args after top_n
+            for (int i = 0; i + 4 <= rest; i += 4){
+                bgs.push_back({
+                    std::stoi(argv[9 + i]),
+                    std::stoi(argv[10 + i]),
+                    std::stoi(argv[11 + i]),
+                    std::stod(argv[12 + i]),
+                });
+            }
+            return run_sprite_match_debug(argv[2], x, y, w, h, argv[7], top_n, bgs);
+        }catch (const std::exception& e){
+            std::cerr << "Error: " << e.what() << std::endl;
+            return 1;
+        }
     }
 
     //  --ocr-crop mode: run number-tuned OCR on an arbitrary box of one image.
