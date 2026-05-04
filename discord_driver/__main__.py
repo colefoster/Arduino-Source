@@ -49,6 +49,13 @@ def main() -> int:
                    help="Lifecycle to script when --mock-discord is set.")
     p.add_argument("--max-posts-per-session", type=int, default=5)
     p.add_argument("--min-seconds-between-posts", type=float, default=30.0)
+    p.add_argument("--trade-command-prefix", default="$trade",
+                   help="Command prefix posted to the channel. Use '-trade' for dash-prefix bots, "
+                        "or '-batch trade' when --batch-size > 1.")
+    p.add_argument("--batch-size", type=int, default=1,
+                   help="If >1, post N pending sets as a single -batch trade message "
+                        "(joined by '---'). Requires --trade-command-prefix to match the "
+                        "bot's batch command.")
     args = p.parse_args()
     if not args.mock_discord and not args.channel_name and not args.channel_url:
         p.error("--channel-name or --channel-url is required unless --mock-discord is set")
@@ -79,6 +86,8 @@ def main() -> int:
         max_in_flight=args.max_in_flight,
         max_posts_per_session=args.max_posts_per_session,
         min_seconds_between_posts=args.min_seconds_between_posts,
+        trade_command_prefix=args.trade_command_prefix,
+        batch_size=args.batch_size,
     )
 
     try:

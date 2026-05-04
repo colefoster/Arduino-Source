@@ -39,6 +39,8 @@ class TradeSet:
     failure_reason: Optional[str]
     created_at: float
     updated_at: float
+    batch_id: Optional[str] = None      # NULL = single trade; UUID = grouped batch
+    batch_index: Optional[int] = None   # 0-based position within the batch
 
 
 _SCHEMA = """
@@ -50,11 +52,23 @@ CREATE TABLE IF NOT EXISTS trade_sets (
     code            TEXT,
     failure_reason  TEXT,
     created_at      REAL NOT NULL,
-    updated_at      REAL NOT NULL
+    updated_at      REAL NOT NULL,
+    batch_id        TEXT,
+    batch_index     INTEGER
 );
-CREATE INDEX IF NOT EXISTS idx_status ON trade_sets(status);
-CREATE INDEX IF NOT EXISTS idx_code   ON trade_sets(code);
+CREATE INDEX IF NOT EXISTS idx_status   ON trade_sets(status);
+CREATE INDEX IF NOT EXISTS idx_code     ON trade_sets(code);
+CREATE INDEX IF NOT EXISTS idx_batch_id ON trade_sets(batch_id);
 """
+
+
+def _migrate(conn: sqlite3.Connection) -> None:
+    cols = {r["name"] for r in conn.execute("PRAGMA table_info(trade_sets)").fetchall()}
+    if "batch_id" not in cols:
+        conn.execute("ALTER TABLE trade_sets ADD COLUMN batch_id TEXT")
+        conn.execute("CREATE INDEX IF NOT EXISTS idx_batch_id ON trade_sets(batch_id)")
+    if "batch_index" not in cols:
+        conn.execute("ALTER TABLE trade_sets ADD COLUMN batch_index INTEGER")
 
 
 def _species_from_body(body: str) -> str:
@@ -82,6 +96,7 @@ class SetQueue:
         self._conn = sqlite3.connect(self.db_path, isolation_level=None)
         self._conn.row_factory = sqlite3.Row
         self._conn.executescript(_SCHEMA)
+        _migrate(self._conn)
 
     def close(self) -> None:
         self._conn.close()
@@ -140,6 +155,26 @@ class SetQueue:
         ).fetchone()
         return _row_to_set(row) if row else None
 
+    def next_pending_batch(self, n: int) -> list[TradeSet]:
+        """Up to N oldest pending sets. Caller decides whether to actually post
+        them as a batch (and stamp them with a batch_id via mark_batch)."""
+        if n < 1:
+            raise ValueError(f"batch size must be >= 1, got {n}")
+        rows = self._conn.execute(
+            "SELECT * FROM trade_sets WHERE status = 'pending' "
+            "ORDER BY created_at ASC LIMIT ?",
+            (n,),
+        ).fetchall()
+        return [_row_to_set(r) for r in rows]
+
+    def in_batch(self, batch_id: str) -> list[TradeSet]:
+        rows = self._conn.execute(
+            "SELECT * FROM trade_sets WHERE batch_id = ? "
+            "ORDER BY batch_index ASC",
+            (batch_id,),
+        ).fetchall()
+        return [_row_to_set(r) for r in rows]
+
     def in_flight(self) -> list[TradeSet]:
         """All sets between submitted and traded — for sanity checks / restart recovery."""
         rows = self._conn.execute(
@@ -159,6 +194,21 @@ class SetQueue:
     def mark_submitted(self, set_id: str) -> None:
         self._transition(set_id, "submitted")
 
+    def mark_batch_submitted(self, set_ids: list[str], batch_id: str) -> None:
+        """Atomically mark N sets submitted with a shared batch_id, indexed by
+        position in `set_ids`. Used when posting a single -batch trade message
+        that the bot will treat as one queued request."""
+        now = time.time()
+        with self._tx() as c:
+            for idx, sid in enumerate(set_ids):
+                n = c.execute(
+                    "UPDATE trade_sets SET status='submitted', batch_id=?, "
+                    "batch_index=?, updated_at=? WHERE set_id=?",
+                    (batch_id, idx, now, sid),
+                ).rowcount
+                if n == 0:
+                    raise KeyError(f"no set with id {sid!r}")
+
     def mark_queued(self, set_id: str, code: str) -> None:
         if not (code.isdigit() and len(code) == 8):
             raise ValueError(f"trade code must be 8 digits, got {code!r}")
@@ -167,6 +217,18 @@ class SetQueue:
                 "UPDATE trade_sets SET status='queued', code=?, updated_at=? "
                 "WHERE set_id=?",
                 (code, time.time(), set_id),
+            )
+
+    def mark_batch_queued(self, batch_id: str, code: str) -> None:
+        """Apply the same code to every submitted set in a batch — the bot
+        issues one code for the whole batch_trade post."""
+        if not (code.isdigit() and len(code) == 8):
+            raise ValueError(f"trade code must be 8 digits, got {code!r}")
+        with self._tx() as c:
+            c.execute(
+                "UPDATE trade_sets SET status='queued', code=?, updated_at=? "
+                "WHERE batch_id=? AND status='submitted'",
+                (code, time.time(), batch_id),
             )
 
     def mark_loading(self, set_id: str) -> None:
@@ -205,6 +267,8 @@ def _row_to_set(row: sqlite3.Row) -> TradeSet:
         failure_reason=row["failure_reason"],
         created_at=row["created_at"],
         updated_at=row["updated_at"],
+        batch_id=row["batch_id"] if "batch_id" in row.keys() else None,
+        batch_index=row["batch_index"] if "batch_index" in row.keys() else None,
     )
 
 

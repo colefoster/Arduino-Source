@@ -4,8 +4,11 @@ DiscordTradeBot module.
 Wire protocol: newline-delimited JSON, one message per line.
 
 Python -> C++:
-    {"type": "TRADE_READY",     "code": "12345678", "set_id": "abc"}
-    {"type": "TRADE_CANCELLED", "set_id": "abc", "reason": "..."}
+    {"type": "TRADE_READY",       "code": "12345678", "set_id": "abc",
+                                  "batch_size": 1}              (batch_size optional, defaults to 1)
+    {"type": "NEXT_TRADE_READY",  "batch_id": "..."}             (batch only — bot signaled
+                                                                  Trade N/M: Ready, advance slot)
+    {"type": "TRADE_CANCELLED",   "set_id": "abc", "reason": "..."}
     {"type": "PING"}
 
 C++ -> Python:
@@ -97,10 +100,20 @@ class SwitchBridge:
         with self._client_lock:
             return self._client_sock is not None
 
-    def send_ready(self, code: str, set_id: str) -> None:
+    def send_ready(self, code: str, set_id: str, batch_size: int = 1) -> None:
         if not (code.isdigit() and len(code) == 8):
             raise ValueError(f"trade code must be 8 digits, got {code!r}")
-        self._send({"type": "TRADE_READY", "code": code, "set_id": set_id})
+        if batch_size < 1:
+            raise ValueError(f"batch_size must be >= 1, got {batch_size}")
+        msg = {"type": "TRADE_READY", "code": code, "set_id": set_id}
+        if batch_size > 1:
+            msg["batch_size"] = batch_size
+        self._send(msg)
+
+    def send_next_trade_ready(self, batch_id: str) -> None:
+        """Bot signaled 'Trade N/M: Ready!' — tell C++ to advance to next box
+        slot and offer it. Only used in batch mode."""
+        self._send({"type": "NEXT_TRADE_READY", "batch_id": batch_id})
 
     def send_cancelled(self, set_id: str, reason: str) -> None:
         self._send({"type": "TRADE_CANCELLED", "set_id": set_id, "reason": reason})

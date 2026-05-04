@@ -28,6 +28,25 @@ static std::string extract_string_field(const std::string& json, const std::stri
     return json.substr(pos + 1, end - pos - 1);
 }
 
+//  Extract a bare numeric (no surrounding quotes) field. Returns `default_value`
+//  if the key is missing or the value isn't a non-negative integer.
+static int extract_int_field(const std::string& json, const std::string& key, int default_value){
+    std::string needle = "\"" + key + "\"";
+    size_t pos = json.find(needle);
+    if (pos == std::string::npos) return default_value;
+    pos = json.find(':', pos + needle.size());
+    if (pos == std::string::npos) return default_value;
+    pos++;
+    while (pos < json.size() && (json[pos] == ' ' || json[pos] == '\t')) pos++;
+    if (pos >= json.size() || !(json[pos] >= '0' && json[pos] <= '9')) return default_value;
+    int value = 0;
+    while (pos < json.size() && json[pos] >= '0' && json[pos] <= '9'){
+        value = value * 10 + (json[pos] - '0');
+        pos++;
+    }
+    return value;
+}
+
 static std::string escape_json(const std::string& s){
     std::string out;
     out.reserve(s.size() + 2);
@@ -83,6 +102,14 @@ std::optional<DiscordTradeRequest> DiscordTradeBridge::wait_for_trade_ready(
     DiscordTradeRequest req = std::move(m_pending.front());
     m_pending.pop_front();
     return req;
+}
+
+bool DiscordTradeBridge::wait_for_next_trade_ready(std::chrono::milliseconds timeout){
+    std::unique_lock<std::mutex> lk(m_mutex);
+    m_cv.wait_for(lk, timeout, [&]{ return m_next_trade_ready_count > 0 || m_shutdown; });
+    if (m_next_trade_ready_count <= 0) return false;
+    m_next_trade_ready_count--;
+    return true;
 }
 
 void DiscordTradeBridge::send_trade_complete(const std::string& set_id){
@@ -141,10 +168,15 @@ void DiscordTradeBridge::process_line(const std::string& line){
         DiscordTradeRequest req;
         req.code = extract_string_field(line, "code");
         req.set_id = extract_string_field(line, "set_id");
+        req.batch_size = extract_int_field(line, "batch_size", 1);
+        if (req.batch_size < 1) req.batch_size = 1;
         if (!req.code.empty() && !req.set_id.empty()){
             m_pending.push_back(std::move(req));
             m_cv.notify_all();
         }
+    } else if (type == "NEXT_TRADE_READY"){
+        m_next_trade_ready_count++;
+        m_cv.notify_all();
     }
     //  PING / TRADE_CANCELLED handling deliberately omitted for v1 — Python
     //  side currently only sends TRADE_READY at runtime.

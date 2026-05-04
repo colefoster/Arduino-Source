@@ -128,15 +128,26 @@ void DiscordTradeBotProgram::program(
         deadline = std::chrono::steady_clock::now()
                  + std::chrono::seconds(TRADE_READY_TIMEOUT_SECONDS);
 
-        env.log("Got TRADE_READY for set " + req->set_id + " code " + req->code);
+        env.log("Got TRADE_READY for set " + req->set_id + " code " + req->code
+                + (req->batch_size > 1
+                   ? " (batch of " + std::to_string(req->batch_size) + ")"
+                   : std::string()));
         MultiConsoleErrorState tracker;
 
-        DiscordTradeResult result = run_one_discord_trade(
-            env.program_info(),
-            env.console, context,
-            tracker, stats,
-            *req
-        );
+        DiscordTradeResult result = (req->batch_size > 1)
+            ? run_one_discord_batch(
+                env.program_info(),
+                env.console, context,
+                tracker, stats,
+                *req,
+                bridge
+            )
+            : run_one_discord_trade(
+                env.program_info(),
+                env.console, context,
+                tracker, stats,
+                *req
+            );
 
         switch (result){
         case DiscordTradeResult::SUCCESS:

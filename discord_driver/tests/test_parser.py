@@ -1,6 +1,7 @@
 """Parser tests against verbatim KlawfAPP DM samples (April 2026 transcript)."""
 
 from discord_driver.parser import (
+    BatchAllComplete, BatchTradeCompleted, BatchTradeReady,
     CodeIssued, Queued, UpNext, LoadingTrade, Searching, PartnerFound,
     NoPartner, TooSlow, TradeFinished, TradeCanceled, Unknown,
     parse_message, is_go_signal, is_terminal,
@@ -207,3 +208,115 @@ def test_archaludon_oops_then_canceled():
     canceled = "Trade Canceled\nYour trade was canceled.\nReason: TrainerTooSlow"
     assert parse_message(notice) == TooSlow()
     assert parse_message(canceled) == TradeCanceled(reason="TrainerTooSlow")
+
+
+# --- batch lifecycle (verbatim from 6:21–6:38 PM transcript) ---
+
+def test_batch_queued_still_matches_singular_pattern():
+    """The bot prepends 'Batch ' to the queue confirmation but the body still
+    contains 'Trade Request Queued' — singular regex should still hit so we
+    keep tracking the queue position."""
+    body = (
+        "🎁 Batch Trade Request Queued\n"
+        "Your batch trade request (5 Pokémon) has been queued.\n\n"
+        "⚠️ Important Instructions:\n"
+        "• Stay in the trade for all 5 trades\n"
+        "• Have all 5 Pokémon ready to trade\n"
+        "• Do not exit until you see the completion message\n\n"
+        "Queue Position: 6\n"
+        "Estimated wait time: 9 minutes"
+    )
+    evt = parse_message(body)
+    assert isinstance(evt, Queued)
+    assert evt.position == 6
+
+
+def test_batch_loading_message_still_parses_as_loading_trade():
+    """Bot's batch-loading body has extra prose after the front matter; the
+    LoadingTrade regex anchors on the prefix so it should still match."""
+    body = (
+        "Loading the Trade Menu...\n"
+        "Pokemon: Clefable\n"
+        "Trade Code: 1532 5063\n\n"
+        "Starting your batch trade! Trading 5 Pokémon.\n\n"
+        "Trade 1/5: Clefable (Clefable)\n\n"
+        "⚠️ IMPORTANT: Stay in the trade until all 5 trades are completed!"
+    )
+    evt = parse_message(body)
+    assert isinstance(evt, LoadingTrade)
+    assert evt.code == "15325063"
+    assert evt.species == "Clefable"
+
+
+def test_batch_trade_completed_intermediate():
+    body = (
+        "Notice...\n"
+        "Trade 1 completed! DO NOT OFFER YET - Preparing your next Pokémon (2/5)..."
+    )
+    evt = parse_message(body)
+    assert evt == BatchTradeCompleted(index=1, total=5)
+
+
+def test_batch_trade_ready_signals_advance():
+    body = (
+        "Notice...\n"
+        "Trade 2/5: Ready! You can now offer your Pokémon for trade 2/5."
+    )
+    evt = parse_message(body)
+    assert evt == BatchTradeReady(index=2, total=5)
+
+
+def test_batch_all_complete_terminal():
+    body = "Notice...\nAll batch trades completed! Thank you for trading!"
+    evt = parse_message(body)
+    assert evt == BatchAllComplete()
+
+
+def test_batch_all_complete_with_emoji_summary():
+    """The success-summary message also starts with 'All batch trades' or the
+    checkmark variant; both should map to BatchAllComplete via the dominant
+    'All batch trades completed' substring (or via its sibling, the emoji
+    line, which we don't separately classify)."""
+    body = "✅ All 5 trades completed successfully! Thank you for trading!"
+    # This one does NOT contain 'All batch trades completed' verbatim, so it
+    # currently falls to Unknown. Documenting current behavior so we notice
+    # if/when we want to expand the regex.
+    evt = parse_message(body)
+    assert isinstance(evt, Unknown)
+
+
+def test_batch_full_lifecycle_in_order():
+    """Replay the full 6:21–6:38 PM transcript and assert event types in order."""
+    bodies = [
+        # 6:21 PM
+        "Here's your trade code!\n1532 5063\nInstructions",
+        "🎁 Batch Trade Request Queued\nYour batch trade request (5 Pokémon) has been queued.\nQueue Position: 6\nEstimated wait time: 9 minutes",
+        # 6:23 PM
+        "You're Up Next!\nYour trade will begin very soon. Please be ready!",
+        # 6:33 PM — Loading + searching
+        "Loading the Trade Menu...\nPokemon: Clefable\nTrade Code: 1532 5063\n\nStarting your batch trade! Trading 5 Pokémon.\n\nTrade 1/5: Clefable (Clefable)",
+        "Now Searching for you,\nWaiting For: .colef\nMy IGN: Klawf.net",
+        # 6:34 PM — partner + per-trade alternation
+        "Notice...\nFound Link Trade partner: Cole. TID: 863442 SID: 3548",
+        "Notice...\nTrade 1 completed! DO NOT OFFER YET - Preparing your next Pokémon (2/5)...",
+        "Notice...\nTrade 2/5: Ready! You can now offer your Pokémon for trade 2/5.",
+        "Notice...\nTrade 2 completed! DO NOT OFFER YET - Preparing your next Pokémon (3/5)...",
+        "Notice...\nTrade 3/5: Ready! You can now offer your Pokémon for trade 3/5.",
+        "Notice...\nTrade 3 completed! DO NOT OFFER YET - Preparing your next Pokémon (4/5)...",
+        "Notice...\nTrade 4/5: Ready! You can now offer your Pokémon for trade 4/5.",
+        "Notice...\nTrade 4 completed! DO NOT OFFER YET - Preparing your next Pokémon (5/5)...",
+        "Notice...\nTrade 5/5: Ready! You can now offer your Pokémon for trade 5/5.",
+        # 6:38 PM — terminal
+        "Notice...\nAll batch trades completed! Thank you for trading!",
+    ]
+    events = [parse_message(b) for b in bodies]
+    types = [type(e).__name__ for e in events]
+    assert types == [
+        "CodeIssued", "Queued", "UpNext", "LoadingTrade", "Searching",
+        "PartnerFound",
+        "BatchTradeCompleted", "BatchTradeReady",
+        "BatchTradeCompleted", "BatchTradeReady",
+        "BatchTradeCompleted", "BatchTradeReady",
+        "BatchTradeCompleted", "BatchTradeReady",
+        "BatchAllComplete",
+    ]

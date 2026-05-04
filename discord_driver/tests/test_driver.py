@@ -31,13 +31,17 @@ class FakeSession:
 @dataclass
 class FakeBridge:
     connected: bool = True
-    sent: List[tuple] = field(default_factory=list)  # (code, set_id)
+    sent: List[tuple] = field(default_factory=list)  # (code, set_id, batch_size)
+    next_signals: List[str] = field(default_factory=list)  # batch_ids
 
     def is_connected(self) -> bool:
         return self.connected
 
-    def send_ready(self, code: str, set_id: str) -> None:
-        self.sent.append((code, set_id))
+    def send_ready(self, code: str, set_id: str, batch_size: int = 1) -> None:
+        self.sent.append((code, set_id, batch_size))
+
+    def send_next_trade_ready(self, batch_id: str) -> None:
+        self.next_signals.append(batch_id)
 
 
 def _msg(idx: int, body: str) -> ScrapedMessage:
@@ -106,7 +110,7 @@ def test_loading_trade_emits_to_bridge_and_marks_loading(setup):
     ))
     driver.tick()
 
-    assert bridge.sent == [("59961930", s.set_id)]
+    assert bridge.sent == [("59961930", s.set_id, 1)]
     assert queue.get(s.set_id).status == "loading"
 
 
@@ -295,7 +299,7 @@ def test_pipelined_two_sets_match_loading_by_code(setup):
         "Loading the Trade Menu...\nPokemon: Lucario\nTrade Code: 2222 2222"
     ))
     driver.tick()
-    assert bridge.sent == [("22222222", b.set_id)]
+    assert bridge.sent == [("22222222", b.set_id, 1)]
     assert queue.get(b.set_id).status == "loading"
     assert queue.get(a.set_id).status == "queued"  # still waiting
 
@@ -303,4 +307,130 @@ def test_pipelined_two_sets_match_loading_by_code(setup):
         "Loading the Trade Menu...\nPokemon: Vaporeon\nTrade Code: 1111 1111"
     ))
     driver.tick()
-    assert bridge.sent[-1] == ("11111111", a.set_id)
+    assert bridge.sent[-1] == ("11111111", a.set_id, 1)
+
+
+# --- batch lifecycle ---
+
+def test_batch_post_assembles_with_separator(tmp_path):
+    queue = SetQueue(tmp_path / "test.db")
+    a = queue.add_set("Clefable\nLevel: 50")
+    b = queue.add_set("Tinkaton\nLevel: 50")
+    c = queue.add_set("Quaquaval\nLevel: 50")
+    session = FakeSession()
+    bridge = FakeBridge()
+    config = DriverConfig(
+        trade_command_prefix="-batch trade",
+        batch_size=3,
+        max_posts_per_session=10,
+        min_seconds_between_posts=0.0,
+    )
+    driver = Driver(session, queue, bridge, config)
+    driver.tick()
+
+    assert len(session.posts) == 1
+    body = session.posts[0]
+    assert body.startswith("-batch trade\n")
+    assert "Clefable" in body and "Tinkaton" in body and "Quaquaval" in body
+    assert body.count("\n---\n") == 2
+    # All three sets share a batch_id and are submitted.
+    rows = [queue.get(s.set_id) for s in (a, b, c)]
+    assert all(r.status == "submitted" for r in rows)
+    bid = rows[0].batch_id
+    assert bid and all(r.batch_id == bid for r in rows)
+    assert [r.batch_index for r in rows] == [0, 1, 2]
+
+
+def test_batch_holds_until_full(tmp_path):
+    queue = SetQueue(tmp_path / "test.db")
+    queue.add_set("Clefable\nLevel: 50")
+    queue.add_set("Tinkaton\nLevel: 50")
+    config = DriverConfig(
+        trade_command_prefix="-batch trade",
+        batch_size=5,  # need 5 but only 2 pending
+        max_posts_per_session=10,
+        min_seconds_between_posts=0.0,
+    )
+    driver = Driver(FakeSession(), queue, FakeBridge(), config)
+    driver.tick()
+    # No post yet — batch is partial.
+    assert queue.counts_by_status().get("submitted", 0) == 0
+
+
+def test_batch_full_dm_lifecycle(tmp_path):
+    """Walk a 3-mon batch through the full DM sequence and assert every set
+    transitions correctly + the bridge receives one TRADE_READY + (N-1)
+    NEXT_TRADE_READY signals."""
+    queue = SetQueue(tmp_path / "test.db")
+    a = queue.add_set("Clefable\nLevel: 50")
+    b = queue.add_set("Tinkaton\nLevel: 50")
+    c = queue.add_set("Quaquaval\nLevel: 50")
+    session = FakeSession()
+    bridge = FakeBridge()
+    config = DriverConfig(
+        trade_command_prefix="-batch trade",
+        batch_size=3,
+        max_posts_per_session=10,
+        min_seconds_between_posts=0.0,
+    )
+    driver = Driver(session, queue, bridge, config)
+
+    # Tick 1: post the batch.
+    driver.tick()
+    assert len(session.posts) == 1
+
+    # Bot replies with code.
+    session.inbox.append(_msg(1, "Here's your trade code!\n4826 8524"))
+    driver.tick()
+    assert all(queue.get(s.set_id).status == "queued" for s in (a, b, c))
+    assert all(queue.get(s.set_id).code == "48268524" for s in (a, b, c))
+
+    # Loading message — should mark all three loading + send ONE TRADE_READY w/ batch_size=3.
+    session.inbox.append(_msg(2,
+        "Loading the Trade Menu...\nPokemon: Clefable\nTrade Code: 4826 8524\n\n"
+        "Starting your batch trade! Trading 3 Pokémon."
+    ))
+    driver.tick()
+    assert all(queue.get(s.set_id).status == "loading" for s in (a, b, c))
+    assert len(bridge.sent) == 1
+    code, set_id, batch_size = bridge.sent[0]
+    assert code == "48268524" and batch_size == 3 and set_id == a.set_id
+
+    # Trade 1 completes; bot says "Preparing 2/3".
+    session.inbox.append(_msg(3,
+        "Notice...\nTrade 1 completed! DO NOT OFFER YET - "
+        "Preparing your next Pokémon (2/3)..."
+    ))
+    driver.tick()
+    assert queue.get(a.set_id).status == "traded"
+    assert queue.get(b.set_id).status == "loading"  # not yet
+    assert bridge.next_signals == []  # not until "Ready!"
+
+    # "Trade 2/3: Ready!" → driver fires NEXT_TRADE_READY.
+    session.inbox.append(_msg(4,
+        "Notice...\nTrade 2/3: Ready! You can now offer your Pokémon for trade 2/3."
+    ))
+    driver.tick()
+    assert len(bridge.next_signals) == 1
+
+    # Trade 2 completes.
+    session.inbox.append(_msg(5,
+        "Notice...\nTrade 2 completed! DO NOT OFFER YET - "
+        "Preparing your next Pokémon (3/3)..."
+    ))
+    driver.tick()
+    assert queue.get(b.set_id).status == "traded"
+
+    # Trade 3 ready.
+    session.inbox.append(_msg(6,
+        "Notice...\nTrade 3/3: Ready! You can now offer your Pokémon for trade 3/3."
+    ))
+    driver.tick()
+    assert len(bridge.next_signals) == 2
+
+    # Final terminal — bot doesn't always send per-trade completion for the
+    # last mon, so the BatchAllComplete handler must close any remaining loading.
+    session.inbox.append(_msg(7, "Notice...\nAll batch trades completed! Thank you for trading!"))
+    driver.tick()
+    assert queue.get(c.set_id).status == "traded"
+    assert queue.counts_by_status().get("loading", 0) == 0

@@ -36,6 +36,15 @@ public:
         std::chrono::milliseconds timeout
     );
 
+    //  Block until a NEXT_TRADE_READY arrives (signaled by Python when the bot
+    //  DMs "Trade N/M: Ready!" between batch trades). Returns true if a signal
+    //  was consumed, false on timeout/shutdown. Thread-safe.
+    //
+    //  Implementation note: each call consumes one signal. If two
+    //  NEXT_TRADE_READY messages land while we're processing trade 2, the
+    //  next two calls return immediately — the queue is just a counter.
+    bool wait_for_next_trade_ready(std::chrono::milliseconds timeout);
+
     void send_trade_complete(const std::string& set_id);
     void send_trade_failed(const std::string& set_id, const std::string& reason);
     void send_pong();
@@ -53,6 +62,7 @@ private:
     std::condition_variable m_cv;
     std::string m_recv_buffer;
     std::deque<DiscordTradeRequest> m_pending;
+    int m_next_trade_ready_count = 0;
     bool m_connected = false;
     bool m_shutdown = false;
 };

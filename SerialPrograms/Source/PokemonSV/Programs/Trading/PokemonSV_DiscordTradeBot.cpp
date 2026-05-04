@@ -21,8 +21,11 @@
 #include "PokemonSV/Inference/Tera/PokemonSV_TeraRaidSearchDetector.h"
 #include "PokemonSV/Inference/Overworld/PokemonSV_OverworldDetector.h"
 #include "PokemonSV/Programs/PokemonSV_ConnectToInternet.h"
+#include "PokemonSV/Inference/Boxes/PokemonSV_BoxDetection.h"
+#include "PokemonSV/Programs/Boxes/PokemonSV_BoxRoutines.h"
 #include "PokemonSV/Programs/FastCodeEntry/PokemonSV_CodeEntry.h"
 #include "PokemonSV_DiscordTradeBot.h"
+#include "PokemonSV_DiscordTradeBridge.h"
 #include "PokemonSV_TradeRoutines.h"
 
 namespace PokemonAutomation{
@@ -217,6 +220,87 @@ DiscordTradeResult run_one_discord_trade(
     } catch (OperationFailedException&){
         stats.m_errors++;
         stream.log("run_one_discord_trade(): operation failed, escaping to overworld.", COLOR_RED);
+        escape_to_overworld(stream, context);
+        return DiscordTradeResult::PARTNER_NO_SHOW;
+    }
+}
+
+
+DiscordTradeResult run_one_discord_batch(
+    const ProgramInfo& info, ConsoleHandle& stream, ProControllerContext& context,
+    MultiConsoleErrorState& tracker,
+    TradeStats& stats,
+    const DiscordTradeRequest& request,
+    DiscordTradeBridge& bridge
+){
+    using namespace std::chrono;
+
+    if (request.code.size() != 8 ||
+        request.code.find_first_not_of("0123456789") != std::string::npos)
+    {
+        stats.m_errors++;
+        stream.log("run_one_discord_batch(): invalid code, must be 8 digits.", COLOR_RED);
+        return DiscordTradeResult::UNRECOVERABLE;
+    }
+    const int N = request.batch_size;
+    if (N < 1 || N > 6){
+        stats.m_errors++;
+        stream.log("run_one_discord_batch(): batch_size must be 1..6, got "
+                   + std::to_string(N), COLOR_RED);
+        return DiscordTradeResult::UNRECOVERABLE;
+    }
+
+    try {
+        stream.log("Walking to overworld before batch navigation.");
+        escape_to_overworld(stream, context);
+
+        //  One Link Trade entry serves the entire batch — partner stays
+        //  connected, we just feed it N mons in a row.
+        enter_link_trade_with_code(
+            info, stream, context,
+            KeyboardLayout::QWERTY,
+            request.code
+        );
+
+        //  Pre-stage assumption: throwaways occupy row 0, columns 0..N-1.
+        //  The trade flow drops us at the box screen between trades; we move
+        //  the cursor to the next slot and let trade_current_pokemon's A-mash
+        //  handle the offer-confirm-trade animation cycle.
+        for (int i = 0; i < N; i++){
+            move_box_cursor(
+                info, stream, context,
+                BoxCursorLocation::SLOTS, /*row=*/0, /*col=*/(uint8_t)i
+            );
+
+            trade_current_pokemon(stream, context, tracker, stats);
+            stats.m_trades++;
+            stream.log("Batch trade " + std::to_string(i + 1) + "/"
+                       + std::to_string(N) + " complete.");
+
+            if (i + 1 < N){
+                //  Bot says "DO NOT OFFER YET - Preparing your next Pokémon"
+                //  immediately, then "Trade M/N: Ready!" once the partner
+                //  side has staged the next mon. Python forwards the latter
+                //  as NEXT_TRADE_READY. Wait up to 3 minutes — Klawf usually
+                //  takes 10–30s but we don't want to bail early.
+                stream.log("Waiting for NEXT_TRADE_READY from Python (trade "
+                           + std::to_string(i + 2) + "/" + std::to_string(N) + ").");
+                if (!bridge.wait_for_next_trade_ready(minutes(3))){
+                    stats.m_errors++;
+                    stream.log("Batch wait timed out after trade "
+                               + std::to_string(i + 1) + "/" + std::to_string(N)
+                               + ". Escaping.", COLOR_RED);
+                    escape_to_overworld(stream, context);
+                    return DiscordTradeResult::TRADE_INTERRUPTED;
+                }
+            }
+        }
+
+        return DiscordTradeResult::SUCCESS;
+
+    } catch (OperationFailedException&){
+        stats.m_errors++;
+        stream.log("run_one_discord_batch(): operation failed mid-batch, escaping.", COLOR_RED);
         escape_to_overworld(stream, context);
         return DiscordTradeResult::PARTNER_NO_SHOW;
     }

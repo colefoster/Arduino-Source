@@ -67,6 +67,28 @@ class TradeFinished:
 
 
 @dataclass(frozen=True)
+class BatchTradeReady:
+    """Bot's 'Trade N/M: Ready!' signal between batch trades. Tells the Switch
+    to advance to the next box slot and offer it. Trade 1 is implicit in the
+    initial LoadingTrade message — first BatchTradeReady is for trade 2."""
+    index: int      # 1-based: which trade in the batch is now ready
+    total: int
+
+
+@dataclass(frozen=True)
+class BatchTradeCompleted:
+    """Per-trade completion within a batch: 'Trade N completed!'. Bot is
+    preparing the next mon — Switch must NOT offer until BatchTradeReady."""
+    index: int      # 1-based: which trade just finished
+    total: int
+
+
+@dataclass(frozen=True)
+class BatchAllComplete:
+    """Final terminal event: 'All batch trades completed!' Closes the batch."""
+
+
+@dataclass(frozen=True)
 class TradeAttachment:
     """The 'Here's what you traded me!' message that bundles the .pk9 attachment.
     Informational — no driver action needed."""
@@ -85,7 +107,9 @@ class Unknown:
 
 Event = Union[
     CodeIssued, Queued, UpNext, LoadingTrade, Searching, PartnerFound,
-    NoPartner, TooSlow, TradeFinished, TradeAttachment, TradeCanceled, Unknown,
+    NoPartner, TooSlow, TradeFinished,
+    BatchTradeReady, BatchTradeCompleted, BatchAllComplete,
+    TradeAttachment, TradeCanceled, Unknown,
 ]
 
 
@@ -129,6 +153,19 @@ _RE_TRADE_ATTACHMENT = re.compile(r"Here's what you traded me!", re.IGNORECASE)
 _RE_TRADE_CANCELED = re.compile(
     r"Trade Canceled.*?Reason:\s*(?P<reason>\w+)", re.IGNORECASE | re.DOTALL,
 )
+# Batch lifecycle. Match "All batch trades completed" BEFORE BatchTradeCompleted
+# (the singular pattern would otherwise hit on the All... line via "trades completed").
+_RE_BATCH_ALL_COMPLETE = re.compile(
+    r"All batch trades completed", re.IGNORECASE,
+)
+_RE_BATCH_TRADE_READY = re.compile(
+    r"Trade\s+(?P<idx>\d+)/(?P<total>\d+):\s*Ready!",
+    re.IGNORECASE,
+)
+_RE_BATCH_TRADE_COMPLETED = re.compile(
+    r"Trade\s+(?P<idx>\d+)\s+completed!.*?Preparing your next Pok.*?\((?P<next>\d+)/(?P<total>\d+)\)",
+    re.IGNORECASE | re.DOTALL,
+)
 
 
 def _strip_code(code: str) -> str:
@@ -138,6 +175,15 @@ def _strip_code(code: str) -> str:
 def parse_message(body: str) -> Event:
     """Classify a single DM body. Returns Unknown if no template matches."""
     text = body.strip()
+
+    # Batch events: check before LoadingTrade/TradeFinished because their
+    # bodies can co-occur in a single message; specific batch markers win.
+    if _RE_BATCH_ALL_COMPLETE.search(text):
+        return BatchAllComplete()
+    if m := _RE_BATCH_TRADE_READY.search(text):
+        return BatchTradeReady(index=int(m["idx"]), total=int(m["total"]))
+    if m := _RE_BATCH_TRADE_COMPLETED.search(text):
+        return BatchTradeCompleted(index=int(m["idx"]), total=int(m["total"]))
 
     if m := _RE_LOADING.search(text):
         return LoadingTrade(species=m["species"].strip(), code=_strip_code(m["code"]))
