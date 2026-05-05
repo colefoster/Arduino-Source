@@ -55,15 +55,38 @@ void PostMatchScreenDetector::make_overlays(VideoOverlaySet& items) const{
 //  Floor at 280 cleanly separates them.
 static constexpr double MIN_GREEN_BRIGHTNESS = 280.0;
 
+//  Unselected button fill is purple-blue (~RGB 23, 10, 202). Co-evidence
+//  used to reject battle-screen FPs where multiple button positions
+//  happen to land on bright move-tile yellow.
+static bool is_unselected_purple(const ImageStats& stats){
+    return stats.average.b > 100.0
+        && stats.average.b > stats.average.r + stats.average.g;
+}
+
 bool PostMatchScreenDetector::detect(const ImageViewRGB32& screen){
+    ImageStats button_stats[3];
     for (int i = 0; i < 3; i++){
-        const ImageStats stats = image_stats(extract_box_reference(screen, m_buttons[i]));
+        button_stats[i] = image_stats(extract_box_reference(screen, m_buttons[i]));
+    }
+    for (int i = 0; i < 3; i++){
+        const ImageStats& stats = button_stats[i];
         if (stats.average.r + stats.average.g < MIN_GREEN_BRIGHTNESS) continue;
         //  Tight ratio tolerance: pill is nearly pure (R+G saturated, B ~ 0).
-        if (is_solid(stats, SELECTED_GREEN_PILL, 0.18, 100)){
-            m_cursored = static_cast<PostMatchButton>(i);
-            return true;
+        if (!is_solid(stats, SELECTED_GREEN_PILL, 0.18, 100)) continue;
+        //  Co-evidence: a real post-match screen has exactly one selected
+        //  pill and two unselected purple-blue pills. On battle FPs all
+        //  three positions read warm/green, so the purple test fails.
+        bool other_purple = false;
+        for (int j = 0; j < 3; j++){
+            if (j == i) continue;
+            if (is_unselected_purple(button_stats[j])){
+                other_purple = true;
+                break;
+            }
         }
+        if (!other_purple) continue;
+        m_cursored = static_cast<PostMatchButton>(i);
+        return true;
     }
     return false;
 }

@@ -25,12 +25,11 @@ Update protocol: edit in place, no dates on items in Now/Next/Backlog. Add to **
 
 - **Break up `BattleHUDReader`?** It's drifting toward 8+ sub-readers (HP, PP, status, Tera, item, ability, sprite, pokeballs). Open design Q -- when does fan-out beat a single fat reader?
 - **Detector tuning grind** (current state, 2026-05-02 evening):
-  - PostMatchScreenDetector: 211/213 (99.1%) -- 2 fails (action_menu attack animation + 1 communicating overlay both have bright green at the Continue position)
   - BattleHUDReader.opponent_species: 138/138 (100%) -- all 41 prior fails were mislabels; OCR was correct (canonical species, language-agnostic)
   - BattleHUDReader.own_hp_current: 66/66 (100%)
   - BattleHUDReader.own_hp_max: 66/66 (100%)
   - TeamPreviewDetector: 213/213 (100%) -- locked-in screen dropped from registry; PreparingForBattleDetector covers that screen
-  - BattleLogReader / PostMatchScreenDetector: 2 fails each
+  - BattleLogReader: 2 fails
   - MoveSelectDetector / TeamSelectDetector / BattleHUDReader.opponent_species: 1 fail each
 - **Search engine sequence-history encoding.** MCTS 1-ply gave -0.4% lift; bottleneck is missing sequence history in encoding (per `memory/project_search_engine.md`).
 - **Pipeline redesign.** Two-layer hour-bucketed pipeline; sharded_cache + lead/winrate/v2_window slated for deletion. Phased plan in `plans/two-layer-pipeline-and-model-cuts.md`.
@@ -38,6 +37,7 @@ Update protocol: edit in place, no dates on items in Now/Next/Backlog. Add to **
 ## Recently shipped
 *Last ~2 weeks. Trim aggressively -- this is for context, not history.*
 
+- 2026-05-04 -- PostMatchScreenDetector 99.1% -> 100%. Both FPs (action_menu + communicating overlay) had genuine green-yellow pixels at the Continue button position (battle move tiles). Tightening color alone couldn't separate. Added co-evidence: a real post-match screen has exactly one green pill and two unselected purple-blue pills (`b > 100 AND b > r+g`). On battle FPs all three button positions read warm/green so the purple test fails. Same shape as the MainMenu chrome co-evidence.
 - 2026-05-04 -- MovesMoreDetector 99.1% -> 100%. Both FPs (action_menu attack-anim + communicating overlay) had near-black pixels at the card-bg sample with ratio identical to the bright purple. Added channel-sum brightness floor (`r+g+b >= 200`); real card reads sum=399, FPs read sum<100.
 - 2026-05-04 -- MainMenuDetector 95.3% -> 100%. Remaining 10 FPs were action_menu / move_select / battle_log / battle_mode_menu frames where genuine yellow pixels (move tiles, status icons) happened to land on the 3x3 button-glow sample regions. Tightened `is_solid` ratio tolerance 0.15 -> 0.05 (kills 6 off-color FPs) and added a third "menu chrome" sample at (0.30, 0.45) — the TV/character backdrop reads bright cyan-blue (b≈254) on the menu and warm/dim (b<150) on every battle FP. Also added detectors to the dashboard Mismatches view (new `Detectors` optgroup) and switched mac_dev_runner from single-threaded `HTTPServer` to `ThreadingHTTPServer` so 200+ parallel scans don't queue head-of-line and trigger Cloudflare 524.
 - 2026-05-04 -- BattleHUDReader.own_hp_current/max 90.9%/95.5% -> 100%/100%. Switched from two per-side crops (cur, max) to one combined "X/Y" crop per slot — Tesseract sees the slash in proper digit context. Added a digit-confusable pre-pass mapping common Tesseract misreads (`>` → `2`, `B`/`E` → `8`, `O` → `0`, etc.) before parse_fraction; the pre-pass drops confusables that are sandwiched between two digits (segmentation noise like "8E4") instead of mapping them. Mismatches view now shows `(raw: X)` next to `got` so you can see pre/post fixup at a glance.
