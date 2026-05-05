@@ -57,6 +57,18 @@ def call_runner(image_path, reader):
         return json.loads(r.read()).get("result", {})
 
 
+def call_detector_debug(image_path):
+    with open(image_path, "rb") as fp:
+        b64 = base64.b64encode(fp.read()).decode()
+    body = json.dumps({"image_base64": b64}).encode()
+    req = urllib.request.Request(
+        f"{DEV_RUNNER}/detector-debug", data=body,
+        headers={"Content-Type": "application/json"},
+    )
+    with urllib.request.urlopen(req, timeout=60) as r:
+        return json.loads(r.read()).get("result", {})
+
+
 def run_readers(frames, workers=12):
     def work(p):
         out = {}
@@ -64,6 +76,13 @@ def run_readers(frames, workers=12):
         except Exception as e: out["BattleHUDReader_err"] = str(e)
         try: out["BattleLogReader"] = call_runner(p, "BattleLogReader")
         except Exception as e: out["BattleLogReader_err"] = str(e)
+        try:
+            d = call_detector_debug(p)
+            flat = {}
+            for det in (d.get("detectors") or []):
+                flat[det.get("name")] = bool(det.get("detected"))
+            out["detectors"] = flat
+        except Exception as e: out["detectors_err"] = str(e)
         return p, out
     results = {}
     with ThreadPoolExecutor(max_workers=workers) as ex:
@@ -107,8 +126,20 @@ def load_corpus():
 def _norm(t): return re.sub(r"\s+", " ", (t or "").strip().lower())
 
 
+#  Detectors whose first-fire (across the whole dump) is interesting enough
+#  to keep one representative frame. These tend to fire on screens we have
+#  thin coverage for.
+KEEP_FIRST_FIRE_DETECTORS = (
+    "PokemonSwitchDetector",     # not yet built — kept for forward-compat
+    "TargetSelectDetector",      # not yet built — kept for forward-compat
+    "MegaEvolveDetector",        # the rare frames where mega is available
+    "ResultScreenDetector",      # post-match sample
+)
+
+
 def pick_keepers(results, known_species, known_events, known_text):
     seen_events, seen_texts = set(), set()
+    seen_first_fires = set()
     keep = []
     for path in sorted(results.keys()):
         out = results[path]
@@ -124,6 +155,12 @@ def pick_keepers(results, known_species, known_events, known_text):
                 if key not in known_text and key not in seen_texts:
                     reasons.append(f"new_log_text={et}:{raw[:50]!r}")
                     seen_texts.add(key)
+        # First-fire detector frames — useful for thin-coverage screens.
+        dets = out.get("detectors") or {}
+        for det_name in KEEP_FIRST_FIRE_DETECTORS:
+            if dets.get(det_name) and det_name not in seen_first_fires:
+                reasons.append(f"first_fire={det_name}")
+                seen_first_fires.add(det_name)
         if reasons:
             keep.append((path, reasons))
     return keep, seen_events, seen_texts
