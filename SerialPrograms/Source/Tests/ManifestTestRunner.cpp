@@ -144,6 +144,19 @@ static int test_manifest_ResultReader(const ImageViewRGB32& image, const json& e
     return test_pokemonChampions_ResultReader(image, target_won);
 }
 
+static int test_manifest_AbilityItemReader(const ImageViewRGB32& image, const json& entry){
+    if (!entry.contains("kind") || !entry.contains("name") || !entry.contains("pokemon")){
+        cerr << "Error: AbilityItemReader manifest entry needs kind/name/pokemon." << endl;
+        return 1;
+    }
+    return test_pokemonChampions_AbilityItemReader(
+        image,
+        entry.at("kind").get<std::string>(),
+        entry.at("name").get<std::string>(),
+        entry.at("pokemon").get<std::string>()
+    );
+}
+
 
 // Map manifest reader names to test functions.
 // Note: some manifest readers (like BattleHUDReader) contain multiple sub-fields
@@ -157,6 +170,7 @@ static const std::map<std::string, ReaderTestFn> READER_FUNCTIONS = {
     {"TeamSummaryReader",    test_manifest_TeamSummaryReader},
     {"TeamPreviewReader",    test_manifest_TeamPreviewReader},
     {"ResultReader",         test_manifest_ResultReader},
+    {"AbilityItemReader",    test_manifest_AbilityItemReader},
 };
 
 // BattleHUDReader sub-field adapters: the manifest stores fields under

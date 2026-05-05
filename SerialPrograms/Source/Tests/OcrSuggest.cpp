@@ -21,6 +21,7 @@
 #include "PokemonChampions/Inference/PokemonChampions_TeamPreviewReader.h"
 #include "PokemonChampions/Inference/PokemonChampions_PokeballAliveDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_BattleEndDetector.h"
+#include "PokemonChampions/Inference/PokemonChampions_AbilityItemReader.h"
 
 #include <array>
 #include <iostream>
@@ -152,6 +153,26 @@ int run_ocr_suggest(const std::string& reader_name, const std::string& image_pat
             }
             std::cout << "],\"own_alive\":" << (int)r.own_alive_count()
                       << ",\"opp_alive\":" << (int)r.opp_alive_count()
+                      << "}" << std::endl;
+        }
+        else if (reader_name == "AbilityItemReader"){
+            auto& log = global_logger_command_line();
+            AbilityItemReader reader;
+            AbilityItemReadout r = reader.read(log, image);
+            //  Escape any quote chars in raw_text for safe JSON.
+            std::string raw_escaped;
+            for (char c : r.raw_text){
+                if (c == '"') raw_escaped += "\\\"";
+                else if (c == '\\') raw_escaped += "\\\\";
+                else if (c == '\n') raw_escaped += " ";
+                else raw_escaped += c;
+            }
+            std::cout << "{\"detected\":" << (r.detected ? "true" : "false")
+                      << ",\"side\":\"" << r.side << "\""
+                      << ",\"kind\":\"" << r.kind << "\""
+                      << ",\"name\":\"" << r.name << "\""
+                      << ",\"pokemon\":\"" << r.pokemon << "\""
+                      << ",\"raw_text\":\"" << raw_escaped << "\""
                       << "}" << std::endl;
         }
         else if (reader_name == "ResultReader"){

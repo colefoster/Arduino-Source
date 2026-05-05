@@ -1,4 +1,11 @@
 {
+  "20260423-183505998294.png": {
+    "AbilityItemReader": {
+      "kind": "item",
+      "name": "sitrus-berry",
+      "pokemon": "tyranitar"
+    }
+  },
   "20260427-132106901219.png": {
     "AbilityItemReader": {
       "kind": "ability",
@@ -18,6 +25,13 @@
       "kind": "item",
       "name": "leftovers",
       "pokemon": "garchomp"
+    }
+  },
+  "20260427-132656550807.png": {
+    "AbilityItemReader": {
+      "kind": "item",
+      "name": "focus-sash",
+      "pokemon": "gengar"
     }
   }
 }

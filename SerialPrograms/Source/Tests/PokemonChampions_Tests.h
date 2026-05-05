@@ -76,6 +76,14 @@ int test_pokemonChampions_TeamPreviewReader(const ImageViewRGB32& image, const s
 //  field. `target_won` is the expected bool from the manifest.
 int test_pokemonChampions_ResultReader(const ImageViewRGB32& image, bool target_won);
 
+//  AbilityItemReader expected fields from the manifest (kind/name/pokemon).
+int test_pokemonChampions_AbilityItemReader(
+    const ImageViewRGB32& image,
+    const std::string& target_kind,
+    const std::string& target_name,
+    const std::string& target_pokemon
+);
+
 //  ── Void (development / debug) ─────────────────────────────────────
 
 //  Runs all OCR readers and prints results. No pass/fail — for dev iteration.

@@ -20,6 +20,7 @@
 #include "PokemonChampions/Inference/PokemonChampions_ActiveHUDSlotDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_ActionMenuDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_BattleEndDetector.h"
+#include "PokemonChampions/Inference/PokemonChampions_AbilityItemReader.h"
 #include "PokemonChampions/Inference/PokemonChampions_PreparingForBattleDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_PostMatchDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_MainMenuDetector.h"
@@ -358,6 +359,43 @@ int test_pokemonChampions_TeamPreviewReader(const ImageViewRGB32& image, const s
         }
     }
     cout << "TeamPreviewReader: all 6 opp species matched." << endl;
+    return 0;
+}
+
+
+// ─── AbilityItemReader ──────────────────────────────────────────────
+
+int test_pokemonChampions_AbilityItemReader(
+    const ImageViewRGB32& image,
+    const std::string& target_kind,
+    const std::string& target_name,
+    const std::string& target_pokemon
+){
+    auto& logger = global_logger_command_line();
+    AbilityItemReader reader;
+    AbilityItemReadout r = reader.read(logger, image);
+    if (!r.detected){
+        cerr << "Error: AbilityItemReader did not detect on image. raw_text='"
+             << r.raw_text << "'" << endl;
+        return 1;
+    }
+    if (r.kind != target_kind){
+        cerr << "Error: AbilityItemReader kind got '" << r.kind
+             << "' expected '" << target_kind << "'" << endl;
+        return 1;
+    }
+    if (r.name != target_name){
+        cerr << "Error: AbilityItemReader name got '" << r.name
+             << "' expected '" << target_name << "'" << endl;
+        return 1;
+    }
+    if (r.pokemon != target_pokemon){
+        cerr << "Error: AbilityItemReader pokemon got '" << r.pokemon
+             << "' expected '" << target_pokemon << "'" << endl;
+        return 1;
+    }
+    cout << "AbilityItemReader: " << r.pokemon << "/" << r.name
+         << " (" << r.kind << ") matched." << endl;
     return 0;
 }
 

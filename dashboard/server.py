@@ -2992,6 +2992,7 @@ _SUGGEST_READERS = {
     "TeamSummaryReader",
     "TeamPreviewReader",
     "ResultReader",
+    "AbilityItemReader",
 }
 
 
