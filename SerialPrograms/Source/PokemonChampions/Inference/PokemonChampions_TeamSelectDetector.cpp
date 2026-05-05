@@ -63,6 +63,10 @@ void TeamSelectDetector::make_overlays(VideoOverlaySet& items) const{
 int TeamSelectDetector::selected_tab(const ImageViewRGB32& screen) const{
     for (size_t i = 0; i < m_tab_slots.size(); i++){
         const ImageStats stats = image_stats(extract_box_reference(screen, m_tab_slots[i]));
+        //  Brightness floor: real selected tab reads avg ~ (255, 255, 3),
+        //  channel-sum ~ 510. Battle FPs (mid-animation green flashes etc.)
+        //  read ratio-similar yellow but max out around sum ~ 312.
+        if (stats.average.r + stats.average.g < 400.0) continue;
         //  Tight thresholds: the selected color is very clean (sd~1.4).
         if (is_solid(stats, SELECTED_TAB_YELLOW, 0.10, 40)){
             return static_cast<int>(i);

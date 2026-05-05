@@ -1974,30 +1974,6 @@
       "slot": 1
     }
   },
-  "doubles_move_select_glimmora.png": {
-    "BattleHUDReader": {
-      "opponent_species": [
-        "",
-        "hawlucha"
-      ],
-      "own_species": [
-        "kingambit",
-        ""
-      ],
-      "own_species_shiny": [
-        false,
-        false
-      ]
-    },
-    "MoveNameReader": {
-      "moves": [
-        "rock-slide",
-        "power-gem",
-        "",
-        ""
-      ]
-    }
-  },
   "move_select.png": {
     "BattleHUDReader": {
       "opponent_species": [
