@@ -1,0 +1,37 @@
+<div class="view" id="view-livetrace">
+    <h1>Live Trace</h1>
+    <div class="subtitle">Engine view as the inference engine sees it, live from the Switch capture. Run the LiveDetectorTrace SerialPrograms program on the Mac to feed this view.</div>
+
+    <div id="livetrace-status" style="display:flex; gap:16px; align-items:center; margin:12px 0; font-size:12px; color:#8b949e;">
+        <span id="livetrace-conn-state">disconnected</span>
+        <span id="livetrace-head-seq">head_seq: -</span>
+        <span id="livetrace-last-age">last event: -</span>
+        <span id="livetrace-event-count">events seen: 0</span>
+    </div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:8px;">
+        <div class="livetrace-team-panel">
+            <h2 style="margin:0 0 8px 0; color:#58a6ff;">Own Team</h2>
+            <div id="livetrace-own"></div>
+        </div>
+        <div class="livetrace-team-panel">
+            <h2 style="margin:0 0 8px 0; color:#f85149;">Opp Team</h2>
+            <div id="livetrace-opp"></div>
+        </div>
+    </div>
+
+    <h2 style="margin-top:24px;">Event Feed</h2>
+    <div id="livetrace-feed" style="max-height:400px; overflow-y:auto; background:#0d1117; border:1px solid #30363d; padding:8px; font-family:ui-monospace,monospace; font-size:11px;"></div>
+</div>
+
+<style>
+.livetrace-team-panel { background:#161b22; border:1px solid #30363d; padding:12px; border-radius:6px; }
+.livetrace-slot { background:#0d1117; border:1px solid #21262d; border-radius:4px; padding:8px; margin:4px 0; font-family:ui-monospace,monospace; font-size:12px; }
+.livetrace-slot.active { border-color:#58a6ff; background:#0d2235; }
+.livetrace-slot.fainted { opacity:0.45; }
+.livetrace-slot-species { font-weight:bold; color:#c9d1d9; }
+.livetrace-slot-meta { color:#8b949e; font-size:11px; margin-top:2px; }
+.livetrace-event-row { padding:2px 0; border-bottom:1px solid #21262d; color:#c9d1d9; }
+.livetrace-event-row .seq { color:#8b949e; margin-right:8px; }
+.livetrace-event-row .type { color:#58a6ff; margin-right:8px; }
+</style>

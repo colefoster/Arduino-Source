@@ -27,8 +27,12 @@ import re
 import subprocess
 import sys
 import tempfile
+import threading
+import time
+from collections import deque
 from http.server import ThreadingHTTPServer, BaseHTTPRequestHandler
 from pathlib import Path
+from urllib.parse import urlparse, parse_qs
 
 REPO = Path(__file__).resolve().parent.parent
 BUILD = REPO / "build_mac"
@@ -36,6 +40,15 @@ EXE = BUILD / "SerialProgramsCommandLine"
 TEST_IMAGES = REPO / "test_images"
 TMP_DIR = REPO / "data"
 PORT = 9876
+
+#  Live detector trace: in-memory ring of recent events from
+#  LiveDetectorTrace (SerialPrograms program). The dashboard polls
+#  /live-trace/recent?since=<seq> for new events.
+LIVE_TRACE_RING_MAX = 500
+_live_trace_lock = threading.Lock()
+_live_trace_events: deque = deque(maxlen=LIVE_TRACE_RING_MAX)
+_live_trace_seq = 0
+_live_trace_last_post_ts = 0.0
 
 
 def _build():
@@ -111,7 +124,7 @@ class Handler(BaseHTTPRequestHandler):
         self.send_response(status)
         self.send_header("Content-Type", "application/json")
         self.send_header("Access-Control-Allow-Origin", "*")
-        self.send_header("Access-Control-Allow-Methods", "POST, OPTIONS")
+        self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
         self.send_header("Access-Control-Allow-Headers", "Content-Type")
         self.send_header("Content-Length", str(len(body)))
         self.end_headers()
@@ -131,8 +144,15 @@ class Handler(BaseHTTPRequestHandler):
         self._send({})
 
     def do_GET(self):
-        if self.path == "/health":
+        parsed = urlparse(self.path)
+        if parsed.path == "/health":
             self._send({"ok": True, "exe_exists": EXE.exists()})
+            return
+        if parsed.path == "/live-trace/recent":
+            self._handle_live_trace_recent(parse_qs(parsed.query))
+            return
+        if parsed.path == "/live-trace/status":
+            self._handle_live_trace_status()
             return
         self._send({"error": "not found"}, 404)
 
@@ -152,8 +172,52 @@ class Handler(BaseHTTPRequestHandler):
             self._handle_sprite_match()
         elif path == "/sprite-match-debug":
             self._handle_sprite_match_debug()
+        elif path == "/live-trace/event":
+            self._handle_live_trace_event()
         else:
             self._send({"error": "not found"}, 404)
+
+    def _handle_live_trace_event(self):
+        global _live_trace_seq, _live_trace_last_post_ts
+        body = self._read_body()
+        if not isinstance(body, dict):
+            self._send({"error": "expected JSON object"}, 400)
+            return
+        with _live_trace_lock:
+            _live_trace_seq += 1
+            body["server_seq"] = _live_trace_seq
+            body["server_ts_ms"] = int(time.time() * 1000)
+            _live_trace_events.append(body)
+            _live_trace_last_post_ts = time.time()
+        self._send({"ok": True, "server_seq": _live_trace_seq})
+
+    def _handle_live_trace_recent(self, qs):
+        try:
+            since = int((qs.get("since") or ["0"])[0])
+        except (TypeError, ValueError):
+            since = 0
+        try:
+            limit = int((qs.get("limit") or ["100"])[0])
+        except (TypeError, ValueError):
+            limit = 100
+        limit = max(1, min(limit, LIVE_TRACE_RING_MAX))
+        with _live_trace_lock:
+            out = [e for e in _live_trace_events if e.get("server_seq", 0) > since]
+            out = out[-limit:]
+            head_seq = _live_trace_seq
+        self._send({"ok": True, "events": out, "head_seq": head_seq})
+
+    def _handle_live_trace_status(self):
+        with _live_trace_lock:
+            head = _live_trace_seq
+            count = len(_live_trace_events)
+            last_ts = _live_trace_last_post_ts
+        self._send({
+            "ok": True,
+            "head_seq": head,
+            "buffered": count,
+            "last_event_age_sec": (time.time() - last_ts) if last_ts else None,
+        })
 
     def _handle_retest(self):
         ok, build_log = _build()

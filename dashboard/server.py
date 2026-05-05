@@ -2653,6 +2653,39 @@ async def detector_debug(request: Request):
         return JSONResponse({"error": str(e)}, 500)
 
 
+@app.get("/api/live-trace/recent")
+async def live_trace_recent(since: int = 0, limit: int = 100):
+    """Proxy to mac_dev_runner: fetch live-trace events newer than `since`."""
+    import urllib.request
+    import urllib.error
+    try:
+        req = urllib.request.Request(
+            f"{DEV_RUNNER}/live-trace/recent?since={int(since)}&limit={int(limit)}",
+            method="GET",
+        )
+        with urllib.request.urlopen(req, timeout=5) as resp:
+            return json.loads(resp.read())
+    except urllib.error.URLError as e:
+        return JSONResponse({"error": f"dev runner unreachable: {e}"}, 502)
+    except Exception as e:
+        return JSONResponse({"error": str(e)}, 500)
+
+
+@app.get("/api/live-trace/status")
+async def live_trace_status():
+    """Proxy to mac_dev_runner: live-trace ring buffer status."""
+    import urllib.request
+    import urllib.error
+    try:
+        req = urllib.request.Request(f"{DEV_RUNNER}/live-trace/status", method="GET")
+        with urllib.request.urlopen(req, timeout=5) as resp:
+            return json.loads(resp.read())
+    except urllib.error.URLError as e:
+        return JSONResponse({"error": f"dev runner unreachable: {e}"}, 502)
+    except Exception as e:
+        return JSONResponse({"error": str(e)}, 500)
+
+
 @app.post("/api/inspector/ocr-crop")
 async def inspector_ocr_crop(request: Request):
     """Run number-tuned OCR on an arbitrary box of an image.
@@ -3651,6 +3684,89 @@ async def templates_delete(digit: str):
         path.unlink()
         return {"ok": True}
     return JSONResponse({"error": "not found"}, status_code=404)
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# LEAD / TEAM ADVISOR (hybrid lookup + neural fallback)
+# ═══════════════════════════════════════════════════════════════════════════
+
+LEAD_LOOKUP_PATH = BASE / "data" / "checkpoints_lead" / "lookup_train_v2.pkl"
+LEAD_MODEL_PATH = BASE / "data" / "checkpoints_lead" / "v3_masked" / "best.pt"
+
+_advisor_state: dict = {"loaded": False, "lookup": None, "model": None, "builder": None,
+                        "device": None, "error": None}
+
+
+def _ensure_advisor():
+    if _advisor_state["loaded"]:
+        return _advisor_state["error"] is None
+    _advisor_state["loaded"] = True
+
+    for p in [str(SRC_DIR), str(BASE)]:
+        if p not in sys.path:
+            sys.path.insert(0, p)
+
+    try:
+        # Lookup is required and pure-Python (numpy + stdlib).
+        from vgc_model.lead.lookup import LeadLookup
+        if not LEAD_LOOKUP_PATH.exists():
+            _advisor_state["error"] = f"No lookup at {LEAD_LOOKUP_PATH}"
+            return False
+        _advisor_state["lookup"] = LeadLookup.load(LEAD_LOOKUP_PATH)
+    except Exception as exc:
+        _advisor_state["error"] = f"lookup load failed: {type(exc).__name__}: {exc}"
+        return False
+
+    # Neural fallback is best-effort. If torch isn't installed (e.g. on ash),
+    # advisor degrades to lookup-only — the lookup covers ~89% of matchups.
+    try:
+        import torch
+        from vgc_model.lead.features import FeatureBuilder
+        from vgc_model.lead.advisor import load_model
+
+        _advisor_state["device"] = torch.device("cpu")
+        if LEAD_MODEL_PATH.exists():
+            _advisor_state["builder"] = FeatureBuilder()
+            _advisor_state["model"] = load_model(
+                LEAD_MODEL_PATH, _advisor_state["builder"], _advisor_state["device"]
+            )
+    except Exception as exc:
+        # Torch missing or model load failed — keep lookup, drop model fallback.
+        _advisor_state["device"] = None
+        _advisor_state["model"] = None
+        _advisor_state["builder"] = None
+
+    return True
+
+
+@app.post("/api/advisor")
+async def advisor_recommend(request: Request):
+    body = await request.json()
+    own = body.get("own") or []
+    opp = body.get("opp") or []
+    if len(own) != 6 or len(opp) != 6:
+        return JSONResponse(
+            {"error": f"Need exactly 6 species each (got own={len(own)}, opp={len(opp)})"},
+            status_code=400,
+        )
+
+    if not _ensure_advisor():
+        return JSONResponse(
+            {"error": _advisor_state["error"] or "advisor not initialized"},
+            status_code=500,
+        )
+
+    from vgc_model.lead.advisor import recommend
+    rec = recommend(
+        own, opp,
+        lookup=_advisor_state["lookup"],
+        model=_advisor_state["model"],
+        builder=_advisor_state["builder"],
+        device=_advisor_state["device"],
+        top_k_sets=3,
+        top_k_pairs=5,
+    )
+    return rec
 
 
 # ═══════════════════════════════════════════════════════════════════════════

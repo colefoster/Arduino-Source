@@ -15,6 +15,7 @@
 
 //  Dev Tools
 #include "Programs/PokemonChampions_DetectorTest.h"
+#include "Programs/PokemonChampions_LiveDetectorTrace.h"
 
 namespace PokemonAutomation{
 namespace NintendoSwitch{
@@ -37,6 +38,7 @@ std::vector<PanelEntry> PanelListFactory::make_panels() const{
 
     ret.emplace_back("---- Dev Tools ----");
     ret.emplace_back(make_single_switch_program<DetectorTest_Descriptor, DetectorTest>());
+    ret.emplace_back(make_single_switch_program<LiveDetectorTrace_Descriptor, LiveDetectorTrace>());
 
     return ret;
 }
