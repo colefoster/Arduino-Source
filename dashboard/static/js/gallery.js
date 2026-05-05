@@ -355,6 +355,22 @@ async function loadGalleryScreenImages(screen) {
     }
 }
 
+// Battle log event type enum (mirrors PokemonChampions_BattleLogReader.h)
+const BATTLE_LOG_EVENT_TYPES = [
+    'UNKNOWN', 'OTHER',
+    'BATTLE_START', 'BATTLE_END', 'TURN_MARKER',
+    'MOVE_USED', 'SWITCH_IN', 'SWITCH_OUT', 'DRAG',
+    'FAINTED', 'CANT', 'FAILED',
+    'STAT_CHANGE', 'STAT_CHANGE_AT_CAP', 'STAT_CHANGE_OTHER',
+    'DAMAGE', 'HEAL', 'CRIT', 'SUPER_EFFECTIVE', 'NOT_EFFECTIVE',
+    'IMMUNE', 'MISS', 'HIT_COUNT', 'OHKO',
+    'STATUS_INFLICTED', 'STATUS_HEALED', 'STATUS_DAMAGE', 'CONFUSION',
+    'WEATHER', 'TERRAIN', 'TRICK_ROOM', 'FIELD_EFFECT',
+    'MEGA_EVOLVE', 'PRIMAL', 'TYPE_CHANGE', 'TRANSFORM',
+    'ITEM_ACTIVATED', 'ITEM_TRANSFER', 'ABILITY_CHANGE',
+    'EFFECT_START', 'EFFECT_END', 'EFFECT_ACTIVATE',
+];
+
 async function loadGalleryInbox() {
     const grid = document.getElementById('gallery-grid');
     grid.innerHTML = '<div style="color:#484f58; font-size:12px;">Loading inbox...</div>';
@@ -367,8 +383,9 @@ async function loadGalleryInbox() {
         }
         // Show assign UI
         const screenOptions = galleryScreens.filter(s => s.type === 'screen').map(s => `<option value="${s.name}">${s.name}</option>`).join('');
+        const eventOptions = BATTLE_LOG_EVENT_TYPES.map(e => `<option value="${e}">${e}</option>`).join('');
         grid.innerHTML = `
-            <div style="margin-bottom:12px; display:flex; gap:8px; align-items:center;">
+            <div style="margin-bottom:12px; display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
                 <button class="btn" id="inbox-select-all">Select All</button>
                 <select id="inbox-screen-select" style="font-size:12px; padding:4px 8px;">
                     <option value="">-- Assign to screen --</option>
@@ -376,12 +393,25 @@ async function loadGalleryInbox() {
                 </select>
                 <button class="btn btn-primary" id="inbox-assign-btn" disabled>Assign Selected</button>
                 <span id="inbox-selected-count" style="font-size:11px; color:#8b949e;">0 selected</span>
+                <span style="flex:1"></span>
+                <button class="btn" id="inbox-scan-log-btn" style="border-color:#d29922; color:#d29922;">Scan BattleLogReader</button>
+                <span id="inbox-scan-status" style="font-size:11px; color:#8b949e;"></span>
             </div>
             <div class="gallery-grid" id="inbox-grid">${data.images.map(img => `
-                <div class="gallery-card inbox-card" data-filename="${img.filename}" style="cursor:pointer; position:relative;">
+                <div class="gallery-card inbox-card" data-filename="${img.filename}" style="position:relative;">
                     <input type="checkbox" class="inbox-check" style="position:absolute; top:4px; left:4px; z-index:1;">
                     <img class="thumb" loading="lazy" src="${API}/api/gallery/thumb/${img.path}" alt="${img.filename}">
-                    <div class="fname">${img.filename}</div>
+                    <div class="fname" style="font-size:10px; color:#6e7681; word-break:break-all;">${img.filename}</div>
+                    <div class="log-readout" data-filename="${img.filename}" style="margin-top:6px; display:none;">
+                        <select class="log-event-type" style="font-size:11px; padding:2px 4px; width:100%;">
+                            ${eventOptions}
+                        </select>
+                        <div class="log-raw-text" style="font-size:10px; color:#8b949e; margin-top:4px; max-height:48px; overflow:auto; white-space:pre-wrap; background:#0d1117; padding:4px; border-radius:3px;"></div>
+                        <div style="display:flex; gap:4px; margin-top:6px;">
+                            <button class="btn btn-primary log-accept-btn" style="flex:1; font-size:11px; padding:4px;">✓ Accept</button>
+                            <button class="btn log-delete-btn" style="font-size:11px; padding:4px; border-color:#f85149; color:#f85149;">🗑</button>
+                        </div>
+                    </div>
                 </div>
             `).join('')}</div>
         `;
@@ -409,6 +439,75 @@ async function loadGalleryInbox() {
                 cb.checked = !cb.checked;
                 updateCount();
             });
+        });
+        // Scan BattleLogReader on all inbox images
+        const scanBtn = document.getElementById('inbox-scan-log-btn');
+        const scanStatus = document.getElementById('inbox-scan-status');
+        scanBtn.addEventListener('click', async () => {
+            scanBtn.disabled = true;
+            scanStatus.textContent = 'Scanning... (may take a minute)';
+            try {
+                const resp = await fetch(`${API}/api/inbox/scan-battle-log`, {method: 'POST'}).then(r => r.json());
+                const results = resp.results || {};
+                Object.entries(results).forEach(([fname, entry]) => {
+                    const card = grid.querySelector(`.inbox-card[data-filename="${CSS.escape(fname)}"]`);
+                    if (!card) return;
+                    const readout = card.querySelector('.log-readout');
+                    const sel = card.querySelector('.log-event-type');
+                    const txtEl = card.querySelector('.log-raw-text');
+                    if (entry.error) {
+                        txtEl.textContent = `[error] ${entry.error}`;
+                        txtEl.style.color = '#f85149';
+                    } else {
+                        sel.value = entry.event_type || 'UNKNOWN';
+                        txtEl.textContent = entry.raw_text || '(no text)';
+                    }
+                    readout.style.display = 'block';
+                });
+                scanStatus.textContent = `Scanned ${Object.keys(results).length} images`;
+            } catch (e) {
+                scanStatus.textContent = `Error: ${e.message}`;
+            } finally {
+                scanBtn.disabled = false;
+            }
+        });
+        // Per-card accept/delete (delegated)
+        grid.addEventListener('click', async (e) => {
+            const acceptBtn = e.target.closest('.log-accept-btn');
+            const deleteBtn = e.target.closest('.log-delete-btn');
+            if (!acceptBtn && !deleteBtn) return;
+            e.stopPropagation();
+            const card = e.target.closest('.inbox-card');
+            const filename = card.dataset.filename;
+            if (acceptBtn) {
+                const eventType = card.querySelector('.log-event-type').value;
+                acceptBtn.disabled = true; acceptBtn.textContent = '...';
+                const resp = await fetch(`${API}/api/inbox/accept-battle-log`, {
+                    method: 'POST', headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({filename, event_type: eventType})
+                }).then(r => r.json());
+                if (resp.ok) {
+                    card.style.transition = 'opacity 0.2s';
+                    card.style.opacity = '0';
+                    setTimeout(() => card.remove(), 200);
+                } else {
+                    acceptBtn.textContent = '✗'; acceptBtn.disabled = false;
+                }
+            }
+            if (deleteBtn) {
+                if (!confirm(`Delete ${filename}?`)) return;
+                deleteBtn.disabled = true;
+                const resp = await fetch(`${API}/api/inbox/delete`, {
+                    method: 'POST', headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({filename})
+                }).then(r => r.json());
+                if (resp.ok) {
+                    card.style.opacity = '0';
+                    setTimeout(() => card.remove(), 200);
+                } else {
+                    deleteBtn.disabled = false;
+                }
+            }
         });
         // Assign button
         assignBtn.addEventListener('click', async () => {

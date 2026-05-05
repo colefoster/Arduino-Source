@@ -157,6 +157,7 @@
             display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 12px;
         }
+        #inbox-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
         .gallery-card {
             background: #161b22; border: 1px solid #30363d; border-radius: 8px;
             padding: 10px; cursor: pointer; transition: border-color 0.15s;
@@ -434,3 +435,44 @@
         .refreshing-tick {
             font-size: 10px; color: #484f58; margin-left: 6px;
         }
+
+/* Advisor view */
+.advisor-grid {
+    display: grid; grid-template-columns: 1fr 1.6fr; gap: 24px;
+    padding: 16px; max-width: 1400px;
+}
+.advisor-input textarea {
+    width: 100%; box-sizing: border-box; margin-bottom: 12px; padding: 8px;
+    background: #0d1117; color: #c9d1d9; border: 1px solid #30363d;
+    border-radius: 4px; font-family: monospace; font-size: 13px;
+}
+.advisor-input label { display: block; margin: 4px 0; font-size: 12px; color: #8b949e; }
+.advisor-controls { display: flex; gap: 8px; margin-top: 8px; }
+.advisor-controls button.primary {
+    background: #238636; color: #fff; border: 0; padding: 8px 16px;
+    border-radius: 4px; cursor: pointer; font-weight: 600;
+}
+.advisor-controls button.ghost {
+    background: transparent; color: #c9d1d9; border: 1px solid #30363d;
+    padding: 8px 12px; border-radius: 4px; cursor: pointer;
+}
+.advisor-source {
+    font-family: monospace; font-size: 12px; color: #8b949e;
+    background: #0d1117; padding: 8px 12px; border-radius: 4px;
+    border: 1px solid #21262d; margin-bottom: 16px;
+}
+.advisor-bring { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.advisor-mon {
+    background: #1f6feb22; color: #58a6ff; border: 1px solid #1f6feb44;
+    padding: 6px 12px; border-radius: 4px; font-weight: 600;
+}
+.advisor-table {
+    width: 100%; border-collapse: collapse; margin-bottom: 16px;
+    font-size: 13px;
+}
+.advisor-table th, .advisor-table td {
+    text-align: left; padding: 6px 10px; border-bottom: 1px solid #21262d;
+}
+.advisor-table th { color: #8b949e; font-weight: 500; font-size: 11px; }
+.advisor-table td:first-child, .advisor-table th:first-child { width: 60px; }
+.advisor-table td:nth-child(2), .advisor-table th:nth-child(2) { width: 70px; color: #8b949e; }

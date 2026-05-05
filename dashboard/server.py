@@ -989,6 +989,119 @@ async def gallery_inbox_assign(request: Request):
     return {"ok": True, "moved": len(moved), "filenames": moved}
 
 
+# Inbox triage helpers
+
+def _ocr_suggest_inbox(filename: str, reader: str):
+    """Run a reader on an _inbox/<filename> image via the dev runner.
+    Returns (result_dict | None, error_str | None)."""
+    import base64
+    import urllib.request
+    import urllib.error
+    img_path = INBOX_DIR / filename
+    if not img_path.exists():
+        return None, "image not found"
+    try:
+        img_b64 = base64.b64encode(img_path.read_bytes()).decode()
+        payload = json.dumps({
+            "image_base64": img_b64,
+            "reader": reader,
+            "screen": "_inbox",
+        }).encode()
+        req = urllib.request.Request(
+            f"{DEV_RUNNER}/ocr-suggest",
+            data=payload,
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+        with urllib.request.urlopen(req, timeout=60) as resp:
+            envelope = json.loads(resp.read())
+        if not envelope.get("ok"):
+            return None, envelope.get("error", "unknown")
+        return envelope.get("result", {}) or {}, None
+    except urllib.error.URLError as e:
+        return None, f"dev runner unreachable: {e}"
+    except Exception as e:
+        return None, str(e)
+
+
+_INBOX_LOG_CACHE: dict = {}  # filename -> (mtime, result)
+
+
+@app.post("/api/inbox/scan-battle-log")
+async def inbox_scan_battle_log():
+    """Run BattleLogReader on every _inbox/*.png. Returns {filename: {event_type, raw_text, error?}}.
+    Cached by mtime so repeated calls are cheap."""
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+    if not INBOX_DIR.exists():
+        return {"results": {}}
+    files = [f for f in sorted(INBOX_DIR.glob("*.png")) if _is_real_image(f.name)]
+    out = {}
+
+    def work(f):
+        mtime = f.stat().st_mtime
+        cached = _INBOX_LOG_CACHE.get(f.name)
+        if cached and cached[0] == mtime:
+            return f.name, cached[1]
+        result, err = _ocr_suggest_inbox(f.name, "BattleLogReader")
+        if err:
+            entry = {"error": err}
+        else:
+            entry = {
+                "event_type": result.get("event_type"),
+                "raw_text": result.get("event_type_raw") or "",
+            }
+        _INBOX_LOG_CACHE[f.name] = (mtime, entry)
+        return f.name, entry
+
+    with ThreadPoolExecutor(max_workers=8) as ex:
+        futs = [ex.submit(work, f) for f in files]
+        for fut in as_completed(futs):
+            name, entry = fut.result()
+            out[name] = entry
+    return {"results": out, "count": len(out)}
+
+
+@app.post("/api/inbox/accept-battle-log")
+async def inbox_accept_battle_log(request: Request):
+    """Accept an inbox image as a labeled battle_log overlay sample.
+    Body: {filename, event_type}. Moves image to _overlays/battle_log/
+    and writes manifest entry."""
+    body = await request.json()
+    filename = body.get("filename", "")
+    event_type = (body.get("event_type") or "").strip()
+    if not filename or not event_type:
+        return JSONResponse({"error": "filename and event_type required"}, 400)
+    src = INBOX_DIR / filename
+    if not src.exists():
+        return JSONResponse({"error": "inbox image not found"}, 404)
+    target_dir = TEST_IMAGES_DIR / "_overlays" / "battle_log"
+    target_dir.mkdir(parents=True, exist_ok=True)
+    dest = target_dir / filename
+    shutil.move(str(src), str(dest))
+    manifest = _load_manifest(target_dir)
+    manifest[filename] = {"BattleLogReader": {"event_type": event_type}}
+    (target_dir / "manifest.json").write_text(
+        json.dumps(manifest, indent=2, sort_keys=True) + "\n"
+    )
+    _INBOX_LOG_CACHE.pop(filename, None)
+    return {"ok": True, "filename": filename, "event_type": event_type}
+
+
+@app.post("/api/inbox/delete")
+async def inbox_delete(request: Request):
+    """Delete an inbox image."""
+    body = await request.json()
+    filename = body.get("filename", "")
+    if not filename:
+        return JSONResponse({"error": "filename required"}, 400)
+    src = INBOX_DIR / filename
+    if not src.exists():
+        return JSONResponse({"error": "not found"}, 404)
+    src.unlink()
+    _INBOX_LOG_CACHE.pop(filename, None)
+    return {"ok": True, "filename": filename}
+
+
 @app.post("/api/teampreview/crops")
 async def teampreview_crops(request: Request):
     """Extract crops from any labeler source frame using custom boxes."""
