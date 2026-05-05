@@ -709,6 +709,256 @@
       "event_type": "FAINTED"
     }
   },
+  "20260505-game-video-20260505-153202484050_0145.png": {
+    "BattleLogReader": {
+      "event_type": "SWITCH_IN"
+    }
+  },
+  "20260505-game-video-20260505-153202484050_0151.png": {
+    "BattleLogReader": {
+      "event_type": "SWITCH_IN"
+    }
+  },
+  "20260505-game-video-20260505-153202484050_0152.png": {
+    "BattleLogReader": {
+      "event_type": "SWITCH_IN"
+    }
+  },
+  "20260505-game-video-20260505-153202484050_0159.png": {
+    "BattleLogReader": {
+      "event_type": "WEATHER"
+    }
+  },
+  "20260505-game-video-20260505-153202484050_0213.png": {
+    "BattleLogReader": {
+      "event_type": "MOVE_USED"
+    }
+  },
+  "20260505-game-video-20260505-153202484050_0214.png": {
+    "BattleLogReader": {
+      "event_type": "MOVE_USED"
+    }
+  },
+  "20260505-game-video-20260505-153202484050_0224.png": {
+    "BattleLogReader": {
+      "event_type": "MOVE_USED"
+    }
+  },
+  "20260505-game-video-20260505-153202484050_0271.png": {
+    "BattleLogReader": {
+      "event_type": "MOVE_USED"
+    }
+  },
+  "20260505-game-video-20260505-153202484050_0287.png": {
+    "BattleLogReader": {
+      "event_type": "FAINTED"
+    }
+  },
+  "20260505-game-video-20260505-153202484050_0309.png": {
+    "BattleLogReader": {
+      "event_type": "SWITCH_IN"
+    }
+  },
+  "20260505-game-video-20260505-153202484050_0378.png": {
+    "BattleLogReader": {
+      "event_type": "MEGA_EVOLVE"
+    }
+  },
+  "20260505-game-video-20260505-153202484050_0384.png": {
+    "BattleLogReader": {
+      "event_type": "MOVE_USED"
+    }
+  },
+  "20260505-game-video-20260505-153202484050_0393.png": {
+    "BattleLogReader": {
+      "event_type": "NOT_EFFECTIVE"
+    }
+  },
+  "20260505-game-video-20260505-153202484050_0403.png": {
+    "BattleLogReader": {
+      "event_type": "MOVE_USED"
+    }
+  },
+  "20260505-game-video-20260505-153202484050_0405.png": {
+    "BattleLogReader": {
+      "event_type": "MOVE_USED"
+    }
+  },
+  "20260505-game-video-20260505-153202484050_0436.png": {
+    "BattleLogReader": {
+      "event_type": "SUPER_EFFECTIVE"
+    }
+  },
+  "20260505-game-video-20260505-153202484050_0439.png": {
+    "BattleLogReader": {
+      "event_type": "FAINTED"
+    }
+  },
+  "20260505-game-video-20260505-153202484050_0451.png": {
+    "BattleLogReader": {
+      "event_type": "MOVE_USED"
+    }
+  },
+  "20260505-game-video-20260505-153202484050_0484.png": {
+    "BattleLogReader": {
+      "event_type": "FAINTED"
+    }
+  },
+  "20260505-game-video-20260505-153202484050_0538.png": {
+    "BattleLogReader": {
+      "event_type": "SWITCH_IN"
+    }
+  },
+  "20260505-game-video-20260505-153202484050_0546.png": {
+    "BattleLogReader": {
+      "event_type": "SWITCH_IN"
+    }
+  },
+  "20260505-game-video-20260505-153202484050_0598.png": {
+    "BattleLogReader": {
+      "event_type": "MOVE_USED"
+    }
+  },
+  "20260505-game-video-20260505-153416571596_0003.png": {
+    "BattleLogReader": {
+      "event_type": "MOVE_USED"
+    }
+  },
+  "20260505-game-video-20260505-153416571596_0006.png": {
+    "BattleLogReader": {
+      "event_type": "MOVE_USED"
+    }
+  },
+  "20260505-game-video-20260505-153416571596_0018.png": {
+    "BattleLogReader": {
+      "event_type": "FAINTED"
+    }
+  },
+  "20260505-game-video-20260505-153416571596_0040.png": {
+    "BattleLogReader": {
+      "event_type": "SWITCH_IN"
+    }
+  },
+  "20260505-game-video-20260505-153416571596_0111.png": {
+    "BattleLogReader": {
+      "event_type": "MEGA_EVOLVE"
+    }
+  },
+  "20260505-game-video-20260505-153416571596_0115.png": {
+    "BattleLogReader": {
+      "event_type": "MOVE_USED"
+    }
+  },
+  "20260505-game-video-20260505-153416571596_0117.png": {
+    "BattleLogReader": {
+      "event_type": "MOVE_USED"
+    }
+  },
+  "20260505-game-video-20260505-153416571596_0126.png": {
+    "BattleLogReader": {
+      "event_type": "NOT_EFFECTIVE"
+    }
+  },
+  "20260505-game-video-20260505-153416571596_0135.png": {
+    "BattleLogReader": {
+      "event_type": "MOVE_USED"
+    }
+  },
+  "20260505-game-video-20260505-153416571596_0171.png": {
+    "BattleLogReader": {
+      "event_type": "FAINTED"
+    }
+  },
+  "20260505-game-video-20260505-153416571596_0181.png": {
+    "BattleLogReader": {
+      "event_type": "MOVE_USED"
+    }
+  },
+  "20260505-game-video-20260505-153416571596_0215.png": {
+    "BattleLogReader": {
+      "event_type": "SUPER_EFFECTIVE"
+    }
+  },
+  "20260505-game-video-20260505-153416571596_0217.png": {
+    "BattleLogReader": {
+      "event_type": "FAINTED"
+    }
+  },
+  "20260505-game-video-20260505-153416571596_0271.png": {
+    "BattleLogReader": {
+      "event_type": "SWITCH_IN"
+    }
+  },
+  "20260505-game-video-20260505-153416571596_0276.png": {
+    "BattleLogReader": {
+      "event_type": "SWITCH_IN"
+    }
+  },
+  "20260505-game-video-20260505-153416571596_0330.png": {
+    "BattleLogReader": {
+      "event_type": "MOVE_USED"
+    }
+  },
+  "20260505-game-video-20260505-153416571596_0338.png": {
+    "BattleLogReader": {
+      "event_type": "MOVE_USED"
+    }
+  },
+  "20260505-game-video-20260505-153416571596_0374.png": {
+    "BattleLogReader": {
+      "event_type": "FAINTED"
+    }
+  },
+  "20260505-game-video-20260505-153416571596_0416.png": {
+    "BattleLogReader": {
+      "event_type": "NOT_EFFECTIVE"
+    }
+  },
+  "20260505-game-video-20260505-153416571596_0419.png": {
+    "BattleLogReader": {
+      "event_type": "FAINTED"
+    }
+  },
+  "20260505-game-video-20260505-153416571596_0437.png": {
+    "BattleLogReader": {
+      "event_type": "SWITCH_IN"
+    }
+  },
+  "20260505-game-video-20260505-153416571596_0503.png": {
+    "BattleLogReader": {
+      "event_type": "MEGA_EVOLVE"
+    }
+  },
+  "20260505-game-video-20260505-153416571596_0513.png": {
+    "BattleLogReader": {
+      "event_type": "MOVE_USED"
+    }
+  },
+  "20260505-game-video-20260505-153416571596_0524.png": {
+    "BattleLogReader": {
+      "event_type": "SUPER_EFFECTIVE"
+    }
+  },
+  "20260505-game-video-20260505-153416571596_0546.png": {
+    "BattleLogReader": {
+      "event_type": "MOVE_USED"
+    }
+  },
+  "20260505-game-video-20260505-153416571596_0547.png": {
+    "BattleLogReader": {
+      "event_type": "MOVE_USED"
+    }
+  },
+  "20260505-game-video-20260505-153416571596_0554.png": {
+    "BattleLogReader": {
+      "event_type": "NOT_EFFECTIVE"
+    }
+  },
+  "20260505-game-video-20260505-153416571596_0560.png": {
+    "BattleLogReader": {
+      "event_type": "FAINTED"
+    }
+  },
   "action_menu.png": {
     "BattleLogReader": {
       "event_type": "STATUS_INFLICTED"
