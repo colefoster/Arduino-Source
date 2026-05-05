@@ -99,21 +99,33 @@ function liveTraceRenderView(view) {
 function liveTraceSlotEl(slot, isActive) {
     const div = document.createElement('div');
     div.className = 'livetrace-slot' + (isActive ? ' active' : '');
-    if (slot && (slot.fainted === true || slot.hp_pct === 0)) {
-        div.classList.add('fainted');
-    }
     if (!slot || typeof slot !== 'object') {
         div.innerHTML = '<span class="livetrace-slot-species">(empty)</span>';
         return div;
     }
-    const species = slot.species || slot.name || '?';
-    const hp = slot.hp_pct != null ? slot.hp_pct + '%' : '';
-    const item = slot.item ? ' / ' + slot.item : '';
-    const status = slot.status ? ' / ' + slot.status : '';
+    //  Schema (BattleStateTracker::to_predict_json):
+    //    species: string (slug, "" if unknown)
+    //    hp: float 0..1
+    //    alive: bool
+    //    item, ability, status: string
+    //    is_mega: bool
+    //    moves: array of strings
+    //    boosts: array of 6 ints
+    if (slot.alive === false || slot.hp === 0) {
+        div.classList.add('fainted');
+    }
+    const species = slot.species && slot.species.length > 0 ? slot.species : '(unknown)';
+    const hpPct = (typeof slot.hp === 'number') ? Math.round(slot.hp * 100) + '%' : '';
+    const parts = [];
+    if (hpPct) parts.push(hpPct);
+    if (slot.is_mega) parts.push('mega');
+    if (slot.item) parts.push(slot.item);
+    if (slot.ability) parts.push(slot.ability);
+    if (slot.status) parts.push(slot.status);
     const moves = Array.isArray(slot.moves) ? slot.moves.filter(Boolean).join(', ') : '';
     div.innerHTML =
         '<div class="livetrace-slot-species">' + escapeHtml(species) + '</div>' +
-        '<div class="livetrace-slot-meta">' + escapeHtml(hp + item + status) + '</div>' +
+        (parts.length ? '<div class="livetrace-slot-meta">' + escapeHtml(parts.join(' / ')) + '</div>' : '') +
         (moves ? '<div class="livetrace-slot-meta">' + escapeHtml(moves) + '</div>' : '');
     return div;
 }
