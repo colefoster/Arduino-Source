@@ -27,6 +27,7 @@
 #include "PokemonChampions/Inference/PokemonChampions_MainMenuDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_MoveNameReader.h"
 #include "PokemonChampions/Inference/PokemonChampions_MoveSelectDetector.h"
+#include "PokemonChampions/Inference/PokemonChampions_MegaEvolveDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_PokeballAliveDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_PostMatchDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_PreparingForBattleDetector.h"
@@ -185,7 +186,7 @@ void LiveDetectorTrace::init_pipeline_registry(){
     add("TrickRoomDetector",         "detector", "wip", "No detector exists yet. Trick Room state not parsed.");
     add("TailwindDetector",          "detector", "wip", "No detector exists yet. Per-side Tailwind not parsed.");
     add("ScreensDetector",           "detector", "wip", "No detector exists yet. Light Screen / Reflect / Aurora Veil per side not parsed.");
-    add("MegaEvolveDetector",        "detector", "wip", "Detector exists in tree but not yet wired into LiveDetectorTrace pipeline.");
+    add("MegaEvolveDetector",        "detector", "skipped", "Reads whether the Mega Evolve toggle pill is showing on Move Select. Fires only on move_select.");
     add("CommunicatingDetector",     "detector", "wip", "Detector exists but not yet wired (would mark 'syncing with opponent' transitional screens).");
 }
 
@@ -446,6 +447,15 @@ void LiveDetectorTrace::run_move_select_screen(Logger& logger, const ImageViewRG
     out["moves"] = std::move(arr);
     out["active_slot"] = (int64_t)res.active_slot;
     mark("MoveNameReader", n > 0 ? "ok" : "error", std::move(out));
+
+    //  Mega Evolve toggle visibility.
+    {
+        MegaEvolveDetector mega;
+        bool can_mega = mega.detect(screen);
+        JsonObject mout;
+        mout["can_mega_evolve"] = can_mega;
+        mark("MegaEvolveDetector", "ok", std::move(mout));
+    }
 }
 
 
