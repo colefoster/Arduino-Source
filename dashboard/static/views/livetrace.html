@@ -1,37 +1,102 @@
 <div class="view" id="view-livetrace">
     <h1>Live Trace</h1>
-    <div class="subtitle">Engine view as the inference engine sees it, live from the Switch capture. Run the LiveDetectorTrace SerialPrograms program on the Mac to feed this view.</div>
+    <div class="subtitle">Mirror of the inference engine ingest pipeline. Run the LiveDetectorTrace SerialPrograms program on the Mac to feed this view. Pipeline panel shows what is firing, stale, skipped, or WIP.</div>
 
-    <div id="livetrace-status" style="display:flex; gap:16px; align-items:center; margin:12px 0; font-size:12px; color:#8b949e;">
-        <span id="livetrace-conn-state">disconnected</span>
-        <span id="livetrace-head-seq">head_seq: -</span>
-        <span id="livetrace-last-age">last event: -</span>
-        <span id="livetrace-event-count">events seen: 0</span>
+    <div id="livetrace-status-bar">
+        <span class="lt-pill" id="lt-screen">screen: -</span>
+        <span class="lt-pill" id="lt-mode">mode: -</span>
+        <span class="lt-pill" id="lt-match">match: -</span>
+        <span class="lt-pill" id="lt-conn">disconnected</span>
+        <span class="lt-pill" id="lt-head">head_seq: -</span>
+        <span class="lt-pill" id="lt-age">last event: -</span>
+        <span class="lt-pill" id="lt-events">events seen: 0</span>
     </div>
 
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:8px;">
-        <div class="livetrace-team-panel">
-            <h2 style="margin:0 0 8px 0; color:#58a6ff;">Own Team</h2>
-            <div id="livetrace-own"></div>
+    <div id="livetrace-grid">
+        <div class="lt-col">
+            <h2>Pipeline</h2>
+            <div class="lt-legend">
+                <span class="lt-dot lt-ok"></span>fired now
+                <span class="lt-dot lt-stale"></span>stale
+                <span class="lt-dot lt-skipped"></span>skipped
+                <span class="lt-dot lt-wip"></span>WIP
+                <span class="lt-dot lt-na"></span>n/a (passive)
+                <span class="lt-dot lt-error"></span>error
+            </div>
+            <div id="lt-pipeline"></div>
         </div>
-        <div class="livetrace-team-panel">
-            <h2 style="margin:0 0 8px 0; color:#f85149;">Opp Team</h2>
-            <div id="livetrace-opp"></div>
+
+        <div class="lt-col">
+            <h2>Engine View (own)</h2>
+            <div class="lt-pokeballs" id="lt-own-pokeballs"></div>
+            <div id="lt-own-team"></div>
+        </div>
+
+        <div class="lt-col">
+            <h2>Engine View (opp)</h2>
+            <div class="lt-pokeballs" id="lt-opp-pokeballs"></div>
+            <div id="lt-opp-team"></div>
         </div>
     </div>
 
-    <h2 style="margin-top:24px;">Event Feed</h2>
-    <div id="livetrace-feed" style="max-height:400px; overflow-y:auto; background:#0d1117; border:1px solid #30363d; padding:8px; font-family:ui-monospace,monospace; font-size:11px;"></div>
+    <h2 style="margin-top:24px;">Field State</h2>
+    <div id="lt-field"></div>
+
+    <h2 style="margin-top:24px;">Recent Events</h2>
+    <div id="livetrace-feed"></div>
 </div>
 
 <style>
-.livetrace-team-panel { background:#161b22; border:1px solid #30363d; padding:12px; border-radius:6px; }
-.livetrace-slot { background:#0d1117; border:1px solid #21262d; border-radius:4px; padding:8px; margin:4px 0; font-family:ui-monospace,monospace; font-size:12px; }
-.livetrace-slot.active { border-color:#58a6ff; background:#0d2235; }
-.livetrace-slot.fainted { opacity:0.45; }
-.livetrace-slot-species { font-weight:bold; color:#c9d1d9; }
-.livetrace-slot-meta { color:#8b949e; font-size:11px; margin-top:2px; }
-.livetrace-event-row { padding:2px 0; border-bottom:1px solid #21262d; color:#c9d1d9; }
-.livetrace-event-row .seq { color:#8b949e; margin-right:8px; }
-.livetrace-event-row .type { color:#58a6ff; margin-right:8px; }
+#livetrace-status-bar { display:flex; flex-wrap:wrap; gap:8px; margin:12px 0; align-items:center; }
+.lt-pill { background:#161b22; border:1px solid #30363d; border-radius:12px; padding:3px 10px; font-size:11px; color:#c9d1d9; font-family:ui-monospace,monospace; }
+.lt-pill.screen-team_preview { background:#0d2235; border-color:#58a6ff; }
+.lt-pill.screen-action_menu, .lt-pill.screen-move_select, .lt-pill.screen-preparing { background:#0d2a1a; border-color:#3fb950; }
+.lt-pill.screen-result_screen, .lt-pill.screen-post_match { background:#2a1a0d; border-color:#d29922; }
+.lt-pill.screen-main_menu { background:#1a1a2a; border-color:#a371f7; }
+
+#livetrace-grid { display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:16px; margin-top:8px; }
+.lt-col { background:#0d1117; border:1px solid #30363d; border-radius:6px; padding:12px; min-width:0; }
+.lt-col h2 { margin:0 0 10px 0; font-size:14px; color:#c9d1d9; }
+
+.lt-legend { display:flex; flex-wrap:wrap; gap:10px; font-size:10px; color:#8b949e; margin-bottom:10px; align-items:center; }
+.lt-dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:3px; vertical-align:middle; }
+.lt-ok { background:#3fb950; }
+.lt-stale { background:#d29922; }
+.lt-skipped { background:#484f58; }
+.lt-wip { background:#f85149; }
+.lt-na { background:#6e7681; border:1px dashed #c9d1d9; }
+.lt-error { background:#bb8009; }
+
+.lt-pipe-row { display:grid; grid-template-columns:auto 1fr auto auto; gap:8px; align-items:center; padding:4px 0; border-bottom:1px solid #21262d; font-family:ui-monospace,monospace; font-size:11px; }
+.lt-pipe-row:hover { background:#161b22; }
+.lt-pipe-row .name { color:#c9d1d9; }
+.lt-pipe-row .cat { color:#6e7681; font-size:10px; }
+.lt-pipe-row .age { color:#8b949e; font-size:10px; min-width:60px; text-align:right; }
+.lt-pipe-row.expanded .detail { display:block; }
+.lt-pipe-row .detail { display:none; grid-column:1 / -1; background:#161b22; border-left:2px solid #30363d; padding:6px 10px; margin:4px 0 4px 14px; color:#8b949e; font-size:10px; white-space:pre-wrap; }
+
+.lt-pokeballs { display:flex; gap:3px; margin-bottom:10px; }
+.lt-pokeball { width:14px; height:14px; border-radius:50%; border:1px solid #30363d; }
+.lt-pokeball.ALIVE { background:#3fb950; }
+.lt-pokeball.FAINTED { background:#484f58; }
+.lt-pokeball.EMPTY { background:transparent; }
+
+.lt-slot { background:#161b22; border:1px solid #21262d; border-radius:4px; padding:6px 8px; margin:4px 0; font-family:ui-monospace,monospace; font-size:11px; }
+.lt-slot.active { border-color:#58a6ff; background:#0d2235; }
+.lt-slot.fainted { opacity:0.4; }
+.lt-slot .species { font-weight:bold; color:#c9d1d9; font-size:12px; }
+.lt-slot .meta { color:#8b949e; font-size:10px; margin-top:2px; }
+.lt-slot .wip { color:#f85149; font-style:italic; font-size:10px; }
+.lt-slot-label { color:#6e7681; font-size:10px; margin-top:6px; margin-bottom:2px; }
+
+#lt-field { background:#0d1117; border:1px solid #30363d; border-radius:6px; padding:10px; font-family:ui-monospace,monospace; font-size:11px; }
+.lt-field-row { display:inline-block; margin-right:14px; color:#8b949e; }
+.lt-field-row .key { color:#6e7681; }
+.lt-field-row .val.set { color:#3fb950; }
+.lt-field-row .val.unset { color:#484f58; }
+
+#livetrace-feed { max-height:280px; overflow-y:auto; background:#0d1117; border:1px solid #30363d; padding:8px; font-family:ui-monospace,monospace; font-size:10px; }
+.lt-event-row { padding:1px 0; color:#c9d1d9; }
+.lt-event-row .seq { color:#6e7681; margin-right:8px; }
+.lt-event-row .scr { color:#58a6ff; margin-right:8px; }
 </style>
