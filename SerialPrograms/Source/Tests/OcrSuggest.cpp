@@ -20,6 +20,7 @@
 #include "PokemonChampions/Inference/PokemonChampions_TeamSummaryReader.h"
 #include "PokemonChampions/Inference/PokemonChampions_TeamPreviewReader.h"
 #include "PokemonChampions/Inference/PokemonChampions_PokeballAliveDetector.h"
+#include "PokemonChampions/Inference/PokemonChampions_BattleEndDetector.h"
 
 #include <array>
 #include <iostream>
@@ -151,6 +152,16 @@ int run_ocr_suggest(const std::string& reader_name, const std::string& image_pat
             }
             std::cout << "],\"own_alive\":" << (int)r.own_alive_count()
                       << ",\"opp_alive\":" << (int)r.opp_alive_count()
+                      << "}" << std::endl;
+        }
+        else if (reader_name == "ResultReader"){
+            //  Wrapper around ResultScreenDetector — exposes the won bool as
+            //  a reader entry. detect() must succeed for the won field to be
+            //  meaningful; if not on a result screen, both fields are false.
+            ResultScreenDetector det;
+            bool detected = det.detect(image);
+            std::cout << "{\"won\":" << (detected && det.won() ? "true" : "false")
+                      << ",\"detected\":" << (detected ? "true" : "false")
                       << "}" << std::endl;
         }
         else{

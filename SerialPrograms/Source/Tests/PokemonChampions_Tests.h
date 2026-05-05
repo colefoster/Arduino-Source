@@ -72,6 +72,10 @@ int test_pokemonChampions_TeamPreviewDetector(const ImageViewRGB32& image, bool 
 //  Filename: <prefix>_<opp0>_<opp1>_..._<opp5>.png (opponent species slugs, NONE for skips)
 int test_pokemonChampions_TeamPreviewReader(const ImageViewRGB32& image, const std::vector<std::string>& words);
 
+//  ResultReader exposes ResultScreenDetector::won() as a manifest-validatable
+//  field. `target_won` is the expected bool from the manifest.
+int test_pokemonChampions_ResultReader(const ImageViewRGB32& image, bool target_won);
+
 //  ── Void (development / debug) ─────────────────────────────────────
 
 //  Runs all OCR readers and prints results. No pass/fail — for dev iteration.

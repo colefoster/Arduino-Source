@@ -135,6 +135,15 @@ static int test_manifest_TeamPreviewReader(const ImageViewRGB32& image, const js
     return test_pokemonChampions_TeamPreviewReader(image, words);
 }
 
+static int test_manifest_ResultReader(const ImageViewRGB32& image, const json& entry){
+    if (!entry.contains("won")){
+        cerr << "Error: ResultReader manifest entry missing 'won' field." << endl;
+        return 1;
+    }
+    bool target_won = entry.at("won").get<bool>();
+    return test_pokemonChampions_ResultReader(image, target_won);
+}
+
 
 // Map manifest reader names to test functions.
 // Note: some manifest readers (like BattleHUDReader) contain multiple sub-fields
@@ -147,6 +156,7 @@ static const std::map<std::string, ReaderTestFn> READER_FUNCTIONS = {
     {"TeamSelectReader",     test_manifest_TeamSelectReader},
     {"TeamSummaryReader",    test_manifest_TeamSummaryReader},
     {"TeamPreviewReader",    test_manifest_TeamPreviewReader},
+    {"ResultReader",         test_manifest_ResultReader},
 };
 
 // BattleHUDReader sub-field adapters: the manifest stores fields under

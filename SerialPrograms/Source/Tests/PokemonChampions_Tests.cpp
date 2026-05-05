@@ -362,6 +362,29 @@ int test_pokemonChampions_TeamPreviewReader(const ImageViewRGB32& image, const s
 }
 
 
+// ─── ResultReader ───────────────────────────────────────────────────
+//
+//  Wrapper validating ResultScreenDetector::won() against a manifest bool.
+
+int test_pokemonChampions_ResultReader(const ImageViewRGB32& image, bool target_won){
+    ResultScreenDetector det;
+    bool detected = det.detect(image);
+    if (!detected){
+        cerr << "Error: ResultReader expected a result screen but ResultScreenDetector "
+             << "returned false." << endl;
+        return 1;
+    }
+    bool got = det.won();
+    if (got != target_won){
+        cerr << "Error: ResultReader.won got " << (got ? "true" : "false")
+             << " expected " << (target_won ? "true" : "false") << endl;
+        return 1;
+    }
+    cout << "ResultReader: won=" << (got ? "true" : "false") << " matched." << endl;
+    return 0;
+}
+
+
 // ─── OCR Dump (void/dev) ────────────────────────────────────────────
 //
 //  Runs all readers on the image and prints results. Always returns 0.
