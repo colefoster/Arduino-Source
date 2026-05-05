@@ -140,6 +140,9 @@ KEEP_FIRST_FIRE_DETECTORS = (
 def pick_keepers(results, known_species, known_events, known_text):
     seen_events, seen_texts = set(), set()
     seen_first_fires = set()
+    seen_signatures = set()        # detector-firing signature (sorted tuple)
+    last_signature = None          # for transition tracking
+    seen_transition_pairs = set()  # (prev_sig, this_sig) — keeps state-change samples
     keep = []
     for path in sorted(results.keys()):
         out = results[path]
@@ -161,6 +164,26 @@ def pick_keepers(results, known_species, known_events, known_text):
             if dets.get(det_name) and det_name not in seen_first_fires:
                 reasons.append(f"first_fire={det_name}")
                 seen_first_fires.add(det_name)
+        # Detector-signature novelty — catches screens we don't have a
+        # detector for yet (pokemon_switch, target_select, match_intro before
+        # registration, etc.). Signature = sorted tuple of which existing
+        # detectors fire on this frame. The "no detector fires" case
+        # (signature = ()) is itself a useful signature for un-classified
+        # screens — keep one rep frame for that too.
+        sig = tuple(sorted(d for d, fired in dets.items() if fired))
+        if sig not in seen_signatures:
+            reasons.append(f"new_signature={list(sig) or '()'}")
+            seen_signatures.add(sig)
+        # State transitions: catch the FIRST frame of a new screen each time
+        # we re-enter it (i.e. every alternation between, say, action_menu
+        # and pokemon_switch). Keeps multiple switch/target frames in a
+        # single match instead of just the first one.
+        if last_signature is not None and sig != last_signature:
+            pair = (last_signature, sig)
+            if pair not in seen_transition_pairs:
+                reasons.append(f"transition={list(last_signature) or '()'}->{list(sig) or '()'}")
+                seen_transition_pairs.add(pair)
+        last_signature = sig
         if reasons:
             keep.append((path, reasons))
     return keep, seen_events, seen_texts
