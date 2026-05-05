@@ -23,6 +23,12 @@ screens:
 
   searching_for_battle:
     description: "Animation/transition after pressing Begin Matchmaking."
+    transitions_to: [match_intro, team_preview_selecting]
+    detectors: []
+    readers: {}
+
+  match_intro:
+    description: "VS-banner intro after matchmaking found a match: both players' names, ranks, format label, and character models on screen."
     transitions_to: [team_preview_selecting]
     detectors: []
     readers: {}

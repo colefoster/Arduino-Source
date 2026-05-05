@@ -2,6 +2,7 @@
   "all_screen_dirs": [
     "team_select",
     "searching_for_battle",
+    "match_intro",
     "team_preview_selecting",
     "team_preview_locked_in",
     "action_menu",

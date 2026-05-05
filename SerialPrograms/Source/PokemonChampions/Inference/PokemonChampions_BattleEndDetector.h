@@ -53,6 +53,11 @@ private:
     ImageFloatBox m_left_lost_banner;
     //  Sampled from the right side "WON!" region when winner is the opponent.
     ImageFloatBox m_right_won_glow;
+    //  Vertical strip at the center of the screen. Dark on the actual result
+    //  split (~80-100 channel-sum); bright on the match_intro VS-banner
+    //  (~300+) which has the same blue+red nameplates as result. Co-evidence
+    //  gate keeps the detector from FP-ing on the intro animation.
+    ImageFloatBox m_center_divider;
 
     bool m_won = false;
 };

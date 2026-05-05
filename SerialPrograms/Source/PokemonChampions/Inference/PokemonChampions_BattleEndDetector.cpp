@@ -41,14 +41,26 @@ ResultScreenDetector::ResultScreenDetector()
     //  kept in the header for forward compat (single-side result views, etc.)
     , m_left_lost_banner (0.000, 0.000, 0.000, 0.000)
     , m_right_won_glow   (0.000, 0.000, 0.000, 0.000)
+    //  Co-evidence: vertical strip at the center of the screen. Dark on the
+    //  real result-screen split (channel-sum ~80-100); bright on match_intro
+    //  (~300+) which shares the same blue+red player nameplates.
+    , m_center_divider   (0.490, 0.300, 0.020, 0.300)
 {}
 
 void ResultScreenDetector::make_overlays(VideoOverlaySet& items) const{
     items.add(COLOR_CYAN, m_left_won_glow);
     items.add(COLOR_CYAN, m_right_lost_glow);
+    items.add(COLOR_MAGENTA, m_center_divider);
 }
 
 bool ResultScreenDetector::detect(const ImageViewRGB32& screen){
+    //  Co-evidence: real result split has a dark center column. Match_intro
+    //  has bright/colorful pixels there (player models, banner art). Reject
+    //  before doing the nameplate ratio check — same playbook as the
+    //  MovesMore / MainMenu / PostMatch tightenings.
+    const ImageStats center = image_stats(extract_box_reference(screen, m_center_divider));
+    if (center.average.r + center.average.g + center.average.b > 200.0) return false;
+
     const ImageStats left  = image_stats(extract_box_reference(screen, m_left_won_glow));
     const ImageStats right = image_stats(extract_box_reference(screen, m_right_lost_glow));
 
