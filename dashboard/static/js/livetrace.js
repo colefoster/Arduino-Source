@@ -250,9 +250,9 @@ function ltSlotEl(slot, isActive) {
     let html = '<div class="species">' + ltEsc(species) + '</div>';
     if (meta.length) html += '<div class="meta">' + ltEsc(meta.join(' / ')) + '</div>';
     if (moves.length) html += '<div class="meta">' + ltEsc(moves.join(', ')) + '</div>';
-    else html += '<div class="wip">moves: WIP (needs Moves & More scan)</div>';
-    if (!slot.ability) html += '<div class="wip">ability: WIP</div>';
-    if (!slot.item && species !== '(unknown)') html += '<div class="wip">item: WIP</div>';
+    else html += '<div class="wip">moves: missing (provide via OWN_TEAM_PASTE for own side; opp moves WIP)</div>';
+    if (!slot.ability) html += '<div class="wip">ability: missing (own=paste, opp=WIP AbilityRevealReader)</div>';
+    if (!slot.item && species !== '(unknown)') html += '<div class="wip">item: missing (own=paste, opp=WIP ItemRevealReader)</div>';
     div.innerHTML = html;
     return div;
 }

@@ -26,6 +26,7 @@
 #include "Common/Cpp/Json/JsonValue.h"
 #include "Common/Cpp/Options/SimpleIntegerOption.h"
 #include "Common/Cpp/Options/StringOption.h"
+#include "Common/Cpp/Options/TextEditOption.h"
 #include "NintendoSwitch/NintendoSwitch_SingleSwitchProgram.h"
 #include "PokemonChampions_BattleStateTracker.h"
 
@@ -110,6 +111,11 @@ private:
     SimpleIntegerOption<uint32_t> POLL_PERIOD_MILLISECONDS;
     SimpleIntegerOption<uint32_t> STALE_AFTER_MILLISECONDS;
     StringOption SINK_URL;
+    //  Pokemon Showdown formatted team paste. Populates own-team species,
+    //  moves, items, and abilities at program start. This is the canonical
+    //  source for own-side state — visual own-side OCR (TeamPreviewReader
+    //  own boxes, MovesAndMoreReader) is fallback / WIP only.
+    TextEditOption OWN_TEAM_PASTE;
 
     //  ── State ──
     BattleStateTracker m_tracker;

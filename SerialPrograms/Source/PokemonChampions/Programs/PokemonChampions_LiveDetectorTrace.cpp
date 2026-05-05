@@ -76,10 +76,20 @@ LiveDetectorTrace::LiveDetectorTrace()
         "http://127.0.0.1:9876/live-trace/event",
         "http://127.0.0.1:9876/live-trace/event"
     )
+    , OWN_TEAM_PASTE(
+        "<b>Own Team (Showdown Paste):</b><br>"
+        "Pokemon Showdown formatted team paste. Canonical source for own-side "
+        "state (species, moves, item, ability for all 6 slots). Visual own-side "
+        "OCR is fallback / WIP only. Loaded once at program start.",
+        LockMode::LOCK_WHILE_RUNNING,
+        "",
+        "Paste your Showdown team here..."
+    )
 {
     PA_ADD_OPTION(POLL_PERIOD_MILLISECONDS);
     PA_ADD_OPTION(STALE_AFTER_MILLISECONDS);
     PA_ADD_OPTION(SINK_URL);
+    PA_ADD_OPTION(OWN_TEAM_PASTE);
 }
 
 
@@ -142,10 +152,17 @@ void LiveDetectorTrace::init_pipeline_registry(){
 
     //  ── Wired readers ──
     add("BattleModeDetector",        "reader", "skipped", "Reads format label: Singles vs Doubles. Refreshed on TeamPreview / matchmaking screens.");
-    add("TeamPreviewReader",         "reader", "skipped", "OCR's all 6 own species + items, sprite-matches all 6 opp species. Fires on TeamPreview screen.");
+    add("TeamPreviewReader",         "reader", "skipped",
+        "Sprite-matches all 6 opp species (CANONICAL for opp side). "
+        "Also OCR's own species/items but those are NOT applied to the "
+        "tracker — own state comes from OWN_TEAM_PASTE. The own-side OCR "
+        "result is shown in last_output as a confirmation/diff signal only.");
     add("BattleHUDReader",           "reader", "skipped", "Reads opp active species (text), opp + own active HPs. Fires on action_menu / move_select / preparing screens.");
     add("MoveNameReader",            "reader", "skipped", "Reads the 4 move-name pills on Move Select. Fires only on move_select.");
     add("PokeballAliveDetector",     "reader", "skipped", "Reads alive/fainted/empty for all 6 slots per side from the HUD pokeball strip. Fires whenever the HUD is visible.");
+    add("OwnTeamPaste",              "reader", "skipped",
+        "Pokemon Showdown formatted paste from program options. CANONICAL source for own-side state "
+        "(species, moves, item, ability for all 6 slots). Loaded once at program start.");
 
     //  ── WIP / unavailable (declared but not wired) ──
     add("MovesAndMoreReader",        "reader", "n/a",
@@ -322,22 +339,14 @@ void LiveDetectorTrace::run_team_preview_screen(Logger& logger, const ImageViewR
         }
     }
 
-    //  Own species: state tracker doesn't have a public set_own_species
-    //  method without ConfiguredPokemon, so we synthesize a partial team
-    //  from the OCR for what we have. Items get filled per-slot above;
-    //  species we put through set_own_team only if at least one row has
-    //  a species, leaving moves/abilities empty (they'll register as WIP
-    //  fields in the engine view).
-    if (own_count > 0){
-        std::array<ConfiguredPokemon, 6> team;
-        for (uint8_t i = 0; i < 6; i++){
-            team[i].species = result.own[i].species;
-            team[i].item = result.own[i].item;
-            //  moves[] and ability stay empty — those would come from
-            //  Moves & More (unavailable in passive mode).
-        }
-        m_tracker.set_own_team(team);
-    }
+    //  Own-side OCR is INTENTIONALLY NOT applied to the tracker here.
+    //  Own team state comes from OWN_TEAM_PASTE (Showdown paste) loaded at
+    //  program start — that's the canonical source per
+    //  feedback_own_team_via_paste.md. We still report what the OCR saw in
+    //  the pipeline status so it's visible as a confirmation/diff signal,
+    //  but we don't overwrite the paste-loaded tracker fields with possibly
+    //  bad OCR. Item-only update from OCR is kept (above) since paste
+    //  provides item too but per-match item changes shouldn't be common.
 
     JsonObject summary;
     summary["own_species_read"] = (int64_t)own_count;
@@ -484,6 +493,28 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
     m_match_in_progress = false;
     uint64_t seq = 0;
 
+    //  Seed own-team from Showdown paste (canonical source per
+    //  feedback_own_team_via_paste.md). Visual own-side OCR is fallback only.
+    {
+        std::string paste = OWN_TEAM_PASTE;
+        if (!paste.empty()){
+            int loaded = m_tracker.load_team_from_showdown_paste(paste);
+            env.console.log(
+                "LiveDetectorTrace: loaded " + std::to_string(loaded) +
+                "/6 own Pokemon from Showdown paste.",
+                loaded > 0 ? COLOR_GREEN : COLOR_YELLOW
+            );
+            mark("OwnTeamPaste", "ok", JsonValue((int64_t)loaded));
+        }else{
+            env.console.log(
+                "LiveDetectorTrace: no Showdown paste provided; own team will "
+                "be empty until visual OCR is wired (currently WIP).",
+                COLOR_YELLOW
+            );
+            mark("OwnTeamPaste", "error");
+        }
+    }
+
     while (true){
         VideoSnapshot snapshot = env.console.video().snapshot();
         if (!snapshot){
@@ -510,10 +541,15 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
                 || m_prev_screen == "main_menu" || m_prev_screen == "post_match"
                 || m_prev_screen == "result_screen")){
             if (m_match_in_progress || m_tracker.opp_seen_count() > 0){
-                env.console.log("LiveDetectorTrace: new match — wiping tracker.", COLOR_BLUE);
+                env.console.log("LiveDetectorTrace: new match — wiping tracker + reloading own paste.", COLOR_BLUE);
             }
             m_tracker.reset();
             m_tracker.set_mode(m_mode);
+            //  Re-seed own team from paste so it survives the reset.
+            std::string paste = OWN_TEAM_PASTE;
+            if (!paste.empty()){
+                m_tracker.load_team_from_showdown_paste(paste);
+            }
             m_match_in_progress = true;
         }
         if (screen == "post_match" || screen == "result_screen"){
