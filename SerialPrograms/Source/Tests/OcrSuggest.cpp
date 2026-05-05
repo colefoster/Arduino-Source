@@ -90,22 +90,6 @@ int run_ocr_suggest(const std::string& reader_name, const std::string& image_pat
         else if (reader_name == "BattleLogReader"){
             BattleLogReader reader;
             auto event = reader.read_event(log, image);
-            const char* type_str = "UNKNOWN";
-            switch (event.type){
-                case BattleLogEventType::UNKNOWN:          type_str = "UNKNOWN"; break;
-                case BattleLogEventType::MOVE_USED:        type_str = "MOVE_USED"; break;
-                case BattleLogEventType::STAT_CHANGE:      type_str = "STAT_CHANGE"; break;
-                case BattleLogEventType::STATUS_INFLICTED: type_str = "STATUS_INFLICTED"; break;
-                case BattleLogEventType::SWITCH_IN:        type_str = "SWITCH_IN"; break;
-                case BattleLogEventType::WEATHER:          type_str = "WEATHER"; break;
-                case BattleLogEventType::TERRAIN:          type_str = "TERRAIN"; break;
-                case BattleLogEventType::TRICK_ROOM:       type_str = "TRICK_ROOM"; break;
-                case BattleLogEventType::SUPER_EFFECTIVE:  type_str = "SUPER_EFFECTIVE"; break;
-                case BattleLogEventType::NOT_EFFECTIVE:    type_str = "NOT_EFFECTIVE"; break;
-                case BattleLogEventType::FAINTED:          type_str = "FAINTED"; break;
-                case BattleLogEventType::ITEM_ACTIVATED:   type_str = "ITEM_ACTIVATED"; break;
-                case BattleLogEventType::OTHER:            type_str = "OTHER"; break;
-            }
             //  raw_text is emitted under event_type_raw so the dashboard's
             //  "(raw: X)" annotation surfaces the OCR string alongside the
             //  classified event_type.
@@ -114,7 +98,7 @@ int run_ocr_suggest(const std::string& reader_name, const std::string& image_pat
                 if (raw[i] == '"' || raw[i] == '\\') raw[i] = ' ';
                 else if (raw[i] == '\n' || raw[i] == '\r' || raw[i] == '\t') raw[i] = ' ';
             }
-            std::cout << "{\"event_type\":\"" << type_str << "\","
+            std::cout << "{\"event_type\":\"" << event_type_to_string(event.type) << "\","
                       << "\"event_type_raw\":\"" << raw << "\"}" << std::endl;
         }
         else if (reader_name == "TeamSelectReader"){

@@ -1312,6 +1312,8 @@ file(GLOB LIBRARY_SOURCES
     Source/PokemonChampions/Inference/PokemonChampions_BattleHUDReader.h
     Source/PokemonChampions/Inference/PokemonChampions_BattleLogReader.cpp
     Source/PokemonChampions/Inference/PokemonChampions_BattleLogReader.h
+    Source/PokemonChampions/Inference/PokemonChampions_BattleLogPatterns.h
+    Source/PokemonChampions/Inference/PokemonChampions_BattleLogPatterns_Generated.cpp
     Source/PokemonChampions/Inference/PokemonChampions_CommunicatingDetector.cpp
     Source/PokemonChampions/Inference/PokemonChampions_CommunicatingDetector.h
     Source/PokemonChampions/Inference/PokemonChampions_BattleModeDetector.cpp

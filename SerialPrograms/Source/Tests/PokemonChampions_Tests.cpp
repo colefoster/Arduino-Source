@@ -146,40 +146,7 @@ int test_pokemonChampions_MoveNameReader(const ImageViewRGB32& image, const std:
 //
 //  We join the last N words with '_' and match against enum names.
 
-static BattleLogEventType event_type_from_string(const std::string& name){
-    if (name == "MOVE_USED")          return BattleLogEventType::MOVE_USED;
-    if (name == "STAT_CHANGE")        return BattleLogEventType::STAT_CHANGE;
-    if (name == "STATUS_INFLICTED")   return BattleLogEventType::STATUS_INFLICTED;
-    if (name == "SWITCH_IN")          return BattleLogEventType::SWITCH_IN;
-    if (name == "WEATHER")            return BattleLogEventType::WEATHER;
-    if (name == "TERRAIN")            return BattleLogEventType::TERRAIN;
-    if (name == "TRICK_ROOM")         return BattleLogEventType::TRICK_ROOM;
-    if (name == "SUPER_EFFECTIVE")    return BattleLogEventType::SUPER_EFFECTIVE;
-    if (name == "NOT_EFFECTIVE")      return BattleLogEventType::NOT_EFFECTIVE;
-    if (name == "FAINTED")            return BattleLogEventType::FAINTED;
-    if (name == "ITEM_ACTIVATED")     return BattleLogEventType::ITEM_ACTIVATED;
-    if (name == "OTHER")              return BattleLogEventType::OTHER;
-    return BattleLogEventType::UNKNOWN;
-}
-
-static std::string event_type_to_string(BattleLogEventType type){
-    switch (type){
-    case BattleLogEventType::UNKNOWN:          return "UNKNOWN";
-    case BattleLogEventType::MOVE_USED:        return "MOVE_USED";
-    case BattleLogEventType::STAT_CHANGE:      return "STAT_CHANGE";
-    case BattleLogEventType::STATUS_INFLICTED: return "STATUS_INFLICTED";
-    case BattleLogEventType::SWITCH_IN:        return "SWITCH_IN";
-    case BattleLogEventType::WEATHER:          return "WEATHER";
-    case BattleLogEventType::TERRAIN:          return "TERRAIN";
-    case BattleLogEventType::TRICK_ROOM:       return "TRICK_ROOM";
-    case BattleLogEventType::SUPER_EFFECTIVE:  return "SUPER_EFFECTIVE";
-    case BattleLogEventType::NOT_EFFECTIVE:    return "NOT_EFFECTIVE";
-    case BattleLogEventType::FAINTED:          return "FAINTED";
-    case BattleLogEventType::ITEM_ACTIVATED:   return "ITEM_ACTIVATED";
-    case BattleLogEventType::OTHER:            return "OTHER";
-    }
-    return "UNKNOWN";
-}
+//  event_type_to_string / event_type_from_string moved to BattleLogReader.{h,cpp}.
 
 int test_pokemonChampions_BattleLogReader(const ImageViewRGB32& image, const std::vector<std::string>& words){
     if (words.empty()){

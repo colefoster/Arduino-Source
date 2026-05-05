@@ -33,21 +33,67 @@ namespace NintendoSwitch{
 namespace PokemonChampions{
 
 
+//  Event taxonomy. Mirrors Pokemon Showdown's data/text/default.ts so each
+//  PS log template maps to exactly one of these values; see
+//  tools/generate_battle_log_patterns.py for the mapping.
 enum class BattleLogEventType{
     UNKNOWN,
-    MOVE_USED,          //  "The opposing X used Y!"  or  "X used Y!"
-    STAT_CHANGE,        //  "X's Atk rose!" / "X's Speed harshly fell!"
-    STATUS_INFLICTED,   //  "X was burned/paralyzed/poisoned/frozen/put to sleep!"
-    SWITCH_IN,          //  "[Trainer] sent out X!"
-    WEATHER,            //  "It started to rain!" / "The sandstorm subsided!"
-    TERRAIN,            //  "Electric Terrain was set!"
-    TRICK_ROOM,         //  "X twisted the dimensions!" / "The twisted dimensions..."
-    SUPER_EFFECTIVE,    //  "It's super effective!"
-    NOT_EFFECTIVE,      //  "It's not very effective..."
-    FAINTED,            //  "X fainted!"
-    ITEM_ACTIVATED,     //  "X's Focus Sash" / etc.
+    //  Match flow
+    MOVE_USED,          //  "[POKEMON] used [MOVE]!"
+    SWITCH_IN,          //  "[TRAINER] sent out [POKEMON]!" / "Go! [POKEMON]!"
+    SWITCH_OUT,         //  "[TRAINER] withdrew [POKEMON]!" / "[POKEMON], come back!"
+    DRAG,               //  "[POKEMON] was dragged out!"
+    FAINTED,            //  "[POKEMON] fainted!"
+    CANT,               //  Move blocked: paralyzed/asleep/frozen/flinch/recharge/struggle
+    FAILED,             //  "But it failed!" / "It had no effect!"
+    //  Stat changes
+    STAT_CHANGE,        //  "[POKEMON]'s [STAT] rose/fell!" — boost_stages signed
+    STAT_CHANGE_AT_CAP, //  "[POKEMON]'s [STAT] won't go any higher/lower!"
+    STAT_CHANGE_OTHER,  //  swap/copy/clear/invert boost effects
+    //  Damage / heal
+    DAMAGE,             //  Generic damage notice ("[POKEMON] was hurt by …")
+    HEAL,               //  HP restored
+    CRIT,               //  "A critical hit!"
+    SUPER_EFFECTIVE,    //  "It's super effective!" + "extremely effective" (Tera)
+    NOT_EFFECTIVE,      //  "It's not very effective..." + "mostly ineffective"
+    IMMUNE,             //  "It doesn't affect [POKEMON]…"
+    MISS,               //  "[POKEMON] avoided the attack!"
+    HIT_COUNT,          //  "Hit [N] times!"
+    OHKO,               //  "It's a one-hit KO!"
+    //  Statuses
+    STATUS_INFLICTED,   //  brn/par/psn/tox/frz/slp.start + Yawn ("grew drowsy")
+    STATUS_HEALED,      //  brn/par/psn/frz/slp.end
+    STATUS_DAMAGE,      //  burn / poison damage tick
+    CONFUSION,          //  start / end / activate
+    //  Field state
+    WEATHER,            //  weather start/end/upkeep/damage/block
+    TERRAIN,            //  terrain start/end/block/heal
+    TRICK_ROOM,         //  twisted dimensions
+    FIELD_EFFECT,       //  gravity / magic room / wonder room / sport
+    //  Form changes / reactions
+    MEGA_EVOLVE,        //  "[POKEMON] has Mega Evolved into Mega [SPECIES]!"
+    PRIMAL,             //  "Primal Reversion!"
+    TYPE_CHANGE,        //  "[POKEMON]'s type changed to [TYPE]!"
+    TRANSFORM,          //  "[POKEMON] transformed!"
+    //  Items / abilities
+    ITEM_ACTIVATED,     //  ate item / used gem / item buff / etc.
+    ITEM_TRANSFER,      //  Trick / Switcheroo / Thief / Pickpocket
+    ABILITY_CHANGE,     //  "acquired [ABILITY]!"
+    //  Generic effect plumbing (rarely surfaced unless the OCR captures parens)
+    EFFECT_START,       //  "([EFFECT] started on [POKEMON]!)"
+    EFFECT_END,         //  "[POKEMON] was freed from [EFFECT]!"
+    EFFECT_ACTIVATE,    //  "([EFFECT] activated!)"
+    //  Match boundary / chrome
+    BATTLE_START,
+    BATTLE_END,
+    TURN_MARKER,        //  "== Turn N =="
     OTHER,              //  Recognized text but no specific parse
 };
+
+
+//  Enum <-> name conversions (used by tests, OcrSuggest, dashboard).
+std::string event_type_to_string(BattleLogEventType type);
+BattleLogEventType event_type_from_string(const std::string& name);
 
 
 struct BattleLogEvent{
@@ -63,7 +109,18 @@ struct BattleLogEvent{
     std::string move;
 
     //  Stat name (for STAT_CHANGE events): "Atk", "Sp. Atk", "Speed", etc.
+    //  Also reused for STATUS_INFLICTED status name (legacy quirk).
     std::string stat;
+
+    //  Item name (for ITEM_ACTIVATED / ITEM_TRANSFER / damage-from-item events).
+    std::string item;
+
+    //  Ability name (for ABILITY_CHANGE).
+    std::string ability;
+
+    //  Effect / type / move name as captured by the matched pattern. Specific
+    //  fields take precedence; this catches the rest.
+    std::string effect;
 
     //  Boost direction: +1 = rose, +2 = sharply rose, -1 = fell, etc.
     int boost_stages = 0;

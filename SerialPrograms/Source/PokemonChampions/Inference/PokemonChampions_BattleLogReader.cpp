@@ -11,12 +11,15 @@
  *
  */
 
+#include <cctype>
 #include <regex>
+#include <utility>
 #include "CommonFramework/ImageTypes/ImageViewRGB32.h"
 #include "CommonFramework/ImageTools/ImageBoxes.h"
 #include "CommonFramework/ImageTools/ImageStats.h"
 #include "CommonTools/OCR/OCR_RawOCR.h"
 #include "CommonTools/OCR/OCR_Routines.h"
+#include "PokemonChampions_BattleLogPatterns.h"
 #include "PokemonChampions_BattleLogReader.h"
 
 namespace PokemonAutomation{
@@ -87,143 +90,185 @@ static std::string clean_pokemon_name(const std::string& raw){
 }
 
 
-// ─── Regex-based parsing ─────────────────────────────────────────────
+// ─── Pattern-driven parsing ──────────────────────────────────────────
+//
+//  The pattern table is generated from Pokemon Showdown's
+//  data/text/default.ts (see tools/generate_battle_log_patterns.py and
+//  PokemonChampions_BattleLogPatterns_Generated.cpp). We walk the table
+//  top-to-bottom; first match wins. The table is sorted so longer literal
+//  templates come before shorter, more permissive ones.
+
+static std::string strip_opposing_prefix(const std::string& s, bool& is_opponent){
+    static const std::string prefix = "the opposing ";
+    is_opponent = false;
+    if (s.size() < prefix.size()) return s;
+    std::string head = s.substr(0, prefix.size());
+    for (char& c : head) c = static_cast<char>(std::tolower(static_cast<unsigned char>(c)));
+    if (head == prefix){
+        is_opponent = true;
+        return s.substr(prefix.size());
+    }
+    return s;
+}
 
 BattleLogEvent BattleLogReader::parse(const std::string& text){
     BattleLogEvent event;
     event.raw_text = text;
 
+    //  Trim leading/trailing whitespace and a single wrapping pair of
+    //  parentheses (PS uses "  (...)" for background-message styling; OCR
+    //  may or may not capture the parens).
+    std::string trimmed = text;
+    size_t start = trimmed.find_first_not_of(" \t\r\n");
+    size_t end = trimmed.find_last_not_of(" \t\r\n");
+    if (start == std::string::npos){
+        event.type = BattleLogEventType::UNKNOWN;
+        return event;
+    }
+    trimmed = trimmed.substr(start, end - start + 1);
+    if (trimmed.size() >= 2 && trimmed.front() == '(' && trimmed.back() == ')'){
+        trimmed = trimmed.substr(1, trimmed.size() - 2);
+    }
+
     std::smatch m;
-
-    //  "The opposing X used Y!"  or  "X used Y!"
-    {
-        std::regex re(R"((?:The opposing )?(.+?) used (.+?)!?)");
-        if (std::regex_search(text, m, re)){
-            event.type = BattleLogEventType::MOVE_USED;
-            event.pokemon = clean_pokemon_name(m[1].str());
-            event.move = m[2].str();
-            event.is_opponent = (text.find("The opposing") != std::string::npos);
-            return event;
+    for (const BattleLogPattern& p : battle_log_patterns()){
+        //  regex_search (not regex_match) so trailing OCR garbage (" - . s",
+        //  "S S", etc.) doesn't break the match. The patterns are sorted by
+        //  literal length so more specific templates beat shorter ones.
+        if (!std::regex_search(trimmed, m, p.regex)) continue;
+        event.type = p.event_type;
+        event.boost_stages = p.boost_stages;
+        if (!p.static_stat.empty()){
+            event.stat = p.static_stat;
         }
-    }
-
-    //  "[Trainer] sent out X!"
-    {
-        std::regex re(R"((.+?) sent out (.+?)!?)");
-        if (std::regex_search(text, m, re)){
-            event.type = BattleLogEventType::SWITCH_IN;
-            event.pokemon = clean_pokemon_name(m[2].str());
-            //  If the trainer name is not ours, it's opponent.
-            //  We can't easily know our own trainer name here, so we mark
-            //  this as opponent if it doesn't contain "'s" (which would
-            //  indicate a Pokemon-level message, not a send-out).
-            event.is_opponent = true;  //  Caller should refine based on context.
-            return event;
+        for (size_t i = 0; i < p.slots.size() && (i + 1) < m.size(); i++){
+            const std::string captured = m[i + 1].str();
+            switch (p.slots[i]){
+            case BattleLogSlot::POKEMON: {
+                bool opp = false;
+                event.pokemon = clean_pokemon_name(strip_opposing_prefix(captured, opp));
+                if (opp) event.is_opponent = true;
+                break;
+            }
+            case BattleLogSlot::STAT:
+                if (p.static_stat.empty()) event.stat = captured;
+                break;
+            case BattleLogSlot::MOVE:    event.move = captured;    break;
+            case BattleLogSlot::ITEM:    event.item = captured;    break;
+            case BattleLogSlot::ABILITY: event.ability = captured; break;
+            case BattleLogSlot::EFFECT:  event.effect = captured;  break;
+            case BattleLogSlot::NONE:    break;
+            }
         }
-    }
-
-    //  "X's Atk rose!" / "X's Sp. Atk sharply rose!" / "X's Speed harshly fell!"
-    //  Also: "The opposing X's Atk rose!"
-    {
-        std::regex re(R"((?:The opposing )?(.+?)'s (.+?) (rose|fell|sharply rose|sharply fell|harshly fell|drastically rose)!?)");
-        if (std::regex_search(text, m, re)){
-            event.type = BattleLogEventType::STAT_CHANGE;
-            event.pokemon = clean_pokemon_name(m[1].str());
-            event.stat = m[2].str();
-            event.is_opponent = (text.find("The opposing") != std::string::npos);
-
-            std::string direction = m[3].str();
-            if (direction == "rose")              event.boost_stages = 1;
-            else if (direction == "sharply rose")  event.boost_stages = 2;
-            else if (direction == "drastically rose") event.boost_stages = 3;
-            else if (direction == "fell")          event.boost_stages = -1;
-            else if (direction == "sharply fell")  event.boost_stages = -2;
-            else if (direction == "harshly fell")  event.boost_stages = -3;
-            return event;
-        }
-    }
-
-    //  Multi-stat changes: "The opposing Volcarona's Sp. Atk, Sp. Def, and Speed rose!"
-    {
-        std::regex re(R"((?:The opposing )?(.+?)'s (.+?) (rose|fell)!?)");
-        if (std::regex_search(text, m, re)){
-            event.type = BattleLogEventType::STAT_CHANGE;
-            event.pokemon = clean_pokemon_name(m[1].str());
-            event.stat = m[2].str();  //  "Sp. Atk, Sp. Def, and Speed"
-            event.is_opponent = (text.find("The opposing") != std::string::npos);
-            event.boost_stages = (m[3].str() == "rose") ? 1 : -1;
-            return event;
-        }
-    }
-
-    //  "X was burned/paralyzed/poisoned/frozen!"
-    //  "X fell asleep!" / "X was put to sleep!"
-    {
-        std::regex re(R"((?:The opposing )?(.+?) was (burned|paralyzed|poisoned|badly poisoned|frozen|put to sleep)!?)");
-        if (std::regex_search(text, m, re)){
-            event.type = BattleLogEventType::STATUS_INFLICTED;
-            event.pokemon = clean_pokemon_name(m[1].str());
-            event.stat = m[2].str();  //  reuse stat field for status name
-            event.is_opponent = (text.find("The opposing") != std::string::npos);
-            return event;
-        }
-    }
-
-    //  "X fainted!"
-    {
-        std::regex re(R"((?:The opposing )?(.+?) fainted!?)");
-        if (std::regex_search(text, m, re)){
-            event.type = BattleLogEventType::FAINTED;
-            event.pokemon = clean_pokemon_name(m[1].str());
-            event.is_opponent = (text.find("The opposing") != std::string::npos);
-            return event;
-        }
-    }
-
-    //  "It's super effective!"
-    if (text.find("super effective") != std::string::npos){
-        event.type = BattleLogEventType::SUPER_EFFECTIVE;
         return event;
     }
 
-    //  "It's not very effective..."
-    if (text.find("not very effective") != std::string::npos){
-        event.type = BattleLogEventType::NOT_EFFECTIVE;
-        return event;
-    }
-
-    //  Weather
-    if (text.find("started to rain") != std::string::npos ||
-        text.find("sunlight turned harsh") != std::string::npos ||
-        text.find("sandstorm kicked up") != std::string::npos ||
-        text.find("started to snow") != std::string::npos ||
-        text.find("rain stopped") != std::string::npos ||
-        text.find("sunlight faded") != std::string::npos ||
-        text.find("sandstorm subsided") != std::string::npos ||
-        text.find("weather disappeared") != std::string::npos ||
-        text.find("effects of the weather") != std::string::npos)
-    {
-        event.type = BattleLogEventType::WEATHER;
-        return event;
-    }
-
-    //  Terrain
-    if (text.find("Terrain") != std::string::npos){
-        event.type = BattleLogEventType::TERRAIN;
-        return event;
-    }
-
-    //  Trick Room
-    if (text.find("twisted the dimensions") != std::string::npos ||
-        text.find("twisted dimensions") != std::string::npos)
-    {
-        event.type = BattleLogEventType::TRICK_ROOM;
-        return event;
-    }
-
-    //  Catch-all: we got text but couldn't parse it.
+    //  No pattern matched.
     event.type = BattleLogEventType::OTHER;
     return event;
+}
+
+
+// ─── Enum <-> name conversions ───────────────────────────────────────
+
+std::string event_type_to_string(BattleLogEventType type){
+    switch (type){
+    case BattleLogEventType::UNKNOWN:            return "UNKNOWN";
+    case BattleLogEventType::MOVE_USED:          return "MOVE_USED";
+    case BattleLogEventType::SWITCH_IN:          return "SWITCH_IN";
+    case BattleLogEventType::SWITCH_OUT:         return "SWITCH_OUT";
+    case BattleLogEventType::DRAG:               return "DRAG";
+    case BattleLogEventType::FAINTED:            return "FAINTED";
+    case BattleLogEventType::CANT:               return "CANT";
+    case BattleLogEventType::FAILED:             return "FAILED";
+    case BattleLogEventType::STAT_CHANGE:        return "STAT_CHANGE";
+    case BattleLogEventType::STAT_CHANGE_AT_CAP: return "STAT_CHANGE_AT_CAP";
+    case BattleLogEventType::STAT_CHANGE_OTHER:  return "STAT_CHANGE_OTHER";
+    case BattleLogEventType::DAMAGE:             return "DAMAGE";
+    case BattleLogEventType::HEAL:               return "HEAL";
+    case BattleLogEventType::CRIT:               return "CRIT";
+    case BattleLogEventType::SUPER_EFFECTIVE:    return "SUPER_EFFECTIVE";
+    case BattleLogEventType::NOT_EFFECTIVE:      return "NOT_EFFECTIVE";
+    case BattleLogEventType::IMMUNE:             return "IMMUNE";
+    case BattleLogEventType::MISS:               return "MISS";
+    case BattleLogEventType::HIT_COUNT:          return "HIT_COUNT";
+    case BattleLogEventType::OHKO:               return "OHKO";
+    case BattleLogEventType::STATUS_INFLICTED:   return "STATUS_INFLICTED";
+    case BattleLogEventType::STATUS_HEALED:      return "STATUS_HEALED";
+    case BattleLogEventType::STATUS_DAMAGE:      return "STATUS_DAMAGE";
+    case BattleLogEventType::CONFUSION:          return "CONFUSION";
+    case BattleLogEventType::WEATHER:            return "WEATHER";
+    case BattleLogEventType::TERRAIN:            return "TERRAIN";
+    case BattleLogEventType::TRICK_ROOM:         return "TRICK_ROOM";
+    case BattleLogEventType::FIELD_EFFECT:       return "FIELD_EFFECT";
+    case BattleLogEventType::MEGA_EVOLVE:        return "MEGA_EVOLVE";
+    case BattleLogEventType::PRIMAL:             return "PRIMAL";
+    case BattleLogEventType::TYPE_CHANGE:        return "TYPE_CHANGE";
+    case BattleLogEventType::TRANSFORM:          return "TRANSFORM";
+    case BattleLogEventType::ITEM_ACTIVATED:     return "ITEM_ACTIVATED";
+    case BattleLogEventType::ITEM_TRANSFER:      return "ITEM_TRANSFER";
+    case BattleLogEventType::ABILITY_CHANGE:     return "ABILITY_CHANGE";
+    case BattleLogEventType::EFFECT_START:       return "EFFECT_START";
+    case BattleLogEventType::EFFECT_END:         return "EFFECT_END";
+    case BattleLogEventType::EFFECT_ACTIVATE:    return "EFFECT_ACTIVATE";
+    case BattleLogEventType::BATTLE_START:       return "BATTLE_START";
+    case BattleLogEventType::BATTLE_END:         return "BATTLE_END";
+    case BattleLogEventType::TURN_MARKER:        return "TURN_MARKER";
+    case BattleLogEventType::OTHER:              return "OTHER";
+    }
+    return "UNKNOWN";
+}
+
+BattleLogEventType event_type_from_string(const std::string& name){
+    //  Brute-force linear scan; called from tests + dashboard, not hot path.
+    static const std::pair<const char*, BattleLogEventType> table[] = {
+        {"UNKNOWN",            BattleLogEventType::UNKNOWN},
+        {"MOVE_USED",          BattleLogEventType::MOVE_USED},
+        {"SWITCH_IN",          BattleLogEventType::SWITCH_IN},
+        {"SWITCH_OUT",         BattleLogEventType::SWITCH_OUT},
+        {"DRAG",               BattleLogEventType::DRAG},
+        {"FAINTED",            BattleLogEventType::FAINTED},
+        {"CANT",               BattleLogEventType::CANT},
+        {"FAILED",             BattleLogEventType::FAILED},
+        {"STAT_CHANGE",        BattleLogEventType::STAT_CHANGE},
+        {"STAT_CHANGE_AT_CAP", BattleLogEventType::STAT_CHANGE_AT_CAP},
+        {"STAT_CHANGE_OTHER",  BattleLogEventType::STAT_CHANGE_OTHER},
+        {"DAMAGE",             BattleLogEventType::DAMAGE},
+        {"HEAL",               BattleLogEventType::HEAL},
+        {"CRIT",               BattleLogEventType::CRIT},
+        {"SUPER_EFFECTIVE",    BattleLogEventType::SUPER_EFFECTIVE},
+        {"NOT_EFFECTIVE",      BattleLogEventType::NOT_EFFECTIVE},
+        {"IMMUNE",             BattleLogEventType::IMMUNE},
+        {"MISS",               BattleLogEventType::MISS},
+        {"HIT_COUNT",          BattleLogEventType::HIT_COUNT},
+        {"OHKO",               BattleLogEventType::OHKO},
+        {"STATUS_INFLICTED",   BattleLogEventType::STATUS_INFLICTED},
+        {"STATUS_HEALED",      BattleLogEventType::STATUS_HEALED},
+        {"STATUS_DAMAGE",      BattleLogEventType::STATUS_DAMAGE},
+        {"CONFUSION",          BattleLogEventType::CONFUSION},
+        {"WEATHER",            BattleLogEventType::WEATHER},
+        {"TERRAIN",            BattleLogEventType::TERRAIN},
+        {"TRICK_ROOM",         BattleLogEventType::TRICK_ROOM},
+        {"FIELD_EFFECT",       BattleLogEventType::FIELD_EFFECT},
+        {"MEGA_EVOLVE",        BattleLogEventType::MEGA_EVOLVE},
+        {"PRIMAL",             BattleLogEventType::PRIMAL},
+        {"TYPE_CHANGE",        BattleLogEventType::TYPE_CHANGE},
+        {"TRANSFORM",          BattleLogEventType::TRANSFORM},
+        {"ITEM_ACTIVATED",     BattleLogEventType::ITEM_ACTIVATED},
+        {"ITEM_TRANSFER",      BattleLogEventType::ITEM_TRANSFER},
+        {"ABILITY_CHANGE",     BattleLogEventType::ABILITY_CHANGE},
+        {"EFFECT_START",       BattleLogEventType::EFFECT_START},
+        {"EFFECT_END",         BattleLogEventType::EFFECT_END},
+        {"EFFECT_ACTIVATE",    BattleLogEventType::EFFECT_ACTIVATE},
+        {"BATTLE_START",       BattleLogEventType::BATTLE_START},
+        {"BATTLE_END",         BattleLogEventType::BATTLE_END},
+        {"TURN_MARKER",        BattleLogEventType::TURN_MARKER},
+        {"OTHER",              BattleLogEventType::OTHER},
+    };
+    for (const auto& [s, t] : table){
+        if (name == s) return t;
+    }
+    return BattleLogEventType::UNKNOWN;
 }
 
 

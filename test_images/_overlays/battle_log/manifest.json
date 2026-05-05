@@ -41,7 +41,7 @@
   },
   "screenshot-20260427-132232206201.png": {
     "BattleLogReader": {
-      "event_type": "SWITCH_IN"
+      "event_type": "SWITCH_OUT"
     }
   }
 }
