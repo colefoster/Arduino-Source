@@ -64,6 +64,8 @@ async function liveTracePoll() {
             document.getElementById('lt-age').textContent =
                 age == null ? 'last event: -' : 'last event: ' + age.toFixed(1) + 's ago';
         }
+        const dr = await fetch('/api/live-trace/derived-state');
+        if (dr.ok) ltRenderDerivedState(await dr.json());
     } catch (e) {
         ltSetConn('disconnected: ' + e.message);
     }
@@ -255,6 +257,33 @@ function ltSlotEl(slot, isActive) {
     if (!slot.item && species !== '(unknown)') html += '<div class="wip">item: missing (own=paste, opp=WIP ItemRevealReader)</div>';
     div.innerHTML = html;
     return div;
+}
+
+function ltRenderDerivedState(s) {
+    const el = document.getElementById('lt-derived');
+    const st = document.getElementById('lt-derived-status');
+    if (!s || !s.in_match) {
+        el.textContent = '(no match in progress)';
+        st.textContent = s && s.last_seq_seen ? `last_seq_seen: ${s.last_seq_seen}` : '';
+        return;
+    }
+    st.textContent = `match #${s.match_id} | turn ${s.turn} | last_seq ${s.last_seq}`;
+    const pillFor = (state) =>
+        `<span style="display:inline-block;width:14px;height:14px;border-radius:50%;margin:0 2px;vertical-align:middle;background:${
+            state === 'alive' ? '#3fb950' : state === 'fainted' ? '#f85149' : '#30363d'
+        };" title="${state}"></span>`;
+    const ownPills = (s.own || []).map(pillFor).join('');
+    const oppPills = (s.opp || []).map(pillFor).join('');
+    let html = '';
+    html += `<div><span style="color:#6e7681;">own:</span> ${ownPills} <span style="color:#3fb950;">${s.own_alive_count}</span> alive</div>`;
+    html += `<div style="margin-top:4px;"><span style="color:#6e7681;">opp:</span> ${oppPills} <span style="color:#f85149;">${s.opp_alive_count}</span> alive</div>`;
+    if (s.faints && s.faints.length) {
+        const list = s.faints.slice(-6).map(f =>
+            `<span style="color:${f.side === 'own' ? '#f85149' : '#3fb950'};">${f.side}[${f.slot}]</span>`
+        ).join(', ');
+        html += `<div style="margin-top:8px; color:#6e7681;">faints (${s.faint_count}): ${list}</div>`;
+    }
+    el.innerHTML = html;
 }
 
 function ltRenderField(f) {

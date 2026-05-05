@@ -2799,6 +2799,36 @@ async def live_trace_status():
         return JSONResponse({"error": str(e)}, 500)
 
 
+# ─── Derived live state (Pokeball-based alive tracking) ────────────────────
+# Background poller feeds a LiveStateTracker that accumulates per-match alive
+# state across screens. Surfaced via /api/live-trace/derived-state for the
+# Live Trace view and any future inference consumer.
+
+_LIVE_STATE_TRACKER = None
+
+def _get_live_state_tracker():
+    global _LIVE_STATE_TRACKER
+    if _LIVE_STATE_TRACKER is None:
+        # Lazy import: keeps server importable without src/ on path during
+        # one-off scripting.
+        import sys
+        repo = str(Path(__file__).resolve().parent.parent)
+        if repo not in sys.path:
+            sys.path.insert(0, repo)
+        from src.vgc_model.inference.live_state_tracker import LiveStateTracker
+        tracker = LiveStateTracker()
+        tracker.start_polling_thread(DEV_RUNNER, interval_sec=1.0)
+        _LIVE_STATE_TRACKER = tracker
+    return _LIVE_STATE_TRACKER
+
+
+@app.get("/api/live-trace/derived-state")
+async def live_trace_derived_state():
+    """Return accumulated state from the LiveStateTracker (alive bitmap +
+    faint events for the current match)."""
+    return _get_live_state_tracker().snapshot()
+
+
 @app.post("/api/inspector/ocr-crop")
 async def inspector_ocr_crop(request: Request):
     """Run number-tuned OCR on an arbitrary box of an image.
