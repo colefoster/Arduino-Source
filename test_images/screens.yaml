@@ -157,12 +157,7 @@ screens:
             type: array
             items: int
             length: 4
-            description: "Current PP per move slot 0..3 (top→bottom). Move-select screen only; -1 elsewhere."
-          move_pp_max:
-            type: array
-            items: int
-            length: 4
-            description: "Max PP per move slot 0..3 (top→bottom). Move-select screen only; -1 elsewhere."
+            description: "Current PP per move slot 0..3 (top→bottom). Move-select screen only; -1 elsewhere. Max is intentionally NOT tracked — it's static (derivable from move data)."
 
   target_select:
     description: "Target selection modal after picking a move in doubles. Shows mons with HP, effectiveness, and selected move name."

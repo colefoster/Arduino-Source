@@ -435,9 +435,8 @@ int run_manifest_tests(const std::string& test_images_dir, const std::string& mo
         const std::string own_hp_cur_key  = "BattleHUDReader.own_hp_current";
         const std::string own_hp_max_key  = "BattleHUDReader.own_hp_max";
         const std::string move_pp_cur_key = "BattleHUDReader.move_pp_current";
-        const std::string move_pp_max_key = "BattleHUDReader.move_pp_max";
 
-        for (const std::string& key : {opp_species_key, opp_hp_key, own_species_key, own_hp_cur_key, own_hp_max_key, move_pp_cur_key, move_pp_max_key}){
+        for (const std::string& key : {opp_species_key, opp_hp_key, own_species_key, own_hp_cur_key, own_hp_max_key, move_pp_cur_key}){
             all_stats[key].name = key;
         }
 
@@ -530,17 +529,16 @@ int run_manifest_tests(const std::string& test_images_dir, const std::string& mo
                 }
 
                 //  PP fields are not per-slot — there are 4 move slots,
-                //  independent of the 2 mon slots. Probe outside the slot
-                //  loop so we don't double-count.
+                //  independent of the 2 mon slots. Max is no longer tracked
+                //  (static, derivable from move data); only current is
+                //  validated when the manifest provides it.
                 for (uint8_t pi = 0; pi < 4; pi++){
-                    int pp_cur_expected = -1, pp_max_expected = -1;
+                    int pp_cur_expected = -1;
                     bool have_pp_cur = hud.contains("move_pp_current") && int_slot(hud["move_pp_current"], pi, pp_cur_expected);
-                    bool have_pp_max = hud.contains("move_pp_max")     && int_slot(hud["move_pp_max"],     pi, pp_max_expected);
-                    if (have_pp_cur || have_pp_max){
+                    if (have_pp_cur){
                         std::string trace = screen + "/" + fname + " pp" + std::to_string(pi);
                         auto pp = reader.read_move_pp(logger, image, pi);
-                        if (have_pp_cur) record(move_pp_cur_key, pp.first  == pp_cur_expected ? 0 : 1, trace);
-                        if (have_pp_max) record(move_pp_max_key, pp.second == pp_max_expected ? 0 : 1, trace);
+                        record(move_pp_cur_key, pp.first == pp_cur_expected ? 0 : 1, trace);
                     }
                 }
             }

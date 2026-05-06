@@ -71,6 +71,8 @@ int run_ocr_suggest(const std::string& reader_name, const std::string& image_pat
             auto own1 = reader.read_own_hp_with_raw(log, image, 1);
             //  PP boxes only render on the move-select screen; on other
             //  screens these reads return {-1,-1} and are ignored downstream.
+            //  Max PP is dropped from the schema — it's static (move data
+            //  has it). Current PP is best-effort; -1 means "not available".
             std::array<std::pair<int,int>, 4> pp;
             for (size_t i = 0; i < 4; i++) pp[i] = reader.read_move_pp(log, image, (uint8_t)i);
             std::cout << "{"
@@ -83,10 +85,7 @@ int run_ocr_suggest(const std::string& reader_name, const std::string& image_pat
                 << "\"own_species\":[\"" << own_sp0 << "\",\"" << own_sp1 << "\"],"
                 << "\"move_pp_current\":["
                     << pp[0].first << "," << pp[1].first << ","
-                    << pp[2].first << "," << pp[3].first << "],"
-                << "\"move_pp_max\":["
-                    << pp[0].second << "," << pp[1].second << ","
-                    << pp[2].second << "," << pp[3].second << "]"
+                    << pp[2].first << "," << pp[3].first << "]"
                 << "}" << std::endl;
         }
         else if (reader_name == "BattleLogReader"){
