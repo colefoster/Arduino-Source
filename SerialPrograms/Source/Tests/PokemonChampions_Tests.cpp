@@ -21,6 +21,7 @@
 #include "PokemonChampions/Inference/PokemonChampions_ActionMenuDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_BattleEndDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_AbilityItemReader.h"
+#include "PokemonChampions/Inference/PokemonChampions_TargetSelectDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_TargetSelectReader.h"
 #include "PokemonChampions/Inference/PokemonChampions_PreparingForBattleDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_PostMatchDetector.h"
@@ -228,6 +229,16 @@ int test_pokemonChampions_ActiveHUDSlot(const ImageViewRGB32& image, int target)
 
 int test_pokemonChampions_TeamSelectDetector(const ImageViewRGB32& image, bool target){
     TeamSelectDetector detector;
+    bool result = detector.detect(image);
+    TEST_RESULT_EQUAL(result, target);
+    return 0;
+}
+
+
+// ─── TargetSelectDetector ───────────────────────────────────────────
+
+int test_pokemonChampions_TargetSelectDetector(const ImageViewRGB32& image, bool target){
+    TargetSelectDetector detector;
     bool result = detector.detect(image);
     TEST_RESULT_EQUAL(result, target);
     return 0;

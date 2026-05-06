@@ -46,6 +46,7 @@ using BoolDetectorFn = std::function<int(const ImageViewRGB32&, bool)>;
 
 static const std::map<std::string, BoolDetectorFn> DETECTOR_FUNCTIONS = {
     {"TeamSelectDetector",          test_pokemonChampions_TeamSelectDetector},
+    {"TargetSelectDetector",        test_pokemonChampions_TargetSelectDetector},
     {"TeamPreviewDetector",         test_pokemonChampions_TeamPreviewDetector},
     {"PreparingForBattleDetector",  test_pokemonChampions_PreparingForBattleDetector},
     {"ActionMenuDetector",          test_pokemonChampions_ActionMenuDetector},

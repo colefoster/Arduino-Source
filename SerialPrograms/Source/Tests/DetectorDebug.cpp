@@ -18,6 +18,7 @@
 #include "PokemonChampions/Inference/PokemonChampions_PostMatchDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_MainMenuDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_TeamSelectDetector.h"
+#include "PokemonChampions/Inference/PokemonChampions_TargetSelectDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_TeamPreviewDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_TeamSummaryReader.h"  // contains MovesMoreDetector
 #include "PokemonChampions/Inference/PokemonChampions_MegaEvolveDetector.h"
@@ -81,6 +82,7 @@ int run_detector_debug(const std::string& image_path){
         ADD_DETECTOR("PostMatchScreenDetector", PostMatchScreenDetector)
         ADD_DETECTOR("MainMenuDetector", MainMenuDetector)
         ADD_DETECTOR("TeamSelectDetector", TeamSelectDetector)
+        ADD_DETECTOR("TargetSelectDetector", TargetSelectDetector)
         ADD_DETECTOR("TeamPreviewDetector", TeamPreviewDetector)
         ADD_DETECTOR("MovesMoreDetector", MovesMoreDetector)
         ADD_DETECTOR("MegaEvolveDetector", MegaEvolveDetector)

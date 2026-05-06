@@ -57,6 +57,9 @@ int test_pokemonChampions_ActiveHUDSlot(const ImageViewRGB32& image, int target)
 //  Filename: standard bool-target convention.
 int test_pokemonChampions_TeamSelectDetector(const ImageViewRGB32& image, bool target);
 
+//  Doubles target-select modal. Standard bool-target convention.
+int test_pokemonChampions_TargetSelectDetector(const ImageViewRGB32& image, bool target);
+
 //  Filename: <prefix>_<species0>_<species1>_..._<species5>.png (6 species slugs)
 int test_pokemonChampions_TeamSelectReader(const ImageViewRGB32& image, const std::vector<std::string>& words);
 

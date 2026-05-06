@@ -1312,6 +1312,8 @@ file(GLOB LIBRARY_SOURCES
     Source/PokemonChampions/Inference/PokemonChampions_AbilityItemTable_Generated.cpp
     Source/PokemonChampions/Inference/PokemonChampions_BattleEndDetector.cpp
     Source/PokemonChampions/Inference/PokemonChampions_BattleEndDetector.h
+    Source/PokemonChampions/Inference/PokemonChampions_TargetSelectDetector.cpp
+    Source/PokemonChampions/Inference/PokemonChampions_TargetSelectDetector.h
     Source/PokemonChampions/Inference/PokemonChampions_TargetSelectReader.cpp
     Source/PokemonChampions/Inference/PokemonChampions_TargetSelectReader.h
     Source/PokemonChampions/Inference/PokemonChampions_BattleHUDReader.cpp
