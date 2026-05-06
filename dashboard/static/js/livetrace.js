@@ -310,7 +310,7 @@ function ltRenderField(f) {
     }
     const note = document.createElement('div');
     note.style.cssText = 'color:#f85149; font-size:10px; margin-top:8px;';
-    note.textContent = 'Field state is WIP: weather/terrain/trick_room/tailwind/screens have no live readers yet — they only update via BattleLogReader (also WIP).';
+    note.textContent = 'Field state is read from BattleLogReader (weather/terrain/trick_room). Tailwind/screens still have no detector and stay unset.';
     el.appendChild(note);
 }
 
