@@ -397,9 +397,15 @@ async function loadGalleryInbox() {
                 <button class="btn" id="inbox-scan-log-btn" style="border-color:#d29922; color:#d29922;">Scan BattleLogReader</button>
                 <span id="inbox-scan-status" style="font-size:11px; color:#8b949e;"></span>
             </div>
+            <div id="inbox-section-unlabeled-header" style="display:none; margin: 12px 0 6px 0; font-size: 13px; font-weight: 600; color: #f85149; border-bottom: 1px solid #f8514933; padding-bottom: 4px;"></div>
+            <div class="gallery-grid" id="inbox-grid-unlabeled" style="display:none;"></div>
+            <div id="inbox-section-partial-header" style="display:none; margin: 16px 0 6px 0; font-size: 13px; font-weight: 600; color: #d29922; border-bottom: 1px solid #d2992233; padding-bottom: 4px;"></div>
+            <div class="gallery-grid" id="inbox-grid-partial" style="display:none;"></div>
             <div class="gallery-grid" id="inbox-grid">${data.images.map(img => `
                 <div class="gallery-card inbox-card" data-filename="${img.filename}" style="position:relative;">
                     <input type="checkbox" class="inbox-check" style="position:absolute; top:4px; left:4px; z-index:1;">
+                    <button class="inbox-quick-delete-btn" title="Delete this image"
+                            style="position:absolute; top:4px; right:4px; z-index:2; background:rgba(13,17,23,0.85); border:1px solid #f85149; color:#f85149; border-radius:50%; width:22px; height:22px; line-height:18px; font-size:13px; cursor:pointer; padding:0;">×</button>
                     <img class="thumb" loading="lazy" src="${API}/api/gallery/thumb/${img.path}" alt="${img.filename}">
                     <div class="fname" style="font-size:10px; color:#6e7681; word-break:break-all;">${img.filename}</div>
                     <div class="log-readout" data-filename="${img.filename}" style="margin-top:6px; display:none;">
@@ -455,30 +461,68 @@ async function loadGalleryInbox() {
                     const readout = card.querySelector('.log-readout');
                     const sel = card.querySelector('.log-event-type');
                     const txtEl = card.querySelector('.log-raw-text');
+                    let cls = 'unlabeled';
                     if (entry.error) {
                         txtEl.textContent = `[error] ${entry.error}`;
                         txtEl.style.color = '#f85149';
                     } else {
-                        sel.value = entry.event_type || 'UNKNOWN';
+                        const et = entry.event_type || 'UNKNOWN';
+                        sel.value = et;
                         txtEl.textContent = entry.raw_text || '(no text)';
+                        if (et !== 'UNKNOWN' && et !== 'OTHER') cls = 'partial';
                     }
+                    card.dataset.scanClass = cls;
                     readout.style.display = 'block';
                 });
                 scanStatus.textContent = `Scanned ${Object.keys(results).length} images`;
+                //  Reorder cards: unlabeled section on top, then partial.
+                //  Unscanned cards (e.g. an error during scan) stay where they are.
+                const gridUnlabeled = document.getElementById('inbox-grid-unlabeled');
+                const gridPartial   = document.getElementById('inbox-grid-partial');
+                const headUnlab     = document.getElementById('inbox-section-unlabeled-header');
+                const headPart      = document.getElementById('inbox-section-partial-header');
+                let nU = 0, nP = 0;
+                grid.querySelectorAll('.inbox-card[data-scan-class]').forEach(card => {
+                    if (card.dataset.scanClass === 'unlabeled') {
+                        gridUnlabeled.appendChild(card); nU++;
+                    } else if (card.dataset.scanClass === 'partial') {
+                        gridPartial.appendChild(card); nP++;
+                    }
+                });
+                if (nU){ headUnlab.style.display = 'block'; gridUnlabeled.style.display = ''; headUnlab.textContent = `Unlabeled (${nU})`; }
+                if (nP){ headPart.style.display = 'block';  gridPartial.style.display   = ''; headPart.textContent  = `Partial (${nP}) — recognized event_type, ready to Accept`; }
             } catch (e) {
                 scanStatus.textContent = `Error: ${e.message}`;
             } finally {
                 scanBtn.disabled = false;
             }
         });
-        // Per-card accept/delete (delegated)
+        // Per-card accept/delete (delegated, also handles the always-visible quick-delete ×)
         grid.addEventListener('click', async (e) => {
             const acceptBtn = e.target.closest('.log-accept-btn');
             const deleteBtn = e.target.closest('.log-delete-btn');
-            if (!acceptBtn && !deleteBtn) return;
+            const quickDelBtn = e.target.closest('.inbox-quick-delete-btn');
+            if (!acceptBtn && !deleteBtn && !quickDelBtn) return;
             e.stopPropagation();
             const card = e.target.closest('.inbox-card');
             const filename = card.dataset.filename;
+            // Quick × delete: same flow as the in-readout 🗑 button.
+            if (quickDelBtn) {
+                if (!confirm(`Delete ${filename}?`)) return;
+                quickDelBtn.disabled = true;
+                const resp = await fetch(`${API}/api/inbox/delete`, {
+                    method: 'POST', headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({filename})
+                }).then(r => r.json());
+                if (resp.ok) {
+                    card.style.transition = 'opacity 0.2s';
+                    card.style.opacity = '0';
+                    setTimeout(() => card.remove(), 200);
+                } else {
+                    quickDelBtn.disabled = false;
+                }
+                return;
+            }
             if (acceptBtn) {
                 const eventType = card.querySelector('.log-event-type').value;
                 acceptBtn.disabled = true; acceptBtn.textContent = '...';
