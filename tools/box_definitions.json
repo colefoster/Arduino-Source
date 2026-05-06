@@ -1344,6 +1344,1134 @@
         0.3813,
         0.2945
       ]
+    },
+    {
+      "name": "opp_item",
+      "scene": "",
+      "screenshot": "__test__/_overlays/ability_item/20260423-183505998294.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.8283,
+        0.428,
+        0.0933,
+        0.0903
+      ],
+      "avg_rgb": [
+        54.5,
+        58.4,
+        87.2
+      ],
+      "stddev_sum": 221.9,
+      "color_ratio": [
+        0.2724,
+        0.292,
+        0.4356
+      ]
+    },
+    {
+      "name": "our_ability",
+      "scene": "",
+      "screenshot": "__test__/_overlays/ability_item/20260423-183505998294.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.0805,
+        0.4349,
+        0.1023,
+        0.0754
+      ],
+      "avg_rgb": [
+        106,
+        74,
+        11.7
+      ],
+      "stddev_sum": 49,
+      "color_ratio": [
+        0.553,
+        0.3861,
+        0.0609
+      ]
+    },
+    {
+      "name": "opp_1_is_selected",
+      "scene": "",
+      "screenshot": "__test__/target_select/20260427-132208830153.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.7338,
+        0.234,
+        0.0045,
+        0.1228
+      ],
+      "avg_rgb": [
+        191.8,
+        0,
+        59.3
+      ],
+      "stddev_sum": 29.2,
+      "color_ratio": [
+        0.7638,
+        0,
+        0.2362
+      ]
+    },
+    {
+      "name": "opp_0_is_selected",
+      "scene": "",
+      "screenshot": "__test__/target_select/20260427-132208830153.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.4741,
+        0.2355,
+        0.0062,
+        0.1172
+      ],
+      "avg_rgb": [
+        171.5,
+        255,
+        0
+      ],
+      "stddev_sum": 8.5,
+      "color_ratio": [
+        0.4021,
+        0.5979,
+        0
+      ]
+    },
+    {
+      "name": "own_0_move_name",
+      "scene": "",
+      "screenshot": "__test__/target_select/20260427-132208830153.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.3203,
+        0.4914,
+        0.1096,
+        0.0317
+      ],
+      "avg_rgb": [
+        44.8,
+        47.2,
+        68.4
+      ],
+      "stddev_sum": 210.5,
+      "color_ratio": [
+        0.2794,
+        0.2942,
+        0.4265
+      ]
+    },
+    {
+      "name": "opp_0_effectiveness",
+      "scene": "",
+      "screenshot": "__test__/target_select/20260427-132208830153.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.3083,
+        0.2308,
+        0.119,
+        0.0269
+      ],
+      "avg_rgb": [
+        68.1,
+        53.9,
+        227.3
+      ],
+      "stddev_sum": 135,
+      "color_ratio": [
+        0.1949,
+        0.1544,
+        0.6506
+      ]
+    },
+    {
+      "name": "opp_1_effectiveness",
+      "scene": "",
+      "screenshot": "__test__/target_select/20260427-132208830153.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.5658,
+        0.23,
+        0.1056,
+        0.0285
+      ],
+      "avg_rgb": [
+        91.3,
+        77.1,
+        229.7
+      ],
+      "stddev_sum": 174.5,
+      "color_ratio": [
+        0.2294,
+        0.1936,
+        0.577
+      ]
+    },
+    {
+      "name": "own_0_is_selected",
+      "scene": "",
+      "screenshot": "__test__/target_select/20260427-132208830153.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.4741,
+        0.5832,
+        0.0053,
+        0.103
+      ],
+      "avg_rgb": [
+        61.5,
+        31.5,
+        252.5
+      ],
+      "stddev_sum": 23,
+      "color_ratio": [
+        0.178,
+        0.0911,
+        0.7309
+      ]
+    },
+    {
+      "name": "own_1_is_selected",
+      "scene": "",
+      "screenshot": "__test__/target_select/20260427-132208830153.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.7334,
+        0.5714,
+        0.0053,
+        0.1117
+      ],
+      "avg_rgb": [
+        96.9,
+        50.3,
+        255
+      ],
+      "stddev_sum": 34.3,
+      "color_ratio": [
+        0.241,
+        0.1249,
+        0.634
+      ]
+    },
+    {
+      "name": "opp_sprite_0",
+      "scene": "",
+      "screenshot": "__test__/action_menu/20260423-150121863579.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.5702,
+        0.048,
+        0.052,
+        0.0954
+      ],
+      "avg_rgb": [
+        148.7,
+        77.8,
+        146.8
+      ],
+      "stddev_sum": 191.2,
+      "color_ratio": [
+        0.3983,
+        0.2085,
+        0.3932
+      ]
+    },
+    {
+      "name": "opp_sprite_1",
+      "scene": "",
+      "screenshot": "__test__/action_menu/20260423-150121863579.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.77,
+        0.048,
+        0.0602,
+        0.0846
+      ],
+      "avg_rgb": [
+        172.3,
+        113.1,
+        162
+      ],
+      "stddev_sum": 234.1,
+      "color_ratio": [
+        0.3851,
+        0.2528,
+        0.3621
+      ]
+    },
+    {
+      "name": "mon_0_species",
+      "scene": "",
+      "screenshot": "__test__/moves_and_more/movesmore.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.1391,
+        0.2778,
+        0.1087,
+        0.0404
+      ],
+      "avg_rgb": [
+        133,
+        118.8,
+        228.9
+      ],
+      "stddev_sum": 122.5,
+      "color_ratio": [
+        0.2767,
+        0.2471,
+        0.4762
+      ]
+    },
+    {
+      "name": "mon_0_move_0",
+      "scene": "",
+      "screenshot": "__test__/moves_and_more/movesmore.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.3565,
+        0.2865,
+        0.0797,
+        0.0293
+      ],
+      "avg_rgb": [
+        186.6,
+        173.3,
+        244.9
+      ],
+      "stddev_sum": 83.7,
+      "color_ratio": [
+        0.3085,
+        0.2865,
+        0.405
+      ]
+    },
+    {
+      "name": "mon_0_move_1",
+      "scene": "",
+      "screenshot": "__test__/moves_and_more/movesmore.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.356,
+        0.3301,
+        0.0797,
+        0.0277
+      ],
+      "avg_rgb": [
+        174.7,
+        156.3,
+        244.9
+      ],
+      "stddev_sum": 92,
+      "color_ratio": [
+        0.3034,
+        0.2713,
+        0.4253
+      ]
+    },
+    {
+      "name": "mon_0_move_2",
+      "scene": "",
+      "screenshot": "__test__/moves_and_more/movesmore.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.3556,
+        0.3697,
+        0.0797,
+        0.0293
+      ],
+      "avg_rgb": [
+        166.2,
+        149.5,
+        237.7
+      ],
+      "stddev_sum": 105.8,
+      "color_ratio": [
+        0.3002,
+        0.2702,
+        0.4296
+      ]
+    },
+    {
+      "name": "mon_0_move_3",
+      "scene": "",
+      "screenshot": "__test__/moves_and_more/movesmore.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.3565,
+        0.4132,
+        0.0927,
+        0.0269
+      ],
+      "avg_rgb": [
+        168,
+        158.3,
+        232.3
+      ],
+      "stddev_sum": 116.7,
+      "color_ratio": [
+        0.3008,
+        0.2834,
+        0.4158
+      ]
+    },
+    {
+      "name": "mon_0_ability",
+      "scene": "",
+      "screenshot": "__test__/moves_and_more/movesmore.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.1431,
+        0.3253,
+        0.0789,
+        0.0309
+      ],
+      "avg_rgb": [
+        175.3,
+        155.5,
+        242.5
+      ],
+      "stddev_sum": 91.5,
+      "color_ratio": [
+        0.3057,
+        0.2713,
+        0.423
+      ]
+    },
+    {
+      "name": "mon_1_name",
+      "scene": "",
+      "screenshot": "__test__/moves_and_more/movesmore.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.5557,
+        0.2796,
+        0.0788,
+        0.0387
+      ],
+      "avg_rgb": [
+        135.1,
+        122.5,
+        229.8
+      ],
+      "stddev_sum": 131.1,
+      "color_ratio": [
+        0.2771,
+        0.2514,
+        0.4715
+      ]
+    },
+    {
+      "name": "mon_4_name",
+      "scene": "",
+      "screenshot": "__test__/moves_and_more/movesmore.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.1385,
+        0.6841,
+        0.113,
+        0.0378
+      ],
+      "avg_rgb": [
+        133.7,
+        120,
+        228.3
+      ],
+      "stddev_sum": 129,
+      "color_ratio": [
+        0.2774,
+        0.249,
+        0.4737
+      ]
+    },
+    {
+      "name": "mon_2_name",
+      "scene": "",
+      "screenshot": "__test__/moves_and_more/movesmore.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.1395,
+        0.4805,
+        0.0811,
+        0.0392
+      ],
+      "avg_rgb": [
+        137.3,
+        124.4,
+        229.3
+      ],
+      "stddev_sum": 134.3,
+      "color_ratio": [
+        0.2797,
+        0.2534,
+        0.4669
+      ]
+    },
+    {
+      "name": "mon_3_name",
+      "scene": "",
+      "screenshot": "__test__/moves_and_more/movesmore.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.5545,
+        0.4805,
+        0.0848,
+        0.0405
+      ],
+      "avg_rgb": [
+        133.1,
+        119.3,
+        229.6
+      ],
+      "stddev_sum": 123.7,
+      "color_ratio": [
+        0.2761,
+        0.2474,
+        0.4765
+      ]
+    },
+    {
+      "name": "mon_5_name",
+      "scene": "",
+      "screenshot": "__test__/moves_and_more/movesmore.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.5568,
+        0.6832,
+        0.0886,
+        0.0369
+      ],
+      "avg_rgb": [
+        132.8,
+        120,
+        227.7
+      ],
+      "stddev_sum": 131.6,
+      "color_ratio": [
+        0.2763,
+        0.2498,
+        0.4739
+      ]
+    },
+    {
+      "name": "mon_1_ability",
+      "scene": "View Details - Moves & More tab",
+      "screenshot": "test_images/moves_and_more/whimsicott_incineroar_kingambit_floette_basculegion_sneasler.png",
+      "description": "Extrapolated from mon_0 + mon_1_name anchor",
+      "status": "confirmed",
+      "box": [
+        0.5597,
+        0.3271,
+        0.0789,
+        0.0309
+      ],
+      "avg_rgb": [
+        0,
+        0,
+        0
+      ],
+      "stddev_sum": 0,
+      "color_ratio": [
+        0.333,
+        0.333,
+        0.333
+      ]
+    },
+    {
+      "name": "mon_1_move_0",
+      "scene": "View Details - Moves & More tab",
+      "screenshot": "test_images/moves_and_more/whimsicott_incineroar_kingambit_floette_basculegion_sneasler.png",
+      "description": "Extrapolated from mon_0 + mon_1_name anchor",
+      "status": "confirmed",
+      "box": [
+        0.7731,
+        0.2883,
+        0.0797,
+        0.0293
+      ],
+      "avg_rgb": [
+        0,
+        0,
+        0
+      ],
+      "stddev_sum": 0,
+      "color_ratio": [
+        0.333,
+        0.333,
+        0.333
+      ]
+    },
+    {
+      "name": "mon_1_move_1",
+      "scene": "View Details - Moves & More tab",
+      "screenshot": "test_images/moves_and_more/whimsicott_incineroar_kingambit_floette_basculegion_sneasler.png",
+      "description": "Extrapolated from mon_0 + mon_1_name anchor",
+      "status": "confirmed",
+      "box": [
+        0.7726,
+        0.3319,
+        0.0797,
+        0.0277
+      ],
+      "avg_rgb": [
+        0,
+        0,
+        0
+      ],
+      "stddev_sum": 0,
+      "color_ratio": [
+        0.333,
+        0.333,
+        0.333
+      ]
+    },
+    {
+      "name": "mon_1_move_2",
+      "scene": "View Details - Moves & More tab",
+      "screenshot": "test_images/moves_and_more/whimsicott_incineroar_kingambit_floette_basculegion_sneasler.png",
+      "description": "Extrapolated from mon_0 + mon_1_name anchor",
+      "status": "confirmed",
+      "box": [
+        0.7722,
+        0.3715,
+        0.0797,
+        0.0293
+      ],
+      "avg_rgb": [
+        0,
+        0,
+        0
+      ],
+      "stddev_sum": 0,
+      "color_ratio": [
+        0.333,
+        0.333,
+        0.333
+      ]
+    },
+    {
+      "name": "mon_1_move_3",
+      "scene": "View Details - Moves & More tab",
+      "screenshot": "test_images/moves_and_more/whimsicott_incineroar_kingambit_floette_basculegion_sneasler.png",
+      "description": "Extrapolated from mon_0 + mon_1_name anchor",
+      "status": "confirmed",
+      "box": [
+        0.7731,
+        0.415,
+        0.0927,
+        0.0269
+      ],
+      "avg_rgb": [
+        0,
+        0,
+        0
+      ],
+      "stddev_sum": 0,
+      "color_ratio": [
+        0.333,
+        0.333,
+        0.333
+      ]
+    },
+    {
+      "name": "mon_2_ability",
+      "scene": "View Details - Moves & More tab",
+      "screenshot": "test_images/moves_and_more/whimsicott_incineroar_kingambit_floette_basculegion_sneasler.png",
+      "description": "Extrapolated from mon_0 + mon_2_name anchor",
+      "status": "confirmed",
+      "box": [
+        0.1435,
+        0.528,
+        0.0789,
+        0.0309
+      ],
+      "avg_rgb": [
+        0,
+        0,
+        0
+      ],
+      "stddev_sum": 0,
+      "color_ratio": [
+        0.333,
+        0.333,
+        0.333
+      ]
+    },
+    {
+      "name": "mon_2_move_0",
+      "scene": "View Details - Moves & More tab",
+      "screenshot": "test_images/moves_and_more/whimsicott_incineroar_kingambit_floette_basculegion_sneasler.png",
+      "description": "Extrapolated from mon_0 + mon_2_name anchor",
+      "status": "confirmed",
+      "box": [
+        0.3569,
+        0.4892,
+        0.0797,
+        0.0293
+      ],
+      "avg_rgb": [
+        0,
+        0,
+        0
+      ],
+      "stddev_sum": 0,
+      "color_ratio": [
+        0.333,
+        0.333,
+        0.333
+      ]
+    },
+    {
+      "name": "mon_2_move_1",
+      "scene": "View Details - Moves & More tab",
+      "screenshot": "test_images/moves_and_more/whimsicott_incineroar_kingambit_floette_basculegion_sneasler.png",
+      "description": "Extrapolated from mon_0 + mon_2_name anchor",
+      "status": "confirmed",
+      "box": [
+        0.3564,
+        0.5328,
+        0.0797,
+        0.0277
+      ],
+      "avg_rgb": [
+        0,
+        0,
+        0
+      ],
+      "stddev_sum": 0,
+      "color_ratio": [
+        0.333,
+        0.333,
+        0.333
+      ]
+    },
+    {
+      "name": "mon_2_move_2",
+      "scene": "View Details - Moves & More tab",
+      "screenshot": "test_images/moves_and_more/whimsicott_incineroar_kingambit_floette_basculegion_sneasler.png",
+      "description": "Extrapolated from mon_0 + mon_2_name anchor",
+      "status": "confirmed",
+      "box": [
+        0.356,
+        0.5724,
+        0.0797,
+        0.0293
+      ],
+      "avg_rgb": [
+        0,
+        0,
+        0
+      ],
+      "stddev_sum": 0,
+      "color_ratio": [
+        0.333,
+        0.333,
+        0.333
+      ]
+    },
+    {
+      "name": "mon_2_move_3",
+      "scene": "View Details - Moves & More tab",
+      "screenshot": "test_images/moves_and_more/whimsicott_incineroar_kingambit_floette_basculegion_sneasler.png",
+      "description": "Extrapolated from mon_0 + mon_2_name anchor",
+      "status": "confirmed",
+      "box": [
+        0.3569,
+        0.6159,
+        0.0927,
+        0.0269
+      ],
+      "avg_rgb": [
+        0,
+        0,
+        0
+      ],
+      "stddev_sum": 0,
+      "color_ratio": [
+        0.333,
+        0.333,
+        0.333
+      ]
+    },
+    {
+      "name": "mon_3_ability",
+      "scene": "View Details - Moves & More tab",
+      "screenshot": "test_images/moves_and_more/whimsicott_incineroar_kingambit_floette_basculegion_sneasler.png",
+      "description": "Extrapolated from mon_0 + mon_3_name anchor",
+      "status": "confirmed",
+      "box": [
+        0.5585,
+        0.528,
+        0.0789,
+        0.0309
+      ],
+      "avg_rgb": [
+        0,
+        0,
+        0
+      ],
+      "stddev_sum": 0,
+      "color_ratio": [
+        0.333,
+        0.333,
+        0.333
+      ]
+    },
+    {
+      "name": "mon_3_move_0",
+      "scene": "View Details - Moves & More tab",
+      "screenshot": "test_images/moves_and_more/whimsicott_incineroar_kingambit_floette_basculegion_sneasler.png",
+      "description": "Extrapolated from mon_0 + mon_3_name anchor",
+      "status": "confirmed",
+      "box": [
+        0.7719,
+        0.4892,
+        0.0797,
+        0.0293
+      ],
+      "avg_rgb": [
+        0,
+        0,
+        0
+      ],
+      "stddev_sum": 0,
+      "color_ratio": [
+        0.333,
+        0.333,
+        0.333
+      ]
+    },
+    {
+      "name": "mon_3_move_1",
+      "scene": "View Details - Moves & More tab",
+      "screenshot": "test_images/moves_and_more/whimsicott_incineroar_kingambit_floette_basculegion_sneasler.png",
+      "description": "Extrapolated from mon_0 + mon_3_name anchor",
+      "status": "confirmed",
+      "box": [
+        0.7714,
+        0.5328,
+        0.0797,
+        0.0277
+      ],
+      "avg_rgb": [
+        0,
+        0,
+        0
+      ],
+      "stddev_sum": 0,
+      "color_ratio": [
+        0.333,
+        0.333,
+        0.333
+      ]
+    },
+    {
+      "name": "mon_3_move_2",
+      "scene": "View Details - Moves & More tab",
+      "screenshot": "test_images/moves_and_more/whimsicott_incineroar_kingambit_floette_basculegion_sneasler.png",
+      "description": "Extrapolated from mon_0 + mon_3_name anchor",
+      "status": "confirmed",
+      "box": [
+        0.771,
+        0.5724,
+        0.0797,
+        0.0293
+      ],
+      "avg_rgb": [
+        0,
+        0,
+        0
+      ],
+      "stddev_sum": 0,
+      "color_ratio": [
+        0.333,
+        0.333,
+        0.333
+      ]
+    },
+    {
+      "name": "mon_3_move_3",
+      "scene": "View Details - Moves & More tab",
+      "screenshot": "test_images/moves_and_more/whimsicott_incineroar_kingambit_floette_basculegion_sneasler.png",
+      "description": "Extrapolated from mon_0 + mon_3_name anchor",
+      "status": "confirmed",
+      "box": [
+        0.7719,
+        0.6159,
+        0.0927,
+        0.0269
+      ],
+      "avg_rgb": [
+        0,
+        0,
+        0
+      ],
+      "stddev_sum": 0,
+      "color_ratio": [
+        0.333,
+        0.333,
+        0.333
+      ]
+    },
+    {
+      "name": "mon_4_ability",
+      "scene": "View Details - Moves & More tab",
+      "screenshot": "test_images/moves_and_more/whimsicott_incineroar_kingambit_floette_basculegion_sneasler.png",
+      "description": "Extrapolated from mon_0 + mon_4_name anchor",
+      "status": "confirmed",
+      "box": [
+        0.1425,
+        0.7316,
+        0.0789,
+        0.0309
+      ],
+      "avg_rgb": [
+        0,
+        0,
+        0
+      ],
+      "stddev_sum": 0,
+      "color_ratio": [
+        0.333,
+        0.333,
+        0.333
+      ]
+    },
+    {
+      "name": "mon_4_move_0",
+      "scene": "View Details - Moves & More tab",
+      "screenshot": "test_images/moves_and_more/whimsicott_incineroar_kingambit_floette_basculegion_sneasler.png",
+      "description": "Extrapolated from mon_0 + mon_4_name anchor",
+      "status": "confirmed",
+      "box": [
+        0.3559,
+        0.6928,
+        0.0797,
+        0.0293
+      ],
+      "avg_rgb": [
+        0,
+        0,
+        0
+      ],
+      "stddev_sum": 0,
+      "color_ratio": [
+        0.333,
+        0.333,
+        0.333
+      ]
+    },
+    {
+      "name": "mon_4_move_1",
+      "scene": "View Details - Moves & More tab",
+      "screenshot": "test_images/moves_and_more/whimsicott_incineroar_kingambit_floette_basculegion_sneasler.png",
+      "description": "Extrapolated from mon_0 + mon_4_name anchor",
+      "status": "confirmed",
+      "box": [
+        0.3554,
+        0.7364,
+        0.0797,
+        0.0277
+      ],
+      "avg_rgb": [
+        0,
+        0,
+        0
+      ],
+      "stddev_sum": 0,
+      "color_ratio": [
+        0.333,
+        0.333,
+        0.333
+      ]
+    },
+    {
+      "name": "mon_4_move_2",
+      "scene": "View Details - Moves & More tab",
+      "screenshot": "test_images/moves_and_more/whimsicott_incineroar_kingambit_floette_basculegion_sneasler.png",
+      "description": "Extrapolated from mon_0 + mon_4_name anchor",
+      "status": "confirmed",
+      "box": [
+        0.355,
+        0.776,
+        0.0797,
+        0.0293
+      ],
+      "avg_rgb": [
+        0,
+        0,
+        0
+      ],
+      "stddev_sum": 0,
+      "color_ratio": [
+        0.333,
+        0.333,
+        0.333
+      ]
+    },
+    {
+      "name": "mon_4_move_3",
+      "scene": "View Details - Moves & More tab",
+      "screenshot": "test_images/moves_and_more/whimsicott_incineroar_kingambit_floette_basculegion_sneasler.png",
+      "description": "Extrapolated from mon_0 + mon_4_name anchor",
+      "status": "confirmed",
+      "box": [
+        0.3559,
+        0.8195,
+        0.0927,
+        0.0269
+      ],
+      "avg_rgb": [
+        0,
+        0,
+        0
+      ],
+      "stddev_sum": 0,
+      "color_ratio": [
+        0.333,
+        0.333,
+        0.333
+      ]
+    },
+    {
+      "name": "mon_5_ability",
+      "scene": "View Details - Moves & More tab",
+      "screenshot": "test_images/moves_and_more/whimsicott_incineroar_kingambit_floette_basculegion_sneasler.png",
+      "description": "Extrapolated from mon_0 + mon_5_name anchor",
+      "status": "confirmed",
+      "box": [
+        0.5608,
+        0.7307,
+        0.0789,
+        0.0309
+      ],
+      "avg_rgb": [
+        0,
+        0,
+        0
+      ],
+      "stddev_sum": 0,
+      "color_ratio": [
+        0.333,
+        0.333,
+        0.333
+      ]
+    },
+    {
+      "name": "mon_5_move_0",
+      "scene": "View Details - Moves & More tab",
+      "screenshot": "test_images/moves_and_more/whimsicott_incineroar_kingambit_floette_basculegion_sneasler.png",
+      "description": "Extrapolated from mon_0 + mon_5_name anchor",
+      "status": "confirmed",
+      "box": [
+        0.7742,
+        0.6919,
+        0.0797,
+        0.0293
+      ],
+      "avg_rgb": [
+        0,
+        0,
+        0
+      ],
+      "stddev_sum": 0,
+      "color_ratio": [
+        0.333,
+        0.333,
+        0.333
+      ]
+    },
+    {
+      "name": "mon_5_move_1",
+      "scene": "View Details - Moves & More tab",
+      "screenshot": "test_images/moves_and_more/whimsicott_incineroar_kingambit_floette_basculegion_sneasler.png",
+      "description": "Extrapolated from mon_0 + mon_5_name anchor",
+      "status": "confirmed",
+      "box": [
+        0.7737,
+        0.7355,
+        0.0797,
+        0.0277
+      ],
+      "avg_rgb": [
+        0,
+        0,
+        0
+      ],
+      "stddev_sum": 0,
+      "color_ratio": [
+        0.333,
+        0.333,
+        0.333
+      ]
+    },
+    {
+      "name": "mon_5_move_2",
+      "scene": "View Details - Moves & More tab",
+      "screenshot": "test_images/moves_and_more/whimsicott_incineroar_kingambit_floette_basculegion_sneasler.png",
+      "description": "Extrapolated from mon_0 + mon_5_name anchor",
+      "status": "confirmed",
+      "box": [
+        0.7733,
+        0.7751,
+        0.0797,
+        0.0293
+      ],
+      "avg_rgb": [
+        0,
+        0,
+        0
+      ],
+      "stddev_sum": 0,
+      "color_ratio": [
+        0.333,
+        0.333,
+        0.333
+      ]
+    },
+    {
+      "name": "mon_5_move_3",
+      "scene": "View Details - Moves & More tab",
+      "screenshot": "test_images/moves_and_more/whimsicott_incineroar_kingambit_floette_basculegion_sneasler.png",
+      "description": "Extrapolated from mon_0 + mon_5_name anchor",
+      "status": "confirmed",
+      "box": [
+        0.7742,
+        0.8186,
+        0.0927,
+        0.0269
+      ],
+      "avg_rgb": [
+        0,
+        0,
+        0
+      ],
+      "stddev_sum": 0,
+      "color_ratio": [
+        0.333,
+        0.333,
+        0.333
+      ]
     }
   ]
 }

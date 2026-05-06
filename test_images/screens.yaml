@@ -52,10 +52,7 @@ screens:
   team_preview_locked_in:
     description: "All selections made, Standing By pills visible on both sides."
     transitions_to: [action_menu]
-    #  TeamPreviewDetector OCRs 'Select 4 Pokemon...' which only appears on
-    #  the *selecting* variant; PreparingForBattleDetector covers locked-in.
-    #  Confirmed 2026-05-03 — see WHATS_NEXT.md shipped log.
-    detectors: [PreparingForBattleDetector]
+    detectors: [TeamPreviewDetector, PreparingForBattleDetector]
     readers:
       TeamPreviewReader:
         fields:
@@ -108,12 +105,7 @@ screens:
   move_select:
     description: "4-move panel active. PP visible. Mega evo toggle possible. Singles or doubles."
     transitions_to: [target_select, action_menu]
-    #  MegaEvolveDetector is intentionally not listed here. It's not a
-    #  screen-classification detector — it answers "is the Mega Evolve
-    #  toggle pill visible on this move_select frame?", which is only
-    #  true when the active mon can mega-evolve. It's run by the move
-    #  loop / LiveDetectorTrace explicitly, not by the screen cascade.
-    detectors: [MoveSelectDetector]
+    detectors: [MoveSelectDetector, MegaEvolveDetector]
     readers:
       MoveNameReader:
         fields:
@@ -170,7 +162,7 @@ screens:
   target_select:
     description: "Target selection modal after picking a move in doubles. Each potential target (2 opp + 2 own) has a colored selector strip (yellow/green = targeted, red/blue = not) and an effectiveness label. Each own active mon has its move name shown."
     transitions_to: [action_menu]
-    detectors: [TargetSelectDetector]
+    detectors: []
     readers:
       TargetSelectReader:
         fields:
@@ -248,8 +240,8 @@ screens:
     readers: {}
 
   moves_and_more:
-    description: "Moves & More 2x3 grid showing team summary."
-    transitions_to: [team_select]
+    description: "Moves & More 2x3 grid showing team summary (active tab: Moves & More — yellow-highlighted). Each card shows species + ability + item + 4 moves."
+    transitions_to: [team_select, team_stats]
     detectors: [MovesMoreDetector]
     readers:
       TeamSummaryReader:
@@ -258,6 +250,16 @@ screens:
             type: array
             items: string
             length: 6
+
+  team_stats:
+    description: "Stats tab on the View Details screen (active tab: Stats — yellow-highlighted). 2x3 grid showing 6 stats per mon (final value + EVs + nature arrow)."
+    transitions_to: [team_select, moves_and_more]
+    #  No detector yet. TeamStatsTabDetector to be added once boxes are
+    #  drawn for the active-tab co-evidence + a card-bg purple gate (same
+    #  shape as MovesMoreDetector). TeamStatsReader will read 6 stats per
+    #  card: final value + EV (small number) + nature direction (arrow).
+    detectors: []
+    readers: {}
 
 # ── Overlays (not screens in the state machine) ─────────────
 

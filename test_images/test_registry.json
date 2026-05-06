@@ -15,7 +15,8 @@
     "battle_mode_menu",
     "ranked_format_select",
     "pre_match",
-    "moves_and_more"
+    "moves_and_more",
+    "team_stats"
   ],
   "overlay_dirs": [
     "_overlays/communicating",
@@ -27,7 +28,8 @@
       "team_select"
     ],
     "TeamPreviewDetector": [
-      "team_preview_selecting"
+      "team_preview_selecting",
+      "team_preview_locked_in"
     ],
     "PreparingForBattleDetector": [
       "team_preview_locked_in"
@@ -38,8 +40,8 @@
     "MoveSelectDetector": [
       "move_select"
     ],
-    "TargetSelectDetector": [
-      "target_select"
+    "MegaEvolveDetector": [
+      "move_select"
     ],
     "ResultScreenDetector": [
       "result_screen"
