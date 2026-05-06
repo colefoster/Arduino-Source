@@ -1052,6 +1052,74 @@ def _ocr_suggest_inbox(filename: str, reader: str):
 _INBOX_LOG_CACHE: dict = {}  # filename -> (mtime, result)
 
 
+#  ── HUD pill atlas ──────────────────────────────────────────────────
+HUD_PILL_ATLAS_DIR = BASE / "data" / "hud_pill_atlas"
+
+@app.get("/api/hud-pill-atlas")
+async def hud_pill_atlas_index():
+    """Return the index + per-species averaged thumbnail (computed on the fly)."""
+    import base64, io
+    idx_path = HUD_PILL_ATLAS_DIR / "index.json"
+    if not idx_path.exists():
+        return {"error": "atlas not built — run tools/build_hud_pill_atlas.py", "sides": {}}
+    idx = json.loads(idx_path.read_text())
+    out = {"sides": {}}
+    try:
+        from PIL import Image
+        import numpy as np
+    except Exception as e:
+        return {"error": f"pillow/numpy missing: {e}", "sides": {}}
+    refs_dir = HUD_PILL_ATLAS_DIR / "refs"
+    for side, species_map in idx.items():
+        species_out = {}
+        for sp, info in species_map.items():
+            arrs = []
+            for r in info.get("refs", []):
+                try:
+                    p = refs_dir / r["ref"]
+                    arrs.append(np.array(Image.open(p).convert("RGB"), dtype=np.float32))
+                except Exception:
+                    continue
+            mean_b64 = None
+            if arrs:
+                mean = np.clip(np.mean(arrs, axis=0), 0, 255).astype(np.uint8)
+                buf = io.BytesIO()
+                Image.fromarray(mean).save(buf, format="PNG")
+                mean_b64 = "data:image/png;base64," + base64.b64encode(buf.getvalue()).decode()
+            species_out[sp] = {
+                "count": info.get("count", len(arrs)),
+                "mean_thumb": mean_b64,
+                "refs": info.get("refs", []),
+            }
+        out["sides"][side] = species_out
+    return out
+
+@app.get("/api/hud-pill-atlas/ref/{filename}")
+async def hud_pill_atlas_ref(filename: str):
+    """Serve one reference crop file from the atlas."""
+    if "/" in filename or ".." in filename:
+        return JSONResponse({"error": "invalid filename"}, 400)
+    p = HUD_PILL_ATLAS_DIR / "refs" / filename
+    if not p.exists():
+        return JSONResponse({"error": "not found"}, 404)
+    return Response(p.read_bytes(), media_type="image/png")
+
+@app.post("/api/hud-pill-atlas/rebuild")
+async def hud_pill_atlas_rebuild():
+    """Re-run the atlas build script (re-extracts crops from current
+    test_images manifests)."""
+    import subprocess
+    result = subprocess.run(
+        ["python3", str(BASE / "tools" / "build_hud_pill_atlas.py")],
+        capture_output=True, text=True, cwd=str(BASE),
+    )
+    return {
+        "ok": result.returncode == 0,
+        "stdout": result.stdout[-2000:],
+        "stderr": result.stderr[-2000:],
+    }
+
+
 @app.get("/api/targetselect-gallery")
 async def targetselect_gallery():
     """For each target_select test image, return the 10 crops + reader's

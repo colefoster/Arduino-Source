@@ -1,0 +1,1692 @@
+{
+  "opp": {
+    "charizard": {
+      "box": [
+        0.5702,
+        0.048,
+        0.052,
+        0.0954
+      ],
+      "count": 2,
+      "refs": [
+        {
+          "ref": "opp__charizard__action_menu_fight_live__slot1.png",
+          "slot": 1,
+          "source_frame": "action_menu_fight_live.png"
+        },
+        {
+          "ref": "opp__charizard__action_menu_pokemon_live__slot1.png",
+          "slot": 1,
+          "source_frame": "action_menu_pokemon_live.png"
+        }
+      ]
+    },
+    "dragonite": {
+      "box": [
+        0.5702,
+        0.048,
+        0.052,
+        0.0954
+      ],
+      "count": 10,
+      "refs": [
+        {
+          "ref": "opp__dragonite__20260428-090442837075__slot1.png",
+          "slot": 1,
+          "source_frame": "20260428-090442837075.png"
+        },
+        {
+          "ref": "opp__dragonite__20260428-090454851069__slot1.png",
+          "slot": 1,
+          "source_frame": "20260428-090454851069.png"
+        },
+        {
+          "ref": "opp__dragonite__20260428-090540240302__slot1.png",
+          "slot": 1,
+          "source_frame": "20260428-090540240302.png"
+        },
+        {
+          "ref": "opp__dragonite__20260428-090600234812__slot1.png",
+          "slot": 1,
+          "source_frame": "20260428-090600234812.png"
+        },
+        {
+          "ref": "opp__dragonite__20260423-183737819287__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-183737819287.png"
+        },
+        {
+          "ref": "opp__dragonite__20260428-090451579888__slot1.png",
+          "slot": 1,
+          "source_frame": "20260428-090451579888.png"
+        },
+        {
+          "ref": "opp__dragonite__20260428-090457295695__slot1.png",
+          "slot": 1,
+          "source_frame": "20260428-090457295695.png"
+        },
+        {
+          "ref": "opp__dragonite__20260428-090542669809__slot1.png",
+          "slot": 1,
+          "source_frame": "20260428-090542669809.png"
+        },
+        {
+          "ref": "opp__dragonite__20260428-090602247537__slot1.png",
+          "slot": 1,
+          "source_frame": "20260428-090602247537.png"
+        },
+        {
+          "ref": "opp__dragonite__20260428-090604557213__slot1.png",
+          "slot": 1,
+          "source_frame": "20260428-090604557213.png"
+        }
+      ]
+    },
+    "excadrill": {
+      "box": [
+        0.5702,
+        0.048,
+        0.052,
+        0.0954
+      ],
+      "count": 17,
+      "refs": [
+        {
+          "ref": "opp__excadrill__20260428-085955805273__slot1.png",
+          "slot": 1,
+          "source_frame": "20260428-085955805273.png"
+        },
+        {
+          "ref": "opp__excadrill__20260428-090001840783__slot1.png",
+          "slot": 1,
+          "source_frame": "20260428-090001840783.png"
+        },
+        {
+          "ref": "opp__excadrill__20260428-090005728584__slot1.png",
+          "slot": 1,
+          "source_frame": "20260428-090005728584.png"
+        },
+        {
+          "ref": "opp__excadrill__20260428-090019691379__slot1.png",
+          "slot": 1,
+          "source_frame": "20260428-090019691379.png"
+        },
+        {
+          "ref": "opp__excadrill__20260428-090024732453__slot1.png",
+          "slot": 1,
+          "source_frame": "20260428-090024732453.png"
+        },
+        {
+          "ref": "opp__excadrill__20260428-090121554529__slot1.png",
+          "slot": 1,
+          "source_frame": "20260428-090121554529.png"
+        },
+        {
+          "ref": "opp__excadrill__20260428-090132724942__slot1.png",
+          "slot": 1,
+          "source_frame": "20260428-090132724942.png"
+        },
+        {
+          "ref": "opp__excadrill__20260428-090301344731__slot1.png",
+          "slot": 1,
+          "source_frame": "20260428-090301344731.png"
+        },
+        {
+          "ref": "opp__excadrill__20260428-090008551568__slot1.png",
+          "slot": 1,
+          "source_frame": "20260428-090008551568.png"
+        },
+        {
+          "ref": "opp__excadrill__20260428-090011695747__slot1.png",
+          "slot": 1,
+          "source_frame": "20260428-090011695747.png"
+        },
+        {
+          "ref": "opp__excadrill__20260428-090015247426__slot1.png",
+          "slot": 1,
+          "source_frame": "20260428-090015247426.png"
+        },
+        {
+          "ref": "opp__excadrill__20260428-090027708724__slot1.png",
+          "slot": 1,
+          "source_frame": "20260428-090027708724.png"
+        },
+        {
+          "ref": "opp__excadrill__20260428-090124664956__slot1.png",
+          "slot": 1,
+          "source_frame": "20260428-090124664956.png"
+        },
+        {
+          "ref": "opp__excadrill__20260428-090129776313__slot1.png",
+          "slot": 1,
+          "source_frame": "20260428-090129776313.png"
+        },
+        {
+          "ref": "opp__excadrill__20260428-090135788993__slot1.png",
+          "slot": 1,
+          "source_frame": "20260428-090135788993.png"
+        },
+        {
+          "ref": "opp__excadrill__20260428-090304291552__slot1.png",
+          "slot": 1,
+          "source_frame": "20260428-090304291552.png"
+        },
+        {
+          "ref": "opp__excadrill__20260428-090307844434__slot1.png",
+          "slot": 1,
+          "source_frame": "20260428-090307844434.png"
+        }
+      ]
+    },
+    "garchomp": {
+      "box": [
+        0.5702,
+        0.048,
+        0.052,
+        0.0954
+      ],
+      "count": 21,
+      "refs": [
+        {
+          "ref": "opp__garchomp__20260427-132110967236__slot1.png",
+          "slot": 1,
+          "source_frame": "20260427-132110967236.png"
+        },
+        {
+          "ref": "opp__garchomp__20260427-132124108376__slot1.png",
+          "slot": 1,
+          "source_frame": "20260427-132124108376.png"
+        },
+        {
+          "ref": "opp__garchomp__20260427-132201855579__slot1.png",
+          "slot": 1,
+          "source_frame": "20260427-132201855579.png"
+        },
+        {
+          "ref": "opp__garchomp__20260427-132210593850__slot1.png",
+          "slot": 1,
+          "source_frame": "20260427-132210593850.png"
+        },
+        {
+          "ref": "opp__garchomp__20260427-132306028011__slot1.png",
+          "slot": 1,
+          "source_frame": "20260427-132306028011.png"
+        },
+        {
+          "ref": "opp__garchomp__20260427-132314136162__slot1.png",
+          "slot": 1,
+          "source_frame": "20260427-132314136162.png"
+        },
+        {
+          "ref": "opp__garchomp__20260427-132458919151__slot1.png",
+          "slot": 1,
+          "source_frame": "20260427-132458919151.png"
+        },
+        {
+          "ref": "opp__garchomp__20260427-132116660246__slot1.png",
+          "slot": 1,
+          "source_frame": "20260427-132116660246.png"
+        },
+        {
+          "ref": "opp__garchomp__20260427-132121208717__slot1.png",
+          "slot": 1,
+          "source_frame": "20260427-132121208717.png"
+        },
+        {
+          "ref": "opp__garchomp__20260427-132125840378__slot1.png",
+          "slot": 1,
+          "source_frame": "20260427-132125840378.png"
+        },
+        {
+          "ref": "opp__garchomp__20260427-132203072042__slot1.png",
+          "slot": 1,
+          "source_frame": "20260427-132203072042.png"
+        },
+        {
+          "ref": "opp__garchomp__20260427-132205497623__slot1.png",
+          "slot": 1,
+          "source_frame": "20260427-132205497623.png"
+        },
+        {
+          "ref": "opp__garchomp__20260427-132212516906__slot1.png",
+          "slot": 1,
+          "source_frame": "20260427-132212516906.png"
+        },
+        {
+          "ref": "opp__garchomp__20260427-132216668463__slot1.png",
+          "slot": 1,
+          "source_frame": "20260427-132216668463.png"
+        },
+        {
+          "ref": "opp__garchomp__20260427-132307326181__slot1.png",
+          "slot": 1,
+          "source_frame": "20260427-132307326181.png"
+        },
+        {
+          "ref": "opp__garchomp__20260427-132309942119__slot1.png",
+          "slot": 1,
+          "source_frame": "20260427-132309942119.png"
+        },
+        {
+          "ref": "opp__garchomp__20260427-132315345000__slot1.png",
+          "slot": 1,
+          "source_frame": "20260427-132315345000.png"
+        },
+        {
+          "ref": "opp__garchomp__20260427-132500213779__slot1.png",
+          "slot": 1,
+          "source_frame": "20260427-132500213779.png"
+        },
+        {
+          "ref": "opp__garchomp__20260427-132506065092__slot1.png",
+          "slot": 1,
+          "source_frame": "20260427-132506065092.png"
+        },
+        {
+          "ref": "opp__garchomp__20260427-132508656455__slot1.png",
+          "slot": 1,
+          "source_frame": "20260427-132508656455.png"
+        },
+        {
+          "ref": "opp__garchomp__20260427-132514528548__slot1.png",
+          "slot": 1,
+          "source_frame": "20260427-132514528548.png"
+        }
+      ]
+    },
+    "gengar": {
+      "box": [
+        0.5702,
+        0.048,
+        0.052,
+        0.0954
+      ],
+      "count": 18,
+      "refs": [
+        {
+          "ref": "opp__gengar__20260423-150121863579__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-150121863579.png"
+        },
+        {
+          "ref": "opp__gengar__20260423-150128027036__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-150128027036.png"
+        },
+        {
+          "ref": "opp__gengar__20260423-183914694345__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-183914694345.png"
+        },
+        {
+          "ref": "opp__gengar__20260427-132110967236__slot0.png",
+          "slot": 0,
+          "source_frame": "20260427-132110967236.png"
+        },
+        {
+          "ref": "opp__gengar__20260427-132602291394__slot1.png",
+          "slot": 1,
+          "source_frame": "20260427-132602291394.png"
+        },
+        {
+          "ref": "opp__gengar__20260427-132611147334__slot1.png",
+          "slot": 1,
+          "source_frame": "20260427-132611147334.png"
+        },
+        {
+          "ref": "opp__gengar__20260427-132709251444__slot1.png",
+          "slot": 1,
+          "source_frame": "20260427-132709251444.png"
+        },
+        {
+          "ref": "opp__gengar__screenshot-20260427-132603218579__slot1.png",
+          "slot": 1,
+          "source_frame": "screenshot-20260427-132603218579.png"
+        },
+        {
+          "ref": "opp__gengar__20260423-150123581184__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-150123581184.png"
+        },
+        {
+          "ref": "opp__gengar__20260423-150129725676__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-150129725676.png"
+        },
+        {
+          "ref": "opp__gengar__20260423-150132024252__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-150132024252.png"
+        },
+        {
+          "ref": "opp__gengar__20260423-183911434513__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-183911434513.png"
+        },
+        {
+          "ref": "opp__gengar__20260423-183917790913__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-183917790913.png"
+        },
+        {
+          "ref": "opp__gengar__20260427-132607311130__slot1.png",
+          "slot": 1,
+          "source_frame": "20260427-132607311130.png"
+        },
+        {
+          "ref": "opp__gengar__20260427-132613234570__slot1.png",
+          "slot": 1,
+          "source_frame": "20260427-132613234570.png"
+        },
+        {
+          "ref": "opp__gengar__20260427-132703444544__slot1.png",
+          "slot": 1,
+          "source_frame": "20260427-132703444544.png"
+        },
+        {
+          "ref": "opp__gengar__20260427-132706341459__slot1.png",
+          "slot": 1,
+          "source_frame": "20260427-132706341459.png"
+        },
+        {
+          "ref": "opp__gengar__20260427-132710729681__slot1.png",
+          "slot": 1,
+          "source_frame": "20260427-132710729681.png"
+        }
+      ]
+    },
+    "greninja": {
+      "box": [
+        0.5702,
+        0.048,
+        0.052,
+        0.0954
+      ],
+      "count": 2,
+      "refs": [
+        {
+          "ref": "opp__greninja__move_select__slot1.png",
+          "slot": 1,
+          "source_frame": "move_select.png"
+        },
+        {
+          "ref": "opp__greninja__move_select_slot2__slot1.png",
+          "slot": 1,
+          "source_frame": "move_select_slot2.png"
+        }
+      ]
+    },
+    "hydreigon": {
+      "box": [
+        0.5702,
+        0.048,
+        0.052,
+        0.0954
+      ],
+      "count": 14,
+      "refs": [
+        {
+          "ref": "opp__hydreigon__20260423-150240891066__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150240891066.png"
+        },
+        {
+          "ref": "opp__hydreigon__20260423-150256754355__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150256754355.png"
+        },
+        {
+          "ref": "opp__hydreigon__20260423-150347231746__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150347231746.png"
+        },
+        {
+          "ref": "opp__hydreigon__20260423-150354427178__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150354427178.png"
+        },
+        {
+          "ref": "opp__hydreigon__doubles_action_menu__slot1.png",
+          "slot": 1,
+          "source_frame": "doubles_action_menu.png"
+        },
+        {
+          "ref": "opp__hydreigon__doubles_action_menu2__slot1.png",
+          "slot": 1,
+          "source_frame": "doubles_action_menu2.png"
+        },
+        {
+          "ref": "opp__hydreigon__20260423-150242947838__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150242947838.png"
+        },
+        {
+          "ref": "opp__hydreigon__20260423-150245612449__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150245612449.png"
+        },
+        {
+          "ref": "opp__hydreigon__20260423-150248328346__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150248328346.png"
+        },
+        {
+          "ref": "opp__hydreigon__20260423-150252130334__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150252130334.png"
+        },
+        {
+          "ref": "opp__hydreigon__20260423-150258802706__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150258802706.png"
+        },
+        {
+          "ref": "opp__hydreigon__20260423-150349250038__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150349250038.png"
+        },
+        {
+          "ref": "opp__hydreigon__20260423-150356457412__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150356457412.png"
+        },
+        {
+          "ref": "opp__hydreigon__20260423-150359121231__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150359121231.png"
+        }
+      ]
+    },
+    "kingambit": {
+      "box": [
+        0.5702,
+        0.048,
+        0.052,
+        0.0954
+      ],
+      "count": 1,
+      "refs": [
+        {
+          "ref": "opp__kingambit__victreebel_kingambit_power-whip_sucker-punch_swords-dance_strength-sap__slot1.png",
+          "slot": 1,
+          "source_frame": "victreebel_kingambit_power-whip_sucker-punch_swords-dance_strength-sap.png"
+        }
+      ]
+    },
+    "palafin": {
+      "box": [
+        0.5702,
+        0.048,
+        0.052,
+        0.0954
+      ],
+      "count": 5,
+      "refs": [
+        {
+          "ref": "opp__palafin__20260423-150121863579__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150121863579.png"
+        },
+        {
+          "ref": "opp__palafin__20260423-150128027036__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150128027036.png"
+        },
+        {
+          "ref": "opp__palafin__20260423-150123581184__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150123581184.png"
+        },
+        {
+          "ref": "opp__palafin__20260423-150129725676__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150129725676.png"
+        },
+        {
+          "ref": "opp__palafin__20260423-150132024252__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150132024252.png"
+        }
+      ]
+    },
+    "sinistcha": {
+      "box": [
+        0.5702,
+        0.048,
+        0.052,
+        0.0954
+      ],
+      "count": 3,
+      "refs": [
+        {
+          "ref": "opp__sinistcha__screenshot-20260427-132603218579__slot0.png",
+          "slot": 0,
+          "source_frame": "screenshot-20260427-132603218579.png"
+        },
+        {
+          "ref": "opp__sinistcha__20260427-132508656455__slot0.png",
+          "slot": 0,
+          "source_frame": "20260427-132508656455.png"
+        },
+        {
+          "ref": "opp__sinistcha__20260427-132514528548__slot0.png",
+          "slot": 0,
+          "source_frame": "20260427-132514528548.png"
+        }
+      ]
+    },
+    "sylveon": {
+      "box": [
+        0.5702,
+        0.048,
+        0.052,
+        0.0954
+      ],
+      "count": 18,
+      "refs": [
+        {
+          "ref": "opp__sylveon__20260423-150240891066__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-150240891066.png"
+        },
+        {
+          "ref": "opp__sylveon__20260423-150256754355__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-150256754355.png"
+        },
+        {
+          "ref": "opp__sylveon__20260423-150347231746__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-150347231746.png"
+        },
+        {
+          "ref": "opp__sylveon__20260423-150354427178__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-150354427178.png"
+        },
+        {
+          "ref": "opp__sylveon__20260423-150434947219__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-150434947219.png"
+        },
+        {
+          "ref": "opp__sylveon__20260423-150440133636__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-150440133636.png"
+        },
+        {
+          "ref": "opp__sylveon__20260423-150454443057__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-150454443057.png"
+        },
+        {
+          "ref": "opp__sylveon__20260423-150503460243__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-150503460243.png"
+        },
+        {
+          "ref": "opp__sylveon__20260423-150242947838__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-150242947838.png"
+        },
+        {
+          "ref": "opp__sylveon__20260423-150245612449__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-150245612449.png"
+        },
+        {
+          "ref": "opp__sylveon__20260423-150248328346__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-150248328346.png"
+        },
+        {
+          "ref": "opp__sylveon__20260423-150252130334__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-150252130334.png"
+        },
+        {
+          "ref": "opp__sylveon__20260423-150258802706__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-150258802706.png"
+        },
+        {
+          "ref": "opp__sylveon__20260423-150349250038__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-150349250038.png"
+        },
+        {
+          "ref": "opp__sylveon__20260423-150356457412__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-150356457412.png"
+        },
+        {
+          "ref": "opp__sylveon__20260423-150359121231__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-150359121231.png"
+        },
+        {
+          "ref": "opp__sylveon__20260423-150456793092__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-150456793092.png"
+        },
+        {
+          "ref": "opp__sylveon__20260423-150459402515__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-150459402515.png"
+        }
+      ]
+    },
+    "tyranitar": {
+      "box": [
+        0.5702,
+        0.048,
+        0.052,
+        0.0954
+      ],
+      "count": 21,
+      "refs": [
+        {
+          "ref": "opp__tyranitar__20260423-183327738746__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-183327738746.png"
+        },
+        {
+          "ref": "opp__tyranitar__20260423-183421609860__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-183421609860.png"
+        },
+        {
+          "ref": "opp__tyranitar__20260423-183424800592__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-183424800592.png"
+        },
+        {
+          "ref": "opp__tyranitar__20260423-183429305173__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-183429305173.png"
+        },
+        {
+          "ref": "opp__tyranitar__20260423-183439332167__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-183439332167.png"
+        },
+        {
+          "ref": "opp__tyranitar__20260423-183741816926__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-183741816926.png"
+        },
+        {
+          "ref": "opp__tyranitar__20260423-183330053152__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-183330053152.png"
+        },
+        {
+          "ref": "opp__tyranitar__20260423-183333045399__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-183333045399.png"
+        },
+        {
+          "ref": "opp__tyranitar__20260423-183336832781__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-183336832781.png"
+        },
+        {
+          "ref": "opp__tyranitar__20260423-183340823259__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-183340823259.png"
+        },
+        {
+          "ref": "opp__tyranitar__20260423-183432132782__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-183432132782.png"
+        },
+        {
+          "ref": "opp__tyranitar__20260423-183434932260__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-183434932260.png"
+        },
+        {
+          "ref": "opp__tyranitar__20260423-183545906705__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-183545906705.png"
+        },
+        {
+          "ref": "opp__tyranitar__20260423-183548953675__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-183548953675.png"
+        },
+        {
+          "ref": "opp__tyranitar__20260423-183552945935__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-183552945935.png"
+        },
+        {
+          "ref": "opp__tyranitar__20260423-183555327020__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-183555327020.png"
+        },
+        {
+          "ref": "opp__tyranitar__20260423-183737819287__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-183737819287.png"
+        },
+        {
+          "ref": "opp__tyranitar__20260423-183744870258__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-183744870258.png"
+        },
+        {
+          "ref": "opp__tyranitar__20260423-183749611704__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-183749611704.png"
+        },
+        {
+          "ref": "opp__tyranitar__20260423-183752637421__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-183752637421.png"
+        },
+        {
+          "ref": "opp__tyranitar__20260423-183756280783__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-183756280783.png"
+        }
+      ]
+    },
+    "whimsicott": {
+      "box": [
+        0.5702,
+        0.048,
+        0.052,
+        0.0954
+      ],
+      "count": 5,
+      "refs": [
+        {
+          "ref": "opp__whimsicott__20260423-183421609860__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-183421609860.png"
+        },
+        {
+          "ref": "opp__whimsicott__20260423-183424800592__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-183424800592.png"
+        },
+        {
+          "ref": "opp__whimsicott__20260423-183330053152__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-183330053152.png"
+        },
+        {
+          "ref": "opp__whimsicott__20260423-183333045399__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-183333045399.png"
+        },
+        {
+          "ref": "opp__whimsicott__20260423-183336832781__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-183336832781.png"
+        }
+      ]
+    }
+  },
+  "own": {
+    "aggron": {
+      "box": [
+        0.0814,
+        0.8705,
+        0.0918,
+        0.0272
+      ],
+      "count": 9,
+      "refs": [
+        {
+          "ref": "own__aggron__20260423-183741816926__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-183741816926.png"
+        },
+        {
+          "ref": "own__aggron__20260423-183914694345__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-183914694345.png"
+        },
+        {
+          "ref": "own__aggron__20260423-183737819287__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-183737819287.png"
+        },
+        {
+          "ref": "own__aggron__20260423-183744870258__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-183744870258.png"
+        },
+        {
+          "ref": "own__aggron__20260423-183749611704__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-183749611704.png"
+        },
+        {
+          "ref": "own__aggron__20260423-183752637421__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-183752637421.png"
+        },
+        {
+          "ref": "own__aggron__20260423-183756280783__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-183756280783.png"
+        },
+        {
+          "ref": "own__aggron__20260423-183911434513__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-183911434513.png"
+        },
+        {
+          "ref": "own__aggron__20260423-183917790913__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-183917790913.png"
+        }
+      ]
+    },
+    "beedrill": {
+      "box": [
+        0.0814,
+        0.8705,
+        0.0918,
+        0.0272
+      ],
+      "count": 1,
+      "refs": [
+        {
+          "ref": "own__beedrill__20260423-183737819287__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-183737819287.png"
+        }
+      ]
+    },
+    "charizard": {
+      "box": [
+        0.0814,
+        0.8705,
+        0.0918,
+        0.0272
+      ],
+      "count": 26,
+      "refs": [
+        {
+          "ref": "own__charizard__20260423-150121863579__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150121863579.png"
+        },
+        {
+          "ref": "own__charizard__20260423-150128027036__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150128027036.png"
+        },
+        {
+          "ref": "own__charizard__20260423-150240891066__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150240891066.png"
+        },
+        {
+          "ref": "own__charizard__20260423-150256754355__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150256754355.png"
+        },
+        {
+          "ref": "own__charizard__20260423-150347231746__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150347231746.png"
+        },
+        {
+          "ref": "own__charizard__20260423-150354427178__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150354427178.png"
+        },
+        {
+          "ref": "own__charizard__20260423-150434947219__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150434947219.png"
+        },
+        {
+          "ref": "own__charizard__20260423-150440133636__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150440133636.png"
+        },
+        {
+          "ref": "own__charizard__20260423-150454443057__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150454443057.png"
+        },
+        {
+          "ref": "own__charizard__20260423-150503460243__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150503460243.png"
+        },
+        {
+          "ref": "own__charizard__screenshot-20260427-132603218579__slot1.png",
+          "slot": 1,
+          "source_frame": "screenshot-20260427-132603218579.png"
+        },
+        {
+          "ref": "own__charizard__20260423-150123581184__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150123581184.png"
+        },
+        {
+          "ref": "own__charizard__20260423-150129725676__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150129725676.png"
+        },
+        {
+          "ref": "own__charizard__20260423-150132024252__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150132024252.png"
+        },
+        {
+          "ref": "own__charizard__20260423-150242947838__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150242947838.png"
+        },
+        {
+          "ref": "own__charizard__20260423-150245612449__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150245612449.png"
+        },
+        {
+          "ref": "own__charizard__20260423-150248328346__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150248328346.png"
+        },
+        {
+          "ref": "own__charizard__20260423-150252130334__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150252130334.png"
+        },
+        {
+          "ref": "own__charizard__20260423-150258802706__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150258802706.png"
+        },
+        {
+          "ref": "own__charizard__20260423-150349250038__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150349250038.png"
+        },
+        {
+          "ref": "own__charizard__20260423-150356457412__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150356457412.png"
+        },
+        {
+          "ref": "own__charizard__20260423-150359121231__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150359121231.png"
+        },
+        {
+          "ref": "own__charizard__20260423-150456793092__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150456793092.png"
+        },
+        {
+          "ref": "own__charizard__20260423-150459402515__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150459402515.png"
+        },
+        {
+          "ref": "own__charizard__20260427-132508656455__slot1.png",
+          "slot": 1,
+          "source_frame": "20260427-132508656455.png"
+        },
+        {
+          "ref": "own__charizard__20260427-132514528548__slot1.png",
+          "slot": 1,
+          "source_frame": "20260427-132514528548.png"
+        }
+      ]
+    },
+    "floette": {
+      "box": [
+        0.0814,
+        0.8705,
+        0.0918,
+        0.0272
+      ],
+      "count": 14,
+      "refs": [
+        {
+          "ref": "own__floette__20260428-085955805273__slot0.png",
+          "slot": 0,
+          "source_frame": "20260428-085955805273.png"
+        },
+        {
+          "ref": "own__floette__20260428-090001840783__slot0.png",
+          "slot": 0,
+          "source_frame": "20260428-090001840783.png"
+        },
+        {
+          "ref": "own__floette__20260428-090005728584__slot0.png",
+          "slot": 0,
+          "source_frame": "20260428-090005728584.png"
+        },
+        {
+          "ref": "own__floette__20260428-090019691379__slot0.png",
+          "slot": 0,
+          "source_frame": "20260428-090019691379.png"
+        },
+        {
+          "ref": "own__floette__20260428-090024732453__slot0.png",
+          "slot": 0,
+          "source_frame": "20260428-090024732453.png"
+        },
+        {
+          "ref": "own__floette__20260428-090121554529__slot0.png",
+          "slot": 0,
+          "source_frame": "20260428-090121554529.png"
+        },
+        {
+          "ref": "own__floette__20260428-090132724942__slot0.png",
+          "slot": 0,
+          "source_frame": "20260428-090132724942.png"
+        },
+        {
+          "ref": "own__floette__20260428-090008551568__slot0.png",
+          "slot": 0,
+          "source_frame": "20260428-090008551568.png"
+        },
+        {
+          "ref": "own__floette__20260428-090011695747__slot0.png",
+          "slot": 0,
+          "source_frame": "20260428-090011695747.png"
+        },
+        {
+          "ref": "own__floette__20260428-090015247426__slot0.png",
+          "slot": 0,
+          "source_frame": "20260428-090015247426.png"
+        },
+        {
+          "ref": "own__floette__20260428-090027708724__slot0.png",
+          "slot": 0,
+          "source_frame": "20260428-090027708724.png"
+        },
+        {
+          "ref": "own__floette__20260428-090124664956__slot0.png",
+          "slot": 0,
+          "source_frame": "20260428-090124664956.png"
+        },
+        {
+          "ref": "own__floette__20260428-090129776313__slot0.png",
+          "slot": 0,
+          "source_frame": "20260428-090129776313.png"
+        },
+        {
+          "ref": "own__floette__20260428-090135788993__slot0.png",
+          "slot": 0,
+          "source_frame": "20260428-090135788993.png"
+        }
+      ]
+    },
+    "gengar": {
+      "box": [
+        0.0814,
+        0.8705,
+        0.0918,
+        0.0272
+      ],
+      "count": 5,
+      "refs": [
+        {
+          "ref": "own__gengar__20260423-183421609860__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-183421609860.png"
+        },
+        {
+          "ref": "own__gengar__20260423-183424800592__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-183424800592.png"
+        },
+        {
+          "ref": "own__gengar__20260423-183330053152__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-183330053152.png"
+        },
+        {
+          "ref": "own__gengar__20260423-183333045399__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-183333045399.png"
+        },
+        {
+          "ref": "own__gengar__20260423-183336832781__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-183336832781.png"
+        }
+      ]
+    },
+    "incineroar": {
+      "box": [
+        0.0814,
+        0.8705,
+        0.0918,
+        0.0272
+      ],
+      "count": 13,
+      "refs": [
+        {
+          "ref": "own__incineroar__20260423-150121863579__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-150121863579.png"
+        },
+        {
+          "ref": "own__incineroar__20260423-150128027036__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-150128027036.png"
+        },
+        {
+          "ref": "own__incineroar__20260423-150240891066__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-150240891066.png"
+        },
+        {
+          "ref": "own__incineroar__20260423-150256754355__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-150256754355.png"
+        },
+        {
+          "ref": "own__incineroar__20260427-132110967236__slot1.png",
+          "slot": 1,
+          "source_frame": "20260427-132110967236.png"
+        },
+        {
+          "ref": "own__incineroar__20260423-150123581184__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-150123581184.png"
+        },
+        {
+          "ref": "own__incineroar__20260423-150129725676__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-150129725676.png"
+        },
+        {
+          "ref": "own__incineroar__20260423-150132024252__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-150132024252.png"
+        },
+        {
+          "ref": "own__incineroar__20260423-150242947838__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-150242947838.png"
+        },
+        {
+          "ref": "own__incineroar__20260423-150245612449__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-150245612449.png"
+        },
+        {
+          "ref": "own__incineroar__20260423-150248328346__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-150248328346.png"
+        },
+        {
+          "ref": "own__incineroar__20260423-150252130334__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-150252130334.png"
+        },
+        {
+          "ref": "own__incineroar__20260423-150258802706__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-150258802706.png"
+        }
+      ]
+    },
+    "kingambit": {
+      "box": [
+        0.0814,
+        0.8705,
+        0.0918,
+        0.0272
+      ],
+      "count": 2,
+      "refs": [
+        {
+          "ref": "own__kingambit__doubles_action_menu__slot0.png",
+          "slot": 0,
+          "source_frame": "doubles_action_menu.png"
+        },
+        {
+          "ref": "own__kingambit__doubles_action_menu2__slot0.png",
+          "slot": 0,
+          "source_frame": "doubles_action_menu2.png"
+        }
+      ]
+    },
+    "meganium": {
+      "box": [
+        0.0814,
+        0.8705,
+        0.0918,
+        0.0272
+      ],
+      "count": 12,
+      "refs": [
+        {
+          "ref": "own__meganium__20260428-090301344731__slot0.png",
+          "slot": 0,
+          "source_frame": "20260428-090301344731.png"
+        },
+        {
+          "ref": "own__meganium__20260428-090442837075__slot0.png",
+          "slot": 0,
+          "source_frame": "20260428-090442837075.png"
+        },
+        {
+          "ref": "own__meganium__20260428-090454851069__slot0.png",
+          "slot": 0,
+          "source_frame": "20260428-090454851069.png"
+        },
+        {
+          "ref": "own__meganium__20260428-090540240302__slot0.png",
+          "slot": 0,
+          "source_frame": "20260428-090540240302.png"
+        },
+        {
+          "ref": "own__meganium__20260428-090600234812__slot0.png",
+          "slot": 0,
+          "source_frame": "20260428-090600234812.png"
+        },
+        {
+          "ref": "own__meganium__20260428-090304291552__slot0.png",
+          "slot": 0,
+          "source_frame": "20260428-090304291552.png"
+        },
+        {
+          "ref": "own__meganium__20260428-090307844434__slot0.png",
+          "slot": 0,
+          "source_frame": "20260428-090307844434.png"
+        },
+        {
+          "ref": "own__meganium__20260428-090451579888__slot0.png",
+          "slot": 0,
+          "source_frame": "20260428-090451579888.png"
+        },
+        {
+          "ref": "own__meganium__20260428-090457295695__slot0.png",
+          "slot": 0,
+          "source_frame": "20260428-090457295695.png"
+        },
+        {
+          "ref": "own__meganium__20260428-090542669809__slot0.png",
+          "slot": 0,
+          "source_frame": "20260428-090542669809.png"
+        },
+        {
+          "ref": "own__meganium__20260428-090602247537__slot0.png",
+          "slot": 0,
+          "source_frame": "20260428-090602247537.png"
+        },
+        {
+          "ref": "own__meganium__20260428-090604557213__slot0.png",
+          "slot": 0,
+          "source_frame": "20260428-090604557213.png"
+        }
+      ]
+    },
+    "palafin": {
+      "box": [
+        0.0814,
+        0.8705,
+        0.0918,
+        0.0272
+      ],
+      "count": 2,
+      "refs": [
+        {
+          "ref": "own__palafin__action_menu_fight_live__slot0.png",
+          "slot": 0,
+          "source_frame": "action_menu_fight_live.png"
+        },
+        {
+          "ref": "own__palafin__action_menu_pokemon_live__slot0.png",
+          "slot": 0,
+          "source_frame": "action_menu_pokemon_live.png"
+        }
+      ]
+    },
+    "sinistcha": {
+      "box": [
+        0.0814,
+        0.8705,
+        0.0918,
+        0.0272
+      ],
+      "count": 15,
+      "refs": [
+        {
+          "ref": "own__sinistcha__20260423-183327738746__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-183327738746.png"
+        },
+        {
+          "ref": "own__sinistcha__20260423-183421609860__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-183421609860.png"
+        },
+        {
+          "ref": "own__sinistcha__20260423-183424800592__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-183424800592.png"
+        },
+        {
+          "ref": "own__sinistcha__20260423-183429305173__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-183429305173.png"
+        },
+        {
+          "ref": "own__sinistcha__20260423-183439332167__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-183439332167.png"
+        },
+        {
+          "ref": "own__sinistcha__20260423-183330053152__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-183330053152.png"
+        },
+        {
+          "ref": "own__sinistcha__20260423-183333045399__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-183333045399.png"
+        },
+        {
+          "ref": "own__sinistcha__20260423-183336832781__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-183336832781.png"
+        },
+        {
+          "ref": "own__sinistcha__20260423-183340823259__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-183340823259.png"
+        },
+        {
+          "ref": "own__sinistcha__20260423-183432132782__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-183432132782.png"
+        },
+        {
+          "ref": "own__sinistcha__20260423-183434932260__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-183434932260.png"
+        },
+        {
+          "ref": "own__sinistcha__20260423-183545906705__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-183545906705.png"
+        },
+        {
+          "ref": "own__sinistcha__20260423-183548953675__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-183548953675.png"
+        },
+        {
+          "ref": "own__sinistcha__20260423-183552945935__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-183552945935.png"
+        },
+        {
+          "ref": "own__sinistcha__20260423-183555327020__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-183555327020.png"
+        }
+      ]
+    },
+    "sneasler": {
+      "box": [
+        0.0814,
+        0.8705,
+        0.0918,
+        0.0272
+      ],
+      "count": 27,
+      "refs": [
+        {
+          "ref": "own__sneasler__20260423-150347231746__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-150347231746.png"
+        },
+        {
+          "ref": "own__sneasler__20260423-150354427178__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-150354427178.png"
+        },
+        {
+          "ref": "own__sneasler__20260423-150434947219__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-150434947219.png"
+        },
+        {
+          "ref": "own__sneasler__20260423-150440133636__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-150440133636.png"
+        },
+        {
+          "ref": "own__sneasler__20260423-150454443057__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-150454443057.png"
+        },
+        {
+          "ref": "own__sneasler__20260423-150503460243__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-150503460243.png"
+        },
+        {
+          "ref": "own__sneasler__20260427-132110967236__slot0.png",
+          "slot": 0,
+          "source_frame": "20260427-132110967236.png"
+        },
+        {
+          "ref": "own__sneasler__20260427-132124108376__slot0.png",
+          "slot": 0,
+          "source_frame": "20260427-132124108376.png"
+        },
+        {
+          "ref": "own__sneasler__20260427-132201855579__slot0.png",
+          "slot": 0,
+          "source_frame": "20260427-132201855579.png"
+        },
+        {
+          "ref": "own__sneasler__20260427-132210593850__slot0.png",
+          "slot": 0,
+          "source_frame": "20260427-132210593850.png"
+        },
+        {
+          "ref": "own__sneasler__20260427-132306028011__slot0.png",
+          "slot": 0,
+          "source_frame": "20260427-132306028011.png"
+        },
+        {
+          "ref": "own__sneasler__20260427-132314136162__slot0.png",
+          "slot": 0,
+          "source_frame": "20260427-132314136162.png"
+        },
+        {
+          "ref": "own__sneasler__20260423-150349250038__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-150349250038.png"
+        },
+        {
+          "ref": "own__sneasler__20260423-150356457412__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-150356457412.png"
+        },
+        {
+          "ref": "own__sneasler__20260423-150359121231__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-150359121231.png"
+        },
+        {
+          "ref": "own__sneasler__20260423-150456793092__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-150456793092.png"
+        },
+        {
+          "ref": "own__sneasler__20260423-150459402515__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-150459402515.png"
+        },
+        {
+          "ref": "own__sneasler__20260427-132116660246__slot0.png",
+          "slot": 0,
+          "source_frame": "20260427-132116660246.png"
+        },
+        {
+          "ref": "own__sneasler__20260427-132121208717__slot0.png",
+          "slot": 0,
+          "source_frame": "20260427-132121208717.png"
+        },
+        {
+          "ref": "own__sneasler__20260427-132125840378__slot0.png",
+          "slot": 0,
+          "source_frame": "20260427-132125840378.png"
+        },
+        {
+          "ref": "own__sneasler__20260427-132203072042__slot0.png",
+          "slot": 0,
+          "source_frame": "20260427-132203072042.png"
+        },
+        {
+          "ref": "own__sneasler__20260427-132205497623__slot0.png",
+          "slot": 0,
+          "source_frame": "20260427-132205497623.png"
+        },
+        {
+          "ref": "own__sneasler__20260427-132212516906__slot0.png",
+          "slot": 0,
+          "source_frame": "20260427-132212516906.png"
+        },
+        {
+          "ref": "own__sneasler__20260427-132216668463__slot0.png",
+          "slot": 0,
+          "source_frame": "20260427-132216668463.png"
+        },
+        {
+          "ref": "own__sneasler__20260427-132307326181__slot0.png",
+          "slot": 0,
+          "source_frame": "20260427-132307326181.png"
+        },
+        {
+          "ref": "own__sneasler__20260427-132309942119__slot0.png",
+          "slot": 0,
+          "source_frame": "20260427-132309942119.png"
+        },
+        {
+          "ref": "own__sneasler__20260427-132315345000__slot0.png",
+          "slot": 0,
+          "source_frame": "20260427-132315345000.png"
+        }
+      ]
+    },
+    "venusaur": {
+      "box": [
+        0.0814,
+        0.8705,
+        0.0918,
+        0.0272
+      ],
+      "count": 14,
+      "refs": [
+        {
+          "ref": "own__venusaur__20260427-132458919151__slot0.png",
+          "slot": 0,
+          "source_frame": "20260427-132458919151.png"
+        },
+        {
+          "ref": "own__venusaur__20260427-132602291394__slot0.png",
+          "slot": 0,
+          "source_frame": "20260427-132602291394.png"
+        },
+        {
+          "ref": "own__venusaur__20260427-132611147334__slot0.png",
+          "slot": 0,
+          "source_frame": "20260427-132611147334.png"
+        },
+        {
+          "ref": "own__venusaur__20260427-132709251444__slot0.png",
+          "slot": 0,
+          "source_frame": "20260427-132709251444.png"
+        },
+        {
+          "ref": "own__venusaur__screenshot-20260427-132603218579__slot0.png",
+          "slot": 0,
+          "source_frame": "screenshot-20260427-132603218579.png"
+        },
+        {
+          "ref": "own__venusaur__20260427-132500213779__slot0.png",
+          "slot": 0,
+          "source_frame": "20260427-132500213779.png"
+        },
+        {
+          "ref": "own__venusaur__20260427-132506065092__slot0.png",
+          "slot": 0,
+          "source_frame": "20260427-132506065092.png"
+        },
+        {
+          "ref": "own__venusaur__20260427-132508656455__slot0.png",
+          "slot": 0,
+          "source_frame": "20260427-132508656455.png"
+        },
+        {
+          "ref": "own__venusaur__20260427-132514528548__slot0.png",
+          "slot": 0,
+          "source_frame": "20260427-132514528548.png"
+        },
+        {
+          "ref": "own__venusaur__20260427-132607311130__slot0.png",
+          "slot": 0,
+          "source_frame": "20260427-132607311130.png"
+        },
+        {
+          "ref": "own__venusaur__20260427-132613234570__slot0.png",
+          "slot": 0,
+          "source_frame": "20260427-132613234570.png"
+        },
+        {
+          "ref": "own__venusaur__20260427-132703444544__slot0.png",
+          "slot": 0,
+          "source_frame": "20260427-132703444544.png"
+        },
+        {
+          "ref": "own__venusaur__20260427-132706341459__slot0.png",
+          "slot": 0,
+          "source_frame": "20260427-132706341459.png"
+        },
+        {
+          "ref": "own__venusaur__20260427-132710729681__slot0.png",
+          "slot": 0,
+          "source_frame": "20260427-132710729681.png"
+        }
+      ]
+    },
+    "victreebel": {
+      "box": [
+        0.0814,
+        0.8705,
+        0.0918,
+        0.0272
+      ],
+      "count": 3,
+      "refs": [
+        {
+          "ref": "own__victreebel__move_select__slot0.png",
+          "slot": 0,
+          "source_frame": "move_select.png"
+        },
+        {
+          "ref": "own__victreebel__move_select_slot2__slot0.png",
+          "slot": 0,
+          "source_frame": "move_select_slot2.png"
+        },
+        {
+          "ref": "own__victreebel__victreebel_kingambit_power-whip_sucker-punch_swords-dance_strength-sap__slot0.png",
+          "slot": 0,
+          "source_frame": "victreebel_kingambit_power-whip_sucker-punch_swords-dance_strength-sap.png"
+        }
+      ]
+    }
+  }
+}

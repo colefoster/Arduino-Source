@@ -1,0 +1,32 @@
+<div id="view-pillatlas" class="view">
+    <h1 style="margin: 0 0 8px;">HUD Pill Atlas</h1>
+    <div style="color:#8b949e; font-size:12px; margin-bottom:12px; max-width: 800px;">
+        Species → averaged HUD-pill render, bootstrapped from manifest-labeled BattleHUDReader frames.
+        Used as the in-domain reference for sprite-matching on the small HUD pills (where the canonical
+        Bulbapedia atlas hits ~22% top-1; this approach is ~95% with one ref/species).
+        Re-run the build to grow the atlas after labeling new frames.
+    </div>
+    <div style="display:flex; gap:8px; align-items:center; margin-bottom:12px;">
+        <button class="btn" id="pa-rebuild-btn" style="border-color:#d29922; color:#d29922;">Rebuild from manifests</button>
+        <span id="pa-rebuild-status" style="font-size:11px; color:#8b949e;"></span>
+    </div>
+    <div id="pa-status" style="font-size:11px; color:#8b949e; margin-bottom:12px;">Loading...</div>
+    <div id="pa-grid"></div>
+</div>
+
+<style>
+.pa-side-section { margin-top: 16px; }
+.pa-side-header { font-size: 13px; font-weight: 600; color: #c9d1d9; border-bottom: 1px solid #30363d; padding-bottom: 4px; margin-bottom: 8px; }
+.pa-species-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px; }
+.pa-species-card { background: #161b22; border: 1px solid #30363d; border-radius: 6px; padding: 8px; display: flex; flex-direction: column; align-items: center; gap: 4px; cursor: pointer; transition: border-color 0.1s; }
+.pa-species-card:hover { border-color: #58a6ff; }
+.pa-species-card .mean-thumb { width: 80px; height: 80px; image-rendering: pixelated; border-radius: 4px; background: #0d1117; }
+.pa-species-card .name { font-family: ui-monospace, monospace; font-size: 12px; color: #c9d1d9; word-break: break-all; text-align: center; }
+.pa-species-card .count { font-size: 10px; color: #6e7681; }
+.pa-species-card.expanded { grid-column: 1 / -1; align-items: flex-start; }
+.pa-species-card.expanded .refs { display: grid; grid-template-columns: repeat(auto-fill, minmax(60px, 1fr)); gap: 4px; width: 100%; margin-top: 8px; }
+.pa-species-card.expanded .refs img { width: 100%; height: auto; image-rendering: pixelated; border-radius: 2px; }
+.pa-species-card.expanded .refs .ref-cell { display: flex; flex-direction: column; align-items: center; }
+.pa-species-card.expanded .refs .ref-cell .ref-name { font-size: 9px; color: #6e7681; word-break: break-all; text-align: center; max-width: 100%; }
+.pa-thin { border-color: #d29922 !important; }
+</style>
