@@ -31,12 +31,15 @@ OUT_DIR = REPO / "data" / "hud_pill_atlas"
 REFS_DIR = OUT_DIR / "refs"
 INDEX_PATH = OUT_DIR / "index.json"
 
-#  Mirror dashboard CROP_DEFS["BattleHUDReader"] for the species pill icons.
+#  Pill ICON regions (the sprite-bearing rectangle, NOT the name text bar).
+#  opp_X coords from user's saved opp_sprite_0/1 boxes.
+#  own_X coords from tools/box_definitions.json (`own_specoes_icon_0/1`)
+#  saved earlier for the existing own-side sprite-match work.
 PILL_BOXES = {
-    "opp_0": (0.5702, 0.048,  0.052,  0.0954),
-    "opp_1": (0.77,   0.048,  0.0602, 0.0846),
-    "own_0": (0.0814, 0.8705, 0.0918, 0.0272),
-    "own_1": (0.2901, 0.8705, 0.0835, 0.0267),
+    "opp_0": (0.5702, 0.0480, 0.0520, 0.0954),
+    "opp_1": (0.7700, 0.0480, 0.0602, 0.0846),
+    "own_0": (0.0249, 0.8763, 0.0556, 0.0803),
+    "own_1": (0.2301, 0.8840, 0.0576, 0.0753),
 }
 
 CROP_SIZE = (50, 50)
