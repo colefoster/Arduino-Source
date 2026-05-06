@@ -268,10 +268,13 @@ function ltRenderDerivedState(s) {
         return;
     }
     st.textContent = `match #${s.match_id} | turn ${s.turn} | last_seq ${s.last_seq}`;
-    const pillFor = (state) =>
-        `<span style="display:inline-block;width:14px;height:14px;border-radius:50%;margin:0 2px;vertical-align:middle;background:${
-            state === 'alive' ? '#3fb950' : state === 'fainted' ? '#f85149' : '#30363d'
-        };" title="${state}"></span>`;
+    const pillFor = (state) => {
+        const color = state === 'alive'          ? '#3fb950'
+                    : state === 'alive_statused' ? '#d97706'
+                    : state === 'fainted'        ? '#f85149'
+                    :                              '#30363d';
+        return `<span style="display:inline-block;width:14px;height:14px;border-radius:50%;margin:0 2px;vertical-align:middle;background:${color};" title="${state}"></span>`;
+    };
     const ownPills = (s.own || []).map(pillFor).join('');
     const oppPills = (s.opp || []).map(pillFor).join('');
     let html = '';

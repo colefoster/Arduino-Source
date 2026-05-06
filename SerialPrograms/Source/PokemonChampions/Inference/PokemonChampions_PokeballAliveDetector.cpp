@@ -21,22 +21,30 @@ namespace PokemonChampions{
 
 const char* pokeball_state_name(PokeballState s){
     switch (s){
-        case PokeballState::ALIVE:   return "alive";
-        case PokeballState::FAINTED: return "fainted";
-        case PokeballState::EMPTY:   return "empty";
+        case PokeballState::ALIVE:          return "alive";
+        case PokeballState::ALIVE_STATUSED: return "alive_statused";
+        case PokeballState::FAINTED:        return "fainted";
+        case PokeballState::EMPTY:          return "empty";
     }
     return "unknown";
 }
 
 
+//  ALIVE_STATUSED is still "alive" for the purposes of who's-still-in-the-
+//  battle counting. The status condition affects play but the mon hasn't
+//  been KO'd. Both states are counted.
+static bool is_alive_state(PokeballState s){
+    return s == PokeballState::ALIVE || s == PokeballState::ALIVE_STATUSED;
+}
+
 uint8_t PokeballAliveResult::own_alive_count() const{
     uint8_t n = 0;
-    for (auto s : own) if (s == PokeballState::ALIVE) n++;
+    for (auto s : own) if (is_alive_state(s)) n++;
     return n;
 }
 uint8_t PokeballAliveResult::opp_alive_count() const{
     uint8_t n = 0;
-    for (auto s : opp) if (s == PokeballState::ALIVE) n++;
+    for (auto s : opp) if (is_alive_state(s)) n++;
     return n;
 }
 
@@ -83,20 +91,22 @@ void PokeballAliveDetector::make_overlays(VideoOverlaySet& items) const{
 }
 
 
-//  Threshold-based three-way classifier on per-slot mean green.
-//  Measured (action_menu/20260423-150354427178.png, 2 alive 2 fainted 2 empty):
-//    alive:   mean G ~ 199-208
-//    fainted: mean G ~ 77
-//    empty:   mean G ~ 54-59
-//  Alive cutoff at 150 leaves wide slack. Fainted vs empty gap is narrow
-//  (~20 G units), so cutoff at 67 sits midway. If this proves brittle on
-//  more frames, switch to a saturation-based check (fainted ball has
-//  visible structure; empty dot is mostly bg).
+//  Threshold-based four-way classifier on per-slot mean RGB.
+//  Measured (action_menu/20260423-150354427178.png + move_select/20260423-183917790913.png):
+//    alive (green):       r~108, g~185, b~57   (r/g ~ 0.59, r-g = -77)
+//    alive_statused (org): r~229, g~167, b~5   (r/g ~ 1.37, r-g = +62)
+//    fainted (grey):      r~77,  g~77,  b~70   (r ≈ g)
+//    empty:               r~37,  g~37,  b~34   (r ≈ g, dim)
+//  Within the bright "g >= 150" branch, r > g cleanly separates orange
+//  (statused) from green (healthy). Margin on labeled samples is huge.
+//  Fainted vs empty gap is narrow (~20 G units); cutoff at 67 sits midway.
 static PokeballState classify(const ImageViewRGB32& slot){
     FloatPixel avg = image_average(slot);
-    if (avg.g >= 150.0) return PokeballState::ALIVE;
-    if (avg.g >= 67.0)  return PokeballState::FAINTED;
-    return PokeballState::EMPTY;
+    if (avg.g < 67.0)  return PokeballState::EMPTY;
+    if (avg.g < 150.0) return PokeballState::FAINTED;
+    //  Bright ball: green-healthy vs orange-statused.
+    if (avg.r > avg.g) return PokeballState::ALIVE_STATUSED;
+    return PokeballState::ALIVE;
 }
 
 

@@ -20,10 +20,12 @@ Match ends on:
 
 State only updates on events where PokeballAliveDetector.status == "ok".
 
-Pokeball states are "alive" / "fainted" / "empty" per slot. We only treat
-alive -> fainted as a real transition. empty stays empty (not on the team
-this match), and fainted -> alive is treated as noise (would imply a misread
-or a new match where the prior state wasn't reset).
+Pokeball states are "alive" / "alive_statused" / "fainted" / "empty" per
+slot. Both "alive" and "alive_statused" count as "still in the battle".
+The real transition we care about is *anything alive* -> fainted; the
+status flips between alive <-> alive_statused are also tracked but do not
+count as a faint event. fainted -> any-alive is treated as noise (would
+imply a misread or a new match where the prior state wasn't reset).
 """
 from __future__ import annotations
 
@@ -74,8 +76,10 @@ class MatchState:
     faints: list = field(default_factory=list)
 
 
+_ALIVE_STATES = ("alive", "alive_statused")
+
 def _alive_count(states: list) -> int:
-    return sum(1 for s in states if s == "alive")
+    return sum(1 for s in states if s in _ALIVE_STATES)
 
 
 class LiveStateTracker:
@@ -164,7 +168,8 @@ class LiveStateTracker:
             for i in range(6):
                 cur = current[i]
                 old = prev[i]
-                if old == "alive" and cur == "fainted":
+                # Faint event: any alive (healthy or statused) → fainted.
+                if old in _ALIVE_STATES and cur == "fainted":
                     fe = FaintEvent(side=side, slot=i, server_seq=seq, server_ts_ms=ts)
                     m.faints.append(fe)
                     self._recent_faints_buffer.append(fe)
@@ -172,9 +177,11 @@ class LiveStateTracker:
                         self._recent_faints_buffer.pop(0)
                 # Always advance to the latest reading. alive→empty (rare,
                 # would mean lost the reading) and empty→alive (start of
-                # match, mons appearing) are accepted; fainted→alive is
+                # match, mons appearing) are accepted. fainted→any-alive is
                 # treated as a noisy reading and we keep "fainted".
-                if old == "fainted" and cur == "alive":
+                # alive ↔ alive_statused flips are accepted normally — they
+                # represent status condition changes during the match.
+                if old == "fainted" and cur in _ALIVE_STATES:
                     continue
                 prev[i] = cur
 

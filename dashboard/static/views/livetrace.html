@@ -80,9 +80,14 @@
 
 .lt-pokeballs { display:flex; gap:3px; margin-bottom:10px; }
 .lt-pokeball { width:14px; height:14px; border-radius:50%; border:1px solid #30363d; }
-.lt-pokeball.ALIVE { background:#3fb950; }
-.lt-pokeball.FAINTED { background:#484f58; }
-.lt-pokeball.EMPTY { background:transparent; }
+.lt-pokeball.alive          { background:#3fb950; }
+.lt-pokeball.alive_statused { background:#d97706; }
+.lt-pokeball.fainted        { background:#484f58; }
+.lt-pokeball.empty          { background:transparent; }
+/* Legacy uppercase aliases to avoid breaking older callers. */
+.lt-pokeball.ALIVE          { background:#3fb950; }
+.lt-pokeball.FAINTED        { background:#484f58; }
+.lt-pokeball.EMPTY          { background:transparent; }
 
 .lt-slot { background:#161b22; border:1px solid #21262d; border-radius:4px; padding:6px 8px; margin:4px 0; font-family:ui-monospace,monospace; font-size:11px; }
 .lt-slot.active { border-color:#58a6ff; background:#0d2235; }
