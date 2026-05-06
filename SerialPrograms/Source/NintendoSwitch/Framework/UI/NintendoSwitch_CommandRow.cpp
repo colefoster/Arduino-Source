@@ -173,6 +173,38 @@ CommandRow::CommandRow(
         m_video_button->setToolTip("Please turn on Stream History to enable video capture.");
     }
 
+    //  Auto Video Capture: cycles Off / 5m / 10m / 15m / 30m on click.
+    static const int s_auto_intervals_min[] = {0, 5, 10, 15, 30};
+    static const int s_auto_interval_count = sizeof(s_auto_intervals_min) / sizeof(s_auto_intervals_min[0]);
+    m_auto_video_button = new QPushButton("Auto: Off", this);
+    m_auto_video_button->setToolTip("Click to cycle auto-capture interval. Saves a video clip on each tick.");
+    layout1->addWidget(m_auto_video_button, 2);
+    m_auto_video_timer = new QTimer(this);
+    m_auto_video_timer->setSingleShot(false);
+    if (GlobalSettings::instance().STREAM_HISTORY->enabled()){
+        connect(
+            m_auto_video_timer, &QTimer::timeout,
+            this, [this](){ emit video_requested(); }
+        );
+        connect(
+            m_auto_video_button, &QPushButton::clicked,
+            this, [this](bool){
+                m_auto_video_interval_index = (m_auto_video_interval_index + 1) % s_auto_interval_count;
+                int minutes = s_auto_intervals_min[m_auto_video_interval_index];
+                if (minutes == 0){
+                    m_auto_video_timer->stop();
+                    m_auto_video_button->setText("Auto: Off");
+                }else{
+                    m_auto_video_timer->start(minutes * 60 * 1000);
+                    m_auto_video_button->setText(QString("Auto: %1m").arg(minutes));
+                }
+            }
+        );
+    }else{
+        m_auto_video_button->setEnabled(false);
+        m_auto_video_button->setToolTip("Please turn on Stream History to enable video capture.");
+    }
+
     m_session.add_listener(*this);
     m_controller.add_listener(*this);
 //    global_input_add_listener(*this);

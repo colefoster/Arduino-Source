@@ -11,6 +11,7 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QCheckBox>
+#include <QTimer>
 #include "Common/Qt/CheckboxDropdown.h"
 #include "CommonFramework/Globals.h"
 #include "CommonFramework/VideoPipeline/VideoOverlaySession.h"
@@ -82,6 +83,9 @@ private:
     QPushButton* m_save_profile_button = nullptr;
     QPushButton* m_screenshot_button = nullptr;
     QPushButton* m_video_button = nullptr;
+    QPushButton* m_auto_video_button = nullptr;
+    QTimer* m_auto_video_timer = nullptr;
+    int m_auto_video_interval_index = 0;
     bool m_last_known_focus;
     ProgramState m_last_known_state;
 };
