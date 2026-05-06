@@ -117,6 +117,12 @@ CROP_DEFS = {
         {"name": "own1_species",    "box": [0.2901, 0.8705, 0.0835, 0.0267]},
         {"name": "own0_hp",         "box": [0.1303, 0.9340, 0.0768, 0.0346]},
         {"name": "own1_hp",         "box": [0.3381, 0.9343, 0.0757, 0.0357]},
+        #  Move-PP boxes — only present on move_select. Mirrors PP_X/PP_Y/
+        #  PP_WIDTH/PP_HEIGHT in PokemonChampions_BattleHUDReader.cpp.
+        {"name": "pp_0",            "box": [0.932, 0.508, 0.042, 0.043]},
+        {"name": "pp_1",            "box": [0.932, 0.628, 0.042, 0.043]},
+        {"name": "pp_2",            "box": [0.932, 0.749, 0.042, 0.043]},
+        {"name": "pp_3",            "box": [0.932, 0.869, 0.042, 0.043]},
     ],
     "CommunicatingDetector": [
         {"name": "communicating_text", "box": [0.380, 0.450, 0.240, 0.050]},
@@ -216,6 +222,25 @@ CROP_DEFS = {
         {"name": "opp_3", "box": [0.9097, 0.1677, 0.0099, 0.0109]},
         {"name": "opp_4", "box": [0.9241, 0.1677, 0.0099, 0.0109]},
         {"name": "opp_5", "box": [0.9385, 0.1677, 0.0099, 0.0109]},
+    ],
+    #  Target Select (doubles): 4 potential targets (2 opp, 2 own).
+    #  is_targeted = thin vertical strip whose color flips yellow/green
+    #  (targeted) vs red/blue (not targeted). effectiveness = OCR'd label.
+    #  move_name = OCR'd "currently selecting target for X" header per own
+    #  active mon. own_1 move_name + own_0/own_1 effectiveness extrapolated
+    #  from the user-drawn opp boxes (column x-delta = 0.2575; effectiveness
+    #  y sits ~0.005 above is_targeted y, mirroring the opp pattern).
+    "TargetSelectReader": [
+        {"name": "opp_0_is_targeted",    "box": [0.4741, 0.2355, 0.0062, 0.1172]},
+        {"name": "opp_1_is_targeted",    "box": [0.7338, 0.2340, 0.0045, 0.1228]},
+        {"name": "own_0_is_targeted",    "box": [0.4741, 0.5832, 0.0053, 0.1030]},
+        {"name": "own_1_is_targeted",    "box": [0.7334, 0.5714, 0.0053, 0.1117]},
+        {"name": "opp_0_effectiveness",  "box": [0.3083, 0.2308, 0.1190, 0.0269]},
+        {"name": "opp_1_effectiveness",  "box": [0.5658, 0.2300, 0.1056, 0.0285]},
+        {"name": "own_0_effectiveness",  "box": [0.3083, 0.5785, 0.1190, 0.0269]},
+        {"name": "own_1_effectiveness",  "box": [0.5658, 0.5667, 0.1056, 0.0285]},
+        {"name": "own_0_move_name",      "box": [0.3203, 0.4914, 0.1096, 0.0317]},
+        {"name": "own_1_move_name",      "box": [0.5778, 0.4914, 0.1096, 0.0317]},
     ],
 }
 
@@ -1025,6 +1050,113 @@ def _ocr_suggest_inbox(filename: str, reader: str):
 
 
 _INBOX_LOG_CACHE: dict = {}  # filename -> (mtime, result)
+
+
+@app.get("/api/hp-gallery")
+async def hp_gallery():
+    """For each action_menu + move_select image, return the 4 HP crops
+    (opp0/opp1/own0/own1) + the BattleHUDReader's reads. Mirror of
+    /api/pp-gallery but for HP boxes."""
+    import base64
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+
+    hp_box_names = ["opp0_hp_pct", "opp1_hp_pct", "own0_hp", "own1_hp"]
+    hp_boxes = [c for c in CROP_DEFS["BattleHUDReader"] if c["name"] in hp_box_names]
+    targets = []  # (screen, path)
+    manifests = {}
+    for screen in ("action_menu", "move_select"):
+        d = TEST_IMAGES_DIR / screen
+        if not d.exists():
+            continue
+        manifests[screen] = _load_manifest(d)
+        for f in sorted(d.iterdir()):
+            if f.is_file() and f.suffix.lower() == ".png" and _is_real_image(f.name):
+                targets.append((screen, f))
+
+    def work(item):
+        screen, img_path = item
+        crops = []
+        for cd in hp_boxes:
+            try:
+                crops.append({
+                    "name": cd["name"],
+                    "data": "data:image/png;base64," + base64.b64encode(_extract_crop(img_path, cd["box"], scale=6)).decode(),
+                })
+            except Exception:
+                crops.append({"name": cd["name"], "data": None})
+        result, err = _suggest_via_runner(screen, img_path.name, "BattleHUDReader")
+        result = result or {}
+        m_entry = (manifests.get(screen, {}).get(img_path.name) or {}).get("BattleHUDReader") or {}
+        return {
+            "filename": img_path.name,
+            "screen": screen,
+            "thumb": f"/api/gallery/thumb/{screen}/{img_path.name}",
+            "crops": crops,
+            "opp_hp_pct":             result.get("opponent_hp_pct",   [-1, -1]),
+            "own_hp_current":         result.get("own_hp_current",    [-1, -1]),
+            "own_hp_max":             result.get("own_hp_max",        [-1, -1]),
+            "own_hp_current_raw":     result.get("own_hp_current_raw",[-1, -1]),
+            "own_hp_max_raw":         result.get("own_hp_max_raw",    [-1, -1]),
+            "manifest_opp_hp_pct":    m_entry.get("opponent_hp_pct"),
+            "manifest_own_hp_current":m_entry.get("own_hp_current"),
+            "manifest_own_hp_max":    m_entry.get("own_hp_max"),
+            "error": err,
+        }
+
+    out = []
+    with ThreadPoolExecutor(max_workers=8) as ex:
+        futs = [ex.submit(work, t) for t in targets]
+        for fut in as_completed(futs):
+            out.append(fut.result())
+    out.sort(key=lambda r: (r["screen"], r["filename"]))
+    return {"images": out, "count": len(out)}
+
+
+@app.get("/api/pp-gallery")
+async def pp_gallery():
+    """For each move_select test image, return the 4 PP crops + the
+    BattleHUDReader's current PP read for each slot + manifest's expected
+    values (if any). Used by the PP Crops view for visual tuning."""
+    import base64
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+    screen_dir = TEST_IMAGES_DIR / "move_select"
+    if not screen_dir.exists():
+        return {"images": []}
+    pp_boxes = [c for c in CROP_DEFS["BattleHUDReader"] if c["name"].startswith("pp_")]
+    files = sorted(f for f in screen_dir.iterdir()
+                   if f.is_file() and f.suffix.lower() == ".png" and _is_real_image(f.name))
+    manifest = _load_manifest(screen_dir)
+
+    def work(img_path):
+        crops = []
+        for cd in pp_boxes:
+            try:
+                crops.append({
+                    "name": cd["name"],
+                    "data": "data:image/png;base64," + base64.b64encode(_extract_crop(img_path, cd["box"], scale=6)).decode(),
+                })
+            except Exception:
+                crops.append({"name": cd["name"], "data": None})
+        result, err = _suggest_via_runner("move_select", img_path.name, "BattleHUDReader")
+        pp_cur = (result or {}).get("move_pp_current", [-1, -1, -1, -1])
+        m_entry = (manifest.get(img_path.name) or {}).get("BattleHUDReader") or {}
+        manifest_pp = m_entry.get("move_pp_current")
+        return {
+            "filename": img_path.name,
+            "thumb": f"/api/gallery/thumb/move_select/{img_path.name}",
+            "crops": crops,
+            "pp_current": pp_cur if isinstance(pp_cur, list) else [-1, -1, -1, -1],
+            "manifest_pp_current": manifest_pp if isinstance(manifest_pp, list) else None,
+            "error": err,
+        }
+
+    out = []
+    with ThreadPoolExecutor(max_workers=8) as ex:
+        futs = {ex.submit(work, f): f for f in files}
+        for fut in as_completed(futs):
+            out.append(fut.result())
+    out.sort(key=lambda r: r["filename"])
+    return {"images": out, "count": len(out)}
 
 
 @app.post("/api/inbox/scan-battle-log")
@@ -2993,6 +3125,7 @@ _SUGGEST_READERS = {
     "TeamPreviewReader",
     "ResultReader",
     "AbilityItemReader",
+    "TargetSelectReader",
 }
 
 

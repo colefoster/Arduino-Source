@@ -160,25 +160,34 @@ screens:
             description: "Current PP per move slot 0..3 (top→bottom). Move-select screen only; -1 elsewhere. Max is intentionally NOT tracked — it's static (derivable from move data)."
 
   target_select:
-    description: "Target selection modal after picking a move in doubles. Shows mons with HP, effectiveness, and selected move name."
+    description: "Target selection modal after picking a move in doubles. Each potential target (2 opp + 2 own) has a colored selector strip (yellow/green = targeted, red/blue = not) and an effectiveness label. Each own active mon has its move name shown."
     transitions_to: [action_menu]
     detectors: []
     readers:
       TargetSelectReader:
         fields:
-          move:
-            type: string
-          targets:
+          own_moves:
             type: array
             items: string
-          target_hp:
+            length: 2
+            description: "Move slug per own active slot (slot 0/1)."
+          opp_targeted:
+            type: array
+            items: bool
+            length: 2
+          own_targeted:
+            type: array
+            items: bool
+            length: 2
+          opp_effectiveness:
             type: array
             items: string
-          effectiveness:
+            length: 2
+            description: "One of: super-effective, not-very-effective, no-effect, neutral. Empty if unread."
+          own_effectiveness:
             type: array
             items: string
-          selected_target:
-            type: int
+            length: 2
 
   pokemon_switch:
     description: "Choosing which mon to switch to (voluntary or forced). Singles or doubles."

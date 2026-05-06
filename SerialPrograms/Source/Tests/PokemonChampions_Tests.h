@@ -12,6 +12,7 @@
 #ifndef PokemonAutomation_Tests_PokemonChampions_Tests_H
 #define PokemonAutomation_Tests_PokemonChampions_Tests_H
 
+#include <array>
 #include <vector>
 #include <string>
 
@@ -82,6 +83,18 @@ int test_pokemonChampions_AbilityItemReader(
     const std::string& target_kind,
     const std::string& target_name,
     const std::string& target_pokemon
+);
+
+//  TargetSelectReader: own_moves[2], opp_targeted[2], own_targeted[2],
+//  opp_effectiveness[2], own_effectiveness[2]. Each "" expected slot is
+//  treated as "skip" (don't validate this slot).
+int test_pokemonChampions_TargetSelectReader(
+    const ImageViewRGB32& image,
+    const std::array<std::string, 2>& target_own_moves,
+    const std::array<int,         2>& target_opp_targeted,  //  -1 skip, 0 false, 1 true
+    const std::array<int,         2>& target_own_targeted,
+    const std::array<std::string, 2>& target_opp_effectiveness,
+    const std::array<std::string, 2>& target_own_effectiveness
 );
 
 //  ── Void (development / debug) ─────────────────────────────────────

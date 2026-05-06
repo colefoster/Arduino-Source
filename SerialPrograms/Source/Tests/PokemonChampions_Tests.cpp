@@ -21,6 +21,7 @@
 #include "PokemonChampions/Inference/PokemonChampions_ActionMenuDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_BattleEndDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_AbilityItemReader.h"
+#include "PokemonChampions/Inference/PokemonChampions_TargetSelectReader.h"
 #include "PokemonChampions/Inference/PokemonChampions_PreparingForBattleDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_PostMatchDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_MainMenuDetector.h"
@@ -396,6 +397,51 @@ int test_pokemonChampions_AbilityItemReader(
     }
     cout << "AbilityItemReader: " << r.pokemon << "/" << r.name
          << " (" << r.kind << ") matched." << endl;
+    return 0;
+}
+
+
+// ─── TargetSelectReader ─────────────────────────────────────────────
+
+int test_pokemonChampions_TargetSelectReader(
+    const ImageViewRGB32& image,
+    const std::array<std::string, 2>& target_own_moves,
+    const std::array<int,         2>& target_opp_targeted,
+    const std::array<int,         2>& target_own_targeted,
+    const std::array<std::string, 2>& target_opp_effectiveness,
+    const std::array<std::string, 2>& target_own_effectiveness
+){
+    auto& logger = global_logger_command_line();
+    TargetSelectReader reader(Language::English);
+    TargetSelectReadout r = reader.read(logger, image);
+    int fails = 0;
+    auto check_str = [&](const char* label, size_t i, const std::string& expected, const std::string& got){
+        if (expected.empty()) return;  //  skip
+        if (got != expected){
+            cerr << "Error: TargetSelectReader." << label << "[" << i
+                 << "] got '" << got << "' expected '" << expected << "'\n";
+            fails++;
+        }
+    };
+    auto check_bool = [&](const char* label, size_t i, int expected, bool got){
+        if (expected < 0) return;  //  skip
+        bool want = expected != 0;
+        if (got != want){
+            cerr << "Error: TargetSelectReader." << label << "[" << i
+                 << "] got " << (got?"true":"false")
+                 << " expected " << (want?"true":"false") << "\n";
+            fails++;
+        }
+    };
+    for (size_t i = 0; i < 2; i++){
+        check_str ("own_moves",         i, target_own_moves[i],         r.own_moves[i]);
+        check_bool("opp_targeted",      i, target_opp_targeted[i],      r.opp_targeted[i]);
+        check_bool("own_targeted",      i, target_own_targeted[i],      r.own_targeted[i]);
+        check_str ("opp_effectiveness", i, target_opp_effectiveness[i], r.opp_effectiveness[i]);
+        check_str ("own_effectiveness", i, target_own_effectiveness[i], r.own_effectiveness[i]);
+    }
+    if (fails > 0) return 1;
+    cout << "TargetSelectReader: matched.\n";
     return 0;
 }
 

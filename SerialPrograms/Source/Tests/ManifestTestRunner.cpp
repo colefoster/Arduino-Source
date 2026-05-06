@@ -157,6 +157,37 @@ static int test_manifest_AbilityItemReader(const ImageViewRGB32& image, const js
     );
 }
 
+static int test_manifest_TargetSelectReader(const ImageViewRGB32& image, const json& entry){
+    auto str_array2 = [&](const char* key) -> std::array<std::string, 2> {
+        std::array<std::string, 2> a{};
+        if (entry.contains(key) && entry.at(key).is_array()){
+            const auto& arr = entry.at(key);
+            for (size_t i = 0; i < 2 && i < arr.size(); i++){
+                if (arr[i].is_string()) a[i] = arr[i].get<std::string>();
+            }
+        }
+        return a;
+    };
+    auto bool_array2 = [&](const char* key) -> std::array<int, 2> {
+        std::array<int, 2> a{-1, -1};
+        if (entry.contains(key) && entry.at(key).is_array()){
+            const auto& arr = entry.at(key);
+            for (size_t i = 0; i < 2 && i < arr.size(); i++){
+                if (arr[i].is_boolean()) a[i] = arr[i].get<bool>() ? 1 : 0;
+            }
+        }
+        return a;
+    };
+    return test_pokemonChampions_TargetSelectReader(
+        image,
+        str_array2("own_moves"),
+        bool_array2("opp_targeted"),
+        bool_array2("own_targeted"),
+        str_array2("opp_effectiveness"),
+        str_array2("own_effectiveness")
+    );
+}
+
 
 // Map manifest reader names to test functions.
 // Note: some manifest readers (like BattleHUDReader) contain multiple sub-fields
@@ -171,6 +202,7 @@ static const std::map<std::string, ReaderTestFn> READER_FUNCTIONS = {
     {"TeamPreviewReader",    test_manifest_TeamPreviewReader},
     {"ResultReader",         test_manifest_ResultReader},
     {"AbilityItemReader",    test_manifest_AbilityItemReader},
+    {"TargetSelectReader",   test_manifest_TargetSelectReader},
 };
 
 // BattleHUDReader sub-field adapters: the manifest stores fields under

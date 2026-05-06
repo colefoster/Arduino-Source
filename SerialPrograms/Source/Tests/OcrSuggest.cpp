@@ -22,6 +22,7 @@
 #include "PokemonChampions/Inference/PokemonChampions_PokeballAliveDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_BattleEndDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_AbilityItemReader.h"
+#include "PokemonChampions/Inference/PokemonChampions_TargetSelectReader.h"
 
 #include <array>
 #include <iostream>
@@ -173,6 +174,19 @@ int run_ocr_suggest(const std::string& reader_name, const std::string& image_pat
                       << ",\"pokemon\":\"" << r.pokemon << "\""
                       << ",\"raw_text\":\"" << raw_escaped << "\""
                       << "}" << std::endl;
+        }
+        else if (reader_name == "TargetSelectReader"){
+            auto& log = global_logger_command_line();
+            TargetSelectReader reader(Language::English);
+            TargetSelectReadout r = reader.read(log, image);
+            auto bool_str = [](bool v){ return v ? "true" : "false"; };
+            std::cout << "{"
+                << "\"own_moves\":[\"" << r.own_moves[0] << "\",\"" << r.own_moves[1] << "\"],"
+                << "\"opp_targeted\":[" << bool_str(r.opp_targeted[0]) << "," << bool_str(r.opp_targeted[1]) << "],"
+                << "\"own_targeted\":[" << bool_str(r.own_targeted[0]) << "," << bool_str(r.own_targeted[1]) << "],"
+                << "\"opp_effectiveness\":[\"" << r.opp_effectiveness[0] << "\",\"" << r.opp_effectiveness[1] << "\"],"
+                << "\"own_effectiveness\":[\"" << r.own_effectiveness[0] << "\",\"" << r.own_effectiveness[1] << "\"]"
+                << "}" << std::endl;
         }
         else if (reader_name == "ResultReader"){
             //  Wrapper around ResultScreenDetector — exposes the won bool as
