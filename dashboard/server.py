@@ -1567,6 +1567,93 @@ async def teampreview_crops(request: Request):
     ]
 
 
+def _team_scan_ps_paste(slots: list) -> str:
+    """Render 6 merged slot dicts as a Pokemon Showdown set paste."""
+    out = []
+    for s in slots:
+        species = (s.get("species") or "Unknown").title()
+        item = (s.get("item") or "").replace("-", " ").title()
+        ability = (s.get("ability") or "").replace("-", " ").title()
+        nature = s.get("nature") or ""
+        moves = [m for m in (s.get("moves") or []) if m]
+        evs = s.get("evs") or {}
+        ev_parts = []
+        for k, label in [("hp","HP"),("atk","Atk"),("def","Def"),("spa","SpA"),("spd","SpD"),("spe","Spe")]:
+            v = evs.get(k, 0)
+            if v: ev_parts.append(f"{v} {label}")
+
+        block = [f"{species}" + (f" @ {item}" if item else "")]
+        if ability: block.append(f"Ability: {ability}")
+        if ev_parts: block.append("EVs: " + " / ".join(ev_parts))
+        if nature: block.append(f"{nature} Nature")
+        for m in moves:
+            block.append(f"- {m.replace('-', ' ').title()}")
+        out.append("\n".join(block))
+    return "\n\n".join(out)
+
+
+@app.post("/api/team-scan/read")
+async def team_scan_read(request: Request):
+    """Run TeamSummaryReader on the M&M screenshot + TeamStatsReader on the
+    Stats screenshot, merge per-slot, and render as a PS paste.
+    Body: {moves_more_file, stats_file} — both relative paths under
+    test_images/{moves_and_more,team_stats}/."""
+    body = await request.json()
+    mm_file = body.get("moves_more_file", "")
+    st_file = body.get("stats_file", "")
+
+    mm_result, err = _suggest_via_runner("moves_and_more", mm_file, "TeamSummaryReader")
+    if err:
+        return JSONResponse({"ok": False, "error": f"moves_and_more: {err}"}, 500)
+    st_result, err = _suggest_via_runner("team_stats", st_file, "TeamStatsReader")
+    if err:
+        return JSONResponse({"ok": False, "error": f"team_stats: {err}"}, 500)
+
+    mm_slots = (mm_result or {}).get("slots", [])
+    st_slots = (st_result or {}).get("slots", [])
+    merged = []
+    for i in range(6):
+        m = mm_slots[i] if i < len(mm_slots) else {}
+        s = st_slots[i] if i < len(st_slots) else {}
+        stats = s.get("stats", {})
+        merged.append({
+            "slot": i,
+            "species": m.get("species", ""),
+            "ability": m.get("ability", ""),
+            "item":    m.get("item", ""),
+            "moves":   m.get("moves", ["", "", "", ""]),
+            "nature":  s.get("nature", ""),
+            "stats":   stats,                       # full per-stat detail (actual/evs/nature/raw_*)
+            "evs":     {k: stats.get(k, {}).get("evs", 0) for k in ["hp","atk","def","spa","spd","spe"]},
+        })
+
+    return {
+        "ok": True,
+        "slots": merged,
+        "ps_paste": _team_scan_ps_paste(merged),
+        "moves_more_file": mm_file,
+        "stats_file": st_file,
+    }
+
+
+@app.get("/api/team-scan/latest")
+async def team_scan_latest():
+    """Return the most-recent M&M and Stats screenshots (mtime-sorted) so the
+    UI auto-loads the freshest pair without the user picking files."""
+    mm_dir = TEST_IMAGES_DIR / "moves_and_more"
+    st_dir = TEST_IMAGES_DIR / "team_stats"
+    def newest_png(d):
+        if not d.exists(): return None
+        files = [f for f in d.iterdir() if f.suffix == ".png"]
+        if not files: return None
+        return max(files, key=lambda f: f.stat().st_mtime).name
+    return {
+        "ok": True,
+        "moves_more_file": newest_png(mm_dir),
+        "stats_file": newest_png(st_dir),
+    }
+
+
 @app.get("/api/sprites/list")
 async def sprites_list():
     """Return the list of sprite slugs in the Pokemon Champions atlas.
@@ -3434,6 +3521,7 @@ _SUGGEST_READERS = {
     "BattleLogReader",
     "TeamSelectReader",
     "TeamSummaryReader",
+    "TeamStatsReader",
     "TeamPreviewReader",
     "ResultReader",
     "AbilityItemReader",
