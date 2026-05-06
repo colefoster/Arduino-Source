@@ -85,6 +85,32 @@ Rules that prove stable graduate into `AutoLadder`/`BattleStateTracker` as state
 - More contradiction rules beyond the initial three.
 - Keyboard-based flag trigger.
 
+## Reader/Detector roadmap (prioritized by inference-engine impact)
+
+### Tier 1 — biggest single unlocks
+1. **BattleLogReader** — code exists, never called. Wiring it up fills ~8 WIP fields at once: switches, faints, boosts/drops, status applied, weather/terrain set, tailwind/screens, opp items revealed, opp abilities revealed, opp moves used. Highest leverage by far. Risk: log text wraps/scrolls fast, needs careful event-extraction logic.
+2. **Status condition reader (own + opp HUD)** — small PSN/PAR/BRN/SLP/FRZ icons inline with each active mon's name on the HUD. Cheap visual (icon templates, fixed positions, no OCR). Engine can't reason about sleep-lock / paralysis without this.
+3. **Boost arrow reader (own + opp HUD)** — up/down arrows on stat icons. Damage calc depends entirely on this. Cheap visual: count arrows in fixed regions.
+
+### Tier 2 — strong second tier
+4. **Field-state population via BattleLogReader** — weather/terrain/trick room/tailwind/screens. Don't build dedicated visual readers; let BattleLogReader populate these via text events. Shrinks the WIP list.
+5. **MegaEvolveDetector wiring** — code exists in tree. One mega per side per match; engine needs to know who's used theirs. ~5 lines to wire.
+6. **Move PP reader** — extension to MoveNameReader. Engine can see "out of PP, forced Struggle" only with this.
+
+### Tier 3 — useful but not blocking
+7. **CommunicatingDetector wiring** — code exists; marks transition/sync screens so trace knows state is in flux.
+8. **TeamSelectScreenDetector** — no detector yet for the "bring 6 pick 3/4" screen.
+9. **BattleModeSelectDetector / queue-screen detector** — matchmaking screen. Useful for refreshing BattleModeDetector reads.
+
+### Skip — won't add value to passive trace
+- **MovesAndMoreReader / TeamSummaryReader** — n/a in passive mode (needs controller navigation). Replaced by OWN_TEAM_PASTE.
+- **Dedicated weather/terrain readers** — let BattleLogReader handle via text events (Tier 2 #4).
+
+### Cross-cutting wiring improvements
+- **Confidence scores** in pipeline status (currently just ok/error).
+- **Per-field provenance** in engine_view (which reader filled what, when).
+- **Diff signal** for own-side OCR vs paste — TeamPreviewReader already runs own-side OCR but we ignore the result; flagging disagreements would surface OCR quality issues.
+
 ## Key file references
 
 - `SerialPrograms/Source/PokemonChampions/Programs/PokemonChampions_AutoLadder.cpp:668-672` — reference call site for snapshot + `read_all()` + tracker update.
