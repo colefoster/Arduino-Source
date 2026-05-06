@@ -88,6 +88,34 @@ FORMATS = {
 
 app = FastAPI(title="Pokemon Champions Dev Hub")
 
+# When set, spectator-resident endpoints proxy to the host that runs the
+# spectator (ash). Mac-local dashboard sets this; ash itself leaves it unset.
+SPECTATOR_PROXY = os.environ.get("SPECTATOR_PROXY", "").rstrip("/")
+
+
+async def _proxy_spectator(method: str, path: str, query: str = "", body: bytes | None = None) -> Response:
+    """Proxy a request to SPECTATOR_PROXY and return a FastAPI Response."""
+    import urllib.request
+    import urllib.error
+    url = f"{SPECTATOR_PROXY}{path}"
+    if query:
+        url = f"{url}?{query}"
+
+    def _fetch():
+        req = urllib.request.Request(url, method=method, data=body)
+        if body is not None:
+            req.add_header("Content-Type", "application/json")
+        try:
+            with urllib.request.urlopen(req, timeout=30) as r:
+                return r.status, r.read(), r.headers.get("Content-Type", "application/json")
+        except urllib.error.HTTPError as e:
+            return e.code, e.read(), e.headers.get("Content-Type", "application/json")
+        except Exception as e:
+            return 502, json.dumps({"error": f"spectator proxy: {e}"}).encode(), "application/json"
+
+    status, payload, ctype = await _run_in_executor(_fetch)
+    return Response(content=payload, status_code=status, media_type=ctype)
+
 if STATIC_DIR.exists():
     app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
 
@@ -429,6 +457,8 @@ def _parse_ground_truth(filename: str, reader_name: str) -> dict:
 
 @app.get("/api/status")
 async def status():
+    if SPECTATOR_PROXY:
+        return await _proxy_spectator("GET", "/api/status")
     now = time.time()
     orch = _orchestrator_status()
     formats = {}
@@ -461,6 +491,8 @@ async def status():
 
 @app.get("/api/collection")
 async def collection():
+    if SPECTATOR_PROXY:
+        return await _proxy_spectator("GET", "/api/collection")
     now = time.time()
     buckets = {fmt_id: [0]*48 for fmt_id in FORMATS}
     for fmt_id in FORMATS:
@@ -497,6 +529,8 @@ def _compute_ratings() -> dict:
 
 @app.get("/api/ratings")
 async def ratings():
+    if SPECTATOR_PROXY:
+        return await _proxy_spectator("GET", "/api/ratings")
     key = "endpoint:ratings"
     cached = _cache_get(key)
     if cached is not None:
@@ -526,6 +560,8 @@ def _compute_recent(limit: int = 30) -> list:
 
 @app.get("/api/recent")
 async def recent(limit: int = 30):
+    if SPECTATOR_PROXY:
+        return await _proxy_spectator("GET", "/api/recent", f"limit={int(limit)}")
     key = f"endpoint:recent:{limit}"
     cached = _cache_get(key)
     if cached is not None:
@@ -567,6 +603,8 @@ def _compute_dataset() -> dict:
 
 @app.get("/api/dataset")
 async def dataset():
+    if SPECTATOR_PROXY:
+        return await _proxy_spectator("GET", "/api/dataset")
     key = "endpoint:dataset"
     cached = _cache_get(key)
     if cached is not None:
@@ -577,6 +615,8 @@ async def dataset():
 
 @app.get("/api/coverage")
 async def coverage():
+    if SPECTATOR_PROXY:
+        return await _proxy_spectator("GET", "/api/coverage")
     import websockets, asyncio
     elo_slices = [0, 1200, 1400]
     try:
@@ -4057,7 +4097,10 @@ async def _run_sync_format(fmt_id: str, sources: list[Path]) -> dict:
 
 @app.post("/api/sync/trigger")
 async def sync_trigger(request: Request):
-    """Trigger replay sync from ash to ColePC."""
+    """Trigger replay sync from ash to unraid."""
+    if SPECTATOR_PROXY:
+        body = await request.body()
+        return await _proxy_spectator("POST", "/api/sync/trigger", body=body)
     if _sync_state["running"]:
         return JSONResponse({"error": "Sync already in progress"}, 409)
 
@@ -4117,6 +4160,8 @@ async def sync_trigger(request: Request):
 @app.get("/api/sync/status")
 async def sync_status():
     """Get current sync status."""
+    if SPECTATOR_PROXY:
+        return await _proxy_spectator("GET", "/api/sync/status")
     # Quick check if sync host is reachable (non-blocking, cached for 60s)
     reachable = None
     if not _sync_state["running"]:
@@ -4234,89 +4279,6 @@ async def templates_delete(digit: str):
         path.unlink()
         return {"ok": True}
     return JSONResponse({"error": "not found"}, status_code=404)
-
-
-# ═══════════════════════════════════════════════════════════════════════════
-# LEAD / TEAM ADVISOR (hybrid lookup + neural fallback)
-# ═══════════════════════════════════════════════════════════════════════════
-
-LEAD_LOOKUP_PATH = BASE / "data" / "checkpoints_lead" / "lookup_train_v2.pkl"
-LEAD_MODEL_PATH = BASE / "data" / "checkpoints_lead" / "v3_masked" / "best.pt"
-
-_advisor_state: dict = {"loaded": False, "lookup": None, "model": None, "builder": None,
-                        "device": None, "error": None}
-
-
-def _ensure_advisor():
-    if _advisor_state["loaded"]:
-        return _advisor_state["error"] is None
-    _advisor_state["loaded"] = True
-
-    for p in [str(SRC_DIR), str(BASE)]:
-        if p not in sys.path:
-            sys.path.insert(0, p)
-
-    try:
-        # Lookup is required and pure-Python (numpy + stdlib).
-        from vgc_model.lead.lookup import LeadLookup
-        if not LEAD_LOOKUP_PATH.exists():
-            _advisor_state["error"] = f"No lookup at {LEAD_LOOKUP_PATH}"
-            return False
-        _advisor_state["lookup"] = LeadLookup.load(LEAD_LOOKUP_PATH)
-    except Exception as exc:
-        _advisor_state["error"] = f"lookup load failed: {type(exc).__name__}: {exc}"
-        return False
-
-    # Neural fallback is best-effort. If torch isn't installed (e.g. on ash),
-    # advisor degrades to lookup-only — the lookup covers ~89% of matchups.
-    try:
-        import torch
-        from vgc_model.lead.features import FeatureBuilder
-        from vgc_model.lead.advisor import load_model
-
-        _advisor_state["device"] = torch.device("cpu")
-        if LEAD_MODEL_PATH.exists():
-            _advisor_state["builder"] = FeatureBuilder()
-            _advisor_state["model"] = load_model(
-                LEAD_MODEL_PATH, _advisor_state["builder"], _advisor_state["device"]
-            )
-    except Exception as exc:
-        # Torch missing or model load failed — keep lookup, drop model fallback.
-        _advisor_state["device"] = None
-        _advisor_state["model"] = None
-        _advisor_state["builder"] = None
-
-    return True
-
-
-@app.post("/api/advisor")
-async def advisor_recommend(request: Request):
-    body = await request.json()
-    own = body.get("own") or []
-    opp = body.get("opp") or []
-    if len(own) != 6 or len(opp) != 6:
-        return JSONResponse(
-            {"error": f"Need exactly 6 species each (got own={len(own)}, opp={len(opp)})"},
-            status_code=400,
-        )
-
-    if not _ensure_advisor():
-        return JSONResponse(
-            {"error": _advisor_state["error"] or "advisor not initialized"},
-            status_code=500,
-        )
-
-    from vgc_model.lead.advisor import recommend
-    rec = recommend(
-        own, opp,
-        lookup=_advisor_state["lookup"],
-        model=_advisor_state["model"],
-        builder=_advisor_state["builder"],
-        device=_advisor_state["device"],
-        top_k_sets=3,
-        top_k_pairs=5,
-    )
-    return rec
 
 
 # ═══════════════════════════════════════════════════════════════════════════

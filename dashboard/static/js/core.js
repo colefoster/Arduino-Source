@@ -10,7 +10,7 @@ function apiPost(path, body) {
     return fetch(`${API}${path}`, { method: 'POST', body: fd }).then(r => r.json());
 }
 
-const views = ['dashboard', 'gallery', 'labeler', 'inspector', 'recognition', 'teampreview', 'templates', 'training', 'validation', 'mismatches', 'sprites', 'pokeballs', 'advisor', 'livetrace', 'ppgallery', 'hpgallery', 'tsgallery', 'pillatlas'];
+const views = ['dashboard', 'gallery', 'labeler', 'inspector', 'recognition', 'teampreview', 'templates', 'training', 'validation', 'mismatches', 'sprites', 'pokeballs', 'livetrace', 'ppgallery', 'hpgallery', 'tsgallery', 'pillatlas'];
 let currentView = null;
 
 window.routeParams = {};
@@ -57,7 +57,6 @@ function route() {
     if (view === 'mismatches') mismatchesInit();
     if (view === 'sprites') spritesInit();
     if (view === 'pokeballs') pokeballsInit();
-    if (view === 'advisor') advisorInit();
     if (view === 'livetrace') liveTraceInit();
     if (view === 'ppgallery') ppGalleryInit();
     if (view === 'hpgallery') hpGalleryInit();
