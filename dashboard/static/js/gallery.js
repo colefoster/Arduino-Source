@@ -490,7 +490,43 @@ async function loadGalleryInbox() {
                     }
                 });
                 if (nU){ headUnlab.style.display = 'block'; gridUnlabeled.style.display = ''; headUnlab.textContent = `Unlabeled (${nU})`; }
-                if (nP){ headPart.style.display = 'block';  gridPartial.style.display   = ''; headPart.textContent  = `Partial (${nP}) — recognized event_type, ready to Accept`; }
+                if (nP){
+                    headPart.style.display = 'block';
+                    gridPartial.style.display = '';
+                    headPart.innerHTML = `Partial (${nP}) — recognized event_type, ready to Accept
+                        <button class="btn btn-primary" id="inbox-accept-all-partial-btn" style="margin-left:12px; font-size:11px; padding:3px 10px;">✓ Accept All Partial</button>
+                        <span id="inbox-accept-all-status" style="margin-left:8px; font-size:11px; color:#8b949e;"></span>`;
+                    document.getElementById('inbox-accept-all-partial-btn').addEventListener('click', async () => {
+                        const btn = document.getElementById('inbox-accept-all-partial-btn');
+                        const status = document.getElementById('inbox-accept-all-status');
+                        if (!confirm(`Accept all ${nP} partial-section cards as their detected event_type?`)) return;
+                        btn.disabled = true;
+                        const cards = [...gridPartial.querySelectorAll('.inbox-card')];
+                        let done = 0, failed = 0;
+                        //  Sequential to avoid hammering the runner; per-card take ~50-200ms.
+                        for (const card of cards){
+                            const filename = card.dataset.filename;
+                            const eventType = card.querySelector('.log-event-type').value;
+                            try {
+                                const resp = await fetch(`${API}/api/inbox/accept-battle-log`, {
+                                    method: 'POST', headers: {'Content-Type': 'application/json'},
+                                    body: JSON.stringify({filename, event_type: eventType})
+                                }).then(r => r.json());
+                                if (resp.ok){
+                                    card.style.transition = 'opacity 0.15s';
+                                    card.style.opacity = '0';
+                                    setTimeout(() => card.remove(), 150);
+                                    done++;
+                                } else {
+                                    failed++;
+                                }
+                            } catch (e){ failed++; }
+                            status.textContent = `${done}/${nP} accepted${failed ? ` (${failed} failed)` : ''}`;
+                        }
+                        status.textContent = `Done: ${done}/${nP} accepted${failed ? ` (${failed} failed)` : ''}`;
+                        btn.disabled = false;
+                    });
+                }
             } catch (e) {
                 scanStatus.textContent = `Error: ${e.message}`;
             } finally {
