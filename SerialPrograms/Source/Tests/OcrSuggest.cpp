@@ -180,12 +180,28 @@ int run_ocr_suggest(const std::string& reader_name, const std::string& image_pat
             TargetSelectReader reader(Language::English);
             TargetSelectReadout r = reader.read(log, image);
             auto bool_str = [](bool v){ return v ? "true" : "false"; };
+            //  Sanitize raw text for JSON: strip non-printable / non-ASCII
+            //  and escape quotes/backslashes.
+            auto json_str = [](const std::string& s){
+                std::string out;
+                for (char c : s){
+                    unsigned char u = (unsigned char)c;
+                    if (u < 0x20 || u >= 0x7F) continue;
+                    if (c == '"') out += "\\\"";
+                    else if (c == '\\') out += "\\\\";
+                    else out += c;
+                }
+                return out;
+            };
             std::cout << "{"
                 << "\"own_moves\":[\"" << r.own_moves[0] << "\",\"" << r.own_moves[1] << "\"],"
                 << "\"opp_targeted\":[" << bool_str(r.opp_targeted[0]) << "," << bool_str(r.opp_targeted[1]) << "],"
                 << "\"own_targeted\":[" << bool_str(r.own_targeted[0]) << "," << bool_str(r.own_targeted[1]) << "],"
                 << "\"opp_effectiveness\":[\"" << r.opp_effectiveness[0] << "\",\"" << r.opp_effectiveness[1] << "\"],"
-                << "\"own_effectiveness\":[\"" << r.own_effectiveness[0] << "\",\"" << r.own_effectiveness[1] << "\"]"
+                << "\"own_effectiveness\":[\"" << r.own_effectiveness[0] << "\",\"" << r.own_effectiveness[1] << "\"],"
+                << "\"own_moves_raw\":[\"" << json_str(r.own_moves_raw[0]) << "\",\"" << json_str(r.own_moves_raw[1]) << "\"],"
+                << "\"opp_effectiveness_raw\":[\"" << json_str(r.opp_effectiveness_raw[0]) << "\",\"" << json_str(r.opp_effectiveness_raw[1]) << "\"],"
+                << "\"own_effectiveness_raw\":[\"" << json_str(r.own_effectiveness_raw[0]) << "\",\"" << json_str(r.own_effectiveness_raw[1]) << "\"]"
                 << "}" << std::endl;
         }
         else if (reader_name == "ResultReader"){

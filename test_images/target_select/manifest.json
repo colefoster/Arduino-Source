@@ -3,7 +3,7 @@
     "TargetSelectReader": {
       "opp_effectiveness": [
         "neutral",
-        "super-effective"
+        "not-very-effective"
       ],
       "opp_targeted": [
         true,

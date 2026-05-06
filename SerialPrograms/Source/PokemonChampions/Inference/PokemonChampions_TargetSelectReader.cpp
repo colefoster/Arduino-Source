@@ -93,9 +93,16 @@ static std::string classify_effectiveness(const std::string& raw){
     auto contains = [&](const char* needle){
         return s.find(needle) != std::string::npos;
     };
-    if (contains("super") || contains("effective"))     return "super-effective";
-    if (contains("not very") || contains("notvery"))    return "not-very-effective";
-    if (contains("no effect") || contains("noeffect"))  return "no-effect";
+    //  Order matters: most-specific patterns first. "Not very effective"
+    //  contains "effective", so the super-effective check would steal it
+    //  if checked first. Same for "no effect" — must precede the bare
+    //  "effective" fallback.
+    if (contains("not very") || contains("notvery") || contains("not eff"))
+        return "not-very-effective";
+    if (contains("no effect") || contains("noeffect") || contains("immune"))
+        return "no-effect";
+    if (contains("super") || contains("effective") || contains("effectiv"))
+        return "super-effective";
     //  "Normal" damage on the target select screen sometimes shows no label
     //  at all, sometimes shows "Normal" or similar. Treat any non-empty
     //  read that didn't match the others as neutral.
@@ -144,19 +151,18 @@ TargetSelectReadout TargetSelectReader::read(Logger& logger, const ImageViewRGB3
         out.own_targeted[i] = is_color_targeted(own);
     }
 
-    //  Effectiveness: OCR + classify.
+    //  Effectiveness: OCR + classify (raw text preserved for debugging).
     for (size_t i = 0; i < 2; i++){
-        out.opp_effectiveness[i] = classify_effectiveness(
-            ocr_text_strip(extract_box_reference(screen, m_opp_effectiveness[i]))
-        );
-        out.own_effectiveness[i] = classify_effectiveness(
-            ocr_text_strip(extract_box_reference(screen, m_own_effectiveness[i]))
-        );
+        out.opp_effectiveness_raw[i] = ocr_text_strip(extract_box_reference(screen, m_opp_effectiveness[i]));
+        out.opp_effectiveness[i]     = classify_effectiveness(out.opp_effectiveness_raw[i]);
+        out.own_effectiveness_raw[i] = ocr_text_strip(extract_box_reference(screen, m_own_effectiveness[i]));
+        out.own_effectiveness[i]     = classify_effectiveness(out.own_effectiveness_raw[i]);
     }
 
     //  Move names: dictionary-matched against the Champions move vocab.
     for (size_t i = 0; i < 2; i++){
         ImageViewRGB32 crop = extract_box_reference(screen, m_own_move_name[i]);
+        out.own_moves_raw[i] = ocr_text_strip(crop);
         OCR::StringMatchResult res = MoveNameOCR::instance().read_substring(
             logger, m_language, crop, OCR::WHITE_TEXT_FILTERS()
         );
@@ -164,8 +170,7 @@ TargetSelectReadout TargetSelectReader::read(Logger& logger, const ImageViewRGB3
             out.own_moves[i] = res.results.begin()->second.token;
         }else{
             //  Fallback: emit raw slug; better than nothing for unknown moves.
-            std::string raw = ocr_text_strip(crop);
-            out.own_moves[i] = slugify_move(raw);
+            out.own_moves[i] = slugify_move(out.own_moves_raw[i]);
         }
     }
 

@@ -1,0 +1,46 @@
+<div id="view-tsgallery" class="view">
+    <h1 style="margin: 0 0 16px;">Target Select Crops Gallery</h1>
+    <div style="color:#8b949e; font-size:12px; margin-bottom:12px;">
+        Per frame: 2 own move-name cells + 4 target cells (opp 0/1, own 0/1).
+        Each target cell shows the is_targeted color strip + the effectiveness crop +
+        raw OCR text + the classified enum. Mismatches between raw and classified
+        usually mean the classifier needs another keyword or a fuzzy fallback.
+    </div>
+    <div id="tsg-status" style="font-size:11px; color:#8b949e; margin-bottom:12px;">Loading...</div>
+    <div id="tsg-grid"></div>
+</div>
+
+<style>
+.tsg-row {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    padding: 10px;
+    margin-bottom: 10px;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 12px;
+    align-items: stretch;
+}
+.tsg-row .thumb-cell { font-size: 10px; color: #6e7681; word-break: break-all; }
+.tsg-row .thumb-cell img { width: 100%; height: auto; border-radius: 3px; image-rendering: pixelated; display: block; margin-bottom: 4px; }
+.tsg-row .ins-link { font-size: 11px; color: #58a6ff; text-decoration: none; }
+.tsg-row .cells { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
+.tsg-row .cell { background: #0d1117; padding: 6px; border-radius: 4px; display: flex; flex-direction: column; align-items: center; gap: 4px; font-family: ui-monospace, monospace; font-size: 11px; }
+.tsg-row .cell .label { font-size: 9px; color: #6e7681; text-transform: uppercase; }
+.tsg-row .cell img { max-width: 100%; height: auto; image-rendering: pixelated; }
+.tsg-row .cell .raw { font-size: 10px; color: #d29922; word-break: break-word; max-width: 100%; text-align: center; }
+.tsg-row .cell .parsed { font-weight: bold; }
+.tsg-row .cell.targeted { background: #0d2a1d; border: 1px solid #3fb950; }
+.tsg-row .cell.untargeted { background: #2d0d12; border: 1px solid #f85149; }
+.tsg-row .cell .targeted-tag { font-size: 9px; padding: 1px 4px; border-radius: 3px; }
+.tsg-row .cell.targeted .targeted-tag { background: #3fb950; color: #fff; }
+.tsg-row .cell.untargeted .targeted-tag { background: #f85149; color: #fff; }
+.tsg-row .cell.move { background: #161e2c; border: 1px solid #1f6feb; }
+.tsg-row .cell .eff-super { color: #3fb950; }
+.tsg-row .cell .eff-not-very { color: #d29922; }
+.tsg-row .cell .eff-no-effect { color: #6e7681; }
+.tsg-row .cell .eff-neutral { color: #79c0ff; }
+.tsg-row .cell .eff-empty { color: #f85149; }
+.tsg-row .cell .mismatch-flag { font-size: 9px; color: #f85149; font-weight: bold; }
+</style>

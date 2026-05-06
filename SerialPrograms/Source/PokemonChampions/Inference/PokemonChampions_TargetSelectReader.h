@@ -35,11 +35,15 @@ namespace PokemonChampions{
 
 
 struct TargetSelectReadout{
-    std::array<std::string, 2> own_moves{};         //  move slugs
+    std::array<std::string, 2> own_moves{};             //  move slugs
     std::array<bool, 2>        opp_targeted{};
     std::array<bool, 2>        own_targeted{};
-    std::array<std::string, 2> opp_effectiveness{}; //  enum slugs (see below)
+    std::array<std::string, 2> opp_effectiveness{};     //  enum slugs (see below)
     std::array<std::string, 2> own_effectiveness{};
+    //  Raw pre-classification reads (debug / gallery view).
+    std::array<std::string, 2> own_moves_raw{};         //  pre-slug Tesseract output
+    std::array<std::string, 2> opp_effectiveness_raw{}; //  pre-classify text
+    std::array<std::string, 2> own_effectiveness_raw{};
 };
 
 

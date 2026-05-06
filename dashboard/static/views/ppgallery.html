@@ -1,0 +1,34 @@
+<div id="view-ppgallery" class="view">
+    <h1 style="margin: 0 0 16px;">PP Crops Gallery</h1>
+    <div style="color:#8b949e; font-size:12px; margin-bottom:12px;">
+        4 PP crops + the BattleHUDReader's <code>move_pp_current</code> read for every move_select test image.
+        Use this to spot crop-box drift. Red = -1 (no read); cyan = a read happened.
+        Open any image in the Inspector via the link below the row to nudge the boxes.
+    </div>
+    <div id="ppg-status" style="font-size:11px; color:#8b949e; margin-bottom:12px;">Loading...</div>
+    <div id="ppg-grid"></div>
+</div>
+
+<style>
+.ppg-row {
+    display: grid;
+    grid-template-columns: 240px repeat(4, 1fr);
+    gap: 8px;
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    padding: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+}
+.ppg-row .thumb-cell { font-size: 10px; color: #6e7681; word-break: break-all; }
+.ppg-row .thumb-cell img { width: 100%; height: auto; border-radius: 3px; image-rendering: pixelated; display: block; margin-bottom: 4px; }
+.ppg-row .pp-cell { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 4px; border-radius: 4px; background: #0d1117; }
+.ppg-row .pp-cell img { max-width: 100%; height: auto; image-rendering: pixelated; }
+.ppg-row .pp-cell .reading { font-family: ui-monospace, monospace; font-size: 13px; font-weight: bold; }
+.ppg-row .pp-cell.absent .reading { color: #f85149; }
+.ppg-row .pp-cell.present .reading { color: #79c0ff; }
+.ppg-row .pp-cell .slot-label { font-size: 9px; color: #6e7681; text-transform: uppercase; }
+.ppg-row .ins-link { font-size: 11px; color: #58a6ff; text-decoration: none; }
+.ppg-row .ins-link:hover { text-decoration: underline; }
+</style>

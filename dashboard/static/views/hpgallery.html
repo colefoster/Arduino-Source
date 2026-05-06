@@ -1,0 +1,36 @@
+<div id="view-hpgallery" class="view">
+    <h1 style="margin: 0 0 16px;">HP Crops Gallery</h1>
+    <div style="color:#8b949e; font-size:12px; margin-bottom:12px;">
+        Opponent HP% (slot 0/1) + own HP "current/max" (slot 0/1) crops + BattleHUDReader reads,
+        across action_menu and move_select frames. Red = -1 (no read); cyan = read happened.
+        If a frame should clearly show HP but reads -1, the box is mis-tuned. Open in inspector to nudge.
+    </div>
+    <div id="hpg-status" style="font-size:11px; color:#8b949e; margin-bottom:12px;">Loading...</div>
+    <div id="hpg-grid"></div>
+</div>
+
+<style>
+.hpg-row {
+    display: grid;
+    grid-template-columns: 240px repeat(4, 1fr);
+    gap: 8px;
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    padding: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+}
+.hpg-row .thumb-cell { font-size: 10px; color: #6e7681; word-break: break-all; }
+.hpg-row .thumb-cell img { width: 100%; height: auto; border-radius: 3px; image-rendering: pixelated; display: block; margin-bottom: 4px; }
+.hpg-row .hp-cell { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 4px; border-radius: 4px; background: #0d1117; }
+.hpg-row .hp-cell img { max-width: 100%; height: auto; image-rendering: pixelated; }
+.hpg-row .hp-cell .reading { font-family: ui-monospace, monospace; font-size: 13px; font-weight: bold; }
+.hpg-row .hp-cell.absent .reading { color: #f85149; }
+.hpg-row .hp-cell.present .reading { color: #79c0ff; }
+.hpg-row .hp-cell .slot-label { font-size: 9px; color: #6e7681; text-transform: uppercase; }
+.hpg-row .hp-cell .raw { font-size: 10px; color: #d29922; font-family: ui-monospace,monospace; }
+.hpg-row .ins-link { font-size: 11px; color: #58a6ff; text-decoration: none; }
+.hpg-row .ins-link:hover { text-decoration: underline; }
+.hpg-row .scene-tag { display: inline-block; font-size: 9px; padding: 1px 5px; border-radius: 3px; background: #21262d; color: #8b949e; text-transform: uppercase; }
+</style>

@@ -1,0 +1,43 @@
+<!-- Lead/Team Advisor — query the hybrid recommender. -->
+<div class="view" id="view-advisor" style="display: none;">
+    <div class="view-header">
+        <h2>Lead Advisor</h2>
+        <p class="muted">Pick the 4 to bring and the 2 to lead. Lookup-primary, model-fallback.</p>
+    </div>
+
+    <div class="advisor-grid">
+        <div class="advisor-input">
+            <label>Your team (6 species, comma-separated)</label>
+            <textarea id="advisor-own" rows="2" placeholder="Sneasler, Incineroar, Garchomp, Sinistcha, Kingambit, Whimsicott"></textarea>
+
+            <label>Opponent team (6 species, comma-separated)</label>
+            <textarea id="advisor-opp" rows="2" placeholder="Floette-Mega, Charizard-Mega-Y, Pelipper, Sneasler, Aerodactyl, Whimsicott"></textarea>
+
+            <div class="advisor-controls">
+                <button id="advisor-go" class="primary">Recommend</button>
+                <button id="advisor-swap" class="ghost" title="Swap own and opp">Swap</button>
+                <button id="advisor-clear" class="ghost">Clear</button>
+            </div>
+            <div id="advisor-status" class="muted"></div>
+        </div>
+
+        <div class="advisor-output">
+            <div id="advisor-source" class="advisor-source"></div>
+
+            <h3>Bring (4 of 6)</h3>
+            <div id="advisor-bring" class="advisor-bring"></div>
+
+            <h3>Top alternative brought sets</h3>
+            <table id="advisor-brought-alts" class="advisor-table">
+                <thead><tr><th>Share</th><th>Battles</th><th>Set</th></tr></thead>
+                <tbody></tbody>
+            </table>
+
+            <h3>Lead pairs</h3>
+            <table id="advisor-leads" class="advisor-table">
+                <thead><tr><th>Share</th><th>Battles</th><th>Lead pair</th></tr></thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1052,6 +1052,60 @@ def _ocr_suggest_inbox(filename: str, reader: str):
 _INBOX_LOG_CACHE: dict = {}  # filename -> (mtime, result)
 
 
+@app.get("/api/targetselect-gallery")
+async def targetselect_gallery():
+    """For each target_select test image, return the 10 crops + reader's
+    parsed values + raw OCR text per cell. Mirror of pp/hp galleries."""
+    import base64
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+    screen_dir = TEST_IMAGES_DIR / "target_select"
+    if not screen_dir.exists():
+        return {"images": []}
+    boxes = CROP_DEFS.get("TargetSelectReader") or []
+    files = sorted(f for f in screen_dir.iterdir()
+                   if f.is_file() and f.suffix.lower() == ".png" and _is_real_image(f.name))
+    manifest = _load_manifest(screen_dir)
+
+    def work(img_path):
+        crops = []
+        for cd in boxes:
+            try:
+                crops.append({
+                    "name": cd["name"],
+                    "data": "data:image/png;base64," + base64.b64encode(_extract_crop(img_path, cd["box"], scale=4)).decode(),
+                })
+            except Exception:
+                crops.append({"name": cd["name"], "data": None})
+        result, err = _suggest_via_runner("target_select", img_path.name, "TargetSelectReader")
+        result = result or {}
+        m_entry = (manifest.get(img_path.name) or {}).get("TargetSelectReader") or {}
+        return {
+            "filename": img_path.name,
+            "thumb": f"/api/gallery/thumb/target_select/{img_path.name}",
+            "crops": crops,
+            "own_moves":             result.get("own_moves",             ["", ""]),
+            "own_moves_raw":         result.get("own_moves_raw",         ["", ""]),
+            "opp_targeted":          result.get("opp_targeted",          [False, False]),
+            "own_targeted":          result.get("own_targeted",          [False, False]),
+            "opp_effectiveness":     result.get("opp_effectiveness",     ["", ""]),
+            "own_effectiveness":     result.get("own_effectiveness",     ["", ""]),
+            "opp_effectiveness_raw": result.get("opp_effectiveness_raw", ["", ""]),
+            "own_effectiveness_raw": result.get("own_effectiveness_raw", ["", ""]),
+            "manifest_own_moves":         m_entry.get("own_moves"),
+            "manifest_opp_effectiveness": m_entry.get("opp_effectiveness"),
+            "manifest_own_effectiveness": m_entry.get("own_effectiveness"),
+            "error": err,
+        }
+
+    out = []
+    with ThreadPoolExecutor(max_workers=8) as ex:
+        futs = [ex.submit(work, f) for f in files]
+        for fut in as_completed(futs):
+            out.append(fut.result())
+    out.sort(key=lambda r: r["filename"])
+    return {"images": out, "count": len(out)}
+
+
 @app.get("/api/hp-gallery")
 async def hp_gallery():
     """For each action_menu + move_select image, return the 4 HP crops
