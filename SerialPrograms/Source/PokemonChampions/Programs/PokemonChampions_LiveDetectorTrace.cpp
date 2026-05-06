@@ -4,7 +4,11 @@
  *
  */
 
+#include <algorithm>
+#include <cctype>
 #include <chrono>
+#include <ctime>
+#include <fstream>
 
 #include <QByteArray>
 #include <QEventLoop>
@@ -92,11 +96,41 @@ LiveDetectorTrace::LiveDetectorTrace()
         "",
         "Paste your Showdown team here..."
     )
+    , ENABLE_AUTO_CAPTURE(
+        "<b>Enable Auto-Capture:</b><br>"
+        "Save a PNG + sidecar JSON to AUTO_CAPTURE_DIR whenever the trace sees "
+        "something novel: an under-labeled screen entry (target_select, team_select), "
+        "a never-before-seen BattleLogEventType this session, a new opp species "
+        "from the HUD, or a new ability/item reveal. Capped at MAX_PER_HOUR. "
+        "Skips already-seen content so you don't accumulate dupes. After a "
+        "session, rsync AUTO_CAPTURE_DIR up to ash to triage on the dashboard.",
+        LockMode::UNLOCK_WHILE_RUNNING,
+        false
+    )
+    , AUTO_CAPTURE_DIR(
+        false,
+        "<b>Auto-Capture Dir:</b><br>"
+        "Where to drop captured PNG + JSON sidecars. Defaults to the dashboard "
+        "inbox path so the existing triage flow picks them up after sync.",
+        LockMode::UNLOCK_WHILE_RUNNING,
+        "/Users/cole/Dev/pokemon-champions/test_images/_inbox",
+        "/Users/cole/Dev/pokemon-champions/test_images/_inbox"
+    )
+    , AUTO_CAPTURE_MAX_PER_HOUR(
+        "<b>Max Captures / Hour:</b><br>"
+        "Sliding hourly cap; older captures fall out of the window automatically. "
+        "0 = no cap (not recommended).",
+        LockMode::UNLOCK_WHILE_RUNNING,
+        60
+    )
 {
     PA_ADD_OPTION(POLL_PERIOD_MILLISECONDS);
     PA_ADD_OPTION(STALE_AFTER_MILLISECONDS);
     PA_ADD_OPTION(SINK_URL);
     PA_ADD_OPTION(OWN_TEAM_PASTE);
+    PA_ADD_OPTION(ENABLE_AUTO_CAPTURE);
+    PA_ADD_OPTION(AUTO_CAPTURE_DIR);
+    PA_ADD_OPTION(AUTO_CAPTURE_MAX_PER_HOUR);
 }
 
 
@@ -133,6 +167,117 @@ static int64_t now_ms(){
     return (int64_t)std::chrono::duration_cast<std::chrono::milliseconds>(
         std::chrono::system_clock::now().time_since_epoch()
     ).count();
+}
+
+
+// ─── Auto-capture helpers ───────────────────────────────────────────────────
+
+static std::string ts_filename_part(){
+    auto t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+    auto ms = (int64_t)std::chrono::duration_cast<std::chrono::milliseconds>(
+        std::chrono::system_clock::now().time_since_epoch()
+    ).count() % 1000;
+    std::tm tm_buf{};
+    localtime_r(&t, &tm_buf);
+    char buf[32];
+    std::snprintf(buf, sizeof(buf),
+        "%04d%02d%02d-%02d%02d%02d%03d",
+        tm_buf.tm_year + 1900, tm_buf.tm_mon + 1, tm_buf.tm_mday,
+        tm_buf.tm_hour, tm_buf.tm_min, tm_buf.tm_sec, (int)ms
+    );
+    return std::string(buf);
+}
+
+
+static std::string slugify_for_filename(const std::string& s){
+    std::string out;
+    out.reserve(s.size());
+    for (char c : s){
+        if (std::isalnum((unsigned char)c)) out += (char)std::tolower((unsigned char)c);
+        else if (c == '_' || c == '-' || c == ':') out += '-';
+        else if (!out.empty() && out.back() != '-') out += '-';
+    }
+    while (!out.empty() && out.back() == '-') out.pop_back();
+    if (out.size() > 60) out.resize(60);
+    return out;
+}
+
+
+std::string LiveDetectorTrace::fingerprint_raw_text(const std::string& raw){
+    std::string out;
+    out.reserve(raw.size());
+    for (char c : raw){
+        if (std::isalnum((unsigned char)c)){
+            out += (char)std::tolower((unsigned char)c);
+        }
+    }
+    if (out.size() > 60) out.resize(60);
+    return out;
+}
+
+
+bool LiveDetectorTrace::maybe_capture(
+    Logger& logger,
+    const ImageViewRGB32& screen,
+    const std::string& reason,
+    const std::string& dedup_key,
+    std::set<std::string>& dedup_set,
+    JsonObject metadata
+){
+    if (!ENABLE_AUTO_CAPTURE) return false;
+
+    //  Per-channel dedup — first occurrence per session for novelty
+    //  channels, first occurrence per match for screen-entry.
+    if (!dedup_set.insert(dedup_key).second) return false;
+
+    //  Hourly rate cap (sliding window).
+    int64_t now = now_ms();
+    while (!m_capture_window_ms.empty() && now - m_capture_window_ms.front() > 3'600'000){
+        m_capture_window_ms.pop_front();
+    }
+    uint32_t cap = AUTO_CAPTURE_MAX_PER_HOUR;
+    if (cap > 0 && m_capture_window_ms.size() >= cap){
+        logger.log(
+            "auto-capture: hourly cap (" + std::to_string(cap) + ") hit; skipping " + reason,
+            COLOR_ORANGE
+        );
+        //  Roll back the dedup add so we'll try again next time the window
+        //  has room. Otherwise a one-time burst would burn this slot forever.
+        dedup_set.erase(dedup_key);
+        return false;
+    }
+
+    std::string dir = AUTO_CAPTURE_DIR;
+    if (dir.empty()){
+        logger.log("auto-capture: AUTO_CAPTURE_DIR empty; skipping", COLOR_RED);
+        dedup_set.erase(dedup_key);
+        return false;
+    }
+    if (dir.back() == '/') dir.pop_back();
+
+    std::string base = ts_filename_part() + "-" + slugify_for_filename(reason + "-" + dedup_key);
+    std::string png_path = dir + "/" + base + ".png";
+    std::string json_path = dir + "/" + base + ".json";
+
+    if (!screen.save(png_path)){
+        logger.log("auto-capture: failed to save " + png_path, COLOR_RED);
+        dedup_set.erase(dedup_key);
+        return false;
+    }
+
+    metadata["reason"] = reason;
+    metadata["dedup_key"] = dedup_key;
+    metadata["ts_ms"] = (int64_t)now;
+    {
+        std::ofstream js(json_path);
+        if (js){
+            js << metadata.dump();
+        }
+    }
+
+    m_capture_window_ms.push_back(now);
+    logger.log("auto-capture: " + base + ".png", COLOR_GREEN);
+    return true;
 }
 
 
@@ -429,6 +574,21 @@ void LiveDetectorTrace::run_ability_item_reader(Logger& logger, const ImageViewR
     out["side"] = r.side;
     out["fresh"] = fresh;
     mark("AbilityItemReader", "ok", std::move(out));
+
+    //  Auto-capture: first occurrence of each (kind, name) per session.
+    if (fresh && !r.name.empty()){
+        std::string key = r.kind + ":" + r.name;
+        JsonObject meta;
+        meta["channel"] = std::string("ability_item");
+        meta["kind"] = r.kind;
+        meta["name"] = r.name;
+        if (!r.pokemon.empty()) meta["pokemon"] = r.pokemon;
+        if (!r.side.empty())    meta["side"] = r.side;
+        meta["raw_text"] = r.raw_text;
+        maybe_capture(logger, screen,
+            "novel-ability-item", key,
+            m_seen_ability_items, std::move(meta));
+    }
 }
 
 
@@ -468,6 +628,21 @@ void LiveDetectorTrace::run_battle_log_reader(Logger& logger, const ImageViewRGB
         && ev.type != BattleLogEventType::OTHER)
     {
         m_tracker.update_from_log(ev);
+
+        //  Auto-capture: first occurrence of each event_type per session.
+        //  Coarser than per-line so we don't capture every MOVE_USED, but
+        //  catches the rare events (ABILITY_CHANGE, TRANSFORM, FIELD_EFFECT,
+        //  PRIMAL, etc.) we'd want labeled.
+        std::string evname = event_type_to_string(ev.type);
+        JsonObject meta;
+        meta["channel"] = std::string("battle_log");
+        meta["event_type"] = evname;
+        meta["raw_text"] = ev.raw_text;
+        if (!ev.pokemon.empty()) meta["pokemon"] = ev.pokemon;
+        if (!ev.move.empty())    meta["move"] = ev.move;
+        maybe_capture(logger, screen,
+            "novel-event-type", evname,
+            m_seen_log_event_types, std::move(meta));
     }
 
     mark("BattleLogReader", "ok", std::move(out));
@@ -502,6 +677,23 @@ void LiveDetectorTrace::run_battle_screen(Logger& logger, const ImageViewRGB32& 
         bool any = !hud.opponents[0].species.empty() || !hud.opponents[1].species.empty()
                 || hud.opponents[0].hp_pct > 0 || hud.own[0].hp_pct > 0;
         mark("BattleHUDReader", any ? "ok" : "error", std::move(out));
+
+        //  Auto-capture: first time we see each opp species this session.
+        //  Skips non-ASCII / nicknamed reads (those need sprite-match path).
+        for (uint8_t i = 0; i < 2; i++){
+            const std::string& sp = hud.opponents[i].species;
+            if (sp.empty()) continue;
+            bool ascii = true;
+            for (unsigned char c : sp){ if (c >= 128){ ascii = false; break; } }
+            if (!ascii) continue;
+            JsonObject meta;
+            meta["channel"] = std::string("opp_species");
+            meta["species"] = sp;
+            meta["slot"] = (int64_t)i;
+            maybe_capture(logger, screen,
+                "novel-opp-species", sp,
+                m_seen_opp_species, std::move(meta));
+        }
     }
 
     //  Pokeball alive-mask — both sides, all 6 slots.
@@ -627,6 +819,11 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
     m_prev_log_text.clear();
     m_prev_ability_item_text.clear();
     m_match_in_progress = false;
+    m_seen_log_event_types.clear();
+    m_seen_opp_species.clear();
+    m_seen_ability_items.clear();
+    m_captured_screen_entries.clear();
+    m_capture_window_ms.clear();
     uint64_t seq = 0;
 
     //  Seed own-team from Showdown paste (canonical source per
@@ -698,7 +895,11 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
             m_tracker.reset();
             m_tracker.set_mode(m_mode);
             m_prev_log_text.clear();
-    m_prev_ability_item_text.clear();
+            m_prev_ability_item_text.clear();
+            //  Per-match dedup — re-arm screen-entry captures so we get a
+            //  fresh target_select / team_select snapshot on each new match.
+            //  Other seen sets are session-scoped and survive matches.
+            m_captured_screen_entries.clear();
             //  Re-seed own team from paste so it survives the reset.
             std::string paste = OWN_TEAM_PASTE;
             if (!paste.empty()){
@@ -708,6 +909,20 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
         }
         if (screen == "post_match" || screen == "result_screen"){
             m_match_in_progress = false;
+        }
+
+        //  Auto-capture: under-labeled screen entries (transition INTO the
+        //  screen, not while we sit on it). Reset per match, so re-entering
+        //  target_select on the next turn captures again only if we haven't
+        //  in this match.
+        if ((screen == "target_select" || screen == "team_select")
+            && screen != m_prev_screen)
+        {
+            JsonObject meta;
+            meta["screen"] = screen;
+            maybe_capture(env.console, snapshot,
+                "screen-entry", screen,
+                m_captured_screen_entries, std::move(meta));
         }
 
         //  Run readers for whatever screen we're on.

@@ -19,11 +19,14 @@
 #ifndef PokemonAutomation_PokemonChampions_LiveDetectorTrace_H
 #define PokemonAutomation_PokemonChampions_LiveDetectorTrace_H
 
+#include <deque>
 #include <map>
+#include <set>
 #include <string>
 
 #include "Common/Cpp/Json/JsonObject.h"
 #include "Common/Cpp/Json/JsonValue.h"
+#include "Common/Cpp/Options/BooleanCheckBoxOption.h"
 #include "Common/Cpp/Options/SimpleIntegerOption.h"
 #include "Common/Cpp/Options/StringOption.h"
 #include "Common/Cpp/Options/TextEditOption.h"
@@ -107,6 +110,24 @@ private:
     //  prior raw text so a single overlay only fires once.
     void run_ability_item_reader(Logger& logger, const ImageViewRGB32& screen);
 
+    //  ── Auto-capture helpers ──
+    //  Snapshot the current frame to AUTO_CAPTURE_DIR with a sidecar JSON
+    //  if (a) auto-capture is on, (b) we're under the hourly cap, and
+    //  (c) the reason isn't already in the dedup set for that channel.
+    //  Returns true iff a file was written.
+    bool maybe_capture(
+        Logger& logger,
+        const ImageViewRGB32& screen,
+        const std::string& reason,
+        const std::string& dedup_key,
+        std::set<std::string>& dedup_set,
+        JsonObject metadata
+    );
+
+    //  Cheap, OCR-noise-resistant fingerprint for raw battle-log text.
+    //  Lowercase, ASCII-alnum only, first 60 chars.
+    static std::string fingerprint_raw_text(const std::string& raw);
+
     //  Mark every WIP / unavailable entry with its declared status (called
     //  once at registry init; thereafter their status is preserved).
     void declare_wip_entries();
@@ -128,6 +149,16 @@ private:
     //  own boxes, MovesAndMoreReader) is fallback / WIP only.
     TextEditOption OWN_TEAM_PASTE;
 
+    //  ── Auto-capture options ──
+    //  Off by default. When on, the program drops PNG + sidecar JSON into
+    //  AUTO_CAPTURE_DIR for screens / readouts that look novel relative to
+    //  what's already been seen this session. Designed for live play —
+    //  feeds the dashboard inbox triage flow instead of the video-dump
+    //  pipeline.
+    BooleanCheckBoxOption ENABLE_AUTO_CAPTURE;
+    StringOption AUTO_CAPTURE_DIR;
+    SimpleIntegerOption<uint32_t> AUTO_CAPTURE_MAX_PER_HOUR;
+
     //  ── State ──
     BattleStateTracker m_tracker;
     BattleMode m_mode = BattleMode::UNKNOWN;
@@ -146,6 +177,22 @@ private:
 
     //  Same dedup pattern for the ability/item reveal overlay.
     std::string m_prev_ability_item_text;
+
+    //  ── Auto-capture state ──
+    //  Per-channel "seen this session" sets so each novel readout fires at
+    //  most one capture. Keys are channel-specific:
+    //    log:   "<event_type>"  (one capture per first occurrence of each
+    //                            BattleLogEventType this session)
+    //    opp:   "<species>"     (HUDReader.opponent_species)
+    //    abil:  "<kind>:<name>" (AbilityItemReader)
+    //    enter: "<screen>"      (one capture per screen entry, reset per match)
+    std::set<std::string> m_seen_log_event_types;
+    std::set<std::string> m_seen_opp_species;
+    std::set<std::string> m_seen_ability_items;
+    std::set<std::string> m_captured_screen_entries;
+
+    //  Sliding hourly window for the rate cap.
+    std::deque<int64_t> m_capture_window_ms;
 };
 
 
