@@ -610,11 +610,13 @@ void BattleHUDReader::init_boxes(){
     m_own_name_boxes[1] = ImageFloatBox(0.2901, 0.8705, 0.0835, 0.0267);
 
     //  PP boxes — right edge of each move pill (visible on the move
-    //  select screen, not the action menu).
-    const double PP_X      = 0.927;
-    const double PP_WIDTH  = 0.057;
-    const double PP_HEIGHT = 0.051;
-    const double PP_Y[4] = { 0.500, 0.620, 0.741, 0.861 };
+    //  select screen, not the action menu). Tightened 2026-05-05 in the
+    //  PP gallery view: trimmed top + right + left to drop the white arc
+    //  border that was reading as a "7" on slot 0. Bottom edge unchanged.
+    const double PP_X      = 0.932;
+    const double PP_WIDTH  = 0.042;
+    const double PP_HEIGHT = 0.043;
+    const double PP_Y[4] = { 0.508, 0.628, 0.749, 0.869 };
     for (size_t i = 0; i < 4; i++){
         m_pp_boxes[i] = ImageFloatBox(PP_X, PP_Y[i], PP_WIDTH, PP_HEIGHT);
     }
