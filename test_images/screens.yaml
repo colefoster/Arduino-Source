@@ -52,7 +52,10 @@ screens:
   team_preview_locked_in:
     description: "All selections made, Standing By pills visible on both sides."
     transitions_to: [action_menu]
-    detectors: [TeamPreviewDetector, PreparingForBattleDetector]
+    #  TeamPreviewDetector OCRs 'Select 4 Pokemon...' which only appears on
+    #  the *selecting* variant; PreparingForBattleDetector covers locked-in.
+    #  Confirmed 2026-05-03 — see WHATS_NEXT.md shipped log.
+    detectors: [PreparingForBattleDetector]
     readers:
       TeamPreviewReader:
         fields:
@@ -105,7 +108,12 @@ screens:
   move_select:
     description: "4-move panel active. PP visible. Mega evo toggle possible. Singles or doubles."
     transitions_to: [target_select, action_menu]
-    detectors: [MoveSelectDetector, MegaEvolveDetector]
+    #  MegaEvolveDetector is intentionally not listed here. It's not a
+    #  screen-classification detector — it answers "is the Mega Evolve
+    #  toggle pill visible on this move_select frame?", which is only
+    #  true when the active mon can mega-evolve. It's run by the move
+    #  loop / LiveDetectorTrace explicitly, not by the screen cascade.
+    detectors: [MoveSelectDetector]
     readers:
       MoveNameReader:
         fields:
@@ -162,7 +170,7 @@ screens:
   target_select:
     description: "Target selection modal after picking a move in doubles. Each potential target (2 opp + 2 own) has a colored selector strip (yellow/green = targeted, red/blue = not) and an effectiveness label. Each own active mon has its move name shown."
     transitions_to: [action_menu]
-    detectors: []
+    detectors: [TargetSelectDetector]
     readers:
       TargetSelectReader:
         fields:

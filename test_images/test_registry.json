@@ -38,6 +38,9 @@
     "MoveSelectDetector": [
       "move_select"
     ],
+    "TargetSelectDetector": [
+      "target_select"
+    ],
     "ResultScreenDetector": [
       "result_screen"
     ],
@@ -98,31 +101,31 @@
             "type": "array",
             "items": "string",
             "length": 2,
-            "description": "Slot 0 (left), slot 1 (right). Singles: leave slot 1 blank."
+            "description": "Slot 0 (left/center), slot 1 (right). Singles uses slot 1 only; leave slot 0 blank."
           },
           "opponent_hp_pct": {
             "type": "array",
             "items": "int",
             "length": 2,
-            "description": "Slot 0 (left), slot 1 (right). Singles: leave slot 1 blank."
+            "description": "Slot 0 (left/center), slot 1 (right). Singles uses slot 1 only; leave slot 0 blank."
           },
           "own_species": {
             "type": "array",
             "items": "string",
             "length": 2,
-            "description": "Slot 0 (left), slot 1 (right). Singles: leave slot 1 blank."
+            "description": "Slot 0 (left/center), slot 1 (right). Singles uses slot 1 only; leave slot 0 blank."
           },
           "own_hp_current": {
             "type": "array",
             "items": "int",
             "length": 2,
-            "description": "Current HP per slot. Slot 0 (left), slot 1 (right). Singles: leave slot 1 blank."
+            "description": "Current HP per slot. Slot 0 (left/center), slot 1 (right). Singles uses slot 1 only."
           },
           "own_hp_max": {
             "type": "array",
             "items": "int",
             "length": 2,
-            "description": "Max HP per slot. Slot 0 (left), slot 1 (right). Singles: leave slot 1 blank."
+            "description": "Max HP per slot. Slot 0 (left/center), slot 1 (right). Singles uses slot 1 only."
           }
         },
         "move_select": {
@@ -130,31 +133,37 @@
             "type": "array",
             "items": "string",
             "length": 2,
-            "description": "Slot 0 (left), slot 1 (right). Singles: leave slot 1 blank."
+            "description": "Slot 0 (left/center), slot 1 (right). Singles uses slot 1 only; leave slot 0 blank."
           },
           "opponent_hp_pct": {
             "type": "array",
             "items": "int",
             "length": 2,
-            "description": "Slot 0 (left), slot 1 (right). Singles: leave slot 1 blank."
+            "description": "Slot 0 (left/center), slot 1 (right). Singles uses slot 1 only; leave slot 0 blank."
           },
           "own_species": {
             "type": "array",
             "items": "string",
             "length": 2,
-            "description": "Slot 0 (left), slot 1 (right). Singles: leave slot 1 blank."
+            "description": "Slot 0 (left/center), slot 1 (right). Singles uses slot 1 only; leave slot 0 blank."
           },
           "own_hp_current": {
             "type": "array",
             "items": "int",
             "length": 2,
-            "description": "Current HP per slot. Slot 0 (left), slot 1 (right). Singles: leave slot 1 blank."
+            "description": "Current HP per slot. Slot 0 (left/center), slot 1 (right). Singles uses slot 1 only."
           },
           "own_hp_max": {
             "type": "array",
             "items": "int",
             "length": 2,
-            "description": "Max HP per slot. Slot 0 (left), slot 1 (right). Singles: leave slot 1 blank."
+            "description": "Max HP per slot. Slot 0 (left/center), slot 1 (right). Singles uses slot 1 only."
+          },
+          "move_pp_current": {
+            "type": "array",
+            "items": "int",
+            "length": 4,
+            "description": "Current PP per move slot 0..3 (top\u2192bottom). Move-select screen only; -1 elsewhere. Max is intentionally NOT tracked \u2014 it's static (derivable from move data)."
           }
         }
       }
@@ -196,23 +205,32 @@
     "TargetSelectReader": {
       "screens": {
         "target_select": {
-          "move": {
-            "type": "string"
-          },
-          "targets": {
+          "own_moves": {
             "type": "array",
-            "items": "string"
+            "items": "string",
+            "length": 2,
+            "description": "Move slug per own active slot (slot 0/1)."
           },
-          "target_hp": {
+          "opp_targeted": {
             "type": "array",
-            "items": "string"
+            "items": "bool",
+            "length": 2
           },
-          "effectiveness": {
+          "own_targeted": {
             "type": "array",
-            "items": "string"
+            "items": "bool",
+            "length": 2
           },
-          "selected_target": {
-            "type": "int"
+          "opp_effectiveness": {
+            "type": "array",
+            "items": "string",
+            "length": 2,
+            "description": "One of: super-effective, not-very-effective, no-effect, neutral. Empty if unread."
+          },
+          "own_effectiveness": {
+            "type": "array",
+            "items": "string",
+            "length": 2
           }
         }
       }
