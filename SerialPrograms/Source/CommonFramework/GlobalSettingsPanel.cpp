@@ -165,6 +165,15 @@ GlobalSettings::GlobalSettings()
         LockMode::UNLOCK_WHILE_RUNNING,
         false
     )
+    , VIDEO_PREVIEW_MAX_HEIGHT(
+        "<b>Max Video Preview Height (px):</b><br>"
+        "Cap the embedded video preview to this many pixels tall, so a "
+        "program panel fits more on screen at once. 0 = no cap. Takes "
+        "effect when a program panel is opened. The pop-out video window "
+        "is unaffected.",
+        LockMode::UNLOCK_WHILE_RUNNING,
+        0
+    )
     , KEYBOARD_CONTROLS_LAYOUT(
         CONSTRUCT_TOKEN,
         "<b>System Keyboard Layout:</b><br>"
@@ -251,6 +260,7 @@ GlobalSettings::GlobalSettings()
     PA_ADD_OPTION(WINDOW_SIZE);
     PA_ADD_OPTION(LOG_WINDOW_SIZE);
     PA_ADD_OPTION(LOG_WINDOW_STARTUP);
+    PA_ADD_OPTION(VIDEO_PREVIEW_MAX_HEIGHT);
 
     PA_ADD_OPTION(KEYBOARD_CONTROLS_LAYOUT);
     PA_ADD_OPTION(STREAM_HISTORY);

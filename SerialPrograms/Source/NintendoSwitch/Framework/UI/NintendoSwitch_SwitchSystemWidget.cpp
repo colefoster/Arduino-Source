@@ -13,6 +13,7 @@
 #include "Common/Cpp/Json/JsonValue.h"
 #include "Common/Qt/CollapsibleGroupBox.h"
 #include "CommonFramework/Globals.h"
+#include "CommonFramework/GlobalSettingsPanel.h"
 #include "CommonFramework/AudioPipeline/UI/AudioSelectorWidget.h"
 #include "CommonFramework/AudioPipeline/UI/AudioDisplayWidget.h"
 #include "CommonFramework/VideoPipeline/UI/VideoSourceSelectorWidget.h"
@@ -72,6 +73,10 @@ SwitchSystemWidget::SwitchSystemWidget(
             m_session.video_session(),
             m_session.overlay_session()
         );
+        uint32_t max_h = GlobalSettings::instance().VIDEO_PREVIEW_MAX_HEIGHT;
+        if (max_h > 0){
+            m_video_display->setMaximumHeight((int)max_h);
+        }
         video_holder->addWidget(m_video_display);
     }
     {

@@ -13,7 +13,7 @@
 #include "Common/Cpp/Options/StaticTextOption.h"
 #include "Common/Cpp/Options/BooleanCheckBoxOption.h"
 #include "Common/Cpp/Options/ButtonOption.h"
-//#include "Common/Cpp/Options/SimpleIntegerOption.h"
+#include "Common/Cpp/Options/SimpleIntegerOption.h"
 #include "Common/Cpp/Options/StringOption.h"
 #include "CommonFramework/Panels/SettingsPanel.h"
 #include "CommonFramework/Panels/PanelTools.h"
@@ -127,6 +127,12 @@ public:
     Pimpl<ResolutionOption> WINDOW_SIZE;
     Pimpl<ResolutionOption> LOG_WINDOW_SIZE;
     BooleanCheckBoxOption LOG_WINDOW_STARTUP;
+
+    //  Per-program embedded video preview height clamp (pixels). 0 = no
+    //  clamp (current behavior). Applied at panel construction time;
+    //  re-open the program panel for changes to take effect. The detached
+    //  pop-out window is unaffected.
+    SimpleIntegerOption<uint32_t> VIDEO_PREVIEW_MAX_HEIGHT;
 
     Pimpl<KeyboardLayoutOption> KEYBOARD_CONTROLS_LAYOUT;
 
