@@ -1,5 +1,21 @@
 {
   "opp": {
+    "archaludon": {
+      "box": [
+        0.568,
+        0.0499,
+        0.0563,
+        0.0889
+      ],
+      "count": 1,
+      "refs": [
+        {
+          "ref": "opp__archaludon__20260505-game-video-20260505-153202484050_0317__slot0.png",
+          "slot": 0,
+          "source_frame": "20260505-game-video-20260505-153202484050_0317.png"
+        }
+      ]
+    },
     "charizard": {
       "box": [
         0.568,
@@ -28,7 +44,7 @@
         0.0563,
         0.0889
       ],
-      "count": 10,
+      "count": 20,
       "refs": [
         {
           "ref": "opp__dragonite__20260428-090442837075__slot1.png",
@@ -51,9 +67,59 @@
           "source_frame": "20260428-090600234812.png"
         },
         {
+          "ref": "opp__dragonite__20260423-183545906705__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-183545906705.png"
+        },
+        {
+          "ref": "opp__dragonite__20260423-183548953675__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-183548953675.png"
+        },
+        {
+          "ref": "opp__dragonite__20260423-183552945935__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-183552945935.png"
+        },
+        {
+          "ref": "opp__dragonite__20260423-183555327020__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-183555327020.png"
+        },
+        {
           "ref": "opp__dragonite__20260423-183737819287__slot0.png",
           "slot": 0,
           "source_frame": "20260423-183737819287.png"
+        },
+        {
+          "ref": "opp__dragonite__20260423-183744870258__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-183744870258.png"
+        },
+        {
+          "ref": "opp__dragonite__20260423-183749611704__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-183749611704.png"
+        },
+        {
+          "ref": "opp__dragonite__20260423-183752637421__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-183752637421.png"
+        },
+        {
+          "ref": "opp__dragonite__20260423-183756280783__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-183756280783.png"
+        },
+        {
+          "ref": "opp__dragonite__20260423-183911434513__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-183911434513.png"
+        },
+        {
+          "ref": "opp__dragonite__20260423-183917790913__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-183917790913.png"
         },
         {
           "ref": "opp__dragonite__20260428-090451579888__slot1.png",
@@ -301,7 +367,7 @@
         0.0563,
         0.0889
       ],
-      "count": 18,
+      "count": 20,
       "refs": [
         {
           "ref": "opp__gengar__20260423-150121863579__slot0.png",
@@ -367,6 +433,16 @@
           "ref": "opp__gengar__20260423-183917790913__slot1.png",
           "slot": 1,
           "source_frame": "20260423-183917790913.png"
+        },
+        {
+          "ref": "opp__gengar__20260427-132116660246__slot0.png",
+          "slot": 0,
+          "source_frame": "20260427-132116660246.png"
+        },
+        {
+          "ref": "opp__gengar__20260427-132125840378__slot0.png",
+          "slot": 0,
+          "source_frame": "20260427-132125840378.png"
         },
         {
           "ref": "opp__gengar__20260427-132607311130__slot1.png",
@@ -549,6 +625,22 @@
         }
       ]
     },
+    "pelipper": {
+      "box": [
+        0.568,
+        0.0499,
+        0.0563,
+        0.0889
+      ],
+      "count": 1,
+      "refs": [
+        {
+          "ref": "opp__pelipper__20260505-game-video-20260505-153202484050_0317__slot1.png",
+          "slot": 1,
+          "source_frame": "20260505-game-video-20260505-153202484050_0317.png"
+        }
+      ]
+    },
     "sinistcha": {
       "box": [
         0.568,
@@ -556,7 +648,7 @@
         0.0563,
         0.0889
       ],
-      "count": 3,
+      "count": 5,
       "refs": [
         {
           "ref": "opp__sinistcha__screenshot-20260427-132603218579__slot0.png",
@@ -572,6 +664,16 @@
           "ref": "opp__sinistcha__20260427-132514528548__slot0.png",
           "slot": 0,
           "source_frame": "20260427-132514528548.png"
+        },
+        {
+          "ref": "opp__sinistcha__20260427-132607311130__slot0.png",
+          "slot": 0,
+          "source_frame": "20260427-132607311130.png"
+        },
+        {
+          "ref": "opp__sinistcha__20260427-132613234570__slot0.png",
+          "slot": 0,
+          "source_frame": "20260427-132613234570.png"
         }
       ]
     },
@@ -799,7 +901,7 @@
         0.0563,
         0.0889
       ],
-      "count": 5,
+      "count": 8,
       "refs": [
         {
           "ref": "opp__whimsicott__20260423-183421609860__slot0.png",
@@ -825,6 +927,21 @@
           "ref": "opp__whimsicott__20260423-183336832781__slot0.png",
           "slot": 0,
           "source_frame": "20260423-183336832781.png"
+        },
+        {
+          "ref": "opp__whimsicott__20260423-183340823259__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-183340823259.png"
+        },
+        {
+          "ref": "opp__whimsicott__20260423-183432132782__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-183432132782.png"
+        },
+        {
+          "ref": "opp__whimsicott__20260423-183434932260__slot0.png",
+          "slot": 0,
+          "source_frame": "20260423-183434932260.png"
         }
       ]
     }
@@ -832,7 +949,7 @@
   "own": {
     "aggron": {
       "box": [
-        0.0245,
+        0.024,
         0.8718,
         0.0563,
         0.0889
@@ -886,9 +1003,9 @@
         }
       ]
     },
-    "beedrill": {
+    "archaludon": {
       "box": [
-        0.0245,
+        0.024,
         0.8718,
         0.0563,
         0.0889
@@ -896,156 +1013,239 @@
       "count": 1,
       "refs": [
         {
-          "ref": "own__beedrill__20260423-183737819287__slot1.png",
+          "ref": "own__archaludon__20260505-game-video-20260505-153202484050_0317__slot1.png",
           "slot": 1,
-          "source_frame": "20260423-183737819287.png"
+          "source_frame": "20260505-game-video-20260505-153202484050_0317.png"
         }
       ]
     },
-    "charizard": {
+    "beedrill": {
       "box": [
-        0.0245,
+        0.024,
         0.8718,
         0.0563,
         0.0889
       ],
-      "count": 26,
+      "count": 5,
       "refs": [
         {
-          "ref": "own__charizard__20260423-150121863579__slot1.png",
+          "ref": "own__beedrill__20260423-183737819287__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-183737819287.png"
+        },
+        {
+          "ref": "own__beedrill__20260423-183744870258__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-183744870258.png"
+        },
+        {
+          "ref": "own__beedrill__20260423-183749611704__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-183749611704.png"
+        },
+        {
+          "ref": "own__beedrill__20260423-183752637421__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-183752637421.png"
+        },
+        {
+          "ref": "own__beedrill__20260423-183756280783__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-183756280783.png"
+        }
+      ]
+    },
+    "beedrill-mega": {
+      "box": [
+        0.024,
+        0.8718,
+        0.0563,
+        0.0889
+      ],
+      "count": 2,
+      "refs": [
+        {
+          "ref": "own__beedrill-mega__20260423-183911434513__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-183911434513.png"
+        },
+        {
+          "ref": "own__beedrill-mega__20260423-183917790913__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-183917790913.png"
+        }
+      ]
+    },
+    "charizard-shiny": {
+      "box": [
+        0.024,
+        0.8718,
+        0.0563,
+        0.0889
+      ],
+      "count": 7,
+      "refs": [
+        {
+          "ref": "own__charizard-shiny__20260423-150121863579__slot1.png",
           "slot": 1,
           "source_frame": "20260423-150121863579.png"
         },
         {
-          "ref": "own__charizard__20260423-150128027036__slot1.png",
+          "ref": "own__charizard-shiny__20260423-150128027036__slot1.png",
           "slot": 1,
           "source_frame": "20260423-150128027036.png"
         },
         {
-          "ref": "own__charizard__20260423-150240891066__slot1.png",
-          "slot": 1,
-          "source_frame": "20260423-150240891066.png"
-        },
-        {
-          "ref": "own__charizard__20260423-150256754355__slot1.png",
-          "slot": 1,
-          "source_frame": "20260423-150256754355.png"
-        },
-        {
-          "ref": "own__charizard__20260423-150347231746__slot1.png",
-          "slot": 1,
-          "source_frame": "20260423-150347231746.png"
-        },
-        {
-          "ref": "own__charizard__20260423-150354427178__slot1.png",
-          "slot": 1,
-          "source_frame": "20260423-150354427178.png"
-        },
-        {
-          "ref": "own__charizard__20260423-150434947219__slot1.png",
-          "slot": 1,
-          "source_frame": "20260423-150434947219.png"
-        },
-        {
-          "ref": "own__charizard__20260423-150440133636__slot1.png",
-          "slot": 1,
-          "source_frame": "20260423-150440133636.png"
-        },
-        {
-          "ref": "own__charizard__20260423-150454443057__slot1.png",
-          "slot": 1,
-          "source_frame": "20260423-150454443057.png"
-        },
-        {
-          "ref": "own__charizard__20260423-150503460243__slot1.png",
-          "slot": 1,
-          "source_frame": "20260423-150503460243.png"
-        },
-        {
-          "ref": "own__charizard__screenshot-20260427-132603218579__slot1.png",
-          "slot": 1,
-          "source_frame": "screenshot-20260427-132603218579.png"
-        },
-        {
-          "ref": "own__charizard__20260423-150123581184__slot1.png",
+          "ref": "own__charizard-shiny__20260423-150123581184__slot1.png",
           "slot": 1,
           "source_frame": "20260423-150123581184.png"
         },
         {
-          "ref": "own__charizard__20260423-150129725676__slot1.png",
+          "ref": "own__charizard-shiny__20260423-150129725676__slot1.png",
           "slot": 1,
           "source_frame": "20260423-150129725676.png"
         },
         {
-          "ref": "own__charizard__20260423-150132024252__slot1.png",
+          "ref": "own__charizard-shiny__20260423-150132024252__slot1.png",
           "slot": 1,
           "source_frame": "20260423-150132024252.png"
         },
         {
-          "ref": "own__charizard__20260423-150242947838__slot1.png",
-          "slot": 1,
-          "source_frame": "20260423-150242947838.png"
-        },
-        {
-          "ref": "own__charizard__20260423-150245612449__slot1.png",
-          "slot": 1,
-          "source_frame": "20260423-150245612449.png"
-        },
-        {
-          "ref": "own__charizard__20260423-150248328346__slot1.png",
-          "slot": 1,
-          "source_frame": "20260423-150248328346.png"
-        },
-        {
-          "ref": "own__charizard__20260423-150252130334__slot1.png",
-          "slot": 1,
-          "source_frame": "20260423-150252130334.png"
-        },
-        {
-          "ref": "own__charizard__20260423-150258802706__slot1.png",
-          "slot": 1,
-          "source_frame": "20260423-150258802706.png"
-        },
-        {
-          "ref": "own__charizard__20260423-150349250038__slot1.png",
-          "slot": 1,
-          "source_frame": "20260423-150349250038.png"
-        },
-        {
-          "ref": "own__charizard__20260423-150356457412__slot1.png",
-          "slot": 1,
-          "source_frame": "20260423-150356457412.png"
-        },
-        {
-          "ref": "own__charizard__20260423-150359121231__slot1.png",
-          "slot": 1,
-          "source_frame": "20260423-150359121231.png"
-        },
-        {
-          "ref": "own__charizard__20260423-150456793092__slot1.png",
-          "slot": 1,
-          "source_frame": "20260423-150456793092.png"
-        },
-        {
-          "ref": "own__charizard__20260423-150459402515__slot1.png",
-          "slot": 1,
-          "source_frame": "20260423-150459402515.png"
-        },
-        {
-          "ref": "own__charizard__20260427-132508656455__slot1.png",
+          "ref": "own__charizard-shiny__20260427-132508656455__slot1.png",
           "slot": 1,
           "source_frame": "20260427-132508656455.png"
         },
         {
-          "ref": "own__charizard__20260427-132514528548__slot1.png",
+          "ref": "own__charizard-shiny__20260427-132514528548__slot1.png",
           "slot": 1,
           "source_frame": "20260427-132514528548.png"
         }
       ]
     },
+    "charizard-shiny-mega-y": {
+      "box": [
+        0.024,
+        0.8718,
+        0.0563,
+        0.0889
+      ],
+      "count": 22,
+      "refs": [
+        {
+          "ref": "own__charizard-shiny-mega-y__20260423-150240891066__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150240891066.png"
+        },
+        {
+          "ref": "own__charizard-shiny-mega-y__20260423-150256754355__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150256754355.png"
+        },
+        {
+          "ref": "own__charizard-shiny-mega-y__20260423-150347231746__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150347231746.png"
+        },
+        {
+          "ref": "own__charizard-shiny-mega-y__20260423-150354427178__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150354427178.png"
+        },
+        {
+          "ref": "own__charizard-shiny-mega-y__20260423-150434947219__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150434947219.png"
+        },
+        {
+          "ref": "own__charizard-shiny-mega-y__20260423-150440133636__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150440133636.png"
+        },
+        {
+          "ref": "own__charizard-shiny-mega-y__20260423-150454443057__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150454443057.png"
+        },
+        {
+          "ref": "own__charizard-shiny-mega-y__20260423-150503460243__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150503460243.png"
+        },
+        {
+          "ref": "own__charizard-shiny-mega-y__screenshot-20260427-132603218579__slot1.png",
+          "slot": 1,
+          "source_frame": "screenshot-20260427-132603218579.png"
+        },
+        {
+          "ref": "own__charizard-shiny-mega-y__20260423-150242947838__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150242947838.png"
+        },
+        {
+          "ref": "own__charizard-shiny-mega-y__20260423-150245612449__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150245612449.png"
+        },
+        {
+          "ref": "own__charizard-shiny-mega-y__20260423-150248328346__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150248328346.png"
+        },
+        {
+          "ref": "own__charizard-shiny-mega-y__20260423-150252130334__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150252130334.png"
+        },
+        {
+          "ref": "own__charizard-shiny-mega-y__20260423-150258802706__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150258802706.png"
+        },
+        {
+          "ref": "own__charizard-shiny-mega-y__20260423-150349250038__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150349250038.png"
+        },
+        {
+          "ref": "own__charizard-shiny-mega-y__20260423-150356457412__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150356457412.png"
+        },
+        {
+          "ref": "own__charizard-shiny-mega-y__20260423-150359121231__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150359121231.png"
+        },
+        {
+          "ref": "own__charizard-shiny-mega-y__20260423-150456793092__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150456793092.png"
+        },
+        {
+          "ref": "own__charizard-shiny-mega-y__20260423-150459402515__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-150459402515.png"
+        },
+        {
+          "ref": "own__charizard-shiny-mega-y__20260427-132607311130__slot1.png",
+          "slot": 1,
+          "source_frame": "20260427-132607311130.png"
+        },
+        {
+          "ref": "own__charizard-shiny-mega-y__20260427-132613234570__slot1.png",
+          "slot": 1,
+          "source_frame": "20260427-132613234570.png"
+        },
+        {
+          "ref": "own__charizard-shiny-mega-y__20260427-132703444544__slot1.png",
+          "slot": 1,
+          "source_frame": "20260427-132703444544.png"
+        }
+      ]
+    },
     "floette": {
       "box": [
-        0.0245,
+        0.024,
         0.8718,
         0.0563,
         0.0889
@@ -1126,12 +1326,12 @@
     },
     "gengar": {
       "box": [
-        0.0245,
+        0.024,
         0.8718,
         0.0563,
         0.0889
       ],
-      "count": 5,
+      "count": 12,
       "refs": [
         {
           "ref": "own__gengar__20260423-183421609860__slot1.png",
@@ -1157,17 +1357,52 @@
           "ref": "own__gengar__20260423-183336832781__slot1.png",
           "slot": 1,
           "source_frame": "20260423-183336832781.png"
+        },
+        {
+          "ref": "own__gengar__20260423-183340823259__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-183340823259.png"
+        },
+        {
+          "ref": "own__gengar__20260423-183432132782__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-183432132782.png"
+        },
+        {
+          "ref": "own__gengar__20260423-183434932260__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-183434932260.png"
+        },
+        {
+          "ref": "own__gengar__20260423-183545906705__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-183545906705.png"
+        },
+        {
+          "ref": "own__gengar__20260423-183548953675__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-183548953675.png"
+        },
+        {
+          "ref": "own__gengar__20260423-183552945935__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-183552945935.png"
+        },
+        {
+          "ref": "own__gengar__20260423-183555327020__slot1.png",
+          "slot": 1,
+          "source_frame": "20260423-183555327020.png"
         }
       ]
     },
     "incineroar": {
       "box": [
-        0.0245,
+        0.024,
         0.8718,
         0.0563,
         0.0889
       ],
-      "count": 13,
+      "count": 15,
       "refs": [
         {
           "ref": "own__incineroar__20260423-150121863579__slot0.png",
@@ -1233,12 +1468,22 @@
           "ref": "own__incineroar__20260423-150258802706__slot0.png",
           "slot": 0,
           "source_frame": "20260423-150258802706.png"
+        },
+        {
+          "ref": "own__incineroar__20260427-132116660246__slot1.png",
+          "slot": 1,
+          "source_frame": "20260427-132116660246.png"
+        },
+        {
+          "ref": "own__incineroar__20260427-132125840378__slot1.png",
+          "slot": 1,
+          "source_frame": "20260427-132125840378.png"
         }
       ]
     },
     "kingambit": {
       "box": [
-        0.0245,
+        0.024,
         0.8718,
         0.0563,
         0.0889
@@ -1259,7 +1504,7 @@
     },
     "meganium": {
       "box": [
-        0.0245,
+        0.024,
         0.8718,
         0.0563,
         0.0889
@@ -1330,7 +1575,7 @@
     },
     "palafin": {
       "box": [
-        0.0245,
+        0.024,
         0.8718,
         0.0563,
         0.0889
@@ -1351,7 +1596,7 @@
     },
     "sinistcha": {
       "box": [
-        0.0245,
+        0.024,
         0.8718,
         0.0563,
         0.0889
@@ -1437,7 +1682,7 @@
     },
     "sneasler": {
       "box": [
-        0.0245,
+        0.024,
         0.8718,
         0.0563,
         0.0889
@@ -1581,9 +1826,25 @@
         }
       ]
     },
+    "starmie": {
+      "box": [
+        0.024,
+        0.8718,
+        0.0563,
+        0.0889
+      ],
+      "count": 1,
+      "refs": [
+        {
+          "ref": "own__starmie__20260505-game-video-20260505-153202484050_0317__slot0.png",
+          "slot": 0,
+          "source_frame": "20260505-game-video-20260505-153202484050_0317.png"
+        }
+      ]
+    },
     "venusaur": {
       "box": [
-        0.0245,
+        0.024,
         0.8718,
         0.0563,
         0.0889
@@ -1664,25 +1925,36 @@
     },
     "victreebel": {
       "box": [
-        0.0245,
+        0.024,
         0.8718,
         0.0563,
         0.0889
       ],
-      "count": 3,
+      "count": 1,
       "refs": [
         {
           "ref": "own__victreebel__move_select__slot0.png",
           "slot": 0,
           "source_frame": "move_select.png"
-        },
+        }
+      ]
+    },
+    "victreebel-mega": {
+      "box": [
+        0.024,
+        0.8718,
+        0.0563,
+        0.0889
+      ],
+      "count": 2,
+      "refs": [
         {
-          "ref": "own__victreebel__move_select_slot2__slot0.png",
+          "ref": "own__victreebel-mega__move_select_slot2__slot0.png",
           "slot": 0,
           "source_frame": "move_select_slot2.png"
         },
         {
-          "ref": "own__victreebel__victreebel_kingambit_power-whip_sucker-punch_swords-dance_strength-sap__slot0.png",
+          "ref": "own__victreebel-mega__victreebel_kingambit_power-whip_sucker-punch_swords-dance_strength-sap__slot0.png",
           "slot": 0,
           "source_frame": "victreebel_kingambit_power-whip_sucker-punch_swords-dance_strength-sap.png"
         }
