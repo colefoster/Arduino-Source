@@ -46,5 +46,53 @@
         false
       ]
     }
+  },
+  "20260505-game2-video-20260505-153202484050_0099.png": {
+    "TargetSelectReader": {
+      "opp_effectiveness": [
+        null,
+        null
+      ],
+      "opp_targeted": [
+        "true",
+        "true"
+      ],
+      "own_effectiveness": [
+        null,
+        null
+      ],
+      "own_moves": [
+        "trick-room",
+        null
+      ],
+      "own_targeted": [
+        "true",
+        "true"
+      ]
+    }
+  },
+  "20260505-game2-video-20260505-153202484050_0161.png": {
+    "TargetSelectReader": {
+      "opp_effectiveness": [
+        "not-very-effective",
+        "neutral"
+      ],
+      "opp_targeted": [
+        "true",
+        "false"
+      ],
+      "own_effectiveness": [
+        null,
+        "not-very-effective"
+      ],
+      "own_moves": [
+        "zen-headbutt",
+        null
+      ],
+      "own_targeted": [
+        "false",
+        "false"
+      ]
+    }
   }
 }

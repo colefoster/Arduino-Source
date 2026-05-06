@@ -1,4 +1,24 @@
 {
+  "20260505-game2-video-20260505-153202484050_0032.png": {
+    "TeamPreviewReader": {
+      "opponent_species": [
+        "archaludon",
+        "gyarados",
+        "incineroar",
+        "meganium",
+        "pelipper",
+        "sneasler-shiny"
+      ],
+      "own_species": [
+        "archaludon",
+        "pelipper",
+        "starmie",
+        "sinistcha",
+        "garchomp",
+        "incineroar"
+      ]
+    }
+  },
   "screenshot-20260427-132030165558.png": {
     "TeamPreviewReader": {
       "opponent_species": [

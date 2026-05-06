@@ -22,7 +22,7 @@
       ],
       "own_species": [
         "incineroar",
-        "charizard"
+        "charizard-shiny"
       ],
       "own_species_shiny": [
         true,
@@ -65,7 +65,7 @@
       ],
       "own_species": [
         "incineroar",
-        "charizard"
+        "charizard-shiny"
       ],
       "own_species_shiny": [
         true,
@@ -108,7 +108,7 @@
       ],
       "own_species": [
         "incineroar",
-        "charizard"
+        "charizard-shiny"
       ],
       "own_species_shiny": [
         true,
@@ -133,6 +133,12 @@
       "slot": 0
     },
     "BattleHUDReader": {
+      "move_pp_current": [
+        null,
+        null,
+        null,
+        null
+      ],
       "opponent_hp_pct": [
         100,
         100
@@ -151,11 +157,7 @@
       ],
       "own_species": [
         "incineroar",
-        "charizard"
-      ],
-      "own_species_shiny": [
-        true,
-        true
+        "charizard-shiny-mega-y"
       ]
     },
     "MegaEvolveDetector": false,
@@ -176,6 +178,12 @@
       "slot": 0
     },
     "BattleHUDReader": {
+      "move_pp_current": [
+        null,
+        null,
+        null,
+        null
+      ],
       "opponent_hp_pct": [
         100,
         100
@@ -194,11 +202,7 @@
       ],
       "own_species": [
         "incineroar",
-        "charizard"
-      ],
-      "own_species_shiny": [
-        true,
-        true
+        "charizard-shiny-mega-y"
       ]
     },
     "MegaEvolveDetector": false,
@@ -237,7 +241,7 @@
       ],
       "own_species": [
         "incineroar",
-        "charizard"
+        "charizard-shiny-mega-y"
       ],
       "own_species_shiny": [
         true,
@@ -280,7 +284,7 @@
       ],
       "own_species": [
         "incineroar",
-        "charizard"
+        "charizard-shiny-mega-y"
       ],
       "own_species_shiny": [
         true,
@@ -323,7 +327,7 @@
       ],
       "own_species": [
         "incineroar",
-        "charizard"
+        "charizard-shiny-mega-y"
       ],
       "own_species_shiny": [
         true,
@@ -366,7 +370,7 @@
       ],
       "own_species": [
         "sneasler",
-        "charizard"
+        "charizard-shiny-mega-y"
       ],
       "own_species_shiny": [
         true,
@@ -409,7 +413,7 @@
       ],
       "own_species": [
         "sneasler",
-        "charizard"
+        "charizard-shiny-mega-y"
       ],
       "own_species_shiny": [
         true,
@@ -452,7 +456,7 @@
       ],
       "own_species": [
         "sneasler",
-        "charizard"
+        "charizard-shiny-mega-y"
       ],
       "own_species_shiny": [
         true,
@@ -491,7 +495,7 @@
       ],
       "own_species": [
         "sneasler",
-        "charizard"
+        "charizard-shiny-mega-y"
       ],
       "own_species_shiny": [
         true,
@@ -530,7 +534,7 @@
       ],
       "own_species": [
         "sneasler",
-        "charizard"
+        "charizard-shiny-mega-y"
       ],
       "own_species_shiny": [
         true,
@@ -680,20 +684,38 @@
     }
   },
   "20260423-183340823259.png": {
+    "ActiveHUDSlot": {
+      "slot": 1
+    },
     "BattleHUDReader": {
+      "move_pp_current": [
+        16,
+        12,
+        16,
+        8
+      ],
+      "opponent_hp_pct": [
+        100,
+        100
+      ],
       "opponent_species": [
-        "",
+        "whimsicott",
         "tyranitar"
+      ],
+      "own_hp_current": [
+        146,
+        137
+      ],
+      "own_hp_max": [
+        146,
+        137
       ],
       "own_species": [
         "sinistcha",
-        ""
-      ],
-      "own_species_shiny": [
-        false,
-        false
+        "gengar"
       ]
     },
+    "MegaEvolveDetector": false,
     "MoveNameReader": {
       "moves": [
         "shadow-ball",
@@ -707,20 +729,38 @@
     }
   },
   "20260423-183432132782.png": {
+    "ActiveHUDSlot": {
+      "slot": 0
+    },
     "BattleHUDReader": {
+      "move_pp_current": [
+        12,
+        16,
+        20,
+        15
+      ],
+      "opponent_hp_pct": [
+        50,
+        61
+      ],
       "opponent_species": [
-        "",
+        "whimsicott",
         "tyranitar"
+      ],
+      "own_hp_current": [
+        137,
+        129
+      ],
+      "own_hp_max": [
+        146,
+        137
       ],
       "own_species": [
         "sinistcha",
-        ""
-      ],
-      "own_species_shiny": [
-        false,
-        false
+        "gengar"
       ]
     },
+    "MegaEvolveDetector": false,
     "MoveNameReader": {
       "moves": [
         "energy-ball",
@@ -734,20 +774,38 @@
     }
   },
   "20260423-183434932260.png": {
+    "ActiveHUDSlot": {
+      "slot": 0
+    },
     "BattleHUDReader": {
+      "move_pp_current": [
+        12,
+        16,
+        20,
+        15
+      ],
+      "opponent_hp_pct": [
+        50,
+        61
+      ],
       "opponent_species": [
-        "",
+        "whimsicott",
         "tyranitar"
+      ],
+      "own_hp_current": [
+        137,
+        129
+      ],
+      "own_hp_max": [
+        146,
+        137
       ],
       "own_species": [
         "sinistcha",
-        ""
-      ],
-      "own_species_shiny": [
-        false,
-        false
+        "gengar"
       ]
     },
+    "MegaEvolveDetector": false,
     "MoveNameReader": {
       "moves": [
         "energy-ball",
@@ -761,20 +819,38 @@
     }
   },
   "20260423-183545906705.png": {
+    "ActiveHUDSlot": {
+      "slot": 0
+    },
     "BattleHUDReader": {
+      "move_pp_current": [
+        11,
+        16,
+        20,
+        15
+      ],
+      "opponent_hp_pct": [
+        100,
+        21
+      ],
       "opponent_species": [
-        "",
+        "dragonite",
         "tyranitar"
+      ],
+      "own_hp_current": [
+        20,
+        121
+      ],
+      "own_hp_max": [
+        146,
+        137
       ],
       "own_species": [
         "sinistcha",
-        ""
-      ],
-      "own_species_shiny": [
-        false,
-        false
+        "gengar"
       ]
     },
+    "MegaEvolveDetector": false,
     "MoveNameReader": {
       "moves": [
         "energy-ball",
@@ -788,20 +864,38 @@
     }
   },
   "20260423-183548953675.png": {
+    "ActiveHUDSlot": {
+      "slot": 0
+    },
     "BattleHUDReader": {
+      "move_pp_current": [
+        11,
+        16,
+        20,
+        15
+      ],
+      "opponent_hp_pct": [
+        100,
+        21
+      ],
       "opponent_species": [
-        "",
+        "dragonite",
         "tyranitar"
+      ],
+      "own_hp_current": [
+        20,
+        121
+      ],
+      "own_hp_max": [
+        146,
+        137
       ],
       "own_species": [
         "sinistcha",
-        ""
-      ],
-      "own_species_shiny": [
-        false,
-        false
+        "gengar"
       ]
     },
+    "MegaEvolveDetector": false,
     "MoveNameReader": {
       "moves": [
         "energy-ball",
@@ -815,20 +909,38 @@
     }
   },
   "20260423-183552945935.png": {
+    "ActiveHUDSlot": {
+      "slot": 1
+    },
     "BattleHUDReader": {
+      "move_pp_current": [
+        16,
+        11,
+        15,
+        8
+      ],
+      "opponent_hp_pct": [
+        100,
+        21
+      ],
       "opponent_species": [
-        "",
+        "dragonite",
         "tyranitar"
+      ],
+      "own_hp_current": [
+        20,
+        121
+      ],
+      "own_hp_max": [
+        146,
+        137
       ],
       "own_species": [
         "sinistcha",
-        ""
-      ],
-      "own_species_shiny": [
-        false,
-        false
+        "gengar"
       ]
     },
+    "MegaEvolveDetector": false,
     "MoveNameReader": {
       "moves": [
         "shadow-ball",
@@ -836,21 +948,41 @@
         "icy-wind",
         "destiny-bond"
       ]
+    },
+    "MoveSelectCursorSlot": {
+      "slot": -1
     }
   },
   "20260423-183555327020.png": {
+    "ActiveHUDSlot": {
+      "slot": 1
+    },
     "BattleHUDReader": {
+      "move_pp_current": [
+        16,
+        11,
+        15,
+        8
+      ],
+      "opponent_hp_pct": [
+        100,
+        21
+      ],
       "opponent_species": [
-        "",
+        "dragonite",
         "tyranitar"
+      ],
+      "own_hp_current": [
+        20,
+        121
+      ],
+      "own_hp_max": [
+        146,
+        137
       ],
       "own_species": [
         "sinistcha",
-        ""
-      ],
-      "own_species_shiny": [
-        false,
-        false
+        "gengar"
       ]
     },
     "MoveNameReader": {
@@ -866,7 +998,16 @@
     }
   },
   "20260423-183737819287.png": {
+    "ActiveHUDSlot": {
+      "slot": 0
+    },
     "BattleHUDReader": {
+      "move_pp_current": [
+        8,
+        16,
+        12,
+        20
+      ],
       "opponent_hp_pct": [
         64,
         7
@@ -886,12 +1027,9 @@
       "own_species": [
         "aggron",
         "beedrill"
-      ],
-      "own_species_shiny": [
-        false,
-        false
       ]
     },
+    "MegaEvolveDetector": true,
     "MoveNameReader": {
       "moves": [
         "stone-edge",
@@ -899,23 +1037,44 @@
         "metal-burst",
         "stealth-rock"
       ]
+    },
+    "MoveSelectCursorSlot": {
+      "slot": -1
     }
   },
   "20260423-183744870258.png": {
+    "ActiveHUDSlot": {
+      "slot": 0
+    },
     "BattleHUDReader": {
+      "move_pp_current": [
+        8,
+        16,
+        12,
+        20
+      ],
+      "opponent_hp_pct": [
+        64,
+        7
+      ],
       "opponent_species": [
-        "",
+        "dragonite",
         "tyranitar"
+      ],
+      "own_hp_current": [
+        177,
+        142
+      ],
+      "own_hp_max": [
+        177,
+        142
       ],
       "own_species": [
         "aggron",
-        ""
-      ],
-      "own_species_shiny": [
-        false,
-        false
+        "beedrill"
       ]
     },
+    "MegaEvolveDetector": true,
     "MoveNameReader": {
       "moves": [
         "stone-edge",
@@ -929,20 +1088,38 @@
     }
   },
   "20260423-183749611704.png": {
+    "ActiveHUDSlot": {
+      "slot": 1
+    },
     "BattleHUDReader": {
+      "move_pp_current": [
+        20,
+        20,
+        12,
+        20
+      ],
+      "opponent_hp_pct": [
+        64,
+        7
+      ],
       "opponent_species": [
-        "",
+        "dragonite",
         "tyranitar"
+      ],
+      "own_hp_current": [
+        177,
+        142
+      ],
+      "own_hp_max": [
+        177,
+        142
       ],
       "own_species": [
         "aggron",
-        ""
-      ],
-      "own_species_shiny": [
-        false,
-        false
+        "beedrill"
       ]
     },
+    "MegaEvolveDetector": true,
     "MoveNameReader": {
       "moves": [
         "poison-jab",
@@ -950,23 +1127,44 @@
         "drill-run",
         "knock-off"
       ]
+    },
+    "MoveSelectCursorSlot": {
+      "slot": -1
     }
   },
   "20260423-183752637421.png": {
+    "ActiveHUDSlot": {
+      "slot": 1
+    },
     "BattleHUDReader": {
+      "move_pp_current": [
+        20,
+        20,
+        12,
+        20
+      ],
+      "opponent_hp_pct": [
+        64,
+        7
+      ],
       "opponent_species": [
-        "",
+        "dragonite",
         "tyranitar"
+      ],
+      "own_hp_current": [
+        177,
+        142
+      ],
+      "own_hp_max": [
+        177,
+        142
       ],
       "own_species": [
         "aggron",
-        ""
-      ],
-      "own_species_shiny": [
-        false,
-        false
+        "beedrill"
       ]
     },
+    "MegaEvolveDetector": true,
     "MoveNameReader": {
       "moves": [
         "poison-jab",
@@ -980,20 +1178,38 @@
     }
   },
   "20260423-183756280783.png": {
+    "ActiveHUDSlot": {
+      "slot": 1
+    },
     "BattleHUDReader": {
+      "move_pp_current": [
+        20,
+        20,
+        12,
+        20
+      ],
+      "opponent_hp_pct": [
+        64,
+        7
+      ],
       "opponent_species": [
-        "",
+        "dragonite",
         "tyranitar"
+      ],
+      "own_hp_current": [
+        177,
+        142
+      ],
+      "own_hp_max": [
+        177,
+        142
       ],
       "own_species": [
         "aggron",
-        ""
-      ],
-      "own_species_shiny": [
-        false,
-        false
+        "beedrill"
       ]
     },
+    "MegaEvolveDetector": true,
     "MoveNameReader": {
       "moves": [
         "poison-jab",
@@ -1007,20 +1223,38 @@
     }
   },
   "20260423-183911434513.png": {
+    "ActiveHUDSlot": {
+      "slot": 0
+    },
     "BattleHUDReader": {
+      "move_pp_current": [
+        7,
+        16,
+        12,
+        20
+      ],
+      "opponent_hp_pct": [
+        2,
+        100
+      ],
       "opponent_species": [
-        "",
+        "dragonite",
         "gengar"
+      ],
+      "own_hp_current": [
+        132,
+        134
+      ],
+      "own_hp_max": [
+        177,
+        142
       ],
       "own_species": [
         "aggron",
-        ""
-      ],
-      "own_species_shiny": [
-        false,
-        false
+        "beedrill-mega"
       ]
     },
+    "MegaEvolveDetector": false,
     "MoveNameReader": {
       "moves": [
         "stone-edge",
@@ -1034,20 +1268,38 @@
     }
   },
   "20260423-183917790913.png": {
+    "ActiveHUDSlot": {
+      "slot": 1
+    },
     "BattleHUDReader": {
+      "move_pp_current": [
+        20,
+        20,
+        11,
+        20
+      ],
+      "opponent_hp_pct": [
+        2,
+        100
+      ],
       "opponent_species": [
-        "",
+        "dragonite",
         "gengar"
+      ],
+      "own_hp_current": [
+        132,
+        134
+      ],
+      "own_hp_max": [
+        177,
+        142
       ],
       "own_species": [
         "aggron",
-        ""
-      ],
-      "own_species_shiny": [
-        false,
-        false
+        "beedrill-mega"
       ]
     },
+    "MegaEvolveDetector": false,
     "MoveNameReader": {
       "moves": [
         "poison-jab",
@@ -1061,20 +1313,38 @@
     }
   },
   "20260427-132116660246.png": {
+    "ActiveHUDSlot": {
+      "slot": 0
+    },
     "BattleHUDReader": {
+      "move_pp_current": [
+        12,
+        8,
+        16,
+        8
+      ],
+      "opponent_hp_pct": [
+        100,
+        100
+      ],
       "opponent_species": [
-        "",
+        "gengar",
         "garchomp"
+      ],
+      "own_hp_current": [
+        157,
+        202
+      ],
+      "own_hp_max": [
+        157,
+        202
       ],
       "own_species": [
         "sneasler",
-        ""
-      ],
-      "own_species_shiny": [
-        true,
-        false
+        "incineroar"
       ]
     },
+    "MegaEvolveDetector": false,
     "MoveNameReader": {
       "moves": [
         "fake-out",
@@ -1112,20 +1382,38 @@
     }
   },
   "20260427-132125840378.png": {
+    "ActiveHUDSlot": {
+      "slot": 1
+    },
     "BattleHUDReader": {
+      "move_pp_current": [
+        16,
+        20,
+        12,
+        16
+      ],
+      "opponent_hp_pct": [
+        100,
+        100
+      ],
       "opponent_species": [
-        "",
+        "gengar",
         "garchomp"
+      ],
+      "own_hp_current": [
+        157,
+        202
+      ],
+      "own_hp_max": [
+        157,
+        202
       ],
       "own_species": [
         "sneasler",
-        ""
-      ],
-      "own_species_shiny": [
-        true,
-        false
+        "incineroar"
       ]
     },
+    "MegaEvolveDetector": false,
     "MoveNameReader": {
       "moves": [
         "throat-chop",
@@ -1404,7 +1692,7 @@
       ],
       "own_species": [
         "venusaur",
-        "charizard"
+        "charizard-shiny"
       ],
       "own_species_shiny": [
         true,
@@ -1447,7 +1735,7 @@
       ],
       "own_species": [
         "venusaur",
-        "charizard"
+        "charizard-shiny"
       ],
       "own_species_shiny": [
         true,
@@ -1468,20 +1756,38 @@
     }
   },
   "20260427-132607311130.png": {
+    "ActiveHUDSlot": {
+      "slot": 0
+    },
     "BattleHUDReader": {
+      "move_pp_current": [
+        11,
+        12,
+        16,
+        8
+      ],
+      "opponent_hp_pct": [
+        38,
+        100
+      ],
       "opponent_species": [
-        "",
+        "sinistcha",
         "gengar"
+      ],
+      "own_hp_current": [
+        82,
+        159
+      ],
+      "own_hp_max": [
+        157,
+        159
       ],
       "own_species": [
         "venusaur",
-        ""
-      ],
-      "own_species_shiny": [
-        true,
-        false
+        "charizard-shiny-mega-y"
       ]
     },
+    "MegaEvolveDetector": false,
     "MoveNameReader": {
       "moves": [
         "energy-ball",
@@ -1495,20 +1801,38 @@
     }
   },
   "20260427-132613234570.png": {
+    "ActiveHUDSlot": {
+      "slot": 1
+    },
     "BattleHUDReader": {
+      "move_pp_current": [
+        11,
+        12,
+        12,
+        8
+      ],
+      "opponent_hp_pct": [
+        38,
+        100
+      ],
       "opponent_species": [
-        "",
+        "sinistcha",
         "gengar"
+      ],
+      "own_hp_current": [
+        82,
+        159
+      ],
+      "own_hp_max": [
+        157,
+        159
       ],
       "own_species": [
         "venusaur",
-        ""
-      ],
-      "own_species_shiny": [
-        true,
-        false
+        "charizard-shiny-mega-y"
       ]
     },
+    "MegaEvolveDetector": false,
     "MoveNameReader": {
       "moves": [
         "heat-wave",
@@ -1522,20 +1846,38 @@
     }
   },
   "20260427-132703444544.png": {
+    "ActiveHUDSlot": {
+      "slot": 0
+    },
     "BattleHUDReader": {
+      "move_pp_current": [
+        11,
+        11,
+        16,
+        8
+      ],
+      "opponent_hp_pct": [
+        -1,
+        7
+      ],
       "opponent_species": [
-        "",
+        null,
         "gengar"
+      ],
+      "own_hp_current": [
+        10,
+        159
+      ],
+      "own_hp_max": [
+        157,
+        159
       ],
       "own_species": [
         "venusaur",
-        ""
-      ],
-      "own_species_shiny": [
-        true,
-        false
+        "charizard-shiny-mega-y"
       ]
     },
+    "MegaEvolveDetector": false,
     "MoveNameReader": {
       "moves": [
         "energy-ball",
@@ -1974,6 +2316,231 @@
       "slot": 1
     }
   },
+  "20260505-game-video-20260505-153202484050_0317.png": {
+    "ActiveHUDSlot": {
+      "slot": 0
+    },
+    "BattleHUDReader": {
+      "move_pp_current": [
+        12,
+        16,
+        8,
+        20
+      ],
+      "opponent_hp_pct": [
+        100,
+        1
+      ],
+      "opponent_species": [
+        "archaludon",
+        "pelipper"
+      ],
+      "own_hp_current": [
+        135,
+        197
+      ],
+      "own_hp_max": [
+        135,
+        197
+      ],
+      "own_species": [
+        "starmie",
+        "archaludon"
+      ]
+    },
+    "MegaEvolveDetector": true,
+    "MoveNameReader": {
+      "moves": [
+        "liquidation",
+        "zen-headbutt",
+        "protect",
+        "aqua-jet"
+      ]
+    },
+    "MoveSelectCursorSlot": {
+      "slot": 0
+    }
+  },
+  "20260505-game2-video-20260505-153202484050_0089.png": {
+    "ActiveHUDSlot": {
+      "slot": 0
+    },
+    "BattleHUDReader": {
+      "move_pp_current": [
+        16,
+        20,
+        8,
+        12
+      ],
+      "opponent_hp_pct": [
+        100,
+        100
+      ],
+      "opponent_species": [
+        "archaludon",
+        "pelipper"
+      ],
+      "own_hp_current": [
+        178,
+        197
+      ],
+      "own_hp_max": [
+        178,
+        197
+      ],
+      "own_species": [
+        "sinistcha",
+        "archaludon"
+      ]
+    },
+    "MegaEvolveDetector": false,
+    "MoveNameReader": {
+      "moves": [
+        "matcha-gotcha",
+        "rage-powder",
+        "trick-room",
+        "life-dew"
+      ]
+    },
+    "MoveSelectCursorSlot": {
+      "slot": 0
+    }
+  },
+  "20260505-game2-video-20260505-153202484050_0159.png": {
+    "ActiveHUDSlot": {
+      "slot": 0
+    },
+    "BattleHUDReader": {
+      "move_pp_current": [
+        12,
+        16,
+        8,
+        20
+      ],
+      "opponent_hp_pct": [
+        100,
+        1
+      ],
+      "opponent_species": [
+        "archaludon",
+        "pelipper"
+      ],
+      "own_hp_current": [
+        135,
+        197
+      ],
+      "own_hp_max": [
+        135,
+        197
+      ],
+      "own_species": [
+        "starmie",
+        "archaludon"
+      ]
+    },
+    "MegaEvolveDetector": true,
+    "MoveNameReader": {
+      "moves": [
+        "liquidation",
+        "zen-headbutt",
+        "protect",
+        "aqua-jet"
+      ]
+    },
+    "MoveSelectCursorSlot": {
+      "slot": 0
+    }
+  },
+  "20260505-game2-video-20260505-153202484050_0278.png": {
+    "ActiveHUDSlot": {
+      "slot": 0
+    },
+    "BattleHUDReader": {
+      "move_pp_current": [
+        12,
+        12,
+        16,
+        8
+      ],
+      "opponent_hp_pct": [
+        54,
+        100
+      ],
+      "opponent_species": [
+        "archaludon",
+        "sneasler"
+      ],
+      "own_hp_current": [
+        135,
+        197
+      ],
+      "own_hp_max": [
+        135,
+        197
+      ],
+      "own_species": [
+        "pelipper-shiny",
+        "archaludon"
+      ]
+    },
+    "MegaEvolveDetector": false,
+    "MoveNameReader": {
+      "moves": [
+        "hurricane",
+        "weather-ball",
+        "tailwind",
+        "protect"
+      ]
+    },
+    "MoveSelectCursorSlot": {
+      "slot": 0
+    }
+  },
+  "20260505-game2-video-20260505-153416571596_0025.png": {
+    "ActiveHUDSlot": {
+      "slot": 0
+    },
+    "BattleHUDReader": {
+      "move_pp_current": [
+        12,
+        16,
+        8,
+        20
+      ],
+      "opponent_hp_pct": [
+        100,
+        1
+      ],
+      "opponent_species": [
+        "archaludon",
+        "pelipper"
+      ],
+      "own_hp_current": [
+        135,
+        197
+      ],
+      "own_hp_max": [
+        135,
+        197
+      ],
+      "own_species": [
+        "starmie",
+        "archaludon"
+      ]
+    },
+    "MegaEvolveDetector": true,
+    "MoveNameReader": {
+      "moves": [
+        "liquidation",
+        "zen-headbutt",
+        "protect",
+        "aqua-jet"
+      ]
+    },
+    "MoveSelectCursorSlot": {
+      "slot": 0
+    }
+  },
   "move_select.png": {
     "BattleHUDReader": {
       "opponent_species": [
@@ -2002,20 +2569,38 @@
     }
   },
   "move_select_slot2.png": {
+    "ActiveHUDSlot": {
+      "slot": 0
+    },
     "BattleHUDReader": {
+      "move_pp_current": [
+        11,
+        8,
+        20,
+        12
+      ],
+      "opponent_hp_pct": [
+        1,
+        1
+      ],
       "opponent_species": [
-        "",
+        null,
         "greninja"
       ],
-      "own_species": [
-        "victreebel",
-        ""
+      "own_hp_current": [
+        47,
+        -1
       ],
-      "own_species_shiny": [
-        false,
-        false
+      "own_hp_max": [
+        187,
+        -1
+      ],
+      "own_species": [
+        "victreebel-mega",
+        null
       ]
     },
+    "MegaEvolveDetector": false,
     "MoveNameReader": {
       "moves": [
         "power-whip",
@@ -2029,20 +2614,38 @@
     }
   },
   "victreebel_kingambit_power-whip_sucker-punch_swords-dance_strength-sap.png": {
+    "ActiveHUDSlot": {
+      "slot": 0
+    },
     "BattleHUDReader": {
+      "move_pp_current": [
+        11,
+        7,
+        20,
+        11
+      ],
+      "opponent_hp_pct": [
+        -1,
+        100
+      ],
       "opponent_species": [
-        "",
+        null,
         "kingambit"
       ],
-      "own_species": [
-        "victreebel",
-        ""
+      "own_hp_current": [
+        187,
+        -1
       ],
-      "own_species_shiny": [
-        false,
-        false
+      "own_hp_max": [
+        157,
+        -1
+      ],
+      "own_species": [
+        "victreebel-mega",
+        null
       ]
     },
+    "MegaEvolveDetector": false,
     "MoveNameReader": {
       "moves": [
         "power-whip",
@@ -2050,6 +2653,9 @@
         "swords-dance",
         "strength-sap"
       ]
+    },
+    "MoveSelectCursorSlot": {
+      "slot": -1
     }
   }
 }

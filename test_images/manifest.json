@@ -1,0 +1,50 @@
+{
+  "20260427-132208830153.png": {
+    "TargetSelectReader": {
+      "opp_effectiveness": [
+        "neutral",
+        "super-effective"
+      ],
+      "opp_targeted": [
+        true,
+        false
+      ],
+      "own_effectiveness": [
+        "",
+        "neutral"
+      ],
+      "own_moves": [
+        "dire-claw",
+        ""
+      ],
+      "own_targeted": [
+        false,
+        false
+      ]
+    }
+  },
+  "20260428-090546804023.png": {
+    "TargetSelectReader": {
+      "opp_effectiveness": [
+        "",
+        ""
+      ],
+      "opp_targeted": [
+        false,
+        false
+      ],
+      "own_effectiveness": [
+        "",
+        ""
+      ],
+      "own_moves": [
+        "protect",
+        ""
+      ],
+      "own_targeted": [
+        true,
+        false
+      ]
+    }
+  }
+}
