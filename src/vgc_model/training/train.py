@@ -279,6 +279,33 @@ def main():
     ap.add_argument("--use-features", action="store_true",
                     help="Inject species/move features from FeatureTables "
                          "(encoding Tier 1).")
+    ap.add_argument("--use-reveal", action="store_true",
+                    help="Add per-side revealed-count scalars (own,opp) to "
+                         "the field token.")
+    ap.add_argument("--use-boosts", action="store_true",
+                    help="Inject per-slot stat-stage boosts (atk/def/spa/"
+                         "spd/spe/acc/eva, normalized to [-1,+1]) into the "
+                         "slot embedding. Requires shards encoded with "
+                         "stat_boosts column (any v6+ schema).")
+    ap.add_argument("--use-side-cond", action="store_true",
+                    help="Inject per-side condition flags (tailwind, "
+                         "light_screen, reflect, aurora_veil) into the field "
+                         "token. Requires v6+ shards parsed with side flags.")
+    ap.add_argument("--use-hazards", action="store_true",
+                    help="Inject per-side hazards (stealth_rock, spikes, "
+                         "toxic_spikes, sticky_web) plus status protection "
+                         "(safeguard, mist, lucky_chant) into the field "
+                         "token. Requires v7+ shards (re-parse + re-encode).")
+    ap.add_argument("--use-volatile", action="store_true",
+                    help="Inject per-slot volatile-status bitmask (~103 "
+                         "statuses incl. taunt/encore/disable/substitute/"
+                         "helping_hand/protect/leech_seed/perish/etc). "
+                         "Requires v8+ shards.")
+    ap.add_argument("--use-sub-hp", action="store_true",
+                    help="Inject per-slot substitute HP fraction.")
+    ap.add_argument("--use-last-move", action="store_true",
+                    help="Inject per-side last-move IDs into the field "
+                         "token (signal for Encore/Choice locking).")
     ap.add_argument("--mask-actions", action="store_true",
                     help="Mask illegal moves/switches at argmax (only valid "
                          "under meta-on; with meta-off the revealed-move list "
@@ -357,6 +384,13 @@ def main():
         seq_history=args.seq_history,
         history_k=args.history_k,
         use_features=args.use_features,
+        use_reveal=args.use_reveal,
+        use_boosts=args.use_boosts,
+        use_side_cond=args.use_side_cond,
+        use_hazards=args.use_hazards,
+        use_volatile=args.use_volatile,
+        use_sub_hp=args.use_sub_hp,
+        use_last_move=args.use_last_move,
         mask_actions=args.mask_actions,
         feature_tables=feature_tables,
         vocabs=vocabs if args.use_features else None,

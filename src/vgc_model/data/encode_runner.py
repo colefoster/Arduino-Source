@@ -42,6 +42,21 @@ _STATIC_COLUMN_SPECS: list[tuple[str, np.dtype, tuple]] = [
     ("ability_confidences",np.float32, (8,)),
     ("move_ids",           np.int32,   (8, 4)),
     ("move_confidences",   np.float32, (8, 4)),
+    # Stat-stage boosts per slot: atk/def/spa/spd/spe/acc/eva normalized to [-1, +1].
+    ("stat_boosts",        np.float32, (8, 7)),
+    # Side conditions: own (4) + opp (4): tailwind, light_screen, reflect, aurora_veil.
+    ("side_conditions",    np.float32, (8,)),
+    # Hazards + status protection: own (7) + opp (7): stealth_rock, spikes/3,
+    # toxic_spikes/2, sticky_web, safeguard, mist, lucky_chant.
+    ("hazards",            np.float32, (14,)),
+    # Per-side last move IDs (own, opp). PAD_IDX if no move yet (post-switch).
+    ("last_move_ids",      np.int32,   (2,)),
+    # Per-slot substitute HP fraction (0..1; 0 = no sub).
+    ("sub_hps",            np.float32, (8,)),
+    # Per-slot volatile-status bitmask. The number of statuses must match
+    # volatile_statuses.N_VOLATILE_STATUSES at parse time. If the canonical
+    # list grows, bump the encoding-version (old shards stay valid for old
+    # models; new shards work with new models).
     ("weather_id",         np.int32,   ()),
     ("terrain_id",         np.int32,   ()),
     ("trick_room",         np.int8,    ()),
@@ -59,7 +74,9 @@ _STATIC_COLUMN_SPECS: list[tuple[str, np.dtype, tuple]] = [
 
 
 def _column_specs(history_k: int) -> list[tuple[str, np.dtype, tuple]]:
+    from .volatile_statuses import N_VOLATILE_STATUSES
     return _STATIC_COLUMN_SPECS + [
+        ("volatiles",               np.float32, (8, N_VOLATILE_STATUSES)),
         ("prev_seq_active_species", np.int32,   (history_k, 4)),
         ("prev_seq_active_hp",      np.float32, (history_k, 4)),
         ("prev_seq_action_types",   np.int8,    (history_k, 4)),

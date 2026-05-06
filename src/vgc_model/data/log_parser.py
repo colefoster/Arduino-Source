@@ -25,6 +25,12 @@ class Pokemon:
     fainted: bool = False
     gender: str = ""
     level: int = 50
+    # Canonical volatile-status names from volatile_statuses.VOLATILE_STATUSES.
+    # We use list (not set) for JSON-serializability; encoder converts to bitmask.
+    volatile_statuses: list[str] = field(default_factory=list)
+    # Substitute current HP as a fraction of starting (1/4 max) sub HP.
+    # 0.0 means no substitute up.
+    substitute_hp_frac: float = 0.0
 
 
 @dataclass
@@ -32,7 +38,7 @@ class FieldState:
     weather: str = ""  # SunnyDay, RainDance, Sandstorm, Snow
     terrain: str = ""  # Electric, Grassy, Psychic, Misty
     trick_room: bool = False
-    # Per-side effects
+    # Per-side effects (booleans; durations TBD)
     tailwind_p1: bool = False
     tailwind_p2: bool = False
     light_screen_p1: bool = False
@@ -41,6 +47,26 @@ class FieldState:
     reflect_p2: bool = False
     aurora_veil_p1: bool = False
     aurora_veil_p2: bool = False
+    # Entry hazards (per side; spikes/toxic_spikes are layer counters).
+    stealth_rock_p1: bool = False
+    stealth_rock_p2: bool = False
+    spikes_p1: int = 0  # 0..3
+    spikes_p2: int = 0
+    toxic_spikes_p1: int = 0  # 0..2
+    toxic_spikes_p2: int = 0
+    sticky_web_p1: bool = False
+    sticky_web_p2: bool = False
+    # Other side conditions worth tracking.
+    safeguard_p1: bool = False
+    safeguard_p2: bool = False
+    mist_p1: bool = False
+    mist_p2: bool = False
+    lucky_chant_p1: bool = False
+    lucky_chant_p2: bool = False
+    # Last move/switch used per side (Showdown protocol move name, or
+    # empty if last action was a switch). For Encore/Choice locking signal.
+    last_move_p1: str = ""
+    last_move_p2: str = ""
 
 
 @dataclass
@@ -316,6 +342,8 @@ class BattleParser:
             mega=mega,
             slot=slot_suffix,
         )
+        # Track per-side last move (for Encore/Choice locking signal).
+        setattr(self.field, f"last_move_{player}", move_name)
 
     def _cmd_turn(self, parts: list[str]):
         """|turn|N - emit training sample for previous turn, start new turn."""
@@ -327,6 +355,17 @@ class BattleParser:
         self.current_turn = new_turn
         self.turn_actions = {"p1": {}, "p2": {}}
         self.mega_this_turn = set()
+        # Clear single-turn volatiles (Protect, Endure, Helping Hand, ...)
+        # so they don't persist into the next decision frame.
+        from .volatile_statuses import SINGLE_TURN_VOLATILES
+        for poke in self.all_pokemon.values():
+            poke.volatile_statuses = [
+                v for v in poke.volatile_statuses
+                if v not in SINGLE_TURN_VOLATILES
+            ]
+            # FLINCH and MUSTRECHARGE clear after the affected turn too.
+            if "FLINCH" in poke.volatile_statuses:
+                poke.volatile_statuses.remove("FLINCH")
 
     def _cmd_win(self, parts: list[str]):
         """|win|PlayerName"""
@@ -483,6 +522,22 @@ class BattleParser:
             setattr(self.field, f"reflect_{side}", True)
         elif "Aurora Veil" in effect:
             setattr(self.field, f"aurora_veil_{side}", True)
+        elif "Stealth Rock" in effect:
+            setattr(self.field, f"stealth_rock_{side}", True)
+        elif "Spikes" in effect and "Toxic" not in effect:
+            cur = getattr(self.field, f"spikes_{side}")
+            setattr(self.field, f"spikes_{side}", min(cur + 1, 3))
+        elif "Toxic Spikes" in effect:
+            cur = getattr(self.field, f"toxic_spikes_{side}")
+            setattr(self.field, f"toxic_spikes_{side}", min(cur + 1, 2))
+        elif "Sticky Web" in effect:
+            setattr(self.field, f"sticky_web_{side}", True)
+        elif "Safeguard" in effect:
+            setattr(self.field, f"safeguard_{side}", True)
+        elif "Mist" in effect:
+            setattr(self.field, f"mist_{side}", True)
+        elif "Lucky Chant" in effect:
+            setattr(self.field, f"lucky_chant_{side}", True)
 
     def _cmd_neg_sideend(self, parts: list[str]):
         """|-sideend|p1: Name|move: Tailwind"""
@@ -498,6 +553,97 @@ class BattleParser:
             setattr(self.field, f"reflect_{side}", False)
         elif "Aurora Veil" in effect:
             setattr(self.field, f"aurora_veil_{side}", False)
+        elif "Stealth Rock" in effect:
+            setattr(self.field, f"stealth_rock_{side}", False)
+        elif "Spikes" in effect and "Toxic" not in effect:
+            setattr(self.field, f"spikes_{side}", 0)
+        elif "Toxic Spikes" in effect:
+            setattr(self.field, f"toxic_spikes_{side}", 0)
+        elif "Sticky Web" in effect:
+            setattr(self.field, f"sticky_web_{side}", False)
+        elif "Safeguard" in effect:
+            setattr(self.field, f"safeguard_{side}", False)
+        elif "Mist" in effect:
+            setattr(self.field, f"mist_{side}", False)
+        elif "Lucky Chant" in effect:
+            setattr(self.field, f"lucky_chant_{side}", False)
+
+    def _cmd_neg_start(self, parts: list[str]):
+        """|-start|p1a: Nickname|<volatile>"""
+        if len(parts) < 4:
+            return
+        slot_info = parts[2]
+        slot = slot_info[:3]
+        key = self.active_slots.get(slot)
+        if not (key and key in self.all_pokemon):
+            return
+        from .volatile_statuses import normalize_showdown_volatile
+        canonical = normalize_showdown_volatile(parts[3])
+        if not canonical:
+            return
+        poke = self.all_pokemon[key]
+        if canonical not in poke.volatile_statuses:
+            poke.volatile_statuses.append(canonical)
+        if canonical == "SUBSTITUTE":
+            poke.substitute_hp_frac = 1.0  # full sub on -start
+
+    def _cmd_neg_end(self, parts: list[str]):
+        """|-end|p1a: Nickname|<volatile>"""
+        if len(parts) < 4:
+            return
+        slot_info = parts[2]
+        slot = slot_info[:3]
+        key = self.active_slots.get(slot)
+        if not (key and key in self.all_pokemon):
+            return
+        from .volatile_statuses import normalize_showdown_volatile
+        canonical = normalize_showdown_volatile(parts[3])
+        if not canonical:
+            return
+        poke = self.all_pokemon[key]
+        if canonical in poke.volatile_statuses:
+            poke.volatile_statuses.remove(canonical)
+        if canonical == "SUBSTITUTE":
+            poke.substitute_hp_frac = 0.0
+
+    def _cmd_neg_singleturn(self, parts: list[str]):
+        """|-singleturn|p1a: Nickname|<vol> (e.g. Protect, Endure, Helping Hand).
+
+        Single-turn effects: set on this turn, encoder reads them for the
+        decision frame (turn samples are emitted at end-of-turn). Cleared
+        at next turn boundary by _cmd_turn.
+        """
+        if len(parts) < 4:
+            return
+        slot_info = parts[2]
+        slot = slot_info[:3]
+        key = self.active_slots.get(slot)
+        if not (key and key in self.all_pokemon):
+            return
+        from .volatile_statuses import normalize_showdown_volatile
+        canonical = normalize_showdown_volatile(parts[3])
+        if not canonical:
+            return
+        poke = self.all_pokemon[key]
+        if canonical not in poke.volatile_statuses:
+            poke.volatile_statuses.append(canonical)
+
+    def _cmd_neg_singlemove(self, parts: list[str]):
+        """|-singlemove|p1a: Nickname|<vol> (e.g. Destiny Bond, Grudge)."""
+        self._cmd_neg_singleturn(parts)  # same handling
+
+    def _cmd_neg_mustrecharge(self, parts: list[str]):
+        """|-mustrecharge|p1a: Nickname"""
+        if len(parts) < 3:
+            return
+        slot_info = parts[2]
+        slot = slot_info[:3]
+        key = self.active_slots.get(slot)
+        if not (key and key in self.all_pokemon):
+            return
+        poke = self.all_pokemon[key]
+        if "MUSTRECHARGE" not in poke.volatile_statuses:
+            poke.volatile_statuses.append("MUSTRECHARGE")
 
     def _cmd_neg_ability(self, parts: list[str]):
         """|-ability|p1a: Nickname|Intimidate"""

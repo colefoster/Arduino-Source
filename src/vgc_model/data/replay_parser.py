@@ -72,6 +72,10 @@ class RevealedPokemon:
     item: StatsField
     ability: StatsField
     moves: list[StatsField]   # exactly 4 entries (padded with meta if needed)
+    # Canonical volatile-status names (see volatile_statuses.VOLATILE_STATUSES).
+    volatile_statuses: list[str] = field(default_factory=list)
+    # Substitute HP fraction (0..1; 0 if no sub up).
+    substitute_hp_frac: float = 0.0
 
 
 @dataclass
@@ -112,6 +116,35 @@ class ParsedTurn:
     p1_action_b: TurnAction
     p2_action_a: TurnAction
     p2_action_b: TurnAction
+    # Per-side conditions (booleans for now — parser tracks presence only).
+    # Order: (tailwind, light_screen, reflect, aurora_veil) for each side.
+    tailwind_p1: bool = False
+    tailwind_p2: bool = False
+    light_screen_p1: bool = False
+    light_screen_p2: bool = False
+    reflect_p1: bool = False
+    reflect_p2: bool = False
+    aurora_veil_p1: bool = False
+    aurora_veil_p2: bool = False
+    # Entry hazards.
+    stealth_rock_p1: bool = False
+    stealth_rock_p2: bool = False
+    spikes_p1: int = 0  # 0..3 layers
+    spikes_p2: int = 0
+    toxic_spikes_p1: int = 0  # 0..2 layers
+    toxic_spikes_p2: int = 0
+    sticky_web_p1: bool = False
+    sticky_web_p2: bool = False
+    # Status protection conditions.
+    safeguard_p1: bool = False
+    safeguard_p2: bool = False
+    mist_p1: bool = False
+    mist_p2: bool = False
+    lucky_chant_p1: bool = False
+    lucky_chant_p2: bool = False
+    # Last Showdown move name used by each side (empty if last action was switch).
+    last_move_p1: str = ""
+    last_move_p2: str = ""
 
 
 @dataclass
@@ -228,6 +261,30 @@ class ReplayParser:
                 p1_action_b=TurnAction.from_action(p1_actions.slot_b if p1_actions else None),
                 p2_action_a=TurnAction.from_action(p2_actions.slot_a if p2_actions else None),
                 p2_action_b=TurnAction.from_action(p2_actions.slot_b if p2_actions else None),
+                tailwind_p1=bool(getattr(state.field, "tailwind_p1", False)),
+                tailwind_p2=bool(getattr(state.field, "tailwind_p2", False)),
+                light_screen_p1=bool(getattr(state.field, "light_screen_p1", False)),
+                light_screen_p2=bool(getattr(state.field, "light_screen_p2", False)),
+                reflect_p1=bool(getattr(state.field, "reflect_p1", False)),
+                reflect_p2=bool(getattr(state.field, "reflect_p2", False)),
+                aurora_veil_p1=bool(getattr(state.field, "aurora_veil_p1", False)),
+                aurora_veil_p2=bool(getattr(state.field, "aurora_veil_p2", False)),
+                stealth_rock_p1=bool(getattr(state.field, "stealth_rock_p1", False)),
+                stealth_rock_p2=bool(getattr(state.field, "stealth_rock_p2", False)),
+                spikes_p1=int(getattr(state.field, "spikes_p1", 0)),
+                spikes_p2=int(getattr(state.field, "spikes_p2", 0)),
+                toxic_spikes_p1=int(getattr(state.field, "toxic_spikes_p1", 0)),
+                toxic_spikes_p2=int(getattr(state.field, "toxic_spikes_p2", 0)),
+                sticky_web_p1=bool(getattr(state.field, "sticky_web_p1", False)),
+                sticky_web_p2=bool(getattr(state.field, "sticky_web_p2", False)),
+                safeguard_p1=bool(getattr(state.field, "safeguard_p1", False)),
+                safeguard_p2=bool(getattr(state.field, "safeguard_p2", False)),
+                mist_p1=bool(getattr(state.field, "mist_p1", False)),
+                mist_p2=bool(getattr(state.field, "mist_p2", False)),
+                lucky_chant_p1=bool(getattr(state.field, "lucky_chant_p1", False)),
+                lucky_chant_p2=bool(getattr(state.field, "lucky_chant_p2", False)),
+                last_move_p1=str(getattr(state.field, "last_move_p1", "") or ""),
+                last_move_p2=str(getattr(state.field, "last_move_p2", "") or ""),
             ))
 
         # Build full-team rosters from team preview + final all_pokemon state.
@@ -277,6 +334,8 @@ class ReplayParser:
             item=item_field,
             ability=ability_field,
             moves=move_fields,
+            volatile_statuses=list(getattr(p, "volatile_statuses", []) or []),
+            substitute_hp_frac=float(getattr(p, "substitute_hp_frac", 0.0)),
         )
 
     def _item_field(self, p: Pokemon) -> StatsField:

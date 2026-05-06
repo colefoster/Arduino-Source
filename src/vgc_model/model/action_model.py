@@ -58,6 +58,13 @@ class ActionModel(nn.Module):
         history_k: int = 8,
         n_action_types: int = 3,  # noop / move / switch
         use_features: bool = False,
+        use_reveal: bool = False,
+        use_boosts: bool = False,
+        use_side_cond: bool = False,
+        use_hazards: bool = False,
+        use_volatile: bool = False,
+        use_sub_hp: bool = False,
+        use_last_move: bool = False,
         mask_actions: bool = False,
         feature_tables: Optional[FeatureTables] = None,
         vocabs: Optional[Vocabs] = None,
@@ -70,6 +77,13 @@ class ActionModel(nn.Module):
             raise ValueError("use_history and seq_history are mutually exclusive")
         self.history_k = history_k
         self.use_features = use_features
+        self.use_reveal = use_reveal
+        self.use_boosts = use_boosts
+        self.use_side_cond = use_side_cond
+        self.use_hazards = use_hazards
+        self.use_volatile = use_volatile
+        self.use_sub_hp = use_sub_hp
+        self.use_last_move = use_last_move
         self.mask_actions = mask_actions
 
         self.species_emb = nn.Embedding(n_species, d_model)
@@ -117,6 +131,38 @@ class ActionModel(nn.Module):
             self.register_buffer("move_feat_table", move_table)
             self.species_feat_proj = nn.Linear(SPECIES_FEAT_DIM, d_model)
             self.move_feat_proj = nn.Linear(MOVE_FEAT_DIM, d_model)
+
+        if use_reveal:
+            # 2 scalars: own_revealed_count (0..4), opp_revealed_count (0..4),
+            # added to the field token so attention can route reveal context
+            # to all slots/heads.
+            self.reveal_proj = nn.Linear(2, d_model)
+
+        if use_boosts:
+            # 7 stat-stage boosts per slot, normalized to [-1, +1] in encoder.
+            self.boost_proj = nn.Linear(7, d_model)
+
+        if use_side_cond:
+            # 8 side-condition flags (own 4 + opp 4), added to field token.
+            self.side_cond_proj = nn.Linear(8, d_model)
+
+        if use_hazards:
+            # 14 hazard + status-protection floats, added to field token.
+            self.hazards_proj = nn.Linear(14, d_model)
+
+        if use_volatile:
+            # Per-slot volatile-status bitmask projected into slot embedding.
+            from ..data.volatile_statuses import N_VOLATILE_STATUSES
+            self.volatile_proj = nn.Linear(N_VOLATILE_STATUSES, d_model)
+
+        if use_sub_hp:
+            # Per-slot substitute HP scalar projected into slot embedding.
+            self.sub_hp_proj = nn.Linear(1, d_model)
+
+        if use_last_move:
+            # Per-side last move IDs projected via the existing move embedding.
+            # Concatenate (own, opp) move embeddings -> 2*d_model -> d_model.
+            self.last_move_proj = nn.Linear(2 * d_model, d_model)
 
         # Heads — one set per active slot (a, b)
         self.head_type_a = nn.Linear(d_model, n_action_types)
@@ -207,11 +253,33 @@ class ActionModel(nn.Module):
         slots = self.slot_proj(slots)
         slots = slots + self.slot_pos.unsqueeze(0)
         slots = slots + self.hp_proj(batch["hp_values"].unsqueeze(-1))
+        if self.use_boosts:
+            slots = slots + self.boost_proj(batch["stat_boosts"])
+        if self.use_volatile:
+            slots = slots + self.volatile_proj(batch["volatiles"])
+        if self.use_sub_hp:
+            slots = slots + self.sub_hp_proj(batch["sub_hps"].unsqueeze(-1))
 
         weather = self.weather_emb(batch["weather_id"])
         terrain = self.terrain_emb(batch["terrain_id"])
         tr = self.tr_emb(batch["trick_room"])
-        field = (weather + terrain + tr).unsqueeze(1)  # (B, 1, d)
+        field_vec = weather + terrain + tr
+        if self.use_side_cond:
+            field_vec = field_vec + self.side_cond_proj(batch["side_conditions"])
+        if self.use_hazards:
+            field_vec = field_vec + self.hazards_proj(batch["hazards"])
+        if self.use_last_move:
+            lm = self.move_emb(batch["last_move_ids"])  # (B, 2, d)
+            B = lm.size(0)
+            lm_flat = lm.reshape(B, -1)  # (B, 2*d)
+            field_vec = field_vec + self.last_move_proj(lm_flat)
+        if self.use_reveal:
+            sids = batch["species_ids"]  # (B, 8): 0..3 own, 4..7 opp
+            own_n = (sids[:, :4] > 0).sum(dim=-1, dtype=torch.float32)
+            opp_n = (sids[:, 4:] > 0).sum(dim=-1, dtype=torch.float32)
+            reveal = torch.stack([own_n, opp_n], dim=-1)  # (B, 2)
+            field_vec = field_vec + self.reveal_proj(reveal)
+        field = field_vec.unsqueeze(1)  # (B, 1, d)
 
         tokens = [slots, field]
         slot_mask = (batch["alive_flags"] == 0)

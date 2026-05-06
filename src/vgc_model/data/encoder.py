@@ -21,6 +21,7 @@ from dataclasses import dataclass
 from typing import Iterator, Literal, Optional
 
 from .vocab import Vocabs
+from .volatile_statuses import N_VOLATILE_STATUSES, volatile_index
 
 
 N_SLOTS = 8
@@ -81,6 +82,28 @@ def _encode_pokemon(slot: dict, vocabs: Vocabs, mode: EncodeMode) -> dict:
         move_ids.append(PAD_IDX)
         move_confs.append(0.0)
 
+    # Stat boosts: 7-D vector in canonical order, normalized to [-1, +1].
+    # Showdown uses keys atk/def/spa/spd/spe/accuracy/evasion.
+    boosts = slot.get("boosts") or {}
+    boost_vec = [
+        float(boosts.get("atk", 0)) / 6.0,
+        float(boosts.get("def", 0)) / 6.0,
+        float(boosts.get("spa", 0)) / 6.0,
+        float(boosts.get("spd", 0)) / 6.0,
+        float(boosts.get("spe", 0)) / 6.0,
+        float(boosts.get("accuracy", 0)) / 6.0,
+        float(boosts.get("evasion", 0)) / 6.0,
+    ]
+
+    # Volatile-status bitmask (N_VOLATILE_STATUSES floats, 0/1).
+    vol_list = slot.get("volatile_statuses") or []
+    vol_mask = [0.0] * N_VOLATILE_STATUSES
+    for name in vol_list:
+        idx = volatile_index(name)
+        if idx >= 0:
+            vol_mask[idx] = 1.0
+    sub_hp = float(slot.get("substitute_hp_frac", 0.0) or 0.0)
+
     return {
         "species": vocabs.species[slot["species"]],
         "hp": float(slot["hp_frac"]),
@@ -92,6 +115,9 @@ def _encode_pokemon(slot: dict, vocabs: Vocabs, mode: EncodeMode) -> dict:
         "ability_conf": ability_c,
         "move_ids": move_ids,
         "move_confs": move_confs,
+        "boosts": boost_vec,
+        "volatiles": vol_mask,
+        "sub_hp": sub_hp,
     }
 
 
@@ -101,6 +127,9 @@ def _empty_pokemon() -> dict:
         "item_id": PAD_IDX, "item_conf": 0.0,
         "ability_id": PAD_IDX, "ability_conf": 0.0,
         "move_ids": list(_EMPTY_MOVES), "move_confs": list(_EMPTY_CONFS),
+        "boosts": [0.0] * 7,
+        "volatiles": [0.0] * N_VOLATILE_STATUSES,
+        "sub_hp": 0.0,
     }
 
 
@@ -182,10 +211,23 @@ def _encode_one_decision_raw(
         "ability_confidences": [s["ability_conf"] for s in encoded_slots],
         "move_ids": [s["move_ids"] for s in encoded_slots],          # 8 x 4
         "move_confidences": [s["move_confs"] for s in encoded_slots],
+        "stat_boosts": [s["boosts"] for s in encoded_slots],          # 8 x 7
+        "volatiles": [s["volatiles"] for s in encoded_slots],          # 8 x N_VOLATILE_STATUSES
+        "sub_hps": [s["sub_hp"] for s in encoded_slots],               # 8
 
         "weather_id": vocabs.weather[turn.get("weather") or "none"],
         "terrain_id": vocabs.terrain[turn.get("terrain") or "none"],
         "trick_room": int(bool(turn.get("trick_room"))),
+        # Per-side condition flags. Order: own first, then opp. For each:
+        # tailwind, light_screen, reflect, aurora_veil. Old parquets without
+        # these keys default to 0 (no leakage).
+        "side_conditions": _build_side_conditions(turn, pov_player),
+        # Per-side hazards: own first then opp. For each: stealth_rock (bool),
+        # spikes layers (0..3 -> 0..1), toxic_spikes (0..2 -> 0..1),
+        # sticky_web (bool), safeguard (bool), mist (bool), lucky_chant (bool).
+        "hazards": _build_hazards(turn, pov_player),
+        # Per-side last move ID (own then opp). Vocab lookup; PAD_IDX if unset.
+        "last_move_ids": _build_last_moves(turn, pov_player, vocabs),
 
         "action_a_type": a_type,
         "action_a_move_id": a_move,
@@ -261,6 +303,55 @@ def _summarize_turn(turn: dict, pov: str, vocabs: Vocabs) -> dict:
         "action_moves": [_act_move(own_a_action), _act_move(own_b_action),
                          _act_move(opp_a_action), _act_move(opp_b_action)],
     }
+
+
+def _build_side_conditions(turn: dict, pov_player: str) -> list[float]:
+    """Per-side flag vector. 8 floats: own (4) then opp (4).
+
+    Each side: (tailwind, light_screen, reflect, aurora_veil) as 0/1.
+    Order matches the model's expectation: index 0..3 = own, 4..7 = opp.
+    Falls back to 0 for old parquets that don't carry these keys.
+    """
+    own = "p1" if pov_player == "p1" else "p2"
+    opp = "p2" if pov_player == "p1" else "p1"
+    keys = ("tailwind", "light_screen", "reflect", "aurora_veil")
+    out: list[float] = []
+    for side in (own, opp):
+        for key in keys:
+            out.append(float(bool(turn.get(f"{key}_{side}", False))))
+    return out
+
+
+def _build_hazards(turn: dict, pov_player: str) -> list[float]:
+    """Per-side hazards + status protection. 14 floats: own (7) then opp (7).
+
+    Each side: (stealth_rock, spikes_layers/3, toxic_spikes_layers/2,
+    sticky_web, safeguard, mist, lucky_chant). Layer-counter fields are
+    normalized to [0, 1] so they're scale-comparable to bool flags.
+    """
+    own = "p1" if pov_player == "p1" else "p2"
+    opp = "p2" if pov_player == "p1" else "p1"
+    out: list[float] = []
+    for side in (own, opp):
+        out.append(float(bool(turn.get(f"stealth_rock_{side}", False))))
+        out.append(float(turn.get(f"spikes_{side}", 0)) / 3.0)
+        out.append(float(turn.get(f"toxic_spikes_{side}", 0)) / 2.0)
+        out.append(float(bool(turn.get(f"sticky_web_{side}", False))))
+        out.append(float(bool(turn.get(f"safeguard_{side}", False))))
+        out.append(float(bool(turn.get(f"mist_{side}", False))))
+        out.append(float(bool(turn.get(f"lucky_chant_{side}", False))))
+    return out
+
+
+def _build_last_moves(turn: dict, pov_player: str, vocabs: Vocabs) -> list[int]:
+    """Per-side last-move IDs: [own_last, opp_last]. PAD_IDX if missing."""
+    own = "p1" if pov_player == "p1" else "p2"
+    opp = "p2" if pov_player == "p1" else "p1"
+    out: list[int] = []
+    for side in (own, opp):
+        name = turn.get(f"last_move_{side}", "") or ""
+        out.append(vocabs.moves[name] if name else PAD_IDX)
+    return out
 
 
 def _build_prev_seq(history: list[dict], history_k: int = HISTORY_K) -> dict:

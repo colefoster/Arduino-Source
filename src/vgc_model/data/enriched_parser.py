@@ -336,6 +336,9 @@ class EnrichedBattleParser:
                     mega=mega, slot=slot_suffix,
                 )
 
+                # Per-side last move (for Encore/Choice locking signal).
+                setattr(field_state, f"last_move_{player}", move_name)
+
                 # Track move execution order
                 move_order_this_turn.append(slot)
 
@@ -438,6 +441,31 @@ class EnrichedBattleParser:
                     poke = all_pokemon[nick_key]
                     poke.boosts[parts[3]] = poke.boosts.get(parts[3], 0) - int(parts[4])
 
+            elif cmd in ("-start", "-end", "-singleturn", "-singlemove") and len(parts) >= 4:
+                from .volatile_statuses import normalize_showdown_volatile
+                nick_key = slot_to_nick.get(parts[2][:3])
+                if nick_key and nick_key in all_pokemon:
+                    canonical = normalize_showdown_volatile(parts[3])
+                    if canonical:
+                        poke = all_pokemon[nick_key]
+                        if cmd == "-end":
+                            if canonical in poke.volatile_statuses:
+                                poke.volatile_statuses.remove(canonical)
+                            if canonical == "SUBSTITUTE":
+                                poke.substitute_hp_frac = 0.0
+                        else:
+                            if canonical not in poke.volatile_statuses:
+                                poke.volatile_statuses.append(canonical)
+                            if canonical == "SUBSTITUTE":
+                                poke.substitute_hp_frac = 1.0
+
+            elif cmd == "-mustrecharge" and len(parts) >= 3:
+                nick_key = slot_to_nick.get(parts[2][:3])
+                if nick_key and nick_key in all_pokemon:
+                    poke = all_pokemon[nick_key]
+                    if "MUSTRECHARGE" not in poke.volatile_statuses:
+                        poke.volatile_statuses.append("MUSTRECHARGE")
+
             elif cmd == "-weather" and len(parts) >= 3:
                 weather = parts[2]
                 if weather == "none":
@@ -476,6 +504,22 @@ class EnrichedBattleParser:
                     setattr(field_state, f"reflect_{side}", True)
                 elif "Aurora Veil" in effect:
                     setattr(field_state, f"aurora_veil_{side}", True)
+                elif "Stealth Rock" in effect:
+                    setattr(field_state, f"stealth_rock_{side}", True)
+                elif "Spikes" in effect and "Toxic" not in effect:
+                    cur = getattr(field_state, f"spikes_{side}")
+                    setattr(field_state, f"spikes_{side}", min(cur + 1, 3))
+                elif "Toxic Spikes" in effect:
+                    cur = getattr(field_state, f"toxic_spikes_{side}")
+                    setattr(field_state, f"toxic_spikes_{side}", min(cur + 1, 2))
+                elif "Sticky Web" in effect:
+                    setattr(field_state, f"sticky_web_{side}", True)
+                elif "Safeguard" in effect:
+                    setattr(field_state, f"safeguard_{side}", True)
+                elif "Mist" in effect:
+                    setattr(field_state, f"mist_{side}", True)
+                elif "Lucky Chant" in effect:
+                    setattr(field_state, f"lucky_chant_{side}", True)
 
             elif cmd == "-sideend" and len(parts) >= 4:
                 side = parts[2][:2]
@@ -488,6 +532,20 @@ class EnrichedBattleParser:
                     setattr(field_state, f"reflect_{side}", False)
                 elif "Aurora Veil" in effect:
                     setattr(field_state, f"aurora_veil_{side}", False)
+                elif "Stealth Rock" in effect:
+                    setattr(field_state, f"stealth_rock_{side}", False)
+                elif "Spikes" in effect and "Toxic" not in effect:
+                    setattr(field_state, f"spikes_{side}", 0)
+                elif "Toxic Spikes" in effect:
+                    setattr(field_state, f"toxic_spikes_{side}", 0)
+                elif "Sticky Web" in effect:
+                    setattr(field_state, f"sticky_web_{side}", False)
+                elif "Safeguard" in effect:
+                    setattr(field_state, f"safeguard_{side}", False)
+                elif "Mist" in effect:
+                    setattr(field_state, f"mist_{side}", False)
+                elif "Lucky Chant" in effect:
+                    setattr(field_state, f"lucky_chant_{side}", False)
 
             elif cmd == "turn":
                 new_turn = int(parts[2])
@@ -507,6 +565,15 @@ class EnrichedBattleParser:
                 turn_actions = {"p1": {}, "p2": {}}
                 mega_this_turn = set()
                 move_order_this_turn = []
+                # Clear single-turn volatiles + flinch at turn boundary.
+                from .volatile_statuses import SINGLE_TURN_VOLATILES
+                for poke in all_pokemon.values():
+                    poke.volatile_statuses = [
+                        v for v in poke.volatile_statuses
+                        if v not in SINGLE_TURN_VOLATILES
+                    ]
+                    if "FLINCH" in poke.volatile_statuses:
+                        poke.volatile_statuses.remove("FLINCH")
 
             elif cmd == "win" and len(parts) >= 3:
                 winner_name = parts[2]
