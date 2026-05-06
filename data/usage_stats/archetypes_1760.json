@@ -1,0 +1,421 @@
+{
+  "format": "gen9championsvgc2026regma",
+  "cutoff": 1760,
+  "method": "lift-based hierarchical clustering, average linkage, k=8",
+  "min_usage_pct": 2.0,
+  "n_mons": 51,
+  "clusters": [
+    {
+      "id": 1,
+      "label_hint": "Sneasler / Kingambit / Basculegion",
+      "members": [
+        {
+          "name": "Sneasler",
+          "usage_pct": 43.7971
+        },
+        {
+          "name": "Kingambit",
+          "usage_pct": 38.2125
+        },
+        {
+          "name": "Basculegion",
+          "usage_pct": 38.1562
+        },
+        {
+          "name": "Froslass-Mega",
+          "usage_pct": 9.3727
+        },
+        {
+          "name": "Aerodactyl-Mega",
+          "usage_pct": 7.938
+        },
+        {
+          "name": "Delphox-Mega",
+          "usage_pct": 6.5129
+        },
+        {
+          "name": "Dragonite",
+          "usage_pct": 3.7215
+        },
+        {
+          "name": "Clefable",
+          "usage_pct": 2.0003
+        }
+      ],
+      "label": "HO Top Cut"
+    },
+    {
+      "id": 2,
+      "label_hint": "Garchomp / Charizard-Mega-Y / Whimsicott",
+      "members": [
+        {
+          "name": "Garchomp",
+          "usage_pct": 40.4036
+        },
+        {
+          "name": "Charizard-Mega-Y",
+          "usage_pct": 17.8622
+        },
+        {
+          "name": "Whimsicott",
+          "usage_pct": 10.6445
+        },
+        {
+          "name": "Sylveon",
+          "usage_pct": 8.0127
+        },
+        {
+          "name": "Venusaur",
+          "usage_pct": 4.742
+        },
+        {
+          "name": "Lopunny-Mega",
+          "usage_pct": 2.5661
+        }
+      ],
+      "label": "Sun / Fairy Aura"
+    },
+    {
+      "id": 4,
+      "label_hint": "Incineroar / Gengar-Mega / Kommo-o",
+      "members": [
+        {
+          "name": "Incineroar",
+          "usage_pct": 35.8365
+        },
+        {
+          "name": "Gengar-Mega",
+          "usage_pct": 6.4689
+        },
+        {
+          "name": "Kommo-o",
+          "usage_pct": 4.3782
+        },
+        {
+          "name": "Politoed",
+          "usage_pct": 3.3112
+        },
+        {
+          "name": "Ninetales-Alola",
+          "usage_pct": 3.1492
+        },
+        {
+          "name": "Aggron-Mega",
+          "usage_pct": 2.3325
+        },
+        {
+          "name": "Hydreigon",
+          "usage_pct": 2.2264
+        },
+        {
+          "name": "Palafin",
+          "usage_pct": 2.0918
+        },
+        {
+          "name": "Glimmora-Mega",
+          "usage_pct": 2.0699
+        }
+      ],
+      "label": "Bulky Goodstuff / Mixed"
+    },
+    {
+      "id": 3,
+      "label_hint": "Sinistcha / Pelipper / Archaludon",
+      "members": [
+        {
+          "name": "Sinistcha",
+          "usage_pct": 26.8703
+        },
+        {
+          "name": "Pelipper",
+          "usage_pct": 15.6857
+        },
+        {
+          "name": "Archaludon",
+          "usage_pct": 13.8138
+        },
+        {
+          "name": "Dragonite-Mega",
+          "usage_pct": 5.52
+        },
+        {
+          "name": "Meganium-Mega",
+          "usage_pct": 5.2754
+        },
+        {
+          "name": "Blastoise-Mega",
+          "usage_pct": 4.8201
+        },
+        {
+          "name": "Sableye",
+          "usage_pct": 3.7675
+        },
+        {
+          "name": "Scizor-Mega",
+          "usage_pct": 3.7175
+        }
+      ],
+      "label": "Rain / Bulk-Offense"
+    },
+    {
+      "id": 8,
+      "label_hint": "Floette-Mega / Aerodactyl",
+      "members": [
+        {
+          "name": "Floette-Mega",
+          "usage_pct": 21.3671
+        },
+        {
+          "name": "Aerodactyl",
+          "usage_pct": 15.2562
+        }
+      ],
+      "label": "Mega-Floette + Aero"
+    },
+    {
+      "id": 6,
+      "label_hint": "Rotom-Wash / Milotic / Tyranitar-Mega",
+      "members": [
+        {
+          "name": "Rotom-Wash",
+          "usage_pct": 13.4577
+        },
+        {
+          "name": "Milotic",
+          "usage_pct": 10.8291
+        },
+        {
+          "name": "Tyranitar-Mega",
+          "usage_pct": 7.0811
+        },
+        {
+          "name": "Corviknight",
+          "usage_pct": 5.9257
+        },
+        {
+          "name": "Excadrill",
+          "usage_pct": 4.6737
+        },
+        {
+          "name": "Tyranitar",
+          "usage_pct": 3.7096
+        },
+        {
+          "name": "Venusaur-Mega",
+          "usage_pct": 3.1405
+        },
+        {
+          "name": "Rotom-Heat",
+          "usage_pct": 2.7341
+        }
+      ],
+      "label": "Sand"
+    },
+    {
+      "id": 5,
+      "label_hint": "Farigiraf / Torkoal / Scovillain-Mega",
+      "members": [
+        {
+          "name": "Farigiraf",
+          "usage_pct": 13.2312
+        },
+        {
+          "name": "Torkoal",
+          "usage_pct": 5.287
+        },
+        {
+          "name": "Scovillain-Mega",
+          "usage_pct": 4.8217
+        },
+        {
+          "name": "Kangaskhan-Mega",
+          "usage_pct": 4.4115
+        },
+        {
+          "name": "Primarina",
+          "usage_pct": 4.3354
+        },
+        {
+          "name": "Dragapult",
+          "usage_pct": 2.3453
+        }
+      ],
+      "label": "Trick Room / Sun-TR"
+    },
+    {
+      "id": 7,
+      "label_hint": "Aegislash / Talonflame / Maushold",
+      "members": [
+        {
+          "name": "Aegislash",
+          "usage_pct": 8.3175
+        },
+        {
+          "name": "Talonflame",
+          "usage_pct": 7.5723
+        },
+        {
+          "name": "Maushold",
+          "usage_pct": 6.8499
+        },
+        {
+          "name": "Gardevoir-Mega",
+          "usage_pct": 4.1706
+        }
+      ],
+      "label": "HO Support Niche"
+    }
+  ],
+  "top_synergy_pairs": [
+    {
+      "a": "Tyranitar-Mega",
+      "b": "Excadrill",
+      "lift": 1.982
+    },
+    {
+      "a": "Gengar-Mega",
+      "b": "Politoed",
+      "lift": 1.35
+    },
+    {
+      "a": "Delphox-Mega",
+      "b": "Clefable",
+      "lift": 1.286
+    },
+    {
+      "a": "Gengar-Mega",
+      "b": "Kommo-o",
+      "lift": 1.129
+    },
+    {
+      "a": "Dragonite",
+      "b": "Clefable",
+      "lift": 1.129
+    },
+    {
+      "a": "Tyranitar-Mega",
+      "b": "Corviknight",
+      "lift": 1.119
+    },
+    {
+      "a": "Sylveon",
+      "b": "Lopunny-Mega",
+      "lift": 1.064
+    },
+    {
+      "a": "Politoed",
+      "b": "Palafin",
+      "lift": 1.057
+    },
+    {
+      "a": "Farigiraf",
+      "b": "Torkoal",
+      "lift": 1.034
+    },
+    {
+      "a": "Corviknight",
+      "b": "Excadrill",
+      "lift": 1.028
+    },
+    {
+      "a": "Pelipper",
+      "b": "Archaludon",
+      "lift": 0.99
+    },
+    {
+      "a": "Aggron-Mega",
+      "b": "Hydreigon",
+      "lift": 0.942
+    },
+    {
+      "a": "Pelipper",
+      "b": "Dragonite-Mega",
+      "lift": 0.93
+    },
+    {
+      "a": "Charizard-Mega-Y",
+      "b": "Venusaur",
+      "lift": 0.921
+    },
+    {
+      "a": "Ninetales-Alola",
+      "b": "Glimmora-Mega",
+      "lift": 0.909
+    },
+    {
+      "a": "Archaludon",
+      "b": "Dragonite-Mega",
+      "lift": 0.867
+    },
+    {
+      "a": "Tyranitar",
+      "b": "Rotom-Heat",
+      "lift": 0.853
+    },
+    {
+      "a": "Excadrill",
+      "b": "Tyranitar",
+      "lift": 0.832
+    },
+    {
+      "a": "Venusaur-Mega",
+      "b": "Rotom-Heat",
+      "lift": 0.806
+    },
+    {
+      "a": "Excadrill",
+      "b": "Rotom-Heat",
+      "lift": 0.779
+    },
+    {
+      "a": "Torkoal",
+      "b": "Venusaur",
+      "lift": 0.778
+    },
+    {
+      "a": "Maushold",
+      "b": "Gardevoir-Mega",
+      "lift": 0.767
+    },
+    {
+      "a": "Gengar-Mega",
+      "b": "Palafin",
+      "lift": 0.756
+    },
+    {
+      "a": "Scizor-Mega",
+      "b": "Politoed",
+      "lift": 0.743
+    },
+    {
+      "a": "Scovillain-Mega",
+      "b": "Primarina",
+      "lift": 0.731
+    },
+    {
+      "a": "Talonflame",
+      "b": "Maushold",
+      "lift": 0.698
+    },
+    {
+      "a": "Corviknight",
+      "b": "Glimmora-Mega",
+      "lift": 0.698
+    },
+    {
+      "a": "Tyranitar",
+      "b": "Aggron-Mega",
+      "lift": 0.683
+    },
+    {
+      "a": "Tyranitar-Mega",
+      "b": "Rotom-Heat",
+      "lift": 0.672
+    },
+    {
+      "a": "Torkoal",
+      "b": "Kangaskhan-Mega",
+      "lift": 0.67
+    }
+  ]
+}

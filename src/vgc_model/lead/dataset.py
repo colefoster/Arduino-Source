@@ -241,10 +241,12 @@ def collate(samples: list[LeadSample], builder: FeatureBuilder) -> dict[str, np.
     """Build a batch of numpy tensors. Caller converts to torch.Tensor."""
     B = len(samples)
 
-    feature_keys = list(builder.encode_pokemon("<PAD>").keys())
+    per_mon_keys = list(builder.encode_pokemon("<PAD>").keys())
+    # team-level keys produced by encode_team but not by encode_pokemon
+    team_keys = ["arch_hist"]
 
-    own = {k: [] for k in feature_keys}
-    opp = {k: [] for k in feature_keys}
+    own: dict[str, list] = {k: [] for k in per_mon_keys + team_keys}
+    opp: dict[str, list] = {k: [] for k in per_mon_keys + team_keys}
     team_lbl = np.zeros((B, 6), dtype=np.float32)
     lead_idx = np.zeros((B, 2), dtype=np.int64)
     weights = np.zeros(B, dtype=np.float32)
@@ -253,7 +255,7 @@ def collate(samples: list[LeadSample], builder: FeatureBuilder) -> dict[str, np.
     for b, s in enumerate(samples):
         ofeat = builder.encode_team(s.own_team)
         pfeat = builder.encode_team(s.opp_team)
-        for k in feature_keys:
+        for k in per_mon_keys + team_keys:
             own[k].append(ofeat[k])
             opp[k].append(pfeat[k])
         team_lbl[b] = s.team_label_vec()
@@ -263,7 +265,7 @@ def collate(samples: list[LeadSample], builder: FeatureBuilder) -> dict[str, np.
         ratings[b] = float(s.rating)
 
     out: dict[str, np.ndarray] = {}
-    for k in feature_keys:
+    for k in per_mon_keys + team_keys:
         out[f"own_{k}"] = np.stack(own[k], axis=0)
         out[f"opp_{k}"] = np.stack(opp[k], axis=0)
     out["team_label"] = team_lbl

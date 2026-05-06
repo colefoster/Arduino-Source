@@ -20,6 +20,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 from .constants import PAIRS_6, lead_pair_to_index  # noqa: F401 (re-exported)
+from .features import N_ARCHETYPES
 
 
 class PokemonEncoder(nn.Module):
@@ -36,6 +37,8 @@ class PokemonEncoder(nn.Module):
         d_item: int = 32,
         d_ability: int = 16,
         d_move: int = 32,
+        d_cluster: int = 8,
+        n_clusters: int = N_ARCHETYPES + 1,  # +1 for unknown bucket
         dropout: float = 0.0,
     ) -> None:
         super().__init__()
@@ -123,6 +126,16 @@ class LeadAdvisorModel(nn.Module):
             [CrossAttnBlock(d_model, n_heads, dropout=dropout) for _ in range(n_layers)]
         )
 
+        # Team-archetype [TEAM] token: maps the per-team cluster histogram to a
+        # learned d_model token that is prepended to each side's set so the
+        # transformer layers can condition mon reps on the team's archetype.
+        self.arch_proj = nn.Sequential(
+            nn.Linear(N_ARCHETYPES + 1, d_model),
+            nn.GELU(),
+            nn.LayerNorm(d_model),
+            nn.Dropout(dropout),
+        )
+
         self.team_head = nn.Sequential(
             nn.LayerNorm(d_model),
             nn.Linear(d_model, d_model),
@@ -133,6 +146,10 @@ class LeadAdvisorModel(nn.Module):
         # Bilinear pair scorer. lead_logits = (h_i ⨀ W ⨀ h_j) summed over channels.
         self.pair_proj = nn.Linear(d_model, d_model)
         self.pair_bias = nn.Parameter(torch.zeros(1))
+        # L3: opp-archetype-conditioned pair bias.
+        # [15 pairs, N_ARCHETYPES+1] — learned bias per (lead-pair, opp-archetype).
+        # Combined with opp arch_hist via dot product per batch element.
+        self.pair_arch_bias = nn.Parameter(torch.zeros(len(PAIRS_6), N_ARCHETYPES + 1))
 
         # Register pair index buffers
         ia = torch.tensor([p[0] for p in PAIRS_6], dtype=torch.long)
@@ -159,15 +176,29 @@ class LeadAdvisorModel(nn.Module):
             opp["scalars"], opp["in_prior"],
         )
 
+        # Dual forward through shared layers:
+        #   - team-head pathway: vanilla cross-attn, no team token (matches baseline)
+        #   - lead-head pathway: prepend [TEAM] token from archetype histogram
+        own_h_team = own_h
         for layer in self.layers:
-            own_h = layer(own_h, opp_h)
+            own_h_team = layer(own_h_team, opp_h)
+        team_logits = self.team_head(own_h_team).squeeze(-1)          # [B, 6]
 
-        team_logits = self.team_head(own_h).squeeze(-1)   # [B, 6]
+        own_team_tok = self.arch_proj(own["arch_hist"]).unsqueeze(1)  # [B, 1, d]
+        opp_team_tok = self.arch_proj(opp["arch_hist"]).unsqueeze(1)
+        own_h_lead = torch.cat([own_team_tok, own_h], dim=1)          # [B, 7, d]
+        opp_h_lead = torch.cat([opp_team_tok, opp_h], dim=1)
+        for layer in self.layers:
+            own_h_lead = layer(own_h_lead, opp_h_lead)
+        own_mons_lead = own_h_lead[:, 1:, :]                          # [B, 6, d]
 
-        h = self.pair_proj(own_h)                          # [B, 6, d]
-        hi = h.index_select(dim=1, index=self.pair_i)      # [B, 15, d]
-        hj = h.index_select(dim=1, index=self.pair_j)      # [B, 15, d]
-        lead_logits = (hi * hj).sum(dim=-1) + self.pair_bias  # [B, 15]
+        h = self.pair_proj(own_mons_lead)                             # [B, 6, d]
+        hi = h.index_select(dim=1, index=self.pair_i)                 # [B, 15, d]
+        hj = h.index_select(dim=1, index=self.pair_j)                 # [B, 15, d]
+        # opp arch_hist: [B, N+1]. pair_arch_bias: [15, N+1]. -> [B, 15]
+        opp_hist = opp["arch_hist"]
+        arch_bias = opp_hist @ self.pair_arch_bias.t()                # [B, 15]
+        lead_logits = (hi * hj).sum(dim=-1) + self.pair_bias + arch_bias  # [B, 15]
 
         if team_mask is not None:
             # Pair (i,j) valid iff both i and j are in the brought set.
