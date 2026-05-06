@@ -18,6 +18,7 @@
 #include "PokemonChampions/Inference/PokemonChampions_BattleLogReader.h"
 #include "PokemonChampions/Inference/PokemonChampions_TeamSelectReader.h"
 #include "PokemonChampions/Inference/PokemonChampions_TeamSummaryReader.h"
+#include "PokemonChampions/Inference/PokemonChampions_TeamStatsReader.h"
 #include "PokemonChampions/Inference/PokemonChampions_TeamPreviewReader.h"
 #include "PokemonChampions/Inference/PokemonChampions_PokeballAliveDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_BattleEndDetector.h"
@@ -116,10 +117,58 @@ int run_ocr_suggest(const std::string& reader_name, const std::string& image_pat
         else if (reader_name == "TeamSummaryReader"){
             TeamSummaryReader reader(Language::English);
             auto team = reader.read_team(log, image);
-            std::cout << "{\"species\":[";
+            std::cout << "{\"slots\":[";
             for (size_t i = 0; i < 6; i++){
                 if (i > 0) std::cout << ",";
-                std::cout << "\"" << team[i].species << "\"";
+                std::cout << "{"
+                    << "\"species\":\"" << team[i].species << "\","
+                    << "\"ability\":\"" << team[i].ability << "\","
+                    << "\"item\":\"" << team[i].item << "\","
+                    << "\"moves\":[\"" << team[i].moves[0] << "\",\""
+                                       << team[i].moves[1] << "\",\""
+                                       << team[i].moves[2] << "\",\""
+                                       << team[i].moves[3] << "\"]"
+                    << "}";
+            }
+            std::cout << "]}" << std::endl;
+        }
+        else if (reader_name == "TeamStatsReader"){
+            TeamStatsReader reader;
+            auto team = reader.read_team(log, image);
+            //  Strip non-printable / non-ASCII from raw OCR text and escape
+            //  quotes/backslashes so the JSON parses cleanly.
+            auto json_str = [](const std::string& s){
+                std::string out;
+                for (char c : s){
+                    unsigned char u = (unsigned char)c;
+                    if (u < 0x20 || u >= 0x7F) continue;
+                    if (c == '"') out += "\\\"";
+                    else if (c == '\\') out += "\\\\";
+                    else out += c;
+                }
+                return out;
+            };
+            std::cout << "{\"slots\":[";
+            for (size_t i = 0; i < 6; i++){
+                if (i > 0) std::cout << ",";
+                const auto& s = team[i];
+                std::cout << "{"
+                    << "\"nature\":\"" << s.nature_slug << "\","
+                    << "\"stats\":{";
+                static const char* stat_keys[6] = {"hp","atk","def","spa","spd","spe"};
+                for (size_t k = 0; k < 6; k++){
+                    if (k > 0) std::cout << ",";
+                    std::cout << "\"" << stat_keys[k] << "\":{"
+                        << "\"actual\":" << s.stats[k].actual << ","
+                        << "\"evs\":" << s.stats[k].evs << ","
+                        << "\"nature\":\"" << nature_mod_name(s.stats[k].nature) << "\","
+                        << "\"raw_actual\":\"" << json_str(s.stats[k].raw_actual) << "\","
+                        << "\"raw_evs\":\"" << json_str(s.stats[k].raw_evs) << "\","
+                        << "\"blue_px\":" << s.stats[k].blue_pixel_count << ","
+                        << "\"red_px\":" << s.stats[k].red_pixel_count
+                        << "}";
+                }
+                std::cout << "}}";
             }
             std::cout << "]}" << std::endl;
         }

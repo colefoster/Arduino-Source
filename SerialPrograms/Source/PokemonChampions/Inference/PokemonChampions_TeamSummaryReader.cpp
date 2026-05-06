@@ -30,6 +30,7 @@
 #include "PokemonChampions_BattleHUDReader.h"     //  SpeciesNameOCR
 #include "PokemonChampions_MoveNameReader.h"       //  MoveNameOCR
 #include "PokemonChampions_AbilityNameReader.h"    //  AbilityNameOCR
+#include "PokemonChampions_ItemNameReader.h"       //  ItemNameOCR
 
 namespace PokemonAutomation{
 namespace NintendoSwitch{
@@ -62,6 +63,13 @@ static constexpr double MOVE_WIDTH     = 0.097;
 static constexpr double MOVE_HEIGHT    = 0.034;
 //  Y offsets of the 4 moves relative to the card's species Y.
 static constexpr double MOVE_DY[4]     = {0.0037, 0.0444, 0.0861, 0.1296};
+
+//  Item text region — sits one line below the ability on the same card.
+//  Drawn 2026-05-06 from team_stats screenshot; deltas relative to species.
+static constexpr double ITEM_DX        = 0.0040;
+static constexpr double ITEM_DY        = 0.0923;
+static constexpr double ITEM_WIDTH     = 0.0656;
+static constexpr double ITEM_HEIGHT    = 0.0291;
 
 
 // ─── MovesMoreDetector ─────────────────────────────────────────────────
@@ -118,6 +126,8 @@ TeamSummaryReader::TeamSummaryReader(Language language)
         m_species_boxes[slot] = ImageFloatBox(sx, sy, SPECIES_WIDTH, SPECIES_HEIGHT);
         m_ability_boxes[slot] = ImageFloatBox(
             sx + ABILITY_DX, sy + ABILITY_DY, ABILITY_WIDTH, ABILITY_HEIGHT);
+        m_item_boxes[slot] = ImageFloatBox(
+            sx + ITEM_DX, sy + ITEM_DY, ITEM_WIDTH, ITEM_HEIGHT);
 
         double mx = MOVE_X_COL[col];
         for (uint8_t m = 0; m < 4; m++){
@@ -132,6 +142,7 @@ void TeamSummaryReader::make_overlays(VideoOverlaySet& items) const{
     for (uint8_t slot = 0; slot < 6; slot++){
         items.add(COLOR_CYAN, m_species_boxes[slot]);
         items.add(COLOR_MAGENTA, m_ability_boxes[slot]);
+        items.add(COLOR_YELLOW, m_item_boxes[slot]);
         for (uint8_t m = 0; m < 4; m++){
             items.add(COLOR_GREEN, m_move_boxes[slot][m]);
         }
@@ -169,6 +180,17 @@ TeamSummaryInfo TeamSummaryReader::read_card(
         }
     }
 
+    //  Item.
+    {
+        ImageViewRGB32 cropped = extract_box_reference(screen, m_item_boxes[slot]);
+        OCR::StringMatchResult result = ItemNameOCR::instance().read_substring(
+            logger, m_language, cropped, OCR::WHITE_TEXT_FILTERS()
+        );
+        if (!result.results.empty()){
+            info.item = result.results.begin()->second.token;
+        }
+    }
+
     //  4 moves.
     for (uint8_t m = 0; m < 4; m++){
         ImageViewRGB32 cropped = extract_box_reference(screen, m_move_boxes[slot][m]);
@@ -184,6 +206,7 @@ TeamSummaryInfo TeamSummaryReader::read_card(
         "TeamSummaryReader: slot " + std::to_string(slot) +
         " species=\"" + info.species +
         "\" ability=\"" + info.ability +
+        "\" item=\"" + info.item +
         "\" moves=[" +
         info.moves[0] + ", " + info.moves[1] + ", " +
         info.moves[2] + ", " + info.moves[3] + "]"

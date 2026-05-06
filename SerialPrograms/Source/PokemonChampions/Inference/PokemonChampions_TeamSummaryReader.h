@@ -41,16 +41,16 @@ namespace PokemonChampions{
 struct TeamSummaryInfo{
     std::string species;                //  Matched slug, "" on failure.
     std::string ability;                //  Matched slug, "" on failure.
+    std::string item;                   //  Matched slug, "" on failure.
     std::array<std::string, 4> moves;   //  Matched slugs; "" for any failed slot.
-    //  Item is not read from this screen (not displayed).
 
-    //  Convert to ConfiguredPokemon for BattleStateTracker. Item will be "".
+    //  Convert to ConfiguredPokemon for BattleStateTracker.
     ConfiguredPokemon to_configured() const{
         ConfiguredPokemon p;
         p.species = species;
         p.ability = ability;
         p.moves = moves;
-        p.item = "";
+        p.item = item;
         return p;
     }
 };
@@ -87,6 +87,7 @@ private:
 
     std::array<ImageFloatBox, 6> m_species_boxes;
     std::array<ImageFloatBox, 6> m_ability_boxes;
+    std::array<ImageFloatBox, 6> m_item_boxes;
     //  [slot][move_idx] — 6 slots x 4 moves = 24 boxes.
     std::array<std::array<ImageFloatBox, 4>, 6> m_move_boxes;
 };
