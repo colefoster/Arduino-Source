@@ -34,8 +34,8 @@ TargetSelectReader::TargetSelectReader(Language language)
     m_opp_effectiveness[1] = ImageFloatBox(0.5658, 0.2300, 0.1056, 0.0285);
     m_own_effectiveness[0] = ImageFloatBox(0.3083, 0.5785, 0.1190, 0.0269);
     m_own_effectiveness[1] = ImageFloatBox(0.5658, 0.5667, 0.1056, 0.0285);
-    m_own_move_name[0]     = ImageFloatBox(0.3203, 0.4914, 0.1096, 0.0317);
-    m_own_move_name[1]     = ImageFloatBox(0.5778, 0.4914, 0.1096, 0.0317);
+    m_own_move_name[0]     = ImageFloatBox(0.3203, 0.4914, 0.1046, 0.0317);
+    m_own_move_name[1]     = ImageFloatBox(0.5778, 0.4914, 0.1046, 0.0317);
 }
 
 

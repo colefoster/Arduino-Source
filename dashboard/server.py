@@ -239,8 +239,8 @@ CROP_DEFS = {
         {"name": "opp_1_effectiveness",  "box": [0.5658, 0.2300, 0.1056, 0.0285]},
         {"name": "own_0_effectiveness",  "box": [0.3083, 0.5785, 0.1190, 0.0269]},
         {"name": "own_1_effectiveness",  "box": [0.5658, 0.5667, 0.1056, 0.0285]},
-        {"name": "own_0_move_name",      "box": [0.3203, 0.4914, 0.1096, 0.0317]},
-        {"name": "own_1_move_name",      "box": [0.5778, 0.4914, 0.1096, 0.0317]},
+        {"name": "own_0_move_name",      "box": [0.3203, 0.4914, 0.1046, 0.0317]},
+        {"name": "own_1_move_name",      "box": [0.5778, 0.4914, 0.1046, 0.0317]},
     ],
 }
 
