@@ -32,27 +32,27 @@ REFS_DIR = OUT_DIR / "refs"
 INDEX_PATH = OUT_DIR / "index.json"
 
 #  Pill ICON regions (the sprite-bearing rectangle, NOT the name text bar).
-#  opp_X coords from user's saved opp_sprite_0/1 boxes.
-#  own_X coords from tools/box_definitions.json (`own_specoes_icon_0/1`)
-#  saved earlier for the existing own-side sprite-match work.
+#  Tuned 2026-05-06: opp shifted right 1px + top up 1px + bottom down ~4px;
+#  own top up ~6px to capture the upper portion of the icon clipped at default.
+#  1 px on 1920x1080 ≈ 0.00052 in x and 0.00093 in y.
+#  Normalized: uniform 108x96 px (≈0.0563 x 0.0889) per slot, plus uniform
+#  y per side (slot 0 and 1 share the same vertical strip). x kept per-slot
+#  since the two pills sit at different horizontal positions on each side.
 PILL_BOXES = {
-    "opp_0": (0.5702, 0.0480, 0.0520, 0.0954),
-    "opp_1": (0.7700, 0.0480, 0.0602, 0.0846),
-    "own_0": (0.0249, 0.8763, 0.0556, 0.0803),
-    "own_1": (0.2301, 0.8840, 0.0576, 0.0753),
+    "opp_0": (0.5680, 0.0499, 0.0563, 0.0889),
+    "opp_1": (0.7724, 0.0499, 0.0563, 0.0889),
+    "own_0": (0.0245, 0.8718, 0.0563, 0.0889),
+    "own_1": (0.2307, 0.8718, 0.0563, 0.0889),
 }
 
 CROP_SIZE = (50, 50)
 
 
 def slug_norm(s: str) -> str:
-    """Strip -shiny / -mega-x|y / -mega so we group base species together."""
-    if not s: return ""
-    s = s.lower().strip()
-    for suf in ("-shiny", "-mega-x", "-mega-y", "-mega"):
-        if s.endswith(suf):
-            s = s[:-len(suf)]
-    return s
+    """Lowercase + strip; do NOT collapse mega/shiny variants. Each visual
+    variant gets its own atlas entry — averaging gengar + gengar-mega
+    yields a blend that matches neither well."""
+    return (s or "").lower().strip()
 
 
 def slot_box_name(slot: str):

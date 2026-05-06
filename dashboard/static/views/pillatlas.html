@@ -6,10 +6,14 @@
         Bulbapedia atlas hits ~22% top-1; this approach is ~95% with one ref/species).
         Re-run the build to grow the atlas after labeling new frames.
     </div>
-    <div style="display:flex; gap:8px; align-items:center; margin-bottom:12px;">
+    <div style="display:flex; gap:8px; align-items:center; margin-bottom:12px; flex-wrap:wrap;">
         <button class="btn" id="pa-rebuild-btn" style="border-color:#d29922; color:#d29922;">Rebuild from manifests</button>
         <span id="pa-rebuild-status" style="font-size:11px; color:#8b949e;"></span>
+        <span style="flex:1"></span>
+        <button class="btn" id="pa-audit-btn" style="border-color:#79c0ff; color:#79c0ff;">Audit labels (find mislabels)</button>
+        <span id="pa-audit-status" style="font-size:11px; color:#8b949e;"></span>
     </div>
+    <div id="pa-audit-results" style="display:none; margin-bottom:16px;"></div>
     <div id="pa-status" style="font-size:11px; color:#8b949e; margin-bottom:12px;">Loading...</div>
     <div id="pa-grid"></div>
 </div>
@@ -29,4 +33,14 @@
 .pa-species-card.expanded .refs .ref-cell { display: flex; flex-direction: column; align-items: center; }
 .pa-species-card.expanded .refs .ref-cell .ref-name { font-size: 9px; color: #6e7681; word-break: break-all; text-align: center; max-width: 100%; }
 .pa-thin { border-color: #d29922 !important; }
+.pa-suspect-card { background: #161b22; border: 1px solid #f85149; border-radius: 6px; padding: 8px; margin-bottom: 8px; display: grid; grid-template-columns: 100px 1fr 1fr; gap: 12px; align-items: center; }
+.pa-suspect-card .head { font-size: 11px; color: #8b949e; word-break: break-all; }
+.pa-suspect-card .col { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 4px; border-radius: 4px; background: #0d1117; }
+.pa-suspect-card .col img { width: 80px; height: auto; image-rendering: pixelated; }
+.pa-suspect-card .col .label { font-size: 10px; color: #6e7681; text-transform: uppercase; }
+.pa-suspect-card .col .name { font-family: ui-monospace, monospace; font-size: 12px; }
+.pa-suspect-card .col .rmsd { font-size: 10px; color: #6e7681; }
+.pa-suspect-card .col.predicted { background: #0d2a1d; border: 1px solid #3fb950; }
+.pa-suspect-card .col.labeled { background: #2d0d12; border: 1px solid #f85149; }
+.pa-suspect-card .conf { font-family: ui-monospace, monospace; font-size: 11px; color: #d29922; }
 </style>

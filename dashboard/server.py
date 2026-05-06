@@ -1104,6 +1104,135 @@ async def hud_pill_atlas_ref(filename: str):
         return JSONResponse({"error": "not found"}, 404)
     return Response(p.read_bytes(), media_type="image/png")
 
+@app.get("/api/hud-pill-atlas/audit")
+async def hud_pill_atlas_audit():
+    """For each ref crop, compare its RMSD against every species mean
+    (excluding itself from its labeled species's mean) and flag cases where
+    the top-1 predicted species != the labeled species. Catches mislabels
+    (hidden megas labeled as base form, OCR slips, etc.).
+
+    Returns a list of suspect crops sorted by confidence-of-mismatch."""
+    import base64, io
+    idx_path = HUD_PILL_ATLAS_DIR / "index.json"
+    if not idx_path.exists():
+        return {"suspects": [], "error": "atlas not built"}
+    idx = json.loads(idx_path.read_text())
+    refs_dir = HUD_PILL_ATLAS_DIR / "refs"
+    try:
+        from PIL import Image
+        import numpy as np
+    except Exception as e:
+        return {"suspects": [], "error": f"pillow/numpy missing: {e}"}
+
+    suspects = []
+    for side, species_map in idx.items():
+        # Load all crops once.
+        crops_per_sp: dict = {}
+        all_crops_with_label: list = []
+        for sp, info in species_map.items():
+            arrs = []
+            for r in info.get("refs", []):
+                p = refs_dir / r["ref"]
+                if not p.exists(): continue
+                try:
+                    arr = np.array(Image.open(p).convert("RGB"), dtype=np.float32)
+                    arrs.append((arr, r))
+                except Exception:
+                    continue
+            if arrs:
+                crops_per_sp[sp] = arrs
+                for arr, meta in arrs:
+                    all_crops_with_label.append((side, sp, arr, meta))
+
+        # For each crop, compute RMSD vs each species mean (excluding self
+        # from its own species mean if its species has multiple refs).
+        for side_q, label_sp, query, meta in all_crops_with_label:
+            # Build means per species; for the labeled sp, leave the query out.
+            best_sp, best_rmsd = None, float('inf')
+            label_rmsd = float('inf')
+            for sp, arrs in crops_per_sp.items():
+                if sp == label_sp:
+                    others = [a for a, m in arrs if m["ref"] != meta["ref"]]
+                    if not others: continue  # only self → can't score against own
+                    ref = np.mean(others, axis=0)
+                else:
+                    ref = np.mean([a for a, _ in arrs], axis=0)
+                rmsd = float(np.sqrt(np.mean((query - ref) ** 2)))
+                if sp == label_sp: label_rmsd = rmsd
+                if rmsd < best_rmsd:
+                    best_rmsd = rmsd; best_sp = sp
+            if best_sp is None: continue
+            if best_sp != label_sp:
+                # Suspect: predicted != labeled
+                suspects.append({
+                    "side": side_q,
+                    "labeled_species": label_sp,
+                    "predicted_species": best_sp,
+                    "ref": meta["ref"],
+                    "source_frame": meta.get("source_frame", ""),
+                    "slot": meta.get("slot", -1),
+                    "rmsd_predicted": round(best_rmsd, 2),
+                    "rmsd_labeled": round(label_rmsd, 2) if label_rmsd != float('inf') else None,
+                    # Confidence-of-mismatch: bigger gap = stronger signal
+                    "confidence": round(label_rmsd - best_rmsd, 2) if label_rmsd != float('inf') else None,
+                })
+
+    suspects.sort(key=lambda s: -(s["confidence"] or 0))
+    return {"suspects": suspects, "count": len(suspects)}
+
+
+@app.post("/api/hud-pill-atlas/relabel")
+async def hud_pill_atlas_relabel(request: Request):
+    """Apply an audit suggestion: update the manifest's BattleHUDReader
+    {own,opponent}_species[slot] for the source frame to the predicted slug.
+    Atlas itself isn't regenerated — caller should hit /rebuild after batching
+    a few of these so we don't re-extract on each click.
+    """
+    body = await request.json()
+    ref = body.get("ref", "")
+    new_species = (body.get("new_species") or "").strip().lower()
+    if not ref or not new_species:
+        return JSONResponse({"error": "ref and new_species required"}, 400)
+    # ref filename format: <side>__<species>__<frame_id>__slot<i>.png
+    parts = ref.replace(".png", "").split("__")
+    if len(parts) < 4:
+        return JSONResponse({"error": f"unexpected ref format: {ref}"}, 400)
+    side = parts[0]
+    frame_id = parts[2]
+    slot_str = parts[3]
+    if not slot_str.startswith("slot"):
+        return JSONResponse({"error": f"unexpected slot: {slot_str}"}, 400)
+    try: slot_idx = int(slot_str[4:])
+    except ValueError:
+        return JSONResponse({"error": f"bad slot int: {slot_str}"}, 400)
+    if side not in ("own", "opp") or slot_idx not in (0, 1):
+        return JSONResponse({"error": f"unsupported side/slot: {side}/{slot_idx}"}, 400)
+
+    field = "own_species" if side == "own" else "opponent_species"
+    target_filename = frame_id + ".png"
+    # Search action_menu / move_select manifests.
+    updated = False
+    for screen in ("action_menu", "move_select"):
+        mpath = TEST_IMAGES_DIR / screen / "manifest.json"
+        if not mpath.exists(): continue
+        manifest = json.loads(mpath.read_text())
+        entry = manifest.get(target_filename)
+        if not entry: continue
+        bhr = entry.setdefault("BattleHUDReader", {})
+        arr = bhr.get(field) or ["", ""]
+        if not isinstance(arr, list) or len(arr) < 2:
+            arr = ["", ""]
+        old = arr[slot_idx]
+        arr[slot_idx] = new_species
+        bhr[field] = arr
+        mpath.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n")
+        updated = True
+        return {"ok": True, "screen": screen, "frame": target_filename,
+                "field": field, "slot": slot_idx, "old": old, "new": new_species}
+    if not updated:
+        return JSONResponse({"error": f"frame {target_filename} not found in any screen manifest"}, 404)
+
+
 @app.post("/api/hud-pill-atlas/rebuild")
 async def hud_pill_atlas_rebuild():
     """Re-run the atlas build script (re-extracts crops from current
