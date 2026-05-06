@@ -4,55 +4,52 @@ Living doc. Keep it short. When in doubt, move things up or delete, don't expand
 
 Update protocol: edit in place, no dates on items in Now/Next/Backlog. Add to **Recently shipped** when something lands.
 
+**Theme: close the auto-laddering loop.** All readers/detectors are at 100% on the manifest. The remaining work is plumbing those signals into `BattleStateTracker` and closing action-execution gaps in `AutoLadder`. See gap analysis: AutoLadder ~40% end-to-end; biggest single win is wiring BattleLogReader.
+
 ---
 
 ## Now
 *Actively touching this week.*
 
-- **OCR quality pass on BattleHUDReader.** HP digit massaging started (`088b961c9`: 7→1, 0-699, cur≤max). PP surfaced in OcrSuggest + manifest. Still open: HP-bar-color sanity check on max HP, decide whether to keep PP visual or DB-tracked.
-- **Mismatches workflow.** Streaming + per-row crop + bulk Accept + j/k/a/s/i landed. Use it to grind down the remaining detector failures (see Backlog).
+- **Wire BattleLogReader → BattleStateTracker.update_from_log()** in the per-turn loop. `LiveDetectorTrace.cpp:172` notes it's built but not wired. Unlocks boosts, status, weather, terrain, trick room, tailwind, screens, switch events, mega flag, item/ability reveals — everything `/predict` currently receives as zeros.
+- **Pokeball detector live integration.** Detector + visual confirm shipped; still need to call it per turn from AutoLadder and feed `alive[]` into the tracker. Runtime carries forward "was alive at start" so fainted-vs-empty resolves itself.
 
 ## Next
 *Picked, not started.*
 
-- **Pokeball detector live integration.** Detector + visual confirm shipped. Still need: wire into the inference engine / spectator pipeline so it runs per turn. (Runtime carries forward "was alive at start" so fainted-vs-empty ambiguity resolves itself; no ground-truth labeling needed.)
-- **Game time + turn time parsing.** Niche, but useful for troubleshooting and replay annotation.
-- **(Removed)** BattleHUD own-active sprite match -- shipped as a sanity-check signal at ~5/6 on team mons; not the primary identity path. Active mon is determined by user selection order, not visual.
-- **Result screen box widths.** Gold/silver detection works; if the L/R win/loss assumption (us=left, opp=right) is ever wrong, adjust boxes.
+- **Target-select detection + execution for doubles.** `AutoLadder.cpp:721` TODO. Need TargetSelectDetector wired to the loop, and execute_action to navigate to the chosen target instead of mashing A.
+- **Plumb `/team-select` into AutoLadder.** Endpoint exists server-side; AutoLadder still uses hardcoded `TEAM_STRATEGY` (first-three / random / last-three). Also: AutoLadder hardcodes 3-of-6, but Champions format is 4-of-6.
+- **TeamSelectScreenDetector.** Replace the hardcoded 60s wait at `AutoLadder.cpp:333`.
+- **Legal-actions mask** computed client-side from HP / PP / choice-lock / disable, passed in `PredictRequest`. Today the model picks blind and can recommend illegal moves.
+- **Mega Evo execution + confirmation.** R-toggle is sent but `is_mega` is never set post-execution; no detector confirms it landed.
+- **Switch action space beyond bench slots 0–1.** Actions 12–13 hardcoded; doesn't cover all viable benches.
 
 ## Backlog
 *Ideas, not committed.*
 
-- **Break up `BattleHUDReader`?** It's drifting toward 8+ sub-readers (HP, PP, status, Tera, item, ability, sprite, pokeballs). Open design Q -- when does fan-out beat a single fat reader?
-- **Detector tuning grind** (current state, 2026-05-02 evening):
-  - BattleHUDReader.opponent_species: 138/138 (100%) -- all 41 prior fails were mislabels; OCR was correct (canonical species, language-agnostic)
-  - BattleHUDReader.own_hp_current: 66/66 (100%)
-  - BattleHUDReader.own_hp_max: 66/66 (100%)
-  - TeamPreviewDetector: 213/213 (100%) -- locked-in screen dropped from registry; PreparingForBattleDetector covers that screen
-  - **All readers + detectors at 100%.** Manifest-regression overall: 2543/2543.
-- **Search engine sequence-history encoding.** MCTS 1-ply gave -0.4% lift; bottleneck is missing sequence history in encoding (per `memory/project_search_engine.md`).
+- **Overlay-based readers as backup for log misses:** StatusOverlayReader (HUD status icons), BoostsReader (stat arrows), WeatherReader, TerrainReader, TrickRoom/Tailwind/Screens detectors. Battle log is primary; these are belt-and-suspenders for OCR-miss frames.
+- **Edge-case handling in AutoLadder:** struggle (out of PP), forced switch on faint, opponent forfeit / disconnect, our forfeit, taunt / disable / protect cooldown tracked in `PokemonState`.
+- **Inference server schema gaps:** choice-locked move, disable turns, taunt turns, protect-cooldown, opponent move history not in `PokemonState`. Server can't see them; client can't send them.
+- **AbilityRevealReader / ItemRevealReader.** Today reveals come only via battle log; an overlay reader would catch the "Garchomp's Sand Veil!" bubble directly.
+- **Game time + turn time parsing.** Niche; useful for replay annotation and timeout debugging.
+- **HP-bar-color sanity check on max HP** (BattleHUDReader). Cross-check OCR'd max against pixel-level bar-color reading.
+- **PP: visual OCR vs DB-tracked.** Currently OCR'd; could be subtracted from move DB on each MOVE_USED event.
+- **Break up `BattleHUDReader`?** Drifting toward 8+ sub-readers. Open design Q — when does fan-out beat a single fat reader?
+- **Search engine sequence-history encoding.** MCTS 1-ply gave -0.4% lift; bottleneck is missing sequence history per `memory/project_search_engine.md`.
 - **Pipeline redesign.** Two-layer hour-bucketed pipeline; sharded_cache + lead/winrate/v2_window slated for deletion. Phased plan in `plans/two-layer-pipeline-and-model-cuts.md`.
 
 ## Recently shipped
 *Last ~2 weeks. Trim aggressively -- this is for context, not history.*
 
-- 2026-05-04 -- TeamSelectDetector to 100%. Last fail was a green-flash mid-animation overlay that read ratio-similar yellow at one tab position. Added a brightness floor (`r+g >= 400`) — real selected tab reads sum=510, FPs all <=312. Same shape as the MainMenu / MovesMore / PostMatch fixes earlier today. Plus deleted `move_select/doubles_move_select_glimmora.png` (mid-animation garbage frame, not a useful test case). All readers + detectors now at 100%; overall regression 2543/2543.
-- 2026-05-04 -- BattleLogReader 7/9 -> 9/9 (100%) and full PS-derived event taxonomy. Replaced the hand-written regex chain with a generated pattern table sourced from Pokemon Showdown's `data/text/default.ts` (220 patterns covering 41 event types). New generator at `tools/generate_battle_log_patterns.py` ingests PS templates + a curated mapping → emits `PokemonChampions_BattleLogPatterns_Generated.cpp`. Reader now uses `regex_search` over the table sorted by literal-text length (most-specific first). Picked up `withdrew` (SWITCH_OUT), `grew drowsy` (Yawn → STATUS_INFLICTED), confusion / damage / heal / crit / miss / immune / mega / cant / item-transfer / field-effect categories. Promoted `event_type_to_string`/`from_string` to the public header. Fixes that mattered: strip `**[MOVE]**` markdown from PS templates; allow trailing OCR garbage by using `regex_search` not `regex_match`; make trailing punctuation optional so OCR misreads of `!` (e.g. `effectivel`) still match.
-- 2026-05-04 -- PostMatchScreenDetector 99.1% -> 100%. Both FPs (action_menu + communicating overlay) had genuine green-yellow pixels at the Continue button position (battle move tiles). Tightening color alone couldn't separate. Added co-evidence: a real post-match screen has exactly one green pill and two unselected purple-blue pills (`b > 100 AND b > r+g`). On battle FPs all three button positions read warm/green so the purple test fails. Same shape as the MainMenu chrome co-evidence.
-- 2026-05-04 -- MovesMoreDetector 99.1% -> 100%. Both FPs (action_menu attack-anim + communicating overlay) had near-black pixels at the card-bg sample with ratio identical to the bright purple. Added channel-sum brightness floor (`r+g+b >= 200`); real card reads sum=399, FPs read sum<100.
-- 2026-05-04 -- MainMenuDetector 95.3% -> 100%. Remaining 10 FPs were action_menu / move_select / battle_log / battle_mode_menu frames where genuine yellow pixels (move tiles, status icons) happened to land on the 3x3 button-glow sample regions. Tightened `is_solid` ratio tolerance 0.15 -> 0.05 (kills 6 off-color FPs) and added a third "menu chrome" sample at (0.30, 0.45) — the TV/character backdrop reads bright cyan-blue (b≈254) on the menu and warm/dim (b<150) on every battle FP. Also added detectors to the dashboard Mismatches view (new `Detectors` optgroup) and switched mac_dev_runner from single-threaded `HTTPServer` to `ThreadingHTTPServer` so 200+ parallel scans don't queue head-of-line and trigger Cloudflare 524.
-- 2026-05-04 -- BattleHUDReader.own_hp_current/max 90.9%/95.5% -> 100%/100%. Switched from two per-side crops (cur, max) to one combined "X/Y" crop per slot — Tesseract sees the slash in proper digit context. Added a digit-confusable pre-pass mapping common Tesseract misreads (`>` → `2`, `B`/`E` → `8`, `O` → `0`, etc.) before parse_fraction; the pre-pass drops confusables that are sandwiched between two digits (segmentation noise like "8E4") instead of mapping them. Mismatches view now shows `(raw: X)` next to `got` so you can see pre/post fixup at a glance.
-- 2026-05-03 -- TeamPreviewDetector 98.1% -> 100%. All 4 fails were on `team_preview_locked_in` frames; the detector OCRs "Select 4 Pokemon..." which only appears on the selecting screen. Fixed by dropping `team_preview_locked_in` from the detector's registry entry (PreparingForBattleDetector already covers that screen).
-- 2026-05-03 -- BattleHUDReader.opponent_species 70.3% -> 100%. All 41 fails were mislabels; OCR had been right. Mismatches view now supports `field=` filter + URL prepopulation (`#/mismatches?reader=...&field=...&auto=1`) for fast triage. Confirmed live that opp species cards are canonical (not nicknames) and language-agnostic -- saved to memory.
-- 2026-05-02 -- MainMenuDetector 81.9% -> 95.3% and PostMatchScreenDetector 82.8% -> 99.1%. Both detectors were matching dim-but-correctly-rationed pixels (RGB ~(80, 60, 5) ratios identically to bright menu yellow ~(240, 250, 20)). Added brightness floors (`r+g >= 400` for MainMenu yellow, `>= 280` for PostMatch green). 2 mislabeled "Win Streak Bonus" interlude frames moved from `post_match/` to `_other/` -- they have no visible buttons.
-- 2026-05-02 -- ResultScreenDetector to 100%. Switched winner/loser color from gold/silver to **blue/red nameplate** (the gold "WON!" emblem the user mentioned earlier sits above the nameplate, not on it). Tolerance widened to absorb white-text-on-color stddev. 4 mislabeled frames moved: 3 from `post_match/` to `result_screen/` (visually identical to result frames), 2 transition frames to `_other/`.
-- 2026-05-02 -- PokeballAliveDetector. C++ class + OcrSuggest dispatch + dashboard reader entry + Pokeballs tab visual-confirm view (`/api/pokeballs/scan` + `views/pokeballs.html`). Three-state classifier (alive / fainted / empty) on mean green: thresholds 150 / 67. Greens read cleanly across 110 frames; runtime context disambiguates fainted vs empty (greens-then-grey = fainted; never-green = empty), so no ground-truth labeling needed. Box anchors saved by user via Inspector; rest linearly extrapolated.
-- 2026-05-02 -- BattleHUD own-sprite sanity check. Shiny atlas (Bulbapedia "Champions Shiny menu sprites" -> `PokemonSpritesShiny.{png,json}`, 272 entries, loaded with `-shiny` slug suffix). `--sprite-match` / `--sprite-match-debug` CLI modes (`Tests/SpriteMatch.{h,cpp}`) with bg-paint pre-pass (pill purple + active-turn lime green). Manifests carry `own_species_shiny: [bool, bool]` via `tools/mark_shiny_species.py`. Dashboard Sprites tab "BattleHUD own-species icons" section runs aggregated per-species debug (crop -> auto-crop -> top-3 matches). Team-atlas filter caps candidates to current team's normal/shiny/mega slugs -> 5/6 top-1 on team mons.
-- 2026-05-02 -- Team Preview tab split out from Sprites tab into its own lightweight view.
-- 2026-05-02 -- Sprites tab: drop "All references" grid, drop My-side panel on locked-in (no own text there), 7x faster examples endpoint. Gate own-side OCR off in `TeamPreviewReader::read` for locked-in.
-- 2026-05-01 -- HP digit fixups (7→1, 0-699 clamp, cur≤max), gold/silver result colors, PP in OcrSuggest+manifest (`088b961c9`).
-- 2026-05-01 -- Mismatches view: stream rows + progress bar (`4c4c32951`); per-row crop, bulk Accept, j/k/a/s/i nav (`ec26afd65`).
-- 2026-04-30 -- TeamPreviewReader dispatches opp boxes by PreparingForBattleDetector (selecting vs locked-in) (`5d9c48b4f`).
-- 2026-04-30 -- Sprites tab: My-side species OCR alongside opp matches (`673f382f2`); all labeled team-preview frames (`f175208f5`).
-- 2026-04-29 -- Locked-in opp coords re-anchored at slot 0/1/5 (`647e16fb8`); inspector exposes TeamPreviewReader_selecting overlay for tuning (`7459d7d2d`).
-- 2026-04-28 -- BattleLogReader tightened x/width (`3295c4181`).
+- 2026-05-06 -- HUD Pill Atlas (in-domain sprite atlas, ~95% top-1 vs canonical 22%); audit + Accept-relabel flow at /#/pillatlas; box normalization; uses own_species_icon boxes (not name-text).
+- 2026-05-05 -- PokeballAliveDetector 4th state ALIVE_STATUSED (orange ball).
+- 2026-05-05 -- Inbox: Accept All button in the Partial section header.
+- 2026-05-04 -- TeamSelectDetector to 100% (brightness floor `r+g >= 400` to kill green-flash mid-animation FP).
+- 2026-05-04 -- BattleLogReader 100% + full PS-derived event taxonomy (220 patterns / 41 event types from `data/text/default.ts` via `tools/generate_battle_log_patterns.py`). `regex_search` over length-sorted patterns; picks up withdrew, drowsy, confusion, crit, miss, immune, mega, cant, item-transfer, field-effect.
+- 2026-05-04 -- PostMatchScreenDetector + MovesMoreDetector + MainMenuDetector to 100% via co-evidence + brightness-floor pattern (same shape as TeamSelect fix). All readers + detectors now at 100%; manifest regression 2543/2543.
+- 2026-05-04 -- BattleHUDReader.own_hp_current/max to 100% via combined "X/Y" crop + digit-confusable pre-pass with sandwich-drop rule for segmentation noise.
+- 2026-05-03 -- TeamPreviewDetector + BattleHUDReader.opponent_species to 100% (mostly mislabel cleanup; opp species cards confirmed canonical English, language-agnostic).
+- 2026-05-02 -- ResultScreenDetector to 100% (blue/red nameplate, not gold/silver emblem).
+- 2026-05-02 -- PokeballAliveDetector base implementation: 3-state (alive/fainted/empty) on mean green; box anchors via Inspector.
+- 2026-05-02 -- BattleHUD own-sprite sanity check (Shiny atlas, team-atlas filter, 5/6 top-1). Sprites tab + Team Preview tab split.
+- 2026-05-01 -- Mismatches view: stream rows, per-row crop, bulk Accept, j/k/a/s/i nav.

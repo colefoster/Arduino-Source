@@ -1105,7 +1105,7 @@ async def hud_pill_atlas_ref(filename: str):
     return Response(p.read_bytes(), media_type="image/png")
 
 @app.get("/api/hud-pill-atlas/audit")
-async def hud_pill_atlas_audit():
+async def hud_pill_atlas_audit(unknown_threshold: float = 25.0):
     """For each ref crop, compare its RMSD against every species mean
     (excluding itself from its labeled species's mean) and flag cases where
     the top-1 predicted species != the labeled species. Catches mislabels
@@ -1125,6 +1125,7 @@ async def hud_pill_atlas_audit():
         return {"suspects": [], "error": f"pillow/numpy missing: {e}"}
 
     suspects = []
+    unknowns = []
     for side, species_map in idx.items():
         # Load all crops once.
         crops_per_sp: dict = {}
@@ -1176,9 +1177,29 @@ async def hud_pill_atlas_audit():
                     # Confidence-of-mismatch: bigger gap = stronger signal
                     "confidence": round(label_rmsd - best_rmsd, 2) if label_rmsd != float('inf') else None,
                 })
+            #  Out-of-atlas candidates: even the best species match is poor.
+            #  Likely a new species/variant the atlas can't yet represent.
+            if best_rmsd >= unknown_threshold:
+                unknowns.append({
+                    "side": side_q,
+                    "labeled_species": label_sp,
+                    "best_match": best_sp,
+                    "ref": meta["ref"],
+                    "source_frame": meta.get("source_frame", ""),
+                    "slot": meta.get("slot", -1),
+                    "rmsd_best": round(best_rmsd, 2),
+                    "rmsd_labeled": round(label_rmsd, 2) if label_rmsd != float('inf') else None,
+                })
 
     suspects.sort(key=lambda s: -(s["confidence"] or 0))
-    return {"suspects": suspects, "count": len(suspects)}
+    unknowns.sort(key=lambda u: -u["rmsd_best"])
+    return {
+        "suspects": suspects,
+        "count": len(suspects),
+        "unknowns": unknowns,
+        "unknown_count": len(unknowns),
+        "unknown_threshold": unknown_threshold,
+    }
 
 
 @app.post("/api/hud-pill-atlas/relabel")
