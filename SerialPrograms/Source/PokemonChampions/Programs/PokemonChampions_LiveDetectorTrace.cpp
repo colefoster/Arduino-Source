@@ -19,11 +19,14 @@
 #include "CommonFramework/Logging/Logger.h"
 #include "CommonFramework/VideoPipeline/VideoFeed.h"
 
+#include "PokemonChampions/Inference/PokemonChampions_AbilityItemReader.h"
 #include "PokemonChampions/Inference/PokemonChampions_ActionMenuDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_ActiveHUDSlotDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_BattleEndDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_BattleHUDReader.h"
+#include "PokemonChampions/Inference/PokemonChampions_BattleLogReader.h"
 #include "PokemonChampions/Inference/PokemonChampions_BattleModeDetector.h"
+#include "PokemonChampions/Inference/PokemonChampions_CommunicatingDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_MainMenuDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_MoveNameReader.h"
 #include "PokemonChampions/Inference/PokemonChampions_MoveSelectDetector.h"
@@ -33,6 +36,9 @@
 #include "PokemonChampions/Inference/PokemonChampions_PreparingForBattleDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_TeamPreviewDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_TeamPreviewReader.h"
+#include "PokemonChampions/Inference/PokemonChampions_TeamSelectDetector.h"
+#include "PokemonChampions/Inference/PokemonChampions_TargetSelectDetector.h"
+#include "PokemonChampions/Inference/PokemonChampions_TargetSelectReader.h"
 
 #include "PokemonChampions/Programs/PokemonChampions_LiveDetectorTrace.h"
 
@@ -150,6 +156,9 @@ void LiveDetectorTrace::init_pipeline_registry(){
     add("PostMatchScreenDetector",   "detector", "skipped", "Detects 'Continue Battling?' post-match prompt.");
     add("MainMenuDetector",          "detector", "skipped", "Detects the Pokemon Champions main menu (out of battle).");
     add("ActiveHUDSlotDetector",     "detector", "skipped", "Reads which own slot has the lime-green active outline (doubles).");
+    add("TeamSelectDetector",        "detector", "skipped", "Detects the team-select tab strip (the screen before Team Preview where you pick which 4 to bring); also reports selected_tab.");
+    add("TargetSelectDetector",      "detector", "skipped", "Detects the doubles target-select modal: 4 selector strips visible with exactly one in the selected (yellow/green) state. Reports selected_index 0..3 (opp_a/opp_b/own_a/own_b).");
+    add("CommunicatingDetector",     "detector", "skipped", "Detects the 'syncing with opponent' transitional overlay; co-fires with whatever screen is underneath.");
 
     //  ── Wired readers ──
     add("BattleModeDetector",        "reader", "skipped", "Reads format label: Singles vs Doubles. Refreshed on TeamPreview / matchmaking screens.");
@@ -161,6 +170,13 @@ void LiveDetectorTrace::init_pipeline_registry(){
     add("BattleHUDReader",           "reader", "skipped", "Reads opp active species (text), opp + own active HPs. Fires on action_menu / move_select / preparing screens.");
     add("MoveNameReader",            "reader", "skipped", "Reads the 4 move-name pills on Move Select. Fires only on move_select.");
     add("PokeballAliveDetector",     "reader", "skipped", "Reads alive/fainted/empty for all 6 slots per side from the HUD pokeball strip. Fires whenever the HUD is visible.");
+    add("TargetSelectReader",        "reader", "skipped",
+        "Reads the doubles target-select modal: which move each own active mon picked, "
+        "which target is highlighted, and per-target effectiveness label. Fires only on the "
+        "target_select screen.");
+    add("AbilityItemReader",         "reader", "skipped",
+        "OCRs the mid-battle ability/item reveal overlay (\"Garchomp's Rough Skin!\"). Self-gates on its "
+        "own visual detection; deduped against the prior raw text so a single overlay only fires once.");
     add("OwnTeamPaste",              "reader", "skipped",
         "Pokemon Showdown formatted paste from program options. CANONICAL source for own-side state "
         "(species, moves, item, ability for all 6 slots). Loaded once at program start.");
@@ -169,14 +185,10 @@ void LiveDetectorTrace::init_pipeline_registry(){
     add("MovesAndMoreReader",        "reader", "n/a",
         "Requires controller navigation to enter 'View Details -> Moves & More'. "
         "Cannot run in passive mode. AutoLadder uses this to load own species/moves/abilities at match start.");
-    add("BattleLogReader",           "reader", "wip",
-        "Battle log overlay parser exists in code but is not yet wired into LiveDetectorTrace. "
-        "Would feed update_from_log() with switch / faint / boost / status / weather events.");
-    add("AbilityRevealReader",       "reader", "wip",
-        "No reader exists yet. Opp ability reveals (intimidate, drought, prankster trigger) are visible "
-        "via 'Garchomp's Sand Veil!' style text bubbles; needs a bubble-text OCR.");
-    add("ItemRevealReader",          "reader", "wip",
-        "No reader exists yet. Opp item reveals (eat berry, switching items) come through battle log text.");
+    add("BattleLogReader",           "reader", "skipped",
+        "OCRs the bottom-center battle text bar (move/switch/faint/boost/status/weather/terrain). "
+        "Fires whenever the bar is visible during in-battle screens; dedupes by raw text so a "
+        "single sticky line only updates the tracker once. Feeds BattleStateTracker::update_from_log().");
     add("StatusOverlayReader",       "reader", "wip",
         "No reader exists yet. Status condition icons (PSN/PAR/BRN/SLP/FRZ) on the HUD are not OCR'd.");
     add("BoostsReader",              "reader", "wip",
@@ -187,7 +199,6 @@ void LiveDetectorTrace::init_pipeline_registry(){
     add("TailwindDetector",          "detector", "wip", "No detector exists yet. Per-side Tailwind not parsed.");
     add("ScreensDetector",           "detector", "wip", "No detector exists yet. Light Screen / Reflect / Aurora Veil per side not parsed.");
     add("MegaEvolveDetector",        "detector", "skipped", "Reads whether the Mega Evolve toggle pill is showing on Move Select. Fires only on move_select.");
-    add("CommunicatingDetector",     "detector", "wip", "Detector exists but not yet wired (would mark 'syncing with opponent' transitional screens).");
 }
 
 
@@ -260,6 +271,17 @@ std::string LiveDetectorTrace::classify_screen(Logger& logger, const ImageViewRG
     //  Order matters: most-specific in-battle screens first, since their
     //  evidence is unambiguous. TeamPreview / MainMenu fall through.
     {
+        //  More specific than MoveSelect — target-select happens after a
+        //  move is picked in doubles. Check first so we don't misclassify.
+        TargetSelectDetector det;
+        if (try_det("TargetSelectDetector", det)){
+            JsonObject out;
+            out["selected_index"] = (int64_t)det.selected_index();
+            mark("TargetSelectDetector", "ok", std::move(out));
+            return "target_select";
+        }
+    }
+    {
         MoveSelectDetector det;
         if (try_det("MoveSelectDetector", det)) return "move_select";
     }
@@ -282,6 +304,15 @@ std::string LiveDetectorTrace::classify_screen(Logger& logger, const ImageViewRG
     {
         TeamPreviewDetector det;
         if (try_det("TeamPreviewDetector", det)) return "team_preview";
+    }
+    {
+        TeamSelectDetector det;
+        if (try_det("TeamSelectDetector", det)){
+            JsonObject out;
+            out["selected_tab"] = (int64_t)det.selected_team();
+            mark("TeamSelectDetector", "ok", std::move(out));
+            return "team_select";
+        }
     }
     {
         MainMenuDetector det;
@@ -358,6 +389,91 @@ void LiveDetectorTrace::run_team_preview_screen(Logger& logger, const ImageViewR
 }
 
 
+void LiveDetectorTrace::run_target_select_screen(Logger& logger, const ImageViewRGB32& screen){
+    TargetSelectReader reader(Language::English);
+    TargetSelectReadout r = reader.read(logger, screen);
+
+    JsonObject out;
+    JsonArray opp_t, own_t, opp_e, own_e, own_m;
+    for (uint8_t i = 0; i < 2; i++){
+        opp_t.push_back(r.opp_targeted[i]);
+        own_t.push_back(r.own_targeted[i]);
+        opp_e.push_back(r.opp_effectiveness[i]);
+        own_e.push_back(r.own_effectiveness[i]);
+        own_m.push_back(r.own_moves[i]);
+    }
+    out["opp_targeted"]      = std::move(opp_t);
+    out["own_targeted"]      = std::move(own_t);
+    out["opp_effectiveness"] = std::move(opp_e);
+    out["own_effectiveness"] = std::move(own_e);
+    out["own_moves"]         = std::move(own_m);
+    mark("TargetSelectReader", "ok", std::move(out));
+}
+
+
+void LiveDetectorTrace::run_ability_item_reader(Logger& logger, const ImageViewRGB32& screen){
+    AbilityItemReader reader;
+    AbilityItemReadout r = reader.read(logger, screen);
+    if (!r.detected){
+        mark_skipped("AbilityItemReader");
+        return;
+    }
+    bool fresh = (r.raw_text != m_prev_ability_item_text);
+    m_prev_ability_item_text = r.raw_text;
+
+    JsonObject out;
+    out["raw"] = r.raw_text;
+    out["pokemon"] = r.pokemon;
+    out["name"] = r.name;
+    out["kind"] = r.kind;
+    out["side"] = r.side;
+    out["fresh"] = fresh;
+    mark("AbilityItemReader", "ok", std::move(out));
+}
+
+
+void LiveDetectorTrace::run_battle_log_reader(Logger& logger, const ImageViewRGB32& screen){
+    BattleLogReader reader;
+    if (!reader.detect_text_bar(screen)){
+        mark_skipped("BattleLogReader");
+        return;
+    }
+    BattleLogEvent ev = reader.read_event(logger, screen);
+    if (ev.raw_text.empty()){
+        mark("BattleLogReader", "error");
+        return;
+    }
+
+    bool fresh = (ev.raw_text != m_prev_log_text);
+    m_prev_log_text = ev.raw_text;
+
+    JsonObject out;
+    out["type"] = event_type_to_string(ev.type);
+    out["raw"] = ev.raw_text;
+    out["is_opponent"] = ev.is_opponent;
+    out["fresh"] = fresh;
+    if (!ev.pokemon.empty()) out["pokemon"] = ev.pokemon;
+    if (!ev.move.empty())    out["move"] = ev.move;
+    if (!ev.stat.empty())    out["stat"] = ev.stat;
+    if (!ev.item.empty())    out["item"] = ev.item;
+    if (!ev.ability.empty()) out["ability"] = ev.ability;
+    if (!ev.effect.empty())  out["effect"] = ev.effect;
+    if (ev.boost_stages != 0) out["boost_stages"] = (int64_t)ev.boost_stages;
+
+    //  Only feed the tracker once per distinct line, and only when the
+    //  parser produced a recognized event type. UNKNOWN/OTHER lines are
+    //  surfaced in the dashboard but not applied to state.
+    if (fresh
+        && ev.type != BattleLogEventType::UNKNOWN
+        && ev.type != BattleLogEventType::OTHER)
+    {
+        m_tracker.update_from_log(ev);
+    }
+
+    mark("BattleLogReader", "ok", std::move(out));
+}
+
+
 void LiveDetectorTrace::run_battle_screen(Logger& logger, const ImageViewRGB32& screen){
     //  BattleHUD reader — opp active species + both side HPs.
     {
@@ -417,6 +533,14 @@ void LiveDetectorTrace::run_battle_screen(Logger& logger, const ImageViewRGB32& 
             mark("ActiveHUDSlotDetector", "skipped");
         }
     }
+
+    //  Battle log text bar — fires whenever the bar is visible. The reader
+    //  internally gates on detect_text_bar() so it's cheap on frames with
+    //  no bar showing.
+    run_battle_log_reader(logger, screen);
+
+    //  Ability/item reveal overlay — self-gates on its own visual detection.
+    run_ability_item_reader(logger, screen);
 }
 
 
@@ -500,6 +624,8 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
     init_pipeline_registry();
     m_tracker.reset();
     m_prev_screen.clear();
+    m_prev_log_text.clear();
+    m_prev_ability_item_text.clear();
     m_match_in_progress = false;
     uint64_t seq = 0;
 
@@ -545,6 +671,22 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
 
         std::string screen = classify_screen(env.console, snapshot);
 
+        //  CommunicatingDetector is an overlay signal — it can fire on top of
+        //  any underlying screen, so run it independently of the cascade and
+        //  surface it in the pipeline. Doesn't replace the underlying screen
+        //  classification; the dashboard treats it as a co-fire bool.
+        {
+            CommunicatingDetector det;
+            bool fired = det.detect(snapshot);
+            if (fired){
+                JsonObject out;
+                out["communicating"] = true;
+                mark("CommunicatingDetector", "ok", std::move(out));
+            }else{
+                mark_skipped("CommunicatingDetector");
+            }
+        }
+
         //  Match-state transitions: enter a new match on TeamPreview after
         //  a non-battle screen; mark match over on Result/PostMatch.
         if (screen == "team_preview" && (m_prev_screen.empty()
@@ -555,6 +697,8 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
             }
             m_tracker.reset();
             m_tracker.set_mode(m_mode);
+            m_prev_log_text.clear();
+    m_prev_ability_item_text.clear();
             //  Re-seed own team from paste so it survives the reset.
             std::string paste = OWN_TEAM_PASTE;
             if (!paste.empty()){
@@ -573,9 +717,21 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
             run_move_select_screen(env.console, snapshot);
         }else if (screen == "action_menu" || screen == "preparing"){
             run_battle_screen(env.console, snapshot);
+        }else if (screen == "target_select"){
+            run_target_select_screen(env.console, snapshot);
+        }else if (screen == "unknown" && m_match_in_progress){
+            //  Mid-animation frames (post-move flashes, switch transitions,
+            //  faint sequences) usually classify as "unknown" — but the
+            //  battle text bar AND the ability/item reveal overlay are most
+            //  often visible exactly during these frames. Both readers
+            //  internally gate on their own visual checks, so this is a
+            //  cheap no-op when neither overlay is showing.
+            run_battle_log_reader(env.console, snapshot);
+            run_ability_item_reader(env.console, snapshot);
         }
-        //  result_screen / post_match / main_menu / unknown — no readers
-        //  fire, but pipeline status still reports the screen detector hit.
+        //  result_screen / post_match / main_menu / unknown (out of match) —
+        //  no readers fire, but pipeline status still reports the screen
+        //  detector hit.
 
         age_pipeline_entries(now_ms());
 
