@@ -26,6 +26,7 @@
 #include <set>
 #include <vector>
 #include <functional>
+#include <filesystem>
 
 using json = nlohmann::json;
 using std::cout;
@@ -333,6 +334,7 @@ int run_manifest_tests(const std::string& test_images_dir, const std::string& mo
     all_dirs.insert(all_dirs.end(), overlay_dirs.begin(), overlay_dirs.end());
 
     std::map<std::string, TestStats> all_stats;
+    std::vector<std::string> stale_manifest_entries;  //  filename in manifest but not on disk
 
     // ── Detector tests ──────────────────────────────────────────────
 
@@ -421,6 +423,13 @@ int run_manifest_tests(const std::string& test_images_dir, const std::string& mo
 
                 const json& reader_entry = img_labels[reader_name];
                 std::string file_path = full_dir + "/" + img_fname;
+
+                if (!std::filesystem::exists(file_path)){
+                    cerr << "  STALE: " << screen_dir << "/" << img_fname
+                         << " in manifest but missing on disk — skipping" << endl;
+                    stale_manifest_entries.push_back(screen_dir + "/" + img_fname);
+                    continue;
+                }
 
                 cout << "  " << screen_dir << "/" << img_fname << endl;
 
@@ -511,6 +520,12 @@ int run_manifest_tests(const std::string& test_images_dir, const std::string& mo
                 const auto& hud = labels["BattleHUDReader"];
 
                 std::string file_path = full_dir + "/" + fname;
+                if (!std::filesystem::exists(file_path)){
+                    cerr << "  STALE: " << screen << "/" << fname
+                         << " in manifest but missing on disk — skipping" << endl;
+                    stale_manifest_entries.push_back(screen + "/" + fname);
+                    continue;
+                }
                 ImageRGB32 image;
                 try{ image = ImageRGB32(file_path); }catch (const std::exception& e){
                     cerr << "  Exception loading " << file_path << ": " << e.what() << endl;
@@ -595,6 +610,16 @@ int run_manifest_tests(const std::string& test_images_dir, const std::string& mo
     if (!regression){
         cout << "===========================================" << endl;
         cout << total_passed << " test" << (total_passed != 1 ? "s" : "") << " passed" << endl;
+    }
+
+    if (!stale_manifest_entries.empty()){
+        cerr << "===========================================" << endl;
+        cerr << "WARNING: " << stale_manifest_entries.size()
+             << " stale manifest entr" << (stale_manifest_entries.size() == 1 ? "y" : "ies")
+             << " (file referenced in manifest.json but missing on disk):" << endl;
+        for (const auto& s : stale_manifest_entries) cerr << "  " << s << endl;
+        cerr << "Run tools/sync_test_images.sh ash->local to pull missing frames, "
+             << "or remove these entries from the manifest." << endl;
     }
 
     return total_failed > 0 ? 1 : 0;
