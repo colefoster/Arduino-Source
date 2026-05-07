@@ -71,49 +71,83 @@ struct StatBox{
     double dx, dy, w, h;
 };
 
-//  All values are deltas from (COL_X[col], ROW_Y[row]) to box origin.
-//  Source rows: subtract slot 0 species (0.1391, 0.2778) from
-//  tools/box_definitions.json mon_0_*_* boxes.
-
-//  HP — left col, top row of stats
-static constexpr StatBox HP_ACTUAL  {0.0704, 0.0450, 0.0277, 0.0261};
-static constexpr StatBox HP_EVS     {0.1238, 0.0465, 0.0205, 0.0231};
+//  Nature-box deltas relative to each card's name anchor. The user only
+//  drew nature chevrons for slot 0; the same constants apply to all
+//  slots since the per-card pixel-wobble doesn't materially shift them
+//  (the chevron icons are large enough to absorb a few px of drift).
 static constexpr StatBox HP_NATURE  {0.0381, 0.0898, 0.0127, 0.0216}; // unused (HP has no nature)
-
-//  ATK — left col, mid row
 static constexpr StatBox ATK_NATURE {0.0381, 0.0898, 0.0127, 0.0216};
-static constexpr StatBox ATK_ACTUAL {0.0743, 0.0819, 0.0224, 0.0369};
-static constexpr StatBox ATK_EVS    {0.1241, 0.0868, 0.0160, 0.0290};
-
-//  DEF — left col, bot row
 static constexpr StatBox DEF_NATURE {0.0483, 0.1360, 0.0113, 0.0182};
-static constexpr StatBox DEF_ACTUAL {0.0706, 0.1274, 0.0272, 0.0292};
-static constexpr StatBox DEF_EVS    {0.1247, 0.1261, 0.0144, 0.0290};
+static constexpr StatBox SPA_NATURE {0.2276, 0.0494, 0.0091, 0.0187};
+static constexpr StatBox SPD_NATURE {0.2285, 0.0907, 0.0111, 0.0202};
+static constexpr StatBox SPE_NATURE {0.2224, 0.1311, 0.0122, 0.0211};
 
-//  SPA — right col, top row of stats
-static constexpr StatBox SPA_NATURE {0.2256, 0.0494, 0.0091, 0.0187};
-static constexpr StatBox SPA_ACTUAL {0.2541, 0.0450, 0.0271, 0.0266};
-static constexpr StatBox SPA_EVS    {0.3072, 0.0455, 0.0158, 0.0256};
-
-//  SPD — right col, mid row
-static constexpr StatBox SPD_NATURE {0.2265, 0.0907, 0.0111, 0.0202};
-static constexpr StatBox SPD_ACTUAL {0.2577, 0.0878, 0.0230, 0.0275};
-static constexpr StatBox SPD_EVS    {0.3061, 0.0873, 0.0158, 0.0266};
-
-//  SPE — right col, bot row
-static constexpr StatBox SPE_NATURE {0.2204, 0.1311, 0.0122, 0.0211};
-static constexpr StatBox SPE_ACTUAL {0.2552, 0.1286, 0.0255, 0.0270};
-static constexpr StatBox SPE_EVS    {0.3075, 0.1281, 0.0177, 0.0280};
-
-
-static const StatBox* ACTUAL_BOXES[6] = {
-    &HP_ACTUAL, &ATK_ACTUAL, &DEF_ACTUAL, &SPA_ACTUAL, &SPD_ACTUAL, &SPE_ACTUAL
-};
-static const StatBox* EVS_BOXES[6] = {
-    &HP_EVS, &ATK_EVS, &DEF_EVS, &SPA_EVS, &SPD_EVS, &SPE_EVS
-};
 static const StatBox* NATURE_BOXES[6] = {
     &HP_NATURE, &ATK_NATURE, &DEF_NATURE, &SPA_NATURE, &SPD_NATURE, &SPE_NATURE
+};
+
+//  Per-slot, per-stat ABSOLUTE boxes for actual + evs fields. Hand-drawn
+//  for all 6 slots — extrapolation introduced too much OCR noise because
+//  the cards aren't on a perfect grid. Layout: STAT_ABS[slot][stat][sub]
+//  where stat = HP/ATK/DEF/SPA/SPD/SPE (0..5), sub = ACTUAL(0)/EVS(1).
+//  Generated from tools/box_definitions.json mon_*_*_* entries.
+struct AbsBox{ double x, y, w, h; };
+static constexpr AbsBox STAT_ABS[6][6][2] = {
+    //  ── slot 0 (user-drawn mon_0_* originals — verified 0/34 misreads) ──
+    {
+        { { 0.2095, 0.3228, 0.0277, 0.0261 }, { 0.2629, 0.3243, 0.0205, 0.0231 } },  // hp
+        { { 0.2134, 0.3597, 0.0224, 0.0369 }, { 0.2632, 0.3646, 0.0160, 0.0290 } },  // atk
+        { { 0.2097, 0.4052, 0.0272, 0.0292 }, { 0.2638, 0.4039, 0.0144, 0.0290 } },  // def
+        { { 0.3952, 0.3228, 0.0271, 0.0266 }, { 0.4483, 0.3233, 0.0158, 0.0256 } },  // spa
+        { { 0.3988, 0.3656, 0.0230, 0.0275 }, { 0.4472, 0.3651, 0.0158, 0.0266 } },  // spd
+        { { 0.3963, 0.4064, 0.0255, 0.0270 }, { 0.4486, 0.4059, 0.0177, 0.0280 } },  // spe
+    },
+    //  ── slot 1 (user-drawn poke_1_* originals; def_actual/evs extrapolated
+    //         since user only drew SpDef-position "def" — see below) ──
+    {
+        { { 0.6301, 0.3250, 0.0246, 0.0243 }, { 0.6807, 0.3237, 0.0170, 0.0248 } },  // hp
+        { { 0.6293, 0.3636, 0.0249, 0.0280 }, { 0.6807, 0.3631, 0.0154, 0.0277 } },  // atk
+        { { 0.6263, 0.4070, 0.0272, 0.0292 }, { 0.6804, 0.4057, 0.0144, 0.0290 } },  // def  (extrapolated)
+        { { 0.8153, 0.3212, 0.0218, 0.0298 }, { 0.8632, 0.3227, 0.0179, 0.0259 } },  // spa
+        { { 0.8111, 0.3641, 0.0259, 0.0290 }, { 0.8638, 0.3657, 0.0197, 0.0248 } },  // spd  (user labeled "def" but coords = SpDef position)
+        { { 0.8150, 0.4050, 0.0213, 0.0272 }, { 0.8627, 0.4063, 0.0172, 0.0261 } },  // spe
+    },
+    //  ── slot 2 (user-drawn poke_2_* originals — all 12 fields covered) ──
+    {
+        { { 0.2123, 0.5247, 0.0246, 0.0261 }, { 0.2628, 0.5249, 0.0167, 0.0259 } },  // hp
+        { { 0.2131, 0.5674, 0.0233, 0.0250 }, { 0.2632, 0.5654, 0.0163, 0.0292 } },  // atk
+        { { 0.2116, 0.6052, 0.0251, 0.0300 }, { 0.2631, 0.6069, 0.0120, 0.0284 } },  // def
+        { { 0.3983, 0.5241, 0.0212, 0.0275 }, { 0.4462, 0.5207, 0.0150, 0.0307 } },  // spa
+        { { 0.3957, 0.5643, 0.0241, 0.0298 }, { 0.4453, 0.5670, 0.0158, 0.0257 } },  // spd
+        { { 0.3968, 0.6071, 0.0231, 0.0269 }, { 0.4462, 0.6081, 0.0154, 0.0259 } },  // spe
+    },
+    //  ── slot 3 ──
+    {
+        { { 0.6251, 0.5220, 0.0287, 0.0293 }, { 0.6801, 0.5235, 0.0213, 0.0291 } },  // hp
+        { { 0.6285, 0.5636, 0.0260, 0.0311 }, { 0.6800, 0.5628, 0.0177, 0.0308 } },  // atk
+        { { 0.6306, 0.6058, 0.0239, 0.0294 }, { 0.6798, 0.6075, 0.0190, 0.0267 } },  // def
+        { { 0.8106, 0.5196, 0.0264, 0.0348 }, { 0.8631, 0.5233, 0.0203, 0.0295 } },  // spa
+        { { 0.8107, 0.5651, 0.0267, 0.0290 }, { 0.8631, 0.5646, 0.0176, 0.0293 } },  // spd
+        { { 0.8091, 0.6059, 0.0284, 0.0318 }, { 0.8631, 0.6069, 0.0167, 0.0280 } },  // spe
+    },
+    //  ── slot 4 ──
+    {
+        { { 0.2102, 0.7231, 0.0266, 0.0321 }, { 0.2628, 0.7246, 0.0180, 0.0303 } },  // hp
+        { { 0.2104, 0.7630, 0.0263, 0.0349 }, { 0.2629, 0.7676, 0.0186, 0.0279 } },  // atk
+        { { 0.2128, 0.8070, 0.0245, 0.0291 }, { 0.2633, 0.8064, 0.0172, 0.0297 } },  // def
+        { { 0.3965, 0.7245, 0.0236, 0.0293 }, { 0.4459, 0.7262, 0.0164, 0.0266 } },  // spa
+        { { 0.3943, 0.7683, 0.0250, 0.0294 }, { 0.4464, 0.7674, 0.0151, 0.0266 } },  // spd  (extrapolated — user didn't redraw)
+        { { 0.3926, 0.8078, 0.0276, 0.0296 }, { 0.4456, 0.8090, 0.0198, 0.0279 } },  // spe
+    },
+    //  ── slot 5 ──
+    {
+        { { 0.6304, 0.7280, 0.0246, 0.0252 }, { 0.6803, 0.7248, 0.0162, 0.0277 } },  // hp  (actual extrapolated — user didn't redraw)
+        { { 0.6258, 0.7662, 0.0287, 0.0286 }, { 0.6801, 0.7682, 0.0189, 0.0248 } },  // atk
+        { { 0.6300, 0.8084, 0.0243, 0.0285 }, { 0.6802, 0.8102, 0.0150, 0.0258 } },  // def
+        { { 0.8127, 0.7252, 0.0246, 0.0268 }, { 0.8631, 0.7259, 0.0174, 0.0273 } },  // spa
+        { { 0.8108, 0.7661, 0.0263, 0.0284 }, { 0.8627, 0.7659, 0.0168, 0.0273 } },  // spd
+        { { 0.8119, 0.8065, 0.0257, 0.0312 }, { 0.8634, 0.8072, 0.0201, 0.0303 } },  // spe
+    },
 };
 
 
@@ -158,11 +192,14 @@ TeamStatsReader::TeamStatsReader(){
         double sy = SLOT_ANCHORS[slot].y;
 
         for (uint8_t s = 0; s < 6; s++){
-            const StatBox& a = *ACTUAL_BOXES[s];
-            const StatBox& e = *EVS_BOXES[s];
+            //  Actual + EVs use ABSOLUTE per-slot boxes (hand-drawn).
+            const AbsBox& a = STAT_ABS[slot][s][0];
+            const AbsBox& e = STAT_ABS[slot][s][1];
+            m_actual_boxes[slot][s] = ImageFloatBox(a.x, a.y, a.w, a.h);
+            m_evs_boxes[slot][s]    = ImageFloatBox(e.x, e.y, e.w, e.h);
+            //  Nature still uses anchor + delta (user didn't redraw chevrons
+            //  per slot; the same offsets work on all 6).
             const StatBox& n = *NATURE_BOXES[s];
-            m_actual_boxes[slot][s] = ImageFloatBox(sx + a.dx, sy + a.dy, a.w, a.h);
-            m_evs_boxes[slot][s]    = ImageFloatBox(sx + e.dx, sy + e.dy, e.w, e.h);
             m_nature_boxes[slot][s] = ImageFloatBox(sx + n.dx, sy + n.dy, n.w, n.h);
         }
     }
