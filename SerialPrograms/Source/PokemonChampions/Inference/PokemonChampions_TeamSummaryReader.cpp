@@ -70,7 +70,9 @@ static constexpr double MOVE_DY[4]     = {0.0037, 0.0444, 0.0861, 0.1286};
 //  Drawn 2026-05-06 from team_stats screenshot; deltas relative to species.
 static constexpr double ITEM_DX        = 0.0040;
 static constexpr double ITEM_DY        = 0.0923;
-static constexpr double ITEM_WIDTH     = 0.0656;
+//  Widened +0.0020 (~4px @ 1920) on 2026-05-06 — original 0.0656 was
+//  clipping the right edge of longer item names.
+static constexpr double ITEM_WIDTH     = 0.0676;
 static constexpr double ITEM_HEIGHT    = 0.0291;
 
 
