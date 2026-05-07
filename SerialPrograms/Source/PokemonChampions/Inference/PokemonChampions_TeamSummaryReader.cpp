@@ -62,7 +62,9 @@ static constexpr double MOVE_X_COL[2]  = {0.3531, 0.7692};   //  Col 1 = Col 0 +
 static constexpr double MOVE_WIDTH     = 0.097;
 static constexpr double MOVE_HEIGHT    = 0.034;
 //  Y offsets of the 4 moves relative to the card's species Y.
-static constexpr double MOVE_DY[4]     = {0.0037, 0.0444, 0.0861, 0.1296};
+//  move_3 nudged -0.0010 (~1px @ 1080) on 2026-05-06 to land cleaner on
+//  the 4th-move text row across all 6 cards.
+static constexpr double MOVE_DY[4]     = {0.0037, 0.0444, 0.0861, 0.1286};
 
 //  Item text region — sits one line below the ability on the same card.
 //  Drawn 2026-05-06 from team_stats screenshot; deltas relative to species.
