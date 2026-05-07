@@ -40,30 +40,64 @@ async function teamScanInit() {
         const div = document.createElement('div');
         div.className = 'tsc-card';
         const stats = slot.stats || {};
-        const speciesLabel = slot.species ? slot.species : '<span class="empty">(no species)</span>';
-        const natureLabel = slot.nature ? `<span class="nature">${tsEsc(slot.nature)}</span>` : '';
-        const itemLabel = slot.item ? slot.item : '<span class="empty">(no item)</span>';
-        const abilityLabel = slot.ability ? slot.ability : '<span class="empty">(no ability)</span>';
+        // Slug → display label: "throat-chop" → "Throat Chop"
+        const titleize = s => s ? s.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()) : '';
 
-        const statRows = ['hp','atk','def','spa','spd','spe'].map(k => {
+        const speciesHtml = slot.species
+            ? `<span class="species">${tsEsc(titleize(slot.species))}</span>`
+            : `<span class="species" style="color:#6e7681; font-style:italic;">No species</span>`;
+        const natureHtml = slot.nature
+            ? `<span class="nature-pill">${tsEsc(slot.nature)}</span>`
+            : '';
+
+        const abilityHtml = slot.ability
+            ? `<span class="ability">${tsEsc(titleize(slot.ability))}</span>`
+            : `<span class="empty">no ability</span>`;
+        const itemHtml = slot.item
+            ? `<span class="item">${tsEsc(titleize(slot.item))}</span>`
+            : `<span class="empty">no item</span>`;
+
+        const STAT_LABELS = {hp:'HP', atk:'Atk', def:'Def', spa:'SpA', spd:'SpD', spe:'Spe'};
+        const STAT_ORDER = ['hp','atk','def','spa','spd','spe'];
+        const statHtml = STAT_ORDER.map(k => {
             const s = stats[k] || {};
             const cls = s.nature === 'boost' ? 'boost' : s.nature === 'drop' ? 'drop' : '';
-            const arrow = s.nature === 'boost' ? '+' : s.nature === 'drop' ? '-' : ' ';
-            const evTag = s.evs ? ` <span style="color:#6e7681;">EV ${s.evs}</span>` : '';
-            return `<div class="row ${cls}"><span class="key">${arrow} ${k.toUpperCase()}</span><span>${s.actual ?? 0}${evTag}</span></div>`;
+            // Unicode escapes for triangle glyphs to keep this file ASCII-clean
+            // (feedback_js_no_unicode_comments.md: literal Unicode in script
+            // tags has tripped Chrome parsing in the past).
+            const arrow = s.nature === 'boost' ? '\u25B2' : s.nature === 'drop' ? '\u25BC' : '';
+            const ev = s.evs || 0;
+            const evCls = ev === 0 ? 'zero' : (ev >= 32 ? 'full' : '');
+            return `
+                <div class="stat ${cls}">
+                    <span class="arrow">${arrow}</span>
+                    <span class="label">${STAT_LABELS[k]}</span>
+                    <span class="value">${s.actual ?? 0}</span>
+                    <span class="ev ${evCls}">${ev}</span>
+                </div>
+            `;
         }).join('');
 
-        const moves = (slot.moves || []).filter(m => m);
-        const movesHtml = moves.length ?
-            moves.map(m => `<div>${tsEsc(m)}</div>`).join('') :
-            '<span class="empty">(no moves)</span>';
+        const moves = slot.moves || [];
+        const movesHtml = moves.map(m =>
+            m ? `<div class="move">${tsEsc(titleize(m))}</div>`
+              : `<div class="move empty">—</div>`
+        ).join('');
 
         div.innerHTML = `
-            <div class="head">
-                Slot ${slot.slot} — ${tsEsc(speciesLabel)} ${natureLabel}
+            <div class="header">
+                <div class="title">
+                    <span class="slot-tag">Slot ${slot.slot}</span>
+                    ${speciesHtml}
+                </div>
+                ${natureHtml}
             </div>
-            <div class="meta">${tsEsc(abilityLabel)} @ ${tsEsc(itemLabel)}</div>
-            <div style="margin-top:6px;">${statRows}</div>
+            <div class="meta">
+                ${abilityHtml}
+                <span class="sep">@</span>
+                ${itemHtml}
+            </div>
+            <div class="stats">${statHtml}</div>
             <div class="moves">${movesHtml}</div>
             <button class="crops-toggle">show crops &amp; raw OCR</button>
             <div class="crops-panel"></div>
