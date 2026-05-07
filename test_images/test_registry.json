@@ -221,6 +221,18 @@
         }
       }
     },
+    "OwnStatusReader": {
+      "screens": {
+        "move_select": {
+          "status": {
+            "type": "array",
+            "items": "string",
+            "length": 2,
+            "description": "Status condition per own slot: burn/poison/paralysis/sleep/freeze/none. Empty string skips that slot. Slot 1 box is provisional \u2014 leave slot 1 empty until corpus has a slot-1 status sample."
+          }
+        }
+      }
+    },
     "TargetSelectReader": {
       "screens": {
         "target_select": {

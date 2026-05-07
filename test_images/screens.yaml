@@ -133,6 +133,13 @@ screens:
             min: -1
             max: 1
             description: "Doubles only: which own HUD pill is highlighted (0=left, 1=right). -1 = singles or no active outline."
+      OwnStatusReader:
+        fields:
+          status:
+            type: array
+            items: string
+            length: 2
+            description: "Status condition per own slot: burn/poison/paralysis/sleep/freeze/none. Empty string skips that slot. Slot 1 box is provisional — leave slot 1 empty until corpus has a slot-1 status sample."
       BattleHUDReader:
         fields:
           opponent_species:

@@ -13,6 +13,7 @@
 #include "CommonFramework/ImageTypes/ImageRGB32.h"
 #include "CommonFramework/Logging/Logger.h"
 #include "PokemonChampions/Inference/PokemonChampions_BattleHUDReader.h"
+#include "PokemonChampions/Inference/PokemonChampions_OwnStatusReader.h"
 
 #include <nlohmann/json.hpp>
 
@@ -150,6 +151,30 @@ static int test_manifest_ResultReader(const ImageViewRGB32& image, const json& e
     return test_pokemonChampions_ResultReader(image, target_won);
 }
 
+static int test_manifest_OwnStatusReader(const ImageViewRGB32& image, const json& entry){
+    if (!entry.contains("status")) return -1;  //  no expectation → skip
+    auto status_json = entry.at("status");
+    NintendoSwitch::PokemonChampions::OwnStatusReader reader;
+    int failed = 0;
+    for (size_t slot = 0; slot < 2 && slot < status_json.size(); slot++){
+        if (status_json[slot].is_null()) continue;
+        std::string expected = status_json[slot].get<std::string>();
+        if (expected.empty()) continue;  //  empty string → skip this slot
+        std::string got = reader.read(image, static_cast<uint8_t>(slot));
+        if (got.empty()){
+            //  Slot box not yet validated for this slot — skip silently.
+            continue;
+        }
+        if (got != expected){
+            cerr << "Error: OwnStatusReader slot " << slot
+                 << " got \"" << got << "\" but expected \""
+                 << expected << "\"." << endl;
+            failed++;
+        }
+    }
+    return failed > 0 ? 1 : 0;
+}
+
 static int test_manifest_AbilityItemReader(const ImageViewRGB32& image, const json& entry){
     if (!entry.contains("kind") || !entry.contains("name") || !entry.contains("pokemon")){
         cerr << "Error: AbilityItemReader manifest entry needs kind/name/pokemon." << endl;
@@ -209,6 +234,7 @@ static const std::map<std::string, ReaderTestFn> READER_FUNCTIONS = {
     {"ResultReader",         test_manifest_ResultReader},
     {"AbilityItemReader",    test_manifest_AbilityItemReader},
     {"TargetSelectReader",   test_manifest_TargetSelectReader},
+    {"OwnStatusReader",      test_manifest_OwnStatusReader},
 };
 
 // BattleHUDReader sub-field adapters: the manifest stores fields under

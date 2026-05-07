@@ -5064,6 +5064,630 @@
         0.333,
         0.333
       ]
+    },
+    {
+      "name": "own_slot_0",
+      "scene": "",
+      "screenshot": "__test__/team_preview_locked_in/20260423-183259675247.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.1599,
+        0.1747,
+        0.027,
+        0.0532
+      ],
+      "avg_rgb": [
+        199.6,
+        203.6,
+        168.8
+      ],
+      "stddev_sum": 269.9,
+      "color_ratio": [
+        0.349,
+        0.356,
+        0.295
+      ]
+    },
+    {
+      "name": "own_slot_1",
+      "scene": "",
+      "screenshot": "__test__/team_preview_locked_in/20260423-183259675247.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.1561,
+        0.2872,
+        0.0287,
+        0.054
+      ],
+      "avg_rgb": [
+        200,
+        203.1,
+        184.6
+      ],
+      "stddev_sum": 271.8,
+      "color_ratio": [
+        0.3403,
+        0.3455,
+        0.3141
+      ]
+    },
+    {
+      "name": "own_slot_2",
+      "scene": "",
+      "screenshot": "__test__/team_preview_locked_in/20260423-183259675247.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.1586,
+        0.4048,
+        0.0299,
+        0.0615
+      ],
+      "avg_rgb": [
+        200.7,
+        205,
+        156.3
+      ],
+      "stddev_sum": 270.5,
+      "color_ratio": [
+        0.3571,
+        0.3647,
+        0.2782
+      ]
+    },
+    {
+      "name": "own_slot_3",
+      "scene": "",
+      "screenshot": "__test__/team_preview_locked_in/20260423-183259675247.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.1578,
+        0.5218,
+        0.0316,
+        0.0577
+      ],
+      "avg_rgb": [
+        212.7,
+        217.9,
+        156.2
+      ],
+      "stddev_sum": 246,
+      "color_ratio": [
+        0.3625,
+        0.3714,
+        0.2661
+      ]
+    },
+    {
+      "name": "own_slot_4",
+      "scene": "",
+      "screenshot": "__test__/team_preview_locked_in/20260423-183259675247.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.1599,
+        0.6395,
+        0.0308,
+        0.066
+      ],
+      "avg_rgb": [
+        43.8,
+        35.7,
+        202.1
+      ],
+      "stddev_sum": 22.4,
+      "color_ratio": [
+        0.1554,
+        0.1269,
+        0.7177
+      ]
+    },
+    {
+      "name": "own_slot_5",
+      "scene": "",
+      "screenshot": "__test__/team_preview_locked_in/20260423-183259675247.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.1586,
+        0.7526,
+        0.0274,
+        0.0637
+      ],
+      "avg_rgb": [
+        66.9,
+        54.9,
+        215.4
+      ],
+      "stddev_sum": 85.5,
+      "color_ratio": [
+        0.1984,
+        0.1628,
+        0.6388
+      ]
+    },
+    {
+      "name": "species_name",
+      "scene": "",
+      "screenshot": "__test__/battle_info/screenshot-20260507-102448558834.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.1973,
+        0.2228,
+        0.1582,
+        0.0408
+      ],
+      "avg_rgb": [
+        121.5,
+        110.8,
+        225.7
+      ],
+      "stddev_sum": 92.6,
+      "color_ratio": [
+        0.2653,
+        0.2419,
+        0.4928
+      ]
+    },
+    {
+      "name": "species_hp_text",
+      "scene": "",
+      "screenshot": "__test__/battle_info/screenshot-20260507-102448558834.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.3372,
+        0.2772,
+        0.0782,
+        0.0377
+      ],
+      "avg_rgb": [
+        99.9,
+        97.5,
+        183.4
+      ],
+      "stddev_sum": 239.1,
+      "color_ratio": [
+        0.2623,
+        0.2561,
+        0.4816
+      ]
+    },
+    {
+      "name": "first_status",
+      "scene": "",
+      "screenshot": "__test__/battle_info/screenshot-20260507-102448558834.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.5275,
+        0.3138,
+        0.2084,
+        0.0471
+      ],
+      "avg_rgb": [
+        229.6,
+        236.1,
+        52.3
+      ],
+      "stddev_sum": 208.1,
+      "color_ratio": [
+        0.4433,
+        0.4557,
+        0.101
+      ]
+    },
+    {
+      "name": "second_status_guess",
+      "scene": "",
+      "screenshot": "__test__/battle_info/screenshot-20260507-102448558834.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.5243,
+        0.4036,
+        0.2787,
+        0.0536
+      ],
+      "avg_rgb": [
+        6.6,
+        10.6,
+        88.4
+      ],
+      "stddev_sum": 6,
+      "color_ratio": [
+        0.0621,
+        0.1006,
+        0.8373
+      ]
+    },
+    {
+      "name": "second_status_duration_guess",
+      "scene": "",
+      "screenshot": "__test__/battle_info/screenshot-20260507-102448558834.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.8113,
+        0.4086,
+        0.0393,
+        0.0544
+      ],
+      "avg_rgb": [
+        5.5,
+        9.7,
+        87.9
+      ],
+      "stddev_sum": 4.2,
+      "color_ratio": [
+        0.0534,
+        0.094,
+        0.8525
+      ]
+    },
+    {
+      "name": "opp_species_0_top",
+      "scene": "",
+      "screenshot": "__test__/battle_info/screenshot-20260507-102448558834.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.5358,
+        0.0722,
+        0.0404,
+        0.0728
+      ],
+      "avg_rgb": [
+        197.8,
+        181.4,
+        191.3
+      ],
+      "stddev_sum": 238.7,
+      "color_ratio": [
+        0.3466,
+        0.318,
+        0.3354
+      ]
+    },
+    {
+      "name": "opp_species_1_top",
+      "scene": "",
+      "screenshot": "__test__/battle_info/screenshot-20260507-102448558834.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.6169,
+        0.0716,
+        0.0408,
+        0.0743
+      ],
+      "avg_rgb": [
+        160.5,
+        149.5,
+        163
+      ],
+      "stddev_sum": 265,
+      "color_ratio": [
+        0.3393,
+        0.3161,
+        0.3446
+      ]
+    },
+    {
+      "name": "own_species_SOLO_top",
+      "scene": "",
+      "screenshot": "__test__/battle_info/screenshot-20260507-102448558834.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.3821,
+        0.0706,
+        0.0411,
+        0.0814
+      ],
+      "avg_rgb": [
+        194,
+        222.7,
+        67.6
+      ],
+      "stddev_sum": 169.7,
+      "color_ratio": [
+        0.4006,
+        0.4599,
+        0.1396
+      ]
+    },
+    {
+      "name": "attk_multiplier",
+      "scene": "",
+      "screenshot": "__test__/battle_info/screenshot-20260507-102448558834.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.384,
+        0.519,
+        0.0272,
+        0.0352
+      ],
+      "avg_rgb": [
+        105.3,
+        99.8,
+        220
+      ],
+      "stddev_sum": 130.6,
+      "color_ratio": [
+        0.2476,
+        0.2349,
+        0.5175
+      ]
+    },
+    {
+      "name": "def_multiplier",
+      "scene": "",
+      "screenshot": "__test__/battle_info/screenshot-20260507-102448558834.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.3839,
+        0.5657,
+        0.0257,
+        0.0348
+      ],
+      "avg_rgb": [
+        128.8,
+        118.4,
+        229.8
+      ],
+      "stddev_sum": 116.6,
+      "color_ratio": [
+        0.2701,
+        0.2481,
+        0.4818
+      ]
+    },
+    {
+      "name": "spa_multiplier",
+      "scene": "",
+      "screenshot": "__test__/battle_info/screenshot-20260507-102448558834.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.3848,
+        0.6074,
+        0.0311,
+        0.0357
+      ],
+      "avg_rgb": [
+        102.4,
+        95.9,
+        219.3
+      ],
+      "stddev_sum": 122.5,
+      "color_ratio": [
+        0.2452,
+        0.2297,
+        0.5252
+      ]
+    },
+    {
+      "name": "spdef_multiplier",
+      "scene": "",
+      "screenshot": "__test__/battle_info/screenshot-20260507-102448558834.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.3853,
+        0.6495,
+        0.0299,
+        0.0418
+      ],
+      "avg_rgb": [
+        122.5,
+        111.6,
+        230.7
+      ],
+      "stddev_sum": 100.2,
+      "color_ratio": [
+        0.2636,
+        0.24,
+        0.4964
+      ]
+    },
+    {
+      "name": "speed_multiplier",
+      "scene": "",
+      "screenshot": "__test__/battle_info/screenshot-20260507-102448558834.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.3847,
+        0.6942,
+        0.0269,
+        0.0383
+      ],
+      "avg_rgb": [
+        103.6,
+        96.3,
+        219.9
+      ],
+      "stddev_sum": 126.7,
+      "color_ratio": [
+        0.2469,
+        0.2294,
+        0.5237
+      ]
+    },
+    {
+      "name": "accuracy_multiplier",
+      "scene": "",
+      "screenshot": "__test__/battle_info/screenshot-20260507-102448558834.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.3849,
+        0.762,
+        0.0272,
+        0.0393
+      ],
+      "avg_rgb": [
+        124.4,
+        113.8,
+        230.2
+      ],
+      "stddev_sum": 108.7,
+      "color_ratio": [
+        0.2657,
+        0.2429,
+        0.4914
+      ]
+    },
+    {
+      "name": "evasiveness_multiplier",
+      "scene": "",
+      "screenshot": "__test__/battle_info/screenshot-20260507-102448558834.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.3848,
+        0.806,
+        0.0249,
+        0.0405
+      ],
+      "avg_rgb": [
+        103.4,
+        96.8,
+        219.9
+      ],
+      "stddev_sum": 129.3,
+      "color_ratio": [
+        0.2462,
+        0.2304,
+        0.5234
+      ]
+    },
+    {
+      "name": "type_0",
+      "scene": "",
+      "screenshot": "__test__/battle_info/screenshot-20260507-102448558834.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.228,
+        0.3336,
+        0.067,
+        0.0383
+      ],
+      "avg_rgb": [
+        71.8,
+        72.4,
+        92.6
+      ],
+      "stddev_sum": 192.2,
+      "color_ratio": [
+        0.3032,
+        0.3057,
+        0.3911
+      ]
+    },
+    {
+      "name": "type_1",
+      "scene": "",
+      "screenshot": "__test__/battle_info/screenshot-20260507-102448558834.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.3393,
+        0.3353,
+        0.0655,
+        0.0364
+      ],
+      "avg_rgb": [
+        72.6,
+        72.4,
+        91.8
+      ],
+      "stddev_sum": 195.1,
+      "color_ratio": [
+        0.3065,
+        0.3057,
+        0.3878
+      ]
+    },
+    {
+      "name": "ability_own",
+      "scene": "",
+      "screenshot": "__test__/battle_info/screenshot-20260507-102448558834.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.3125,
+        0.3881,
+        0.1101,
+        0.0431
+      ],
+      "avg_rgb": [
+        102.2,
+        95.5,
+        220.6
+      ],
+      "stddev_sum": 115.8,
+      "color_ratio": [
+        0.2444,
+        0.2283,
+        0.5273
+      ]
+    },
+    {
+      "name": "item_own",
+      "scene": "",
+      "screenshot": "__test__/battle_info/screenshot-20260507-102448558834.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.2887,
+        0.4394,
+        0.1351,
+        0.0449
+      ],
+      "avg_rgb": [
+        124.1,
+        112.7,
+        232
+      ],
+      "stddev_sum": 93.8,
+      "color_ratio": [
+        0.2648,
+        0.2405,
+        0.4948
+      ]
+    },
+    {
+      "name": "status_symbol_0",
+      "scene": "",
+      "screenshot": "__test__/move_select/20260423-150123581184.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.0672,
+        0.8534,
+        0.0115,
+        0.0205
+      ],
+      "avg_rgb": [
+        191.1,
+        193.9,
+        208.7
+      ],
+      "stddev_sum": 178.7,
+      "color_ratio": [
+        0.3219,
+        0.3266,
+        0.3515
+      ]
     }
   ]
 }
