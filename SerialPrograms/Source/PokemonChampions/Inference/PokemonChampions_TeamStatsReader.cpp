@@ -217,8 +217,50 @@ void TeamStatsReader::make_overlays(VideoOverlaySet& items) const{
 }
 
 
-//  Parse the first integer found in OCR text. Returns 0 if none.
-static int parse_first_int(const std::string& s){
+//  Map common Tesseract digit-confusable glyphs back to digits, with the
+//  same sandwich-drop rule BattleHUDReader uses: a confusable BETWEEN two
+//  real digits is segmentation noise (drop it); otherwise it's a real
+//  misread (map it).
+//
+//  Includes 'a' → '9' beyond BattleHUD's set — observed on stat values
+//  in italic-ish stat font ("90" → "a0" for Basculegion SpA).
+static std::string apply_digit_confusables(const std::string& text){
+    auto digit_for = [](char c) -> char {
+        switch (c){
+            case 'O': case 'o': case 'D': case 'Q': case '(': case ')': return '0';
+            case 'I': case 'l': case '|': case '!':                     return '1';
+            case 'Z': case '>': case '?':                               return '2';
+            case 'B': case 'E':                                         return '8';
+            case 'S': case '$':                                         return '5';
+            case 'g': case 'q': case 'a': case 'A':                     return '9';
+            default: return 0;
+        }
+    };
+    auto is_digit = [](char c){ return c >= '0' && c <= '9'; };
+    std::string out;
+    out.reserve(text.size());
+    for (size_t i = 0; i < text.size(); i++){
+        char c = text[i];
+        char dig = digit_for(c);
+        if (dig == 0){
+            out += c;
+            continue;
+        }
+        char prev = (i > 0) ? text[i - 1] : 0;
+        char next = (i + 1 < text.size()) ? text[i + 1] : 0;
+        if (is_digit(prev) && is_digit(next)){
+            //  Sandwiched between digits: segmentation noise, drop.
+            continue;
+        }
+        out += dig;
+    }
+    return out;
+}
+
+//  Parse the first integer found in OCR text after the digit-confusable
+//  fixup. Returns 0 if none parseable.
+static int parse_first_int(const std::string& raw){
+    std::string s = apply_digit_confusables(raw);
     int n = 0;
     bool any = false;
     for (char c : s){
