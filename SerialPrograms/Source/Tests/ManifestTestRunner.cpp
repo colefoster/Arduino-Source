@@ -55,6 +55,10 @@ static const std::map<std::string, BoolDetectorFn> DETECTOR_FUNCTIONS = {
     {"ResultScreenDetector",        test_pokemonChampions_ResultScreenDetector},
     {"PostMatchScreenDetector",     test_pokemonChampions_PostMatchScreenDetector},
     {"MainMenuDetector",            test_pokemonChampions_MainMenuDetector},
+    {"PreMatchDetector",            test_pokemonChampions_PreMatchDetector},
+    {"SearchingForBattleDetector",  test_pokemonChampions_SearchingForBattleDetector},
+    {"RankedFormatSelectDetector",  test_pokemonChampions_RankedFormatSelectDetector},
+    {"BattleModeMenuDetector",      test_pokemonChampions_BattleModeMenuDetector},
     {"MovesMoreDetector",           test_pokemonChampions_MovesMoreDetector},
     {"MegaEvolveDetector",          test_pokemonChampions_MegaEvolveDetector},
 };

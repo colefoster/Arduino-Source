@@ -24,7 +24,7 @@ screens:
   searching_for_battle:
     description: "Animation/transition after pressing Begin Matchmaking."
     transitions_to: [match_intro, team_preview_selecting]
-    detectors: []
+    detectors: [SearchingForBattleDetector]
     readers: {}
 
   match_intro:
@@ -224,19 +224,19 @@ screens:
   battle_mode_menu:
     description: "Battle mode list: Ranked Battles / Casual Battles / Private Battles / Online Competitions / Battle Data."
     transitions_to: [ranked_format_select, main_menu]
-    detectors: []
+    detectors: [BattleModeMenuDetector]
     readers: {}
 
   ranked_format_select:
     description: "Choose between Single Battle and Double Battle for ranked."
     transitions_to: [pre_match, battle_mode_menu]
-    detectors: []
+    detectors: [RankedFormatSelectDetector]
     readers: {}
 
   pre_match:
     description: "Pre-match staging screen: selected team displayed with Begin Matchmaking and Change Team buttons."
     transitions_to: [team_select, searching_for_battle, ranked_format_select]
-    detectors: []
+    detectors: [PreMatchDetector]
     readers: {}
 
   moves_and_more:

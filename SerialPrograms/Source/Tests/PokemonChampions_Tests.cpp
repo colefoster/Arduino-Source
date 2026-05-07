@@ -26,6 +26,10 @@
 #include "PokemonChampions/Inference/PokemonChampions_PreparingForBattleDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_PostMatchDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_MainMenuDetector.h"
+#include "PokemonChampions/Inference/PokemonChampions_PreMatchDetector.h"
+#include "PokemonChampions/Inference/PokemonChampions_SearchingForBattleDetector.h"
+#include "PokemonChampions/Inference/PokemonChampions_RankedFormatSelectDetector.h"
+#include "PokemonChampions/Inference/PokemonChampions_BattleModeMenuDetector.h"
 
 //  OCR readers
 #include "PokemonChampions/Inference/PokemonChampions_BattleModeDetector.h"
@@ -96,6 +100,34 @@ int test_pokemonChampions_MegaEvolveDetector(const ImageViewRGB32& image, bool t
 
 int test_pokemonChampions_MainMenuDetector(const ImageViewRGB32& image, bool target){
     MainMenuDetector detector;
+    bool result = detector.detect(image);
+    TEST_RESULT_EQUAL(result, target);
+    return 0;
+}
+
+int test_pokemonChampions_PreMatchDetector(const ImageViewRGB32& image, bool target){
+    PreMatchDetector detector;
+    bool result = detector.detect(image);
+    TEST_RESULT_EQUAL(result, target);
+    return 0;
+}
+
+int test_pokemonChampions_SearchingForBattleDetector(const ImageViewRGB32& image, bool target){
+    SearchingForBattleDetector detector;
+    bool result = detector.detect(image);
+    TEST_RESULT_EQUAL(result, target);
+    return 0;
+}
+
+int test_pokemonChampions_RankedFormatSelectDetector(const ImageViewRGB32& image, bool target){
+    RankedFormatSelectDetector detector;
+    bool result = detector.detect(image);
+    TEST_RESULT_EQUAL(result, target);
+    return 0;
+}
+
+int test_pokemonChampions_BattleModeMenuDetector(const ImageViewRGB32& image, bool target){
+    BattleModeMenuDetector detector;
     bool result = detector.detect(image);
     TEST_RESULT_EQUAL(result, target);
     return 0;

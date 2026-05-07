@@ -42,6 +42,7 @@ private:
     ImageFloatBox m_battle_button;
     ImageFloatBox m_box_button;
     ImageFloatBox m_chrome;
+    ImageFloatBox m_recruit_tile;
     MainMenuButton m_cursored = MainMenuButton::BATTLE;
 };
 

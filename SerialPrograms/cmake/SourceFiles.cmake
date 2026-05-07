@@ -1330,6 +1330,14 @@ file(GLOB LIBRARY_SOURCES
     Source/PokemonChampions/Inference/PokemonChampions_BattleModeDetector.h
     Source/PokemonChampions/Inference/PokemonChampions_MainMenuDetector.cpp
     Source/PokemonChampions/Inference/PokemonChampions_MainMenuDetector.h
+    Source/PokemonChampions/Inference/PokemonChampions_PreMatchDetector.cpp
+    Source/PokemonChampions/Inference/PokemonChampions_PreMatchDetector.h
+    Source/PokemonChampions/Inference/PokemonChampions_SearchingForBattleDetector.cpp
+    Source/PokemonChampions/Inference/PokemonChampions_SearchingForBattleDetector.h
+    Source/PokemonChampions/Inference/PokemonChampions_RankedFormatSelectDetector.cpp
+    Source/PokemonChampions/Inference/PokemonChampions_RankedFormatSelectDetector.h
+    Source/PokemonChampions/Inference/PokemonChampions_BattleModeMenuDetector.cpp
+    Source/PokemonChampions/Inference/PokemonChampions_BattleModeMenuDetector.h
     Source/PokemonChampions/Inference/PokemonChampions_MoveNameReader.cpp
     Source/PokemonChampions/Inference/PokemonChampions_MoveNameReader.h
     Source/PokemonChampions/Inference/PokemonChampions_MegaEvolveDetector.cpp
@@ -1344,6 +1352,8 @@ file(GLOB LIBRARY_SOURCES
     Source/PokemonChampions/Inference/PokemonChampions_TeamPreviewDetector.h
     Source/PokemonChampions/Inference/PokemonChampions_TeamPreviewReader.cpp
     Source/PokemonChampions/Inference/PokemonChampions_TeamPreviewReader.h
+    Source/PokemonChampions/Inference/PokemonChampions_TeamPreviewLeadsReader.cpp
+    Source/PokemonChampions/Inference/PokemonChampions_TeamPreviewLeadsReader.h
     Source/PokemonChampions/Inference/PokemonChampions_PokeballAliveDetector.cpp
     Source/PokemonChampions/Inference/PokemonChampions_PokeballAliveDetector.h
     Source/PokemonChampions/Resources/PokemonChampions_PokemonSprites.cpp

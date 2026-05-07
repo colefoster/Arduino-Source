@@ -30,6 +30,10 @@ int test_pokemonChampions_ResultScreenDetector(const ImageViewRGB32& image, bool
 int test_pokemonChampions_PreparingForBattleDetector(const ImageViewRGB32& image, bool target);
 int test_pokemonChampions_PostMatchScreenDetector(const ImageViewRGB32& image, bool target);
 int test_pokemonChampions_MainMenuDetector(const ImageViewRGB32& image, bool target);
+int test_pokemonChampions_PreMatchDetector(const ImageViewRGB32& image, bool target);
+int test_pokemonChampions_SearchingForBattleDetector(const ImageViewRGB32& image, bool target);
+int test_pokemonChampions_RankedFormatSelectDetector(const ImageViewRGB32& image, bool target);
+int test_pokemonChampions_BattleModeMenuDetector(const ImageViewRGB32& image, bool target);
 
 //  ── OCR Readers (words from filename) ──────────────────────────────
 

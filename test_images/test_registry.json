@@ -27,6 +27,9 @@
     "TeamSelectDetector": [
       "team_select"
     ],
+    "SearchingForBattleDetector": [
+      "searching_for_battle"
+    ],
     "TeamPreviewDetector": [
       "team_preview_selecting",
       "team_preview_locked_in"
@@ -51,6 +54,15 @@
     ],
     "MainMenuDetector": [
       "main_menu"
+    ],
+    "BattleModeMenuDetector": [
+      "battle_mode_menu"
+    ],
+    "RankedFormatSelectDetector": [
+      "ranked_format_select"
+    ],
+    "PreMatchDetector": [
+      "pre_match"
     ],
     "MovesMoreDetector": [
       "moves_and_more"
