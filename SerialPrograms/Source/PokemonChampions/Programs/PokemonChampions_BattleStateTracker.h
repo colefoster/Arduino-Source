@@ -31,6 +31,13 @@ namespace NintendoSwitch{
 namespace PokemonChampions{
 
 
+//  Forward decls — defined in TeamSummaryReader.h / TeamStatsReader.h.
+//  We can't include those here because TeamSummaryReader.h pulls in this
+//  header (for ConfiguredPokemon).
+struct TeamSummaryInfo;
+struct TeamStatsInfo;
+
+
 struct TrackedPokemon{
     std::string species;        //  slug, e.g. "kingambit"
     float hp = 1.0f;            //  normalized 0.0-1.0
@@ -38,6 +45,10 @@ struct TrackedPokemon{
     std::vector<std::string> known_moves;  //  up to 4 move slugs
     std::string item;           //  slug, e.g. "bright-powder"
     std::string ability;        //  slug, e.g. "defiant"
+    std::string nature;         //  "Adamant", "Timid", etc. Empty until scanned.
+    //  EVs in HP/Atk/Def/SpA/SpD/Spe order. Zeros until scanned. These are
+    //  the small numbers next to each stat on the Stats tab.
+    std::array<int, 6> evs = {};
     std::array<int8_t, 6> boosts = {};  //  atk, def, spa, spd, spe, evasion
     bool is_mega = false;
     bool alive = true;
@@ -79,6 +90,15 @@ public:
 
     //  Update from a parsed battle log event.
     void update_from_log(const BattleLogEvent& event);
+
+    //  Update own team from a Moves & More tab scan (species + ability +
+    //  item + 4 moves). Empty fields in the input are skipped — partial
+    //  reads don't clobber prior good data. Safe to call repeatedly.
+    void update_from_team_summary(const std::array<TeamSummaryInfo, 6>& infos);
+
+    //  Update own team from a Stats tab scan (nature slug + 6 EVs).
+    //  Empty nature / all-zero EVs are skipped. Safe to call repeatedly.
+    void update_from_team_stats(const std::array<TeamStatsInfo, 6>& infos);
 
     //  Advance the turn counter.
     void advance_turn();

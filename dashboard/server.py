@@ -1636,6 +1636,50 @@ async def team_scan_read(request: Request):
     }
 
 
+@app.get("/api/team-scan/crops")
+async def team_scan_crops(slot: int, mm_file: str = "", st_file: str = ""):
+    """Return per-field crops for one slot's M&M boxes + Stats boxes,
+    pulled straight from tools/box_definitions.json. Used by the Team Scan
+    tab's per-slot expand panel for OCR debugging."""
+    import base64
+    if slot < 0 or slot > 5:
+        return JSONResponse({"error": "slot out of range"}, 400)
+    defs = json.loads(BOX_DEFINITIONS_PATH.read_text()) if BOX_DEFINITIONS_PATH.exists() else {"boxes": []}
+
+    mm_path = TEST_IMAGES_DIR / "moves_and_more" / mm_file if mm_file else None
+    st_path = TEST_IMAGES_DIR / "team_stats" / st_file if st_file else None
+
+    def crop_or_none(img_path, box):
+        if not img_path or not img_path.exists(): return None
+        return f"data:image/png;base64,{base64.b64encode(_extract_crop(img_path, box)).decode()}"
+
+    # M&M fields live on the moves_and_more screenshot.
+    # Stats fields live on the team_stats screenshot.
+    # Slot 0's name box is unique: "mon_0_species" not "mon_0_name".
+    name_field = "species" if slot == 0 else "name"
+    mm_fields = [name_field, "ability", "item", "move_0", "move_1", "move_2", "move_3"]
+    stat_fields = []
+    for stat in ["hp", "atk", "def", "spa", "spd", "spe"]:
+        for sub in ["actual", "evs"] + ([] if stat == "hp" else ["nature"]):
+            stat_fields.append(f"{stat}_{sub}")
+
+    out = {"slot": slot, "mm": [], "stats": []}
+    by_name = {b["name"]: b for b in defs["boxes"]}
+    for f in mm_fields:
+        key = f"mon_{slot}_{f}"
+        b = by_name.get(key)
+        if not b: continue
+        out["mm"].append({"field": f, "name": key, "box": b["box"],
+                          "data": crop_or_none(mm_path, b["box"])})
+    for f in stat_fields:
+        key = f"mon_{slot}_{f}"
+        b = by_name.get(key)
+        if not b: continue
+        out["stats"].append({"field": f, "name": key, "box": b["box"],
+                             "data": crop_or_none(st_path, b["box"])})
+    return out
+
+
 @app.get("/api/team-scan/latest")
 async def team_scan_latest():
     """Return the most-recent M&M and Stats screenshots (mtime-sorted) so the

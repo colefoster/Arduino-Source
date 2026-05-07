@@ -43,4 +43,13 @@
 .tsc-card .moves { display:grid; grid-template-columns:1fr 1fr; gap:2px 8px; margin-top:6px; padding-top:6px; border-top:1px solid #30363d; font-size:11px; color:#3fb950; font-family:ui-monospace,monospace; }
 .tsc-card .meta { font-size:11px; color:#d29922; margin-top:4px; }
 .tsc-card .empty { color:#6e7681; font-style:italic; }
+.tsc-card .crops-toggle { font-size:10px; color:#58a6ff; background:none; border:0; cursor:pointer; padding:4px 0 0; text-align:left; }
+.tsc-card .crops-panel { display:none; margin-top:8px; padding-top:8px; border-top:1px solid #30363d; }
+.tsc-card .crops-panel.open { display:block; }
+.tsc-card .crops-section-label { font-size:10px; color:#8b949e; text-transform:uppercase; margin:4px 0; }
+.tsc-card .crops-grid { display:grid; grid-template-columns:repeat(4, 1fr); gap:6px; }
+.tsc-card .crop-cell { background:#0d1117; padding:4px; border-radius:3px; display:flex; flex-direction:column; align-items:center; gap:2px; font-family:ui-monospace,monospace; font-size:9px; }
+.tsc-card .crop-cell .field { color:#8b949e; }
+.tsc-card .crop-cell .read { color:#d29922; word-break:break-word; text-align:center; }
+.tsc-card .crop-cell img { max-width:100%; image-rendering:pixelated; border:1px solid #30363d; }
 </style>

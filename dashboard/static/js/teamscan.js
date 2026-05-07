@@ -36,7 +36,7 @@ async function teamScanInit() {
         return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     }
 
-    function renderSlot(slot) {
+    function renderSlot(slot, mmFile, stFile) {
         const div = document.createElement('div');
         div.className = 'tsc-card';
         const stats = slot.stats || {};
@@ -65,8 +65,67 @@ async function teamScanInit() {
             <div class="meta">${tsEsc(abilityLabel)} @ ${tsEsc(itemLabel)}</div>
             <div style="margin-top:6px;">${statRows}</div>
             <div class="moves">${movesHtml}</div>
+            <button class="crops-toggle">show crops &amp; raw OCR</button>
+            <div class="crops-panel"></div>
         `;
+
+        const toggleBtn = div.querySelector('.crops-toggle');
+        const panel = div.querySelector('.crops-panel');
+        let loaded = false;
+        toggleBtn.addEventListener('click', async () => {
+            const isOpen = panel.classList.toggle('open');
+            toggleBtn.textContent = isOpen ? 'hide crops' : 'show crops & raw OCR';
+            if (isOpen && !loaded) {
+                loaded = true;
+                panel.innerHTML = '<div style="font-size:10px; color:#8b949e;">loading...</div>';
+                try {
+                    const params = new URLSearchParams({slot: slot.slot, mm_file: mmFile, st_file: stFile});
+                    const r = await fetchJson('/api/team-scan/crops?' + params);
+                    panel.innerHTML = renderCropsPanel(r, slot);
+                } catch (e) {
+                    panel.innerHTML = `<div style="color:#f85149;">error: ${tsEsc(e.message)}</div>`;
+                }
+            }
+        });
+
         return div;
+    }
+
+    function renderCropsPanel(crops, slot) {
+        const stats = slot.stats || {};
+        // For each stats crop, also pull the raw OCR text from the read result.
+        // crops.stats entries have .field like "atk_actual" / "atk_evs" / "atk_nature".
+        const lookup = (field) => {
+            const [stat, sub] = field.split('_');
+            const s = stats[stat] || {};
+            if (sub === 'actual') return {raw: s.raw_actual, parsed: s.actual};
+            if (sub === 'evs')    return {raw: s.raw_evs,    parsed: s.evs};
+            if (sub === 'nature') return {raw: '', parsed: s.nature || 'neutral'};
+            return {raw: '', parsed: ''};
+        };
+        const mmCells = crops.mm.map(c => `
+            <div class="crop-cell">
+                <div class="field">${tsEsc(c.field)}</div>
+                ${c.data ? `<img src="${c.data}">` : '<span style="color:#f85149;">no img</span>'}
+            </div>
+        `).join('');
+        const statCells = crops.stats.map(c => {
+            const {raw, parsed} = lookup(c.field);
+            return `
+                <div class="crop-cell">
+                    <div class="field">${tsEsc(c.field)}</div>
+                    ${c.data ? `<img src="${c.data}">` : '<span style="color:#f85149;">no img</span>'}
+                    <div class="read">parsed: ${tsEsc(String(parsed))}</div>
+                    ${raw ? `<div class="read" style="color:#79c0ff;">raw: ${tsEsc(raw)}</div>` : ''}
+                </div>
+            `;
+        }).join('');
+        return `
+            <div class="crops-section-label">Moves &amp; More boxes</div>
+            <div class="crops-grid">${mmCells}</div>
+            <div class="crops-section-label" style="margin-top:8px;">Stats boxes (parsed | raw OCR)</div>
+            <div class="crops-grid">${statCells}</div>
+        `;
     }
 
     function imgUrl(screen, filename) {
@@ -97,7 +156,7 @@ async function teamScanInit() {
                 status.textContent = 'Error: ' + (r.error || 'unknown');
                 return;
             }
-            (r.slots || []).forEach(slot => slotsEl.appendChild(renderSlot(slot)));
+            (r.slots || []).forEach(slot => slotsEl.appendChild(renderSlot(slot, mm, st)));
             pasteEl.textContent = r.ps_paste || '';
             status.textContent = 'OK';
         } catch (e) {

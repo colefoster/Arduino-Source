@@ -41,6 +41,8 @@
 #include "PokemonChampions/Inference/PokemonChampions_TeamPreviewDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_TeamPreviewReader.h"
 #include "PokemonChampions/Inference/PokemonChampions_TeamSelectDetector.h"
+#include "PokemonChampions/Inference/PokemonChampions_TeamStatsReader.h"
+#include "PokemonChampions/Inference/PokemonChampions_TeamSummaryReader.h"
 #include "PokemonChampions/Inference/PokemonChampions_TargetSelectDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_TargetSelectReader.h"
 
@@ -304,6 +306,8 @@ void LiveDetectorTrace::init_pipeline_registry(){
     add("TeamSelectDetector",        "detector", "skipped", "Detects the team-select tab strip (the screen before Team Preview where you pick which 4 to bring); also reports selected_tab.");
     add("TargetSelectDetector",      "detector", "skipped", "Detects the doubles target-select modal: 4 selector strips visible with exactly one in the selected (yellow/green) state. Reports selected_index 0..3 (opp_a/opp_b/own_a/own_b).");
     add("CommunicatingDetector",     "detector", "skipped", "Detects the 'syncing with opponent' transitional overlay; co-fires with whatever screen is underneath.");
+    add("MovesMoreDetector",         "detector", "skipped", "Detects the 'View Details — Moves & More' tab. Shows species/ability/item/4 moves per slot.");
+    add("TeamStatsTabDetector",      "detector", "skipped", "Detects the 'View Details — Stats' tab. Shows 6 stats × {actual, EVs, nature direction} per slot.");
 
     //  ── Wired readers ──
     add("BattleModeDetector",        "reader", "skipped", "Reads format label: Singles vs Doubles. Refreshed on TeamPreview / matchmaking screens.");
@@ -319,6 +323,14 @@ void LiveDetectorTrace::init_pipeline_registry(){
         "Reads the doubles target-select modal: which move each own active mon picked, "
         "which target is highlighted, and per-target effectiveness label. Fires only on the "
         "target_select screen.");
+    add("TeamSummaryReader",         "reader", "skipped",
+        "Reads the Moves & More tab — species/ability/item/4 moves for all 6 slots in one OCR pass. "
+        "Fires only on moves_and_more screens. Feeds BattleStateTracker::update_from_team_summary "
+        "(merges with existing own-team data; partial reads don't clobber).");
+    add("TeamStatsReader",           "reader", "skipped",
+        "Reads the Stats tab — 6 stats per slot (final value + EVs + nature direction). "
+        "Infers nature slug (Adamant/Timid/...) from the boost/drop pair. "
+        "Fires only on team_stats screens. Feeds BattleStateTracker::update_from_team_stats.");
     add("AbilityItemReader",         "reader", "skipped",
         "OCRs the mid-battle ability/item reveal overlay (\"Garchomp's Rough Skin!\"). Self-gates on its "
         "own visual detection; deduped against the prior raw text so a single overlay only fires once.");
@@ -459,6 +471,17 @@ std::string LiveDetectorTrace::classify_screen(Logger& logger, const ImageViewRG
             return "team_select";
         }
     }
+    //  Both View Details tabs share the purple-card backdrop but differ in
+    //  which tab label is yellow-green. Order doesn't matter — they
+    //  mutually exclude (only one tab is active at a time).
+    {
+        MovesMoreDetector det;
+        if (try_det("MovesMoreDetector", det)) return "moves_and_more";
+    }
+    {
+        TeamStatsTabDetector det;
+        if (try_det("TeamStatsTabDetector", det)) return "team_stats";
+    }
     {
         MainMenuDetector det;
         if (try_det("MainMenuDetector", det)) return "main_menu";
@@ -531,6 +554,86 @@ void LiveDetectorTrace::run_team_preview_screen(Logger& logger, const ImageViewR
     summary["own"] = std::move(own_arr);
     summary["opp"] = std::move(opp_arr);
     mark("TeamPreviewReader", (own_count + opp_count) > 0 ? "ok" : "error", std::move(summary));
+}
+
+
+void LiveDetectorTrace::run_moves_and_more_screen(Logger& logger, const ImageViewRGB32& screen){
+    TeamSummaryReader reader(Language::English);
+    auto team = reader.read_team(logger, screen);
+
+    //  Build a signature from the species+item+ability concat so we only
+    //  fire update_from_team_summary once per distinct read while the
+    //  user sits on this screen.
+    std::string sig;
+    for (const auto& t : team){
+        sig += t.species + "|" + t.ability + "|" + t.item + "|"
+             + t.moves[0] + "," + t.moves[1] + "," + t.moves[2] + "," + t.moves[3] + ";";
+    }
+    bool fresh = (sig != m_prev_team_summary_sig);
+    m_prev_team_summary_sig = sig;
+
+    if (fresh){
+        m_tracker.update_from_team_summary(team);
+    }
+
+    JsonObject out;
+    JsonArray slot_arr;
+    for (uint8_t i = 0; i < 6; i++){
+        JsonObject s;
+        s["slot"] = (int64_t)i;
+        s["species"] = team[i].species;
+        s["ability"] = team[i].ability;
+        s["item"] = team[i].item;
+        JsonArray moves;
+        for (uint8_t m = 0; m < 4; m++) moves.push_back(team[i].moves[m]);
+        s["moves"] = std::move(moves);
+        slot_arr.push_back(std::move(s));
+    }
+    out["slots"] = std::move(slot_arr);
+    out["fresh"] = fresh;
+    mark("TeamSummaryReader", "ok", std::move(out));
+}
+
+
+void LiveDetectorTrace::run_team_stats_screen(Logger& logger, const ImageViewRGB32& screen){
+    TeamStatsReader reader;
+    auto team = reader.read_team(logger, screen);
+
+    std::string sig;
+    for (const auto& t : team){
+        sig += t.nature_slug + "|";
+        for (const auto& s : t.stats){
+            sig += std::to_string(s.actual) + "," + std::to_string(s.evs) + ";";
+        }
+    }
+    bool fresh = (sig != m_prev_team_stats_sig);
+    m_prev_team_stats_sig = sig;
+
+    if (fresh){
+        m_tracker.update_from_team_stats(team);
+    }
+
+    JsonObject out;
+    JsonArray slot_arr;
+    static const char* keys[6] = {"hp","atk","def","spa","spd","spe"};
+    for (uint8_t i = 0; i < 6; i++){
+        JsonObject s;
+        s["slot"] = (int64_t)i;
+        s["nature"] = team[i].nature_slug;
+        JsonObject stats;
+        for (uint8_t k = 0; k < 6; k++){
+            JsonObject one;
+            one["actual"] = (int64_t)team[i].stats[k].actual;
+            one["evs"] = (int64_t)team[i].stats[k].evs;
+            one["nature"] = std::string(nature_mod_name(team[i].stats[k].nature));
+            stats[keys[k]] = std::move(one);
+        }
+        s["stats"] = std::move(stats);
+        slot_arr.push_back(std::move(s));
+    }
+    out["slots"] = std::move(slot_arr);
+    out["fresh"] = fresh;
+    mark("TeamStatsReader", "ok", std::move(out));
 }
 
 
@@ -818,6 +921,8 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
     m_prev_screen.clear();
     m_prev_log_text.clear();
     m_prev_ability_item_text.clear();
+    m_prev_team_summary_sig.clear();
+    m_prev_team_stats_sig.clear();
     m_match_in_progress = false;
     m_seen_log_event_types.clear();
     m_seen_opp_species.clear();
@@ -896,6 +1001,8 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
             m_tracker.set_mode(m_mode);
             m_prev_log_text.clear();
             m_prev_ability_item_text.clear();
+    m_prev_team_summary_sig.clear();
+    m_prev_team_stats_sig.clear();
             //  Per-match dedup — re-arm screen-entry captures so we get a
             //  fresh target_select / team_select snapshot on each new match.
             //  Other seen sets are session-scoped and survive matches.
@@ -915,7 +1022,8 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
         //  screen, not while we sit on it). Reset per match, so re-entering
         //  target_select on the next turn captures again only if we haven't
         //  in this match.
-        if ((screen == "target_select" || screen == "team_select")
+        if ((screen == "target_select" || screen == "team_select"
+                || screen == "moves_and_more" || screen == "team_stats")
             && screen != m_prev_screen)
         {
             JsonObject meta;
@@ -934,6 +1042,10 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
             run_battle_screen(env.console, snapshot);
         }else if (screen == "target_select"){
             run_target_select_screen(env.console, snapshot);
+        }else if (screen == "moves_and_more"){
+            run_moves_and_more_screen(env.console, snapshot);
+        }else if (screen == "team_stats"){
+            run_team_stats_screen(env.console, snapshot);
         }else if (screen == "unknown" && m_match_in_progress){
             //  Mid-animation frames (post-move flashes, switch transitions,
             //  faint sequences) usually classify as "unknown" — but the

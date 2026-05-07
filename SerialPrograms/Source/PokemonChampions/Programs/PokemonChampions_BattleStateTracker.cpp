@@ -9,6 +9,8 @@
 #include "Common/Cpp/Json/JsonObject.h"
 #include "Common/Cpp/Json/JsonValue.h"
 #include "PokemonChampions_BattleStateTracker.h"
+#include "PokemonChampions/Inference/PokemonChampions_TeamSummaryReader.h"
+#include "PokemonChampions/Inference/PokemonChampions_TeamStatsReader.h"
 
 namespace PokemonAutomation{
 namespace NintendoSwitch{
@@ -509,6 +511,50 @@ JsonObject BattleStateTracker::to_predict_json() const{
 
     return root;
 }
+
+void BattleStateTracker::update_from_team_summary(
+    const std::array<TeamSummaryInfo, 6>& infos
+){
+    //  Merge — only overwrite a tracker field when the input has a
+    //  non-empty value. Lets a partial Moves & More read add to whatever
+    //  was already known without clobbering.
+    for (uint8_t i = 0; i < 6; i++){
+        const TeamSummaryInfo& src = infos[i];
+        TrackedPokemon& dst = m_own_team[i];
+        if (!src.species.empty()) dst.species = src.species;
+        if (!src.ability.empty()) dst.ability = src.ability;
+        if (!src.item.empty())    dst.item = src.item;
+        for (uint8_t m = 0; m < 4; m++){
+            if (!src.moves[m].empty()) dst.add_move(src.moves[m]);
+        }
+    }
+}
+
+
+void BattleStateTracker::update_from_team_stats(
+    const std::array<TeamStatsInfo, 6>& infos
+){
+    for (uint8_t i = 0; i < 6; i++){
+        const TeamStatsInfo& src = infos[i];
+        TrackedPokemon& dst = m_own_team[i];
+        if (!src.nature_slug.empty()){
+            dst.nature = src.nature_slug;
+        }
+        //  Per-stat EVs. Only overwrite when the input has a non-zero EV
+        //  read; OCR sometimes misses single-digit zeros and we don't
+        //  want to clobber a known good value with noise.
+        bool any_nonzero = false;
+        for (uint8_t s = 0; s < 6; s++){
+            if (src.stats[s].evs > 0) any_nonzero = true;
+        }
+        if (any_nonzero){
+            for (uint8_t s = 0; s < 6; s++){
+                dst.evs[s] = src.stats[s].evs;
+            }
+        }
+    }
+}
+
 
 JsonObject BattleStateTracker::to_team_select_json(
     const std::vector<std::string>& opp_species

@@ -99,6 +99,8 @@ private:
     void run_battle_screen(Logger& logger, const ImageViewRGB32& screen);
     void run_move_select_screen(Logger& logger, const ImageViewRGB32& screen);
     void run_target_select_screen(Logger& logger, const ImageViewRGB32& screen);
+    void run_moves_and_more_screen(Logger& logger, const ImageViewRGB32& screen);
+    void run_team_stats_screen(Logger& logger, const ImageViewRGB32& screen);
 
     //  Detects the in-battle text bar; OCRs + parses; deduplicates against
     //  the prior poll's raw text so a single log line (which sticks for
@@ -177,6 +179,13 @@ private:
 
     //  Same dedup pattern for the ability/item reveal overlay.
     std::string m_prev_ability_item_text;
+
+    //  Dedup signatures for the team-scan readers — prevents writing the
+    //  tracker every poll while we sit on the screen. Signature is a
+    //  concat of per-slot key fields (species|item for M&M, nature|EVs
+    //  for Stats); when it changes, we re-fire update_from_*.
+    std::string m_prev_team_summary_sig;
+    std::string m_prev_team_stats_sig;
 
     //  ── Auto-capture state ──
     //  Per-channel "seen this session" sets so each novel readout fires at
