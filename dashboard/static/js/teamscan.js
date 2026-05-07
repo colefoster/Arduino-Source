@@ -2,8 +2,11 @@
 // latest moves_and_more / team_stats pair, displays per-slot reads, and
 // renders the assembled team as a Showdown paste.
 
-(async function tsInit() {
-    if (!document.getElementById('view-teamscan')) return;
+let _teamScanInited = false;
+
+async function teamScanInit() {
+    if (_teamScanInited) return;
+    _teamScanInited = true;
 
     async function fetchJson(path, opts) {
         const r = await fetch(path, opts);
@@ -111,7 +114,6 @@
     await loadFileList('moves_and_more', 'ts-mm-file');
     await loadFileList('team_stats', 'ts-st-file');
 
-    // Pre-pick the most-recent pair and auto-run.
     try {
         const latest = await fetchJson('/api/team-scan/latest');
         if (latest.moves_more_file) document.getElementById('ts-mm-file').value = latest.moves_more_file;
@@ -119,4 +121,4 @@
     } catch (e) { /* ignore */ }
 
     runScan();
-})();
+}
