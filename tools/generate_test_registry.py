@@ -46,6 +46,15 @@ def main():
                 detectors[det] = []
             detectors[det].append(screen_name)
 
+    # Build state-probe detector -> [screen_dirs] mapping. State-probe
+    # detectors fire conditionally; expected value is per-frame from the
+    # manifest (default false if not present). Listed separately from
+    # always-on screen detectors so the runner can dispatch correctly.
+    state_probe_detectors = {}
+    for screen_name, screen_def in screens.items():
+        for det in screen_def.get("state_probe_detectors", []):
+            state_probe_detectors.setdefault(det, []).append(screen_name)
+
     # Build reader -> {screen_dir: field_schema} mapping
     readers = {}
     for screen_name, screen_def in screens.items():
@@ -69,6 +78,7 @@ def main():
         "all_screen_dirs": all_screen_dirs,
         "overlay_dirs": [f"_overlays/{name}" for name in overlays.keys()],
         "detectors": detectors,
+        "state_probe_detectors": state_probe_detectors,
         "readers": readers,
     }
 

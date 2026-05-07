@@ -390,6 +390,75 @@ int run_manifest_tests(const std::string& test_images_dir, const std::string& mo
         }
     }
 
+    // ── State-probe detector tests ──────────────────────────────────
+    //
+    //  These detectors fire only when a particular state is on-screen
+    //  (e.g. MegaEvolveDetector → "R" pill visible). Expected value is
+    //  read per-frame from the manifest's top-level `<DetectorName>` key,
+    //  defaulting to false if the key is absent.
+
+    if (registry.contains("state_probe_detectors")){
+        for (const auto& [det_name, screens_json] : registry["state_probe_detectors"].items()){
+            auto fn_it = DETECTOR_FUNCTIONS.find(det_name);
+            if (fn_it == DETECTOR_FUNCTIONS.end()){
+                cerr << "Warning: no test function for state-probe detector "
+                     << det_name << ", skipping." << endl;
+                continue;
+            }
+            const auto& test_fn = fn_it->second;
+
+            TestStats& stats = all_stats[det_name];
+            stats.name = det_name;
+
+            cout << "===========================================" << endl;
+            cout << "Testing state-probe detector: " << det_name << endl;
+
+            const auto screens = screens_json.get<std::vector<std::string>>();
+            for (const auto& screen_dir : screens){
+                std::string full_dir = test_images_dir + "/" + screen_dir;
+                std::string manifest_path = full_dir + "/manifest.json";
+                json manifest;
+                try{
+                    manifest = load_json_file(manifest_path);
+                }catch (const std::exception&){
+                    //  No manifest → all-false expectation for these frames.
+                    manifest = json::object();
+                }
+
+                auto files = list_png_files(full_dir);
+                for (const auto& file_path : files){
+                    std::string fname = filename_from_path(file_path);
+                    bool expected = false;
+                    if (manifest.contains(fname) && manifest[fname].contains(det_name)
+                        && manifest[fname][det_name].is_boolean()){
+                        expected = manifest[fname][det_name].get<bool>();
+                    }
+                    cout << "  " << screen_dir << "/" << fname
+                         << " (expect=" << (expected ? "true" : "false") << ")" << endl;
+
+                    int ret = 0;
+                    try{
+                        ImageRGB32 image(file_path);
+                        ret = test_fn(image, expected);
+                    }catch (const std::exception& e){
+                        cerr << "  Exception: " << e.what() << endl;
+                        ret = 1;
+                    }
+
+                    if (ret > 0){
+                        stats.failed++;
+                        stats.failures.push_back(screen_dir + "/" + fname);
+                        if (!regression) return 1;
+                    }else if (ret == 0){
+                        stats.passed++;
+                    }else{
+                        stats.skipped++;
+                    }
+                }
+            }
+        }
+    }
+
     // ── Reader tests ────────────────────────────────────────────────
 
     for (const auto& [reader_name, reader_info] : registry["readers"].items()){

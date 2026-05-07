@@ -369,7 +369,7 @@
         159
       ],
       "own_species": [
-        "sneasler",
+        "sneasler-shiny",
         "charizard-shiny-mega-y"
       ],
       "own_species_shiny": [
@@ -412,7 +412,7 @@
         159
       ],
       "own_species": [
-        "sneasler",
+        "sneasler-shiny",
         "charizard-shiny-mega-y"
       ],
       "own_species_shiny": [
@@ -455,7 +455,7 @@
         159
       ],
       "own_species": [
-        "sneasler",
+        "sneasler-shiny",
         "charizard-shiny-mega-y"
       ],
       "own_species_shiny": [
@@ -494,7 +494,7 @@
         159
       ],
       "own_species": [
-        "sneasler",
+        "sneasler-shiny",
         "charizard-shiny-mega-y"
       ],
       "own_species_shiny": [
@@ -533,7 +533,7 @@
         159
       ],
       "own_species": [
-        "sneasler",
+        "sneasler-shiny",
         "charizard-shiny-mega-y"
       ],
       "own_species_shiny": [
@@ -1340,7 +1340,7 @@
         202
       ],
       "own_species": [
-        "sneasler",
+        "sneasler-shiny",
         "incineroar"
       ]
     },
@@ -1364,7 +1364,7 @@
         "garchomp"
       ],
       "own_species": [
-        "sneasler",
+        "sneasler-shiny",
         ""
       ],
       "own_species_shiny": [
@@ -1409,7 +1409,7 @@
         202
       ],
       "own_species": [
-        "sneasler",
+        "sneasler-shiny",
         "incineroar"
       ]
     },
@@ -1433,7 +1433,7 @@
         "garchomp"
       ],
       "own_species": [
-        "sneasler",
+        "sneasler-shiny",
         ""
       ],
       "own_species_shiny": [
@@ -1460,7 +1460,7 @@
         "garchomp"
       ],
       "own_species": [
-        "sneasler",
+        "sneasler-shiny",
         ""
       ],
       "own_species_shiny": [
@@ -1487,7 +1487,7 @@
         "garchomp"
       ],
       "own_species": [
-        "sneasler",
+        "sneasler-shiny",
         ""
       ],
       "own_species_shiny": [
@@ -1514,7 +1514,7 @@
         "garchomp"
       ],
       "own_species": [
-        "sneasler",
+        "sneasler-shiny",
         ""
       ],
       "own_species_shiny": [
@@ -1541,7 +1541,7 @@
         "garchomp"
       ],
       "own_species": [
-        "sneasler",
+        "sneasler-shiny",
         ""
       ],
       "own_species_shiny": [
@@ -1568,7 +1568,7 @@
         "garchomp"
       ],
       "own_species": [
-        "sneasler",
+        "sneasler-shiny",
         ""
       ],
       "own_species_shiny": [
@@ -1595,7 +1595,7 @@
         "garchomp"
       ],
       "own_species": [
-        "sneasler",
+        "sneasler-shiny",
         ""
       ],
       "own_species_shiny": [
@@ -1622,7 +1622,7 @@
         "garchomp"
       ],
       "own_species": [
-        "venusaur",
+        "venusaur-shiny",
         ""
       ],
       "own_species_shiny": [
@@ -1649,7 +1649,7 @@
         "garchomp"
       ],
       "own_species": [
-        "venusaur",
+        "venusaur-shiny",
         ""
       ],
       "own_species_shiny": [
@@ -1667,7 +1667,8 @@
     },
     "MoveSelectCursorSlot": {
       "slot": 0
-    }
+    },
+    "MegaEvolveDetector": true
   },
   "20260427-132508656455.png": {
     "ActiveHUDSlot": {
@@ -1691,7 +1692,7 @@
         159
       ],
       "own_species": [
-        "venusaur",
+        "venusaur-shiny",
         "charizard-shiny"
       ],
       "own_species_shiny": [
@@ -1734,7 +1735,7 @@
         159
       ],
       "own_species": [
-        "venusaur",
+        "venusaur-shiny",
         "charizard-shiny"
       ],
       "own_species_shiny": [
@@ -1783,7 +1784,7 @@
         159
       ],
       "own_species": [
-        "venusaur",
+        "venusaur-shiny",
         "charizard-shiny-mega-y"
       ]
     },
@@ -1828,7 +1829,7 @@
         159
       ],
       "own_species": [
-        "venusaur",
+        "venusaur-shiny",
         "charizard-shiny-mega-y"
       ]
     },
@@ -1873,7 +1874,7 @@
         159
       ],
       "own_species": [
-        "venusaur",
+        "venusaur-shiny",
         "charizard-shiny-mega-y"
       ]
     },
@@ -1897,7 +1898,7 @@
         "gengar"
       ],
       "own_species": [
-        "venusaur",
+        "venusaur-shiny",
         ""
       ],
       "own_species_shiny": [
@@ -1924,7 +1925,7 @@
         "gengar"
       ],
       "own_species": [
-        "venusaur",
+        "venusaur-shiny",
         ""
       ],
       "own_species_shiny": [
@@ -2179,7 +2180,8 @@
         "nasty-plot",
         "protect"
       ]
-    }
+    },
+    "MegaEvolveDetector": true
   },
   "20260428-090451579888.png": {
     "BattleHUDReader": {
@@ -2233,7 +2235,8 @@
     },
     "MoveSelectCursorSlot": {
       "slot": 1
-    }
+    },
+    "MegaEvolveDetector": true
   },
   "20260428-090542669809.png": {
     "BattleHUDReader": {
@@ -2345,7 +2348,7 @@
       ],
       "own_species": [
         "starmie",
-        "archaludon"
+        "archaludon-shiny"
       ]
     },
     "MegaEvolveDetector": true,
@@ -2390,7 +2393,7 @@
       ],
       "own_species": [
         "sinistcha",
-        "archaludon"
+        "archaludon-shiny"
       ]
     },
     "MegaEvolveDetector": false,
@@ -2435,7 +2438,7 @@
       ],
       "own_species": [
         "starmie",
-        "archaludon"
+        "archaludon-shiny"
       ]
     },
     "MegaEvolveDetector": true,
@@ -2480,7 +2483,7 @@
       ],
       "own_species": [
         "pelipper-shiny",
-        "archaludon"
+        "archaludon-shiny"
       ]
     },
     "MegaEvolveDetector": false,
@@ -2525,7 +2528,7 @@
       ],
       "own_species": [
         "starmie",
-        "archaludon"
+        "archaludon-shiny"
       ]
     },
     "MegaEvolveDetector": true,
@@ -2566,7 +2569,8 @@
     },
     "MoveSelectCursorSlot": {
       "slot": 0
-    }
+    },
+    "MegaEvolveDetector": true
   },
   "move_select_slot2.png": {
     "ActiveHUDSlot": {
@@ -2657,5 +2661,14 @@
     "MoveSelectCursorSlot": {
       "slot": -1
     }
+  },
+  "20260506-game-video-20260506-085127194822_0199.png": {
+    "MegaEvolveDetector": true
+  },
+  "20260506-game-video-20260506-085127194822_0200.png": {
+    "MegaEvolveDetector": true
+  },
+  "20260506-game2-video-20260506-085625397902_0272.png": {
+    "MegaEvolveDetector": true
   }
 }

@@ -43,9 +43,6 @@
     "MoveSelectDetector": [
       "move_select"
     ],
-    "MegaEvolveDetector": [
-      "move_select"
-    ],
     "ResultScreenDetector": [
       "result_screen"
     ],
@@ -66,6 +63,11 @@
     ],
     "MovesMoreDetector": [
       "moves_and_more"
+    ]
+  },
+  "state_probe_detectors": {
+    "MegaEvolveDetector": [
+      "move_select"
     ]
   },
   "readers": {
