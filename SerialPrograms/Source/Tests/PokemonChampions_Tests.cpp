@@ -30,6 +30,7 @@
 #include "PokemonChampions/Inference/PokemonChampions_SearchingForBattleDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_RankedFormatSelectDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_BattleModeMenuDetector.h"
+#include "PokemonChampions/Inference/PokemonChampions_PokemonSwitchDetector.h"
 
 //  OCR readers
 #include "PokemonChampions/Inference/PokemonChampions_BattleModeDetector.h"
@@ -128,6 +129,13 @@ int test_pokemonChampions_RankedFormatSelectDetector(const ImageViewRGB32& image
 
 int test_pokemonChampions_BattleModeMenuDetector(const ImageViewRGB32& image, bool target){
     BattleModeMenuDetector detector;
+    bool result = detector.detect(image);
+    TEST_RESULT_EQUAL(result, target);
+    return 0;
+}
+
+int test_pokemonChampions_PokemonSwitchDetector(const ImageViewRGB32& image, bool target){
+    PokemonSwitchDetector detector;
     bool result = detector.detect(image);
     TEST_RESULT_EQUAL(result, target);
     return 0;

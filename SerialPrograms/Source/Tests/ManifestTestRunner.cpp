@@ -60,6 +60,7 @@ static const std::map<std::string, BoolDetectorFn> DETECTOR_FUNCTIONS = {
     {"SearchingForBattleDetector",  test_pokemonChampions_SearchingForBattleDetector},
     {"RankedFormatSelectDetector",  test_pokemonChampions_RankedFormatSelectDetector},
     {"BattleModeMenuDetector",      test_pokemonChampions_BattleModeMenuDetector},
+    {"PokemonSwitchDetector",       test_pokemonChampions_PokemonSwitchDetector},
     {"MovesMoreDetector",           test_pokemonChampions_MovesMoreDetector},
     {"MegaEvolveDetector",          test_pokemonChampions_MegaEvolveDetector},
 };

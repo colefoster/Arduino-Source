@@ -176,7 +176,7 @@ screens:
   target_select:
     description: "Target selection modal after picking a move in doubles. Each potential target (2 opp + 2 own) has a colored selector strip (yellow/green = targeted, red/blue = not) and an effectiveness label. Each own active mon has its move name shown."
     transitions_to: [action_menu]
-    detectors: []
+    detectors: [TargetSelectDetector]
     readers:
       TargetSelectReader:
         fields:
@@ -206,7 +206,7 @@ screens:
   pokemon_switch:
     description: "Choosing which mon to switch to (voluntary or forced). Singles or doubles."
     transitions_to: [action_menu]
-    detectors: []
+    detectors: [PokemonSwitchDetector]
     readers: {}
 
   # ── Shared battle states ───────────────────────────────────

@@ -81,18 +81,18 @@ bool TargetSelectDetector::detect(const ImageViewRGB32& screen){
         }
     }
 
-    //  Fire iff exactly one strip is in the selected (yellow/green) state,
-    //  AND at least one OTHER position also reads as a saturated strip
-    //  color. The companion check is what rejects false positives where a
-    //  single coincidentally-yellow region on action_menu / move_select /
-    //  post_match etc. lines up with one strip box but no others.
-    //
-    //  Self-target moves (e.g. Protect) don't render opp strips at all, so
-    //  we tolerate fewer than 4 strips total — but still need >= 2.
-    if (selected_count != 1) return false;
+    //  Fire iff at least one strip is selected AND at least 2 positions
+    //  total read as saturated strip colors. The companion check rejects
+    //  battle-screen FPs where a single coincidentally-yellow region
+    //  (post-match Continue, action menu HP bars, etc.) hits one strip
+    //  box but no others. Selected counts >1 are legitimate field/spread
+    //  moves: 2 = spread (Heat Wave), 3 = AoE (Earthquake), 4 = field
+    //  (Trick Room) — callers can disambiguate via selected_count().
+    if (selected_count < 1) return false;
     if (strip_count < 2) return false;
 
     m_selected = selected_idx;
+    m_selected_count = selected_count;
     return true;
 }
 

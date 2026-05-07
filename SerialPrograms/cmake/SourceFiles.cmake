@@ -1340,6 +1340,8 @@ file(GLOB LIBRARY_SOURCES
     Source/PokemonChampions/Inference/PokemonChampions_BattleModeMenuDetector.h
     Source/PokemonChampions/Inference/PokemonChampions_OwnStatusReader.cpp
     Source/PokemonChampions/Inference/PokemonChampions_OwnStatusReader.h
+    Source/PokemonChampions/Inference/PokemonChampions_PokemonSwitchDetector.cpp
+    Source/PokemonChampions/Inference/PokemonChampions_PokemonSwitchDetector.h
     Source/PokemonChampions/Inference/PokemonChampions_MoveNameReader.cpp
     Source/PokemonChampions/Inference/PokemonChampions_MoveNameReader.h
     Source/PokemonChampions/Inference/PokemonChampions_MegaEvolveDetector.cpp

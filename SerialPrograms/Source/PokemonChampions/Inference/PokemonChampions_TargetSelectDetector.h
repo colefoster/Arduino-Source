@@ -39,9 +39,17 @@ public:
     virtual void make_overlays(VideoOverlaySet& items) const override;
     virtual bool detect(const ImageViewRGB32& screen) override;
 
-    //  Valid after detect() returns true:
+    //  Valid after detect() returns true. For single-target moves this
+    //  is the sole highlighted strip (0..3); for spread/field moves
+    //  multiple strips light up and this is the last one scanned —
+    //  callers that care should check selected_count().
     //    0 = opp_a, 1 = opp_b, 2 = own_a, 3 = own_b
     int8_t selected_index() const{ return m_selected; }
+
+    //  Number of strips in the selected (yellow/green) state. 1 for
+    //  single-target, 2 for spread (e.g. Heat Wave), 3 for AoE
+    //  (e.g. Earthquake), 4 for field (e.g. Trick Room).
+    int selected_count() const{ return m_selected_count; }
 
 private:
     //  Same 4 boxes TargetSelectReader uses for is-targeted classification.
@@ -49,6 +57,7 @@ private:
     std::array<ImageFloatBox, 4> m_strips;
 
     int8_t m_selected = -1;
+    int m_selected_count = 0;
 };
 
 

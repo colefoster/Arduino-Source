@@ -43,6 +43,12 @@
     "MoveSelectDetector": [
       "move_select"
     ],
+    "TargetSelectDetector": [
+      "target_select"
+    ],
+    "PokemonSwitchDetector": [
+      "pokemon_switch"
+    ],
     "ResultScreenDetector": [
       "result_screen"
     ],
