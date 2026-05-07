@@ -24,9 +24,12 @@ ActiveHUDSlotDetector::ActiveHUDSlotDetector()
     //  Kept tight (3px tall on 1080) so we sample only the lime band, not
     //  the lighter background above or the darker pill body below.
     //  Strip widths span the full pill so partial occlusion still works.
+    //  Left ~20% of each pill is cropped because the status-condition
+    //  symbol (poison/burn/etc.) overlays that area and disrupts the lime
+    //  strip — caused a missed detection on a doubles move-select frame.
     : m_slot_strips{
-        ImageFloatBox(0.0527, 0.8530, 0.1728, 0.0030),  //  slot 0 (left)
-        ImageFloatBox(0.2628, 0.8530, 0.1728, 0.0030),  //  slot 1 (right)
+        ImageFloatBox(0.0873, 0.8530, 0.1382, 0.0030),  //  slot 0 (left)
+        ImageFloatBox(0.2974, 0.8530, 0.1382, 0.0030),  //  slot 1 (right)
     }
 {}
 
