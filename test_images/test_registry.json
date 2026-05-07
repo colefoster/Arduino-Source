@@ -16,7 +16,8 @@
     "ranked_format_select",
     "pre_match",
     "moves_and_more",
-    "team_stats"
+    "team_stats",
+    "battle_info"
   ],
   "overlay_dirs": [
     "_overlays/communicating",
@@ -31,8 +32,7 @@
       "searching_for_battle"
     ],
     "TeamPreviewDetector": [
-      "team_preview_selecting",
-      "team_preview_locked_in"
+      "team_preview_selecting"
     ],
     "PreparingForBattleDetector": [
       "team_preview_locked_in"
@@ -45,9 +45,6 @@
     ],
     "ResultScreenDetector": [
       "result_screen"
-    ],
-    "PostMatchScreenDetector": [
-      "post_match"
     ],
     "MainMenuDetector": [
       "main_menu"
@@ -63,11 +60,17 @@
     ],
     "MovesMoreDetector": [
       "moves_and_more"
+    ],
+    "BattleInfoDetector": [
+      "battle_info"
     ]
   },
   "state_probe_detectors": {
     "MegaEvolveDetector": [
       "move_select"
+    ],
+    "PostMatchScreenDetector": [
+      "post_match"
     ]
   },
   "readers": {
@@ -267,6 +270,21 @@
             "type": "array",
             "items": "string",
             "length": 6
+          }
+        }
+      }
+    },
+    "BattleInfoReader": {
+      "screens": {
+        "battle_info": {
+          "selected_slot": {
+            "type": "string"
+          },
+          "species": {
+            "type": "string"
+          },
+          "hp_text": {
+            "type": "string"
           }
         }
       }

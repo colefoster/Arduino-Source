@@ -52,7 +52,10 @@ screens:
   team_preview_locked_in:
     description: "All selections made, Standing By pills visible on both sides."
     transitions_to: [action_menu]
-    detectors: [TeamPreviewDetector, PreparingForBattleDetector]
+    # TeamPreviewDetector OCRs "Select 4 Pokemon..." which only appears on
+    # the selecting variant — never fires here. PreparingForBattleDetector
+    # is the correct screen classifier for locked-in.
+    detectors: [PreparingForBattleDetector]
     readers:
       TeamPreviewReader:
         fields:
@@ -214,7 +217,12 @@ screens:
   post_match:
     description: "Quit Battling / Edit Team / Continue Battling buttons."
     transitions_to: [pre_match]
-    detectors: [PostMatchScreenDetector]
+    # PostMatchScreenDetector specifically detects the 3-button menu being
+    # fully drawn. The folder also includes pre-button transition frames
+    # and frames with system overlays obscuring buttons — per-frame
+    # manifest expectations control which.
+    detectors: []
+    state_probe_detectors: [PostMatchScreenDetector]
     readers: {}
 
   # ── Non-battle (menu) ──────────────────────────────────────
@@ -264,6 +272,20 @@ screens:
     #  card: final value + EV (small number) + nature direction (arrow).
     detectors: []
     readers: {}
+
+  battle_info:
+    description: "Mid-battle Battle Info tab. L/R bar at top cycles through 4 active mons (own bottom, opp top). Per-mon left panel: species name, HP, types, ability+item (own only). Stat panel below: 7 rows × 7 dots showing boost stages + multiplier. Right panel: Active Statuses & Effects list with turn counters. Top-right: Total Time + Move Time."
+    transitions_to: [action_menu, move_select]
+    detectors: [BattleInfoDetector]
+    readers:
+      BattleInfoReader:
+        fields:
+          selected_slot:
+            type: string  # "own_0" | "own_1" | "opp_0" | "opp_1"
+          species:
+            type: string
+          hp_text:
+            type: string
 
 # ── Overlays (not screens in the state machine) ─────────────
 

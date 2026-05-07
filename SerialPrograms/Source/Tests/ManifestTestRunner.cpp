@@ -414,6 +414,9 @@ int run_manifest_tests(const std::string& test_images_dir, const std::string& mo
             cout << "Testing state-probe detector: " << det_name << endl;
 
             const auto screens = screens_json.get<std::vector<std::string>>();
+            const std::set<std::string> listed_screens(screens.begin(), screens.end());
+
+            //  Listed screens: per-frame manifest expectations.
             for (const auto& screen_dir : screens){
                 std::string full_dir = test_images_dir + "/" + screen_dir;
                 std::string manifest_path = full_dir + "/manifest.json";
@@ -440,6 +443,39 @@ int run_manifest_tests(const std::string& test_images_dir, const std::string& mo
                     try{
                         ImageRGB32 image(file_path);
                         ret = test_fn(image, expected);
+                    }catch (const std::exception& e){
+                        cerr << "  Exception: " << e.what() << endl;
+                        ret = 1;
+                    }
+
+                    if (ret > 0){
+                        stats.failed++;
+                        stats.failures.push_back(screen_dir + "/" + fname);
+                        if (!regression) return 1;
+                    }else if (ret == 0){
+                        stats.passed++;
+                    }else{
+                        stats.skipped++;
+                    }
+                }
+            }
+
+            //  Non-listed screens + overlays: expect=false (FP test).
+            //  State probes need this guard or we lose FP coverage on the
+            //  rest of the corpus when promoting from screen-detector.
+            for (const auto& screen_dir : all_dirs){
+                if (listed_screens.count(screen_dir)) continue;
+                std::string full_dir = test_images_dir + "/" + screen_dir;
+                auto files = list_png_files(full_dir);
+                for (const auto& file_path : files){
+                    std::string fname = filename_from_path(file_path);
+                    cout << "  " << screen_dir << "/" << fname
+                         << " (expect=false)" << endl;
+
+                    int ret = 0;
+                    try{
+                        ImageRGB32 image(file_path);
+                        ret = test_fn(image, false);
                     }catch (const std::exception& e){
                         cerr << "  Exception: " << e.what() << endl;
                         ret = 1;

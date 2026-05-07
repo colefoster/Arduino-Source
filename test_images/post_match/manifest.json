@@ -1,1 +1,50 @@
-{}
+{
+  "20260423-150548385516.png": {
+    "PostMatchScreenDetector": true
+  },
+  "20260423-150553793727.png": {
+    "PostMatchScreenDetector": true
+  },
+  "20260423-150556766509.png": {
+    "PostMatchScreenDetector": true
+  },
+  "20260423-184025189666.png": {
+    "PostMatchScreenDetector": true
+  },
+  "20260428-090651148388.png": {
+    "PostMatchScreenDetector": true
+  },
+  "20260428-090713695566.png": {
+    "PostMatchScreenDetector": true
+  },
+  "20260428-090714823631.png": {
+    "PostMatchScreenDetector": true
+  },
+  "20260505-game2-video-20260505-153202484050_0003.png": {
+    "PostMatchScreenDetector": true
+  },
+  "20260506-game-video-20260506-084258514206_0013.png": {
+    "PostMatchScreenDetector": true
+  },
+  "20260506-game-video-20260506-085127194822_0290.png": {
+    "PostMatchScreenDetector": false
+  },
+  "20260506-game2-video-20260506-085625397902_0001.png": {
+    "PostMatchScreenDetector": true
+  },
+  "20260506-game2-video-20260506-085625397902_0006.png": {
+    "PostMatchScreenDetector": false
+  },
+  "20260506-game2-video-20260506-085625397902_0008.png": {
+    "PostMatchScreenDetector": true
+  },
+  "poke_ball_tier_rank4.png": {
+    "PostMatchScreenDetector": true
+  },
+  "post_match.png": {
+    "PostMatchScreenDetector": true
+  },
+  "post_match_screen_live.png": {
+    "PostMatchScreenDetector": true
+  }
+}

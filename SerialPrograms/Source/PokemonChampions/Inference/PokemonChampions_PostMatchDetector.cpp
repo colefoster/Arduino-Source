@@ -34,11 +34,15 @@ static const FloatPixel SELECTED_GREEN_PILL{0.40, 0.60, 0.00};
 
 
 PostMatchScreenDetector::PostMatchScreenDetector()
-    //  Narrow strips at the left edge of each button, above-the-text region.
-    //  In 1920x1080: Quit @ x 200-280, Edit @ x 600-680, Continue @ x 1290-1330.
+    //  Narrow strips inside each button, above-the-text region.
+    //  In 1920x1080: Quit @ x 200-280, Edit @ x 800-880, Continue @ x 1290-1330.
+    //  The Edit position was previously at x=600-680 — that turned out to
+    //  sit on Quit's right edge, not Edit, so when Quit was cursored the
+    //  Edit sample read yellow and the "exactly 1 green + 2 purple" rule
+    //  rejected legitimate post-match frames.
     : m_buttons{
         ImageFloatBox(0.1042, 0.9222, 0.0417, 0.0222),   // Quit Battling
-        ImageFloatBox(0.3125, 0.9222, 0.0417, 0.0222),   // Edit Team
+        ImageFloatBox(0.4167, 0.9222, 0.0417, 0.0222),   // Edit Team
         ImageFloatBox(0.6719, 0.9222, 0.0208, 0.0222),   // Continue Battling
       }
 {}
@@ -68,27 +72,28 @@ bool PostMatchScreenDetector::detect(const ImageViewRGB32& screen){
     for (int i = 0; i < 3; i++){
         button_stats[i] = image_stats(extract_box_reference(screen, m_buttons[i]));
     }
+    //  Strict signature: exactly one green-pill (selected) + two purple-blue
+    //  (unselected). The earlier "1 green + ≥1 purple" rule fired on
+    //  move_select where two of the three sampled bottom-strip positions
+    //  read green from Pokémon HP pills — only Continue (mid-screen)
+    //  landed on the dark backdrop and read purple.
+    int selected = -1;
+    int n_purple = 0;
     for (int i = 0; i < 3; i++){
         const ImageStats& stats = button_stats[i];
-        if (stats.average.r + stats.average.g < MIN_GREEN_BRIGHTNESS) continue;
-        //  Tight ratio tolerance: pill is nearly pure (R+G saturated, B ~ 0).
-        if (!is_solid(stats, SELECTED_GREEN_PILL, 0.18, 100)) continue;
-        //  Co-evidence: a real post-match screen has exactly one selected
-        //  pill and two unselected purple-blue pills. On battle FPs all
-        //  three positions read warm/green, so the purple test fails.
-        bool other_purple = false;
-        for (int j = 0; j < 3; j++){
-            if (j == i) continue;
-            if (is_unselected_purple(button_stats[j])){
-                other_purple = true;
-                break;
-            }
+        bool is_green =
+            (stats.average.r + stats.average.g >= MIN_GREEN_BRIGHTNESS)
+            && is_solid(stats, SELECTED_GREEN_PILL, 0.18, 100);
+        if (is_green){
+            if (selected != -1) return false;  //  more than one selected → not post-match
+            selected = i;
+        }else if (is_unselected_purple(stats)){
+            n_purple++;
         }
-        if (!other_purple) continue;
-        m_cursored = static_cast<PostMatchButton>(i);
-        return true;
     }
-    return false;
+    if (selected == -1 || n_purple != 2) return false;
+    m_cursored = static_cast<PostMatchButton>(selected);
+    return true;
 }
 
 

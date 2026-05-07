@@ -94,12 +94,16 @@ void MovesMoreDetector::make_overlays(VideoOverlaySet& items) const{
 
 bool MovesMoreDetector::detect(const ImageViewRGB32& screen){
     //  Co-evidence gate: the active "Moves & More" tab label is yellow-green
-    //  (real reads g~221, r~193, b~112). Battle frames with battle_log
-    //  overlays sometimes have ratio-correct purple at m_card_bg, but their
-    //  tab-region pixels are dim or purple-blue (g<<150, b>g). Require the
-    //  tab to read yellow-green before doing the purple check.
+    //  (real reads g~221, r~193, b~112). FPs at this position include the
+    //  inactive tab on the team_stats screen (lavender, b~233) and battle_log
+    //  overlay frames (light cyan, b~252). Both have g > r so the prior
+    //  rule passed them — adding a low-blue requirement separates cleanly.
     const ImageStats tab = image_stats(extract_box_reference(screen, m_tab_label));
-    if (tab.average.g < 150.0 || tab.average.g < tab.average.r) return false;
+    if (tab.average.g < 150.0
+        || tab.average.g < tab.average.r
+        || tab.average.b > 150.0){
+        return false;
+    }
 
     //  Primary: is the card background the expected purple?
     //  Brightness floor: real card-bg purple reads avg ~ (96, 80, 223),
