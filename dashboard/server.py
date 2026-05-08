@@ -258,6 +258,73 @@ CROP_DEFS = {
     #  active mon. own_1 move_name + own_0/own_1 effectiveness extrapolated
     #  from the user-drawn opp boxes (column x-delta = 0.2575; effectiveness
     #  y sits ~0.005 above is_targeted y, mirroring the opp pattern).
+    #  Pokemon Switch screen (POKEMON menu reached from action_menu).
+    #  Left column shows up to 6 own mons with HP fraction; right column
+    #  shows opp mons with HP%. Center panel is Moves&More-style detail
+    #  for the selected mon (already covered by TeamSummaryReader if needed).
+    #
+    #  Boxes are seeds — refine in inspector. Per-slot Y delta extrapolated
+    #  from a visible-rows estimate (~0.144 between row tops).
+    "PokemonSwitchReader": [
+        #  Own column (left). Per-row Y delta = 0.1185 (derived from user-
+        #  drawn slot-0 + slot-2 anchors). HP text sits +0.0355 below species.
+        #  Box width / height taken from user's slot-0 draws.
+        *[{"name": f"own_{i}_species", "box": [0.0610, 0.2291 + i*0.1185, 0.0893, 0.0395]} for i in range(6)],
+        *[{"name": f"own_{i}_hp_text", "box": [0.0629, 0.2646 + i*0.1185, 0.0745, 0.0425]} for i in range(6)],
+        #  Yellow highlight strip on the left edge of the selected card.
+        *[{"name": f"own_{i}_highlight", "box": [0.0420, 0.2291 + i*0.1185, 0.0150, 0.0850]} for i in range(6)],
+        #  Opp column (right). User-drawn opp_0 anchor; per-row delta 0.1080.
+        *[{"name": f"opp_{i}_hp_pct", "box": [0.9131, 0.2622 + i*0.1170, 0.0356, 0.0345]} for i in range(6)],
+    ],
+    #  Battle Info tab — boxes drawn by user 2026-05-07.
+    #
+    #  Top-bar icon layout: 4 active mons in doubles (own_0, own_1, opp_0,
+    #  opp_1) or N icons when fewer are alive. The yellow highlight bar
+    #  above whichever icon is currently focused is the "selected slot"
+    #  signal. The user drew opp_*_top + own_species_SOLO_top (singles-only
+    #  centered position). Doubles own boxes are extrapolated by mirroring
+    #  the opp boxes around screen center x=0.5.
+    "BattleInfoReader": [
+        # Top icon row — singles (1 own + 2 opp) and doubles (2 own + 2 opp).
+        {"name": "own_species_0_top",    "box": [0.34334, 0.0722, 0.03936, 0.0728]}, # mirrored from opp; -2px L
+        {"name": "own_species_1_top",    "box": [0.4238,  0.0722, 0.03936, 0.0728]}, # mirrored from opp; -2px R
+        {"name": "own_species_SOLO_top", "box": [0.3821, 0.0706, 0.0411, 0.0814]},   # singles-only center position
+        {"name": "opp_species_0_top",    "box": [0.5358, 0.0722, 0.0404, 0.0728]},
+        {"name": "opp_species_1_top",    "box": [0.6169, 0.0716, 0.0408, 0.0743]},
+        # Focused-mon left panel.
+        {"name": "species_name",         "box": [0.1973, 0.2228, 0.1582, 0.0408]},
+        {"name": "species_hp_text",     "box": [0.3372, 0.2772, 0.0782, 0.0377]},  # own=X/Y, opp=NN%
+        # Type pills (2). Color classifier — each PS type has a unique hue.
+        {"name": "type_0",               "box": [0.2280, 0.3336, 0.0670, 0.0383]},
+        {"name": "type_1",               "box": [0.3393, 0.3353, 0.0655, 0.0364]},
+        # Ability + item — own only (opp panel just shows types in this region).
+        {"name": "ability_own",          "box": [0.3125, 0.3881, 0.1101, 0.0431]},
+        {"name": "item_own",             "box": [0.2887, 0.4394, 0.1351, 0.0449]},
+        # Per-stat boost multiplier text (×1.0, ×0.67, ×1.5, etc.). 7 rows.
+        {"name": "attk_multiplier",      "box": [0.3840, 0.5190, 0.0272, 0.0352]},
+        {"name": "def_multiplier",       "box": [0.3839, 0.5657, 0.0257, 0.0348]},
+        {"name": "spa_multiplier",       "box": [0.3848, 0.6074, 0.0311, 0.0357]},
+        {"name": "spdef_multiplier",     "box": [0.3853, 0.6495, 0.0299, 0.0418]},
+        {"name": "speed_multiplier",     "box": [0.3847, 0.6942, 0.0269, 0.0383]},
+        {"name": "accuracy_multiplier",  "box": [0.3849, 0.7620, 0.0272, 0.0393]},
+        {"name": "evasiveness_multiplier","box":[0.3848, 0.8060, 0.0249, 0.0405]},
+        # Active Statuses & Effects (right panel) — phase-3 OCR target.
+        {"name": "first_status",                "box": [0.5275, 0.3138, 0.2084, 0.0471]},
+        {"name": "second_status_guess",         "box": [0.5243, 0.4036, 0.2787, 0.0536]},
+        {"name": "second_status_duration_guess","box": [0.8113, 0.4086, 0.0393, 0.0544]},
+    ],
+    #  Investigation tab: 6 own-side icon slots on the locked-in team
+    #  preview screen (own ICONS, opp sprites are inward). Boxes drawn
+    #  by user 2026-05-07. Top-to-bottom positional indexing — semantic
+    #  lead-order mapping is TBD; investigate via /#/tplocked.
+    "TeamPreviewLockedInReader": [
+        {"name": "own_slot_0", "box": [0.1599, 0.1747, 0.0270, 0.0532]},
+        {"name": "own_slot_1", "box": [0.1561, 0.2872, 0.0287, 0.0540]},
+        {"name": "own_slot_2", "box": [0.1586, 0.4048, 0.0299, 0.0615]},
+        {"name": "own_slot_3", "box": [0.1578, 0.5218, 0.0316, 0.0577]},
+        {"name": "own_slot_4", "box": [0.1599, 0.6395, 0.0308, 0.0660]},
+        {"name": "own_slot_5", "box": [0.1586, 0.7526, 0.0274, 0.0637]},
+    ],
     "TargetSelectReader": [
         {"name": "opp_0_is_targeted",    "box": [0.4741, 0.2355, 0.0062, 0.1172]},
         {"name": "opp_1_is_targeted",    "box": [0.7338, 0.2340, 0.0045, 0.1228]},
@@ -265,7 +332,7 @@ CROP_DEFS = {
         {"name": "own_1_is_targeted",    "box": [0.7334, 0.5714, 0.0053, 0.1117]},
         {"name": "opp_0_effectiveness",  "box": [0.3083, 0.2308, 0.1190, 0.0269]},
         {"name": "opp_1_effectiveness",  "box": [0.5658, 0.2300, 0.1056, 0.0285]},
-        {"name": "own_0_effectiveness",  "box": [0.3083, 0.5785, 0.1190, 0.0269]},
+        {"name": "own_0_effectiveness",  "box": [0.3083, 0.5640, 0.1190, 0.0269]},
         {"name": "own_1_effectiveness",  "box": [0.5658, 0.5667, 0.1056, 0.0285]},
         {"name": "own_0_move_name",      "box": [0.3203, 0.4914, 0.1046, 0.0317]},
         {"name": "own_1_move_name",      "box": [0.5778, 0.4914, 0.1046, 0.0317]},
@@ -276,7 +343,8 @@ BOOL_DETECTORS = {
     "MoveSelectDetector", "ActionMenuDetector", "PostMatchScreenDetector",
     "PreparingForBattleDetector", "TeamSelectDetector", "TeamPreviewDetector",
     "MainMenuDetector", "MovesMoreDetector", "CommunicatingDetector",
-    "MegaEvolveDetector",
+    "MegaEvolveDetector", "TargetSelectDetector", "PokemonSwitchDetector",
+    "BattleInfoDetector", "TeamStatsTabDetector",
 }
 
 BATTLE_LOG_EVENTS = [
@@ -288,10 +356,13 @@ BATTLE_LOG_EVENTS = [
 
 FOLDER_TO_READER = {
     "action_menu": "ActionMenuDetector",
+    "battle_info": "BattleInfoReader",
     "battle_log": "BattleLogReader",
     "move_select": "MoveNameReader",
+    "pokemon_switch": "PokemonSwitchReader",
     "post_match": "PostMatchScreenDetector",
     "preparing": "PreparingForBattleDetector",
+    "target_select": "TargetSelectReader",
     "team_select": "TeamSelectReader",
     "team_preview": "TeamPreviewReader",
     "team_summary": "TeamSummaryReader",
@@ -302,8 +373,10 @@ FOLDER_READERS = {
     "action_menu": ["ActionMenuDetector", "BattleHUDReader", "PokeballAliveDetector"],
     "move_select": ["MoveSelectDetector", "MegaEvolveDetector", "MoveNameReader", "MoveSelectCursorSlot", "BattleHUDReader", "PokeballAliveDetector"],
     "battle_log": ["BattleLogReader", "BattleHUDReader", "PokeballAliveDetector"],
+    "pokemon_switch": ["PokemonSwitchDetector", "PokemonSwitchReader"],
     "post_match": ["PostMatchScreenDetector"],
     "preparing": ["PreparingForBattleDetector"],
+    "target_select": ["TargetSelectDetector", "TargetSelectReader"],
     "team_select": ["TeamSelectReader"],
     "team_preview": ["TeamPreviewReader", "TeamPreviewDetector"],
     "team_summary": ["TeamSummaryReader"],
@@ -417,6 +490,192 @@ def _extract_crop(img_path: Path, box: list, scale: int = 4) -> bytes:
     buf = io.BytesIO()
     upscaled.save(buf, format="PNG")
     return buf.getvalue()
+
+def _yellow_inner_image(img_path: Path, box: list, scale: int = 3):
+    """User's pipeline:
+    1. yellow -> white
+    2. invert (dark -> white outline; bg+inner -> black)
+    3. flood-fill from edges over BLACK -> 'outside' painted white
+    4. surviving black pixels = inner trapped center (digit body)
+    Output: black inner-center on white bg, no outline.
+    """
+    from PIL import Image
+    img = Image.open(img_path).convert("RGB")
+    w, h = img.size
+    x0, y0 = max(0, int(box[0]*w)), max(0, int(box[1]*h))
+    x1, y1 = min(w, x0+int(box[2]*w)), min(h, y0+int(box[3]*h))
+    crop = img.crop((x0, y0, x1, y1))
+    cw, ch = crop.size
+    upscaled = crop.resize((cw*scale, ch*scale), Image.NEAREST)
+    px = upscaled.load()
+    W, H = upscaled.size
+    #  Step 1+2 combined: classify each pixel after yellow-paint, then invert.
+    #   - yellow OR light non-yellow -> BLACK after invert (was bg/inner light)
+    #   - dark navy outline           -> WHITE after invert
+    bin_inv = [[False]*W for _ in range(H)]   # True = BLACK pixel
+    for j in range(H):
+        for i in range(W):
+            r,g,b = px[i,j]
+            is_yellow = (r > 150) and (g > 150) and (b < 140) and (r-b > 40) and (g-b > 40)
+            if is_yellow:
+                bin_inv[j][i] = True   # was yellow -> white -> invert -> black
+                continue
+            brightness = (r + g + b) / 3
+            if brightness < 130:
+                bin_inv[j][i] = False  # dark outline -> invert -> white
+            else:
+                bin_inv[j][i] = True   # light non-yellow -> invert -> black
+    #  Step 3: flood-fill from edges over BLACK (True) pixels.
+    visited = [[False]*W for _ in range(H)]
+    stack = []
+    for i in range(W):
+        if bin_inv[0][i]: stack.append((i,0)); visited[0][i] = True
+        if bin_inv[H-1][i]: stack.append((i,H-1)); visited[H-1][i] = True
+    for j in range(H):
+        if bin_inv[j][0]: stack.append((0,j)); visited[j][0] = True
+        if bin_inv[j][W-1]: stack.append((W-1,j)); visited[j][W-1] = True
+    while stack:
+        x,y = stack.pop()
+        for dx,dy in ((1,0),(-1,0),(0,1),(0,-1)):
+            nx,ny = x+dx, y+dy
+            if 0<=nx<W and 0<=ny<H and bin_inv[ny][nx] and not visited[ny][nx]:
+                visited[ny][nx] = True
+                stack.append((nx,ny))
+    #  Step 4: trapped black survives; everything else -> white.
+    for j in range(H):
+        for i in range(W):
+            if bin_inv[j][i] and not visited[j][i]:
+                px[i,j] = (0,0,0)         # inner trapped center
+            else:
+                px[i,j] = (255,255,255)   # outline OR outside bg
+    return upscaled
+
+
+def _yellow_paint_filled_image(img_path: Path, box: list, scale: int = 3):
+    """Yellow-paint binarize, then flood-fill from edges over white pixels
+    and flip 'trapped' white (digit interior) to black. Produces a solid
+    black digit shape — much easier for Tesseract than a hollow outline."""
+    img = _yellow_paint_image(img_path, box, scale)
+    w, h = img.size
+    px = img.load()
+    #  BFS from every edge pixel that's currently white. Anything reached =
+    #  outside background. Implemented w/ a simple stack to avoid recursion.
+    is_white = [[False]*w for _ in range(h)]
+    for j in range(h):
+        for i in range(w):
+            r,g,b = px[i,j]
+            is_white[j][i] = (r > 200 and g > 200 and b > 200)
+    visited = [[False]*w for _ in range(h)]
+    stack = []
+    for i in range(w):
+        if is_white[0][i] and not visited[0][i]:
+            stack.append((i,0)); visited[0][i] = True
+        if is_white[h-1][i] and not visited[h-1][i]:
+            stack.append((i,h-1)); visited[h-1][i] = True
+    for j in range(h):
+        if is_white[j][0] and not visited[j][0]:
+            stack.append((0,j)); visited[j][0] = True
+        if is_white[j][w-1] and not visited[j][w-1]:
+            stack.append((w-1,j)); visited[j][w-1] = True
+    while stack:
+        x,y = stack.pop()
+        for dx,dy in ((1,0),(-1,0),(0,1),(0,-1)):
+            nx,ny = x+dx, y+dy
+            if 0<=nx<w and 0<=ny<h and is_white[ny][nx] and not visited[ny][nx]:
+                visited[ny][nx] = True
+                stack.append((nx,ny))
+    #  Trapped white -> black. Outline stays black. Reached white stays white.
+    for j in range(h):
+        for i in range(w):
+            if is_white[j][i] and not visited[j][i]:
+                px[i,j] = (0,0,0)
+    return img
+
+
+def _yellow_paint_image(img_path: Path, box: list, scale: int = 3):
+    """Returns the PIL.Image for the yellow-paint binarization (used for
+    both display and Python-side OCR). Same logic as _binarize_yellow_paint
+    but returns the image, not bytes."""
+    from PIL import Image
+    img = Image.open(img_path).convert("RGB")
+    w, h = img.size
+    x0, y0 = max(0, int(box[0]*w)), max(0, int(box[1]*h))
+    x1, y1 = min(w, x0+int(box[2]*w)), min(h, y0+int(box[3]*h))
+    crop = img.crop((x0, y0, x1, y1))
+    cw, ch = crop.size
+    upscaled = crop.resize((cw*scale, ch*scale), Image.NEAREST)
+    px = upscaled.load()
+    for j in range(upscaled.size[1]):
+        for i in range(upscaled.size[0]):
+            r, g, b = px[i, j]
+            is_yellow = (r > 150) and (g > 150) and (b < 140) and (r - b > 40) and (g - b > 40)
+            if is_yellow:
+                px[i, j] = (255, 255, 255)
+                continue
+            brightness = (r + g + b) / 3
+            if brightness < 130:
+                px[i, j] = (0, 0, 0)
+            else:
+                px[i, j] = (255, 255, 255)
+    return upscaled
+
+
+def _binarize_yellow_paint(img_path: Path, box: list, scale: int = 3) -> bytes:
+    img = _yellow_paint_image(img_path, box, scale)
+    buf = io.BytesIO()
+    img.save(buf, format="PNG")
+    return buf.getvalue()
+
+
+def _normalize_lead_digit(raw: str) -> str:
+    """Map Tesseract's inner-OCR output to {1,2,3,4} or '' for bench.
+    1's inner shape (thin slash) reliably misreads as 7 / / / |. Bench
+    slots have no digit and produce punctuation noise — return ''."""
+    if not raw:
+        return ""
+    for ch in raw:
+        if ch in "1234":
+            return ch
+        if ch in "7/|":   # confusables for 1
+            return "1"
+    return ""
+
+
+def _tesseract_digit(img):
+    """Single-glyph OCR. Whitelist breaks psm 10 in tesseract 5.x, so we
+    take the raw read and let the caller decide. Stylized italic font is
+    poorly handled by Tesseract regardless of config — this view exists
+    so we can SEE that and switch to digit-template matching."""
+    try:
+        import pytesseract
+        return pytesseract.image_to_string(img, config="--psm 10").strip()
+    except Exception as e:
+        return f"err: {e}"
+
+
+def _binarize_for_ocr(img_path: Path, box: list, scale: int = 3) -> bytes:
+    """Mirror of C++ raw_ocr_numbers() preprocessing: crop, NEAREST-upscale,
+    then white-only mask -> black text on white bg. Returns PNG bytes.
+    Filter: pixel is text iff min(R,G,B) > 180 AND (max - min) < 50."""
+    from PIL import Image
+    img = Image.open(img_path).convert("RGB")
+    w, h = img.size
+    x0, y0 = max(0, int(box[0]*w)), max(0, int(box[1]*h))
+    x1, y1 = min(w, x0+int(box[2]*w)), min(h, y0+int(box[3]*h))
+    crop = img.crop((x0, y0, x1, y1))
+    cw, ch = crop.size
+    upscaled = crop.resize((cw*scale, ch*scale), Image.NEAREST)
+    px = upscaled.load()
+    for j in range(upscaled.size[1]):
+        for i in range(upscaled.size[0]):
+            r, g, b = px[i, j]
+            mn = min(r, g, b); mx = max(r, g, b)
+            is_text = (mn > 180) and (mx - mn < 50)
+            px[i, j] = (0, 0, 0) if is_text else (255, 255, 255)
+    buf = io.BytesIO()
+    upscaled.save(buf, format="PNG")
+    return buf.getvalue()
+
 
 def _parse_ground_truth(filename: str, reader_name: str) -> dict:
     base = os.path.splitext(filename)[0]
@@ -990,7 +1249,7 @@ async def gallery_inbox():
     if not INBOX_DIR.exists():
         return {"count": 0, "images": []}
     images = []
-    for f in sorted(INBOX_DIR.glob("*.png")):
+    for f in sorted(INBOX_DIR.glob("*.png"), key=lambda p: p.stat().st_mtime, reverse=True):
         if not _is_real_image(f.name):
             continue
         images.append({"filename": f.name, "path": f"_inbox/{f.name}"})
@@ -1362,6 +1621,129 @@ async def targetselect_gallery():
             out.append(fut.result())
     out.sort(key=lambda r: r["filename"])
     return {"images": out, "count": len(out)}
+
+
+@app.get("/api/saved-teams/list")
+async def saved_teams_list():
+    """List saved-team JSONs in the SerialPrograms team library directory.
+    Each file = one unique team composition keyed by sorted species slugs."""
+    team_dir = Path.home() / "Library" / "Application Support" / "SerialPrograms" / "UserSettings" / "PokemonChampionsTeams"
+    teams = []
+    if team_dir.exists():
+        for f in sorted(team_dir.glob("*.json")):
+            try:
+                data = json.loads(f.read_text())
+                mons = data.get("own_team", [])
+                teams.append({
+                    "filename": f.name,
+                    "key": f.stem,                       # sorted slug list
+                    "species": [m.get("species", "") for m in mons],
+                    "mons": mons,
+                    "mtime": f.stat().st_mtime,
+                })
+            except Exception as e:
+                teams.append({"filename": f.name, "error": str(e)})
+    teams.sort(key=lambda t: -t.get("mtime", 0))
+    return {"dir": str(team_dir), "count": len(teams), "teams": teams}
+
+
+@app.get("/api/tp-locked/list")
+async def tp_locked_list():
+    screen_dir = TEST_IMAGES_DIR / "team_preview_locked_in"
+    if not screen_dir.exists():
+        return {"files": []}
+    files = sorted([
+        f.name for f in screen_dir.iterdir()
+        if f.is_file() and f.suffix.lower() == ".png" and _is_real_image(f.name)
+    ])
+    return {"files": files}
+
+
+@app.get("/api/tp-locked/read")
+async def tp_locked_read(filename: str):
+    """For one team_preview_locked_in image, return the 6 own-slot crops
+    (b64) + sprite-match top-N per slot. Investigation tool."""
+    import base64
+    import urllib.request
+    import urllib.error
+    img_path = TEST_IMAGES_DIR / "team_preview_locked_in" / filename
+    if not img_path.exists():
+        return JSONResponse({"error": "not found"}, 404)
+
+    boxes = CROP_DEFS.get("TeamPreviewLockedInReader") or []
+    img_b64 = base64.b64encode(img_path.read_bytes()).decode()
+
+    def _ocr_digit(box):
+        payload = json.dumps({
+            "image_base64": img_b64,
+            "x": box[0], "y": box[1], "w": box[2], "h": box[3],
+        }).encode()
+        try:
+            req = urllib.request.Request(
+                f"{DEV_RUNNER}/ocr-crop", data=payload,
+                headers={"Content-Type": "application/json"}, method="POST",
+            )
+            with urllib.request.urlopen(req, timeout=15) as resp:
+                d = json.loads(resp.read())
+                return d.get("result") or d
+        except Exception as e:
+            return {"error": str(e)}
+
+    slots = []
+    for b in boxes:
+        try:
+            crop_b64 = "data:image/png;base64," + base64.b64encode(
+                _extract_crop(img_path, b["box"], scale=4)
+            ).decode()
+        except Exception:
+            crop_b64 = None
+        try:
+            bin_b64 = "data:image/png;base64," + base64.b64encode(
+                _binarize_for_ocr(img_path, b["box"], scale=3)
+            ).decode()
+        except Exception:
+            bin_b64 = None
+        yp_b64 = None; yp_text = ""
+        try:
+            yp_img = _yellow_paint_image(img_path, b["box"], scale=3)
+            buf = io.BytesIO(); yp_img.save(buf, format="PNG")
+            yp_b64 = "data:image/png;base64," + base64.b64encode(buf.getvalue()).decode()
+            yp_text = _tesseract_digit(yp_img)
+        except Exception as e:
+            yp_text = f"err: {e}"
+        yf_b64 = None; yf_text = ""
+        try:
+            yf_img = _yellow_paint_filled_image(img_path, b["box"], scale=3)
+            buf = io.BytesIO(); yf_img.save(buf, format="PNG")
+            yf_b64 = "data:image/png;base64," + base64.b64encode(buf.getvalue()).decode()
+            yf_text = _tesseract_digit(yf_img)
+        except Exception as e:
+            yf_text = f"err: {e}"
+        yi_b64 = None; yi_text = ""
+        try:
+            yi_img = _yellow_inner_image(img_path, b["box"], scale=3)
+            buf = io.BytesIO(); yi_img.save(buf, format="PNG")
+            yi_b64 = "data:image/png;base64," + base64.b64encode(buf.getvalue()).decode()
+            yi_text = _tesseract_digit(yi_img)
+        except Exception as e:
+            yi_text = f"err: {e}"
+        ocr = _ocr_digit(b["box"])
+        slots.append({
+            "name": b["name"],
+            "box": b["box"],
+            "crop": crop_b64,
+            "binarized": bin_b64,
+            "yellow_paint": yp_b64,
+            "yellow_paint_ocr": yp_text,
+            "yellow_filled": yf_b64,
+            "yellow_filled_ocr": yf_text,
+            "yellow_inner": yi_b64,
+            "yellow_inner_ocr": yi_text,
+            "lead_digit": _normalize_lead_digit(yi_text),
+            "ocr": ocr,
+        })
+
+    return {"filename": filename, "slots": slots}
 
 
 @app.get("/api/hp-gallery")
@@ -2189,18 +2571,24 @@ async def labeler_sources():
                     if f.is_file() and f.suffix.lower() in (".jpg", ".jpeg", ".png")
                     and _is_real_image(f.name)]
             if imgs:
-                reader_name = reader_dir.name
+                folder = reader_dir.name
+                #  Map folder -> canonical reader names. Falls back to the
+                #  folder name (legacy 1:1 mapping) for older folders that
+                #  haven't been registered in FOLDER_TO_READER / FOLDER_READERS.
+                readers = FOLDER_READERS.get(folder, [FOLDER_TO_READER.get(folder, folder)])
+                suggested = FOLDER_TO_READER.get(folder, folder)
                 sources.append({
-                    "path": f"__test__/{reader_name}",
-                    "name": reader_name, "parent": "test_images", "count": len(imgs),
-                    "suggested_reader": reader_name,
-                    "readers": [reader_name],
+                    "path": f"__test__/{folder}",
+                    "name": folder, "parent": "test_images", "count": len(imgs),
+                    "suggested_reader": suggested,
+                    "readers": readers,
                     "reader_infos": {
-                        reader_name: {"reader": reader_name,
-                                      "type": READER_TYPES.get(reader_name, "unknown"),
-                                      "is_bool": reader_name in BOOL_DETECTORS,
-                                      "crops": CROP_DEFS.get(reader_name, []),
-                                      "events": BATTLE_LOG_EVENTS if reader_name == "BattleLogReader" else None}
+                        r: {"reader": r,
+                            "type": READER_TYPES.get(r, "unknown"),
+                            "is_bool": r in BOOL_DETECTORS,
+                            "crops": CROP_DEFS.get(r, []),
+                            "events": BATTLE_LOG_EVENTS if r == "BattleLogReader" else None}
+                        for r in readers
                     },
                 })
 
@@ -3534,18 +3922,60 @@ async def ocr_suggest_bulk(request: Request):
 
     # Run in parallel — the C++ OCR binary is single-threaded per call,
     # but multiple concurrent subprocesses share the CPU well up to ~8.
-    results = {}
+    raw_results = {}
     errors = []
     loop = asyncio.get_running_loop()
     with ThreadPoolExecutor(max_workers=8) as pool:
         tasks = [loop.run_in_executor(pool, _suggest_one, f) for f in targets]
         for fname, result, err in await asyncio.gather(*tasks):
             if result is not None:
-                results[fname] = result
+                raw_results[fname] = result
             elif err is not None:
                 errors.append({"filename": fname, "error": err})
 
+    #  Project each OCR result into the manifest's schema-shaped form.
+    #  Some readers (TeamSummaryReader, TeamStatsReader) emit a per-slot
+    #  `slots` array but the schema declares flat per-field arrays — write
+    #  the flat shape so the manifest test runner finds what it expects.
+    fields_schema = (
+        _load_screens_yaml()
+        .get("screens", {})
+        .get(screen, {})
+        .get("readers", {})
+        .get(reader, {})
+        .get("fields", {})
+    )
+    results = {
+        fname: _project_ocr_to_manifest(reader, raw, fields_schema)
+        for fname, raw in raw_results.items()
+    }
+
     return {"ok": True, "suggested": len(results), "results": results, "errors": errors}
+
+
+def _project_ocr_to_manifest(reader: str, ocr: dict, fields_schema: dict) -> dict:
+    """Reshape an OcrSuggest result into the manifest's flat per-field schema.
+
+    OcrSuggest emits structured output keyed for human-readability (e.g.
+    `slots: [{species, ability, item, moves}, ...]`). The manifest test
+    runner expects flat per-field arrays declared in screens.yaml (e.g.
+    `species: [s0, s1, ..., s5]`). This function projects the former into
+    the latter for the readers that need it; pass-through for the rest.
+    """
+    if not isinstance(ocr, dict):
+        return ocr
+
+    slots = ocr.get("slots")
+    if isinstance(slots, list) and slots:
+        out = {}
+        for field_name in fields_schema.keys():
+            if all(isinstance(s, dict) and field_name in s for s in slots):
+                out[field_name] = [s.get(field_name, "") for s in slots]
+        if out:
+            return out
+        # fall through if nothing matched
+
+    return ocr
 
 
 # ── Mismatches API ──
