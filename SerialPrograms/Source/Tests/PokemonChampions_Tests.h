@@ -34,6 +34,8 @@ int test_pokemonChampions_PreMatchDetector(const ImageViewRGB32& image, bool tar
 int test_pokemonChampions_SearchingForBattleDetector(const ImageViewRGB32& image, bool target);
 int test_pokemonChampions_RankedFormatSelectDetector(const ImageViewRGB32& image, bool target);
 int test_pokemonChampions_BattleModeMenuDetector(const ImageViewRGB32& image, bool target);
+int test_pokemonChampions_CasualFormatSelectDetector(const ImageViewRGB32& image, bool target);
+int test_pokemonChampions_CasualPreMatchDetector(const ImageViewRGB32& image, bool target);
 int test_pokemonChampions_PokemonSwitchDetector(const ImageViewRGB32& image, bool target);
 
 //  ── OCR Readers (words from filename) ──────────────────────────────

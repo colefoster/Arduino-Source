@@ -22,6 +22,12 @@ namespace PokemonChampions{
 //  Dark blue-purple band behind the "Casual Battles" header pill. Stable
 //  whether cursor is on Singles or Doubles.
 static const FloatPixel ANCHOR_PURPLE{0.247, 0.227, 0.525};
+//  Pill body co-evidence: on this screen the cursored pill is a flat lime
+//  yellow and the uncursored one is a flat purple. The ranked-format-select
+//  screen paints a similar header band but its pill regions are textured
+//  trainer art (stddev ~50+), so the pair-of-solids gate kills FPs.
+static const FloatPixel PILL_LIME  {0.432, 0.524, 0.044};
+static const FloatPixel PILL_PURPLE{0.255, 0.228, 0.517};
 
 
 CasualFormatSelectDetector::CasualFormatSelectDetector()
@@ -58,6 +64,18 @@ bool CasualFormatSelectDetector::detect(const ImageViewRGB32& screen){
     const ImageStats anchor = image_stats(extract_box_reference(screen, m_anchor));
     if (anchor.average.b < 150.0) return false;
     if (!is_solid(anchor, ANCHOR_PURPLE, 0.06, 100)) return false;
+
+    //  Co-evidence: the two pill boxes must be a {solid lime, solid purple}
+    //  pair in either order. ranked-format-select paints similar header but
+    //  has trainer art at these positions (stddev sum > 100), so this pair
+    //  rule rules it out. Stddev cap 25 covers normal compression jitter.
+    const ImageStats pill0 = image_stats(extract_box_reference(screen, m_pill_boxes[0]));
+    const ImageStats pill1 = image_stats(extract_box_reference(screen, m_pill_boxes[1]));
+    bool p0_lime   = is_solid(pill0, PILL_LIME,   0.05, 25);
+    bool p0_purple = is_solid(pill0, PILL_PURPLE, 0.05, 25);
+    bool p1_lime   = is_solid(pill1, PILL_LIME,   0.05, 25);
+    bool p1_purple = is_solid(pill1, PILL_PURPLE, 0.05, 25);
+    if (!((p0_lime && p1_purple) || (p0_purple && p1_lime))) return false;
 
     //  Cursor read: only the cursored pill renders bright yellow. Whichever
     //  pill scores yellow above the floor wins; if neither does, leave -1.

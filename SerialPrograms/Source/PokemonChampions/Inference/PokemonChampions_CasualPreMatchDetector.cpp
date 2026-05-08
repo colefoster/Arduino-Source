@@ -18,6 +18,13 @@ namespace NintendoSwitch{
 namespace PokemonChampions{
 
 
+//  Background chrome anchor: top header band, well clear of the pills.
+//  On the real screen this region is the blue-purple page background
+//  (avg blue ~190, blue >> red). Battle-log overlay frames over a
+//  white dialog have all-white sample boxes; this check rejects them.
+static const ImageFloatBox CHROME_ANCHOR(0.30, 0.07, 0.40, 0.08);
+
+
 CasualPreMatchDetector::CasualPreMatchDetector(){
     m_pill_boxes[0] = ImageFloatBox(0.5236, 0.2909, 0.1409, 0.0391);  //  Team Select
     m_pill_boxes[1] = ImageFloatBox(0.5126, 0.5059, 0.1359, 0.0426);  //  Change Music
@@ -29,11 +36,18 @@ void CasualPreMatchDetector::make_overlays(VideoOverlaySet& items) const{
     for (const ImageFloatBox& b : m_pill_boxes){
         items.add(COLOR_YELLOW, b);
     }
+    items.add(COLOR_CYAN, CHROME_ANCHOR);
 }
 
 
 bool CasualPreMatchDetector::detect(const ImageViewRGB32& screen){
     m_selected_index = -1;
+
+    //  Co-evidence: the page chrome behind the pills must be blue-dominant.
+    //  Without this, an all-white battle-log dialog satisfies the "3 white
+    //  pills" path and FPs.
+    ImageStats chrome = image_stats(extract_box_reference(screen, CHROME_ANCHOR));
+    if (chrome.average.b < chrome.average.r + 30.0) return false;
     int yellow_count = 0;
     int white_count = 0;
     int yellow_idx = -1;
