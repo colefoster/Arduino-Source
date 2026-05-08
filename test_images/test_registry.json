@@ -288,6 +288,23 @@
             "type": "array",
             "items": "string",
             "length": 6
+          },
+          "ability": {
+            "type": "array",
+            "items": "string",
+            "length": 6
+          },
+          "item": {
+            "type": "array",
+            "items": "string",
+            "length": 6
+          },
+          "moves": {
+            "type": "array",
+            "items": "array",
+            "length": 6,
+            "inner_length": 4,
+            "description": "Per-slot 4-move array (slot_i.moves = [m0, m1, m2, m3]). Empty string for unread slots."
           }
         }
       }

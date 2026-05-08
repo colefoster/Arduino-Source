@@ -246,7 +246,7 @@
         }
         .gallery-expanded {
             background: #161b22; border: 1px solid #30363d; border-radius: 12px;
-            padding: 20px; max-width: 900px; max-height: 90vh; overflow-y: auto; width: 90%;
+            padding: 20px; max-width: 1500px; max-height: 90vh; overflow-y: auto; width: 95%;
         }
         .gallery-expanded img { max-width: 100%; border-radius: 4px; image-rendering: pixelated; }
         .gallery-expanded .crops { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 12px; }

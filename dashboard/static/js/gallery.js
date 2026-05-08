@@ -19,16 +19,11 @@ async function galleryInit() {
         // Use new screen-based API
         galleryScreens = await api('/api/gallery/screens');
         renderGallerySidebar();
-        //  Auto-select the screen with the most images on first load.
+        //  Default to the inbox on first load.
         if (!gallerySelectedScreen) {
-            const top = galleryScreens
-                .filter(s => s.type === 'screen' && s.count > 0)
-                .sort((a, b) => (b.count || 0) - (a.count || 0))[0];
-            if (top) {
-                gallerySelectedScreen = top.name;
-                renderGallerySidebar();
-                loadGalleryScreenImages(top.name);
-            }
+            gallerySelectedScreen = '_inbox';
+            renderGallerySidebar();
+            loadGalleryInbox();
         }
     } catch (e) {
         document.getElementById('gallery-sidebar').innerHTML = '<div style="color:#f85149; font-size:12px;">Failed to load screens</div>';
@@ -68,8 +63,15 @@ function renderGallerySidebar() {
     };
 
     let html = '';
+    // Inbox first
+    html += '<div style="color:#8b949e; font-size:10px; text-transform:uppercase; margin-bottom:4px;">Inbox</div>';
+    html += `<div class="reader-pill${gallerySelectedScreen === '_inbox' ? ' active' : ''}" data-screen="_inbox" style="border-color:#d29922;">
+        <span>Unsorted</span>
+        <span class="count-badge" id="inbox-count">...</span>
+    </div>`;
+
     if (withImages.length) {
-        html += '<div style="color:#8b949e; font-size:10px; text-transform:uppercase; margin-bottom:4px;">Screens (labeled/total)</div>';
+        html += '<div style="color:#8b949e; font-size:10px; text-transform:uppercase; margin:8px 0 4px;">Screens (labeled/total)</div>';
         html += withImages.map(s => pillFor(s, s.name)).join('');
     }
     if (empty.length) {
@@ -80,13 +82,6 @@ function renderGallerySidebar() {
         html += '<div style="color:#8b949e; font-size:10px; text-transform:uppercase; margin:8px 0 4px;">Overlays</div>';
         html += overlays.map(s => pillFor(s, s.name.replace('_overlays/', ''))).join('');
     }
-
-    // Inbox link
-    html += '<div style="color:#8b949e; font-size:10px; text-transform:uppercase; margin:8px 0 4px;">Inbox</div>';
-    html += `<div class="reader-pill${gallerySelectedScreen === '_inbox' ? ' active' : ''}" data-screen="_inbox" style="border-color:#d29922;">
-        <span>Unsorted</span>
-        <span class="count-badge" id="inbox-count">...</span>
-    </div>`;
 
     sidebar.innerHTML = html;
 
@@ -373,6 +368,8 @@ const BATTLE_LOG_EVENT_TYPES = [
 
 async function loadGalleryInbox() {
     const grid = document.getElementById('gallery-grid');
+    //  Outer #gallery-grid has CSS `display:grid`; override so inbox toolbar/sub-grids stack vertically.
+    grid.style.display = 'block';
     grid.innerHTML = '<div style="color:#484f58; font-size:12px;">Loading inbox...</div>';
     document.getElementById('gallery-filters').style.display = 'none';
     try {
@@ -605,8 +602,20 @@ async function loadGalleryInbox() {
                     body: JSON.stringify({filenames, screen})
                 }).then(r => r.json());
                 assignBtn.textContent = `Moved ${resp.moved}!`;
-                // Refresh
-                setTimeout(() => { galleryInited = false; galleryInit(); }, 800);
+                //  Remove moved cards in-place; reset selection & count.
+                const moved = new Set(filenames);
+                grid.querySelectorAll('.inbox-card').forEach(card => {
+                    if (moved.has(card.dataset.filename)) card.remove();
+                });
+                grid.querySelectorAll('.inbox-check').forEach(cb => { cb.checked = false; });
+                document.getElementById('inbox-selected-count').textContent = '0 selected';
+                document.getElementById('inbox-screen-select').value = '';
+                //  Update sidebar counts (inbox badge + per-screen totals) without reload.
+                api('/api/gallery/screens').then(s => { galleryScreens = s; renderGallerySidebar(); }).catch(() => {});
+                setTimeout(() => {
+                    assignBtn.textContent = 'Assign Selected';
+                    assignBtn.disabled = true;
+                }, 800);
             } catch (e) {
                 assignBtn.textContent = 'Error!';
             }
@@ -853,7 +862,7 @@ async function expandGalleryCard(filename) {
                 <div style="margin-top:8px;"><button class="btn" id="gallery-load-crops" style="font-size:10px; padding:2px 8px;">Show Crops</button></div>
                 <div class="crops" id="gallery-expanded-crops" style="margin-top:8px;"></div>
             </div>
-            <div style="flex:0 0 340px;" id="gallery-label-form">
+            <div style="flex:1 1 640px; min-width:560px;" id="gallery-label-form">
                 <div style="color:#484f58; font-size:12px;">Loading schema...</div>
             </div>
         </div>
@@ -1084,7 +1093,57 @@ async function buildLabelForm(overlay, screen, filename, img) {
 
         const ORDINALS = ['first','second','third','fourth','fifth','sixth'];
         const displayField = (f) => f.startsWith('own_') ? 'my_' + f.slice(4) : f;
-        for (const [fieldName, fieldDef] of Object.entries(fields)) {
+
+        //  Per-slot layout: when every field is an array of the same length,
+        //  group inputs by slot index so the user labels one Pokémon at a
+        //  time instead of one field-type at a time. (Per-pokemon UX wins
+        //  for screens like moves_and_more where every field is per-slot.)
+        const fieldEntries = Object.entries(fields);
+        const allArrays = fieldEntries.length > 0
+            && fieldEntries.every(([_, def]) => def.type === 'array' && def.length);
+        const lengths = fieldEntries.map(([_, def]) => def.length);
+        const sameLength = allArrays && new Set(lengths).size === 1;
+        const perSlot = sameLength && !isDetector && lengths[0] >= 2;
+
+        if (perSlot) {
+            const slotCount = lengths[0];
+            html += `<div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">`;
+            for (let slot = 0; slot < slotCount; slot++) {
+                const ord = ORDINALS[slot] || (slot + 1);
+                html += `<div style="background:#0d1117; border:1px solid #30363d; border-radius:4px; padding:6px;">`;
+                html += `<div style="font-size:10px; color:#58a6ff; font-weight:bold; margin-bottom:4px;">slot ${slot+1} <span style="color:#6e7681; font-weight:normal;">(${ord})</span></div>`;
+                for (const [fieldName, fieldDef] of fieldEntries) {
+                    const val = existing[fieldName];
+                    const slotVal = Array.isArray(val) ? val[slot] : null;
+                    const items = fieldDef.items || 'string';
+                    html += `<div style="display:flex; align-items:center; gap:4px; margin-bottom:3px;">`;
+                    html += `<span style="font-size:9px; color:#8b949e; min-width:46px; text-transform:lowercase;">${fieldName}</span>`;
+                    if (items === 'array') {
+                        const innerLen = fieldDef.inner_length || 1;
+                        const slotArr = Array.isArray(slotVal) ? slotVal : [];
+                        for (let j = 0; j < innerLen; j++) {
+                            const cell = slotArr[j] != null ? slotArr[j] : '';
+                            html += `<input type="text" class="manifest-input" data-reader="${readerName}" data-field="${fieldName}" data-index="${slot}" data-subindex="${j}"
+                                value="${cell}" placeholder="${j+1}"
+                                style="flex:1; min-width:0; font-size:10px; padding:2px 3px; background:#161b22; border:1px solid #30363d; color:#c9d1d9; border-radius:3px;">`;
+                        }
+                    } else {
+                        const inputType = items === 'int' ? 'number' : 'text';
+                        const v = slotVal != null ? slotVal : '';
+                        html += `<input type="${inputType}" class="manifest-input" data-reader="${readerName}" data-field="${fieldName}" data-index="${slot}"
+                            value="${v}" placeholder="${fieldName}"
+                            style="flex:1; min-width:0; font-size:11px; padding:2px 4px; background:#161b22; border:1px solid #30363d; color:#c9d1d9; border-radius:3px;">`;
+                    }
+                    html += `</div>`;
+                }
+                html += `</div>`;
+            }
+            html += `</div>`;
+            html += `</div>`;  // close per-reader container
+            continue;
+        }
+
+        for (const [fieldName, fieldDef] of fieldEntries) {
             const val = existing[fieldName];
             const labelText = displayField(fieldName);
             html += `<div style="margin-bottom:6px;">`;
@@ -1099,16 +1158,35 @@ async function buildLabelForm(overlay, screen, filename, img) {
             if (fieldDef.type === 'array') {
                 const len = fieldDef.length || 1;
                 const items = fieldDef.items || 'string';
-                for (let i = 0; i < len; i++) {
-                    const arrVal = Array.isArray(val) && val[i] != null ? val[i] : '';
-                    const inputType = items === 'int' ? 'number' : 'text';
-                    const ord = ORDINALS[i] || (i + 1);
-                    html += `<div style="display:flex; align-items:center; gap:6px; margin-bottom:2px;">`;
-                    html += `<span style="font-size:10px; color:#6e7681; min-width:48px;">${ord}</span>`;
-                    html += `<input type="${inputType}" class="manifest-input" data-reader="${readerName}" data-field="${fieldName}" data-index="${i}"
-                        value="${arrVal}" placeholder="${labelText} (${ord})"
-                        style="flex:1; font-size:12px; padding:3px 6px; background:#0d1117; border:1px solid #30363d; color:#c9d1d9; border-radius:3px;">`;
-                    html += `</div>`;
+                if (items === 'array') {
+                    //  Array-of-arrays (e.g. moves[6][4]). Render one row per
+                    //  outer index with `inner_length` text inputs side-by-side.
+                    const inner_length = fieldDef.inner_length || 1;
+                    for (let i = 0; i < len; i++) {
+                        const slotArr = Array.isArray(val) && Array.isArray(val[i]) ? val[i] : [];
+                        const ord = ORDINALS[i] || (i + 1);
+                        html += `<div style="display:flex; align-items:center; gap:4px; margin-bottom:2px;">`;
+                        html += `<span style="font-size:10px; color:#6e7681; min-width:48px;">${ord}</span>`;
+                        for (let j = 0; j < inner_length; j++) {
+                            const cell = slotArr[j] != null ? slotArr[j] : '';
+                            html += `<input type="text" class="manifest-input" data-reader="${readerName}" data-field="${fieldName}" data-index="${i}" data-subindex="${j}"
+                                value="${cell}" placeholder="${j+1}"
+                                style="flex:1; min-width:0; font-size:11px; padding:3px 4px; background:#0d1117; border:1px solid #30363d; color:#c9d1d9; border-radius:3px;">`;
+                        }
+                        html += `</div>`;
+                    }
+                } else {
+                    for (let i = 0; i < len; i++) {
+                        const arrVal = Array.isArray(val) && val[i] != null ? val[i] : '';
+                        const inputType = items === 'int' ? 'number' : 'text';
+                        const ord = ORDINALS[i] || (i + 1);
+                        html += `<div style="display:flex; align-items:center; gap:6px; margin-bottom:2px;">`;
+                        html += `<span style="font-size:10px; color:#6e7681; min-width:48px;">${ord}</span>`;
+                        html += `<input type="${inputType}" class="manifest-input" data-reader="${readerName}" data-field="${fieldName}" data-index="${i}"
+                            value="${arrVal}" placeholder="${labelText} (${ord})"
+                            style="flex:1; font-size:12px; padding:3px 6px; background:#0d1117; border:1px solid #30363d; color:#c9d1d9; border-radius:3px;">`;
+                        html += `</div>`;
+                    }
                 }
             } else if (fieldDef.type === 'int') {
                 html += `<input type="number" class="manifest-input" data-reader="${readerName}" data-field="${fieldName}"
@@ -1154,7 +1232,13 @@ async function buildLabelForm(overlay, screen, filename, img) {
                 return;
             }
             if (!labels[reader]) labels[reader] = {};
-            if (index != null) {
+            const sub = input.dataset.subindex;
+            if (index != null && sub != null) {
+                //  Array-of-arrays (e.g. moves[i][j]).
+                if (!labels[reader][field]) labels[reader][field] = [];
+                if (!labels[reader][field][parseInt(index)]) labels[reader][field][parseInt(index)] = [];
+                labels[reader][field][parseInt(index)][parseInt(sub)] = val;
+            } else if (index != null) {
                 if (!labels[reader][field]) labels[reader][field] = [];
                 labels[reader][field][parseInt(index)] = val;
             } else {
@@ -1266,9 +1350,17 @@ async function buildLabelForm(overlay, screen, filename, img) {
                     for (const [field, val] of Object.entries(result)) {
                         if (Array.isArray(val)) {
                             val.forEach((v, i) => {
-                                const input = formEl.querySelector(`.manifest-input[data-reader="${reader}"][data-field="${field}"][data-index="${i}"]`);
-                                // Use null-check so int 0 / bool false aren't dropped by `||`.
-                                if (input && !input.value) { input.value = v != null ? v : ''; input.style.borderColor = '#d29922'; }
+                                if (Array.isArray(v)) {
+                                    //  Array-of-arrays: populate by (i, j).
+                                    v.forEach((cell, j) => {
+                                        const input = formEl.querySelector(`.manifest-input[data-reader="${reader}"][data-field="${field}"][data-index="${i}"][data-subindex="${j}"]`);
+                                        if (input && !input.value) { input.value = cell != null ? cell : ''; input.style.borderColor = '#d29922'; }
+                                    });
+                                } else {
+                                    const input = formEl.querySelector(`.manifest-input[data-reader="${reader}"][data-field="${field}"][data-index="${i}"]`);
+                                    // Use null-check so int 0 / bool false aren't dropped by `||`.
+                                    if (input && !input.value) { input.value = v != null ? v : ''; input.style.borderColor = '#d29922'; }
+                                }
                             });
                         } else {
                             const input = formEl.querySelector(`.manifest-input[data-reader="${reader}"][data-field="${field}"]`);

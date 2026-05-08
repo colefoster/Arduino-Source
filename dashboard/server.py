@@ -317,6 +317,16 @@ CROP_DEFS = {
     #  preview screen (own ICONS, opp sprites are inward). Boxes drawn
     #  by user 2026-05-07. Top-to-bottom positional indexing — semantic
     #  lead-order mapping is TBD; investigate via /#/tplocked.
+    #  Mirrors C++ TeamPreviewCursorReader: 6 highlight strips on the left
+    #  edge of each own card on the team_preview_selecting screen.
+    "TeamPreviewCursorReader": [
+        {"name": "cursor_0", "box": [0.0235, 0.1821, 0.0143, 0.0235]},
+        {"name": "cursor_1", "box": [0.0279, 0.3011, 0.0115, 0.0213]},
+        {"name": "cursor_2", "box": [0.0239, 0.4165, 0.0163, 0.0222]},
+        {"name": "cursor_3", "box": [0.0299, 0.5300, 0.0108, 0.0268]},
+        {"name": "cursor_4", "box": [0.0318, 0.6513, 0.0093, 0.0237]},
+        {"name": "cursor_5", "box": [0.0335, 0.7654, 0.0069, 0.0300]},
+    ],
     "TeamPreviewLockedInReader": [
         {"name": "own_slot_0", "box": [0.1599, 0.1747, 0.0270, 0.0532]},
         {"name": "own_slot_1", "box": [0.1561, 0.2872, 0.0287, 0.0540]},
@@ -1744,6 +1754,84 @@ async def tp_locked_read(filename: str):
         })
 
     return {"filename": filename, "slots": slots}
+
+
+@app.get("/api/tp-cursor/list")
+async def tp_cursor_list():
+    screen_dir = TEST_IMAGES_DIR / "team_preview_selecting"
+    if not screen_dir.exists():
+        return {"files": []}
+    files = sorted([
+        f.name for f in screen_dir.iterdir()
+        if f.is_file() and f.suffix.lower() == ".png" and _is_real_image(f.name)
+    ])
+    return {"files": files}
+
+
+@app.get("/api/tp-cursor/read")
+async def tp_cursor_read(filename: str):
+    """For one team_preview_selecting image, return the 6 highlight crops
+    + per-slot yellow-score (mirrors C++ TeamPreviewCursorReader::read).
+    Mirrors the C++ formula: (R+G)/2 - B, floor 30; highest scoring slot wins."""
+    import base64
+    from PIL import Image
+    img_path = TEST_IMAGES_DIR / "team_preview_selecting" / filename
+    if not img_path.exists():
+        return JSONResponse({"error": "not found"}, 404)
+
+    boxes = CROP_DEFS.get("TeamPreviewCursorReader") or []
+
+    def _yellow_score(box):
+        img = Image.open(img_path).convert("RGB")
+        w, h = img.size
+        x0 = max(0, int(box[0]*w)); y0 = max(0, int(box[1]*h))
+        x1 = min(w, x0+int(box[2]*w)); y1 = min(h, y0+int(box[3]*h))
+        crop = img.crop((x0, y0, x1, y1))
+        if crop.size[0] == 0 or crop.size[1] == 0:
+            return None
+        pixels = list(crop.getdata())
+        n = len(pixels)
+        r = sum(p[0] for p in pixels) / n
+        g = sum(p[1] for p in pixels) / n
+        b = sum(p[2] for p in pixels) / n
+        score = (r + g) / 2 - b
+        return {"r": round(r, 1), "g": round(g, 1), "b": round(b, 1),
+                "score": round(score, 1)}
+
+    slots = []
+    for i, b in enumerate(boxes):
+        try:
+            crop_b64 = "data:image/png;base64," + base64.b64encode(
+                _extract_crop(img_path, b["box"], scale=4)
+            ).decode()
+        except Exception:
+            crop_b64 = None
+        stats = _yellow_score(b["box"])
+        slots.append({
+            "slot": i,
+            "name": b["name"],
+            "box": b["box"],
+            "crop": crop_b64,
+            "stats": stats,
+        })
+
+    FLOOR = 30.0
+    best_slot = -1
+    best_score = 0.0
+    for s in slots:
+        st = s["stats"]
+        if st and st["score"] > best_score and st["score"] >= FLOOR:
+            best_score = st["score"]
+            best_slot = s["slot"]
+
+    img_b64 = "data:image/png;base64," + base64.b64encode(img_path.read_bytes()).decode()
+    return {
+        "filename": filename,
+        "image": img_b64,
+        "floor": FLOOR,
+        "selected_slot": best_slot,
+        "slots": slots,
+    }
 
 
 @app.get("/api/hp-gallery")
@@ -3686,7 +3774,22 @@ async def ocr_suggest(request: Request):
         )
         with urllib.request.urlopen(req, timeout=30) as resp:
             result = json.loads(resp.read())
-            return result
+        #  Project per-slot OCR output (e.g. TeamSummaryReader's `slots`)
+        #  into the manifest's flat-field shape so the per-card Suggest
+        #  button populates the manifest inputs the form actually renders.
+        if result.get("ok") and isinstance(result.get("result"), dict):
+            fields_schema = (
+                _load_screens_yaml()
+                .get("screens", {})
+                .get(screen, {})
+                .get("readers", {})
+                .get(reader, {})
+                .get("fields", {})
+            )
+            result["result"] = _project_ocr_to_manifest(
+                reader, result["result"], fields_schema
+            )
+        return result
     except urllib.error.URLError as e:
         return JSONResponse({"error": f"dev runner unreachable: {e}"}, 502)
     except Exception as e:
