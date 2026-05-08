@@ -272,6 +272,13 @@ private:
     int m_team_scan_step = -1;
     bool m_team_scan_complete = false;
 
+    //  Recovery: when stuck on "unknown" classification for > grace period,
+    //  press B every 5s up to 4 times to back out to a known screen.
+    //  Reset whenever we see a non-unknown screen.
+    int64_t m_unknown_since_ms = 0;
+    int m_recovery_b_count = 0;
+    int64_t m_recovery_last_b_ms = 0;
+
     //  pokemon_switch screen state (forced switch suggester).
     int m_switch_cursor = -1;
     std::array<bool, 6> m_switch_alive = {};

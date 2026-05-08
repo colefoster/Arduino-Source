@@ -44,6 +44,7 @@
 #include "PokemonChampions/Inference/PokemonChampions_CommunicatingDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_BattleModeMenuDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_CasualFormatSelectDetector.h"
+#include "PokemonChampions/Inference/PokemonChampions_CasualPreMatchDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_MainMenuDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_PreMatchDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_RankedFormatSelectDetector.h"
@@ -409,6 +410,7 @@ void LiveDetectorTrace::init_pipeline_registry(){
     add("BattleModeMenuDetector",    "detector", "skipped", "Detects the Battle mode list (Ranked / Casual / Private / Online Comp / Battle Data).");
     add("RankedFormatSelectDetector","detector", "skipped", "Detects the Ranked format selector (Singles vs Doubles).");
     add("CasualFormatSelectDetector","detector", "skipped", "Detects the Casual battles format selector (Single/Double pills). Reports selected_index 0=Singles, 1=Doubles.");
+    add("CasualPreMatchDetector",    "detector", "skipped", "Detects the casual pre-match staging screen. Reports selected_index 0=Team Select, 1=Change Music, 2=Begin Matchmaking, -1=on a footer button.");
     add("PreMatchDetector",          "detector", "skipped", "Detects the pre-match staging screen (selected team + Begin Matchmaking / Change Team).");
     add("SearchingForBattleDetector","detector", "skipped", "Detects the matchmaking 'Searching for opponent' screen.");
     add("TeamPreviewCursorReader",   "reader",   "skipped", "On team_preview_selecting, reports which of the 6 own slots the cursor is on (yellow ▶ arrow). -1 if no confident pick.");
@@ -640,6 +642,16 @@ std::string LiveDetectorTrace::classify_screen(Logger& logger, const ImageViewRG
             out["selected_index"] = (int64_t)det.selected_index();
             mark("PreMatchDetector", "ok", std::move(out));
             return "pre_match";
+        }
+    }
+    {
+        CasualPreMatchDetector det;
+        if (try_det("CasualPreMatchDetector", det)){
+            m_menu_selected_index = det.selected_index();
+            JsonObject out;
+            out["selected_index"] = (int64_t)det.selected_index();
+            mark("CasualPreMatchDetector", "ok", std::move(out));
+            return "casual_pre_match";
         }
     }
     {
@@ -1574,7 +1586,7 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
             static const std::set<std::string> safe_screens = {
                 "main_menu", "battle_mode_menu", "ranked_format_select",
                 "casual_format_select",
-                "pre_match", "team_select",
+                "pre_match", "casual_pre_match", "team_select",
                 "team_preview", "team_preview_locked_in", "preparing",
                 "result_screen", "post_match",
                 //  In-battle dummy strategy: A on Fight, A on Move 1, A on
@@ -1649,6 +1661,38 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
                     }
                 }
             }
+        }
+
+        //  Recovery: when classify_screen returns "unknown" for an extended
+        //  period and auto-press is on, press B every 5s up to 4 times to
+        //  back out of any unexpected modal/sub-menu/dialog. 10s grace
+        //  period absorbs animation transitions before kicking in. Resets
+        //  the moment a known screen reclassifies.
+        if (screen == "unknown" && ENABLE_AUTO_PRESS){
+            if (m_unknown_since_ms == 0){
+                m_unknown_since_ms = now_ms();
+            }
+            int64_t elapsed = now_ms() - m_unknown_since_ms;
+            const int64_t GRACE_MS = 10000;
+            const int64_t INTERVAL_MS = 5000;
+            const int MAX_BS = 4;
+            if (elapsed >= GRACE_MS && m_recovery_b_count < MAX_BS){
+                bool ready = (m_recovery_b_count == 0)
+                          || (now_ms() - m_recovery_last_b_ms >= INTERVAL_MS);
+                if (ready){
+                    m_recovery_b_count++;
+                    m_recovery_last_b_ms = now_ms();
+                    env.console.log(
+                        "LiveDetectorTrace: stuck on 'unknown' — recovery B "
+                        + std::to_string(m_recovery_b_count) + "/"
+                        + std::to_string(MAX_BS),
+                        COLOR_ORANGE);
+                    pbf_press_button(context, BUTTON_B, 80ms, 160ms);
+                }
+            }
+        }else{
+            m_unknown_since_ms = 0;
+            m_recovery_b_count = 0;
         }
 
         //  Watchdog: log if we've been on the same screen for >60s.

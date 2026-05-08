@@ -1360,6 +1360,8 @@ file(GLOB LIBRARY_SOURCES
     Source/PokemonChampions/Inference/PokemonChampions_TeamPreviewReader.h
     Source/PokemonChampions/Inference/PokemonChampions_CasualFormatSelectDetector.cpp
     Source/PokemonChampions/Inference/PokemonChampions_CasualFormatSelectDetector.h
+    Source/PokemonChampions/Inference/PokemonChampions_CasualPreMatchDetector.cpp
+    Source/PokemonChampions/Inference/PokemonChampions_CasualPreMatchDetector.h
     Source/PokemonChampions/Inference/PokemonChampions_TeamPreviewCursorReader.cpp
     Source/PokemonChampions/Inference/PokemonChampions_TeamPreviewCursorReader.h
     Source/PokemonChampions/Inference/PokemonChampions_TeamPreviewLeadsReader.cpp

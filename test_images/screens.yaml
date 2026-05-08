@@ -254,8 +254,14 @@ screens:
 
   casual_format_select:
     description: "Casual battles format selector — Single Battle / Double Battle horizontal pills. Visually distinct from ranked_format_select (yellow + purple pills, not cyan/pink tiles)."
-    transitions_to: [pre_match, battle_mode_menu]
+    transitions_to: [casual_pre_match, battle_mode_menu]
     detectors: [CasualFormatSelectDetector]
+    readers: {}
+
+  casual_pre_match:
+    description: "Casual pre-match staging screen — Single Battle pill, Team N card, Change Music, Begin Matchmaking. Distinct from ranked pre_match (different theming, NPC dialog area, cursor highlights)."
+    transitions_to: [team_select, searching_for_battle, casual_format_select]
+    detectors: [CasualPreMatchDetector]
     readers: {}
 
   pre_match:

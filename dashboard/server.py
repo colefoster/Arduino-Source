@@ -349,6 +349,11 @@ CROP_DEFS = {
         {"name": "casual_singles", "box": [0.6828, 0.3375, 0.0410, 0.1587]},
         {"name": "casual_doubles", "box": [0.6849, 0.5822, 0.0389, 0.1662]},
     ],
+    "CasualPreMatchDetector": [
+        {"name": "cursor_0_team_select",       "box": [0.5236, 0.2909, 0.1409, 0.0391]},
+        {"name": "cursor_1_change_music",      "box": [0.5126, 0.5059, 0.1359, 0.0426]},
+        {"name": "cursor_2_begin_matchmaking", "box": [0.5036, 0.8399, 0.1319, 0.0551]},
+    ],
     "PreMatchDetector": [
         {"name": "team_card",   "box": [0.7917, 0.5556, 0.0078, 0.0139]},
         {"name": "format_band", "box": [0.6250, 0.1667, 0.0130, 0.0231]},
@@ -404,7 +409,7 @@ BOOL_DETECTORS = {
     "MegaEvolveDetector", "TargetSelectDetector", "PokemonSwitchDetector",
     "BattleInfoDetector", "TeamStatsTabDetector",
     "BattleModeMenuDetector", "RankedFormatSelectDetector",
-    "CasualFormatSelectDetector",
+    "CasualFormatSelectDetector", "CasualPreMatchDetector",
     "PreMatchDetector", "SearchingForBattleDetector",
 }
 
@@ -421,6 +426,7 @@ FOLDER_TO_READER = {
     "battle_log": "BattleLogReader",
     "battle_mode_menu": "BattleModeMenuDetector",
     "casual_format_select": "CasualFormatSelectDetector",
+    "casual_pre_match": "CasualPreMatchDetector",
     "main_menu": "MainMenuDetector",
     "match_intro": "MainMenuDetector",  # no detector yet — placeholder
     "move_select": "MoveNameReader",
@@ -446,6 +452,7 @@ FOLDER_READERS = {
     "battle_info": ["BattleInfoDetector", "BattleInfoReader"],
     "battle_mode_menu": ["BattleModeMenuDetector"],
     "casual_format_select": ["CasualFormatSelectDetector"],
+    "casual_pre_match": ["CasualPreMatchDetector"],
     "main_menu": ["MainMenuDetector"],
     "move_select": ["MoveSelectDetector", "MegaEvolveDetector", "MoveNameReader", "MoveSelectCursorSlot", "BattleHUDReader", "PokeballAliveDetector"],
     "battle_log": ["BattleLogReader", "BattleHUDReader", "PokeballAliveDetector"],

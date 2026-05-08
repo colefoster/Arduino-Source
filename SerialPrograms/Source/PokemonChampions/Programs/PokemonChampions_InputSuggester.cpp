@@ -302,7 +302,7 @@ std::optional<InputSuggestion> suggest_for_screen(
         const char* label = (ctx.format_target == 1) ? "Doubles" : "Singles";
         return suggest_vertical_menu(ctx.menu_selected_index, ctx.format_target, label, /*max=*/2);
     }
-    if (screen == "pre_match"){
+    if (screen == "pre_match" || screen == "casual_pre_match"){
         //  Until the team-scan has completed once this program session,
         //  target Team Select (0) so we can run the M&M + Stats scan.
         //  Afterwards, target Begin Matchmaking (2) for the queue loop.
