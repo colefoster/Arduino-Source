@@ -330,13 +330,33 @@ def predict(req: PredictRequest):
     probs_a = torch.softmax(logits_a, dim=-1).cpu().tolist()
     probs_b = torch.softmax(logits_b, dim=-1).cpu().tolist()
 
+    action_a = int(logits_a.argmax().item())
+    action_b = int(logits_b.argmax().item())
+
+    # Same-bench double-switch deconfliction. Action 12 = switch→bench0,
+    # 13 = switch→bench1. The two slots' heads are independent — both can
+    # argmax the same switch target. Higher-prob slot wins; loser re-picks
+    # from its existing logits with that switch masked. Equivalent to a
+    # second forward pass with the mask updated, but without re-running
+    # the model (logits_b doesn't condition on slot A's chosen action).
+    SWITCH_ACTIONS = (12, 13)
+    if action_a in SWITCH_ACTIONS and action_b == action_a:
+        if probs_a[action_a] >= probs_b[action_b]:
+            masked = logits_b.clone()
+            masked[action_b] = float("-inf")
+            action_b = int(masked.argmax().item())
+        else:
+            masked = logits_a.clone()
+            masked[action_a] = float("-inf")
+            action_a = int(masked.argmax().item())
+
     return PredictResponse(
         slot_a=ActionResult(
-            action=int(logits_a.argmax().item()),
+            action=action_a,
             probs=probs_a,
         ),
         slot_b=ActionResult(
-            action=int(logits_b.argmax().item()),
+            action=action_b,
             probs=probs_b,
         ),
     )
