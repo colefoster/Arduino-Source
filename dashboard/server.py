@@ -319,13 +319,61 @@ CROP_DEFS = {
     #  lead-order mapping is TBD; investigate via /#/tplocked.
     #  Mirrors C++ TeamPreviewCursorReader: 6 highlight strips on the left
     #  edge of each own card on the team_preview_selecting screen.
+    "MainMenuDetector": [
+        {"name": "Battle_cursor",   "box": [0.5403, 0.3214, 0.0083, 0.1857]},
+        {"name": "Box_cursor",      "box": [0.9807, 0.1817, 0.0045, 0.1337]},
+        {"name": "Train_cursor",    "box": [0.9801, 0.5813, 0.0054, 0.1341]},
+        {"name": "Recruit_cursor",  "box": [0.5451, 0.6028, 0.0052, 0.0824]},
+        {"name": "Missions_cursor", "box": [0.2169, 0.9295, 0.0231, 0.0175]},
+        {"name": "Mailbox_cursor",  "box": [0.3761, 0.9268, 0.0188, 0.0221]},
+        {"name": "Style_cursor",    "box": [0.5308, 0.9265, 0.0256, 0.0211]},
+        {"name": "SubMenu_cursor",  "box": [0.6844, 0.9269, 0.0239, 0.0241]},
+    ],
+    "BattleModeMenuDetector": [
+        {"name": "season_pill",   "box": [0.6563, 0.1574, 0.0078, 0.0139]},
+        {"name": "top_row_burst", "box": [0.9271, 0.2963, 0.0078, 0.0139]},
+        {"name": "cursor_0_ranked",         "box": [0.7103, 0.1990, 0.0192, 0.0341]},
+        {"name": "cursor_1_casual",         "box": [0.7078, 0.3583, 0.0229, 0.0428]},
+        {"name": "cursor_2_private",        "box": [0.7004, 0.5044, 0.0253, 0.0527]},
+        {"name": "cursor_3_online_comp",    "box": [0.7426, 0.6621, 0.0258, 0.0451]},
+        {"name": "cursor_4_battle_data",    "box": [0.7240, 0.8227, 0.0284, 0.0504]},
+    ],
+    "RankedFormatSelectDetector": [
+        {"name": "top_tile_cyan", "box": [0.7708, 0.3333, 0.0078, 0.0139]},
+        {"name": "btm_tile_pink", "box": [0.8333, 0.5556, 0.0078, 0.0139]},
+        {"name": "cursor_0_singles", "box": [0.7027, 0.4299, 0.0340, 0.0409]},
+        {"name": "cursor_1_doubles", "box": [0.6962, 0.6637, 0.0310, 0.0427]},
+    ],
+    "CasualFormatSelectDetector": [
+        {"name": "casual_detect",  "box": [0.6544, 0.1806, 0.2542, 0.0355]},
+        {"name": "casual_singles", "box": [0.6828, 0.3375, 0.0410, 0.1587]},
+        {"name": "casual_doubles", "box": [0.6849, 0.5822, 0.0389, 0.1662]},
+    ],
+    "PreMatchDetector": [
+        {"name": "team_card",   "box": [0.7917, 0.5556, 0.0078, 0.0139]},
+        {"name": "format_band", "box": [0.6250, 0.1667, 0.0130, 0.0231]},
+        {"name": "cursor_0_team_select",       "box": [0.5743, 0.4779, 0.0334, 0.0441]},
+        {"name": "cursor_1_change_music",      "box": [0.5716, 0.7012, 0.0237, 0.0393]},
+        {"name": "cursor_2_begin_matchmaking", "box": [0.5711, 0.8555, 0.0270, 0.0393]},
+    ],
     "TeamPreviewCursorReader": [
-        {"name": "cursor_0", "box": [0.0235, 0.1821, 0.0143, 0.0235]},
-        {"name": "cursor_1", "box": [0.0279, 0.3011, 0.0115, 0.0213]},
-        {"name": "cursor_2", "box": [0.0239, 0.4165, 0.0163, 0.0222]},
-        {"name": "cursor_3", "box": [0.0299, 0.5300, 0.0108, 0.0268]},
-        {"name": "cursor_4", "box": [0.0318, 0.6513, 0.0093, 0.0237]},
-        {"name": "cursor_5", "box": [0.0335, 0.7654, 0.0069, 0.0300]},
+        {"name": "cursor_0",    "box": [0.0235, 0.1821, 0.0143, 0.0235]},
+        {"name": "cursor_1",    "box": [0.0279, 0.3011, 0.0115, 0.0213]},
+        {"name": "cursor_2",    "box": [0.0239, 0.4165, 0.0163, 0.0222]},
+        {"name": "cursor_3",    "box": [0.0299, 0.5300, 0.0108, 0.0268]},
+        {"name": "cursor_4",    "box": [0.0318, 0.6513, 0.0093, 0.0237]},
+        {"name": "cursor_5",    "box": [0.0335, 0.7654, 0.0069, 0.0300]},
+        {"name": "cursor_done", "box": [0.1324, 0.8572, 0.0146, 0.0428]},
+    ],
+    #  Lead-mark digit boxes for team_preview_selecting. Mirrors the
+    #  selecting_screen_boxes() coords in TeamPreviewLeadsReader.cpp.
+    "TeamPreviewSelectingMarksReader": [
+        {"name": "digit_0", "box": [0.0462, 0.1699, 0.0253, 0.0527]},
+        {"name": "digit_1", "box": [0.0462, 0.2865, 0.0240, 0.0554]},
+        {"name": "digit_2", "box": [0.0476, 0.4017, 0.0234, 0.0536]},
+        {"name": "digit_3", "box": [0.0467, 0.5218, 0.0246, 0.0476]},
+        {"name": "digit_4", "box": [0.0466, 0.6375, 0.0223, 0.0484]},
+        {"name": "digit_5", "box": [0.0466, 0.7555, 0.0229, 0.0522]},
     ],
     "TeamPreviewLockedInReader": [
         {"name": "own_slot_0", "box": [0.1599, 0.1747, 0.0270, 0.0532]},
@@ -355,6 +403,9 @@ BOOL_DETECTORS = {
     "MainMenuDetector", "MovesMoreDetector", "CommunicatingDetector",
     "MegaEvolveDetector", "TargetSelectDetector", "PokemonSwitchDetector",
     "BattleInfoDetector", "TeamStatsTabDetector",
+    "BattleModeMenuDetector", "RankedFormatSelectDetector",
+    "CasualFormatSelectDetector",
+    "PreMatchDetector", "SearchingForBattleDetector",
 }
 
 BATTLE_LOG_EVENTS = [
@@ -368,28 +419,50 @@ FOLDER_TO_READER = {
     "action_menu": "ActionMenuDetector",
     "battle_info": "BattleInfoReader",
     "battle_log": "BattleLogReader",
+    "battle_mode_menu": "BattleModeMenuDetector",
+    "casual_format_select": "CasualFormatSelectDetector",
+    "main_menu": "MainMenuDetector",
+    "match_intro": "MainMenuDetector",  # no detector yet — placeholder
     "move_select": "MoveNameReader",
     "pokemon_switch": "PokemonSwitchReader",
     "post_match": "PostMatchScreenDetector",
+    "pre_match": "PreMatchDetector",
     "preparing": "PreparingForBattleDetector",
+    "ranked_format_select": "RankedFormatSelectDetector",
+    "result_screen": "ResultScreenDetector",
+    "searching_for_battle": "SearchingForBattleDetector",
     "target_select": "TargetSelectReader",
+    "team_preview_locked_in": "TeamPreviewLeadsReader",
+    "team_preview_selecting": "TeamPreviewCursorReader",
     "team_select": "TeamSelectReader",
     "team_preview": "TeamPreviewReader",
+    "team_stats": "TeamStatsReader",
     "team_summary": "TeamSummaryReader",
 }
 
 # Which readers to show together for each screen type
 FOLDER_READERS = {
     "action_menu": ["ActionMenuDetector", "BattleHUDReader", "PokeballAliveDetector"],
+    "battle_info": ["BattleInfoDetector", "BattleInfoReader"],
+    "battle_mode_menu": ["BattleModeMenuDetector"],
+    "casual_format_select": ["CasualFormatSelectDetector"],
+    "main_menu": ["MainMenuDetector"],
     "move_select": ["MoveSelectDetector", "MegaEvolveDetector", "MoveNameReader", "MoveSelectCursorSlot", "BattleHUDReader", "PokeballAliveDetector"],
     "battle_log": ["BattleLogReader", "BattleHUDReader", "PokeballAliveDetector"],
     "pokemon_switch": ["PokemonSwitchDetector", "PokemonSwitchReader"],
     "post_match": ["PostMatchScreenDetector"],
-    "preparing": ["PreparingForBattleDetector"],
+    "pre_match": ["PreMatchDetector"],
+    "preparing": ["PreparingForBattleDetector", "TeamPreviewLeadsReader"],
+    "ranked_format_select": ["RankedFormatSelectDetector"],
+    "result_screen": ["ResultScreenDetector"],
+    "searching_for_battle": ["SearchingForBattleDetector"],
     "target_select": ["TargetSelectDetector", "TargetSelectReader"],
-    "team_select": ["TeamSelectReader"],
-    "team_preview": ["TeamPreviewReader", "TeamPreviewDetector"],
-    "team_summary": ["TeamSummaryReader"],
+    "team_preview_locked_in": ["PreparingForBattleDetector", "TeamPreviewLeadsReader"],
+    "team_preview_selecting": ["TeamPreviewDetector", "TeamPreviewReader", "TeamPreviewCursorReader", "TeamPreviewSelectingMarksReader"],
+    "team_select": ["TeamSelectReader", "TeamSelectDetector"],
+    "team_preview": ["TeamPreviewReader", "TeamPreviewDetector", "TeamPreviewCursorReader"],
+    "team_stats": ["TeamStatsTabDetector", "TeamStatsReader"],
+    "team_summary": ["TeamSummaryReader", "MovesMoreDetector"],
 }
 
 READER_TYPES = {}
@@ -1756,6 +1829,105 @@ async def tp_locked_read(filename: str):
     return {"filename": filename, "slots": slots}
 
 
+@app.get("/api/tp-marks/list")
+async def tp_marks_list():
+    screen_dir = TEST_IMAGES_DIR / "team_preview_selecting"
+    if not screen_dir.exists():
+        return {"files": []}
+    files = sorted([
+        f.name for f in screen_dir.iterdir()
+        if f.is_file() and f.suffix.lower() == ".png" and _is_real_image(f.name)
+    ])
+    return {"files": files}
+
+
+@app.get("/api/tp-marks/read")
+async def tp_marks_read(filename: str):
+    """Mirror of /api/tp-locked/read but for the team_preview_selecting
+    digit badges. Same OCR pipeline (raw / binarize / yellow_paint /
+    yellow_filled / yellow_inner / Tesseract per stage)."""
+    import base64
+    import urllib.request
+    img_path = TEST_IMAGES_DIR / "team_preview_selecting" / filename
+    if not img_path.exists():
+        return JSONResponse({"error": "not found"}, 404)
+
+    boxes = CROP_DEFS.get("TeamPreviewSelectingMarksReader") or []
+    img_b64 = base64.b64encode(img_path.read_bytes()).decode()
+
+    def _ocr_digit(box):
+        payload = json.dumps({
+            "image_base64": img_b64,
+            "x": box[0], "y": box[1], "w": box[2], "h": box[3],
+        }).encode()
+        try:
+            req = urllib.request.Request(
+                f"{DEV_RUNNER}/ocr-crop", data=payload,
+                headers={"Content-Type": "application/json"}, method="POST",
+            )
+            with urllib.request.urlopen(req, timeout=15) as resp:
+                d = json.loads(resp.read())
+                return d.get("result") or d
+        except Exception as e:
+            return {"error": str(e)}
+
+    slots = []
+    for b in boxes:
+        try:
+            crop_b64 = "data:image/png;base64," + base64.b64encode(
+                _extract_crop(img_path, b["box"], scale=4)
+            ).decode()
+        except Exception:
+            crop_b64 = None
+        try:
+            bin_b64 = "data:image/png;base64," + base64.b64encode(
+                _binarize_for_ocr(img_path, b["box"], scale=3)
+            ).decode()
+        except Exception:
+            bin_b64 = None
+        yp_b64 = None; yp_text = ""
+        try:
+            yp_img = _yellow_paint_image(img_path, b["box"], scale=3)
+            buf = io.BytesIO(); yp_img.save(buf, format="PNG")
+            yp_b64 = "data:image/png;base64," + base64.b64encode(buf.getvalue()).decode()
+            yp_text = _tesseract_digit(yp_img)
+        except Exception as e:
+            yp_text = f"err: {e}"
+        yf_b64 = None; yf_text = ""
+        try:
+            yf_img = _yellow_paint_filled_image(img_path, b["box"], scale=3)
+            buf = io.BytesIO(); yf_img.save(buf, format="PNG")
+            yf_b64 = "data:image/png;base64," + base64.b64encode(buf.getvalue()).decode()
+            yf_text = _tesseract_digit(yf_img)
+        except Exception as e:
+            yf_text = f"err: {e}"
+        yi_b64 = None; yi_text = ""
+        try:
+            yi_img = _yellow_inner_image(img_path, b["box"], scale=3)
+            buf = io.BytesIO(); yi_img.save(buf, format="PNG")
+            yi_b64 = "data:image/png;base64," + base64.b64encode(buf.getvalue()).decode()
+            yi_text = _tesseract_digit(yi_img)
+        except Exception as e:
+            yi_text = f"err: {e}"
+        ocr = _ocr_digit(b["box"])
+        slots.append({
+            "name": b["name"],
+            "box": b["box"],
+            "crop": crop_b64,
+            "binarized": bin_b64,
+            "yellow_paint": yp_b64,
+            "yellow_paint_ocr": yp_text,
+            "yellow_filled": yf_b64,
+            "yellow_filled_ocr": yf_text,
+            "yellow_inner": yi_b64,
+            "yellow_inner_ocr": yi_text,
+            "lead_digit": _normalize_lead_digit(yi_text),
+            "ocr": ocr,
+        })
+
+    return {"filename": filename, "slots": slots}
+
+
 @app.get("/api/tp-cursor/list")
 async def tp_cursor_list():
     screen_dir = TEST_IMAGES_DIR / "team_preview_selecting"
@@ -2628,26 +2800,8 @@ async def teampreview_sprite(slug: str):
 async def labeler_sources():
     sources = []
 
-    # ref_frames subdirectories (VOD extracts)
-    if REF_FRAMES_DIR.exists():
-        for vod_dir in sorted(REF_FRAMES_DIR.rglob("*")):
-            if not vod_dir.is_dir(): continue
-            imgs = [f for f in vod_dir.iterdir() if f.is_file() and f.suffix.lower() in (".jpg", ".jpeg", ".png")]
-            if imgs:
-                folder_name = vod_dir.name
-                readers = FOLDER_READERS.get(folder_name, [FOLDER_TO_READER.get(folder_name, "BattleHUDReader")])
-                sources.append({
-                    "path": str(vod_dir.relative_to(REF_FRAMES_DIR)),
-                    "name": folder_name, "parent": vod_dir.parent.name, "count": len(imgs),
-                    "suggested_reader": FOLDER_TO_READER.get(folder_name),
-                    "readers": readers,
-                    "reader_infos": {
-                        r: {"reader": r, "type": READER_TYPES.get(r, "unknown"),
-                            "is_bool": r in BOOL_DETECTORS, "crops": CROP_DEFS.get(r, []),
-                            "events": BATTLE_LOG_EVENTS if r == "BattleLogReader" else None}
-                        for r in readers
-                    },
-                })
+    # ref_frames (VOD/YouTube extracts) intentionally excluded — labeler
+    # surfaces only labeled test_images/ + _overlays/ folders.
 
     # test_images subdirectories (labeled test frames from CommandLineTests)
     if TEST_IMAGES_DIR.exists():

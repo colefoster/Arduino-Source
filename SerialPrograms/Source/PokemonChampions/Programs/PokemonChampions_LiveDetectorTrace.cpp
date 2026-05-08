@@ -9,6 +9,7 @@
 #include <chrono>
 #include <ctime>
 #include <fstream>
+#include <set>
 
 #include <QByteArray>
 #include <QEventLoop>
@@ -20,10 +21,20 @@
 #include "Common/Cpp/Json/JsonArray.h"
 #include "Common/Cpp/Json/JsonObject.h"
 #include "Common/Cpp/Json/JsonValue.h"
+#include "CommonFramework/Globals.h"
 #include "CommonFramework/Logging/Logger.h"
 #include "CommonFramework/VideoPipeline/VideoFeed.h"
+#include "CommonFramework/VideoPipeline/VideoOverlayScopes.h"
+#include "NintendoSwitch/Commands/NintendoSwitch_Commands_PushButtons.h"
+#include "NintendoSwitch/Controllers/NintendoSwitch_ControllerButtons.h"
+#include "NintendoSwitch/Programs/NintendoSwitch_GameEntry.h"
+#include "PokemonChampions/Programs/PokemonChampions_InputSuggester.h"
 
 #include "PokemonChampions/Inference/PokemonChampions_AbilityItemReader.h"
+#include "PokemonChampions/Inference/PokemonChampions_BattleInfoDetector.h"
+#include "PokemonChampions/Inference/PokemonChampions_BattleInfoReader.h"
+#include "PokemonChampions/Inference/PokemonChampions_TeamPreviewCursorReader.h"
+#include "PokemonChampions/Inference/PokemonChampions_TeamPreviewLeadsReader.h"
 #include "PokemonChampions/Inference/PokemonChampions_ActionMenuDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_ActiveHUDSlotDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_BattleEndDetector.h"
@@ -31,11 +42,18 @@
 #include "PokemonChampions/Inference/PokemonChampions_BattleLogReader.h"
 #include "PokemonChampions/Inference/PokemonChampions_BattleModeDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_CommunicatingDetector.h"
+#include "PokemonChampions/Inference/PokemonChampions_BattleModeMenuDetector.h"
+#include "PokemonChampions/Inference/PokemonChampions_CasualFormatSelectDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_MainMenuDetector.h"
+#include "PokemonChampions/Inference/PokemonChampions_PreMatchDetector.h"
+#include "PokemonChampions/Inference/PokemonChampions_RankedFormatSelectDetector.h"
+#include "PokemonChampions/Inference/PokemonChampions_SearchingForBattleDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_MoveNameReader.h"
 #include "PokemonChampions/Inference/PokemonChampions_MoveSelectDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_MegaEvolveDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_PokeballAliveDetector.h"
+#include "PokemonChampions/Inference/PokemonChampions_PokemonSwitchDetector.h"
+#include "PokemonChampions/Inference/PokemonChampions_PokemonSwitchReader.h"
 #include "PokemonChampions/Inference/PokemonChampions_PostMatchDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_PreparingForBattleDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_TeamPreviewDetector.h"
@@ -72,7 +90,46 @@ LiveDetectorTrace_Descriptor::LiveDetectorTrace_Descriptor()
 
 
 LiveDetectorTrace::LiveDetectorTrace()
-    : POLL_PERIOD_MILLISECONDS(
+    //  Default = grip menu. Switch 2 (and detached-joycon Switch 1) need
+    //  this so SP's virtual controller becomes the only paired controller
+    //  before any auto-press fires.
+    : START_LOCATION(true)
+    , FORMAT_TARGET(
+        "<b>Queue Format:</b><br>"
+        "Which Ranked battle format the auto-press flow should pick on the "
+        "format-select screen.",
+        {
+            {0, "singles", "Singles"},
+            {1, "doubles", "Doubles"},
+        },
+        LockMode::UNLOCK_WHILE_RUNNING,
+        0   //  Default = Singles
+    )
+    , BATTLE_MODE_TARGET(
+        "<b>Battle Mode:</b><br>"
+        "Which row of the Battle menu to pick. Casual is recommended while "
+        "the auto-queuer is being validated.",
+        {
+            {0, "ranked", "Ranked Battles"},
+            {1, "casual", "Casual Battles"},
+        },
+        LockMode::UNLOCK_WHILE_RUNNING,
+        1   //  Default = Casual
+    )
+    , TEAM_INDEX(
+        "<b>Team Index:</b><br>"
+        "Which saved team to pick on the team_select screen.",
+        {
+            {0, "team1", "Team 1"},
+            {1, "team2", "Team 2"},
+            {2, "team3", "Team 3"},
+            {3, "team4", "Team 4"},
+            {4, "team5", "Team 5"},
+        },
+        LockMode::UNLOCK_WHILE_RUNNING,
+        0   //  Default = Team 1
+    )
+    , POLL_PERIOD_MILLISECONDS(
         "<b>Poll Period (ms):</b><br>How often to snapshot + run readers. 250ms = 4 Hz.",
         LockMode::UNLOCK_WHILE_RUNNING,
         250
@@ -89,14 +146,17 @@ LiveDetectorTrace::LiveDetectorTrace()
         "http://127.0.0.1:9876/live-trace/event",
         "http://127.0.0.1:9876/live-trace/event"
     )
-    , OWN_TEAM_PASTE(
-        "<b>Own Team (Showdown Paste):</b><br>"
-        "Pokemon Showdown formatted team paste. Canonical source for own-side "
-        "state (species, moves, item, ability for all 6 slots). Visual own-side "
-        "OCR is fallback / WIP only. Loaded once at program start.",
-        LockMode::LOCK_WHILE_RUNNING,
-        "",
-        "Paste your Showdown team here..."
+    , ENABLE_AUTO_PRESS(
+        "<b>Enable Auto-Press (DANGEROUS):</b><br>"
+        "When ON, the program presses the suggested button for screens on the "
+        "menu-nav allowlist (main_menu, battle_mode_menu, ranked_format_select, "
+        "pre_match, team_select, team_preview_locked_in/preparing, result_screen, "
+        "post_match). IN-BATTLE screens (action_menu, move_select, target_select, "
+        "pokemon_switch) and team_preview_selecting are NEVER auto-pressed even "
+        "with this on — they remain suggest-only. Per-(screen, button) dedup "
+        "with a 10s retry. Default OFF.",
+        LockMode::UNLOCK_WHILE_RUNNING,
+        false
     )
     , ENABLE_AUTO_CAPTURE(
         "<b>Enable Auto-Capture:</b><br>"
@@ -126,10 +186,14 @@ LiveDetectorTrace::LiveDetectorTrace()
         60
     )
 {
+    PA_ADD_OPTION(START_LOCATION);
+    PA_ADD_OPTION(BATTLE_MODE_TARGET);
+    PA_ADD_OPTION(FORMAT_TARGET);
+    PA_ADD_OPTION(TEAM_INDEX);
     PA_ADD_OPTION(POLL_PERIOD_MILLISECONDS);
     PA_ADD_OPTION(STALE_AFTER_MILLISECONDS);
     PA_ADD_OPTION(SINK_URL);
-    PA_ADD_OPTION(OWN_TEAM_PASTE);
+    PA_ADD_OPTION(ENABLE_AUTO_PRESS);
     PA_ADD_OPTION(ENABLE_AUTO_CAPTURE);
     PA_ADD_OPTION(AUTO_CAPTURE_DIR);
     PA_ADD_OPTION(AUTO_CAPTURE_MAX_PER_HOUR);
@@ -188,6 +252,46 @@ static std::string ts_filename_part(){
         tm_buf.tm_hour, tm_buf.tm_min, tm_buf.tm_sec, (int)ms
     );
     return std::string(buf);
+}
+
+
+//  Coerce a (possibly Tesseract-emitted) byte string into valid UTF-8 by
+//  replacing any malformed sequences with '?'. nlohmann::json (and our JSON
+//  dumper) throws json.exception.type_error.316 on invalid UTF-8, which has
+//  killed the whole trace mid-match when the OCR engine spat out a stray
+//  high byte (e.g. 0xC? followed by 'p'). Apply to anything OCR-derived
+//  before it enters a JsonValue.
+static std::string safe_utf8(const std::string& s){
+    std::string out;
+    out.reserve(s.size());
+    size_t i = 0;
+    while (i < s.size()){
+        unsigned char c = (unsigned char)s[i];
+        size_t need;
+        uint32_t min_cp;
+        if (c < 0x80){ out += (char)c; i++; continue; }
+        else if ((c & 0xE0) == 0xC0){ need = 1; min_cp = 0x80; }
+        else if ((c & 0xF0) == 0xE0){ need = 2; min_cp = 0x800; }
+        else if ((c & 0xF8) == 0xF0){ need = 3; min_cp = 0x10000; }
+        else { out += '?'; i++; continue; }
+
+        if (i + need >= s.size()){ out += '?'; i++; continue; }
+        uint32_t cp = c & (0x7F >> need);
+        bool ok = true;
+        for (size_t k = 1; k <= need; k++){
+            unsigned char cc = (unsigned char)s[i + k];
+            if ((cc & 0xC0) != 0x80){ ok = false; break; }
+            cp = (cp << 6) | (cc & 0x3F);
+        }
+        if (!ok || cp < min_cp || cp > 0x10FFFF || (cp >= 0xD800 && cp <= 0xDFFF)){
+            out += '?';
+            i++;
+        }else{
+            out.append(s, i, need + 1);
+            i += need + 1;
+        }
+    }
+    return out;
 }
 
 
@@ -302,9 +406,17 @@ void LiveDetectorTrace::init_pipeline_registry(){
     add("ResultScreenDetector",      "detector", "skipped", "Detects 'Win!' / 'Lose...' result banner.");
     add("PostMatchScreenDetector",   "detector", "skipped", "Detects 'Continue Battling?' post-match prompt.");
     add("MainMenuDetector",          "detector", "skipped", "Detects the Pokemon Champions main menu (out of battle).");
+    add("BattleModeMenuDetector",    "detector", "skipped", "Detects the Battle mode list (Ranked / Casual / Private / Online Comp / Battle Data).");
+    add("RankedFormatSelectDetector","detector", "skipped", "Detects the Ranked format selector (Singles vs Doubles).");
+    add("CasualFormatSelectDetector","detector", "skipped", "Detects the Casual battles format selector (Single/Double pills). Reports selected_index 0=Singles, 1=Doubles.");
+    add("PreMatchDetector",          "detector", "skipped", "Detects the pre-match staging screen (selected team + Begin Matchmaking / Change Team).");
+    add("SearchingForBattleDetector","detector", "skipped", "Detects the matchmaking 'Searching for opponent' screen.");
+    add("TeamPreviewCursorReader",   "reader",   "skipped", "On team_preview_selecting, reports which of the 6 own slots the cursor is on (yellow ▶ arrow). -1 if no confident pick.");
     add("ActiveHUDSlotDetector",     "detector", "skipped", "Reads which own slot has the lime-green active outline (doubles).");
     add("TeamSelectDetector",        "detector", "skipped", "Detects the team-select tab strip (the screen before Team Preview where you pick which 4 to bring); also reports selected_tab.");
     add("TargetSelectDetector",      "detector", "skipped", "Detects the doubles target-select modal: 4 selector strips visible with exactly one in the selected (yellow/green) state. Reports selected_index 0..3 (opp_a/opp_b/own_a/own_b).");
+    add("PokemonSwitchDetector",     "detector", "skipped", "Detects the Pokemon switch menu (reached from action_menu's POKEMON button): 6-mon left column + Moves & More center panel + opp right column. Cursor-independent.");
+    add("PokemonSwitchReader",       "reader",   "skipped", "On the Pokemon switch menu, reads species + HP fraction for each own slot and HP% for each opp slot. Fills bench HP that the in-battle HUD only shows for active slots. Selected slot detected via yellow highlight.");
     add("CommunicatingDetector",     "detector", "skipped", "Detects the 'syncing with opponent' transitional overlay; co-fires with whatever screen is underneath.");
     add("MovesMoreDetector",         "detector", "skipped", "Detects the 'View Details — Moves & More' tab. Shows species/ability/item/4 moves per slot.");
     add("TeamStatsTabDetector",      "detector", "skipped", "Detects the 'View Details — Stats' tab. Shows 6 stats × {actual, EVs, nature direction} per slot.");
@@ -314,8 +426,8 @@ void LiveDetectorTrace::init_pipeline_registry(){
     add("TeamPreviewReader",         "reader", "skipped",
         "Sprite-matches all 6 opp species (CANONICAL for opp side). "
         "Also OCR's own species/items but those are NOT applied to the "
-        "tracker — own state comes from OWN_TEAM_PASTE. The own-side OCR "
-        "result is shown in last_output as a confirmation/diff signal only.");
+        "tracker as text — instead, the OCR'd own species are used as a "
+        "lookup key against the saved-team library to load the matching team.");
     add("BattleHUDReader",           "reader", "skipped", "Reads opp active species (text), opp + own active HPs. Fires on action_menu / move_select / preparing screens.");
     add("MoveNameReader",            "reader", "skipped", "Reads the 4 move-name pills on Move Select. Fires only on move_select.");
     add("PokeballAliveDetector",     "reader", "skipped", "Reads alive/fainted/empty for all 6 slots per side from the HUD pokeball strip. Fires whenever the HUD is visible.");
@@ -334,9 +446,23 @@ void LiveDetectorTrace::init_pipeline_registry(){
     add("AbilityItemReader",         "reader", "skipped",
         "OCRs the mid-battle ability/item reveal overlay (\"Garchomp's Rough Skin!\"). Self-gates on its "
         "own visual detection; deduped against the prior raw text so a single overlay only fires once.");
-    add("OwnTeamPaste",              "reader", "skipped",
-        "Pokemon Showdown formatted paste from program options. CANONICAL source for own-side state "
-        "(species, moves, item, ability for all 6 slots). Loaded once at program start.");
+    add("BattleInfoDetector",        "detector", "skipped",
+        "Detects the mid-battle Battle Info tab. Co-evidence: dark-red \"Active Statuses & Effects\" "
+        "header strip + pink/purple species panel bg.");
+    add("BattleInfoReader",          "reader", "skipped",
+        "Reads the focused mon on the Battle Info tab: species, HP (X/Y or %), 2 types via color "
+        "classifier, ability + item (own only), 5 main-stat boost stages from multiplier OCR (×1.5 → +1, "
+        "×0.67 → -1 etc.), and the first row of Active Statuses & Effects with turn counter. The selected "
+        "slot (own/opp × 0/1) is detected by the yellow-bg pill in the L/R icon bar at top.");
+    add("TeamPreviewLeadsReader",    "reader", "skipped",
+        "Reads the 4 yellow lead-order tags (1-4) on the locked-in team-preview screen. "
+        "Per-slot pipeline: yellow->white + invert + flood-fill outside -> Tesseract SINGLE_CHAR -> "
+        "normalize 7|/ confusables to 1. Outputs send-out order; feeds BattleStateTracker::set_own_leads.");
+    add("OwnTeamLibrary",            "reader", "skipped",
+        "File-backed library of scanned teams at <settings>/PokemonChampionsTeams/. Each scan writes "
+        "a JSON keyed on the sorted species slugs joined by '_'. Loaded automatically when the team "
+        "preview selecting screen reveals the 6 own species — the matching file is consulted to "
+        "populate species/ability/item/moves/nature/EVs.");
 
     //  ── WIP / unavailable (declared but not wired) ──
     add("MovesAndMoreReader",        "reader", "n/a",
@@ -443,6 +569,13 @@ std::string LiveDetectorTrace::classify_screen(Logger& logger, const ImageViewRG
         if (try_det("MoveSelectDetector", det)) return "move_select";
     }
     {
+        //  Pokemon switch menu — same broad layout as Moves & More (purple
+        //  card bg + lime tab) but reached from the action menu's POKEMON
+        //  button. Check before action_menu since it's a more specific match.
+        PokemonSwitchDetector det;
+        if (try_det("PokemonSwitchDetector", det)) return "pokemon_switch";
+    }
+    {
         ActionMenuDetector det;
         if (try_det("ActionMenuDetector", det)) return "action_menu";
     }
@@ -456,7 +589,15 @@ std::string LiveDetectorTrace::classify_screen(Logger& logger, const ImageViewRG
     }
     {
         PostMatchScreenDetector det;
-        if (try_det("PostMatchScreenDetector", det)) return "post_match";
+        if (try_det("PostMatchScreenDetector", det)){
+            //  0=Quit, 1=Edit, 2=Continue. Reuse menu_selected_index so the
+            //  suggester can nav with Left/Right.
+            m_menu_selected_index = (int)det.cursored();
+            JsonObject out;
+            out["selected_index"] = (int64_t)m_menu_selected_index;
+            mark("PostMatchScreenDetector", "ok", std::move(out));
+            return "post_match";
+        }
     }
     {
         TeamPreviewDetector det;
@@ -465,6 +606,7 @@ std::string LiveDetectorTrace::classify_screen(Logger& logger, const ImageViewRG
     {
         TeamSelectDetector det;
         if (try_det("TeamSelectDetector", det)){
+            m_menu_selected_index = (int)det.selected_team();
             JsonObject out;
             out["selected_tab"] = (int64_t)det.selected_team();
             mark("TeamSelectDetector", "ok", std::move(out));
@@ -483,8 +625,69 @@ std::string LiveDetectorTrace::classify_screen(Logger& logger, const ImageViewRG
         if (try_det("TeamStatsTabDetector", det)) return "team_stats";
     }
     {
+        BattleInfoDetector det;
+        if (try_det("BattleInfoDetector", det)) return "battle_info";
+    }
+    {
+        SearchingForBattleDetector det;
+        if (try_det("SearchingForBattleDetector", det)) return "searching_for_battle";
+    }
+    {
+        PreMatchDetector det;
+        if (try_det("PreMatchDetector", det)){
+            m_menu_selected_index = det.selected_index();
+            JsonObject out;
+            out["selected_index"] = (int64_t)det.selected_index();
+            mark("PreMatchDetector", "ok", std::move(out));
+            return "pre_match";
+        }
+    }
+    {
+        RankedFormatSelectDetector det;
+        if (try_det("RankedFormatSelectDetector", det)){
+            m_menu_selected_index = det.selected_index();
+            JsonObject out;
+            out["selected_index"] = (int64_t)det.selected_index();
+            mark("RankedFormatSelectDetector", "ok", std::move(out));
+            return "ranked_format_select";
+        }
+    }
+    {
+        CasualFormatSelectDetector det;
+        if (try_det("CasualFormatSelectDetector", det)){
+            m_menu_selected_index = det.selected_index();
+            JsonObject out;
+            out["selected_index"] = (int64_t)det.selected_index();
+            mark("CasualFormatSelectDetector", "ok", std::move(out));
+            return "casual_format_select";
+        }
+    }
+    {
+        BattleModeMenuDetector det;
+        if (try_det("BattleModeMenuDetector", det)){
+            m_menu_selected_index = det.selected_index();
+            JsonObject out;
+            out["selected_index"] = (int64_t)det.selected_index();
+            mark("BattleModeMenuDetector", "ok", std::move(out));
+            return "battle_mode_menu";
+        }
+    }
+    {
         MainMenuDetector det;
-        if (try_det("MainMenuDetector", det)) return "main_menu";
+        if (try_det("MainMenuDetector", det)){
+            m_menu_selected_index = det.selected_index();
+            JsonObject out;
+            out["selected_index"] = (int64_t)det.selected_index();
+            mark("MainMenuDetector", "ok", std::move(out));
+            return "main_menu";
+        }
+    }
+    //  match_intro is a cinematic VS-banner with no detector. Infer it:
+    //  if we just came from searching_for_battle (or already in match_intro)
+    //  and nothing else fires, we're in the cinematic. Anything classifiable
+    //  pulls us out (e.g. team_preview_selecting or preparing).
+    if (m_prev_screen == "searching_for_battle" || m_prev_screen == "match_intro"){
+        return "match_intro";
     }
     return "unknown";
 }
@@ -539,6 +742,24 @@ void LiveDetectorTrace::run_team_preview_screen(Logger& logger, const ImageViewR
         }
     }
 
+    //  When all 6 own species are visible, look up the matching team in
+    //  the saved library and load it. Then reorder so internal indexing
+    //  matches screen positions (leads + HUD active slot become direct).
+    if (own_count == 6){
+        std::array<std::string, 6> screen_species;
+        for (uint8_t i = 0; i < 6; i++){
+            screen_species[i] = result.own[i].species;
+        }
+        const std::string team_dir = SETTINGS_PATH() + "PokemonChampionsTeams";
+        bool matched = m_tracker.load_team_matching(team_dir, screen_species);
+        if (matched){
+            logger.log(
+                "LiveDetectorTrace: matched saved team in library — own state seeded.",
+                COLOR_GREEN);
+        }
+        m_tracker.reorder_own_team_to_screen(screen_species);
+    }
+
     //  Own-side OCR is INTENTIONALLY NOT applied to the tracker here.
     //  Own team state comes from OWN_TEAM_PASTE (Showdown paste) loaded at
     //  program start — that's the canonical source per
@@ -554,6 +775,41 @@ void LiveDetectorTrace::run_team_preview_screen(Logger& logger, const ImageViewR
     summary["own"] = std::move(own_arr);
     summary["opp"] = std::move(opp_arr);
     mark("TeamPreviewReader", (own_count + opp_count) > 0 ? "ok" : "error", std::move(summary));
+
+    //  Cursor read — which of the 6 boxes is currently highlighted on the
+    //  selecting variant. -1 means no slot scored above the floor (often
+    //  means cursor drifted to the Done button after 4 picks).
+    {
+        TeamPreviewCursorReader cursor;
+        int slot = cursor.read(logger, screen);
+        m_tp_cursor_slot = slot;
+        JsonObject out;
+        out["selected_slot"] = (int64_t)slot;
+        mark("TeamPreviewCursorReader", slot >= 0 ? "ok" : "error", std::move(out));
+    }
+
+    //  Lead-mark digit read — same OCR pipeline as the locked-in screen,
+    //  with the selecting-screen badge boxes. Per-slot digit '1'..'4' or 0.
+    {
+        TeamPreviewLeadsReader marks(TeamPreviewLeadsReader::selecting_screen_boxes());
+        TeamPreviewLeadsResult res = marks.read(logger, screen);
+        m_tp_marks_per_slot = res.digit_per_slot;
+        int marks_count = 0;
+        for (char c : res.digit_per_slot){ if (c >= '1' && c <= '4') marks_count++; }
+        JsonObject out;
+        out["marks_count"] = (int64_t)marks_count;
+        JsonArray arr;
+        for (uint8_t i = 0; i < 6; i++){
+            JsonObject r;
+            r["slot"] = (int64_t)i;
+            r["digit"] = res.digit_per_slot[i] ? std::string(1, res.digit_per_slot[i]) : std::string();
+            r["raw"] = res.raw_ocr[i];
+            arr.push_back(std::move(r));
+        }
+        out["slots"] = std::move(arr);
+        mark("TeamPreviewSelectingMarks",
+             marks_count > 0 ? "ok" : "skipped", std::move(out));
+    }
 }
 
 
@@ -574,6 +830,14 @@ void LiveDetectorTrace::run_moves_and_more_screen(Logger& logger, const ImageVie
 
     if (fresh){
         m_tracker.update_from_team_summary(team);
+        //  Persist the merged team to the multi-team library. File is
+        //  named after the sorted species slugs so the same set in any
+        //  order maps to the same file (overwrites on re-scan).
+        const std::string team_dir = SETTINGS_PATH() + "PokemonChampionsTeams";
+        std::string saved_path = m_tracker.save_team_to_library(team_dir);
+        if (!saved_path.empty()){
+            logger.log("LiveDetectorTrace: team saved to " + saved_path, COLOR_GREEN);
+        }
     }
 
     JsonObject out;
@@ -581,11 +845,11 @@ void LiveDetectorTrace::run_moves_and_more_screen(Logger& logger, const ImageVie
     for (uint8_t i = 0; i < 6; i++){
         JsonObject s;
         s["slot"] = (int64_t)i;
-        s["species"] = team[i].species;
-        s["ability"] = team[i].ability;
-        s["item"] = team[i].item;
+        s["species"] = safe_utf8(team[i].species);
+        s["ability"] = safe_utf8(team[i].ability);
+        s["item"] = safe_utf8(team[i].item);
         JsonArray moves;
-        for (uint8_t m = 0; m < 4; m++) moves.push_back(team[i].moves[m]);
+        for (uint8_t m = 0; m < 4; m++) moves.push_back(safe_utf8(team[i].moves[m]));
         s["moves"] = std::move(moves);
         slot_arr.push_back(std::move(s));
     }
@@ -619,7 +883,7 @@ void LiveDetectorTrace::run_team_stats_screen(Logger& logger, const ImageViewRGB
     for (uint8_t i = 0; i < 6; i++){
         JsonObject s;
         s["slot"] = (int64_t)i;
-        s["nature"] = team[i].nature_slug;
+        s["nature"] = safe_utf8(team[i].nature_slug);
         JsonObject stats;
         for (uint8_t k = 0; k < 6; k++){
             JsonObject one;
@@ -646,9 +910,9 @@ void LiveDetectorTrace::run_target_select_screen(Logger& logger, const ImageView
     for (uint8_t i = 0; i < 2; i++){
         opp_t.push_back(r.opp_targeted[i]);
         own_t.push_back(r.own_targeted[i]);
-        opp_e.push_back(r.opp_effectiveness[i]);
-        own_e.push_back(r.own_effectiveness[i]);
-        own_m.push_back(r.own_moves[i]);
+        opp_e.push_back(safe_utf8(r.opp_effectiveness[i]));
+        own_e.push_back(safe_utf8(r.own_effectiveness[i]));
+        own_m.push_back(safe_utf8(r.own_moves[i]));
     }
     out["opp_targeted"]      = std::move(opp_t);
     out["own_targeted"]      = std::move(own_t);
@@ -670,12 +934,23 @@ void LiveDetectorTrace::run_ability_item_reader(Logger& logger, const ImageViewR
     m_prev_ability_item_text = r.raw_text;
 
     JsonObject out;
-    out["raw"] = r.raw_text;
-    out["pokemon"] = r.pokemon;
-    out["name"] = r.name;
-    out["kind"] = r.kind;
-    out["side"] = r.side;
+    out["raw"] = safe_utf8(r.raw_text);
+    out["pokemon"] = safe_utf8(r.pokemon);
+    out["name"] = safe_utf8(r.name);
+    out["kind"] = safe_utf8(r.kind);
+    out["side"] = safe_utf8(r.side);
     out["fresh"] = fresh;
+
+    //  Write into tracker on a fresh reveal — only fills empty fields,
+    //  so paste-loaded own ability/item is never clobbered. Opp side is
+    //  the high-value path; species-slug match selects the slot.
+    bool tracker_applied = false;
+    if (fresh && !r.name.empty() && !r.pokemon.empty()){
+        tracker_applied = m_tracker.apply_ability_item_reveal(
+            r.side, r.pokemon, r.name, r.kind);
+    }
+    out["tracker_applied"] = tracker_applied;
+
     mark("AbilityItemReader", "ok", std::move(out));
 
     //  Auto-capture: first occurrence of each (kind, name) per session.
@@ -683,15 +958,154 @@ void LiveDetectorTrace::run_ability_item_reader(Logger& logger, const ImageViewR
         std::string key = r.kind + ":" + r.name;
         JsonObject meta;
         meta["channel"] = std::string("ability_item");
-        meta["kind"] = r.kind;
-        meta["name"] = r.name;
-        if (!r.pokemon.empty()) meta["pokemon"] = r.pokemon;
-        if (!r.side.empty())    meta["side"] = r.side;
-        meta["raw_text"] = r.raw_text;
+        meta["kind"] = safe_utf8(r.kind);
+        meta["name"] = safe_utf8(r.name);
+        if (!r.pokemon.empty()) meta["pokemon"] = safe_utf8(r.pokemon);
+        if (!r.side.empty())    meta["side"] = safe_utf8(r.side);
+        meta["raw_text"] = safe_utf8(r.raw_text);
         maybe_capture(logger, screen,
             "novel-ability-item", key,
             m_seen_ability_items, std::move(meta));
     }
+}
+
+
+void LiveDetectorTrace::run_locked_in_screen(Logger& logger, const ImageViewRGB32& screen){
+    TeamPreviewLeadsReader reader;
+    TeamPreviewLeadsResult result = reader.read(logger, screen);
+
+    //  Build a signature so we don't re-fire the tracker every poll.
+    std::string sig;
+    for (uint8_t s : result.leads){ sig += char('0' + s); sig += '|'; }
+    bool fresh = (sig != m_prev_leads_sig);
+    m_prev_leads_sig = sig;
+
+    JsonArray digits_arr;
+    for (uint8_t i = 0; i < 6; i++){
+        char d = result.digit_per_slot[i];
+        digits_arr.push_back(JsonValue(d ? std::string(1, d) : std::string()));
+    }
+    JsonArray leads_arr;
+    for (uint8_t s : result.leads){
+        leads_arr.push_back(JsonValue(static_cast<int64_t>(s)));
+    }
+
+    JsonObject out;
+    out["digit_per_slot"] = std::move(digits_arr);
+    out["leads"] = std::move(leads_arr);
+    out["fresh"] = fresh;
+    out["lead_count"] = (int64_t)result.leads.size();
+
+    if (fresh && !result.leads.empty()){
+        m_tracker.set_own_leads(result.leads);
+    }
+
+    mark("TeamPreviewLeadsReader",
+         result.leads.empty() ? "error" : "ok",
+         std::move(out));
+}
+
+
+void LiveDetectorTrace::run_pokemon_switch_screen(Logger& logger, const ImageViewRGB32& screen){
+    PokemonSwitchReader reader(Language::English);
+    PokemonSwitchResult r = reader.read(logger, screen);
+
+    JsonObject out;
+    out["selected_own_slot"] = (int64_t)r.selected_own_slot;
+
+    JsonArray own_arr;
+    std::array<std::pair<int, int>, 6> own_hp{};
+    for (uint8_t i = 0; i < 6; i++){
+        JsonObject row;
+        row["slot"] = (int64_t)i;
+        row["species"] = r.own[i].species;
+        row["hp_current"] = (int64_t)r.own[i].hp_current;
+        row["hp_max"] = (int64_t)r.own[i].hp_max;
+        own_arr.push_back(JsonValue(std::move(row)));
+        own_hp[i] = {r.own[i].hp_current, r.own[i].hp_max};
+    }
+    out["own"] = std::move(own_arr);
+
+    JsonArray opp_arr;
+    std::array<int, 6> opp_pct{};
+    for (uint8_t i = 0; i < 6; i++){
+        JsonObject row;
+        row["slot"] = (int64_t)i;
+        row["hp_pct"] = (int64_t)r.opp[i].hp_pct;
+        opp_arr.push_back(JsonValue(std::move(row)));
+        opp_pct[i] = r.opp[i].hp_pct;
+    }
+    out["opp"] = std::move(opp_arr);
+
+    m_tracker.apply_switch_screen_hp(own_hp, opp_pct);
+
+    //  Cache for the suggester: cursor + per-slot alive bitmap. A slot is
+    //  "alive" if its hp_max>0 and hp_current>0. (hp_max==0 means OCR
+    //  failed — treat as unknown / not alive for safety.)
+    m_switch_cursor = r.selected_own_slot;
+    for (uint8_t i = 0; i < 6; i++){
+        m_switch_alive[i] = (r.own[i].hp_max > 0 && r.own[i].hp_current > 0);
+    }
+
+    mark("PokemonSwitchReader", "ok", std::move(out));
+}
+
+
+void LiveDetectorTrace::run_battle_info_screen(Logger& logger, const ImageViewRGB32& screen){
+    BattleInfoReader reader(Language::English);
+    BattleInfoResult r = reader.read(logger, screen);
+
+    //  Signature: focus + species + HP + boosts + status text. Skips redundant
+    //  tracker writes while sitting on the screen unchanged.
+    std::string sig;
+    sig += r.focused.valid ? (r.focused.side + std::to_string(r.focused.slot)) : "?";
+    sig += "|" + r.species + "|" + std::to_string(r.hp_current) + "/" +
+           std::to_string(r.hp_max) + "|" + std::to_string(r.hp_pct);
+    for (int8_t b : r.boosts) sig += "," + std::to_string((int)b);
+    sig += "|" + r.status_text;
+    bool fresh = (sig != m_prev_battle_info_sig);
+    m_prev_battle_info_sig = sig;
+
+    JsonObject out;
+    JsonObject focus;
+    focus["valid"] = r.focused.valid;
+    focus["side"] = r.focused.side;
+    focus["slot"] = (int64_t)r.focused.slot;
+    out["focused"] = std::move(focus);
+    out["species"] = r.species;
+    out["hp_current"] = (int64_t)r.hp_current;
+    out["hp_max"] = (int64_t)r.hp_max;
+    out["hp_pct"] = (int64_t)r.hp_pct;
+    {
+        JsonArray types;
+        for (const auto& t : r.types) types.push_back(JsonValue(t));
+        out["types"] = std::move(types);
+    }
+    out["ability"] = r.ability;
+    out["item"] = r.item;
+    {
+        JsonArray boosts;
+        for (int8_t b : r.boosts) boosts.push_back(JsonValue((int64_t)b));
+        out["boosts"] = std::move(boosts);
+    }
+    out["status_text"] = r.status_text;
+    out["status_turns_current"] = (int64_t)r.status_turns_current;
+    out["status_turns_max"] = (int64_t)r.status_turns_max;
+    out["fresh"] = fresh;
+
+    //  Tracker write on fresh reads only.
+    if (fresh && r.focused.valid){
+        m_tracker.apply_battle_info_focused(
+            r.focused.side, r.focused.slot,
+            r.species,
+            r.hp_current, r.hp_max, r.hp_pct,
+            r.types, r.ability, r.item,
+            r.boosts,
+            r.status_text, r.status_turns_current, r.status_turns_max
+        );
+    }
+
+    mark("BattleInfoReader", r.focused.valid ? "ok" : "error", std::move(out));
 }
 
 
@@ -712,15 +1126,15 @@ void LiveDetectorTrace::run_battle_log_reader(Logger& logger, const ImageViewRGB
 
     JsonObject out;
     out["type"] = event_type_to_string(ev.type);
-    out["raw"] = ev.raw_text;
+    out["raw"] = safe_utf8(ev.raw_text);
     out["is_opponent"] = ev.is_opponent;
     out["fresh"] = fresh;
-    if (!ev.pokemon.empty()) out["pokemon"] = ev.pokemon;
-    if (!ev.move.empty())    out["move"] = ev.move;
-    if (!ev.stat.empty())    out["stat"] = ev.stat;
-    if (!ev.item.empty())    out["item"] = ev.item;
-    if (!ev.ability.empty()) out["ability"] = ev.ability;
-    if (!ev.effect.empty())  out["effect"] = ev.effect;
+    if (!ev.pokemon.empty()) out["pokemon"] = safe_utf8(ev.pokemon);
+    if (!ev.move.empty())    out["move"] = safe_utf8(ev.move);
+    if (!ev.stat.empty())    out["stat"] = safe_utf8(ev.stat);
+    if (!ev.item.empty())    out["item"] = safe_utf8(ev.item);
+    if (!ev.ability.empty()) out["ability"] = safe_utf8(ev.ability);
+    if (!ev.effect.empty())  out["effect"] = safe_utf8(ev.effect);
     if (ev.boost_stages != 0) out["boost_stages"] = (int64_t)ev.boost_stages;
 
     //  Only feed the tracker once per distinct line, and only when the
@@ -906,6 +1320,25 @@ JsonObject LiveDetectorTrace::build_event(const std::string& screen, int64_t ts_
     ev["pipeline"] = std::move(pipeline);
 
     ev["engine_view"] = m_tracker.to_predict_json();
+
+    if (m_last_suggestion){
+        JsonObject s;
+        s["button"] = m_last_suggestion->button;
+        s["label"] = m_last_suggestion->label;
+        s["reason"] = m_last_suggestion->reason;
+        JsonArray boxes;
+        for (const ImageFloatBox& b : m_last_suggestion->highlights){
+            JsonObject bj;
+            bj["x"] = b.x;
+            bj["y"] = b.y;
+            bj["width"] = b.width;
+            bj["height"] = b.height;
+            boxes.push_back(std::move(bj));
+        }
+        s["highlights"] = std::move(boxes);
+        ev["suggested_input"] = std::move(s);
+    }
+
     return ev;
 }
 
@@ -916,6 +1349,18 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
     std::string sink_url = SINK_URL;
     env.console.log("LiveDetectorTrace: starting. Sink = " + sink_url, COLOR_BLUE);
 
+    //  Pair virtual controller via grip menu if requested. Required when a
+    //  physical controller is or was paired with the console — otherwise
+    //  auto-press writes are silently dropped.
+    if (START_LOCATION.start_in_grip_menu()){
+        env.console.log("LiveDetectorTrace: grip-menu pairing dance.", COLOR_BLUE);
+        grip_menu_connect_go_home(context);
+        //  grip_menu_connect_go_home leaves us at the Switch Home screen.
+        //  Press Home again to resume the most-recent app (Pokemon Champions).
+        env.console.log("LiveDetectorTrace: resuming game from Home.", COLOR_BLUE);
+        resume_game_from_home(env.console, context);
+    }
+
     init_pipeline_registry();
     m_tracker.reset();
     m_prev_screen.clear();
@@ -923,6 +1368,8 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
     m_prev_ability_item_text.clear();
     m_prev_team_summary_sig.clear();
     m_prev_team_stats_sig.clear();
+    m_prev_leads_sig.clear();
+    m_prev_battle_info_sig.clear();
     m_match_in_progress = false;
     m_seen_log_event_types.clear();
     m_seen_opp_species.clear();
@@ -931,27 +1378,15 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
     m_capture_window_ms.clear();
     uint64_t seq = 0;
 
-    //  Seed own-team from Showdown paste (canonical source per
-    //  feedback_own_team_via_paste.md). Visual own-side OCR is fallback only.
-    {
-        std::string paste = OWN_TEAM_PASTE;
-        if (!paste.empty()){
-            int loaded = m_tracker.load_team_from_showdown_paste(paste);
-            env.console.log(
-                "LiveDetectorTrace: loaded " + std::to_string(loaded) +
-                "/6 own Pokemon from Showdown paste.",
-                loaded > 0 ? COLOR_GREEN : COLOR_YELLOW
-            );
-            mark("OwnTeamPaste", "ok", JsonValue((int64_t)loaded));
-        }else{
-            env.console.log(
-                "LiveDetectorTrace: no Showdown paste provided; own team will "
-                "be empty until visual OCR is wired (currently WIP).",
-                COLOR_YELLOW
-            );
-            mark("OwnTeamPaste", "error");
-        }
-    }
+    //  Live overlay for the currently-suggested button. Re-populated each
+    //  poll; cleared automatically when the program ends.
+    VideoOverlaySet suggestion_overlay(env.console.overlay());
+
+    //  Own team is no longer seeded at program start. The library at
+    //  <settings>/PokemonChampionsTeams/<sorted-slugs>.json is consulted
+    //  on every team-preview-selecting screen — when all 6 own species are
+    //  visible we look up the matching file and load it. Run a Moves &
+    //  More scan in-game to populate the library.
 
     while (true){
         VideoSnapshot snapshot = env.console.video().snapshot();
@@ -1003,19 +1438,24 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
             m_prev_ability_item_text.clear();
     m_prev_team_summary_sig.clear();
     m_prev_team_stats_sig.clear();
+    m_prev_leads_sig.clear();
+    m_prev_battle_info_sig.clear();
             //  Per-match dedup — re-arm screen-entry captures so we get a
             //  fresh target_select / team_select snapshot on each new match.
             //  Other seen sets are session-scoped and survive matches.
             m_captured_screen_entries.clear();
-            //  Re-seed own team from paste so it survives the reset.
-            std::string paste = OWN_TEAM_PASTE;
-            if (!paste.empty()){
-                m_tracker.load_team_from_showdown_paste(paste);
-            }
+            //  Don't re-seed here — selecting-screen handler matches against
+            //  the team library when own species become visible.
             m_match_in_progress = true;
         }
         if (screen == "post_match" || screen == "result_screen"){
             m_match_in_progress = false;
+            //  Cancel any in-flight scan step (defensive — shouldn't be
+            //  active here), but DO NOT reset m_team_scan_complete: the
+            //  selected team persists between matches in the same loop, so
+            //  one scan covers the whole session. To re-scan (e.g. after
+            //  editing a team), restart the program.
+            m_team_scan_step = -1;
         }
 
         //  Auto-capture: under-labeled screen entries (transition INTO the
@@ -1040,12 +1480,22 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
             run_move_select_screen(env.console, snapshot);
         }else if (screen == "action_menu" || screen == "preparing"){
             run_battle_screen(env.console, snapshot);
+            //  "preparing" is also the locked-in team-preview screen — leads
+            //  reader runs alongside the battle pipeline (cheap when leads
+            //  are stable: signature dedup skips the tracker write).
+            if (screen == "preparing"){
+                run_locked_in_screen(env.console, snapshot);
+            }
         }else if (screen == "target_select"){
             run_target_select_screen(env.console, snapshot);
         }else if (screen == "moves_and_more"){
             run_moves_and_more_screen(env.console, snapshot);
         }else if (screen == "team_stats"){
             run_team_stats_screen(env.console, snapshot);
+        }else if (screen == "battle_info"){
+            run_battle_info_screen(env.console, snapshot);
+        }else if (screen == "pokemon_switch"){
+            run_pokemon_switch_screen(env.console, snapshot);
         }else if (screen == "unknown" && m_match_in_progress){
             //  Mid-animation frames (post-move flashes, switch transitions,
             //  faint sequences) usually classify as "unknown" — but the
@@ -1061,6 +1511,157 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
         //  detector hit.
 
         age_pipeline_entries(now_ms());
+
+        //  Compute "what I'd press" for the current screen + state, render
+        //  to the SP overlay, and stash for build_event() to emit on the
+        //  dashboard.
+        LiveContext sctx;
+        sctx.tp_cursor_slot = m_tp_cursor_slot;
+        sctx.tp_marks_per_slot = m_tp_marks_per_slot;
+        sctx.menu_selected_index = m_menu_selected_index;
+        sctx.switch_cursor = m_switch_cursor;
+        sctx.switch_alive = m_switch_alive;
+        sctx.format_target = (int)FORMAT_TARGET.current_value();
+        sctx.battle_mode_target = (int)BATTLE_MODE_TARGET.current_value();
+        sctx.team_index_target = (int)TEAM_INDEX.current_value();
+
+        //  Initialize team-scan sub-flow on first sight of team_select with
+        //  cursor on the target team. Stays inactive (-1) afterwards until
+        //  match-end resets m_team_scan_complete.
+        if (screen == "team_select"
+            && m_menu_selected_index == sctx.team_index_target
+            && m_team_scan_step < 0
+            && !m_team_scan_complete){
+            m_team_scan_step = 0;
+            env.console.log("LiveDetectorTrace: starting team-scan sub-flow.", COLOR_PURPLE);
+        }
+        sctx.team_scan_step = m_team_scan_step;
+        sctx.team_scan_complete = m_team_scan_complete;
+        m_last_suggestion = suggest_for_screen(screen, m_tracker, sctx);
+        suggestion_overlay.clear();
+        if (m_last_suggestion){
+            for (const ImageFloatBox& box : m_last_suggestion->highlights){
+                suggestion_overlay.add(m_last_suggestion->color, box, m_last_suggestion->label);
+            }
+        }
+
+        //  Track screen-change time for the watchdog log.
+        if (screen != m_prev_screen){
+            m_last_screen_change_ms = now_ms();
+            //  Reset press dedup on every transition so the next screen's
+            //  first suggestion fires immediately.
+            m_last_pressed_screen.clear();
+            m_last_pressed_button.clear();
+            //  Clear team_preview state on leave (stale cursor / marks
+            //  shouldn't leak into the next entry).
+            if (m_prev_screen == "team_preview" && screen != "team_preview"){
+                m_tp_cursor_slot = -1;
+                m_tp_marks_per_slot = {};
+            }
+            if (m_prev_screen == "pokemon_switch" && screen != "pokemon_switch"){
+                m_switch_cursor = -1;
+                m_switch_alive = {};
+            }
+            //  Stale-cursor protection: if we leave a menu screen, clear
+            //  the index so the next menu's cursor doesn't inherit it
+            //  before its detector fires.
+            m_menu_selected_index = -1;
+        }
+
+        //  Auto-press (off by default). Allowlist: menu nav + result/post-match.
+        //  In-battle screens and team_preview_selecting stay suggest-only.
+        if (ENABLE_AUTO_PRESS && m_last_suggestion && !m_last_suggestion->button.empty()){
+            static const std::set<std::string> safe_screens = {
+                "main_menu", "battle_mode_menu", "ranked_format_select",
+                "casual_format_select",
+                "pre_match", "team_select",
+                "team_preview", "team_preview_locked_in", "preparing",
+                "result_screen", "post_match",
+                //  In-battle dummy strategy: A on Fight, A on Move 1, A on
+                //  default target, switch to first alive bench. Required
+                //  for the auto-queuer to actually finish a match.
+                "action_menu", "move_select", "target_select", "pokemon_switch",
+            };
+            if (safe_screens.count(screen)){
+                //  Dedup logic: prevent burst-pressing the same action
+                //  button (A/B/X/Y/Plus) through a slow screen transition.
+                //  Nav buttons (Up/Down/Left/Right) are EXEMPT — when the
+                //  suggester emits Down repeatedly to walk a cursor, each
+                //  press should fire immediately; the cursor's new position
+                //  is the natural state-change signal.
+                const std::string& b = m_last_suggestion->button;
+                bool is_nav = (b == "Up" || b == "Down" || b == "Left" || b == "Right");
+                bool same = (screen == m_last_pressed_screen
+                             && b == m_last_pressed_button);
+                int64_t since_press_ms = now_ms() - m_last_press_ms;
+                //  Two windows:
+                //    Nav (Up/Down/Left/Right): 350ms — long enough to absorb
+                //      the cursor-read lag after one press (poll period
+                //      ≈250ms), short enough to permit multi-step nav
+                //      (e.g. Down, Down, Down on team_preview_selecting).
+                //    Action (A/B/X/Y/Plus/L/R): 1500ms — absorbs typical
+                //      screen transitions while still permitting needed
+                //      double-A patterns on the next poll.
+                int64_t window_ms = is_nav ? 350 : 1500;
+                bool retry_window = same && since_press_ms < window_ms;
+                if (!retry_window){
+                    Button btn = BUTTON_NONE;
+                    DpadPosition dpad = DPAD_NONE;
+                    if      (b == "A")     btn = BUTTON_A;
+                    else if (b == "B")     btn = BUTTON_B;
+                    else if (b == "X")     btn = BUTTON_X;
+                    else if (b == "Y")     btn = BUTTON_Y;
+                    else if (b == "L")     btn = BUTTON_L;
+                    else if (b == "R")     btn = BUTTON_R;
+                    else if (b == "Plus")  btn = BUTTON_PLUS;
+                    else if (b == "Up")    dpad = DPAD_UP;
+                    else if (b == "Down")  dpad = DPAD_DOWN;
+                    else if (b == "Left")  dpad = DPAD_LEFT;
+                    else if (b == "Right") dpad = DPAD_RIGHT;
+                    if (btn != BUTTON_NONE || dpad != DPAD_NONE){
+                        env.console.log(
+                            "LiveDetectorTrace: AUTO-PRESS " + b
+                            + " on " + screen + " — " + m_last_suggestion->reason,
+                            COLOR_PURPLE);
+                        if (btn != BUTTON_NONE){
+                            pbf_press_button(context, btn, 80ms, 160ms);
+                        }else{
+                            pbf_press_dpad(context, dpad, 80ms, 160ms);
+                        }
+                        m_last_pressed_screen = screen;
+                        m_last_pressed_button = b;
+                        m_last_press_ms = now_ms();
+
+                        //  Team-scan state machine: advance step on each
+                        //  press fired while in the sub-flow. Step 7 (final
+                        //  Select-confirm A) marks the scan complete.
+                        if (m_team_scan_step >= 0){
+                            if (m_team_scan_step == 7){
+                                m_team_scan_complete = true;
+                                m_team_scan_step = -1;
+                                env.console.log(
+                                    "LiveDetectorTrace: team-scan sub-flow complete.",
+                                    COLOR_PURPLE);
+                            }else{
+                                m_team_scan_step++;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        //  Watchdog: log if we've been on the same screen for >60s.
+        if (m_last_screen_change_ms > 0 && now_ms() - m_last_screen_change_ms > 60000){
+            //  Throttle: only log once per 60s window.
+            static int64_t last_warn_ms = 0;
+            if (now_ms() - last_warn_ms > 60000){
+                env.console.log(
+                    "LiveDetectorTrace: stuck on '" + screen + "' for >60s.",
+                    COLOR_ORANGE);
+                last_warn_ms = now_ms();
+            }
+        }
 
         JsonObject ev = build_event(screen, now_ms(), seq++);
         post_event(env.console, sink_url, ev.dump());

@@ -10,6 +10,7 @@
 #ifndef PokemonAutomation_PokemonChampions_MainMenuDetector_H
 #define PokemonAutomation_PokemonChampions_MainMenuDetector_H
 
+#include <array>
 #include "CommonFramework/ImageTools/ImageBoxes.h"
 #include "CommonFramework/VideoPipeline/VideoOverlayScopes.h"
 #include "CommonTools/VisualDetector.h"
@@ -20,8 +21,15 @@ namespace PokemonChampions{
 
 
 enum class MainMenuButton{
-    BATTLE,
-    BOX,
+    BATTLE   = 0,
+    BOX      = 1,
+    TRAIN    = 2,
+    RECRUIT  = 3,
+    MISSIONS = 4,   //  bottom bar — leftmost
+    MAILBOX  = 5,
+    STYLE    = 6,
+    SUB_MENU = 7,   //  bottom bar — rightmost
+    UNKNOWN  = -1,
 };
 
 
@@ -34,6 +42,7 @@ public:
 
     //  Valid after detect() returns true.
     MainMenuButton cursored() const{ return m_cursored; }
+    int selected_index() const{ return (int)m_cursored; }
 
 private:
     bool is_battle_selected(const ImageViewRGB32& screen) const;
@@ -43,7 +52,10 @@ private:
     ImageFloatBox m_box_button;
     ImageFloatBox m_chrome;
     ImageFloatBox m_recruit_tile;
-    MainMenuButton m_cursored = MainMenuButton::BATTLE;
+    //  Per-option cursor strips. 0..7 = Battle/Box/Train/Recruit/Missions/
+    //  Mailbox/Style/SubMenu. Drawn by user.
+    std::array<ImageFloatBox, 8> m_cursor_boxes;
+    MainMenuButton m_cursored = MainMenuButton::UNKNOWN;
 };
 
 

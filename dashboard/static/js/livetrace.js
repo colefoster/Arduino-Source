@@ -28,10 +28,12 @@ async function liveTraceInit() {
     liveTraceEventCount = 0;
     liveTraceExpandedRows = new Set();
     document.getElementById('livetrace-feed').innerHTML = '';
-    document.getElementById('lt-pipeline').innerHTML = '<div style="color:#8b949e;">(no data yet)</div>';
-    document.getElementById('lt-own-team').innerHTML = '<div class="lt-slot">(no data yet)</div>';
-    document.getElementById('lt-opp-team').innerHTML = '<div class="lt-slot">(no data yet)</div>';
-    document.getElementById('lt-field').innerHTML = '(no data yet)';
+    document.getElementById('lt-pipeline').innerHTML = '<div style="color:#6e7681; font-size:11px; font-style:italic;">no data yet</div>';
+    document.getElementById('lt-own-team').innerHTML = '<div style="color:#6e7681; font-size:11px; font-style:italic;">no data yet</div>';
+    document.getElementById('lt-opp-team').innerHTML = '<div style="color:#6e7681; font-size:11px; font-style:italic;">no data yet</div>';
+    document.getElementById('lt-bs-own-active-row').innerHTML = '';
+    document.getElementById('lt-bs-opp-active-row').innerHTML = '';
+    document.getElementById('lt-field').innerHTML = '<span style="color:#6e7681; font-size:11px; font-style:italic;">no data yet</span>';
     liveTracePoll();
     liveTraceTimer = setInterval(liveTracePoll, 1000);
 }
@@ -49,7 +51,6 @@ async function liveTracePoll() {
             return;
         }
         ltSetConn('connected');
-        document.getElementById('lt-head').textContent = 'head_seq: ' + (data.head_seq != null ? data.head_seq : '-');
         const events = data.events || [];
         for (const ev of events) {
             ltHandleEvent(ev);
@@ -61,9 +62,9 @@ async function liveTracePoll() {
         if (sr.ok) {
             const s = await sr.json();
             const age = s.last_event_age_sec;
-            document.getElementById('lt-age').textContent =
-                age == null ? 'last event: -' : 'last event: ' + age.toFixed(1) + 's ago';
+            document.getElementById('lt-age').textContent = age == null ? '-' : age.toFixed(1) + 's';
         }
+        document.getElementById('lt-head').textContent = data.head_seq != null ? data.head_seq : '-';
         const dr = await fetch('/api/live-trace/derived-state');
         if (dr.ok) ltRenderDerivedState(await dr.json());
     } catch (e) {
@@ -72,25 +73,42 @@ async function liveTracePoll() {
 }
 
 function ltSetConn(s) {
-    document.getElementById('lt-conn').textContent = s;
+    const el = document.getElementById('lt-conn');
+    el.textContent = s;
+    el.className = s === 'connected' ? 'lt-conn-connected' : 'lt-conn-disconnected';
 }
 
 function ltHandleEvent(ev) {
     liveTraceEventCount++;
-    document.getElementById('lt-events').textContent = 'events seen: ' + liveTraceEventCount;
+    document.getElementById('lt-events').textContent = liveTraceEventCount;
     liveTraceLastEvent = ev;
     if (ev.current_screen) {
         const pill = document.getElementById('lt-screen');
-        pill.textContent = 'screen: ' + ev.current_screen;
-        pill.className = 'lt-pill screen-' + ev.current_screen;
+        pill.textContent = ev.current_screen;
+        pill.className = 'lt-screen-pill lt-pill-big screen-' + ev.current_screen;
     }
-    if (ev.battle_mode) document.getElementById('lt-mode').textContent = 'mode: ' + ev.battle_mode;
+    if (ev.battle_mode) document.getElementById('lt-mode').textContent = ev.battle_mode;
     if (typeof ev.match_in_progress === 'boolean') {
-        document.getElementById('lt-match').textContent = 'match: ' + (ev.match_in_progress ? 'in progress' : 'idle');
+        document.getElementById('lt-match').textContent = ev.match_in_progress ? 'in progress' : 'idle';
     }
     if (ev.pipeline) ltRenderPipeline(ev.pipeline);
     if (ev.engine_view) ltRenderEngineView(ev.engine_view, ev.pipeline || {});
+    ltRenderSuggestion(ev.suggested_input);
     ltAppendFeed(ev);
+}
+
+function ltRenderSuggestion(s) {
+    const el = document.getElementById('lt-suggest');
+    if (!el) return;
+    if (!s || !s.button) {
+        el.hidden = true;
+        el.innerHTML = '';
+        return;
+    }
+    const label = s.label || (s.button + ' — ?');
+    const reason = s.reason ? `<span class="lt-suggest-reason">${s.reason}</span>` : '';
+    el.innerHTML = `▶ ${label}${reason}`;
+    el.hidden = false;
 }
 
 function ltRenderPipeline(pipeline) {
@@ -104,7 +122,7 @@ function ltRenderPipeline(pipeline) {
         const matched = entries.filter(group.filter);
         if (matched.length === 0) continue;
         const header = document.createElement('div');
-        header.style.cssText = 'color:#6e7681; font-size:10px; text-transform:uppercase; letter-spacing:0.5px; margin:8px 0 4px 0;';
+        header.className = 'lt-pipe-group-head';
         header.textContent = group.title + ' (' + matched.length + ')';
         container.appendChild(header);
         for (const e of matched) {
@@ -165,96 +183,203 @@ function ltAgeStr(msAgo) {
 }
 
 function ltRenderEngineView(view, pipeline) {
-    const own = document.getElementById('lt-own-team');
-    const opp = document.getElementById('lt-opp-team');
-    own.innerHTML = '';
-    opp.innerHTML = '';
+    const ownBench = document.getElementById('lt-own-team');
+    const oppBench = document.getElementById('lt-opp-team');
+    const ownActive = document.getElementById('lt-bs-own-active-row');
+    const oppActive = document.getElementById('lt-bs-opp-active-row');
 
-    // Pokeballs from PokeballAliveDetector last_output if present
+    // Pokeballs (active ring matches the currently-active slot indices).
     const pb = pipeline.PokeballAliveDetector && pipeline.PokeballAliveDetector.last_output;
-    ltRenderPokeballs('lt-own-pokeballs', pb && pb.own);
-    ltRenderPokeballs('lt-opp-pokeballs', pb && pb.opp);
+    const ownActiveIdx = ltActiveIndices(view.own_active, pb && pb.own);
+    const oppActiveIdx = ltActiveIndices(view.opp_active, pb && pb.opp);
+    ltRenderPokeballs('lt-own-pokeballs', pb && pb.own, ownActiveIdx);
+    ltRenderPokeballs('lt-opp-pokeballs', pb && pb.opp, oppActiveIdx);
 
-    // Active mons + bench
-    const ownActiveLabel = document.createElement('div');
-    ownActiveLabel.className = 'lt-slot-label';
-    ownActiveLabel.textContent = 'Active';
-    own.appendChild(ownActiveLabel);
+    const isDoubles = Array.isArray(view.own_active) && view.own_active.length > 1
+                   || Array.isArray(view.opp_active) && view.opp_active.length > 1;
+
+    // Active goes inside the Battle State hero card.
+    ownActive.innerHTML = '';
+    oppActive.innerHTML = '';
+    ownActive.className = 'lt-bs-active-row' + (isDoubles ? '' : ' singles');
+    oppActive.className = 'lt-bs-active-row' + (isDoubles ? '' : ' singles');
     if (Array.isArray(view.own_active)) {
-        for (const slot of view.own_active) own.appendChild(ltSlotEl(slot, true));
+        view.own_active.forEach((slot, i) => ownActive.appendChild(ltSlotEl(slot, true, isDoubles ? i : null)));
     }
-    const ownBenchLabel = document.createElement('div');
-    ownBenchLabel.className = 'lt-slot-label';
-    ownBenchLabel.textContent = 'Bench';
-    own.appendChild(ownBenchLabel);
-    if (Array.isArray(view.own_bench)) {
-        for (const slot of view.own_bench) own.appendChild(ltSlotEl(slot, false));
-    }
-
-    const oppActiveLabel = document.createElement('div');
-    oppActiveLabel.className = 'lt-slot-label';
-    oppActiveLabel.textContent = 'Active';
-    opp.appendChild(oppActiveLabel);
     if (Array.isArray(view.opp_active)) {
-        for (const slot of view.opp_active) opp.appendChild(ltSlotEl(slot, true));
-    }
-    const oppBenchLabel = document.createElement('div');
-    oppBenchLabel.className = 'lt-slot-label';
-    oppBenchLabel.textContent = 'Bench';
-    opp.appendChild(oppBenchLabel);
-    if (Array.isArray(view.opp_bench)) {
-        for (const slot of view.opp_bench) opp.appendChild(ltSlotEl(slot, false));
+        view.opp_active.forEach((slot, i) => oppActive.appendChild(ltSlotEl(slot, true, isDoubles ? i : null)));
     }
 
-    // Field state
+    // Bench goes in its dedicated columns.
+    ownBench.innerHTML = '';
+    oppBench.innerHTML = '';
+    if (Array.isArray(view.own_bench) && view.own_bench.length) {
+        for (const slot of view.own_bench) ownBench.appendChild(ltSlotEl(slot, false, null));
+    } else {
+        ownBench.innerHTML = '<div style="color:#6e7681; font-size:11px; font-style:italic;">no bench data</div>';
+    }
+    if (Array.isArray(view.opp_bench) && view.opp_bench.length) {
+        for (const slot of view.opp_bench) oppBench.appendChild(ltSlotEl(slot, false, null));
+    } else {
+        oppBench.innerHTML = '<div style="color:#6e7681; font-size:11px; font-style:italic;">no bench data</div>';
+    }
+
+    // Leads row + turn pill.
+    ltRenderLeads(view);
+    const turnEl = document.getElementById('lt-bs-turn');
+    if (view.field && typeof view.field.turn === 'number') {
+        turnEl.textContent = view.field.turn > 0 ? `turn ${view.field.turn}` : '';
+    } else {
+        turnEl.textContent = '';
+    }
+
     if (view.field) ltRenderField(view.field);
 }
 
-function ltRenderPokeballs(elId, arr) {
+function _bsName(slot) {
+    if (!slot) return '?';
+    const sp = (slot.species || '').replace(/-/g, ' ');
+    if (!sp || sp === '(unknown)') return '?';
+    return sp.replace(/\b\w/g, c => c.toUpperCase());
+}
+
+function ltRenderLeads(view) {
+    const leadsRow = document.getElementById('lt-bs-leads-row');
+    const leads = Array.isArray(view.own_leads) ? view.own_leads : [];
+    if (leads.length === 0) {
+        leadsRow.innerHTML = '<span class="lt-leads-empty">leads not yet read</span>';
+        return;
+    }
+    const byIdx = {};
+    const collect = (arr) => Array.isArray(arr) && arr.forEach(s => {
+        if (s && typeof s.slot === 'number') byIdx[s.slot] = s;
+    });
+    collect(view.own_active); collect(view.own_bench);
+    leadsRow.innerHTML = leads.map((slotIdx, i) => {
+        const name = _bsName(byIdx[slotIdx]) || `slot ${slotIdx}`;
+        return `<span class="lt-lead-pill"><span class="order">${i + 1}</span>${ltEsc(name)}</span>`;
+    }).join('');
+}
+
+function ltRenderPokeballs(elId, arr, activeIdx) {
     const el = document.getElementById(elId);
     if (!el) return;
     el.innerHTML = '';
+    const active = new Set(Array.isArray(activeIdx) ? activeIdx : []);
     if (!Array.isArray(arr)) {
         for (let i = 0; i < 6; i++) {
             const p = document.createElement('div');
-            p.className = 'lt-pokeball EMPTY';
+            p.className = 'lt-pokeball EMPTY' + (active.has(i) ? ' active' : '');
             p.title = 'unknown';
             el.appendChild(p);
         }
         return;
     }
-    for (const state of arr) {
+    arr.forEach((state, i) => {
         const p = document.createElement('div');
-        p.className = 'lt-pokeball ' + (state || 'EMPTY');
-        p.title = state || 'EMPTY';
+        p.className = 'lt-pokeball ' + (state || 'EMPTY') + (active.has(i) ? ' active' : '');
+        p.title = (state || 'EMPTY') + (active.has(i) ? ' (active slot ' + i + ')' : '');
         el.appendChild(p);
-    }
+    });
 }
 
-function ltSlotEl(slot, isActive) {
+// Best-effort: figure out which roster indices the two active mons occupy.
+// Backend doesn't echo the slot indices today, so fall back to the first N
+// non-fainted positions in the pokeball array (N = active.length).
+function ltActiveIndices(activeArr, pbArr) {
+    const n = Array.isArray(activeArr) ? activeArr.length : 0;
+    if (n === 0) return [];
+    if (!Array.isArray(pbArr)) return Array.from({ length: n }, (_, i) => i);
+    const out = [];
+    for (let i = 0; i < pbArr.length && out.length < n; i++) {
+        if (pbArr[i] === 'alive' || pbArr[i] === 'alive_statused' ||
+            pbArr[i] === 'ALIVE') {
+            out.push(i);
+        }
+    }
+    while (out.length < n) out.push(out.length);
+    return out;
+}
+
+function ltSlotEl(slot, isActive, slotIdx) {
     const div = document.createElement('div');
     div.className = 'lt-slot' + (isActive ? ' active' : '');
+    const idxPill = (slotIdx != null) ? `<span class="slot-idx">${slotIdx}</span>` : '';
     if (!slot || typeof slot !== 'object') {
-        div.innerHTML = '<span class="species">(empty)</span>';
+        div.innerHTML = `<div class="row1"><span class="species">${idxPill}(empty)</span></div>`;
         return div;
     }
     if (slot.alive === false || slot.hp === 0) div.classList.add('fainted');
-    const species = (slot.species && slot.species.length > 0) ? slot.species : '(unknown)';
-    const hpPct = (typeof slot.hp === 'number') ? Math.round(slot.hp * 100) + '%' : '';
-    const meta = [];
-    if (hpPct) meta.push(hpPct);
-    if (slot.is_mega) meta.push('mega');
-    if (slot.item) meta.push(slot.item);
-    if (slot.ability) meta.push(slot.ability);
-    if (slot.status) meta.push(slot.status);
-    const moves = Array.isArray(slot.moves) ? slot.moves.filter(Boolean) : [];
+    const speciesRaw = (slot.species && slot.species.length > 0) ? slot.species : '(unknown)';
+    const isUnknown = speciesRaw === '(unknown)';
+    const species = isUnknown ? '(unknown)' : speciesRaw.replace(/-/g, ' ');
 
-    let html = '<div class="species">' + ltEsc(species) + '</div>';
-    if (meta.length) html += '<div class="meta">' + ltEsc(meta.join(' / ')) + '</div>';
-    if (moves.length) html += '<div class="meta">' + ltEsc(moves.join(', ')) + '</div>';
-    else html += '<div class="wip">moves: missing (provide via OWN_TEAM_PASTE for own side; opp moves WIP)</div>';
-    if (!slot.ability) html += '<div class="wip">ability: missing (own=paste, opp=WIP AbilityRevealReader)</div>';
-    if (!slot.item && species !== '(unknown)') html += '<div class="wip">item: missing (own=paste, opp=WIP ItemRevealReader)</div>';
+    // Row 1: idx + name + status/mega pills
+    const pills = [];
+    if (slot.status) pills.push(`<span class="status-pill ${ltEsc(slot.status)}">${ltEsc(slot.status)}</span>`);
+    if (slot.is_mega) pills.push(`<span class="mega-pill">mega</span>`);
+    let html = `<div class="row1">
+        <span class="species">${idxPill}${ltEsc(species)}</span>
+        <span style="display:flex; gap:4px;">${pills.join('')}</span>
+    </div>`;
+
+    // HP bar — skipped for unknown placeholder (placeholder has hp=1.0 by default).
+    if (!isUnknown && typeof slot.hp === 'number') {
+        const pct = Math.max(0, Math.min(1, slot.hp));
+        const cls = pct > 0.5 ? 'high' : pct > 0.2 ? 'mid' : 'low';
+        html += `<div class="lt-hp">
+            <div class="bar"><div class="fill ${cls}" style="width:${(pct*100).toFixed(0)}%"></div></div>
+            <span class="pct">${(pct*100).toFixed(0)}%</span>
+        </div>`;
+    }
+
+    // Ability + item (compact, dim if missing)
+    if (!isUnknown) {
+        const abK = slot.ability ? '' : 'miss';
+        const itK = slot.item ? '' : 'miss';
+        const ab = slot.ability ? slot.ability.replace(/-/g, ' ') : 'unknown';
+        const it = slot.item ? slot.item.replace(/-/g, ' ') : 'unknown';
+        html += `<div class="lt-ai">
+            <span class="kv ${abK}"><span class="k">A</span><span class="v">${ltEsc(ab)}</span></span>
+            <span class="kv ${itK}"><span class="k">I</span><span class="v">${ltEsc(it)}</span></span>
+        </div>`;
+    }
+
+    // Boost chips: only render non-zero stages.
+    if (!isUnknown && Array.isArray(slot.boosts)) {
+        const STAT_LABELS = ['atk','def','spa','spd','spe','eva'];
+        const chips = slot.boosts
+            .map((v, i) => ({ v, label: STAT_LABELS[i] }))
+            .filter(b => b.v !== 0)
+            .map(b => {
+                const sign = b.v > 0 ? '+' : '';
+                const cls = b.v > 0 ? 'up' : 'down';
+                return `<span class="lt-boost ${cls}">${b.label} ${sign}${b.v}</span>`;
+            });
+        if (chips.length) {
+            html += `<div class="lt-boosts">${chips.join('')}</div>`;
+        }
+    }
+
+    // Moves (4 chips, 2x2). Active mons get the full grid; bench shows them too if known.
+    const moves = Array.isArray(slot.moves) ? slot.moves.filter(Boolean) : [];
+    const movePp = Array.isArray(slot.move_pp) ? slot.move_pp : [];
+    if (isUnknown) {
+        html += `<div style="color:#6e7681; font-size:10px; font-style:italic;">waiting for HUD read…</div>`;
+    } else if (isActive || moves.length) {
+        const cells = [];
+        for (let i = 0; i < 4; i++) {
+            const m = moves[i];
+            const pp = movePp[i];                   //  [current, max] or null
+            const ppSuffix = (Array.isArray(pp) && pp.length === 2)
+                ? `<span class="pp">${pp[0]}/${pp[1]}</span>` : '';
+            cells.push(m
+                ? `<span class="move">${ltEsc(m.replace(/-/g, ' '))}${ppSuffix}</span>`
+                : `<span class="move miss">—</span>`);
+        }
+        html += `<div class="lt-moves">${cells.join('')}</div>`;
+    }
+
     div.innerHTML = html;
     return div;
 }
@@ -292,26 +417,28 @@ function ltRenderDerivedState(s) {
 function ltRenderField(f) {
     const el = document.getElementById('lt-field');
     el.innerHTML = '';
+    //  Tailwind + screens have no detector yet — flag as 'wip' (yellow) rather
+    //  than just 'unset' so it's visually distinct from "off but tracked."
     const rows = [
-        { k: 'turn', v: f.turn, set: f.turn > 0, isWip: false },
-        { k: 'weather', v: f.weather || '-', set: !!f.weather, isWip: !f.weather },
-        { k: 'terrain', v: f.terrain || '-', set: !!f.terrain, isWip: !f.terrain },
-        { k: 'trick_room', v: f.trick_room ? 'on' : 'off', set: f.trick_room, isWip: false },
-        { k: 'tailwind_own', v: f.tailwind_own ? 'on' : 'off', set: f.tailwind_own, isWip: false },
-        { k: 'tailwind_opp', v: f.tailwind_opp ? 'on' : 'off', set: f.tailwind_opp, isWip: false },
-        { k: 'screens_own', v: ltScreenSummary(f.screens_own), set: ltAnyTrue(f.screens_own), isWip: false },
-        { k: 'screens_opp', v: ltScreenSummary(f.screens_opp), set: ltAnyTrue(f.screens_opp), isWip: false },
+        { k: 'turn',         v: f.turn || 0,                          set: f.turn > 0 },
+        { k: 'weather',      v: f.weather || 'none',                  set: !!f.weather },
+        { k: 'terrain',      v: f.terrain || 'none',                  set: !!f.terrain },
+        { k: 'trick room',   v: f.trick_room ? 'on' : 'off',          set: f.trick_room },
+        { k: 'tailwind own', v: f.tailwind_own ? 'on' : 'off',        set: f.tailwind_own, wip: true },
+        { k: 'tailwind opp', v: f.tailwind_opp ? 'on' : 'off',        set: f.tailwind_opp, wip: true },
+        { k: 'screens own',  v: ltScreenSummary(f.screens_own),       set: ltAnyTrue(f.screens_own), wip: true },
+        { k: 'screens opp',  v: ltScreenSummary(f.screens_opp),       set: ltAnyTrue(f.screens_opp), wip: true },
     ];
     for (const r of rows) {
         const span = document.createElement('span');
-        span.className = 'lt-field-row';
-        span.innerHTML = '<span class="key">' + ltEsc(r.k) + '=</span><span class="val ' + (r.set ? 'set' : 'unset') + '">' + ltEsc(String(r.v)) + '</span>';
+        let cls = 'lt-field-pill';
+        if (r.set) cls += ' set';
+        else if (r.wip) cls += ' wip';
+        span.className = cls;
+        span.innerHTML = `<span class="k">${ltEsc(r.k)}</span><span class="v">${ltEsc(String(r.v))}</span>`;
+        if (r.wip && !r.set) span.title = 'WIP: no detector yet — value not tracked';
         el.appendChild(span);
     }
-    const note = document.createElement('div');
-    note.style.cssText = 'color:#f85149; font-size:10px; margin-top:8px;';
-    note.textContent = 'Field state is read from BattleLogReader (weather/terrain/trick_room). Tailwind/screens still have no detector and stay unset.';
-    el.appendChild(note);
 }
 
 function ltScreenSummary(arr) {
@@ -331,7 +458,7 @@ function ltAppendFeed(ev) {
     row.innerHTML =
         '<span class="seq">#' + (ev.server_seq != null ? ev.server_seq : '?') + '</span>' +
         '<span class="scr">' + ltEsc(ev.current_screen || '-') + '</span>' +
-        '<span>' + ltEsc(ts) + '</span>';
+        '<span class="ts">' + ltEsc(ts) + '</span>';
     feed.insertBefore(row, feed.firstChild);
     while (feed.children.length > LIVETRACE_FEED_MAX) {
         feed.removeChild(feed.lastChild);

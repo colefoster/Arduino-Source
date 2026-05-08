@@ -20,10 +20,6 @@
       "own_species": [
         "incineroar",
         "charizard-shiny"
-      ],
-      "own_species_shiny": [
-        true,
-        true
       ]
     }
   },
@@ -122,7 +118,7 @@
         159
       ],
       "own_species": [
-        "sneasler",
+        "sneasler-shiny",
         "charizard-shiny-mega-y"
       ],
       "own_species_shiny": [
@@ -146,7 +142,7 @@
         159
       ],
       "own_species": [
-        "sneasler",
+        "sneasler-shiny",
         "charizard-shiny-mega-y"
       ],
       "own_species_shiny": [
@@ -170,7 +166,7 @@
         159
       ],
       "own_species": [
-        "sneasler",
+        "sneasler-shiny",
         "charizard-shiny-mega-y"
       ],
       "own_species_shiny": [
@@ -194,7 +190,7 @@
         159
       ],
       "own_species": [
-        "sneasler",
+        "sneasler-shiny",
         "charizard-shiny-mega-y"
       ],
       "own_species_shiny": [
@@ -218,7 +214,7 @@
         159
       ],
       "own_species": [
-        "sneasler",
+        "sneasler-shiny",
         "charizard-shiny-mega-y"
       ],
       "own_species_shiny": [
@@ -242,7 +238,7 @@
         159
       ],
       "own_species": [
-        "sneasler",
+        "sneasler-shiny",
         "charizard-shiny-mega-y"
       ],
       "own_species_shiny": [
@@ -406,7 +402,7 @@
         202
       ],
       "own_species": [
-        "sneasler",
+        "sneasler-shiny",
         "incineroar"
       ],
       "own_species_shiny": [
@@ -422,7 +418,7 @@
         "garchomp"
       ],
       "own_species": [
-        "sneasler",
+        "sneasler-shiny",
         ""
       ],
       "own_species_shiny": [
@@ -438,7 +434,7 @@
         "garchomp"
       ],
       "own_species": [
-        "sneasler",
+        "sneasler-shiny",
         ""
       ],
       "own_species_shiny": [
@@ -454,7 +450,7 @@
         "garchomp"
       ],
       "own_species": [
-        "sneasler",
+        "sneasler-shiny",
         ""
       ],
       "own_species_shiny": [
@@ -470,7 +466,7 @@
         "garchomp"
       ],
       "own_species": [
-        "sneasler",
+        "sneasler-shiny",
         ""
       ],
       "own_species_shiny": [
@@ -486,7 +482,7 @@
         "garchomp"
       ],
       "own_species": [
-        "sneasler",
+        "sneasler-shiny",
         ""
       ],
       "own_species_shiny": [
@@ -502,7 +498,7 @@
         "garchomp"
       ],
       "own_species": [
-        "venusaur",
+        "venusaur-shiny",
         ""
       ],
       "own_species_shiny": [
@@ -518,7 +514,7 @@
         "gengar"
       ],
       "own_species": [
-        "venusaur",
+        "venusaur-shiny",
         ""
       ],
       "own_species_shiny": [
@@ -534,7 +530,7 @@
         "gengar"
       ],
       "own_species": [
-        "venusaur",
+        "venusaur-shiny",
         ""
       ],
       "own_species_shiny": [
@@ -550,7 +546,7 @@
         "gengar"
       ],
       "own_species": [
-        "venusaur",
+        "venusaur-shiny",
         ""
       ],
       "own_species_shiny": [
@@ -771,7 +767,7 @@
       ],
       "own_species": [
         "sinistcha",
-        "archaludon"
+        "archaludon-shiny"
       ]
     }
   },
@@ -858,7 +854,7 @@
         159
       ],
       "own_species": [
-        "venusaur",
+        "venusaur-shiny",
         "charizard-shiny-mega-y"
       ],
       "own_species_shiny": [

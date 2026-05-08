@@ -50,6 +50,13 @@ struct TrackedPokemon{
     //  the small numbers next to each stat on the Stats tab.
     std::array<int, 6> evs = {};
     std::array<int8_t, 6> boosts = {};  //  atk, def, spa, spd, spe, evasion
+
+    //  Per-move PP, updated from the move-select HUD reader. Aligned with
+    //  known_moves order. -1 = unread; populated only for the active mon
+    //  while move_select is on screen. Persists between polls.
+    struct MovePP{ int current = -1; int max = -1; };
+    std::array<MovePP, 4> move_pp = {};
+
     bool is_mega = false;
     bool alive = true;
 
@@ -128,6 +135,80 @@ public:
     //  without marking it as "seen in battle".
     void set_opp_species_preview(uint8_t slot, const std::string& species);
 
+    //  Apply an ability/item overlay reveal. `side` is "left"/"right" from
+    //  the reader (screen position, not own/opp). Matches `pokemon_slug`
+    //  against opp_team first, then own_team; writes the slug only if the
+    //  target field is currently empty. Returns true if a slot matched.
+    bool apply_ability_item_reveal(
+        const std::string& side,
+        const std::string& pokemon_slug,
+        const std::string& name_slug,
+        const std::string& kind);
+
+    //  ── Persistent team store ───────────────────────────────────
+    //
+    //  Save / load the full m_own_team[6] (species, ability, item, moves,
+    //  nature, EVs) to/from a JSON file. Used to make team scans survive
+    //  program restarts.
+    bool save_team_to_file(const std::string& path) const;
+    bool load_team_from_file(const std::string& path);
+
+    //  Multi-team library — saves each scanned team to a separate file in
+    //  `dir`, named after the sorted species slugs joined by `_`. Same set
+    //  of 6 species in any order maps to the same file (overwrites on
+    //  re-scan, so a team's data stays current).
+    //
+    //  save_team_to_library: writes the current m_own_team[6]. No-op if any
+    //   species slot is empty. Returns the file path written.
+    //  load_team_matching: given the 6 species seen on the team-preview
+    //   selecting screen (any order), looks up the matching file in `dir`
+    //   and populates m_own_team. Returns true if a match was found.
+    std::string save_team_to_library(const std::string& dir) const;
+    bool load_team_matching(
+        const std::string& dir,
+        const std::array<std::string, 6>& species);
+
+    //  Reorder m_own_team so that index i holds the mon whose species
+    //  matches `screen_species[i]`. Empty entries in screen_species are
+    //  left in place. Used after the selecting-stage Team Preview reads
+    //  the on-screen own species — aligns internal indexing with screen
+    //  positions so leads / active slot indices map directly.
+    void reorder_own_team_to_screen(const std::array<std::string, 6>& screen_species);
+
+    //  Apply a Pokemon Switch screen read. `own_hp[i]` = pair of (current,
+    //  max); -1 sentinels for unread. `opp_hp_pct[i]` = 0-100 or -1.
+    //  Updates HP for every slot whose value is real, leaving others
+    //  alone. The switch screen is the only place where bench HP is
+    //  visible at once, so this fills the gap left by HUDReader (which
+    //  only reads the active 1-2 slots).
+    void apply_switch_screen_hp(
+        const std::array<std::pair<int, int>, 6>& own_hp,
+        const std::array<int, 6>& opp_hp_pct);
+
+    //  Apply a Battle Info tab read for one focused mon. side="own"|"opp",
+    //  slot=0|1. Empty/sentinel inputs are skipped, so partial reads merge
+    //  with prior state instead of clobbering it. Status text is parsed
+    //  for known field effects (Trick Room, Tailwind, Light Screen, ...)
+    //  with turn counters.
+    void apply_battle_info_focused(
+        const std::string& side, uint8_t slot,
+        const std::string& species,
+        int hp_current, int hp_max, int hp_pct,
+        const std::array<std::string, 2>& types,
+        const std::string& ability, const std::string& item,
+        const std::array<int8_t, 5>& boosts,
+        const std::string& status_text,
+        int status_turns_current, int status_turns_max);
+
+    //  Set the chosen lead lineup for a match (read from the locked-in
+    //  team-preview screen). `leads` is up to 4 own-team slot indices in
+    //  send-out order (leads[0] = first out). Slots not in `leads` are
+    //  the bench. Pass an empty array to clear.
+    void set_own_leads(const std::vector<uint8_t>& leads);
+
+    //  Accessor for serialization / dashboard.
+    const std::vector<uint8_t>& own_leads() const { return m_own_leads; }
+
 private:
     //  Find or create an opponent slot for a species. Returns index 0-5.
     uint8_t find_or_add_opponent(const std::string& species);
@@ -155,6 +236,10 @@ private:
     bool m_tailwind_opp = false;
     std::array<bool, 3> m_screens_own = {};   //  light_screen, reflect, aurora_veil
     std::array<bool, 3> m_screens_opp = {};
+
+    //  Chosen lead lineup (up to 4 own-team slot indices, in send-out
+    //  order). Empty before the locked-in screen has been read.
+    std::vector<uint8_t> m_own_leads;
 };
 
 

@@ -10,7 +10,7 @@ function apiPost(path, body) {
     return fetch(`${API}${path}`, { method: 'POST', body: fd }).then(r => r.json());
 }
 
-const views = ['dashboard', 'gallery', 'labeler', 'inspector', 'recognition', 'teampreview', 'templates', 'training', 'validation', 'mismatches', 'sprites', 'pokeballs', 'livetrace', 'ppgallery', 'hpgallery', 'tsgallery', 'pillatlas', 'teamscan'];
+const views = ['dashboard', 'gallery', 'labeler', 'inspector', 'recognition', 'teampreview', 'templates', 'training', 'validation', 'mismatches', 'sprites', 'pokeballs', 'livetrace', 'ppgallery', 'hpgallery', 'tsgallery', 'pillatlas', 'teamscan', 'tplocked', 'tpcursor', 'tpmarks'];
 let currentView = null;
 
 window.routeParams = {};
@@ -63,6 +63,9 @@ function route() {
     if (view === 'tsgallery') tsGalleryInit();
     if (view === 'pillatlas') pillAtlasInit();
     if (view === 'teamscan') teamScanInit();
+    if (view === 'tplocked') tplockedInit();
+    if (view === 'tpcursor') tpcursorInit();
+    if (view === 'tpmarks') tpmarksInit();
 }
 
 window.addEventListener('hashchange', route);

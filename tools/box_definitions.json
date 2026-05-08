@@ -988,25 +988,25 @@
     {
       "name": "own_0_species",
       "scene": "",
-      "screenshot": "__test__/move_select/20260423-150123581184.png",
+      "screenshot": "__test__/pokemon_switch/20260423-150442604167.png",
       "description": "",
       "status": "confirmed",
       "box": [
-        0.0814,
-        0.8705,
-        0.0918,
-        0.0272
+        0.061,
+        0.2291,
+        0.0893,
+        0.0395
       ],
       "avg_rgb": [
-        142.1,
-        136.9,
-        247.3
+        228.4,
+        237.7,
+        49.4
       ],
-      "stddev_sum": 140.9,
+      "stddev_sum": 200,
       "color_ratio": [
-        0.27,
-        0.2602,
-        0.4699
+        0.4431,
+        0.4611,
+        0.0958
       ]
     },
     {
@@ -5687,6 +5687,1182 @@
         0.3219,
         0.3266,
         0.3515
+      ]
+    },
+    {
+      "name": "own_3_species",
+      "scene": "",
+      "screenshot": "__test__/pokemon_switch/20260423-150442604167.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.0609,
+        0.5847,
+        0.095,
+        0.0303
+      ],
+      "avg_rgb": [
+        141.1,
+        125.4,
+        254.5
+      ],
+      "stddev_sum": 94.4,
+      "color_ratio": [
+        0.2708,
+        0.2408,
+        0.4884
+      ]
+    },
+    {
+      "name": "opp_0_hp_pct",
+      "scene": "",
+      "screenshot": "__test__/pokemon_switch/20260423-150442604167.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.9131,
+        0.2622,
+        0.0356,
+        0.0345
+      ],
+      "avg_rgb": [
+        45.7,
+        47.9,
+        57.8
+      ],
+      "stddev_sum": 195.5,
+      "color_ratio": [
+        0.3021,
+        0.3161,
+        0.3819
+      ]
+    },
+    {
+      "name": "own_2_species",
+      "scene": "",
+      "screenshot": "__test__/pokemon_switch/20260423-150442604167.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.0626,
+        0.466,
+        0.069,
+        0.0343
+      ],
+      "avg_rgb": [
+        149.8,
+        134.8,
+        254.4
+      ],
+      "stddev_sum": 98.5,
+      "color_ratio": [
+        0.278,
+        0.25,
+        0.472
+      ]
+    },
+    {
+      "name": "own_0_hp",
+      "scene": "",
+      "screenshot": "__test__/pokemon_switch/20260423-150442604167.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.0629,
+        0.2646,
+        0.0745,
+        0.0425
+      ],
+      "avg_rgb": [
+        196.4,
+        202.1,
+        59.8
+      ],
+      "stddev_sum": 277.3,
+      "color_ratio": [
+        0.4285,
+        0.4409,
+        0.1305
+      ]
+    },
+    {
+      "name": "opp_1_hp_pct",
+      "scene": "",
+      "screenshot": "__test__/pokemon_switch/20260423-150442604167.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.9073,
+        0.3815,
+        0.0416,
+        0.0321
+      ],
+      "avg_rgb": [
+        21.2,
+        21.3,
+        36.5
+      ],
+      "stddev_sum": 203.4,
+      "color_ratio": [
+        0.2681,
+        0.27,
+        0.4619
+      ]
+    },
+    {
+      "name": "opp_4_hp_pct",
+      "scene": "",
+      "screenshot": "__test__/pokemon_switch/20260423-150442604167.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.9141,
+        0.7304,
+        0.0346,
+        0.0316
+      ],
+      "avg_rgb": [
+        105.8,
+        40.1,
+        83
+      ],
+      "stddev_sum": 228.7,
+      "color_ratio": [
+        0.4623,
+        0.175,
+        0.3627
+      ]
+    },
+    {
+      "name": "cursor_0",
+      "scene": "",
+      "screenshot": "__test__/team_preview_selecting/20260505-game2-video-20260505-153202484050_0032.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.0235,
+        0.1821,
+        0.0143,
+        0.0235
+      ],
+      "avg_rgb": [
+        220.4,
+        218.2,
+        6.7
+      ],
+      "stddev_sum": 109.6,
+      "color_ratio": [
+        0.495,
+        0.49,
+        0.0149
+      ]
+    },
+    {
+      "name": "cursor_1",
+      "scene": "",
+      "screenshot": "__test__/team_preview_selecting/20260505-game2-video-20260505-153202484050_0032.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.0279,
+        0.3011,
+        0.0115,
+        0.0213
+      ],
+      "avg_rgb": [
+        22.5,
+        37.1,
+        131.3
+      ],
+      "stddev_sum": 164.1,
+      "color_ratio": [
+        0.1181,
+        0.1942,
+        0.6877
+      ]
+    },
+    {
+      "name": "cursor_2",
+      "scene": "",
+      "screenshot": "__test__/team_preview_selecting/20260505-game2-video-20260505-153202484050_0032.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.0239,
+        0.4165,
+        0.0163,
+        0.0222
+      ],
+      "avg_rgb": [
+        0.6,
+        5.4,
+        8.6
+      ],
+      "stddev_sum": 6.2,
+      "color_ratio": [
+        0.0386,
+        0.372,
+        0.5894
+      ]
+    },
+    {
+      "name": "cursor_3",
+      "scene": "",
+      "screenshot": "__test__/team_preview_selecting/20260505-game2-video-20260505-153202484050_0032.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.0299,
+        0.53,
+        0.0108,
+        0.0268
+      ],
+      "avg_rgb": [
+        28.9,
+        39.4,
+        36.7
+      ],
+      "stddev_sum": 31.9,
+      "color_ratio": [
+        0.275,
+        0.3754,
+        0.3496
+      ]
+    },
+    {
+      "name": "cursor_4",
+      "scene": "",
+      "screenshot": "__test__/team_preview_selecting/20260505-game2-video-20260505-153202484050_0032.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.0318,
+        0.6513,
+        0.0093,
+        0.0237
+      ],
+      "avg_rgb": [
+        9.7,
+        17.5,
+        17.8
+      ],
+      "stddev_sum": 20.5,
+      "color_ratio": [
+        0.215,
+        0.3898,
+        0.3952
+      ]
+    },
+    {
+      "name": "cursor_5",
+      "scene": "",
+      "screenshot": "__test__/team_preview_selecting/20260505-game2-video-20260505-153202484050_0032.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.0335,
+        0.7654,
+        0.0069,
+        0.03
+      ],
+      "avg_rgb": [
+        5.7,
+        7.6,
+        8.1
+      ],
+      "stddev_sum": 76.9,
+      "color_ratio": [
+        0.2665,
+        0.3542,
+        0.3793
+      ]
+    },
+    {
+      "name": "pokemon_cursor",
+      "scene": "",
+      "screenshot": "__test__/action_menu/20260423-150121863579.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.8512,
+        0.6524,
+        0.0159,
+        0.0247
+      ],
+      "avg_rgb": [
+        198.8,
+        194.7,
+        0.9
+      ],
+      "stddev_sum": 202.8,
+      "color_ratio": [
+        0.5042,
+        0.4937,
+        0.0022
+      ]
+    },
+    {
+      "name": "menu_VP_points",
+      "scene": "",
+      "screenshot": "__test__/battle_mode_menu/20260423-145958889700.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.7831,
+        0.0483,
+        0.1015,
+        0.0496
+      ],
+      "avg_rgb": [
+        66.9,
+        100.7,
+        127.6
+      ],
+      "stddev_sum": 161.3,
+      "color_ratio": [
+        0.2265,
+        0.3412,
+        0.4323
+      ]
+    },
+    {
+      "name": "menu_BP_level",
+      "scene": "",
+      "screenshot": "__test__/battle_mode_menu/20260423-145958889700.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.5226,
+        0.0424,
+        0.0391,
+        0.0603
+      ],
+      "avg_rgb": [
+        165.5,
+        152.3,
+        253
+      ],
+      "stddev_sum": 76.7,
+      "color_ratio": [
+        0.29,
+        0.2668,
+        0.4432
+      ]
+    },
+    {
+      "name": "battle_mode_menu_actual_sparkle",
+      "scene": "",
+      "screenshot": "__test__/battle_mode_menu/20260423-145958889700.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.9355,
+        0.1845,
+        0.0048,
+        0.0057
+      ],
+      "avg_rgb": [
+        255,
+        254.5,
+        64
+      ],
+      "stddev_sum": 49.7,
+      "color_ratio": [
+        0.4447,
+        0.4438,
+        0.1116
+      ]
+    },
+    {
+      "name": "battle_mode_menu_actual_better_format_band",
+      "scene": "",
+      "screenshot": "__test__/battle_mode_menu/20260423-145958889700.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.6843,
+        0.1605,
+        0.0119,
+        0.0219
+      ],
+      "avg_rgb": [
+        255,
+        83,
+        252
+      ],
+      "stddev_sum": 11.5,
+      "color_ratio": [
+        0.4322,
+        0.1406,
+        0.4271
+      ]
+    },
+    {
+      "name": "battle_mode_menu_cursor_0",
+      "scene": "",
+      "screenshot": "__test__/battle_mode_menu/20260423-145958889700.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.7103,
+        0.199,
+        0.0192,
+        0.0341
+      ],
+      "avg_rgb": [
+        127.4,
+        111.4,
+        255
+      ],
+      "stddev_sum": 6.7,
+      "color_ratio": [
+        0.2581,
+        0.2255,
+        0.5164
+      ]
+    },
+    {
+      "name": "battle_mode_menu_cursor_1",
+      "scene": "",
+      "screenshot": "__test__/battle_mode_menu/20260423-145958889700.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.7078,
+        0.3583,
+        0.0229,
+        0.0428
+      ],
+      "avg_rgb": [
+        127.3,
+        111.2,
+        255
+      ],
+      "stddev_sum": 8.6,
+      "color_ratio": [
+        0.2579,
+        0.2253,
+        0.5168
+      ]
+    },
+    {
+      "name": "battle_mode_menu_cursor_2",
+      "scene": "",
+      "screenshot": "__test__/battle_mode_menu/20260423-145958889700.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.7004,
+        0.5044,
+        0.0253,
+        0.0527
+      ],
+      "avg_rgb": [
+        219.9,
+        255,
+        0
+      ],
+      "stddev_sum": 3.5,
+      "color_ratio": [
+        0.463,
+        0.537,
+        0
+      ]
+    },
+    {
+      "name": "battle_mode_menu_cursor_3",
+      "scene": "",
+      "screenshot": "__test__/battle_mode_menu/20260423-145958889700.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.7426,
+        0.6621,
+        0.0258,
+        0.0451
+      ],
+      "avg_rgb": [
+        149.7,
+        134.1,
+        255
+      ],
+      "stddev_sum": 10.6,
+      "color_ratio": [
+        0.2778,
+        0.2489,
+        0.4733
+      ]
+    },
+    {
+      "name": "battle_mode_menu_cursor_4",
+      "scene": "",
+      "screenshot": "__test__/battle_mode_menu/20260423-145958889700.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.724,
+        0.8227,
+        0.0284,
+        0.0504
+      ],
+      "avg_rgb": [
+        138.6,
+        123.2,
+        255
+      ],
+      "stddev_sum": 10.2,
+      "color_ratio": [
+        0.2682,
+        0.2384,
+        0.4934
+      ]
+    },
+    {
+      "name": "pre_battle_change_music_cursor",
+      "scene": "",
+      "screenshot": "__test__/pre_match/20260423-150015112781.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.5716,
+        0.7012,
+        0.0237,
+        0.0393
+      ],
+      "avg_rgb": [
+        250.9,
+        255,
+        0
+      ],
+      "stddev_sum": 0.8,
+      "color_ratio": [
+        0.4959,
+        0.5041,
+        0
+      ]
+    },
+    {
+      "name": "pre_battle_begin_matchmaking_cursor",
+      "scene": "",
+      "screenshot": "__test__/pre_match/20260423-150015112781.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.5711,
+        0.8555,
+        0.027,
+        0.0393
+      ],
+      "avg_rgb": [
+        255,
+        255,
+        255
+      ],
+      "stddev_sum": 0,
+      "color_ratio": [
+        0.3333,
+        0.3333,
+        0.3333
+      ]
+    },
+    {
+      "name": "pre_battle_team_select_cursor",
+      "scene": "",
+      "screenshot": "__test__/pre_match/20260423-150015112781.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.5743,
+        0.4779,
+        0.0334,
+        0.0441
+      ],
+      "avg_rgb": [
+        247.8,
+        241.9,
+        255
+      ],
+      "stddev_sum": 0.9,
+      "color_ratio": [
+        0.3328,
+        0.3248,
+        0.3424
+      ]
+    },
+    {
+      "name": "battle_format_doubles_cursor",
+      "scene": "",
+      "screenshot": "__test__/ranked_format_select/20260423-150009579307.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.6962,
+        0.6637,
+        0.031,
+        0.0427
+      ],
+      "avg_rgb": [
+        228.4,
+        255,
+        0
+      ],
+      "stddev_sum": 5.1,
+      "color_ratio": [
+        0.4724,
+        0.5276,
+        0
+      ]
+    },
+    {
+      "name": "battle_format_singles_cursor",
+      "scene": "",
+      "screenshot": "__test__/ranked_format_select/20260423-150009579307.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.7027,
+        0.4299,
+        0.034,
+        0.0409
+      ],
+      "avg_rgb": [
+        133.1,
+        116.5,
+        255
+      ],
+      "stddev_sum": 13,
+      "color_ratio": [
+        0.2637,
+        0.2309,
+        0.5054
+      ]
+    },
+    {
+      "name": "digit_0",
+      "scene": "",
+      "screenshot": "__test__/team_preview_selecting/20260505-game2-video-20260505-153202484050_0032.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.0462,
+        0.1699,
+        0.0253,
+        0.0527
+      ],
+      "avg_rgb": [
+        226.5,
+        247.7,
+        39.8
+      ],
+      "stddev_sum": 21.9,
+      "color_ratio": [
+        0.4406,
+        0.4819,
+        0.0775
+      ]
+    },
+    {
+      "name": "digit_1",
+      "scene": "",
+      "screenshot": "__test__/team_preview_selecting/20260505-game2-video-20260505-153202484050_0032.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.0462,
+        0.2865,
+        0.024,
+        0.0554
+      ],
+      "avg_rgb": [
+        123.6,
+        112.3,
+        241.9
+      ],
+      "stddev_sum": 16.2,
+      "color_ratio": [
+        0.2586,
+        0.235,
+        0.5063
+      ]
+    },
+    {
+      "name": "digit_5",
+      "scene": "",
+      "screenshot": "__test__/team_preview_selecting/20260505-game2-video-20260505-153202484050_0032.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.0466,
+        0.7555,
+        0.0229,
+        0.0522
+      ],
+      "avg_rgb": [
+        123.3,
+        112.1,
+        242.6
+      ],
+      "stddev_sum": 9.6,
+      "color_ratio": [
+        0.2579,
+        0.2346,
+        0.5075
+      ]
+    },
+    {
+      "name": "digit_4",
+      "scene": "",
+      "screenshot": "__test__/team_preview_selecting/20260505-game2-video-20260505-153202484050_0032.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.0466,
+        0.6375,
+        0.0223,
+        0.0484
+      ],
+      "avg_rgb": [
+        123.5,
+        112.3,
+        242.5
+      ],
+      "stddev_sum": 9.9,
+      "color_ratio": [
+        0.2583,
+        0.2348,
+        0.507
+      ]
+    },
+    {
+      "name": "digit_2",
+      "scene": "",
+      "screenshot": "__test__/team_preview_selecting/20260505-game2-video-20260505-153202484050_0032.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.0476,
+        0.4017,
+        0.0234,
+        0.0536
+      ],
+      "avg_rgb": [
+        123.1,
+        111.8,
+        243.2
+      ],
+      "stddev_sum": 9.1,
+      "color_ratio": [
+        0.2575,
+        0.2338,
+        0.5087
+      ]
+    },
+    {
+      "name": "digit_3",
+      "scene": "",
+      "screenshot": "__test__/team_preview_selecting/20260505-game2-video-20260505-153202484050_0032.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.0467,
+        0.5218,
+        0.0246,
+        0.0476
+      ],
+      "avg_rgb": [
+        123.1,
+        112,
+        242.1
+      ],
+      "stddev_sum": 10.6,
+      "color_ratio": [
+        0.2579,
+        0.2347,
+        0.5074
+      ]
+    },
+    {
+      "name": "Battle_cursor",
+      "scene": "",
+      "screenshot": "__test__/main_menu/main_menu.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.5403,
+        0.3214,
+        0.0083,
+        0.1857
+      ],
+      "avg_rgb": [
+        241.4,
+        254.2,
+        37.4
+      ],
+      "stddev_sum": 61.4,
+      "color_ratio": [
+        0.4529,
+        0.4769,
+        0.0702
+      ]
+    },
+    {
+      "name": "recruit_cursor",
+      "scene": "",
+      "screenshot": "__test__/main_menu/main_menu.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.5451,
+        0.6028,
+        0.0052,
+        0.0824
+      ],
+      "avg_rgb": [
+        166.5,
+        178.2,
+        226.1
+      ],
+      "stddev_sum": 179.4,
+      "color_ratio": [
+        0.2917,
+        0.3122,
+        0.3961
+      ]
+    },
+    {
+      "name": "train_cursor",
+      "scene": "",
+      "screenshot": "__test__/main_menu/main_menu.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.9801,
+        0.5813,
+        0.0054,
+        0.1341
+      ],
+      "avg_rgb": [
+        119.3,
+        110.6,
+        212.9
+      ],
+      "stddev_sum": 146.4,
+      "color_ratio": [
+        0.2695,
+        0.2497,
+        0.4808
+      ]
+    },
+    {
+      "name": "box_cursor",
+      "scene": "",
+      "screenshot": "__test__/main_menu/main_menu.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.9807,
+        0.1817,
+        0.0045,
+        0.1337
+      ],
+      "avg_rgb": [
+        110.3,
+        94.9,
+        191.7
+      ],
+      "stddev_sum": 130.3,
+      "color_ratio": [
+        0.2779,
+        0.2391,
+        0.483
+      ]
+    },
+    {
+      "name": "sub_menu_cursor",
+      "scene": "",
+      "screenshot": "__test__/main_menu/main_menu.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.6844,
+        0.9269,
+        0.0239,
+        0.0241
+      ],
+      "avg_rgb": [
+        78,
+        60.9,
+        253.7
+      ],
+      "stddev_sum": 15.9,
+      "color_ratio": [
+        0.1986,
+        0.1551,
+        0.6462
+      ]
+    },
+    {
+      "name": "style_cursor",
+      "scene": "",
+      "screenshot": "__test__/main_menu/main_menu.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.5308,
+        0.9265,
+        0.0256,
+        0.0211
+      ],
+      "avg_rgb": [
+        75.7,
+        59.8,
+        252.7
+      ],
+      "stddev_sum": 12.9,
+      "color_ratio": [
+        0.195,
+        0.154,
+        0.651
+      ]
+    },
+    {
+      "name": "mailbox_cursor",
+      "scene": "",
+      "screenshot": "__test__/main_menu/main_menu.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.3761,
+        0.9268,
+        0.0188,
+        0.0221
+      ],
+      "avg_rgb": [
+        77.9,
+        58.2,
+        254.1
+      ],
+      "stddev_sum": 11,
+      "color_ratio": [
+        0.1996,
+        0.1491,
+        0.6513
+      ]
+    },
+    {
+      "name": "missions_cursor",
+      "scene": "",
+      "screenshot": "__test__/main_menu/main_menu.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.2169,
+        0.9295,
+        0.0231,
+        0.0175
+      ],
+      "avg_rgb": [
+        74.1,
+        57.9,
+        254.8
+      ],
+      "stddev_sum": 5.5,
+      "color_ratio": [
+        0.1917,
+        0.1496,
+        0.6588
+      ]
+    },
+    {
+      "name": "Done_cursor",
+      "scene": "",
+      "screenshot": "__test__/team_preview_selecting/20260505-game2-video-20260505-153202484050_0032.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.1324,
+        0.8572,
+        0.0146,
+        0.0428
+      ],
+      "avg_rgb": [
+        52.1,
+        48.5,
+        110
+      ],
+      "stddev_sum": 4.2,
+      "color_ratio": [
+        0.2474,
+        0.2304,
+        0.5222
+      ]
+    },
+    {
+      "name": "switch_0_cursor",
+      "scene": "",
+      "screenshot": "__test__/pokemon_switch/20260423-150442604167.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.0284,
+        0.2402,
+        0.0036,
+        0.0638
+      ],
+      "avg_rgb": [
+        201.2,
+        237.7,
+        4.9
+      ],
+      "stddev_sum": 77.2,
+      "color_ratio": [
+        0.4534,
+        0.5355,
+        0.0111
+      ]
+    },
+    {
+      "name": "switch_1_cursor",
+      "scene": "",
+      "screenshot": "__test__/pokemon_switch/20260423-150442604167.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.0289,
+        0.3504,
+        0.0028,
+        0.0749
+      ],
+      "avg_rgb": [
+        61.3,
+        46.2,
+        201.3
+      ],
+      "stddev_sum": 72.2,
+      "color_ratio": [
+        0.1986,
+        0.1496,
+        0.6518
+      ]
+    },
+    {
+      "name": "switch_2_cursor",
+      "scene": "",
+      "screenshot": "__test__/pokemon_switch/20260423-150442604167.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.0289,
+        0.4693,
+        0.0025,
+        0.0682
+      ],
+      "avg_rgb": [
+        46.2,
+        37.1,
+        178.7
+      ],
+      "stddev_sum": 77.1,
+      "color_ratio": [
+        0.1765,
+        0.1415,
+        0.682
+      ]
+    },
+    {
+      "name": "switch_3_cursor",
+      "scene": "",
+      "screenshot": "__test__/pokemon_switch/20260423-150442604167.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.0289,
+        0.5846,
+        0.0026,
+        0.0749
+      ],
+      "avg_rgb": [
+        75.4,
+        69.8,
+        193.5
+      ],
+      "stddev_sum": 133.6,
+      "color_ratio": [
+        0.2225,
+        0.2062,
+        0.5713
+      ]
+    },
+    {
+      "name": "casual_doubles",
+      "scene": "",
+      "screenshot": "__test__/casual_format_select/screenshot-20260508-153628218227.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.6849,
+        0.5822,
+        0.0389,
+        0.1662
+      ],
+      "avg_rgb": [
+        116.1,
+        104,
+        236.2
+      ],
+      "stddev_sum": 15.7,
+      "color_ratio": [
+        0.2544,
+        0.228,
+        0.5176
+      ]
+    },
+    {
+      "name": "casual_singles",
+      "scene": "",
+      "screenshot": "__test__/casual_format_select/screenshot-20260508-153628218227.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.6828,
+        0.3375,
+        0.041,
+        0.1587
+      ],
+      "avg_rgb": [
+        210.1,
+        255,
+        21.3
+      ],
+      "stddev_sum": 6.3,
+      "color_ratio": [
+        0.4319,
+        0.5242,
+        0.0439
+      ]
+    },
+    {
+      "name": "casual_detect",
+      "scene": "",
+      "screenshot": "__test__/casual_format_select/screenshot-20260508-153628218227.png",
+      "description": "should be exactly this color to match, avg rgb is 98,90,208",
+      "status": "confirmed",
+      "box": [
+        0.6544,
+        0.1806,
+        0.2542,
+        0.0355
+      ],
+      "avg_rgb": [
+        98,
+        90,
+        208
+      ],
+      "stddev_sum": 0.7,
+      "color_ratio": [
+        0.2475,
+        0.2273,
+        0.5252
       ]
     }
   ]

@@ -252,6 +252,12 @@ screens:
     detectors: [RankedFormatSelectDetector]
     readers: {}
 
+  casual_format_select:
+    description: "Casual battles format selector — Single Battle / Double Battle horizontal pills. Visually distinct from ranked_format_select (yellow + purple pills, not cyan/pink tiles)."
+    transitions_to: [pre_match, battle_mode_menu]
+    detectors: [CasualFormatSelectDetector]
+    readers: {}
+
   pre_match:
     description: "Pre-match staging screen: selected team displayed with Begin Matchmaking and Change Team buttons."
     transitions_to: [team_select, searching_for_battle, ranked_format_select]

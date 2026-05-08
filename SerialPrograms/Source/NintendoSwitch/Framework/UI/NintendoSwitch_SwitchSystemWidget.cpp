@@ -4,6 +4,7 @@
  *
  */
 
+#include <fstream>
 #include <QKeyEvent>
 #include <QVBoxLayout>
 #include <QGroupBox>
@@ -182,6 +183,30 @@ SwitchSystemWidget::SwitchSystemWidget(
             });
         }
     );
+
+    //  Auto-load default profile if present. Path:
+    //    <SETTINGS_PATH>/SwitchSystem-default.json
+    //  Save your current Console N Settings via "Save Profile" to this exact
+    //  filename (in the SerialPrograms settings folder) and every new
+    //  program tab will pre-populate with it. Silent no-op if missing or
+    //  invalid — the user keeps the framework defaults.
+    {
+        std::string default_path = SETTINGS_PATH() + "SwitchSystem-default.json";
+        std::ifstream test(default_path);
+        if (test.good()){
+            test.close();
+            try {
+                SwitchSystemOption option(m_session.allow_commands_while_running());
+                option.load_json(load_json_file(default_path));
+                m_session.set(option);
+                m_session.logger().log(
+                    "Auto-loaded default Switch System profile: " + default_path,
+                    COLOR_BLUE);
+            } catch (...) {
+                //  Ignore — profile schema may be stale.
+            }
+        }
+    }
 }
 
 

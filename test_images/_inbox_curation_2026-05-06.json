@@ -1,0 +1,508 @@
+{
+  "prefix": "20260506-game2-",
+  "new_event_types": [],
+  "new_log_text_count": 67,
+  "files": [
+    {
+      "file": "20260506-game2-video-20260506-085625397902_0001.png",
+      "reasons": [
+        "new_signature=['PostMatchScreenDetector']"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085625397902_0006.png",
+      "reasons": [
+        "new_signature=()",
+        "transition=['PostMatchScreenDetector']->()"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085625397902_0008.png",
+      "reasons": [
+        "transition=()->['PostMatchScreenDetector']"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085625397902_0046.png",
+      "reasons": [
+        "new_signature=['TeamPreviewDetector']",
+        "transition=()->['TeamPreviewDetector']"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085625397902_0099.png",
+      "reasons": [
+        "new_signature=['PreparingForBattleDetector']",
+        "transition=['TeamPreviewDetector']->['PreparingForBattleDetector']"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085625397902_0103.png",
+      "reasons": [
+        "transition=['PreparingForBattleDetector']->()"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085625397902_0114.png",
+      "reasons": [
+        "new_log_text=SWITCH_IN:'\u2018ash sent out Sneasler the Early Riser and Aerodac'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085625397902_0117.png",
+      "reasons": [
+        "new_log_text=SWITCH_IN:'Go! Whimsicott and Incineroar! : 0= \u2014'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085625397902_0118.png",
+      "reasons": [
+        "new_log_text=SWITCH_IN:\"Go! Whimsicott and Incineroar! / = '\""
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085625397902_0132.png",
+      "reasons": [
+        "new_signature=['ActionMenuDetector']",
+        "transition=()->['ActionMenuDetector']"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085625397902_0153.png",
+      "reasons": [
+        "new_signature=['MoveSelectDetector']",
+        "transition=['ActionMenuDetector']->['MoveSelectDetector']"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085625397902_0158.png",
+      "reasons": [
+        "transition=['MoveSelectDetector']->()"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085625397902_0160.png",
+      "reasons": [
+        "transition=()->['MoveSelectDetector']"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085625397902_0166.png",
+      "reasons": [
+        "new_log_text=MOVE_USED:'\u2018e opposing Sneasler used Fake Outl. e'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085625397902_0167.png",
+      "reasons": [
+        "new_log_text=MOVE_USED:'The opposing Sneasler used Fake Out! )'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085625397902_0172.png",
+      "reasons": [
+        "new_log_text=MOVE_USED:'\u2018Whimsicott used Taunt! \u00a2 P OB'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085625397902_0178.png",
+      "reasons": [
+        "new_log_text=MOVE_USED:'\u2018Ihe opposing Aerodactyl used Dual Wingbeat! ph'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085625397902_0179.png",
+      "reasons": [
+        "new_log_text=MOVE_USED:\"The'opposing Aerodactyl used Dual Wingbeat! gm\u2014 .\""
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085625397902_0181.png",
+      "reasons": [
+        "new_log_text=MISS:'\u2018Whimsicott avoided the attack! . Haes a0 a4'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085625397902_0193.png",
+      "reasons": [
+        "transition=['ActionMenuDetector']->()"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085625397902_0201.png",
+      "reasons": [
+        "new_log_text=MOVE_USED:'Whimsicott used Tailwind! s g'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085625397902_0204.png",
+      "reasons": [
+        "new_log_text=EFFECT_START:' Afailwind started blowing on your side! AEE e'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085625397902_0205.png",
+      "reasons": [
+        "new_log_text=EFFECT_START:'\u2018Atailwind started blowing on your side! baiel v Y'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085625397902_0207.png",
+      "reasons": [
+        "new_log_text=MOVE_USED:'.The opposing Sneasler used Dire Claw! 8 '"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085625397902_0208.png",
+      "reasons": [
+        "new_log_text=MOVE_USED:'The opposingsSneasler used Dire Claw! o,'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085625397902_0217.png",
+      "reasons": [
+        "new_log_text=STATUS_INFLICTED:'\u2018Whimsicott fell asleep!   - habal W W'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085625397902_0218.png",
+      "reasons": [
+        "new_log_text=STATUS_INFLICTED:'Whimsicott fell asleep! > |'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085625397902_0220.png",
+      "reasons": [
+        "new_log_text=MOVE_USED:'The opposing Aerodactyl used Rock Slidel   5'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085625397902_0221.png",
+      "reasons": [
+        "new_log_text=MOVE_USED:'The opposing Aerodactyl used Rock Slide!'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085625397902_0230.png",
+      "reasons": [
+        "new_log_text=FAINTED:'Whimsicott fainted! i'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085625397902_0231.png",
+      "reasons": [
+        "new_log_text=FAINTED:'Whimsicott fainted!'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085625397902_0235.png",
+      "reasons": [
+        "new_log_text=MOVE_USED:'Incineroar used Parting Shot! = .. - Gaal A7'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085625397902_0236.png",
+      "reasons": [
+        "new_log_text=MOVE_USED:'Incineroar used Parting Shot! S, g'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085625397902_0247.png",
+      "reasons": [
+        "new_log_text=SWITCH_IN:'Go! Flogtte! g\u2014 o~ \u2014 o~ ='"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085625397902_0248.png",
+      "reasons": [
+        "new_log_text=SWITCH_IN:'Go! Floette!'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085625397902_0260.png",
+      "reasons": [
+        "new_log_text=SWITCH_IN:\"Go! Incinero\u00e9'rk \u2018 -\""
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085625397902_0272.png",
+      "reasons": [
+        "first_fire=MegaEvolveDetector",
+        "new_signature=['MegaEvolveDetector', 'MoveSelectDetector']",
+        "transition=['ActionMenuDetector']->['MegaEvolveDetector', 'MoveSelectDetector']"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085625397902_0279.png",
+      "reasons": [
+        "transition=['MegaEvolveDetector', 'MoveSelectDetector']->()"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085625397902_0298.png",
+      "reasons": [
+        "new_log_text=MEGA_EVOLVE:'Floette has Mega Evolved into Mega Floette!'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085951191566_0011.png",
+      "reasons": [
+        "new_log_text=STATUS_INFLICTED:'\u2018Whimsicott fell asleep! - - - BAAAEs .'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085951191566_0012.png",
+      "reasons": [
+        "new_log_text=STATUS_INFLICTED:'Whimsicott fell asleep! |'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085951191566_0014.png",
+      "reasons": [
+        "new_log_text=MOVE_USED:'The opposing Aerodactyl used Rock Slide!   \u00bb'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085951191566_0015.png",
+      "reasons": [
+        "new_log_text=MOVE_USED:'The opposing Aerodactyl used Rock Slide!\u2019\u201d a8, 4 7'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085951191566_0030.png",
+      "reasons": [
+        "new_log_text=MOVE_USED:'Incineroar used Parting Shot! S0'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085951191566_0041.png",
+      "reasons": [
+        "new_log_text=SWITCH_IN:'Go! Floette! _g\u2014 o~ \u2014 g~ B'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085951191566_0042.png",
+      "reasons": [
+        "new_log_text=SWITCH_IN:'-Go! Floette! Tt -'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085951191566_0053.png",
+      "reasons": [
+        "new_log_text=SWITCH_IN:'Go! Incineroar! = L =g =N :'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085951191566_0097.png",
+      "reasons": [
+        "new_log_text=MOVE_USED:'Incineroar used FakeOut! \u2122 S~'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085951191566_0102.png",
+      "reasons": [
+        "new_log_text=MOVE_USED:'Floette used Light of Ruin! >'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085951191566_0103.png",
+      "reasons": [
+        "new_log_text=MOVE_USED:'Floette used Light of Ruinl = A'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085951191566_0110.png",
+      "reasons": [
+        "new_log_text=FAINTED:'The opposing Sneasler fainted! o al S e'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085951191566_0111.png",
+      "reasons": [
+        "new_log_text=FAINTED:'The opposing Sneasler fainted! ~ /\u00a9 = S'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085951191566_0114.png",
+      "reasons": [
+        "new_log_text=DAMAGE:'Floette was damaged by the recoil! -'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085951191566_0115.png",
+      "reasons": [
+        "new_log_text=DAMAGE:'Floette was damaged by the recoill o ='"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085951191566_0116.png",
+      "reasons": [
+        "new_log_text=MOVE_USED:\".'.\u2019I' )0S| Mg \u2018 lactyl used Rock SIide \u2122\u2122 \u2122 = - -\""
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085951191566_0117.png",
+      "reasons": [
+        "new_log_text=MOVE_USED:'The opposing Aerodactyl used Rock Slide!\u2122 &= o R'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085951191566_0123.png",
+      "reasons": [
+        "new_log_text=FAINTED:'Incineroar fainted! e P R e -'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085951191566_0124.png",
+      "reasons": [
+        "new_log_text=FAINTED:'Incineroar fainted! - :'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085951191566_0136.png",
+      "reasons": [
+        "new_log_text=SWITCH_IN:'-ash sent out Charizara! @ _rony A N'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085951191566_0137.png",
+      "reasons": [
+        "new_log_text=SWITCH_IN:'ash sent out Charizard! \u00a5 \u2018'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085951191566_0140.png",
+      "reasons": [
+        "new_log_text=SWITCH_IN:'Go! Kingambit! ~'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085951191566_0141.png",
+      "reasons": [
+        "new_log_text=SWITCH_IN:'Go! Kingambit! e p\u2014\u2014'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085951191566_0187.png",
+      "reasons": [
+        "new_log_text=MEGA_EVOLVE:'The opposing Charizard has Mega Evolved into Mega '"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085951191566_0189.png",
+      "reasons": [
+        "new_log_text=WEATHER:'The sunlight turned harsh!'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085951191566_0192.png",
+      "reasons": [
+        "new_log_text=MOVE_USED:'The opposing Charizara used Protect! A= =_a=m'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085951191566_0198.png",
+      "reasons": [
+        "new_log_text=MOVE_USED:'Floette used Dazzling Gleam!'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085951191566_0207.png",
+      "reasons": [
+        "new_log_text=MOVE_USED:'The opposing Aerodactyl used Tailwind!'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085951191566_0211.png",
+      "reasons": [
+        "new_log_text=EFFECT_START:'A tailwind started blowing on the opposing side!'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085951191566_0213.png",
+      "reasons": [
+        "new_log_text=MOVE_USED:'\u2018Kingambit used lron Heagt\u2014=   % = F 3'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085951191566_0214.png",
+      "reasons": [
+        "new_log_text=MOVE_USED:'Kingambit used Iron Head! \u2122/~\u2014 =% 8L'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085951191566_0219.png",
+      "reasons": [
+        "new_log_text=FAINTED:'Thevopposing Aerodactyl fainted! 5 N o _'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085951191566_0220.png",
+      "reasons": [
+        "new_log_text=FAINTED:'The opposing-Aerodactyl faintedl\u00ab /7 g Zv\u2014'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085951191566_0230.png",
+      "reasons": [
+        "new_log_text=SWITCH_IN:'ash sent out Venusaur! ~ \u00ae &'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085951191566_0231.png",
+      "reasons": [
+        "new_log_text=SWITCH_IN:\"ash sent out Venusalii='s SN 7 S SRR Bl oo - W\""
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085951191566_0270.png",
+      "reasons": [
+        "new_log_text=MOVE_USED:'The opposing Venusaur used Sludge Bomb! | _ .'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085951191566_0273.png",
+      "reasons": [
+        "new_log_text=SUPER_EFFECTIVE:\"It's super effective on Floette!\""
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085951191566_0276.png",
+      "reasons": [
+        "new_log_text=FAINTED:'Floette fainted! o/ A  Sinc S'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085951191566_0280.png",
+      "reasons": [
+        "new_log_text=MOVE_USED:'The opposing Charizard used Heat Wavelws.. 0 R 4'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085951191566_0281.png",
+      "reasons": [
+        "new_log_text=MOVE_USED:'The opposing Charizard used Heat Wave!'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085951191566_0286.png",
+      "reasons": [
+        "new_log_text=FAINTED:'Kingambit fainted! <  5'"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085951191566_0295.png",
+      "reasons": [
+        "first_fire=ResultScreenDetector",
+        "new_signature=['ResultScreenDetector']",
+        "transition=()->['ResultScreenDetector']"
+      ]
+    },
+    {
+      "file": "20260506-game2-video-20260506-085951191566_0300.png",
+      "reasons": [
+        "transition=['ResultScreenDetector']->()"
+      ]
+    }
+  ]
+}

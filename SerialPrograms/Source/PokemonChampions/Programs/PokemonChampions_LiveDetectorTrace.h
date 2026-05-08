@@ -19,19 +19,24 @@
 #ifndef PokemonAutomation_PokemonChampions_LiveDetectorTrace_H
 #define PokemonAutomation_PokemonChampions_LiveDetectorTrace_H
 
+#include <array>
 #include <deque>
 #include <map>
+#include <optional>
 #include <set>
 #include <string>
 
 #include "Common/Cpp/Json/JsonObject.h"
 #include "Common/Cpp/Json/JsonValue.h"
 #include "Common/Cpp/Options/BooleanCheckBoxOption.h"
+#include "Common/Cpp/Options/EnumDropdownOption.h"
 #include "Common/Cpp/Options/SimpleIntegerOption.h"
 #include "Common/Cpp/Options/StringOption.h"
 #include "Common/Cpp/Options/TextEditOption.h"
 #include "NintendoSwitch/NintendoSwitch_SingleSwitchProgram.h"
+#include "NintendoSwitch/Options/NintendoSwitch_StartInGripMenuOption.h"
 #include "PokemonChampions_BattleStateTracker.h"
+#include "PokemonChampions_InputSuggester.h"
 
 namespace PokemonAutomation{
 
@@ -101,6 +106,9 @@ private:
     void run_target_select_screen(Logger& logger, const ImageViewRGB32& screen);
     void run_moves_and_more_screen(Logger& logger, const ImageViewRGB32& screen);
     void run_team_stats_screen(Logger& logger, const ImageViewRGB32& screen);
+    void run_locked_in_screen(Logger& logger, const ImageViewRGB32& screen);
+    void run_battle_info_screen(Logger& logger, const ImageViewRGB32& screen);
+    void run_pokemon_switch_screen(Logger& logger, const ImageViewRGB32& screen);
 
     //  Detects the in-battle text bar; OCRs + parses; deduplicates against
     //  the prior poll's raw text so a single log line (which sticks for
@@ -142,14 +150,40 @@ private:
     void age_pipeline_entries(int64_t now_ms);
 
     //  ── Options ──
+    //  Start-in-grip-menu dance — required for Switch 2 (and any setup
+    //  where a real controller is paired). Without this, the console keeps
+    //  the user's physical controller paired and SP's virtual controller's
+    //  button writes are silently ignored. With this on, the program
+    //  presses L+R via the virtual controller to trigger console pairing,
+    //  then exits grip menu via Home. Detach all physical controllers
+    //  BEFORE starting the program.
+    StartInGripOrGameOption START_LOCATION;
+
+    //  Which format to queue for. Drives the ranked_format_select suggester
+    //  target. 0 = Singles (top tile), 1 = Doubles (bottom tile).
+    IntegerEnumDropdownOption FORMAT_TARGET;
+
+    //  Battle Mode Menu target. 0=Ranked, 1=Casual, 2=Private, 3=Online
+    //  Comp, 4=Battle Data. Only Ranked and Casual lead to a queueable
+    //  ladder run.
+    IntegerEnumDropdownOption BATTLE_MODE_TARGET;
+
+    //  Team Select target. 0..4 = Team 1..5. Drives horizontal nav on the
+    //  team_select screen.
+    IntegerEnumDropdownOption TEAM_INDEX;
+
     SimpleIntegerOption<uint32_t> POLL_PERIOD_MILLISECONDS;
     SimpleIntegerOption<uint32_t> STALE_AFTER_MILLISECONDS;
     StringOption SINK_URL;
-    //  Pokemon Showdown formatted team paste. Populates own-team species,
-    //  moves, items, and abilities at program start. This is the canonical
-    //  source for own-side state — visual own-side OCR (TeamPreviewReader
-    //  own boxes, MovesAndMoreReader) is fallback / WIP only.
-    TextEditOption OWN_TEAM_PASTE;
+
+    //  ── Auto-press options ──
+    //  Off by default. When on, the program presses the suggested button
+    //  for screens on the safe allowlist (menu nav, result/post-match) —
+    //  IN-BATTLE screens (action/move/target/switch) and the
+    //  team_preview_selecting screen are NEVER auto-pressed even when this
+    //  is on. Per-(screen, button) dedup with a 10s retry window so a
+    //  press that didn't register fires again, but we don't burst.
+    BooleanCheckBoxOption ENABLE_AUTO_PRESS;
 
     //  ── Auto-capture options ──
     //  Off by default. When on, the program drops PNG + sidecar JSON into
@@ -186,6 +220,8 @@ private:
     //  for Stats); when it changes, we re-fire update_from_*.
     std::string m_prev_team_summary_sig;
     std::string m_prev_team_stats_sig;
+    std::string m_prev_leads_sig;
+    std::string m_prev_battle_info_sig;
 
     //  ── Auto-capture state ──
     //  Per-channel "seen this session" sets so each novel readout fires at
@@ -202,6 +238,43 @@ private:
 
     //  Sliding hourly window for the rate cap.
     std::deque<int64_t> m_capture_window_ms;
+
+    //  Latest input suggestion (consumed by build_event each poll).
+    std::optional<InputSuggestion> m_last_suggestion;
+
+    //  Auto-press dedup state.
+    std::string m_last_pressed_screen;
+    std::string m_last_pressed_button;
+    int64_t m_last_press_ms = 0;
+    int64_t m_last_screen_change_ms = 0;
+
+    //  Live context fed to the suggester (per-poll reader output that
+    //  doesn't belong on BattleStateTracker).
+    int m_tp_cursor_slot = -1;                //  Set by run_team_preview_screen.
+    std::array<char, 6> m_tp_marks_per_slot = {};  //  Lead-order digit per slot
+                                                   //  ('1'..'4' or 0). Read each
+                                                   //  poll on team_preview.
+    int m_menu_selected_index = -1;  //  Set by classify_screen when one of
+                                     //  the menu detectors fires.
+
+    //  team_select scan-and-pick sequence (load M&M + Stats before queueing).
+    //  -1 = inactive. 0..7 = current step in the canonical sequence:
+    //    0  team_select  A     open team modal
+    //    1  team_select  Down  to "Edit this team"
+    //    2  team_select  Down  to "View Info"
+    //    3  team_select  A     enter info screen (-> moves_and_more)
+    //    4  moves_and_more  R  tab to Stats (-> team_stats)
+    //    5  team_stats     B  back to team_select
+    //    6  team_select  A     open team modal again
+    //    7  team_select  A     confirm "Select this team" (default cursor)
+    //  Activated when entering team_select with cursor on target team and
+    //  scan not yet complete. Reset on match-end.
+    int m_team_scan_step = -1;
+    bool m_team_scan_complete = false;
+
+    //  pokemon_switch screen state (forced switch suggester).
+    int m_switch_cursor = -1;
+    std::array<bool, 6> m_switch_alive = {};
 };
 
 

@@ -49,13 +49,38 @@ MainMenuDetector::MainMenuDetector()
     //  Cursor-independent screen-presence cue — the brown panel fill is
     //  stable across all cursor positions in the corpus.
     , m_recruit_tile (0.5729, 0.3796, 0.0130, 0.0231)
-{}
+{
+    //  Per-option cursor strips drawn by user.
+    m_cursor_boxes[0] = ImageFloatBox(0.5403, 0.3214, 0.0083, 0.1857);  //  Battle
+    m_cursor_boxes[1] = ImageFloatBox(0.9807, 0.1817, 0.0045, 0.1337);  //  Box
+    m_cursor_boxes[2] = ImageFloatBox(0.9801, 0.5813, 0.0054, 0.1341);  //  Train
+    m_cursor_boxes[3] = ImageFloatBox(0.5451, 0.6028, 0.0052, 0.0824);  //  Recruit
+    m_cursor_boxes[4] = ImageFloatBox(0.2169, 0.9295, 0.0231, 0.0175);  //  Missions
+    m_cursor_boxes[5] = ImageFloatBox(0.3761, 0.9268, 0.0188, 0.0221);  //  Mailbox
+    m_cursor_boxes[6] = ImageFloatBox(0.5308, 0.9265, 0.0256, 0.0211);  //  Style
+    m_cursor_boxes[7] = ImageFloatBox(0.6844, 0.9269, 0.0239, 0.0241);  //  SubMenu
+}
 
 void MainMenuDetector::make_overlays(VideoOverlaySet& items) const{
     items.add(COLOR_CYAN, m_battle_button);
     items.add(COLOR_CYAN, m_box_button);
     items.add(COLOR_CYAN, m_chrome);
     items.add(COLOR_YELLOW, m_recruit_tile);
+    for (const ImageFloatBox& b : m_cursor_boxes){
+        items.add(COLOR_YELLOW, b);
+    }
+}
+
+
+//  (R+G)/2 - B; positive iff the strip skews yellow.
+static double yellow_score(const ImageViewRGB32& crop){
+    if (crop.width() == 0 || crop.height() == 0) return -1.0;
+    ImageStats st = image_stats(crop);
+    int r = (int)st.average.r;
+    int g = (int)st.average.g;
+    int b = (int)st.average.b;
+    int score = (r + g) / 2 - b;
+    return score > 0 ? double(score) : 0.0;
 }
 
 //  is_solid alone (ratio-based) accepts dim brownish-yellow pixels at the
@@ -99,12 +124,19 @@ bool MainMenuDetector::detect(const ImageViewRGB32& screen){
     const ImageStats brown = image_stats(extract_box_reference(screen, m_recruit_tile));
     if (brown.average.r + brown.average.g < 200.0) return false;
     if (!is_solid(brown, RECRUIT_BROWN, 0.10, 250)) return false;
-    //  Report which top-tile is cursored, if any. Default BATTLE for callers
-    //  that read m_cursored without checking — they get the most-common state.
-    m_cursored = MainMenuButton::BATTLE;
-    if (is_box_selected(screen)){
-        m_cursored = MainMenuButton::BOX;
+    //  Score all 8 cursor strips and pick the highest yellow above the floor.
+    //  Falls back to UNKNOWN if nothing scores high enough — the suggester
+    //  treats that as "wait a poll".
+    int best = -1;
+    double best_score = 0.0;
+    for (int i = 0; i < 8; i++){
+        double s = yellow_score(extract_box_reference(screen, m_cursor_boxes[i]));
+        if (s > best_score && s >= 30.0){
+            best_score = s;
+            best = i;
+        }
     }
+    m_cursored = best >= 0 ? (MainMenuButton)best : MainMenuButton::UNKNOWN;
     return true;
 }
 

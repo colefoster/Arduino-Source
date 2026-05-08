@@ -214,4 +214,55 @@ async function teamScanInit() {
     } catch (e) { /* ignore */ }
 
     runScan();
+
+    //  Saved-team library section.
+    async function loadSavedTeams() {
+        const listEl = document.getElementById('ts-saved-list');
+        const countEl = document.getElementById('ts-saved-count');
+        const dirEl = document.getElementById('ts-saved-dir');
+        try {
+            const r = await fetchJson('/api/saved-teams/list');
+            countEl.textContent = `(${r.count})`;
+            dirEl.textContent = r.dir || '';
+            if (!r.teams || !r.teams.length) {
+                listEl.innerHTML = '<div style="color:#6e7681; font-size:11px; font-style:italic;">No saved teams yet — run a Moves & More scan in-game to populate.</div>';
+                return;
+            }
+            listEl.innerHTML = r.teams.map(t => {
+                if (t.error) {
+                    return `<div class="ts-saved-card"><div class="head"><span style="color:#f85149;">${t.filename}: ${t.error}</span></div></div>`;
+                }
+                const monsHtml = (t.mons || []).map(m => {
+                    const moves = (m.moves || []).filter(Boolean).map(mv =>
+                        `<span class="move">${mv.replace(/-/g, ' ')}</span>`).join(' ');
+                    const evs = (m.evs || []).map((v, i) => {
+                        const labels = ['HP','Atk','Def','SpA','SpD','Spe'];
+                        return v > 0 ? `<span class="nz">${labels[i]} ${v}</span>` : '';
+                    }).filter(Boolean).join(' / ');
+                    return `<div class="ts-saved-mon">
+                        <div class="name">${(m.species || '?').replace(/-/g, ' ')}
+                            ${m.nature ? `<span class="nature">${m.nature}</span>` : ''}
+                        </div>
+                        <div class="meta">
+                            ${m.ability ? `<span class="ab">${m.ability.replace(/-/g, ' ')}</span>` : '<span style="color:#484f58;">no ability</span>'} /
+                            ${m.item ? `<span class="it">${m.item.replace(/-/g, ' ')}</span>` : '<span style="color:#484f58;">no item</span>'}
+                        </div>
+                        <div class="moves">${moves || '<span style="color:#484f58;">no moves</span>'}</div>
+                        ${evs ? `<div class="evs">${evs}</div>` : ''}
+                    </div>`;
+                }).join('');
+                const date = t.mtime ? new Date(t.mtime * 1000).toLocaleString() : '';
+                return `<div class="ts-saved-card">
+                    <div class="head">
+                        <span class="filename" title="${t.filename}">${t.filename}</span>
+                        <span class="mtime">${date}</span>
+                    </div>
+                    <div class="grid">${monsHtml}</div>
+                </div>`;
+            }).join('');
+        } catch (e) {
+            listEl.innerHTML = `<div style="color:#f85149;">Error: ${e.message}</div>`;
+        }
+    }
+    loadSavedTeams();
 }

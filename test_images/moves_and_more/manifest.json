@@ -1,4 +1,70 @@
 {
+  "20260507-072514019-screen-entry-moves-and-more.png": {
+    "TeamSummaryReader": {
+      "ability": [
+        "stamina",
+        "drizzle",
+        "adaptability",
+        "hospitality",
+        "defiant",
+        "intimidate"
+      ],
+      "item": [
+        "leftovers",
+        "focus-sash",
+        "choice-scarf",
+        "mental-herb",
+        "black-glasses",
+        "sitrus-berry"
+      ],
+      "moves": [
+        [
+          "electro-shot",
+          "dragon-pulse",
+          "flash-cannon",
+          "protect"
+        ],
+        [
+          "hurricane",
+          "weather-ball",
+          "tailwind",
+          "protect"
+        ],
+        [
+          "last-respects",
+          "wave-crash",
+          "aqua-jet",
+          "flip-turn"
+        ],
+        [
+          "matcha-gotcha",
+          "rage-powder",
+          "trick-room",
+          "life-dew"
+        ],
+        [
+          "sucker-punch",
+          "kowtow-cleave",
+          "iron-head",
+          "protect"
+        ],
+        [
+          "throat-chop",
+          "parting-shot",
+          "fake-out",
+          "flare-blitz"
+        ]
+      ],
+      "species": [
+        "archaludon",
+        "pelipper",
+        "basculegion",
+        "sinistcha",
+        "kingambit",
+        "incineroar"
+      ]
+    }
+  },
   "movesmore.png": {
     "TeamSummaryReader": {
       "species": [
@@ -8,6 +74,72 @@
         "sneasler",
         "kingambit",
         "incineroar"
+      ]
+    }
+  },
+  "whimsicott_incineroar_kingambit_floette_basculegion_sneasler.png": {
+    "TeamSummaryReader": {
+      "ability": [
+        "prankster",
+        "intimidate",
+        "defiant",
+        "flower-veil",
+        "adaptability",
+        "unburden"
+      ],
+      "item": [
+        "focus-sash",
+        "sitrus-berry",
+        "black-glasses",
+        "floettite",
+        "choice-scarf",
+        "white-herb"
+      ],
+      "moves": [
+        [
+          "moonblast",
+          "tailwind",
+          "encore",
+          "taunt"
+        ],
+        [
+          "throat-chop",
+          "parting-shot",
+          "fake-out",
+          "flare-blitz"
+        ],
+        [
+          "sucker-punch",
+          "kowtow-cleave",
+          "iron-head",
+          "protect"
+        ],
+        [
+          "moonblast",
+          "dazzling-gleam",
+          "calm-mind",
+          "light-of-ruin"
+        ],
+        [
+          "last-respects",
+          "wave-crash",
+          "aqua-jet",
+          "flip-turn"
+        ],
+        [
+          "fake-out",
+          "close-combat",
+          "dire-claw",
+          "protect"
+        ]
+      ],
+      "species": [
+        "whimsicott",
+        "incineroar",
+        "kingambit",
+        "floette",
+        "basculegion",
+        "sneasler"
       ]
     }
   }

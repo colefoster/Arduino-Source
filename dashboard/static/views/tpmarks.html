@@ -1,0 +1,39 @@
+<div id="view-tpmarks" class="view">
+    <h1 style="margin: 0 0 16px;">Team Preview Selecting: lead-mark digits</h1>
+    <div style="color:#8b949e; font-size:12px; margin-bottom:12px;">
+        6 digit-badge crops (top-to-bottom <code>digit_0</code>...<code>digit_5</code>).
+        Same OCR pipeline as <a href="#/tplocked" style="color:#58a6ff;">TP Locked-In</a>:
+        raw → binarize → yellow_paint → yellow_filled → yellow_inner → Tesseract.
+        The "→ lead" column is the final '1'..'4' (or empty for unmarked) used by the auto-press lead-pick state machine.
+    </div>
+
+    <div style="display:flex; gap:8px; margin-bottom:12px; align-items:center;">
+        <label style="font-size:11px; color:#8b949e;">File:</label>
+        <select id="tpm-file" style="background:#0d1117; color:#e6edf3; border:1px solid #30363d; padding:4px; min-width:380px;"></select>
+        <button id="tpm-run" style="background:#238636; color:#fff; border:0; padding:6px 12px; border-radius:4px; cursor:pointer;">Run</button>
+        <span id="tpm-status" style="font-size:11px; color:#8b949e; margin-left:auto;"></span>
+    </div>
+
+    <div style="display:grid; grid-template-columns: 360px 1fr; gap:16px;">
+        <div>
+            <div style="font-size:11px; color:#8b949e; margin-bottom:4px;">Screenshot</div>
+            <img id="tpm-img" style="width:100%; border:1px solid #30363d; border-radius:4px;">
+        </div>
+        <div id="tpm-slots" style="display:flex; flex-direction:column; gap:8px;"></div>
+    </div>
+</div>
+
+<style>
+.tpm-card {
+    background:#161b22; border:1px solid #30363d; border-radius:6px;
+    padding:8px 10px; display:grid;
+    grid-template-columns: 80px 1fr; gap:12px; align-items:center;
+}
+.tpm-card .label { font-size:10px; color:#6e7681; text-transform:uppercase; letter-spacing:0.06em; font-weight:600; }
+.tpm-card img { background:#0d1117; image-rendering:pixelated; border:1px solid #30363d; border-radius:3px; max-width:100%; }
+.tpm-card .matches { display:flex; flex-direction:column; gap:2px; font-family: ui-monospace, monospace; font-size:11px; }
+.tpm-card .match { display:flex; gap:8px; }
+.tpm-card .match .slug { color:#79c0ff; min-width:170px; }
+.tpm-card .match .score { color:#8b949e; }
+.tpm-card .match.top .slug { color:#3fb950; font-weight:700; }
+</style>

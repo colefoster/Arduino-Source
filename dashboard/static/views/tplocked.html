@@ -1,0 +1,38 @@
+<div id="view-tplocked" class="view">
+    <h1 style="margin: 0 0 16px;">Team Preview Locked-In: own slot investigation</h1>
+    <div style="color:#8b949e; font-size:12px; margin-bottom:12px;">
+        6 own-side icon slots (top-to-bottom <code>own_slot_0</code>...<code>own_slot_5</code>).
+        Each crop sprite-matched against the HUD pill atlas. Use this to validate the boxes
+        and decide the lead-order mapping before promoting to a real reader.
+    </div>
+
+    <div style="display:flex; gap:8px; margin-bottom:12px; align-items:center;">
+        <label style="font-size:11px; color:#8b949e;">File:</label>
+        <select id="tpl-file" style="background:#0d1117; color:#e6edf3; border:1px solid #30363d; padding:4px; min-width:380px;"></select>
+        <button id="tpl-run" style="background:#238636; color:#fff; border:0; padding:6px 12px; border-radius:4px; cursor:pointer;">Run</button>
+        <span id="tpl-status" style="font-size:11px; color:#8b949e; margin-left:auto;"></span>
+    </div>
+
+    <div style="display:grid; grid-template-columns: 360px 1fr; gap:16px;">
+        <div>
+            <div style="font-size:11px; color:#8b949e; margin-bottom:4px;">Screenshot</div>
+            <img id="tpl-img" style="width:100%; border:1px solid #30363d; border-radius:4px;">
+        </div>
+        <div id="tpl-slots" style="display:flex; flex-direction:column; gap:8px;"></div>
+    </div>
+</div>
+
+<style>
+.tpl-card {
+    background:#161b22; border:1px solid #30363d; border-radius:6px;
+    padding:8px 10px; display:grid;
+    grid-template-columns: 80px 1fr; gap:12px; align-items:center;
+}
+.tpl-card .label { font-size:10px; color:#6e7681; text-transform:uppercase; letter-spacing:0.06em; font-weight:600; }
+.tpl-card img { background:#0d1117; image-rendering:pixelated; border:1px solid #30363d; border-radius:3px; max-width:100%; }
+.tpl-card .matches { display:flex; flex-direction:column; gap:2px; font-family: ui-monospace, monospace; font-size:11px; }
+.tpl-card .match { display:flex; gap:8px; }
+.tpl-card .match .slug { color:#79c0ff; min-width:170px; }
+.tpl-card .match .score { color:#8b949e; }
+.tpl-card .match.top .slug { color:#3fb950; font-weight:700; }
+</style>

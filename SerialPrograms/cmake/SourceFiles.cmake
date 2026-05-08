@@ -1342,6 +1342,8 @@ file(GLOB LIBRARY_SOURCES
     Source/PokemonChampions/Inference/PokemonChampions_OwnStatusReader.h
     Source/PokemonChampions/Inference/PokemonChampions_PokemonSwitchDetector.cpp
     Source/PokemonChampions/Inference/PokemonChampions_PokemonSwitchDetector.h
+    Source/PokemonChampions/Inference/PokemonChampions_PokemonSwitchReader.cpp
+    Source/PokemonChampions/Inference/PokemonChampions_PokemonSwitchReader.h
     Source/PokemonChampions/Inference/PokemonChampions_MoveNameReader.cpp
     Source/PokemonChampions/Inference/PokemonChampions_MoveNameReader.h
     Source/PokemonChampions/Inference/PokemonChampions_MegaEvolveDetector.cpp
@@ -1356,6 +1358,10 @@ file(GLOB LIBRARY_SOURCES
     Source/PokemonChampions/Inference/PokemonChampions_TeamPreviewDetector.h
     Source/PokemonChampions/Inference/PokemonChampions_TeamPreviewReader.cpp
     Source/PokemonChampions/Inference/PokemonChampions_TeamPreviewReader.h
+    Source/PokemonChampions/Inference/PokemonChampions_CasualFormatSelectDetector.cpp
+    Source/PokemonChampions/Inference/PokemonChampions_CasualFormatSelectDetector.h
+    Source/PokemonChampions/Inference/PokemonChampions_TeamPreviewCursorReader.cpp
+    Source/PokemonChampions/Inference/PokemonChampions_TeamPreviewCursorReader.h
     Source/PokemonChampions/Inference/PokemonChampions_TeamPreviewLeadsReader.cpp
     Source/PokemonChampions/Inference/PokemonChampions_TeamPreviewLeadsReader.h
     Source/PokemonChampions/Inference/PokemonChampions_BattleInfoDetector.cpp
@@ -1390,6 +1396,8 @@ file(GLOB LIBRARY_SOURCES
     Source/PokemonChampions/Programs/PokemonChampions_DetectorTest.h
     Source/PokemonChampions/Programs/PokemonChampions_InferenceClient.cpp
     Source/PokemonChampions/Programs/PokemonChampions_InferenceClient.h
+    Source/PokemonChampions/Programs/PokemonChampions_InputSuggester.cpp
+    Source/PokemonChampions/Programs/PokemonChampions_InputSuggester.h
     Source/PokemonChampions/Programs/PokemonChampions_LiveDetectorTrace.cpp
     Source/PokemonChampions/Programs/PokemonChampions_LiveDetectorTrace.h
     Source/PokemonBDSP/Inference/Battles/PokemonBDSP_BattleBallReader.cpp

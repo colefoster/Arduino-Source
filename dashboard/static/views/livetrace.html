@@ -1,68 +1,245 @@
 <div class="view" id="view-livetrace">
-    <h1>Live Trace</h1>
-    <div class="subtitle">Mirror of the inference engine ingest pipeline. Run the LiveDetectorTrace SerialPrograms program on the Mac to feed this view. Pipeline panel shows what is firing, stale, skipped, or WIP.</div>
+    <div class="lt-header">
+        <h1 style="margin:0;">Live Trace</h1>
+        <div class="lt-status">
+            <span class="lt-screen-pill lt-pill-big" id="lt-screen">screen: -</span>
+            <div class="lt-meta">
+                <span class="lt-meta-item"><span class="k">mode</span><span id="lt-mode">-</span></span>
+                <span class="lt-meta-item"><span class="k">match</span><span id="lt-match">-</span></span>
+                <span class="lt-meta-item"><span class="k">conn</span><span id="lt-conn" class="lt-conn-disconnected">disconnected</span></span>
+                <span class="lt-meta-item"><span class="k">head</span><span id="lt-head">-</span></span>
+                <span class="lt-meta-item"><span class="k">last evt</span><span id="lt-age">-</span></span>
+                <span class="lt-meta-item"><span class="k">events</span><span id="lt-events">0</span></span>
+            </div>
+        </div>
+    </div>
+    <div class="subtitle">Mirror of the inference engine ingest pipeline. Run the LiveDetectorTrace SerialPrograms program to feed this view.</div>
 
-    <div id="livetrace-status-bar">
-        <span class="lt-pill" id="lt-screen">screen: -</span>
-        <span class="lt-pill" id="lt-mode">mode: -</span>
-        <span class="lt-pill" id="lt-match">match: -</span>
-        <span class="lt-pill" id="lt-conn">disconnected</span>
-        <span class="lt-pill" id="lt-head">head_seq: -</span>
-        <span class="lt-pill" id="lt-age">last event: -</span>
-        <span class="lt-pill" id="lt-events">events seen: 0</span>
+    <!-- Hero: Battle State -->
+    <div class="lt-card lt-bs-card">
+        <div class="lt-bs-header">
+            <span class="lt-section-label">Battle State</span>
+            <span class="lt-bs-turn" id="lt-bs-turn"></span>
+            <span class="lt-suggest" id="lt-suggest" hidden></span>
+        </div>
+        <div class="lt-bs-grid">
+            <!-- Own side -->
+            <div class="lt-bs-side lt-side-own">
+                <div class="lt-bs-side-head">
+                    <span class="lt-side-tag">Own</span>
+                    <div class="lt-pokeballs" id="lt-own-pokeballs"></div>
+                </div>
+                <div class="lt-bs-leads-row" id="lt-bs-leads-row">
+                    <span class="lt-leads-empty">leads not yet read</span>
+                </div>
+                <div class="lt-bs-active-row" id="lt-bs-own-active-row"></div>
+            </div>
+            <!-- Opp side -->
+            <div class="lt-bs-side lt-side-opp">
+                <div class="lt-bs-side-head">
+                    <span class="lt-side-tag">Opp</span>
+                    <div class="lt-pokeballs" id="lt-opp-pokeballs"></div>
+                </div>
+                <div class="lt-bs-leads-row lt-leads-na">
+                    <span class="lt-leads-empty">opp leads — game-state hidden</span>
+                </div>
+                <div class="lt-bs-active-row" id="lt-bs-opp-active-row"></div>
+            </div>
+        </div>
     </div>
 
+    <!-- 3-col main: pipeline | own bench | opp bench (active mons live above) -->
     <div id="livetrace-grid">
-        <div class="lt-col">
-            <h2>Pipeline</h2>
-            <div class="lt-legend">
-                <span class="lt-dot lt-ok"></span>fired now
-                <span class="lt-dot lt-stale"></span>stale
-                <span class="lt-dot lt-skipped"></span>skipped
-                <span class="lt-dot lt-wip"></span>WIP
-                <span class="lt-dot lt-na"></span>n/a (passive)
-                <span class="lt-dot lt-error"></span>error
+        <div class="lt-col lt-col-pipe">
+            <div class="lt-col-head">
+                <span class="lt-section-label">Pipeline</span>
+                <div class="lt-legend">
+                    <span class="lt-dot lt-ok"></span>fresh
+                    <span class="lt-dot lt-stale"></span>stale
+                    <span class="lt-dot lt-skipped"></span>skip
+                    <span class="lt-dot lt-wip"></span>WIP
+                    <span class="lt-dot lt-na"></span>n/a
+                    <span class="lt-dot lt-error"></span>err
+                </div>
             </div>
             <div id="lt-pipeline"></div>
         </div>
 
         <div class="lt-col">
-            <h2>Engine View (own)</h2>
-            <div class="lt-pokeballs" id="lt-own-pokeballs"></div>
+            <div class="lt-col-head"><span class="lt-section-label">Own Bench</span></div>
             <div id="lt-own-team"></div>
         </div>
 
         <div class="lt-col">
-            <h2>Engine View (opp)</h2>
-            <div class="lt-pokeballs" id="lt-opp-pokeballs"></div>
+            <div class="lt-col-head"><span class="lt-section-label">Opp Bench</span></div>
             <div id="lt-opp-team"></div>
         </div>
     </div>
 
-    <h2 style="margin-top:24px;">Derived State <span id="lt-derived-status" style="font-size:11px; color:#6e7681; font-weight:normal;"></span></h2>
-    <div id="lt-derived" style="background:#0d1117; border:1px solid #30363d; border-radius:6px; padding:10px; font-family:ui-monospace,monospace; font-size:11px; color:#8b949e;">(no data yet)</div>
+    <!-- Field state strip -->
+    <div class="lt-card lt-field-card">
+        <div class="lt-section-label" style="margin-bottom:8px;">Field</div>
+        <div id="lt-field"></div>
+    </div>
 
-    <h2 style="margin-top:24px;">Field State</h2>
-    <div id="lt-field"></div>
-
-    <h2 style="margin-top:24px;">Recent Events</h2>
-    <div id="livetrace-feed"></div>
+    <!-- Bottom row: derived state + recent events -->
+    <div class="lt-bottom-grid">
+        <div class="lt-card">
+            <div class="lt-col-head">
+                <span class="lt-section-label">Derived State</span>
+                <span class="lt-derived-status" id="lt-derived-status"></span>
+            </div>
+            <div id="lt-derived" class="lt-derived">(no data yet)</div>
+        </div>
+        <div class="lt-card">
+            <div class="lt-col-head"><span class="lt-section-label">Recent Events</span></div>
+            <div id="livetrace-feed"></div>
+        </div>
+    </div>
 </div>
 
 <style>
-#livetrace-status-bar { display:flex; flex-wrap:wrap; gap:8px; margin:12px 0; align-items:center; }
-.lt-pill { background:#161b22; border:1px solid #30363d; border-radius:12px; padding:3px 10px; font-size:11px; color:#c9d1d9; font-family:ui-monospace,monospace; }
-.lt-pill.screen-team_preview { background:#0d2235; border-color:#58a6ff; }
-.lt-pill.screen-action_menu, .lt-pill.screen-move_select, .lt-pill.screen-preparing { background:#0d2a1a; border-color:#3fb950; }
-.lt-pill.screen-result_screen, .lt-pill.screen-post_match { background:#2a1a0d; border-color:#d29922; }
-.lt-pill.screen-main_menu { background:#1a1a2a; border-color:#a371f7; }
+/* ─── Header ─────────────────────────────────────────────── */
+.lt-header { display:flex; justify-content:space-between; align-items:center; gap:16px; margin-bottom:4px; flex-wrap:wrap; }
+.lt-status { display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+.lt-meta { display:flex; gap:14px; flex-wrap:wrap; align-items:center; }
+.lt-meta-item { display:flex; flex-direction:column; align-items:flex-start; line-height:1.1; font-family:ui-monospace,monospace; font-size:11px; }
+.lt-meta-item .k { font-size:9px; color:#6e7681; text-transform:uppercase; letter-spacing:0.06em; font-weight:600; }
+.lt-meta-item span:last-child { color:#c9d1d9; }
+.lt-conn-disconnected { color:#f85149 !important; }
+.lt-conn-connected { color:#3fb950 !important; }
 
-#livetrace-grid { display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:16px; margin-top:8px; }
-.lt-col { background:#0d1117; border:1px solid #30363d; border-radius:6px; padding:12px; min-width:0; }
-.lt-col h2 { margin:0 0 10px 0; font-size:14px; color:#c9d1d9; }
+.lt-screen-pill {
+    background:#161b22; border:1px solid #30363d; border-radius:6px;
+    padding:6px 14px; font-size:13px; font-weight:600; color:#c9d1d9;
+    font-family:ui-monospace,monospace; letter-spacing:0.02em;
+}
+.lt-screen-pill.screen-team_preview,
+.lt-screen-pill.screen-team_preview_locked_in { background:#0d2235; border-color:#58a6ff; color:#79c0ff; }
+.lt-screen-pill.screen-action_menu, .lt-screen-pill.screen-move_select,
+.lt-screen-pill.screen-preparing { background:#0d2a1a; border-color:#3fb950; color:#3fb950; }
+.lt-screen-pill.screen-target_select { background:#2a1f0d; border-color:#d29922; color:#d29922; }
+.lt-screen-pill.screen-result_screen, .lt-screen-pill.screen-post_match { background:#2a1a0d; border-color:#d29922; color:#d29922; }
+.lt-screen-pill.screen-main_menu { background:#1a1a2a; border-color:#a371f7; color:#a371f7; }
 
-.lt-legend { display:flex; flex-wrap:wrap; gap:10px; font-size:10px; color:#8b949e; margin-bottom:10px; align-items:center; }
-.lt-dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:3px; vertical-align:middle; }
+/* ─── Cards ──────────────────────────────────────────────── */
+.lt-card { background:#0d1117; border:1px solid #30363d; border-radius:8px; padding:14px; margin-top:14px; }
+.lt-section-label { font-size:10px; color:#8b949e; text-transform:uppercase; letter-spacing:0.08em; font-weight:700; }
+.lt-col-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; gap:10px; flex-wrap:wrap; }
+
+/* ─── Battle State ───────────────────────────────────────── */
+.lt-bs-card { padding:14px 16px; }
+.lt-bs-header { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:12px; }
+.lt-bs-turn { font-size:11px; color:#8b949e; font-family:ui-monospace,monospace; }
+.lt-suggest {
+    font-size:11px; font-family:ui-monospace,monospace; font-weight:700;
+    color:#3fb950; background:#3fb95022; border:1px solid #3fb95055;
+    padding:3px 9px; border-radius:12px; margin-left:auto;
+}
+.lt-suggest .lt-suggest-reason { color:#8b949e; font-weight:400; margin-left:6px; }
+.lt-bs-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.lt-bs-side { background:#161b22; border:1px solid #21262d; border-radius:6px; padding:10px; }
+.lt-side-own { border-left:3px solid #3fb950; }
+.lt-side-opp { border-left:3px solid #f85149; }
+.lt-bs-side-head { display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; gap:10px; }
+.lt-side-tag { font-size:10px; font-weight:700; color:#8b949e; text-transform:uppercase; letter-spacing:0.08em; }
+.lt-side-own .lt-side-tag { color:#3fb950; }
+.lt-side-opp .lt-side-tag { color:#f85149; }
+
+.lt-bs-leads-row { display:flex; gap:6px; flex-wrap:wrap; min-height:28px; align-items:center; padding:4px 0; margin-bottom:8px; border-bottom:1px solid #21262d; }
+.lt-leads-empty { font-size:11px; color:#6e7681; font-style:italic; }
+.lt-leads-na { opacity:0.5; }
+.lt-lead-pill {
+    background:#1f6feb22; border:1px solid #1f6feb55; color:#79c0ff;
+    font-size:11px; padding:3px 9px; border-radius:12px; font-weight:600;
+    display:inline-flex; align-items:center; gap:4px;
+}
+.lt-lead-pill .order { color:#58a6ff; font-family:ui-monospace,monospace; font-weight:700; }
+
+.lt-bs-active-row { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.lt-bs-active-row.singles { grid-template-columns:1fr; }
+
+/* ─── Slot card (active + bench) ─────────────────────────── */
+.lt-slot {
+    background:#0d1117; border:1px solid #21262d; border-radius:6px;
+    padding:8px 10px; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    font-size:12px; line-height:1.3;
+    display:flex; flex-direction:column; gap:5px;
+}
+.lt-slot.active { border-color:#58a6ff; background:linear-gradient(180deg, #0d2235 0%, #0d1117 80%); }
+.lt-slot.fainted { opacity:0.45; }
+.lt-slot .row1 { display:flex; align-items:baseline; justify-content:space-between; gap:8px; }
+.lt-slot .species { font-weight:700; color:#e6edf3; font-size:13px; text-transform:capitalize; }
+.lt-slot .slot-idx {
+    color:#58a6ff; font-family:ui-monospace,monospace; font-weight:600;
+    font-size:10px; background:#1f6feb22; padding:1px 5px; border-radius:8px; margin-right:6px;
+}
+.lt-slot .status-pill {
+    font-size:9px; font-weight:700; padding:1px 6px; border-radius:8px;
+    text-transform:uppercase; letter-spacing:0.04em;
+}
+.lt-slot .status-pill.brn { background:#f8514922; color:#f85149; }
+.lt-slot .status-pill.par { background:#d2992222; color:#d29922; }
+.lt-slot .status-pill.psn, .lt-slot .status-pill.tox { background:#a371f722; color:#a371f7; }
+.lt-slot .status-pill.slp { background:#6e768122; color:#8b949e; }
+.lt-slot .status-pill.frz { background:#79c0ff22; color:#79c0ff; }
+.lt-slot .mega-pill { background:#a371f733; color:#d2a8ff; font-size:9px; font-weight:700; padding:1px 6px; border-radius:8px; text-transform:uppercase; letter-spacing:0.05em; }
+
+.lt-hp { display:flex; align-items:center; gap:6px; font-family:ui-monospace,monospace; font-size:10px; }
+.lt-hp .bar { flex:1; height:5px; background:#21262d; border-radius:3px; overflow:hidden; min-width:40px; }
+.lt-hp .fill { height:100%; transition:width .25s; }
+.lt-hp .fill.high   { background:#3fb950; }
+.lt-hp .fill.mid    { background:#d29922; }
+.lt-hp .fill.low    { background:#f85149; }
+.lt-hp .pct { color:#8b949e; min-width:30px; text-align:right; }
+
+.lt-ai { display:flex; align-items:center; gap:8px; font-size:10px; color:#8b949e; flex-wrap:wrap; }
+.lt-ai .kv { display:inline-flex; gap:3px; }
+.lt-ai .kv .k { color:#6e7681; font-size:9px; text-transform:uppercase; font-weight:600; letter-spacing:0.04em; }
+.lt-ai .kv .v { color:#d2dae5; text-transform:capitalize; }
+.lt-ai .kv.miss .v { color:#484f58; font-style:italic; }
+
+.lt-moves { display:grid; grid-template-columns:1fr 1fr; gap:3px 8px; font-size:10px; }
+.lt-moves .move {
+    color:#d2dae5; text-transform:capitalize; padding-left:8px; position:relative;
+    display:flex; align-items:center; gap:6px; justify-content:space-between;
+}
+.lt-moves .move::before { content:""; position:absolute; left:0; top:50%; width:4px; height:4px; border-radius:50%; background:#3fb950; transform:translateY(-50%); }
+.lt-moves .move .pp {
+    font-family:ui-monospace,monospace; font-size:9px; color:#6e7681;
+    text-transform:none; font-variant-numeric:tabular-nums;
+}
+.lt-moves .move.miss { color:#484f58; font-style:italic; }
+.lt-moves .move.miss::before { background:#30363d; }
+
+/* Boost chips */
+.lt-boosts { display:flex; flex-wrap:wrap; gap:4px; }
+.lt-boost {
+    font-size:9px; font-family:ui-monospace,monospace; font-weight:700;
+    padding:1px 6px; border-radius:8px; text-transform:uppercase; letter-spacing:0.04em;
+}
+.lt-boost.up   { background:#3fb95022; color:#3fb950; }
+.lt-boost.down { background:#f8514922; color:#f85149; }
+
+/* ─── Pokeballs ──────────────────────────────────────────── */
+.lt-pokeballs { display:flex; gap:3px; }
+.lt-pokeball { width:13px; height:13px; border-radius:50%; border:1px solid #30363d; }
+.lt-pokeball.alive          { background:#3fb950; }
+.lt-pokeball.alive_statused { background:#d97706; }
+.lt-pokeball.fainted        { background:#484f58; }
+.lt-pokeball.empty          { background:transparent; }
+.lt-pokeball.active         { box-shadow:0 0 0 2px #58a6ff; transform:scale(1.18); }
+.lt-pokeball.ALIVE          { background:#3fb950; }
+.lt-pokeball.FAINTED        { background:#484f58; }
+.lt-pokeball.EMPTY          { background:transparent; }
+
+/* ─── 3-col grid ─────────────────────────────────────────── */
+#livetrace-grid { display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:14px; margin-top:14px; }
+.lt-col { background:#0d1117; border:1px solid #30363d; border-radius:8px; padding:14px; min-width:0; }
+.lt-col-pipe { font-family:ui-monospace,monospace; }
+
+.lt-legend { display:flex; flex-wrap:wrap; gap:8px; font-size:9px; color:#8b949e; align-items:center; }
+.lt-dot { display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:2px; vertical-align:middle; }
 .lt-ok { background:#3fb950; }
 .lt-stale { background:#d29922; }
 .lt-skipped { background:#484f58; }
@@ -70,41 +247,41 @@
 .lt-na { background:#6e7681; border:1px dashed #c9d1d9; }
 .lt-error { background:#bb8009; }
 
-.lt-pipe-row { display:grid; grid-template-columns:auto 1fr auto auto; gap:8px; align-items:center; padding:4px 0; border-bottom:1px solid #21262d; font-family:ui-monospace,monospace; font-size:11px; }
+/* ─── Pipeline rows ──────────────────────────────────────── */
+.lt-pipe-group-head { color:#6e7681; font-size:9px; text-transform:uppercase; letter-spacing:0.08em; margin:10px 0 4px 0; font-weight:700; }
+.lt-pipe-group-head:first-child { margin-top:0; }
+.lt-pipe-row { display:grid; grid-template-columns:auto 1fr auto auto; gap:6px; align-items:center; padding:3px 0; border-bottom:1px solid #161b22; font-family:ui-monospace,monospace; font-size:11px; }
+.lt-pipe-row:last-child { border-bottom:none; }
 .lt-pipe-row:hover { background:#161b22; }
-.lt-pipe-row .name { color:#c9d1d9; }
-.lt-pipe-row .cat { color:#6e7681; font-size:10px; }
-.lt-pipe-row .age { color:#8b949e; font-size:10px; min-width:60px; text-align:right; }
+.lt-pipe-row .name { color:#c9d1d9; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.lt-pipe-row .cat { color:#6e7681; font-size:9px; }
+.lt-pipe-row .status { color:#6e7681; font-size:9px; }
+.lt-pipe-row .age { color:#8b949e; font-size:10px; min-width:42px; text-align:right; }
 .lt-pipe-row.expanded .detail { display:block; }
-.lt-pipe-row .detail { display:none; grid-column:1 / -1; background:#161b22; border-left:2px solid #30363d; padding:6px 10px; margin:4px 0 4px 14px; color:#8b949e; font-size:10px; white-space:pre-wrap; }
+.lt-pipe-row .detail { display:none; grid-column:1/-1; background:#161b22; border-left:2px solid #30363d; padding:6px 10px; margin:4px 0 4px 14px; color:#8b949e; font-size:10px; white-space:pre-wrap; }
 
-.lt-pokeballs { display:flex; gap:3px; margin-bottom:10px; }
-.lt-pokeball { width:14px; height:14px; border-radius:50%; border:1px solid #30363d; }
-.lt-pokeball.alive          { background:#3fb950; }
-.lt-pokeball.alive_statused { background:#d97706; }
-.lt-pokeball.fainted        { background:#484f58; }
-.lt-pokeball.empty          { background:transparent; }
-/* Legacy uppercase aliases to avoid breaking older callers. */
-.lt-pokeball.ALIVE          { background:#3fb950; }
-.lt-pokeball.FAINTED        { background:#484f58; }
-.lt-pokeball.EMPTY          { background:transparent; }
+/* ─── Field state pills ──────────────────────────────────── */
+#lt-field { display:flex; gap:6px; flex-wrap:wrap; }
+.lt-field-pill {
+    display:inline-flex; align-items:center; gap:6px;
+    background:#161b22; border:1px solid #21262d; border-radius:14px;
+    padding:3px 10px; font-size:10px; font-family:ui-monospace,monospace;
+}
+.lt-field-pill .k { color:#6e7681; font-size:9px; text-transform:uppercase; letter-spacing:0.04em; font-weight:600; }
+.lt-field-pill .v { color:#484f58; }
+.lt-field-pill.set { background:#0d2a1a; border-color:#3fb95044; }
+.lt-field-pill.set .v { color:#3fb950; font-weight:600; }
+.lt-field-pill.wip { background:#2a1a0d; border-color:#d2992244; }
+.lt-field-pill.wip .v { color:#d29922; }
 
-.lt-slot { background:#161b22; border:1px solid #21262d; border-radius:4px; padding:6px 8px; margin:4px 0; font-family:ui-monospace,monospace; font-size:11px; }
-.lt-slot.active { border-color:#58a6ff; background:#0d2235; }
-.lt-slot.fainted { opacity:0.4; }
-.lt-slot .species { font-weight:bold; color:#c9d1d9; font-size:12px; }
-.lt-slot .meta { color:#8b949e; font-size:10px; margin-top:2px; }
-.lt-slot .wip { color:#f85149; font-style:italic; font-size:10px; }
-.lt-slot-label { color:#6e7681; font-size:10px; margin-top:6px; margin-bottom:2px; }
+/* ─── Bottom grid: derived + events ──────────────────────── */
+.lt-bottom-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+.lt-derived { background:#0d1117; border:1px solid #21262d; border-radius:6px; padding:10px; font-family:ui-monospace,monospace; font-size:11px; color:#8b949e; min-height:60px; }
+.lt-derived-status { font-size:10px; color:#6e7681; font-family:ui-monospace,monospace; }
 
-#lt-field { background:#0d1117; border:1px solid #30363d; border-radius:6px; padding:10px; font-family:ui-monospace,monospace; font-size:11px; }
-.lt-field-row { display:inline-block; margin-right:14px; color:#8b949e; }
-.lt-field-row .key { color:#6e7681; }
-.lt-field-row .val.set { color:#3fb950; }
-.lt-field-row .val.unset { color:#484f58; }
-
-#livetrace-feed { max-height:280px; overflow-y:auto; background:#0d1117; border:1px solid #30363d; padding:8px; font-family:ui-monospace,monospace; font-size:10px; }
-.lt-event-row { padding:1px 0; color:#c9d1d9; }
-.lt-event-row .seq { color:#6e7681; margin-right:8px; }
-.lt-event-row .scr { color:#58a6ff; margin-right:8px; }
+#livetrace-feed { max-height:200px; overflow-y:auto; background:#0d1117; border:1px solid #21262d; border-radius:6px; padding:6px 8px; font-family:ui-monospace,monospace; font-size:10px; }
+.lt-event-row { padding:1px 0; color:#c9d1d9; display:flex; gap:8px; }
+.lt-event-row .seq { color:#6e7681; min-width:50px; }
+.lt-event-row .scr { color:#58a6ff; flex:1; }
+.lt-event-row .ts  { color:#6e7681; }
 </style>

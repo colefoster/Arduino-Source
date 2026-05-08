@@ -1,0 +1,47 @@
+<div id="view-tpcursor" class="view">
+    <h1 style="margin: 0 0 16px;">Team Preview Selecting: cursor reader</h1>
+    <div style="color:#8b949e; font-size:12px; margin-bottom:12px;">
+        6 highlight strips on the left edge of each own card. Per-slot
+        <code>(R+G)/2 - B</code> "yellowness" score; floor 30. Highest-scoring slot wins.
+        The selected slot pill shows what <code>TeamPreviewCursorReader::read</code> returns.
+    </div>
+
+    <div style="display:flex; gap:8px; margin-bottom:12px; align-items:center;">
+        <label style="font-size:11px; color:#8b949e;">File:</label>
+        <select id="tpc-file" style="background:#0d1117; color:#e6edf3; border:1px solid #30363d; padding:4px; min-width:380px;"></select>
+        <button id="tpc-run" style="background:#238636; color:#fff; border:0; padding:6px 12px; border-radius:4px; cursor:pointer;">Run</button>
+        <span id="tpc-selected" class="tpc-selected" style="margin-left:12px;"></span>
+        <span id="tpc-status" style="font-size:11px; color:#8b949e; margin-left:auto;"></span>
+    </div>
+
+    <div style="display:grid; grid-template-columns: 360px 1fr; gap:16px;">
+        <div>
+            <div style="font-size:11px; color:#8b949e; margin-bottom:4px;">Screenshot</div>
+            <img id="tpc-img" style="width:100%; border:1px solid #30363d; border-radius:4px;">
+        </div>
+        <div id="tpc-slots" style="display:flex; flex-direction:column; gap:8px;"></div>
+    </div>
+</div>
+
+<style>
+.tpc-card {
+    background:#161b22; border:1px solid #30363d; border-radius:6px;
+    padding:8px 10px; display:grid;
+    grid-template-columns: 80px 200px 1fr; gap:12px; align-items:center;
+}
+.tpc-card.win { border-color:#3fb950; background:#0a2a17; }
+.tpc-card .label { font-size:11px; color:#8b949e; font-family:ui-monospace,monospace; }
+.tpc-card.win .label { color:#3fb950; font-weight:700; }
+.tpc-card img { background:#0d1117; image-rendering:pixelated; border:1px solid #30363d; border-radius:3px; max-width:100%; }
+.tpc-card .stats { font-family:ui-monospace,monospace; font-size:11px; color:#8b949e; }
+.tpc-card .stats .score { color:#e6edf3; font-weight:700; }
+.tpc-card.win .stats .score { color:#3fb950; }
+.tpc-card.below .stats .score { color:#6e7681; }
+
+.tpc-selected {
+    font-family:ui-monospace,monospace; font-size:12px; font-weight:700;
+    padding:3px 9px; border-radius:12px;
+}
+.tpc-selected.has { background:#3fb95022; border:1px solid #3fb95055; color:#3fb950; }
+.tpc-selected.none { background:#f8514922; border:1px solid #f8514955; color:#f85149; }
+</style>

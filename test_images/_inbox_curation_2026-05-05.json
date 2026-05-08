@@ -1,0 +1,442 @@
+{
+  "prefix": "20260505-game2-",
+  "new_event_types": [],
+  "new_log_text_count": 56,
+  "files": [
+    {
+      "file": "20260505-game2-video-20260505-153202484050_0001.png",
+      "reasons": [
+        "new_signature=()"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153202484050_0003.png",
+      "reasons": [
+        "new_signature=['PostMatchScreenDetector']",
+        "transition=()->['PostMatchScreenDetector']"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153202484050_0019.png",
+      "reasons": [
+        "transition=['PostMatchScreenDetector']->()"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153202484050_0032.png",
+      "reasons": [
+        "new_signature=['TeamPreviewDetector']",
+        "transition=()->['TeamPreviewDetector']"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153202484050_0057.png",
+      "reasons": [
+        "new_signature=['PreparingForBattleDetector']",
+        "transition=['TeamPreviewDetector']->['PreparingForBattleDetector']"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153202484050_0061.png",
+      "reasons": [
+        "transition=['PreparingForBattleDetector']->()"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153202484050_0072.png",
+      "reasons": [
+        "new_log_text=SWITCH_IN:'U= sent out Pelipper and*Archaludon! = | . \u2014'"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153202484050_0080.png",
+      "reasons": [
+        "new_log_text=WEATHER:'It started to rain! : ~ 1'"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153202484050_0081.png",
+      "reasons": [
+        "new_log_text=WEATHER:\"It started to rain! '\""
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153202484050_0082.png",
+      "reasons": [
+        "new_signature=['ActionMenuDetector']",
+        "transition=()->['ActionMenuDetector']"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153202484050_0089.png",
+      "reasons": [
+        "new_signature=['MoveSelectDetector']",
+        "transition=['ActionMenuDetector']->['MoveSelectDetector']"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153202484050_0099.png",
+      "reasons": [
+        "transition=['MoveSelectDetector']->()"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153202484050_0107.png",
+      "reasons": [
+        "new_log_text=MOVE_USED:'The opposing Archaludon used Flash Cannon! |'"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153202484050_0108.png",
+      "reasons": [
+        "new_log_text=MOVE_USED:'Ihe opposing Archaludon used Flash Cannon! T 9N - '"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153202484050_0112.png",
+      "reasons": [
+        "new_log_text=MOVE_USED:'Archaludon used Electro Shot! \u2018A'"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153202484050_0113.png",
+      "reasons": [
+        "new_log_text=MOVE_USED:'Archaludon used Electro Shot! -'"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153202484050_0136.png",
+      "reasons": [
+        "new_log_text=MOVE_USED:'The opposing Pelipper used Hurricane! i'"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153202484050_0137.png",
+      "reasons": [
+        "new_log_text=MOVE_USED:'The opposing Pelipper used Hurricane! ;'"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153202484050_0143.png",
+      "reasons": [
+        "new_log_text=FAINTED:\"Sinistcha fainted! ' = T il 1 \u2018\""
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153202484050_0144.png",
+      "reasons": [
+        "new_log_text=FAINTED:'Sinistcha fainted!'"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153202484050_0154.png",
+      "reasons": [
+        "new_log_text=SWITCH_IN:'Go! Starmie!'"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153202484050_0159.png",
+      "reasons": [
+        "first_fire=MegaEvolveDetector",
+        "new_signature=['MegaEvolveDetector', 'MoveSelectDetector']",
+        "transition=()->['MegaEvolveDetector', 'MoveSelectDetector']"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153202484050_0161.png",
+      "reasons": [
+        "transition=['MegaEvolveDetector', 'MoveSelectDetector']->()"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153202484050_0190.png",
+      "reasons": [
+        "new_log_text=MEGA_EVOLVE:'Starmie has Mega Evolved into Mega Starmie! \u2122 i |'"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153202484050_0192.png",
+      "reasons": [
+        "new_log_text=MOVE_USED:'Starmie used Liquidation! = s'"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153202484050_0197.png",
+      "reasons": [
+        "new_log_text=NOT_EFFECTIVE:\"It's not very effective on the opposing Archaludon\""
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153202484050_0198.png",
+      "reasons": [
+        "new_log_text=NOT_EFFECTIVE:\"It's not very effective on the opposing Archaludon\""
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153202484050_0202.png",
+      "reasons": [
+        "new_log_text=MOVE_USED:'The opposing Archaludon used Electro Shot! | \u2122 j |'"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153202484050_0203.png",
+      "reasons": [
+        "new_log_text=MOVE_USED:\"The opposing Archaludon used Electro Shot! '8\""
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153202484050_0221.png",
+      "reasons": [
+        "new_log_text=FAINTED:'Starmie fainted!\u00ae - \u2014\u2014 .o'"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153202484050_0225.png",
+      "reasons": [
+        "new_log_text=MOVE_USED:'Archaludon used Electro Shot!'"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153202484050_0243.png",
+      "reasons": [
+        "new_log_text=FAINTED:'The opposing Pelipper fainted! \u2018'"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153202484050_0272.png",
+      "reasons": [
+        "new_log_text=SWITCH_IN:'Go! Pelipper! : \u2019'"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153202484050_0278.png",
+      "reasons": [
+        "transition=()->['MoveSelectDetector']"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153202484050_0299.png",
+      "reasons": [
+        "new_log_text=MOVE_USED:'The opposing Sneasler used Fake Out! \u2018'"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153202484050_0300.png",
+      "reasons": [
+        "new_log_text=MOVE_USED:'The opposing Sneasler used Fake Out! = =   '"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153416571596_0002.png",
+      "reasons": [
+        "new_log_text=MOVE_USED:\"The opposing Pelipper used Hurricane! '3\""
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153416571596_0003.png",
+      "reasons": [
+        "new_log_text=MOVE_USED:'The opposing Pelipper used Hurricane!'"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153416571596_0021.png",
+      "reasons": [
+        "new_log_text=SWITCH_IN:'\u2018Go! Starmie! S 7w =SV'"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153416571596_0025.png",
+      "reasons": [
+        "transition=['ActionMenuDetector']->['MegaEvolveDetector', 'MoveSelectDetector']"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153416571596_0056.png",
+      "reasons": [
+        "new_log_text=MEGA_EVOLVE:'Starmie has Mega Evolved into Mega Starmie! j u'"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153416571596_0057.png",
+      "reasons": [
+        "new_log_text=MEGA_EVOLVE:'Starmie has Mega Evolved into Mega Starmie! g'"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153416571596_0058.png",
+      "reasons": [
+        "new_log_text=MOVE_USED:'Starmie used Liquidation! H J 0'"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153416571596_0059.png",
+      "reasons": [
+        "new_log_text=MOVE_USED:'Starmie used Liquidation!'"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153416571596_0063.png",
+      "reasons": [
+        "new_log_text=NOT_EFFECTIVE:\"It's not very effective on the opposing Archaludon\""
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153416571596_0064.png",
+      "reasons": [
+        "new_log_text=NOT_EFFECTIVE:\"It's not very effective on the opposing Archaludon\""
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153416571596_0068.png",
+      "reasons": [
+        "new_log_text=MOVE_USED:'The opposing Archaludon used Electro Shot!  ~ i B'"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153416571596_0069.png",
+      "reasons": [
+        "new_log_text=MOVE_USED:'The opposing Archaludon used Electro Shot! \u2018A'"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153416571596_0086.png",
+      "reasons": [
+        "new_log_text=FAINTED:'Starmie fainted! e . \u2018'"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153416571596_0087.png",
+      "reasons": [
+        "new_log_text=FAINTED:'Starmie fainted! v S \u2014 ='"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153416571596_0092.png",
+      "reasons": [
+        "new_log_text=MOVE_USED:\"Archaludon used Electro Shot! i 'a\""
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153416571596_0109.png",
+      "reasons": [
+        "new_log_text=FAINTED:'The opposing Pelipper fainted! .'"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153416571596_0110.png",
+      "reasons": [
+        "new_log_text=FAINTED:\"The'opposing Pelipper fainted! = = =~ - T\""
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153416571596_0136.png",
+      "reasons": [
+        "new_log_text=SWITCH_IN:'U3 sent out Sneasler!'"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153416571596_0139.png",
+      "reasons": [
+        "new_log_text=SWITCH_IN:'Go! Pelipper!'"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153416571596_0166.png",
+      "reasons": [
+        "new_log_text=MOVE_USED:'The opposing Sneasler used Fake Outl<i N .'"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153416571596_0169.png",
+      "reasons": [
+        "new_log_text=MOVE_USED:'The opposing Archaludon used Electro Shot!'"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153416571596_0187.png",
+      "reasons": [
+        "new_log_text=FAINTED:'Pelipper fainted!'"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153416571596_0188.png",
+      "reasons": [
+        "new_log_text=FAINTED:'Pelipper fainted! - . = =='"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153416571596_0208.png",
+      "reasons": [
+        "new_log_text=NOT_EFFECTIVE:\"It's not very effective on the opposing Archaludon\""
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153416571596_0210.png",
+      "reasons": [
+        "new_log_text=FAINTED:'The opposing Archaludon fainted! \u2019'"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153416571596_0211.png",
+      "reasons": [
+        "new_log_text=FAINTED:'The opposing Archaludon fainted! p \u00a2'"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153416571596_0252.png",
+      "reasons": [
+        "new_log_text=MEGA_EVOLVE:'The opposing Gyarados has Mega Evolved into Mega G'"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153416571596_0257.png",
+      "reasons": [
+        "new_log_text=MOVE_USED:'The opposing Sneasler used Close Combat! ='"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153416571596_0274.png",
+      "reasons": [
+        "new_log_text=MOVE_USED:'The opposing Gyarados used Waterfall!'"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153416571596_0277.png",
+      "reasons": [
+        "new_log_text=NOT_EFFECTIVE:\"It's not very effective on Archaludon. | \u2014 \u2014\""
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153416571596_0278.png",
+      "reasons": [
+        "new_log_text=NOT_EFFECTIVE:\"It's not very effective on Archaludon. -~ \u00a9'\""
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153416571596_0279.png",
+      "reasons": [
+        "new_log_text=FAINTED:'Archaludon fainted! TR 1'"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153416571596_0280.png",
+      "reasons": [
+        "new_log_text=FAINTED:'Archaludon fainted! iy N . = ='"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153416571596_0288.png",
+      "reasons": [
+        "first_fire=ResultScreenDetector",
+        "new_signature=['ResultScreenDetector']",
+        "transition=()->['ResultScreenDetector']"
+      ]
+    },
+    {
+      "file": "20260505-game2-video-20260505-153416571596_0293.png",
+      "reasons": [
+        "transition=['ResultScreenDetector']->()"
+      ]
+    }
+  ]
+}
