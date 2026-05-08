@@ -11,6 +11,7 @@
 #ifndef PokemonAutomation_PokemonChampions_RankedFormatSelectDetector_H
 #define PokemonAutomation_PokemonChampions_RankedFormatSelectDetector_H
 
+#include <array>
 #include "CommonFramework/ImageTools/ImageBoxes.h"
 #include "CommonFramework/VideoPipeline/VideoOverlayScopes.h"
 #include "CommonTools/VisualDetector.h"
@@ -27,9 +28,15 @@ public:
     virtual void make_overlays(VideoOverlaySet& items) const override;
     virtual bool detect(const ImageViewRGB32& screen) override;
 
+    //  Valid after detect() returns true. -1 if no cursor scored above
+    //  the floor. 0=Singles, 1=Doubles.
+    int selected_index() const{ return m_selected_index; }
+
 private:
     ImageFloatBox m_top_tile_cyan;
     ImageFloatBox m_btm_tile_pink;
+    std::array<ImageFloatBox, 2> m_cursor_boxes;
+    int m_selected_index = -1;
 };
 
 

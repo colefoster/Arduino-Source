@@ -10,6 +10,7 @@
 #ifndef PokemonAutomation_PokemonChampions_PreMatchDetector_H
 #define PokemonAutomation_PokemonChampions_PreMatchDetector_H
 
+#include <array>
 #include "CommonFramework/ImageTools/ImageBoxes.h"
 #include "CommonFramework/VideoPipeline/VideoOverlayScopes.h"
 #include "CommonTools/VisualDetector.h"
@@ -26,9 +27,15 @@ public:
     virtual void make_overlays(VideoOverlaySet& items) const override;
     virtual bool detect(const ImageViewRGB32& screen) override;
 
+    //  Valid after detect() returns true. -1 if no cursor scored above
+    //  the floor. 0=Team Select, 1=Change Music, 2=Begin Matchmaking.
+    int selected_index() const{ return m_selected_index; }
+
 private:
     ImageFloatBox m_team_card;
     ImageFloatBox m_format_band;
+    std::array<ImageFloatBox, 3> m_cursor_boxes;
+    int m_selected_index = -1;
 };
 
 

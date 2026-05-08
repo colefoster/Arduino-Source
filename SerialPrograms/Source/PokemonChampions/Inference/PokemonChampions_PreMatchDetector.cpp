@@ -34,16 +34,36 @@ PreMatchDetector::PreMatchDetector()
     : m_team_card  (0.7917, 0.5556, 0.0078, 0.0139)
     //  Format band. x=1200, y=180, w=25, h=25 in 1920x1080.
     , m_format_band(0.6250, 0.1667, 0.0130, 0.0231)
-{}
+{
+    //  0=Team Select, 1=Change Music, 2=Begin Matchmaking. Drawn by user.
+    m_cursor_boxes[0] = ImageFloatBox(0.5743, 0.4779, 0.0334, 0.0441);
+    m_cursor_boxes[1] = ImageFloatBox(0.5716, 0.7012, 0.0237, 0.0393);
+    m_cursor_boxes[2] = ImageFloatBox(0.5711, 0.8555, 0.0270, 0.0393);
+}
 
 
 void PreMatchDetector::make_overlays(VideoOverlaySet& items) const{
     items.add(COLOR_CYAN, m_team_card);
     items.add(COLOR_CYAN, m_format_band);
+    for (const ImageFloatBox& b : m_cursor_boxes){
+        items.add(COLOR_YELLOW, b);
+    }
+}
+
+
+static double yellow_score(const ImageViewRGB32& crop){
+    if (crop.width() == 0 || crop.height() == 0) return -1.0;
+    ImageStats st = image_stats(crop);
+    int r = (int)st.average.r;
+    int g = (int)st.average.g;
+    int b = (int)st.average.b;
+    int score = (r + g) / 2 - b;
+    return score > 0 ? double(score) : 0.0;
 }
 
 
 bool PreMatchDetector::detect(const ImageViewRGB32& screen){
+    m_selected_index = -1;
     //  Co-evidence #1: white sprite-strip card. Pure white card between the
     //  six small Pokémon icons in the Team N row.
     const ImageStats team = image_stats(extract_box_reference(screen, m_team_card));
@@ -55,6 +75,17 @@ bool PreMatchDetector::detect(const ImageViewRGB32& screen){
     const ImageStats band = image_stats(extract_box_reference(screen, m_format_band));
     if (band.average.b < 180.0) return false;
     if (!is_solid(band, FORMAT_BAND_PURPLE, 0.10, 200)) return false;
+
+    int best = -1;
+    double best_score = 0.0;
+    for (int i = 0; i < 3; i++){
+        double s = yellow_score(extract_box_reference(screen, m_cursor_boxes[i]));
+        if (s > best_score && s >= 30.0){
+            best_score = s;
+            best = i;
+        }
+    }
+    m_selected_index = best;
     return true;
 }
 

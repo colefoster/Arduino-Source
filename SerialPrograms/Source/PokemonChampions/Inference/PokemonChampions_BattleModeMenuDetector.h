@@ -13,6 +13,7 @@
 #ifndef PokemonAutomation_PokemonChampions_BattleModeMenuDetector_H
 #define PokemonAutomation_PokemonChampions_BattleModeMenuDetector_H
 
+#include <array>
 #include "CommonFramework/ImageTools/ImageBoxes.h"
 #include "CommonFramework/VideoPipeline/VideoOverlayScopes.h"
 #include "CommonTools/VisualDetector.h"
@@ -29,9 +30,16 @@ public:
     virtual void make_overlays(VideoOverlaySet& items) const override;
     virtual bool detect(const ImageViewRGB32& screen) override;
 
+    //  Valid after detect() returns true. -1 if no cursor scored above the
+    //  floor (e.g. animation frame). Indexes match top-to-bottom row order:
+    //  0=Ranked, 1=Casual, 2=Private, 3=Online Competitions, 4=Battle Data.
+    int selected_index() const{ return m_selected_index; }
+
 private:
     ImageFloatBox m_season_pill;
     ImageFloatBox m_top_row_burst;
+    std::array<ImageFloatBox, 5> m_cursor_boxes;
+    int m_selected_index = -1;
 };
 
 

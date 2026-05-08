@@ -862,7 +862,7 @@ async function expandGalleryCard(filename) {
                 <div style="margin-top:8px;"><button class="btn" id="gallery-load-crops" style="font-size:10px; padding:2px 8px;">Show Crops</button></div>
                 <div class="crops" id="gallery-expanded-crops" style="margin-top:8px;"></div>
             </div>
-            <div style="flex:1 1 640px; min-width:560px;" id="gallery-label-form">
+            <div style="flex:1 1 520px; min-width:480px;" id="gallery-label-form">
                 <div style="color:#484f58; font-size:12px;">Loading schema...</div>
             </div>
         </div>
@@ -1116,25 +1116,30 @@ async function buildLabelForm(overlay, screen, filename, img) {
                     const val = existing[fieldName];
                     const slotVal = Array.isArray(val) ? val[slot] : null;
                     const items = fieldDef.items || 'string';
-                    html += `<div style="display:flex; align-items:center; gap:4px; margin-bottom:3px;">`;
-                    html += `<span style="font-size:9px; color:#8b949e; min-width:46px; text-transform:lowercase;">${fieldName}</span>`;
                     if (items === 'array') {
+                        //  Nested arrays (e.g. moves) stack vertically:
+                        //  one full-width input per inner slot under a label.
                         const innerLen = fieldDef.inner_length || 1;
                         const slotArr = Array.isArray(slotVal) ? slotVal : [];
+                        html += `<div style="margin-bottom:4px;">`;
+                        html += `<div style="font-size:9px; color:#8b949e; text-transform:lowercase; margin-bottom:2px;">${fieldName}</div>`;
                         for (let j = 0; j < innerLen; j++) {
                             const cell = slotArr[j] != null ? slotArr[j] : '';
                             html += `<input type="text" class="manifest-input" data-reader="${readerName}" data-field="${fieldName}" data-index="${slot}" data-subindex="${j}"
-                                value="${cell}" placeholder="${j+1}"
-                                style="flex:1; min-width:0; font-size:10px; padding:2px 3px; background:#161b22; border:1px solid #30363d; color:#c9d1d9; border-radius:3px;">`;
+                                value="${cell}" placeholder="${fieldName} ${j+1}"
+                                style="display:block; width:100%; box-sizing:border-box; font-size:10px; padding:2px 4px; margin-bottom:1px; background:#161b22; border:1px solid #30363d; color:#c9d1d9; border-radius:3px;">`;
                         }
+                        html += `</div>`;
                     } else {
                         const inputType = items === 'int' ? 'number' : 'text';
                         const v = slotVal != null ? slotVal : '';
+                        html += `<div style="display:flex; align-items:center; gap:4px; margin-bottom:3px;">`;
+                        html += `<span style="font-size:9px; color:#8b949e; min-width:46px; text-transform:lowercase;">${fieldName}</span>`;
                         html += `<input type="${inputType}" class="manifest-input" data-reader="${readerName}" data-field="${fieldName}" data-index="${slot}"
                             value="${v}" placeholder="${fieldName}"
                             style="flex:1; min-width:0; font-size:11px; padding:2px 4px; background:#161b22; border:1px solid #30363d; color:#c9d1d9; border-radius:3px;">`;
+                        html += `</div>`;
                     }
-                    html += `</div>`;
                 }
                 html += `</div>`;
             }
