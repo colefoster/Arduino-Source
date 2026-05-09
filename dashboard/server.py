@@ -2782,6 +2782,99 @@ async def pokeballs_scan(offset: int = 0, limit: int = 50):
     }
 
 
+@app.get("/api/switchprobe/scan")
+async def switchprobe_scan():
+    """Run the four-box PokemonSwitchDetector logic across every image in
+    test_images/pokemon_switch and return per-image box averages + the
+    pass/fail verdict. Mirrors PokemonChampions_PokemonSwitchDetector.cpp:
+        active   = b < 60 && g > 150
+        inactive = b > 80 && r < 80 && g < 80
+        accept   = (moves both active && stats both inactive)
+                || (moves both inactive && stats both active)
+    Boxes are pulled from CROP_DEFS["PokemonSwitchDetector"] so the page
+    stays in sync with the inspector.
+    """
+    import numpy as np
+    from PIL import Image
+
+    boxes = CROP_DEFS.get("PokemonSwitchDetector", [])
+    screen_dir = TEST_IMAGES_DIR / "pokemon_switch"
+
+    def is_active(r, g, b):
+        return b < 60.0 and g > 150.0
+
+    def is_inactive(r, g, b):
+        return b > 80.0 and r < 80.0 and g < 80.0
+
+    frames = []
+    if screen_dir.exists():
+        for img_path in sorted(screen_dir.glob("*.png")):
+            if img_path.name.startswith("_"):
+                continue
+            try:
+                img = np.asarray(Image.open(img_path).convert("RGB"))
+            except Exception as e:
+                frames.append({"filename": img_path.name, "error": str(e)})
+                continue
+            H, W, _ = img.shape
+            box_results = []
+            states = {}
+            for b in boxes:
+                x, y, w, h = b["box"]
+                x0, y0 = max(0, int(x*W)), max(0, int(y*H))
+                x1, y1 = min(W, x0 + int(w*W)), min(H, y0 + int(h*H))
+                crop = img[y0:y1, x0:x1]
+                if crop.size == 0:
+                    avg = [0.0, 0.0, 0.0]
+                else:
+                    avg = crop.reshape(-1, 3).mean(axis=0).tolist()
+                rr, gg, bb = avg
+                if is_active(rr, gg, bb):
+                    state = "active"
+                elif is_inactive(rr, gg, bb):
+                    state = "inactive"
+                else:
+                    state = "neither"
+                states[b["name"]] = state
+                box_results.append({
+                    "name": b["name"],
+                    "box": b["box"],
+                    "avg": [round(v, 1) for v in avg],
+                    "state": state,
+                })
+            moves_active   = states.get("moves_left") == "active"   and states.get("moves_right") == "active"
+            moves_inactive = states.get("moves_left") == "inactive" and states.get("moves_right") == "inactive"
+            stats_active   = states.get("stats_left") == "active"   and states.get("stats_right") == "active"
+            stats_inactive = states.get("stats_left") == "inactive" and states.get("stats_right") == "inactive"
+            verdict = (moves_active and stats_inactive) or (moves_inactive and stats_active)
+            if moves_active and stats_inactive:
+                explanation = "moves active + stats inactive"
+            elif moves_inactive and stats_active:
+                explanation = "stats active + moves inactive"
+            else:
+                bits = []
+                for tab, lname, rname in [("moves", "moves_left", "moves_right"),
+                                          ("stats", "stats_left", "stats_right")]:
+                    bits.append(f"{tab}=[{states[lname]},{states[rname]}]")
+                explanation = "fail: " + " ".join(bits)
+            frames.append({
+                "filename": img_path.name,
+                "boxes": box_results,
+                "verdict": verdict,
+                "explanation": explanation,
+            })
+    return {
+        "ok": True,
+        "boxes": [b["name"] for b in boxes],
+        "thresholds": {
+            "active": "b < 60 && g > 150",
+            "inactive": "b > 80 && r < 80 && g < 80",
+        },
+        "count": len(frames),
+        "frames": frames,
+    }
+
+
 @app.get("/api/teampreview/sprite/{slug}")
 async def teampreview_sprite(slug: str):
     """Extract a single sprite from the atlas PNG. A "-shiny" suffix

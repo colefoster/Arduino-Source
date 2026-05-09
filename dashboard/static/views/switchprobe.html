@@ -1,0 +1,13 @@
+<div class="view" id="view-switchprobe">
+    <h1>Pokemon Switch Detector Probe</h1>
+    <div class="subtitle">
+        Per-image run of <code>PokemonSwitchDetector</code> across <code>test_images/pokemon_switch/</code>.
+        Active = <code>b&lt;60 &amp;&amp; g&gt;150</code> (lime/yellow). Inactive = <code>b&gt;80 &amp;&amp; r&lt;80 &amp;&amp; g&lt;80</code> (dark blue).
+        Accept iff exactly one tab pair is fully active and the other fully inactive.
+    </div>
+    <div style="display:flex; gap:8px; align-items:center; margin:12px 0;">
+        <button id="sp-rerun" class="btn">Re-run</button>
+        <span id="sp-summary" style="color:#8b949e; font-size:12px;">Loading...</span>
+    </div>
+    <div id="sp-rows"></div>
+</div>
