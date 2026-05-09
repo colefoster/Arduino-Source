@@ -1154,6 +1154,14 @@ void LiveDetectorTrace::run_pokemon_switch_screen(Logger& logger, const ImageVie
     for (uint8_t i = 0; i < 6; i++){
         m_switch_alive[i] = (r.own[i].hp_max > 0 && r.own[i].hp_current > 0);
     }
+    //  Successful cursor read clears the blind-nudge retry state. Subsequent
+    //  cursor losses (e.g., a context modal opens) should be treated as a
+    //  fresh blind episode, not a continuation.
+    if (r.selected_own_slot >= 0){
+        m_switch_blind_attempts = 0;
+        m_switch_blind_last_press_ms = 0;
+        m_switch_blind_error_logged = false;
+    }
 
     mark("PokemonSwitchReader", "ok", std::move(out));
 }
@@ -1684,6 +1692,9 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
         sctx.move_select_cursor = m_move_select_cursor;
         sctx.target_move_slot = m_target_move_slot;
         sctx.switch_target_slot = m_switch_target_slot;
+        sctx.switch_blind_attempts = m_switch_blind_attempts;
+        sctx.switch_blind_last_press_ms = m_switch_blind_last_press_ms;
+        sctx.now_ms = (int64_t)now_ms();
 
         //  Initialize team-scan sub-flow on first sight of team_select with
         //  the carousel landed on the target team. Stays inactive (-1)
@@ -1704,6 +1715,20 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
         sctx.team_scan_step = m_team_scan_step;
         sctx.team_scan_complete = m_team_scan_complete;
         m_last_suggestion = suggest_for_screen(screen, m_tracker, sctx);
+        //  Bounded retry on pokemon_switch with no yellow highlight: after
+        //  3 blind Down nudges the suggester gives up (returns nullopt).
+        //  Log a single error so the dashboard surfaces "we're stuck on
+        //  pokemon_switch with no readable cursor".
+        if (screen == "pokemon_switch" && m_switch_cursor < 0
+            && m_switch_blind_attempts >= 3
+            && !m_switch_blind_error_logged){
+            env.console.log(
+                "ERROR: pokemon_switch — no yellow highlight after 3 Down "
+                "nudges; cursor unreadable. Giving up auto-press until the "
+                "screen changes.",
+                COLOR_RED);
+            m_switch_blind_error_logged = true;
+        }
         //  Visibility for the team_select flow: log the chosen suggestion
         //  whenever it changes (or first time we see it on this screen).
         //  Helps debug "auto-press isn't doing anything" — if no suggestion
@@ -1746,6 +1771,9 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
             if (m_prev_screen == "pokemon_switch" && screen != "pokemon_switch"){
                 m_switch_cursor = -1;
                 m_switch_alive = {};
+                m_switch_blind_attempts = 0;
+                m_switch_blind_last_press_ms = 0;
+                m_switch_blind_error_logged = false;
             }
             //  In-battle action counter: bump on every fresh entry to
             //  action_menu, so the suggester knows whether it's a fight
@@ -1964,6 +1992,15 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
                         m_last_pressed_screen = screen;
                         m_last_pressed_button = b;
                         m_last_press_ms = now_ms();
+
+                        //  Track blind-nudge attempts on pokemon_switch when
+                        //  the suggester emitted Down because no yellow
+                        //  highlight could be read. Bounded at 3.
+                        if (screen == "pokemon_switch" && b == "Down"
+                            && m_switch_cursor < 0){
+                            m_switch_blind_attempts++;
+                            m_switch_blind_last_press_ms = now_ms();
+                        }
 
                         //  Carousel-aware team_select: each fired Left/Right
                         //  shifts the known team by one, wrapping at the

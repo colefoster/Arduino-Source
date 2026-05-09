@@ -332,6 +332,12 @@ private:
     //  (after a context modal flicker) keep the same target.
     int m_switch_target_slot = 0;
     int m_switch_rolled_for = -1;
+    //  Bounded retry for the "no yellow highlight" case. Reset on
+    //  successful cursor read or on leaving pokemon_switch. After 3
+    //  attempts the trace logs an error and stops nudging.
+    int m_switch_blind_attempts = 0;
+    int64_t m_switch_blind_last_press_ms = 0;
+    bool m_switch_blind_error_logged = false;
 
     //  In-battle dummy strategy: 2 fight turns then a manual switch.
     //  Counts entries to action_menu since the current match started

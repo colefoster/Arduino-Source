@@ -233,13 +233,24 @@ static std::optional<InputSuggestion> suggest_pokemon_switch(
     const int target = alive_slots[pick_idx];
     int cursor = ctx.switch_cursor;
     if (cursor < 0){
-        //  Cursor unread. Most common reason on this screen: a context
-        //  modal is currently open (cursor moved off the column onto the
-        //  modal). Press A to confirm Switch In (default cursored).
+        //  No yellow highlight read. On a forced switch the highlight can
+        //  land on a fainted slot whose row suppresses the cursor color —
+        //  nudging Down moves it onto the next (alive) slot. Bounded
+        //  retry: up to 3 nudges, ~1s apart. After that give up so the
+        //  caller can log an error rather than mash Down forever.
+        if (ctx.switch_blind_attempts >= 3){
+            return std::nullopt;
+        }
+        if (ctx.switch_blind_last_press_ms != 0
+            && ctx.now_ms - ctx.switch_blind_last_press_ms < 1000){
+            //  Too soon since last nudge — wait for the next poll.
+            return std::nullopt;
+        }
         InputSuggestion s;
-        s.button = "A";
-        s.label = "A — confirm Switch In";
-        s.reason = "context modal open (cursor off column)";
+        s.button = "Down";
+        s.label = "Down — no highlight, nudging";
+        s.reason = "cursor unread (attempt "
+                 + std::to_string(ctx.switch_blind_attempts + 1) + "/3)";
         return s;
     }
     if (cursor < target){

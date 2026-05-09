@@ -89,6 +89,18 @@ struct LiveContext{
     //  pokemon_switch entry by the trace so the cursor doesn't oscillate
     //  across polls within the same switch attempt.
     int switch_target_slot = 0;
+    //  How many times we've fired Down on pokemon_switch with cursor unread
+    //  (no yellow highlight). Used to bound the blind-nudge retry loop
+    //  when the forced-switch screen lands on a fainted slot whose
+    //  highlight is suppressed. After 3 attempts we give up.
+    int switch_blind_attempts = 0;
+    //  Wall-clock ms of the last blind nudge, so the suggester can throttle
+    //  retries to ~1s apart (give the cursor time to land + the reader to
+    //  re-OCR). 0 = no nudge fired yet.
+    int64_t switch_blind_last_press_ms = 0;
+    //  Wall-clock now() in ms — supplied by the trace each poll so the
+    //  suggester can make time-based decisions without a global clock.
+    int64_t now_ms = 0;
 
     //  In-battle dummy strategy state. Strategy: alternate "two random
     //  moves, then a manual switch" so the auto-queuer cycles through
