@@ -2,24 +2,22 @@
  *
  *  From: https://github.com/PokemonAutomation/
  *
- *  Three cursor-independent samples:
- *    1. Lime active "Moves & More" tab at top of center panel.
- *    2. Purple left mon-list column at upper y.
- *    3. Same column at lower y — both must read purple to confirm the
- *       full vertical stripe (not just one mon row that happened to
- *       land there).
+ *  Center-panel tabs ("Moves & More" left, "Stats" right). Active tab is
+ *  filled with a lime/yellow highlight; inactive tab is dark blue. Two
+ *  sample points per tab (left + right). Accept iff exactly one tab reads
+ *  active-on-both-points and the other reads inactive-on-both-points.
+ *  Rejects: both active, both inactive, or any mixed/partial state.
  *
- *  Pixel measurements (1920x1080):
- *    Tab lime:        x=380, y=260  RGB ≈ (200, 254, 9), ratio (0.43, 0.55, 0.02)
- *    Left col upper:  x=260, y=410  RGB ≈ (106, 96, 242), ratio (0.24, 0.22, 0.55)
- *    Left col lower:  x=260, y=650  RGB ≈ (107, 96, 242), same purple
+ *  Sample averages (1920x1080, on a real switch screen with Moves & More
+ *  active):
+ *    Moves left/right:  ~(170, 255,   0)   lime
+ *    Stats  left/right: ~( 30,  23, 100)   dark blue
  *
  */
 
 #include "Common/Cpp/Color.h"
 #include "CommonFramework/ImageTools/ImageStats.h"
 #include "CommonFramework/VideoPipeline/VideoOverlay.h"
-#include "CommonTools/Images/SolidColorTest.h"
 #include "PokemonChampions_PokemonSwitchDetector.h"
 
 namespace PokemonAutomation{
@@ -27,42 +25,49 @@ namespace NintendoSwitch{
 namespace PokemonChampions{
 
 
-static const FloatPixel TAB_LIME{0.43, 0.55, 0.02};
-static const FloatPixel LEFT_COL_PURPLE{0.24, 0.22, 0.55};
+//  Active = lime green or yellow: very low blue + strong green channel.
+//  Lime ~(170,255,0); Yellow ~(255,220,0). Both have b near 0, g >= 200.
+static bool is_active_highlight(const ImageStats& s){
+    return s.average.b < 60.0 && s.average.g > 150.0;
+}
+
+//  Inactive = dark blue panel: dominant blue, low red & green.
+static bool is_inactive_blue(const ImageStats& s){
+    return s.average.b > 80.0 && s.average.r < 80.0 && s.average.g < 80.0;
+}
 
 
 PokemonSwitchDetector::PokemonSwitchDetector()
-    //  x=380, y=260, w=15, h=15
-    : m_tab_lime    (0.1979, 0.2407, 0.0078, 0.0139)
-    //  x=260, y=410, w=15, h=15
-    , m_left_col_top(0.1354, 0.3796, 0.0078, 0.0139)
-    //  x=260, y=650, w=15, h=15
-    , m_left_col_bot(0.1354, 0.6019, 0.0078, 0.0139)
+    //  4 boxes inside the two tabs at the top of the center panel.
+    //  Moves & More tab: left + right samples.
+    : m_moves_left (0.3977, 0.1079, 0.0221, 0.0273)
+    , m_moves_right(0.5137, 0.1136, 0.0198, 0.0258)
+    //  Stats tab: left + right samples.
+    , m_stats_left (0.5581, 0.1122, 0.0246, 0.0244)
+    , m_stats_right(0.6419, 0.1114, 0.0282, 0.0258)
 {}
 
 
 void PokemonSwitchDetector::make_overlays(VideoOverlaySet& items) const{
-    items.add(COLOR_CYAN, m_tab_lime);
-    items.add(COLOR_CYAN, m_left_col_top);
-    items.add(COLOR_CYAN, m_left_col_bot);
+    items.add(COLOR_CYAN, m_moves_left);
+    items.add(COLOR_CYAN, m_moves_right);
+    items.add(COLOR_CYAN, m_stats_left);
+    items.add(COLOR_CYAN, m_stats_right);
 }
 
 
 bool PokemonSwitchDetector::detect(const ImageViewRGB32& screen){
-    //  Co-evidence #1: lime active Moves & More tab.
-    const ImageStats tab = image_stats(extract_box_reference(screen, m_tab_lime));
-    if (tab.average.r + tab.average.g < 350.0) return false;
-    if (!is_solid(tab, TAB_LIME, 0.10, 30)) return false;
-    //  Co-evidence #2 & #3: left mon-list column purple at two y values.
-    //  The moves_and_more screen has a similar lime tab but no left mon
-    //  list — so this pair is the discriminator.
-    const ImageStats top = image_stats(extract_box_reference(screen, m_left_col_top));
-    if (top.average.b < 180.0) return false;
-    if (!is_solid(top, LEFT_COL_PURPLE, 0.10, 50)) return false;
-    const ImageStats bot = image_stats(extract_box_reference(screen, m_left_col_bot));
-    if (bot.average.b < 180.0) return false;
-    if (!is_solid(bot, LEFT_COL_PURPLE, 0.10, 50)) return false;
-    return true;
+    const ImageStats ml = image_stats(extract_box_reference(screen, m_moves_left));
+    const ImageStats mr = image_stats(extract_box_reference(screen, m_moves_right));
+    const ImageStats sl = image_stats(extract_box_reference(screen, m_stats_left));
+    const ImageStats sr = image_stats(extract_box_reference(screen, m_stats_right));
+
+    const bool moves_active   = is_active_highlight(ml) && is_active_highlight(mr);
+    const bool moves_inactive = is_inactive_blue(ml)    && is_inactive_blue(mr);
+    const bool stats_active   = is_active_highlight(sl) && is_active_highlight(sr);
+    const bool stats_inactive = is_inactive_blue(sl)    && is_inactive_blue(sr);
+
+    return (moves_active && stats_inactive) || (moves_inactive && stats_active);
 }
 
 

@@ -3,8 +3,14 @@
  *  From: https://github.com/PokemonAutomation/
  *
  *  Detects the Switch / Pokemon menu — left column showing all six own
- *  mons with HP bars + center "Moves & More" detail panel + right column
- *  showing opponent mons. Cursor-independent.
+ *  mons with HP bars + center "Moves & More" / "Stats" tab panel + right
+ *  column showing opponent mons. Cursor-independent.
+ *
+ *  Co-evidence: the center panel has two side-by-side tabs ("Moves & More"
+ *  on the left, "Stats" on the right). Exactly one is active at any time —
+ *  the active one is filled lime/yellow, the inactive one dark blue. We
+ *  sample two points inside each tab (left + right) and accept only when
+ *  one tab is fully active and the other fully inactive.
  *
  */
 
@@ -28,9 +34,10 @@ public:
     virtual bool detect(const ImageViewRGB32& screen) override;
 
 private:
-    ImageFloatBox m_tab_lime;       //  active "Moves & More" tab
-    ImageFloatBox m_left_col_top;   //  left mon-list column purple
-    ImageFloatBox m_left_col_bot;   //  same column, lower y
+    ImageFloatBox m_moves_left;
+    ImageFloatBox m_moves_right;
+    ImageFloatBox m_stats_left;
+    ImageFloatBox m_stats_right;
 };
 
 

@@ -7464,6 +7464,102 @@
         0.3394,
         0.3333
       ]
+    },
+    {
+      "name": "stats_left_solid_yellow",
+      "scene": "",
+      "screenshot": "__test__/pokemon_switch/20260423-150442604167.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.5581,
+        0.1122,
+        0.0246,
+        0.0244
+      ],
+      "avg_rgb": [
+        31.5,
+        23.7,
+        101.3
+      ],
+      "stddev_sum": 3.2,
+      "color_ratio": [
+        0.2013,
+        0.1516,
+        0.6471
+      ]
+    },
+    {
+      "name": "moves_and_more_right_solid_green",
+      "scene": "",
+      "screenshot": "__test__/pokemon_switch/20260423-150442604167.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.5137,
+        0.1136,
+        0.0198,
+        0.0258
+      ],
+      "avg_rgb": [
+        170.5,
+        255,
+        0
+      ],
+      "stddev_sum": 4,
+      "color_ratio": [
+        0.4007,
+        0.5993,
+        0
+      ]
+    },
+    {
+      "name": "stats_right_solid_green",
+      "scene": "",
+      "screenshot": "__test__/pokemon_switch/20260423-150442604167.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.6419,
+        0.1114,
+        0.0282,
+        0.0258
+      ],
+      "avg_rgb": [
+        29.2,
+        22.7,
+        100.5
+      ],
+      "stddev_sum": 5.5,
+      "color_ratio": [
+        0.1917,
+        0.149,
+        0.6594
+      ]
+    },
+    {
+      "name": "Box on the left side of moves and more, solid yellow",
+      "scene": "",
+      "screenshot": "__test__/pokemon_switch/20260423-150442604167.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.3977,
+        0.1079,
+        0.0221,
+        0.0273
+      ],
+      "avg_rgb": [
+        255,
+        255,
+        3.6
+      ],
+      "stddev_sum": 2,
+      "color_ratio": [
+        0.4965,
+        0.4965,
+        0.007
+      ]
     }
   ]
 }

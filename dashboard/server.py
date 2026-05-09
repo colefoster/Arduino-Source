@@ -265,6 +265,16 @@ CROP_DEFS = {
     #
     #  Boxes are seeds — refine in inspector. Per-slot Y delta extrapolated
     #  from a visible-rows estimate (~0.144 between row tops).
+    #  PokemonSwitchDetector co-evidence samples (mirrors C++ boxes in
+    #  PokemonChampions_PokemonSwitchDetector.cpp). Two samples per tab
+    #  (Moves & More left, Stats right). Accept iff exactly one tab is
+    #  fully lime/yellow active and the other fully dark-blue inactive.
+    "PokemonSwitchDetector": [
+        {"name": "moves_left",  "box": [0.3977, 0.1079, 0.0221, 0.0273]},
+        {"name": "moves_right", "box": [0.5137, 0.1136, 0.0198, 0.0258]},
+        {"name": "stats_left",  "box": [0.5581, 0.1122, 0.0246, 0.0244]},
+        {"name": "stats_right", "box": [0.6419, 0.1114, 0.0282, 0.0258]},
+    ],
     "PokemonSwitchReader": [
         #  Own column (left). Per-row Y delta = 0.1185 (derived from user-
         #  drawn slot-0 + slot-2 anchors). HP text sits +0.0355 below species.
