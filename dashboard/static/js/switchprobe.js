@@ -29,6 +29,12 @@ function spReaderBlock(f) {
         return `<div style="color:#8b949e; font-size:11px;">No reader output.</div>`;
     }
     const sel = (typeof r.selected_own_slot === 'number') ? r.selected_own_slot : -1;
+    const crops = f.reader_crops || {};
+    const cropImg = (key) => {
+        const src = crops[key];
+        if (!src) return '<span style="color:#6e7681; font-size:10px;">—</span>';
+        return `<img src="${src}" style="height:22px; image-rendering:pixelated; border:1px solid #30363d; vertical-align:middle; display:block;">`;
+    };
     const ownRows = (r.own || []).map((s, i) => {
         const isSel = (i === sel);
         const fainted = (s.hp_max > 0 && s.hp_current === 0);
@@ -37,16 +43,25 @@ function spReaderBlock(f) {
         const bg = isSel ? 'background:#3a3a1a;' : '';
         const hpColor = fainted ? '#f85149' : '#c9d1d9';
         return `<tr style="${bg}">
-            <td style="padding:2px 6px; font-family:monospace; font-size:11px; color:#8b949e;">${i}${isSel ? ' ▸' : ''}</td>
-            <td style="padding:2px 6px; font-size:11px;">${sp}</td>
-            <td style="padding:2px 6px; font-family:monospace; font-size:11px; color:${hpColor};">${hp}</td>
+            <td style="padding:2px 6px; font-family:monospace; font-size:11px; color:#8b949e; vertical-align:middle;">${i}${isSel ? ' ▸' : ''}</td>
+            <td style="padding:2px 6px; vertical-align:middle;">
+                <div style="font-size:11px; margin-bottom:2px;">${sp}</div>
+                ${cropImg(`own_${i}_species`)}
+            </td>
+            <td style="padding:2px 6px; vertical-align:middle;">
+                <div style="font-family:monospace; font-size:11px; color:${hpColor}; margin-bottom:2px;">${hp}</div>
+                ${cropImg(`own_${i}_hp_text`)}
+            </td>
         </tr>`;
     }).join('');
     const oppRows = (r.opp || []).map((s, i) => {
         const pct = (s.hp_pct < 0) ? '—' : `${s.hp_pct}%`;
         return `<tr>
-            <td style="padding:2px 6px; font-family:monospace; font-size:11px; color:#8b949e;">${i}</td>
-            <td style="padding:2px 6px; font-family:monospace; font-size:11px; color:#c9d1d9;">${pct}</td>
+            <td style="padding:2px 6px; font-family:monospace; font-size:11px; color:#8b949e; vertical-align:middle;">${i}</td>
+            <td style="padding:2px 6px; vertical-align:middle;">
+                <div style="font-family:monospace; font-size:11px; color:#c9d1d9; margin-bottom:2px;">${pct}</div>
+                ${cropImg(`opp_${i}_hp_pct`)}
+            </td>
         </tr>`;
     }).join('');
     return `

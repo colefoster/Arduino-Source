@@ -2885,6 +2885,18 @@ async def switchprobe_scan():
                     bits.append(f"{tab}=[{states[lname]},{states[rname]}]")
                 explanation = "fail: " + " ".join(bits)
             reader_result, reader_err = _run_reader(img_path)
+            #  Per-slot OCR crops, keyed by box name. Lets the dashboard show
+            #  exactly what each reader box sampled — useful for diagnosing
+            #  garbled HP/species reads.
+            reader_crops = {}
+            for cd in CROP_DEFS.get("PokemonSwitchReader", []):
+                try:
+                    reader_crops[cd["name"]] = (
+                        f"data:image/png;base64,"
+                        + base64.b64encode(_extract_crop(img_path, cd["box"])).decode()
+                    )
+                except Exception:
+                    pass
             frames.append({
                 "filename": img_path.name,
                 "boxes": box_results,
@@ -2892,6 +2904,7 @@ async def switchprobe_scan():
                 "explanation": explanation,
                 "reader": reader_result,
                 "reader_error": reader_err,
+                "reader_crops": reader_crops,
             })
     return {
         "ok": True,
