@@ -7008,6 +7008,462 @@
         0.3429,
         0.3092
       ]
+    },
+    {
+      "name": "3rd-main-team-spot-cursor",
+      "scene": "",
+      "screenshot": "__test__/team_select/20260423-183217025546.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.5922,
+        0.1387,
+        0.0206,
+        0.0353
+      ],
+      "avg_rgb": [
+        253.5,
+        253.4,
+        254.4
+      ],
+      "stddev_sum": 28.4,
+      "color_ratio": [
+        0.3329,
+        0.3328,
+        0.3342
+      ]
+    },
+    {
+      "name": "last-team-spot-cursor",
+      "scene": "",
+      "screenshot": "__test__/team_select/20260423-183217025546.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.7846,
+        0.1373,
+        0.0211,
+        0.0314
+      ],
+      "avg_rgb": [
+        249.2,
+        248.6,
+        253
+      ],
+      "stddev_sum": 55,
+      "color_ratio": [
+        0.332,
+        0.3311,
+        0.337
+      ]
+    },
+    {
+      "name": "last-team-spot-name",
+      "scene": "",
+      "screenshot": "__test__/team_select/20260423-183217025546.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.8061,
+        0.1329,
+        0.0735,
+        0.0427
+      ],
+      "avg_rgb": [
+        228.5,
+        216.4,
+        254
+      ],
+      "stddev_sum": 84.5,
+      "color_ratio": [
+        0.3269,
+        0.3096,
+        0.3634
+      ]
+    },
+    {
+      "name": "3rd-team-spot-name",
+      "scene": "",
+      "screenshot": "__test__/team_select/20260423-183217025546.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.6198,
+        0.1312,
+        0.0677,
+        0.0465
+      ],
+      "avg_rgb": [
+        231.5,
+        227.6,
+        253.7
+      ],
+      "stddev_sum": 80,
+      "color_ratio": [
+        0.3247,
+        0.3193,
+        0.356
+      ]
+    },
+    {
+      "name": "middle-team-spot-cursor",
+      "scene": "",
+      "screenshot": "__test__/team_select/20260423-183217025546.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.4049,
+        0.1376,
+        0.0233,
+        0.0345
+      ],
+      "avg_rgb": [
+        236.5,
+        234.5,
+        252.2
+      ],
+      "stddev_sum": 81.1,
+      "color_ratio": [
+        0.327,
+        0.3243,
+        0.3487
+      ]
+    },
+    {
+      "name": "middle-team-spot-name",
+      "scene": "",
+      "screenshot": "__test__/team_select/20260423-183217025546.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.43,
+        0.1315,
+        0.0647,
+        0.0459
+      ],
+      "avg_rgb": [
+        231.5,
+        227.9,
+        253.8
+      ],
+      "stddev_sum": 79.3,
+      "color_ratio": [
+        0.3246,
+        0.3196,
+        0.3559
+      ]
+    },
+    {
+      "name": "1st-main-team-spot-column",
+      "scene": "",
+      "screenshot": "__test__/team_select/20260423-183217025546.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.287,
+        0.1395,
+        0.0201,
+        0.0327
+      ],
+      "avg_rgb": [
+        255,
+        255,
+        255
+      ],
+      "stddev_sum": 0,
+      "color_ratio": [
+        0.3333,
+        0.3333,
+        0.3333
+      ]
+    },
+    {
+      "name": "1st-main-team-spot-name",
+      "scene": "",
+      "screenshot": "__test__/team_select/20260423-183217025546.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.3171,
+        0.1317,
+        0.0643,
+        0.0446
+      ],
+      "avg_rgb": [
+        235.6,
+        240.8,
+        247.8
+      ],
+      "stddev_sum": 125.8,
+      "color_ratio": [
+        0.3253,
+        0.3325,
+        0.3422
+      ]
+    },
+    {
+      "name": "very-first-team-spot-cursor",
+      "scene": "",
+      "screenshot": "__test__/team_select/20260423-183217025546.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.0981,
+        0.1385,
+        0.0316,
+        0.0364
+      ],
+      "avg_rgb": [
+        253.8,
+        255,
+        2.1
+      ],
+      "stddev_sum": 4.1,
+      "color_ratio": [
+        0.4968,
+        0.4992,
+        0.004
+      ]
+    },
+    {
+      "name": "very-first-team-spot-name",
+      "scene": "",
+      "screenshot": "__test__/team_select/20260423-183217025546.png",
+      "description": "this team is the one the existing boxes get the names for",
+      "status": "confirmed",
+      "box": [
+        0.1195,
+        0.1338,
+        0.0784,
+        0.0436
+      ],
+      "avg_rgb": [
+        205.4,
+        242.4,
+        44
+      ],
+      "stddev_sum": 179.4,
+      "color_ratio": [
+        0.4175,
+        0.4929,
+        0.0896
+      ]
+    },
+    {
+      "name": "last_mon_name_1st-main-slot-team",
+      "scene": "",
+      "screenshot": "__test__/team_select/20260423-183217025546.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.2737,
+        0.7749,
+        0.0793,
+        0.0298
+      ],
+      "avg_rgb": [
+        221.5,
+        224.1,
+        247.4
+      ],
+      "stddev_sum": 129.2,
+      "color_ratio": [
+        0.3197,
+        0.3234,
+        0.3569
+      ]
+    },
+    {
+      "name": "second_last_mon_name_1st-main-slot-team",
+      "scene": "",
+      "screenshot": "__test__/team_select/20260423-183217025546.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.273,
+        0.6666,
+        0.076,
+        0.0298
+      ],
+      "avg_rgb": [
+        218.7,
+        222.4,
+        246.4
+      ],
+      "stddev_sum": 135.2,
+      "color_ratio": [
+        0.3182,
+        0.3235,
+        0.3584
+      ]
+    },
+    {
+      "name": "first_mon_name_1st-main-slot-team",
+      "scene": "",
+      "screenshot": "__test__/team_select/20260423-183217025546.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.2719,
+        0.2194,
+        0.0746,
+        0.03
+      ],
+      "avg_rgb": [
+        216.6,
+        220.8,
+        245.9
+      ],
+      "stddev_sum": 139.2,
+      "color_ratio": [
+        0.3169,
+        0.3232,
+        0.3599
+      ]
+    },
+    {
+      "name": "first_mon_name_2nd-main-slot-team",
+      "scene": "",
+      "screenshot": "__test__/team_select/20260423-183217025546.png",
+      "description": "this is the middle team",
+      "status": "confirmed",
+      "box": [
+        0.463,
+        0.219,
+        0.0725,
+        0.0337
+      ],
+      "avg_rgb": [
+        221.7,
+        224.4,
+        247.4
+      ],
+      "stddev_sum": 129.2,
+      "color_ratio": [
+        0.3197,
+        0.3235,
+        0.3568
+      ]
+    },
+    {
+      "name": "second_mon_name_2nd-main-slot-team",
+      "scene": "",
+      "screenshot": "__test__/team_select/20260423-183217025546.png",
+      "description": "this is the middle team",
+      "status": "confirmed",
+      "box": [
+        0.4621,
+        0.3325,
+        0.0754,
+        0.0312
+      ],
+      "avg_rgb": [
+        220.9,
+        223.8,
+        247.1
+      ],
+      "stddev_sum": 131.6,
+      "color_ratio": [
+        0.3193,
+        0.3235,
+        0.3572
+      ]
+    },
+    {
+      "name": "third_mon_name_3rd-main-slot-team",
+      "scene": "",
+      "screenshot": "__test__/team_select/20260423-183217025546.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.6532,
+        0.4431,
+        0.0798,
+        0.032
+      ],
+      "avg_rgb": [
+        247.9,
+        241.9,
+        255
+      ],
+      "stddev_sum": 4.8,
+      "color_ratio": [
+        0.3328,
+        0.3248,
+        0.3424
+      ]
+    },
+    {
+      "name": "fourth_mon_name_3rd-main-slot-team",
+      "scene": "",
+      "screenshot": "__test__/team_select/20260423-183217025546.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.6522,
+        0.5523,
+        0.0751,
+        0.0324
+      ],
+      "avg_rgb": [
+        247.5,
+        241.4,
+        255
+      ],
+      "stddev_sum": 11.9,
+      "color_ratio": [
+        0.3327,
+        0.3245,
+        0.3427
+      ]
+    },
+    {
+      "name": "solid yello wonly main menu indicator",
+      "scene": "",
+      "screenshot": "__test__/main_menu/20260509-090213399684.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.9094,
+        0.1447,
+        0.0485,
+        0.0268
+      ],
+      "avg_rgb": [
+        210,
+        179.3,
+        56.8
+      ],
+      "stddev_sum": 18.9,
+      "color_ratio": [
+        0.4707,
+        0.402,
+        0.1273
+      ]
+    },
+    {
+      "name": "solid grey only main menu indicator",
+      "scene": "",
+      "screenshot": "__test__/main_menu/20260509-090213399684.png",
+      "description": "",
+      "status": "confirmed",
+      "box": [
+        0.3113,
+        0.0177,
+        0.1101,
+        0.0699
+      ],
+      "avg_rgb": [
+        86.3,
+        89.5,
+        87.8
+      ],
+      "stddev_sum": 9.5,
+      "color_ratio": [
+        0.3273,
+        0.3394,
+        0.3333
+      ]
     }
   ]
 }

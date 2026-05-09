@@ -55,8 +55,21 @@ struct LiveContext{
     //  Target on the battle_mode_menu screen. 0=Ranked, 1=Casual.
     int battle_mode_target = 0;
 
-    //  Target on the team_select screen. 0..4 = Team 1..5.
+    //  Target on the team_select screen. 0..17 = Team 1..18.
     int team_index_target = 0;
+
+    //  Carousel-aware team_select state.
+    //    team_select_known_n: 1..18 once we've identified the absolute
+    //                         team (cursor seen at col 0 = Team 1, or
+    //                         col 4 = Team 18). 0 = still homing.
+    //    team_select_cursor_col: 0..4 (visible cursor column), -1 if unread.
+    int team_select_known_n = 0;
+    int team_select_cursor_col = -1;
+    //  True when known_n has been stable long enough (~400ms) for the
+    //  most recent press to have landed on the Switch. Gates the
+    //  Confirm-A so we don't open a modal on the team the cursor was on
+    //  *before* the in-flight Right press registered.
+    bool team_select_settle_ok = true;
 
     //  Scan-and-pick step on team_select. -1 = inactive (skip the scan
     //  sub-flow and just confirm the team). See LiveDetectorTrace.h for
@@ -71,6 +84,25 @@ struct LiveContext{
     //  pokemon_switch screen.
     int switch_cursor = -1;                //  -1 if unread.
     std::array<bool, 6> switch_alive = {}; //  hp_max > 0 && hp_current > 0.
+    //  Random pick among alive bench slots — index INTO the alive list
+    //  (modulo'd by the count in the suggester). Rolled once per
+    //  pokemon_switch entry by the trace so the cursor doesn't oscillate
+    //  across polls within the same switch attempt.
+    int switch_target_slot = 0;
+
+    //  In-battle dummy strategy state. Strategy: alternate "two random
+    //  moves, then a manual switch" so the auto-queuer cycles through
+    //  the team instead of always firing slot-0 of the lead.
+    //    battle_action_menu_visits: number of times we've entered
+    //        action_menu this match (1 = first turn). Switches happen
+    //        on every visit where (visits > 0 && visits % 3 == 0).
+    //    action_menu_cursor: 0 = FIGHT, 1 = POKEMON, -1 = unread.
+    //    move_select_cursor: 0..3 = currently-cursored slot, -1 = unread.
+    //    target_move_slot: which 0..3 slot to pick this turn (random).
+    int battle_action_menu_visits = 0;
+    int action_menu_cursor = -1;
+    int move_select_cursor = -1;
+    int target_move_slot = 0;
 };
 
 

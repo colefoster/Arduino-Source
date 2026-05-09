@@ -168,8 +168,10 @@ private:
     //  ladder run.
     IntegerEnumDropdownOption BATTLE_MODE_TARGET;
 
-    //  Team Select target. 0..4 = Team 1..5. Drives horizontal nav on the
-    //  team_select screen.
+    //  Team Select target. 0..17 = Team 1..18. Drives horizontal nav on
+    //  the team_select screen — the screen is a 5-column carousel that
+    //  hides which absolute team is selected, so we left-home to Team 1
+    //  before stepping Right to the target.
     IntegerEnumDropdownOption TEAM_INDEX;
 
     SimpleIntegerOption<uint32_t> POLL_PERIOD_MILLISECONDS;
@@ -272,6 +274,48 @@ private:
     int m_team_scan_step = -1;
     bool m_team_scan_complete = false;
 
+    //  Carousel-aware team-select navigation state. The team_select screen
+    //  shows 5 columns of an 18-wide carousel; cursor sits at col 0 only
+    //  on Team 1 and col 4 only on Team 18, so cursor column alone can't
+    //  identify the absolute team. Strategy: left-home until cursor is
+    //  observed at col 0 (=> Team 1), then step Right per fired press,
+    //  tracking known_team_n. Reset on screen entry to team_select so a
+    //  manual interruption re-homes cleanly.
+    //    0  = unknown (homing)
+    //    1..18 = known team index
+    int m_team_select_known_n = 0;
+    //  Stickiness for team_select classification. The cursor-marker
+    //  boxes briefly read non-yellow during a Right/Left navigation
+    //  animation, which would otherwise drop the screen to "unknown"
+    //  for ~250ms — long enough for the recovery-B watchdog to start
+    //  the unknown-grace timer and eventually bail us out. Holding the
+    //  last-seen team_select tag for ~1500ms covers the gap without
+    //  hiding a genuine screen exit (the modal/info screens take
+    //  longer than that to settle).
+    int64_t m_team_select_last_seen_ms = 0;
+    //  Wall-clock ms of the last time m_team_select_known_n changed. Used
+    //  by the scan-trigger gate: pressing Right takes ~340ms to land on
+    //  the Switch (240ms pre-delay + 100ms hold), so an optimistic increment
+    //  in the press hook can race the next poll and fire the scan A while
+    //  the cursor hasn't moved yet. Requiring known_n to settle for >=
+    //  400ms guarantees at least one poll observed cursor_col matches the
+    //  presumed new known_n before we open a modal.
+    int64_t m_team_select_known_n_changed_at_ms = 0;
+    //  Tracks the TEAM_INDEX option's value across polls so we can detect
+    //  a mid-run change and re-arm the scan flow (otherwise the queuer
+    //  would skip team_select and queue whichever team was last picked).
+    //  -1 sentinel = "not yet observed" (initialised on first poll).
+    int m_team_index_last_seen = -1;
+    //  Last-logged cursor column on team_select; suppresses the per-poll
+    //  detector log line when nothing changed (we're idle on the screen).
+    int m_team_select_logged_col = -2;
+    //  Last-logged suggestion button on team_select; same throttle for
+    //  the suggester-side log.
+    std::string m_team_select_logged_suggestion;
+    //  One-shot guard so the unknown-after-pre_match diagnostic dump
+    //  fires at most once per stuck episode (cleared on screen change).
+    bool m_team_select_unknown_dumped = false;
+
     //  Recovery: when stuck on "unknown" classification for > grace period,
     //  press B every 5s up to 4 times to back out to a known screen.
     //  Reset whenever we see a non-unknown screen.
@@ -282,6 +326,27 @@ private:
     //  pokemon_switch screen state (forced switch suggester).
     int m_switch_cursor = -1;
     std::array<bool, 6> m_switch_alive = {};
+    //  Random pick rolled once per pokemon_switch entry. m_switch_rolled_for
+    //  is the action_menu visit number we last rolled for, so re-entering
+    //  the screen on a different turn re-rolls but mid-attempt re-entries
+    //  (after a context modal flicker) keep the same target.
+    int m_switch_target_slot = 0;
+    int m_switch_rolled_for = -1;
+
+    //  In-battle dummy strategy: 2 fight turns then a manual switch.
+    //  Counts entries to action_menu since the current match started
+    //  (resets when a fresh team_preview kicks off a new match). The
+    //  suggester targets POKEMON whenever (visits > 0 && visits % 3 == 0).
+    int m_battle_action_menu_visits = 0;
+    //  Per-action_menu cursor (0=FIGHT, 1=POKEMON) and per-move_select
+    //  cursor (0..3), captured from their detectors. -1 = unread.
+    int m_action_menu_cursor = -1;
+    int m_move_select_cursor = -1;
+    //  Random move slot rolled once per move_select visit. We only
+    //  reroll when the visit-counter advances past m_move_slot_rolled_for
+    //  so a single turn's nav is consistent across polls.
+    int m_target_move_slot = 0;
+    int m_move_slot_rolled_for = -1;
 };
 
 

@@ -19,6 +19,8 @@
  *
  */
 
+#include <sstream>
+#include <iomanip>
 #include "CommonFramework/ImageTypes/ImageViewRGB32.h"
 #include "CommonFramework/ImageTools/ImageBoxes.h"
 #include "CommonFramework/ImageTools/ImageStats.h"
@@ -36,15 +38,19 @@ static const FloatPixel SELECTED_TAB_YELLOW{0.4972, 0.4972, 0.0056};
 
 
 TeamSelectDetector::TeamSelectDetector()
-    //  5 team tab positions (left to right), measured 2026-04-22 from
-    //  screenshot-20260422-160451227419.png (Team 2 selected).
-    //  Positions are fixed regardless of which team is highlighted.
+    //  5 visible-column cursor positions for the 18-team carousel.
+    //  Measured 2026-05-08 (tools/box_definitions.json: very-first /
+    //  1st-main / middle / 3rd-main / last team-spot-cursor entries).
+    //  selected_team() returns the cursor *column* (0..4), NOT the
+    //  absolute team index — col 0 is reachable only on Team 1, col 4
+    //  only on Team 18; cols 1..3 are ambiguous mid-carousel and need
+    //  the homing logic in LiveDetectorTrace to pin the absolute team.
     : m_tab_slots{
-          ImageFloatBox(0.1005, 0.1435, 0.0318, 0.0194),  //  Team 1
-          ImageFloatBox(0.2844, 0.1426, 0.0276, 0.0222),  //  Team 2
-          ImageFloatBox(0.4755, 0.1407, 0.0359, 0.0213),  //  Team 3
-          ImageFloatBox(0.6646, 0.1380, 0.0370, 0.0222),  //  Team 4
-          ImageFloatBox(0.8562, 0.1426, 0.0359, 0.0185),  //  Team 5
+          ImageFloatBox(0.0981, 0.1385, 0.0316, 0.0364),  //  col 0 (Team 1)
+          ImageFloatBox(0.2870, 0.1395, 0.0201, 0.0327),  //  col 1
+          ImageFloatBox(0.4049, 0.1376, 0.0233, 0.0345),  //  col 2 (middle)
+          ImageFloatBox(0.5922, 0.1387, 0.0206, 0.0353),  //  col 3
+          ImageFloatBox(0.7846, 0.1373, 0.0211, 0.0314),  //  col 4 (Team 18)
       }
     //  Scroll-position indicator at the bottom. Used to confirm the user
     //  is scrolled to the leftmost page (teams 1-5 visible).
@@ -67,8 +73,11 @@ int TeamSelectDetector::selected_tab(const ImageViewRGB32& screen) const{
         //  channel-sum ~ 510. Battle FPs (mid-animation green flashes etc.)
         //  read ratio-similar yellow but max out around sum ~ 312.
         if (stats.average.r + stats.average.g < 400.0) continue;
-        //  Tight thresholds: the selected color is very clean (sd~1.4).
-        if (is_solid(stats, SELECTED_TAB_YELLOW, 0.10, 40)){
+        //  Modest tolerance: stored carousel screenshots read sd 5-10
+        //  with ratios well inside 0.10 of the target, but live capture
+        //  adds compression / sub-pixel noise that can push either past
+        //  the 0.10 / 40 bar that worked on the static 5-tab layout.
+        if (is_solid(stats, SELECTED_TAB_YELLOW, 0.12, 60)){
             return static_cast<int>(i);
         }
     }
@@ -83,6 +92,35 @@ bool TeamSelectDetector::detect(const ImageViewRGB32& screen){
     }
     m_selected_tab = static_cast<uint8_t>(tab);
     return true;
+}
+
+
+std::string TeamSelectDetector::debug_dump(const ImageViewRGB32& screen) const{
+    std::ostringstream os;
+    os << std::fixed << std::setprecision(1);
+    os << "TeamSelectDetector boxes:";
+    static const char* labels[5] = {
+        "col0(very-first)", "col1(1st-main)", "col2(middle)",
+        "col3(3rd-main)",   "col4(last)"
+    };
+    for (size_t i = 0; i < m_tab_slots.size(); i++){
+        const ImageStats stats = image_stats(extract_box_reference(screen, m_tab_slots[i]));
+        const double s = stats.average.r + stats.average.g + stats.average.b;
+        const double rr = s > 0 ? stats.average.r / s : 0.0;
+        const double gr = s > 0 ? stats.average.g / s : 0.0;
+        const double br = s > 0 ? stats.average.b / s : 0.0;
+        const double sd = stats.stddev.r + stats.stddev.g + stats.stddev.b;
+        const bool floor = (stats.average.r + stats.average.g) >= 400.0;
+        const bool solid = is_solid(stats, SELECTED_TAB_YELLOW, 0.12, 60);
+        os << " | " << labels[i]
+           << " avg=(" << stats.average.r << "," << stats.average.g << "," << stats.average.b << ")"
+           << " ratio=(" << std::setprecision(3) << rr << "," << gr << "," << br << ")"
+           << std::setprecision(1)
+           << " sd=" << sd
+           << (floor ? " floor=ok" : " floor=NO")
+           << (solid ? " is_solid=YES" : " is_solid=no");
+    }
+    return os.str();
 }
 
 

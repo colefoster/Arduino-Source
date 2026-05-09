@@ -52,6 +52,15 @@ private:
     ImageFloatBox m_box_button;
     ImageFloatBox m_chrome;
     ImageFloatBox m_recruit_tile;
+    //  Two additional anchors drawn 2026-05-09 from the stuck-detection
+    //  screenshot. Used as strict co-evidence so a yellow blob from a
+    //  battle UI / modal popup elsewhere can't be mistaken for the menu:
+    //    m_yellow_anchor — top-right gold/yellow icon strip (always
+    //                      present on main menu, never on the carousel).
+    //    m_grey_anchor   — neutral mid-grey strip near the top of the
+    //                      screen (rock-solid signature, sd~10).
+    ImageFloatBox m_yellow_anchor;
+    ImageFloatBox m_grey_anchor;
     //  Per-option cursor strips. 0..7 = Battle/Box/Train/Recruit/Missions/
     //  Mailbox/Style/SubMenu. Drawn by user.
     std::array<ImageFloatBox, 8> m_cursor_boxes;

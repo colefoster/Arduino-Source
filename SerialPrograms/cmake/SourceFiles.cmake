@@ -1378,6 +1378,8 @@ file(GLOB LIBRARY_SOURCES
     Source/PokemonChampions/Inference/PokemonChampions_ItemNameReader.h
     Source/PokemonChampions/Inference/PokemonChampions_TeamSelectDetector.cpp
     Source/PokemonChampions/Inference/PokemonChampions_TeamSelectDetector.h
+    Source/PokemonChampions/Inference/PokemonChampions_TeamSelectModalDetector.cpp
+    Source/PokemonChampions/Inference/PokemonChampions_TeamSelectModalDetector.h
     Source/PokemonChampions/Inference/PokemonChampions_TeamSelectReader.cpp
     Source/PokemonChampions/Inference/PokemonChampions_TeamSelectReader.h
     Source/PokemonChampions/Inference/PokemonChampions_TeamSummaryReader.cpp

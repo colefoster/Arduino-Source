@@ -25,17 +25,42 @@ static ImageFloatBox move_slot_overlay_box(int slot){
 
 
 static std::optional<InputSuggestion> suggest_move_select(
-    const BattleStateTracker& tracker
+    const BattleStateTracker& tracker,
+    const LiveContext& ctx
 ){
-    //  Dummy picker: always suggest move slot 0. If we know its name from
-    //  the tracker (active mon's first known move), include it in the
-    //  label; otherwise fall back to "Move 1".
+    //  Random-slot picker: target slot is rolled once per turn by the
+    //  trace (m_target_move_slot) and surfaced via ctx.target_move_slot.
+    //  Move panel is a vertical 4-slot list, so nav is Up/Down toward
+    //  the target then A. Falls back to A if the cursor is unread or
+    //  already on target.
     (void)tracker;
+    const int target = ctx.target_move_slot;
+    const int cursor = ctx.move_select_cursor;
+    if (cursor >= 0 && cursor < target){
+        InputSuggestion s;
+        s.button = "Down";
+        s.label = "Down — to Move " + std::to_string(target + 1);
+        s.reason = "random pick: cursor=" + std::to_string(cursor)
+                 + " target=" + std::to_string(target);
+        s.highlights.push_back(move_slot_overlay_box(target));
+        return s;
+    }
+    if (cursor > target){
+        InputSuggestion s;
+        s.button = "Up";
+        s.label = "Up — to Move " + std::to_string(target + 1);
+        s.reason = "random pick: cursor=" + std::to_string(cursor)
+                 + " target=" + std::to_string(target);
+        s.highlights.push_back(move_slot_overlay_box(target));
+        return s;
+    }
     InputSuggestion s;
     s.button = "A";
-    s.label = "A — Move 1";
-    s.reason = "dummy picker: always slot 0";
-    s.highlights.push_back(move_slot_overlay_box(0));
+    s.label = "A — Move " + std::to_string(target + 1);
+    s.reason = (cursor < 0)
+        ? "cursor unread; pressing A on default slot 0"
+        : "cursor on target slot " + std::to_string(target);
+    s.highlights.push_back(move_slot_overlay_box(target));
     return s;
 }
 
@@ -186,15 +211,26 @@ static std::optional<InputSuggestion> suggest_vertical_menu(
 static std::optional<InputSuggestion> suggest_pokemon_switch(
     const LiveContext& ctx
 ){
-    int target = -1;
+    //  Random-among-alive picker: collect all alive lead slots (0-3),
+    //  pick the one whose index matches the pre-rolled switch_target_slot
+    //  modulo the count. The trace rolls switch_target_slot once per
+    //  pokemon_switch entry so the choice is consistent across polls in
+    //  the same switch attempt — re-entering the screen in a later turn
+    //  re-rolls.
+    std::array<int, 4> alive_slots{};
+    int alive_count = 0;
     for (int i = 0; i < 4; i++){    //  Only leads (0-3) are pickable.
-        if (ctx.switch_alive[i]){ target = i; break; }
+        if (ctx.switch_alive[i]){
+            alive_slots[alive_count++] = i;
+        }
     }
-    if (target < 0){
+    if (alive_count == 0){
         //  No alive lead read. Either OCR missed, or all 4 leads are KO'd
         //  (match should have ended). Wait a poll.
         return std::nullopt;
     }
+    const int pick_idx = ((ctx.switch_target_slot % alive_count) + alive_count) % alive_count;
+    const int target = alive_slots[pick_idx];
     int cursor = ctx.switch_cursor;
     if (cursor < 0){
         //  Cursor unread. Most common reason on this screen: a context
@@ -236,13 +272,45 @@ std::optional<InputSuggestion> suggest_for_screen(
     const LiveContext& ctx
 ){
     if (screen == "move_select"){
-        return suggest_move_select(tracker);
+        return suggest_move_select(tracker, ctx);
     }
     if (screen == "action_menu"){
-        //  Cursor defaults to Fight after every turn; just press A.
-        //  ActionMenuDetector::cursored() exposes FIGHT/POKEMON if we ever
-        //  need to gate on it.
-        return press_a("A — Fight", "open move menu (default cursor)");
+        //  Strategy: every third action_menu visit (visits 3, 6, 9, ...)
+        //  pick POKEMON to force a switch — gives the auto-queuer
+        //  variety instead of always firing slot-0 of the lead. The
+        //  intermediate two visits go FIGHT (which then routes through
+        //  move_select with a randomly-chosen slot).
+        const int visits = ctx.battle_action_menu_visits;
+        const bool switch_turn = (visits > 0 && visits % 3 == 0);
+        const int cursor = ctx.action_menu_cursor;  //  0=FIGHT, 1=POKEMON
+        const int target = switch_turn ? 1 : 0;
+        const char* target_label = switch_turn ? "Pokemon" : "Fight";
+        if (cursor < 0){
+            //  Cursor unread (mid-animation). Press A on the default
+            //  cursored button (FIGHT). If this is supposed to be a
+            //  switch turn, the next poll will see POKEMON cursor and
+            //  Down us toward it.
+            return press_a(std::string("A — ") + target_label,
+                           std::string("default cursor; visits=")
+                           + std::to_string(visits));
+        }
+        if (cursor < target){
+            InputSuggestion s; s.button = "Down";
+            s.label = std::string("Down — to ") + target_label;
+            s.reason = "switch turn (visits=" + std::to_string(visits)
+                     + ", cursor=FIGHT)";
+            return s;
+        }
+        if (cursor > target){
+            InputSuggestion s; s.button = "Up";
+            s.label = std::string("Up — to ") + target_label;
+            s.reason = "fight turn (visits=" + std::to_string(visits)
+                     + ", cursor=POKEMON)";
+            return s;
+        }
+        return press_a(std::string("A — ") + target_label,
+                       std::string("on target; visits=")
+                       + std::to_string(visits));
     }
     if (screen == "target_select"){
         //  Doubles target pick. Cursor defaults to opp_a; just A. Could
@@ -310,77 +378,196 @@ std::optional<InputSuggestion> suggest_for_screen(
         const char* label = ctx.team_scan_complete ? "Begin Matchmaking" : "Team Select";
         return suggest_vertical_menu(ctx.menu_selected_index, target, label, /*max=*/3);
     }
-    if (screen == "team_select"){
-        //  Scan-and-pick sub-flow active? Steps 0,1,2,3,6,7 fire on
-        //  team_select.
-        if (ctx.team_scan_step >= 0){
-            switch (ctx.team_scan_step){
-            case 0: { InputSuggestion s; s.button = "A";
-                s.label = "A — open team modal";
-                s.reason = "scan step 0/7"; return s; }
-            case 1: { InputSuggestion s; s.button = "Down";
-                s.label = "Down — to Edit";
-                s.reason = "scan step 1/7"; return s; }
-            case 2: { InputSuggestion s; s.button = "Down";
-                s.label = "Down — to View Info";
-                s.reason = "scan step 2/7"; return s; }
-            case 3: { InputSuggestion s; s.button = "A";
-                s.label = "A — enter info screen";
-                s.reason = "scan step 3/7"; return s; }
-            case 6: { InputSuggestion s; s.button = "A";
-                s.label = "A — open team modal";
-                s.reason = "scan step 6/7"; return s; }
-            case 7: { InputSuggestion s; s.button = "A";
-                s.label = "A — Select this team";
-                s.reason = "scan step 7/7 (confirm)"; return s; }
-            //  Steps 4 and 5 belong to other screens — if we see them
-            //  here it means a screen transition is mid-flight; wait.
-            default: return std::nullopt;
-            }
-        }
-        //  Normal nav-then-confirm path (no scan needed this match).
-        const int target = ctx.team_index_target;
-        int cursor = ctx.menu_selected_index;
-        if (cursor < 0) return std::nullopt;
-        if (cursor < target){
-            InputSuggestion s;
-            s.button = "Right";
-            s.label = "Right — to Team " + std::to_string(target + 1);
-            s.reason = "cursor=" + std::to_string(cursor)
-                     + " target=Team " + std::to_string(target + 1);
+    //  Scan-and-pick sub-flow has priority over screen-specific suggestions
+    //  because the modal that opens after step 0 partially covers the
+    //  team_select carousel cursors and can flicker the screen
+    //  classification to "unknown". Steps 1, 2, 3, 6, 7 are modal-only
+    //  presses that don't depend on the underlying tab strip being seen,
+    //  so we issue them even when classify_screen returns "unknown".
+    //  Steps 4 (R on Moves & More) and 5 (B on Stats) still gate on their
+    //  info screens — the wrong screen would mean the prior step's effect
+    //  hasn't landed yet and we should wait.
+    //  Helper: nav within the team-select modal toward a target option
+    //  (0..3 = Select / Edit / View / Cancel). Cursor wraps top-to-bottom
+    //  on the Switch, so pick the shorter of Down vs Up; ties go Down.
+    //  Returns nullopt only if the caller passes a non-modal screen —
+    //  that case is handled by per-step gating below.
+    auto modal_nav_toward = [&](int target_opt, int step_label,
+                                const char* arrival_button,
+                                const char* arrival_label,
+                                const char* arrival_reason)
+        -> std::optional<InputSuggestion>
+    {
+        const int cur = ctx.menu_selected_index;  //  0..3 from modal detector
+        if (cur < 0) return std::nullopt;
+        if (cur == target_opt){
+            InputSuggestion s; s.button = arrival_button;
+            s.label = arrival_label;
+            s.reason = std::string("scan step ") + std::to_string(step_label)
+                     + "/7 (modal cur=" + std::to_string(cur)
+                     + " == target) — " + arrival_reason;
             return s;
         }
-        if (cursor > target){
+        const int down_dist = ((target_opt - cur) % 4 + 4) % 4;  //  1..3
+        const int up_dist   = 4 - down_dist;                      //  3..1
+        const bool go_down = (down_dist <= up_dist);
+        InputSuggestion s;
+        s.button = go_down ? "Down" : "Up";
+        s.label = std::string(go_down ? "Down" : "Up") + " — modal toward "
+                + (target_opt == 0 ? "Select"
+                 : target_opt == 1 ? "Edit"
+                 : target_opt == 2 ? "View details" : "Cancel");
+        s.reason = std::string("scan step ") + std::to_string(step_label)
+                 + "/7 (modal cur=" + std::to_string(cur)
+                 + " target=" + std::to_string(target_opt) + ")";
+        return s;
+    };
+
+    //  Scan-and-pick sub-flow has priority over screen-specific suggestions.
+    //  Renumbered to 5 steps (was 7) since the modal detector lets us walk
+    //  to View details with a single decision-driven step instead of
+    //  blind "Down, Down, A":
+    //    0  team_select        A      open modal
+    //    1  team_select_modal  Down/A walk to View details, then A
+    //    2  moves_and_more     R      tab to Stats
+    //    3  team_stats         B      back out of info screen
+    //    4  team_select        A      open modal again (back-to-back match)
+    //    5  team_select_modal  A/Up   confirm Select this team
+    if (ctx.team_scan_step >= 0){
+        switch (ctx.team_scan_step){
+        case 0:
+            if (screen == "team_select"){
+                InputSuggestion s; s.button = "A";
+                s.label = "A — open team modal";
+                s.reason = "scan step 0/7"; return s;
+            }
+            return std::nullopt;
+        case 1:
+            //  Walk modal cursor to option 2 (View details), confirm with A.
+            if (screen == "team_select_modal"){
+                return modal_nav_toward(2, 1, "A", "A — enter View details",
+                                        "press A");
+            }
+            return std::nullopt;
+        case 2:
+            if (screen == "moves_and_more"){
+                InputSuggestion s; s.button = "R";
+                s.label = "R — tab to Stats";
+                s.reason = "scan step 2/7 (M&M loaded)"; return s;
+            }
+            return std::nullopt;
+        case 3:
+            if (screen == "team_stats"){
+                InputSuggestion s; s.button = "B";
+                s.label = "B — back out of info";
+                s.reason = "scan step 3/7 (Stats loaded)"; return s;
+            }
+            return std::nullopt;
+        case 4:
+            //  B from team_stats lands the cursor back on whichever team
+            //  was last *confirmed* (e.g. Team 1), NOT the team we just
+            //  inspected — so we have to re-home + re-navigate to the
+            //  scan target before the A that opens the modal again.
+            //  All suggestions emitted here keep the "scan step 4/7"
+            //  reason prefix so the press hook still advances scan_step
+            //  when the final A fires.
+            if (screen == "team_select"){
+                const int target_n = ctx.team_index_target + 1;  //  1..18
+                const int known_n  = ctx.team_select_known_n;
+                const int cursor   = ctx.team_select_cursor_col;
+                if (cursor < 0) return std::nullopt;
+                if (known_n <= 0){
+                    InputSuggestion s; s.button = "Left";
+                    s.label = "Left — home to an edge";
+                    s.reason = "scan step 4/7 (re-home after B; cursor col="
+                             + std::to_string(cursor) + ")";
+                    return s;
+                }
+                if (known_n != target_n){
+                    const int forward  = ((target_n - known_n) % 18 + 18) % 18;
+                    const int backward = 18 - forward;
+                    const bool go_right = (forward <= backward);
+                    InputSuggestion s;
+                    s.button = go_right ? "Right" : "Left";
+                    s.label = std::string(go_right ? "Right" : "Left")
+                            + " — to Team " + std::to_string(target_n);
+                    s.reason = "scan step 4/7 (re-nav: known=Team "
+                             + std::to_string(known_n)
+                             + " target=Team " + std::to_string(target_n) + ")";
+                    return s;
+                }
+                if (!ctx.team_select_settle_ok) return std::nullopt;
+                InputSuggestion s; s.button = "A";
+                s.label = "A — open team modal";
+                s.reason = "scan step 4/7 (on target Team "
+                         + std::to_string(target_n) + ")";
+                return s;
+            }
+            return std::nullopt;
+        case 5:
+            //  Walk modal cursor to option 0 (Select this team), confirm.
+            if (screen == "team_select_modal"){
+                return modal_nav_toward(0, 5, "A", "A — Select this team",
+                                        "confirm");
+            }
+            return std::nullopt;
+        default: return std::nullopt;
+        }
+    }
+
+    if (screen == "team_select"){
+        //  Normal nav-then-confirm path (no scan needed this match).
+        //  The carousel wraps (Right at 18 -> 1, Left at 1 -> 18) and hides
+        //  absolute team index for cols 1..3, so cursor col alone is
+        //  ambiguous mid-carousel. Strategy:
+        //    1. While known_n == 0, press Left repeatedly. Cursor MUST
+        //       eventually land on col 0 (Team 1) or col 4 (Team 18) —
+        //       the trace tick latches known_n on either edge, including
+        //       Team 18 if Left wraps us to it from Team 1 first.
+        //    2. Once anchored, pick the shorter wrap-aware direction to
+        //       the target (forward / backward distance modulo 18).
+        //    3. When known_n == target_n, confirm with A.
+        const int target_n = ctx.team_index_target + 1;  //  1..18
+        const int known_n  = ctx.team_select_known_n;    //  0 unknown, else 1..18
+        const int cursor   = ctx.team_select_cursor_col; //  0..4 or -1
+        if (cursor < 0) return std::nullopt;
+        if (known_n <= 0){
+            //  Homing: drive cursor toward an edge. Leftward homing always
+            //  terminates because the carousel cycles through every team.
             InputSuggestion s;
             s.button = "Left";
-            s.label = "Left — to Team " + std::to_string(target + 1);
-            s.reason = "cursor=" + std::to_string(cursor)
-                     + " target=Team " + std::to_string(target + 1);
+            s.label = "Left — home to an edge";
+            s.reason = "absolute team unknown (cursor col=" + std::to_string(cursor)
+                     + "); homing left until col 0 or col 4";
             return s;
         }
-        return press_a("A — Confirm Team " + std::to_string(target + 1),
-                       "cursor on target");
-    }
-    if (screen == "moves_and_more"){
-        if (ctx.team_scan_step == 4){
-            InputSuggestion s;
-            s.button = "R";
-            s.label = "R — tab to Stats";
-            s.reason = "scan step 4/7 (M&M loaded)";
-            return s;
+        if (known_n == target_n){
+            //  Wait for the most recent nav press to actually register on
+            //  the Switch before opening any modal. Otherwise an
+            //  in-flight Right would mean the cursor visually still sits
+            //  on the previous team when A fires.
+            if (!ctx.team_select_settle_ok) return std::nullopt;
+            return press_a("A — Confirm Team " + std::to_string(target_n),
+                           "known=target=Team " + std::to_string(target_n));
         }
-        return std::nullopt;
+        //  Shorter-direction nav with wrap. forward = #Rights to reach target;
+        //  backward = #Lefts. Prefer Right on ties (arbitrary, deterministic).
+        const int forward  = ((target_n - known_n) % 18 + 18) % 18;  //  1..17
+        const int backward = 18 - forward;                            //  17..1
+        const bool go_right = (forward <= backward);
+        InputSuggestion s;
+        s.button = go_right ? "Right" : "Left";
+        s.label = std::string(go_right ? "Right" : "Left")
+                + " — to Team " + std::to_string(target_n);
+        s.reason = "known=Team " + std::to_string(known_n)
+                 + " target=Team " + std::to_string(target_n)
+                 + " (" + std::to_string(go_right ? forward : backward) + " step"
+                 + ((go_right ? forward : backward) == 1 ? "" : "s")
+                 + (go_right ? " right" : " left") + ")";
+        return s;
     }
-    if (screen == "team_stats"){
-        if (ctx.team_scan_step == 5){
-            InputSuggestion s;
-            s.button = "B";
-            s.label = "B — back out of info";
-            s.reason = "scan step 5/7 (Stats loaded)";
-            return s;
-        }
-        return std::nullopt;
-    }
+    if (screen == "moves_and_more")  return std::nullopt;
+    if (screen == "team_stats")      return std::nullopt;
     if (screen == "team_preview_locked_in" || screen == "preparing")
         return press_a("A — Confirm Leads", "confirm leads / continue");
     if (screen == "result_screen")        return press_a("A — Continue",     "dismiss result banner");

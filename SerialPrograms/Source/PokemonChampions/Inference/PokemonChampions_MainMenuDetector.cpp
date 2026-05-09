@@ -14,6 +14,7 @@
  *
  */
 
+#include <algorithm>
 #include "Common/Cpp/Color.h"
 #include "CommonFramework/ImageTools/ImageStats.h"
 #include "CommonFramework/VideoPipeline/VideoOverlay.h"
@@ -49,6 +50,16 @@ MainMenuDetector::MainMenuDetector()
     //  Cursor-independent screen-presence cue — the brown panel fill is
     //  stable across all cursor positions in the corpus.
     , m_recruit_tile (0.5729, 0.3796, 0.0130, 0.0231)
+    //  Top-right gold/yellow icon — drawn 2026-05-09. Verified across all
+    //  11 main_menu corpus shots; zero hits across 70+ non-menu screens.
+    //  Brightness varies session-to-session (210..254 on R), so we do a
+    //  loose "yellowish" check rather than a tight ratio match.
+    , m_yellow_anchor(0.9094, 0.1447, 0.0485, 0.0268)
+    //  Neutral mid-grey panel near the top of the screen — drawn
+    //  2026-05-09. Reads ~(86, 89, 88) sd~10 across every main_menu shot
+    //  in the corpus; nothing else in the corpus reads neutral grey at
+    //  this position. Strict gate.
+    , m_grey_anchor  (0.3113, 0.0177, 0.1101, 0.0699)
 {
     //  Per-option cursor strips drawn by user.
     m_cursor_boxes[0] = ImageFloatBox(0.5403, 0.3214, 0.0083, 0.1857);  //  Battle
@@ -66,9 +77,45 @@ void MainMenuDetector::make_overlays(VideoOverlaySet& items) const{
     items.add(COLOR_CYAN, m_box_button);
     items.add(COLOR_CYAN, m_chrome);
     items.add(COLOR_YELLOW, m_recruit_tile);
+    items.add(COLOR_YELLOW, m_yellow_anchor);
+    items.add(COLOR_WHITE, m_grey_anchor);
     for (const ImageFloatBox& b : m_cursor_boxes){
         items.add(COLOR_YELLOW, b);
     }
+}
+
+
+//  Tight neutral-grey check for m_grey_anchor. Measured: avg~(86, 89, 88),
+//  sd~9-12 across all corpus shots. Channel-balanced (no dominant color)
+//  in the dark-grey range.
+static bool is_neutral_grey(const ImageStats& stats){
+    const double r = stats.average.r;
+    const double g = stats.average.g;
+    const double b = stats.average.b;
+    if (r < 60.0 || r > 130.0) return false;
+    if (g < 60.0 || g > 130.0) return false;
+    if (b < 60.0 || b > 130.0) return false;
+    //  Channel imbalance ≤ 12 keeps this off any tinted dark surface.
+    const double max_c = std::max({r, g, b});
+    const double min_c = std::min({r, g, b});
+    if (max_c - min_c > 12.0) return false;
+    //  Internal variance must be low — kills textured / noisy regions.
+    return (stats.stddev.r + stats.stddev.g + stats.stddev.b) <= 25.0;
+}
+
+//  Loose "yellowish" check for m_yellow_anchor. The icon shade varies
+//  session-to-session (R 210..254, G 179..215, B 15..57), but is always
+//  yellow-leaning: r and g both bright, b small.
+static bool is_yellowish_icon(const ImageStats& stats){
+    const double r = stats.average.r;
+    const double g = stats.average.g;
+    const double b = stats.average.b;
+    if (r + g < 360.0) return false;        //  brightness floor on (r+g)
+    if (b > 90.0)      return false;        //  blue must be subdued
+    if (r < 180.0 || g < 150.0) return false;
+    //  Internal variance: the anchor lands on icon + uniform background,
+    //  sd~17-45 in the corpus.
+    return (stats.stddev.r + stats.stddev.g + stats.stddev.b) <= 70.0;
 }
 
 
@@ -115,10 +162,20 @@ bool MainMenuDetector::is_box_selected(const ImageViewRGB32& screen) const{
 }
 
 bool MainMenuDetector::detect(const ImageViewRGB32& screen){
-    //  Co-evidence #1: cyan-blue wallpaper in upper-left corner.
+    //  Strict co-evidence #1: neutral-grey panel near the top of the
+    //  screen. Reads ~(86, 89, 88) sd~10 on every main_menu corpus
+    //  shot; nothing else in the corpus reads neutral grey at this
+    //  position. Cheapest reject.
+    const ImageStats grey = image_stats(extract_box_reference(screen, m_grey_anchor));
+    if (!is_neutral_grey(grey)) return false;
+    //  Strict co-evidence #2: top-right yellow icon. Verified across
+    //  all 11 main_menu corpus shots; zero hits across the rest.
+    const ImageStats yel = image_stats(extract_box_reference(screen, m_yellow_anchor));
+    if (!is_yellowish_icon(yel)) return false;
+    //  Co-evidence #3: cyan-blue wallpaper in upper-left corner.
     const ImageStats chrome = image_stats(extract_box_reference(screen, m_chrome));
     if (!is_menu_chrome_blue(chrome)) return false;
-    //  Co-evidence #2: Recruit tile brown fill — cursor-independent.
+    //  Co-evidence #4: Recruit tile brown fill — cursor-independent.
     //  Saturated brown (r:g:b ≈ 0.58:0.39:0.03) with brightness floor.
     //  stddev_sum ≈ 165-175 across the corpus — tile has internal texture/gradient.
     const ImageStats brown = image_stats(extract_box_reference(screen, m_recruit_tile));

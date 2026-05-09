@@ -60,6 +60,7 @@
 #include "PokemonChampions/Inference/PokemonChampions_TeamPreviewDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_TeamPreviewReader.h"
 #include "PokemonChampions/Inference/PokemonChampions_TeamSelectDetector.h"
+#include "PokemonChampions/Inference/PokemonChampions_TeamSelectModalDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_TeamStatsReader.h"
 #include "PokemonChampions/Inference/PokemonChampions_TeamSummaryReader.h"
 #include "PokemonChampions/Inference/PokemonChampions_TargetSelectDetector.h"
@@ -119,13 +120,29 @@ LiveDetectorTrace::LiveDetectorTrace()
     )
     , TEAM_INDEX(
         "<b>Team Index:</b><br>"
-        "Which saved team to pick on the team_select screen.",
+        "Which saved team (1..18) to pick on the team_select screen. The "
+        "auto-press flow left-homes to Team 1 first (cursor at column 0 "
+        "is the only unambiguous anchor in the 5-column carousel), then "
+        "steps Right to land on the target.",
         {
-            {0, "team1", "Team 1"},
-            {1, "team2", "Team 2"},
-            {2, "team3", "Team 3"},
-            {3, "team4", "Team 4"},
-            {4, "team5", "Team 5"},
+            { 0, "team1",  "Team 1"},
+            { 1, "team2",  "Team 2"},
+            { 2, "team3",  "Team 3"},
+            { 3, "team4",  "Team 4"},
+            { 4, "team5",  "Team 5"},
+            { 5, "team6",  "Team 6"},
+            { 6, "team7",  "Team 7"},
+            { 7, "team8",  "Team 8"},
+            { 8, "team9",  "Team 9"},
+            { 9, "team10", "Team 10"},
+            {10, "team11", "Team 11"},
+            {11, "team12", "Team 12"},
+            {12, "team13", "Team 13"},
+            {13, "team14", "Team 14"},
+            {14, "team15", "Team 15"},
+            {15, "team16", "Team 16"},
+            {16, "team17", "Team 17"},
+            {17, "team18", "Team 18"},
         },
         LockMode::UNLOCK_WHILE_RUNNING,
         0   //  Default = Team 1
@@ -416,6 +433,7 @@ void LiveDetectorTrace::init_pipeline_registry(){
     add("TeamPreviewCursorReader",   "reader",   "skipped", "On team_preview_selecting, reports which of the 6 own slots the cursor is on (yellow ▶ arrow). -1 if no confident pick.");
     add("ActiveHUDSlotDetector",     "detector", "skipped", "Reads which own slot has the lime-green active outline (doubles).");
     add("TeamSelectDetector",        "detector", "skipped", "Detects the team-select tab strip (the screen before Team Preview where you pick which 4 to bring); also reports selected_tab.");
+    add("TeamSelectModalDetector",   "detector", "skipped", "Detects the 4-option popup (Select / Edit / View details / Cancel) that opens on top of team_select when A is pressed on a team. Reports selected_option (0..3).");
     add("TargetSelectDetector",      "detector", "skipped", "Detects the doubles target-select modal: 4 selector strips visible with exactly one in the selected (yellow/green) state. Reports selected_index 0..3 (opp_a/opp_b/own_a/own_b).");
     add("PokemonSwitchDetector",     "detector", "skipped", "Detects the Pokemon switch menu (reached from action_menu's POKEMON button): 6-mon left column + Moves & More center panel + opp right column. Cursor-independent.");
     add("PokemonSwitchReader",       "reader",   "skipped", "On the Pokemon switch menu, reads species + HP fraction for each own slot and HP% for each opp slot. Fills bench HP that the in-battle HUD only shows for active slots. Selected slot detected via yellow highlight.");
@@ -568,7 +586,14 @@ std::string LiveDetectorTrace::classify_screen(Logger& logger, const ImageViewRG
     }
     {
         MoveSelectDetector det;
-        if (try_det("MoveSelectDetector", det)) return "move_select";
+        if (try_det("MoveSelectDetector", det)){
+            m_move_select_cursor = det.cursor_slot();  //  -1 if pre-highlight
+            JsonObject out;
+            out["cursor"] = (int64_t)m_move_select_cursor;
+            out["target"] = (int64_t)m_target_move_slot;
+            mark("MoveSelectDetector", "ok", std::move(out));
+            return "move_select";
+        }
     }
     {
         //  Pokemon switch menu — same broad layout as Moves & More (purple
@@ -579,7 +604,14 @@ std::string LiveDetectorTrace::classify_screen(Logger& logger, const ImageViewRG
     }
     {
         ActionMenuDetector det;
-        if (try_det("ActionMenuDetector", det)) return "action_menu";
+        if (try_det("ActionMenuDetector", det)){
+            //  0 = FIGHT, 1 = POKEMON. Drives switch-every-3rd-turn nav.
+            m_action_menu_cursor = (int)det.cursored();
+            JsonObject out;
+            out["cursor"] = (int64_t)m_action_menu_cursor;
+            mark("ActionMenuDetector", "ok", std::move(out));
+            return "action_menu";
+        }
     }
     {
         PreparingForBattleDetector det;
@@ -605,13 +637,77 @@ std::string LiveDetectorTrace::classify_screen(Logger& logger, const ImageViewRG
         TeamPreviewDetector det;
         if (try_det("TeamPreviewDetector", det)) return "team_preview";
     }
+    //  Modal takes precedence over the carousel — the team_select tabs
+    //  are still partially visible behind the popup (and TeamSelectDetector
+    //  would still fire), but the active input target is the modal.
+    //  Co-evidence: also require the carousel cursor (yellow team-tab
+    //  marker) to be visible — the modal's pill yellow is ratio-similar
+    //  to several non-team_select UI yellows (notably the main_menu
+    //  BATTLE button glow), and without this gate the modal detector
+    //  false-fires whenever any of its 60 sample boxes happens to land
+    //  on a saturated-yellow pixel elsewhere.
+    {
+        TeamSelectModalDetector modal_det;
+        if (modal_det.detect(screen)){
+            TeamSelectDetector carousel_det;
+            const bool carousel_visible = carousel_det.detect(screen);
+            if (carousel_visible){
+                const int opt = (int)modal_det.selected_option();
+                JsonObject out;
+                out["selected_option"] = (int64_t)opt;
+                out["carousel_cursor_col"] = (int64_t)carousel_det.selected_team();
+                mark("TeamSelectModalDetector", "ok", std::move(out));
+                //  Reuse menu_selected_index for the modal cursor.
+                m_menu_selected_index = opt;
+                //  Modal counts as still being on team_select for stickiness.
+                m_team_select_last_seen_ms = now_ms();
+                return "team_select_modal";
+            }
+            mark("TeamSelectModalDetector", "skipped");  //  modal hit but no carousel — ignore
+        }else{
+            mark("TeamSelectModalDetector", "skipped");
+        }
+    }
     {
         TeamSelectDetector det;
         if (try_det("TeamSelectDetector", det)){
-            m_menu_selected_index = (int)det.selected_team();
+            //  selected_team() returns the visible cursor column 0..4 in
+            //  the carousel — NOT the absolute team index. Treat it as a
+            //  cursor column and track absolute team via m_team_select_known_n.
+            const int col = (int)det.selected_team();
+            const int prev_known = m_team_select_known_n;
+            m_menu_selected_index = col;
+            //  Edge anchors: col 0 is reachable only on Team 1, col 4 only
+            //  on Team 18. When unknown, latch known_n on either edge.
+            if (m_team_select_known_n == 0){
+                if (col == 0){
+                    m_team_select_known_n = 1;
+                    m_team_select_known_n_changed_at_ms = now_ms();
+                }else if (col == 4){
+                    m_team_select_known_n = 18;
+                    m_team_select_known_n_changed_at_ms = now_ms();
+                }
+            }
+            //  Throttled log: only on entry / when state changes, so we
+            //  don't spam the SP console at 4 Hz while idle on the screen.
+            const bool just_entered = (m_prev_screen != "team_select");
+            const bool col_changed = (col != m_team_select_logged_col);
+            const bool known_changed = (m_team_select_known_n != prev_known);
+            if (just_entered || col_changed || known_changed){
+                logger.log(
+                    "TeamSelectDetector: cursor_col=" + std::to_string(col)
+                    + " known_team_n=" + std::to_string(m_team_select_known_n)
+                    + (m_team_select_known_n == 0 ? " (homing)" : ""),
+                    COLOR_GREEN
+                );
+                m_team_select_logged_col = col;
+            }
             JsonObject out;
-            out["selected_tab"] = (int64_t)det.selected_team();
+            out["selected_tab"] = (int64_t)col;     //  back-compat field name.
+            out["cursor_col"]   = (int64_t)col;
+            out["known_team_n"] = (int64_t)m_team_select_known_n;
             mark("TeamSelectDetector", "ok", std::move(out));
+            m_team_select_last_seen_ms = now_ms();
             return "team_select";
         }
     }
@@ -1420,6 +1516,25 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
 
         std::string screen = classify_screen(env.console, snapshot);
 
+        //  Stickiness: if classify dropped to "unknown" but we were on
+        //  team_select within the last ~1500ms, hold the classification.
+        //  The cursor markers briefly fail to read yellow during nav/A
+        //  animations and modal transitions; without this, a single
+        //  blip flips the screen to "unknown", scan-step branches gate
+        //  out, and the recovery-B watchdog eventually backs us out of
+        //  team_select entirely. The window is shorter than the modal-
+        //  to-info-screen latency, so genuine exits still fall through
+        //  cleanly once the new screen's detector fires.
+        if (screen == "unknown" && m_team_select_last_seen_ms > 0
+            && now_ms() - m_team_select_last_seen_ms < 1500){
+            //  If we were on the modal recently, hold that — otherwise
+            //  hold the carousel. Conservative: prefer the modal tag
+            //  when in doubt, since the modal layer is the active
+            //  input target when both are visible.
+            screen = (m_prev_screen == "team_select_modal")
+                     ? "team_select_modal" : "team_select";
+        }
+
         //  CommunicatingDetector is an overlay signal — it can fire on top of
         //  any underlying screen, so run it independently of the cascade and
         //  surface it in the pipeline. Doesn't replace the underlying screen
@@ -1459,6 +1574,11 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
             //  Don't re-seed here — selecting-screen handler matches against
             //  the team library when own species become visible.
             m_match_in_progress = true;
+            //  Reset the in-battle action counter so the 2-fight + 1-switch
+            //  cycle starts fresh on every match.
+            m_battle_action_menu_visits = 0;
+            m_move_slot_rolled_for = -1;
+            m_switch_rolled_for = -1;
         }
         if (screen == "post_match" || screen == "result_screen"){
             m_match_in_progress = false;
@@ -1536,20 +1656,69 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
         sctx.format_target = (int)FORMAT_TARGET.current_value();
         sctx.battle_mode_target = (int)BATTLE_MODE_TARGET.current_value();
         sctx.team_index_target = (int)TEAM_INDEX.current_value();
+        //  Re-arm the scan flow if the user changed the target mid-run.
+        //  Without this, team_scan_complete remains true from a prior
+        //  match and the pre_match suggester goes straight to "Begin
+        //  Matchmaking" — queueing the previously-selected team rather
+        //  than the new one. Don't fire on the first poll (sentinel = -1).
+        if (m_team_index_last_seen >= 0
+            && m_team_index_last_seen != sctx.team_index_target){
+            env.console.log(
+                "TEAM_INDEX changed (" + std::to_string(m_team_index_last_seen)
+                + " -> " + std::to_string(sctx.team_index_target)
+                + ") — re-arming team scan + clearing known team.",
+                COLOR_PURPLE);
+            m_team_scan_complete = false;
+            m_team_scan_step = -1;
+            m_team_select_known_n = 0;
+        }
+        m_team_index_last_seen = sctx.team_index_target;
+        sctx.team_select_known_n = m_team_select_known_n;
+        sctx.team_select_cursor_col =
+            (screen == "team_select") ? m_menu_selected_index : -1;
+        sctx.team_select_settle_ok =
+            (m_team_select_known_n_changed_at_ms == 0)
+            || (now_ms() - m_team_select_known_n_changed_at_ms >= 400);
+        sctx.battle_action_menu_visits = m_battle_action_menu_visits;
+        sctx.action_menu_cursor = m_action_menu_cursor;
+        sctx.move_select_cursor = m_move_select_cursor;
+        sctx.target_move_slot = m_target_move_slot;
+        sctx.switch_target_slot = m_switch_target_slot;
 
         //  Initialize team-scan sub-flow on first sight of team_select with
-        //  cursor on the target team. Stays inactive (-1) afterwards until
-        //  match-end resets m_team_scan_complete.
+        //  the carousel landed on the target team. Stays inactive (-1)
+        //  afterwards until match-end resets m_team_scan_complete.
+        //  Settle gate: known_n is updated optimistically the moment a
+        //  Right/Left press fires, but the press takes ~340ms to land on
+        //  the Switch — without this gate the next poll racing the press
+        //  would open a modal on the wrong team.
         if (screen == "team_select"
-            && m_menu_selected_index == sctx.team_index_target
+            && m_team_select_known_n > 0
+            && m_team_select_known_n - 1 == sctx.team_index_target
             && m_team_scan_step < 0
-            && !m_team_scan_complete){
+            && !m_team_scan_complete
+            && now_ms() - m_team_select_known_n_changed_at_ms >= 400){
             m_team_scan_step = 0;
             env.console.log("LiveDetectorTrace: starting team-scan sub-flow.", COLOR_PURPLE);
         }
         sctx.team_scan_step = m_team_scan_step;
         sctx.team_scan_complete = m_team_scan_complete;
         m_last_suggestion = suggest_for_screen(screen, m_tracker, sctx);
+        //  Visibility for the team_select flow: log the chosen suggestion
+        //  whenever it changes (or first time we see it on this screen).
+        //  Helps debug "auto-press isn't doing anything" — if no suggestion
+        //  is chosen the detector probably isn't firing at all.
+        if (screen == "team_select"){
+            const std::string sug = m_last_suggestion
+                ? (m_last_suggestion->button + " — " + m_last_suggestion->reason)
+                : std::string("(no suggestion)");
+            if (sug != m_team_select_logged_suggestion){
+                env.console.log("team_select suggestion: " + sug, COLOR_PURPLE);
+                m_team_select_logged_suggestion = sug;
+            }
+        }else{
+            m_team_select_logged_suggestion.clear();
+        }
         suggestion_overlay.clear();
         if (m_last_suggestion){
             for (const ImageFloatBox& box : m_last_suggestion->highlights){
@@ -1560,6 +1729,10 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
         //  Track screen-change time for the watchdog log.
         if (screen != m_prev_screen){
             m_last_screen_change_ms = now_ms();
+            env.console.log(
+                "screen: " + (m_prev_screen.empty() ? std::string("(none)") : m_prev_screen)
+                + " -> " + screen,
+                COLOR_BLUE);
             //  Reset press dedup on every transition so the next screen's
             //  first suggestion fires immediately.
             m_last_pressed_screen.clear();
@@ -1574,6 +1747,103 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
                 m_switch_cursor = -1;
                 m_switch_alive = {};
             }
+            //  In-battle action counter: bump on every fresh entry to
+            //  action_menu, so the suggester knows whether it's a fight
+            //  turn (visits=1,2,4,5,...) or a switch turn (visits=3,6,9...).
+            if (screen == "action_menu" && m_prev_screen != "action_menu"){
+                m_battle_action_menu_visits++;
+                env.console.log(
+                    "in-battle: action_menu visit #"
+                    + std::to_string(m_battle_action_menu_visits)
+                    + ((m_battle_action_menu_visits > 0
+                        && m_battle_action_menu_visits % 3 == 0)
+                        ? " (SWITCH turn)" : " (fight turn)"),
+                    COLOR_BLUE);
+            }
+            //  Roll a random move slot once per move_select visit. Tied
+            //  to m_battle_action_menu_visits so each turn gets one
+            //  fresh roll, but a re-entry within the same turn (e.g.
+            //  unknown blip + re-detect) sticks with the same target.
+            if (screen == "move_select" && m_prev_screen != "move_select"
+                && m_move_slot_rolled_for != m_battle_action_menu_visits){
+                m_target_move_slot = (int)(now_ms() % 4);
+                m_move_slot_rolled_for = m_battle_action_menu_visits;
+                env.console.log(
+                    "in-battle: rolled move slot " + std::to_string(m_target_move_slot)
+                    + " for action_menu visit #"
+                    + std::to_string(m_battle_action_menu_visits),
+                    COLOR_BLUE);
+            }
+            //  Roll a random switch target once per pokemon_switch entry.
+            //  Keyed off the same action_menu visit count so a single
+            //  switch attempt sticks with one target across modal-flicker
+            //  re-entries, but a fresh switch on a later turn rerolls.
+            if (screen == "pokemon_switch" && m_prev_screen != "pokemon_switch"
+                && m_switch_rolled_for != m_battle_action_menu_visits){
+                //  Use a different mod source than move-slot so the two
+                //  rolls aren't always in lockstep.
+                m_switch_target_slot = (int)((now_ms() / 7) % 4);
+                m_switch_rolled_for = m_battle_action_menu_visits;
+                env.console.log(
+                    "in-battle: rolled switch index " + std::to_string(m_switch_target_slot)
+                    + " (mod alive_count) for action_menu visit #"
+                    + std::to_string(m_battle_action_menu_visits),
+                    COLOR_BLUE);
+            }
+            if (screen != "action_menu" && m_prev_screen == "action_menu"){
+                m_action_menu_cursor = -1;
+            }
+            if (screen != "move_select" && m_prev_screen == "move_select"){
+                m_move_select_cursor = -1;
+            }
+            //  Re-home on every fresh entry to team_select. A manual
+            //  interruption mid-flow (or returning to it after a scan
+            //  detour) shouldn't keep stale absolute-team state.
+            //
+            //  Also reset known_n when returning from team_stats /
+            //  moves_and_more — pressing B from those screens puts the
+            //  cursor on whichever team was previously *confirmed*,
+            //  NOT the team we just inspected. Without this reset, our
+            //  press-counter-based known_n would still claim we're on
+            //  the inspected team.
+            //
+            //  Also abandon a stalled scan: if scan_step is in the
+            //  modal-walk range (1) when we re-enter team_select, the
+            //  previous attempt didn't reach moves_and_more / team_stats
+            //  and the modal closed on us. Resetting to -1 lets the
+            //  scan retrigger from step 0 once known_n re-anchors.
+            const bool fresh_entry =
+                screen == "team_select" && m_prev_screen != "team_select"
+                && m_prev_screen != "team_select_modal";
+            const bool returning_from_info =
+                screen == "team_select"
+                && (m_prev_screen == "moves_and_more"
+                    || m_prev_screen == "team_stats");
+            if (fresh_entry || returning_from_info){
+                m_team_select_known_n = 0;
+                m_team_select_known_n_changed_at_ms = 0;
+                //  Step layout (post-modal-detector):
+                //    0 team_select       1 modal walk -> View
+                //    2 moves_and_more    3 team_stats
+                //    4 team_select       5 modal walk -> Select (final A)
+                //  Re-entering team_select with step in {1, 2, 3} means
+                //  we exited info-screen flow without completing it
+                //  (modal closed unexpectedly). Reset to retry.
+                if (m_team_scan_step == 1){
+                    env.console.log(
+                        "team-scan: abandoning stalled modal walk (step 1) — "
+                        "re-entering team_select from " + m_prev_screen,
+                        COLOR_ORANGE);
+                    m_team_scan_step = -1;
+                }else if (m_team_scan_step == 2 || m_team_scan_step == 3){
+                    env.console.log(
+                        "team-scan: abandoning stalled info-screen wait (step "
+                        + std::to_string(m_team_scan_step)
+                        + ") — modal closed without reaching moves_and_more / team_stats",
+                        COLOR_ORANGE);
+                    m_team_scan_step = -1;
+                }
+            }
             //  Stale-cursor protection: if we leave a menu screen, clear
             //  the index so the next menu's cursor doesn't inherit it
             //  before its detector fires.
@@ -1587,6 +1857,13 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
                 "main_menu", "battle_mode_menu", "ranked_format_select",
                 "casual_format_select",
                 "pre_match", "casual_pre_match", "team_select",
+                "team_select_modal",
+                //  Info screens reached during the team-scan sub-flow:
+                //  step 2 fires R on moves_and_more, step 3 fires B on
+                //  team_stats. Without these, the press dispatcher
+                //  silently drops both presses and the scan stalls
+                //  forever on the first info screen.
+                "moves_and_more", "team_stats",
                 "team_preview", "team_preview_locked_in", "preparing",
                 "result_screen", "post_match",
                 //  In-battle dummy strategy: A on Fight, A on Move 1, A on
@@ -1594,7 +1871,17 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
                 //  for the auto-queuer to actually finish a match.
                 "action_menu", "move_select", "target_select", "pokemon_switch",
             };
-            if (safe_screens.count(screen)){
+            //  Modal-step exception: scan steps 1 and 5 walk the modal
+            //  cursor (Down/Up + A). The modal screen is now classified
+            //  explicitly (team_select_modal, in safe_screens), so this
+            //  flag is mostly redundant — but kept for the timing /
+            //  dedup-bypass logic below, which needs to know "this press
+            //  is part of a deterministic state-machine sequence and
+            //  shouldn't be deduped".
+            const bool scan_modal_step =
+                m_last_suggestion
+                && (m_team_scan_step == 1 || m_team_scan_step == 5);
+            if (safe_screens.count(screen) || scan_modal_step){
                 //  Dedup logic: prevent burst-pressing the same action
                 //  button (A/B/X/Y/Plus) through a slow screen transition.
                 //  Nav buttons (Up/Down/Left/Right) are EXEMPT — when the
@@ -1615,7 +1902,32 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
                 //      screen transitions while still permitting needed
                 //      double-A patterns on the next poll.
                 int64_t window_ms = is_nav ? 350 : 1500;
+                //  Scan-modal walk emits the SAME button (Down or A)
+                //  until the modal cursor reaches the target option, so
+                //  short-window dedup blocks would stall the walk —
+                //  but bypassing dedup entirely fires a new press every
+                //  poll (250ms) while the previous press takes ~990ms
+                //  to land on Switch, queueing 3-4 Downs per intended
+                //  step and lapping the cursor around the 4-option
+                //  modal. Use a window matched to actual press duration
+                //  (240ms pre-delay + 150ms hold + 600ms release ≈
+                //  1000ms) so consecutive scan-modal presses fire at
+                //  press-cycle cadence, one tap per cursor advance.
+                if (scan_modal_step) window_ms = 1000;
                 bool retry_window = same && since_press_ms < window_ms;
+                if (retry_window){
+                    //  Visibility into when dedup is the reason a press
+                    //  didn't fire — surfaces "stuck on Edit" type bugs.
+                    static int64_t last_skip_log = 0;
+                    if (now_ms() - last_skip_log > 1000){
+                        env.console.log(
+                            "auto-press dedup SKIP: " + b + " on " + screen
+                            + " (last fired " + std::to_string(since_press_ms)
+                            + "ms ago, window " + std::to_string(window_ms) + "ms)",
+                            COLOR_ORANGE);
+                        last_skip_log = now_ms();
+                    }
+                }
                 if (!retry_window){
                     Button btn = BUTTON_NONE;
                     DpadPosition dpad = DPAD_NONE;
@@ -1635,20 +1947,84 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
                             "LiveDetectorTrace: AUTO-PRESS " + b
                             + " on " + screen + " — " + m_last_suggestion->reason,
                             COLOR_PURPLE);
+                        //  Conservative timing for the team-scan modal:
+                        //  back-to-back Downs at the default 80/160ms can
+                        //  saturate the Switch's input queue and the
+                        //  second tap silently drops. 150ms hold + 600ms
+                        //  release puts ~750ms between physical presses
+                        //  — well past the input-merge window. (100/400
+                        //  was tried first; Switch still dropped one.)
+                        const auto hold_ms = scan_modal_step ? 150ms : 80ms;
+                        const auto cool_ms = scan_modal_step ? 600ms : 160ms;
                         if (btn != BUTTON_NONE){
-                            pbf_press_button(context, btn, 80ms, 160ms);
+                            pbf_press_button(context, btn, hold_ms, cool_ms);
                         }else{
-                            pbf_press_dpad(context, dpad, 80ms, 160ms);
+                            pbf_press_dpad(context, dpad, hold_ms, cool_ms);
                         }
                         m_last_pressed_screen = screen;
                         m_last_pressed_button = b;
                         m_last_press_ms = now_ms();
 
-                        //  Team-scan state machine: advance step on each
-                        //  press fired while in the sub-flow. Step 7 (final
-                        //  Select-confirm A) marks the scan complete.
-                        if (m_team_scan_step >= 0){
-                            if (m_team_scan_step == 7){
+                        //  Carousel-aware team_select: each fired Left/Right
+                        //  shifts the known team by one, wrapping at the
+                        //  ends (Right at 18 -> 1, Left at 1 -> 18). We only
+                        //  advance once known_n is anchored — homing presses
+                        //  with known_n == 0 are no-ops here; the col-0/col-4
+                        //  latch in classify_screen sets known_n the moment
+                        //  the cursor lands at an edge.
+                        if (screen == "team_select" && m_team_select_known_n > 0){
+                            if (b == "Right"){
+                                m_team_select_known_n =
+                                    (m_team_select_known_n == 18)
+                                        ? 1
+                                        : m_team_select_known_n + 1;
+                                m_team_select_known_n_changed_at_ms = now_ms();
+                            }else if (b == "Left"){
+                                m_team_select_known_n =
+                                    (m_team_select_known_n == 1)
+                                        ? 18
+                                        : m_team_select_known_n - 1;
+                                m_team_select_known_n_changed_at_ms = now_ms();
+                            }
+                        }
+
+                        //  Team-scan state machine. Steps 0-5 (was 0-7,
+                        //  collapsed since modal nav is now cursor-aware
+                        //  rather than blind Down counting):
+                        //    0  team_select        A    open modal
+                        //    1  team_select_modal  walk to View, then A
+                        //    2  moves_and_more     R    tab to Stats
+                        //    3  team_stats         B    back out
+                        //    4  team_select        A    open modal again
+                        //    5  team_select_modal  walk to Select, then A
+                        //
+                        //  Within steps 1 and 5 the modal is walked with
+                        //  Down/Up presses BEFORE the final A — we only
+                        //  advance the step counter when an A actually
+                        //  fires while inside the modal walk, since
+                        //  that's the press that exits the step. Down/Up
+                        //  presses inside the modal walk leave step
+                        //  unchanged. All other steps advance on any
+                        //  scan-tagged press.
+                        const bool is_scan_press =
+                            m_team_scan_step >= 0
+                            && m_last_suggestion
+                            && m_last_suggestion->reason.rfind("scan step ", 0) == 0;
+                        //  Steps 1 and 5 walk the modal cursor; step 4
+                        //  re-navigates the carousel (Right/Left ×N + A)
+                        //  because B from team_stats puts the cursor
+                        //  back on the previously-confirmed team, not
+                        //  the one we just inspected. All three are
+                        //  multi-press steps that complete on A.
+                        const bool is_modal_walk_step =
+                            (m_team_scan_step == 1
+                             || m_team_scan_step == 4
+                             || m_team_scan_step == 5);
+                        const bool advance =
+                            is_scan_press
+                            && (!is_modal_walk_step || b == "A");
+                        if (advance){
+                            if (m_team_scan_step == 5){
                                 m_team_scan_complete = true;
                                 m_team_scan_step = -1;
                                 env.console.log(
@@ -1656,6 +2032,27 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
                                     COLOR_PURPLE);
                             }else{
                                 m_team_scan_step++;
+                                //  Step 3's B press advances us to step 4.
+                                //  B from team_stats lands the cursor on
+                                //  the *previously-confirmed* team, not
+                                //  the team we just inspected, so the
+                                //  carousel anchor (m_team_select_known_n)
+                                //  is stale. Reset here — at the
+                                //  deterministic step transition, before
+                                //  any post-B screen classification can
+                                //  race the carousel-entry reset path
+                                //  (which runs only on direct
+                                //  team_stats -> team_select transitions
+                                //  and misses the common "team_stats ->
+                                //  unknown -> team_select" path).
+                                if (m_team_scan_step == 4){
+                                    m_team_select_known_n = 0;
+                                    m_team_select_known_n_changed_at_ms = 0;
+                                    env.console.log(
+                                        "team-scan: cleared known_team_n "
+                                        "for re-nav after B from team_stats.",
+                                        COLOR_PURPLE);
+                                }
                             }
                         }
                     }
@@ -1671,6 +2068,23 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
         if (screen == "unknown" && ENABLE_AUTO_PRESS){
             if (m_unknown_since_ms == 0){
                 m_unknown_since_ms = now_ms();
+            }
+            //  One-shot diagnostic the first time we sit on 'unknown' for
+            //  >2s after entering from a screen that should lead into
+            //  team_select. Surfaces what the live capture is actually
+            //  reading at the 5 cursor boxes so we can re-tune thresholds
+            //  / geometry without needing a fresh stored screenshot.
+            if (!m_team_select_unknown_dumped
+                && (m_prev_screen == "casual_pre_match"
+                    || m_prev_screen == "pre_match"
+                    || m_prev_screen == "team_select")
+                && now_ms() - m_unknown_since_ms > 2000){
+                TeamSelectDetector det;
+                env.console.log(
+                    "team_select diag (stuck unknown after " + m_prev_screen + "): "
+                    + det.debug_dump(snapshot),
+                    COLOR_ORANGE);
+                m_team_select_unknown_dumped = true;
             }
             int64_t elapsed = now_ms() - m_unknown_since_ms;
             const int64_t GRACE_MS = 10000;
@@ -1693,6 +2107,7 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
         }else{
             m_unknown_since_ms = 0;
             m_recovery_b_count = 0;
+            m_team_select_unknown_dumped = false;
         }
 
         //  Watchdog: log if we've been on the same screen for >60s.

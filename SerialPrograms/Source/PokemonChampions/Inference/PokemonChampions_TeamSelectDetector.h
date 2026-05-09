@@ -14,6 +14,7 @@
 
 #include <array>
 #include <cstdint>
+#include <string>
 #include "CommonFramework/ImageTools/ImageBoxes.h"
 #include "CommonFramework/Logging/Logger.h"
 #include "CommonFramework/VideoPipeline/VideoOverlayScopes.h"
@@ -37,6 +38,13 @@ public:
     //  Standalone check: returns selected tab index (0-4) or -1 if none
     //  of the 5 tab positions shows the yellow highlight.
     int selected_tab(const ImageViewRGB32& screen) const;
+
+    //  Diagnostic: human-readable dump of the per-box stats for the 5
+    //  cursor positions. Used by LiveDetectorTrace to log what the live
+    //  capture is actually reading when the screen classifies as
+    //  "unknown" — surfaces capture-card colour drift / scroll states the
+    //  detector wasn't tuned for.
+    std::string debug_dump(const ImageViewRGB32& screen) const;
 
 private:
     std::array<ImageFloatBox, 5> m_tab_slots;
