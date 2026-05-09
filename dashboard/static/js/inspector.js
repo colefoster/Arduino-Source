@@ -66,7 +66,7 @@ async function inspectorInit() {
         inspectorState.boxes = boxes;
         const sel = document.getElementById('inspector-boxes-select');
         sel.innerHTML = '<option value="">None</option>' +
-            Object.keys(boxes).map(r => `<option value="${r}">${r}</option>`).join('');
+            Object.keys(boxes).sort().map(r => `<option value="${r}">${r}</option>`).join('');
     } catch {}
 
     // Source change -> populate thumbnail ribbon (paginated, 10 per page)
