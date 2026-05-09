@@ -2794,11 +2794,38 @@ async def switchprobe_scan():
     Boxes are pulled from CROP_DEFS["PokemonSwitchDetector"] so the page
     stays in sync with the inspector.
     """
+    import base64
+    import urllib.request
+    import urllib.error
     import numpy as np
     from PIL import Image
 
     boxes = CROP_DEFS.get("PokemonSwitchDetector", [])
     screen_dir = TEST_IMAGES_DIR / "pokemon_switch"
+
+    def _run_reader(img_path: Path):
+        """Subprocess the dev runner's PokemonSwitchReader for this image."""
+        try:
+            payload = json.dumps({
+                "image_base64": base64.b64encode(img_path.read_bytes()).decode(),
+                "reader": "PokemonSwitchReader",
+                "screen": "pokemon_switch",
+            }).encode()
+            req = urllib.request.Request(
+                f"{DEV_RUNNER}/ocr-suggest",
+                data=payload,
+                headers={"Content-Type": "application/json"},
+                method="POST",
+            )
+            with urllib.request.urlopen(req, timeout=30) as resp:
+                envelope = json.loads(resp.read())
+            if not envelope.get("ok"):
+                return None, envelope.get("error", "unknown")
+            return envelope.get("result", {}) or {}, None
+        except urllib.error.URLError as e:
+            return None, f"dev runner unreachable: {e}"
+        except Exception as e:
+            return None, str(e)
 
     def is_active(r, g, b):
         return b < 60.0 and g > 150.0
@@ -2857,11 +2884,14 @@ async def switchprobe_scan():
                                           ("stats", "stats_left", "stats_right")]:
                     bits.append(f"{tab}=[{states[lname]},{states[rname]}]")
                 explanation = "fail: " + " ".join(bits)
+            reader_result, reader_err = _run_reader(img_path)
             frames.append({
                 "filename": img_path.name,
                 "boxes": box_results,
                 "verdict": verdict,
                 "explanation": explanation,
+                "reader": reader_result,
+                "reader_error": reader_err,
             })
     return {
         "ok": True,

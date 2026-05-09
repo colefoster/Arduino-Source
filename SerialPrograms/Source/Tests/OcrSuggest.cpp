@@ -24,6 +24,7 @@
 #include "PokemonChampions/Inference/PokemonChampions_BattleEndDetector.h"
 #include "PokemonChampions/Inference/PokemonChampions_AbilityItemReader.h"
 #include "PokemonChampions/Inference/PokemonChampions_TargetSelectReader.h"
+#include "PokemonChampions/Inference/PokemonChampions_PokemonSwitchReader.h"
 
 #include <array>
 #include <iostream>
@@ -252,6 +253,32 @@ int run_ocr_suggest(const std::string& reader_name, const std::string& image_pat
                 << "\"opp_effectiveness_raw\":[\"" << json_str(r.opp_effectiveness_raw[0]) << "\",\"" << json_str(r.opp_effectiveness_raw[1]) << "\"],"
                 << "\"own_effectiveness_raw\":[\"" << json_str(r.own_effectiveness_raw[0]) << "\",\"" << json_str(r.own_effectiveness_raw[1]) << "\"]"
                 << "}" << std::endl;
+        }
+        else if (reader_name == "PokemonSwitchReader"){
+            //  Reads the forced-switch / pokemon menu screen: per-slot
+            //  species + HP for own column, HP% for opp column, and the
+            //  highlighted slot (yellow). Empty slots emit -1 sentinels.
+            PokemonSwitchReader reader(Language::English);
+            PokemonSwitchResult r = reader.read(log, image);
+            std::cout << "{";
+            std::cout << "\"selected_own_slot\":" << r.selected_own_slot;
+            std::cout << ",\"own\":[";
+            for (int i = 0; i < 6; i++){
+                if (i) std::cout << ",";
+                std::cout << "{\"slot\":" << i
+                          << ",\"species\":\"" << r.own[i].species << "\""
+                          << ",\"hp_current\":" << r.own[i].hp_current
+                          << ",\"hp_max\":" << r.own[i].hp_max
+                          << "}";
+            }
+            std::cout << "],\"opp\":[";
+            for (int i = 0; i < 6; i++){
+                if (i) std::cout << ",";
+                std::cout << "{\"slot\":" << i
+                          << ",\"hp_pct\":" << r.opp[i].hp_pct
+                          << "}";
+            }
+            std::cout << "]}" << std::endl;
         }
         else if (reader_name == "ResultReader"){
             //  Wrapper around ResultScreenDetector — exposes the won bool as
