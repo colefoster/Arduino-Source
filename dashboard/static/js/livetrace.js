@@ -466,14 +466,24 @@ function ltRenderSituation(sit, view) {
         return mon.species || mon.name || null;
     };
 
+    //  Singles flag — slot 1 is forced to -1 on both sides by the C++
+    //  situation() builder. Suppress the slot-1 cell so the row reads
+    //  cleanly instead of "[—] unknown".
+    const isSingles = (sit.own_active_slots && sit.own_active_slots[1] < 0)
+                   && (sit.opp_active_slots && sit.opp_active_slots[1] < 0);
+    const slotsToShow = isSingles ? 1 : 2;
+
     const activeRow = (label, slots, team) => {
-        const cells = (slots || [-1, -1]).map((idx, i) => {
+        const safe = slots || [-1, -1];
+        const cells = [];
+        for (let i = 0; i < slotsToShow; i++) {
+            const idx = safe[i];
             const sp = speciesAt(team, idx);
             const idxStr = (idx == null || idx < 0) ? '—' : String(idx);
             const spStr = sp ? `<span style="color:#c9d1d9;">${ltEsc(sp)}</span>` : '<span style="color:#6e7681;">unknown</span>';
-            return `<span class="lt-sit-cell"><span class="k">slot ${i}</span><span class="v">[${idxStr}] ${spStr}</span></span>`;
-        }).join('');
-        return `<div class="lt-sit-row"><span class="lt-sit-label">${label}</span>${cells}</div>`;
+            cells.push(`<span class="lt-sit-cell"><span class="k">slot ${i}</span><span class="v">[${idxStr}] ${spStr}</span></span>`);
+        }
+        return `<div class="lt-sit-row"><span class="lt-sit-label">${label}</span>${cells.join('')}</div>`;
     };
 
     const aliveDots = (arr) => {

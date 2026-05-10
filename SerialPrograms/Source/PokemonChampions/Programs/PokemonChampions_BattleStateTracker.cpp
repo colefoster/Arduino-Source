@@ -776,15 +776,20 @@ void BattleStateTracker::update_from_log(const BattleLogEvent& event){
                 }
             }
             if (new_team_slot >= 0){
+                //  Singles only ever has one active position. Iterating
+                //  both in singles would let m_own_active[1] (still at
+                //  its init value of 1) match a fainted mon and steer
+                //  the write to the wrong slot.
+                const uint8_t positions = (m_mode == BattleMode::DOUBLES) ? 2 : 1;
                 int target_pos = -1;
-                for (uint8_t i = 0; i < 2; i++){
+                for (uint8_t i = 0; i < positions; i++){
                     if (!m_own_team[m_own_active[i]].alive){ target_pos = i; break; }
                 }
                 if (target_pos < 0){
-                    //  No fainted active — voluntary switch. Fall back to
-                    //  position 0 (singles) or whichever active doesn't
-                    //  already match the new species.
-                    for (uint8_t i = 0; i < 2; i++){
+                    //  No fainted active — voluntary switch. In doubles
+                    //  pick the position whose mon doesn't match the new
+                    //  species; singles always lands on position 0.
+                    for (uint8_t i = 0; i < positions; i++){
                         if (m_own_active[i] != new_team_slot){ target_pos = i; break; }
                     }
                     if (target_pos < 0) target_pos = 0;
