@@ -34,6 +34,7 @@ async function liveTraceInit() {
     document.getElementById('lt-bs-own-active-row').innerHTML = '';
     document.getElementById('lt-bs-opp-active-row').innerHTML = '';
     document.getElementById('lt-field').innerHTML = '<span style="color:#6e7681; font-size:11px; font-style:italic;">no data yet</span>';
+    document.getElementById('lt-situation').innerHTML = '<span style="color:#6e7681; font-size:11px; font-style:italic;">no data yet</span>';
     liveTracePoll();
     liveTraceTimer = setInterval(liveTracePoll, 1000);
 }
@@ -93,6 +94,7 @@ function ltHandleEvent(ev) {
     }
     if (ev.pipeline) ltRenderPipeline(ev.pipeline);
     if (ev.engine_view) ltRenderEngineView(ev.engine_view, ev.pipeline || {});
+    if (ev.situation) ltRenderSituation(ev.situation, ev.engine_view || {});
     ltRenderSuggestion(ev.suggested_input);
     ltAppendFeed(ev);
 }
@@ -439,6 +441,70 @@ function ltRenderField(f) {
         if (r.wip && !r.set) span.title = 'WIP: no detector yet — value not tracked';
         el.appendChild(span);
     }
+}
+
+//  BattleSituation renderer — surfaces the raw tracker snapshot. Engine_view
+//  already shows the pretty version (sprites, names); this card is a
+//  diagnostic strip for confirming the underlying indices and bitmaps the
+//  C++ tracker is actually publishing each poll. Useful when reasoning
+//  about active-slot bugs (was m_own_active correctly remapped?).
+function ltRenderSituation(sit, view) {
+    const el = document.getElementById('lt-situation');
+    if (!sit) {
+        el.innerHTML = '<span style="color:#6e7681; font-size:11px; font-style:italic;">no situation yet</span>';
+        return;
+    }
+
+    //  Try to label each active slot with its species from engine_view.
+    //  view.own_team / view.opp_team are arrays of mons indexed 0..5.
+    const ownTeam = Array.isArray(view.own_team) ? view.own_team : [];
+    const oppTeam = Array.isArray(view.opp_team) ? view.opp_team : [];
+    const speciesAt = (team, idx) => {
+        if (idx == null || idx < 0) return null;
+        const mon = team[idx];
+        if (!mon) return null;
+        return mon.species || mon.name || null;
+    };
+
+    const activeRow = (label, slots, team) => {
+        const cells = (slots || [-1, -1]).map((idx, i) => {
+            const sp = speciesAt(team, idx);
+            const idxStr = (idx == null || idx < 0) ? '—' : String(idx);
+            const spStr = sp ? `<span style="color:#c9d1d9;">${ltEsc(sp)}</span>` : '<span style="color:#6e7681;">unknown</span>';
+            return `<span class="lt-sit-cell"><span class="k">slot ${i}</span><span class="v">[${idxStr}] ${spStr}</span></span>`;
+        }).join('');
+        return `<div class="lt-sit-row"><span class="lt-sit-label">${label}</span>${cells}</div>`;
+    };
+
+    const aliveDots = (arr) => {
+        if (!Array.isArray(arr)) return '—';
+        return arr.map((alive, i) =>
+            `<span class="lt-sit-dot ${alive ? 'alive' : 'down'}" title="slot ${i}: ${alive ? 'alive' : 'down/empty'}">${alive ? '●' : '○'}</span>`
+        ).join('');
+    };
+
+    let html = '';
+    html += activeRow('own active', sit.own_active_slots, ownTeam);
+    html += activeRow('opp active', sit.opp_active_slots, oppTeam);
+    html += `<div class="lt-sit-row"><span class="lt-sit-label">own alive</span><span class="lt-sit-dots">${aliveDots(sit.own_alive)}</span></div>`;
+    html += `<div class="lt-sit-row"><span class="lt-sit-label">opp alive</span><span class="lt-sit-dots">${aliveDots(sit.opp_alive)}</span></div>`;
+
+    //  Field state — duplicated from the Field card on purpose, so this
+    //  card is a self-contained snapshot of what BattleStateTracker
+    //  reported. Compact one-liner.
+    const fieldBits = [];
+    if (sit.weather)      fieldBits.push(`weather=${sit.weather}`);
+    if (sit.terrain)      fieldBits.push(`terrain=${sit.terrain}`);
+    if (sit.trick_room)   fieldBits.push(`trick_room`);
+    if (sit.tailwind_own) fieldBits.push(`tailwind_own`);
+    if (sit.tailwind_opp) fieldBits.push(`tailwind_opp`);
+    if (ltAnyTrue(sit.screens_own)) fieldBits.push(`screens_own=${ltScreenSummary(sit.screens_own)}`);
+    if (ltAnyTrue(sit.screens_opp)) fieldBits.push(`screens_opp=${ltScreenSummary(sit.screens_opp)}`);
+    if (typeof sit.turn === 'number' && sit.turn > 0) fieldBits.push(`turn=${sit.turn}`);
+    const fieldStr = fieldBits.length ? fieldBits.join(' · ') : '<span style="color:#6e7681;">no field effects</span>';
+    html += `<div class="lt-sit-row"><span class="lt-sit-label">field</span><span class="lt-sit-field">${fieldStr}</span></div>`;
+
+    el.innerHTML = html;
 }
 
 function ltScreenSummary(arr) {
