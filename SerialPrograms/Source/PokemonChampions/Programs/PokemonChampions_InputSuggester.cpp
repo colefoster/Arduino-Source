@@ -6,6 +6,20 @@
 #include "PokemonChampions_InputSuggester.h"
 #include "PokemonChampions_BattleStateTracker.h"
 
+namespace {
+//  Resolve the on-field own slots: prefer the BattleSituation snapshot
+//  when ctx carries one (canonical), fall back to ctx.own_active_slots
+//  for legacy callers.
+inline std::array<int, 2> resolve_own_active(
+    const PokemonAutomation::NintendoSwitch::PokemonChampions::LiveContext& ctx
+){
+    if (ctx.situation != nullptr){
+        return ctx.situation->own_active_slots;
+    }
+    return ctx.own_active_slots;
+}
+}  //  anon
+
 namespace PokemonAutomation{
 namespace NintendoSwitch{
 namespace PokemonChampions{
@@ -235,10 +249,10 @@ static std::optional<InputSuggestion> suggest_pokemon_switch(
         //  Skip mons currently on field — selecting one of them on the
         //  switch screen tries to swap a mon with itself and the game
         //  rejects it. Filter only when we actually have active info;
-        //  if both own_active_slots are -1 (no HUD read yet), keep the
-        //  permissive behavior so we don't strand on an empty pool.
+        //  if both slots are -1 (no HUD read yet), keep the permissive
+        //  behavior so we don't strand on an empty pool.
         bool is_on_field = false;
-        for (int a : ctx.own_active_slots){
+        for (int a : resolve_own_active(ctx)){
             if (a == i){ is_on_field = true; break; }
         }
         if (is_on_field) continue;

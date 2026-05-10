@@ -102,6 +102,40 @@ std::string team_bias_snap(
     int max_edit_distance = 2);
 
 
+//  Live tactical state of the current match — companion to TeamCandidates.
+//  Where TeamCandidates is the slug-snapshot consumed by OCR readers as
+//  bias, BattleSituation is the per-poll game state consumed by suggesters
+//  and (later) the action model. Both are flat structs built from the
+//  tracker per poll; readers / suggesters take const refs so they don't
+//  couple to tracker layout. -1 / empty / false are the sentinel values
+//  for "unknown".
+struct BattleSituation{
+    //  Indices into m_own_team / m_opp_team for whoever's currently on
+    //  field. Singles: only [0] meaningful; [1] = -1.
+    std::array<int, 2> own_active_slots = {-1, -1};
+    std::array<int, 2> opp_active_slots = {-1, -1};
+
+    //  Aliveness across the full team (own) / discovered roster (opp).
+    //  An "alive" mon has hp_max > 0 and hp > 0. Indices line up with
+    //  m_own_team / m_opp_team.
+    std::array<bool, 6> own_alive = {};
+    std::array<bool, 6> opp_alive = {};
+
+    //  Field state.
+    std::string weather;            //  "RainDance" / "SunnyDay" / "Sandstorm" / "Snow" / ""
+    std::string terrain;            //  "Electric" / "Grassy" / "Psychic" / "Misty" / ""
+    bool trick_room = false;
+    bool tailwind_own = false;
+    bool tailwind_opp = false;
+    std::array<bool, 3> screens_own = {};   //  light_screen, reflect, aurora_veil
+    std::array<bool, 3> screens_opp = {};
+
+    //  Match-level: turn counter and battle mode.
+    uint8_t turn = 0;
+    BattleMode mode = BattleMode::UNKNOWN;
+};
+
+
 //  User-configured Pokemon for the own team.
 struct ConfiguredPokemon{
     std::string species;
@@ -257,6 +291,10 @@ public:
     //  should treat the second slot as -1 / unused in singles mode.
     std::array<uint8_t, 2> own_active_slot_indices() const { return m_own_active; }
     std::array<uint8_t, 2> opp_active_slot_indices() const { return m_opp_active; }
+
+    //  Live tactical snapshot. See BattleSituation docs. Cheap; rebuild
+    //  per-poll rather than caching.
+    BattleSituation situation() const;
 
 private:
     //  Find or create an opponent slot for a species. Returns index 0-5.

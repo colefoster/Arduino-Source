@@ -1466,6 +1466,41 @@ JsonObject LiveDetectorTrace::build_event(const std::string& screen, int64_t ts_
 
     ev["engine_view"] = m_tracker.to_predict_json();
 
+    //  Live tactical snapshot — the same struct the suggester sees this
+    //  poll. Surfaced on the event so the dashboard can render active
+    //  slots, alive bitmaps, and field state without re-deriving from
+    //  the engine_view payload.
+    {
+        BattleSituation sit = m_tracker.situation();
+        JsonObject sj;
+        JsonArray own_act, opp_act;
+        own_act.push_back((int64_t)sit.own_active_slots[0]);
+        own_act.push_back((int64_t)sit.own_active_slots[1]);
+        opp_act.push_back((int64_t)sit.opp_active_slots[0]);
+        opp_act.push_back((int64_t)sit.opp_active_slots[1]);
+        sj["own_active_slots"] = std::move(own_act);
+        sj["opp_active_slots"] = std::move(opp_act);
+        JsonArray own_alive, opp_alive;
+        for (uint8_t i = 0; i < 6; i++){
+            own_alive.push_back(sit.own_alive[i]);
+            opp_alive.push_back(sit.opp_alive[i]);
+        }
+        sj["own_alive"] = std::move(own_alive);
+        sj["opp_alive"] = std::move(opp_alive);
+        sj["weather"] = sit.weather;
+        sj["terrain"] = sit.terrain;
+        sj["trick_room"] = sit.trick_room;
+        sj["tailwind_own"] = sit.tailwind_own;
+        sj["tailwind_opp"] = sit.tailwind_opp;
+        JsonArray scr_own, scr_opp;
+        for (bool b : sit.screens_own) scr_own.push_back(b);
+        for (bool b : sit.screens_opp) scr_opp.push_back(b);
+        sj["screens_own"] = std::move(scr_own);
+        sj["screens_opp"] = std::move(scr_opp);
+        sj["turn"] = (int64_t)sit.turn;
+        ev["situation"] = std::move(sj);
+    }
+
     if (m_last_suggestion){
         JsonObject s;
         s["button"] = m_last_suggestion->button;
@@ -1767,15 +1802,14 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
         sctx.switch_blind_attempts = m_switch_blind_attempts;
         sctx.switch_blind_last_press_ms = m_switch_blind_last_press_ms;
         sctx.now_ms = (int64_t)now_ms();
-        //  Active-slot indices (which m_own_team[i] is currently on field).
-        //  Suggester uses these to exclude on-field mons from switch
-        //  candidates. -1 in singles' second slot, or when HUD hasn't
-        //  read the species yet to anchor the mapping.
-        {
-            auto act = m_tracker.own_active_slot_indices();
-            sctx.own_active_slots[0] = (int)act[0];
-            sctx.own_active_slots[1] = (m_mode == BattleMode::DOUBLES) ? (int)act[1] : -1;
-        }
+        //  Live tactical snapshot — the canonical source for active-slot
+        //  indices, alive bitmaps, and field state. Lives on this poll's
+        //  stack frame; the LiveContext borrows it for the duration of
+        //  suggest_for_screen. Legacy own_active_slots[2] kept in sync
+        //  for any consumer that hasn't migrated to the situation pointer.
+        BattleSituation poll_situation = m_tracker.situation();
+        sctx.situation = &poll_situation;
+        sctx.own_active_slots = poll_situation.own_active_slots;
 
         //  Initialize team-scan sub-flow on first sight of team_select with
         //  the carousel landed on the target team. Stays inactive (-1)

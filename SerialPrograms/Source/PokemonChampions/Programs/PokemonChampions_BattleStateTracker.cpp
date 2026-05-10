@@ -510,6 +510,31 @@ std::string team_bias_snap(
 }
 
 
+BattleSituation BattleStateTracker::situation() const{
+    BattleSituation s;
+    s.own_active_slots[0] = (int)m_own_active[0];
+    s.own_active_slots[1] = (m_mode == BattleMode::DOUBLES) ? (int)m_own_active[1] : -1;
+    s.opp_active_slots[0] = (int)m_opp_active[0];
+    s.opp_active_slots[1] = (m_mode == BattleMode::DOUBLES) ? (int)m_opp_active[1] : -1;
+    for (uint8_t i = 0; i < 6; i++){
+        s.own_alive[i] = m_own_team[i].alive && m_own_team[i].hp > 0.0f;
+    }
+    for (uint8_t i = 0; i < m_opp_seen && i < 6; i++){
+        s.opp_alive[i] = m_opp_team[i].alive && m_opp_team[i].hp > 0.0f;
+    }
+    s.weather = m_weather;
+    s.terrain = m_terrain;
+    s.trick_room = m_trick_room;
+    s.tailwind_own = m_tailwind_own;
+    s.tailwind_opp = m_tailwind_opp;
+    s.screens_own = m_screens_own;
+    s.screens_opp = m_screens_opp;
+    s.turn = m_turn;
+    s.mode = m_mode;
+    return s;
+}
+
+
 TeamCandidates BattleStateTracker::candidates() const{
     TeamCandidates c;
     auto push_unique = [](std::vector<std::string>& v, const std::string& s){

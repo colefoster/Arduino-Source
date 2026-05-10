@@ -32,6 +32,7 @@ namespace PokemonChampions{
 
 
 class BattleStateTracker;
+struct BattleSituation;
 
 
 //  Live-pipeline state that doesn't belong in BattleStateTracker (per-poll
@@ -86,7 +87,18 @@ struct LiveContext{
     //  pokemon_switch suggester to exclude the on-field mon(s) from
     //  switch candidates — without this we keep trying to "switch" to
     //  the lead that's already out. -1 = unknown / not on field.
+    //  Superseded by `situation->own_active_slots` when a situation
+    //  pointer is set; kept for callers that construct LiveContext
+    //  without a tracker on hand (tests, fallback paths).
     std::array<int, 2> own_active_slots = {-1, -1};
+
+    //  Live tactical-state snapshot (see BattleSituation in
+    //  BattleStateTracker.h). Optional — when set, suggesters and the
+    //  action model read field state, alive bitmaps, and active slots
+    //  through this single struct instead of poking at LiveContext
+    //  fields piecemeal. Lifetime: borrowed for the duration of one
+    //  suggest_for_screen call; trace owns the snapshot on its stack.
+    const BattleSituation* situation = nullptr;
 
     //  pokemon_switch screen.
     int switch_cursor = -1;                //  -1 if unread.
