@@ -470,6 +470,29 @@ void BattleStateTracker::set_own_leads(const std::vector<uint8_t>& leads){
 }
 
 
+TeamCandidates BattleStateTracker::candidates() const{
+    TeamCandidates c;
+    auto push_unique = [](std::vector<std::string>& v, const std::string& s){
+        if (s.empty()) return;
+        for (const auto& e : v) if (e == s) return;
+        v.push_back(s);
+    };
+    for (uint8_t i = 0; i < 6; i++){
+        push_unique(c.own_species,     m_own_team[i].species);
+        push_unique(c.abilities_seen,  m_own_team[i].ability);
+        push_unique(c.items_seen,      m_own_team[i].item);
+        c.moves_for_own_slot[i] = m_own_team[i].known_moves;
+    }
+    for (uint8_t i = 0; i < m_opp_seen && i < 6; i++){
+        push_unique(c.opp_species,     m_opp_team[i].species);
+        push_unique(c.abilities_seen,  m_opp_team[i].ability);
+        push_unique(c.items_seen,      m_opp_team[i].item);
+    }
+    c.own_brought_indices = m_own_leads;
+    return c;
+}
+
+
 bool BattleStateTracker::apply_ability_item_reveal(
     const std::string& side,
     const std::string& pokemon_slug,

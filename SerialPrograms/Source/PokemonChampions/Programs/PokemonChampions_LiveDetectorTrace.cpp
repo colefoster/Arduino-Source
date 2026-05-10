@@ -1373,9 +1373,22 @@ void LiveDetectorTrace::run_move_select_screen(Logger& logger, const ImageViewRG
     //  Battle HUD is also visible on Move Select — run it too.
     run_battle_screen(logger, screen);
 
-    //  4 own active moves.
+    //  4 own active moves. Pass the tracker's team-candidate snapshot so
+    //  the reader can prefer one of the 4 known moves over a far-off
+    //  global match (e.g. "Heatful" -> "Heat Wave"). Resolve the active
+    //  mon's own-team slot via leads + active HUD slot when available;
+    //  -1 disables team biasing.
     MoveNameReader reader(Language::English);
-    MoveSelectionRead res = reader.read_all(logger, screen);
+    TeamCandidates cand = m_tracker.candidates();
+    int active_hud = reader.read_active_slot(logger, screen);
+    int own_team_slot = -1;
+    if (!cand.own_brought_indices.empty()){
+        size_t idx = (active_hud >= 0) ? (size_t)active_hud : 0;
+        if (idx < cand.own_brought_indices.size()){
+            own_team_slot = cand.own_brought_indices[idx];
+        }
+    }
+    MoveSelectionRead res = reader.read_all(logger, screen, &cand, own_team_slot);
 
     int n = 0;
     for (const auto& m : res.moves) if (!m.empty()) n++;

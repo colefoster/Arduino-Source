@@ -65,6 +65,32 @@ struct TrackedPokemon{
 };
 
 
+//  Snapshot of the slugs the tracker currently believes are in play.
+//  Cheap to build (vector copies of strings) and consumed by readers as
+//  a *bias* — narrow OCR matching to these slugs first, fall through to
+//  the global dictionary on a miss. Never used as a hard filter.
+//
+//  - own_species: up to 6 slugs from the registered team. Empty until
+//    Team Scan / paste populates the tracker.
+//  - opp_species: slugs the opp has shown so far (Team Preview sprite
+//    matcher seeds early; HUD reads fill the rest).
+//  - own_brought_indices: 0-4 indices into own_species, in send-out
+//    order (mirrors set_own_leads). Empty before locked-in screen.
+//  - moves_for_own_slot[i]: the 4 known moves for own_team[i] (from
+//    Moves & More scan or accumulated from prior turns). Used by
+//    MoveNameReader to constrain its dictionary.
+//  - abilities_seen / items_seen: union of tracker-known own + opp
+//    ability/item slugs. Used by AbilityItemReader.
+struct TeamCandidates{
+    std::vector<std::string> own_species;
+    std::vector<std::string> opp_species;
+    std::vector<uint8_t> own_brought_indices;
+    std::array<std::vector<std::string>, 6> moves_for_own_slot;
+    std::vector<std::string> abilities_seen;
+    std::vector<std::string> items_seen;
+};
+
+
 //  User-configured Pokemon for the own team.
 struct ConfiguredPokemon{
     std::string species;
@@ -208,6 +234,10 @@ public:
 
     //  Accessor for serialization / dashboard.
     const std::vector<uint8_t>& own_leads() const { return m_own_leads; }
+
+    //  Bias snapshot for downstream readers. See TeamCandidates docs.
+    //  Cheap; rebuild per-poll rather than caching.
+    TeamCandidates candidates() const;
 
 private:
     //  Find or create an opponent slot for a species. Returns index 0-5.

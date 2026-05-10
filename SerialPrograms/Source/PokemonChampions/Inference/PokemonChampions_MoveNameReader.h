@@ -27,6 +27,13 @@ namespace NintendoSwitch{
 namespace PokemonChampions{
 
 
+//  Forward decl: optional bias snapshot from BattleStateTracker. When
+//  provided and `moves_for_own_slot[N]` is non-empty, MoveNameReader
+//  prefers a member of that small list over a far-off global match.
+//  See BattleStateTracker.h for the full struct.
+struct TeamCandidates;
+
+
 //  Singleton dictionary matcher for Champions move names.
 class MoveNameOCR : public OCR::SmallDictionaryMatcher{
     static constexpr double MAX_LOG10P = -1.30;
@@ -66,17 +73,32 @@ public:
     void make_overlays(VideoOverlaySet& items) const;
 
     //  Read a single move slot (0-3). Returns the matched slug, or "" on failure.
-    std::string read_move(Logger& logger, const ImageViewRGB32& screen, uint8_t slot) const;
+    //  When `hint` is non-null and contains moves for `own_team_slot`, prefer
+    //  one of those slugs if the global match is suspiciously far from it.
+    std::string read_move(
+        Logger& logger, const ImageViewRGB32& screen, uint8_t slot,
+        const TeamCandidates* hint = nullptr,
+        int own_team_slot = -1
+    ) const;
 
     //  Read all four move slots. Returns slugs; empty string for any failed read.
-    std::array<std::string, 4> read_all_moves(Logger& logger, const ImageViewRGB32& screen) const;
+    std::array<std::string, 4> read_all_moves(
+        Logger& logger, const ImageViewRGB32& screen,
+        const TeamCandidates* hint = nullptr,
+        int own_team_slot = -1
+    ) const;
 
     //  Doubles helper: returns which own HUD pill is highlighted (0 or 1),
     //  or -1 if no active outline is detected.
     int read_active_slot(Logger& logger, const ImageViewRGB32& screen) const;
 
     //  Read moves + active slot in one pass. In singles, active_slot will be -1.
-    MoveSelectionRead read_all(Logger& logger, const ImageViewRGB32& screen) const;
+    //  When `hint` is non-null, the active mon's known_moves narrow the dictionary.
+    MoveSelectionRead read_all(
+        Logger& logger, const ImageViewRGB32& screen,
+        const TeamCandidates* hint = nullptr,
+        int own_team_slot = -1
+    ) const;
 
 private:
     Language m_language;
