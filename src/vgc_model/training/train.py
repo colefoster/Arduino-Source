@@ -26,7 +26,7 @@ import torch.nn as nn
 from torch.utils.data import DataLoader, random_split
 
 from ..data.feature_tables import FeatureTables
-from ..data.training_dataset import TrainingDataset
+from ..data.training_dataset import TrainingDataset, ShardChunkSampler
 from ..data.vocab import Vocabs
 from ..model.action_model import ActionModel
 from .gpu_slot_swap import swap_batch
@@ -268,6 +268,10 @@ def main():
     ap.add_argument("--mtl-switch", type=float, default=0.5)
     ap.add_argument("--epoch-limit", type=int, default=None,
                     help="Stop training after N epochs.")
+    ap.add_argument("--resume", action="store_true",
+                    help="If a <run_id>.last.pt checkpoint exists, load it and "
+                         "skip past completed epochs. Useful for host-reboot "
+                         "recovery; safe to leave on by default.")
     ap.add_argument("--use-history", action="store_true",
                     help="Enable LSTM-over-prior-turns history token (Phase 7).")
     ap.add_argument("--seq-history", action="store_true",
@@ -355,15 +359,17 @@ def main():
         f"shards={dataset.shard_count}"
     )
 
-    val_size = max(1, int(0.05 * len(dataset)))
-    train_size = len(dataset) - val_size
-    train_set, val_set = random_split(
-        dataset, [train_size, val_size],
-        generator=torch.Generator().manual_seed(42),
+    # Shard-level split (not sample-level) so the shard LRU cache hits.
+    # Random sample-level split would force every batch to touch every shard.
+    train_set, val_set = dataset.split_by_shard(val_fraction=0.05, seed=42)
+    print(
+        f"split: train_samples={len(train_set)} val_samples={len(val_set)} "
+        f"(train_shards={train_set.shard_count} val_shards={val_set.shard_count})"
     )
 
+    train_sampler = ShardChunkSampler(train_set, seed=42)
     train_loader = DataLoader(
-        train_set, batch_size=args.batch_size, shuffle=True,
+        train_set, batch_size=args.batch_size, sampler=train_sampler,
         num_workers=args.num_workers, pin_memory=device.type == "cuda",
         persistent_workers=args.num_workers > 0,
     )
@@ -409,7 +415,22 @@ def main():
 
     best_val_loss = float("inf")
     target_epochs = args.epochs if args.epoch_limit is None else min(args.epochs, args.epoch_limit)
-    for epoch in range(1, target_epochs + 1):
+    start_epoch = 1
+    last_ckpt_path = args.checkpoint_dir / f"{run_id}.last.pt"
+    # Resume support: if a last.pt exists for this run_id, load model + optimizer
+    # state and skip past completed epochs. Lets us recover from host reboots
+    # / container kills without losing training progress.
+    if args.resume and last_ckpt_path.exists():
+        ck = torch.load(last_ckpt_path, map_location=device, weights_only=False)
+        model.load_state_dict(ck["state_dict"])
+        if "optimizer" in ck:
+            optimizer.load_state_dict(ck["optimizer"])
+        best_val_loss = float(ck.get("best_val_loss", float("inf")))
+        start_epoch = int(ck.get("epoch", 0)) + 1
+        print(f"resumed from {last_ckpt_path} (next epoch={start_epoch}, best_val={best_val_loss:.4f})")
+
+    for epoch in range(start_epoch, target_epochs + 1):
+        train_sampler.set_epoch(epoch)
         train_metrics = _run_epoch(
             model, train_loader, device, mtl=mtl,
             optimizer=optimizer, augment=not args.no_augment,
@@ -474,6 +495,16 @@ def main():
                 "args": vars(args),
                 "val_loss": val_metrics["loss"],
             }, ckpt_path)
+
+        # Always save last.pt so a host reboot can resume from this epoch.
+        torch.save({
+            "epoch": epoch,
+            "state_dict": model.state_dict(),
+            "optimizer": optimizer.state_dict(),
+            "args": vars(args),
+            "val_loss": val_metrics["loss"],
+            "best_val_loss": best_val_loss,
+        }, last_ckpt_path)
 
 
 if __name__ == "__main__":

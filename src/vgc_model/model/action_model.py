@@ -256,7 +256,8 @@ class ActionModel(nn.Module):
         if self.use_boosts:
             slots = slots + self.boost_proj(batch["stat_boosts"])
         if self.use_volatile:
-            slots = slots + self.volatile_proj(batch["volatiles"])
+            # Volatile bitmask is stored bool to save shard RAM; promote to float.
+            slots = slots + self.volatile_proj(batch["volatiles"].float())
         if self.use_sub_hp:
             slots = slots + self.sub_hp_proj(batch["sub_hps"].unsqueeze(-1))
 

@@ -76,7 +76,9 @@ _STATIC_COLUMN_SPECS: list[tuple[str, np.dtype, tuple]] = [
 def _column_specs(history_k: int) -> list[tuple[str, np.dtype, tuple]]:
     from .volatile_statuses import N_VOLATILE_STATUSES
     return _STATIC_COLUMN_SPECS + [
-        ("volatiles",               np.float32, (8, N_VOLATILE_STATUSES)),
+        # Volatile bitmask: bool (1 byte/entry) instead of float32 to keep the
+        # eagerly-loaded shard set within RAM. Promoted to float at batch time.
+        ("volatiles",               np.bool_,   (8, N_VOLATILE_STATUSES)),
         ("prev_seq_active_species", np.int32,   (history_k, 4)),
         ("prev_seq_active_hp",      np.float32, (history_k, 4)),
         ("prev_seq_action_types",   np.int8,    (history_k, 4)),
