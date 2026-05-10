@@ -81,6 +81,13 @@ struct LiveContext{
     //  Matchmaking (2).
     bool team_scan_complete = false;
 
+    //  Indices into m_own_team for the mons currently on field. Mirrors
+    //  BattleStateTracker::own_active_slot_indices(). Used by the
+    //  pokemon_switch suggester to exclude the on-field mon(s) from
+    //  switch candidates — without this we keep trying to "switch" to
+    //  the lead that's already out. -1 = unknown / not on field.
+    std::array<int, 2> own_active_slots = {-1, -1};
+
     //  pokemon_switch screen.
     int switch_cursor = -1;                //  -1 if unread.
     std::array<bool, 6> switch_alive = {}; //  hp_max > 0 && hp_current > 0.
@@ -115,6 +122,13 @@ struct LiveContext{
     int action_menu_cursor = -1;
     int move_select_cursor = -1;
     int target_move_slot = 0;
+
+    //  Mega Evolve toggle state on move_select.
+    //    can_mega_evolve: MegaEvolveDetector said the toggle pill is up.
+    //    mega_toggled_this_turn: we've already fired R for this turn's
+    //        action_menu visit, so don't keep re-toggling.
+    bool can_mega_evolve = false;
+    bool mega_toggled_this_turn = false;
 };
 
 

@@ -250,6 +250,14 @@ public:
     //  Cheap; rebuild per-poll rather than caching.
     TeamCandidates candidates() const;
 
+    //  Indices into m_own_team / m_opp_team for the mons currently on
+    //  field. Singles: only [0] is meaningful (slot 0 holds the lone
+    //  active). Doubles: both [0] (left) and [1] (right) are valid.
+    //  Returns the raw m_own_active / m_opp_active arrays — callers
+    //  should treat the second slot as -1 / unused in singles mode.
+    std::array<uint8_t, 2> own_active_slot_indices() const { return m_own_active; }
+    std::array<uint8_t, 2> opp_active_slot_indices() const { return m_opp_active; }
+
 private:
     //  Find or create an opponent slot for a species. Returns index 0-5.
     uint8_t find_or_add_opponent(const std::string& species);

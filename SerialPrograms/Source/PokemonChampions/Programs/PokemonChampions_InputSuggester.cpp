@@ -34,6 +34,17 @@ static std::optional<InputSuggestion> suggest_move_select(
     //  the target then A. Falls back to A if the cursor is unread or
     //  already on target.
     (void)tracker;
+    //  Always mega-evolve as soon as the toggle is available. Fire R once
+    //  per turn before the move pick — the per-turn guard is keyed on
+    //  battle_action_menu_visits so we don't re-toggle within the same
+    //  turn (which would un-mega).
+    if (ctx.can_mega_evolve && !ctx.mega_toggled_this_turn){
+        InputSuggestion s;
+        s.button = "R";
+        s.label = "R - Mega Evolve";
+        s.reason = "mega: toggle on while available";
+        return s;
+    }
     const int target = ctx.target_move_slot;
     const int cursor = ctx.move_select_cursor;
     if (cursor >= 0 && cursor < target){
@@ -220,13 +231,24 @@ static std::optional<InputSuggestion> suggest_pokemon_switch(
     std::array<int, 4> alive_slots{};
     int alive_count = 0;
     for (int i = 0; i < 4; i++){    //  Only leads (0-3) are pickable.
-        if (ctx.switch_alive[i]){
-            alive_slots[alive_count++] = i;
+        if (!ctx.switch_alive[i]) continue;
+        //  Skip mons currently on field — selecting one of them on the
+        //  switch screen tries to swap a mon with itself and the game
+        //  rejects it. Filter only when we actually have active info;
+        //  if both own_active_slots are -1 (no HUD read yet), keep the
+        //  permissive behavior so we don't strand on an empty pool.
+        bool is_on_field = false;
+        for (int a : ctx.own_active_slots){
+            if (a == i){ is_on_field = true; break; }
         }
+        if (is_on_field) continue;
+        alive_slots[alive_count++] = i;
     }
     if (alive_count == 0){
-        //  No alive lead read. Either OCR missed, or all 4 leads are KO'd
-        //  (match should have ended). Wait a poll.
+        //  No bench candidate. Either OCR missed both alive slots, or every
+        //  alive lead is currently on the field (singles+1 alive bench is
+        //  the normal case; this means we shouldn't be on the switch
+        //  screen at all). Wait a poll.
         return std::nullopt;
     }
     const int pick_idx = ((ctx.switch_target_slot % alive_count) + alive_count) % alive_count;

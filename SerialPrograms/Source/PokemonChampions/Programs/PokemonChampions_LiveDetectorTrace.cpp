@@ -946,6 +946,17 @@ void LiveDetectorTrace::run_moves_and_more_screen(Logger& logger, const ImageVie
         if (!saved_path.empty()){
             logger.log("LiveDetectorTrace: team saved to " + saved_path, COLOR_GREEN);
         }
+        //  Also pin the scanned team to the current TEAM_INDEX slot. The
+        //  species-keyed library file above is the canonical store; this
+        //  by-index sidecar lets us seed m_own_team at program start (or
+        //  when TEAM_INDEX changes) before team_preview ever fires —
+        //  which is what makes the dashboard show the team pre-match.
+        const int team_idx = (int)TEAM_INDEX.current_value();
+        const std::string idx_path =
+            team_dir + "/team_index_" + std::to_string(team_idx) + ".json";
+        if (m_tracker.save_team_to_file(idx_path)){
+            logger.log("LiveDetectorTrace: team also pinned to " + idx_path, COLOR_GREEN);
+        }
     }
 
     JsonObject out;
@@ -1413,10 +1424,12 @@ void LiveDetectorTrace::run_move_select_screen(Logger& logger, const ImageViewRG
     out["active_slot"] = (int64_t)res.active_slot;
     mark("MoveNameReader", n > 0 ? "ok" : "error", std::move(out));
 
-    //  Mega Evolve toggle visibility.
+    //  Mega Evolve toggle visibility. Stash on the trace so the suggester
+    //  (which runs after this in the poll loop) can decide to fire R.
     {
         MegaEvolveDetector mega;
         bool can_mega = mega.detect(screen);
+        m_can_mega_evolve = can_mega;
         JsonObject mout;
         mout["can_mega_evolve"] = can_mega;
         mark("MegaEvolveDetector", "ok", std::move(mout));
@@ -1495,6 +1508,22 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
 
     init_pipeline_registry();
     m_tracker.reset();
+    //  Pre-seed m_own_team from the by-index sidecar (written by the team
+    //  scan). Without this, the dashboard's engine-view panel is empty
+    //  until the first team_preview of a match — even though the team is
+    //  sitting on disk. With this, the panel shows the saved team
+    //  immediately at program start.
+    {
+        const std::string team_dir = SETTINGS_PATH() + "PokemonChampionsTeams";
+        const int team_idx = (int)TEAM_INDEX.current_value();
+        const std::string idx_path =
+            team_dir + "/team_index_" + std::to_string(team_idx) + ".json";
+        if (m_tracker.load_team_from_file(idx_path)){
+            env.console.log(
+                "LiveDetectorTrace: pre-seeded own team from " + idx_path,
+                COLOR_GREEN);
+        }
+    }
     m_prev_screen.clear();
     m_prev_log_text.clear();
     m_prev_ability_item_text.clear();
@@ -1585,6 +1614,18 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
             }
             m_tracker.reset();
             m_tracker.set_mode(m_mode);
+            //  Re-seed own team from the by-index sidecar after the
+            //  match-start reset. The species-keyed library load that
+            //  happens later (when team_preview reads 6 species) will
+            //  overwrite this — but having it here keeps the dashboard
+            //  showing the team during the gap.
+            {
+                const std::string team_dir = SETTINGS_PATH() + "PokemonChampionsTeams";
+                const int team_idx = (int)TEAM_INDEX.current_value();
+                const std::string idx_path =
+                    team_dir + "/team_index_" + std::to_string(team_idx) + ".json";
+                m_tracker.load_team_from_file(idx_path);
+            }
             m_prev_log_text.clear();
             m_prev_ability_item_text.clear();
     m_prev_team_summary_sig.clear();
@@ -1603,6 +1644,7 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
             m_battle_action_menu_visits = 0;
             m_move_slot_rolled_for = -1;
             m_switch_rolled_for = -1;
+            m_mega_toggled_for_visit = -1;
         }
         if (screen == "post_match" || screen == "result_screen"){
             m_match_in_progress = false;
@@ -1695,6 +1737,17 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
             m_team_scan_complete = false;
             m_team_scan_step = -1;
             m_team_select_known_n = 0;
+            //  Re-seed own team from the new index's by-index sidecar so
+            //  the dashboard reflects what we'll actually play. Falls
+            //  through silently if the new team hasn't been scanned yet.
+            const std::string team_dir = SETTINGS_PATH() + "PokemonChampionsTeams";
+            const std::string idx_path =
+                team_dir + "/team_index_" + std::to_string(sctx.team_index_target) + ".json";
+            if (m_tracker.load_team_from_file(idx_path)){
+                env.console.log(
+                    "LiveDetectorTrace: re-seeded own team from " + idx_path,
+                    COLOR_GREEN);
+            }
         }
         m_team_index_last_seen = sctx.team_index_target;
         sctx.team_select_known_n = m_team_select_known_n;
@@ -1707,10 +1760,22 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
         sctx.action_menu_cursor = m_action_menu_cursor;
         sctx.move_select_cursor = m_move_select_cursor;
         sctx.target_move_slot = m_target_move_slot;
+        sctx.can_mega_evolve = m_can_mega_evolve;
+        sctx.mega_toggled_this_turn =
+            (m_mega_toggled_for_visit == m_battle_action_menu_visits);
         sctx.switch_target_slot = m_switch_target_slot;
         sctx.switch_blind_attempts = m_switch_blind_attempts;
         sctx.switch_blind_last_press_ms = m_switch_blind_last_press_ms;
         sctx.now_ms = (int64_t)now_ms();
+        //  Active-slot indices (which m_own_team[i] is currently on field).
+        //  Suggester uses these to exclude on-field mons from switch
+        //  candidates. -1 in singles' second slot, or when HUD hasn't
+        //  read the species yet to anchor the mapping.
+        {
+            auto act = m_tracker.own_active_slot_indices();
+            sctx.own_active_slots[0] = (int)act[0];
+            sctx.own_active_slots[1] = (m_mode == BattleMode::DOUBLES) ? (int)act[1] : -1;
+        }
 
         //  Initialize team-scan sub-flow on first sight of team_select with
         //  the carousel landed on the target team. Stays inactive (-1)
@@ -1839,6 +1904,7 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
             }
             if (screen != "move_select" && m_prev_screen == "move_select"){
                 m_move_select_cursor = -1;
+                m_can_mega_evolve = false;
             }
             //  Re-home on every fresh entry to team_select. A manual
             //  interruption mid-flow (or returning to it after a scan
@@ -2008,6 +2074,17 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
                         m_last_pressed_screen = screen;
                         m_last_pressed_button = b;
                         m_last_press_ms = now_ms();
+
+                        //  Mark mega-toggle as fired for this turn so the
+                        //  next move_select poll suggests A on the move
+                        //  rather than re-pressing R (which would un-mega).
+                        //  Keyed on action_menu visit count so a fresh
+                        //  turn re-arms the toggle automatically.
+                        if (screen == "move_select" && b == "R"
+                            && m_last_suggestion
+                            && m_last_suggestion->reason.rfind("mega:", 0) == 0){
+                            m_mega_toggled_for_visit = m_battle_action_menu_visits;
+                        }
 
                         //  Track blind-nudge attempts on pokemon_switch when
                         //  the suggester emitted Down because no yellow

@@ -586,6 +586,20 @@ void BattleStateTracker::update_from_hud(const BattleHUDState& hud){
         }
 
         const auto& own = hud.own[hud_slot];
+        //  Remap m_own_active[i] to whichever team slot has the species
+        //  currently shown on the HUD. Without this, m_own_active stays
+        //  pinned to the initial leads {0,1} and the suggester treats the
+        //  on-field mon as a valid switch target. Only remap when we have
+        //  a non-empty species AND a matching team slot — otherwise keep
+        //  the prior mapping so a missed-species poll doesn't clobber.
+        if (!own.species.empty()){
+            for (uint8_t j = 0; j < 6; j++){
+                if (!m_own_team[j].species.empty() && m_own_team[j].species == own.species){
+                    m_own_active[i] = j;
+                    break;
+                }
+            }
+        }
         if (own.hp_current >= 0 && own.hp_max > 0){
             m_own_team[m_own_active[i]].hp = static_cast<float>(own.hp_current) / own.hp_max;
         }
@@ -713,18 +727,45 @@ void BattleStateTracker::update_from_log(const BattleLogEvent& event){
             uint8_t idx = find_or_add_opponent(species);
             m_opp_team[idx].reset_volatile();
         }else if (!event.is_opponent && !event.pokemon.empty()){
-            //  Own switch — clear boosts on whichever active slot matches.
+            //  Own switch. Walk all 6 team slots looking for the new
+            //  active species, then update m_own_active so subsequent
+            //  reads / suggestions know who's actually on field. The HUD
+            //  reader will confirm it within ~250ms but the log line
+            //  fires on the same poll the swap announces, so we get a
+            //  faster signal here. We don't know which active position
+            //  (0 vs 1 in doubles) the switch went into — pick the slot
+            //  whose current m_own_active mon is no longer alive (faint
+            //  switch), else the slot whose species doesn't match an
+            //  active any more, else default to 0.
             std::string lower = event.pokemon;
             std::transform(lower.begin(), lower.end(), lower.begin(), ::tolower);
-            for (uint8_t i = 0; i < 2; i++){
-                auto& mon = m_own_team[m_own_active[i]];
+            int new_team_slot = -1;
+            for (uint8_t j = 0; j < 6; j++){
+                const auto& mon = m_own_team[j];
                 if (!mon.species.empty() &&
                     (lower.find(mon.species) != std::string::npos ||
                      mon.species.find(lower) != std::string::npos))
                 {
-                    mon.reset_volatile();
+                    new_team_slot = j;
                     break;
                 }
+            }
+            if (new_team_slot >= 0){
+                int target_pos = -1;
+                for (uint8_t i = 0; i < 2; i++){
+                    if (!m_own_team[m_own_active[i]].alive){ target_pos = i; break; }
+                }
+                if (target_pos < 0){
+                    //  No fainted active — voluntary switch. Fall back to
+                    //  position 0 (singles) or whichever active doesn't
+                    //  already match the new species.
+                    for (uint8_t i = 0; i < 2; i++){
+                        if (m_own_active[i] != new_team_slot){ target_pos = i; break; }
+                    }
+                    if (target_pos < 0) target_pos = 0;
+                }
+                m_own_active[target_pos] = (uint8_t)new_team_slot;
+                m_own_team[new_team_slot].reset_volatile();
             }
         }
         break;
