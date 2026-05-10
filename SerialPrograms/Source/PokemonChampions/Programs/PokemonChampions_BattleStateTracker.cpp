@@ -5,6 +5,7 @@
  */
 
 #include <algorithm>
+#include <cstdlib>
 #include "Common/Cpp/Json/JsonArray.h"
 #include "Common/Cpp/Json/JsonObject.h"
 #include "Common/Cpp/Json/JsonValue.h"
@@ -467,6 +468,45 @@ void BattleStateTracker::set_own_leads(const std::vector<uint8_t>& leads){
     for (uint8_t s : leads){
         if (s < 6) m_own_leads.push_back(s);
     }
+}
+
+
+static int levenshtein_capped_(const std::string& a, const std::string& b, int cap){
+    const int n = (int)a.size();
+    const int m = (int)b.size();
+    if (std::abs(n - m) > cap) return cap + 1;
+    std::vector<int> prev(m + 1), cur(m + 1);
+    for (int j = 0; j <= m; j++) prev[j] = j;
+    for (int i = 1; i <= n; i++){
+        cur[0] = i;
+        int row_min = cur[0];
+        for (int j = 1; j <= m; j++){
+            int cost = (a[i - 1] == b[j - 1]) ? 0 : 1;
+            cur[j] = std::min({prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + cost});
+            if (cur[j] < row_min) row_min = cur[j];
+        }
+        if (row_min > cap) return cap + 1;
+        std::swap(prev, cur);
+    }
+    return prev[m];
+}
+
+std::string team_bias_snap(
+    const std::string& global_token,
+    const std::vector<std::string>& candidates,
+    int max_edit_distance
+){
+    if (global_token.empty() || candidates.empty()) return global_token;
+    for (const auto& c : candidates){
+        if (c == global_token) return global_token;
+    }
+    int best_d = max_edit_distance + 1;
+    std::string best;
+    for (const auto& c : candidates){
+        int d = levenshtein_capped_(global_token, c, max_edit_distance);
+        if (d < best_d){ best_d = d; best = c; }
+    }
+    return best.empty() ? global_token : best;
 }
 
 

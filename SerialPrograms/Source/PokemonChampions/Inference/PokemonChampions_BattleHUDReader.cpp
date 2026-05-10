@@ -28,6 +28,7 @@
 #include <regex>
 #include <vector>
 #include "CommonFramework/Globals.h"
+#include "PokemonChampions/Programs/PokemonChampions_BattleStateTracker.h"
 #include "CommonFramework/ImageTypes/ImageRGB32.h"
 #include "CommonFramework/ImageTypes/ImageViewRGB32.h"
 #include "CommonFramework/ImageTools/ImageBoxes.h"
@@ -655,7 +656,8 @@ void BattleHUDReader::make_overlays(VideoOverlaySet& items) const{
 
 
 std::string BattleHUDReader::read_opponent_species(
-    Logger& logger, const ImageViewRGB32& screen, uint8_t slot
+    Logger& logger, const ImageViewRGB32& screen, uint8_t slot,
+    const TeamCandidates* hint
 ) const{
     if (slot >= 2 || m_opponent_name_boxes[slot].width == 0) return "";
     ImageViewRGB32 cropped = extract_box_reference(screen, m_opponent_name_boxes[slot]);
@@ -663,11 +665,24 @@ std::string BattleHUDReader::read_opponent_species(
         logger, m_language, cropped, OCR::WHITE_TEXT_FILTERS()
     );
     if (result.results.empty()) return "";
-    return result.results.begin()->second.token;
+    std::string token = result.results.begin()->second.token;
+    if (hint != nullptr){
+        std::string snapped = team_bias_snap(token, hint->opp_species, 2);
+        if (snapped != token){
+            logger.log(
+                "BattleHUDReader: team-bias opp slot " + std::to_string(slot)
+                + " '" + token + "' -> '" + snapped + "'",
+                COLOR_PURPLE
+            );
+            return snapped;
+        }
+    }
+    return token;
 }
 
 std::string BattleHUDReader::read_own_species(
-    Logger& logger, const ImageViewRGB32& screen, uint8_t slot
+    Logger& logger, const ImageViewRGB32& screen, uint8_t slot,
+    const TeamCandidates* hint
 ) const{
     if (slot >= 2 || m_own_name_boxes[slot].width == 0) return "";
     ImageViewRGB32 cropped = extract_box_reference(screen, m_own_name_boxes[slot]);
@@ -675,7 +690,19 @@ std::string BattleHUDReader::read_own_species(
         logger, m_language, cropped, OCR::WHITE_TEXT_FILTERS()
     );
     if (result.results.empty()) return "";
-    return result.results.begin()->second.token;
+    std::string token = result.results.begin()->second.token;
+    if (hint != nullptr){
+        std::string snapped = team_bias_snap(token, hint->own_species, 2);
+        if (snapped != token){
+            logger.log(
+                "BattleHUDReader: team-bias own slot " + std::to_string(slot)
+                + " '" + token + "' -> '" + snapped + "'",
+                COLOR_PURPLE
+            );
+            return snapped;
+        }
+    }
+    return token;
 }
 
 int BattleHUDReader::read_opponent_hp_pct(
@@ -852,15 +879,16 @@ std::pair<int, int> BattleHUDReader::read_move_pp(
 }
 
 BattleHUDState BattleHUDReader::read_all(
-    Logger& logger, const ImageViewRGB32& screen
+    Logger& logger, const ImageViewRGB32& screen,
+    const TeamCandidates* hint
 ) const{
     BattleHUDState state;
 
     for (uint8_t i = 0; i < 2; i++){
-        state.opponents[i].species = read_opponent_species(logger, screen, i);
+        state.opponents[i].species = read_opponent_species(logger, screen, i, hint);
         state.opponents[i].hp_pct  = read_opponent_hp_pct(logger, screen, i);
 
-        state.own[i].species    = read_own_species(logger, screen, i);
+        state.own[i].species    = read_own_species(logger, screen, i, hint);
         auto own_hp = read_own_hp(logger, screen, i);
         state.own[i].hp_current = own_hp.first;
         state.own[i].hp_max     = own_hp.second;

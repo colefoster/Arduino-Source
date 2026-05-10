@@ -30,6 +30,12 @@ namespace NintendoSwitch{
 namespace PokemonChampions{
 
 
+//  Forward decl: optional bias snapshot from BattleStateTracker. When
+//  provided, reader snaps OCR results to known own/opp species slugs
+//  within Levenshtein-2.
+struct TeamCandidates;
+
+
 //  Run number-tuned OCR on an arbitrary crop. White-text filter, 3x upscale,
 //  inverted-binary preprocessing. Returns the raw Tesseract output (digits and
 //  noise). Used by HP/PP readers and the --ocr-crop debug entry.
@@ -91,10 +97,18 @@ public:
     void make_overlays(VideoOverlaySet& items) const;
 
     //  Read opponent species name from badge (slot 0 or 1).
-    std::string read_opponent_species(Logger& logger, const ImageViewRGB32& screen, uint8_t slot = 0) const;
+    //  When `hint` is provided, the global OCR token is snapped to the
+    //  closest member of `hint->opp_species` within Levenshtein-2 (or to
+    //  `hint->own_species` for own_species). Bias only — falls through
+    //  to the global token when no close match exists.
+    std::string read_opponent_species(
+        Logger& logger, const ImageViewRGB32& screen, uint8_t slot = 0,
+        const TeamCandidates* hint = nullptr) const;
 
     //  Read own species name from the bottom-left HUD bar (slot 0 or 1).
-    std::string read_own_species(Logger& logger, const ImageViewRGB32& screen, uint8_t slot = 0) const;
+    std::string read_own_species(
+        Logger& logger, const ImageViewRGB32& screen, uint8_t slot = 0,
+        const TeamCandidates* hint = nullptr) const;
 
     //  Read opponent HP% (slot 0 or 1). Returns 0-100 or -1.
     int read_opponent_hp_pct(Logger& logger, const ImageViewRGB32& screen, uint8_t slot = 0) const;
@@ -115,8 +129,11 @@ public:
     //  Read PP for a move slot (0-3). Singles only.
     std::pair<int, int> read_move_pp(Logger& logger, const ImageViewRGB32& screen, uint8_t slot) const;
 
-    //  Read everything at once.
-    BattleHUDState read_all(Logger& logger, const ImageViewRGB32& screen) const;
+    //  Read everything at once. `hint` (when non-null) constrains the
+    //  species OCR for both own and opp slots — see read_opponent_species.
+    BattleHUDState read_all(
+        Logger& logger, const ImageViewRGB32& screen,
+        const TeamCandidates* hint = nullptr) const;
 
 private:
     void init_boxes();

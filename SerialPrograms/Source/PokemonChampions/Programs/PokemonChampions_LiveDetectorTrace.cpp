@@ -1286,7 +1286,8 @@ void LiveDetectorTrace::run_battle_screen(Logger& logger, const ImageViewRGB32& 
     //  BattleHUD reader — opp active species + both side HPs.
     {
         BattleHUDReader reader(Language::English);
-        BattleHUDState hud = reader.read_all(logger, screen);
+        TeamCandidates hud_cand = m_tracker.candidates();
+        BattleHUDState hud = reader.read_all(logger, screen, &hud_cand);
         m_tracker.update_from_hud(hud);
 
         JsonObject out;

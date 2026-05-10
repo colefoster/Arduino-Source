@@ -91,6 +91,17 @@ struct TeamCandidates{
 };
 
 
+//  If `global_token` isn't already a member of `candidates` and a member
+//  is within Levenshtein-`max_edit_distance` of it, return that member.
+//  Otherwise return `global_token` unchanged. `candidates` empty or
+//  `global_token` empty short-circuits to returning the original token.
+//  Used by readers to snap a global-OCR result to a known team slug.
+std::string team_bias_snap(
+    const std::string& global_token,
+    const std::vector<std::string>& candidates,
+    int max_edit_distance = 2);
+
+
 //  User-configured Pokemon for the own team.
 struct ConfiguredPokemon{
     std::string species;

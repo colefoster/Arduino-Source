@@ -90,31 +90,6 @@ void MoveNameReader::make_overlays(VideoOverlaySet& items) const{
     }
 }
 
-//  Char-level Levenshtein distance, capped at `cap` (returns cap+1 if
-//  the true distance is larger). Cheap because move slugs are short and
-//  the candidate list is at most 4. Used by the team-bias reweight
-//  below; we don't need a full DP if both strings have very different
-//  lengths.
-static int levenshtein_capped(const std::string& a, const std::string& b, int cap){
-    const int n = (int)a.size();
-    const int m = (int)b.size();
-    if (std::abs(n - m) > cap) return cap + 1;
-    std::vector<int> prev(m + 1), cur(m + 1);
-    for (int j = 0; j <= m; j++) prev[j] = j;
-    for (int i = 1; i <= n; i++){
-        cur[0] = i;
-        int row_min = cur[0];
-        for (int j = 1; j <= m; j++){
-            int cost = (a[i - 1] == b[j - 1]) ? 0 : 1;
-            cur[j] = std::min({prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + cost});
-            if (cur[j] < row_min) row_min = cur[j];
-        }
-        if (row_min > cap) return cap + 1;
-        std::swap(prev, cur);
-    }
-    return prev[m];
-}
-
 std::string MoveNameReader::read_move(
     Logger& logger, const ImageViewRGB32& screen, uint8_t slot,
     const TeamCandidates* hint, int own_team_slot
@@ -139,35 +114,19 @@ std::string MoveNameReader::read_move(
     }
     std::string global_token = result.results.begin()->second.token;
 
-    //  Team-bias reweight. If the active mon's known_moves are available
-    //  and the global match isn't one of them, pick the closest known
-    //  move within edit-distance 2. Anything further than that is
-    //  almost certainly a genuine new move (incomplete team scan), so
-    //  we keep the global match.
+    //  Team-bias snap to known_moves[own_team_slot]. Anything further
+    //  than edit-distance 2 from a known move is almost certainly a
+    //  genuine new move (incomplete team scan), so we keep the global.
     if (hint != nullptr && own_team_slot >= 0 && own_team_slot < 6){
-        const auto& known = hint->moves_for_own_slot[own_team_slot];
-        if (!known.empty()){
-            bool already_in_known = false;
-            for (const auto& m : known){
-                if (m == global_token){ already_in_known = true; break; }
-            }
-            if (!already_in_known){
-                int best_d = 3;
-                std::string best;
-                for (const auto& m : known){
-                    int d = levenshtein_capped(global_token, m, 2);
-                    if (d < best_d){ best_d = d; best = m; }
-                }
-                if (!best.empty()){
-                    logger.log(
-                        "MoveNameReader: team-bias slot " + std::to_string(slot)
-                        + " '" + global_token + "' -> '" + best
-                        + "' (d=" + std::to_string(best_d) + ")",
-                        COLOR_PURPLE
-                    );
-                    return best;
-                }
-            }
+        std::string snapped = team_bias_snap(
+            global_token, hint->moves_for_own_slot[own_team_slot], 2);
+        if (snapped != global_token){
+            logger.log(
+                "MoveNameReader: team-bias slot " + std::to_string(slot)
+                + " '" + global_token + "' -> '" + snapped + "'",
+                COLOR_PURPLE
+            );
+            return snapped;
         }
     }
 
