@@ -31,6 +31,13 @@ namespace NintendoSwitch{
 namespace PokemonChampions{
 
 
+//  Forward decl: optional bias snapshot from BattleStateTracker.
+//  When provided, own-slot species OCR snaps to a member of
+//  hint->own_species within Levenshtein-2 (the registered team is
+//  fixed, so a near-miss is virtually always a misread).
+struct TeamCandidates;
+
+
 struct PokemonSwitchSlot{
     std::string species;            //  slug; empty if unread
     int hp_current = -1;            //  own only
@@ -50,7 +57,9 @@ class PokemonSwitchReader{
 public:
     explicit PokemonSwitchReader(Language language = Language::English);
 
-    PokemonSwitchResult read(Logger& logger, const ImageViewRGB32& screen) const;
+    PokemonSwitchResult read(
+        Logger& logger, const ImageViewRGB32& screen,
+        const TeamCandidates* hint = nullptr) const;
 
 private:
     Language m_language;

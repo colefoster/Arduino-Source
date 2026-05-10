@@ -9,6 +9,7 @@
 #include "CommonFramework/ImageTypes/ImageViewRGB32.h"
 #include "CommonFramework/ImageTools/ImageStats.h"
 #include "CommonFramework/ImageTools/ImageBoxes.h"
+#include "PokemonChampions/Programs/PokemonChampions_BattleStateTracker.h"
 #include "PokemonChampions_BattleHUDReader.h"   //  SpeciesNameOCR + raw_ocr_numbers + parse_fraction
 #include "PokemonChampions_PokemonSwitchReader.h"
 
@@ -55,7 +56,8 @@ static double yellow_score(const ImageViewRGB32& crop){
 
 
 PokemonSwitchResult PokemonSwitchReader::read(
-    Logger& logger, const ImageViewRGB32& screen
+    Logger& logger, const ImageViewRGB32& screen,
+    const TeamCandidates* hint
 ) const{
     PokemonSwitchResult out;
 
@@ -78,7 +80,19 @@ PokemonSwitchResult PokemonSwitchReader::read(
                 logger, m_language, cropped, OCR::WHITE_TEXT_FILTERS()
             );
             if (!result.results.empty()){
-                out.own[i].species = result.results.begin()->second.token;
+                std::string token = result.results.begin()->second.token;
+                if (hint != nullptr){
+                    std::string snapped = team_bias_snap(token, hint->own_species, 2);
+                    if (snapped != token){
+                        logger.log(
+                            "PokemonSwitchReader: team-bias slot " + std::to_string(i)
+                            + " '" + token + "' -> '" + snapped + "'",
+                            COLOR_PURPLE
+                        );
+                        token = snapped;
+                    }
+                }
+                out.own[i].species = token;
             }
         }
         //  HP "X/Y".

@@ -3,6 +3,7 @@
  *  From: https://github.com/PokemonAutomation/
  */
 
+#include "PokemonChampions/Programs/PokemonChampions_BattleStateTracker.h"
 #include "PokemonChampions_AbilityItemReader.h"
 #include "PokemonChampions_AbilityItemTable.h"
 
@@ -162,7 +163,10 @@ static std::pair<std::string, std::string> split_possessive(const std::string& t
 }
 
 
-AbilityItemReadout AbilityItemReader::read(Logger& logger, const ImageViewRGB32& screen) const{
+AbilityItemReadout AbilityItemReader::read(
+    Logger& logger, const ImageViewRGB32& screen,
+    const TeamCandidates* hint
+) const{
     AbilityItemReadout out;
 
     //  Try left first, then right. Whichever has real text wins.
@@ -188,9 +192,57 @@ AbilityItemReadout AbilityItemReader::read(Logger& logger, const ImageViewRGB32&
     if (name_slug.empty()){
         return out;  //  text present but couldn't parse — leave detected=false
     }
+    //  Team-bias the pokemon slug first — it's a species OCR result and
+    //  must be one of the known own/opp mons. Use the union; we don't
+    //  know which side the reveal belongs to here.
+    if (hint != nullptr && !poke_slug.empty()){
+        std::vector<std::string> all_known = hint->own_species;
+        for (const auto& s : hint->opp_species){
+            bool dup = false;
+            for (const auto& e : all_known) if (e == s){ dup = true; break; }
+            if (!dup) all_known.push_back(s);
+        }
+        std::string snapped = team_bias_snap(poke_slug, all_known, 2);
+        if (snapped != poke_slug){
+            logger.log(
+                "AbilityItemReader: team-bias pokemon '" + poke_slug
+                + "' -> '" + snapped + "'",
+                COLOR_PURPLE
+            );
+            poke_slug = snapped;
+        }
+    }
     out.pokemon = poke_slug;
     out.name = name_slug;
     AbilityItemKind k = lookup_ability_item_kind(name_slug);
+    if (k == AbilityItemKind::UNKNOWN){
+        //  Team-bias snap first: an unknown global slug that's within
+        //  edit-distance 2 of a scanned ability/item is almost certainly
+        //  that one. Cheap because the candidate sets are small (≤ ~12).
+        if (hint != nullptr){
+            std::string a_snap = team_bias_snap(name_slug, hint->abilities_seen, 2);
+            if (a_snap != name_slug){
+                out.name = a_snap;
+                k = AbilityItemKind::ABILITY;
+                logger.log(
+                    "AbilityItemReader: team-bias name '" + name_slug
+                    + "' -> '" + a_snap + "' (ability)",
+                    COLOR_PURPLE
+                );
+            }else{
+                std::string i_snap = team_bias_snap(name_slug, hint->items_seen, 2);
+                if (i_snap != name_slug){
+                    out.name = i_snap;
+                    k = AbilityItemKind::ITEM;
+                    logger.log(
+                        "AbilityItemReader: team-bias name '" + name_slug
+                        + "' -> '" + i_snap + "' (item)",
+                        COLOR_PURPLE
+                    );
+                }
+            }
+        }
+    }
     if (k == AbilityItemKind::UNKNOWN){
         //  Fallback: OCR likely garbled the name (e.g. "Skin" -> "Skir").
         //  Look for the closest known slug within 1 edit. Keep the original

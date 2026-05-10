@@ -1033,7 +1033,8 @@ void LiveDetectorTrace::run_target_select_screen(Logger& logger, const ImageView
 
 void LiveDetectorTrace::run_ability_item_reader(Logger& logger, const ImageViewRGB32& screen){
     AbilityItemReader reader;
-    AbilityItemReadout r = reader.read(logger, screen);
+    TeamCandidates ai_cand = m_tracker.candidates();
+    AbilityItemReadout r = reader.read(logger, screen, &ai_cand);
     if (!r.detected){
         mark_skipped("AbilityItemReader");
         return;
@@ -1116,7 +1117,8 @@ void LiveDetectorTrace::run_locked_in_screen(Logger& logger, const ImageViewRGB3
 
 void LiveDetectorTrace::run_pokemon_switch_screen(Logger& logger, const ImageViewRGB32& screen){
     PokemonSwitchReader reader(Language::English);
-    PokemonSwitchResult r = reader.read(logger, screen);
+    TeamCandidates sw_cand = m_tracker.candidates();
+    PokemonSwitchResult r = reader.read(logger, screen, &sw_cand);
 
     JsonObject out;
     out["selected_own_slot"] = (int64_t)r.selected_own_slot;

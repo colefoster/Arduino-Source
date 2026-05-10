@@ -30,6 +30,13 @@ namespace NintendoSwitch{
 namespace PokemonChampions{
 
 
+//  Forward decl: optional bias snapshot from BattleStateTracker.
+//  When provided, the parsed pokemon slug snaps to known own/opp
+//  species, and the parsed ability/item slug snaps to the union of
+//  scanned own/opp abilities/items — both within Levenshtein-2.
+struct TeamCandidates;
+
+
 struct AbilityItemReadout{
     bool detected = false;
     std::string raw_text;     //  OCR result, before parsing
@@ -44,7 +51,9 @@ class AbilityItemReader{
 public:
     AbilityItemReader();
 
-    AbilityItemReadout read(Logger& logger, const ImageViewRGB32& screen) const;
+    AbilityItemReadout read(
+        Logger& logger, const ImageViewRGB32& screen,
+        const TeamCandidates* hint = nullptr) const;
 
 private:
     ImageFloatBox m_box_left;
