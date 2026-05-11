@@ -103,13 +103,13 @@ std::string team_bias_snap(
 
 
 //  Live tactical state of the current match — companion to TeamCandidates.
-//  Where TeamCandidates is the slug-snapshot consumed by OCR readers as
-//  bias, BattleSituation is the per-poll game state consumed by suggesters
+//  Where TeamCandidates is the slug snapshot consumed by OCR readers as
+//  bias, BattleSnapshot is the per-poll game state consumed by suggesters
 //  and (later) the action model. Both are flat structs built from the
 //  tracker per poll; readers / suggesters take const refs so they don't
-//  couple to tracker layout. -1 / empty / false are the sentinel values
-//  for "unknown".
-struct BattleSituation{
+//  couple to tracker layout. Rebuild per poll, do not cache. -1 / empty /
+//  false are the sentinel values for "unknown".
+struct BattleSnapshot{
     //  Indices into m_own_team / m_opp_team for whoever's currently on
     //  field. Singles: only [0] meaningful; [1] = -1.
     std::array<int, 2> own_active_slots = {-1, -1};
@@ -292,9 +292,9 @@ public:
     std::array<uint8_t, 2> own_active_slot_indices() const { return m_own_active; }
     std::array<uint8_t, 2> opp_active_slot_indices() const { return m_opp_active; }
 
-    //  Live tactical snapshot. See BattleSituation docs. Cheap; rebuild
+    //  Live tactical snapshot. See BattleSnapshot docs. Cheap; rebuild
     //  per-poll rather than caching.
-    BattleSituation situation() const;
+    BattleSnapshot snapshot() const;
 
 private:
     //  Find or create an opponent slot for a species. Returns index 0-5.

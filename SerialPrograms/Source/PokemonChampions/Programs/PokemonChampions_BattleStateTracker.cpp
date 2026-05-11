@@ -510,8 +510,8 @@ std::string team_bias_snap(
 }
 
 
-BattleSituation BattleStateTracker::situation() const{
-    BattleSituation s;
+BattleSnapshot BattleStateTracker::snapshot() const{
+    BattleSnapshot s;
     s.own_active_slots[0] = (int)m_own_active[0];
     s.own_active_slots[1] = (m_mode == BattleMode::DOUBLES) ? (int)m_own_active[1] : -1;
     s.opp_active_slots[0] = (int)m_opp_active[0];

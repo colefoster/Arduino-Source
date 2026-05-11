@@ -1175,6 +1175,15 @@ void LiveDetectorTrace::run_pokemon_switch_screen(Logger& logger, const ImageVie
         m_switch_blind_last_press_ms = 0;
         m_switch_blind_error_logged = false;
     }
+    //  Nav-loop guard: reset the nav-since-change counter whenever the
+    //  cursor moves to a new slot. If the cursor reads stably at the
+    //  same slot after several Up/Down presses, the suggester gives up.
+    if (r.selected_own_slot >= 0
+        && r.selected_own_slot != m_switch_last_cursor_seen){
+        m_switch_last_cursor_seen = r.selected_own_slot;
+        m_switch_nav_since_change = 0;
+        m_switch_nav_error_logged = false;
+    }
 
     mark("PokemonSwitchReader", "ok", std::move(out));
 }
@@ -1471,7 +1480,7 @@ JsonObject LiveDetectorTrace::build_event(const std::string& screen, int64_t ts_
     //  slots, alive bitmaps, and field state without re-deriving from
     //  the engine_view payload.
     {
-        BattleSituation sit = m_tracker.situation();
+        BattleSnapshot sit = m_tracker.snapshot();
         JsonObject sj;
         JsonArray own_act, opp_act;
         own_act.push_back((int64_t)sit.own_active_slots[0]);
@@ -1498,7 +1507,7 @@ JsonObject LiveDetectorTrace::build_event(const std::string& screen, int64_t ts_
         sj["screens_own"] = std::move(scr_own);
         sj["screens_opp"] = std::move(scr_opp);
         sj["turn"] = (int64_t)sit.turn;
-        ev["situation"] = std::move(sj);
+        ev["snapshot"] = std::move(sj);
     }
 
     if (m_last_suggestion){
@@ -1801,15 +1810,16 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
         sctx.switch_target_slot = m_switch_target_slot;
         sctx.switch_blind_attempts = m_switch_blind_attempts;
         sctx.switch_blind_last_press_ms = m_switch_blind_last_press_ms;
+        sctx.switch_nav_since_change = m_switch_nav_since_change;
         sctx.now_ms = (int64_t)now_ms();
         //  Live tactical snapshot — the canonical source for active-slot
         //  indices, alive bitmaps, and field state. Lives on this poll's
         //  stack frame; the LiveContext borrows it for the duration of
         //  suggest_for_screen. Legacy own_active_slots[2] kept in sync
-        //  for any consumer that hasn't migrated to the situation pointer.
-        BattleSituation poll_situation = m_tracker.situation();
-        sctx.situation = &poll_situation;
-        sctx.own_active_slots = poll_situation.own_active_slots;
+        //  for any consumer that hasn't migrated to the snapshot pointer.
+        BattleSnapshot poll_snapshot = m_tracker.snapshot();
+        sctx.snapshot = &poll_snapshot;
+        sctx.own_active_slots = poll_snapshot.own_active_slots;
 
         //  Initialize team-scan sub-flow on first sight of team_select with
         //  the carousel landed on the target team. Stays inactive (-1)
@@ -1843,6 +1853,21 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
                 "screen changes.",
                 COLOR_RED);
             m_switch_blind_error_logged = true;
+        }
+        //  Nav-loop guard: cursor reads but isn't moving despite repeated
+        //  Up/Down presses. Likely cause: forced-switch screen layout
+        //  mismatch (singles 3-row vs reader's 4-row tuning), so the
+        //  cursor's reported slot is stale and never reaches our target.
+        if (screen == "pokemon_switch" && m_switch_cursor >= 0
+            && m_switch_nav_since_change >= 5
+            && !m_switch_nav_error_logged){
+            env.console.log(
+                "ERROR: pokemon_switch — cursor stuck at slot "
+                + std::to_string(m_switch_cursor)
+                + " after 5 nav presses. Reader/layout mismatch likely."
+                  " Giving up auto-press until cursor moves or screen exits.",
+                COLOR_RED);
+            m_switch_nav_error_logged = true;
         }
         //  Visibility for the team_select flow: log the chosen suggestion
         //  whenever it changes (or first time we see it on this screen).
@@ -1889,6 +1914,9 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
                 m_switch_blind_attempts = 0;
                 m_switch_blind_last_press_ms = 0;
                 m_switch_blind_error_logged = false;
+                m_switch_last_cursor_seen = -2;
+                m_switch_nav_since_change = 0;
+                m_switch_nav_error_logged = false;
             }
             //  In-battle action counter: bump on every fresh entry to
             //  action_menu, so the suggester knows whether it's a fight
@@ -2127,6 +2155,15 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
                             && m_switch_cursor < 0){
                             m_switch_blind_attempts++;
                             m_switch_blind_last_press_ms = now_ms();
+                        }
+                        //  Nav-loop counter: every Up/Down fired on
+                        //  pokemon_switch with the cursor known. Reset
+                        //  on cursor-change (run_pokemon_switch_screen)
+                        //  or screen-exit. Suggester gives up at 5.
+                        if (screen == "pokemon_switch"
+                            && (b == "Up" || b == "Down")
+                            && m_switch_cursor >= 0){
+                            m_switch_nav_since_change++;
                         }
 
                         //  Carousel-aware team_select: each fired Left/Right

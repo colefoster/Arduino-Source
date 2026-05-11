@@ -82,15 +82,15 @@
         <div id="lt-field"></div>
     </div>
 
-    <!-- BattleSituation snapshot — canonical tracker state per poll -->
-    <div class="lt-card lt-situation-card">
+    <!-- BattleSnapshot — canonical per-poll tracker state -->
+    <div class="lt-card lt-snapshot-card">
         <div class="lt-section-label" style="margin-bottom:8px;">
-            Tracker Situation
+            Tracker Snapshot
             <span style="color:#6e7681; font-size:10px; font-weight:normal; margin-left:8px;">
-                — raw m_own_active / m_opp_active + alive bitmap from BattleStateTracker::situation()
+                — raw m_own_active / m_opp_active + alive bitmap from BattleStateTracker::snapshot()
             </span>
         </div>
-        <div id="lt-situation"></div>
+        <div id="lt-snapshot"></div>
     </div>
 
     <!-- Bottom row: derived state + recent events -->
@@ -286,18 +286,18 @@
 .lt-field-pill.wip .v { color:#d29922; }
 
 /* ─── Bottom grid: derived + events ──────────────────────── */
-/* ─── Tracker Situation card ───────────────────────────── */
-.lt-situation-card { margin-top:14px; }
-#lt-situation { display:flex; flex-direction:column; gap:4px; font-family:ui-monospace,monospace; font-size:11px; }
-.lt-sit-row { display:flex; align-items:center; gap:8px; padding:2px 0; }
-.lt-sit-label { color:#6e7681; font-size:10px; text-transform:uppercase; letter-spacing:0.04em; font-weight:600; min-width:80px; }
-.lt-sit-cell { display:inline-flex; align-items:center; gap:4px; background:#161b22; border:1px solid #21262d; border-radius:3px; padding:2px 6px; }
-.lt-sit-cell .k { color:#6e7681; font-size:9px; text-transform:uppercase; }
-.lt-sit-cell .v { color:#c9d1d9; font-size:11px; }
-.lt-sit-dots { letter-spacing:3px; }
-.lt-sit-dot.alive { color:#3fb950; }
-.lt-sit-dot.down  { color:#484f58; }
-.lt-sit-field { color:#8b949e; font-size:11px; }
+/* ─── Tracker Snapshot card ────────────────────────────── */
+.lt-snapshot-card { margin-top:14px; }
+#lt-snapshot { display:flex; flex-direction:column; gap:4px; font-family:ui-monospace,monospace; font-size:11px; }
+.lt-snap-row { display:flex; align-items:center; gap:8px; padding:2px 0; }
+.lt-snap-label { color:#6e7681; font-size:10px; text-transform:uppercase; letter-spacing:0.04em; font-weight:600; min-width:80px; }
+.lt-snap-cell { display:inline-flex; align-items:center; gap:4px; background:#161b22; border:1px solid #21262d; border-radius:3px; padding:2px 6px; }
+.lt-snap-cell .k { color:#6e7681; font-size:9px; text-transform:uppercase; }
+.lt-snap-cell .v { color:#c9d1d9; font-size:11px; }
+.lt-snap-dots { letter-spacing:3px; }
+.lt-snap-dot.alive { color:#3fb950; }
+.lt-snap-dot.down  { color:#484f58; }
+.lt-snap-field { color:#8b949e; font-size:11px; }
 
 .lt-bottom-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
 .lt-derived { background:#0d1117; border:1px solid #21262d; border-radius:6px; padding:10px; font-family:ui-monospace,monospace; font-size:11px; color:#8b949e; min-height:60px; }

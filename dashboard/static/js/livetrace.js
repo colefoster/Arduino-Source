@@ -34,7 +34,7 @@ async function liveTraceInit() {
     document.getElementById('lt-bs-own-active-row').innerHTML = '';
     document.getElementById('lt-bs-opp-active-row').innerHTML = '';
     document.getElementById('lt-field').innerHTML = '<span style="color:#6e7681; font-size:11px; font-style:italic;">no data yet</span>';
-    document.getElementById('lt-situation').innerHTML = '<span style="color:#6e7681; font-size:11px; font-style:italic;">no data yet</span>';
+    document.getElementById('lt-snapshot').innerHTML = '<span style="color:#6e7681; font-size:11px; font-style:italic;">no data yet</span>';
     liveTracePoll();
     liveTraceTimer = setInterval(liveTracePoll, 1000);
 }
@@ -94,7 +94,7 @@ function ltHandleEvent(ev) {
     }
     if (ev.pipeline) ltRenderPipeline(ev.pipeline);
     if (ev.engine_view) ltRenderEngineView(ev.engine_view, ev.pipeline || {});
-    if (ev.situation) ltRenderSituation(ev.situation, ev.engine_view || {});
+    if (ev.snapshot) ltRenderSnapshot(ev.snapshot, ev.engine_view || {});
     ltRenderSuggestion(ev.suggested_input);
     ltAppendFeed(ev);
 }
@@ -443,15 +443,15 @@ function ltRenderField(f) {
     }
 }
 
-//  BattleSituation renderer — surfaces the raw tracker snapshot. Engine_view
+//  BattleSnapshot renderer — surfaces the raw tracker snapshot. Engine_view
 //  already shows the pretty version (sprites, names); this card is a
 //  diagnostic strip for confirming the underlying indices and bitmaps the
 //  C++ tracker is actually publishing each poll. Useful when reasoning
 //  about active-slot bugs (was m_own_active correctly remapped?).
-function ltRenderSituation(sit, view) {
-    const el = document.getElementById('lt-situation');
-    if (!sit) {
-        el.innerHTML = '<span style="color:#6e7681; font-size:11px; font-style:italic;">no situation yet</span>';
+function ltRenderSnapshot(snap, view) {
+    const el = document.getElementById('lt-snapshot');
+    if (!snap) {
+        el.innerHTML = '<span style="color:#6e7681; font-size:11px; font-style:italic;">no snapshot yet</span>';
         return;
     }
 
@@ -467,10 +467,10 @@ function ltRenderSituation(sit, view) {
     };
 
     //  Singles flag — slot 1 is forced to -1 on both sides by the C++
-    //  situation() builder. Suppress the slot-1 cell so the row reads
+    //  snapshot() builder. Suppress the slot-1 cell so the row reads
     //  cleanly instead of "[—] unknown".
-    const isSingles = (sit.own_active_slots && sit.own_active_slots[1] < 0)
-                   && (sit.opp_active_slots && sit.opp_active_slots[1] < 0);
+    const isSingles = (snap.own_active_slots && snap.own_active_slots[1] < 0)
+                   && (snap.opp_active_slots && snap.opp_active_slots[1] < 0);
     const slotsToShow = isSingles ? 1 : 2;
 
     const activeRow = (label, slots, team) => {
@@ -481,38 +481,38 @@ function ltRenderSituation(sit, view) {
             const sp = speciesAt(team, idx);
             const idxStr = (idx == null || idx < 0) ? '—' : String(idx);
             const spStr = sp ? `<span style="color:#c9d1d9;">${ltEsc(sp)}</span>` : '<span style="color:#6e7681;">unknown</span>';
-            cells.push(`<span class="lt-sit-cell"><span class="k">slot ${i}</span><span class="v">[${idxStr}] ${spStr}</span></span>`);
+            cells.push(`<span class="lt-snap-cell"><span class="k">slot ${i}</span><span class="v">[${idxStr}] ${spStr}</span></span>`);
         }
-        return `<div class="lt-sit-row"><span class="lt-sit-label">${label}</span>${cells.join('')}</div>`;
+        return `<div class="lt-snap-row"><span class="lt-snap-label">${label}</span>${cells.join('')}</div>`;
     };
 
     const aliveDots = (arr) => {
         if (!Array.isArray(arr)) return '—';
         return arr.map((alive, i) =>
-            `<span class="lt-sit-dot ${alive ? 'alive' : 'down'}" title="slot ${i}: ${alive ? 'alive' : 'down/empty'}">${alive ? '●' : '○'}</span>`
+            `<span class="lt-snap-dot ${alive ? 'alive' : 'down'}" title="slot ${i}: ${alive ? 'alive' : 'down/empty'}">${alive ? '●' : '○'}</span>`
         ).join('');
     };
 
     let html = '';
-    html += activeRow('own active', sit.own_active_slots, ownTeam);
-    html += activeRow('opp active', sit.opp_active_slots, oppTeam);
-    html += `<div class="lt-sit-row"><span class="lt-sit-label">own alive</span><span class="lt-sit-dots">${aliveDots(sit.own_alive)}</span></div>`;
-    html += `<div class="lt-sit-row"><span class="lt-sit-label">opp alive</span><span class="lt-sit-dots">${aliveDots(sit.opp_alive)}</span></div>`;
+    html += activeRow('own active', snap.own_active_slots, ownTeam);
+    html += activeRow('opp active', snap.opp_active_slots, oppTeam);
+    html += `<div class="lt-snap-row"><span class="lt-snap-label">own alive</span><span class="lt-snap-dots">${aliveDots(snap.own_alive)}</span></div>`;
+    html += `<div class="lt-snap-row"><span class="lt-snap-label">opp alive</span><span class="lt-snap-dots">${aliveDots(snap.opp_alive)}</span></div>`;
 
     //  Field state — duplicated from the Field card on purpose, so this
-    //  card is a self-contained snapshot of what BattleStateTracker
-    //  reported. Compact one-liner.
+    //  card is a self-contained read of what BattleStateTracker reported.
+    //  Compact one-liner.
     const fieldBits = [];
-    if (sit.weather)      fieldBits.push(`weather=${sit.weather}`);
-    if (sit.terrain)      fieldBits.push(`terrain=${sit.terrain}`);
-    if (sit.trick_room)   fieldBits.push(`trick_room`);
-    if (sit.tailwind_own) fieldBits.push(`tailwind_own`);
-    if (sit.tailwind_opp) fieldBits.push(`tailwind_opp`);
-    if (ltAnyTrue(sit.screens_own)) fieldBits.push(`screens_own=${ltScreenSummary(sit.screens_own)}`);
-    if (ltAnyTrue(sit.screens_opp)) fieldBits.push(`screens_opp=${ltScreenSummary(sit.screens_opp)}`);
-    if (typeof sit.turn === 'number' && sit.turn > 0) fieldBits.push(`turn=${sit.turn}`);
+    if (snap.weather)      fieldBits.push(`weather=${snap.weather}`);
+    if (snap.terrain)      fieldBits.push(`terrain=${snap.terrain}`);
+    if (snap.trick_room)   fieldBits.push(`trick_room`);
+    if (snap.tailwind_own) fieldBits.push(`tailwind_own`);
+    if (snap.tailwind_opp) fieldBits.push(`tailwind_opp`);
+    if (ltAnyTrue(snap.screens_own)) fieldBits.push(`screens_own=${ltScreenSummary(snap.screens_own)}`);
+    if (ltAnyTrue(snap.screens_opp)) fieldBits.push(`screens_opp=${ltScreenSummary(snap.screens_opp)}`);
+    if (typeof snap.turn === 'number' && snap.turn > 0) fieldBits.push(`turn=${snap.turn}`);
     const fieldStr = fieldBits.length ? fieldBits.join(' · ') : '<span style="color:#6e7681;">no field effects</span>';
-    html += `<div class="lt-sit-row"><span class="lt-sit-label">field</span><span class="lt-sit-field">${fieldStr}</span></div>`;
+    html += `<div class="lt-snap-row"><span class="lt-snap-label">field</span><span class="lt-snap-field">${fieldStr}</span></div>`;
 
     el.innerHTML = html;
 }

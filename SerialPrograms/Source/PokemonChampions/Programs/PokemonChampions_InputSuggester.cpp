@@ -7,14 +7,14 @@
 #include "PokemonChampions_BattleStateTracker.h"
 
 namespace {
-//  Resolve the on-field own slots: prefer the BattleSituation snapshot
-//  when ctx carries one (canonical), fall back to ctx.own_active_slots
-//  for legacy callers.
+//  Resolve the on-field own slots: prefer the BattleSnapshot when ctx
+//  carries one (canonical), fall back to ctx.own_active_slots for
+//  legacy callers (tests, contexts built without a tracker).
 inline std::array<int, 2> resolve_own_active(
     const PokemonAutomation::NintendoSwitch::PokemonChampions::LiveContext& ctx
 ){
-    if (ctx.situation != nullptr){
-        return ctx.situation->own_active_slots;
+    if (ctx.snapshot != nullptr){
+        return ctx.snapshot->own_active_slots;
     }
     return ctx.own_active_slots;
 }
@@ -288,6 +288,14 @@ static std::optional<InputSuggestion> suggest_pokemon_switch(
         s.reason = "cursor unread (attempt "
                  + std::to_string(ctx.switch_blind_attempts + 1) + "/3)";
         return s;
+    }
+    //  Nav-loop guard: if the cursor reads but isn't moving despite us
+    //  pressing Up/Down, stop. Likely means the reader's cursor boxes
+    //  are mistuned for the current layout (singles 3-row vs the
+    //  reader's 4-row tuning) — keep mashing Down and we just spam
+    //  forever. Cap at 5 navs since the cursor last changed.
+    if (cursor != target && ctx.switch_nav_since_change >= 5){
+        return std::nullopt;
     }
     if (cursor < target){
         InputSuggestion s;

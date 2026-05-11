@@ -32,7 +32,7 @@ namespace PokemonChampions{
 
 
 class BattleStateTracker;
-struct BattleSituation;
+struct BattleSnapshot;
 
 
 //  Live-pipeline state that doesn't belong in BattleStateTracker (per-poll
@@ -87,18 +87,18 @@ struct LiveContext{
     //  pokemon_switch suggester to exclude the on-field mon(s) from
     //  switch candidates — without this we keep trying to "switch" to
     //  the lead that's already out. -1 = unknown / not on field.
-    //  Superseded by `situation->own_active_slots` when a situation
+    //  Superseded by `snapshot->own_active_slots` when a snapshot
     //  pointer is set; kept for callers that construct LiveContext
     //  without a tracker on hand (tests, fallback paths).
     std::array<int, 2> own_active_slots = {-1, -1};
 
-    //  Live tactical-state snapshot (see BattleSituation in
+    //  Live tactical-state snapshot (see BattleSnapshot in
     //  BattleStateTracker.h). Optional — when set, suggesters and the
     //  action model read field state, alive bitmaps, and active slots
     //  through this single struct instead of poking at LiveContext
     //  fields piecemeal. Lifetime: borrowed for the duration of one
     //  suggest_for_screen call; trace owns the snapshot on its stack.
-    const BattleSituation* situation = nullptr;
+    const BattleSnapshot* snapshot = nullptr;
 
     //  pokemon_switch screen.
     int switch_cursor = -1;                //  -1 if unread.
@@ -108,6 +108,12 @@ struct LiveContext{
     //  pokemon_switch entry by the trace so the cursor doesn't oscillate
     //  across polls within the same switch attempt.
     int switch_target_slot = 0;
+    //  Nav-loop guard. How many Up/Down presses we've fired on
+    //  pokemon_switch since the cursor's reported slot last changed.
+    //  Bounds the case where the cursor reads stably at a wrong slot
+    //  (e.g. singles 3-row layout vs the reader's 4-row tuning) so we
+    //  don't spam Down forever.
+    int switch_nav_since_change = 0;
     //  How many times we've fired Down on pokemon_switch with cursor unread
     //  (no yellow highlight). Used to bound the blind-nudge retry loop
     //  when the forced-switch screen lands on a fainted slot whose
