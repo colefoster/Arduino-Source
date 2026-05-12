@@ -1,0 +1,2636 @@
+{
+  "format": "gen9championsvgc2026regma",
+  "source": "smogon-chaos-cut1500",
+  "priors": {
+    "sneasler": {
+      "item": "white-herb",
+      "ability": "unburden",
+      "moves": [
+        "close-combat",
+        "dire-claw",
+        "fake-out",
+        "protect"
+      ]
+    },
+    "incineroar": {
+      "item": "sitrus-berry",
+      "ability": "intimidate",
+      "moves": [
+        "fake-out",
+        "parting-shot",
+        "flare-blitz",
+        "darkest-lariat"
+      ]
+    },
+    "garchomp": {
+      "item": "choice-scarf",
+      "ability": "rough-skin",
+      "moves": [
+        "earthquake",
+        "dragon-claw",
+        "rock-slide",
+        "protect"
+      ]
+    },
+    "sinistcha": {
+      "item": "sitrus-berry",
+      "ability": "hospitality",
+      "moves": [
+        "matcha-gotcha",
+        "rage-powder",
+        "trick-room",
+        "life-dew"
+      ]
+    },
+    "kingambit": {
+      "item": "black-glasses",
+      "ability": "defiant",
+      "moves": [
+        "sucker-punch",
+        "kowtow-cleave",
+        "protect",
+        "iron-head"
+      ]
+    },
+    "basculegion": {
+      "item": "choice-scarf",
+      "ability": "adaptability",
+      "moves": [
+        "last-respects",
+        "wave-crash",
+        "aqua-jet",
+        "flip-turn"
+      ]
+    },
+    "pelipper": {
+      "item": "focus-sash",
+      "ability": "drizzle",
+      "moves": [
+        "hurricane",
+        "weather-ball",
+        "tailwind",
+        "protect"
+      ]
+    },
+    "aerodactyl": {
+      "item": "focus-sash",
+      "ability": "unnerve",
+      "moves": [
+        "rock-slide",
+        "tailwind",
+        "dual-wingbeat",
+        "protect"
+      ]
+    },
+    "farigiraf": {
+      "item": "sitrus-berry",
+      "ability": "armor-tail",
+      "moves": [
+        "trick-room",
+        "hyper-voice",
+        "psychic",
+        "protect"
+      ]
+    },
+    "rotom-wash": {
+      "item": "choice-scarf",
+      "ability": "levitate",
+      "moves": [
+        "hydro-pump",
+        "thunderbolt",
+        "volt-switch",
+        "will-o-wisp"
+      ]
+    },
+    "milotic": {
+      "item": "leftovers",
+      "ability": "competitive",
+      "moves": [
+        "scald",
+        "protect",
+        "icy-wind",
+        "recover"
+      ]
+    },
+    "floette-mega": {
+      "item": "floettite",
+      "ability": "fairy-aura",
+      "moves": [
+        "protect",
+        "dazzling-gleam",
+        "moonblast",
+        "calm-mind"
+      ]
+    },
+    "archaludon": {
+      "item": "leftovers",
+      "ability": "stamina",
+      "moves": [
+        "electro-shot",
+        "flash-cannon",
+        "protect",
+        "draco-meteor"
+      ]
+    },
+    "whimsicott": {
+      "item": "focus-sash",
+      "ability": "prankster",
+      "moves": [
+        "tailwind",
+        "moonblast",
+        "encore",
+        "protect"
+      ]
+    },
+    "charizard-mega-y": {
+      "item": "charizardite-y",
+      "ability": "drought",
+      "moves": [
+        "heat-wave",
+        "protect",
+        "solar-beam",
+        "weather-ball"
+      ]
+    },
+    "froslass-mega": {
+      "item": "froslassite",
+      "ability": "snow-warning",
+      "moves": [
+        "blizzard",
+        "shadow-ball",
+        "protect",
+        "aurora-veil"
+      ]
+    },
+    "tyranitar-mega": {
+      "item": "tyranitarite",
+      "ability": "sand-stream",
+      "moves": [
+        "rock-slide",
+        "protect",
+        "knock-off",
+        "low-kick"
+      ]
+    },
+    "aegislash": {
+      "item": "spell-tag",
+      "ability": "stance-change",
+      "moves": [
+        "king-s-shield",
+        "shadow-sneak",
+        "poltergeist",
+        "iron-head"
+      ]
+    },
+    "meganium-mega": {
+      "item": "meganiumite",
+      "ability": "mega-sol",
+      "moves": [
+        "solar-beam",
+        "weather-ball",
+        "dazzling-gleam",
+        "protect"
+      ]
+    },
+    "gengar-mega": {
+      "item": "gengarite",
+      "ability": "shadow-tag",
+      "moves": [
+        "protect",
+        "shadow-ball",
+        "sludge-bomb",
+        "perish-song"
+      ]
+    },
+    "talonflame": {
+      "item": "nothing",
+      "ability": "gale-wings",
+      "moves": [
+        "tailwind",
+        "protect",
+        "flare-blitz",
+        "brave-bird"
+      ]
+    },
+    "maushold": {
+      "item": "chople-berry",
+      "ability": "friend-guard",
+      "moves": [
+        "follow-me",
+        "protect",
+        "super-fang",
+        "taunt"
+      ]
+    },
+    "corviknight": {
+      "item": "leftovers",
+      "ability": "mirror-armor",
+      "moves": [
+        "brave-bird",
+        "tailwind",
+        "roost",
+        "body-press"
+      ]
+    },
+    "delphox-mega": {
+      "item": "delphoxite",
+      "ability": "levitate",
+      "moves": [
+        "protect",
+        "heat-wave",
+        "psychic",
+        "encore"
+      ]
+    },
+    "venusaur": {
+      "item": "focus-sash",
+      "ability": "chlorophyll",
+      "moves": [
+        "sludge-bomb",
+        "sleep-powder",
+        "protect",
+        "energy-ball"
+      ]
+    },
+    "torkoal": {
+      "item": "charcoal",
+      "ability": "drought",
+      "moves": [
+        "eruption",
+        "protect",
+        "heat-wave",
+        "weather-ball"
+      ]
+    },
+    "primarina": {
+      "item": "leftovers",
+      "ability": "liquid-voice",
+      "moves": [
+        "hyper-voice",
+        "protect",
+        "moonblast",
+        "calm-mind"
+      ]
+    },
+    "dragonite-mega": {
+      "item": "dragoninite",
+      "ability": "multiscale",
+      "moves": [
+        "hurricane",
+        "protect",
+        "draco-meteor",
+        "dragon-pulse"
+      ]
+    },
+    "excadrill": {
+      "item": "focus-sash",
+      "ability": "sand-rush",
+      "moves": [
+        "iron-head",
+        "protect",
+        "rock-slide",
+        "earthquake"
+      ]
+    },
+    "sableye": {
+      "item": "roseli-berry",
+      "ability": "prankster",
+      "moves": [
+        "encore",
+        "fake-out",
+        "disable",
+        "rain-dance"
+      ]
+    },
+    "tyranitar": {
+      "item": "chople-berry",
+      "ability": "sand-stream",
+      "moves": [
+        "rock-slide",
+        "protect",
+        "knock-off",
+        "low-kick"
+      ]
+    },
+    "gardevoir-mega": {
+      "item": "gardevoirite",
+      "ability": "pixilate",
+      "moves": [
+        "hyper-voice",
+        "protect",
+        "psychic",
+        "trick-room"
+      ]
+    },
+    "aerodactyl-mega": {
+      "item": "aerodactylite",
+      "ability": "tough-claws",
+      "moves": [
+        "rock-slide",
+        "dual-wingbeat",
+        "protect",
+        "tailwind"
+      ]
+    },
+    "kommo-o": {
+      "item": "leftovers",
+      "ability": "soundproof",
+      "moves": [
+        "protect",
+        "clanging-scales",
+        "aura-sphere",
+        "clangorous-soul"
+      ]
+    },
+    "scovillain-mega": {
+      "item": "scovillainite",
+      "ability": "spicy-spray",
+      "moves": [
+        "rage-powder",
+        "protect",
+        "leech-seed",
+        "overheat"
+      ]
+    },
+    "blastoise-mega": {
+      "item": "blastoisinite",
+      "ability": "mega-launcher",
+      "moves": [
+        "water-spout",
+        "dark-pulse",
+        "protect",
+        "aura-sphere"
+      ]
+    },
+    "sylveon": {
+      "item": "fairy-feather",
+      "ability": "pixilate",
+      "moves": [
+        "hyper-voice",
+        "protect",
+        "quick-attack",
+        "hyper-beam"
+      ]
+    },
+    "scizor-mega": {
+      "item": "scizorite",
+      "ability": "technician",
+      "moves": [
+        "bullet-punch",
+        "protect",
+        "swords-dance",
+        "bug-bite"
+      ]
+    },
+    "ninetales-alola": {
+      "item": "focus-sash",
+      "ability": "snow-warning",
+      "moves": [
+        "blizzard",
+        "aurora-veil",
+        "protect",
+        "moonblast"
+      ]
+    },
+    "kangaskhan-mega": {
+      "item": "kangaskhanite",
+      "ability": "parental-bond",
+      "moves": [
+        "fake-out",
+        "double-edge",
+        "sucker-punch",
+        "drain-punch"
+      ]
+    },
+    "politoed": {
+      "item": "leftovers",
+      "ability": "drizzle",
+      "moves": [
+        "protect",
+        "weather-ball",
+        "perish-song",
+        "icy-wind"
+      ]
+    },
+    "dragapult": {
+      "item": "focus-sash",
+      "ability": "clear-body",
+      "moves": [
+        "protect",
+        "dragon-darts",
+        "phantom-force",
+        "will-o-wisp"
+      ]
+    },
+    "venusaur-mega": {
+      "item": "venusaurite",
+      "ability": "thick-fat",
+      "moves": [
+        "sludge-bomb",
+        "protect",
+        "giga-drain",
+        "earth-power"
+      ]
+    },
+    "rotom-heat": {
+      "item": "choice-scarf",
+      "ability": "levitate",
+      "moves": [
+        "overheat",
+        "volt-switch",
+        "thunderbolt",
+        "electroweb"
+      ]
+    },
+    "aggron-mega": {
+      "item": "aggronite",
+      "ability": "filter",
+      "moves": [
+        "body-press",
+        "heavy-slam",
+        "protect",
+        "iron-defense"
+      ]
+    },
+    "glimmora-mega": {
+      "item": "glimmoranite",
+      "ability": "adaptability",
+      "moves": [
+        "power-gem",
+        "spiky-shield",
+        "earth-power",
+        "sludge-bomb"
+      ]
+    },
+    "hydreigon": {
+      "item": "choice-scarf",
+      "ability": "levitate",
+      "moves": [
+        "dark-pulse",
+        "draco-meteor",
+        "protect",
+        "snarl"
+      ]
+    },
+    "crabominable-mega": {
+      "item": "crabominite",
+      "ability": "iron-fist",
+      "moves": [
+        "ice-hammer",
+        "protect",
+        "drain-punch",
+        "mach-punch"
+      ]
+    },
+    "dragonite": {
+      "item": "dragon-fang",
+      "ability": "multiscale",
+      "moves": [
+        "extreme-speed",
+        "protect",
+        "dragon-claw",
+        "tailwind"
+      ]
+    },
+    "charizard-mega-x": {
+      "item": "charizardite-x",
+      "ability": "tough-claws",
+      "moves": [
+        "flare-blitz",
+        "protect",
+        "dragon-claw",
+        "dragon-dance"
+      ]
+    },
+    "palafin": {
+      "item": "mystic-water",
+      "ability": "zero-to-hero",
+      "moves": [
+        "jet-punch",
+        "wave-crash",
+        "protect",
+        "flip-turn"
+      ]
+    },
+    "clefable": {
+      "item": "sitrus-berry",
+      "ability": "unaware",
+      "moves": [
+        "follow-me",
+        "moonblast",
+        "protect",
+        "helping-hand"
+      ]
+    },
+    "starmie-mega": {
+      "item": "starminite",
+      "ability": "huge-power",
+      "moves": [
+        "liquidation",
+        "protect",
+        "aqua-jet",
+        "zen-headbutt"
+      ]
+    },
+    "arcanine-hisui": {
+      "item": "choice-scarf",
+      "ability": "intimidate",
+      "moves": [
+        "flare-blitz",
+        "rock-slide",
+        "extreme-speed",
+        "protect"
+      ]
+    },
+    "typhlosion-hisui": {
+      "item": "choice-scarf",
+      "ability": "frisk",
+      "moves": [
+        "eruption",
+        "shadow-ball",
+        "heat-wave",
+        "overheat"
+      ]
+    },
+    "tsareena": {
+      "item": "choice-scarf",
+      "ability": "queenly-majesty",
+      "moves": [
+        "triple-axel",
+        "trop-kick",
+        "protect",
+        "low-kick"
+      ]
+    },
+    "zoroark-hisui": {
+      "item": "focus-sash",
+      "ability": "illusion",
+      "moves": [
+        "hyper-voice",
+        "icy-wind",
+        "shadow-ball",
+        "bitter-malice"
+      ]
+    },
+    "volcarona": {
+      "item": "sitrus-berry",
+      "ability": "flame-body",
+      "moves": [
+        "protect",
+        "heat-wave",
+        "rage-powder",
+        "quiver-dance"
+      ]
+    },
+    "golurk-mega": {
+      "item": "golurkite",
+      "ability": "unseen-fist",
+      "moves": [
+        "protect",
+        "poltergeist",
+        "headlong-rush",
+        "ice-punch"
+      ]
+    },
+    "oranguru": {
+      "item": "mental-herb",
+      "ability": "inner-focus",
+      "moves": [
+        "instruct",
+        "trick-room",
+        "protect",
+        "psychic"
+      ]
+    },
+    "orthworm": {
+      "item": "sitrus-berry",
+      "ability": "earth-eater",
+      "moves": [
+        "body-press",
+        "shed-tail",
+        "heavy-slam",
+        "iron-defense"
+      ]
+    },
+    "drampa-mega": {
+      "item": "drampanite",
+      "ability": "berserk",
+      "moves": [
+        "hyper-voice",
+        "protect",
+        "earth-power",
+        "dragon-pulse"
+      ]
+    },
+    "hatterene": {
+      "item": "fairy-feather",
+      "ability": "magic-bounce",
+      "moves": [
+        "dazzling-gleam",
+        "trick-room",
+        "protect",
+        "psychic"
+      ]
+    },
+    "camerupt-mega": {
+      "item": "cameruptite",
+      "ability": "sheer-force",
+      "moves": [
+        "earth-power",
+        "protect",
+        "heat-wave",
+        "eruption"
+      ]
+    },
+    "tauros-paldea-aqua": {
+      "item": "white-herb",
+      "ability": "intimidate",
+      "moves": [
+        "close-combat",
+        "aqua-jet",
+        "protect",
+        "wave-crash"
+      ]
+    },
+    "lucario-mega": {
+      "item": "lucarionite",
+      "ability": "adaptability",
+      "moves": [
+        "protect",
+        "close-combat",
+        "bullet-punch",
+        "meteor-mash"
+      ]
+    },
+    "gyarados-mega": {
+      "item": "gyaradosite",
+      "ability": "mold-breaker",
+      "moves": [
+        "waterfall",
+        "protect",
+        "crunch",
+        "dragon-dance"
+      ]
+    },
+    "meowscarada": {
+      "item": "choice-scarf",
+      "ability": "protean",
+      "moves": [
+        "flower-trick",
+        "knock-off",
+        "triple-axel",
+        "u-turn"
+      ]
+    },
+    "gyarados": {
+      "item": "leftovers",
+      "ability": "intimidate",
+      "moves": [
+        "waterfall",
+        "protect",
+        "thunder-wave",
+        "taunt"
+      ]
+    },
+    "lopunny-mega": {
+      "item": "lopunnite",
+      "ability": "scrappy",
+      "moves": [
+        "fake-out",
+        "close-combat",
+        "protect",
+        "triple-axel"
+      ]
+    },
+    "mimikyu": {
+      "item": "mental-herb",
+      "ability": "disguise",
+      "moves": [
+        "play-rough",
+        "trick-room",
+        "shadow-sneak",
+        "shadow-claw"
+      ]
+    },
+    "rotom-frost": {
+      "item": "choice-scarf",
+      "ability": "levitate",
+      "moves": [
+        "blizzard",
+        "thunderbolt",
+        "volt-switch",
+        "electroweb"
+      ]
+    },
+    "mamoswine": {
+      "item": "choice-scarf",
+      "ability": "oblivious",
+      "moves": [
+        "icicle-crash",
+        "ice-shard",
+        "protect",
+        "high-horsepower"
+      ]
+    },
+    "meowstic": {
+      "item": "focus-sash",
+      "ability": "prankster",
+      "moves": [
+        "psychic-terrain",
+        "fake-out",
+        "expanding-force",
+        "gravity"
+      ]
+    },
+    "gallade": {
+      "item": "black-belt",
+      "ability": "sharpness",
+      "moves": [
+        "sacred-sword",
+        "psycho-cut",
+        "protect",
+        "trick-room"
+      ]
+    },
+    "tinkaton": {
+      "item": "shuca-berry",
+      "ability": "mold-breaker",
+      "moves": [
+        "gigaton-hammer",
+        "fake-out",
+        "play-rough",
+        "protect"
+      ]
+    },
+    "araquanid": {
+      "item": "mystic-water",
+      "ability": "water-bubble",
+      "moves": [
+        "liquidation",
+        "wide-guard",
+        "protect",
+        "leech-life"
+      ]
+    },
+    "empoleon": {
+      "item": "leftovers",
+      "ability": "competitive",
+      "moves": [
+        "flash-cannon",
+        "protect",
+        "hydro-pump",
+        "ice-beam"
+      ]
+    },
+    "feraligatr-mega": {
+      "item": "feraligite",
+      "ability": "dragonize",
+      "moves": [
+        "protect",
+        "liquidation",
+        "double-edge",
+        "aqua-jet"
+      ]
+    },
+    "scizor": {
+      "item": "metal-coat",
+      "ability": "technician",
+      "moves": [
+        "bullet-punch",
+        "protect",
+        "swords-dance",
+        "bug-bite"
+      ]
+    },
+    "heliolisk": {
+      "item": "choice-scarf",
+      "ability": "dry-skin",
+      "moves": [
+        "thunderbolt",
+        "volt-switch",
+        "protect",
+        "hyper-voice"
+      ]
+    },
+    "garchomp-mega": {
+      "item": "garchompite",
+      "ability": "sand-force",
+      "moves": [
+        "protect",
+        "earthquake",
+        "rock-slide",
+        "dragon-claw"
+      ]
+    },
+    "raichu": {
+      "item": "focus-sash",
+      "ability": "lightning-rod",
+      "moves": [
+        "fake-out",
+        "volt-switch",
+        "nuzzle",
+        "protect"
+      ]
+    },
+    "manectric-mega": {
+      "item": "manectite",
+      "ability": "intimidate",
+      "moves": [
+        "protect",
+        "volt-switch",
+        "snarl",
+        "thunderbolt"
+      ]
+    },
+    "kangaskhan": {
+      "item": "silk-scarf",
+      "ability": "scrappy",
+      "moves": [
+        "",
+        "fake-out",
+        "last-resort",
+        "double-edge"
+      ]
+    },
+    "conkeldurr": {
+      "item": "black-belt",
+      "ability": "iron-fist",
+      "moves": [
+        "drain-punch",
+        "mach-punch",
+        "protect",
+        "ice-punch"
+      ]
+    },
+    "skarmory-mega": {
+      "item": "skarmorite",
+      "ability": "stalwart",
+      "moves": [
+        "iron-head",
+        "protect",
+        "brave-bird",
+        "tailwind"
+      ]
+    },
+    "espathra": {
+      "item": "focus-sash",
+      "ability": "speed-boost",
+      "moves": [
+        "protect",
+        "lumina-crash",
+        "calm-mind",
+        "baton-pass"
+      ]
+    },
+    "greninja-mega": {
+      "item": "greninjite",
+      "ability": "protean",
+      "moves": [
+        "protect",
+        "dark-pulse",
+        "ice-beam",
+        "hydro-pump"
+      ]
+    },
+    "gardevoir": {
+      "item": "choice-scarf",
+      "ability": "telepathy",
+      "moves": [
+        "moonblast",
+        "dazzling-gleam",
+        "psychic",
+        "icy-wind"
+      ]
+    },
+    "weavile": {
+      "item": "focus-sash",
+      "ability": "pressure",
+      "moves": [
+        "fake-out",
+        "knock-off",
+        "triple-axel",
+        "protect"
+      ]
+    },
+    "chandelure-mega": {
+      "item": "chandelurite",
+      "ability": "infiltrator",
+      "moves": [
+        "shadow-ball",
+        "heat-wave",
+        "protect",
+        "trick-room"
+      ]
+    },
+    "ceruledge": {
+      "item": "colbur-berry",
+      "ability": "flash-fire",
+      "moves": [
+        "bitter-blade",
+        "protect",
+        "shadow-sneak",
+        "swords-dance"
+      ]
+    },
+    "arcanine": {
+      "item": "sitrus-berry",
+      "ability": "intimidate",
+      "moves": [
+        "flare-blitz",
+        "protect",
+        "will-o-wisp",
+        "snarl"
+      ]
+    },
+    "snorlax": {
+      "item": "leftovers",
+      "ability": "thick-fat",
+      "moves": [
+        "protect",
+        "body-slam",
+        "fissure",
+        "belly-drum"
+      ]
+    },
+    "slowking-galar": {
+      "item": "colbur-berry",
+      "ability": "regenerator",
+      "moves": [
+        "trick-room",
+        "sludge-bomb",
+        "chilly-reception",
+        "psychic"
+      ]
+    },
+    "goodra-hisui": {
+      "item": "leftovers",
+      "ability": "shell-armor",
+      "moves": [
+        "body-press",
+        "shelter",
+        "protect",
+        "heavy-slam"
+      ]
+    },
+    "azumarill": {
+      "item": "sitrus-berry",
+      "ability": "huge-power",
+      "moves": [
+        "aqua-jet",
+        "play-rough",
+        "protect",
+        "belly-drum"
+      ]
+    },
+    "basculegion-f": {
+      "item": "choice-scarf",
+      "ability": "adaptability",
+      "moves": [
+        "shadow-ball",
+        "muddy-water",
+        "protect",
+        "ice-beam"
+      ]
+    },
+    "chesnaught-mega": {
+      "item": "chesnaughtite",
+      "ability": "bulletproof",
+      "moves": [
+        "body-press",
+        "spiky-shield",
+        "iron-defense",
+        "wood-hammer"
+      ]
+    },
+    "hawlucha-mega": {
+      "item": "hawluchanite",
+      "ability": "no-guard",
+      "moves": [
+        "entrainment",
+        "protect",
+        "brave-bird",
+        "close-combat"
+      ]
+    },
+    "ampharos-mega": {
+      "item": "ampharosite",
+      "ability": "mold-breaker",
+      "moves": [
+        "dragon-pulse",
+        "protect",
+        "thunderbolt",
+        "dazzling-gleam"
+      ]
+    },
+    "gengar": {
+      "item": "focus-sash",
+      "ability": "cursed-body",
+      "moves": [
+        "shadow-ball",
+        "sludge-bomb",
+        "protect",
+        "icy-wind"
+      ]
+    },
+    "glimmora": {
+      "item": "focus-sash",
+      "ability": "toxic-debris",
+      "moves": [
+        "power-gem",
+        "earth-power",
+        "spiky-shield",
+        "sludge-bomb"
+      ]
+    },
+    "alakazam-mega": {
+      "item": "alakazite",
+      "ability": "trace",
+      "moves": [
+        "protect",
+        "expanding-force",
+        "focus-blast",
+        "dazzling-gleam"
+      ]
+    },
+    "vivillon": {
+      "item": "focus-sash",
+      "ability": "compound-eyes",
+      "moves": [
+        "sleep-powder",
+        "protect",
+        "hurricane",
+        "rage-powder"
+      ]
+    },
+    "klefki": {
+      "item": "mental-herb",
+      "ability": "prankster",
+      "moves": [
+        "light-screen",
+        "reflect",
+        "thunder-wave",
+        "dazzling-gleam"
+      ]
+    },
+    "rotom-mow": {
+      "item": "choice-scarf",
+      "ability": "levitate",
+      "moves": [
+        "leaf-storm",
+        "volt-switch",
+        "thunderbolt",
+        "protect"
+      ]
+    },
+    "excadrill-mega": {
+      "item": "excadrite",
+      "ability": "piercing-drill",
+      "moves": [
+        "iron-head",
+        "protect",
+        "rock-slide",
+        "high-horsepower"
+      ]
+    },
+    "kleavor": {
+      "item": "choice-scarf",
+      "ability": "sharpness",
+      "moves": [
+        "stone-axe",
+        "x-scissor",
+        "u-turn",
+        "close-combat"
+      ]
+    },
+    "chimecho-mega": {
+      "item": "chimechite",
+      "ability": "levitate",
+      "moves": [
+        "flash-cannon",
+        "trick-room",
+        "protect",
+        "psychic"
+      ]
+    },
+    "vanilluxe": {
+      "item": "choice-scarf",
+      "ability": "snow-warning",
+      "moves": [
+        "blizzard",
+        "freeze-dry",
+        "aurora-veil",
+        "icy-wind"
+      ]
+    },
+    "abomasnow-mega": {
+      "item": "abomasite",
+      "ability": "snow-warning",
+      "moves": [
+        "blizzard",
+        "protect",
+        "energy-ball",
+        "earth-power"
+      ]
+    },
+    "gallade-mega": {
+      "item": "galladite",
+      "ability": "inner-focus",
+      "moves": [
+        "protect",
+        "psycho-cut",
+        "sacred-sword",
+        "close-combat"
+      ]
+    },
+    "armarouge": {
+      "item": "focus-sash",
+      "ability": "flash-fire",
+      "moves": [
+        "armor-cannon",
+        "protect",
+        "psychic",
+        "trick-room"
+      ]
+    },
+    "alakazam": {
+      "item": "focus-sash",
+      "ability": "inner-focus",
+      "moves": [
+        "psychic",
+        "speed-swap",
+        "light-screen",
+        "reflect"
+      ]
+    },
+    "slowking": {
+      "item": "colbur-berry",
+      "ability": "regenerator",
+      "moves": [
+        "trick-room",
+        "chilly-reception",
+        "scald",
+        "psychic"
+      ]
+    },
+    "chandelure": {
+      "item": "focus-sash",
+      "ability": "flash-fire",
+      "moves": [
+        "shadow-ball",
+        "heat-wave",
+        "protect",
+        "trick-room"
+      ]
+    },
+    "blastoise": {
+      "item": "leftovers",
+      "ability": "rain-dish",
+      "moves": [
+        "fake-out",
+        "protect",
+        "flip-turn",
+        "water-spout"
+      ]
+    },
+    "krookodile": {
+      "item": "choice-scarf",
+      "ability": "intimidate",
+      "moves": [
+        "knock-off",
+        "earthquake",
+        "rock-slide",
+        "high-horsepower"
+      ]
+    },
+    "clefable-mega": {
+      "item": "clefablite",
+      "ability": "magic-bounce",
+      "moves": [
+        "follow-me",
+        "moonblast",
+        "protect",
+        "air-slash"
+      ]
+    },
+    "cofagrigus": {
+      "item": "leftovers",
+      "ability": "mummy",
+      "moves": [
+        "trick-room",
+        "will-o-wisp",
+        "shadow-ball",
+        "body-press"
+      ]
+    },
+    "lucario": {
+      "item": "choice-scarf",
+      "ability": "inner-focus",
+      "moves": [
+        "close-combat",
+        "final-gambit",
+        "meteor-mash",
+        "protect"
+      ]
+    },
+    "jolteon": {
+      "item": "focus-sash",
+      "ability": "volt-absorb",
+      "moves": [
+        "protect",
+        "thunderbolt",
+        "electroweb",
+        "volt-switch"
+      ]
+    },
+    "mudsdale": {
+      "item": "soft-sand",
+      "ability": "inner-focus",
+      "moves": [
+        "high-horsepower",
+        "protect",
+        "rock-slide",
+        "earthquake"
+      ]
+    },
+    "samurott-hisui": {
+      "item": "choice-scarf",
+      "ability": "sharpness",
+      "moves": [
+        "sacred-sword",
+        "ceaseless-edge",
+        "aqua-cutter",
+        "protect"
+      ]
+    },
+    "decidueye-hisui": {
+      "item": "scope-lens",
+      "ability": "scrappy",
+      "moves": [
+        "leaf-blade",
+        "triple-arrows",
+        "protect",
+        "sucker-punch"
+      ]
+    },
+    "heracross-mega": {
+      "item": "heracronite",
+      "ability": "skill-link",
+      "moves": [
+        "rock-blast",
+        "close-combat",
+        "pin-missile",
+        "protect"
+      ]
+    },
+    "banette-mega": {
+      "item": "banettite",
+      "ability": "prankster",
+      "moves": [
+        "poltergeist",
+        "encore",
+        "destiny-bond",
+        "shadow-sneak"
+      ]
+    },
+    "slowbro-mega": {
+      "item": "slowbronite",
+      "ability": "shell-armor",
+      "moves": [
+        "scald",
+        "body-press",
+        "trick-room",
+        "slack-off"
+      ]
+    },
+    "altaria-mega": {
+      "item": "altarianite",
+      "ability": "pixilate",
+      "moves": [
+        "protect",
+        "hyper-voice",
+        "tailwind",
+        "roost"
+      ]
+    },
+    "victreebel-mega": {
+      "item": "victreebelite",
+      "ability": "innards-out",
+      "moves": [
+        "strength-sap",
+        "sludge-bomb",
+        "protect",
+        "giga-drain"
+      ]
+    },
+    "rhyperior": {
+      "item": "white-herb",
+      "ability": "solid-rock",
+      "moves": [
+        "rock-slide",
+        "protect",
+        "high-horsepower",
+        "earthquake"
+      ]
+    },
+    "hydrapple": {
+      "item": "leftovers",
+      "ability": "regenerator",
+      "moves": [
+        "protect",
+        "fickle-beam",
+        "earth-power",
+        "giga-drain"
+      ]
+    },
+    "beedrill-mega": {
+      "item": "beedrillite",
+      "ability": "adaptability",
+      "moves": [
+        "poison-jab",
+        "protect",
+        "u-turn",
+        "drill-run"
+      ]
+    },
+    "glaceon": {
+      "item": "never-melt-ice",
+      "ability": "snow-cloak",
+      "moves": [
+        "blizzard",
+        "freeze-dry",
+        "protect",
+        "ice-shard"
+      ]
+    },
+    "umbreon": {
+      "item": "leftovers",
+      "ability": "inner-focus",
+      "moves": [
+        "foul-play",
+        "snarl",
+        "yawn",
+        "protect"
+      ]
+    },
+    "alcremie": {
+      "item": "leftovers",
+      "ability": "aroma-veil",
+      "moves": [
+        "decorate",
+        "dazzling-gleam",
+        "protect",
+        "encore"
+      ]
+    },
+    "bellibolt": {
+      "item": "magnet",
+      "ability": "electromorphosis",
+      "moves": [
+        "protect",
+        "parabolic-charge",
+        "thunderbolt",
+        "muddy-water"
+      ]
+    },
+    "garganacl": {
+      "item": "leftovers",
+      "ability": "purifying-salt",
+      "moves": [
+        "salt-cure",
+        "protect",
+        "recover",
+        "wide-guard"
+      ]
+    },
+    "noivern": {
+      "item": "focus-sash",
+      "ability": "frisk",
+      "moves": [
+        "tailwind",
+        "draco-meteor",
+        "protect",
+        "air-slash"
+      ]
+    },
+    "tauros-paldea-blaze": {
+      "item": "white-herb",
+      "ability": "intimidate",
+      "moves": [
+        "close-combat",
+        "protect",
+        "raging-bull",
+        "flare-blitz"
+      ]
+    },
+    "drampa": {
+      "item": "silk-scarf",
+      "ability": "cloud-nine",
+      "moves": [
+        "protect",
+        "hyper-voice",
+        "draco-meteor",
+        "earth-power"
+      ]
+    },
+    "toxapex": {
+      "item": "leftovers",
+      "ability": "regenerator",
+      "moves": [
+        "baneful-bunker",
+        "toxic",
+        "infestation",
+        "wide-guard"
+      ]
+    },
+    "ditto": {
+      "item": "choice-scarf",
+      "ability": "imposter",
+      "moves": [
+        "",
+        "transform",
+        "",
+        ""
+      ]
+    },
+    "altaria": {
+      "item": "leftovers",
+      "ability": "cloud-nine",
+      "moves": [
+        "protect",
+        "tailwind",
+        "roost",
+        "perish-song"
+      ]
+    },
+    "greninja": {
+      "item": "focus-sash",
+      "ability": "protean",
+      "moves": [
+        "dark-pulse",
+        "ice-beam",
+        "protect",
+        "hydro-pump"
+      ]
+    },
+    "liepard": {
+      "item": "focus-sash",
+      "ability": "prankster",
+      "moves": [
+        "fake-out",
+        "encore",
+        "thunder-wave",
+        "foul-play"
+      ]
+    },
+    "serperior": {
+      "item": "miracle-seed",
+      "ability": "contrary",
+      "moves": [
+        "leaf-storm",
+        "protect",
+        "dragon-pulse",
+        "glare"
+      ]
+    },
+    "toxicroak": {
+      "item": "focus-sash",
+      "ability": "dry-skin",
+      "moves": [
+        "fake-out",
+        "close-combat",
+        "poison-jab",
+        "protect"
+      ]
+    },
+    "wyrdeer": {
+      "item": "sitrus-berry",
+      "ability": "intimidate",
+      "moves": [
+        "trick-room",
+        "protect",
+        "skill-swap",
+        "psyshield-bash"
+      ]
+    },
+    "gliscor": {
+      "item": "leftovers",
+      "ability": "hyper-cutter",
+      "moves": [
+        "protect",
+        "dual-wingbeat",
+        "high-horsepower",
+        "tailwind"
+      ]
+    },
+    "emboar-mega": {
+      "item": "emboarite",
+      "ability": "mold-breaker",
+      "moves": [
+        "flare-blitz",
+        "protect",
+        "close-combat",
+        "sucker-punch"
+      ]
+    },
+    "reuniclus": {
+      "item": "leftovers",
+      "ability": "regenerator",
+      "moves": [
+        "trick-room",
+        "psychic",
+        "protect",
+        "focus-blast"
+      ]
+    },
+    "infernape": {
+      "item": "focus-sash",
+      "ability": "blaze",
+      "moves": [
+        "fake-out",
+        "close-combat",
+        "protect",
+        "flare-blitz"
+      ]
+    },
+    "passimian": {
+      "item": "choice-scarf",
+      "ability": "defiant",
+      "moves": [
+        "close-combat",
+        "knock-off",
+        "protect",
+        "rock-slide"
+      ]
+    },
+    "floette-eternal": {
+      "item": "choice-scarf",
+      "ability": "flower-veil",
+      "moves": [
+        "dazzling-gleam",
+        "light-of-ruin",
+        "moonblast",
+        "psychic"
+      ]
+    },
+    "mr-rime": {
+      "item": "focus-sash",
+      "ability": "screen-cleaner",
+      "moves": [
+        "fake-out",
+        "protect",
+        "trick-room",
+        "freeze-dry"
+      ]
+    },
+    "pinsir-mega": {
+      "item": "pinsirite",
+      "ability": "aerilate",
+      "moves": [
+        "body-slam",
+        "protect",
+        "close-combat",
+        "feint"
+      ]
+    },
+    "hippowdon": {
+      "item": "leftovers",
+      "ability": "sand-stream",
+      "moves": [
+        "protect",
+        "slack-off",
+        "yawn",
+        "earthquake"
+      ]
+    },
+    "machamp": {
+      "item": "black-belt",
+      "ability": "no-guard",
+      "moves": [
+        "dynamic-punch",
+        "stone-edge",
+        "wide-guard",
+        "protect"
+      ]
+    },
+    "ninetales": {
+      "item": "charcoal",
+      "ability": "drought",
+      "moves": [
+        "protect",
+        "heat-wave",
+        "solar-beam",
+        "encore"
+      ]
+    },
+    "lycanroc": {
+      "item": "focus-sash",
+      "ability": "sand-rush",
+      "moves": [
+        "rock-slide",
+        "protect",
+        "close-combat",
+        "accelerock"
+      ]
+    },
+    "steelix-mega": {
+      "item": "steelixite",
+      "ability": "sand-force",
+      "moves": [
+        "body-press",
+        "protect",
+        "heavy-slam",
+        "earthquake"
+      ]
+    },
+    "runerigus": {
+      "item": "leftovers",
+      "ability": "wandering-spirit",
+      "moves": [
+        "trick-room",
+        "body-press",
+        "will-o-wisp",
+        "poltergeist"
+      ]
+    },
+    "spiritomb": {
+      "item": "mental-herb",
+      "ability": "infiltrator",
+      "moves": [
+        "trick-room",
+        "will-o-wisp",
+        "snarl",
+        "foul-play"
+      ]
+    },
+    "lycanroc-dusk": {
+      "item": "focus-sash",
+      "ability": "tough-claws",
+      "moves": [
+        "accelerock",
+        "close-combat",
+        "protect",
+        "rock-slide"
+      ]
+    },
+    "clawitzer": {
+      "item": "mystic-water",
+      "ability": "mega-launcher",
+      "moves": [
+        "water-pulse",
+        "aura-sphere",
+        "dark-pulse",
+        "protect"
+      ]
+    },
+    "houndoom-mega": {
+      "item": "houndoominite",
+      "ability": "solar-power",
+      "moves": [
+        "dark-pulse",
+        "heat-wave",
+        "protect",
+        "solar-beam"
+      ]
+    },
+    "slowbro-galar": {
+      "item": "quick-claw",
+      "ability": "quick-draw",
+      "moves": [
+        "shell-side-arm",
+        "psychic",
+        "protect",
+        "trick-room"
+      ]
+    },
+    "skeledirge": {
+      "item": "leftovers",
+      "ability": "unaware",
+      "moves": [
+        "torch-song",
+        "shadow-ball",
+        "protect",
+        "slack-off"
+      ]
+    },
+    "quaquaval": {
+      "item": "white-herb",
+      "ability": "moxie",
+      "moves": [
+        "close-combat",
+        "aqua-step",
+        "protect",
+        "aqua-jet"
+      ]
+    },
+    "beartic": {
+      "item": "never-melt-ice",
+      "ability": "slush-rush",
+      "moves": [
+        "icicle-crash",
+        "close-combat",
+        "protect",
+        "rock-slide"
+      ]
+    },
+    "aromatisse": {
+      "item": "sitrus-berry",
+      "ability": "aroma-veil",
+      "moves": [
+        "trick-room",
+        "moonblast",
+        "heal-pulse",
+        "protect"
+      ]
+    },
+    "slowbro": {
+      "item": "leftovers",
+      "ability": "regenerator",
+      "moves": [
+        "trick-room",
+        "scald",
+        "psychic",
+        "protect"
+      ]
+    },
+    "pidgeot-mega": {
+      "item": "pidgeotite",
+      "ability": "no-guard",
+      "moves": [
+        "hurricane",
+        "protect",
+        "heat-wave",
+        "tailwind"
+      ]
+    },
+    "medicham-mega": {
+      "item": "medichamite",
+      "ability": "pure-power",
+      "moves": [
+        "close-combat",
+        "fake-out",
+        "zen-headbutt",
+        "protect"
+      ]
+    },
+    "torterra": {
+      "item": "white-herb",
+      "ability": "shell-armor",
+      "moves": [
+        "protect",
+        "wood-hammer",
+        "shell-smash",
+        "headlong-rush"
+      ]
+    },
+    "sharpedo-mega": {
+      "item": "sharpedonite",
+      "ability": "strong-jaw",
+      "moves": [
+        "protect",
+        "crunch",
+        "liquidation",
+        "psychic-fangs"
+      ]
+    },
+    "ariados": {
+      "item": "focus-sash",
+      "ability": "insomnia",
+      "moves": [
+        "rage-powder",
+        "protect",
+        "struggle-bug",
+        "string-shot"
+      ]
+    },
+    "aurorus": {
+      "item": "never-melt-ice",
+      "ability": "snow-warning",
+      "moves": [
+        "protect",
+        "blizzard",
+        "aurora-veil",
+        "ancient-power"
+      ]
+    },
+    "salazzle": {
+      "item": "focus-sash",
+      "ability": "corrosion",
+      "moves": [
+        "fake-out",
+        "sludge-bomb",
+        "protect",
+        "heat-wave"
+      ]
+    },
+    "medicham": {
+      "item": "focus-sash",
+      "ability": "pure-power",
+      "moves": [
+        "fake-out",
+        "close-combat",
+        "skill-swap",
+        "trick-room"
+      ]
+    },
+    "vaporeon": {
+      "item": "leftovers",
+      "ability": "water-absorb",
+      "moves": [
+        "scald",
+        "protect",
+        "ice-beam",
+        "yawn"
+      ]
+    },
+    "flapple": {
+      "item": "choice-scarf",
+      "ability": "hustle",
+      "moves": [
+        "grav-apple",
+        "dragon-rush",
+        "u-turn",
+        "dual-wingbeat"
+      ]
+    },
+    "glalie-mega": {
+      "item": "glalitite",
+      "ability": "refrigerate",
+      "moves": [
+        "protect",
+        "explosion",
+        "body-slam",
+        "ice-shard"
+      ]
+    },
+    "hawlucha": {
+      "item": "white-herb",
+      "ability": "unburden",
+      "moves": [
+        "close-combat",
+        "protect",
+        "acrobatics",
+        "coaching"
+      ]
+    },
+    "meowstic-f-mega": {
+      "item": "meowsticite",
+      "ability": "trace",
+      "moves": [
+        "protect",
+        "expanding-force",
+        "alluring-voice",
+        "thunderbolt"
+      ]
+    },
+    "sableye-mega": {
+      "item": "sablenite",
+      "ability": "magic-bounce",
+      "moves": [
+        "will-o-wisp",
+        "fake-out",
+        "encore",
+        "foul-play"
+      ]
+    },
+    "meowstic-m-mega": {
+      "item": "meowsticite",
+      "ability": "trace",
+      "moves": [
+        "expanding-force",
+        "psychic-terrain",
+        "fake-out",
+        "protect"
+      ]
+    },
+    "luxray": {
+      "item": "choice-scarf",
+      "ability": "intimidate",
+      "moves": [
+        "volt-switch",
+        "protect",
+        "supercell-slam",
+        "snarl"
+      ]
+    },
+    "rampardos": {
+      "item": "focus-sash",
+      "ability": "sheer-force",
+      "moves": [
+        "rock-slide",
+        "protect",
+        "iron-head",
+        "head-smash"
+      ]
+    },
+    "sandaconda": {
+      "item": "bright-powder",
+      "ability": "sand-veil",
+      "moves": [
+        "minimize",
+        "body-press",
+        "iron-defense",
+        "rock-slide"
+      ]
+    },
+    "abomasnow": {
+      "item": "occa-berry",
+      "ability": "snow-warning",
+      "moves": [
+        "blizzard",
+        "aurora-veil",
+        "protect",
+        "giga-drain"
+      ]
+    },
+    "trevenant": {
+      "item": "sitrus-berry",
+      "ability": "harvest",
+      "moves": [
+        "trick-room",
+        "protect",
+        "horn-leech",
+        "poltergeist"
+      ]
+    },
+    "typhlosion": {
+      "item": "choice-scarf",
+      "ability": "flash-fire",
+      "moves": [
+        "eruption",
+        "protect",
+        "heat-wave",
+        "flamethrower"
+      ]
+    },
+    "pikachu": {
+      "item": "light-ball",
+      "ability": "lightning-rod",
+      "moves": [
+        "fake-out",
+        "protect",
+        "volt-tackle",
+        "thunderbolt"
+      ]
+    },
+    "goodra": {
+      "item": "leftovers",
+      "ability": "sap-sipper",
+      "moves": [
+        "protect",
+        "draco-meteor",
+        "thunderbolt",
+        "flamethrower"
+      ]
+    },
+    "chesnaught": {
+      "item": "leftovers",
+      "ability": "bulletproof",
+      "moves": [
+        "spiky-shield",
+        "body-press",
+        "wood-hammer",
+        "wide-guard"
+      ]
+    },
+    "scovillain": {
+      "item": "focus-sash",
+      "ability": "chlorophyll",
+      "moves": [
+        "protect",
+        "rage-powder",
+        "overheat",
+        "flamethrower"
+      ]
+    },
+    "audino-mega": {
+      "item": "audinite",
+      "ability": "healer",
+      "moves": [
+        "trick-room",
+        "dazzling-gleam",
+        "life-dew",
+        "calm-mind"
+      ]
+    },
+    "leafeon": {
+      "item": "miracle-seed",
+      "ability": "chlorophyll",
+      "moves": [
+        "solar-blade",
+        "leaf-blade",
+        "knock-off",
+        "protect"
+      ]
+    },
+    "charizard": {
+      "item": "choice-scarf",
+      "ability": "solar-power",
+      "moves": [
+        "heat-wave",
+        "air-slash",
+        "weather-ball",
+        "solar-beam"
+      ]
+    },
+    "tyrantrum": {
+      "item": "choice-scarf",
+      "ability": "rock-head",
+      "moves": [
+        "head-smash",
+        "protect",
+        "dragon-claw",
+        "rock-slide"
+      ]
+    },
+    "avalugg-hisui": {
+      "item": "leftovers",
+      "ability": "sturdy",
+      "moves": [
+        "rock-slide",
+        "mountain-gale",
+        "body-press",
+        "wide-guard"
+      ]
+    },
+    "espeon": {
+      "item": "focus-sash",
+      "ability": "magic-bounce",
+      "moves": [
+        "psychic",
+        "protect",
+        "power-gem",
+        "trick-room"
+      ]
+    },
+    "pangoro": {
+      "item": "focus-sash",
+      "ability": "scrappy",
+      "moves": [
+        "close-combat",
+        "protect",
+        "knock-off",
+        "darkest-lariat"
+      ]
+    },
+    "raichu-alola": {
+      "item": "focus-sash",
+      "ability": "surge-surfer",
+      "moves": [
+        "fake-out",
+        "psychic",
+        "volt-switch",
+        "thunderbolt"
+      ]
+    },
+    "diggersby": {
+      "item": "choice-scarf",
+      "ability": "huge-power",
+      "moves": [
+        "earthquake",
+        "high-horsepower",
+        "body-slam",
+        "rock-slide"
+      ]
+    },
+    "absol-mega": {
+      "item": "absolite",
+      "ability": "magic-bounce",
+      "moves": [
+        "protect",
+        "sucker-punch",
+        "close-combat",
+        "knock-off"
+      ]
+    },
+    "roserade": {
+      "item": "choice-scarf",
+      "ability": "poison-point",
+      "moves": [
+        "sludge-bomb",
+        "protect",
+        "leaf-storm",
+        "sleep-powder"
+      ]
+    },
+    "toucannon": {
+      "item": "king-s-rock",
+      "ability": "skill-link",
+      "moves": [
+        "rock-blast",
+        "beak-blast",
+        "protect",
+        "bullet-seed"
+      ]
+    },
+    "absol": {
+      "item": "scope-lens",
+      "ability": "super-luck",
+      "moves": [
+        "night-slash",
+        "sucker-punch",
+        "protect",
+        "close-combat"
+      ]
+    },
+    "froslass": {
+      "item": "focus-sash",
+      "ability": "cursed-body",
+      "moves": [
+        "frost-breath",
+        "icy-wind",
+        "protect",
+        "shadow-ball"
+      ]
+    },
+    "appletun": {
+      "item": "leftovers",
+      "ability": "thick-fat",
+      "moves": [
+        "apple-acid",
+        "protect",
+        "leech-seed",
+        "draco-meteor"
+      ]
+    },
+    "bastiodon": {
+      "item": "leftovers",
+      "ability": "sturdy",
+      "moves": [
+        "body-press",
+        "wide-guard",
+        "protect",
+        "iron-defense"
+      ]
+    },
+    "golurk": {
+      "item": "white-herb",
+      "ability": "no-guard",
+      "moves": [
+        "poltergeist",
+        "protect",
+        "dynamic-punch",
+        "headlong-rush"
+      ]
+    },
+    "audino": {
+      "item": "mental-herb",
+      "ability": "healer",
+      "moves": [
+        "trick-room",
+        "heal-pulse",
+        "simple-beam",
+        "protect"
+      ]
+    },
+    "morpeko": {
+      "item": "focus-sash",
+      "ability": "hunger-switch",
+      "moves": [
+        "aura-wheel",
+        "fake-out",
+        "protect",
+        "parting-shot"
+      ]
+    },
+    "manectric": {
+      "item": "focus-sash",
+      "ability": "lightning-rod",
+      "moves": [
+        "volt-switch",
+        "protect",
+        "thunderbolt",
+        "snarl"
+      ]
+    },
+    "skarmory": {
+      "item": "leftovers",
+      "ability": "sturdy",
+      "moves": [
+        "body-press",
+        "tailwind",
+        "protect",
+        "brave-bird"
+      ]
+    },
+    "starmie": {
+      "item": "choice-scarf",
+      "ability": "natural-cure",
+      "moves": [
+        "scald",
+        "psychic",
+        "protect",
+        "ice-beam"
+      ]
+    },
+    "aggron": {
+      "item": "leftovers",
+      "ability": "sturdy",
+      "moves": [
+        "body-press",
+        "heavy-slam",
+        "protect",
+        "rock-slide"
+      ]
+    },
+    "emolga": {
+      "item": "focus-sash",
+      "ability": "motor-drive",
+      "moves": [
+        "nuzzle",
+        "volt-switch",
+        "encore",
+        "protect"
+      ]
+    },
+    "decidueye": {
+      "item": "focus-sash",
+      "ability": "long-reach",
+      "moves": [
+        "spirit-shackle",
+        "leaf-blade",
+        "protect",
+        "tailwind"
+      ]
+    },
+    "avalugg": {
+      "item": "leftovers",
+      "ability": "sturdy",
+      "moves": [
+        "body-press",
+        "protect",
+        "wide-guard",
+        "iron-defense"
+      ]
+    },
+    "sharpedo": {
+      "item": "focus-sash",
+      "ability": "speed-boost",
+      "moves": [
+        "protect",
+        "crunch",
+        "close-combat",
+        "psychic-fangs"
+      ]
+    },
+    "rotom-fan": {
+      "item": "choice-scarf",
+      "ability": "levitate",
+      "moves": [
+        "air-slash",
+        "volt-switch",
+        "will-o-wisp",
+        "discharge"
+      ]
+    },
+    "florges": {
+      "item": "leftovers",
+      "ability": "flower-veil",
+      "moves": [
+        "protect",
+        "moonblast",
+        "pollen-puff",
+        "calm-mind"
+      ]
+    },
+    "zoroark": {
+      "item": "focus-sash",
+      "ability": "illusion",
+      "moves": [
+        "protect",
+        "dark-pulse",
+        "sludge-bomb",
+        "night-daze"
+      ]
+    },
+    "crabominable": {
+      "item": "focus-sash",
+      "ability": "hyper-cutter",
+      "moves": [
+        "ice-hammer",
+        "protect",
+        "close-combat",
+        "mach-punch"
+      ]
+    },
+    "castform": {
+      "item": "choice-scarf",
+      "ability": "forecast",
+      "moves": [
+        "weather-ball",
+        "protect",
+        "thunder",
+        "blizzard"
+      ]
+    },
+    "gourgeist-super": {
+      "item": "mental-herb",
+      "ability": "frisk",
+      "moves": [
+        "trick-room",
+        "poltergeist",
+        "power-whip",
+        "will-o-wisp"
+      ]
+    },
+    "emboar": {
+      "item": "white-herb",
+      "ability": "reckless",
+      "moves": [
+        "flare-blitz",
+        "close-combat",
+        "wild-charge",
+        "head-smash"
+      ]
+    },
+    "heracross": {
+      "item": "choice-scarf",
+      "ability": "moxie",
+      "moves": [
+        "close-combat",
+        "rock-slide",
+        "megahorn",
+        "knock-off"
+      ]
+    },
+    "arbok": {
+      "item": "choice-scarf",
+      "ability": "intimidate",
+      "moves": [
+        "gunk-shot",
+        "glare",
+        "protect",
+        "coil"
+      ]
+    },
+    "steelix": {
+      "item": "leftovers",
+      "ability": "sturdy",
+      "moves": [
+        "body-press",
+        "protect",
+        "earthquake",
+        "wide-guard"
+      ]
+    },
+    "polteageist": {
+      "item": "white-herb",
+      "ability": "weak-armor",
+      "moves": [
+        "shell-smash",
+        "shadow-ball",
+        "protect",
+        "stored-power"
+      ]
+    },
+    "simipour": {
+      "item": "focus-sash",
+      "ability": "torrent",
+      "moves": [
+        "fake-out",
+        "scald",
+        "flip-turn",
+        "icy-wind"
+      ]
+    },
+    "delphox": {
+      "item": "focus-sash",
+      "ability": "magician",
+      "moves": [
+        "heat-wave",
+        "protect",
+        "psychic",
+        "dazzling-gleam"
+      ]
+    },
+    "flareon": {
+      "item": "white-herb",
+      "ability": "flash-fire",
+      "moves": [
+        "flare-blitz",
+        "superpower",
+        "detect",
+        "quick-attack"
+      ]
+    },
+    "dedenne": {
+      "item": "sitrus-berry",
+      "ability": "cheek-pouch",
+      "moves": [
+        "nuzzle",
+        "dazzling-gleam",
+        "super-fang",
+        "protect"
+      ]
+    },
+    "glalie": {
+      "item": "leftovers",
+      "ability": "inner-focus",
+      "moves": [
+        "protect",
+        "sheer-cold",
+        "freeze-dry",
+        "explosion"
+      ]
+    },
+    "forretress": {
+      "item": "leftovers",
+      "ability": "sturdy",
+      "moves": [
+        "body-press",
+        "protect",
+        "stealth-rock",
+        "gyro-ball"
+      ]
+    },
+    "stunfisk": {
+      "item": "bright-powder",
+      "ability": "static",
+      "moves": [
+        "earth-power",
+        "protect",
+        "thunderbolt",
+        "yawn"
+      ]
+    },
+    "ampharos": {
+      "item": "magnet",
+      "ability": "static",
+      "moves": [
+        "protect",
+        "thunderbolt",
+        "dazzling-gleam",
+        "volt-switch"
+      ]
+    },
+    "camerupt": {
+      "item": "charcoal",
+      "ability": "solid-rock",
+      "moves": [
+        "protect",
+        "earth-power",
+        "eruption",
+        "heat-wave"
+      ]
+    },
+    "simisage": {
+      "item": "king-s-rock",
+      "ability": "overgrow",
+      "moves": [
+        "fake-out",
+        "protect",
+        "leaf-storm",
+        "taunt"
+      ]
+    },
+    "lycanroc-midnight": {
+      "item": "choice-scarf",
+      "ability": "no-guard",
+      "moves": [
+        "rock-slide",
+        "close-combat",
+        "stone-edge",
+        "protect"
+      ]
+    },
+    "garbodor": {
+      "item": "leftovers",
+      "ability": "aftermath",
+      "moves": [
+        "protect",
+        "gunk-shot",
+        "drain-punch",
+        "stomping-tantrum"
+      ]
+    },
+    "chimecho": {
+      "item": "sitrus-berry",
+      "ability": "levitate",
+      "moves": [
+        "trick-room",
+        "psychic",
+        "protect",
+        "heal-pulse"
+      ]
+    },
+    "victreebel": {
+      "item": "focus-sash",
+      "ability": "chlorophyll",
+      "moves": [
+        "protect",
+        "sleep-powder",
+        "poison-jab",
+        "sludge-bomb"
+      ]
+    },
+    "gourgeist": {
+      "item": "choice-scarf",
+      "ability": "frisk",
+      "moves": [
+        "poltergeist",
+        "trick-or-treat",
+        "power-whip",
+        "trick"
+      ]
+    },
+    "tauros": {
+      "item": "choice-scarf",
+      "ability": "intimidate",
+      "moves": [
+        "protect",
+        "rock-slide",
+        "close-combat",
+        "raging-bull"
+      ]
+    },
+    "slurpuff": {
+      "item": "sitrus-berry",
+      "ability": "unburden",
+      "moves": [
+        "protect",
+        "dazzling-gleam",
+        "sticky-web",
+        "play-rough"
+      ]
+    },
+    "tauros-paldea-combat": {
+      "item": "choice-scarf",
+      "ability": "intimidate",
+      "moves": [
+        "protect",
+        "rock-slide",
+        "raging-bull",
+        "close-combat"
+      ]
+    },
+    "feraligatr": {
+      "item": "mystic-water",
+      "ability": "sheer-force",
+      "moves": [
+        "liquidation",
+        "ice-punch",
+        "dragon-dance",
+        "protect"
+      ]
+    },
+    "rotom": {
+      "item": "choice-scarf",
+      "ability": "levitate",
+      "moves": [
+        "shadow-ball",
+        "volt-switch",
+        "will-o-wisp",
+        "electroweb"
+      ]
+    },
+    "houndoom": {
+      "item": "focus-sash",
+      "ability": "flash-fire",
+      "moves": [
+        "dark-pulse",
+        "heat-wave",
+        "protect",
+        "scorching-sands"
+      ]
+    },
+    "lopunny": {
+      "item": "chople-berry",
+      "ability": "cute-charm",
+      "moves": [
+        "fake-out",
+        "protect",
+        "baton-pass",
+        "encore"
+      ]
+    },
+    "simisear": {
+      "item": "focus-sash",
+      "ability": "blaze",
+      "moves": [
+        "fake-out",
+        "protect",
+        "flare-blitz",
+        "rock-slide"
+      ]
+    },
+    "furfrou": {
+      "item": "leftovers",
+      "ability": "fur-coat",
+      "moves": [
+        "snarl",
+        "thunder-wave",
+        "protect",
+        "cotton-guard"
+      ]
+    },
+    "gourgeist-small": {
+      "item": "choice-scarf",
+      "ability": "frisk",
+      "moves": [
+        "trick-or-treat",
+        "poltergeist",
+        "trick",
+        "power-whip"
+      ]
+    }
+  }
+}

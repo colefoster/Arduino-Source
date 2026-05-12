@@ -6,9 +6,12 @@
 
 #include <algorithm>
 #include <cstdlib>
+#include <map>
+#include <mutex>
 #include "Common/Cpp/Json/JsonArray.h"
 #include "Common/Cpp/Json/JsonObject.h"
 #include "Common/Cpp/Json/JsonValue.h"
+#include "CommonFramework/Globals.h"
 #include "PokemonChampions_BattleStateTracker.h"
 #include "PokemonChampions/Inference/PokemonChampions_TeamSummaryReader.h"
 #include "PokemonChampions/Inference/PokemonChampions_TeamStatsReader.h"
@@ -22,6 +25,19 @@ namespace PokemonChampions{
 
 void TrackedPokemon::reset_volatile(){
     boosts.fill(0);
+    //  Choice / encore / multi-turn lock state resets on switch-out — the
+    //  real game clears it the moment the mon leaves the field. We reset
+    //  on switch-in (the next time the mon is volatile-reset) which is the
+    //  natural sync point in update_from_log.
+    locked_to_move.clear();
+    //  Volatile statuses (substitute, taunt, encore, confusion, etc.)
+    //  evaporate the moment the mon leaves the field — except for the
+    //  ones that DON'T (e.g. ingrain, yawn-source). Cleared en masse here;
+    //  any persistent-across-switch volatile would need a carve-out.
+    volatile_statuses.clear();
+    substitute_hp_frac = 0.0f;
+    sleep_turns_remaining = 0;
+    toxic_counter = 0;
 }
 
 void TrackedPokemon::add_move(const std::string& move){
@@ -31,6 +47,72 @@ void TrackedPokemon::add_move(const std::string& move){
             known_moves.push_back(move);
         }
     }
+}
+
+
+// ─── Opponent set prior ─────────────────────────────────────────
+//
+//  Per-species "most likely set" defaults drawn from Smogon chaos stats
+//  for the current regulation (data/usage_stats/...). Used to backfill
+//  empty item / ability / moves on the opponent side so the model never
+//  sees blank slugs (which map to UNK at training time and degrade
+//  calibration). Loaded lazily on first lookup; cached process-wide.
+//
+//  Schema (see scripts/build_usage_stats.py + data/usage_stats/SCHEMA.md):
+//    { "format": "...", "source": "...",
+//      "priors": { "<species_slug>": {
+//          "item": "<item_slug>", "ability": "<ability_slug>",
+//          "moves": ["<move>", "<move>", "<move>", "<move>"]
+//      }}}
+
+struct OppSetPrior{
+    std::string item;
+    std::string ability;
+    std::array<std::string, 4> moves = {};
+};
+
+static const std::map<std::string, OppSetPrior>& load_opp_set_priors(){
+    static std::map<std::string, OppSetPrior> table;
+    static std::once_flag flag;
+    std::call_once(flag, [](){
+        const std::string path = RESOURCE_PATH() + "PokemonChampions/OpponentSetPrior.json";
+        JsonValue root;
+        try{
+            root = load_json_file(path);
+        }catch (...){
+            //  No prior file shipped — leave table empty; lookups will
+            //  return defaults and the opp-emission path will fall through
+            //  to its existing empty-string behavior.
+            return;
+        }
+        const JsonObject* obj = root.to_object();
+        if (obj == nullptr) return;
+        const JsonObject* priors = obj->get_object("priors");
+        if (priors == nullptr) return;
+        for (const auto& kv : *priors){
+            const JsonObject* mon = kv.second.to_object();
+            if (mon == nullptr) continue;
+            OppSetPrior p;
+            if (auto* s = mon->get_string("item")) p.item = *s;
+            if (auto* s = mon->get_string("ability")) p.ability = *s;
+            if (const JsonArray* moves = mon->get_array("moves")){
+                for (size_t k = 0; k < moves->size() && k < 4; k++){
+                    if (auto* mv = (*moves)[k].to_string()) p.moves[k] = *mv;
+                }
+            }
+            table.emplace(kv.first, std::move(p));
+        }
+    });
+    return table;
+}
+
+//  Return prior defaults for a species slug, or an all-empty struct.
+static OppSetPrior opp_set_prior_for(const std::string& species_slug){
+    if (species_slug.empty()) return {};
+    const auto& table = load_opp_set_priors();
+    auto it = table.find(species_slug);
+    if (it == table.end()) return {};
+    return it->second;
 }
 
 
@@ -58,10 +140,53 @@ void BattleStateTracker::reset(){
     for (auto& p : m_opp_team){ p = TrackedPokemon{}; }
 
     m_own_leads.clear();
+
+    m_history.clear();
+}
+
+
+void BattleStateTracker::push_history_snapshot(){
+    BattleHistoryEntry entry;
+
+    bool doubles = (m_mode == BattleMode::DOUBLES);
+
+    auto fill_pair = [&](
+        const std::array<TrackedPokemon, 6>& team,
+        const std::array<uint8_t, 2>& active,
+        uint8_t base_idx
+    ){
+        uint8_t positions = doubles ? 2 : 1;
+        for (uint8_t i = 0; i < positions; i++){
+            uint8_t slot = active[i];
+            if (slot >= 6) continue;
+            const TrackedPokemon& mon = team[slot];
+            if (mon.species.empty()) continue;
+            entry.active_species[base_idx + i] = mon.species;
+            entry.active_hp[base_idx + i] = mon.alive ? mon.hp : 0.0f;
+        }
+    };
+
+    fill_pair(m_own_team, m_own_active, 0);   //  slots 0,1 = own_a, own_b
+    fill_pair(m_opp_team, m_opp_active, 2);   //  slots 2,3 = opp_a, opp_b
+
+    //  action_types / action_moves: we don't reliably know what each
+    //  participant chose last turn from the C++ pipeline, so leave them
+    //  as the "noop" / empty defaults. The model treats noop as a valid
+    //  history entry; the state trajectory carries most of the signal.
+
+    m_history.push_back(std::move(entry));
+    while ((int)m_history.size() > BATTLE_HISTORY_K){
+        m_history.pop_front();
+    }
 }
 
 void BattleStateTracker::set_mode(BattleMode mode){
     m_mode = mode;
+}
+
+void BattleStateTracker::set_own_actives(int slot_a, int slot_b){
+    if (slot_a >= 0 && slot_a < 6) m_own_active[0] = (uint8_t)slot_a;
+    if (slot_b >= 0 && slot_b < 6) m_own_active[1] = (uint8_t)slot_b;
 }
 
 // ─── Showdown paste parser ────────────────────────────────────────
@@ -573,6 +698,13 @@ bool BattleStateTracker::apply_ability_item_reveal(
         if (field.empty()){
             field = name_slug;
         }
+        //  Either way (already-known or just-set), reveal pins this to a
+        //  fully-confident state — the popup is the ground truth.
+        if (kind == "ability"){
+            mon.ability_confidence = 1.0f;
+        }else{
+            mon.item_confidence = 1.0f;
+        }
         return true;
     };
 
@@ -652,9 +784,67 @@ void BattleStateTracker::update_from_moves(
     }
 }
 
+//  Resolve which active position (0 or 1) on the given side an event refers
+//  to by matching `pokemon_display` (raw display name from the OCR'd log
+//  line, e.g. "Volcarona" or "The opposing Volcarona") against the species
+//  slug of the on-field mons. Returns -1 if no match.
+//
+//  In SINGLES only position 0 is valid; we still attempt position 0 (and
+//  ignore an erroneous position 1 in active[]) by capping `positions`.
+static int resolve_active_position(
+    const std::string& pokemon_display,
+    const std::array<TrackedPokemon, 6>& team,
+    const std::array<uint8_t, 2>& active,
+    BattleMode mode
+){
+    if (pokemon_display.empty()) return -1;
+    std::string lower = pokemon_display;
+    std::transform(lower.begin(), lower.end(), lower.begin(), ::tolower);
+    uint8_t positions = (mode == BattleMode::DOUBLES) ? 2 : 1;
+    for (uint8_t i = 0; i < positions; i++){
+        uint8_t slot = active[i];
+        if (slot >= 6) continue;
+        const std::string& sp = team[slot].species;
+        if (sp.empty()) continue;
+        if (lower.find(sp) != std::string::npos ||
+            sp.find(lower) != std::string::npos)
+        {
+            return (int)i;
+        }
+    }
+    return -1;
+}
+
 void BattleStateTracker::update_from_log(const BattleLogEvent& event){
     switch (event.type){
     case BattleLogEventType::MOVE_USED:{
+        //  Per-side last-move ledger — encoder reads last_move_p1/p2 as
+        //  vocab IDs, we keep them as slugs and resolve at request time.
+        const std::string slug = to_slug(event.move);
+        if (event.is_opponent){
+            m_last_move_opp = slug;
+        }else{
+            m_last_move_own = slug;
+        }
+
+        //  Per-turn history: record this move on the most recent history
+        //  entry under the right [own_a, own_b, opp_a, opp_b] slot. The
+        //  history snapshot is pushed by the trace on each action_menu
+        //  re-entry; if we have no entry yet (move fired before our first
+        //  snapshot) we simply drop the attribution.
+        if (!m_history.empty() && !slug.empty()){
+            const auto& team = event.is_opponent ? m_opp_team : m_own_team;
+            const auto& active = event.is_opponent ? m_opp_active : m_own_active;
+            int pos = resolve_active_position(event.pokemon, team, active, m_mode);
+            if (pos >= 0){
+                int idx = (event.is_opponent ? 2 : 0) + pos;
+                if (idx >= 0 && idx < 4){
+                    m_history.back().action_moves[idx] = slug;
+                    m_history.back().action_types[idx] = "move";
+                }
+            }
+        }
+
         //  Track opponent moves.
         if (event.is_opponent){
             for (uint8_t i = 0; i < 2; i++){
@@ -669,16 +859,82 @@ void BattleStateTracker::update_from_log(const BattleLogEvent& event){
                     if (lower_pokemon.find(mon.species) != std::string::npos ||
                         mon.species.find(lower_pokemon) != std::string::npos)
                     {
-                        //  Convert move name to slug format.
-                        std::string slug = event.move;
-                        std::transform(slug.begin(), slug.end(), slug.begin(), ::tolower);
-                        for (char& c : slug){
-                            if (c == ' ') c = '-';
+                        std::string move_slug = to_slug(event.move);
+                        mon.add_move(move_slug);
+                        //  Confidence bump: the move is now positively
+                        //  revealed in-battle (vs team-paste prior).
+                        for (size_t k = 0; k < mon.known_moves.size() && k < 4; k++){
+                            if (mon.known_moves[k] == move_slug){
+                                mon.move_confidences[k] = 1.0f;
+                                break;
+                            }
                         }
-                        mon.add_move(slug);
                         break;
                     }
                 }
+            }
+        }else{
+            //  Proactive Choice-lock: when an own mon holding a Choice item
+            //  uses a move, the next turn locks them into that move. Set
+            //  locked_to_move now so the next move_select roll picks that
+            //  slot directly instead of trial-and-erroring through the
+            //  in-game rejection toast.
+            //
+            //  Matched by species (event.pokemon is the visible name, not a
+            //  slot index). Walk both active positions to handle doubles.
+            std::string lower_pokemon = event.pokemon;
+            std::transform(lower_pokemon.begin(), lower_pokemon.end(),
+                           lower_pokemon.begin(), ::tolower);
+            uint8_t positions = (m_mode == BattleMode::DOUBLES) ? 2 : 1;
+            for (uint8_t i = 0; i < positions; i++){
+                auto& mon = m_own_team[m_own_active[i]];
+                if (mon.species.empty()) continue;
+                bool species_match =
+                    lower_pokemon.find(mon.species) != std::string::npos
+                    || mon.species.find(lower_pokemon) != std::string::npos;
+                if (!species_match) continue;
+                //  Choice items: choice-band / choice-specs / choice-scarf.
+                //  Item slugs are stored lowercase-with-dashes.
+                bool is_choice_item =
+                    mon.item == "choice-scarf"
+                    || mon.item == "choice-band"
+                    || mon.item == "choice-specs";
+                if (is_choice_item){
+                    mon.locked_to_move = to_slug(event.move);
+                }
+                break;
+            }
+        }
+        break;
+    }
+
+    case BattleLogEventType::MOVE_LOCKED:{
+        //  Reactive lock — the user tried an illegal move and got the
+        //  rejection toast. The text names the legal move, so we set the
+        //  active own mon's locked_to_move directly. Always own-side
+        //  (the opponent's lock state is hidden in normal play).
+        //
+        //  In doubles we don't know which of the two active mons owns the
+        //  rejection — it fires while a specific move_select is on screen,
+        //  but BattleLogEvent doesn't carry the active position. The
+        //  ActiveHUDSlotDetector / MoveNameReader::read_active_slot would
+        //  be the right cross-reference, but the simple "first active that
+        //  holds a Choice item" heuristic is correct for ~all real lock
+        //  cases (a Choice mon can be locked; a non-Choice mon can't).
+        uint8_t positions = (m_mode == BattleMode::DOUBLES) ? 2 : 1;
+        std::string locked = to_slug(event.move);
+        for (uint8_t i = 0; i < positions; i++){
+            auto& mon = m_own_team[m_own_active[i]];
+            bool is_choice_item =
+                mon.item == "choice-scarf"
+                || mon.item == "choice-band"
+                || mon.item == "choice-specs";
+            //  If we don't yet know the item (item OCR pending), still
+            //  apply on position 0 — singles always, doubles is a guess.
+            //  The lock will be overwritten on the next MOVE_USED if wrong.
+            if (is_choice_item || (i == 0 && mon.item.empty())){
+                mon.locked_to_move = locked;
+                break;
             }
         }
         break;
@@ -689,14 +945,42 @@ void BattleStateTracker::update_from_log(const BattleLogEvent& event){
         //  event.stat may be "Atk", "Sp. Atk", "Speed", or comma-separated.
         //  event.boost_stages = +1, -1, +2, etc.
         //  For now, handle single-stat changes.
+        //
+        //  Server schema accepts atk/def/spa/spd/spe/accuracy/evasion (7-D)
+        //  but the C++ side stores 6-D (no accuracy) — PS does emit accuracy
+        //  changes but they're rare and not in the encoder's boost slot
+        //  ordering anyway, so we drop them.
         int idx = stat_name_to_index(event.stat);
         if (idx >= 0){
             auto& team = event.is_opponent ? m_opp_team : m_own_team;
             auto& active = event.is_opponent ? m_opp_active : m_own_active;
-            //  Apply to first active slot (simplified).
-            team[active[0]].boosts[idx] = static_cast<int8_t>(std::clamp(
-                static_cast<int>(team[active[0]].boosts[idx]) + event.boost_stages, -6, 6
-            ));
+            //  Resolve the affected active position via species match; in
+            //  doubles this is the only way to disambiguate. Falls back to
+            //  position 0 (the historical behavior) when the species lookup
+            //  doesn't land.
+            int pos = resolve_active_position(event.pokemon, team, active, m_mode);
+            if (pos < 0) pos = 0;
+            uint8_t slot = active[pos];
+            if (slot < 6){
+                team[slot].boosts[idx] = static_cast<int8_t>(std::clamp(
+                    static_cast<int>(team[slot].boosts[idx]) + event.boost_stages, -6, 6
+                ));
+            }
+        }
+        break;
+    }
+
+    case BattleLogEventType::STAT_CHANGE_OTHER:{
+        //  Catch the "Haze" / clearAllBoost case: "All stat changes were
+        //  eliminated!" — resets every stat stage to 0 on both sides for
+        //  every active mon. The raw text disambiguates this from the
+        //  swap / invert / clearBoostFromZEffect variants the same enum
+        //  bucket covers (those affect a single side and we don't track
+        //  them yet).
+        const std::string& raw = event.raw_text;
+        if (raw.find("All stat changes were eliminated") != std::string::npos){
+            for (auto& mon : m_own_team) mon.boosts.fill(0);
+            for (auto& mon : m_opp_team) mon.boosts.fill(0);
         }
         break;
     }
@@ -714,7 +998,18 @@ void BattleStateTracker::update_from_log(const BattleLogEvent& event){
         if (!status.empty()){
             auto& team = event.is_opponent ? m_opp_team : m_own_team;
             auto& active = event.is_opponent ? m_opp_active : m_own_active;
-            team[active[0]].status = status;
+            auto& mon = team[active[0]];
+            mon.status = status;
+            //  Seed duration counters from the inflict event so the
+            //  encoder always sees a defensible value, not 0.
+            if (status == "slp"){
+                //  Game range is 1-3 turns; without knowing the roll we
+                //  default to 3 (worst case for the player). Wake-up
+                //  will fire STATUS_HEALED which clears status.
+                mon.sleep_turns_remaining = 3;
+            }else if (status == "tox"){
+                mon.toxic_counter = 1;
+            }
         }
         break;
     }
@@ -801,6 +1096,113 @@ void BattleStateTracker::update_from_log(const BattleLogEvent& event){
         break;
     }
 
+    case BattleLogEventType::VOLATILE_START:{
+        //  Add canonical volatile name to the active mon's list (no dup).
+        //  Substitute also sets substitute_hp_frac = 1.0 — the active mon
+        //  just dropped 25% HP to spawn the sub at full sub-HP.
+        auto& team = event.is_opponent ? m_opp_team : m_own_team;
+        auto& active = event.is_opponent ? m_opp_active : m_own_active;
+        auto& mon = team[active[0]];
+        const std::string& name = event.effect;
+        if (!name.empty()){
+            bool present = std::find(
+                mon.volatile_statuses.begin(),
+                mon.volatile_statuses.end(), name)
+                != mon.volatile_statuses.end();
+            if (!present){
+                mon.volatile_statuses.push_back(name);
+            }
+            if (name == "SUBSTITUTE"){
+                mon.substitute_hp_frac = 1.0f;
+            }
+        }
+        break;
+    }
+
+    case BattleLogEventType::VOLATILE_END:{
+        auto& team = event.is_opponent ? m_opp_team : m_own_team;
+        auto& active = event.is_opponent ? m_opp_active : m_own_active;
+        auto& mon = team[active[0]];
+        const std::string& name = event.effect;
+        if (!name.empty()){
+            auto it = std::find(
+                mon.volatile_statuses.begin(),
+                mon.volatile_statuses.end(), name);
+            if (it != mon.volatile_statuses.end()){
+                mon.volatile_statuses.erase(it);
+            }
+            if (name == "SUBSTITUTE"){
+                mon.substitute_hp_frac = 0.0f;
+            }
+        }
+        break;
+    }
+
+    case BattleLogEventType::HAZARD_SET:{
+        //  event.is_opponent identifies whose team the hazard sits on (the
+        //  affected side, not the user who set it). "all" via Defog text
+        //  is treated as clear-all on the named side.
+        Hazards& h = event.is_opponent ? m_hazards_opp : m_hazards_own;
+        const std::string& kind = event.effect;
+        if      (kind == "stealth_rock") h.stealth_rock = true;
+        else if (kind == "spikes")       h.spikes_layers = std::min<uint8_t>(3, h.spikes_layers + 1);
+        else if (kind == "toxic_spikes") h.toxic_spikes_layers = std::min<uint8_t>(2, h.toxic_spikes_layers + 1);
+        else if (kind == "sticky_web")   h.sticky_web = true;
+        break;
+    }
+
+    case BattleLogEventType::HAZARD_CLEAR:{
+        //  Rapid Spin / Defog / Mortal Spin / Tidy Up — clear all hazards
+        //  on the named side. event.is_opponent identifies the cleared side.
+        Hazards& h = event.is_opponent ? m_hazards_opp : m_hazards_own;
+        h = Hazards{};
+        break;
+    }
+
+    case BattleLogEventType::SIDE_START:{
+        const std::string& kind = event.effect;
+        if (event.is_opponent){
+            if      (kind == "tailwind"){     m_tailwind_opp = true;  m_timers_opp.tailwind = 4; }
+            else if (kind == "light_screen"){ m_screens_opp[0] = true; m_timers_opp.light_screen = 5; }
+            else if (kind == "reflect"){      m_screens_opp[1] = true; m_timers_opp.reflect = 5; }
+            else if (kind == "aurora_veil"){  m_screens_opp[2] = true; m_timers_opp.aurora_veil = 5; }
+            else if (kind == "safeguard"){    m_hazards_opp.safeguard = true; }
+            else if (kind == "mist"){         m_hazards_opp.mist = true; }
+            else if (kind == "lucky_chant"){  m_hazards_opp.lucky_chant = true; }
+        }else{
+            if      (kind == "tailwind"){     m_tailwind_own = true;  m_timers_own.tailwind = 4; }
+            else if (kind == "light_screen"){ m_screens_own[0] = true; m_timers_own.light_screen = 5; }
+            else if (kind == "reflect"){      m_screens_own[1] = true; m_timers_own.reflect = 5; }
+            else if (kind == "aurora_veil"){  m_screens_own[2] = true; m_timers_own.aurora_veil = 5; }
+            else if (kind == "safeguard"){    m_hazards_own.safeguard = true; }
+            else if (kind == "mist"){         m_hazards_own.mist = true; }
+            else if (kind == "lucky_chant"){  m_hazards_own.lucky_chant = true; }
+        }
+        break;
+    }
+
+    case BattleLogEventType::SIDE_END:{
+        const std::string& kind = event.effect;
+        if (event.is_opponent){
+            if      (kind == "tailwind"){     m_tailwind_opp = false; m_timers_opp.tailwind = 0; }
+            else if (kind == "light_screen"){ m_screens_opp[0] = false; m_timers_opp.light_screen = 0; }
+            else if (kind == "reflect"){      m_screens_opp[1] = false; m_timers_opp.reflect = 0; }
+            else if (kind == "aurora_veil"){  m_screens_opp[2] = false; m_timers_opp.aurora_veil = 0; }
+            else if (kind == "safeguard"){    m_hazards_opp.safeguard = false; }
+            else if (kind == "mist"){         m_hazards_opp.mist = false; }
+            else if (kind == "lucky_chant"){  m_hazards_opp.lucky_chant = false; }
+        }else{
+            if      (kind == "tailwind"){     m_tailwind_own = false; m_timers_own.tailwind = 0; }
+            else if (kind == "light_screen"){ m_screens_own[0] = false; m_timers_own.light_screen = 0; }
+            else if (kind == "reflect"){      m_screens_own[1] = false; m_timers_own.reflect = 0; }
+            else if (kind == "aurora_veil"){  m_screens_own[2] = false; m_timers_own.aurora_veil = 0; }
+            else if (kind == "safeguard"){    m_hazards_own.safeguard = false; }
+            else if (kind == "mist"){         m_hazards_own.mist = false; }
+            else if (kind == "lucky_chant"){  m_hazards_own.lucky_chant = false; }
+        }
+        break;
+    }
+
     case BattleLogEventType::FAINTED:{
         auto& team = event.is_opponent ? m_opp_team : m_own_team;
         auto& active = event.is_opponent ? m_opp_active : m_own_active;
@@ -808,6 +1210,8 @@ void BattleStateTracker::update_from_log(const BattleLogEvent& event){
         for (uint8_t i = 0; i < 2; i++){
             team[active[i]].alive = false;
             team[active[i]].hp = 0.0f;
+            //  Lock state dies with the mon — next replacement is fresh.
+            team[active[i]].locked_to_move.clear();
             break;  //  Mark first active for simplicity.
         }
         break;
@@ -849,6 +1253,35 @@ void BattleStateTracker::update_from_log(const BattleLogEvent& event){
 
 void BattleStateTracker::advance_turn(){
     m_turn++;
+
+    //  Decrement side-condition timers. Bool flags stay live as long as
+    //  the counter is non-zero; the SIDE_END event will clean them up
+    //  authoritatively when the log says so, but this decrement keeps
+    //  the timer field meaningful when log events are missed.
+    auto tick = [](SideTimers& t, bool& tw, std::array<bool, 3>& sc){
+        if (t.tailwind > 0)     { t.tailwind--;     if (t.tailwind == 0) tw = false; }
+        if (t.light_screen > 0) { t.light_screen--; if (t.light_screen == 0) sc[0] = false; }
+        if (t.reflect > 0)      { t.reflect--;      if (t.reflect == 0) sc[1] = false; }
+        if (t.aurora_veil > 0)  { t.aurora_veil--;  if (t.aurora_veil == 0) sc[2] = false; }
+    };
+    tick(m_timers_own, m_tailwind_own, m_screens_own);
+    tick(m_timers_opp, m_tailwind_opp, m_screens_opp);
+
+    //  Status duration counters on the active mons. Sleep ticks down each
+    //  turn; toxic counter goes up (1 → 2 → 3 → …). Real game uses random
+    //  1-3 turns for sleep; we initialize at 3 and the actual wake-up is
+    //  signaled by STATUS_HEALED.
+    auto tick_status = [](TrackedPokemon& mon){
+        if (mon.sleep_turns_remaining > 0) mon.sleep_turns_remaining--;
+        if (mon.status == "tox" && mon.toxic_counter < 15){
+            mon.toxic_counter++;
+        }
+    };
+    uint8_t positions = (m_mode == BattleMode::DOUBLES) ? 2 : 1;
+    for (uint8_t i = 0; i < positions; i++){
+        tick_status(m_own_team[m_own_active[i]]);
+        tick_status(m_opp_team[m_opp_active[i]]);
+    }
 }
 
 
@@ -897,27 +1330,55 @@ int BattleStateTracker::stat_name_to_index(const std::string& stat){
 
 // ─── JSON output ─────────────────────────────────────────────────
 
-static JsonObject pokemon_to_json(const TrackedPokemon& p, int slot = -1){
+static JsonObject pokemon_to_json(const TrackedPokemon& p, int slot = -1, bool is_opponent = false){
     JsonObject obj;
     if (slot >= 0) obj["slot"] = JsonValue(static_cast<int64_t>(slot));
     obj["species"] = JsonValue(p.species);
     obj["hp"] = JsonValue(static_cast<double>(p.hp));
     obj["status"] = JsonValue(p.status);
-    obj["item"] = JsonValue(p.item);
-    obj["ability"] = JsonValue(p.ability);
+
+    //  Opponent set prior: when a known opp species hasn't yet revealed
+    //  its item / ability / moves, backfill from the Smogon-chaos prior
+    //  for this format. The model was trained on progressive revelation
+    //  but a *completely* empty slug maps to UNK at the tokenizer; the
+    //  prior gives us a sensible default that's still distinguishable
+    //  from a revealed value via the confidence channels (which stay
+    //  at 0.0 — already the case for unrevealed fields).
+    OppSetPrior prior;
+    if (is_opponent && !p.species.empty()){
+        prior = opp_set_prior_for(p.species);
+    }
+    const std::string item_out = (is_opponent && p.item.empty()) ? prior.item : p.item;
+    const std::string ability_out = (is_opponent && p.ability.empty()) ? prior.ability : p.ability;
+    obj["item"] = JsonValue(item_out);
+    obj["ability"] = JsonValue(ability_out);
     obj["is_mega"] = JsonValue(p.is_mega);
     obj["alive"] = JsonValue(p.alive);
 
     JsonArray moves;
-    for (const auto& m : p.known_moves){
-        moves.push_back(JsonValue(m));
+    if (is_opponent && p.known_moves.empty()){
+        for (const auto& m : prior.moves){
+            if (!m.empty()) moves.push_back(JsonValue(m));
+        }
+    }else{
+        for (const auto& m : p.known_moves){
+            moves.push_back(JsonValue(m));
+        }
     }
     obj["moves"] = JsonValue(std::move(moves));
 
+    //  Stat boosts. Internal layout is 6-D (atk/def/spa/spd/spe/evasion);
+    //  the encoder expects 7-D (atk/def/spa/spd/spe/accuracy/evasion). Slot
+    //  an explicit 0 at the accuracy index so consumers can index the
+    //  array uniformly. JSON shape:
+    //    [atk, def, spa, spd, spe, accuracy=0, evasion]
     JsonArray boosts;
-    for (int8_t b : p.boosts){
-        boosts.push_back(JsonValue(static_cast<int64_t>(b)));
+    for (size_t i = 0; i < 5; i++){
+        boosts.push_back(JsonValue(static_cast<int64_t>(p.boosts[i])));
     }
+    boosts.push_back(JsonValue(static_cast<int64_t>(0)));         //  accuracy
+    boosts.push_back(JsonValue(static_cast<int64_t>(p.boosts[5])));  //  evasion
+    obj["boosts"] = JsonValue(std::move(boosts));
 
     //  Per-move PP, aligned to known_moves order. Each entry is [current, max]
     //  or null when unread (-1 sentinel from BattleHUDState).
@@ -933,7 +1394,43 @@ static JsonObject pokemon_to_json(const TrackedPokemon& p, int slot = -1){
         }
     }
     obj["move_pp"] = JsonValue(std::move(move_pp));
-    obj["boosts"] = JsonValue(std::move(boosts));
+
+    //  Volatile-status names, encoder-canonical uppercase form. Empty list
+    //  is the "no volatile" sentinel and what every empty slot defaults to.
+    JsonArray volatiles;
+    for (const auto& v : p.volatile_statuses){
+        volatiles.push_back(JsonValue(v));
+    }
+    obj["volatile_statuses"] = JsonValue(std::move(volatiles));
+    obj["substitute_hp_frac"] = JsonValue(static_cast<double>(p.substitute_hp_frac));
+
+    //  Reveal confidences in [0, 1]. 1.0 = positively revealed in-battle;
+    //  0.0 = pre-match prior / no signal. Per-move confidence array is
+    //  aligned to known_moves order, padded with 0s.
+    obj["item_confidence"] = JsonValue(static_cast<double>(p.item_confidence));
+    obj["ability_confidence"] = JsonValue(static_cast<double>(p.ability_confidence));
+    JsonArray move_confs;
+    for (size_t i = 0; i < 4; i++){
+        move_confs.push_back(JsonValue(static_cast<double>(p.move_confidences[i])));
+    }
+    obj["move_confidences"] = JsonValue(std::move(move_confs));
+
+    //  Status duration counters. Encoder reads these as ints; 0 = no
+    //  counter for that status (or unknown).
+    obj["sleep_turns_remaining"] = JsonValue(static_cast<int64_t>(p.sleep_turns_remaining));
+    obj["toxic_counter"] = JsonValue(static_cast<int64_t>(p.toxic_counter));
+
+    //  Locked-into-move slug ("" if no lock). Exposed so the inference
+    //  server can hard-mask move slots that don't match.
+    obj["locked_to_move"] = JsonValue(p.locked_to_move);
+
+    //  Configuration prior: nature + EVs. Empty / zero is "not yet scanned".
+    obj["nature"] = JsonValue(p.nature);
+    JsonArray evs;
+    for (int v : p.evs){
+        evs.push_back(JsonValue(static_cast<int64_t>(v)));
+    }
+    obj["evs"] = JsonValue(std::move(evs));
 
     return obj;
 }
@@ -981,11 +1478,11 @@ JsonObject BattleStateTracker::to_predict_json() const{
         uint8_t slot_idx = m_opp_active[i];
         bool has_real = slot_idx < m_opp_seen && !m_opp_team[slot_idx].species.empty();
         if (has_real){
-            opp_active.push_back(JsonValue(pokemon_to_json(m_opp_team[slot_idx], slot_idx)));
+            opp_active.push_back(JsonValue(pokemon_to_json(m_opp_team[slot_idx], slot_idx, /*is_opponent=*/true)));
         }else{
             TrackedPokemon placeholder;
             placeholder.species = "(unknown)";
-            opp_active.push_back(JsonValue(pokemon_to_json(placeholder, slot_idx)));
+            opp_active.push_back(JsonValue(pokemon_to_json(placeholder, slot_idx, /*is_opponent=*/true)));
         }
     }
     root["opp_active"] = JsonValue(std::move(opp_active));
@@ -998,7 +1495,7 @@ JsonObject BattleStateTracker::to_predict_json() const{
             if (m_opp_active[a] == i) is_active = true;
         }
         if (!is_active && m_opp_team[i].alive){
-            opp_bench.push_back(JsonValue(pokemon_to_json(m_opp_team[i], i)));
+            opp_bench.push_back(JsonValue(pokemon_to_json(m_opp_team[i], i, /*is_opponent=*/true)));
         }
     }
     root["opp_bench"] = JsonValue(std::move(opp_bench));
@@ -1020,6 +1517,46 @@ JsonObject BattleStateTracker::to_predict_json() const{
     for (bool s : m_screens_opp) screens_opp.push_back(JsonValue(s));
     field["screens_opp"] = JsonValue(std::move(screens_opp));
 
+    //  Side-condition remaining-turn counters. Parallel arrays to the
+    //  bools above. 0 = inactive. Encoder doesn't read these today but
+    //  the v2/search pipeline can — emitting now means no schema break
+    //  later. Order matches m_screens_*: [light_screen, reflect, aurora_veil].
+    JsonObject timers_own, timers_opp;
+    timers_own["tailwind"] = JsonValue(static_cast<int64_t>(m_timers_own.tailwind));
+    timers_own["light_screen"] = JsonValue(static_cast<int64_t>(m_timers_own.light_screen));
+    timers_own["reflect"] = JsonValue(static_cast<int64_t>(m_timers_own.reflect));
+    timers_own["aurora_veil"] = JsonValue(static_cast<int64_t>(m_timers_own.aurora_veil));
+    timers_opp["tailwind"] = JsonValue(static_cast<int64_t>(m_timers_opp.tailwind));
+    timers_opp["light_screen"] = JsonValue(static_cast<int64_t>(m_timers_opp.light_screen));
+    timers_opp["reflect"] = JsonValue(static_cast<int64_t>(m_timers_opp.reflect));
+    timers_opp["aurora_veil"] = JsonValue(static_cast<int64_t>(m_timers_opp.aurora_veil));
+    field["side_timers_own"] = JsonValue(std::move(timers_own));
+    field["side_timers_opp"] = JsonValue(std::move(timers_opp));
+
+    //  Entry hazards + protection. Mirrors encoder.py::_build_hazards:
+    //  stealth_rock, spikes (0..3), toxic_spikes (0..2), sticky_web,
+    //  safeguard, mist, lucky_chant. Emitted as a nested object per
+    //  side rather than a flat 14-vec so the field is self-describing.
+    auto hazards_obj = [](const Hazards& h){
+        JsonObject o;
+        o["stealth_rock"] = JsonValue(h.stealth_rock);
+        o["spikes"] = JsonValue(static_cast<int64_t>(h.spikes_layers));
+        o["toxic_spikes"] = JsonValue(static_cast<int64_t>(h.toxic_spikes_layers));
+        o["sticky_web"] = JsonValue(h.sticky_web);
+        o["safeguard"] = JsonValue(h.safeguard);
+        o["mist"] = JsonValue(h.mist);
+        o["lucky_chant"] = JsonValue(h.lucky_chant);
+        return o;
+    };
+    field["hazards_own"] = JsonValue(hazards_obj(m_hazards_own));
+    field["hazards_opp"] = JsonValue(hazards_obj(m_hazards_opp));
+
+    //  Last move used by each side (slug). Empty before any move resolved.
+    //  Encoder reads last_move_p1 / last_move_p2; the inference server
+    //  maps own↔p1 / opp↔p2 (or vice versa) at request time.
+    field["last_move_own"] = JsonValue(m_last_move_own);
+    field["last_move_opp"] = JsonValue(m_last_move_opp);
+
     root["field"] = JsonValue(std::move(field));
 
     //  Lead lineup chosen on the locked-in team-preview screen.
@@ -1040,10 +1577,10 @@ JsonObject BattleStateTracker::to_predict_json() const{
     //  skipping active, taking first 2. Server applies as a hard mask
     //  before argmax (see inference/server.py:254 + model_player.py:147).
     //
-    //  TODO: choice-lock / encore / disable / multi-turn-lock / taunt —
-    //  TrackedPokemon doesn't carry those fields yet. PP + alive coverage
-    //  alone removes the most common illegal-action class (depleted PP,
-    //  fainted target, fainted bench) and is what we have signals for.
+    //  Choice-lock handled via mon.locked_to_move (set by MOVE_LOCKED text
+    //  parse + proactive MOVE_USED when item is a Choice item). Still TODO:
+    //  encore / disable / multi-turn-lock / taunt — would slot into the
+    //  same locked_to_move field once their detection patterns are added.
     bool doubles = (m_mode == BattleMode::DOUBLES);
 
     auto build_legal_mask = [&](uint8_t active_idx){
@@ -1060,11 +1597,29 @@ JsonObject BattleStateTracker::to_predict_json() const{
             && m_own_team[ally_idx].alive;
         bool target_ok[3] = {opp_a_alive, opp_b_alive, ally_alive};
 
-        //  Move slots: PP > 0, or unread (-1) → assume legal.
+        //  Choice / encore / multi-turn lock: if locked_to_move is set, only
+        //  the matching known_moves slot is usable. Find that slot once.
+        //  If we have a lock but can't match it to any of the 4 known_moves
+        //  yet (move OCR hasn't populated, or the lock text said a move
+        //  this mon doesn't own — shouldn't happen), fall back to "no lock"
+        //  rather than zeroing every move row.
+        int locked_slot = -1;
+        if (!mon.locked_to_move.empty()){
+            for (uint8_t m = 0; m < mon.known_moves.size() && m < 4; m++){
+                if (mon.known_moves[m] == mon.locked_to_move){
+                    locked_slot = (int)m;
+                    break;
+                }
+            }
+        }
+
+        //  Move slots: PP > 0, or unread (-1) → assume legal. Locked rows
+        //  are zeroed for every slot except locked_slot.
         for (uint8_t m = 0; m < 4; m++){
             bool pp_ok = (mon.move_pp[m].current > 0 || mon.move_pp[m].current < 0);
+            bool lock_ok = (locked_slot < 0) || ((int)m == locked_slot);
             for (uint8_t t = 0; t < 3; t++){
-                mask.push_back(JsonValue(pp_ok && target_ok[t]));
+                mask.push_back(JsonValue(pp_ok && lock_ok && target_ok[t]));
             }
         }
 
@@ -1090,6 +1645,44 @@ JsonObject BattleStateTracker::to_predict_json() const{
     if (doubles){
         root["legal_actions_b"] = JsonValue(build_legal_mask(m_own_active[1]));
     }
+
+    //  Per-turn rolling history for the LSTM history feature. Shape
+    //  matches src/vgc_model/data/encoder.py::_summarize_turn: a list
+    //  of entries, each with four 4-vectors keyed [own_a, own_b,
+    //  opp_a, opp_b]. Newest-last; never longer than BATTLE_HISTORY_K.
+    //  Pushed once per turn transition (action_menu re-entry) by the
+    //  live trace; cleared on match start.
+    JsonArray history;
+    for (const auto& entry : m_history){
+        JsonObject e;
+
+        JsonArray species;
+        for (const auto& s : entry.active_species){
+            species.push_back(JsonValue(s));
+        }
+        e["active_species"] = JsonValue(std::move(species));
+
+        JsonArray hp;
+        for (float v : entry.active_hp){
+            hp.push_back(JsonValue((double)v));
+        }
+        e["active_hp"] = JsonValue(std::move(hp));
+
+        JsonArray types;
+        for (const auto& t : entry.action_types){
+            types.push_back(JsonValue(t));
+        }
+        e["action_types"] = JsonValue(std::move(types));
+
+        JsonArray moves;
+        for (const auto& m : entry.action_moves){
+            moves.push_back(JsonValue(m));
+        }
+        e["action_moves"] = JsonValue(std::move(moves));
+
+        history.push_back(JsonValue(std::move(e)));
+    }
+    root["history"] = JsonValue(std::move(history));
 
     return root;
 }

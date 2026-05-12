@@ -19,6 +19,7 @@
 #define PokemonAutomation_PokemonChampions_BattleStateTracker_H
 
 #include <array>
+#include <deque>
 #include <string>
 #include <vector>
 #include "Common/Cpp/Json/JsonObject.h"
@@ -49,7 +50,11 @@ struct TrackedPokemon{
     //  EVs in HP/Atk/Def/SpA/SpD/Spe order. Zeros until scanned. These are
     //  the small numbers next to each stat on the Stats tab.
     std::array<int, 6> evs = {};
-    std::array<int8_t, 6> boosts = {};  //  atk, def, spa, spd, spe, evasion
+    //  Stat-stage boosts in atk/def/spa/spd/spe/evasion order. Range -6..+6.
+    //  Encoder consumes a 7-D vector (atk/def/spa/spd/spe/accuracy/evasion);
+    //  the JSON emitter inserts a 0 at the accuracy slot rather than carry
+    //  an extra always-zero field through the rest of the C++ pipeline.
+    std::array<int8_t, 6> boosts = {};
 
     //  Per-move PP, updated from the move-select HUD reader. Aligned with
     //  known_moves order. -1 = unread; populated only for the active mon
@@ -60,7 +65,41 @@ struct TrackedPokemon{
     bool is_mega = false;
     bool alive = true;
 
-    void reset_volatile();      //  Clear boosts (on switch-out).
+    //  Move slug this mon is currently locked into (Choice item, encore,
+    //  multi-turn move, etc.). Empty means "no known lock — any move is
+    //  legal". Set by BattleLogReader's MOVE_LOCKED rejection text and
+    //  pre-emptively by MOVE_USED when the mon is holding a Choice item.
+    //  Cleared on switch-in (via reset_volatile) and on faint.
+    std::string locked_to_move;
+
+    //  Volatile-status names, canonical uppercase per
+    //  src/vgc_model/data/volatile_statuses.py (e.g. "CONFUSION", "TAUNT",
+    //  "ENCORE", "LEECHSEED", "SUBSTITUTE", "PROTECT"). Stored as a slug
+    //  list rather than a fixed-width bitmask so the C++ side stays
+    //  agnostic to the Python encoder's index numbering — the inference
+    //  server bit-encodes at request time. Cleared on switch-in.
+    std::vector<std::string> volatile_statuses;
+
+    //  Substitute remaining HP fraction (0.0..1.0), 0 if no Substitute.
+    float substitute_hp_frac = 0.0f;
+
+    //  Per-field confidence (0.0..1.0). 1.0 = positively revealed in this
+    //  match (HUD reveal, used a move, etc.); 0.0 = pre-match prior /
+    //  team-paste only. The model was trained with progressive revelation
+    //  so these need to reflect "have we actually seen it in play yet."
+    //  Bumped by readers and log events; never decremented.
+    float item_confidence = 0.0f;
+    float ability_confidence = 0.0f;
+    std::array<float, 4> move_confidences = {};
+
+    //  Status condition turn counters. -1 / 0 = unknown or not applicable.
+    //  sleep_turns_remaining: real Showdown semantics, decremented per turn
+    //  the mon is asleep (resets on wake/switch). toxic_counter: the
+    //  multiplier index for badly-poisoned damage tick (1 on first turn).
+    int sleep_turns_remaining = 0;
+    int toxic_counter = 0;
+
+    void reset_volatile();      //  Clear boosts + volatiles + lock state.
     void add_move(const std::string& move);  //  Add to known_moves if not present.
 };
 
@@ -136,6 +175,30 @@ struct BattleSnapshot{
 };
 
 
+//  Per-turn history entry — mirrors `_summarize_turn` in
+//  src/vgc_model/data/encoder.py. Slot order is
+//  [own_a, own_b, opp_a, opp_b].
+//
+//  Captured slug-level so the inference server can vocab-lookup with the
+//  same Vocabs the model was trained against. action_type is "move",
+//  "switch", or "noop"; action_move is a move slug or empty (paired with
+//  "move"). All-empty / hp=0 / "noop" is a valid (and common) entry —
+//  the C++ side often lacks reliable per-turn action attribution; the
+//  trajectory of active species + HP alone carries most of the signal.
+struct BattleHistoryEntry{
+    std::array<std::string, 4> active_species = {};   //  slug, empty = none
+    std::array<float, 4> active_hp = {0.0f, 0.0f, 0.0f, 0.0f};
+    std::array<std::string, 4> action_types = {"noop","noop","noop","noop"};
+    std::array<std::string, 4> action_moves = {};     //  slug, empty when type != move
+};
+
+
+//  Look-back window for the LSTM history feature. Must match
+//  ``HISTORY_K`` in ``src/vgc_model/data/encoder.py``. If the encoder's
+//  K changes, bump this and rebuild.
+constexpr int BATTLE_HISTORY_K = 8;
+
+
 //  User-configured Pokemon for the own team.
 struct ConfiguredPokemon{
     std::string species;
@@ -151,6 +214,12 @@ public:
 
     void reset();
     void set_mode(BattleMode mode);
+    //  Seed which own-team slots are on the field. Called by the trace
+    //  once team-preview marks identify the leads ('1' / '2'), so the
+    //  snapshot's active indices are correct from poll 1 of the battle
+    //  instead of waiting for a HUD remap. Pass -1 for slot_b in singles.
+    //  Out-of-range / -1 values are ignored.
+    void set_own_actives(int slot_a, int slot_b);
     void set_own_team(const std::array<ConfiguredPokemon, 6>& team);
 
     //  Parse a Showdown paste format team string and populate own team.
@@ -296,6 +365,18 @@ public:
     //  per-poll rather than caching.
     BattleSnapshot snapshot() const;
 
+    //  ── Per-turn history ───────────────────────────────────────
+    //
+    //  Capture a BattleHistoryEntry of the current on-field state and
+    //  push it onto the rolling per-match history buffer. Buffer is
+    //  capped at BATTLE_HISTORY_K entries (oldest dropped). Cleared on
+    //  reset(). Should be called once per turn transition (when the
+    //  trace re-enters action_menu).
+    void push_history_snapshot();
+
+    //  Direct access to the rolling per-match history. Newest-last.
+    const std::deque<BattleHistoryEntry>& history() const { return m_history; }
+
 private:
     //  Find or create an opponent slot for a species. Returns index 0-5.
     uint8_t find_or_add_opponent(const std::string& species);
@@ -324,9 +405,48 @@ private:
     std::array<bool, 3> m_screens_own = {};   //  light_screen, reflect, aurora_veil
     std::array<bool, 3> m_screens_opp = {};
 
+    //  Per-side entry-hazard + protection state. Mirrors the 7-element
+    //  per-side vector in src/vgc_model/data/encoder.py::_build_hazards:
+    //  stealth_rock, spikes_layers (0..3), toxic_spikes_layers (0..2),
+    //  sticky_web, safeguard, mist, lucky_chant.
+    struct Hazards{
+        bool stealth_rock = false;
+        uint8_t spikes_layers = 0;        //  0..3
+        uint8_t toxic_spikes_layers = 0;  //  0..2
+        bool sticky_web = false;
+        bool safeguard = false;
+        bool mist = false;
+        bool lucky_chant = false;
+    };
+    Hazards m_hazards_own;
+    Hazards m_hazards_opp;
+
+    //  Side-condition remaining-turn counters. 0 = inactive. tailwind_*,
+    //  light_screen_*, reflect_*, aurora_veil_* parallel the bools above;
+    //  the bool says "is it up", the counter says "for how many more turns".
+    //  Most cleanly populated from MOVE_USED + dedicated end events, but
+    //  defaults to the encoder's expected 0 when unread.
+    struct SideTimers{
+        uint8_t tailwind = 0;
+        uint8_t light_screen = 0;
+        uint8_t reflect = 0;
+        uint8_t aurora_veil = 0;
+    };
+    SideTimers m_timers_own;
+    SideTimers m_timers_opp;
+
+    //  Last move used by each side, slug form. Empty before any move
+    //  resolves. Encoder reads `last_move_p1 / p2`; we translate at JSON
+    //  emit time via the own↔p1/p2 convention.
+    std::string m_last_move_own;
+    std::string m_last_move_opp;
+
     //  Chosen lead lineup (up to 4 own-team slot indices, in send-out
     //  order). Empty before the locked-in screen has been read.
     std::vector<uint8_t> m_own_leads;
+
+    //  Per-match rolling history of prior turns. See push_history_snapshot.
+    std::deque<BattleHistoryEntry> m_history;
 };
 
 

@@ -34,8 +34,13 @@ ITEM_FEAT_DIM = 13
 ABILITY_FEAT_DIM = 16
 BOOST_STATS = ["atk", "def", "spa", "spd", "spe", "evasion"]
 MAX_ACTIONS = 14
+MAX_HISTORY = 30  # must match VGCTransformerV2Seq.config.max_history
 CONF_KNOWN = 1.0
 CONF_USAGE = 0.5
+
+# Action-type slugs the C++ live trace emits in history entries.
+_HIST_TYPE_MOVE = "move"
+_HIST_TYPE_SWITCH = "switch"
 
 
 @dataclass
@@ -295,13 +300,11 @@ class SearchEngine:
             "turn": torch.tensor([min(f.get("turn", 1), 30)], dtype=torch.float, device=D),
             "action_mask_a": torch.tensor([[True]*MAX_ACTIONS], dtype=torch.bool, device=D),
             "action_mask_b": torch.tensor([[True]*MAX_ACTIONS], dtype=torch.bool, device=D),
-            # v2_seq needs these (zero = no history)
-            "prev_seq_actions": torch.full((1, 30, 4), MAX_ACTIONS, dtype=torch.long, device=D),
-            "prev_seq_species": torch.zeros(1, 30, 4, dtype=torch.long, device=D),
-            "prev_seq_hp": torch.zeros(1, 30, 4, dtype=torch.float, device=D),
-            "prev_seq_flags": torch.zeros(1, 30, 3, dtype=torch.float, device=D),
-            "prev_seq_speed": torch.full((1, 30, 2), 0.5, dtype=torch.float, device=D),
-            "prev_seq_len": torch.tensor([0], dtype=torch.long, device=D),
+            # v2_seq prev_seq_* tensors. Populated from req["history"] when
+            # the live trace sends per-turn snapshots; otherwise zeros (the
+            # model treats prev_seq_len=0 as "no history"). Window matches
+            # the trained model's max_history=30.
+            **self._encode_history(req.get("history") or [], D),
             # Team preview (dummy — not used by action heads)
             "own_team_ids": torch.zeros(1, 6, dtype=torch.long, device=D),
             "opp_team_ids": torch.zeros(1, 6, dtype=torch.long, device=D),
@@ -318,6 +321,63 @@ class SearchEngine:
             batch["action_mask_b"] = torch.tensor([(lb + [True]*MAX_ACTIONS)[:MAX_ACTIONS]], dtype=torch.bool, device=D)
 
         return batch
+
+    def _encode_history(self, history: list[dict], D: torch.device) -> dict[str, torch.Tensor]:
+        """Pack the rolling per-turn history into the v2_seq prev_seq_* tensors.
+
+        ``history`` is a list of dicts matching ``HistoryEntry`` from the
+        inference server schema — newest-last, capped client-side. Returns
+        the six prev_seq_* tensors shaped (1, MAX_HISTORY, ...) plus
+        prev_seq_len (1,). Entries past MAX_HISTORY are dropped from the
+        oldest end so the most recent turns win the window.
+
+        Mirrors the trainer's encoder layout: slots [own_a, own_b, opp_a,
+        opp_b]; action_types -> {noop=MAX_ACTIONS, move=0..11 placeholder,
+        switch=12..13 placeholder}. The C++ side currently emits "noop"
+        for action_types because per-turn action attribution is unreliable
+        from OCR alone — that's fine; the LSTM still sees the state
+        trajectory (species + HP), which carries most of the signal.
+        """
+        # Keep newest MAX_HISTORY turns.
+        history = history[-MAX_HISTORY:]
+        T = len(history)
+
+        actions = torch.full((1, MAX_HISTORY, 4), MAX_ACTIONS, dtype=torch.long, device=D)
+        species = torch.zeros(1, MAX_HISTORY, 4, dtype=torch.long, device=D)
+        hp = torch.zeros(1, MAX_HISTORY, 4, dtype=torch.float, device=D)
+        flags = torch.zeros(1, MAX_HISTORY, 3, dtype=torch.float, device=D)
+        speed = torch.full((1, MAX_HISTORY, 2), 0.5, dtype=torch.float, device=D)
+
+        for t, entry in enumerate(history):
+            spec_slugs = (entry.get("active_species") or []) + [""]*4
+            hps = (entry.get("active_hp") or []) + [0.0]*4
+            types = (entry.get("action_types") or []) + ["noop"]*4
+            moves = (entry.get("action_moves") or []) + [""]*4
+            for s in range(4):
+                slug = spec_slugs[s] or ""
+                species[0, t, s] = self.vocabs.species[slug] if slug else 0
+                hp[0, t, s] = float(hps[s] or 0.0)
+                # Action encoding: noop = MAX_ACTIONS (pad), move = 0
+                # (placeholder; live trace currently never carries a real
+                # move slug here), switch = 12. The model's history LSTM
+                # consumes this as a categorical embedding lookup; the
+                # important signal is "move vs switch vs noop" rather than
+                # which move exactly.
+                a_type = types[s] or "noop"
+                if a_type == _HIST_TYPE_SWITCH:
+                    actions[0, t, s] = 12
+                elif a_type == _HIST_TYPE_MOVE and (moves[s] or ""):
+                    actions[0, t, s] = 0
+                # else: stays at MAX_ACTIONS (noop / pad)
+
+        return {
+            "prev_seq_actions": actions,
+            "prev_seq_species": species,
+            "prev_seq_hp": hp,
+            "prev_seq_flags": flags,
+            "prev_seq_speed": speed,
+            "prev_seq_len": torch.tensor([T], dtype=torch.long, device=D),
+        }
 
     @staticmethod
     def _swap_perspective(req_dict: dict) -> dict:
@@ -336,6 +396,24 @@ class SearchEngine:
         # Swap legal action masks
         swapped["legal_actions_a"] = None
         swapped["legal_actions_b"] = None
+
+        # Swap history slot ordering: encoder lays out each entry as
+        # [own_a, own_b, opp_a, opp_b]; for the opponent's POV we mirror
+        # slots 0↔2 and 1↔3 in every per-turn array.
+        hist = req_dict.get("history") or []
+        if hist:
+            mirrored = []
+            for e in hist:
+                def _swap4(lst, default):
+                    arr = (list(lst or []) + [default]*4)[:4]
+                    return [arr[2], arr[3], arr[0], arr[1]]
+                mirrored.append({
+                    "active_species": _swap4(e.get("active_species"), ""),
+                    "active_hp":      _swap4(e.get("active_hp"), 0.0),
+                    "action_types":   _swap4(e.get("action_types"), "noop"),
+                    "action_moves":   _swap4(e.get("action_moves"), ""),
+                })
+            swapped["history"] = mirrored
         return swapped
 
     # ── Winrate batch encoding ───────────────────────────────────

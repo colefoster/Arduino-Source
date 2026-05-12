@@ -60,6 +60,19 @@ class FieldState(BaseModel):
     turn: int = 1
 
 
+class HistoryEntry(BaseModel):
+    """One prior-turn snapshot for the LSTM history feature.
+
+    Slot order is [own_a, own_b, opp_a, opp_b] — matches the trainer's
+    ``_summarize_turn`` in ``src/vgc_model/data/encoder.py``. The C++
+    live-trace pipeline pushes one of these per turn-transition.
+    """
+    active_species: list[str] = Field(default_factory=lambda: [""]*4)
+    active_hp: list[float] = Field(default_factory=lambda: [0.0]*4)
+    action_types: list[str] = Field(default_factory=lambda: ["noop"]*4)
+    action_moves: list[str] = Field(default_factory=lambda: [""]*4)
+
+
 class PredictRequest(BaseModel):
     """Game state for a battle action prediction.
 
@@ -73,6 +86,10 @@ class PredictRequest(BaseModel):
     field: FieldState = Field(default_factory=FieldState)
     legal_actions_a: Optional[List[bool]] = None   # 14-element mask, or None = all legal
     legal_actions_b: Optional[List[bool]] = None
+    #  Per-turn rolling history, newest-last. Capped client-side. The
+    #  search engine packs this into the v2_seq model's prev_seq_* tensors;
+    #  the v1 ``/predict`` head ignores it.
+    history: list[HistoryEntry] = Field(default_factory=list)
 
 
 class ActionResult(BaseModel):

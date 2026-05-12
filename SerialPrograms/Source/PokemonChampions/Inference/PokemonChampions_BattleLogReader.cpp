@@ -130,6 +130,159 @@ BattleLogEvent BattleLogReader::parse(const std::string& text){
         trimmed = trimmed.substr(1, trimmed.size() - 2);
     }
 
+    //  Champions-specific patterns. The generated table is rebuilt from PS
+    //  default.ts (see tools/generate_battle_log_patterns.py) so anything
+    //  Champions adds on top of PS lives here. Checked before the table walk
+    //  so a Champions message can't be mis-matched by a generic PS pattern.
+    //
+    //  Most volatile / hazard / side-condition texts live in PS moves.ts and
+    //  abilities.ts (not default.ts), so the generated table doesn't cover
+    //  them. The text strings used below are the canonical PS-protocol
+    //  messages, which are the same strings the Champions client displays
+    //  (we've confirmed this for the Choice-lock case and assume parity
+    //  elsewhere — auto-capture will surface any divergence).
+    {
+        //  Choice-item lock rejection. Captures the item ("Choice Scarf" /
+        //  "Choice Band" / "Choice Specs") and the only legal move name.
+        //    "The Choice Scarf only allows the use of Wave Crash!"
+        static const std::regex choice_lock(
+            R"___(The\s+(Choice\s+(?:Scarf|Band|Specs))\s+only\s+allows\s+the\s+use\s+of\s+(.+?)!?\s*$)___",
+            std::regex::icase);
+        std::smatch lm;
+        if (std::regex_search(trimmed, lm, choice_lock)){
+            event.type = BattleLogEventType::MOVE_LOCKED;
+            event.item = lm[1].str();
+            event.move = lm[2].str();
+            return event;
+        }
+    }
+
+    //  Helper: one row in the Champions overlay. (regex, event_type,
+    //  canonical-effect-name, slot mapping). slot[0] is the [POKEMON]
+    //  capture position if any; -1 if the pattern has no pokemon group.
+    //  Effect name goes into event.effect.
+    struct ChampionsOverlay {
+        std::regex re;
+        BattleLogEventType type;
+        const char* effect;     //  canonical name
+        int pokemon_group;      //  1-based; 0 = no pokemon capture
+    };
+
+    static const std::vector<ChampionsOverlay>& champions_overlays = [](){
+        static std::vector<ChampionsOverlay> v;
+        auto add = [&](const char* pat, BattleLogEventType t,
+                       const char* eff, int pg){
+            v.push_back({std::regex(pat, std::regex::icase), t, eff, pg});
+        };
+
+        // ── Volatile statuses ─────────────────────────────────────────
+        // Names are upper-case canonical, matching VOLATILE_STATUSES in
+        // src/vgc_model/data/volatile_statuses.py.
+        add(R"___((.+?)\s+put\s+in\s+a\s+substitute!?$)___",
+            BattleLogEventType::VOLATILE_START, "SUBSTITUTE", 1);
+        add(R"___((.+?)(?:'s)?\s+substitute\s+faded!?$)___",
+            BattleLogEventType::VOLATILE_END,   "SUBSTITUTE", 1);
+        add(R"___((.+?)\s+fell\s+for\s+the\s+taunt!?$)___",
+            BattleLogEventType::VOLATILE_START, "TAUNT", 1);
+        add(R"___((.+?)(?:'s)?\s+taunt\s+wore\s+off!?$)___",
+            BattleLogEventType::VOLATILE_END,   "TAUNT", 1);
+        add(R"___((.+?)\s+received\s+an\s+encore!?$)___",
+            BattleLogEventType::VOLATILE_START, "ENCORE", 1);
+        add(R"___((.+?)(?:'s)?\s+encore\s+ended!?$)___",
+            BattleLogEventType::VOLATILE_END,   "ENCORE", 1);
+        add(R"___((.+?)(?:'s)?\s+(?:.+?)\s+was\s+disabled!?$)___",
+            BattleLogEventType::VOLATILE_START, "DISABLE", 1);
+        add(R"___((.+?)(?:'s)?\s+move\s+is\s+no\s+longer\s+disabled!?$)___",
+            BattleLogEventType::VOLATILE_END,   "DISABLE", 1);
+        add(R"___((.+?)\s+was\s+seeded!?$)___",
+            BattleLogEventType::VOLATILE_START, "LEECHSEED", 1);
+        add(R"___((.+?)\s+protected\s+itself!?$)___",
+            BattleLogEventType::VOLATILE_START, "PROTECT", 1);
+        add(R"___((.+?)\s+is\s+getting\s+pumped!?$)___",
+            BattleLogEventType::VOLATILE_START, "FOCUSENERGY", 1);
+        add(R"___((.+?)\s+planted\s+its\s+roots!?$)___",
+            BattleLogEventType::VOLATILE_START, "INGRAIN", 1);
+        add(R"___((.+?)\s+levitated\s+with\s+electromagnetism!?$)___",
+            BattleLogEventType::VOLATILE_START, "MAGNETRISE", 1);
+        add(R"___((.+?)\s+was\s+prevented\s+from\s+healing!?$)___",
+            BattleLogEventType::VOLATILE_START, "HEALBLOCK", 1);
+        add(R"___((.+?)\s+can't\s+use\s+(?:.+?)\s+via\s+sound!?$)___",
+            BattleLogEventType::VOLATILE_START, "THROATCHOP", 1);
+        add(R"___((.+?)\s+fell\s+in\s+love!?$)___",
+            BattleLogEventType::VOLATILE_START, "ATTRACT", 1);
+        // Perish Song — count is encoded in the text. Use four entries so
+        // each maps cleanly to the canonical perish bit.
+        add(R"___((.+?)(?:'s)?\s+perish\s+count\s+fell\s+to\s+3!?$)___",
+            BattleLogEventType::VOLATILE_START, "PERISH3", 1);
+        add(R"___((.+?)(?:'s)?\s+perish\s+count\s+fell\s+to\s+2!?$)___",
+            BattleLogEventType::VOLATILE_START, "PERISH2", 1);
+        add(R"___((.+?)(?:'s)?\s+perish\s+count\s+fell\s+to\s+1!?$)___",
+            BattleLogEventType::VOLATILE_START, "PERISH1", 1);
+        add(R"___((.+?)(?:'s)?\s+perish\s+count\s+fell\s+to\s+0!?$)___",
+            BattleLogEventType::VOLATILE_START, "PERISH4", 1);  //  faint marker
+
+        // ── Hazards (entry / removal) ─────────────────────────────────
+        // Text uses "the opposing X's team" or "X's team" — we route the
+        // affected side via the POKEMON capture's "the opposing" prefix.
+        add(R"___(Pointed\s+stones\s+float\s+in\s+the\s+air\s+around\s+(.+?)(?:'s)?\s+team!?$)___",
+            BattleLogEventType::HAZARD_SET,   "stealth_rock", 1);
+        add(R"___(Spikes\s+were\s+scattered\s+all\s+around\s+(.+?)(?:'s)?\s+(?:feet|team)!?$)___",
+            BattleLogEventType::HAZARD_SET,   "spikes", 1);
+        add(R"___(Poison\s+spikes\s+were\s+scattered\s+all\s+around\s+(.+?)(?:'s)?\s+(?:feet|team)!?$)___",
+            BattleLogEventType::HAZARD_SET,   "toxic_spikes", 1);
+        add(R"___(A\s+sticky\s+web\s+has\s+been\s+laid\s+out\s+beneath\s+(.+?)(?:'s)?\s+feet!?$)___",
+            BattleLogEventType::HAZARD_SET,   "sticky_web", 1);
+        // Rapid Spin / Defog / Mortal Spin / etc. — generic clear text.
+        add(R"___((.+?)\s+blew\s+away\s+(?:the\s+)?(?:stealth\s+rock|spikes|toxic\s+spikes|sticky\s+web|hazards)!?$)___",
+            BattleLogEventType::HAZARD_CLEAR, "all", 1);
+
+        // ── Side conditions ───────────────────────────────────────────
+        add(R"___(The\s+tailwind\s+blew\s+from\s+behind\s+(.+?)(?:'s)?\s+team!?$)___",
+            BattleLogEventType::SIDE_START,   "tailwind", 1);
+        add(R"___((.+?)(?:'s)?\s+tailwind\s+petered\s+out!?$)___",
+            BattleLogEventType::SIDE_END,     "tailwind", 1);
+        add(R"___(Light\s+Screen\s+made\s+(.+?)(?:'s)?\s+team\s+stronger\s+against\s+special\s+moves!?$)___",
+            BattleLogEventType::SIDE_START,   "light_screen", 1);
+        add(R"___((.+?)(?:'s)?\s+Light\s+Screen\s+wore\s+off!?$)___",
+            BattleLogEventType::SIDE_END,     "light_screen", 1);
+        add(R"___(Reflect\s+made\s+(.+?)(?:'s)?\s+team\s+stronger\s+against\s+physical\s+moves!?$)___",
+            BattleLogEventType::SIDE_START,   "reflect", 1);
+        add(R"___((.+?)(?:'s)?\s+Reflect\s+wore\s+off!?$)___",
+            BattleLogEventType::SIDE_END,     "reflect", 1);
+        add(R"___(Aurora\s+Veil\s+made\s+(.+?)(?:'s)?\s+team\s+stronger\s+against\s+(?:both\s+physical\s+and\s+special|all)\s+moves!?$)___",
+            BattleLogEventType::SIDE_START,   "aurora_veil", 1);
+        add(R"___((.+?)(?:'s)?\s+Aurora\s+Veil\s+wore\s+off!?$)___",
+            BattleLogEventType::SIDE_END,     "aurora_veil", 1);
+        add(R"___((.+?)(?:'s)?\s+team\s+became\s+cloaked\s+by\s+a\s+mystical\s+veil!?$)___",
+            BattleLogEventType::SIDE_START,   "safeguard", 1);
+        add(R"___((.+?)(?:'s)?\s+team\s+is\s+no\s+longer\s+protected\s+by\s+Safeguard!?$)___",
+            BattleLogEventType::SIDE_END,     "safeguard", 1);
+        add(R"___((.+?)(?:'s)?\s+team\s+became\s+shrouded\s+in\s+mist!?$)___",
+            BattleLogEventType::SIDE_START,   "mist", 1);
+        add(R"___((.+?)(?:'s)?\s+team\s+is\s+no\s+longer\s+protected\s+by\s+Mist!?$)___",
+            BattleLogEventType::SIDE_END,     "mist", 1);
+        add(R"___(The\s+Lucky\s+Chant\s+shielded\s+(.+?)(?:'s)?\s+team\s+from\s+critical\s+hits!?$)___",
+            BattleLogEventType::SIDE_START,   "lucky_chant", 1);
+        add(R"___((.+?)(?:'s)?\s+team's\s+Lucky\s+Chant\s+wore\s+off!?$)___",
+            BattleLogEventType::SIDE_END,     "lucky_chant", 1);
+
+        return v;
+    }();
+
+    for (const auto& ov : champions_overlays){
+        std::smatch om;
+        if (!std::regex_search(trimmed, om, ov.re)) continue;
+        event.type = ov.type;
+        event.effect = ov.effect;
+        if (ov.pokemon_group > 0 && (size_t)ov.pokemon_group < om.size()){
+            bool opp = false;
+            event.pokemon = clean_pokemon_name(
+                strip_opposing_prefix(om[ov.pokemon_group].str(), opp));
+            if (opp) event.is_opponent = true;
+        }
+        return event;
+    }
+
     std::smatch m;
     for (const BattleLogPattern& p : battle_log_patterns()){
         //  regex_search (not regex_match) so trailing OCR garbage (" - . s",
@@ -214,6 +367,13 @@ std::string event_type_to_string(BattleLogEventType type){
     case BattleLogEventType::BATTLE_START:       return "BATTLE_START";
     case BattleLogEventType::BATTLE_END:         return "BATTLE_END";
     case BattleLogEventType::TURN_MARKER:        return "TURN_MARKER";
+    case BattleLogEventType::MOVE_LOCKED:        return "MOVE_LOCKED";
+    case BattleLogEventType::VOLATILE_START:     return "VOLATILE_START";
+    case BattleLogEventType::VOLATILE_END:       return "VOLATILE_END";
+    case BattleLogEventType::HAZARD_SET:         return "HAZARD_SET";
+    case BattleLogEventType::HAZARD_CLEAR:       return "HAZARD_CLEAR";
+    case BattleLogEventType::SIDE_START:         return "SIDE_START";
+    case BattleLogEventType::SIDE_END:           return "SIDE_END";
     case BattleLogEventType::OTHER:              return "OTHER";
     }
     return "UNKNOWN";
@@ -263,6 +423,13 @@ BattleLogEventType event_type_from_string(const std::string& name){
         {"BATTLE_START",       BattleLogEventType::BATTLE_START},
         {"BATTLE_END",         BattleLogEventType::BATTLE_END},
         {"TURN_MARKER",        BattleLogEventType::TURN_MARKER},
+        {"MOVE_LOCKED",        BattleLogEventType::MOVE_LOCKED},
+        {"VOLATILE_START",     BattleLogEventType::VOLATILE_START},
+        {"VOLATILE_END",       BattleLogEventType::VOLATILE_END},
+        {"HAZARD_SET",         BattleLogEventType::HAZARD_SET},
+        {"HAZARD_CLEAR",       BattleLogEventType::HAZARD_CLEAR},
+        {"SIDE_START",         BattleLogEventType::SIDE_START},
+        {"SIDE_END",           BattleLogEventType::SIDE_END},
         {"OTHER",              BattleLogEventType::OTHER},
     };
     for (const auto& [s, t] : table){

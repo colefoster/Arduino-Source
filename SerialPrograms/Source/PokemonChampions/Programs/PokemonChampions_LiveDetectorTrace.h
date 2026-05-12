@@ -194,6 +194,16 @@ private:
     //  press that didn't register fires again, but we don't burst.
     BooleanCheckBoxOption ENABLE_AUTO_PRESS;
 
+    //  ── Auto-collect options ──
+    //  When on, runs ONCE per program session before the first queue:
+    //    main_menu -> Missions (idx 4)  -> X (Claim All) -> wait -> A -> B
+    //    main_menu -> Mailbox  (idx 5)  -> X (Claim All) -> wait -> A -> B
+    //    -> resume normal queue flow.
+    //  Gated by m_collect_done_this_session so it never re-runs after
+    //  the first match. Has no effect if the bot isn't sitting on
+    //  main_menu when the program starts.
+    BooleanCheckBoxOption ENABLE_AUTO_COLLECT_BEFORE_QUEUE;
+
     //  ── Auto-capture options ──
     //  Off by default. When on, the program drops PNG + sidecar JSON into
     //  AUTO_CAPTURE_DIR for screens / readouts that look novel relative to
@@ -357,6 +367,21 @@ private:
     //  decision at entry.
     int m_switch_target_slot = -1;
     int m_switch_rolled_for = -1;
+
+    //  Self-tracked active own team-slots (0-5, -1 if empty). Index 0 is
+    //  always populated when active is known; index 1 is only used in
+    //  doubles (-1 in singles). Authoritative source for the pre-roll
+    //  filter — BattleHUD active reads can fail to populate before the
+    //  first pokemon_switch entry, leaving the snapshot default to slot 0.
+    //  Updated from:
+    //   - team_preview_selecting marks: slot tagged '1' → [0]; slot tagged
+    //     '2' → [1] (doubles only).
+    //   - pokemon_switch A-press: replaces whichever entry is fainted
+    //     (alive=false). If both still alive (voluntary doubles switch),
+    //     no update — both leads are on field and would be invalid targets.
+    //  Reset to {-1,-1} on match start. Survives across screens within a
+    //  match.
+    std::array<int, 2> m_known_own_active = {-1, -1};
     //  Bounded retry for the "no yellow highlight" case. Reset on
     //  successful cursor read or on leaving pokemon_switch. After 3
     //  attempts the trace logs an error and stops nudging.
@@ -385,6 +410,23 @@ private:
 
     //  Mega Evolve toggle visibility for the current move_select frame.
     //  Reset to false on leaving move_select (alongside m_move_select_cursor).
+    //  Auto-collect sub-flow state machine.
+    //    0 DONE          — already collected (or option off); fall through.
+    //    1 GO_MISSIONS   — on main_menu, target idx 4 (Missions). A to enter.
+    //    2 AT_MISSIONS   — on missions screen, run X→delay→A→B sequence.
+    //    3 GO_MAILBOX    — on main_menu, target idx 5 (Mailbox). A to enter.
+    //    4 AT_MAILBOX    — on mailbox screen, run X→delay→A→B sequence.
+    //  Reset to 1 at program start when ENABLE_AUTO_COLLECT_BEFORE_QUEUE
+    //  is on; set to 0 once we return to main_menu after AT_MAILBOX.
+    int m_collect_step = 0;
+    //  Wall-clock ms when we last fired X on a claim screen. The Accept
+    //  popup follows a 1-2s animation, so the suggester waits this long
+    //  before pressing A.
+    int64_t m_collect_x_fired_at_ms = 0;
+    //  Have we already fired A (Accept) for the current sub-screen?
+    //  Reset on entering a new sub-screen (m_collect_step transition).
+    bool m_collect_a_fired = false;
+
     //  Random lead-order fallback. When LEAD_ORDER_SINGLES /
     //  LEAD_ORDER_DOUBLES is blank, we roll a fresh random permutation
     //  here and feed it into ctx.tp_lead_order. Re-rolled at match
@@ -411,6 +453,12 @@ private:
     //  cursor last *changed*. Reset on cursor-change and on screen exit.
     int m_switch_last_cursor_seen = -2;
     int m_switch_nav_since_change = 0;
+    //  Total Up/Down presses since the current pokemon_switch entry began.
+    //  Reset on screen exit. Used by the suggester's unreachable-target
+    //  guard — the cursor can change repeatedly (resetting
+    //  nav_since_change) without ever landing on the rolled target if
+    //  that target is the active mon (which the game's D-pad skips).
+    int m_switch_nav_total = 0;
     bool m_switch_nav_error_logged = false;
 
     bool m_can_mega_evolve = false;

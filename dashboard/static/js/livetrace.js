@@ -466,12 +466,13 @@ function ltRenderSnapshot(snap, view) {
         return mon.species || mon.name || null;
     };
 
-    //  Singles flag — slot 1 is forced to -1 on both sides by the C++
-    //  snapshot() builder. Suppress the slot-1 cell so the row reads
-    //  cleanly instead of "[—] unknown".
-    const isSingles = (snap.own_active_slots && snap.own_active_slots[1] < 0)
-                   && (snap.opp_active_slots && snap.opp_active_slots[1] < 0);
-    const slotsToShow = isSingles ? 1 : 2;
+    //  Use the snapshot's explicit mode field instead of inferring from
+    //  slot[1] < 0 — the C++ snapshot() builder forces slot[1] = -1 in
+    //  any non-DOUBLES state (including UNKNOWN), so the old inference
+    //  rendered doubles as singles on every poll before
+    //  BattleModeDetector fired on team_preview.
+    const mode = (snap.mode || 'Unknown').toLowerCase();
+    const slotsToShow = (mode === 'singles') ? 1 : 2;
 
     const activeRow = (label, slots, team) => {
         const safe = slots || [-1, -1];

@@ -15,83 +15,79 @@
     </div>
     <div class="subtitle">Mirror of the inference engine ingest pipeline. Run the LiveDetectorTrace SerialPrograms program to feed this view.</div>
 
-    <!-- Hero: Battle State -->
-    <div class="lt-card lt-bs-card">
-        <div class="lt-bs-header">
-            <span class="lt-section-label">Battle State</span>
-            <span class="lt-bs-turn" id="lt-bs-turn"></span>
-            <span class="lt-suggest" id="lt-suggest" hidden></span>
-        </div>
-        <div class="lt-bs-grid">
-            <!-- Own side -->
-            <div class="lt-bs-side lt-side-own">
-                <div class="lt-bs-side-head">
-                    <span class="lt-side-tag">Own</span>
-                    <div class="lt-pokeballs" id="lt-own-pokeballs"></div>
+    <!-- Main: Battle State (hero, includes benches) + narrow Pipeline rail -->
+    <div class="lt-main-grid">
+        <div class="lt-main-left">
+            <div class="lt-card lt-bs-card">
+                <div class="lt-bs-header">
+                    <span class="lt-section-label">Battle State</span>
+                    <span class="lt-bs-turn" id="lt-bs-turn"></span>
+                    <span class="lt-suggest" id="lt-suggest" hidden></span>
                 </div>
-                <div class="lt-bs-leads-row" id="lt-bs-leads-row">
-                    <span class="lt-leads-empty">leads not yet read</span>
+                <div class="lt-bs-grid">
+                    <!-- Own side -->
+                    <div class="lt-bs-side lt-side-own">
+                        <div class="lt-bs-side-head">
+                            <span class="lt-side-tag">Own</span>
+                            <div class="lt-pokeballs" id="lt-own-pokeballs"></div>
+                        </div>
+                        <div class="lt-bs-leads-row" id="lt-bs-leads-row">
+                            <span class="lt-leads-empty">leads not yet read</span>
+                        </div>
+                        <div class="lt-bs-active-row" id="lt-bs-own-active-row"></div>
+                        <div class="lt-bench-strip-label">Bench</div>
+                        <div class="lt-bench-strip" id="lt-own-team"></div>
+                    </div>
+                    <!-- Opp side -->
+                    <div class="lt-bs-side lt-side-opp">
+                        <div class="lt-bs-side-head">
+                            <span class="lt-side-tag">Opp</span>
+                            <div class="lt-pokeballs" id="lt-opp-pokeballs"></div>
+                        </div>
+                        <div class="lt-bs-leads-row lt-leads-na">
+                            <span class="lt-leads-empty">opp leads — game-state hidden</span>
+                        </div>
+                        <div class="lt-bs-active-row" id="lt-bs-opp-active-row"></div>
+                        <div class="lt-bench-strip-label">Bench</div>
+                        <div class="lt-bench-strip" id="lt-opp-team"></div>
+                    </div>
                 </div>
-                <div class="lt-bs-active-row" id="lt-bs-own-active-row"></div>
-            </div>
-            <!-- Opp side -->
-            <div class="lt-bs-side lt-side-opp">
-                <div class="lt-bs-side-head">
-                    <span class="lt-side-tag">Opp</span>
-                    <div class="lt-pokeballs" id="lt-opp-pokeballs"></div>
-                </div>
-                <div class="lt-bs-leads-row lt-leads-na">
-                    <span class="lt-leads-empty">opp leads — game-state hidden</span>
-                </div>
-                <div class="lt-bs-active-row" id="lt-bs-opp-active-row"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 3-col main: pipeline | own bench | opp bench (active mons live above) -->
-    <div id="livetrace-grid">
-        <div class="lt-col lt-col-pipe">
-            <div class="lt-col-head">
-                <span class="lt-section-label">Pipeline</span>
-                <div class="lt-legend">
-                    <span class="lt-dot lt-ok"></span>fresh
-                    <span class="lt-dot lt-stale"></span>stale
-                    <span class="lt-dot lt-skipped"></span>skip
-                    <span class="lt-dot lt-wip"></span>WIP
-                    <span class="lt-dot lt-na"></span>n/a
-                    <span class="lt-dot lt-error"></span>err
+                <!-- Field strip inlined as a thin row at the bottom of the hero -->
+                <div class="lt-bs-field-row">
+                    <span class="lt-bs-field-label">Field</span>
+                    <div id="lt-field"></div>
                 </div>
             </div>
-            <div id="lt-pipeline"></div>
         </div>
 
-        <div class="lt-col">
-            <div class="lt-col-head"><span class="lt-section-label">Own Bench</span></div>
-            <div id="lt-own-team"></div>
-        </div>
-
-        <div class="lt-col">
-            <div class="lt-col-head"><span class="lt-section-label">Opp Bench</span></div>
-            <div id="lt-opp-team"></div>
-        </div>
+        <aside class="lt-main-right">
+            <div class="lt-card lt-pipe-card">
+                <div class="lt-col-head">
+                    <span class="lt-section-label">Pipeline</span>
+                    <div class="lt-legend">
+                        <span class="lt-dot lt-ok"></span>ok
+                        <span class="lt-dot lt-stale"></span>stl
+                        <span class="lt-dot lt-skipped"></span>sk
+                        <span class="lt-dot lt-wip"></span>w
+                        <span class="lt-dot lt-na"></span>n/a
+                        <span class="lt-dot lt-error"></span>er
+                    </div>
+                </div>
+                <div id="lt-pipeline"></div>
+            </div>
+        </aside>
     </div>
 
-    <!-- Field state strip -->
-    <div class="lt-card lt-field-card">
-        <div class="lt-section-label" style="margin-bottom:8px;">Field</div>
-        <div id="lt-field"></div>
-    </div>
-
-    <!-- BattleSnapshot — canonical per-poll tracker state -->
-    <div class="lt-card lt-snapshot-card">
-        <div class="lt-section-label" style="margin-bottom:8px;">
+    <!-- BattleSnapshot — canonical per-poll tracker state (collapsible diagnostic) -->
+    <details class="lt-card lt-snapshot-card">
+        <summary class="lt-section-label" style="cursor:pointer;">
             Tracker Snapshot
             <span style="color:#6e7681; font-size:10px; font-weight:normal; margin-left:8px;">
-                — raw m_own_active / m_opp_active + alive bitmap from BattleStateTracker::snapshot()
+                raw m_own_active / m_opp_active + alive bitmap
             </span>
-        </div>
-        <div id="lt-snapshot"></div>
-    </div>
+        </summary>
+        <div id="lt-snapshot" style="margin-top:8px;"></div>
+    </details>
 
     <!-- Bottom row: derived state + recent events -->
     <div class="lt-bottom-grid">
@@ -244,10 +240,35 @@
 .lt-pokeball.FAINTED        { background:#484f58; }
 .lt-pokeball.EMPTY          { background:transparent; }
 
-/* ─── 3-col grid ─────────────────────────────────────────── */
-#livetrace-grid { display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:14px; margin-top:14px; }
-.lt-col { background:#0d1117; border:1px solid #30363d; border-radius:8px; padding:14px; min-width:0; }
-.lt-col-pipe { font-family:ui-monospace,monospace; }
+/* ─── Main 2-col grid: Battle State + narrow Pipeline rail ─ */
+.lt-main-grid { display:grid; grid-template-columns:minmax(0,1fr) 280px; gap:14px; margin-top:14px; align-items:start; }
+.lt-main-left { min-width:0; }
+.lt-main-right { min-width:0; }
+.lt-pipe-card { font-family:ui-monospace,monospace; padding:10px 12px; position:sticky; top:8px; }
+.lt-pipe-card .lt-section-label { font-size:10px; }
+
+@media (max-width: 1100px) {
+    .lt-main-grid { grid-template-columns:1fr; }
+    .lt-pipe-card { position:static; }
+}
+
+/* ─── Bench strip (compact horizontal slot row, inside Battle State) ─ */
+.lt-bench-strip-label { margin-top:10px; font-size:9px; color:#6e7681; text-transform:uppercase; letter-spacing:0.08em; font-weight:700; }
+.lt-bench-strip { display:grid; grid-template-columns:repeat(auto-fill, minmax(130px, 1fr)); gap:6px; margin-top:6px; }
+.lt-bench-strip .lt-slot { padding:5px 7px; gap:3px; font-size:11px; }
+.lt-bench-strip .lt-slot .species { font-size:11px; }
+.lt-bench-strip .lt-slot .slot-idx { font-size:9px; padding:0 4px; }
+.lt-bench-strip .lt-slot .lt-hp .bar { height:4px; min-width:30px; }
+.lt-bench-strip .lt-slot .lt-hp .pct { font-size:9px; min-width:26px; }
+/* Hide verbose detail in bench cards — name + HP + status pill is enough at a glance. */
+.lt-bench-strip .lt-slot .lt-ai,
+.lt-bench-strip .lt-slot .lt-moves,
+.lt-bench-strip .lt-slot .lt-boosts { display:none; }
+
+/* ─── Field strip (inlined inside Battle State hero) ──── */
+.lt-bs-field-row { display:flex; align-items:center; gap:10px; margin-top:12px; padding-top:10px; border-top:1px solid #21262d; flex-wrap:wrap; }
+.lt-bs-field-label { font-size:9px; color:#6e7681; text-transform:uppercase; letter-spacing:0.08em; font-weight:700; min-width:36px; }
+.lt-bs-field-row #lt-field { flex:1; display:flex; gap:6px; flex-wrap:wrap; }
 
 .lt-legend { display:flex; flex-wrap:wrap; gap:8px; font-size:9px; color:#8b949e; align-items:center; }
 .lt-dot { display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:2px; vertical-align:middle; }
@@ -259,9 +280,13 @@
 .lt-error { background:#bb8009; }
 
 /* ─── Pipeline rows ──────────────────────────────────────── */
-.lt-pipe-group-head { color:#6e7681; font-size:9px; text-transform:uppercase; letter-spacing:0.08em; margin:10px 0 4px 0; font-weight:700; }
+.lt-pipe-group-head { color:#6e7681; font-size:9px; text-transform:uppercase; letter-spacing:0.08em; margin:8px 0 3px 0; font-weight:700; }
 .lt-pipe-group-head:first-child { margin-top:0; }
-.lt-pipe-row { display:grid; grid-template-columns:auto 1fr auto auto; gap:6px; align-items:center; padding:3px 0; border-bottom:1px solid #161b22; font-family:ui-monospace,monospace; font-size:11px; }
+.lt-pipe-row { display:grid; grid-template-columns:auto 1fr auto auto; gap:5px; align-items:center; padding:2px 0; border-bottom:1px solid #161b22; font-family:ui-monospace,monospace; font-size:10px; }
+.lt-pipe-card .lt-pipe-row .status { display:none; }
+.lt-pipe-card .lt-pipe-row .cat { display:none; }
+.lt-pipe-card .lt-pipe-row .age { font-size:9px; min-width:36px; }
+.lt-pipe-card .lt-pipe-row .detail { font-size:9px; padding:4px 8px; margin:3px 0 3px 10px; }
 .lt-pipe-row:last-child { border-bottom:none; }
 .lt-pipe-row:hover { background:#161b22; }
 .lt-pipe-row .name { color:#c9d1d9; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }

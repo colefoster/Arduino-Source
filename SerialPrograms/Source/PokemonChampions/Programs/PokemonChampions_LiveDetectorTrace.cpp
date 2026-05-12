@@ -150,9 +150,9 @@ LiveDetectorTrace::LiveDetectorTrace()
     , LEAD_ORDER_SINGLES(
         false,
         "<b>Lead Order (Singles):</b><br>"
-        "Comma-separated own-team slot indices (0..5) for the 3 leads on "
-        "the team-preview selecting screen, in pick order. E.g. <code>2,0,4</code> "
-        "marks slot 2 as Lead 1, slot 0 as Lead 2, slot 4 as Lead 3. "
+        "Comma-separated own-team slot numbers (1..6) for the 3 leads on "
+        "the team-preview selecting screen, in pick order. E.g. <code>3,1,5</code> "
+        "marks slot 3 as Lead 1, slot 1 as Lead 2, slot 5 as Lead 3. "
         "Leave blank for a random pick (re-rolled each match).",
         LockMode::UNLOCK_WHILE_RUNNING,
         "",
@@ -161,9 +161,9 @@ LiveDetectorTrace::LiveDetectorTrace()
     , LEAD_ORDER_DOUBLES(
         false,
         "<b>Lead Order (Doubles):</b><br>"
-        "Comma-separated own-team slot indices (0..5) for the 4 leads on "
-        "the team-preview selecting screen, in pick order. E.g. <code>3,1,0,5</code> "
-        "marks slot 3 as Lead 1, slot 1 as Lead 2, slot 0 as Lead 3, slot 5 as Lead 4. "
+        "Comma-separated own-team slot numbers (1..6) for the 4 leads on "
+        "the team-preview selecting screen, in pick order. E.g. <code>4,2,1,6</code> "
+        "marks slot 4 as Lead 1, slot 2 as Lead 2, slot 1 as Lead 3, slot 6 as Lead 4. "
         "Leave blank for a random pick (re-rolled each match).",
         LockMode::UNLOCK_WHILE_RUNNING,
         "",
@@ -195,6 +195,16 @@ LiveDetectorTrace::LiveDetectorTrace()
         "pokemon_switch) and team_preview_selecting are NEVER auto-pressed even "
         "with this on — they remain suggest-only. Per-(screen, button) dedup "
         "with a 10s retry. Default OFF.",
+        LockMode::UNLOCK_WHILE_RUNNING,
+        false
+    )
+    , ENABLE_AUTO_COLLECT_BEFORE_QUEUE(
+        "<b>Auto-Collect Missions + Mailbox Before Queue:</b><br>"
+        "Runs ONCE per program session before the first queue: from main_menu, "
+        "navs to Missions, presses X (Claim All), waits ~2.5s for the claim "
+        "animation, presses A to accept, B back to main_menu; same for Mailbox; "
+        "then resumes the normal queue flow. Requires the bot to start on "
+        "main_menu. No-op after the first match completes.",
         LockMode::UNLOCK_WHILE_RUNNING,
         false
     )
@@ -236,6 +246,7 @@ LiveDetectorTrace::LiveDetectorTrace()
     PA_ADD_OPTION(STALE_AFTER_MILLISECONDS);
     PA_ADD_OPTION(SINK_URL);
     PA_ADD_OPTION(ENABLE_AUTO_PRESS);
+    PA_ADD_OPTION(ENABLE_AUTO_COLLECT_BEFORE_QUEUE);
     PA_ADD_OPTION(ENABLE_AUTO_CAPTURE);
     PA_ADD_OPTION(AUTO_CAPTURE_DIR);
     PA_ADD_OPTION(AUTO_CAPTURE_MAX_PER_HOUR);
@@ -821,6 +832,42 @@ std::string LiveDetectorTrace::classify_screen(Logger& logger, const ImageViewRG
     if (m_prev_screen == "searching_for_battle" || m_prev_screen == "match_intro"){
         return "match_intro";
     }
+    //  Auto-collect sub-screens. Missions and Mailbox screens have no
+    //  visual detector, but the state machine knows when we MUST be on
+    //  them: collect_step == 1 right after pressing A on Missions from
+    //  main_menu means the current frame is missions; step == 2 with no
+    //  other classifier match means we're still on missions; same
+    //  pattern for mailbox at steps 3 / 4. Sticky until main_menu
+    //  classifies (B closed the screen).
+    if (m_collect_step == 1 || m_collect_step == 2){
+        if (m_prev_screen == "main_menu" || m_prev_screen == "missions_screen"){
+            return "missions_screen";
+        }
+    }
+    if (m_collect_step == 3 || m_collect_step == 4){
+        if (m_prev_screen == "main_menu" || m_prev_screen == "mailbox_screen"){
+            return "mailbox_screen";
+        }
+    }
+    //  Mid-turn battle animation. After the player commits a move /
+    //  target / switch, the screen leaves action_menu / move_select /
+    //  target_select / pokemon_switch and enters a sequence of
+    //  animation frames (attack effect, HP drain, faint cinematic,
+    //  battle-log text bar). None of those frames have a dedicated
+    //  detector. Infer them from the previous screen + match-in-progress
+    //  so the live trace and overlay readers can treat them as a
+    //  proper state instead of a noisy "unknown". Sticky until the
+    //  next detectable screen fires (action_menu when turn resumes,
+    //  result_screen when battle ends, etc.).
+    if (m_match_in_progress){
+        static const std::set<std::string> animation_entrants = {
+            "action_menu", "move_select", "target_select",
+            "pokemon_switch", "battle_animation",
+        };
+        if (animation_entrants.count(m_prev_screen)){
+            return "battle_animation";
+        }
+    }
     return "unknown";
 }
 
@@ -959,6 +1006,38 @@ void LiveDetectorTrace::run_team_preview_screen(Logger& logger, const ImageViewR
         }
         int marks_count = 0;
         for (char c : m_tp_marks_per_slot){ if (c >= '1' && c <= '4') marks_count++; }
+        //  Lead detection: slot tagged '1' is the first active; in doubles,
+        //  slot tagged '2' is the second active. (Marks 3 and 4 are bench
+        //  reserves for doubles — those aren't on the field at match start.)
+        //  Marks are sticky-latched above, so this won't flicker once seen.
+        const bool doubles_mode = (m_tracker.mode() == BattleMode::DOUBLES);
+        int lead1 = -1;
+        int lead2 = -1;
+        for (uint8_t i = 0; i < 6; i++){
+            if (m_tp_marks_per_slot[i] == '1') lead1 = (int)i;
+            if (m_tp_marks_per_slot[i] == '2') lead2 = (int)i;
+        }
+        if (lead1 >= 0 && m_known_own_active[0] != lead1){
+            logger.log(
+                "active tracker: lead0 = slot " + std::to_string(lead1)
+                + " (from team_preview mark '1')",
+                COLOR_CYAN);
+            m_known_own_active[0] = lead1;
+        }
+        if (doubles_mode && lead2 >= 0 && m_known_own_active[1] != lead2){
+            logger.log(
+                "active tracker: lead1 = slot " + std::to_string(lead2)
+                + " (from team_preview mark '2', doubles)",
+                COLOR_CYAN);
+            m_known_own_active[1] = lead2;
+        }
+        //  Push latched leads into the tracker so the snapshot reports
+        //  correct own_active_slots from poll 1 of preparing/action_menu
+        //  instead of the {0, 1} default that waits for a HUD remap.
+        //  Singles passes -1 for slot_b (ignored by setter).
+        m_tracker.set_own_actives(
+            m_known_own_active[0],
+            doubles_mode ? m_known_own_active[1] : -1);
         JsonObject out;
         out["marks_count"] = (int64_t)marks_count;
         JsonArray arr;
@@ -999,6 +1078,31 @@ void LiveDetectorTrace::run_moves_and_more_screen(Logger& logger, const ImageVie
 
     if (fresh){
         m_tracker.update_from_team_summary(team);
+        //  One log line per slot — the canonical "what set is this mon
+        //  running" dump. Fires only when the signature changes (i.e.
+        //  once per distinct team summary read), so it doesn't spam.
+        for (uint8_t i = 0; i < 6; i++){
+            const auto& t = team[i];
+            //  Skip empty slots (read returned nothing).
+            if (t.species.empty()
+                && t.ability.empty()
+                && t.item.empty()
+                && t.moves[0].empty()){
+                continue;
+            }
+            std::string moves_csv;
+            for (uint8_t m = 0; m < 4; m++){
+                if (m > 0) moves_csv += ", ";
+                moves_csv += t.moves[m].empty() ? std::string("-") : t.moves[m];
+            }
+            logger.log(
+                "team set: slot " + std::to_string(i)
+                + " " + (t.species.empty() ? std::string("?") : t.species)
+                + " @ " + (t.item.empty() ? std::string("-") : t.item)
+                + " / " + (t.ability.empty() ? std::string("-") : t.ability)
+                + " [" + moves_csv + "]",
+                COLOR_GREEN);
+        }
         //  Persist the merged team to the multi-team library. File is
         //  named after the sorted species slugs so the same set in any
         //  order maps to the same file (overwrites on re-scan).
@@ -1108,7 +1212,37 @@ void LiveDetectorTrace::run_ability_item_reader(Logger& logger, const ImageViewR
     TeamCandidates ai_cand = m_tracker.candidates();
     AbilityItemReadout r = reader.read(logger, screen, &ai_cand);
     if (!r.detected){
-        mark_skipped("AbilityItemReader");
+        //  The reader's detected flag stays false if (a) no text on
+        //  either box, or (b) text present but parse couldn't split
+        //  "Pokemon's Item". Case (b) is the one that hides ability
+        //  reveals from the dashboard — surface the raw OCR text so
+        //  we can see what the reader saw and tune the parser.
+        if (!r.raw_text.empty()){
+            //  Dedup against prior raw so we don't re-fire on every
+            //  poll the same partial OCR is visible (~4-8 polls per
+            //  ~1-2s reveal animation at 250ms poll period).
+            bool fresh_attempt = (r.raw_text != m_prev_ability_item_text);
+            m_prev_ability_item_text = r.raw_text;
+            JsonObject err;
+            err["raw"] = safe_utf8(r.raw_text);
+            err["side"] = safe_utf8(r.side);
+            err["note"] = std::string("text present but parse failed");
+            mark("AbilityItemReader", "error", std::move(err));
+            //  Auto-capture so we can build the parser to handle this
+            //  text. One screenshot per distinct raw text per session.
+            if (fresh_attempt){
+                JsonObject meta;
+                meta["channel"] = std::string("ability_item_parse_fail");
+                meta["raw_text"] = safe_utf8(r.raw_text);
+                if (!r.side.empty()) meta["side"] = safe_utf8(r.side);
+                maybe_capture(logger, screen,
+                    "ability-item-parse-fail",
+                    "parse:" + r.raw_text.substr(0, 40),
+                    m_seen_ability_items, std::move(meta));
+            }
+        }else{
+            mark_skipped("AbilityItemReader");
+        }
         return;
     }
     bool fresh = (r.raw_text != m_prev_ability_item_text);
@@ -1583,6 +1717,7 @@ JsonObject LiveDetectorTrace::build_event(const std::string& screen, int64_t ts_
         sj["screens_own"] = std::move(scr_own);
         sj["screens_opp"] = std::move(scr_opp);
         sj["turn"] = (int64_t)sit.turn;
+        sj["mode"] = std::string(battle_mode_str(sit.mode));
         ev["snapshot"] = std::move(sj);
     }
 
@@ -1653,6 +1788,12 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
     m_prev_battle_info_sig.clear();
     m_match_in_progress = false;
     m_random_lead_order_rolled = false;
+    //  Auto-collect: arm the sub-flow if the option is on. Becomes 0
+    //  (DONE) once the mailbox sequence completes — or if the option
+    //  is off, never fires.
+    m_collect_step = ENABLE_AUTO_COLLECT_BEFORE_QUEUE ? 1 : 0;
+    m_collect_x_fired_at_ms = 0;
+    m_collect_a_fired = false;
     m_seen_log_event_types.clear();
     m_seen_opp_species.clear();
     m_seen_ability_items.clear();
@@ -1663,6 +1804,11 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
     //  Live overlay for the currently-suggested button. Re-populated each
     //  poll; cleared automatically when the program ends.
     VideoOverlaySet suggestion_overlay(env.console.overlay());
+
+    //  Persistent screen-label overlay — shows the trace's current screen
+    //  classification in the top-left of the video. Replaced on every
+    //  screen transition; cleared automatically on program exit.
+    std::unique_ptr<OverlayTextScope> screen_label;
 
     //  Own team is no longer seeded at program start. The library at
     //  <settings>/PokemonChampionsTeams/<sorted-slugs>.json is consulted
@@ -1725,6 +1871,40 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
             }
         }
 
+        //  Mid-battle recovery: if the very first poll after program
+        //  start lands on an in-battle screen, we missed the
+        //  team_preview match-start transition that normally sets
+        //  m_match_in_progress + m_mode. Without this, the match-end
+        //  transition (post_match / result_screen) wouldn't surface
+        //  any cleanup because m_match_in_progress is still false.
+        //
+        //  One-shot gate — m_prev_screen is empty only on the very
+        //  first poll after program() entry (assigned at end of every
+        //  poll, line ~2542), so this block can NEVER fire during the
+        //  normal flow. Strictly additive: marks match-in-progress and
+        //  seeds the mode from FORMAT_TARGET. Own team is already
+        //  loaded from team_index_<N>.json at program start; opp team
+        //  will fill in as run_battle_screen's HUD reader sees them.
+        if (m_prev_screen.empty() && !m_match_in_progress){
+            static const std::set<std::string> in_battle = {
+                "action_menu", "move_select", "target_select",
+                "pokemon_switch", "preparing", "battle_info",
+            };
+            if (in_battle.count(screen)){
+                BattleMode bm = ((int)FORMAT_TARGET.current_value() == 1)
+                    ? BattleMode::DOUBLES : BattleMode::SINGLES;
+                env.console.log(
+                    "LiveDetectorTrace: mid-battle resume on '" + screen
+                    + "'. Seeding match-in-progress + mode="
+                    + std::string(battle_mode_str(bm))
+                    + " from FORMAT_TARGET; opp team fills in as HUD reads.",
+                    COLOR_BLUE);
+                m_match_in_progress = true;
+                m_mode = bm;
+                m_tracker.set_mode(bm);
+            }
+        }
+
         //  Match-state transitions: enter a new match on TeamPreview after
         //  a non-battle screen; mark match over on Result/PostMatch.
         if (screen == "team_preview" && (m_prev_screen.empty()
@@ -1766,6 +1946,10 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
             m_move_slot_rolled_for = -1;
             m_switch_rolled_for = -1;
             m_mega_toggled_for_visit = -1;
+            //  Active tracker resets at match start. Re-seeded from the
+            //  team_preview '1' mark (and '2' in doubles) once selecting
+            //  begins.
+            m_known_own_active = {-1, -1};
             //  Force re-roll of the random lead order for the next
             //  team-preview-selecting phase, so each match gets a fresh
             //  pick when no explicit LEAD_ORDER is configured.
@@ -1829,6 +2013,25 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
             run_battle_log_reader(env.console, snapshot);
             run_ability_item_reader(env.console, snapshot);
         }
+
+        //  Cross-cutting overlay readers. The ability/item reveal popup
+        //  and battle-log text bar can appear on top of *any* in-battle
+        //  screen — target_select, pokemon_switch, battle_info — not
+        //  just the screens that funnel through run_battle_screen.
+        //  Before this catch-all, items revealed during a forced switch
+        //  or while the doubles target-pick modal was open went unseen.
+        //  Both readers self-gate, so this is a cheap no-op when no
+        //  overlay is visible. Skipped on screens that already ran
+        //  them above (avoid double-firing per poll).
+        if (m_match_in_progress){
+            static const std::set<std::string> already_ran_overlays = {
+                "move_select", "action_menu", "preparing", "unknown",
+            };
+            if (!already_ran_overlays.count(screen)){
+                run_battle_log_reader(env.console, snapshot);
+                run_ability_item_reader(env.console, snapshot);
+            }
+        }
         //  result_screen / post_match / main_menu / unknown (out of match) —
         //  no readers fire, but pipeline status still reports the screen
         //  detector hit.
@@ -1861,9 +2064,13 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
             int p = 0;
             int cur = -1;
             int valid = 0;
+            //  User-facing input is 1-indexed (slot numbers 1..6 to match
+            //  the on-screen card order). Convert to internal 0-indexed
+            //  here; everything downstream (team_preview marks, suggester,
+            //  active tracker) uses 0..5.
             auto commit = [&](){
-                if (p < sctx.tp_lead_needed && cur >= 0 && cur <= 5){
-                    order[p] = cur;
+                if (p < sctx.tp_lead_needed && cur >= 1 && cur <= 6){
+                    order[p] = cur - 1;
                     valid++;
                 }
                 if (cur >= 0) p++;
@@ -1893,12 +2100,15 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
                         m_random_lead_order[k] = (k < (int)all.size()) ? all[k] : -1;
                     }
                     m_random_lead_order_rolled = true;
+                    //  Log in user-facing 1-indexed form to match the
+                    //  Lead Order option's input format.
                     env.console.log(
                         std::string("lead-order: rolled random ")
-                        + std::to_string(m_random_lead_order[0]) + ","
-                        + std::to_string(m_random_lead_order[1]) + ","
-                        + std::to_string(m_random_lead_order[2]) + ","
-                        + std::to_string(m_random_lead_order[3]),
+                        + std::to_string(m_random_lead_order[0] + 1) + ","
+                        + std::to_string(m_random_lead_order[1] + 1) + ","
+                        + std::to_string(m_random_lead_order[2] + 1) + ","
+                        + std::to_string(m_random_lead_order[3] + 1)
+                        + " (1-indexed)",
                         COLOR_BLUE);
                 }
                 for (int k = 0; k < sctx.tp_lead_needed; k++){
@@ -1958,6 +2168,10 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
         sctx.switch_blind_attempts = m_switch_blind_attempts;
         sctx.switch_blind_last_press_ms = m_switch_blind_last_press_ms;
         sctx.switch_nav_since_change = m_switch_nav_since_change;
+        sctx.switch_nav_total = m_switch_nav_total;
+        sctx.collect_step = m_collect_step;
+        sctx.collect_x_fired_at_ms = m_collect_x_fired_at_ms;
+        sctx.collect_a_fired = m_collect_a_fired;
         sctx.now_ms = (int64_t)now_ms();
         //  Live tactical snapshot — the canonical source for active-slot
         //  indices, alive bitmaps, and field state. Lives on this poll's
@@ -2041,6 +2255,16 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
         //  Track screen-change time for the watchdog log.
         if (screen != m_prev_screen){
             m_last_screen_change_ms = now_ms();
+            //  Refresh the persistent screen label on the video overlay.
+            //  Reset the unique_ptr first so the old OverlayTextScope's
+            //  destructor removes the previous text before we add the new.
+            screen_label.reset();
+            screen_label = std::make_unique<OverlayTextScope>(
+                env.console.overlay(),
+                COLOR_CYAN,
+                std::string("screen: ") + screen,
+                0.01, 0.03, 3.0
+            );
             env.console.log(
                 "screen: " + (m_prev_screen.empty() ? std::string("(none)") : m_prev_screen)
                 + " -> " + screen,
@@ -2067,7 +2291,53 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
                 m_switch_blind_error_logged = false;
                 m_switch_last_cursor_seen = -2;
                 m_switch_nav_since_change = 0;
+                m_switch_nav_total = 0;
                 m_switch_nav_error_logged = false;
+            }
+            //  Auto-collect state-machine transitions. The sub-screens
+            //  (missions, mailbox) classify as "unknown" — we don't need
+            //  to detect them specifically. The transitions are:
+            //
+            //    Step 1 (GO_MISSIONS) -> 2 (AT_MISSIONS): we just left
+            //      main_menu after pressing A on Missions, so we're
+            //      now on the missions screen by construction.
+            //    Step 2 -> 3 (GO_MAILBOX): we're back on main_menu (B
+            //      closed the missions screen).
+            //    Step 3 -> 4 (AT_MAILBOX): same pattern as 1->2.
+            //    Step 4 -> 0 (DONE): back on main_menu, all collected.
+            if (m_collect_step == 1 && m_prev_screen == "main_menu"
+                && screen != "main_menu"){
+                m_collect_step = 2;
+                m_collect_x_fired_at_ms = 0;
+                m_collect_a_fired = false;
+                env.console.log(
+                    "auto-collect: opened missions; running X/A/B sequence.",
+                    COLOR_BLUE);
+            }
+            else if (m_collect_step == 2 && screen == "main_menu"
+                     && m_prev_screen != "main_menu"){
+                m_collect_step = 3;
+                m_collect_x_fired_at_ms = 0;
+                m_collect_a_fired = false;
+                env.console.log(
+                    "auto-collect: missions done; navigating to mailbox.",
+                    COLOR_BLUE);
+            }
+            else if (m_collect_step == 3 && m_prev_screen == "main_menu"
+                     && screen != "main_menu"){
+                m_collect_step = 4;
+                m_collect_x_fired_at_ms = 0;
+                m_collect_a_fired = false;
+                env.console.log(
+                    "auto-collect: opened mailbox; running X/A/B sequence.",
+                    COLOR_BLUE);
+            }
+            else if (m_collect_step == 4 && screen == "main_menu"
+                     && m_prev_screen != "main_menu"){
+                m_collect_step = 0;
+                env.console.log(
+                    "auto-collect: complete. Resuming normal queue flow.",
+                    COLOR_GREEN);
             }
             //  In-battle action counter: bump on every fresh entry to
             //  action_menu, so the suggester knows whether it's a fight
@@ -2081,6 +2351,15 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
                         && m_battle_action_menu_visits % 3 == 0)
                         ? " (SWITCH turn)" : " (fight turn)"),
                     COLOR_BLUE);
+                //  Turn-boundary snapshot for the model's LSTM history
+                //  feature. Push after every re-entry past the first —
+                //  the first action_menu entry is turn 1's decision
+                //  point with no prior turn to record. Subsequent
+                //  entries capture whatever state followed the prior
+                //  action; the tracker handles the K-window cap.
+                if (m_battle_action_menu_visits > 1){
+                    m_tracker.push_history_snapshot();
+                }
             }
             //  Roll a random move slot once per move_select visit. Tied
             //  to m_battle_action_menu_visits so each turn gets one
@@ -2098,23 +2377,50 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
             if (screen == "move_select"
                 && m_move_select_cursor >= 0
                 && m_move_slot_rolled_for != m_battle_action_menu_visits){
-                //  Pick one of the 3 slots that isn't the current cursor.
-                int offset = 1 + (int)(now_ms() % 3);  //  1..3
-                m_target_move_slot = (m_move_select_cursor + offset) % 4;
+                //  Lock override: if the active mon is Choice-locked /
+                //  encored / etc., the tracker carries locked_to_move.
+                //  Match it against the OCR'd move pills; if found, force
+                //  that slot instead of rolling. Falls through to random
+                //  if the lock can't be matched (lock set before moves
+                //  read, or stale lock after switch — defensive).
+                int locked_slot = -1;
+                if (m_known_own_active[0] >= 0){
+                    const std::string& locked =
+                        m_tracker.own((uint8_t)m_known_own_active[0]).locked_to_move;
+                    if (!locked.empty()){
+                        for (int s = 0; s < 4; s++){
+                            if (m_move_select_moves[s] == locked){
+                                locked_slot = s;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                if (locked_slot >= 0){
+                    m_target_move_slot = locked_slot;
+                }else{
+                    //  Pick one of the 3 slots that isn't the current cursor.
+                    int offset = 1 + (int)(now_ms() % 3);  //  1..3
+                    m_target_move_slot = (m_move_select_cursor + offset) % 4;
+                }
                 m_move_slot_rolled_for = m_battle_action_menu_visits;
                 const std::string& move_name = m_move_select_moves[m_target_move_slot];
                 const std::string move_label =
                     move_name.empty() ? ("slot " + std::to_string(m_target_move_slot))
                                       : move_name;
                 env.console.log(
-                    "in-battle: rolled move slot " + std::to_string(m_target_move_slot)
+                    std::string("in-battle: ")
+                    + (locked_slot >= 0 ? "FORCED locked-move slot " : "rolled move slot ")
+                    + std::to_string(m_target_move_slot)
                     + " (" + move_label
                     + ", cursor=" + std::to_string(m_move_select_cursor)
-                    + ", forced nav) for action_menu visit #"
+                    + (locked_slot >= 0 ? ", choice/encore lock" : ", forced nav")
+                    + ") for action_menu visit #"
                     + std::to_string(m_battle_action_menu_visits),
                     COLOR_BLUE);
                 env.console.overlay().add_log(
-                    "move pick: " + move_label,
+                    (locked_slot >= 0 ? "locked: " : "move pick: ") + move_label,
                     COLOR_CYAN);
             }
             //  Roll a switch target once per pokemon_switch attempt. Keyed
@@ -2134,6 +2440,12 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
                 const auto& active = poll_snapshot.own_active_slots;
                 for (int i = 0; i < 4; i++){
                     if (!m_switch_alive[i]) continue;
+                    //  Self-tracked active is authoritative — set from
+                    //  team_preview lead marks + every confirmed switch-in.
+                    //  Both doubles active slots are excluded here.
+                    //  BattleHUD snapshot is consulted as a secondary
+                    //  check in case the self-tracker is stale.
+                    if (m_known_own_active[0] == i || m_known_own_active[1] == i) continue;
                     bool on_field = false;
                     for (int a : active){
                         if (a == i){ on_field = true; break; }
@@ -2254,7 +2566,14 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
             const bool scan_modal_step =
                 m_last_suggestion
                 && (m_team_scan_step == 1 || m_team_scan_step == 5);
-            if (safe_screens.count(screen) || scan_modal_step){
+            //  Auto-collect bypass: the missions and mailbox screens
+            //  classify as "unknown", which isn't in safe_screens. When
+            //  the collect sub-flow is at AT_MISSIONS / AT_MAILBOX
+            //  (steps 2 / 4), allow presses through regardless.
+            const bool auto_collect_step =
+                (m_collect_step == 2 || m_collect_step == 4)
+                && screen != "main_menu";
+            if (safe_screens.count(screen) || scan_modal_step || auto_collect_step){
                 //  Dedup logic: prevent burst-pressing the same action
                 //  button (A/B/X/Y/Plus) through a slow screen transition.
                 //  Nav buttons (Up/Down/Left/Right) are EXEMPT — when the
@@ -2320,8 +2639,11 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
                             "LiveDetectorTrace: AUTO-PRESS " + b
                             + " on " + screen + " — " + m_last_suggestion->reason,
                             COLOR_PURPLE);
+                        //  m_last_suggestion->label already starts with the
+                        //  button name (e.g. "A — Done", "Down — to slot 2").
+                        //  Don't prepend `b` here or it reads "A — A — Done".
                         env.console.overlay().add_log(
-                            b + " — " + m_last_suggestion->label,
+                            m_last_suggestion->label,
                             COLOR_PURPLE);
                         //  Conservative timing for the team-scan modal:
                         //  back-to-back Downs at the default 80/160ms can
@@ -2340,6 +2662,26 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
                         m_last_pressed_screen = screen;
                         m_last_pressed_button = b;
                         m_last_press_ms = now_ms();
+
+                        //  Auto-collect press tracking. When the sub-
+                        //  flow is in AT_MISSIONS / AT_MAILBOX (step 2
+                        //  or 4) and we're NOT on main_menu, X kicks
+                        //  off the claim animation and A is the accept
+                        //  press that follows. We track which has
+                        //  fired so the suggester can sequence
+                        //  X → wait → A → B without re-firing. No
+                        //  missions/mailbox screen detector needed —
+                        //  "not on main_menu while step ∈ {2,4}" is
+                        //  enough signal.
+                        if ((m_collect_step == 2 || m_collect_step == 4)
+                            && screen != "main_menu"){
+                            if (b == "X" && m_collect_x_fired_at_ms == 0){
+                                m_collect_x_fired_at_ms = now_ms();
+                            }else if (b == "A" && m_collect_x_fired_at_ms != 0
+                                      && !m_collect_a_fired){
+                                m_collect_a_fired = true;
+                            }
+                        }
 
                         //  Mark mega-toggle as fired for this turn so the
                         //  next move_select poll suggests A on the move
@@ -2368,6 +2710,53 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
                             && (b == "Up" || b == "Down")
                             && m_switch_cursor >= 0){
                             m_switch_nav_since_change++;
+                            m_switch_nav_total++;
+                        }
+                        //  Active tracker update: A on pokemon_switch confirms
+                        //  the switch-in. Whichever slot the cursor was on at
+                        //  press time becomes the new active. (First A press
+                        //  opens the context modal — cursor is still on the
+                        //  same slot at that moment. Subsequent A's confirm
+                        //  the modal but the cursor reads as -1 then, so we
+                        //  only credit the press that had a known cursor.)
+                        if (screen == "pokemon_switch" && b == "A"
+                            && m_switch_cursor >= 0 && m_switch_cursor < 6){
+                            //  Identify which active entry to replace. The
+                            //  fainted slot (no longer in m_switch_alive)
+                            //  is the one being filled. If neither entry's
+                            //  slot is fainted, this is a voluntary switch
+                            //  (rare) — skip the update; we don't know
+                            //  which slot the player is putting the new
+                            //  mon into.
+                            int replace_idx = -1;
+                            for (int idx = 0; idx < 2; idx++){
+                                int s = m_known_own_active[idx];
+                                if (s < 0) continue;
+                                if (s < 6 && !m_switch_alive[s]){
+                                    replace_idx = idx;
+                                    break;
+                                }
+                            }
+                            //  Empty entry (e.g. singles slot[1] = -1) is
+                            //  also a valid target.
+                            if (replace_idx < 0){
+                                for (int idx = 0; idx < 2; idx++){
+                                    if (m_known_own_active[idx] < 0){
+                                        replace_idx = idx;
+                                        break;
+                                    }
+                                }
+                            }
+                            if (replace_idx >= 0
+                                && m_known_own_active[replace_idx] != m_switch_cursor){
+                                env.console.log(
+                                    "active tracker: switched to slot "
+                                    + std::to_string(m_switch_cursor)
+                                    + " (was " + std::to_string(m_known_own_active[replace_idx])
+                                    + " at active[" + std::to_string(replace_idx) + "])",
+                                    COLOR_CYAN);
+                                m_known_own_active[replace_idx] = m_switch_cursor;
+                            }
                         }
                         //  Same guard on team_preview_selecting: Done
                         //  button's cursor strip occasionally fails to

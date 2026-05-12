@@ -334,6 +334,25 @@ static std::optional<InputSuggestion> suggest_pokemon_switch(
     if (cursor != target && ctx.switch_nav_since_change >= 5){
         return std::nullopt;
     }
+    //  Unreachable-target guard: cursor IS moving (so the above guard
+    //  doesn't fire) but never lands on target. Caused by picking a
+    //  target the in-game D-pad nav skips — usually the active mon when
+    //  BattleHUD didn't populate before this entry so the pre-roll
+    //  filter let it through. Accept the current cursor as the new
+    //  target: any reachable alive bench mon is a legal switch.
+    //  Threshold: ~8 navs (2x a single 3-row sweep) is more than enough
+    //  to land on a reachable target. Beyond that, target is skipped.
+    if (cursor != target
+        && ctx.switch_nav_total >= 8
+        && cursor >= 0 && cursor < 4 && ctx.switch_alive[cursor]){
+        InputSuggestion s;
+        s.button = "A";
+        s.label = "A — fallback on slot " + std::to_string(cursor);
+        s.reason = "target " + std::to_string(target) + " unreachable after "
+                 + std::to_string(ctx.switch_nav_total)
+                 + " navs (active mon skipped?); accepting cursor=" + std::to_string(cursor);
+        return s;
+    }
     if (cursor < target){
         InputSuggestion s;
         s.button = "Down";
@@ -363,6 +382,40 @@ std::optional<InputSuggestion> suggest_for_screen(
     const BattleStateTracker& tracker,
     const LiveContext& ctx
 ){
+    //  Auto-collect: when the sub-flow is at step 2 (AT_MISSIONS) or
+    //  step 4 (AT_MAILBOX) and we're NOT on main_menu, we presume we
+    //  just opened the right sub-screen (missions or mailbox) — no
+    //  need to detect it specifically. Run X → wait ~2.5s → A → B.
+    //  Trace advances the step when the screen returns to main_menu.
+    if ((ctx.collect_step == 2 || ctx.collect_step == 4)
+        && screen != "main_menu"){
+        const char* label_screen =
+            (ctx.collect_step == 2) ? "missions" : "mailbox";
+        if (ctx.collect_x_fired_at_ms == 0){
+            InputSuggestion s;
+            s.button = "X";
+            s.label = "X — Claim All";
+            s.reason = std::string("collect:") + label_screen + " — claim all";
+            return s;
+        }
+        const int64_t ms_since_x = ctx.now_ms - ctx.collect_x_fired_at_ms;
+        if (ms_since_x < 2500){
+            return std::nullopt;  //  wait for claim animation
+        }
+        if (!ctx.collect_a_fired){
+            InputSuggestion s;
+            s.button = "A";
+            s.label = "A — accept";
+            s.reason = std::string("collect:") + label_screen + " — accept";
+            return s;
+        }
+        InputSuggestion s;
+        s.button = "B";
+        s.label = "B — back to main_menu";
+        s.reason = std::string("collect:") + label_screen + " — closing";
+        return s;
+    }
+
     if (screen == "move_select"){
         return suggest_move_select(tracker, ctx);
     }
@@ -373,7 +426,23 @@ std::optional<InputSuggestion> suggest_for_screen(
         //  intermediate two visits go FIGHT (which then routes through
         //  move_select with a randomly-chosen slot).
         const int visits = ctx.battle_action_menu_visits;
-        const bool switch_turn = (visits > 0 && visits % 3 == 0);
+        //  Check we actually have an alive non-active mon to switch
+        //  to. On a "switch turn" with no bench candidates (last mon
+        //  standing in singles, or both bench fainted in doubles),
+        //  POKEMON opens an empty switch screen and the suggester
+        //  loops trying to nav. Fall back to FIGHT in that case.
+        bool can_switch = true;
+        if (ctx.snapshot != nullptr){
+            can_switch = false;
+            auto active = resolve_own_active(ctx);
+            for (int i = 0; i < 6; i++){
+                if (!ctx.snapshot->own_alive[i]) continue;
+                bool on_field = false;
+                for (int a : active){ if (a == i){ on_field = true; break; } }
+                if (!on_field){ can_switch = true; break; }
+            }
+        }
+        const bool switch_turn = (visits > 0 && visits % 3 == 0) && can_switch;
         const int cursor = ctx.action_menu_cursor;  //  0=FIGHT, 1=POKEMON
         const int target = switch_turn ? 1 : 0;
         const char* target_label = switch_turn ? "Pokemon" : "Fight";
@@ -418,39 +487,81 @@ std::optional<InputSuggestion> suggest_for_screen(
     //  ── Menu nav chain — auto-nav to target option, then A. ──
     if (screen == "main_menu"){
         //  2D-ish layout. Indexes:
-        //    0 Battle (target)        center-left, big tile
-        //    1 Box                    top-right
-        //    2 Train                  middle-right
-        //    3 Recruit                middle, below Battle
-        //    4-7 bottom bar (Missions/Mailbox/Style/SubMenu)
-        //  Step-toward-target heuristic: Up to escape bottom bar / Recruit,
-        //  Left from the right column. Eventually lands on Battle, then A.
+        //    0 Battle (default target)        center-left, big tile (2-tall)
+        //    1 Box                            top-right
+        //    2 Train                          middle-right
+        //    3 Recruit                        directly BELOW Battle
+        //    4 Missions                       bottom bar (left)
+        //    5 Mailbox                        bottom bar
+        //    6 Style                          bottom bar
+        //    7 SubMenu                        bottom bar (right)
+        //  Auto-collect sub-flow overrides target to Missions (4) or
+        //  Mailbox (5) before the first queue. Otherwise target = Battle.
         int cursor = ctx.menu_selected_index;
         if (cursor < 0) return std::nullopt;
-        if (cursor == 0){
-            return press_a("A — Battle", "open Battle menu");
+        int target = 0;
+        const char* target_name = "Battle";
+        if (ctx.collect_step == 1){ target = 4; target_name = "Missions"; }
+        else if (ctx.collect_step == 3){ target = 5; target_name = "Mailbox"; }
+
+        if (cursor == target){
+            return press_a(std::string("A — ") + target_name,
+                           std::string("open ") + target_name);
         }
-        if (cursor >= 4){
-            //  Bottom bar — Up escapes back into the main grid.
+
+        if (target == 0){
+            //  Original hand-coded Battle nav. Recruit (3) is directly
+            //  BELOW Battle so it's a single Up; Box / Train are
+            //  right-column so Left; bottom bar Up to escape.
+            if (cursor >= 4){
+                InputSuggestion s;
+                s.button = "Up";
+                s.label = "Up — leave bottom bar";
+                s.reason = "cursor in bottom bar (idx=" + std::to_string(cursor) + ")";
+                return s;
+            }
+            if (cursor == 1 || cursor == 2){
+                InputSuggestion s;
+                s.button = "Left";
+                s.label = "Left — toward Battle";
+                s.reason = "cursor on " + std::string(cursor == 1 ? "Box" : "Train");
+                return s;
+            }
+            //  cursor == 3 (Recruit): Up directly to Battle.
             InputSuggestion s;
             s.button = "Up";
-            s.label = "Up — leave bottom bar";
-            s.reason = "cursor in bottom bar (idx=" + std::to_string(cursor) + ")";
+            s.label = "Up — to Battle";
+            s.reason = "cursor on Recruit";
             return s;
         }
-        if (cursor == 1 || cursor == 2){
-            //  Box / Train are right-column. Left moves toward Battle column.
+
+        //  Target is Missions (4) or Mailbox (5) in the bottom bar.
+        //  Strategy: get into the bottom bar first, then step Left/Right
+        //  to the target index. From anywhere in the top grid, Down
+        //  drops into the bar.
+        if (cursor < 4){
             InputSuggestion s;
-            s.button = "Left";
-            s.label = "Left — toward Battle";
-            s.reason = "cursor on " + std::string(cursor == 1 ? "Box" : "Train");
+            s.button = "Down";
+            s.label = std::string("Down — toward ") + target_name;
+            s.reason = "cursor in top grid (idx=" + std::to_string(cursor)
+                     + "), entering bottom bar";
             return s;
         }
-        //  cursor == 3 (Recruit): Up to Battle.
+        //  Now in bottom bar; step toward target.
+        if (cursor < target){
+            InputSuggestion s;
+            s.button = "Right";
+            s.label = std::string("Right — toward ") + target_name;
+            s.reason = "cursor idx=" + std::to_string(cursor)
+                     + ", target=" + std::to_string(target);
+            return s;
+        }
+        //  cursor > target within bottom bar.
         InputSuggestion s;
-        s.button = "Up";
-        s.label = "Up — to Battle";
-        s.reason = "cursor on Recruit";
+        s.button = "Left";
+        s.label = std::string("Left — toward ") + target_name;
+        s.reason = "cursor idx=" + std::to_string(cursor)
+                 + ", target=" + std::to_string(target);
         return s;
     }
     if (screen == "battle_mode_menu"){

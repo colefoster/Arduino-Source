@@ -83,10 +83,33 @@ enum class BattleLogEventType{
     EFFECT_START,       //  "([EFFECT] started on [POKEMON]!)"
     EFFECT_END,         //  "[POKEMON] was freed from [EFFECT]!"
     EFFECT_ACTIVATE,    //  "([EFFECT] activated!)"
+    //  Volatile statuses (substitute / taunt / encore / leech-seed / etc.).
+    //  event.effect = canonical uppercase name from
+    //  src/vgc_model/data/volatile_statuses.py (e.g. "SUBSTITUTE",
+    //  "TAUNT", "ENCORE", "LEECHSEED", "PROTECT", "PERISH3").
+    VOLATILE_START,
+    VOLATILE_END,
+    //  Per-side entry hazards. event.effect = canonical slug:
+    //  "stealth_rock", "spikes", "toxic_spikes", "sticky_web".
+    //  event.is_opponent identifies the side the hazard was placed on.
+    HAZARD_SET,
+    HAZARD_CLEAR,
+    //  Per-side conditions. event.effect = canonical slug: "tailwind",
+    //  "light_screen", "reflect", "aurora_veil", "safeguard", "mist",
+    //  "lucky_chant". event.is_opponent identifies the affected side.
+    SIDE_START,
+    SIDE_END,
     //  Match boundary / chrome
     BATTLE_START,
     BATTLE_END,
     TURN_MARKER,        //  "== Turn N =="
+    //  Choice-item lock rejection. Champions-specific message; fired when
+    //  the user picks any move other than the one a Choice item locks them
+    //  into. event.item = "Choice Scarf"/"Choice Band"/"Choice Specs",
+    //  event.move = the only legal move. Used by the trace to pre-lock the
+    //  next move_select roll on that mon.
+    //    "The Choice Scarf only allows the use of Wave Crash!"
+    MOVE_LOCKED,
     OTHER,              //  Recognized text but no specific parse
 };
 

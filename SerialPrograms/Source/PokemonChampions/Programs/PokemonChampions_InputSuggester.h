@@ -124,6 +124,16 @@ struct LiveContext{
     //  (e.g. singles 3-row layout vs the reader's 4-row tuning) so we
     //  don't spam Down forever.
     int switch_nav_since_change = 0;
+    //  Total Up/Down presses fired in this pokemon_switch entry. Unlike
+    //  switch_nav_since_change, NOT reset on cursor-change — only on
+    //  screen exit. Used to detect "cursor oscillates but never lands on
+    //  target": if the active mon is hidden from BattleHUD at roll time,
+    //  the pre-roll filter may pick a target slot the game skips on
+    //  D-pad nav (the active mon's row), and the cursor pings between
+    //  its two neighbors forever. After this many navs without reaching
+    //  target, the suggester falls back to A on the current cursor — any
+    //  reachable alive bench mon beats spinning.
+    int switch_nav_total = 0;
     //  How many times we've fired Down on pokemon_switch with cursor unread
     //  (no yellow highlight). Used to bound the blind-nudge retry loop
     //  when the forced-switch screen lands on a fainted slot whose
@@ -150,6 +160,22 @@ struct LiveContext{
     int action_menu_cursor = -1;
     int move_select_cursor = -1;
     int target_move_slot = 0;
+
+    //  Auto-collect sub-flow (missions + mailbox before queue).
+    //    0 DONE         — collected or disabled; suggester defaults to normal flow.
+    //    1 GO_MISSIONS  — on main_menu, nav cursor to Missions (idx 4) + A.
+    //    2 AT_MISSIONS  — on missions screen, X → wait → A → B sequence.
+    //    3 GO_MAILBOX   — on main_menu, nav cursor to Mailbox (idx 5) + A.
+    //    4 AT_MAILBOX   — on mailbox screen, X → wait → A → B sequence.
+    int collect_step = 0;
+    //  Wall-clock ms when X was last fired on the current claim screen.
+    //  Suggester waits ~2.5s after X before firing A (accept) so the
+    //  in-game animation completes; otherwise A is queued but
+    //  silently dropped.
+    int64_t collect_x_fired_at_ms = 0;
+    //  Whether A (accept) has fired for the current claim screen.
+    //  When true, the suggester moves on to B (back to main_menu).
+    bool collect_a_fired = false;
 
     //  Mega Evolve toggle state on move_select.
     //    can_mega_evolve: MegaEvolveDetector said the toggle pill is up.
