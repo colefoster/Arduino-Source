@@ -226,10 +226,13 @@ BattleLogEvent BattleLogReader::parse(const std::string& text){
         // affected side via the POKEMON capture's "the opposing" prefix.
         add(R"___(Pointed\s+stones\s+float\s+in\s+the\s+air\s+around\s+(.+?)(?:'s)?\s+team!?$)___",
             BattleLogEventType::HAZARD_SET,   "stealth_rock", 1);
-        add(R"___(Spikes\s+were\s+scattered\s+all\s+around\s+(.+?)(?:'s)?\s+(?:feet|team)!?$)___",
-            BattleLogEventType::HAZARD_SET,   "spikes", 1);
+        //  Poison spikes BEFORE plain spikes — first match wins in
+        //  regex_search and "Poison spikes were scattered..." also matches
+        //  the shorter "Spikes were scattered..." pattern otherwise.
         add(R"___(Poison\s+spikes\s+were\s+scattered\s+all\s+around\s+(.+?)(?:'s)?\s+(?:feet|team)!?$)___",
             BattleLogEventType::HAZARD_SET,   "toxic_spikes", 1);
+        add(R"___(Spikes\s+were\s+scattered\s+all\s+around\s+(.+?)(?:'s)?\s+(?:feet|team)!?$)___",
+            BattleLogEventType::HAZARD_SET,   "spikes", 1);
         add(R"___(A\s+sticky\s+web\s+has\s+been\s+laid\s+out\s+beneath\s+(.+?)(?:'s)?\s+feet!?$)___",
             BattleLogEventType::HAZARD_SET,   "sticky_web", 1);
         // Rapid Spin / Defog / Mortal Spin / etc. — generic clear text.
