@@ -56,8 +56,8 @@ cleanup() {
 cd "$REPO_ROOT"
 
 # find path to compile_commands.json
-if [ -f "$REPO_ROOT/SerialPrograms/bin/compile_commands.json" ]; then
-    DB_PATH="$REPO_ROOT/SerialPrograms/bin/compile_commands.json"
+if [ -f "$REPO_ROOT/switch_bot/SerialPrograms/bin/compile_commands.json" ]; then
+    DB_PATH="$REPO_ROOT/switch_bot/SerialPrograms/bin/compile_commands.json"
 elif [ -f "$REPO_ROOT/build/RelWithDebInfo/compile_commands.json" ]; then
     DB_PATH="$REPO_ROOT/build/RelWithDebInfo/compile_commands.json"
 else

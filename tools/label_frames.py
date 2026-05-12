@@ -103,7 +103,7 @@ BATTLE_LOG_EVENTS = [
 
 def load_species_list():
     """Load species slugs from PokemonSpeciesOCR.json for autocomplete."""
-    path = REPO / "Resources" / "PokemonChampions" / "PokemonSpeciesOCR.json"
+    path = REPO / "switch_bot" / "Resources" / "PokemonChampions" / "PokemonSpeciesOCR.json"
     if path.exists():
         with open(path) as f:
             data = json.load(f)
@@ -113,7 +113,7 @@ def load_species_list():
 
 def load_move_list():
     """Load move slugs from PokemonMovesOCR.json for autocomplete."""
-    path = REPO / "Resources" / "PokemonChampions" / "PokemonMovesOCR.json"
+    path = REPO / "switch_bot" / "Resources" / "PokemonChampions" / "PokemonMovesOCR.json"
     if path.exists():
         with open(path) as f:
             data = json.load(f)

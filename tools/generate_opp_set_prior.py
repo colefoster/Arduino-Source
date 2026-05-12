@@ -30,7 +30,7 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_FORMAT = "gen9championsvgc2026regma"
 DEFAULT_SRC = REPO_ROOT / "data" / "usage_stats" / f"{DEFAULT_FORMAT}.json"
-DEFAULT_OUT = REPO_ROOT / "Resources" / "PokemonChampions" / "OpponentSetPrior.json"
+DEFAULT_OUT = REPO_ROOT / "switch_bot" / "Resources" / "PokemonChampions" / "OpponentSetPrior.json"
 
 #  How many top moves to keep per species. Set to 4 to match a Pokemon's
 #  4-move-slot UI; the prior's job is to fill the slot, not predict the

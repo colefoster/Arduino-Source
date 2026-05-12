@@ -21,8 +21,8 @@ import sys
 import time
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-BUILD_DIR = os.path.join(REPO, "build_mac")
-TEST_ROOT = os.path.join(REPO, "CommandLineTests", "PokemonChampions")
+BUILD_DIR = os.path.join(REPO, "switch_bot", "build_mac")
+TEST_ROOT = os.path.join(REPO, "switch_bot", "CommandLineTests", "PokemonChampions")
 TEST_IMAGES = os.path.join(REPO, "test_images")
 RESULTS_PATH = os.path.join(REPO, "tools", "regression_results.json")
 

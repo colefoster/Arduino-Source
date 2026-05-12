@@ -35,7 +35,7 @@ from pathlib import Path
 from urllib.parse import urlparse, parse_qs
 
 REPO = Path(__file__).resolve().parent.parent
-BUILD = REPO / "build_mac"
+BUILD = REPO / "switch_bot" / "build_mac"
 EXE = BUILD / "SerialProgramsCommandLine"
 TEST_IMAGES = REPO / "test_images"
 TMP_DIR = REPO / "data"

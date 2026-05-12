@@ -78,7 +78,7 @@ STATIC_DIR = Path(__file__).parent / "static"
 
 TEST_IMAGES_DIR = BASE / "test_images"
 REF_FRAMES_DIR = BASE / "ref_frames"
-RESOURCES_DIR = BASE / "Resources" / "PokemonChampions"
+RESOURCES_DIR = BASE / "switch_bot" / "Resources" / "PokemonChampions"
 LABELS_DIR = BASE / "labels"
 
 FORMATS = {

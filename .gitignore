@@ -1,13 +1,13 @@
-SerialPrograms/bin/
+switch_bot/SerialPrograms/bin/
 
 .vscode
 .qtcreator
 
-discord_social_sdk_win/
-discord_partner_sdk.dll
-3rdPartyBinaries/discord_social_sdk_mac/
-3rdPartyBinaries/onnxruntime-osx-arm64-*/
-3rdPartyBinaries/onnxruntime-osx-x86_64-*/
+switch_bot/3rdPartyBinaries/discord_social_sdk_win/
+switch_bot/3rdPartyBinaries/discord_partner_sdk.dll
+switch_bot/3rdPartyBinaries/discord_social_sdk_mac/
+switch_bot/3rdPartyBinaries/onnxruntime-osx-arm64-*/
+switch_bot/3rdPartyBinaries/onnxruntime-osx-x86_64-*/
 
 
 # macOS hidden system file
@@ -35,19 +35,19 @@ build/
 *.pch
 
 # Compiled Dynamic libraries
-SerialPrograms/*.so
-SerialPrograms/*.dylib
-SerialPrograms/*.dll
+switch_bot/SerialPrograms/*.so
+switch_bot/SerialPrograms/*.dylib
+switch_bot/SerialPrograms/*.dll
 
 # Fortran module files
 *.mod
 *.smod
 
 # Compiled Static libraries
-SerialPrograms/*.lai
-SerialPrograms/*.la
-SerialPrograms/*.a
-SerialPrograms/*.lib
+switch_bot/SerialPrograms/*.lai
+switch_bot/SerialPrograms/*.la
+switch_bot/SerialPrograms/*.a
+switch_bot/SerialPrograms/*.lib
 
 # Executables
 *.exe
@@ -55,11 +55,10 @@ SerialPrograms/*.lib
 *.app
 
 .vs
-build_and_run.bat
-Resources/*
-!Resources/PokemonChampions/
-Packages/
-SerialPrograms/CMakeLists.txt.user
+switch_bot/Resources/*
+!switch_bot/Resources/PokemonChampions/
+switch_bot/Packages/
+switch_bot/SerialPrograms/CMakeLists.txt.user
 opencv_world4120.dll
 opencv_world4120d.dll
 
@@ -75,10 +74,10 @@ CLAUDE.md
 
 build_*/
 .cache/*
-Packages/*
+switch_bot/Packages/*
 
 # Pokemon Champions: reference video captures & extracted frames (local only)
-SerialPrograms/Source/PokemonChampions/ref_frames/
+switch_bot/SerialPrograms/Source/PokemonChampions/ref_frames/
 
 
 ref_frames/vod_extract/

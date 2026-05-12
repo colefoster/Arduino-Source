@@ -17,7 +17,7 @@ import sys
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
-CLI = REPO / "build_mac" / "SerialProgramsCommandLine"
+CLI = REPO / "switch_bot" / "build_mac" / "SerialProgramsCommandLine"
 TARGETS = [
     REPO / "test_images" / "action_menu",
     REPO / "test_images" / "move_select",

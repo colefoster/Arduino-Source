@@ -21,7 +21,7 @@ import sys
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 REPO_ROOT = os.path.dirname(SCRIPT_DIR)
 DEFAULT_SRC = os.path.join(REPO_ROOT, "Screenshots", "labeled_tests", "PokemonChampions")
-DEFAULT_DST = os.path.join(REPO_ROOT, "CommandLineTests", "PokemonChampions")
+DEFAULT_DST = os.path.join(REPO_ROOT, "switch_bot", "CommandLineTests", "PokemonChampions")
 COLEPC_SRC = "colepc:C:/Dev/pokemon-champions/Screenshots/labeled_tests/PokemonChampions/"
 
 

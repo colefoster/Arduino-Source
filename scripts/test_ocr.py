@@ -39,8 +39,8 @@ def load_dict(path):
     # slug -> display name
     return {slug: names[0] for slug, names in eng.items()}
 
-MOVES_DICT = load_dict(REPO / "Resources/PokemonChampions/PokemonMovesOCR.json")
-SPECIES_DICT = load_dict(REPO / "Resources/PokemonChampions/PokemonSpeciesOCR.json")
+MOVES_DICT = load_dict(REPO / "switch_bot/Resources/PokemonChampions/PokemonMovesOCR.json")
+SPECIES_DICT = load_dict(REPO / "switch_bot/Resources/PokemonChampions/PokemonSpeciesOCR.json")
 
 # All display names for fuzzy matching
 MOVE_NAMES = list(MOVES_DICT.values())
