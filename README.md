@@ -2,34 +2,51 @@
 
 Automation + ML tooling for **Pokemon Champions** (Regulation M-A VGC). Built on top of [PokemonAutomation/Arduino-Source](https://github.com/PokemonAutomation/Arduino-Source) — capture-card + microcontroller automation for a real Switch.
 
-## What's here
+## Layout
 
-- **Switch automation** — C++ Serial Programs (auto-ladder, detector test) under `SerialPrograms/Source/PokemonChampions/`
-- **Battle policy** — PyTorch action / lead / win-probability models in `src/vgc_model/` with sharded training cache
-- **MCTS search** — 1-ply rollouts using a battle sim (`sim/`) and the win-probability model as eval (`inference/`)
-- **PS spectator** — websocket client that gathers training data from live Pokemon Showdown battles (`scripts/spectate_ps_battles.py`)
-- **Dev dashboard** — FastAPI + JS SPA at [champions.colefoster.ca](https://champions.colefoster.ca) for labeling, regression, training monitoring (`dashboard/`)
+The repo is a monorepo of four discrete subsystems plus shared data.
+
+| Dir | What lives here |
+|---|---|
+| **`switch_bot/`** | C++ Qt fork of Arduino-Source. The live bot, OCR readers, screen detectors, and the `LiveDetectorTrace` passive watcher that drives every match. Includes `SerialPrograms/`, `Common/`, `3rdParty*/`, `IconResource/`, `CommandLineTests/`, `Resources/`, `Packages/`, `build_mac/`. |
+| **`ml/`** | Python ML pipeline. `ml/vgc_model/` is the package: data parsing/encoding, model definitions, training, inference server (`/predict`, `/search`), battle sim. `ml/poke_env/` is the vendored Showdown-env library used for self-play. |
+| **`spectator/`** | Long-running Showdown websocket spectator (8 connections on `ash`) that collects training replays. `orchestrator.py`, `ps_battles.py`, `status.py`, `sync_replays.sh`. |
+| **`sv_trade_bot/`** | Separate Pokemon S/V trade-bot driver (Klawf/scvi-bot ecosystem). Headless Playwright + JSON-over-TCP bridge to a SerialPrograms panel. |
+| **`devtools/`** | Mac-local developer surface. `devtools/dashboard/` (FastAPI SPA on :9875), `devtools/tools/` (`mac_dev_runner.py` on :9876, OCR/detector tuning, retest harness, video curation), `devtools/test_images/` (labeled regression corpus). |
+| **`scripts/`** | Top-level entry points: training scripts, replay parsing, ladder play, vocab building. |
+| **`tests/`** | Python `pytest` suite for ML + sim. |
+| **`data/`** | Shared datasets: replays, vocab, feature tables, sprite cache, checkpoints, usage stats. Most subdirs are gitignored (regenerable). |
+| **`plans/`, `docs/`** | Design docs + architecture notes. |
+
+## Building
+
+- **macOS (dev + regression):** `cmake -B switch_bot/build_mac -S switch_bot/SerialPrograms` then `cmake --build switch_bot/build_mac --target SerialPrograms --target SerialProgramsCommandLine -j 10`. See `docs/ARCHITECTURE.md`.
+- **Linux (training):** PyTorch container on unraid (`pokemon-champions-gpu`). See `infra_unraid_gpu_container.md` in agent memory.
+- **Python deps:** `pip install -r requirements.txt` if/when a requirements file lands; for now ad-hoc.
+
+## Running the local stack
+
+Two launchd-managed services on the Mac:
+
+- `com.cole.pokemon-champions.dashboard` — uvicorn server on `:9875` (cwd `devtools/dashboard/`)
+- `com.cole.pokemon-champions.mac-dev-runner` — `devtools/tools/mac_dev_runner.py` on `:9876`
+
+Both reload with `launchctl unload <plist> && launchctl load <plist>`.
 
 ## Documentation
 
 | | |
 |---|---|
-| [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | Topology, system boundaries, data flow, operational notes |
-| [`plans/`](plans/README.md) | Design docs (search engine, sim v2, test image arch) |
-| [`CodingAgentContext/PokemonChampionsReference.md`](CodingAgentContext/PokemonChampionsReference.md) | Game-data reference (Pokemon, moves, abilities, items) |
-| [`CodingAgentContext/AutomationProgramPatterns.md`](CodingAgentContext/AutomationProgramPatterns.md) | Patterns for new SerialPrograms routines |
-
-## Building
-
-- **Mac (regression tests + OCR dev):** see [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — `cmake --build build_mac --target SerialProgramsCommandLine`
-- **Windows (live bot):** Visual Studio + Qt6 on ColePC. Capture card + microcontroller required for live automation.
-- **Linux (training):** PyTorch container on unraid (`pokemon-champions-gpu`).
+| [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | Topology, system boundaries, data flow |
+| [`plans/`](plans/) | Design docs (search engine, sim v2, refactor plans) |
+| [`docs/coding_agent_context/PokemonChampionsReference.md`](docs/coding_agent_context/PokemonChampionsReference.md) | Game-data reference (Pokemon, moves, abilities, items) |
+| [`docs/coding_agent_context/AutomationProgramPatterns.md`](docs/coding_agent_context/AutomationProgramPatterns.md) | Patterns for new SerialPrograms routines |
 
 ---
 
 ## Upstream attribution
 
-This repo is a fork of [PokemonAutomation/Arduino-Source](https://github.com/PokemonAutomation/Arduino-Source). Pokemon Champions code lives under `SerialPrograms/Source/PokemonChampions/` and is additive — the rest of the upstream tree (other game programs, framework code, Discord/DPP integrations) is preserved largely as-is.
+`switch_bot/` is a fork of [PokemonAutomation/Arduino-Source](https://github.com/PokemonAutomation/Arduino-Source). Pokemon Champions code lives under `switch_bot/SerialPrograms/Source/PokemonChampions/` and is additive — the rest of the upstream tree is preserved largely as-is.
 
 [<img src="https://canary.discordapp.com/api/guilds/695809740428673034/widget.png?style=banner2">](https://discord.gg/cQ4gWxN)
 

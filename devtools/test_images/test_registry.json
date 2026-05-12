@@ -8,7 +8,8 @@
     "action_menu",
     "move_select",
     "target_select",
-    "pokemon_switch",
+    "singles_switch",
+    "doubles_switch",
     "result_screen",
     "post_match",
     "main_menu",
@@ -49,7 +50,8 @@
       "target_select"
     ],
     "PokemonSwitchDetector": [
-      "pokemon_switch"
+      "singles_switch",
+      "doubles_switch"
     ],
     "ResultScreenDetector": [
       "result_screen"
