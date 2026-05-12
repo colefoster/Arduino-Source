@@ -1,0 +1,8 @@
+{
+    "channel": "ability_item_parse_fail",
+    "dedup_key": "parse:O Mo o",
+    "raw_text": "O Mo o",
+    "reason": "ability-item-parse-fail",
+    "side": "right",
+    "ts_ms": 1778592331844
+}

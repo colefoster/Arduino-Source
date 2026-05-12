@@ -1,0 +1,8 @@
+{
+    "channel": "ability_item_parse_fail",
+    "dedup_key": "parse:.y",
+    "raw_text": ".y",
+    "reason": "ability-item-parse-fail",
+    "side": "right",
+    "ts_ms": 1778592690293
+}

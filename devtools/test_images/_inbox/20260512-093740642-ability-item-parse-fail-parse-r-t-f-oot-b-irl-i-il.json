@@ -1,0 +1,8 @@
+{
+    "channel": "ability_item_parse_fail",
+    "dedup_key": "parse:R T F oot b irl: i il",
+    "raw_text": "R T F oot b irl: i il",
+    "reason": "ability-item-parse-fail",
+    "side": "left",
+    "ts_ms": 1778593060642
+}

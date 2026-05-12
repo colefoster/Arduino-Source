@@ -1,0 +1,8 @@
+{
+    "channel": "ability_item_parse_fail",
+    "dedup_key": "parse:IR 2 o -l",
+    "raw_text": "IR 2 o -l",
+    "reason": "ability-item-parse-fail",
+    "side": "right",
+    "ts_ms": 1778592879343
+}
