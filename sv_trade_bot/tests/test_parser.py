@@ -1,6 +1,6 @@
 """Parser tests against verbatim KlawfAPP DM samples (April 2026 transcript)."""
 
-from discord_driver.parser import (
+from sv_trade_bot.parser import (
     BatchAllComplete, BatchTradeCompleted, BatchTradeReady,
     CodeIssued, Queued, UpNext, LoadingTrade, Searching, PartnerFound,
     NoPartner, TooSlow, TradeFinished, TradeCanceled, Unknown,

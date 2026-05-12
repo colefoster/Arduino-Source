@@ -2,9 +2,9 @@
 
 Use this to dry-run the full loop with zero hardware:
 
-    Terminal 1:  python3 -m discord_driver --mock-discord --sets sets.txt \\
+    Terminal 1:  python3 -m sv_trade_bot --mock-discord --sets sets.txt \\
                      --min-seconds-between-posts 0
-    Terminal 2:  python3 -m discord_driver.noop_switch --port 9988
+    Terminal 2:  python3 -m sv_trade_bot.noop_switch --port 9988
 
 The noop "Switch" sends READY on connect, then for every TRADE_READY it
 receives waits `--trade-duration` seconds (simulating the trade) and replies

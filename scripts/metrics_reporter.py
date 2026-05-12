@@ -99,7 +99,7 @@ def get_spectator_status() -> dict:
             alive = len(lines) >= 2
         else:
             result = subprocess.run(
-                ["pgrep", "-f", "spectate_ps_battles"],
+                ["pgrep", "-f", "spectator/ps_battles"],
                 capture_output=True, text=True, timeout=5,
             )
             alive = result.returncode == 0

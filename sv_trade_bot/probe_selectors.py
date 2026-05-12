@@ -3,7 +3,7 @@
 Run AFTER first-run login (so the persistent profile is authenticated):
 
     pip3 install playwright && playwright install chromium
-    python3 -m discord_driver.probe_selectors
+    python3 -m sv_trade_bot.probe_selectors
 
 Pass --headless to run without a browser window after the first successful run.
 
@@ -31,8 +31,8 @@ import sys
 import time
 from pathlib import Path
 
-from discord_driver.parser import Unknown, parse_message
-from discord_driver.playwright_session import DiscordSession
+from sv_trade_bot.parser import Unknown, parse_message
+from sv_trade_bot.playwright_session import DiscordSession
 
 logger = logging.getLogger("probe")
 
@@ -57,7 +57,7 @@ def probe(
             session.goto_discord()
         except RuntimeError as e:
             print(f"   FAIL: {e}")
-            print(f"   Fix: run `python3 -m discord_driver.probe_selectors` (no --headless), "
+            print(f"   Fix: run `python3 -m sv_trade_bot.probe_selectors` (no --headless), "
                   f"log into Discord in the browser window, close, and re-run.")
             return 2
         print(f"   OK. URL = {session.page.url}")

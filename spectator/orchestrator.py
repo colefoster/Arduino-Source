@@ -7,9 +7,9 @@ assignment — each battle is joined by exactly one connection, with failover
 if a connection dies.
 
 Usage:
-    python3 scripts/spectate_orchestrator.py                     # 8 connections
-    python3 scripts/spectate_orchestrator.py --connections 4      # fewer connections
-    python3 scripts/spectate_orchestrator.py --min-elo 1200       # only 1200+
+    python3 spectator/orchestrator.py                     # 8 connections
+    python3 spectator/orchestrator.py --connections 4      # fewer connections
+    python3 spectator/orchestrator.py --min-elo 1200       # only 1200+
 """
 
 from __future__ import annotations

@@ -1,6 +1,6 @@
 import pytest
 
-from discord_driver.set_queue import SetQueue, _species_from_body, load_sets_from_file
+from sv_trade_bot.set_queue import SetQueue, _species_from_body, load_sets_from_file
 
 
 @pytest.fixture

@@ -6,9 +6,9 @@ Connects as a guest, polls for active battles in Champions formats,
 joins as spectator, and saves the full log when the battle ends.
 
 Usage:
-    python3 scripts/spectate_ps_battles.py                    # run until Ctrl+C
-    python3 scripts/spectate_ps_battles.py --min-elo 1200     # only 1200+ rated
-    python3 scripts/spectate_ps_battles.py --duration 3600    # run for 1 hour
+    python3 spectator/ps_battles.py                    # run until Ctrl+C
+    python3 spectator/ps_battles.py --min-elo 1200     # only 1200+ rated
+    python3 spectator/ps_battles.py --duration 3600    # run for 1 hour
 """
 
 from __future__ import annotations

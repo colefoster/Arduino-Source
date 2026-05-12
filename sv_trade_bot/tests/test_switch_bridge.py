@@ -3,7 +3,7 @@ import time
 
 import pytest
 
-from discord_driver.switch_bridge import FakeSwitch, SwitchBridge
+from sv_trade_bot.switch_bridge import FakeSwitch, SwitchBridge
 
 
 def _free_port() -> int:

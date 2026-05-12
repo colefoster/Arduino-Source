@@ -22,7 +22,7 @@ import time
 from dataclasses import dataclass, field
 from typing import List, Optional
 
-from discord_driver.playwright_session import ScrapedMessage
+from sv_trade_bot.playwright_session import ScrapedMessage
 
 
 @dataclass

@@ -18,12 +18,12 @@ import uuid
 from dataclasses import dataclass, field
 from typing import Optional, Protocol, Set
 
-from discord_driver.parser import (
+from sv_trade_bot.parser import (
     BatchAllComplete, BatchTradeCompleted, BatchTradeReady,
     CodeIssued, LoadingTrade, NoPartner, TooSlow, TradeCanceled, TradeFinished,
     Unknown, parse_message,
 )
-from discord_driver.set_queue import SetQueue, TradeSet
+from sv_trade_bot.set_queue import SetQueue, TradeSet
 
 
 logger = logging.getLogger(__name__)

@@ -5,9 +5,9 @@ from typing import List, Optional
 
 import pytest
 
-from discord_driver.driver import Driver, DriverConfig
-from discord_driver.playwright_session import ScrapedMessage
-from discord_driver.set_queue import SetQueue
+from sv_trade_bot.driver import Driver, DriverConfig
+from sv_trade_bot.playwright_session import ScrapedMessage
+from sv_trade_bot.set_queue import SetQueue
 
 
 VAPOREON = "Vaporeon @ Leftovers\nAbility: Water Absorb"
@@ -234,7 +234,7 @@ def test_min_seconds_between_posts_enforced(tmp_path, monkeypatch):
         driver = Driver(session, queue, FakeBridge(), config)
 
         fake_now = [1000.0]
-        monkeypatch.setattr("discord_driver.driver.time.monotonic",
+        monkeypatch.setattr("sv_trade_bot.driver.time.monotonic",
                             lambda: fake_now[0])
 
         driver.tick()
@@ -269,7 +269,7 @@ def test_in_flight_stale_halts_driver(tmp_path, monkeypatch):
         # any DM activity (bot ghosted us).
         real_time = __import__("time")
         original = real_time.time
-        monkeypatch.setattr("discord_driver.driver.time.time",
+        monkeypatch.setattr("sv_trade_bot.driver.time.time",
                             lambda: original() + 120)
 
         driver.tick()

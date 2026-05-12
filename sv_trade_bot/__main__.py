@@ -1,6 +1,6 @@
 """CLI entry point.
 
-    python -m discord_driver \
+    python -m sv_trade_bot \
         --sets sets.txt \
         --bot-username KlawfAPP \
         --channel-server "Klawf Cove" \
@@ -18,10 +18,10 @@ import sys
 import time
 from pathlib import Path
 
-from discord_driver.driver import Driver, DriverConfig
-from discord_driver.playwright_session import DiscordSession
-from discord_driver.set_queue import SetQueue, load_sets_from_file
-from discord_driver.switch_bridge import SwitchBridge
+from sv_trade_bot.driver import Driver, DriverConfig
+from sv_trade_bot.playwright_session import DiscordSession
+from sv_trade_bot.set_queue import SetQueue, load_sets_from_file
+from sv_trade_bot.switch_bridge import SwitchBridge
 
 
 def main() -> int:
@@ -64,7 +64,7 @@ def main() -> int:
         level=logging.INFO,
         format="%(asctime)s %(levelname)s %(name)s: %(message)s",
     )
-    log = logging.getLogger("discord_driver")
+    log = logging.getLogger("sv_trade_bot")
 
     queue = SetQueue(args.db)
     if args.sets:
@@ -92,7 +92,7 @@ def main() -> int:
 
     try:
         if args.mock_discord:
-            from discord_driver.mock_session import MockSession
+            from sv_trade_bot.mock_session import MockSession
             log.info("MOCK MODE: scenario=%s. Discord will not be touched.",
                      args.mock_scenario)
             session = MockSession(scenario=args.mock_scenario)
