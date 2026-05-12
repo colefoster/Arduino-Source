@@ -38,14 +38,24 @@ struct BattleSnapshot;
 //  Live-pipeline state that doesn't belong in BattleStateTracker (per-poll
 //  reader output, screen-local counters). Passed by value to the suggester.
 struct LiveContext{
-    //  Last-known cursor slot on team_preview_selecting (0..5, -1 = unread
-    //  / cursor on Done area).
+    //  Last-known cursor slot on team_preview_selecting (0..5, 6=Done,
+    //  -1 = unread). Nav-loop guard counter below — incremented per
+    //  Down/Up press, reset when cursor changes.
     int tp_cursor_slot = -1;
+    int tp_nav_since_change = 0;
     //  Per-slot lead-mark digit on the team_preview_selecting screen.
     //  '1'..'4' if marked at that lead-order, 0 if unmarked / unread.
     //  Read from screen each poll — robust to mid-stream auto-press
     //  toggle, missed presses, manual interventions.
     std::array<char, 6> tp_marks_per_slot = {};
+
+    //  Configured lead order. tp_lead_order[p] = own-team slot index
+    //  (0..5) that should bear lead digit (p+1). Length = tp_lead_needed
+    //  (3 for singles, 4 for doubles). Entries beyond tp_lead_needed
+    //  are ignored. -1 sentinel means "unconfigured at this position"
+    //  — suggester treats as a no-op for that position.
+    std::array<int, 4> tp_lead_order = {0, 1, 2, 3};
+    int tp_lead_needed = 4;
     //  selected_index() output from whichever menu detector last fired.
     //  Drives nav-then-A in the menu suggester. -1 = unread.
     int menu_selected_index = -1;

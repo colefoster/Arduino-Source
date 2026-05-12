@@ -61,7 +61,14 @@ static std::optional<InputSuggestion> suggest_move_select(
     }
     const int target = ctx.target_move_slot;
     const int cursor = ctx.move_select_cursor;
-    if (cursor >= 0 && cursor < target){
+    //  Cursor unread (just entered the screen, mid-animation, etc.) —
+    //  wait a poll. Pressing A here used to fire on the default slot 0,
+    //  which beat the random-target nav and "always picked move 1"
+    //  whenever we entered move_select with the cursor still rendering.
+    if (cursor < 0){
+        return std::nullopt;
+    }
+    if (cursor < target){
         InputSuggestion s;
         s.button = "Down";
         s.label = "Down — to Move " + std::to_string(target + 1);
@@ -82,9 +89,7 @@ static std::optional<InputSuggestion> suggest_move_select(
     InputSuggestion s;
     s.button = "A";
     s.label = "A — Move " + std::to_string(target + 1);
-    s.reason = (cursor < 0)
-        ? "cursor unread; pressing A on default slot 0"
-        : "cursor on target slot " + std::to_string(target);
+    s.reason = "cursor on target slot " + std::to_string(target);
     s.highlights.push_back(move_slot_overlay_box(target));
     return s;
 }
@@ -117,74 +122,115 @@ static std::optional<InputSuggestion> suggest_team_preview_selecting(
     const LiveContext& ctx
 ){
     (void)tracker;
-    int marks_count = 0;
-    int first_unmarked = -1;
-    for (int i = 0; i < 6; i++){
-        char d = ctx.tp_marks_per_slot[i];
-        if (d >= '1' && d <= '4'){
-            marks_count++;
-        }else if (first_unmarked < 0){
-            first_unmarked = i;
+    const int needed = ctx.tp_lead_needed;  //  3 (singles) or 4 (doubles)
+
+    //  Walk the configured lead order. For each position p, the slot
+    //  ctx.tp_lead_order[p] should bear digit ('1'+p). If a position is
+    //  wrong (someone else has the digit, or our target slot has a
+    //  different digit), the fix at that position becomes our target.
+    //  Pressing A on a marked slot in-game clears its mark AND
+    //  renumbers higher digits down — so a single "unmark wrong slot"
+    //  press lets the next poll re-mark in the correct order.
+    int target_slot = -1;
+    std::string reason;
+    for (int p = 0; p < needed; p++){
+        const char want_digit = (char)('1' + p);
+        const int want_slot = ctx.tp_lead_order[p];
+        if (want_slot < 0 || want_slot > 5){
+            //  Unconfigured / invalid entry — fall through to "mark first
+            //  unmarked slot" behavior at this position.
+            int fallback = -1;
+            for (int s = 0; s < 6; s++){
+                if (ctx.tp_marks_per_slot[s] == 0){ fallback = s; break; }
+            }
+            if (fallback < 0) continue;
+            target_slot = fallback;
+            reason = "lead " + std::to_string(p+1) + " unconfigured; marking slot "
+                   + std::to_string(fallback);
+            break;
         }
+        //  Who currently bears want_digit?
+        int actual_slot = -1;
+        for (int s = 0; s < 6; s++){
+            if (ctx.tp_marks_per_slot[s] == want_digit){ actual_slot = s; break; }
+        }
+        if (actual_slot == want_slot){
+            //  This lead position is already correct.
+            continue;
+        }
+        if (actual_slot >= 0){
+            //  Wrong slot bears this digit. Clear it (A on it) so the
+            //  digits cascade down, then next poll re-marks correctly.
+            target_slot = actual_slot;
+            reason = "clearing wrong lead " + std::to_string(p+1) + " at slot "
+                   + std::to_string(actual_slot) + " (expected slot "
+                   + std::to_string(want_slot) + ")";
+            break;
+        }
+        //  No slot bears this digit yet. The target slot must be empty
+        //  to receive the mark — if it has a *higher* digit from a
+        //  prior wrong placement, clear that first.
+        char want_slot_mark = ctx.tp_marks_per_slot[want_slot];
+        if (want_slot_mark >= '1' && want_slot_mark <= '4'){
+            target_slot = want_slot;
+            reason = "clearing stale digit at slot " + std::to_string(want_slot)
+                   + " before placing lead " + std::to_string(p+1);
+        }else{
+            target_slot = want_slot;
+            reason = "marking slot " + std::to_string(want_slot)
+                   + " as lead " + std::to_string(p+1);
+        }
+        break;
     }
 
-    //  Singles brings 3, Doubles brings 4.
-    const int needed = (ctx.format_target == 0) ? 3 : 4;
-    if (marks_count >= needed){
-        //  All marks made. Need cursor on Done (index 6). If still on a slot,
-        //  Down advances toward Done.
-        int cursor = ctx.tp_cursor_slot;
-        if (cursor == 6){
-            InputSuggestion s;
-            s.button = "A";
-            s.label = "A — Done";
-            s.reason = std::to_string(needed) + " marks; cursor on Done";
-            return s;
-        }
-        if (cursor < 0){
-            return std::nullopt;  //  cursor unread; wait
-        }
+    //  All configured positions are correct — head to Done.
+    if (target_slot < 0){
+        target_slot = 6;
+        reason = "all " + std::to_string(needed) + " leads correct; pressing Done";
+    }
+
+    const int cursor = ctx.tp_cursor_slot;
+
+    //  Nav-loop guard for Done. The Done button's cursor strip
+    //  occasionally fails to score (different x/y than per-slot
+    //  strips) — without a bound we Down forever. After 6 navs
+    //  without the cursor changing, fall back to A.
+    if (target_slot == 6 && cursor >= 0 && cursor != 6
+        && ctx.tp_nav_since_change >= 6){
         InputSuggestion s;
-        s.button = "Down";
-        s.label = "Down — to Done";
-        s.reason = std::to_string(needed) + " marks; cursor=" + std::to_string(cursor) + " advancing to Done";
+        s.button = "A";
+        s.label = "A — Done (forced; cursor read stuck at " + std::to_string(cursor) + ")";
+        s.reason = "tp nav-loop guard: " + std::to_string(ctx.tp_nav_since_change)
+                 + " navs without cursor change; assuming cursor on Done";
         return s;
     }
-
-    if (first_unmarked < 0){
-        //  Defensive: marks_count<4 but no unmarked slot? Shouldn't happen
-        //  unless OCR is mis-reading. Wait a poll.
-        return std::nullopt;
-    }
-
-    int target = first_unmarked;
-    int cursor = ctx.tp_cursor_slot;
 
     if (cursor < 0){
         return std::nullopt;  //  cursor unread; wait
     }
-    if (cursor < target){
+    if (cursor < target_slot){
         InputSuggestion s;
         s.button = "Down";
-        s.label = "Down — to slot " + std::to_string(target);
-        s.reason = "cursor=" + std::to_string(cursor)
-                 + " target=" + std::to_string(target)
-                 + " marks=" + std::to_string(marks_count) + "/" + std::to_string(needed);
+        s.label = "Down — to " + (target_slot == 6 ? std::string("Done")
+                                                   : "slot " + std::to_string(target_slot));
+        s.reason = reason + " (cursor=" + std::to_string(cursor) + ")";
         return s;
     }
-    if (cursor > target){
+    if (cursor > target_slot){
         InputSuggestion s;
         s.button = "Up";
-        s.label = "Up — to slot " + std::to_string(target);
-        s.reason = "cursor=" + std::to_string(cursor)
-                 + " target=" + std::to_string(target)
-                 + " marks=" + std::to_string(marks_count) + "/" + std::to_string(needed);
+        s.label = "Up — to " + (target_slot == 6 ? std::string("Done")
+                                                 : "slot " + std::to_string(target_slot));
+        s.reason = reason + " (cursor=" + std::to_string(cursor) + ")";
         return s;
     }
+    //  cursor == target_slot
     InputSuggestion s;
     s.button = "A";
-    s.label = "A — mark slot " + std::to_string(target);
-    s.reason = "marks=" + std::to_string(marks_count) + "/" + std::to_string(needed);
+    s.label = (target_slot == 6)
+        ? std::string("A — Done")
+        : ("A — slot " + std::to_string(target_slot));
+    s.reason = reason;
     return s;
 }
 
@@ -236,37 +282,28 @@ static std::optional<InputSuggestion> suggest_vertical_menu(
 static std::optional<InputSuggestion> suggest_pokemon_switch(
     const LiveContext& ctx
 ){
-    //  Random-among-alive picker: collect all alive lead slots (0-3),
-    //  pick the one whose index matches the pre-rolled switch_target_slot
-    //  modulo the count. The trace rolls switch_target_slot once per
-    //  pokemon_switch entry so the choice is consistent across polls in
-    //  the same switch attempt — re-entering the screen in a later turn
-    //  re-rolls.
-    std::array<int, 4> alive_slots{};
-    int alive_count = 0;
-    for (int i = 0; i < 4; i++){    //  Only leads (0-3) are pickable.
-        if (!ctx.switch_alive[i]) continue;
-        //  Skip mons currently on field — selecting one of them on the
-        //  switch screen tries to swap a mon with itself and the game
-        //  rejects it. Filter only when we actually have active info;
-        //  if both slots are -1 (no HUD read yet), keep the permissive
-        //  behavior so we don't strand on an empty pool.
-        bool is_on_field = false;
-        for (int a : resolve_own_active(ctx)){
-            if (a == i){ is_on_field = true; break; }
+    //  Target is an absolute slot 0-3, pre-rolled by the trace from
+    //  {alive AND not on-field} at the moment of entry to pokemon_switch.
+    //  Trust it here — do NOT re-derive on-field per poll: the BattleHUD
+    //  active-slot read flickers during the switch screen, and a
+    //  per-poll-rebuilt candidate list made the target oscillate, which
+    //  pinged the cursor Down/Up/Down/Up until the session timed out.
+    int target = ctx.switch_target_slot;
+    if (target < 0 || target >= 4 || !ctx.switch_alive[target]){
+        //  No valid pre-rolled target yet (first-poll race, or the rolled
+        //  slot's alive read got cleared). Pick deterministically: first
+        //  alive lead. Stable across polls so the cursor can't oscillate
+        //  even when the on-field filter would have flickered.
+        target = -1;
+        for (int i = 0; i < 4; i++){
+            if (ctx.switch_alive[i]){ target = i; break; }
         }
-        if (is_on_field) continue;
-        alive_slots[alive_count++] = i;
+        if (target < 0){
+            //  No alive bench candidate visible. Wait for the reader to
+            //  populate alive bits.
+            return std::nullopt;
+        }
     }
-    if (alive_count == 0){
-        //  No bench candidate. Either OCR missed both alive slots, or every
-        //  alive lead is currently on the field (singles+1 alive bench is
-        //  the normal case; this means we shouldn't be on the switch
-        //  screen at all). Wait a poll.
-        return std::nullopt;
-    }
-    const int pick_idx = ((ctx.switch_target_slot % alive_count) + alive_count) % alive_count;
-    const int target = alive_slots[pick_idx];
     int cursor = ctx.switch_cursor;
     if (cursor < 0){
         //  No yellow highlight read. On a forced switch the highlight can

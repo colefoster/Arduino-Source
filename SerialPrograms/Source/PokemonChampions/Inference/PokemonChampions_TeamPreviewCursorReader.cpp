@@ -27,8 +27,14 @@ TeamPreviewCursorReader::TeamPreviewCursorReader(){
     m_highlight[3] = ImageFloatBox(0.0299, 0.5300, 0.0108, 0.0268);
     m_highlight[4] = ImageFloatBox(0.0318, 0.6513, 0.0093, 0.0237);
     m_highlight[5] = ImageFloatBox(0.0335, 0.7654, 0.0069, 0.0300);
-    //  Index 6 = Done button (bottom of left column).
-    m_highlight[6] = ImageFloatBox(0.1324, 0.8572, 0.0146, 0.0428);
+    //  Index 6 = Done button (bottom of left column). Updated 2026-05-11
+    //  with user-drawn `doubles_done` box on
+    //  test_images/team_preview_selecting/20260505-game2-video-20260505-153202484050_0032.png.
+    //  Slightly taller catch area than the previous box, picking up the
+    //  Done highlight strip the reader had been missing — that miss is
+    //  what stranded the suggester pressing Down forever once 4 marks
+    //  were placed in doubles.
+    m_highlight[6] = ImageFloatBox(0.1319, 0.8530, 0.0146, 0.0465);
 }
 
 

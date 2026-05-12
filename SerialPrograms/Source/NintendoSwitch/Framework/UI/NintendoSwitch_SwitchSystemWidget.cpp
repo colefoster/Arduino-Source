@@ -130,7 +130,13 @@ SwitchSystemWidget::SwitchSystemWidget(
     connect(
         m_command, &CommandRow::load_profile,
         m_command, [this](){
-            std::string path = QFileDialog::getOpenFileName(this, tr("Choose the name of your profile file"), "", tr("JSON files (*.json)")).toStdString();
+            //  Default the dialog to the UserSettings directory — that's
+            //  where the auto-loader reads SwitchSystem-default.json from,
+            //  so load/save round-trip lands in the right spot. Without
+            //  this hint, Qt defaults to the process cwd (= build_mac when
+            //  launched from the build dir), which writes orphaned copies.
+            QString start_dir = QString::fromStdString(SETTINGS_PATH());
+            std::string path = QFileDialog::getOpenFileName(this, tr("Choose the name of your profile file"), start_dir, tr("JSON files (*.json)")).toStdString();
             if (path.empty()){
                 return;
             }
@@ -146,7 +152,13 @@ SwitchSystemWidget::SwitchSystemWidget(
     connect(
         m_command, &CommandRow::save_profile,
         m_command, [this](){
-            std::string path = QFileDialog::getSaveFileName(this, tr("Choose the name of your profile file"), "", tr("JSON files (*.json)")).toStdString();
+            //  Default to UserSettings + a "SwitchSystem-default.json"
+            //  filename so a no-rename save goes straight to the auto-load
+            //  path. User can still rename if they want a named profile.
+            QString start_path = QString::fromStdString(
+                SETTINGS_PATH() + "SwitchSystem-default.json"
+            );
+            std::string path = QFileDialog::getSaveFileName(this, tr("Choose the name of your profile file"), start_path, tr("JSON files (*.json)")).toStdString();
             if (path.empty()){
                 return;
             }

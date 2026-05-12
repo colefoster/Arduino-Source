@@ -43,6 +43,11 @@ struct PokemonSwitchSlot{
     int hp_current = -1;            //  own only
     int hp_max     = -1;            //  own only
     int hp_pct     = -1;            //  opp only
+    //  Raw OCR strings for split current/max HP boxes. Empty if the
+    //  per-slot box was zero-area (slot beyond layout's active count)
+    //  or OCR produced no output. Surfaced on the dashboard for tuning.
+    std::string hp_current_raw;     //  own only
+    std::string hp_max_raw;         //  own only
 };
 
 
@@ -62,10 +67,21 @@ public:
         const TeamCandidates* hint = nullptr) const;
 
 private:
+    //  Per-row boxes for one layout (singles 3-row OR doubles 4-row).
+    //  Slots beyond the layout's active count get zero-area boxes so
+    //  yellow_score returns 0 and they never win the cursor pick.
+    struct OwnLayout{
+        std::array<ImageFloatBox, 6> species;
+        std::array<ImageFloatBox, 6> hp_text;        //  combined "X/Y" — legacy
+        std::array<ImageFloatBox, 6> hp_current;     //  split — just the current number
+        std::array<ImageFloatBox, 6> hp_max;         //  split — just the max number (post-slash)
+        std::array<ImageFloatBox, 6> highlight;
+        int active_slot_count = 0;  //  3 (singles) or 4 (doubles)
+    };
+
     Language m_language;
-    std::array<ImageFloatBox, 6> m_own_species;
-    std::array<ImageFloatBox, 6> m_own_hp_text;
-    std::array<ImageFloatBox, 6> m_own_highlight;
+    OwnLayout m_doubles;
+    OwnLayout m_singles;
     std::array<ImageFloatBox, 6> m_opp_hp_pct;
 };
 

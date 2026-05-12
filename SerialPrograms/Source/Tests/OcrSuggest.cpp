@@ -260,6 +260,16 @@ int run_ocr_suggest(const std::string& reader_name, const std::string& image_pat
             //  highlighted slot (yellow). Empty slots emit -1 sentinels.
             PokemonSwitchReader reader(Language::English);
             PokemonSwitchResult r = reader.read(log, image);
+            auto esc = [](const std::string& s){
+                std::string o;
+                for (char c : s){
+                    if (c == '"') o += "\\\"";
+                    else if (c == '\\') o += "\\\\";
+                    else if ((unsigned char)c < 0x20) o += ' ';
+                    else o += c;
+                }
+                return o;
+            };
             std::cout << "{";
             std::cout << "\"selected_own_slot\":" << r.selected_own_slot;
             std::cout << ",\"own\":[";
@@ -269,6 +279,8 @@ int run_ocr_suggest(const std::string& reader_name, const std::string& image_pat
                           << ",\"species\":\"" << r.own[i].species << "\""
                           << ",\"hp_current\":" << r.own[i].hp_current
                           << ",\"hp_max\":" << r.own[i].hp_max
+                          << ",\"hp_current_raw\":\"" << esc(r.own[i].hp_current_raw) << "\""
+                          << ",\"hp_max_raw\":\"" << esc(r.own[i].hp_max_raw) << "\""
                           << "}";
             }
             std::cout << "],\"opp\":[";

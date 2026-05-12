@@ -74,7 +74,7 @@ screens:
 
   action_menu:
     description: "FIGHT / POKEMON buttons visible. Singles or doubles."
-    transitions_to: [move_select, pokemon_switch]
+    transitions_to: [move_select, singles_switch, doubles_switch]
     detectors: [ActionMenuDetector]
     readers:
       BattleHUDReader:
@@ -203,8 +203,14 @@ screens:
             items: string
             length: 2
 
-  pokemon_switch:
-    description: "Choosing which mon to switch to (voluntary or forced). Singles or doubles."
+  singles_switch:
+    description: "Choosing which mon to switch to (voluntary or forced) — singles 3-row layout."
+    transitions_to: [action_menu]
+    detectors: [PokemonSwitchDetector]
+    readers: {}
+
+  doubles_switch:
+    description: "Choosing which mon to switch to (voluntary or forced) — doubles 4-row layout."
     transitions_to: [action_menu]
     detectors: [PokemonSwitchDetector]
     readers: {}

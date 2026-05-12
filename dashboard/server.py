@@ -276,14 +276,49 @@ CROP_DEFS = {
         {"name": "stats_right", "box": [0.6419, 0.1114, 0.0282, 0.0258]},
     ],
     "PokemonSwitchReader": [
+        #  ── Doubles 4-row layout ───────────────────────────────────
         #  Own column (left). Per-row Y delta = 0.1185 (derived from user-
         #  drawn slot-0 + slot-2 anchors). HP text sits +0.0355 below species.
         #  Box width / height taken from user's slot-0 draws.
-        *[{"name": f"own_{i}_species", "box": [0.0610, 0.2291 + i*0.1185, 0.0893, 0.0395]} for i in range(6)],
-        *[{"name": f"own_{i}_hp_text", "box": [0.0629, 0.2646 + i*0.1185, 0.0745, 0.0425]} for i in range(6)],
-        #  Yellow highlight strip on the left edge of the selected card.
-        *[{"name": f"own_{i}_highlight", "box": [0.0420, 0.2291 + i*0.1185, 0.0150, 0.0850]} for i in range(6)],
-        #  Opp column (right). User-drawn opp_0 anchor; per-row delta 0.1080.
+        *[{"name": f"doubles_own_{i}_species", "box": [0.0610, 0.2291 + i*0.1185, 0.0893, 0.0395]} for i in range(4)],
+        *[{"name": f"doubles_own_{i}_hp_text", "box": [0.0629, 0.2646 + i*0.1185, 0.0745, 0.0425]} for i in range(4)],
+        *[{"name": f"doubles_own_{i}_highlight", "box": [0.0420, 0.2291 + i*0.1185, 0.0150, 0.0850]} for i in range(4)],
+        #  Split current / max HP boxes (doubles). User drew slots 0+2;
+        #  1+3 extrapolated by linear interpolation (delta ≈ 0.1152).
+        {"name": "doubles_own_0_hp_current", "box": [0.0640, 0.2699, 0.0453, 0.0355]},
+        {"name": "doubles_own_1_hp_current", "box": [0.0640, 0.3851, 0.0444, 0.0375]},
+        {"name": "doubles_own_2_hp_current", "box": [0.0639, 0.5003, 0.0434, 0.0394]},
+        {"name": "doubles_own_3_hp_current", "box": [0.0640, 0.6155, 0.0444, 0.0375]},
+        {"name": "doubles_own_0_hp_max",     "box": [0.1099, 0.2777, 0.0294, 0.0261]},
+        {"name": "doubles_own_1_hp_max",     "box": [0.1092, 0.3937, 0.0310, 0.0265]},
+        {"name": "doubles_own_2_hp_max",     "box": [0.1085, 0.5098, 0.0325, 0.0269]},
+        {"name": "doubles_own_3_hp_max",     "box": [0.1092, 0.6258, 0.0310, 0.0265]},
+
+        #  ── Singles 3-row layout ───────────────────────────────────
+        #  User-drawn boxes 2026-05-10 on
+        #  test_images/singles_switch/20260509-154834669879.png. HP boxes
+        #  span the full "X/Y" text. Cursor strips are wider than doubles
+        #  (full pill-left swatch rather than hairline yellow edge).
+        {"name": "singles_own_0_species",   "box": [0.0620, 0.2321, 0.0828, 0.0367]},
+        {"name": "singles_own_1_species",   "box": [0.0621, 0.3492, 0.0848, 0.0314]},
+        {"name": "singles_own_2_species",   "box": [0.0627, 0.4659, 0.0734, 0.0344]},
+        {"name": "singles_own_0_hp_text",   "box": [0.0694, 0.2635, 0.0682, 0.0429]},
+        {"name": "singles_own_1_hp_text",   "box": [0.0650, 0.3854, 0.0736, 0.0362]},
+        {"name": "singles_own_2_hp_text",   "box": [0.0633, 0.5029, 0.0763, 0.0358]},
+        {"name": "singles_own_0_highlight", "box": [0.0429, 0.2308, 0.0184, 0.0255]},
+        {"name": "singles_own_1_highlight", "box": [0.0388, 0.3506, 0.0239, 0.0255]},
+        {"name": "singles_own_2_highlight", "box": [0.0421, 0.4658, 0.0191, 0.0209]},
+        #  Split current / max HP boxes (singles). User drew slots 1+2;
+        #  slot 0 extrapolated using the singles per-row delta (~0.117).
+        {"name": "singles_own_0_hp_current", "box": [0.0604, 0.2676, 0.0480, 0.0383]},
+        {"name": "singles_own_1_hp_current", "box": [0.0604, 0.3846, 0.0480, 0.0383]},
+        {"name": "singles_own_2_hp_current", "box": [0.0619, 0.5039, 0.0502, 0.0356]},
+        {"name": "singles_own_0_hp_max",     "box": [0.1111, 0.2787, 0.0282, 0.0240]},
+        {"name": "singles_own_1_hp_max",     "box": [0.1111, 0.3957, 0.0282, 0.0240]},
+        {"name": "singles_own_2_hp_max",     "box": [0.1117, 0.5117, 0.0253, 0.0242]},
+
+        #  Opp column (right). Independent of own row count — same boxes
+        #  for both layouts.
         *[{"name": f"opp_{i}_hp_pct", "box": [0.9131, 0.2622 + i*0.1170, 0.0356, 0.0345]} for i in range(6)],
     ],
     #  Battle Info tab — boxes drawn by user 2026-05-07.
@@ -440,7 +475,8 @@ FOLDER_TO_READER = {
     "main_menu": "MainMenuDetector",
     "match_intro": "MainMenuDetector",  # no detector yet — placeholder
     "move_select": "MoveNameReader",
-    "pokemon_switch": "PokemonSwitchReader",
+    "singles_switch": "PokemonSwitchReader",
+    "doubles_switch": "PokemonSwitchReader",
     "post_match": "PostMatchScreenDetector",
     "pre_match": "PreMatchDetector",
     "preparing": "PreparingForBattleDetector",
@@ -466,7 +502,8 @@ FOLDER_READERS = {
     "main_menu": ["MainMenuDetector"],
     "move_select": ["MoveSelectDetector", "MegaEvolveDetector", "MoveNameReader", "MoveSelectCursorSlot", "BattleHUDReader", "PokeballAliveDetector"],
     "battle_log": ["BattleLogReader", "BattleHUDReader", "PokeballAliveDetector"],
-    "pokemon_switch": ["PokemonSwitchDetector", "PokemonSwitchReader"],
+    "singles_switch": ["PokemonSwitchDetector", "PokemonSwitchReader"],
+    "doubles_switch": ["PokemonSwitchDetector", "PokemonSwitchReader"],
     "post_match": ["PostMatchScreenDetector"],
     "pre_match": ["PreMatchDetector"],
     "preparing": ["PreparingForBattleDetector", "TeamPreviewLeadsReader"],
@@ -2801,7 +2838,10 @@ async def switchprobe_scan():
     from PIL import Image
 
     boxes = CROP_DEFS.get("PokemonSwitchDetector", [])
-    screen_dir = TEST_IMAGES_DIR / "pokemon_switch"
+    screen_dirs = [
+        TEST_IMAGES_DIR / "singles_switch",
+        TEST_IMAGES_DIR / "doubles_switch",
+    ]
 
     def _run_reader(img_path: Path):
         """Subprocess the dev runner's PokemonSwitchReader for this image."""
@@ -2834,14 +2874,16 @@ async def switchprobe_scan():
         return b > 80.0 and r < 80.0 and g < 80.0
 
     frames = []
-    if screen_dir.exists():
+    for screen_dir in screen_dirs:
+        if not screen_dir.exists():
+            continue
         for img_path in sorted(screen_dir.glob("*.png")):
             if img_path.name.startswith("_"):
                 continue
             try:
                 img = np.asarray(Image.open(img_path).convert("RGB"))
             except Exception as e:
-                frames.append({"filename": img_path.name, "error": str(e)})
+                frames.append({"filename": img_path.name, "dir": screen_dir.name, "error": str(e)})
                 continue
             H, W, _ = img.shape
             box_results = []
@@ -2899,6 +2941,7 @@ async def switchprobe_scan():
                     pass
             frames.append({
                 "filename": img_path.name,
+                "dir": screen_dir.name,
                 "boxes": box_results,
                 "verdict": verdict,
                 "explanation": explanation,

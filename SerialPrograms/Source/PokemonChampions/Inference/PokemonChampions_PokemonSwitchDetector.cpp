@@ -3,15 +3,17 @@
  *  From: https://github.com/PokemonAutomation/
  *
  *  Center-panel tabs ("Moves & More" left, "Stats" right). Active tab is
- *  filled with a lime/yellow highlight; inactive tab is dark blue. Two
- *  sample points per tab (left + right). Accept iff exactly one tab reads
- *  active-on-both-points and the other reads inactive-on-both-points.
- *  Rejects: both active, both inactive, or any mixed/partial state.
+ *  filled with a lime/yellow highlight. Accept iff exactly one tab reads
+ *  active on both of its sample points. The inactive tab is assumed
+ *  non-highlighted by default — we don't verify its color, because a
+ *  positive "is dark blue" check halves the detector's reliability for
+ *  no information gain (any frame where lime is present on one tab is
+ *  already pokemon_switch).
  *
  *  Sample averages (1920x1080, on a real switch screen with Moves & More
  *  active):
  *    Moves left/right:  ~(170, 255,   0)   lime
- *    Stats  left/right: ~( 30,  23, 100)   dark blue
+ *    Stats  left/right: ~( 30,  23,  80)   dark blue (varies 79-100)
  *
  */
 
@@ -31,10 +33,6 @@ static bool is_active_highlight(const ImageStats& s){
     return s.average.b < 60.0 && s.average.g > 150.0;
 }
 
-//  Inactive = dark blue panel: dominant blue, low red & green.
-static bool is_inactive_blue(const ImageStats& s){
-    return s.average.b > 80.0 && s.average.r < 80.0 && s.average.g < 80.0;
-}
 
 
 PokemonSwitchDetector::PokemonSwitchDetector()
@@ -62,12 +60,12 @@ bool PokemonSwitchDetector::detect(const ImageViewRGB32& screen){
     const ImageStats sl = image_stats(extract_box_reference(screen, m_stats_left));
     const ImageStats sr = image_stats(extract_box_reference(screen, m_stats_right));
 
-    const bool moves_active   = is_active_highlight(ml) && is_active_highlight(mr);
-    const bool moves_inactive = is_inactive_blue(ml)    && is_inactive_blue(mr);
-    const bool stats_active   = is_active_highlight(sl) && is_active_highlight(sr);
-    const bool stats_inactive = is_inactive_blue(sl)    && is_inactive_blue(sr);
+    const bool moves_active = is_active_highlight(ml) && is_active_highlight(mr);
+    const bool stats_active = is_active_highlight(sl) && is_active_highlight(sr);
 
-    return (moves_active && stats_inactive) || (moves_inactive && stats_active);
+    //  Exactly one tab highlighted. The non-highlighted tab is assumed
+    //  default (not hovered) — no second check required.
+    return moves_active != stats_active;
 }
 
 

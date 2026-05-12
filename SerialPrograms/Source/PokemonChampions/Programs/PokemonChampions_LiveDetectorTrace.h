@@ -174,6 +174,13 @@ private:
     //  before stepping Right to the target.
     IntegerEnumDropdownOption TEAM_INDEX;
 
+    //  Lead selection order on team_preview_selecting. Comma-separated
+    //  list of own-team slot indices (0..5). The slot at position p is
+    //  marked as lead (p+1). Singles uses 3 entries, doubles uses 4 —
+    //  the trace reads the right one based on FORMAT_TARGET.
+    StringOption LEAD_ORDER_SINGLES;
+    StringOption LEAD_ORDER_DOUBLES;
+
     SimpleIntegerOption<uint32_t> POLL_PERIOD_MILLISECONDS;
     SimpleIntegerOption<uint32_t> STALE_AFTER_MILLISECONDS;
     StringOption SINK_URL;
@@ -254,8 +261,18 @@ private:
     //  doesn't belong on BattleStateTracker).
     int m_tp_cursor_slot = -1;                //  Set by run_team_preview_screen.
     std::array<char, 6> m_tp_marks_per_slot = {};  //  Lead-order digit per slot
-                                                   //  ('1'..'4' or 0). Read each
-                                                   //  poll on team_preview.
+                                                   //  ('1'..'4' or 0). STICKY:
+                                                   //  populated from per-poll
+                                                   //  reads, latched until a
+                                                   //  threshold of consecutive
+                                                   //  blanks (see counters) or
+                                                   //  screen exit.
+    //  Per-slot count of consecutive polls the reader returned blank for that
+    //  slot. When the latched digit is non-zero and the blank streak crosses
+    //  TP_MARKS_BLANK_STREAK, we clear the latched digit (the player removed
+    //  the mark). Single-poll blanks are absorbed by the latch — that's the
+    //  OCR-flicker bug the marks=2/3 oscillation was a symptom of.
+    std::array<uint8_t, 6> m_tp_marks_blank_streak = {};
     int m_menu_selected_index = -1;  //  Set by classify_screen when one of
                                      //  the menu detectors fires.
 
@@ -326,11 +343,19 @@ private:
     //  pokemon_switch screen state (forced switch suggester).
     int m_switch_cursor = -1;
     std::array<bool, 6> m_switch_alive = {};
-    //  Random pick rolled once per pokemon_switch entry. m_switch_rolled_for
-    //  is the action_menu visit number we last rolled for, so re-entering
-    //  the screen on a different turn re-rolls but mid-attempt re-entries
-    //  (after a context modal flicker) keep the same target.
-    int m_switch_target_slot = 0;
+    //  Absolute slot 0-3 picked once per pokemon_switch attempt from the
+    //  set of {alive AND not on-field} at roll time. -1 = not rolled yet.
+    //  m_switch_rolled_for is the action_menu visit number we last rolled
+    //  for, so re-entering the screen on a different turn re-rolls but
+    //  mid-attempt re-entries (after a context modal flicker) keep the
+    //  same target.
+    //
+    //  Pre-2026-05-12 this stored a random index 0-3 that the suggester
+    //  modulo'd into a per-poll-rebuilt alive_slots array. The rebuild
+    //  flickered with BattleHUD active reads → target oscillated → cursor
+    //  ping-ponged forever. Storing an absolute slot here freezes the
+    //  decision at entry.
+    int m_switch_target_slot = -1;
     int m_switch_rolled_for = -1;
     //  Bounded retry for the "no yellow highlight" case. Reset on
     //  successful cursor read or on leaving pokemon_switch. After 3
@@ -353,6 +378,47 @@ private:
     //  so a single turn's nav is consistent across polls.
     int m_target_move_slot = 0;
     int m_move_slot_rolled_for = -1;
+    //  Last move names OCR'd from move_select this poll (slot 0..3).
+    //  Empty string for any slot that failed to read. Used so the
+    //  overlay log can show "Moonblast" instead of "slot 2".
+    std::array<std::string, 4> m_move_select_moves = {};
+
+    //  Mega Evolve toggle visibility for the current move_select frame.
+    //  Reset to false on leaving move_select (alongside m_move_select_cursor).
+    //  Random lead-order fallback. When LEAD_ORDER_SINGLES /
+    //  LEAD_ORDER_DOUBLES is blank, we roll a fresh random permutation
+    //  here and feed it into ctx.tp_lead_order. Re-rolled at match
+    //  start (alongside the match-state reset) so each match gets a
+    //  fresh draw. `m_random_lead_order_rolled` gates the roll so it
+    //  fires once per match.
+    std::array<int, 4> m_random_lead_order = {0, 1, 2, 3};
+    bool m_random_lead_order_rolled = false;
+
+    //  team_preview_selecting nav-loop guard. The cursor reader returns
+    //  -1 or a stale slot when the cursor is actually on the Done button
+    //  (its yellow strip lives at a different x/y than the per-slot
+    //  strips and sometimes fails to score). Without a bound, the
+    //  suggester emits Down forever once marks_count is satisfied.
+    int m_tp_last_cursor_seen = -2;
+    int m_tp_nav_since_change = 0;
+    bool m_tp_nav_error_logged = false;
+
+    //  Pokemon switch nav-loop guard. The forced-switch screen layout
+    //  shifts in singles (3 rows) vs doubles (4 rows); when the cursor
+    //  reader is tuned for one layout and we land on the other, the
+    //  cursor reads at a stale slot and never advances — pressing Down
+    //  forever. Bound the total nav presses on pokemon_switch since the
+    //  cursor last *changed*. Reset on cursor-change and on screen exit.
+    int m_switch_last_cursor_seen = -2;
+    int m_switch_nav_since_change = 0;
+    bool m_switch_nav_error_logged = false;
+
+    bool m_can_mega_evolve = false;
+    //  Which battle_action_menu_visit we last fired the R toggle on. Used
+    //  to make the toggle one-shot per turn — once we've pressed R for
+    //  visit N, don't press again until a new turn (visit N+1) or a new
+    //  match (counter resets to 0).
+    int m_mega_toggled_for_visit = -1;
 };
 
 

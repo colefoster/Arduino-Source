@@ -147,6 +147,28 @@ LiveDetectorTrace::LiveDetectorTrace()
         LockMode::UNLOCK_WHILE_RUNNING,
         0   //  Default = Team 1
     )
+    , LEAD_ORDER_SINGLES(
+        false,
+        "<b>Lead Order (Singles):</b><br>"
+        "Comma-separated own-team slot indices (0..5) for the 3 leads on "
+        "the team-preview selecting screen, in pick order. E.g. <code>2,0,4</code> "
+        "marks slot 2 as Lead 1, slot 0 as Lead 2, slot 4 as Lead 3. "
+        "Leave blank for a random pick (re-rolled each match).",
+        LockMode::UNLOCK_WHILE_RUNNING,
+        "",
+        ""
+    )
+    , LEAD_ORDER_DOUBLES(
+        false,
+        "<b>Lead Order (Doubles):</b><br>"
+        "Comma-separated own-team slot indices (0..5) for the 4 leads on "
+        "the team-preview selecting screen, in pick order. E.g. <code>3,1,0,5</code> "
+        "marks slot 3 as Lead 1, slot 1 as Lead 2, slot 0 as Lead 3, slot 5 as Lead 4. "
+        "Leave blank for a random pick (re-rolled each match).",
+        LockMode::UNLOCK_WHILE_RUNNING,
+        "",
+        ""
+    )
     , POLL_PERIOD_MILLISECONDS(
         "<b>Poll Period (ms):</b><br>How often to snapshot + run readers. 250ms = 4 Hz.",
         LockMode::UNLOCK_WHILE_RUNNING,
@@ -208,6 +230,8 @@ LiveDetectorTrace::LiveDetectorTrace()
     PA_ADD_OPTION(BATTLE_MODE_TARGET);
     PA_ADD_OPTION(FORMAT_TARGET);
     PA_ADD_OPTION(TEAM_INDEX);
+    PA_ADD_OPTION(LEAD_ORDER_SINGLES);
+    PA_ADD_OPTION(LEAD_ORDER_DOUBLES);
     PA_ADD_OPTION(POLL_PERIOD_MILLISECONDS);
     PA_ADD_OPTION(STALE_AFTER_MILLISECONDS);
     PA_ADD_OPTION(SINK_URL);
@@ -891,6 +915,15 @@ void LiveDetectorTrace::run_team_preview_screen(Logger& logger, const ImageViewR
         TeamPreviewCursorReader cursor;
         int slot = cursor.read(logger, screen);
         m_tp_cursor_slot = slot;
+        //  Nav-loop guard: reset the nav-since-change counter whenever
+        //  the cursor moves to a new slot. If the cursor reads stably
+        //  at the same slot after several Down presses, the suggester
+        //  falls back to A (assume cursor on Done but reader missed it).
+        if (slot >= 0 && slot != m_tp_last_cursor_seen){
+            m_tp_last_cursor_seen = slot;
+            m_tp_nav_since_change = 0;
+            m_tp_nav_error_logged = false;
+        }
         JsonObject out;
         out["selected_slot"] = (int64_t)slot;
         mark("TeamPreviewCursorReader", slot >= 0 ? "ok" : "error", std::move(out));
@@ -898,19 +931,47 @@ void LiveDetectorTrace::run_team_preview_screen(Logger& logger, const ImageViewR
 
     //  Lead-mark digit read — same OCR pipeline as the locked-in screen,
     //  with the selecting-screen badge boxes. Per-slot digit '1'..'4' or 0.
+    //
+    //  Stickiness: per-slot Tesseract reads on the tiny yellow badges flicker
+    //  (a confirmed mark reads blank for 1 poll out of 5 or so), which made
+    //  the suggester ping cursor Up/Down at the boundary between "go mark
+    //  slot X" and "advance to Done." We latch the digit per slot — once a
+    //  fresh read returns 1-4, hold it. Clear the latch only after
+    //  TP_MARKS_BLANK_STREAK consecutive blanks (player un-marked) or on
+    //  screen exit.
     {
+        constexpr uint8_t TP_MARKS_BLANK_STREAK = 5;
         TeamPreviewLeadsReader marks(TeamPreviewLeadsReader::selecting_screen_boxes());
         TeamPreviewLeadsResult res = marks.read(logger, screen);
-        m_tp_marks_per_slot = res.digit_per_slot;
+        for (uint8_t i = 0; i < 6; i++){
+            char d = res.digit_per_slot[i];
+            if (d >= '1' && d <= '4'){
+                m_tp_marks_per_slot[i] = d;        //  fresh confident read — latch
+                m_tp_marks_blank_streak[i] = 0;
+            }else{
+                if (m_tp_marks_blank_streak[i] < 255){
+                    m_tp_marks_blank_streak[i]++;
+                }
+                if (m_tp_marks_blank_streak[i] >= TP_MARKS_BLANK_STREAK){
+                    m_tp_marks_per_slot[i] = 0;     //  sustained blank — release
+                }
+            }
+        }
         int marks_count = 0;
-        for (char c : res.digit_per_slot){ if (c >= '1' && c <= '4') marks_count++; }
+        for (char c : m_tp_marks_per_slot){ if (c >= '1' && c <= '4') marks_count++; }
         JsonObject out;
         out["marks_count"] = (int64_t)marks_count;
         JsonArray arr;
         for (uint8_t i = 0; i < 6; i++){
             JsonObject r;
             r["slot"] = (int64_t)i;
-            r["digit"] = res.digit_per_slot[i] ? std::string(1, res.digit_per_slot[i]) : std::string();
+            //  Latched value used by the suggester.
+            r["digit"] = m_tp_marks_per_slot[i]
+                ? std::string(1, m_tp_marks_per_slot[i]) : std::string();
+            //  Raw per-poll read for flicker visibility.
+            r["digit_raw"] = res.digit_per_slot[i]
+                ? std::string(1, res.digit_per_slot[i]) : std::string();
+            r["blank_streak"] = (int64_t)m_tp_marks_blank_streak[i];
             r["raw"] = res.raw_ocr[i];
             arr.push_back(std::move(r));
         }
@@ -1160,12 +1221,20 @@ void LiveDetectorTrace::run_pokemon_switch_screen(Logger& logger, const ImageVie
 
     m_tracker.apply_switch_screen_hp(own_hp, opp_pct);
 
-    //  Cache for the suggester: cursor + per-slot alive bitmap. A slot is
-    //  "alive" if its hp_max>0 and hp_current>0. (hp_max==0 means OCR
-    //  failed — treat as unknown / not alive for safety.)
+    //  Cache for the suggester: cursor + per-slot alive bitmap. A slot
+    //  becomes "alive" on a confirmed positive read (hp_max>0 && hp_current>0).
+    //  IMPORTANT: a failed read (hp_max<=0) does NOT downgrade alive back
+    //  to false — the cursored slot's HP text is obscured by the yellow
+    //  highlight every poll the cursor sits on it, so a strict per-poll
+    //  rewrite causes the candidate pool to flip between {cursored slot
+    //  excluded} and {others excluded} as the cursor moves, oscillating
+    //  Down→Up→Down forever. The bitmap is reset on screen exit
+    //  (m_switch_alive = {}) so prior switch-screen state never bleeds in.
     m_switch_cursor = r.selected_own_slot;
     for (uint8_t i = 0; i < 6; i++){
-        m_switch_alive[i] = (r.own[i].hp_max > 0 && r.own[i].hp_current > 0);
+        if (r.own[i].hp_max > 0 && r.own[i].hp_current > 0){
+            m_switch_alive[i] = true;
+        }
     }
     //  Successful cursor read clears the blind-nudge retry state. Subsequent
     //  cursor losses (e.g., a context modal opens) should be treated as a
@@ -1424,6 +1493,13 @@ void LiveDetectorTrace::run_move_select_screen(Logger& logger, const ImageViewRG
         m_tracker.update_from_moves(moves, active_slot);
     }
 
+    //  Cache OCR'd move names so the move_select roll-site overlay log
+    //  can show the actual move ("Down -> Moonblast") instead of just a
+    //  slot index.
+    for (size_t i = 0; i < 4; i++){
+        m_move_select_moves[i] = (i < res.moves.size()) ? res.moves[i] : std::string{};
+    }
+
     JsonObject out;
     JsonArray arr;
     for (size_t i = 0; i < res.moves.size(); i++){
@@ -1576,6 +1652,7 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
     m_prev_leads_sig.clear();
     m_prev_battle_info_sig.clear();
     m_match_in_progress = false;
+    m_random_lead_order_rolled = false;
     m_seen_log_event_types.clear();
     m_seen_opp_species.clear();
     m_seen_ability_items.clear();
@@ -1689,6 +1766,10 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
             m_move_slot_rolled_for = -1;
             m_switch_rolled_for = -1;
             m_mega_toggled_for_visit = -1;
+            //  Force re-roll of the random lead order for the next
+            //  team-preview-selecting phase, so each match gets a fresh
+            //  pick when no explicit LEAD_ORDER is configured.
+            m_random_lead_order_rolled = false;
         }
         if (screen == "post_match" || screen == "result_screen"){
             m_match_in_progress = false;
@@ -1760,6 +1841,72 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
         LiveContext sctx;
         sctx.tp_cursor_slot = m_tp_cursor_slot;
         sctx.tp_marks_per_slot = m_tp_marks_per_slot;
+        sctx.tp_nav_since_change = m_tp_nav_since_change;
+
+        //  Parse the configured lead order. Singles uses 3 entries,
+        //  doubles uses 4 — pick the right StringOption based on
+        //  FORMAT_TARGET (0=Singles, 1=Doubles). Entries outside 0..5
+        //  or missing become -1 sentinels.
+        //
+        //  Blank / fully-invalid config falls back to a random
+        //  permutation rolled once per match (gated by
+        //  m_random_lead_order_rolled; reset at match-start).
+        {
+            const bool is_doubles = ((int)FORMAT_TARGET.current_value() == 1);
+            sctx.tp_lead_needed = is_doubles ? 4 : 3;
+            std::array<int, 4> order = {-1, -1, -1, -1};
+            const std::string raw = is_doubles
+                ? (std::string)LEAD_ORDER_DOUBLES
+                : (std::string)LEAD_ORDER_SINGLES;
+            int p = 0;
+            int cur = -1;
+            int valid = 0;
+            auto commit = [&](){
+                if (p < sctx.tp_lead_needed && cur >= 0 && cur <= 5){
+                    order[p] = cur;
+                    valid++;
+                }
+                if (cur >= 0) p++;
+                cur = -1;
+            };
+            for (char c : raw){
+                if (c >= '0' && c <= '9'){
+                    cur = (cur < 0 ? 0 : cur * 10) + (c - '0');
+                }else if (cur >= 0){
+                    commit();
+                }
+            }
+            commit();
+            if (valid == 0){
+                //  No explicit config — use the random fallback. Roll
+                //  once per match (gated by m_random_lead_order_rolled).
+                if (!m_random_lead_order_rolled){
+                    std::array<int, 6> all = {0, 1, 2, 3, 4, 5};
+                    //  Fisher-Yates using wall-clock as seed source.
+                    uint64_t s = (uint64_t)now_ms();
+                    for (int i = 5; i > 0; i--){
+                        s = s * 6364136223846793005ULL + 1442695040888963407ULL;
+                        int j = (int)((s >> 33) % (uint64_t)(i + 1));
+                        std::swap(all[i], all[j]);
+                    }
+                    for (int k = 0; k < 4; k++){
+                        m_random_lead_order[k] = (k < (int)all.size()) ? all[k] : -1;
+                    }
+                    m_random_lead_order_rolled = true;
+                    env.console.log(
+                        std::string("lead-order: rolled random ")
+                        + std::to_string(m_random_lead_order[0]) + ","
+                        + std::to_string(m_random_lead_order[1]) + ","
+                        + std::to_string(m_random_lead_order[2]) + ","
+                        + std::to_string(m_random_lead_order[3]),
+                        COLOR_BLUE);
+                }
+                for (int k = 0; k < sctx.tp_lead_needed; k++){
+                    order[k] = m_random_lead_order[k];
+                }
+            }
+            sctx.tp_lead_order = order;
+        }
         sctx.menu_selected_index = m_menu_selected_index;
         sctx.switch_cursor = m_switch_cursor;
         sctx.switch_alive = m_switch_alive;
@@ -1907,6 +2054,10 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
             if (m_prev_screen == "team_preview" && screen != "team_preview"){
                 m_tp_cursor_slot = -1;
                 m_tp_marks_per_slot = {};
+                m_tp_marks_blank_streak = {};
+                m_tp_last_cursor_seen = -2;
+                m_tp_nav_since_change = 0;
+                m_tp_nav_error_logged = false;
             }
             if (m_prev_screen == "pokemon_switch" && screen != "pokemon_switch"){
                 m_switch_cursor = -1;
@@ -1935,31 +2086,80 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
             //  to m_battle_action_menu_visits so each turn gets one
             //  fresh roll, but a re-entry within the same turn (e.g.
             //  unknown blip + re-detect) sticks with the same target.
-            if (screen == "move_select" && m_prev_screen != "move_select"
+            //
+            //  Roll defers until the cursor reads — otherwise we'd roll
+            //  on the first move_select poll (cursor still -1 from
+            //  animation), the suggester would wait, and once the
+            //  cursor renders we'd potentially have rolled the same
+            //  slot the cursor is already on → instant A on the
+            //  default move, looks like "didn't nav at all". Now we
+            //  roll *avoiding* the current cursor so a nav press
+            //  always happens.
+            if (screen == "move_select"
+                && m_move_select_cursor >= 0
                 && m_move_slot_rolled_for != m_battle_action_menu_visits){
-                m_target_move_slot = (int)(now_ms() % 4);
+                //  Pick one of the 3 slots that isn't the current cursor.
+                int offset = 1 + (int)(now_ms() % 3);  //  1..3
+                m_target_move_slot = (m_move_select_cursor + offset) % 4;
                 m_move_slot_rolled_for = m_battle_action_menu_visits;
+                const std::string& move_name = m_move_select_moves[m_target_move_slot];
+                const std::string move_label =
+                    move_name.empty() ? ("slot " + std::to_string(m_target_move_slot))
+                                      : move_name;
                 env.console.log(
                     "in-battle: rolled move slot " + std::to_string(m_target_move_slot)
-                    + " for action_menu visit #"
+                    + " (" + move_label
+                    + ", cursor=" + std::to_string(m_move_select_cursor)
+                    + ", forced nav) for action_menu visit #"
                     + std::to_string(m_battle_action_menu_visits),
                     COLOR_BLUE);
+                env.console.overlay().add_log(
+                    "move pick: " + move_label,
+                    COLOR_CYAN);
             }
-            //  Roll a random switch target once per pokemon_switch entry.
-            //  Keyed off the same action_menu visit count so a single
-            //  switch attempt sticks with one target across modal-flicker
-            //  re-entries, but a fresh switch on a later turn rerolls.
-            if (screen == "pokemon_switch" && m_prev_screen != "pokemon_switch"
+            //  Roll a switch target once per pokemon_switch attempt. Keyed
+            //  off the action_menu visit count so a single attempt sticks
+            //  with one target across modal-flicker re-entries, but a
+            //  fresh switch on a later turn rerolls.
+            //
+            //  The target is an ABSOLUTE slot 0-3 picked from {alive AND
+            //  not on-field} at this moment. Defer rolling until at least
+            //  one candidate is visible — on the first switch-screen poll
+            //  the alive bitmap may still be populating (cursored slot's
+            //  HP is obscured by the yellow highlight).
+            if (screen == "pokemon_switch"
                 && m_switch_rolled_for != m_battle_action_menu_visits){
-                //  Use a different mod source than move-slot so the two
-                //  rolls aren't always in lockstep.
-                m_switch_target_slot = (int)((now_ms() / 7) % 4);
-                m_switch_rolled_for = m_battle_action_menu_visits;
-                env.console.log(
-                    "in-battle: rolled switch index " + std::to_string(m_switch_target_slot)
-                    + " (mod alive_count) for action_menu visit #"
-                    + std::to_string(m_battle_action_menu_visits),
-                    COLOR_BLUE);
+                std::array<int, 4> candidates{};
+                int cand_count = 0;
+                const auto& active = poll_snapshot.own_active_slots;
+                for (int i = 0; i < 4; i++){
+                    if (!m_switch_alive[i]) continue;
+                    bool on_field = false;
+                    for (int a : active){
+                        if (a == i){ on_field = true; break; }
+                    }
+                    if (on_field) continue;
+                    candidates[cand_count++] = i;
+                }
+                if (cand_count > 0){
+                    //  Use a different mod source than move-slot so the two
+                    //  rolls aren't always in lockstep.
+                    const int pick = (int)((now_ms() / 7) % cand_count);
+                    m_switch_target_slot = candidates[pick];
+                    m_switch_rolled_for = m_battle_action_menu_visits;
+                    env.console.log(
+                        "in-battle: rolled switch target slot "
+                        + std::to_string(m_switch_target_slot)
+                        + " (from " + std::to_string(cand_count)
+                        + " candidates) for action_menu visit #"
+                        + std::to_string(m_battle_action_menu_visits),
+                        COLOR_BLUE);
+                    env.console.overlay().add_log(
+                        "switch target: slot "
+                        + std::to_string(m_switch_target_slot)
+                        + " (" + std::to_string(cand_count) + " cand)",
+                        COLOR_CYAN);
+                }
             }
             if (screen != "action_menu" && m_prev_screen == "action_menu"){
                 m_action_menu_cursor = -1;
@@ -1967,6 +2167,7 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
             if (screen != "move_select" && m_prev_screen == "move_select"){
                 m_move_select_cursor = -1;
                 m_can_mega_evolve = false;
+                m_move_select_moves = {};
             }
             //  Re-home on every fresh entry to team_select. A manual
             //  interruption mid-flow (or returning to it after a scan
@@ -2119,6 +2320,9 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
                             "LiveDetectorTrace: AUTO-PRESS " + b
                             + " on " + screen + " — " + m_last_suggestion->reason,
                             COLOR_PURPLE);
+                        env.console.overlay().add_log(
+                            b + " — " + m_last_suggestion->label,
+                            COLOR_PURPLE);
                         //  Conservative timing for the team-scan modal:
                         //  back-to-back Downs at the default 80/160ms can
                         //  saturate the Switch's input queue and the
@@ -2164,6 +2368,15 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
                             && (b == "Up" || b == "Down")
                             && m_switch_cursor >= 0){
                             m_switch_nav_since_change++;
+                        }
+                        //  Same guard on team_preview_selecting: Done
+                        //  button's cursor strip occasionally fails to
+                        //  score, so the suggester emits Down forever
+                        //  once marks are placed. Bounded at 6 in the
+                        //  suggester — past that it falls back to A.
+                        if (screen == "team_preview"
+                            && (b == "Up" || b == "Down")){
+                            m_tp_nav_since_change++;
                         }
 
                         //  Carousel-aware team_select: each fired Left/Right
