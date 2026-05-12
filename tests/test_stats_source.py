@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import pytest
 
-from src.vgc_model.data.stats_source import (
+from vgc_model.data.stats_source import (
     PikalyticsStatsSource,
     StatsLookup,
 )

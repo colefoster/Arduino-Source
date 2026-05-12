@@ -14,12 +14,12 @@ import pytest
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
-from src.vgc_model.data.replay_parser import (
+from vgc_model.data.replay_parser import (
     ParsedReplay,
     ReplayParser,
     StatsField,
 )
-from src.vgc_model.data.stats_source import PikalyticsStatsSource
+from vgc_model.data.stats_source import PikalyticsStatsSource
 
 
 @pytest.fixture(scope="module")

@@ -15,10 +15,10 @@ from pathlib import Path
 
 import pytest
 
-from src.vgc_model.sim.battle_sim import BattleSim, SimPokemon, SimField
-from src.vgc_model.sim.type_chart import type_effectiveness
-from src.vgc_model.data.feature_tables import FeatureTables
-from src.vgc_model.data.log_parser import parse_battle, normalize_species, parse_hp
+from vgc_model.sim.battle_sim import BattleSim, SimPokemon, SimField
+from vgc_model.sim.type_chart import type_effectiveness
+from vgc_model.data.feature_tables import FeatureTables
+from vgc_model.data.log_parser import parse_battle, normalize_species, parse_hp
 
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent

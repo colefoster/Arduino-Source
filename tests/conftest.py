@@ -8,20 +8,20 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
 @pytest.fixture(scope="session")
 def feature_tables():
-    from src.vgc_model.data.feature_tables import FeatureTables
+    from vgc_model.data.feature_tables import FeatureTables
     return FeatureTables()
 
 
 @pytest.fixture(scope="session")
 def battle_sim(feature_tables):
-    from src.vgc_model.sim.battle_sim import BattleSim
+    from vgc_model.sim.battle_sim import BattleSim
     return BattleSim(feature_tables)
 
 
 @pytest.fixture(scope="session")
 def usage_stats():
     try:
-        from src.vgc_model.data.usage_stats import UsageStats
+        from vgc_model.data.usage_stats import UsageStats
         return UsageStats()
     except Exception:
         pytest.skip("Usage stats not available")
@@ -30,7 +30,7 @@ def usage_stats():
 @pytest.fixture
 def sample_state():
     """A reusable 2v2 state: Garchomp+Rillaboom vs Incineroar+Flutter Mane."""
-    from src.vgc_model.sim.battle_sim import SimPokemon, SimState, SimField
+    from vgc_model.sim.battle_sim import SimPokemon, SimState, SimField
 
     garchomp = SimPokemon(
         species="Garchomp", hp_frac=1.0,

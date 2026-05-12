@@ -22,15 +22,15 @@ import torch
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
-from src.vgc_model.data.log_parser import parse_battle, normalize_species
-from src.vgc_model.data.enriched_parser import (
+from vgc_model.data.log_parser import parse_battle, normalize_species
+from vgc_model.data.enriched_parser import (
     EnrichedBattleParser, _pass1_extract, _base_species,
     CONF_KNOWN, CONF_USAGE,
 )
-from src.vgc_model.data.feature_tables import FeatureTables
-from src.vgc_model.data.usage_stats import UsageStats
-from src.vgc_model.data.vocab import Vocabs
-from src.vgc_model.data.dataset import MAX_ACTIONS, BOOST_STATS
+from vgc_model.data.feature_tables import FeatureTables
+from vgc_model.data.usage_stats import UsageStats
+from vgc_model.data.vocab import Vocabs
+from vgc_model.data.dataset import MAX_ACTIONS, BOOST_STATS
 
 REPLAY_DIR = PROJECT_ROOT / "data" / "showdown_replays" / "gen9championsvgc2026regma"
 VOCAB_DIR = PROJECT_ROOT / "data" / "vocab"
@@ -167,9 +167,9 @@ def evaluate(n_games=100, min_rating=1400, n_rollouts=50):
         us = None
 
     # Load search engine
-    from src.vgc_model.inference.search import SearchEngine
-    from src.vgc_model.model.vgc_model_v2_seq import VGCTransformerV2Seq, ModelConfigV2Seq
-    from src.vgc_model.model.winrate_model import WinrateModel, WinrateModelConfig
+    from vgc_model.inference.search import SearchEngine
+    from vgc_model.model.vgc_model_v2_seq import VGCTransformerV2Seq, ModelConfigV2Seq
+    from vgc_model.model.winrate_model import WinrateModel, WinrateModelConfig
 
     if not V2_CHECKPOINT.exists():
         print(f"ERROR: No v2 checkpoint at {V2_CHECKPOINT}")

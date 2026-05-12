@@ -6,7 +6,7 @@ import torch.nn as nn
 from unittest.mock import MagicMock
 from collections import Counter
 
-from src.vgc_model.sim.battle_sim import SimPokemon, SimState, SimField
+from vgc_model.sim.battle_sim import SimPokemon, SimState, SimField
 
 
 # ── Mock Models ──────────────────────────────────────────────────
@@ -55,7 +55,7 @@ class MockWinrateModel(nn.Module):
 @pytest.fixture
 def mock_vocabs():
     """Create a minimal mock vocabs object."""
-    from src.vgc_model.data.vocab import Vocabs
+    from vgc_model.data.vocab import Vocabs
     vocab_dir = pytest.importorskip("pathlib").Path(__file__).parent.parent / "data" / "vocab"
     if not vocab_dir.exists():
         pytest.skip("Vocab dir not available")
@@ -65,7 +65,7 @@ def mock_vocabs():
 @pytest.fixture
 def search_engine_factory(feature_tables, mock_vocabs):
     """Factory to create SearchEngine with mock models."""
-    from src.vgc_model.inference.search import SearchEngine
+    from vgc_model.inference.search import SearchEngine
 
     def _make(action_logits_a=None, action_logits_b=None, win_logit=0.5):
         action_model = MockActionModel(action_logits_a, action_logits_b)
@@ -157,7 +157,7 @@ class TestSearchBasic:
 
 class TestPerspectiveSwap:
     def test_swap_reverses_sides(self, search_engine_factory):
-        from src.vgc_model.inference.search import SearchEngine
+        from vgc_model.inference.search import SearchEngine
         req = {
             "own_active": [{"species": "Garchomp"}],
             "opp_active": [{"species": "Incineroar"}],

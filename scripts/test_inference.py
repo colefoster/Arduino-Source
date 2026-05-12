@@ -6,7 +6,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from src.vgc_model.inference.server import (
+from vgc_model.inference.server import (
     load_model, predict, team_select,
     PredictRequest, PokemonState, FieldState, TeamSelectRequest,
 )

@@ -14,11 +14,11 @@ import torch
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
-from src.vgc_model.data.encoder import Encoder, PAD_IDX, RawSample
-from src.vgc_model.data.encode_runner import _stack_samples
-from src.vgc_model.data.replay_parser import ReplayParser
-from src.vgc_model.data.stats_source import PikalyticsStatsSource
-from src.vgc_model.data.vocab import Vocabs
+from vgc_model.data.encoder import Encoder, PAD_IDX, RawSample
+from vgc_model.data.encode_runner import _stack_samples
+from vgc_model.data.replay_parser import ReplayParser
+from vgc_model.data.stats_source import PikalyticsStatsSource
+from vgc_model.data.vocab import Vocabs
 
 
 @pytest.fixture(scope="module")

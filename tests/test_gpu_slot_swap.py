@@ -8,7 +8,7 @@ from __future__ import annotations
 
 import torch
 
-from src.vgc_model.training.gpu_slot_swap import swap_batch
+from vgc_model.training.gpu_slot_swap import swap_batch
 
 
 def _make_batch(b: int = 3) -> dict[str, torch.Tensor]:

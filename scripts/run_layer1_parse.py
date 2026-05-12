@@ -21,9 +21,9 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
-from src.vgc_model.data.parse_runner import run_all_buckets
-from src.vgc_model.data.replay_parser import ReplayParser
-from src.vgc_model.data.stats_source import PikalyticsStatsSource
+from vgc_model.data.parse_runner import run_all_buckets
+from vgc_model.data.replay_parser import ReplayParser
+from vgc_model.data.stats_source import PikalyticsStatsSource
 
 
 def main():

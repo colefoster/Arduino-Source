@@ -21,12 +21,12 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
-from src.vgc_model.data.encode_runner import (
+from vgc_model.data.encode_runner import (
     bootstrap_vocabs,
     run_all_encoding,
 )
-from src.vgc_model.data.encoder import Encoder
-from src.vgc_model.data.vocab import Vocabs
+from vgc_model.data.encoder import Encoder
+from vgc_model.data.vocab import Vocabs
 
 
 DEFAULT_PARSED_ROOT = PROJECT_ROOT / "data" / "parsed"

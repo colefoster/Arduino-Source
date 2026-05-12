@@ -1,7 +1,7 @@
 """Tests for the type effectiveness chart."""
 
 import pytest
-from src.vgc_model.sim.type_chart import type_effectiveness
+from vgc_model.sim.type_chart import type_effectiveness
 
 
 class TestSuperEffective:

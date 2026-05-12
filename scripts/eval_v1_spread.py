@@ -14,7 +14,7 @@ import json
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "ml"))
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))  # for pickled 'src.vgc_model...'
 
 import torch

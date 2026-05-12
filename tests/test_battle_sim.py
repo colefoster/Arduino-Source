@@ -2,7 +2,7 @@
 
 import copy
 import pytest
-from src.vgc_model.sim.battle_sim import (
+from vgc_model.sim.battle_sim import (
     BattleSim, SimPokemon, SimState, SimField, ActionSpec, PROTECT_MOVES,
 )
 

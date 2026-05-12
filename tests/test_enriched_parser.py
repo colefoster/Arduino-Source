@@ -2,7 +2,7 @@
 
 import pytest
 
-from src.vgc_model.data.enriched_parser import (
+from vgc_model.data.enriched_parser import (
     CONF_KNOWN,
     CONF_PLAYER,
     CONF_UNKNOWN,

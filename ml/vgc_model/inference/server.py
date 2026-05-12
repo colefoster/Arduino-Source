@@ -26,13 +26,13 @@ import torch
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
 
-# Add project root to path
+# Add ml/ to path so bare `from vgc_model.X` imports resolve.
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent.parent
-sys.path.insert(0, str(PROJECT_ROOT))
+sys.path.insert(0, str(PROJECT_ROOT / "ml"))
 
-from src.vgc_model.data.vocab import Vocabs
-from src.vgc_model.data.dataset import MAX_ACTIONS, BOOST_STATS
-from src.vgc_model.model.vgc_model import VGCTransformer, ModelConfig
+from vgc_model.data.vocab import Vocabs
+from vgc_model.data.dataset import MAX_ACTIONS, BOOST_STATS
+from vgc_model.model.vgc_model import VGCTransformer, ModelConfig
 
 
 # ── Request / Response schemas ────────────────────────────────────

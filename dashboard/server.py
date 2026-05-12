@@ -3430,7 +3430,7 @@ async def upload_test_image(file: UploadFile = File(...), reader: str = Form(...
 # MODEL REVIEW API (lazy-loaded — torch only imported on first request)
 # ═══════════════════════════════════════════════════════════════════════════
 
-SRC_DIR = BASE / "src"
+SRC_DIR = BASE / "ml"
 VOCAB_DIR = BASE / "data" / "vocab"
 CHECKPOINT_PATH = BASE / "data" / "checkpoints" / "best.pt"
 VGC_FMT = "gen9championsvgc2026regma"
@@ -4231,7 +4231,7 @@ def _get_live_state_tracker():
         repo = str(Path(__file__).resolve().parent.parent)
         if repo not in sys.path:
             sys.path.insert(0, repo)
-        from src.vgc_model.inference.live_state_tracker import LiveStateTracker
+        from vgc_model.inference.live_state_tracker import LiveStateTracker
         tracker = LiveStateTracker()
         tracker.start_polling_thread(DEV_RUNNER, interval_sec=1.0)
         _LIVE_STATE_TRACKER = tracker

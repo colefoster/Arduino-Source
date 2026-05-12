@@ -7,7 +7,7 @@ import json
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "ml"))
 
 from vgc_model.data.vocab import Vocabs
 from vgc_model.data.log_parser import parse_battle
