@@ -206,7 +206,16 @@ class SearchEngine:
             species_ids.append(self.vocabs.species[species])
             hp_values.append(poke.get("hp", 1.0) if alive else 0.0)
             status_ids.append(self.vocabs.status[poke.get("status", "")] if poke.get("status") else 0)
-            boosts = (poke.get("boosts", [0]*6) + [0]*6)[:6]
+            # Boosts: model is (B,8,6) trained on [atk,def,spa,spd,spe,eva].
+            # C++ emits 7-D [atk,def,spa,spd,spe,accuracy,evasion] (accuracy
+            # is always 0). If we get 7 elements, drop index 5 to preserve
+            # the trained layout. 6-D inputs pass through unchanged.
+            raw_boosts = poke.get("boosts", [0]*6) or [0]*6
+            if len(raw_boosts) >= 7:
+                boosts = [raw_boosts[0], raw_boosts[1], raw_boosts[2],
+                          raw_boosts[3], raw_boosts[4], raw_boosts[6]]
+            else:
+                boosts = (list(raw_boosts) + [0]*6)[:6]
             boost_values.append(boosts)
             mega_flags.append(int(poke.get("is_mega", False)))
             alive_flags.append(1 if alive else 0)
@@ -217,15 +226,29 @@ class SearchEngine:
 
             # Moves — for own pokemon use what's known, for opp infer from usage
             moves = list(poke.get("moves", []))[:4]
-            if is_own[slot_idx]:
+            # If the client supplied per-move confidences (C++ tracker since
+            # 2026-05-12), trust them. Otherwise fall back to the heuristic
+            # (CONF_KNOWN for own / for opp's already-revealed moves).
+            client_mconf = poke.get("move_confidences") or []
+            client_mconf_signal = any(c > 0.0 for c in client_mconf[:len(moves)])
+            if client_mconf_signal:
+                m_confs = list(client_mconf[:len(moves)])
+                # Pad missing trailing entries with 0.
+                while len(m_confs) < len(moves):
+                    m_confs.append(0.0)
+            elif is_own[slot_idx]:
                 m_confs = [CONF_KNOWN] * len(moves)
             else:
                 m_confs = [CONF_KNOWN if m else 0.0 for m in moves]
-                if self.usage_stats and len(moves) < 4:
-                    inferred = self.usage_stats.infer_moveset(species, moves)
-                    for m in inferred[len(moves):]:
-                        moves.append(m)
-                        m_confs.append(CONF_USAGE)
+
+            # Usage-stats fill (opp only) — only when we don't have all 4 moves
+            # AND the C++ side didn't already populate the slot. Adds inferred
+            # moves with CONF_USAGE so the model treats them as priors.
+            if not is_own[slot_idx] and self.usage_stats and len(moves) < 4:
+                inferred = self.usage_stats.infer_moveset(species, moves)
+                for m in inferred[len(moves):]:
+                    moves.append(m)
+                    m_confs.append(CONF_USAGE)
 
             while len(moves) < 4: moves.append("")
             while len(m_confs) < 4: m_confs.append(0.0)
@@ -241,9 +264,13 @@ class SearchEngine:
                     slot_mf.append(torch.zeros(MOVE_FEAT_DIM))
             move_features.append(torch.stack(slot_mf))
 
-            # Item
+            # Item — prefer C++-supplied confidence (item_confidence); fall
+            # back to usage stats for opp / CONF_KNOWN for own.
             item = poke.get("item", "")
-            if not item and not is_own[slot_idx] and self.usage_stats:
+            client_iconf = float(poke.get("item_confidence") or 0.0)
+            if client_iconf > 0.0:
+                i_conf = client_iconf
+            elif not item and not is_own[slot_idx] and self.usage_stats:
                 item = self.usage_stats.get_likely_item(species) or ""
                 i_conf = CONF_USAGE if item else 0.0
             else:
@@ -255,9 +282,12 @@ class SearchEngine:
                 if item else torch.zeros(ITEM_FEAT_DIM)
             )
 
-            # Ability
+            # Ability — same C++-confidence-first pattern as item.
             ability = poke.get("ability", "")
-            if not ability and not is_own[slot_idx] and self.usage_stats:
+            client_aconf = float(poke.get("ability_confidence") or 0.0)
+            if client_aconf > 0.0:
+                a_conf = client_aconf
+            elif not ability and not is_own[slot_idx] and self.usage_stats:
                 ability = self.usage_stats.get_likely_ability(species) or ""
                 a_conf = CONF_USAGE if ability else 0.0
             else:
@@ -493,6 +523,11 @@ class SearchEngine:
         f = dict(req_dict.get("field", {}))
         f["tailwind_own"], f["tailwind_opp"] = f.get("tailwind_opp", False), f.get("tailwind_own", False)
         f["screens_own"], f["screens_opp"] = f.get("screens_opp", [False]*3), f.get("screens_own", [False]*3)
+        # Encoder-shape additions (2026-05-12). Swap each side's hazards,
+        # side-condition timers, and side-level last-move ledger.
+        f["hazards_own"], f["hazards_opp"] = f.get("hazards_opp", {}), f.get("hazards_own", {})
+        f["side_timers_own"], f["side_timers_opp"] = f.get("side_timers_opp", {}), f.get("side_timers_own", {})
+        f["last_move_own"], f["last_move_opp"] = f.get("last_move_opp", ""), f.get("last_move_own", "")
         swapped["field"] = f
 
         # Swap legal action masks

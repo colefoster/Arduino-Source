@@ -44,9 +44,71 @@ class PokemonState(BaseModel):
     moves: list[str] = Field(default_factory=list)   # up to 4 move names
     item: str = ""
     ability: str = ""
-    boosts: list[int] = Field(default_factory=lambda: [0]*6)  # atk,def,spa,spd,spe,eva
+    # 7-D boosts: atk, def, spa, spd, spe, accuracy, evasion. C++ emits 7-D.
+    # Batch builders slice to 6 for the legacy boost embedding; the 7th
+    # (evasion) is forward-compat.
+    boosts: list[int] = Field(default_factory=lambda: [0]*7)
     is_mega: bool = False
     alive: bool = True
+
+    # ── Encoder-shape fields emitted by C++ tracker (2026-05-12) ─────────
+    # Most are read by `_build_v2_batch` when present; some are forward-
+    # compat for a future model architecture and no-op'd at inference today.
+
+    # Volatile-status names, canonical uppercase. Matches the 102-entry
+    # list in src/vgc_model/data/volatile_statuses.py. Empty = none.
+    volatile_statuses: list[str] = Field(default_factory=list)
+    # Substitute remaining HP fraction (0..1).
+    substitute_hp_frac: float = 0.0
+
+    # Reveal confidences in [0,1]. C++ pins to 1.0 on positive in-battle
+    # reveal (HUD popup, MOVE_USED, etc.). When the field is missing /
+    # zero, `_build_v2_batch` falls back to the prior heuristic
+    # (CONF_KNOWN=1.0 for own, CONF_USAGE for opp).
+    item_confidence: float = 0.0
+    ability_confidence: float = 0.0
+    move_confidences: list[float] = Field(default_factory=lambda: [0.0]*4)
+
+    # Status duration counters. Encoder doesn't consume yet; forward-compat.
+    sleep_turns_remaining: int = 0
+    toxic_counter: int = 0
+
+    # Choice / encore / multi-turn lock. Encoder doesn't consume — the
+    # lock is folded into legal_actions_a/b on the C++ side. Surfaced here
+    # for debug visibility.
+    locked_to_move: str = ""
+
+    # Most recent move slug used by THIS mon. Per-mon ground truth; the
+    # field-level last_move_own/opp on FieldState is the side-level
+    # derivation (whoever moved most recently on each side).
+    last_move: str = ""
+
+    # Pre-match config priors.
+    nature: str = ""
+    evs: list[int] = Field(default_factory=lambda: [0]*6)
+
+    # Per-move PP, aligned to moves[]. Each entry is [current, max] or null.
+    move_pp: list[Optional[list[int]]] = Field(default_factory=lambda: [None]*4)
+
+
+class HazardsState(BaseModel):
+    """Per-side entry hazards. Matches C++ ``BattleStateTracker::Hazards``."""
+    stealth_rock: bool = False
+    spikes: int = 0           # 0..3 layers
+    toxic_spikes: int = 0     # 0..2 layers
+    sticky_web: bool = False
+    safeguard: bool = False
+    mist: bool = False
+    lucky_chant: bool = False
+
+
+class SideTimers(BaseModel):
+    """Per-side condition remaining-turn counters (parallel to bool flags
+    in FieldState). 0 = inactive."""
+    tailwind: int = 0
+    light_screen: int = 0
+    reflect: int = 0
+    aurora_veil: int = 0
 
 
 class FieldState(BaseModel):
@@ -58,6 +120,14 @@ class FieldState(BaseModel):
     screens_own: list[bool] = Field(default_factory=lambda: [False]*3)  # LS, Reflect, AV
     screens_opp: list[bool] = Field(default_factory=lambda: [False]*3)
     turn: int = 1
+
+    # ── Encoder-shape additions emitted by C++ tracker (2026-05-12) ──────
+    hazards_own: HazardsState = Field(default_factory=HazardsState)
+    hazards_opp: HazardsState = Field(default_factory=HazardsState)
+    side_timers_own: SideTimers = Field(default_factory=SideTimers)
+    side_timers_opp: SideTimers = Field(default_factory=SideTimers)
+    last_move_own: str = ""
+    last_move_opp: str = ""
 
 
 class HistoryEntry(BaseModel):
@@ -232,7 +302,14 @@ def _encode_pokemon_slot(poke: PokemonState) -> dict:
         move_ids.append(_vocabs.moves[m] if m else 0)
     move_ids += [0] * (4 - len(move_ids))
 
-    boosts = (poke.boosts + [0]*6)[:6]
+    # C++ emits 7-D boosts [atk,def,spa,spd,spe,accuracy,evasion]; model
+    # was trained on 6-D [atk,def,spa,spd,spe,evasion]. Drop the accuracy
+    # slot (index 5) when 7 elements are present so we preserve evasion.
+    if len(poke.boosts) >= 7:
+        boosts = [poke.boosts[0], poke.boosts[1], poke.boosts[2],
+                  poke.boosts[3], poke.boosts[4], poke.boosts[6]]
+    else:
+        boosts = (list(poke.boosts) + [0]*6)[:6]
 
     return {
         "species_id": species_id,
