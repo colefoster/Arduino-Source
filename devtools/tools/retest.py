@@ -57,7 +57,8 @@ def run_regression(reader=None):
     result = subprocess.run(
         [exe, "--regression", test_path],
         stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
-        text=True, timeout=600, cwd=BUILD_DIR,
+        text=True, encoding="utf-8", errors="replace",
+        timeout=600, cwd=BUILD_DIR,
     )
     elapsed = time.time() - t0
 
@@ -197,7 +198,8 @@ def run_manifest_regression():
     result = subprocess.run(
         [exe, "--manifest-regression", test_dir],
         stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
-        text=True, timeout=600, cwd=BUILD_DIR,
+        text=True, encoding="utf-8", errors="replace",
+        timeout=600, cwd=BUILD_DIR,
     )
     elapsed = time.time() - t0
     print(result.stdout)
