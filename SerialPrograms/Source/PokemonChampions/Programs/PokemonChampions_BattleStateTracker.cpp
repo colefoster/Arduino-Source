@@ -8,10 +8,12 @@
 #include <cstdlib>
 #include <map>
 #include <mutex>
+#include <unordered_map>
 #include "Common/Cpp/Json/JsonArray.h"
 #include "Common/Cpp/Json/JsonObject.h"
 #include "Common/Cpp/Json/JsonValue.h"
 #include "CommonFramework/Globals.h"
+#include "CommonFramework/Logging/Logger.h"
 #include "PokemonChampions_BattleStateTracker.h"
 #include "PokemonChampions/Inference/PokemonChampions_TeamSummaryReader.h"
 #include "PokemonChampions/Inference/PokemonChampions_TeamStatsReader.h"
@@ -169,15 +171,28 @@ void BattleStateTracker::push_history_snapshot(){
     fill_pair(m_own_team, m_own_active, 0);   //  slots 0,1 = own_a, own_b
     fill_pair(m_opp_team, m_opp_active, 2);   //  slots 2,3 = opp_a, opp_b
 
+    //  Field-state snapshot at push time. The LSTM packer diffs these
+    //  across consecutive entries (and last-vs-current request) to set
+    //  the `field_changed` flag.
+    entry.weather = m_weather;
+    entry.terrain = m_terrain;
+    entry.trick_room = m_trick_room;
+
     //  action_types / action_moves: we don't reliably know what each
     //  participant chose last turn from the C++ pipeline, so leave them
-    //  as the "noop" / empty defaults. The model treats noop as a valid
-    //  history entry; the state trajectory carries most of the signal.
+    //  as the "noop" / empty defaults. action_moves and move_order get
+    //  populated mid-turn by update_from_log's MOVE_USED case (writing
+    //  to m_history.back()). The model treats noop as a valid history
+    //  entry; the state trajectory carries most of the signal.
 
     m_history.push_back(std::move(entry));
     while ((int)m_history.size() > BATTLE_HISTORY_K){
         m_history.pop_front();
     }
+
+    //  Reset the per-turn MOVE_USED order counter — the next turn's
+    //  moves write into this fresh history entry's move_order[].
+    m_turn_move_count = 0;
 }
 
 void BattleStateTracker::set_mode(BattleMode mode){
@@ -722,6 +737,102 @@ bool BattleStateTracker::apply_ability_item_reveal(
 }
 
 
+// ─── Move-name volatile inference ────────────────────────────────
+//
+//  For moves whose effect is a 1:1 deterministic volatile on a known
+//  target, infer the volatile the moment MOVE_USED fires — skipping the
+//  follow-up text entirely. Cheaper and more reliable than OCRing the
+//  second message, and covers volatiles whose text we haven't built a
+//  pattern for yet.
+//
+//  target_kind: SELF = applied to the mover, OPP = applied to the
+//  opposite-side first active. ALLY is rare (Helping Hand, Rage Powder
+//  in doubles) and not handled here.
+//
+//  Only includes moves where the effect cannot reasonably "fail" (or
+//  where a stray false positive on a fail is harmless — the volatile
+//  is cleared on the mon's next switch-out via reset_volatile). Moves
+//  with miss/accuracy windows that could no-op the volatile are NOT
+//  inferred here; their pattern-text match in BattleLogReader covers
+//  the success case authoritatively.
+enum class VolatileTarget { SELF, OPP };
+struct MoveVolatileSpec {
+    const char* volatile_name;
+    VolatileTarget target;
+};
+
+static const MoveVolatileSpec* lookup_move_volatile(const std::string& move_slug){
+    static const std::unordered_map<std::string, MoveVolatileSpec> table = {
+        // ── Self-applied, deterministic — no accuracy check, no fail mode ──
+        {"substitute",      {"SUBSTITUTE",   VolatileTarget::SELF}},
+        {"protect",         {"PROTECT",      VolatileTarget::SELF}},
+        {"detect",          {"PROTECT",      VolatileTarget::SELF}},
+        {"endure",          {"ENDURE",       VolatileTarget::SELF}},
+        {"kings-shield",    {"KINGSSHIELD",  VolatileTarget::SELF}},
+        {"spiky-shield",    {"SPIKYSHIELD",  VolatileTarget::SELF}},
+        {"baneful-bunker",  {"BANEFULBUNKER",VolatileTarget::SELF}},
+        {"burning-bulwark", {"BURNINGBULWARK", VolatileTarget::SELF}},
+        {"silk-trap",       {"SILKTRAP",     VolatileTarget::SELF}},
+        {"max-guard",       {"MAXGUARD",     VolatileTarget::SELF}},
+        {"focus-energy",    {"FOCUSENERGY",  VolatileTarget::SELF}},
+        {"laser-focus",     {"LASERFOCUS",   VolatileTarget::SELF}},
+        {"magnet-rise",     {"MAGNETRISE",   VolatileTarget::SELF}},
+        {"ingrain",         {"INGRAIN",      VolatileTarget::SELF}},
+        {"aqua-ring",       {"AQUARING",     VolatileTarget::SELF}},
+        {"autotomize",      {"AUTOTOMIZE",   VolatileTarget::SELF}},
+        {"charge",          {"CHARGE",       VolatileTarget::SELF}},
+        {"defense-curl",    {"DEFENSECURL",  VolatileTarget::SELF}},
+        {"destiny-bond",    {"DESTINYBOND",  VolatileTarget::SELF}},
+        {"geomancy",        {"GEOMANCY",     VolatileTarget::SELF}},
+        {"grudge",          {"GRUDGE",       VolatileTarget::SELF}},
+        {"imprison",        {"IMPRISON",     VolatileTarget::SELF}},
+        {"magic-coat",      {"MAGICCOAT",    VolatileTarget::SELF}},
+        {"minimize",        {"MINIMIZE",     VolatileTarget::SELF}},
+        {"no-retreat",      {"NORETREAT",    VolatileTarget::SELF}},
+        {"power-shift",     {"POWERSHIFT",   VolatileTarget::SELF}},
+        {"power-trick",     {"POWERTRICK",   VolatileTarget::SELF}},
+        {"rage",            {"RAGE",         VolatileTarget::SELF}},
+        {"rage-powder",     {"RAGEPOWDER",   VolatileTarget::SELF}},
+        {"roost",           {"ROOST",        VolatileTarget::SELF}},
+        {"snatch",          {"SNATCH",       VolatileTarget::SELF}},
+        {"spotlight",       {"SPOTLIGHT",    VolatileTarget::SELF}},
+        {"stockpile",       {"STOCKPILE",    VolatileTarget::SELF}},
+        {"follow-me",       {"FOLLOWME",     VolatileTarget::SELF}},
+        {"helping-hand",    {"HELPINGHAND",  VolatileTarget::SELF}},
+        {"conversion",      {"TYPECHANGE",   VolatileTarget::SELF}},
+        {"conversion-2",    {"TYPECHANGE",   VolatileTarget::SELF}},
+
+        // ── Charging-turn (multi-turn moves) — the volatile is the prep
+        //    state. Cleared on the resolve turn or on switch-out. Inferring
+        //    on MOVE_USED is correct for the prep turn; the resolve turn
+        //    fires MOVE_USED again and we'll re-set it (idempotent). The
+        //    volatile gets cleared via reset_volatile on switch-out.
+        {"bide",            {"BIDE",         VolatileTarget::SELF}},
+        {"bounce",          {"BOUNCE",       VolatileTarget::SELF}},
+        {"dig",             {"DIG",          VolatileTarget::SELF}},
+        {"dive",            {"DIVE",         VolatileTarget::SELF}},
+        {"fly",             {"FLY",          VolatileTarget::SELF}},
+        {"phantom-force",   {"PHANTOMFORCE", VolatileTarget::SELF}},
+        {"razor-wind",      {"RAZORWIND",    VolatileTarget::SELF}},
+        {"shadow-force",    {"SHADOWFORCE",  VolatileTarget::SELF}},
+        {"sky-attack",      {"SKYATTACK",    VolatileTarget::SELF}},
+        {"sky-drop",        {"SKYDROP",      VolatileTarget::SELF}},
+        {"solar-beam",      {"SOLARBEAM",    VolatileTarget::SELF}},
+        {"solar-blade",     {"SOLARBLADE",   VolatileTarget::SELF}},
+        {"skull-bash",      {"SKULLBASH",    VolatileTarget::SELF}},
+        {"meteor-beam",     {"METEORBEAM",   VolatileTarget::SELF}},
+        {"freeze-shock",    {"FREEZESHOCK",  VolatileTarget::SELF}},
+        {"ice-burn",        {"ICEBURN",      VolatileTarget::SELF}},
+        {"electro-shot",    {"ELECTROSHOT",  VolatileTarget::SELF}},
+        {"sparkling-aria",  {"SPARKLINGARIA",VolatileTarget::SELF}},
+        {"uproar",          {"UPROAR",       VolatileTarget::SELF}},
+    };
+    auto it = table.find(move_slug);
+    if (it == table.end()) return nullptr;
+    return &it->second;
+}
+
+
 // ─── Updates ─────────────────────────────────────────────────────
 
 void BattleStateTracker::update_from_hud(const BattleHUDState& hud){
@@ -785,9 +896,20 @@ void BattleStateTracker::update_from_moves(
 }
 
 //  Resolve which active position (0 or 1) on the given side an event refers
-//  to by matching `pokemon_display` (raw display name from the OCR'd log
-//  line, e.g. "Volcarona" or "The opposing Volcarona") against the species
-//  slug of the on-field mons. Returns -1 if no match.
+//  to. BattleLogEvent does not (currently) carry an explicit position field,
+//  so we match `pokemon_display` (raw display name from the OCR'd log line,
+//  e.g. "Volcarona" or "The opposing Volcarona") against the species slug of
+//  the on-field mons. Returns -1 if no match.
+//
+//  TODO: if BattleLogReader is later extended to emit event.position, prefer
+//  that signal and use this species-match only as the fallback (logging an
+//  orange line when the fallback fires, so we can see real wild cases).
+//
+//  Ambiguity case: in doubles two active mons may share a species root
+//  (Urshifu-Single-Strike + Urshifu-Rapid-Strike). When both actives match
+//  the display name we return position 0 and log a COLOR_ORANGE warning so
+//  the bad attribution is visible. Real disambiguation would need the
+//  position field from the reader.
 //
 //  In SINGLES only position 0 is valid; we still attempt position 0 (and
 //  ignore an erroneous position 1 in active[]) by capping `positions`.
@@ -801,6 +923,8 @@ static int resolve_active_position(
     std::string lower = pokemon_display;
     std::transform(lower.begin(), lower.end(), lower.begin(), ::tolower);
     uint8_t positions = (mode == BattleMode::DOUBLES) ? 2 : 1;
+    int first_hit = -1;
+    int hit_count = 0;
     for (uint8_t i = 0; i < positions; i++){
         uint8_t slot = active[i];
         if (slot >= 6) continue;
@@ -809,10 +933,19 @@ static int resolve_active_position(
         if (lower.find(sp) != std::string::npos ||
             sp.find(lower) != std::string::npos)
         {
-            return (int)i;
+            if (first_hit < 0) first_hit = (int)i;
+            hit_count++;
         }
     }
-    return -1;
+    if (hit_count > 1){
+        global_logger_tagged().log(
+            "resolve_active_position: ambiguous species match for '" +
+            pokemon_display + "' (both actives matched) — defaulting to pos " +
+            std::to_string(first_hit),
+            COLOR_ORANGE
+        );
+    }
+    return first_hit;
 }
 
 void BattleStateTracker::update_from_log(const BattleLogEvent& event){
@@ -825,6 +958,61 @@ void BattleStateTracker::update_from_log(const BattleLogEvent& event){
             m_last_move_opp = slug;
         }else{
             m_last_move_own = slug;
+        }
+
+        //  Per-mon last-move. Per-side is just a derivation of "whichever
+        //  active mon moved most recently"; the per-mon value is the
+        //  ground truth for encore / instruct / mimic predicates and for
+        //  attributing the side-level value to the right slot. Match by
+        //  species against active mons on the moving side; persists
+        //  across switch-out so re-entry doesn't lose the history.
+        {
+            std::string lower_pokemon = event.pokemon;
+            std::transform(lower_pokemon.begin(), lower_pokemon.end(),
+                           lower_pokemon.begin(), ::tolower);
+            auto& team = event.is_opponent ? m_opp_team : m_own_team;
+            auto& active = event.is_opponent ? m_opp_active : m_own_active;
+            uint8_t positions = (m_mode == BattleMode::DOUBLES) ? 2 : 1;
+            for (uint8_t i = 0; i < positions; i++){
+                auto& mon = team[active[i]];
+                if (mon.species.empty()) continue;
+                if (lower_pokemon.find(mon.species) != std::string::npos
+                    || mon.species.find(lower_pokemon) != std::string::npos){
+                    mon.last_move = slug;
+                    break;
+                }
+            }
+        }
+
+        //  Move-name volatile inference. Catches the "one move = one
+        //  volatile" cases (Substitute, Protect, Roost, Magnet Rise,
+        //  multi-turn prep states, etc.) without needing a follow-up
+        //  text pattern. The volatile_statuses vector dedupes on push.
+        const MoveVolatileSpec* spec = lookup_move_volatile(slug);
+        if (spec != nullptr){
+            //  Side resolution:
+            //    SELF + opp move → opp active[0]
+            //    SELF + own move → own active[0]
+            //    OPP  + opp move → own active[0]
+            //    OPP  + own move → opp active[0]
+            bool target_is_opp_side = event.is_opponent;
+            if (spec->target == VolatileTarget::OPP){
+                target_is_opp_side = !target_is_opp_side;
+            }
+            auto& team = target_is_opp_side ? m_opp_team : m_own_team;
+            auto& active = target_is_opp_side ? m_opp_active : m_own_active;
+            auto& mon = team[active[0]];
+            std::string name = spec->volatile_name;
+            bool present = std::find(
+                mon.volatile_statuses.begin(),
+                mon.volatile_statuses.end(), name)
+                != mon.volatile_statuses.end();
+            if (!present){
+                mon.volatile_statuses.push_back(name);
+            }
+            if (name == "SUBSTITUTE"){
+                mon.substitute_hp_frac = 1.0f;
+            }
         }
 
         //  Per-turn history: record this move on the most recent history
@@ -841,6 +1029,14 @@ void BattleStateTracker::update_from_log(const BattleLogEvent& event){
                 if (idx >= 0 && idx < 4){
                     m_history.back().action_moves[idx] = slug;
                     m_history.back().action_types[idx] = "move";
+                    //  Stamp the slot's rank in this turn's MOVE_USED
+                    //  sequence — but only the *first* MOVE_USED for the
+                    //  slot. Multi-hit moves and status events re-fire
+                    //  MOVE_USED, and we don't want those to bump the
+                    //  rank away from "went first/second/...".
+                    if (m_history.back().move_order[idx] < 0){
+                        m_history.back().move_order[idx] = m_turn_move_count++;
+                    }
                 }
             }
         }
@@ -971,45 +1167,136 @@ void BattleStateTracker::update_from_log(const BattleLogEvent& event){
     }
 
     case BattleLogEventType::STAT_CHANGE_OTHER:{
-        //  Catch the "Haze" / clearAllBoost case: "All stat changes were
-        //  eliminated!" — resets every stat stage to 0 on both sides for
-        //  every active mon. The raw text disambiguates this from the
-        //  swap / invert / clearBoostFromZEffect variants the same enum
-        //  bucket covers (those affect a single side and we don't track
-        //  them yet).
+        //  STAT_CHANGE_OTHER aggregates every non-numeric stat mutation in
+        //  PS's default.ts. Route by raw_text keyword.
+        //
+        //  Wired:
+        //    clearAllBoost            "All stat changes were eliminated!"   (Haze)
+        //    clearBoost               "[POKEMON]'s stat changes were removed!"
+        //    invertBoost              "[POKEMON]'s stat changes were inverted!"
+        //    clearBoostFromZEffect    "[POKEMON] returned its decreased stats to normal …"
+        //    swapBoost                "[POKEMON] switched stat changes with its target!"
+        //
+        //  TODOs (rarely seen in Champions, deferred):
+        //    swapDefensiveBoost  — Power Swap-style cross-mon variant
+        //    swapOffensiveBoost  — same family
+        //    copyBoost           — Psych Up
         const std::string& raw = event.raw_text;
+
+        //  clearAllBoost — Haze. Both sides, both active positions.
         if (raw.find("All stat changes were eliminated") != std::string::npos){
             for (auto& mon : m_own_team) mon.boosts.fill(0);
             for (auto& mon : m_opp_team) mon.boosts.fill(0);
+            break;
         }
+
+        auto& team = event.is_opponent ? m_opp_team : m_own_team;
+        auto& active = event.is_opponent ? m_opp_active : m_own_active;
+        int pos = resolve_active_position(event.pokemon, team, active, m_mode);
+        if (pos < 0) pos = 0;
+        uint8_t slot = active[pos];
+        if (slot >= 6) break;
+
+        //  clearBoost — clear all boosts on one mon.
+        if (raw.find("stat changes were removed") != std::string::npos){
+            team[slot].boosts.fill(0);
+            break;
+        }
+
+        //  invertBoost — negate every boost stage on one mon.
+        if (raw.find("stat changes were inverted") != std::string::npos){
+            for (auto& b : team[slot].boosts){
+                b = static_cast<int8_t>(std::clamp(-static_cast<int>(b), -6, 6));
+            }
+            break;
+        }
+
+        //  clearBoostFromZEffect — zero only the negative entries; leave
+        //  positives intact. "returned its decreased stats to normal".
+        if (raw.find("returned its decreased stats to normal") != std::string::npos){
+            for (auto& b : team[slot].boosts){
+                if (b < 0) b = 0;
+            }
+            break;
+        }
+
+        //  swapBoost — swap boost arrays between actor and target. The log
+        //  line names only the actor; we assume the target is the opposing
+        //  active in the same lane position (matches typical doubles use of
+        //  Power Trick / Heart Swap etc. on a same-lane target). Singles
+        //  always pos 0 ↔ pos 0.
+        //  TODO: BattleLogEvent doesn't carry the target — if a future
+        //  reader pass adds it, prefer that.
+        if (raw.find("switched stat changes with its target") != std::string::npos){
+            auto& other_team = event.is_opponent ? m_own_team : m_opp_team;
+            auto& other_active = event.is_opponent ? m_own_active : m_opp_active;
+            uint8_t other_slot = other_active[pos];
+            if (other_slot < 6){
+                std::swap(team[slot].boosts, other_team[other_slot].boosts);
+            }
+            break;
+        }
+
         break;
     }
 
     case BattleLogEventType::STATUS_INFLICTED:{
-        //  event.stat contains the status name ("burned", "paralyzed", etc.)
+        //  event.stat contains the human status name ("burned", "paralyzed",
+        //  "badly poisoned", etc.) — populated by the generator from PS's
+        //  static_stat field. Map to canonical server slugs.
+        //  Check "badly poison" before "poison" — substring order matters.
         std::string status;
-        if (event.stat.find("burn") != std::string::npos) status = "brn";
-        else if (event.stat.find("paralyz") != std::string::npos) status = "par";
-        else if (event.stat.find("poison") != std::string::npos) status = "psn";
-        else if (event.stat.find("sleep") != std::string::npos) status = "slp";
-        else if (event.stat.find("froz") != std::string::npos) status = "frz";
+        if      (event.stat.find("burn") != std::string::npos)        status = "brn";
+        else if (event.stat.find("paralyz") != std::string::npos)     status = "par";
         else if (event.stat.find("badly poison") != std::string::npos) status = "tox";
+        else if (event.stat.find("poison") != std::string::npos)      status = "psn";
+        else if (event.stat.find("sleep") != std::string::npos)       status = "slp";
+        else if (event.stat.find("asleep") != std::string::npos)      status = "slp";
+        else if (event.stat.find("froz") != std::string::npos)        status = "frz";
 
         if (!status.empty()){
             auto& team = event.is_opponent ? m_opp_team : m_own_team;
             auto& active = event.is_opponent ? m_opp_active : m_own_active;
-            auto& mon = team[active[0]];
-            mon.status = status;
-            //  Seed duration counters from the inflict event so the
-            //  encoder always sees a defensible value, not 0.
-            if (status == "slp"){
-                //  Game range is 1-3 turns; without knowing the roll we
-                //  default to 3 (worst case for the player). Wake-up
-                //  will fire STATUS_HEALED which clears status.
-                mon.sleep_turns_remaining = 3;
-            }else if (status == "tox"){
-                mon.toxic_counter = 1;
+            int pos = resolve_active_position(event.pokemon, team, active, m_mode);
+            if (pos < 0) pos = 0;
+            uint8_t slot = active[pos];
+            if (slot < 6){
+                auto& mon = team[slot];
+                mon.status = status;
+                //  Seed duration counters from the inflict event so the
+                //  encoder always sees a defensible value, not 0.
+                if (status == "slp"){
+                    //  Game range is 1-3 turns; without knowing the roll we
+                    //  default to 3 (worst case for the player). Wake-up
+                    //  will fire STATUS_HEALED which clears status.
+                    mon.sleep_turns_remaining = 3;
+                }else if (status == "tox"){
+                    mon.toxic_counter = 1;
+                }
             }
+        }
+        break;
+    }
+
+    case BattleLogEventType::STATUS_HEALED:{
+        //  Clear status when the mon is cured (woke up, thawed, paralysis
+        //  healed, etc.). The reader's static_stat field carries the
+        //  matched status name; we don't need to dispatch on it since the
+        //  game only ever has one primary status at a time, so any
+        //  STATUS_HEALED on the named mon clears whichever status it had.
+        //  FAINTED clears alive but leaves status untouched; that's fine —
+        //  to_predict_json gates on alive, so a stale status string on a
+        //  dead mon never reaches the encoder.
+        auto& team = event.is_opponent ? m_opp_team : m_own_team;
+        auto& active = event.is_opponent ? m_opp_active : m_own_active;
+        int pos = resolve_active_position(event.pokemon, team, active, m_mode);
+        if (pos < 0) pos = 0;
+        uint8_t slot = active[pos];
+        if (slot < 6){
+            auto& mon = team[slot];
+            mon.status.clear();
+            mon.sleep_turns_remaining = 0;
+            mon.toxic_counter = 0;
         }
         break;
     }
@@ -1424,6 +1711,11 @@ static JsonObject pokemon_to_json(const TrackedPokemon& p, int slot = -1, bool i
     //  server can hard-mask move slots that don't match.
     obj["locked_to_move"] = JsonValue(p.locked_to_move);
 
+    //  Most recent move this mon used. Empty before its first MOVE_USED.
+    //  Per-mon ground truth; field-level last_move_own/opp on the field
+    //  block are the derived "whoever moved most recently per side".
+    obj["last_move"] = JsonValue(p.last_move);
+
     //  Configuration prior: nature + EVs. Empty / zero is "not yet scanned".
     obj["nature"] = JsonValue(p.nature);
     JsonArray evs;
@@ -1679,6 +1971,16 @@ JsonObject BattleStateTracker::to_predict_json() const{
             moves.push_back(JsonValue(m));
         }
         e["action_moves"] = JsonValue(std::move(moves));
+
+        e["weather"] = JsonValue(entry.weather);
+        e["terrain"] = JsonValue(entry.terrain);
+        e["trick_room"] = JsonValue(entry.trick_room);
+
+        JsonArray order;
+        for (int v : entry.move_order){
+            order.push_back(JsonValue((int64_t)v));
+        }
+        e["move_order"] = JsonValue(std::move(order));
 
         history.push_back(JsonValue(std::move(e)));
     }

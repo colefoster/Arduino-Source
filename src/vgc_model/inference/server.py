@@ -71,6 +71,15 @@ class HistoryEntry(BaseModel):
     active_hp: list[float] = Field(default_factory=lambda: [0.0]*4)
     action_types: list[str] = Field(default_factory=lambda: ["noop"]*4)
     action_moves: list[str] = Field(default_factory=lambda: [""]*4)
+    #  End-of-turn field state, used by the packer to set
+    #  prev_seq_flags[2] = field_changed (diff vs next turn / current).
+    weather: str = ""
+    terrain: str = ""
+    trick_room: bool = False
+    #  Observed MOVE_USED execution order, slot-indexed
+    #  [own_a, own_b, opp_a, opp_b]. 0=first, 1=second, ... -1=no MOVE_USED
+    #  observed for that slot this turn. Drives prev_seq_speed.
+    move_order: list[int] = Field(default_factory=lambda: [-1]*4)
 
 
 class PredictRequest(BaseModel):

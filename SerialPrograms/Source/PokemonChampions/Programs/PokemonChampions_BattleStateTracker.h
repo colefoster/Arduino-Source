@@ -72,6 +72,13 @@ struct TrackedPokemon{
     //  Cleared on switch-in (via reset_volatile) and on faint.
     std::string locked_to_move;
 
+    //  Most recent move slug this specific mon used. Empty before its
+    //  first MOVE_USED. Per-mon (the source of truth); the tracker's
+    //  m_last_move_own / m_last_move_opp side-level fields are derived
+    //  from whichever active mon moved most recently. Persists across
+    //  switch-out so re-entry doesn't lose the history.
+    std::string last_move;
+
     //  Volatile-status names, canonical uppercase per
     //  src/vgc_model/data/volatile_statuses.py (e.g. "CONFUSION", "TAUNT",
     //  "ENCORE", "LEECHSEED", "SUBSTITUTE", "PROTECT"). Stored as a slug
@@ -190,6 +197,21 @@ struct BattleHistoryEntry{
     std::array<float, 4> active_hp = {0.0f, 0.0f, 0.0f, 0.0f};
     std::array<std::string, 4> action_types = {"noop","noop","noop","noop"};
     std::array<std::string, 4> action_moves = {};     //  slug, empty when type != move
+
+    //  Field-state snapshot at the time this history entry was pushed
+    //  (i.e. end-of-turn from the just-finished turn's POV). The packer
+    //  diffs (weather, terrain, trick_room) across consecutive entries
+    //  (and last vs current) to set the LSTM's `field_changed` flag.
+    std::string weather;
+    std::string terrain;
+    bool trick_room = false;
+
+    //  Observed MOVE_USED execution order this turn, indexed
+    //  [own_a, own_b, opp_a, opp_b]. 0 = went first, 1 = second, etc.
+    //  -1 = no MOVE_USED observed for that slot (didn't move). Only the
+    //  *first* MOVE_USED per slot writes here (multi-hit / status
+    //  re-fires of MOVE_USED preserve the original rank).
+    std::array<int, 4> move_order = { -1, -1, -1, -1 };
 };
 
 
@@ -447,6 +469,11 @@ private:
 
     //  Per-match rolling history of prior turns. See push_history_snapshot.
     std::deque<BattleHistoryEntry> m_history;
+
+    //  Counter for ordering MOVE_USED events within the current turn.
+    //  Reset to 0 each push_history_snapshot(); incremented on the first
+    //  MOVE_USED observed for each slot. See BattleHistoryEntry::move_order.
+    int m_turn_move_count = 0;
 };
 
 

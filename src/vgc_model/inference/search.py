@@ -304,7 +304,7 @@ class SearchEngine:
             # the live trace sends per-turn snapshots; otherwise zeros (the
             # model treats prev_seq_len=0 as "no history"). Window matches
             # the trained model's max_history=30.
-            **self._encode_history(req.get("history") or [], D),
+            **self._encode_history(req.get("history") or [], req, D),
             # Team preview (dummy — not used by action heads)
             "own_team_ids": torch.zeros(1, 6, dtype=torch.long, device=D),
             "opp_team_ids": torch.zeros(1, 6, dtype=torch.long, device=D),
@@ -322,12 +322,16 @@ class SearchEngine:
 
         return batch
 
-    def _encode_history(self, history: list[dict], D: torch.device) -> dict[str, torch.Tensor]:
+    def _encode_history(
+        self, history: list[dict], req: dict, D: torch.device,
+    ) -> dict[str, torch.Tensor]:
         """Pack the rolling per-turn history into the v2_seq prev_seq_* tensors.
 
         ``history`` is a list of dicts matching ``HistoryEntry`` from the
-        inference server schema — newest-last, capped client-side. Returns
-        the six prev_seq_* tensors shaped (1, MAX_HISTORY, ...) plus
+        inference server schema — newest-last, capped client-side. ``req``
+        is the (already perspective-swapped) request, used to compare the
+        last history entry against the current state for the flag bits.
+        Returns the six prev_seq_* tensors shaped (1, MAX_HISTORY, ...) plus
         prev_seq_len (1,). Entries past MAX_HISTORY are dropped from the
         oldest end so the most recent turns win the window.
 
@@ -337,6 +341,24 @@ class SearchEngine:
         for action_types because per-turn action attribution is unreliable
         from OCR alone — that's fine; the LSTM still sees the state
         trajectory (species + HP), which carries most of the signal.
+
+        prev_seq_flags[t] = [any_fainted, any_switch, field_changed]
+            Trainer (enriched_dataset._encode_history_sequence) defines
+            these by comparing turn t's snapshot to turn t+1 (the last
+            entry compares against the *current* sample). We mirror that:
+              any_fainted: any slot present at turn t with hp<=0 that's
+                no longer represented at turn t+1.
+              any_switch:  the set of base species across the 4 slots
+                differs between turn t and turn t+1.
+              field_changed: requires per-turn field state, which the C++
+                history payload does not carry — left at 0.0 (gap).
+
+        prev_seq_speed[t] = [own_a_went_first, own_b_went_first]
+            Trainer derives from per-turn move_order log (1.0=own first,
+            0.0=after, 0.5=unknown). The live-trace pipeline does not
+            emit move order, so we default to 0.5 (unknown) — left as a
+            gap to be filled when the C++ side starts publishing speed
+            order per turn-transition.
         """
         # Keep newest MAX_HISTORY turns.
         history = history[-MAX_HISTORY:]
@@ -348,11 +370,26 @@ class SearchEngine:
         flags = torch.zeros(1, MAX_HISTORY, 3, dtype=torch.float, device=D)
         speed = torch.full((1, MAX_HISTORY, 2), 0.5, dtype=torch.float, device=D)
 
+        # Python-side lists of per-turn slot snapshots, for the flag pass.
+        per_turn_species: list[list[str]] = []
+        per_turn_hp: list[list[float]] = []
+        per_turn_field: list[tuple[str, str, bool]] = []
+        per_turn_order: list[list[int]] = []
+
         for t, entry in enumerate(history):
             spec_slugs = (entry.get("active_species") or []) + [""]*4
             hps = (entry.get("active_hp") or []) + [0.0]*4
             types = (entry.get("action_types") or []) + ["noop"]*4
             moves = (entry.get("action_moves") or []) + [""]*4
+            per_turn_species.append([(s or "") for s in spec_slugs[:4]])
+            per_turn_hp.append([float(h or 0.0) for h in hps[:4]])
+            per_turn_field.append((
+                entry.get("weather") or "",
+                entry.get("terrain") or "",
+                bool(entry.get("trick_room") or False),
+            ))
+            order = (entry.get("move_order") or []) + [-1]*4
+            per_turn_order.append([int(order[s]) for s in range(4)])
             for s in range(4):
                 slug = spec_slugs[s] or ""
                 species[0, t, s] = self.vocabs.species[slug] if slug else 0
@@ -369,6 +406,71 @@ class SearchEngine:
                 elif a_type == _HIST_TYPE_MOVE and (moves[s] or ""):
                     actions[0, t, s] = 0
                 # else: stays at MAX_ACTIONS (noop / pad)
+
+        # Snapshot of the *current* sample (one step past the last history
+        # entry) — used as the comparison target for the last entry's flags.
+        # Slot order matches the trainer: [own_a, own_b, opp_a, opp_b].
+        cur_own = (req.get("own_active", []) + [{}, {}])[:2]
+        cur_opp = (req.get("opp_active", []) + [{}, {}])[:2]
+        cur_species = [
+            (cur_own[0].get("species") or ""),
+            (cur_own[1].get("species") or ""),
+            (cur_opp[0].get("species") or ""),
+            (cur_opp[1].get("species") or ""),
+        ]
+        cur_field_obj = req.get("field") or {}
+        cur_field = (
+            cur_field_obj.get("weather") or "",
+            cur_field_obj.get("terrain") or "",
+            bool(cur_field_obj.get("trick_room") or False),
+        )
+
+        for t in range(T):
+            next_species = (per_turn_species[t + 1] if t + 1 < T else cur_species)
+            next_field = (per_turn_field[t + 1] if t + 1 < T else cur_field)
+            this_species = per_turn_species[t]
+            this_hp = per_turn_hp[t]
+            this_field = per_turn_field[t]
+
+            this_set = {s for s in this_species if s}
+            next_set = {s for s in next_species if s}
+
+            # any_switch: species set differs between this turn and next.
+            any_switch = 1.0 if this_set != next_set else 0.0
+
+            # any_fainted: a slot present this turn with hp<=0 that is no
+            # longer present next turn. Approximates the trainer rule
+            # (which compared full state from the prior sample's view).
+            any_fainted = 0.0
+            for s_idx, slug in enumerate(this_species):
+                if slug and this_hp[s_idx] <= 0.0 and slug not in next_set:
+                    any_fainted = 1.0
+                    break
+
+            # field_changed: (weather, terrain, trick_room) tuple differs
+            # vs the next turn (or current request, for the last entry).
+            field_changed = 1.0 if this_field != next_field else 0.0
+            flags[0, t, 0] = any_fainted
+            flags[0, t, 1] = any_switch
+            flags[0, t, 2] = field_changed
+
+            # prev_seq_speed[t] = [own_a_went_first, own_b_went_first].
+            # 1.0 if the own slot moved strictly before every opp slot that
+            # also moved this turn; 0.0 if it moved after any opp; 0.5 if
+            # the own slot did not move (move_order == -1 sentinel).
+            order = per_turn_order[t]
+            own_a, own_b, opp_a, opp_b = order[0], order[1], order[2], order[3]
+            opp_orders = [v for v in (opp_a, opp_b) if v >= 0]
+            for slot_idx, own_v in enumerate((own_a, own_b)):
+                if own_v < 0:
+                    speed[0, t, slot_idx] = 0.5
+                elif not opp_orders:
+                    # Own moved, no opp moved — by convention own went first.
+                    speed[0, t, slot_idx] = 1.0
+                elif own_v < min(opp_orders):
+                    speed[0, t, slot_idx] = 1.0
+                else:
+                    speed[0, t, slot_idx] = 0.0
 
         return {
             "prev_seq_actions": actions,
@@ -412,6 +514,14 @@ class SearchEngine:
                     "active_hp":      _swap4(e.get("active_hp"), 0.0),
                     "action_types":   _swap4(e.get("action_types"), "noop"),
                     "action_moves":   _swap4(e.get("action_moves"), ""),
+                    #  move_order is slot-indexed [own_a, own_b, opp_a, opp_b]
+                    #  too, so it mirrors 0↔2 / 1↔3 like the rest.
+                    "move_order":     _swap4(e.get("move_order"), -1),
+                    #  weather / terrain / trick_room are global field state —
+                    #  not own/opp-relative — so they pass through unchanged.
+                    "weather":        e.get("weather", ""),
+                    "terrain":        e.get("terrain", ""),
+                    "trick_room":     bool(e.get("trick_room", False)),
                 })
             swapped["history"] = mirrored
         return swapped
