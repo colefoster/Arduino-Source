@@ -274,6 +274,78 @@ TeamSelection InferenceClient::team_select(Logger& logger, const JsonObject& tea
 }
 
 
+// ─── Decide-team ─────────────────────────────────────────────────
+
+DecideTeamResult InferenceClient::decide_team(Logger& logger, const JsonObject& teams){
+    DecideTeamResult result;
+
+    std::string response = post_json(logger, "/decide-team", teams.dump());
+    if (response.empty()){
+        return result;
+    }
+
+    try{
+        JsonValue json = parse_json(response);
+        const JsonObject& root = json.to_object_throw();
+
+        const JsonArray& bring = root.get_array_throw("bring");
+        for (size_t i = 0; i < 4 && i < bring.size(); i++){
+            result.bring[i] = static_cast<uint8_t>(bring[i].to_integer_throw());
+        }
+        const JsonArray& lead = root.get_array_throw("lead");
+        for (size_t i = 0; i < 2 && i < lead.size(); i++){
+            result.lead[i] = static_cast<uint8_t>(lead[i].to_integer_throw());
+        }
+
+        //  bring_scores / lead_scores are scalars per slot; not required
+        //  by the trace but logged for debugging.
+        const JsonValue* bs = root.get_value("bring_scores");
+        if (bs != nullptr){
+            const JsonArray* arr = bs->to_array();
+            if (arr){
+                for (size_t i = 0; i < 6 && i < arr->size(); i++){
+                    double d = 0;
+                    if ((*arr)[i].read_float(d)){
+                        result.bring_scores[i] = static_cast<float>(d);
+                    }
+                }
+            }
+        }
+        const JsonValue* ls = root.get_value("lead_scores");
+        if (ls != nullptr){
+            const JsonArray* arr = ls->to_array();
+            if (arr){
+                for (size_t i = 0; i < 4 && i < arr->size(); i++){
+                    double d = 0;
+                    if ((*arr)[i].read_float(d)){
+                        result.lead_scores[i] = static_cast<float>(d);
+                    }
+                }
+            }
+        }
+
+        //  Optional meta block.
+        const JsonValue* mv = root.get_value("meta");
+        if (mv != nullptr && mv->type() == JsonType::OBJECT){
+            const JsonObject& meta = mv->to_object_throw();
+            const std::string* s = meta.get_string("model_version");
+            if (s) result.model_version = *s;
+            s = meta.get_string("endpoint_impl");
+            if (s) result.endpoint_impl = *s;
+            double d = 0;
+            if (meta.read_float(d, "latency_ms")){
+                result.latency_ms = static_cast<float>(d);
+            }
+        }
+
+        result.success = true;
+    }catch (const std::exception& e){
+        logger.log("InferenceClient: failed to parse decide-team response: " + std::string(e.what()), COLOR_RED);
+    }
+    return result;
+}
+
+
 // ─── Action names ────────────────────────────────────────────────
 
 std::string action_name(uint8_t action_idx){

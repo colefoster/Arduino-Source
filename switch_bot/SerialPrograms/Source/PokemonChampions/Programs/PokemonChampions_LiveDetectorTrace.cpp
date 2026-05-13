@@ -264,6 +264,16 @@ LiveDetectorTrace::LiveDetectorTrace()
         LockMode::UNLOCK_WHILE_RUNNING,
         false
     )
+    , ENABLE_MODEL_TEAM_PICK(
+        "<b>Enable Model-Driven Team Pick:</b><br>"
+        "When on AND the inference server responds to POST /decide-team "
+        "at team_preview, the trace overrides LEAD_ORDER_* with the "
+        "model's bring + lead picks. Falls back to LEAD_ORDER_* (or "
+        "random) when the model is unavailable. "
+        "See plans/decide_team_select_contract.md.",
+        LockMode::UNLOCK_WHILE_RUNNING,
+        false
+    )
 {
     PA_ADD_OPTION(START_LOCATION);
     PA_ADD_OPTION(BATTLE_MODE_TARGET);
@@ -282,6 +292,7 @@ LiveDetectorTrace::LiveDetectorTrace()
     PA_ADD_OPTION(AI_SERVER_URL);
     PA_ADD_OPTION(ENABLE_MODEL_MOVE_PICK);
     PA_ADD_OPTION(ENABLE_MODEL_SWITCH_PICK);
+    PA_ADD_OPTION(ENABLE_MODEL_TEAM_PICK);
 }
 
 
@@ -2013,6 +2024,10 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
             //  team-preview-selecting phase, so each match gets a fresh
             //  pick when no explicit LEAD_ORDER is configured.
             m_random_lead_order_rolled = false;
+            //  M4: reset the per-match team-decision cache so the next
+            //  match fires a fresh /decide-team.
+            m_team_decision_fired = false;
+            m_last_team_decision = DecideTeamResult{};
         }
         if (screen == "post_match" || screen == "result_screen"){
             m_match_in_progress = false;
@@ -2105,6 +2120,76 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
         sctx.tp_marks_per_slot = m_tp_marks_per_slot;
         sctx.tp_nav_since_change = m_tp_nav_since_change;
 
+        //  ── M4: /decide-team shadow + driver ──
+        //  Fire once per match the first time both rosters are visible.
+        //  team_preview / team_preview_selecting screens carry the 12
+        //  species via TeamPreviewReader's tracker writes. Empty bench
+        //  slots (Champions: always 6 own + 6 opp) means the read isn't
+        //  ready yet — wait another poll.
+        if (m_inference_client
+            && !m_team_decision_fired
+            && (screen == "team_preview" || screen == "team_preview_selecting")){
+            TeamCandidates tc = m_tracker.candidates();
+            //  Need all 6 own species and at least 6 opp species (Champions
+            //  always reveals 6 at team_preview).
+            bool ready = tc.own_species.size() >= 6 && tc.opp_species.size() >= 6;
+            for (size_t i = 0; ready && i < 6; i++){
+                if (tc.own_species[i].empty() || tc.opp_species[i].empty()){
+                    ready = false;
+                }
+            }
+            if (ready){
+                JsonObject teams;
+                JsonArray own_arr;
+                JsonArray opp_arr;
+                for (size_t i = 0; i < 6; i++){
+                    own_arr.push_back(JsonValue(tc.own_species[i]));
+                    opp_arr.push_back(JsonValue(tc.opp_species[i]));
+                }
+                teams["own_team"] = JsonValue(std::move(own_arr));
+                teams["opp_team"] = JsonValue(std::move(opp_arr));
+                teams["format"] = JsonValue(((int)FORMAT_TARGET.current_value() == 1)
+                    ? std::string("doubles") : std::string("singles"));
+                teams["regulation"] = JsonValue(std::string("M-A"));
+
+                DecideTeamResult tr = m_inference_client->decide_team(env.console, teams);
+                m_team_decision_fired = true;
+                if (tr.success){
+                    m_last_team_decision = tr;
+                    std::string brought;
+                    for (int k = 0; k < 4; k++){
+                        if (k > 0) brought += ", ";
+                        int idx = tr.bring[k];
+                        brought += (idx >= 0 && idx < 6 && !tc.own_species[idx].empty())
+                            ? tc.own_species[idx]
+                            : ("slot" + std::to_string(idx));
+                    }
+                    std::string leads;
+                    for (int k = 0; k < 2; k++){
+                        if (k > 0) leads += ", ";
+                        int li = tr.lead[k];
+                        int team_idx = (li >= 0 && li < 4) ? (int)tr.bring[li] : -1;
+                        leads += (team_idx >= 0 && team_idx < 6
+                                  && !tc.own_species[team_idx].empty())
+                            ? tc.own_species[team_idx]
+                            : ("?" + std::to_string(li));
+                    }
+                    env.console.log(
+                        "model team: bring=[" + brought + "] lead=[" + leads + "]"
+                        + (tr.model_version.empty() ? std::string()
+                           : (" v=" + tr.model_version + "/" + tr.endpoint_impl)),
+                        COLOR_CYAN);
+                    env.console.overlay().add_log(
+                        "team: " + brought + " | leads: " + leads,
+                        COLOR_CYAN);
+                }else{
+                    env.console.log(
+                        "/decide-team failed (server unreachable or parse error)",
+                        COLOR_ORANGE);
+                }
+            }
+        }
+
         //  Parse the configured lead order. Singles uses 3 entries,
         //  doubles uses 4 — pick the right StringOption based on
         //  FORMAT_TARGET (0=Singles, 1=Doubles). Entries outside 0..5
@@ -2143,6 +2228,18 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
                 }
             }
             commit();
+            //  M4 driver: model overrides LEAD_ORDER_* entirely when on.
+            //  bring[] from /decide-team is already in send-out order;
+            //  drop into tp_lead_order[0..3]. Singles uses the first 3.
+            //  Falls back to LEAD_ORDER_* / random if the call hasn't
+            //  succeeded.
+            if (ENABLE_MODEL_TEAM_PICK && m_last_team_decision.success){
+                for (int k = 0; k < sctx.tp_lead_needed; k++){
+                    order[k] = m_last_team_decision.bring[k];
+                }
+                valid = sctx.tp_lead_needed;   // suppresses the random fallback
+            }
+
             if (valid == 0){
                 //  No explicit config — use the random fallback. Roll
                 //  once per match (gated by m_random_lead_order_rolled).

@@ -234,6 +234,7 @@ private:
     //  Choice-lock heuristic runs unchanged.
     BooleanCheckBoxOption ENABLE_MODEL_MOVE_PICK;
     BooleanCheckBoxOption ENABLE_MODEL_SWITCH_PICK;
+    BooleanCheckBoxOption ENABLE_MODEL_TEAM_PICK;
 
     //  ── State ──
     BattleStateTracker m_tracker;
@@ -258,6 +259,16 @@ private:
     //      turn before we POST).
     int m_decide_pending_visit = -1;
     int m_decide_polls_waited = 0;
+
+    //  M4: cached /decide-team result. Fired once per match on
+    //  team_preview entry; the result outlives the team_preview screen
+    //  so the team_preview_selecting press path can consult it. Empty
+    //  until first successful call (or perma-empty if server is down /
+    //  flag is off).
+    DecideTeamResult m_last_team_decision;
+    //  True once we've fired /decide-team for the current match. Reset
+    //  on match start. Prevents redundant POSTs as the screen lingers.
+    bool m_team_decision_fired = false;
 
     //  Track screen transitions so we can wipe the tracker when a fresh
     //  match begins (TeamPreview entered after we were on PostMatch /

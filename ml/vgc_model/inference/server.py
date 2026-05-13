@@ -181,9 +181,22 @@ class PredictResponse(BaseModel):
     slot_b: ActionResult
 
 
+class DecideMeta(BaseModel):
+    """Diagnostic meta block on a /decide* response. Trace logs the
+    fields it knows about; everything is optional and forward-compat."""
+    model_version: str = ""
+    endpoint_impl: str = ""       # "policy_only" / "search_1ply" / "lead_advisor" / etc.
+    latency_ms: float = 0.0
+    n_rollouts: int = 0
+
+
 class TeamSelectRequest(BaseModel):
     own_team: list[str]         # 6 species names
     opp_team: list[str]         # 6 species names
+    # Format / regulation (forward-compat). The lead-advisor model may
+    # condition on these; today's implementation may ignore.
+    format: str = "doubles"     # "singles" | "doubles"
+    regulation: str = ""        # free-form, e.g. "M-A"
 
 
 class TeamSelectResponse(BaseModel):
@@ -193,21 +206,23 @@ class TeamSelectResponse(BaseModel):
     lead_scores: list[float]    # 4 scores (one per selected)
 
 
+class DecideTeamResponse(BaseModel):
+    """The stable trace-facing team-select response. Mirrors
+    TeamSelectResponse with a meta block analogous to /decide.
+    See plans/decide_team_select_contract.md."""
+    bring: list[int]
+    bring_scores: list[float]
+    lead: list[int]
+    lead_scores: list[float]
+    meta: DecideMeta = Field(default_factory=DecideMeta)
+
+
 class SearchResponse(BaseModel):
     slot_a: ActionResult
     slot_b: ActionResult
     win_pct: float
     opp_slot_a: Optional[ActionResult] = None
     opp_slot_b: Optional[ActionResult] = None
-    n_rollouts: int = 0
-
-
-class DecideMeta(BaseModel):
-    """Diagnostic meta block on a /decide response. Trace logs the
-    fields it knows about; everything is optional and forward-compat."""
-    model_version: str = ""
-    endpoint_impl: str = ""       # "policy_only" / "search_1ply" / etc.
-    latency_ms: float = 0.0
     n_rollouts: int = 0
 
 
@@ -525,6 +540,36 @@ def team_select(req: TeamSelectRequest):
         lead=lead,
         bring_scores=team_scores,
         lead_scores=lead_scores,
+    )
+
+
+@app.post("/decide-team", response_model=DecideTeamResponse)
+def decide_team(req: TeamSelectRequest):
+    """The stable trace-facing team / lead selection endpoint. See
+    plans/decide_team_select_contract.md.
+
+    Today this wraps the existing /team-select implementation with a
+    meta block analogous to /decide. Future: route to a richer
+    lead-advisor model when one is loaded as a separate checkpoint.
+    """
+    import time
+    t0 = time.perf_counter()
+
+    # Reuse the existing team_select() body via direct call.
+    legacy = team_select(req)
+    latency_ms = (time.perf_counter() - t0) * 1000.0
+
+    return DecideTeamResponse(
+        bring=legacy.bring,
+        bring_scores=legacy.bring_scores,
+        lead=legacy.lead,
+        lead_scores=legacy.lead_scores,
+        meta=DecideMeta(
+            model_version=_model_version_label(),
+            endpoint_impl="lead_advisor",
+            latency_ms=latency_ms,
+            n_rollouts=0,
+        ),
     )
 
 

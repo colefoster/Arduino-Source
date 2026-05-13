@@ -70,6 +70,20 @@ struct TeamSelection{
 };
 
 
+//  Response from POST /decide-team. See plans/decide_team_select_contract.md.
+//  Extends TeamSelection with score arrays + meta block.
+struct DecideTeamResult{
+    bool success = false;
+    std::array<uint8_t, 4> bring = {};
+    std::array<uint8_t, 2> lead = {};
+    std::array<float, 6> bring_scores = {};
+    std::array<float, 4> lead_scores = {};
+    std::string model_version;
+    std::string endpoint_impl;
+    float latency_ms = 0.0f;
+};
+
+
 class InferenceClient{
 public:
     InferenceClient(
@@ -92,6 +106,11 @@ public:
 
     //  Send both teams' species, get back team + lead selection.
     TeamSelection team_select(Logger& logger, const JsonObject& teams);
+
+    //  POST /decide-team — the stable trace-facing team/lead endpoint.
+    //  See plans/decide_team_select_contract.md. Synchronous; called
+    //  once per match at team_preview_selecting.
+    DecideTeamResult decide_team(Logger& logger, const JsonObject& teams);
 
     void set_url(const std::string& url){ m_url = url; }
     void set_timeout(int ms){ m_timeout_ms = ms; }
