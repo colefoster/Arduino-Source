@@ -96,7 +96,139 @@ function ltHandleEvent(ev) {
     if (ev.engine_view) ltRenderEngineView(ev.engine_view, ev.pipeline || {});
     if (ev.snapshot) ltRenderSnapshot(ev.snapshot, ev.engine_view || {});
     ltRenderSuggestion(ev.suggested_input);
+    ltRenderModelDecision(ev);
     ltAppendFeed(ev);
+}
+
+//  M5: rolling history of win_pct per match. Reset when
+//  match_in_progress flips false -> true. Capped at 30 entries.
+const LT_WINPROB_MAX = 30;
+let _ltWinpct = [];
+let _ltLastVisit = -1;
+let _ltPrevMatchInProgress = false;
+
+function ltRenderModelDecision(ev) {
+    const card = document.getElementById('lt-model-card');
+    if (!card) return;
+
+    //  Reset the win-pct trace on match transitions.
+    const inMatch = !!ev.match_in_progress;
+    if (inMatch && !_ltPrevMatchInProgress) {
+        _ltWinpct = [];
+        _ltLastVisit = -1;
+    }
+    _ltPrevMatchInProgress = inMatch;
+
+    const d = ev.model_decision;
+    if (!d) {
+        card.hidden = true;
+        return;
+    }
+    card.hidden = false;
+
+    //  Push the win_pct point ONCE per new decision visit.
+    if (typeof d.win_pct === 'number' && d.visit !== _ltLastVisit) {
+        _ltWinpct.push({ visit: d.visit, win_pct: d.win_pct });
+        while (_ltWinpct.length > LT_WINPROB_MAX) _ltWinpct.shift();
+        _ltLastVisit = d.visit;
+    }
+
+    //  Action decoders — best-effort. The trace already produced human
+    //  labels in its log; here we just render the integer + probability.
+    const fmtAction = (action, p) => {
+        if (typeof action !== 'number') return '-';
+        const pct = typeof p === 'number' ? Math.round(p * 100) : '?';
+        return action < 12
+            ? `move${Math.floor(action / 3)} -> ${['opp_a', 'opp_b', 'ally'][action % 3]} (p=${pct}%)`
+            : `switch_${action - 12} (p=${pct}%)`;
+    };
+
+    document.getElementById('lt-model-pick-a').innerHTML =
+        `<span class="label">A:</span>${ltEsc(fmtAction(d.action_a, d.p_a))}`;
+    const pickB = document.getElementById('lt-model-pick-b');
+    if (typeof d.action_b === 'number' && d.action_b < 14) {
+        pickB.innerHTML = `<span class="label">B:</span>${ltEsc(fmtAction(d.action_b, d.p_b))}`;
+        pickB.hidden = false;
+    } else {
+        pickB.hidden = true;
+    }
+
+    const opp = document.getElementById('lt-model-opp');
+    if (typeof d.opp_action_a === 'number') {
+        let oppText = 'opp predicts: ' + fmtAction(d.opp_action_a, d.opp_p_a);
+        if (typeof d.opp_action_b === 'number') {
+            oppText += ' | ' + fmtAction(d.opp_action_b, d.opp_p_b);
+        }
+        opp.textContent = oppText;
+        opp.hidden = false;
+    } else {
+        opp.hidden = true;
+    }
+
+    document.getElementById('lt-model-version').textContent =
+        d.model_version ? `${d.model_version} / ${d.endpoint_impl || '?'} (${Math.round(d.latency_ms || 0)}ms)` : '';
+
+    //  Win-pct gauge + sparkline.
+    const wpEl = document.getElementById('lt-winprob-value');
+    if (_ltWinpct.length > 0) {
+        const latest = _ltWinpct[_ltWinpct.length - 1].win_pct;
+        const pct = Math.round(latest * 100);
+        wpEl.textContent = pct + '%';
+        wpEl.classList.remove('low', 'mid');
+        if (latest < 0.35) wpEl.classList.add('low');
+        else if (latest < 0.55) wpEl.classList.add('mid');
+    } else {
+        wpEl.textContent = '--';
+    }
+    ltDrawWinprobSparkline();
+}
+
+function ltDrawWinprobSparkline() {
+    const c = document.getElementById('lt-winprob-canvas');
+    if (!c) return;
+    const ctx = c.getContext('2d');
+    const W = c.width, H = c.height;
+    ctx.clearRect(0, 0, W, H);
+
+    //  50% baseline.
+    ctx.strokeStyle = '#21262d';
+    ctx.setLineDash([2, 3]);
+    ctx.beginPath();
+    ctx.moveTo(0, H / 2);
+    ctx.lineTo(W, H / 2);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    if (_ltWinpct.length === 0) return;
+
+    //  Plot — left-padded so a fresh match starts at the left edge.
+    const n = _ltWinpct.length;
+    const dx = (n > 1) ? W / (n - 1) : 0;
+    ctx.strokeStyle = '#58a6ff';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    for (let i = 0; i < n; i++) {
+        const p = Math.max(0, Math.min(1, _ltWinpct[i].win_pct));
+        const x = i * dx;
+        const y = H - p * H;
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+
+    //  Fill below the line.
+    ctx.lineTo((n - 1) * dx, H);
+    ctx.lineTo(0, H);
+    ctx.closePath();
+    ctx.fillStyle = 'rgba(88, 166, 255, 0.12)';
+    ctx.fill();
+
+    //  Last-point dot.
+    const last = _ltWinpct[n - 1].win_pct;
+    ctx.fillStyle = '#58a6ff';
+    ctx.beginPath();
+    ctx.arc((n - 1) * dx, H - last * H, 3, 0, Math.PI * 2);
+    ctx.fill();
 }
 
 function ltRenderSuggestion(s) {

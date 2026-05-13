@@ -1782,6 +1782,32 @@ JsonObject LiveDetectorTrace::build_event(const std::string& screen, int64_t ts_
         ev["suggested_input"] = std::move(s);
     }
 
+    //  M5: surface the cached /decide result so the dashboard can render
+    //  a win-probability gauge, opp-action overlay, etc. without parsing
+    //  free-text log lines. Empty/absent when no model call has succeeded
+    //  this match.
+    if (m_last_decision.success){
+        JsonObject d;
+        d["visit"] = (int64_t)m_decision_for_visit;
+        d["action_a"] = (int64_t)m_last_decision.action_a;
+        d["action_b"] = (int64_t)m_last_decision.action_b;
+        d["p_a"] = (double)m_last_decision.probs_a[m_last_decision.action_a];
+        d["p_b"] = (double)m_last_decision.probs_b[m_last_decision.action_b];
+        if (m_last_decision.win_pct >= 0.0f){
+            d["win_pct"] = (double)m_last_decision.win_pct;
+        }
+        if (m_last_decision.has_opp){
+            d["opp_action_a"] = (int64_t)m_last_decision.opp_action_a;
+            d["opp_action_b"] = (int64_t)m_last_decision.opp_action_b;
+            d["opp_p_a"] = (double)m_last_decision.opp_probs_a[m_last_decision.opp_action_a];
+            d["opp_p_b"] = (double)m_last_decision.opp_probs_b[m_last_decision.opp_action_b];
+        }
+        if (!m_last_decision.model_version.empty()) d["model_version"] = m_last_decision.model_version;
+        if (!m_last_decision.endpoint_impl.empty()) d["endpoint_impl"] = m_last_decision.endpoint_impl;
+        d["latency_ms"] = (double)m_last_decision.latency_ms;
+        ev["model_decision"] = std::move(d);
+    }
+
     return ev;
 }
 
