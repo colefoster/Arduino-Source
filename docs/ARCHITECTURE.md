@@ -52,7 +52,7 @@ Single FastAPI + vanilla-JS SPA on ash. **All UI lives here.** Local Mac runs CL
 
 | Machine | Role | Tree |
 |---|---|---|
-| **Mac** (`/Users/cole/Dev/pokemon-champions`) | Editing, local C++ builds (`build_mac/`), reference frames (`ref_frames/`, ~1.3 GB, Mac-only) | working copy |
+| **Mac** (`/Users/cole/Dev/mimikyu`) | Editing, local C++ builds (`switch_bot/build_mac/`), reference frames (`ref_frames/`, ~1.3 GB, Mac-only) | canonical (as of 2026-04-30) |
 | **ColePC** (Windows, `C:\Dev\pokemon-champions`) | **Canonical tree.** Qt6 + VS toolchain, capture card, microcontroller, RTX GPU. Where live bot tests and OCR/detector dev happen. | canonical |
 | **unraid** (Pandora) | **Canonical training rig** (in transition). Linux fork = DataLoader workers actually scale. RTX 4060. Container `pokemon-champions-gpu`, image `pytorch/pytorch:2.6.0-cuda12.6-cudnn9-runtime`, vol `/mnt/user/data/pokemon-champions → /workspace`. | clone |
 | **ash** (Hetzner VPS) | Data acquisition (spectator), dashboard host, public surface | `/opt/pokemon-champions/` |

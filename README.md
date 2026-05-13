@@ -39,8 +39,8 @@ The repo is a monorepo of four discrete subsystems plus shared data.
 
 Two launchd-managed services on the Mac:
 
-- `com.cole.pokemon-champions.dashboard` — uvicorn server on `:9875` (cwd `devtools/dashboard/`)
-- `com.cole.pokemon-champions.mac-dev-runner` — `devtools/tools/mac_dev_runner.py` on `:9876`
+- `com.cole.mimikyu.hub` — uvicorn server on `:9875` (cwd `devtools/dashboard/`)
+- `com.cole.mimikyu.dev-runner` — `devtools/tools/mac_dev_runner.py` on `:9876`
 
 Both reload with `launchctl unload <plist> && launchctl load <plist>`.
 

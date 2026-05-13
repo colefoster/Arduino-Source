@@ -225,8 +225,8 @@ LiveDetectorTrace::LiveDetectorTrace()
         "Where to drop captured PNG + JSON sidecars. Defaults to the dashboard "
         "inbox path so the existing triage flow picks them up after sync.",
         LockMode::UNLOCK_WHILE_RUNNING,
-        "/Users/cole/Dev/pokemon-champions/test_images/_inbox",
-        "/Users/cole/Dev/pokemon-champions/test_images/_inbox"
+        "/Users/cole/Dev/mimikyu/devtools/test_images/_inbox",
+        "/Users/cole/Dev/mimikyu/devtools/test_images/_inbox"
     )
     , AUTO_CAPTURE_MAX_PER_HOUR(
         "<b>Max Captures / Hour:</b><br>"
