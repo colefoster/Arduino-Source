@@ -109,3 +109,6 @@ data/checkpoints/
 # Test-image scratch: auto-captured parse-fail inbox + per-screen scratch
 test_images/_inbox/
 test_images/**/_modal*
+
+# PNG corpus: kept local only (too big for git); manifests stay tracked
+devtools/test_images/**/*.png
