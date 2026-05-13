@@ -225,6 +225,16 @@ private:
     //  in M1. See plans/decide_endpoint_contract.md.
     StringOption AI_SERVER_URL;
 
+    //  ── Model-driven press flags (M2/M3) ──
+    //  When ON, the trace replaces the random roll with the model's
+    //  pick at the corresponding decision site. Each flag is independent
+    //  so users can opt into partial driver mode. All default OFF.
+    //  Fallback when the model fires but produces no fresh prediction
+    //  (server down / timeout / parse error): the existing random /
+    //  Choice-lock heuristic runs unchanged.
+    BooleanCheckBoxOption ENABLE_MODEL_MOVE_PICK;
+    BooleanCheckBoxOption ENABLE_MODEL_SWITCH_PICK;
+
     //  ── State ──
     BattleStateTracker m_tracker;
     BattleMode m_mode = BattleMode::UNKNOWN;

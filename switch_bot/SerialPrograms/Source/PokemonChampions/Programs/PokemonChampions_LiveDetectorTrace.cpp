@@ -241,10 +241,28 @@ LiveDetectorTrace::LiveDetectorTrace()
         "URL of the Python inference server. Empty = disabled. When set and "
         "reachable, the trace fires one POST /decide per turn and logs the "
         "decoded action to the trace event + video overlay. Heuristic still "
-        "drives presses (M1 shadow). See plans/decide_endpoint_contract.md.",
+        "drives presses unless the model-driven flags below are on. See "
+        "plans/decide_endpoint_contract.md.",
         LockMode::UNLOCK_WHILE_RUNNING,
         "http://localhost:8265",
         "http://localhost:8265"
+    )
+    , ENABLE_MODEL_MOVE_PICK(
+        "<b>Enable Model-Driven Move Pick:</b><br>"
+        "When on AND a fresh /decide prediction is available, the trace "
+        "uses the model's chosen move slot (overrides the random roll). "
+        "Choice-lock still wins over the model (lock is a hard mask). "
+        "Falls back to random when the model is unavailable.",
+        LockMode::UNLOCK_WHILE_RUNNING,
+        false
+    )
+    , ENABLE_MODEL_SWITCH_PICK(
+        "<b>Enable Model-Driven Switch Pick:</b><br>"
+        "When on AND the latest /decide prediction is a switch action "
+        "(switch_0 / switch_1), the trace navigates to that bench slot. "
+        "Falls back to random when the model is unavailable.",
+        LockMode::UNLOCK_WHILE_RUNNING,
+        false
     )
 {
     PA_ADD_OPTION(START_LOCATION);
@@ -262,6 +280,8 @@ LiveDetectorTrace::LiveDetectorTrace()
     PA_ADD_OPTION(AUTO_CAPTURE_DIR);
     PA_ADD_OPTION(AUTO_CAPTURE_MAX_PER_HOUR);
     PA_ADD_OPTION(AI_SERVER_URL);
+    PA_ADD_OPTION(ENABLE_MODEL_MOVE_PICK);
+    PA_ADD_OPTION(ENABLE_MODEL_SWITCH_PICK);
 }
 
 
@@ -2443,12 +2463,32 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
                     }
                 }
 
+                //  M2: model-driven move pick. Precedence: Choice-lock >
+                //  model > random. The model is only consulted when the
+                //  prediction is fresh for THIS visit AND the action is
+                //  a move (< 12, not a switch).
+                int model_slot = -1;
+                if (locked_slot < 0
+                    && ENABLE_MODEL_MOVE_PICK
+                    && m_inference_client
+                    && m_last_decision.success
+                    && m_decision_for_visit == m_battle_action_menu_visits
+                    && m_last_decision.action_a < 12){
+                    model_slot = m_last_decision.action_a / 3;
+                }
+
+                const char* pick_source;
                 if (locked_slot >= 0){
                     m_target_move_slot = locked_slot;
+                    pick_source = "locked";
+                }else if (model_slot >= 0){
+                    m_target_move_slot = model_slot;
+                    pick_source = "model";
                 }else{
                     //  Pick one of the 3 slots that isn't the current cursor.
                     int offset = 1 + (int)(now_ms() % 3);  //  1..3
                     m_target_move_slot = (m_move_select_cursor + offset) % 4;
+                    pick_source = "random";
                 }
                 m_move_slot_rolled_for = m_battle_action_menu_visits;
                 const std::string& move_name = m_move_select_moves[m_target_move_slot];
@@ -2457,16 +2497,15 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
                                       : move_name;
                 env.console.log(
                     std::string("in-battle: ")
-                    + (locked_slot >= 0 ? "FORCED locked-move slot " : "rolled move slot ")
+                    + pick_source + " move slot "
                     + std::to_string(m_target_move_slot)
                     + " (" + move_label
                     + ", cursor=" + std::to_string(m_move_select_cursor)
-                    + (locked_slot >= 0 ? ", choice/encore lock" : ", forced nav")
                     + ") for action_menu visit #"
                     + std::to_string(m_battle_action_menu_visits),
                     COLOR_BLUE);
                 env.console.overlay().add_log(
-                    (locked_slot >= 0 ? "locked: " : "move pick: ") + move_label,
+                    std::string(pick_source) + ": " + move_label,
                     COLOR_CYAN);
             }
             //  Roll a switch target once per pokemon_switch attempt. Keyed
@@ -2500,20 +2539,60 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
                     candidates[cand_count++] = i;
                 }
                 if (cand_count > 0){
-                    //  Use a different mod source than move-slot so the two
-                    //  rolls aren't always in lockstep.
-                    const int pick = (int)((now_ms() / 7) % cand_count);
-                    m_switch_target_slot = candidates[pick];
+                    //  M3 switch: model override. Action 12/13 indexes
+                    //  into the own_bench emission order from
+                    //  to_predict_json (non-active slots in 0..5 order,
+                    //  first 2). Compute the same emission inline; pick
+                    //  bench[i] if alive and reachable, else fall back.
+                    int model_target = -1;
+                    if (ENABLE_MODEL_SWITCH_PICK
+                        && m_inference_client
+                        && m_last_decision.success
+                        && m_decision_for_visit == m_battle_action_menu_visits
+                        && m_last_decision.action_a >= 12){
+                        uint8_t bench_emission[2] = {255, 255};
+                        uint8_t bn = 0;
+                        for (uint8_t i = 0; i < 6 && bn < 2; i++){
+                            bool is_active = (m_known_own_active[0] == (int)i
+                                || m_known_own_active[1] == (int)i);
+                            if (is_active) continue;
+                            if (m_tracker.own(i).species.empty()) continue;
+                            bench_emission[bn++] = i;
+                        }
+                        uint8_t want = bench_emission[m_last_decision.action_a - 12];
+                        if (want != 255){
+                            //  Confirm it's in the alive-candidate set.
+                            for (int k = 0; k < cand_count; k++){
+                                if (candidates[k] == want){
+                                    model_target = want;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    const char* switch_source;
+                    if (model_target >= 0){
+                        m_switch_target_slot = model_target;
+                        switch_source = "model";
+                    }else{
+                        //  Use a different mod source than move-slot so the two
+                        //  rolls aren't always in lockstep.
+                        const int pick = (int)((now_ms() / 7) % cand_count);
+                        m_switch_target_slot = candidates[pick];
+                        switch_source = "random";
+                    }
                     m_switch_rolled_for = m_battle_action_menu_visits;
                     env.console.log(
-                        "in-battle: rolled switch target slot "
+                        std::string("in-battle: ") + switch_source
+                        + " switch target slot "
                         + std::to_string(m_switch_target_slot)
                         + " (from " + std::to_string(cand_count)
                         + " candidates) for action_menu visit #"
                         + std::to_string(m_battle_action_menu_visits),
                         COLOR_BLUE);
                     env.console.overlay().add_log(
-                        "switch target: slot "
+                        std::string(switch_source) + " switch: slot "
                         + std::to_string(m_switch_target_slot)
                         + " (" + std::to_string(cand_count) + " cand)",
                         COLOR_CYAN);
@@ -3032,6 +3111,52 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
                     }
                     env.console.log(logline, COLOR_CYAN);
                     env.console.overlay().add_log(overlay, COLOR_CYAN);
+
+                    //  M5.1: opp prediction overlay. When /decide carries
+                    //  the perspective-swapped pass, surface the model's
+                    //  guess at the opp's action so we can sanity-check.
+                    //  Decoded against opp's side — the opp's target=0
+                    //  (their "opp_a") is our own_a from our POV; we
+                    //  mirror the label for the human watching.
+                    if (r.has_opp){
+                        //  Opp's bench species — for switch decoding —
+                        //  best-effort from the tracker's opp_team.
+                        std::array<std::string, 2> opp_bench_sp{};
+                        {
+                            uint8_t bn = 0;
+                            const auto opp_active = m_tracker.opp_active_slot_indices();
+                            for (uint8_t i = 0; i < m_tracker.opp_seen_count() && bn < 2; i++){
+                                bool is_active = (i == opp_active[0])
+                                    || (!is_singles && i == opp_active[1]);
+                                if (is_active) continue;
+                                const auto& mon = m_tracker.opp(i);
+                                if (mon.species.empty()) continue;
+                                opp_bench_sp[bn++] = mon.species;
+                            }
+                        }
+                        //  Opp's move slugs aren't OCR'd live (we only
+                        //  read our own move pills); pass empty array so
+                        //  the decoder falls back to "moveN".
+                        std::array<std::string, 4> empty_moves{};
+                        std::string opp_sa = decode_action_human(
+                            r.opp_action_a, empty_moves, opp_bench_sp, is_singles);
+                        int opct_a = static_cast<int>(r.opp_probs_a[r.opp_action_a] * 100);
+                        std::string opp_line = "opp predicts visit#"
+                            + std::to_string(m_decision_for_visit)
+                            + ": A=" + opp_sa + " (p=" + std::to_string(opct_a) + "%)";
+                        std::string opp_overlay = "opp: " + opp_sa
+                            + " (p=" + std::to_string(opct_a) + "%)";
+                        if (!is_singles){
+                            std::string opp_sb = decode_action_human(
+                                r.opp_action_b, empty_moves, opp_bench_sp, false);
+                            int opct_b = static_cast<int>(r.opp_probs_b[r.opp_action_b] * 100);
+                            opp_line += " B=" + opp_sb + " (p="
+                                + std::to_string(opct_b) + "%)";
+                            opp_overlay += " | " + opp_sb;
+                        }
+                        env.console.log(opp_line, COLOR_PURPLE);
+                        env.console.overlay().add_log(opp_overlay, COLOR_PURPLE);
+                    }
                 }else{
                     env.console.log(
                         "model decision visit#"
