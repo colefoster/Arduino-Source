@@ -1,0 +1,77 @@
+SerialPrograms/bin/
+
+.vscode
+.qtcreator
+
+discord_social_sdk_win/
+discord_partner_sdk.dll
+3rdPartyBinaries/discord_social_sdk_mac/
+3rdPartyBinaries/onnxruntime-osx-arm64-*/
+3rdPartyBinaries/onnxruntime-osx-x86_64-*/
+
+
+# macOS hidden system file
+.DS_Store
+
+build-*/
+build/
+
+# Qt config file on a user basis
+*.pro.user
+*.txt.user
+
+# all other common C++ ignorables
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+SerialPrograms/*.so
+SerialPrograms/*.dylib
+SerialPrograms/*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+SerialPrograms/*.lai
+SerialPrograms/*.la
+SerialPrograms/*.a
+SerialPrograms/*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+.vs
+Resources/*
+Packages/
+SerialPrograms/CMakeLists.txt.user
+opencv_world4120.dll
+opencv_world4120d.dll
+
+# Python cache
+__pycache__
+
+# Jupyter Notebooks
+*.ipynb
+
+vcpkg/
+
+CLAUDE.md
+
+build_*/
+.cache/*
+Packages/*
+

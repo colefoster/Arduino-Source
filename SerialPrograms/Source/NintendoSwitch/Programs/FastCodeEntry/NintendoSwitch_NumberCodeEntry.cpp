@@ -1,0 +1,307 @@
+/*  Number Code Entry
+ *
+ *  From: https://github.com/PokemonAutomation/
+ *
+ */
+
+#include <map>
+#include "CommonFramework/Exceptions/OperationFailedException.h"
+#include "NintendoSwitch/NintendoSwitch_Settings.h"
+#include "NintendoSwitch/Commands/NintendoSwitch_Commands_Superscalar.h"
+#include "NintendoSwitch/Options/NintendoSwitch_CodeEntrySettingsOption.h"
+#include "NintendoSwitch/Inference/NintendoSwitch_ConsoleTypeDetector.h"
+#include "NintendoSwitch_CodeEntryTools.h"
+#include "NintendoSwitch_NumberCodeEntry.h"
+#include "NintendoSwitch_KeyboardCodeEntry.h"
+
+//#include <iostream>
+//using std::cout;
+//using std::endl;
+
+namespace PokemonAutomation{
+namespace NintendoSwitch{
+namespace FastCodeEntry{
+
+
+
+
+void numberpad_enter_code(
+    ConsoleHandle& console, AbstractControllerContext& context,
+    bool assume_console_type_is_ready,
+    const std::string& code, bool include_plus
+){
+    auto* keyboard = dynamic_cast<StandardHid::Keyboard*>(&context.controller());
+    if (keyboard){
+        StandardHid::KeyboardContext subcontext(context);
+        keyboard_enter_code(console, subcontext, KeyboardLayout::QWERTY, code, include_plus);
+        return;
+    }
+
+    auto* procon = dynamic_cast<ProController*>(&context.controller());
+    if (procon){
+        ProControllerContext subcontext(context);
+        numberpad_enter_code(
+            console, subcontext,
+            assume_console_type_is_ready,
+            code, include_plus
+        );
+        return;
+    }
+
+    throw UserSetupError(
+        console, "Unsupported controller type."
+    );
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+struct NumberEntryPosition{
+    uint8_t row;
+    uint8_t col;
+};
+
+static const std::map<char, NumberEntryPosition>& NUMBER_POSITIONS(){
+    static const std::map<char, NumberEntryPosition> map{
+        {1, {0, 0}},
+        {2, {0, 1}},
+        {3, {0, 2}},
+        {4, {1, 0}},
+        {5, {1, 1}},
+        {6, {1, 2}},
+        {7, {2, 0}},
+        {8, {2, 1}},
+        {9, {2, 2}},
+        {0, {3, 1}},
+
+        {'1', {0, 0}},
+        {'2', {0, 1}},
+        {'3', {0, 2}},
+        {'4', {1, 0}},
+        {'5', {1, 1}},
+        {'6', {1, 2}},
+        {'7', {2, 0}},
+        {'8', {2, 1}},
+        {'9', {2, 2}},
+        {'0', {3, 1}},
+    };
+    return map;
+}
+
+
+
+
+
+//  Return the path from "source" to "destination".
+std::vector<CodeEntryAction> numberpad_get_path(
+    NumberEntryPosition source,
+    NumberEntryPosition destination
+){
+    std::vector<CodeEntryAction> path;
+
+    uint8_t row = source.row;
+    uint8_t col = source.col;
+
+    //  Do vertical first since it may auto-center the horizontal position.
+    while (row < destination.row){
+        path.emplace_back(CodeEntryAction::NORM_MOVE_DOWN);
+        row++;
+    }
+    while (row > destination.row){
+        path.emplace_back(CodeEntryAction::NORM_MOVE_UP);
+        row--;
+    }
+
+    //  Moving to the zero automatically changes the column.
+    if (row == 3){
+        col = 1;
+    }
+
+    while (col < destination.col){
+        path.emplace_back(CodeEntryAction::NORM_MOVE_RIGHT);
+        col++;
+    }
+    while (col > destination.col){
+        path.emplace_back(CodeEntryAction::NORM_MOVE_LEFT);
+        col--;
+    }
+
+    path.emplace_back(CodeEntryAction::ENTER_CHAR);
+
+    return path;
+}
+
+
+//  Get all possible paths from "start" to cover everything [positions, positions + length).
+std::vector<std::vector<CodeEntryAction>> numberpad_get_all_paths(
+    NumberEntryPosition start,
+    const NumberEntryPosition* positions, size_t length,
+    bool reordering
+){
+    if (length == 1){
+        return {numberpad_get_path(start, positions[0])};
+    }
+
+    std::vector<std::vector<CodeEntryAction>> paths;
+    {
+        NumberEntryPosition position = positions[0];
+        std::vector<CodeEntryAction> current = numberpad_get_path(start, position);
+        std::vector<std::vector<CodeEntryAction>> subpaths = numberpad_get_all_paths(
+            position,
+            positions + 1, length - 1,
+            reordering
+        );
+        for (std::vector<CodeEntryAction>& path : subpaths){
+            path.insert(path.begin(), current.begin(), current.end());
+            paths.emplace_back(std::move(path));
+        }
+    }
+    if (reordering){
+        NumberEntryPosition position = positions[length - 1];
+        std::vector<CodeEntryAction> current = numberpad_get_path(start, position);
+        current.emplace_back(CodeEntryAction::SCROLL_LEFT);
+        std::vector<std::vector<CodeEntryAction>> subpaths = numberpad_get_all_paths(
+            position,
+            positions, length - 1,
+            reordering
+        );
+        for (std::vector<CodeEntryAction>& path : subpaths){
+            path.insert(path.begin(), current.begin(), current.end());
+            paths.emplace_back(std::move(path));
+        }
+    }
+
+    return paths;
+}
+
+
+
+//  Given a set of paths, find the best one and return it with fully populated
+//  delays.
+std::vector<CodeEntryActionWithDelay> numberpad_get_best_path(
+    bool switch2,
+    const std::vector<std::vector<CodeEntryAction>>& paths,
+    const CodeEntryDelays& delays,
+    bool optimize
+){
+    std::vector<CodeEntryActionWithDelay> best_path;
+    Milliseconds best_time = Milliseconds::max();
+    for (const std::vector<CodeEntryAction>& path : paths){
+        std::vector<CodeEntryActionWithDelay> current_path;
+        Milliseconds current_time = codeboard_populate_delays(
+            switch2,
+            current_path,
+            path, delays, optimize
+        );
+
+//        cout << "Size = " << current_path.size() << ", cost = " << current_time.count() << endl;
+
+        if (best_time > current_time ||
+            (best_time == current_time && best_path.size() > current_path.size())
+        ){
+            best_time = current_time;
+            best_path = std::move(current_path);
+        }
+    }
+    return best_path;
+}
+
+
+
+
+void numberpad_enter_code(
+    ConsoleHandle& console, ProControllerContext& context,
+    bool assume_console_type_is_ready,
+    const std::string& code, bool include_plus
+){
+    //  Calculate the coordinates.
+    const std::map<char, NumberEntryPosition>& POSITION_MAP = NUMBER_POSITIONS();
+    std::vector<NumberEntryPosition> positions;
+    for (char ch : code){
+        auto iter = POSITION_MAP.find(ch);
+        if (iter == POSITION_MAP.end()){
+            throw_and_log<OperationFailedException>(
+                console, ErrorReport::NO_ERROR_REPORT,
+                "Invalid code character."
+            );
+        }
+        positions.emplace_back(iter->second);
+    }
+
+    CodeEntryDelays delays;
+
+    ConsoleType console_type = assume_console_type_is_ready
+        ? console.state().console_type()
+        : detect_console_type_from_in_game(console, context);
+    bool switch2;
+    if (is_switch1(console_type)){
+        switch2 = false;
+        if (context->performance_class() == ControllerPerformanceClass::SerialPABotBase_Wired){
+            delays = ConsoleSettings::instance().CODEBOARD_ENTRY_SWITCH1_WIRED;
+        }else{
+            delays = ConsoleSettings::instance().CODEBOARD_ENTRY_SWITCH1_WIRELESS;
+        }
+    }else if (is_switch2(console_type)){
+        switch2 = true;
+        if (context->performance_class() == ControllerPerformanceClass::SerialPABotBase_Wired){
+            delays = ConsoleSettings::instance().CODEBOARD_ENTRY_SWITCH2_WIRED;
+        }else{
+            delays = ConsoleSettings::instance().CODEBOARD_ENTRY_SWITCH2_WIRELESS;
+        }
+    }else{
+        throw UserSetupError(
+            console,
+            "Please select a valid Switch console type."
+        );
+    }
+
+
+    //  Get all the possible paths.
+    std::vector<std::vector<CodeEntryAction>> all_paths = numberpad_get_all_paths(
+        {0, 0},
+        positions.data(), positions.size(),
+        delays.reordering
+    );
+
+    //  Pick the best path.
+    std::vector<CodeEntryActionWithDelay> best_path = numberpad_get_best_path(
+        switch2,
+        all_paths,
+        delays,
+        !switch2 && context->atomic_multibutton()
+    );
+
+    codeboard_execute_path(context, delays, best_path);
+
+    if (include_plus){
+        ssf_press_button_ptv(context, BUTTON_PLUS);
+        ssf_press_button_ptv(context, BUTTON_PLUS);
+    }
+
+    ssf_flush_pipeline(context);
+}
+
+
+
+
+
+
+
+}
+}
+}

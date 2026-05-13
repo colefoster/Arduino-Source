@@ -1,0 +1,252 @@
+/*  ML ONNX Runtime Helpers
+ *
+ *  From: https://github.com/PokemonAutomation/
+ *
+ *  Helper functions to work with ONNX Runtime library
+ */
+
+#include <QString>
+#include <QFile>
+#include <QCryptographicHash>
+#include <QByteArray>
+
+#include <iostream>
+#include <string>
+#include <filesystem>
+#include <fstream>
+#include <onnxruntime_cxx_api.h>
+#include "3rdParty/ONNX/OnnxToolsPA.h"
+#include "Common/Compiler.h"
+#include "Common/Cpp/Exceptions.h"
+#include "Common/Cpp/Filesystem.h"
+#include "CommonFramework/Logging/Logger.h"
+#include "ML_ONNXRuntimeHelpers.h"
+
+namespace PokemonAutomation{
+namespace ML{
+
+
+// Computes the cryptographic hash of a file.
+std::string create_file_hash(const std::string& filepath){
+    QFile file(QString::fromStdString(filepath));
+    if (!file.open(QIODevice::ReadOnly)){
+        return "";
+    }
+
+    QCryptographicHash hash(QCryptographicHash::Sha256);
+    if (hash.addData(&file)){
+        return hash.result().toHex(0).toStdString();
+    }else{
+        return "";
+    }
+}
+
+
+Ort::SessionOptions create_session_options(const std::string& model_cache_path, bool use_gpu){
+    Ort::SessionOptions so;
+    std::cout << "Set potential model cache path in session options: " << model_cache_path << std::endl;
+
+if (use_gpu){
+#if __APPLE__
+    // create session using Apple ML acceleration library CoreML
+    std::unordered_map<std::string, std::string> provider_options;
+    // See for provider options: https://onnxruntime.ai/docs/execution-providers/CoreML-ExecutionProvider.html
+    // "NeuralNetwork" is a faster ModelFormat than "MLProgram".
+    provider_options["ModelFormat"] = std::string("NeuralNetwork");
+    provider_options["ModelCacheDirectory"] = model_cache_path;
+
+    // provider_options["MLComputeUnits"] = "ALL";
+    // provider_options["RequireStaticInputShapes"] = "0";
+    // provider_options["EnableOnSubgraphs"] = "0";
+    so.AppendExecutionProvider("CoreML", provider_options);
+    std::cout << "Using CoreML execution provider for GPU acceleration" << std::endl;
+#elif _WIN32
+    // Try CUDA first for NVIDIA GPUs (best performance)
+    // CUDA requires NVIDIA GPU and CUDA runtime installation
+    // See: https://onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html
+    bool cuda_available = false;
+    try{
+        OrtCUDAProviderOptions cuda_options{};
+        cuda_options.device_id = 0;
+        so.AppendExecutionProvider_CUDA(cuda_options);
+        std::cout << "Using CUDA execution provider for GPU acceleration" << std::endl;
+        cuda_available = true;
+    }catch (const Ort::Exception& e){
+        std::cout << "CUDA execution provider not available: " << e.what() << std::endl;
+    }
+
+    bool rocm_available = false;
+    if (!cuda_available){
+        // Try ROCm next for AMD GPUs
+        // See: https://onnxruntime.ai/docs/execution-providers/ROCm-ExecutionProvider.html
+        try{
+            OrtROCMProviderOptions rocm_options{};
+            rocm_options.device_id = 0;
+            so.AppendExecutionProvider_ROCM(rocm_options);
+            std::cout << "Using ROCm execution provider for GPU acceleration" << std::endl;
+            rocm_available = true;
+        }catch (const Ort::Exception& e){
+            std::cout << "ROCm execution provider not available, falling back to CPU: " << e.what() << std::endl;
+        }
+    }
+
+    // Fallback to DirectML for all GPU vendors (NVIDIA, AMD, Intel)
+    // DirectML is built into Windows 10 1903+ and requires no additional runtime installation
+    // See: https://onnxruntime.ai/docs/execution-providers/DirectML-ExecutionProvider.html
+    if (!cuda_available and !rocm_available){
+        try{
+            so.AppendExecutionProvider("DML");
+            std::cout << "Using DirectML execution provider for GPU acceleration" << std::endl;
+        }catch (const Ort::Exception& e){
+            std::cout << "DirectML execution provider not available, falling back to CPU: " << e.what() << std::endl;
+        }
+    }
+#elif defined(__linux__)
+    // Try CUDA first for NVIDIA GPUs (best performance)
+    // See: https://onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html
+    try{
+        OrtCUDAProviderOptions cuda_options{};
+        cuda_options.device_id = 0;
+        so.AppendExecutionProvider_CUDA(cuda_options);
+        std::cout << "Using CUDA execution provider for GPU acceleration" << std::endl;
+    }catch (const Ort::Exception& e){
+        std::cout << "CUDA execution provider not available, trying ROCm: " << e.what() << std::endl;
+
+        // Try ROCm next for AMD GPUs
+        // See: https://onnxruntime.ai/docs/execution-providers/ROCm-ExecutionProvider.html
+        try{
+            OrtROCMProviderOptions rocm_options{};
+            rocm_options.device_id = 0;
+            so.AppendExecutionProvider_ROCM(rocm_options);
+            std::cout << "Using ROCm execution provider for GPU acceleration" << std::endl;
+        }catch (const Ort::Exception& e){
+            std::cout << "ROCm execution provider not available, falling back to CPU: " << e.what() << std::endl;
+        }
+    }
+#endif
+}
+
+    // CPU fallback is always available
+    return so;
+}
+
+// Check the model file cache integrity by checking the existence of a flag file and the model hash stored 
+// in the flag file. If the flag does not exist, we assume the file cache does not exist or is broken.
+// If the hash stored in the flag file does not match the model file, the model file is a new model, delete
+// the old cache.
+// Return
+// - bool: whether to write flag file after cache is created
+// - string: the model file hash to write into the flag file after Ort::Session is built and the cache is created.
+//
+// model_cache_path: Folder path to store model cache. This name is better to be unique for each model for
+//   easier file management.
+// model_path: the model path to load the ML model. This is needed to ensure we delete the old model cache
+//   when a new model
+std::pair<bool, std::string> clean_up_old_model_cache(const std::string& model_cache_path, const std::string& model_path){
+    std::string file_hash = create_file_hash(model_path);
+    if (file_hash.size() == 0){
+        // the model file cannot be loaded
+        return {true, ""};
+    }
+
+    if (!Filesystem::exists(model_cache_path)){
+        return {true, file_hash};
+    }
+
+    const std::string flag_file_path = model_cache_path + "/HASH.txt";
+    if (Filesystem::exists(flag_file_path)){
+        std::ifstream fin(flag_file_path);
+        if (fin){
+            std::string line;
+            fin >> line;
+            if (line == file_hash){
+                // hash match!
+                return {false, file_hash};
+            }
+        }
+    }
+    // remove everything from model_cache_path
+    Filesystem::remove_all(model_cache_path);
+    return {true, file_hash};
+}
+
+
+void write_cache_flag_file(const std::string& model_cache_path, const std::string& hash){
+    if (!Filesystem::exists(model_cache_path)){
+        return;
+    }
+    const std::string flag_file_path = model_cache_path + "/HASH.txt";
+    std::ofstream fout(Filesystem::Path(flag_file_path).stdpath());
+    fout << hash;
+}
+
+
+Ort::Session create_session(const Ort::Env& env, const Ort::SessionOptions& so,
+    const std::string& model_path, const std::string& model_cache_path)
+{
+    bool write_flag_file = true;
+    std::string file_hash;
+    std::tie(write_flag_file, file_hash) = clean_up_old_model_cache(model_cache_path, model_path);
+    
+    auto& logger = global_logger_tagged();
+    logger.log("Creating Ort::session from model " + model_path);
+    try{
+        Ort::Session session{env, str_to_onnx_str(model_path).c_str(), so};
+        logger.log("Ort::Session created");
+        // when Ort::Ssssion is created, if possible, it will create a model cache
+        if (write_flag_file){
+            write_cache_flag_file(model_cache_path, file_hash);
+        }
+        return session;
+    }catch (...){
+        throw MLModelSessionCreationError(&logger, model_path);
+    }
+}
+
+
+void print_model_input_output_info(const Ort::Session& session){
+    const auto input_names = session.GetInputNames();
+    const auto output_names = session.GetOutputNames();
+
+    for (size_t i = 0; i < input_names.size(); ++i){
+        Ort::TypeInfo type_info = session.GetInputTypeInfo(i);
+        auto tensor_info = type_info.GetTensorTypeAndShapeInfo();
+        std::vector<int64_t> input_dims = tensor_info.GetShape();
+
+        std::cout << "Input " << i << ": " << input_names[i] << " Type " << tensor_info.GetElementType() <<  " Shape: [";
+        for (size_t j = 0; j < input_dims.size(); ++j){
+            std::cout << input_dims[j];
+            if (j < input_dims.size() - 1){
+                std::cout << ", ";
+            }
+        }
+        std::cout << "]" << std::endl;
+    }
+
+    for (size_t i = 0; i < output_names.size(); ++i){
+        Ort::TypeInfo type_info = session.GetOutputTypeInfo(i);
+        auto tensor_info = type_info.GetTensorTypeAndShapeInfo();
+        std::vector<int64_t> output_dims = tensor_info.GetShape();
+
+        std::cout << "Output " << i << ": " << input_names[i] << " Type " << tensor_info.GetElementType() <<  " Shape: [";
+        for (size_t j = 0; j < output_dims.size(); ++j){
+            std::cout << output_dims[j];
+            if (j < output_dims.size() - 1){
+                std::cout << ", ";
+            }
+        }
+        std::cout << "]" << std::endl;
+    }
+}
+
+Ort::Env create_ORT_env(){
+#if ORT_API_VERSION < 24 // Removed in ONNX Runtime 1.24.0
+    if (Ort::Global<void>::api_ == nullptr){
+        throw InternalProgramError(nullptr, PA_CURRENT_FUNCTION, "Onnx API returned a null pointer.");
+    }
+#endif
+    return Ort::Env();
+}
+
+}
+}

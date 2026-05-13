@@ -1,0 +1,31 @@
+# Serial Programs
+
+Source code for the "Computer Control" programs.
+
+[<img src="https://canary.discordapp.com/api/guilds/695809740428673034/widget.png?style=banner2">](https://discord.gg/cQ4gWxN)
+
+## How to Build
+
+Currently, we build with Qt 6.8.3.
+
+***We cannot use Qt 6.9 and later due to: https://github.com/PokemonAutomation/Arduino-Source/issues/570***
+
+### Windows:
+
+- [How to Build (Qt 6.8.3) - Windows](BuildInstructions/Build-Windows-Qt6.8.3.md)
+
+
+### Ubuntu Linux:
+
+This doesn't actually work. (flickering video display) But here are the instructions for setting it up anyway.
+
+- [How to Build (Qt 6.8.2) - Ubuntu](BuildInstructions/Build-Ubuntu-Qt6.8.2.md)
+
+### Mac:
+
+- [Compilling for Mac](BuildInstructions/CompilingForMac.md)
+
+## Developer guide
+
+https://github.com/PokemonAutomation/ComputerControl/blob/master/Wiki/Developer/README.md
+

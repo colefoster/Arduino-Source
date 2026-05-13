@@ -1,0 +1,185 @@
+/*  Activate Menu Glitch (1.1.2)
+ *
+ *  From: https://github.com/PokemonAutomation/
+ *
+ */
+
+#include "CommonFramework/Exceptions/OperationFailedException.h"
+#include "CommonFramework/VideoPipeline/VideoFeed.h"
+#include "CommonTools/Async/InferenceRoutines.h"
+#include "CommonTools/VisualDetectors/BlackScreenDetector.h"
+#include "CommonTools/StartupChecks/StartProgramChecks.h"
+#include "NintendoSwitch/Commands/NintendoSwitch_Commands_PushButtons.h"
+#include "Pokemon/Pokemon_Strings.h"
+#include "PokemonBDSP/PokemonBDSP_Settings.h"
+#include "PokemonBDSP/Inference/PokemonBDSP_DialogDetector.h"
+#include "PokemonBDSP/Inference/PokemonBDSP_MapDetector.h"
+#include "PokemonBDSP_ActivateMenuGlitch-1.1.2.h"
+
+namespace PokemonAutomation{
+namespace NintendoSwitch{
+namespace PokemonBDSP{
+
+using namespace Pokemon;
+
+
+ActivateMenuGlitch112_Descriptor::ActivateMenuGlitch112_Descriptor()
+    : SingleSwitchProgramDescriptor(
+        "PokemonBDSP:ActivateMenuGlitch112",
+        STRING_POKEMON + " BDSP", "Activate Menu Glitch (1.1.2)",
+        "Programs/PokemonBDSP/ActivateMenuGlitch-Poketch.html",
+        "Activate the menu glitch using the Pok\u00e9tch. "
+        "<font color=\"red\">(This requires game versions 1.1.0 - 1.1.2. The glitch it relies on was patched in v1.1.3.)</font>",
+        ProgramControllerClass::StandardController_RequiresPrecision,
+        FeedbackType::REQUIRED,
+        AllowCommandsWhenRunning::DISABLE_COMMANDS
+    )
+{}
+
+ActivateMenuGlitch112::ActivateMenuGlitch112()
+    : FLY_A_TO_X_DELAY0(
+        "<b>Fly Menu A-to-X Delay:</b><br>The delay between the A and X presses to overlap the menu with the fly option.<br>"
+        "(German players may need to increase this to 90.)",
+        LockMode::LOCK_WHILE_RUNNING,
+        160ms, "400 ms"
+    )
+{
+    PA_ADD_OPTION(FLY_A_TO_X_DELAY0);
+}
+
+
+
+void trigger_menu(VideoStream& stream, ProControllerContext& context){
+    context.wait_for_all_requests();
+    MapWatcher detector;
+    int ret = run_until<ProControllerContext>(
+        stream, context,
+        [](ProControllerContext& context){
+            for (size_t i = 0; i < 12; i++){
+                for (size_t c = 0; c < 42; c++){
+                    pbf_controller_state(context, BUTTON_ZL, DPAD_NONE, {0, 0}, {0, 0}, 8ms);
+                    pbf_controller_state(context, BUTTON_R | BUTTON_ZL, DPAD_NONE, {0, 0}, {0, 0}, 40ms);
+                    pbf_wait(context, 24ms);
+                }
+                pbf_wait(context, 1000ms);
+                pbf_press_button(context, BUTTON_R, 160ms, 840ms);
+            }
+        },
+        {{detector}}
+    );
+    if (ret < 0){
+        OperationFailedException::fire(
+            ErrorReport::SEND_ERROR_REPORT,
+            "Map not detected after 60 seconds.",
+            stream
+        );
+    }
+    stream.log("Detected map!", COLOR_BLUE);
+
+    context.wait_for(std::chrono::milliseconds(500));
+    ShortDialogDetector dialog;
+    while (dialog.detect(stream.video().snapshot())){
+        stream.log("Overshot mashing. Backing out.", COLOR_ORANGE);
+        pbf_press_button(context, BUTTON_B, 160ms, 840ms);
+        context.wait_for_all_requests();
+    }
+}
+void trigger_map_overlap(VideoStream& stream, ProControllerContext& context){
+    for (size_t c = 0; c < 10; c++){
+        trigger_menu(stream, context);
+
+        pbf_press_dpad(context, DPAD_UP, 400ms, 0ms);
+        context.wait_for_all_requests();
+        BlackScreenWatcher detector;
+        int ret = wait_until(
+            stream, context, std::chrono::seconds(4),
+            {{detector}}
+        );
+        if (ret >= 0){
+            stream.log("Overlap detected! Entered " + STRING_POKEMON + " center.", COLOR_BLUE);
+            return;
+        }
+        stream.log("Failed to activate map overlap.", COLOR_ORANGE);
+        pbf_mash_button(context, BUTTON_B, 3000ms);
+        pbf_press_button(context, BUTTON_R, 160ms, 1840ms);
+    }
+    OperationFailedException::fire(
+        ErrorReport::SEND_ERROR_REPORT,
+        "Failed to trigger map overlap after 10 attempts.",
+        stream
+    );
+}
+
+
+
+void ActivateMenuGlitch112::program(SingleSwitchProgramEnvironment& env, ProControllerContext& context){
+    StartProgramChecks::check_performance_class_wired_or_wireless(context);
+
+    VideoStream& stream = env.console;
+
+    trigger_map_overlap(stream, context);
+    pbf_wait(context, 3000ms);
+
+    //  Move to escalator.
+    pbf_press_dpad(context, DPAD_UP, 160ms, 1000ms);
+    pbf_press_dpad(context, DPAD_UP, 160ms, 1000ms);
+    pbf_move_left_joystick(context, {+1, 0}, 2000ms, 5000ms);
+
+    //  Re-enter escalator.
+    pbf_press_dpad(context, DPAD_RIGHT, 1000ms, 6000ms);
+
+    //  Leave Pokemon center.
+    pbf_press_dpad(context, DPAD_LEFT, 160ms, 840ms);
+    pbf_press_dpad(context, DPAD_LEFT, 160ms, 840ms);
+    pbf_press_dpad(context, DPAD_LEFT, 160ms, 840ms);
+    {
+        context.wait_for_all_requests();
+        BlackScreenWatcher detector;
+        int ret = run_until<ProControllerContext>(
+            stream, context,
+            [](ProControllerContext& context){
+                for (size_t c = 0; c < 5; c++){
+                    pbf_press_dpad(context, DPAD_LEFT, 160ms, 840ms);
+                    pbf_press_dpad(context, DPAD_DOWN, 160ms, 840ms);
+                }
+            },
+            {{detector}}
+        );
+        if (ret < 0){
+            OperationFailedException::fire(
+                ErrorReport::SEND_ERROR_REPORT,
+                "Unable to leave " + STRING_POKEMON + " center.",
+                stream
+            );
+        }
+        stream.log("Leaving " + STRING_POKEMON + " center detected!", COLOR_BLUE);
+    }
+    pbf_move_left_joystick(context, {0, -1}, 1000ms, 4000ms);
+
+    //  Center cursor.
+    pbf_press_button(context, BUTTON_X, 160ms, GameSettings::instance().OVERWORLD_TO_MENU_DELAY0);
+    pbf_press_button(context, BUTTON_X, 160ms, GameSettings::instance().MENU_TO_OVERWORLD_DELAY0);
+
+    //  Bring up menu
+    pbf_press_button(context, BUTTON_ZL, 160ms, FLY_A_TO_X_DELAY0.get() - 160ms);
+    pbf_press_button(context, BUTTON_X, 160ms, GameSettings::instance().OVERWORLD_TO_MENU_DELAY0);
+
+    //  Fly
+    pbf_press_button(context, BUTTON_ZL, 160ms, 10000ms);
+
+    //  Enter Pokemon center.
+    pbf_press_dpad(context, DPAD_UP, 400ms, 5000ms);
+    pbf_move_left_joystick(context, {+1, 0}, 1000ms, 0ms);
+    pbf_move_left_joystick(context, {0, -1}, 1000ms, 1000ms);
+
+    //  Move cursor back to default location for "Pokemon".
+    pbf_move_right_joystick(context, {0, +1}, 160ms, 160ms);
+    pbf_move_right_joystick(context, {-1, 0}, 160ms, 160ms);
+    pbf_move_right_joystick(context, {-1, 0}, 160ms, 160ms);
+}
+
+
+
+}
+}
+}

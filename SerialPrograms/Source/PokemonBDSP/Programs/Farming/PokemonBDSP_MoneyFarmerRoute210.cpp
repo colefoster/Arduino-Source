@@ -1,0 +1,534 @@
+/*  Money Farmer (Route 210)
+ *
+ *  From: https://github.com/PokemonAutomation/
+ *
+ */
+
+#include "CommonFramework/Exceptions/OperationFailedException.h"
+#include "CommonFramework/Notifications/ProgramNotifications.h"
+#include "CommonFramework/ProgramStats/StatsTracking.h"
+#include "CommonTools/Async/InferenceRoutines.h"
+#include "CommonTools/StartupChecks/StartProgramChecks.h"
+#include "NintendoSwitch/Commands/NintendoSwitch_Commands_PushButtons.h"
+#include "Pokemon/Pokemon_Strings.h"
+#include "PokemonBDSP/PokemonBDSP_Settings.h"
+#include "PokemonBDSP/Programs/PokemonBDSP_GlobalRoomHeal.h"
+#include "PokemonBDSP/Inference/PokemonBDSP_VSSeekerReaction.h"
+#include "PokemonBDSP/Inference/Battles/PokemonBDSP_StartBattleDetector.h"
+#include "PokemonBDSP/Inference/Battles/PokemonBDSP_BattleMenuDetector.h"
+#include "PokemonBDSP/Inference/Battles/PokemonBDSP_EndBattleDetector.h"
+#include "PokemonBDSP_MoneyFarmerRoute210.h"
+
+namespace PokemonAutomation{
+namespace NintendoSwitch{
+namespace PokemonBDSP{
+
+using namespace Pokemon;
+
+
+MoneyFarmerRoute210_Descriptor::MoneyFarmerRoute210_Descriptor()
+    : SingleSwitchProgramDescriptor(
+        "PokemonBDSP:MoneyFarmerRoute210",
+        STRING_POKEMON + " BDSP", "Money Farmer (Route 210)",
+        "Programs/PokemonBDSP/MoneyFarmerRoute210.html",
+        "Farm money by using VS Seeker to rebattle the Ace Trainer couple on Route 210.",
+        ProgramControllerClass::StandardController_RequiresPrecision,
+        FeedbackType::REQUIRED,
+        AllowCommandsWhenRunning::DISABLE_COMMANDS
+    )
+{}
+struct MoneyFarmerRoute210_Descriptor::Stats : public StatsTracker{
+    Stats()
+        : m_searches(m_stats["Searches"])
+        , m_errors(m_stats["Errors"])
+        , m_noreact(m_stats["No React"])
+        , m_react(m_stats["React"])
+    {
+        m_display_order.emplace_back("Searches");
+        m_display_order.emplace_back("Errors", HIDDEN_IF_ZERO);
+        m_display_order.emplace_back("No React");
+        m_display_order.emplace_back("React");
+    }
+    std::atomic<uint64_t>& m_searches;
+    std::atomic<uint64_t>& m_errors;
+    std::atomic<uint64_t>& m_noreact;
+    std::atomic<uint64_t>& m_react;
+};
+std::unique_ptr<StatsTracker> MoneyFarmerRoute210_Descriptor::make_stats() const{
+    return std::unique_ptr<StatsTracker>(new Stats());
+}
+
+
+
+MoneyFarmerRoute210::MoneyFarmerRoute210()
+    : SHORTCUT("<b>VS Seeker Shortcut:</b>")
+    , START_LOCATION(
+        "<b>Start Location:</b>",
+        {
+            {StartLocation::CelesticTown, "celestic", "In front of the Celestic Town " + STRING_POKEMON + " center."},
+            {StartLocation::AceTrainerPair, "trainer-pair", "Lower-most row of the platform the Ace Trainer pair in Route 210 is on."},
+        },
+        LockMode::LOCK_WHILE_RUNNING,
+        StartLocation::CelesticTown
+    )
+    , HEALING_METHOD(
+        "<b> Healing method:</b>",
+        {
+            {HealMethod::CelesticTown, "celestic", "Celestic Town " + STRING_POKEMON + " center."},
+            {HealMethod::GlobalRoom, "global-room", "Use Global Room. (will force update your game)"},
+        },
+        LockMode::LOCK_WHILE_RUNNING,
+        HealMethod::CelesticTown
+    )
+    , MON0_MOVE1_PP("<b>Lead " + STRING_POKEMON + " Move 1 PP:</b><br>Set to zero to not use this move.", LockMode::LOCK_WHILE_RUNNING, 5, 0, 64)
+    , MON0_MOVE2_PP("<b>Lead " + STRING_POKEMON + " Move 2 PP:</b><br>Set to zero to not use this move.", LockMode::LOCK_WHILE_RUNNING, 5, 0, 64)
+    , MON0_MOVE3_PP("<b>Lead " + STRING_POKEMON + " Move 3 PP:</b><br>Set to zero to not use this move.", LockMode::LOCK_WHILE_RUNNING, 5, 0, 64)
+    , MON0_MOVE4_PP("<b>Lead " + STRING_POKEMON + " Move 4 PP:</b><br>Set to zero to not use this move.", LockMode::LOCK_WHILE_RUNNING, 5, 0, 64)
+    , MON1_MOVE1_PP("<b>2nd " + STRING_POKEMON + " Move 1 PP:</b><br>Set to zero to not use this move.", LockMode::LOCK_WHILE_RUNNING, 5, 0, 64)
+    , MON1_MOVE2_PP("<b>2nd " + STRING_POKEMON + " Move 2 PP:</b><br>Set to zero to not use this move.", LockMode::LOCK_WHILE_RUNNING, 5, 0, 64)
+    , MON1_MOVE3_PP("<b>2nd " + STRING_POKEMON + " Move 3 PP:</b><br>Set to zero to not use this move.", LockMode::LOCK_WHILE_RUNNING, 5, 0, 64)
+    , MON1_MOVE4_PP("<b>2nd " + STRING_POKEMON + " Move 4 PP:</b><br>Set to zero to not use this move.", LockMode::LOCK_WHILE_RUNNING, 5, 0, 64)
+    , PICKUP_SLOT1(
+        "<b>" + STRING_POKEMON + " in slot 1 has the Pickup ability</b>", LockMode::LOCK_WHILE_RUNNING, false)
+    , PICKUP_SLOT2(
+        "<b>" + STRING_POKEMON + " in slot 2 has the Pickup ability</b>", LockMode::LOCK_WHILE_RUNNING, false)
+    , PICKUP_SLOT3(
+        "<b>" + STRING_POKEMON + " in slot 3 has the Pickup ability</b>", LockMode::LOCK_WHILE_RUNNING, false)
+    , PICKUP_SLOT4(
+        "<b>" + STRING_POKEMON + " in slot 4 has the Pickup ability</b>", LockMode::LOCK_WHILE_RUNNING, false)
+    , PICKUP_SLOT5(
+        "<b>" + STRING_POKEMON + " in slot 5 has the Pickup ability</b>", LockMode::LOCK_WHILE_RUNNING, false)
+    , PICKUP_SLOT6(
+        "<b>" + STRING_POKEMON + " in slot 6 has the Pickup ability</b>", LockMode::LOCK_WHILE_RUNNING, false)
+    , CHECK_PICKUP_FREQ (
+        "<b>Check " + STRING_POKEMON + " with the Pickup ability every this many battles</b>", LockMode::LOCK_WHILE_RUNNING, 10, 1, 100)
+    , NOTIFICATION_STATUS_UPDATE("Status Update", true, false, std::chrono::seconds(3600))
+    , NOTIFICATIONS({
+        &NOTIFICATION_STATUS_UPDATE,
+        &NOTIFICATION_ERROR_FATAL,
+    })
+{
+    PA_ADD_OPTION(SHORTCUT);
+    PA_ADD_OPTION(START_LOCATION);
+    PA_ADD_OPTION(HEALING_METHOD);
+    PA_ADD_OPTION(ON_LEARN_MOVE);
+    PA_ADD_OPTION(MON0_MOVE1_PP);
+    PA_ADD_OPTION(MON0_MOVE2_PP);
+    PA_ADD_OPTION(MON0_MOVE3_PP);
+    PA_ADD_OPTION(MON0_MOVE4_PP);
+    PA_ADD_OPTION(MON1_MOVE1_PP);
+    PA_ADD_OPTION(MON1_MOVE2_PP);
+    PA_ADD_OPTION(MON1_MOVE3_PP);
+    PA_ADD_OPTION(MON1_MOVE4_PP);
+    PA_ADD_OPTION(PICKUP_SLOT1);
+    PA_ADD_OPTION(PICKUP_SLOT2);
+    PA_ADD_OPTION(PICKUP_SLOT3);
+    PA_ADD_OPTION(PICKUP_SLOT4);
+    PA_ADD_OPTION(PICKUP_SLOT5);
+    PA_ADD_OPTION(PICKUP_SLOT6);
+    PA_ADD_OPTION(CHECK_PICKUP_FREQ);
+    PA_ADD_OPTION(NOTIFICATIONS);
+}
+
+
+
+
+bool MoneyFarmerRoute210::battle(SingleSwitchProgramEnvironment& env, ProControllerContext& context, uint8_t pp0[4], uint8_t pp1[4]){
+    MoneyFarmerRoute210_Descriptor::Stats& stats = env.current_stats<MoneyFarmerRoute210_Descriptor::Stats>();
+
+    env.log("Starting battle!");
+
+    {
+        StartBattleDetector detector(env.console);
+        int ret = run_until<ProControllerContext>(
+            env.console, context,
+            [](ProControllerContext& context){
+                pbf_press_button(context, BUTTON_ZL, 80ms, 80ms);
+                for (size_t c = 0; c < 17; c++){
+                    pbf_press_dpad(context, DPAD_UP, 40ms, 80ms);
+                    pbf_press_button(context, BUTTON_ZL, 80ms, 80ms);
+                    pbf_press_dpad(context, DPAD_RIGHT, 160ms, 80ms);
+                    pbf_press_button(context, BUTTON_ZL, 80ms, 80ms);
+                }
+            },
+            {{detector}}
+        );
+        if (ret < 0){
+            stats.m_errors++;
+            env.log("Failed to detect start of battle after 20 seconds.", COLOR_RED);
+            pbf_mash_button(context, BUTTON_B, 1000ms);
+            return false;
+        }
+    }
+    pbf_wait(context, 5000ms);
+
+    bool battle_menu_seen = false;
+
+    //  State Machine
+    //  We need lots of loops in case the party pokemon need to learn lots of moves.
+    
+    while (true){
+        context.wait_for_all_requests();
+
+        BattleMenuWatcher battle_menu(BattleType::TRAINER);
+        EndBattleWatcher end_battle;
+        SelectionArrowFinder learn_move(env.console, {0.50, 0.62, 0.40, 0.18}, COLOR_YELLOW);
+        int ret = run_until<ProControllerContext>(
+            env.console, context,
+            [](ProControllerContext& context){
+                pbf_mash_button(context, BUTTON_B, 120000ms);
+            },
+            {
+                {battle_menu},
+                battle_menu_seen ? PeriodicInferenceCallback{end_battle} : PeriodicInferenceCallback{},
+                {learn_move},
+            }
+        );
+        
+        
+        switch (ret){
+        case 0:
+            env.log("Battle menu detected!", COLOR_BLUE);
+            battle_menu_seen = true;
+
+            {
+                pbf_press_button(context, BUTTON_ZL, 80ms, 1000ms);
+                uint8_t slot = 0;
+                for (; slot < 4; slot++){
+                    if (pp0[slot] != 0){
+                        break;
+                    }
+                }
+                if (slot == 4){
+                    OperationFailedException::fire(
+                        ErrorReport::SEND_ERROR_REPORT,
+                        "Ran out of PP in a battle.",
+                        env.console
+                    );
+                }
+
+                for (uint8_t move_slot = 0; move_slot < slot; move_slot++){
+                    pbf_press_dpad(context, DPAD_DOWN, 80ms, 400ms);
+                }
+                pbf_press_button(context, BUTTON_ZL, 80ms, 1000ms);
+                pbf_press_button(context, BUTTON_ZL, 80ms, 3000ms);
+                pp0[slot]--;
+            }
+
+            {
+                pbf_press_button(context, BUTTON_ZL, 80ms, 1000ms);
+                uint8_t slot = 0;
+                for (; slot < 4; slot++){
+                    if (pp1[slot] != 0){
+                        break;
+                    }
+                }
+                if (slot == 4){
+                    OperationFailedException::fire(
+                        ErrorReport::SEND_ERROR_REPORT,
+                        "Ran out of PP in a battle.",
+                        env.console
+                    );
+                }
+
+                for (uint8_t move_slot = 0; move_slot < slot; move_slot++){
+                    pbf_press_dpad(context, DPAD_DOWN, 80ms, 400ms);
+                }
+                pbf_press_button(context, BUTTON_ZL, 80ms, 1000ms);
+                pbf_press_button(context, BUTTON_ZL, 80ms, 3000ms);
+                pp1[slot]--;
+            }
+
+            break;
+        case 1:
+            env.log("Battle finished!", COLOR_BLUE);
+            pbf_mash_button(context, BUTTON_B, 2000ms);
+            return false;
+        case 2:
+            env.log("Detected move learn!", COLOR_BLUE);
+            if (ON_LEARN_MOVE == OnLearnMove::DONT_LEARN){
+                pbf_move_right_joystick(context, {0, -1}, 160ms, 840ms);
+                pbf_press_button(context, BUTTON_ZL, 160ms, 840ms);
+                break;
+            }
+            return true;
+        default:
+            stats.m_errors++;
+            OperationFailedException::fire(
+                ErrorReport::SEND_ERROR_REPORT,
+                "Timed out after 2 minutes.",
+                env.console
+            );
+        }
+    }
+
+    OperationFailedException::fire(
+        ErrorReport::SEND_ERROR_REPORT,
+        "No progress detected after 5 battle menus. Are you out of PP?",
+        env.console
+    );
+}
+
+void MoneyFarmerRoute210::check_pickup_items(
+    ProControllerContext& context, const bool pickup_slots[6]
+){
+
+    // Open menu
+    pbf_press_button(context, BUTTON_X, 80ms, 1000ms);
+    
+    // Open Pokemon menu
+    pbf_press_button(context, BUTTON_A, 80ms, 1000ms);
+    
+    // Loop over each pokemon that has Pickup according to the settings
+    int current_slot = 0;
+    
+    for (int slot = 0; slot < 6; slot++){
+        if (pickup_slots[slot]){
+            int presses = slot - current_slot;
+            for (int i = 0; i < presses; i++){
+                pbf_wait(context, 50ms);
+                pbf_press_dpad(context, DPAD_DOWN, 80ms, 50ms);
+            }
+            
+            // Select mon, go to held items, go to put into bag (or back if the mon has no item), then exit with B
+            pbf_press_button(context, BUTTON_A, 160ms, 200ms);
+            
+            pbf_press_dpad(context, DPAD_UP, 160ms, 50ms);
+            pbf_press_dpad(context, DPAD_UP, 160ms, 50ms);
+            pbf_press_button(context, BUTTON_A, 160ms, 200ms);
+            
+            pbf_press_dpad(context, DPAD_UP, 160ms, 50ms);
+            pbf_press_dpad(context, DPAD_UP, 160ms, 50ms);
+            pbf_press_dpad(context, DPAD_UP, 160ms, 50ms);
+            pbf_press_button(context, BUTTON_A, 160ms, 200ms);
+            pbf_wait(context, 1000ms);
+            
+            pbf_press_button(context, BUTTON_B, 160ms, 100ms);
+            
+            current_slot = slot;
+            pbf_wait(context, 150ms);
+        }
+    };
+    
+    // Exit the screen
+    pbf_mash_button(context, BUTTON_B, 2000ms);
+}
+
+void MoneyFarmerRoute210::heal_at_center_and_return(
+    Logger& logger, ProControllerContext& context,
+    uint8_t pp0[4], uint8_t pp1[4]
+){
+    logger.log("Healing " + STRING_POKEMON + " Celestic Town " + STRING_POKEMON + " Center.");
+    pbf_move_left_joystick(context, {0, +1}, 6000ms, 0ms);
+    pbf_mash_button(context, BUTTON_ZL, 3000ms);
+    pbf_mash_button(context, BUTTON_B, 10000ms);
+
+    logger.log("Returning to trainers...");
+    pbf_move_left_joystick(context, {0, -1}, 6000ms, 0ms);
+    pbf_move_left_joystick(context, {+1, 0}, 480ms, 0ms);
+    pbf_move_left_joystick(context, {0, +1}, 1600ms, 0ms);
+    pbf_move_left_joystick(context, {+1, 0}, 6000ms, 0ms);
+
+    pbf_press_button(context, BUTTON_R, 80ms, 1200ms);
+    pbf_mash_button(context, BUTTON_ZL, 6000ms);
+
+    pbf_move_left_joystick(context, {0, -1}, 240ms, 0ms);
+    pbf_move_left_joystick(context, {-1, 0}, 240ms, 0ms);
+    pbf_move_left_joystick(context, {0, -1}, 640ms, 0ms);
+    pbf_move_left_joystick(context, {+1, 0}, 880ms, 0ms);
+    pbf_move_left_joystick(context, {0, -1}, 1000ms, 0ms);
+    pbf_move_left_joystick(context, {+1, 0}, 840ms, 0ms);
+    pbf_move_left_joystick(context, {0, +1}, 3000ms, 0ms);
+    pbf_move_left_joystick(context, {+1, 0}, 2400ms, 0ms);
+    pbf_move_left_joystick(context, {0, -1}, 3000ms, 0ms);
+
+    pbf_press_dpad(context, DPAD_RIGHT, 3000ms, 0ms);
+    pbf_press_dpad(context, DPAD_LEFT, 3000ms, 0ms);
+    pbf_press_dpad(context, DPAD_DOWN, 1000ms, 0ms);
+
+    pp0[0] = MON0_MOVE1_PP;
+    pp0[1] = MON0_MOVE2_PP;
+    pp0[2] = MON0_MOVE3_PP;
+    pp0[3] = MON0_MOVE4_PP;
+    pp1[0] = MON1_MOVE1_PP;
+    pp1[1] = MON1_MOVE2_PP;
+    pp1[2] = MON1_MOVE3_PP;
+    pp1[3] = MON1_MOVE4_PP;
+}
+void MoneyFarmerRoute210::fly_to_center_heal_and_return(
+    Logger& logger, ProControllerContext& context,
+    uint8_t pp0[4], uint8_t pp1[4]
+){
+    logger.log("Flying back to Hearthome City to heal.");
+    pbf_press_button(context, BUTTON_X, 80ms, GameSettings::instance().OVERWORLD_TO_MENU_DELAY0);
+    pbf_press_button(context, BUTTON_PLUS, 80ms, 1920ms);
+    pbf_press_dpad(context, DPAD_LEFT, 80ms, 480ms);
+    pbf_press_dpad(context, DPAD_LEFT, 80ms, 480ms);
+    pbf_mash_button(context, BUTTON_ZL, 12000ms);
+    heal_at_center_and_return(logger, context, pp0, pp1);
+}
+
+bool MoneyFarmerRoute210::heal_after_battle_and_return(
+    SingleSwitchProgramEnvironment& env,
+    VideoStream& stream, ProControllerContext& context,
+    uint8_t pp0[4], uint8_t pp1[4])
+{
+    if (HEALING_METHOD == HealMethod::CelesticTown){
+        // Go to Celestic Town Pokecenter to heal the party.
+        fly_to_center_heal_and_return(stream.logger(), context, pp0, pp1);
+        return false;
+    }else{
+        // Use Global Room to heal the party.
+        heal_by_global_room(stream, context);
+
+        pp0[0] = MON0_MOVE1_PP;
+        pp0[1] = MON0_MOVE2_PP;
+        pp0[2] = MON0_MOVE3_PP;
+        pp0[3] = MON0_MOVE4_PP;
+        pp1[0] = MON1_MOVE1_PP;
+        pp1[1] = MON1_MOVE2_PP;
+        pp1[2] = MON1_MOVE3_PP;
+        pp1[3] = MON1_MOVE4_PP;
+        return true;
+    }
+}
+
+
+bool MoneyFarmerRoute210::has_pp(uint8_t pp0[4], uint8_t pp1[4]){
+    size_t count0 = 0;
+    size_t count1 = 0;
+    for (size_t c = 0; c < 4; c++){
+        count0 += pp0[c];
+        count1 += pp1[c];
+    }
+    return count0 > 0 && count1 > 0;
+}
+
+
+
+void MoneyFarmerRoute210::program(SingleSwitchProgramEnvironment& env, ProControllerContext& context){
+    StartProgramChecks::check_performance_class_wired_or_wireless(context);
+
+    MoneyFarmerRoute210_Descriptor::Stats& stats = env.current_stats<MoneyFarmerRoute210_Descriptor::Stats>();
+
+    uint8_t pp0[4] = {
+        MON0_MOVE1_PP,
+        MON0_MOVE2_PP,
+        MON0_MOVE3_PP,
+        MON0_MOVE4_PP,
+    };
+    uint8_t pp1[4] = {
+        MON1_MOVE1_PP,
+        MON1_MOVE2_PP,
+        MON1_MOVE3_PP,
+        MON1_MOVE4_PP,
+    };
+    
+    // Transform the slots selected as having mons with the Pickup ability into an array
+    bool pickup_slots_selected[6] = {
+        PICKUP_SLOT1,
+        PICKUP_SLOT2,
+        PICKUP_SLOT3,
+        PICKUP_SLOT4,
+        PICKUP_SLOT5,
+        PICKUP_SLOT6,
+    };
+    
+    bool has_pickup_mons = PICKUP_SLOT1 || PICKUP_SLOT2 || PICKUP_SLOT3 || PICKUP_SLOT4 || PICKUP_SLOT5 || PICKUP_SLOT6;
+    
+    uint32_t pickup_counter = 0;
+    uint32_t total_pickup_checks = 0;
+
+    //  Connect the controller.
+    pbf_press_button(context, BUTTON_B, 40ms, 40ms);
+
+    bool need_to_charge = true;
+    if (START_LOCATION == StartLocation::CelesticTown){
+        heal_at_center_and_return(env.console, context, pp0, pp1);
+        need_to_charge = false;
+    }else{
+        if (HEALING_METHOD == HealMethod::GlobalRoom){
+            heal_by_global_room(env.console, context);
+        }
+        pbf_move_left_joystick(context, {+1, 0}, 1120ms, 0ms);
+    }
+
+    while (true){
+        env.update_stats();
+
+        send_program_status_notification(env, NOTIFICATION_STATUS_UPDATE);
+        
+        if (has_pickup_mons && pickup_counter % CHECK_PICKUP_FREQ.current_value() == 0 && pickup_counter != total_pickup_checks){
+            check_pickup_items(context, pickup_slots_selected);
+            total_pickup_checks = pickup_counter;
+        }
+
+        if (need_to_charge){
+            pbf_move_left_joystick(context, {+1, 0}, 1120ms, 0ms);
+            pbf_press_dpad(context, DPAD_UP, 680ms, 0ms);
+            for (size_t c = 0; c < 7; c++){
+                pbf_move_left_joystick(context, {-1, 0},  1120ms, 0ms);
+                pbf_move_left_joystick(context, {+1, 0}, 1120ms, 0ms);
+            }
+            pbf_press_dpad(context, DPAD_DOWN, 600ms, 0ms);
+        }
+        pbf_press_dpad(context, DPAD_LEFT, 1600ms, 0ms);
+
+        context.wait_for_all_requests();
+        stats.m_searches++;
+
+        std::vector<ImagePixelBox> bubbles;
+        {
+            VSSeekerReactionTracker tracker(env.console, {0.20, 0.20, 0.60, 0.60});
+            run_until<ProControllerContext>(
+                env.console, context,
+                [this](ProControllerContext& context){
+                    SHORTCUT.run(context, 1000ms);
+                },
+                {{tracker}}
+            );
+            need_to_charge = true;
+            pbf_mash_button(context, BUTTON_B, 2000ms);
+
+            bubbles = tracker.reactions();
+            if (bubbles.empty()){
+                env.log("No reactions.", COLOR_ORANGE);
+                stats.m_noreact++;
+                continue;
+            }
+            stats.m_react++;
+        }
+        for (const ImagePixelBox& box : bubbles){
+            env.log("Reaction at: " + std::to_string(box.min_x), COLOR_BLUE);
+        }
+
+        if (this->battle(env, context, pp0, pp1)){
+            return;
+        }
+        pickup_counter++;
+        
+        if (!has_pp(pp0, pp1)){
+            need_to_charge = heal_after_battle_and_return(env, env.console, context, pp0, pp1);
+            continue;
+        }
+    }
+}
+
+
+
+
+
+
+}
+}
+}
+
+
+
+
+
+
+
+
+
+
