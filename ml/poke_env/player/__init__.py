@@ -1,4 +1,4 @@
-"""poke_env.player module init — stripped down for pokemon-champions."""
+"""poke_env.player module init — stripped down for mimikyu."""
 from poke_env.concurrency import POKE_LOOP
 from poke_env.player.battle_order import (
     BattleOrder,

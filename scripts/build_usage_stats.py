@@ -48,7 +48,7 @@ SPREADS_MIN_PCT = 0.5
 # User-Agent matters: Smogon's nginx returns 405 to default urllib UA.
 # Accept-Encoding: gzip is also required.
 HTTP_HEADERS = {
-    "User-Agent": "pokemon-champions-usage-stats/2.0",
+    "User-Agent": "mimikyu-usage-stats/2.0",
     "Accept": "application/json",
     "Accept-Encoding": "gzip",
 }

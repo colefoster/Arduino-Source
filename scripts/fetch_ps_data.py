@@ -33,7 +33,7 @@ OUT_DIR = Path(__file__).resolve().parent.parent / "data" / "ps_data"
 
 
 def _fetch(url: str) -> str:
-    req = urllib.request.Request(url, headers={"User-Agent": "pokemon-champions/1.0"})
+    req = urllib.request.Request(url, headers={"User-Agent": "mimikyu/1.0"})
     with urllib.request.urlopen(req) as resp:
         return resp.read().decode("utf-8")
 

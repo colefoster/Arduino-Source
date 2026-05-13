@@ -1,6 +1,6 @@
 #!/bin/bash
 # Sync spectated replays from ash to ColePC via this Mac
-# Run via cron every 2 hours: 0 */2 * * * /Users/cole/Dev/pokemon-champions/spectator/sync_replays.sh
+# Run via cron every 2 hours: 0 */2 * * * /Users/cole/Dev/mimikyu/spectator/sync_replays.sh
 
 set -e
 
