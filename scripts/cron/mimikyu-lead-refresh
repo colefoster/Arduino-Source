@@ -1,0 +1,12 @@
+# Mimikyu — auto-refresh lookup + Smogon usage stats
+# Install on unraid:  cp scripts/cron/mimikyu-lead-refresh /etc/cron.d/
+# Then:               chmod 644 /etc/cron.d/mimikyu-lead-refresh
+
+SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+# Weekly: rebuild lead-pair / brought-set lookup from latest replay corpus.
+# Sundays at 05:00 UTC. Excludes last 2 days so model val days stay clean.
+# (Smogon usage stats are refreshed every 3 days by /usr/local/sbin/pokemon-
+#  pikalytics-scrape.sh — entry in Unraid's managed /etc/cron.d/root.)
+0 5 * * 0 root docker exec mimikyu-gpu bash -c 'cd /workspace && python -u -m src.vgc_model.lead.lookup --parsed-dir data/parsed/gen9championsvgc2026regma --min-rating 1200 --exclude-last-days 2 --out data/checkpoints_lead/lookup_train_v2.pkl' >> /var/log/mimikyu-lookup-rebuild.log 2>&1

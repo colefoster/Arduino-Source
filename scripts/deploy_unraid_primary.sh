@@ -30,18 +30,18 @@ ssh ash 'ssh -o ConnectTimeout=5 unraid "echo ok"' || { echo "ash → unraid SSH
 echo "    OK"
 
 echo "[2/5] Pulling main branch on ash..."
-ssh ash 'cd /opt/pokemon-champions && sudo -u cole git pull --ff-only origin main' || true
+ssh ash 'cd /opt/mimikyu && sudo -u cole git pull --ff-only origin main' || true
 
 echo "[3/5] Restarting ash dashboard..."
-ssh ash 'sudo systemctl restart pokemon-champions-dashboard.service && sleep 2 && systemctl is-active pokemon-champions-dashboard.service'
+ssh ash 'sudo systemctl restart mimikyu-hub.service && sleep 2 && systemctl is-active mimikyu-hub.service'
 
 echo "[4/5] Recreating unraid container with job runner as ENTRYPOINT..."
 ssh unraid '
 set -e
-docker stop pokemon-champions-gpu 2>/dev/null || true
-docker rm pokemon-champions-gpu 2>/dev/null || true
+docker stop mimikyu-gpu 2>/dev/null || true
+docker rm mimikyu-gpu 2>/dev/null || true
 docker run -d \
-  --name pokemon-champions-gpu \
+  --name mimikyu-gpu \
   --restart unless-stopped \
   --gpus all \
   --memory 24g \
@@ -55,7 +55,7 @@ docker run -d \
 
 echo "[5/5] Smoke testing..."
 sleep 3
-ssh unraid 'docker ps --filter name=pokemon-champions-gpu --format "{{.Status}}"'
+ssh unraid 'docker ps --filter name=mimikyu-gpu --format "{{.Status}}"'
 curl -s "http://100.88.115.6:8422/health" | head
 echo
 echo "Dashboard sync target check:"

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Minimal HTTP job runner for the unraid pokemon-champions-gpu container.
+"""Minimal HTTP job runner for the unraid mimikyu-gpu container.
 
 Mirrors the ColePC ``scripts/job_runner.py`` API for training jobs only —
 no OCR, no detector debug, no Windows-isms.

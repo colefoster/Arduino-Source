@@ -1,12 +1,23 @@
-# Pokemon Champions Automation
+# Mimikyu
 
-Automation + ML tooling for **Pokemon Champions** (Regulation M-A VGC). Built on top of [PokemonAutomation/Arduino-Source](https://github.com/PokemonAutomation/Arduino-Source) — capture-card + microcontroller automation for a real Switch.
+A disguise for your Switch — autonomous **Pokemon Champions** play (Regulation M-A VGC). Computer vision + ML inference + Switch automation, all running on a real console behind a capture card.
+
+Successor to [baton_pass](https://github.com/colefoster/baton_pass), which auto-played on Pokemon Showdown. Mimikyu plays on the actual Switch. Switch automation forked from [PokemonAutomation/Arduino-Source](https://github.com/PokemonAutomation/Arduino-Source).
+
+## Subsystems
+
+| Persona | Dir | Role |
+|---|---|---|
+| **mimikyu-hand** | `switch_bot/` | Drives the Switch (C++ Qt) |
+| **mimikyu-mind** | `ml/` | Inference, training, search (Python) |
+| **mimikyu-watch** | `spectator/` | Showdown replay collection |
+| **mimikyu-hub** | `devtools/` | Mac-local dashboard + tooling |
 
 ## Layout
 
 The repo is a monorepo of four discrete subsystems plus shared data.
 
-| Dir | What lives here |
+| Dir | What lives here (detail) |
 |---|---|
 | **`switch_bot/`** | C++ Qt fork of Arduino-Source. The live bot, OCR readers, screen detectors, and the `LiveDetectorTrace` passive watcher that drives every match. Includes `SerialPrograms/`, `Common/`, `3rdParty*/`, `IconResource/`, `CommandLineTests/`, `Resources/`, `Packages/`, `build_mac/`. |
 | **`ml/`** | Python ML pipeline. `ml/vgc_model/` is the package: data parsing/encoding, model definitions, training, inference server (`/predict`, `/search`), battle sim. `ml/poke_env/` is the vendored Showdown-env library used for self-play. |

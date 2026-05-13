@@ -1,4 +1,4 @@
-"""Pokemon Champions Dev Tools Hub.
+"""Mimikyu Hub — dev tools dashboard for the Pokemon Champions automation project.
 
 Extends the spectator dashboard with interactive dev tools:
 - OCR Gallery: browse test images with crops and regression results
@@ -6,7 +6,7 @@ Extends the spectator dashboard with interactive dev tools:
 - Pixel Inspector: measure screen regions for detector tuning
 
 Data layout on ash:
-    /opt/pokemon-champions/
+    /opt/mimikyu/
         data/showdown_replays/     <- spectated + downloaded replays
         test_images/               <- synced CommandLineTests/PokemonChampions/
         ref_frames/                <- synced ref_frames/vod_extract/
@@ -86,7 +86,7 @@ FORMATS = {
     "gen9championsbssregma": "BSS",
 }
 
-app = FastAPI(title="Pokemon Champions Dev Hub")
+app = FastAPI(title="Mimikyu Hub")
 
 # When set, spectator-resident endpoints proxy to the host that runs the
 # spectator (ash). Mac-local dashboard sets this; ash itself leaves it unset.
@@ -5029,7 +5029,7 @@ async def validation_summary():
 # ═══════════════════════════════════════════════════════════════════════════
 #
 # Sync target switched from ColePC (Windows) to unraid (Linux container volume)
-# to make the unraid pokemon-champions-gpu container the canonical training
+# to make the unraid mimikyu-gpu container the canonical training
 # rig. The unraid host has the workspace at /mnt/user/data/pokemon-champions
 # which is mounted into the container as /workspace.
 
