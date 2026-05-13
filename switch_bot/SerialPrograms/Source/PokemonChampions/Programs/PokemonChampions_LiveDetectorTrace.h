@@ -22,6 +22,7 @@
 #include <array>
 #include <deque>
 #include <map>
+#include <memory>
 #include <optional>
 #include <set>
 #include <string>
@@ -36,6 +37,7 @@
 #include "NintendoSwitch/NintendoSwitch_SingleSwitchProgram.h"
 #include "NintendoSwitch/Options/NintendoSwitch_StartInGripMenuOption.h"
 #include "PokemonChampions_BattleStateTracker.h"
+#include "PokemonChampions_InferenceClient.h"
 #include "PokemonChampions_InputSuggester.h"
 
 namespace PokemonAutomation{
@@ -214,10 +216,38 @@ private:
     StringOption AUTO_CAPTURE_DIR;
     SimpleIntegerOption<uint32_t> AUTO_CAPTURE_MAX_PER_HOUR;
 
+    //  ── Inference server (M1 shadow) ──
+    //  URL of the Python inference server's /decide endpoint. Empty
+    //  string disables the integration entirely. On non-empty + reachable
+    //  server, the trace fires one POST /decide per turn (action_menu
+    //  visit increment, +1 poll delay) and logs the decoded action to
+    //  the trace event + video overlay. Heuristic still drives presses
+    //  in M1. See plans/decide_endpoint_contract.md.
+    StringOption AI_SERVER_URL;
+
     //  ── State ──
     BattleStateTracker m_tracker;
     BattleMode m_mode = BattleMode::UNKNOWN;
     std::map<std::string, PipelineEntry> m_pipeline;
+
+    //  ── Inference client (M1 shadow) ──
+    //  Created at program() entry when AI_SERVER_URL is non-empty and
+    //  /health succeeds. Nullptr otherwise; trace runs unchanged.
+    std::unique_ptr<InferenceClient> m_inference_client;
+    //  Cached prediction from the most recent /decide call, indexed by
+    //  m_battle_action_menu_visits at the time of the call. -1 = no
+    //  call has succeeded yet for any visit.
+    DecideResult m_last_decision;
+    int m_decision_for_visit = -1;
+    //  Bookkeeping for the "fire once per visit, +1 poll delay" rule.
+    //    m_decide_pending_visit: visit # we owe a /decide call for.
+    //      -1 = nothing pending. Set when the visit count increments;
+    //      cleared once the call returns (success or fail).
+    //    m_decide_polls_waited: poll counter since the increment. Fire
+    //      only once this is >= 1 (lets HUD readers settle for the new
+    //      turn before we POST).
+    int m_decide_pending_visit = -1;
+    int m_decide_polls_waited = 0;
 
     //  Track screen transitions so we can wipe the tracker when a fresh
     //  match begins (TeamPreview entered after we were on PostMatch /

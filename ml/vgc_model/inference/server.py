@@ -202,6 +202,32 @@ class SearchResponse(BaseModel):
     n_rollouts: int = 0
 
 
+class DecideMeta(BaseModel):
+    """Diagnostic meta block on a /decide response. Trace logs the
+    fields it knows about; everything is optional and forward-compat."""
+    model_version: str = ""
+    endpoint_impl: str = ""       # "policy_only" / "search_1ply" / etc.
+    latency_ms: float = 0.0
+    n_rollouts: int = 0
+
+
+class DecideResponse(BaseModel):
+    """Stable response shape the live trace calls `POST /decide` for.
+    See plans/decide_endpoint_contract.md for the full contract.
+
+    Backed today by whichever in-battle pipeline is available (search
+    engine when loaded; v1 policy as fallback). The trace doesn't care
+    which implementation is behind the route — it reads `slot_a` and
+    `slot_b` and the optional fields when present.
+    """
+    slot_a: ActionResult
+    slot_b: ActionResult
+    win_pct: Optional[float] = None
+    opp_slot_a: Optional[ActionResult] = None
+    opp_slot_b: Optional[ActionResult] = None
+    meta: DecideMeta = Field(default_factory=DecideMeta)
+
+
 # ── Model loading ─────────────────────────────────────────────────
 
 _model: VGCTransformer | None = None
@@ -212,7 +238,8 @@ _search_engine = None  # SearchEngine instance (loaded on demand)
 
 def load_model(checkpoint_path: str, vocab_dir: str,
                v2_checkpoint: str = "", winrate_checkpoint: str = ""):
-    global _model, _vocabs, _device, _search_engine
+    global _model, _vocabs, _device, _search_engine, _model_checkpoint_path
+    _model_checkpoint_path = checkpoint_path
 
     _device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -499,6 +526,86 @@ def team_select(req: TeamSelectRequest):
         bring_scores=team_scores,
         lead_scores=lead_scores,
     )
+
+
+@app.post("/decide", response_model=DecideResponse)
+def decide(req: PredictRequest):
+    """The stable trace-facing decision endpoint. Routes to whichever
+    in-battle pipeline is loaded:
+
+    1. Search engine (v2_seq + winrate + sim) when available.
+    2. v1 policy as fallback.
+
+    See plans/decide_endpoint_contract.md for the contract this honors.
+    """
+    import time
+    t0 = time.perf_counter()
+
+    if _search_engine is not None:
+        result = _search_engine.search(req.model_dump(), n_rollouts=20)
+        latency_ms = (time.perf_counter() - t0) * 1000.0
+        return DecideResponse(
+            slot_a=ActionResult(action=result.action_a, probs=result.own_probs_a),
+            slot_b=ActionResult(action=result.action_b, probs=result.own_probs_b),
+            win_pct=result.win_pct,
+            opp_slot_a=ActionResult(
+                action=int(max(range(len(result.opp_probs_a)),
+                               key=lambda i: result.opp_probs_a[i])),
+                probs=result.opp_probs_a,
+            ) if result.opp_probs_a else None,
+            opp_slot_b=ActionResult(
+                action=int(max(range(len(result.opp_probs_b)),
+                               key=lambda i: result.opp_probs_b[i])),
+                probs=result.opp_probs_b,
+            ) if result.opp_probs_b else None,
+            meta=DecideMeta(
+                model_version=_model_version_label(),
+                endpoint_impl="search_1ply",
+                latency_ms=latency_ms,
+                n_rollouts=result.n_rollouts,
+            ),
+        )
+
+    # Fallback to v1 policy if search engine isn't loaded. The trace
+    # still gets a usable action; meta.endpoint_impl tells it the
+    # quality is the older model.
+    if _model is None:
+        raise HTTPException(status_code=503, detail="No model loaded.")
+
+    batch = _build_batch(req)
+    with torch.no_grad():
+        out = _model(batch)
+    logits_a = out["logits_a"].squeeze(0)
+    logits_b = out["logits_b"].squeeze(0)
+    probs_a = torch.softmax(logits_a, dim=-1).cpu().tolist()
+    probs_b = torch.softmax(logits_b, dim=-1).cpu().tolist()
+    latency_ms = (time.perf_counter() - t0) * 1000.0
+    return DecideResponse(
+        slot_a=ActionResult(action=int(logits_a.argmax().item()), probs=probs_a),
+        slot_b=ActionResult(action=int(logits_b.argmax().item()), probs=probs_b),
+        meta=DecideMeta(
+            model_version=_model_version_label(),
+            endpoint_impl="policy_only",
+            latency_ms=latency_ms,
+            n_rollouts=0,
+        ),
+    )
+
+
+def _model_version_label() -> str:
+    """Best-effort label for the currently-loaded model. Comes from
+    the checkpoint path's stem when available; falls back to the
+    architecture class name."""
+    global _model_checkpoint_path
+    try:
+        return Path(_model_checkpoint_path).stem if _model_checkpoint_path else "unknown"
+    except Exception:
+        return "unknown"
+
+
+# Tracks the last-loaded checkpoint path so /decide.meta.model_version
+# can return something useful. Populated by load_model().
+_model_checkpoint_path: str = ""
 
 
 @app.post("/search", response_model=SearchResponse)

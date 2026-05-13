@@ -235,6 +235,17 @@ LiveDetectorTrace::LiveDetectorTrace()
         LockMode::UNLOCK_WHILE_RUNNING,
         60
     )
+    , AI_SERVER_URL(
+        false,
+        "<b>AI Inference Server URL (shadow logging):</b><br>"
+        "URL of the Python inference server. Empty = disabled. When set and "
+        "reachable, the trace fires one POST /decide per turn and logs the "
+        "decoded action to the trace event + video overlay. Heuristic still "
+        "drives presses (M1 shadow). See plans/decide_endpoint_contract.md.",
+        LockMode::UNLOCK_WHILE_RUNNING,
+        "http://localhost:8265",
+        "http://localhost:8265"
+    )
 {
     PA_ADD_OPTION(START_LOCATION);
     PA_ADD_OPTION(BATTLE_MODE_TARGET);
@@ -250,6 +261,7 @@ LiveDetectorTrace::LiveDetectorTrace()
     PA_ADD_OPTION(ENABLE_AUTO_CAPTURE);
     PA_ADD_OPTION(AUTO_CAPTURE_DIR);
     PA_ADD_OPTION(AUTO_CAPTURE_MAX_PER_HOUR);
+    PA_ADD_OPTION(AI_SERVER_URL);
 }
 
 
@@ -1805,6 +1817,33 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
     //  poll; cleared automatically when the program ends.
     VideoOverlaySet suggestion_overlay(env.console.overlay());
 
+    //  ── Inference client (M1 shadow) ──
+    //  Health-check once at program entry. On failure we run unchanged,
+    //  just without the model logs. URL is unlocked-while-running so the
+    //  user can re-enable mid-session by editing the option + restarting.
+    m_inference_client.reset();
+    m_last_decision = DecideResult{};
+    m_decision_for_visit = -1;
+    m_decide_pending_visit = -1;
+    {
+        const std::string url = AI_SERVER_URL;
+        if (!url.empty()){
+            m_inference_client = std::make_unique<InferenceClient>(url);
+            if (!m_inference_client->health_check(env.console)){
+                env.console.log(
+                    "AI server not reachable at " + url + ". "
+                    "Shadow logging disabled this session.",
+                    COLOR_RED);
+                m_inference_client.reset();
+            }else{
+                env.console.log(
+                    "AI server connected at " + url + ". "
+                    "Shadow logging enabled — model decisions will be logged each turn.",
+                    COLOR_GREEN);
+            }
+        }
+    }
+
     //  Persistent screen-label overlay — shows the trace's current screen
     //  classification in the top-left of the video. Replaced on every
     //  screen transition; cleared automatically on program exit.
@@ -2359,6 +2398,13 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
                 //  action; the tracker handles the K-window cap.
                 if (m_battle_action_menu_visits > 1){
                     m_tracker.push_history_snapshot();
+                }
+                //  M1 shadow: arm a /decide call for the new turn. The
+                //  actual POST happens 1 poll later so HUD reads can
+                //  settle before we snapshot to_predict_json().
+                if (m_inference_client){
+                    m_decide_pending_visit = m_battle_action_menu_visits;
+                    m_decide_polls_waited = 0;
                 }
             }
             //  Roll a random move slot once per move_select visit. Tied
@@ -2922,6 +2968,81 @@ void LiveDetectorTrace::program(SingleSwitchProgramEnvironment& env, ProControll
                     "LiveDetectorTrace: stuck on '" + screen + "' for >60s.",
                     COLOR_ORANGE);
                 last_warn_ms = now_ms();
+            }
+        }
+
+        //  ── M1 shadow: fire /decide once per turn, +1 poll delay ──
+        //  The visit-increment block above set m_decide_pending_visit
+        //  to the new turn number. We wait at least 1 poll past that
+        //  so HUD readers can populate, then POST. Synchronous call;
+        //  latency adds to this poll's wall-clock. Async refactor in M2.
+        if (m_inference_client
+            && m_decide_pending_visit > 0
+            && m_decide_pending_visit > m_decision_for_visit){
+            if (m_decide_polls_waited < 1){
+                m_decide_polls_waited++;
+            }else{
+                JsonObject state = m_tracker.to_predict_json();
+                DecideResult r = m_inference_client->decide(env.console, state);
+                if (r.success){
+                    m_last_decision = r;
+                    m_decision_for_visit = m_decide_pending_visit;
+
+                    //  Build a human-readable log line. Pull the OCR'd
+                    //  move names from the cached move_select reads (if
+                    //  any) and the bench species from the tracker.
+                    const bool is_singles = (m_mode != BattleMode::DOUBLES);
+                    std::array<std::string, 2> bench_sp{};
+                    {
+                        uint8_t bench_n = 0;
+                        const auto own_active = m_tracker.own_active_slot_indices();
+                        for (uint8_t i = 0; i < 6 && bench_n < 2; i++){
+                            bool is_active = (i == own_active[0])
+                                || (!is_singles && i == own_active[1]);
+                            if (is_active) continue;
+                            const auto& mon = m_tracker.own(i);
+                            if (mon.species.empty()) continue;
+                            bench_sp[bench_n++] = mon.species;
+                        }
+                    }
+                    std::string sa = decode_action_human(
+                        r.action_a, m_move_select_moves, bench_sp, is_singles);
+                    std::string sb = is_singles ? std::string()
+                        : decode_action_human(
+                            r.action_b, m_move_select_moves, bench_sp, false);
+
+                    int pct_a = static_cast<int>(r.probs_a[r.action_a] * 100);
+                    std::string overlay = "model: " + sa
+                        + " (p=" + std::to_string(pct_a) + "%)";
+                    std::string logline = "model decision visit#"
+                        + std::to_string(m_decision_for_visit)
+                        + ": A=" + sa + " (p=" + std::to_string(pct_a) + "%)";
+                    if (!is_singles){
+                        int pct_b = static_cast<int>(r.probs_b[r.action_b] * 100);
+                        logline += " B=" + sb + " (p=" + std::to_string(pct_b) + "%)";
+                        overlay += " | " + sb;
+                    }
+                    if (r.win_pct >= 0.0f){
+                        int wp = static_cast<int>(r.win_pct * 100);
+                        logline += " win=" + std::to_string(wp) + "%";
+                    }
+                    if (!r.model_version.empty()){
+                        logline += " v=" + r.model_version;
+                        if (!r.endpoint_impl.empty()) logline += "/" + r.endpoint_impl;
+                    }
+                    env.console.log(logline, COLOR_CYAN);
+                    env.console.overlay().add_log(overlay, COLOR_CYAN);
+                }else{
+                    env.console.log(
+                        "model decision visit#"
+                        + std::to_string(m_decide_pending_visit)
+                        + ": /decide failed (server unreachable or parse error)",
+                        COLOR_ORANGE);
+                    //  Mark this visit as "tried" so we don't retry every
+                    //  poll for the rest of the turn.
+                    m_decision_for_visit = m_decide_pending_visit;
+                }
+                m_decide_pending_visit = -1;
             }
         }
 

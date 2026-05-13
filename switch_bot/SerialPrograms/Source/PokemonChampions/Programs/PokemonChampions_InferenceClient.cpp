@@ -145,6 +145,93 @@ ActionPrediction InferenceClient::predict(Logger& logger, const JsonObject& game
 }
 
 
+// ─── Decide ──────────────────────────────────────────────────────
+
+DecideResult InferenceClient::decide(Logger& logger, const JsonObject& game_state){
+    DecideResult result;
+
+    std::string response = post_json(logger, "/decide", game_state.dump());
+    if (response.empty()){
+        return result;
+    }
+
+    try{
+        JsonValue json = parse_json(response);
+        const JsonObject& root = json.to_object_throw();
+
+        //  Required: slot_a + slot_b.
+        const JsonObject& slot_a = root.get_object_throw("slot_a");
+        result.action_a = static_cast<uint8_t>(slot_a.get_integer_throw("action"));
+        const JsonArray& probs_a = slot_a.get_array_throw("probs");
+        for (size_t i = 0; i < NUM_ACTIONS && i < probs_a.size(); i++){
+            result.probs_a[i] = static_cast<float>(probs_a[i].to_double_throw());
+        }
+
+        const JsonObject& slot_b = root.get_object_throw("slot_b");
+        result.action_b = static_cast<uint8_t>(slot_b.get_integer_throw("action"));
+        const JsonArray& probs_b = slot_b.get_array_throw("probs");
+        for (size_t i = 0; i < NUM_ACTIONS && i < probs_b.size(); i++){
+            result.probs_b[i] = static_cast<float>(probs_b[i].to_double_throw());
+        }
+
+        //  Optional: win_pct.
+        const JsonValue* wp = root.get_value("win_pct");
+        if (wp != nullptr && wp->type() != JsonType::EMPTY){
+            double d = 0;
+            if (wp->read_float(d)){
+                result.win_pct = static_cast<float>(d);
+            }
+        }
+
+        //  Optional: opp_slot_a / opp_slot_b.
+        const JsonValue* opp_a_val = root.get_value("opp_slot_a");
+        const JsonValue* opp_b_val = root.get_value("opp_slot_b");
+        if (opp_a_val != nullptr && opp_a_val->type() != JsonType::EMPTY
+            && opp_b_val != nullptr && opp_b_val->type() != JsonType::EMPTY){
+            const JsonObject& oa = opp_a_val->to_object_throw();
+            const JsonObject& ob = opp_b_val->to_object_throw();
+            result.has_opp = true;
+            result.opp_action_a = static_cast<uint8_t>(oa.get_integer_throw("action"));
+            result.opp_action_b = static_cast<uint8_t>(ob.get_integer_throw("action"));
+            const JsonArray& opa = oa.get_array_throw("probs");
+            const JsonArray& opb = ob.get_array_throw("probs");
+            for (size_t i = 0; i < NUM_ACTIONS && i < opa.size(); i++){
+                result.opp_probs_a[i] = static_cast<float>(opa[i].to_double_throw());
+            }
+            for (size_t i = 0; i < NUM_ACTIONS && i < opb.size(); i++){
+                result.opp_probs_b[i] = static_cast<float>(opb[i].to_double_throw());
+            }
+        }
+
+        //  Optional: meta block.
+        const JsonValue* meta_val = root.get_value("meta");
+        if (meta_val != nullptr && meta_val->type() == JsonType::OBJECT){
+            const JsonObject& meta = meta_val->to_object_throw();
+            const std::string* mv = meta.get_string("model_version");
+            if (mv != nullptr) result.model_version = *mv;
+            const std::string* ei = meta.get_string("endpoint_impl");
+            if (ei != nullptr) result.endpoint_impl = *ei;
+            double lat = 0;
+            const JsonValue* lv = meta.get_value("latency_ms");
+            if (lv != nullptr && lv->read_float(lat)){
+                result.latency_ms = static_cast<float>(lat);
+            }
+            int64_t nr = 0;
+            const JsonValue* nrv = meta.get_value("n_rollouts");
+            if (nrv != nullptr && nrv->read_integer(nr)){
+                result.n_rollouts = static_cast<int>(nr);
+            }
+        }
+
+        result.success = true;
+    }catch (const std::exception& e){
+        logger.log("InferenceClient: failed to parse decide response: " + std::string(e.what()), COLOR_RED);
+    }
+
+    return result;
+}
+
+
 // ─── Team select ─────────────────────────────────────────────────
 
 TeamSelection InferenceClient::team_select(Logger& logger, const JsonObject& teams){
@@ -191,16 +278,48 @@ TeamSelection InferenceClient::team_select(Logger& logger, const JsonObject& tea
 
 std::string action_name(uint8_t action_idx){
     static const char* NAMES[NUM_ACTIONS] = {
-        "move0→opp_a", "move0→opp_b", "move0→ally",
-        "move1→opp_a", "move1→opp_b", "move1→ally",
-        "move2→opp_a", "move2→opp_b", "move2→ally",
-        "move3→opp_a", "move3→opp_b", "move3→ally",
-        "switch→bench0", "switch→bench1",
+        "move0->opp_a", "move0->opp_b", "move0->ally",
+        "move1->opp_a", "move1->opp_b", "move1->ally",
+        "move2->opp_a", "move2->opp_b", "move2->ally",
+        "move3->opp_a", "move3->opp_b", "move3->ally",
+        "switch->bench0", "switch->bench1",
     };
     if (action_idx < NUM_ACTIONS){
         return NAMES[action_idx];
     }
     return "unknown_action_" + std::to_string(action_idx);
+}
+
+std::string decode_action_human(
+    uint8_t action_idx,
+    const std::array<std::string, 4>& moves,
+    const std::array<std::string, 2>& bench_species,
+    bool is_singles
+){
+    if (action_idx >= NUM_ACTIONS){
+        return action_name(action_idx);
+    }
+    if (action_idx >= 12){
+        //  Switch action.
+        uint8_t bench_slot = action_idx - 12;
+        const std::string& sp = bench_species[bench_slot];
+        if (sp.empty()){
+            return "switch->bench" + std::to_string(bench_slot);
+        }
+        return "switch to " + sp;
+    }
+    //  Move action: move_slot * 3 + target.
+    uint8_t move_slot = action_idx / 3;
+    uint8_t target = action_idx % 3;
+    const std::string& mv = moves[move_slot];
+    static const char* TARGET_NAMES[3] = {"opp_a", "opp_b", "ally"};
+    std::string label = mv.empty()
+        ? ("move" + std::to_string(move_slot))
+        : mv;
+    if (is_singles){
+        return label;
+    }
+    return label + " -> " + TARGET_NAMES[target];
 }
 
 
